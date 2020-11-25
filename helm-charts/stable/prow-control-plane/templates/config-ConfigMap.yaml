@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  config.yaml: |
+    prowjob_namespace: {{ .Values.prowJobNamespace }}
+    pod_namespace: {{ .Values.dataplaneNamespace }}
+
+    in_repo_config:
+      enabled:
+        "*": true
+
+    deck:
+     spyglass:
+       lenses:
+       - lens:
+           name: metadata
+         required_files:
+         - started.json|finished.json
+       - lens:
+           config:
+           name: buildlog
+         required_files:
+         - build-log.txt
+       - lens:
+           name: junit
+         required_files:
+         - .*/junit.*\.xml
+       - lens:
+           name: podinfo
+         required_files:
+         - podinfo.json
+
+    plank:
+      job_url_prefix_config:
+        "*": https://{{ .Values.prow.domain }}/view/
+      report_templates:
+        '*': >-
+            [Full PR test history](https://{{ .Values.prow.domain }}/pr-history?{{ "org={{.Spec.Refs.Org}}&repo={{.Spec.Refs.Repo}}&pr={{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}" }}).
+            [Your PR dashboard](https://{{ .Values.prow.domain }}/pr?{{ "query=is:pr+state:open+author:{{with index .Spec.Refs.Pulls 0}}{{.Author}}{{end}}" }}).
+      default_decoration_configs:
+        "*":
+          gcs_configuration:
+            bucket: s3://{{ .Values.prow.presubmitsBucketName }}
+            path_strategy: explicit
+          s3_credentials_secret: s3-credentials
+          ssh_key_secrets:
+          - ssh-secret
+          utility_images:
+            clonerefs:  {{ .Values.utility_images.clonerefs }}
+            entrypoint: {{ .Values.utility_images.entrypoint }}
+            initupload: {{ .Values.utility_images.initupload }}
+            sidecar: {{ .Values.utility_images.sidecar }}
+
+    tide:
+      queries:
+      - labels:
+        - lgtm
+        - approved
+        missingLabels:
+        - needs-rebase
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - do-not-merge/invalid-owners-file
+        repos:
+        {{-  range $repo := .Values.repositories }}
+          - {{ $repo.org }}/{{ $repo.name }}
+        {{- end }}
+
+    decorate_all_jobs: true

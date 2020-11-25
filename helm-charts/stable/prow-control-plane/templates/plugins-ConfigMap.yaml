@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plugins
+data:
+  plugins.yaml: |
+    plugins:
+      {{- range $repo := .Values.repositories }}
+      {{ $repo.org }}/{{ $repo.name }}:
+      - approve
+      - assign
+      - blunderbuss
+      - cat
+      - dog
+      - help
+      - heart
+      - hold
+      - label
+      - lgtm
+      - trigger
+      - verify-owners
+      - wip
+      - yuks
+      {{- range $extra := $repo.extraPlugins }}
+      - {{ $extra }}
+      {{- end }}
+      {{- end }}
+    config_updater:
+      maps:
+{{ toYaml .Values.plugins.configUpdaterMaps | indent 8 }}
