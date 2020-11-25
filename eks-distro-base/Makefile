@@ -9,7 +9,7 @@ BASE_IMAGE?=$(BASE_IMAGE_NAME):$(BASE_TAG)
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro/base
 # This tag is overwritten in the prow job to point to the commit hash
-IMAGE_TAG?=latest
+IMAGE_TAG?=$(shell git rev-parse HEAD | cut -c 1-8)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 ifeq ($(DEVELOPMENT),true)
