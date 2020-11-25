@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CHART_BUCKET="prowdataclusterstack-prowdataclusterstack-316-prowchartsbucket2e50b8d9-8b0f36hrcee8"
+CHART_BUCKET="prowdataclusterstack-316-prowchartsbucket2e50b8d9-8b0f36hrcee8"
 REPO_URL="https://${CHART_BUCKET}.s3.amazonaws.com"
 
 CHART_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
