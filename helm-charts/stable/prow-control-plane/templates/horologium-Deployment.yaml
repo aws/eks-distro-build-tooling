@@ -20,6 +20,9 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: horologium
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.horologium.image }}
         args:
         - --dry-run={{ .Values.dryRun }}
