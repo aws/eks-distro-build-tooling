@@ -17,6 +17,9 @@ spec:
       serviceAccountName: sinker
       containers:
       - name: sinker
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         args:
         - --kubeconfig=/etc/kubeconfig/config
         - --config-path=/etc/config/config.yaml
@@ -36,6 +39,9 @@ spec:
           mountPath: /shared-bins
       initContainers:
       - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.awsIamAuthenticator.image }}
         command:
         - cp

@@ -33,6 +33,9 @@ spec:
       serviceAccountName: tide
       containers:
       - name: tide
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.tide.image }}
         args:
         - --dry-run={{ .Values.dryRun }}

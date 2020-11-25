@@ -37,6 +37,9 @@ spec:
       terminationGracePeriodSeconds: 180
       containers:
       - name: hook
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.hook.image }}
         imagePullPolicy: Always
         args:
@@ -87,6 +90,9 @@ spec:
           timeoutSeconds: 600
       initContainers:
       - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.awsIamAuthenticator.image }}
         command:
         - cp

@@ -54,6 +54,9 @@ spec:
     spec:
       containers:
       - name: ghproxy
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.ghproxy.image }}
         args:
         - --cache-dir=/cache

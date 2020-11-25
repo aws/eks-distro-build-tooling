@@ -37,6 +37,9 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: deck
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.deck.image }}
         args:
         - --kubeconfig=/etc/kubeconfig/config
@@ -91,6 +94,9 @@ spec:
           timeoutSeconds: 600
       initContainers:
       - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.awsIamAuthenticator.image }}
         command:
         - cp
