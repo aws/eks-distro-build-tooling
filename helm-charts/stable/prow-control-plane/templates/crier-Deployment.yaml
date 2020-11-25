@@ -18,6 +18,9 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: crier
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.crier.image }}
         args:
         - --blob-storage-workers=10

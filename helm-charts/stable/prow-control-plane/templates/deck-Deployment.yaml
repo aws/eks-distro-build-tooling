@@ -23,6 +23,9 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: deck
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.deck.image }}
         args:
         - --config-path=/etc/config/config.yaml
@@ -77,6 +80,9 @@ spec:
           timeoutSeconds: 600
       initContainers:
       - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.awsIamAuthenticator.image }}
         command:
         - cp

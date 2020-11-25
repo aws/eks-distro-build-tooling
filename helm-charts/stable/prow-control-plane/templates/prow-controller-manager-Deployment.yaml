@@ -17,6 +17,9 @@ spec:
       serviceAccountName: prow-controller-manager
       containers:
       - name: prow-controller-manager
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         args:
         - --dry-run={{ .Values.dryRun }}
         - --deck-url=http://deck/
@@ -45,6 +48,9 @@ spec:
           mountPath: /shared-bins
       initContainers:
       - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
         image: {{ .Values.awsIamAuthenticator.image }}
         command:
         - cp
