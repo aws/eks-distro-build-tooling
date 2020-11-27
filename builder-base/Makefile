@@ -42,8 +42,12 @@ images:
 
 # for local development only
 docker:
-	cat Dockerfile.template | sed -e 's,BASE_IMAGE,$(BASE_IMAGE),' | tee Dockerfile
-	docker build -t $(IMAGE) .
+	docker build \
+		-t $(IMAGE) \
+		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
+		--build-arg TARGETARCH=amd64 \
+		--build-arg TARGETOS=linux \
+		-f Dockerfile .
 
 .PHONY: build
 build: local-images

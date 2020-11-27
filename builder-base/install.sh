@@ -39,6 +39,7 @@ yum install -y \
     make \
     man \
     procps-ng \
+    python3-pip \
     rsync \
     tar \
     vim \
