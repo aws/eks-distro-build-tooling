@@ -42,6 +42,27 @@ images:
 		--local context=. \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
 
+.PHONY: docker-public-login
+docker-public-login:
+	aws --region us-east-1 ecr-public get-authorization-token \
+         --output=text \
+	 --query 'authorizationData.authorizationToken' |  \
+	 base64 --decode | cut -d: -f2 | \
+	 docker login -u AWS --password-stdin https://public.ecr.aws
+
+.PHONY: public-images
+public-images: docker-public-login
+	$(eval REPOSITORY=$(shell aws --region us-east-1 ecr-public describe-registries --query 'registries[*].registryUri' --output text))
+	$(eval IMAGE=$(REPOSITORY)/$(IMAGE_NAME):$(IMAGE_TAG))
+	buildctl \
+		build \
+		--frontend dockerfile.v0 \
+		--opt platform=linux/amd64,linux/arm64 \
+		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--local dockerfile=./ \
+		--local context=. \
+		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+
 # for local development only
 .PHONY: ecr
 ecr:
