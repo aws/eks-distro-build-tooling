@@ -17,7 +17,11 @@ set -euo pipefail
 
 GIT_REPO_ROOT=$(git rev-parse --show-toplevel)
 STABLE="${GIT_REPO_ROOT}/helm-charts/stable"
-PREV_RELEASE_HASH=$(git rev-list HEAD --max-count=1 --skip=1)
+
+# PULL_PULL_SHA is environment variable set by the presubmit job. More info here: https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md#job-environment-variables
+PREV_RELEASE_HASH=${PULL_PULL_SHA}
+
+git fetch origin $PREV_RELEASE_HASH
 
 EXIT_CODE=0
 
