@@ -20,14 +20,13 @@ import (
 
 // ReleaseChannelSpec defines the desired state of ReleaseChannel
 type ReleaseChannelSpec struct {
-	// +kubebuilder:validation:Required
 	SNSTopicARN string `json:"snsTopicARN,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:printcolumn:name="TopicARN",type=string,JSONPath=`.spec.snsTopicARN`,description="The SNS Topic ARN for this release channel"
-// +kubebuilder:printcolumn:name="Active",type=bool,JSONPath=`.spec.active`,description="Indicates if this channel is active"
-// +kubebuilder:printcolumn:name="Latest Release",type=integer,format=int32,JSONPath=`.spec.latestRelease`,description="The latest release of this channel"
+// +kubebuilder:printcolumn:name="Active",type=boolean,JSONPath=`.status.active`,description="Indicates if this channel is active"
+// +kubebuilder:printcolumn:name="Latest Release",type=integer,format=int32,JSONPath=`.status.latestRelease`,description="The latest release of this channel"
 // +kubebuilder:resource:singular="releasechannel",path="releasechannels"
 
 // ReleaseChannel is the Schema for the releasechannels API

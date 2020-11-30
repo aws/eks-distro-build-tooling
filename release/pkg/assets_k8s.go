@@ -148,32 +148,34 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				),
 			},
 		})
-		for _, arch := range linuxImageArches {
-			filename := path.Join("bin", "linux", arch, fmt.Sprintf("%s.tar", binary))
-			sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
-			if err != nil {
-				return nil, err
+		if binary != "pause" {
+			for _, arch := range linuxImageArches {
+				filename := path.Join("bin", "linux", arch, fmt.Sprintf("%s.tar", binary))
+				sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
+				if err != nil {
+					return nil, err
+				}
+				imageTarAssets = append(imageTarAssets, distrov1alpha1.Asset{
+					Name:        filename,
+					Type:        "Archive",
+					Description: fmt.Sprintf("%s linux/%s OCI image tar", binary, arch),
+					OS:          "linux",
+					Arch:        []string{arch},
+					Archive: &distrov1alpha1.AssetArchive{
+						Path: path.Join(
+							fmt.Sprintf("kubernetes-%s", spec.Channel),
+							"releases",
+							fmt.Sprintf("%d", spec.Number),
+							"artifacts",
+							"kubernetes",
+							gitTag,
+							filename,
+						),
+						SHA512: sha512,
+						SHA256: sha256,
+					},
+				})
 			}
-			imageTarAssets = append(imageTarAssets, distrov1alpha1.Asset{
-				Name:        filename,
-				Type:        "Archive",
-				Description: fmt.Sprintf("%s linux/%s OCI image tar", binary, arch),
-				OS:          "linux",
-				Arch:        []string{arch},
-				Archive: &distrov1alpha1.AssetArchive{
-					Path: path.Join(
-						fmt.Sprintf("kubernetes-%s", spec.Channel),
-						"releases",
-						fmt.Sprintf("%d", spec.Number),
-						"artifacts",
-						"kubernetes",
-						gitTag,
-						filename,
-					),
-					SHA512: sha512,
-					SHA256: sha256,
-				},
-			})
 		}
 	}
 
