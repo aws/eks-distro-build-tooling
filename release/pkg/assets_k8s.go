@@ -72,6 +72,18 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				if err != nil {
 					return nil, err
 				}
+				assetPath, err := r.GetURI(path.Join(
+					fmt.Sprintf("kubernetes-%s", spec.Channel),
+					"releases",
+					fmt.Sprintf("%d", spec.Number),
+					"artifacts",
+					"kubernetes",
+					gitTag,
+					filename,
+				))
+				if err != nil {
+					return nil, err
+				}
 				binaryAssets = append(binaryAssets, distrov1alpha1.Asset{
 					Name:        filename,
 					Type:        "Archive",
@@ -79,15 +91,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 					OS:          os,
 					Arch:        []string{arch},
 					Archive: &distrov1alpha1.AssetArchive{
-						Path: path.Join(
-							fmt.Sprintf("kubernetes-%s", spec.Channel),
-							"releases",
-							fmt.Sprintf("%d", spec.Number),
-							"artifacts",
-							"kubernetes",
-							gitTag,
-							filename,
-						),
+						URI:    assetPath,
 						SHA512: sha512,
 						SHA256: sha256,
 					},
@@ -99,6 +103,18 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				if err != nil {
 					return nil, err
 				}
+				assetPath, err := r.GetURI(path.Join(
+					fmt.Sprintf("kubernetes-%s", spec.Channel),
+					"releases",
+					fmt.Sprintf("%d", spec.Number),
+					"artifacts",
+					"kubernetes",
+					gitTag,
+					filename,
+				))
+				if err != nil {
+					return nil, err
+				}
 				assets = append(assets, distrov1alpha1.Asset{
 					Name:        filename,
 					Type:        "Archive",
@@ -106,15 +122,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 					OS:          os,
 					Arch:        []string{arch},
 					Archive: &distrov1alpha1.AssetArchive{
-						Path: path.Join(
-							fmt.Sprintf("kubernetes-%s", spec.Channel),
-							"releases",
-							fmt.Sprintf("%d", spec.Number),
-							"artifacts",
-							"kubernetes",
-							gitTag,
-							filename,
-						),
+						URI:    assetPath,
 						SHA512: sha512,
 						SHA256: sha256,
 					},
@@ -155,6 +163,18 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				if err != nil {
 					return nil, err
 				}
+				assetPath, err := r.GetURI(path.Join(
+					fmt.Sprintf("kubernetes-%s", spec.Channel),
+					"releases",
+					fmt.Sprintf("%d", spec.Number),
+					"artifacts",
+					"kubernetes",
+					gitTag,
+					filename,
+				))
+				if err != nil {
+					return nil, err
+				}
 				imageTarAssets = append(imageTarAssets, distrov1alpha1.Asset{
 					Name:        filename,
 					Type:        "Archive",
@@ -162,15 +182,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 					OS:          "linux",
 					Arch:        []string{arch},
 					Archive: &distrov1alpha1.AssetArchive{
-						Path: path.Join(
-							fmt.Sprintf("kubernetes-%s", spec.Channel),
-							"releases",
-							fmt.Sprintf("%d", spec.Number),
-							"artifacts",
-							"kubernetes",
-							gitTag,
-							filename,
-						),
+						URI:    assetPath,
 						SHA512: sha512,
 						SHA256: sha256,
 					},
@@ -187,20 +199,24 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	if err != nil {
 		return nil, err
 	}
+	assetPath, err := r.GetURI(path.Join(
+		fmt.Sprintf("kubernetes-%s", spec.Channel),
+		"releases",
+		fmt.Sprintf("%d", spec.Number),
+		"artifacts",
+		"kubernetes",
+		gitTag,
+		filename,
+	))
+	if err != nil {
+		return nil, err
+	}
 	assets = append(assets, distrov1alpha1.Asset{
 		Name:        filename,
 		Type:        "Archive",
 		Description: "Kubernetes source tarball",
 		Archive: &distrov1alpha1.AssetArchive{
-			Path: path.Join(
-				fmt.Sprintf("kubernetes-%s", spec.Channel),
-				"releases",
-				fmt.Sprintf("%d", spec.Number),
-				"artifacts",
-				"kubernetes",
-				gitTag,
-				filename,
-			),
+			URI:    assetPath,
 			SHA512: sha512,
 			SHA256: sha256,
 		},

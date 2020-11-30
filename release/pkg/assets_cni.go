@@ -43,6 +43,18 @@ func (r *ReleaseConfig) GetCniComponent(spec distrov1alpha1.ReleaseSpec) (*distr
 			if err != nil {
 				return nil, errors.Cause(err)
 			}
+			assetPath, err := r.GetURI(path.Join(
+				fmt.Sprintf("kubernetes-%s", spec.Channel),
+				"releases",
+				fmt.Sprintf("%d", spec.Number),
+				"artifacts",
+				"plugins",
+				gitTag,
+				filename,
+			))
+			if err != nil {
+				return nil, errors.Cause(err)
+			}
 			assets = append(assets, distrov1alpha1.Asset{
 				Name:        filename,
 				Type:        "Archive",
@@ -50,15 +62,7 @@ func (r *ReleaseConfig) GetCniComponent(spec distrov1alpha1.ReleaseSpec) (*distr
 				OS:          os,
 				Arch:        []string{arch},
 				Archive: &distrov1alpha1.AssetArchive{
-					Path: path.Join(
-						fmt.Sprintf("kubernetes-%s", spec.Channel),
-						"releases",
-						fmt.Sprintf("%d", spec.Number),
-						"artifacts",
-						"plugins",
-						gitTag,
-						filename,
-					),
+					URI:    assetPath,
 					SHA512: sha512,
 					SHA256: sha256,
 				},

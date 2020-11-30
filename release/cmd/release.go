@@ -39,10 +39,12 @@ var releaseCmd = &cobra.Command{
 		sourceDir := viper.GetString("source")
 		gitCommit := viper.GetString("git-commit")
 		imageRepository := viper.GetString("image-repository")
+		cdnURL := viper.GetString("cdn")
 		releaseNumber := viper.GetInt("release-number")
 
 		releaseConfig := &pkg.ReleaseConfig{
 			ContainerImageRepository: imageRepository,
+			ArtifactURL:              cdnURL,
 			BuildRepoSource:          sourceDir,
 			ReleaseDate:              time.Now().UTC(),
 		}
@@ -89,6 +91,7 @@ func init() {
 	// TODO: exec `git -C $SOURCE describe --always --long --abbrev=64 HEAD` instead of prompting
 	releaseCmd.Flags().String("git-commit", "", "The eks-distro git commit")
 	releaseCmd.Flags().String("image-repository", "", "The container image repository name")
+	releaseCmd.Flags().String("cdn", "https://distro.eks.amazonaws.com", "The URL base for artifacts")
 	releaseCmd.Flags().Int("release-number", 1, "The release-number to create")
 
 }

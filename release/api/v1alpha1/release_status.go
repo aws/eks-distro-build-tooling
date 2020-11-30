@@ -70,8 +70,8 @@ type Asset struct {
 
 type AssetArchive struct {
 	// +kubebuilder:validation:Required
-	// The path of the server at which the asset is located
-	Path string `json:"path,omitempty"`
+	// The URI where the asset is located
+	URI string `json:"uri,omitempty"`
 	// +kubebuilder:validation:Required
 	// The sha512 of the asset, only applies for 'file' store
 	SHA512 string `json:"sha512,omitempty"`
