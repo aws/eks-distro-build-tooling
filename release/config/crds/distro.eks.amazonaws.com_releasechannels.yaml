@@ -20,7 +20,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.2.5
   creationTimestamp: null
-  name: releasechannels.eks-distro.eks.amazonaws.com
+  name: releasechannels.distro.eks.amazonaws.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .spec.snsTopicARN
@@ -36,7 +36,7 @@ spec:
     format: int32
     name: Latest Release
     type: integer
-  group: eks-distro.eks.amazonaws.com
+  group: distro.eks.amazonaws.com
   names:
     kind: ReleaseChannel
     listKind: ReleaseChannelList

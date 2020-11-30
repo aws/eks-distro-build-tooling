@@ -20,7 +20,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.2.5
   creationTimestamp: null
-  name: releases.eks-distro.eks.amazonaws.com
+  name: releases.distro.eks.amazonaws.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .spec.releaseChannel
@@ -36,7 +36,7 @@ spec:
     format: date-time
     name: Release Date
     type: string
-  group: eks-distro.eks.amazonaws.com
+  group: distro.eks.amazonaws.com
   names:
     kind: Release
     listKind: ReleaseList

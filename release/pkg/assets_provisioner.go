@@ -18,27 +18,27 @@ import (
 	"fmt"
 	"path"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
 )
 
 // GetProvisionerComponent returns the Component for Kubernetes
-func (r *ReleaseConfig) GetProvisionerComponent(spec eksDistrov1alpha1.ReleaseSpec) (*eksDistrov1alpha1.Component, error) {
+func (r *ReleaseConfig) GetProvisionerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/external-provisioner"
 	tagFile := path.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
 	}
-	assets := []eksDistrov1alpha1.Asset{}
+	assets := []distrov1alpha1.Asset{}
 	binary := "external-provisioner"
-	assets = append(assets, eksDistrov1alpha1.Asset{
+	assets = append(assets, distrov1alpha1.Asset{
 		Name:        fmt.Sprintf("%s-image", binary),
 		Type:        "Image",
 		Description: fmt.Sprintf("%s container image", binary),
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
-		Image: &eksDistrov1alpha1.AssetImage{
+		Image: &distrov1alpha1.AssetImage{
 			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
 				r.ContainerImageRepository,
 				binary,
@@ -48,7 +48,7 @@ func (r *ReleaseConfig) GetProvisionerComponent(spec eksDistrov1alpha1.ReleaseSp
 			),
 		},
 	})
-	component := &eksDistrov1alpha1.Component{
+	component := &distrov1alpha1.Component{
 		Name:   "external-provisioner",
 		GitTag: gitTag,
 		Assets: assets,
