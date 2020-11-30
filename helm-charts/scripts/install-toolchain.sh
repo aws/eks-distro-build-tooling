@@ -23,7 +23,7 @@ ARCH=$([[ $(uname -m) = "x86_64" ]] && echo 'amd64' || echo 'arm64')
 TMP_DIR="${BUILD_DIR}/tmp"
 mkdir -p "${TOOLS_DIR}"
 
-HELM_VERSION="v3.4.0"
+HELM_VERSION="v3.4.1"
 KUBECTL_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 KIND_VERSION=v0.5.1
 
