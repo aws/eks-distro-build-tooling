@@ -28,6 +28,10 @@ spec:
     http:
       paths:
       - backend:
+          serviceName: ssl-redirect
+          servicePort: use-annotation
+        path: /
+      - backend:
           serviceName: deck
           servicePort: 80
         path: /
