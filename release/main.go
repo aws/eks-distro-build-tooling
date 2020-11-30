@@ -15,7 +15,7 @@
 package main
 
 import (
-	"github.com/aws/eks-distro-build-toooling/release/cmd"
+	"github.com/aws/eks-distro-build-tooling/release/cmd"
 )
 
 func main() {
