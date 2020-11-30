@@ -33,9 +33,9 @@ type ReleaseSpec struct {
 }
 
 // +kubebuilder:object:root=true
-// +kubebuilder:printcolumn:name="Release Channel",type=string,JSONPath=`.spec.releaseChannel`,description="The release channel"
-// +kubebuilder:printcolumn:name="Release",type=integer,JSONPath=`.spec.release`,description="Release number"
-// +kubebuilder:printcolumn:name="Release Date",type=string,format=date-time,JSONPath=`.spec.releaseDate`,description="The date the release was published"
+// +kubebuilder:printcolumn:name="Release Channel",type=string,JSONPath=`.spec.channel`,description="The release channel"
+// +kubebuilder:printcolumn:name="Release",type=integer,JSONPath=`.spec.number`,description="Release number"
+// +kubebuilder:printcolumn:name="Release Date",type=string,format=date-time,JSONPath=`.status.date`,description="The date the release was published"
 // +kubebuilder:resource:singular="release",path="releases",shortName={"rel"}
 
 // Release is the Schema for the releases API
