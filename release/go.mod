@@ -1,4 +1,4 @@
-module github.com/aws/eks-distro-build-toooling/release
+module github.com/aws/eks-distro-build-tooling/release
 
 go 1.13
 

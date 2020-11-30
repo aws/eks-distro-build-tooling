@@ -15,7 +15,7 @@ test: generate fmt vet manifests
 	go test ./... -coverprofile cover.out
 
 # Build binary
-build: generate fmt vet
+build: fmt vet
 	go build -o bin/eks-distro-release main.go
 
 # Run against the configured Kubernetes cluster in ~/.kube/config
