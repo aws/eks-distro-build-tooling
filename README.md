@@ -1,4 +1,6 @@
-## My Project
+## EKS Distro Build Tooling Repository
+
+[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*-base-postsubmit)](https://prow.eks.amazonaws.com/?type=postsubmit)
 
 TODO: Fill this README out!
 
