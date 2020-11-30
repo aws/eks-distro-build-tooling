@@ -1,0 +1,13 @@
+fullnameOverride: ''
+nameOverride: ''
+
+region: 'us-west-2'
+
+clusterName: 'my-eks-cluster'
+
+cloudwatchAgent:
+  image: 'amazon/cloudwatch-agent:1.247346.0b249609'
+  serviceAccount:
+    name: 'cloudwatch-agent'
+    annotations: {}
+    create: false
