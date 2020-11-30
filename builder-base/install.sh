@@ -33,6 +33,7 @@ yum install -y \
     awscli \
     amazon-ecr-credential-helper \
     curl \
+    gcc \
     git \
     jq \
     less \
