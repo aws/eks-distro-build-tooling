@@ -24,13 +24,13 @@ run: generate fmt vet manifests
 
 # Install CRDs into a cluster
 install: manifests
-	kubectl apply -f ./config/crds/eks-distro.eks.amazonaws.com_releasechannels.yaml
-	kubectl apply -f ./config/crds/eks-distro.eks.amazonaws.com_releases.yaml
+	kubectl apply -f ./config/crds/distro.eks.amazonaws.com_releasechannels.yaml
+	kubectl apply -f ./config/crds/distro.eks.amazonaws.com_releases.yaml
 
 # Uninstall CRDs from a cluster
 uninstall: manifests
-	kubectl delete -f ./config/crds/eks-distro.eks.amazonaws.com_releasechannels.yaml
-	kubectl delete -f ./config/crds/eks-distro.eks.amazonaws.com_releases.yaml
+	kubectl delete -f ./config/crds/distro.eks.amazonaws.com_releasechannels.yaml
+	kubectl delete -f ./config/crds/distro.eks.amazonaws.com_releases.yaml
 
 # Generate manifests e.g. CRD, RBAC etc.
 manifests: controller-gen

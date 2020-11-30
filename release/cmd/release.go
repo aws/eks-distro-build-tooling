@@ -20,7 +20,7 @@ import (
 	"sigs.k8s.io/yaml"
 	"time"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/aws/eks-distro-build-tooling/release/pkg"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -46,8 +46,8 @@ var releaseCmd = &cobra.Command{
 			BuildRepoSource:          sourceDir,
 			ReleaseDate:              time.Now().UTC(),
 		}
-		release := &eksDistrov1alpha1.Release{
-			Spec: eksDistrov1alpha1.ReleaseSpec{
+		release := &distrov1alpha1.Release{
+			Spec: distrov1alpha1.ReleaseSpec{
 				Channel:         releaseBranch,
 				Number:          releaseNumber,
 				BuildRepoCommit: gitCommit,
@@ -55,7 +55,7 @@ var releaseCmd = &cobra.Command{
 		}
 		release.Name = fmt.Sprintf("kubernetes-%s-eks-%d", releaseBranch, releaseNumber)
 		// TODO figure out how to get these automatically added
-		release.APIVersion = "eks-distro.eks.amazonaws.com/v1alpha1"
+		release.APIVersion = "distro.eks.amazonaws.com/v1alpha1"
 		release.Kind = "Release"
 		err := releaseConfig.UpdateReleaseStatus(release)
 		if err != nil {

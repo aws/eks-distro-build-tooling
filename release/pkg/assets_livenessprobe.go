@@ -18,27 +18,27 @@ import (
 	"fmt"
 	"path"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
 )
 
 // GetLivenessprobeComponent returns the Component for Kubernetes
-func (r *ReleaseConfig) GetLivenessprobeComponent(spec eksDistrov1alpha1.ReleaseSpec) (*eksDistrov1alpha1.Component, error) {
+func (r *ReleaseConfig) GetLivenessprobeComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/livenessprobe"
 	tagFile := path.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
 	}
-	assets := []eksDistrov1alpha1.Asset{}
+	assets := []distrov1alpha1.Asset{}
 	binary := "livenessprobe"
-	assets = append(assets, eksDistrov1alpha1.Asset{
+	assets = append(assets, distrov1alpha1.Asset{
 		Name:        fmt.Sprintf("%s-image", binary),
 		Type:        "Image",
 		Description: fmt.Sprintf("%s container image", binary),
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
-		Image: &eksDistrov1alpha1.AssetImage{
+		Image: &distrov1alpha1.AssetImage{
 			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
 				r.ContainerImageRepository,
 				binary,
@@ -48,7 +48,7 @@ func (r *ReleaseConfig) GetLivenessprobeComponent(spec eksDistrov1alpha1.Release
 			),
 		},
 	})
-	component := &eksDistrov1alpha1.Component{
+	component := &distrov1alpha1.Component{
 		Name:   "livenessprobe",
 		GitTag: gitTag,
 		Assets: assets,

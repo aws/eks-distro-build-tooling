@@ -17,7 +17,7 @@ package pkg
 import (
 	"time"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
 )
 
@@ -29,9 +29,9 @@ type ReleaseConfig struct {
 }
 
 // UpdateReleaseStatus returns a release struct
-func (r *ReleaseConfig) UpdateReleaseStatus(release *eksDistrov1alpha1.Release) error {
-	components := []eksDistrov1alpha1.Component{}
-	componentFuncs := map[string]func(eksDistrov1alpha1.ReleaseSpec) (*eksDistrov1alpha1.Component, error){
+func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release) error {
+	components := []distrov1alpha1.Component{}
+	componentFuncs := map[string]func(distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error){
 		"kubernetes":            r.GetKubernetesComponent,
 		"aws-iam-authenticator": r.GetAuthenticatorComponent,
 		"livenessprobe":         r.GetLivenessprobeComponent,
@@ -54,7 +54,7 @@ func (r *ReleaseConfig) UpdateReleaseStatus(release *eksDistrov1alpha1.Release) 
 		components = append(components, *component)
 	}
 
-	release.Status = eksDistrov1alpha1.ReleaseStatus{
+	release.Status = distrov1alpha1.ReleaseStatus{
 		Date:       r.ReleaseDate.Format(time.RFC3339),
 		Components: components,
 	}

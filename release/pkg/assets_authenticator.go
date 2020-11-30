@@ -18,19 +18,19 @@ import (
 	"fmt"
 	"path"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
 )
 
 // GetKubernetesComponent returns the Component for Kubernetes
-func (r *ReleaseConfig) GetAuthenticatorComponent(spec eksDistrov1alpha1.ReleaseSpec) (*eksDistrov1alpha1.Component, error) {
+func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-sigs/aws-iam-authenticator"
 	tagFile := path.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
 	}
-	assets := []eksDistrov1alpha1.Asset{}
+	assets := []distrov1alpha1.Asset{}
 	osArchMap := map[string][]string{
 		"linux":   []string{"arm64", "amd64"},
 		"windows": []string{"amd64"},
@@ -45,13 +45,13 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec eksDistrov1alpha1.Release
 			if err != nil {
 				return nil, errors.Cause(err)
 			}
-			assets = append(assets, eksDistrov1alpha1.Asset{
+			assets = append(assets, distrov1alpha1.Asset{
 				Name:        filename,
 				Type:        "Archive",
 				Description: fmt.Sprintf("aws-iam-authenticator tarball for %s/%s", os, arch),
 				OS:          os,
 				Arch:        []string{arch},
-				Archive: &eksDistrov1alpha1.AssetArchive{
+				Archive: &distrov1alpha1.AssetArchive{
 					Path: path.Join(
 						fmt.Sprintf("kubernetes-%s", spec.Channel),
 						"releases",
@@ -68,13 +68,13 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec eksDistrov1alpha1.Release
 		}
 	}
 	binary := "aws-iam-authenticator"
-	assets = append(assets, eksDistrov1alpha1.Asset{
+	assets = append(assets, distrov1alpha1.Asset{
 		Name:        fmt.Sprintf("%s-image", binary),
 		Type:        "Image",
 		Description: fmt.Sprintf("%s container image", binary),
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
-		Image: &eksDistrov1alpha1.AssetImage{
+		Image: &distrov1alpha1.AssetImage{
 			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
 				r.ContainerImageRepository,
 				binary,
@@ -84,7 +84,7 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec eksDistrov1alpha1.Release
 			),
 		},
 	})
-	component := &eksDistrov1alpha1.Component{
+	component := &distrov1alpha1.Component{
 		Name:   "aws-iam-authenticator",
 		GitTag: gitTag,
 		Assets: assets,

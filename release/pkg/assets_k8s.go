@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"path"
 
-	eksDistrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
+	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 )
 
 // GetKubernetesComponent returns the Component for Kubernetes
-func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpec) (*eksDistrov1alpha1.Component, error) {
+func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	kgv, err := newKubeGitVersionFile(r.BuildRepoSource, spec.Channel)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 	if err != nil {
 		return nil, err
 	}
-	assets := []eksDistrov1alpha1.Asset{}
+	assets := []distrov1alpha1.Asset{}
 
 	osComponentMap := map[string][]string{
 		"linux":   []string{"client", "server", "node"},
@@ -62,7 +62,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 			"kubelet.exe",
 		},
 	}
-	binaryAssets := []eksDistrov1alpha1.Asset{}
+	binaryAssets := []distrov1alpha1.Asset{}
 
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
@@ -72,13 +72,13 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 				if err != nil {
 					return nil, err
 				}
-				binaryAssets = append(binaryAssets, eksDistrov1alpha1.Asset{
+				binaryAssets = append(binaryAssets, distrov1alpha1.Asset{
 					Name:        filename,
 					Type:        "Archive",
 					Description: fmt.Sprintf("%s binary for %s/%s", binary, os, arch),
 					OS:          os,
 					Arch:        []string{arch},
-					Archive: &eksDistrov1alpha1.AssetArchive{
+					Archive: &distrov1alpha1.AssetArchive{
 						Path: path.Join(
 							fmt.Sprintf("kubernetes-%s", spec.Channel),
 							"releases",
@@ -99,13 +99,13 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 				if err != nil {
 					return nil, err
 				}
-				assets = append(assets, eksDistrov1alpha1.Asset{
+				assets = append(assets, distrov1alpha1.Asset{
 					Name:        filename,
 					Type:        "Archive",
 					Description: fmt.Sprintf("Kubernetes %s tarball for %s/%s", component, os, arch),
 					OS:          os,
 					Arch:        []string{arch},
-					Archive: &eksDistrov1alpha1.AssetArchive{
+					Archive: &distrov1alpha1.AssetArchive{
 						Path: path.Join(
 							fmt.Sprintf("kubernetes-%s", spec.Channel),
 							"releases",
@@ -123,7 +123,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 		}
 	}
 
-	imageTarAssets := []eksDistrov1alpha1.Asset{}
+	imageTarAssets := []distrov1alpha1.Asset{}
 	linuxImageArches := []string{"amd64", "arm64"}
 	images := []string{
 		"kube-apiserver",
@@ -134,13 +134,13 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 	}
 
 	for _, binary := range images {
-		assets = append(assets, eksDistrov1alpha1.Asset{
+		assets = append(assets, distrov1alpha1.Asset{
 			Name:        fmt.Sprintf("%s-image", binary),
 			Type:        "Image",
 			Description: fmt.Sprintf("%s container image", binary),
 			OS:          "linux",
 			Arch:        []string{"amd64", "arm64"},
-			Image: &eksDistrov1alpha1.AssetImage{
+			Image: &distrov1alpha1.AssetImage{
 				URI: fmt.Sprintf("%s/kubernetes/%s:%s",
 					r.ContainerImageRepository,
 					binary,
@@ -154,13 +154,13 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 			if err != nil {
 				return nil, err
 			}
-			imageTarAssets = append(imageTarAssets, eksDistrov1alpha1.Asset{
+			imageTarAssets = append(imageTarAssets, distrov1alpha1.Asset{
 				Name:        filename,
 				Type:        "Archive",
 				Description: fmt.Sprintf("%s linux/%s OCI image tar", binary, arch),
 				OS:          "linux",
 				Arch:        []string{arch},
-				Archive: &eksDistrov1alpha1.AssetArchive{
+				Archive: &distrov1alpha1.AssetArchive{
 					Path: path.Join(
 						fmt.Sprintf("kubernetes-%s", spec.Channel),
 						"releases",
@@ -185,11 +185,11 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 	if err != nil {
 		return nil, err
 	}
-	assets = append(assets, eksDistrov1alpha1.Asset{
+	assets = append(assets, distrov1alpha1.Asset{
 		Name:        filename,
 		Type:        "Archive",
 		Description: "Kubernetes source tarball",
-		Archive: &eksDistrov1alpha1.AssetArchive{
+		Archive: &distrov1alpha1.AssetArchive{
 			Path: path.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
@@ -203,7 +203,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec eksDistrov1alpha1.ReleaseSpe
 			SHA256: sha256,
 		},
 	})
-	component := &eksDistrov1alpha1.Component{
+	component := &distrov1alpha1.Component{
 		Name:      "kubernetes",
 		GitCommit: kgv.KubeGitCommit,
 		GitTag:    gitTag,
