@@ -46,6 +46,12 @@ data:
           required_files:
           - started.json|finished.json
         - lens:
+            name: coverage
+          required_files:
+          - ^artifacts/filtered\.cov$
+          optional_files:
+          - ^artifacts/filtered\.html$
+        - lens:
             config:
             name: buildlog
           required_files:
