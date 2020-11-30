@@ -15,6 +15,7 @@
 package pkg
 
 import (
+	"net/url"
 	"time"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
@@ -24,6 +25,7 @@ import (
 // ReleaseConfig contains metadata fields for a release
 type ReleaseConfig struct {
 	ContainerImageRepository string
+	ArtifactURL              string
 	BuildRepoSource          string
 	ReleaseDate              time.Time
 }
@@ -59,4 +61,14 @@ func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release) err
 		Components: components,
 	}
 	return nil
+}
+
+// GetURI returns an full URL for the given path
+func (r *ReleaseConfig) GetURI(path string) (string, error) {
+	uri, err := url.Parse(r.ArtifactURL)
+	if err != nil {
+		return "", err
+	}
+	uri.Path = path
+	return uri.String(), nil
 }

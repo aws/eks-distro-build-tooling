@@ -77,10 +77,6 @@ spec:
                           type: array
                         archive:
                           properties:
-                            path:
-                              description: The path of the server at which the asset
-                                is located
-                              type: string
                             sha256:
                               description: The sha256 of the asset, only applies for
                                 'file' store
@@ -88,6 +84,9 @@ spec:
                             sha512:
                               description: The sha512 of the asset, only applies for
                                 'file' store
+                              type: string
+                            uri:
+                              description: The URI where the asset is located
                               type: string
                           type: object
                         description:
