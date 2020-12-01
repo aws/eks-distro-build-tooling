@@ -10,6 +10,7 @@ install-toolchain:
 
 verify: install-toolchain
 	${CHART_ROOT}/scripts/lint-charts.sh
+	${CHART_ROOT}/scripts/verify-version.sh
 
 publish:
 	${CHART_ROOT}/scripts/publish-charts.sh
