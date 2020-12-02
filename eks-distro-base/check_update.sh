@@ -19,7 +19,7 @@ set -o pipefail
 set -x
 
 yum --security check-update
-if [ $? -eq 100 ]; then
+if [ $? -eq 0 ]; then
     bash ./eks-distro-base/install.sh
     export TZ=America/Los_Angeles
     DATE_EPOCH=$(date "+%F-%s")
