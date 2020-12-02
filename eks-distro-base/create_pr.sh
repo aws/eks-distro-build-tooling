@@ -36,15 +36,14 @@ PR_BODY="This PR updates the base image tag in ${FILENAME} with \
 the tag of the newly-built EKS Distro base image"
 
 cd ../${REPO}
-git remote add upstream https://github.com/aws/${REPO}.git
-git remote add origin https://abhay-krishna@github.com/abhay-krishna/${REPO}.git
-git config --global credential.https://github.com/abhay-krishna/${REPO}.abhay-krishna "Abhay Krishna" 'store --file /secrets/github/token'
+git remote add upstream git@github.com:aws/${REPO}.git
+git remote add origin git@github.com:abhay-krishna/${REPO}.git
 #git fetch upstream
 #git rebase upstream/main
 git checkout -b image-tag-update
 
 for FILE in $(find ./ -name $FILEPATH); do
-    if [ $REPO = "eks-distro" ]; then
+    if [ $REPO = "eks-distro" ] ; then
         if [ $(dirname $FILE) = "." ]; then
             OLD_TAG="^BASE_IMAGE?=\(.*\):.*"
             NEW_TAG="BASE_IMAGE?=\1:${DATE_EPOCH}"
