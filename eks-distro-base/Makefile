@@ -19,7 +19,7 @@ endif
 .PHONY: local-images
 local-images:
 	# Sleep to wait for buildkitd to start up
-	sleep 10
+	sleep 15
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
