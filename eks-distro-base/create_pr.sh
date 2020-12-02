@@ -18,7 +18,7 @@ set -e
 set -o pipefail
 set -x
 
-GITHUB_TOKEN=f1407625622a39bcd2caff55c5852860b1d2ca62
+GITHUB_TOKEN=$(cat /secrets/github/token)
 
 OLD_TAG="$2"
 NEW_TAG="$3"
