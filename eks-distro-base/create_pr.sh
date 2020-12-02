@@ -42,8 +42,6 @@ REVIEWERS=(
 )
 
 cd ../${REPO}
-git config user.email user.email "prow@amazonaws.com"
-git config user.name "Prow Bot"
 git remote add upstream https://github.com/aws/${REPO}.git
 git remote add origin https://github.com/abhay-krishna/${REPO}.git
 #git fetch upstream
@@ -61,7 +59,7 @@ for FILE in $(find ./ -name $FILEPATH); do
     git add $FILE
 done
 git commit -m "Update EKS Distro base image tag"
-git push -u origin image-update-branch -f
+git push -u origin image-update-branch
 
 echo TOKEN | gh auth login --with-token
 IFS=,
