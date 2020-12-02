@@ -20,6 +20,7 @@ set -x
 
 GITHUB_TOKEN=$(cat /secrets/github/token)
 
+REPO="$1"
 OLD_TAG="$2"
 NEW_TAG="$3"
 FILEPATH="$4"
