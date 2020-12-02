@@ -22,7 +22,7 @@ yum --security check-update
 if [ $? -eq 0 ]; then
     bash ./eks-distro-base/install.sh
     export TZ=America/Los_Angeles
-    DATE_EPOCH=$(date "+%F-%s")
+    export DATE_EPOCH=$(date "+%F-%s")
     make release -C eks-distro-base DEVELOPMENT=false IMAGE_TAG=${DATE_EPOCH}
     bash ./eks-distro-base/create_pr.sh eks-distro-build-tooling '.*' ${DATE_EPOCH} TAG_FILE
     bash ./eks-distro-base/create_pr.sh eks-distro 'BASE_TAG?=.*' 'BASE_TAG?='"${DATE_EPOCH}" Makefile
