@@ -59,7 +59,7 @@ for FILE in $(find ./ -name $FILEPATH); do
     git add $FILE
 done
 git commit -m "Update EKS Distro base image tag"
-git push -u origin image-update-branch
+git push -u origin image-update-branch -f
 
 echo TOKEN | gh auth login --with-token
 IFS=,
