@@ -38,7 +38,7 @@ the tag of the newly-built EKS Distro base image"
 cd ../${REPO}
 git remote add upstream https://github.com/aws/${REPO}.git
 git remote add origin https://abhay-krishna@github.com/abhay-krishna/${REPO}.git
-git config credential.helper 'store --file /secrets/github/token'
+git config --global credential.https://github.com/abhay-krishna/${REPO}.abhay-krishna 'store --file /secrets/github/token'
 #git fetch upstream
 #git rebase upstream/main
 git checkout -b image-tag-update
