@@ -43,7 +43,7 @@ REVIEWERS=(
 
 cd ../${REPO}
 git remote add upstream https://github.com/aws/${REPO}.git
-git remote add origin https://github.com/abhay-krishna/${REPO}.git
+git remote add origin https://abhay-krishna:${TOKEN}@github.com/abhay-krishna/${REPO}.git
 #git fetch upstream
 #git rebase upstream/main
 git checkout -b image-update-branch
