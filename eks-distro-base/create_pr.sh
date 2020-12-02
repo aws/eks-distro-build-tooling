@@ -37,7 +37,7 @@ PR_TITLE="Update base image tag in ${FILENAME}"
 PR_BODY="This PR updates the base image tag in ${FILENAME} with \
 the tag of the newly-built EKS Distro base image"
 REVIEWERS=(
-  "micah-hausler"
+  "micahhausler"
   "vivek-koppuru"
 )
 
