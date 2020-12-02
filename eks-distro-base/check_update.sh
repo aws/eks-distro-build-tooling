@@ -18,8 +18,31 @@ set -e
 set -o pipefail
 set -x
 
-yum --security check-update
-if [ $? -eq 0 ]; then
+BASE_IMAGE=319341287998.dkr.ecr.us-west-2.amazonaws.com/eks-distro/base:4834bc2a2e2eea3b14dc3b0cbbf5ac1f7cfba156
+mkdir eks-distro-base/check-update
+cat << EOF >> eks-distro-base/check-update/Dockerfile
+FROM $BASE_IMAGE AS base_image
+
+RUN yum check-update --security
+RUN echo $? > ./return_value
+
+FROM scratch
+
+COPY --from=base_image ./return_value ./return_value
+EOF
+
+buildctl build \
+         --frontend dockerfile.v0
+         --local dockerfile=./eks-distro/check-update
+         --local context=.\
+         --output type=local,dest=/tmp/return_status.tar
+
+tar -xvf /tmp/return_status.tar
+ls
+ls return_status
+cat return_status/return_value
+RETURN_STATUS=$(cat return_status)
+if [ $RETURN_STATUS -eq 0 ]; then
     bash ./eks-distro-base/install.sh
     export TZ=America/Los_Angeles
     export DATE_EPOCH=$(date "+%F-%s")
