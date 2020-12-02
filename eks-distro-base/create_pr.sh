@@ -63,4 +63,4 @@ git push -u origin image-update-branch -f
 
 echo $TOKEN | gh auth login --with-token
 IFS=,
-gh create pr --title $PR_TITLE --body $PR_BODY --reviewer "${REVIEWERS[*]}" --draft
+gh pr create --title $PR_TITLE --body $PR_BODY --reviewer "${REVIEWERS[*]}" --draft
