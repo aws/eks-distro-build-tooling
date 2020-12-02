@@ -24,6 +24,7 @@ yum install -y \
     amazon-ecr-credential-helper \
     git \
     make \
+    openssh-clients \
     tar \
     wget \
 
