@@ -18,7 +18,7 @@ set -e
 set -o pipefail
 set -x
 
-GITHUB_TOKEN=$(cat /secrets/github/token)
+TOKEN=$(cat /secrets/github/token)
 
 REPO="$1"
 OLD_TAG="$2"
@@ -63,6 +63,6 @@ done
 git commit -m "Update EKS Distro base image tag"
 git push -u origin image-update-branch -f
 
-echo $GITHUB_TOKEN | gh auth login --with-token
+echo TOKEN | gh auth login --with-token
 IFS=,
 gh create pr --title $PR_TITLE --body $PR_BODY --reviewer "${REVIEWERS[*]}" --draft
