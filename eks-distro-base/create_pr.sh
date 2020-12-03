@@ -57,5 +57,6 @@ git commit -m "Update EKS Distro base image tag"
 ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin image-tag-update -f'
 
 gh auth login --with-token < /secrets/github/token
-IFS=,
-gh pr create --title $PR_TITLE --body $PR_BODY --draft
+if [ $(gh pr list) = ""]; then
+    gh pr create --title $PR_TITLE --body $PR_BODY --draft
+fi
