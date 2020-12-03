@@ -27,6 +27,7 @@ if [ $REPO = "eks-distro-build-tooling" ]; then
     CHANGED_FILE="Tag file"
 elif [ $REPO = "eks-distro" ]; then
     CHANGED_FILE="Makefile"
+fi
     
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
 PR_BODY="This PR updates the base image tag in ${CHANGED_FILE} with \
