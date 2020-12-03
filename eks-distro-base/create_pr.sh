@@ -24,15 +24,12 @@ NEW_TAG="$3"
 FILEPATH="$4"
 
 if [ $REPO = "eks-distro-build-tooling" ]; then
-    FILENAME="Tag file"
+    CHANGED_FILE="Tag file"
 elif [ $REPO = "eks-distro" ]; then
-    FILENAME="Makefile"
-else
-    FILENAME="EKS Distro base periodic"
-fi
-
-PR_TITLE="Update base image tag in ${FILENAME}"
-PR_BODY="This PR updates the base image tag in ${FILENAME} with \
+    CHANGED_FILE="Makefile"
+    
+PR_TITLE="Update base image tag in ${CHANGED_FILE}"
+PR_BODY="This PR updates the base image tag in ${CHANGED_FILE} with \
 the tag of the newly-built EKS Distro base image"
 
 cd ../${REPO}
