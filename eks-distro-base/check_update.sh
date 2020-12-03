@@ -36,11 +36,9 @@ buildctl build \
          --opt platform=linux/amd64 \
          --local dockerfile=./eks-distro-base/check-update \
          --local context=. \
-         --output type=local,dest=/tmp/return_status.tar
-ls -l /tmp
-ls /tmp/return_status.tar
-cat return_status/return_value
-RETURN_STATUS=$(cat return_status)
+         --output type=local,dest=/tmp/return_status
+
+RETURN_STATUS=$(cat /tmp/return_status/return_value)
 if [ $RETURN_STATUS -eq 0 ]; then
     bash ./eks-distro-base/install.sh
     export TZ=America/Los_Angeles
