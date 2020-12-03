@@ -30,7 +30,7 @@ FROM scratch
 
 COPY --from=base_image ./return_value ./return_value
 EOF
-
+sleep 10
 buildctl build \
          --frontend dockerfile.v0
          --local dockerfile=./eks-distro/check-update
