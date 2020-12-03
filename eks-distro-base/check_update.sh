@@ -37,10 +37,8 @@ buildctl build \
          --local dockerfile=./eks-distro-base/check-update \
          --local context=. \
          --output type=local,dest=/tmp/return_status.tar
-
-tar -xvf /tmp/return_status.tar
-ls
-ls return_status
+ls -l /tmp
+ls /tmp/return_status.tar
 cat return_status/return_value
 RETURN_STATUS=$(cat return_status)
 if [ $RETURN_STATUS -eq 0 ]; then
