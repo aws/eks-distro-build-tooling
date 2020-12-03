@@ -46,5 +46,4 @@ if [ $RETURN_STATUS -eq 0 ]; then
     make release -C eks-distro-base DEVELOPMENT=false IMAGE_TAG=${DATE_EPOCH}
     bash ./eks-distro-base/create_pr.sh eks-distro-build-tooling '.*' ${DATE_EPOCH} TAG_FILE
     bash ./eks-distro-base/create_pr.sh eks-distro 'BASE_TAG?=.*' 'BASE_TAG?='"${DATE_EPOCH}" Makefile
-    bash ./eks-distro-base/create_pr.sh eks-distro-prow-jobs '\(eks-distro/base\):.*' '\1:'"${DATE_EPOCH}" eks-distro-base-periodics.yaml
 fi
