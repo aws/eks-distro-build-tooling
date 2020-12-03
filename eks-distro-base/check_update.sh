@@ -33,7 +33,7 @@ EOF
 sleep 10
 buildctl build \
          --frontend dockerfile.v0 \
-         --opt platform=linux/amd64
+         --opt platform=linux/amd64 \
          --local dockerfile=./eks-distro/check-update \
          --local context=. \
          --output type=local,dest=/tmp/return_status.tar
