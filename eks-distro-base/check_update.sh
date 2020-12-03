@@ -32,9 +32,10 @@ COPY --from=base_image ./return_value ./return_value
 EOF
 sleep 10
 buildctl build \
-         --frontend dockerfile.v0
-         --local dockerfile=./eks-distro/check-update
-         --local context=.\
+         --frontend dockerfile.v0 \
+         --opt platform=linux/amd64
+         --local dockerfile=./eks-distro/check-update \
+         --local context=. \
          --output type=local,dest=/tmp/return_status.tar
 
 tar -xvf /tmp/return_status.tar
