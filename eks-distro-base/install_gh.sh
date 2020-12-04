@@ -23,5 +23,6 @@ yum install -y openssh-clients
 GITHUB_CLIENT_VERSION="${GITHUB_CLIENT_VERSION:-1.2.1}"
 wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLIENT_VERSION}/gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
 sha256sum -c eks-distro-base/github_cli_checksum
-tar -C /usr -xzf gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
+tar -xzf gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
+mv gh_${GITHUB_CLIENT_VERSION}_linux_amd64/bin/gh /usr/bin
 rm -rf gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz

@@ -18,9 +18,9 @@ set -e
 set -o pipefail
 set -x
 
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account)
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_REGION="us-west-2"
-BASE_IMAGE=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/eks-distro/base:$(cat eks-distro-base/TAG_FILE)
+BASE_IMAGE=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/eks-distro/base:$(cat eks-distro-base/TAG_FILE)
 mkdir eks-distro-base/check-update
 cat << EOF >> eks-distro-base/check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
