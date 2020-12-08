@@ -37,6 +37,10 @@ spec:
         env:
         - name: AWS_STS_REGIONAL_ENDPOINTS
           value: regional
+        - name: AWS_ROLE_SESSION_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         image: {{ .Values.horologium.image }}
         args:
         - --dry-run={{ .Values.dryRun }}
