@@ -21,15 +21,17 @@ err_report() {
 }
 trap 'err_report $LINENO' ERR
 
+MAKE_ROOT="$(pwd -P)"
+source "${MAKE_ROOT}/../../../helm-charts/scripts/lib.sh"
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 BUILD_DIR="$SCRIPT_ROOT/build"
 REPO=$1
-CHART_BUCKET=$2
+CHART_BUCKET_NAME=$2
 BASE_IMAGE=$3
 IMAGE=$4
 UPLOAD=$5
-BUCKET_URL="https://${CHART_BUCKET}.s3.amazonaws.com"
-sh ../../../helm-charts/scripts/install-toolchain.sh
+BUCKET_URL="https://${CHART_BUCKET_NAME}.s3.amazonaws.com"
+sh "${MAKE_ROOT}/../../../helm-charts/scripts/install-toolchain.sh"
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
@@ -75,7 +77,7 @@ then
         curl -o index.yaml --silent "${BUCKET_URL}/index.yaml"
     fi
     helm repo index stable --url ${BUCKET_URL} $MERGE_ARG
-    aws s3 cp --recursive --acl public-read stable  "s3://${CHART_BUCKET}"
+    aws s3 cp --recursive --acl public-read stable  "s3://${CHART_BUCKET_NAME}"
 fi
 cd ..
 rm -rf athens

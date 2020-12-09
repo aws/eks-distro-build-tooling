@@ -24,4 +24,4 @@ release:
 
 .PHONY: clean
 clean:
-	rm -rf rm -rf ${CHART_ROOT}/build/
+	rm -rf ${CHART_ROOT}/build/
