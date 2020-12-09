@@ -29,15 +29,17 @@ BASE_IMAGE=$3
 IMAGE=$4
 UPLOAD=$5
 BUCKET_URL="https://${CHART_BUCKET}.s3.amazonaws.com"
-
+sh ../../../helm-charts/scripts/install-toolchain.sh
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
 git clone $REPO
 cd athens
 OUTPUT="dest=/tmp/athens.tar"
+TYPE="type=oci"
 if [[ $UPLOAD == "true" ]]; then
     OUTPUT="push=true"
+    TYPE="type=image"
 fi
 buildctl build \
   --frontend dockerfile.v0 \
@@ -45,7 +47,7 @@ buildctl build \
   --opt build-arg:BASE_IMAGE=${BASE_IMAGE} \
   --local dockerfile=cmd/proxy/ \
   --local context=. \
-  --output type=oci,oci-mediatypes=true,name=${IMAGE},$OUTPUT
+  --output $TYPE,oci-mediatypes=true,name=${IMAGE},$OUTPUT
 cd ..
 rm -rf athens
 
