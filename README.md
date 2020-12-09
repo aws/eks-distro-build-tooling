@@ -1,6 +1,6 @@
 ## EKS Distro Build Tooling Repository
 
-[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*-base-postsubmit)](https://prow.eks.amazonaws.com/?type=postsubmit)
+[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 This repository contains tooling used to build the [EKS
 Distro](https://distro.eks.amazonaws.com), and all the projects contained in
