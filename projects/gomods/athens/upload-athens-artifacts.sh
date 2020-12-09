@@ -21,17 +21,16 @@ err_report() {
 }
 trap 'err_report $LINENO' ERR
 
-MAKE_ROOT="$(pwd -P)"
-source "${MAKE_ROOT}/../../../helm-charts/scripts/lib.sh"
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-BUILD_DIR="$SCRIPT_ROOT/build"
+ATHENS_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${ATHENS_ROOT}/../../../helm-charts/scripts/lib.sh"
+BUILD_DIR="$ATHENS_ROOT/build"
 REPO=$1
 CHART_BUCKET_NAME=$2
 BASE_IMAGE=$3
 IMAGE=$4
 UPLOAD=$5
 BUCKET_URL="https://${CHART_BUCKET_NAME}.s3.amazonaws.com"
-sh "${MAKE_ROOT}/../../../helm-charts/scripts/install-toolchain.sh"
+sh "${ATHENS_ROOT}/../../../helm-charts/scripts/install-toolchain.sh"
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
@@ -82,5 +81,5 @@ fi
 cd ..
 rm -rf athens
 
-cd $SCRIPT_ROOT
+cd $ATHENS_ROOT
 rm -rf $BUILD_DIR
