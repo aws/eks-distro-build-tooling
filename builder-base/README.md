@@ -2,6 +2,16 @@
 
 This image is used to build other jobs, and serves as a base image for prow jobs
 
+```bash
+# build with buildkit
+docker run -d --name buildkitd --privileged moby/buildkit:latest
+export BUILDKIT_HOST=docker-container://buildkitd
+
+make images
+
+# build with docker
+make docker
+```
 
 ## Build Arguments
 
