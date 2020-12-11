@@ -10,7 +10,7 @@ BASE_TAG?=26f234d9da8bc4423bacb539caaece931808d28b
 BASE_IMAGE?=$(BASE_REPO)/$(BASE_IMAGE_NAME):$(BASE_TAG)
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-IMAGE_NAME?="athensgomodecrrepositorybe76f212-0bkvuns6scpo"
+IMAGE_NAME?="gomods/athens"
 IMAGE_TAG?="latest"
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
