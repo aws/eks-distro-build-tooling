@@ -25,7 +25,7 @@ mkdir eks-distro-base/check-update
 cat << EOF >> eks-distro-base/check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
-RUN yum check-update --security
+RUN (yum check-update --security) && true
 RUN echo $? > ./return_value
 
 FROM scratch
@@ -45,4 +45,6 @@ RETURN_STATUS=$(cat /tmp/status/return_value)
 
 if [ $RETURN_STATUS -eq 100 ]; then
     bash ./eks-distro-base/update_base_image.sh
+elif [ $RETURN_STATUS -eq 1 ]; then
+    exit 1
 fi

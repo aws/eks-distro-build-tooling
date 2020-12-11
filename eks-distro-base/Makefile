@@ -2,9 +2,7 @@ DEVELOPMENT?=true
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
-BASE_IMAGE_NAME?=amazonlinux
-BASE_TAG?=2
-BASE_IMAGE?=$(BASE_IMAGE_NAME):$(BASE_TAG)
+BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro/base
