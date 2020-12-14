@@ -17,6 +17,8 @@ endif
 .PHONY: local-images
 local-images:
 	mkdir -p /tmp/builder-base
+	# Sleeping until buildkit daemon is running on the other container
+	sleep 10
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -25,9 +27,12 @@ local-images:
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=tar,dest=/tmp/builder-base/output.tar
+	./update_base_image.sh --dry-run
 
 .PHONY: images
 images:
+	# Sleeping until buildkit daemon is running on the other container
+	sleep 10
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -36,6 +41,7 @@ images:
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+	./update_base_image.sh
 
 # for local development only
 docker:

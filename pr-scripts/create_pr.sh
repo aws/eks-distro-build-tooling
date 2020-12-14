@@ -22,22 +22,44 @@ REPO="$1"
 OLD_TAG="$2"
 NEW_TAG="$3"
 FILEPATH="$4"
+DRY_RUN_FLAG="$5"
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 if [ $REPO = "eks-distro-build-tooling" ]; then
     CHANGED_FILE="Tag file"
 elif [ $REPO = "eks-distro" ]; then
-    CHANGED_FILE="Makefile"
+    CHANGED_FILE="Makefiles"
+elif [ $REPO = "eks-distro-prow-jobs" ]; then
+    CHANGED_FILE="Prow jobs"
+fi
+
+if [ $REPO_OWNER = "aws" ]; then
+    ORIGIN_ORG="eks-distro-pr-bot"
+    UPSTREAM_ORG="aws"
+else
+    ORIGIN_ORG=$REPO_OWNER
+    UPSTREAM_ORG=$REPO_OWNER
+fi
+
+COMMIT_MESSAGE="[PR BOT] Update EKS Distro base image tag"
+if [ $REPO = "eks-distro-prow-jobs" ]; then
+    COMMIT_MESSAGE="[PR BOT] Update builder-base image tag in Prow jobs"
 fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
-sed -i '' "s,CHANGED_FILE,${CHANGED_FILE}," eks-distro-base/pr_body
-PR_BODY=$(cat pr_body)
+sed -i "s,CHANGED_FILE,${CHANGED_FILE}," ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body
+PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body)
+if [ $REPO = "eks-distro-prow-jobs" ]; then
+    PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/builder_base_pr_body)
+fi
+PR_BRANCH="image-tag-update"
 
-cd ../${REPO}
+cd ${REPO_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 git config user.name "EKS Distro PR Bot"
-git remote add upstream git@github.com:aws/${REPO}.git
-git remote add origin git@github.com:eks-distro-pr-bot/${REPO}.git
-git checkout -b image-tag-update
+git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
+git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
+git checkout -b $PR_BRANCH
 git fetch upstream
 git rebase upstream/main
 
@@ -54,12 +76,15 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     sed -i "s,${OLD_TAG},${NEW_TAG}," $FILE
     git add $FILE
 done
-git commit -m "Update EKS Distro base image tag"
-ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin image-tag-update -f'
+git commit -m "$COMMIT_MESSAGE"
+if [ $DRY_RUN_FLAG = "--dry-run" ] ; then
+    exit 0
+fi
+ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u $PR_BRANCH -f'
 
 gh auth login --with-token < /secrets/github-secrets/token
 
-PR_EXISTS=$(gh pr list | grep -c "image-tag-update")
+PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}")
 if [ $PR_EXISTS -eq 0 ]; then
   gh pr create --title $PR_TITLE --body $PR_BODY
 fi

@@ -18,11 +18,7 @@ set -e
 set -o pipefail
 set -x
 
-yum install -y openssh-clients
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-GITHUB_CLIENT_VERSION="${GITHUB_CLIENT_VERSION:-1.2.1}"
-wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLIENT_VERSION}/gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
-sha256sum -c eks-distro-base/github_cli_checksum
-tar -xzf gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
-mv gh_${GITHUB_CLIENT_VERSION}_linux_amd64/bin/gh /usr/bin
-rm -rf gh_${GITHUB_CLIENT_VERSION}_linux_amd64.tar.gz
+${REPO_ROOT}/../pr-scripts/install_gh.sh
+${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$PULL_BASE_SHA" *.yaml $1

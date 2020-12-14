@@ -18,33 +18,38 @@ set -e
 set -o pipefail
 set -x
 
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-AWS_REGION="us-west-2"
-BASE_IMAGE=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/eks-distro/base:$(cat eks-distro-base/TAG_FILE)
-mkdir eks-distro-base/check-update
-cat << EOF >> eks-distro-base/check-update/Dockerfile
+IMAGE_REPO=$1
+IMAGE_NAME=$2
+IMAGE_TAG=$3
+DRY_RUN_FLAG=$4
+
+BASE_IMAGE=${IMAGE_REPO}/${IMAGE_NAME}:$(cat TAG_FILE)
+mkdir check-update
+cat << EOF >> check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
-RUN (yum check-update --security) && true
-RUN echo $? > ./return_value
+RUN yum check-update --security; echo $? > ./return_value
 
 FROM scratch
 
 COPY --from=base_image ./return_value ./return_value
 EOF
 
-sleep 10
 buildctl build \
          --frontend dockerfile.v0 \
          --opt platform=linux/amd64 \
-         --local dockerfile=./eks-distro-base/check-update \
+         --local dockerfile=./check-update \
          --local context=. \
-         --output type=local,dest=/tmp/status
+         --output type=local,dest=/tmp/${IMAGE_TAG}
 
-RETURN_STATUS=$(cat /tmp/status/return_value)
+if [ ${DRY_RUN_FLAG} = "--dry-run" ]; then
+    echo "Dry run"
+    exit 0
+fi
 
+RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
 if [ $RETURN_STATUS -eq 100 ]; then
-    bash ./eks-distro-base/update_base_image.sh
+    echo "Updates required"
 elif [ $RETURN_STATUS -eq 1 ]; then
-    exit 1
+    echo "Error"
 fi
