@@ -1,0 +1,5 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }} and deployed to the {{ .Release.Namespace }} namespace.
+
+For more information about this application, visit https://github.com/aws/amazon-eks-pod-identity-webhook

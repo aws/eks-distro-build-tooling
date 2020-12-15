@@ -12,13 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: distro.eks.amazonaws.com/v1alpha1
-kind: ReleaseChannel
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
-  creationTimestamp: null
-  name: 1-18
-spec:
-  snsTopicARN: "arn:aws:sns:us-east-1:379412251201:eks-distro-updates"
-status:
-  active: true
-  latestRelease: 1
+  name: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - update
+  - patch
+  resourceNames:
+  - {{ include "amazon-eks-pod-identity-webhook.fullname" . }}

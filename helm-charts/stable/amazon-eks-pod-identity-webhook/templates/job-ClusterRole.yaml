@@ -12,13 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: distro.eks.amazonaws.com/v1alpha1
-kind: ReleaseChannel
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
-  creationTimestamp: null
-  name: 1-18
-spec:
-  snsTopicARN: "arn:aws:sns:us-east-1:379412251201:eks-distro-updates"
-status:
-  active: true
-  latestRelease: 1
+  name: {{ .Values.jobName }}
+rules:
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  verbs:
+  - get
+  - patch
+  resourceNames:
+  - {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  verbs:
+  - create
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests/approval
+  verbs:
+  - update
