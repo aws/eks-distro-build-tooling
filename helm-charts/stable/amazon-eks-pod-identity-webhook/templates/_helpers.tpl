@@ -46,6 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "amazon-eks-pod-identity-webhook.selectorLabels" -}}
+app: {{ include "amazon-eks-pod-identity-webhook.name" . }}
 app.kubernetes.io/name: {{ include "amazon-eks-pod-identity-webhook.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
