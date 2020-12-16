@@ -50,8 +50,10 @@ spec:
         - --tls-secret={{ include "amazon-eks-pod-identity-webhook.fullname" . }}
         - --annotation-prefix=eks.amazonaws.com
         - --token-audience=sts.amazonaws.com
-        - --metrics-port={{ .Values.service.metricsPort }}
-        - --port={{ .Values.service.port }}
+        - --token-expiration={{ .Values.webhook.tokenExpiration }}
+        - --sts-regional-endpoint={{ .Values.webhook.stsRegionalEndpoint }}
+        - --metrics-port={{ .Values.webhook.metricsPort }}
+        - --port={{ .Values.webhook.port }}
         - --logtostderr
         volumeMounts:
         - name: webhook-certs

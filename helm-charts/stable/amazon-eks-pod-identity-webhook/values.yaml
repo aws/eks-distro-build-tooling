@@ -26,9 +26,15 @@ baseImage: public.ecr.aws/amazonlinux/amazonlinux:2
 sleep: 30
 fargate: false
 
-service:
+# Parameters to webhook are defined here: https://github.com/aws/amazon-eks-pod-identity-webhook#usage
+webhook:
+  tokenExpiration: 3600
+  stsRegionalEndpoint: true
   port: 443
   metricsPort: 9999
+
+service:
+  port: 443
 
 replicaCount: 1
 

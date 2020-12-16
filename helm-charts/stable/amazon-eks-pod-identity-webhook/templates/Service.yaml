@@ -19,12 +19,12 @@ metadata:
   labels:
     {{- include "amazon-eks-pod-identity-webhook.labels" . | nindent 4 }}
   annotations:
-    prometheus.io/port: {{ .Values.service.metricsPort | quote }}
+    prometheus.io/port: {{ .Values.webhook.metricsPort | quote }}
     prometheus.io/scheme: "https"
     prometheus.io/scrape: "true"
 spec:
   ports:
   - port: {{ .Values.service.port }}
-    targetPort: {{ .Values.service.port }}
+    targetPort: {{ .Values.webhook.port }}
   selector:
     {{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 4 }}
