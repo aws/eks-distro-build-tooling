@@ -15,7 +15,7 @@
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: ${WEBHOOK_NAME}
+  name: ${MWC_NAME}
   namespace: ${NAMESPACE}
 webhooks:
 - name: ${WEBHOOK_NAME}.amazonaws.com

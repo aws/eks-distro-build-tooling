@@ -14,6 +14,8 @@
 
 nameOverride: "eks-distro-pod-identity-webhook"
 fullnameOverride: "eks-distro-pod-identity-webhook"
+webhookConfigName: "0500-eks-distro-pod-identity-webhook"
+jobName: "eks-distro-pod-identity-webhook-cert-approver"
 
 # Make sure to pass in the image for the webhook here or as a parameter to the helm installation
 image: placeholder-webhook:fake
@@ -37,5 +39,3 @@ service:
   port: 443
 
 replicaCount: 1
-
-jobName: "eks-distro-pod-identity-webhook-cert-approver"
