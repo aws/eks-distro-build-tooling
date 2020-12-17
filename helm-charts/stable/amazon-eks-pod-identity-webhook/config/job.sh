@@ -29,10 +29,10 @@ cat /config/mutatingwebhook.yaml | sed -e "s|\${CA_BUNDLE}|${CA_BUNDLE}|g" | sed
 kubectl apply -f mutatingwebhook.yaml
 
 # Loop for a total of 50 seconds to give time for webhook to create CertificateSigningRequest
-for i in {1..10}; do
+for i in {1..20}; do
     # Make sure to have the NAMESPACE and WEBHOOK_NAME env var defined
-    for c in $(kubectl get csr -o json | jq -r '.items[] | select(.spec.username=="system:serviceaccount:$NAMESPACE:$WEBHOOK_NAME" and .status=={}).metadata.name'); do
+    for c in $(kubectl get csr -o json | jq -r ".items[] | select(.spec.username==\"system:serviceaccount:$NAMESPACE:$WEBHOOK_NAME\" and .status=={}).metadata.name"); do
         kubectl certificate approve $c
     done
-    sleep 5
+    sleep 30
 done

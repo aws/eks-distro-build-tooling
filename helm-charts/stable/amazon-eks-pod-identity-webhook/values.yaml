@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-nameOverride: "pod-identity-webhook"
-fullnameOverride: "pod-identity-webhook"
+nameOverride: "0500-eks-distro-pod-identity-webhook"
+fullnameOverride: "0500-eks-distro-pod-identity-webhook"
 
 # Make sure to pass in the image for the webhook here or as a parameter to the helm installation
 image: placeholder-webhook:fake
@@ -38,4 +38,4 @@ service:
 
 replicaCount: 1
 
-jobName: "pod-identity-webhook-cert-approver"
+jobName: "0500-eks-distro-pod-identity-webhook-cert-approver"
