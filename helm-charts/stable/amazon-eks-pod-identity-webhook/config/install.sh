@@ -16,7 +16,7 @@ set -e
 set -o pipefail
 set -x
 
-echo "Running job.sh in $(pwd)"
+echo "Running install.sh in $(pwd)"
 
 yum install -y jq
 

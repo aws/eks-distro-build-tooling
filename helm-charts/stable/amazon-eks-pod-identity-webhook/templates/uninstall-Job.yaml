@@ -15,23 +15,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.jobName }}
+  name: {{ .Values.uninstallJobName }}
   annotations:
-    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook: pre-delete
     helm.sh/hook-weight: "0"
 spec:
   template:
     spec:
-      serviceAccountName: {{ .Values.jobName }}
-      {{- if .Values.fargate }}
-      initContainers:
-      - name: sleep
-        image: {{ .Values.baseImage }}
-        imagePullPolicy: Always
-        command:
-        - sleep
-        - {{ .Values.sleep | quote }}
-      {{- end }}
+      serviceAccountName: {{ .Values.uninstallJobName }}
       containers:
       - name: job
         image: {{ .Values.baseImage }}
@@ -47,12 +38,12 @@ spec:
               fieldPath: metadata.namespace
         command:
         - bash
-        - config/job.sh
+        - config/uninstall.sh
         volumeMounts:
         - name: config
           mountPath: /config
       volumes:
       - name: config
         configMap:
-          name: {{ .Values.jobName }}-configmap
+          name: {{ .Values.uninstallJobName }}-configmap
       restartPolicy: OnFailure

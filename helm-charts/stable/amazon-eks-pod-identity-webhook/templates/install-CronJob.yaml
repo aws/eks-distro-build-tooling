@@ -15,14 +15,14 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.jobName }}
+  name: {{ .Values.installJobName }}
 spec:
   schedule: "@weekly"
   jobTemplate:
     spec:
       template:
         spec:
-          serviceAccountName: {{ .Values.jobName }}
+          serviceAccountName: {{ .Values.installJobName }}
           containers:
           - name: job
             image: {{ .Values.baseImage }}
@@ -38,12 +38,12 @@ spec:
                   fieldPath: metadata.namespace
             command:
             - bash
-            - config/job.sh
+            - config/install.sh
             volumeMounts:
             - name: config
               mountPath: /config
           volumes:
           - name: config
             configMap:
-              name: {{ .Values.jobName }}-configmap
+              name: {{ .Values.installJobName }}-configmap
           restartPolicy: OnFailure

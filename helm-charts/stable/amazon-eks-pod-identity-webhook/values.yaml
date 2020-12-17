@@ -15,7 +15,8 @@
 nameOverride: "eks-distro-pod-identity-webhook"
 fullnameOverride: "eks-distro-pod-identity-webhook"
 webhookConfigName: "0500-eks-distro-pod-identity-webhook"
-jobName: "eks-distro-pod-identity-webhook-cert-approver"
+installJobName: "eks-distro-pod-identity-webhook-cert-approver"
+uninstallJobName: "eks-distro-pod-identity-webhook-cleaner"
 
 # Make sure to pass in the image for the webhook here or as a parameter to the helm installation
 image: placeholder-webhook:fake

@@ -12,7 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: ServiceAccount
 apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: {{ .Values.jobName }}
+  name: {{ .Values.uninstallJobName }}-configmap
+data:
+  {{- $files := .Files }}
+  {{- range tuple "uninstall.sh" }}
+  {{ . }}: |-
+{{ $files.Get (printf "config/%s" .) | indent 4 }}
+  {{- end }}

@@ -12,15 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: {{ .Values.jobName }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ .Values.jobName }}
-subjects:
-- kind: ServiceAccount
-  name: {{ .Values.jobName }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.installJobName }}-configmap
+data:
+  {{- $files := .Files }}
+  {{- range tuple "mutatingwebhook.yaml" "install.sh" }}
+  {{ . }}: |-
+{{ $files.Get (printf "config/%s" .) | indent 4 }}
+  {{- end }}
