@@ -28,8 +28,9 @@ CA_BUNDLE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w
 cat /config/mutatingwebhook.yaml | sed -e "s|\${CA_BUNDLE}|${CA_BUNDLE}|g" | sed -e "s|\${WEBHOOK_NAME}|${WEBHOOK_NAME}|g" | sed -e "s|\${NAMESPACE}|${NAMESPACE}|g" | sed -e "s|\${MWC_NAME}|${MWC_NAME}|g" > mutatingwebhook.yaml
 kubectl apply -f mutatingwebhook.yaml
 
-# Loop for a total of 100 seconds (default hook timeout is 300) to give time for webhook to create CertificateSigningRequest
-for i in {1..20}; do
+# Loop for a total of 50 seconds to give time for webhook to create CertificateSigningRequest
+# The default hook timeout is 300, but for fargate there is a sleep container before this is run, and with the boot time of fargate containers, we get closer to the timeout if we increase the loop count
+for i in {1..10}; do
     # Make sure to have the NAMESPACE and WEBHOOK_NAME env var defined
     for c in $(kubectl get csr -o json | jq -r ".items[] | select(.spec.username==\"system:serviceaccount:$NAMESPACE:$WEBHOOK_NAME\" and .status=={}).metadata.name"); do
         kubectl certificate approve $c
