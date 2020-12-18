@@ -12,36 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: {{ .Values.jobName }}
-rules:
-- apiGroups:
-  - admissionregistration.k8s.io
-  resources:
-  - mutatingwebhookconfigurations
-  verbs:
-  - get
-  - patch
-  resourceNames:
-  - {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
-- apiGroups:
-  - admissionregistration.k8s.io
-  resources:
-  - mutatingwebhookconfigurations
-  verbs:
-  - create
-- apiGroups:
-  - certificates.k8s.io
-  resources:
-  - certificatesigningrequests
-  verbs:
-  - get
-  - list
-- apiGroups:
-  - certificates.k8s.io
-  resources:
-  - certificatesigningrequests/approval
-  verbs:
-  - update
+  name: {{ .Values.installJobName }}-configmap
+data:
+  {{- $files := .Files }}
+  {{- range tuple "mutatingwebhook.yaml" "install.sh" }}
+  {{ . }}: |-
+{{ $files.Get (printf "config/%s" .) | indent 4 }}
+  {{- end }}

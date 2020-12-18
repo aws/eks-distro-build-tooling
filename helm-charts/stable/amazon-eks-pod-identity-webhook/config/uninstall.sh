@@ -12,23 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: MutatingWebhookConfiguration
-metadata:
-  name: ${MWC_NAME}
-  namespace: ${NAMESPACE}
-webhooks:
-- name: ${WEBHOOK_NAME}.amazonaws.com
-  failurePolicy: Ignore
-  sideEffects: None
-  clientConfig:
-    service:
-      name: ${WEBHOOK_NAME}
-      namespace: ${NAMESPACE}
-      path: "/mutate"
-    caBundle: ${CA_BUNDLE}
-  rules:
-  - operations: [ "CREATE" ]
-    apiGroups: [""]
-    apiVersions: ["v1"]
-    resources: ["pods"]
+set -e
+set -o pipefail
+set -x
+
+echo "Running uninstall.sh in $(pwd)"
+
+KUBECTL_VERSION=v1.18.9
+curl -sSL "https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1/artifacts/kubernetes/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o /bin/kubectl
+chmod +x /bin/kubectl
+
+kubectl delete mutatingwebhookconfiguration $MWC_NAME
+kubectl delete secret -n $NAMESPACE $WEBHOOK_NAME

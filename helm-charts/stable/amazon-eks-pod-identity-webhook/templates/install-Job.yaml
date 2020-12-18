@@ -1,0 +1,58 @@
+# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.installJobName }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "0"
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.installJobName }}
+      {{- if .Values.fargate }}
+      initContainers:
+      - name: sleep
+        image: {{ .Values.baseImage }}
+        imagePullPolicy: Always
+        command:
+        - sleep
+        - {{ .Values.sleep | quote }}
+      {{- end }}
+      containers:
+      - name: job
+        image: {{ .Values.baseImage }}
+        imagePullPolicy: Always
+        env:
+        - name: WEBHOOK_NAME
+          value: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
+        - name: MWC_NAME
+          value: {{ .Values.webhookConfigName }}
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        command:
+        - bash
+        - config/install.sh
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Values.installJobName }}-configmap
+      restartPolicy: OnFailure
