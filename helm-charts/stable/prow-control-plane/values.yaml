@@ -28,17 +28,7 @@ prow:
   presubmitsBucketName: ''
   tideStatusReconcilerBucketName: ''
 
-dataplane:
-  presubmits:
-    clusterName: ''
-    clusterCA: ''
-    clusterEndpoint: ''
-    clusterArn: ''
-  postsubmits:
-    clusterName: ''
-    clusterCA: ''
-    clusterEndpoint: ''
-    clusterArn: ''
+kubeconfig: ''
 
 dryRun: false
 
@@ -119,7 +109,7 @@ awsIamAuthenticator:
 
 # Namespace on the control plane to look for prow jobs
 prowJobNamespace: "default"
-# Namespae on the data plane to run pods in
+# Namespace on the data plane to run pods in
 dataplaneNamespace: "default"
 
 plugins:
