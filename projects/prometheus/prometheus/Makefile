@@ -47,7 +47,7 @@ binaries:
 move-binaries:
 	mkdir -p $(REPO)/.build/$(IMAGE_OS)-$(IMAGE_ARCH)
 	mv $(REPO)/prometheus $(REPO)/.build/$(IMAGE_OS)-$(IMAGE_ARCH)/
-	mv $(REPO)/promtool $(REPO)/.build/$(IMAGE_OS)-$(IMAGE_ARCH)
+	mv $(REPO)/promtool $(REPO)/.build/$(IMAGE_OS)-$(IMAGE_ARCH)/
 
 .PHONY: npm_licenses
 npm_licenses:
