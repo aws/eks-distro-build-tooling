@@ -55,8 +55,6 @@ npm_licenses:
 
 .PHONY: local-images
 local-images: clone binaries move-binaries npm_licenses
-	# Sleep to wait for buildkitd to start up
-	sleep 10
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -67,8 +65,6 @@ local-images: clone binaries move-binaries npm_licenses
 
 .PHONY: images
 images: clone binaries move-binaries npm_licenses
-	# Sleep to wait for buildkitd to start up
-	sleep 10
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
