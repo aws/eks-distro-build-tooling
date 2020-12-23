@@ -66,5 +66,19 @@ sha256sum -c $BASE_DIR/buildkit-checksum
 tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 
+# Bash 4.3 is required to run kubernetes make test
+OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
+wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz 
+tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
+sha256sum -c $BASE_DIR/bash-checksum
+
+cd bash-$OVERRIDE_BASH_VERSION
+./configure --prefix=/usr --without-bash-malloc
+make 
+make install 
+cd ..
+rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
+rm -rf bash-$OVERRIDE_BASH_VERSION
+
 # directory setup
 mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
