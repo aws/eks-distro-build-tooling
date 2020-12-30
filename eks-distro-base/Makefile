@@ -100,9 +100,9 @@ release: images
 update: 
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
-	$(eval RETURN_VALUE="$(shell ./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG))")
-	if [ $(RETURN_VALUE) = "Updates required" ]; then \
+	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG))")
+	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		$(MAKE) images \
-	elif [ $(RETURN_VALUE) = "Error" ]; then \
+	elif [ $(RETURN_MESSAGE) = "Error" ]; then \
 		exit 1; \
 	fi
