@@ -16,7 +16,6 @@ endif
 
 .PHONY: local-images
 local-images:
-	mkdir -p /tmp/builder-base
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \
@@ -26,7 +25,7 @@ local-images:
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
 		--local context=. \
-		--output type=tar,dest=/tmp/builder-base/output.tar
+		--output type=tar,dest=/tmp/builder-base.tar
 	./update_base_image.sh --dry-run
 
 .PHONY: images
