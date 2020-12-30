@@ -7,17 +7,23 @@ BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro/base
 # This tag is overwritten in the prow job to point to the commit hash
-IMAGE_TAG?=$(shell git rev-parse HEAD | cut -c 1-8)
+IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 ifeq ($(DEVELOPMENT),true)
 	BASE_IMAGE=amazonlinux:2
 endif
 
+ifeq ("$(REPO_OWNER)","")
+	$(error No org information was provided, please set REPO_OWNER environment variable. \
+	This is used to raise a pull request against your org after updating tags in the respective files.)
+endif
+
 .PHONY: local-images
 local-images:
-	# Sleep to wait for buildkitd to start up
-	sleep 10
+	# Sleeping until buildkit daemon is running on the other container
+	sleep 10 
+	./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG) --dry-run
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -26,10 +32,11 @@ local-images:
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/eks-distro-base.tar
+	./update_base_image.sh $(IMAGE_TAG) --dry-run
 
 .PHONY: images
 images:
-	# Sleep to wait for buildkitd to start up
+	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \
 		build \
@@ -39,6 +46,7 @@ images:
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+	./update_base_image.sh $(IMAGE_TAG)
 
 .PHONY: docker-public-login
 docker-public-login:
@@ -87,3 +95,14 @@ build: local-images
 
 .PHONY: release
 release: images
+
+.PHONY: update
+update: 
+	# Sleeping until buildkit daemon is running on the other container
+	sleep 10
+	$(eval RETURN_VALUE="$(shell ./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG))")
+	if [ $(RETURN_VALUE) = "Updates required" ]; then \
+		$(MAKE) images \
+	elif [ $(RETURN_VALUE) = "Error" ]; then \
+		exit 1; \
+	fi
