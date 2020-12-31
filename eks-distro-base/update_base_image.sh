@@ -18,9 +18,9 @@ set -e
 set -o pipefail
 set -x
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 IMAGE_TAG=$1
 DRY_RUN_FLAG=$2
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 ${REPO_ROOT}/../pr-scripts/install_gh.sh
 ${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-build-tooling '.*' $IMAGE_TAG TAG_FILE $DRY_RUN_FLAG

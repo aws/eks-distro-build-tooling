@@ -71,7 +71,9 @@ git rebase upstream/main
 
 for FILE in $(find ./ -type f -name $FILEPATH); do
     if [ $REPO = "eks-distro" ]; then
-        if [ $(dirname $FILE) = "." ]; then
+        if [ $(dirname $FILE) = "./projects/kubernetes/kubernetes" ]; then
+            continue
+        elif [ $(dirname $FILE) = "." ]; then
             OLD_TAG="^BASE_IMAGE?=\(.*\):.*"
             NEW_TAG="BASE_IMAGE?=\1:${IMAGE_TAG}"
         else
