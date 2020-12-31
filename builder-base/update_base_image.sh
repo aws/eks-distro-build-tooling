@@ -19,6 +19,7 @@ set -o pipefail
 set -x
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+DRY_RUN_FLAG=$1
 
 ${REPO_ROOT}/../pr-scripts/install_gh.sh
-${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$PULL_BASE_SHA" *.yaml $1
+${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$PULL_BASE_SHA" *.yaml $DRY_RUN_FLAG
