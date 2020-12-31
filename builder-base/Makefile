@@ -6,7 +6,8 @@ BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro/builder
-# This tag is overwritten in the prow job to point to the commit hash
+# This tag is overwritten in the prow job to point to the PR branch commit hash (presubmit)
+# or the base branch commit hash (postsubmit)
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
