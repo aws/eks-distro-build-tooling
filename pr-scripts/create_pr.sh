@@ -22,7 +22,12 @@ REPO="$1"
 OLD_TAG="$2"
 NEW_TAG="$3"
 FILEPATH="$4"
-DRY_RUN_FLAG="$5"
+if [ $REPO = "eks-distro" ]; then
+    IMAGE_TAG="$5"
+    DRY_RUN_FLAG="$6"
+else
+    DRY_RUN_FLAG="$5"
+fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -48,7 +53,7 @@ if [ $REPO = "eks-distro-prow-jobs" ]; then
 fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
-sed -i "s,CHANGED_FILE,${CHANGED_FILE}," ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body
+sed -i "s,in .* with,in ${CHANGED_FILE} with," ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body
 PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body)
 if [ $REPO = "eks-distro-prow-jobs" ]; then
     PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/builder_base_pr_body)
@@ -56,6 +61,7 @@ fi
 PR_BRANCH="image-tag-update"
 
 cd ${REPO_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+git config --global push.default current
 git config user.name "EKS Distro PR Bot"
 git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
 git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
@@ -67,7 +73,7 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     if [ $REPO = "eks-distro" ]; then
         if [ $(dirname $FILE) = "." ]; then
             OLD_TAG="^BASE_IMAGE?=\(.*\):.*"
-            NEW_TAG="BASE_IMAGE?=\1:${DATE_EPOCH}"
+            NEW_TAG="BASE_IMAGE?=\1:${IMAGE_TAG}"
         else
             OLD_TAG="$2"
             NEW_TAG="$3"
@@ -84,7 +90,7 @@ ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChe
 
 gh auth login --with-token < /secrets/github-secrets/token
 
-PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}")
+PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
 if [ $PR_EXISTS -eq 0 ]; then
   gh pr create --title $PR_TITLE --body $PR_BODY
 fi
