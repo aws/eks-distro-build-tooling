@@ -29,7 +29,7 @@ else
     DRY_RUN_FLAG="$5"
 fi
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 if [ $REPO = "eks-distro-build-tooling" ]; then
     CHANGED_FILE="Tag file"
@@ -53,14 +53,14 @@ if [ $REPO = "eks-distro-prow-jobs" ]; then
 fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
-sed -i "s,in .* with,in ${CHANGED_FILE} with," ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body
-PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/eks_distro_base_pr_body)
+sed -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
+PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body)
 if [ $REPO = "eks-distro-prow-jobs" ]; then
-    PR_BODY=$(cat ${REPO_ROOT}/../pr-scripts/builder_base_pr_body)
+    PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body)
 fi
 PR_BRANCH="image-tag-update"
 
-cd ${REPO_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 git config --global push.default current
 git config user.name "EKS Distro PR Bot"
 git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
@@ -84,7 +84,7 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     sed -i "s,${OLD_TAG},${NEW_TAG}," $FILE
     git add $FILE
 done
-git commit -m "$COMMIT_MESSAGE"
+git commit -m "$COMMIT_MESSAGE" || true
 if [ $DRY_RUN_FLAG = "--dry-run" ] ; then
     exit 0
 fi

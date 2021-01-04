@@ -18,10 +18,10 @@ set -e
 set -o pipefail
 set -x
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 IMAGE_TAG=$1
 DRY_RUN_FLAG=$2
 
-${REPO_ROOT}/../pr-scripts/install_gh.sh
-${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-build-tooling '.*' $IMAGE_TAG TAG_FILE $DRY_RUN_FLAG
-${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro 'BASE_TAG?=.*' 'BASE_TAG?='"$IMAGE_TAG" Makefile $IMAGE_TAG $DRY_RUN_FLAG
+${SCRIPT_ROOT}/../pr-scripts/install_gh.sh
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-build-tooling '.*' $IMAGE_TAG EKS_DISTRO_BASE_TAG_FILE $DRY_RUN_FLAG
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro 'BASE_TAG?=.*' 'BASE_TAG?='"$IMAGE_TAG" Makefile $IMAGE_TAG $DRY_RUN_FLAG
