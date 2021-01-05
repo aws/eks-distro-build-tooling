@@ -50,6 +50,8 @@ fi
 RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
 if [ $RETURN_STATUS -eq 100 ]; then
     echo "Updates required"
+elif [ $RETURN_STATUS -eq 0 ]; then
+    echo "No updates required"
 elif [ $RETURN_STATUS -eq 1 ]; then
     echo "Error"
 fi
