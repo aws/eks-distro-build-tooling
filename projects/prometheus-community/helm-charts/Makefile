@@ -52,7 +52,6 @@ install-toolchain:
 
 verify: install-toolchain clone
 	$(CHART_SCRIPTS_DIR)/lint-charts.sh $(CLONE_ROOT)/charts
-	$(CHART_SCRIPTS_DIR)/verify-version.sh $(CLONE_ROOT)/charts
 
 .PHONY: publish
 publish:
