@@ -15,14 +15,16 @@
 
 set -euo pipefail
 
+CHARTS_DIR=$1
+
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source $SCRIPT_ROOT/lib.sh
 
 FAILED=()
 
-cd ${STABLE}
+cd ${CHARTS_DIR}
 for d in */; do
-    helm lint ${STABLE}/${d} || FAILED+=("${d}")
+    helm lint ${CHARTS_DIR}/${d} || FAILED+=("${d}")
 done
 
 if [ "${#FAILED[@]}" -eq  0 ]; then

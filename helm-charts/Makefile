@@ -1,5 +1,6 @@
 CHART_ROOT ?= $(shell git rev-parse --show-toplevel)/helm-charts
 BUILD_DIR ?= $(dir $(realpath -s $(firstword $(MAKEFILE_LIST))))/build
+STABLE ?= ${CHART_ROOT}/stable
 
 $(shell mkdir -p ${BUILD_DIR})
 
@@ -9,11 +10,11 @@ install-toolchain:
 	${CHART_ROOT}/scripts/install-toolchain.sh
 
 verify: install-toolchain
-	${CHART_ROOT}/scripts/lint-charts.sh
-	${CHART_ROOT}/scripts/verify-version.sh
+	${CHART_ROOT}/scripts/lint-charts.sh ${STABLE}
+	${CHART_ROOT}/scripts/verify-version.sh ${STABLE}
 
 publish:
-	${CHART_ROOT}/scripts/publish-charts.sh
+	${CHART_ROOT}/scripts/publish-charts.sh ${STABLE}
 
 release: install-toolchain publish
 
