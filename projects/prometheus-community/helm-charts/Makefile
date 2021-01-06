@@ -64,4 +64,3 @@ release: install-toolchain clone publish
 .PHONY: clean
 clean:
 	rm -rf $(PROMETHEUS_CHART_REPO)
-	rm -rf $(CHART_BUILD_DIR)
