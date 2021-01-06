@@ -41,12 +41,10 @@ clone: clean
 	git clone $(PROMETHEUS_CHART_CLONE_URL) $(PROMETHEUS_CHART_REPO)
 	cd $(PROMETHEUS_CHART_REPO) && git checkout $(PROMETHEUS_CHART_GIT_COMMIT)
 	# Clone and setup dependency charts for Prometheus
-	cd charts/prometheus
-	git clone $(KUBE_STATE_METRICS_CHART_CLONE_URL)
-	cd $(KUBE_STATE_METRICS_CHART_CLONE_URL) && git checkout $(KUBE_STATE_METRICS_CHART_GIT_COMMIT)
-	cd ..
-	mv $(KUBE_STATE_METRICS_CHART_REPO)/charts .
-	rm -rf $(KUBE_STATE_METRICS_CHART_REPO)
+	cd $(PROMETHEUS_CHART_REPO)/charts/prometheus && git clone $(KUBE_STATE_METRICS_CHART_CLONE_URL)
+	cd $(PROMETHEUS_CHART_REPO)/charts/prometheus/$(KUBE_STATE_METRICS_CHART_REPO) && git checkout $(KUBE_STATE_METRICS_CHART_GIT_COMMIT)
+	mv $(PROMETHEUS_CHART_REPO)/charts/prometheus/$(KUBE_STATE_METRICS_CHART_REPO)/charts $(PROMETHEUS_CHART_REPO)/charts/prometheus/
+	rm -rf $(PROMETHEUS_CHART_REPO)/charts/prometheus/$(KUBE_STATE_METRICS_CHART_REPO)
 
 .PHONY: install-toolchain
 install-toolchain:
@@ -65,5 +63,5 @@ release: install-toolchain clone publish
 
 .PHONY: clean
 clean:
-	rm -rf $(REPO)
+	rm -rf $(PROMETHEUS_CHART_REPO)
 	rm -rf $(CHART_BUILD_DIR)
