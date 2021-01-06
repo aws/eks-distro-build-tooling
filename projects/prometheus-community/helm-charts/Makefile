@@ -1,5 +1,5 @@
 PROMETHEUS_CHART_REPO?=helm-charts
-PROMETHEUS_CHART_CLONE_URL?=https://github.com/prometheus-community/$(REPO).git
+PROMETHEUS_CHART_CLONE_URL?=https://github.com/prometheus-community/$(PROMETHEUS_CHART_REPO).git
 
 KUBE_STATE_METRICS_CHART_REPO?=kube-state-metrics
 KUBE_STATE_METRICS_CHART_CLONE_URL?=https://github.com/kubernetes/$(KUBE_STATE_METRICS_CHART_REPO).git
