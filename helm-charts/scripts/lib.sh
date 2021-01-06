@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-CHART_BUCKET="prow-data-devstack-prowchartsbucket2e50b8d9-1m50276yexnzx"
+CHART_BUCKET="prowdataclusterstack-316-prowchartsbucket2e50b8d9-8b0f36hrcee8"
 REPO_URL="https://${CHART_BUCKET}.s3.amazonaws.com"
 
 CHART_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
