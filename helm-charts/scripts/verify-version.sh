@@ -16,8 +16,9 @@
 set -x
 set -euo pipefail
 
+CHARTS_DIR=$1
+
 GIT_REPO_ROOT=$(git rev-parse --show-toplevel)
-STABLE="${GIT_REPO_ROOT}/helm-charts/stable"
 REMOTE_URL="https://github.com/aws/eks-distro-build-tooling.git"
 
 # PULL_PULL_SHA is environment variable set by the presubmit job. More info here: https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md#job-environment-variables
@@ -26,7 +27,7 @@ git fetch $REMOTE_URL $PREV_RELEASE_HASH
 
 EXIT_CODE=0
 
-cd $STABLE
+cd $CHARTS_DIR
 for d in */; do
   if git diff-index ${PREV_RELEASE_HASH} --quiet -- $d/templates $d/values.yaml --; then
     echo "✅ $d has no changes since last release"

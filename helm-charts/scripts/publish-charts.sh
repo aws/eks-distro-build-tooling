@@ -21,12 +21,19 @@ err_report() {
 }
 trap 'err_report $LINENO' ERR
 
+CHARTS_DIR=$1
+
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source $SCRIPT_ROOT/lib.sh
 
 mkdir -p "${BUILD_DIR}"
 
-helm package "${STABLE}/"* --destination "${BUILD_DIR}/stable"
+if [ -e "${CHARTS_DIR}/Chart.yaml" ]
+then
+	helm package "${CHARTS_DIR}/" --destination "${BUILD_DIR}/stable"
+else
+	helm package "${CHARTS_DIR}/"* --destination "${BUILD_DIR}/stable"
+fi
 
 set +e # Should have exit code 18
 RETURN_CODE="$(curl --write-out '%{http_code}' --silent --output /dev/null -X HEAD ${REPO_URL}/index.yaml)"
