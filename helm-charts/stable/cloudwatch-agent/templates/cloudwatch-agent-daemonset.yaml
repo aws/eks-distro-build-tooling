@@ -1,0 +1,94 @@
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# deploy cwagent as daemonset
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "cloudwatch-agent.fullname" . }}
+  labels:
+    {{- include "cloudwatch-agent.selectorLabels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ include "cloudwatch-agent.fullname" . }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "cloudwatch-agent.fullname" . }}
+    spec:
+      containers:
+        - name: {{ include "cloudwatch-agent.fullname" . }}
+          image: {{ .Values.cloudwatchAgent.image }}
+          resources:
+            limits:
+              cpu:  200m
+              memory: 200Mi
+            requests:
+              cpu: 200m
+              memory: 200Mi
+          # Please don't change below envs
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: HOST_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8S_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          # Please don't change the mountPath
+          volumeMounts:
+            - name: cwagentconfig
+              mountPath: /etc/cwagentconfig
+            - name: rootfs
+              mountPath: /rootfs
+              readOnly: true
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+              readOnly: true
+            - name: varlibdocker
+              mountPath: /var/lib/docker
+              readOnly: true
+            - name: sys
+              mountPath: /sys
+              readOnly: true
+            - name: devdisk
+              mountPath: /dev/disk
+              readOnly: true
+      volumes:
+        - name: cwagentconfig
+          configMap:
+            name: cwagentconfig
+        - name: rootfs
+          hostPath:
+            path: /
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: varlibdocker
+          hostPath:
+            path: /var/lib/docker
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: devdisk
+          hostPath:
+            path: /dev/disk/
+      terminationGracePeriodSeconds: 60
+      serviceAccountName: {{ .Values.cloudwatchAgent.serviceAccount.name }}
