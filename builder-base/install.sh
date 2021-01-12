@@ -87,9 +87,16 @@ mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 export GOPATH=/go
 export PATH=${GOPATH}/bin/:$PATH
 
-for version in "${GOLANG113_VERSION:-1.13.15}" "${GOLANG114_VERSION:-1.14.13}" "${GOLANG115_VERSION:-1.15.6}"; do
+setupgo() {
+    local -r version=$1
     go get golang.org/dl/go${version}
     go${version} download
-    mkdir -p ${GOPATH}/go${version}/bin
-    cp ${GOPATH}/bin/go${version} ${GOPATH}/go${version}/bin/go
-done
+    # Removing the last number as we only care about the major version of golang
+    local -r majorversion=${version%.*}
+    mkdir -p ${GOPATH}/go${majorversion}/bin
+    cp ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+}
+
+setupgo "${GOLANG113_VERSION:-1.13.15}"
+setupgo "${GOLANG114_VERSION:-1.14.13}"
+setupgo "${GOLANG115_VERSION:-1.15.6}"
