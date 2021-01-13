@@ -21,5 +21,11 @@ set -x
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 DRY_RUN_FLAG=$1
 
+if [ $DRY_RUN_FLAG = "--dry-run" ]; then
+    NEW_TAG=$PULL_PULL_SHA
+else
+    NEW_TAG=$PULL_BASE_SHA
+fi
+
 ${REPO_ROOT}/../pr-scripts/install_gh.sh
-${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$PULL_BASE_SHA" *.yaml $DRY_RUN_FLAG
+${REPO_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$NEW_TAG" *.yaml $DRY_RUN_FLAG
