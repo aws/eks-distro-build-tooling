@@ -4,9 +4,10 @@ CHART_BUCKET?="prowdataclusterstack-316-prowchartsbucket2e50b8d9-8b0f36hrcee8"
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 BASE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 BASE_IMAGE_NAME?=eks-distro/base
-BASE_TAG?=26f234d9da8bc4423bacb539caaece931808d28b
+BASE_TAG?=$(shell cat $(MAKE_ROOT)/../../../EKS_DISTRO_BASE_TAG_FILE)
 BASE_IMAGE?=$(BASE_REPO)/$(BASE_IMAGE_NAME):$(BASE_TAG)
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
