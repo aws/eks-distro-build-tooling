@@ -87,6 +87,8 @@ mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 export GOPATH=/go
 export PATH=${GOPATH}/bin/:$PATH
 
+# Set up specific go version by using go get, additional versions apart from default can be installed by calling
+# the function again with the specific parameter.
 setupgo() {
     local -r version=$1
     go get golang.org/dl/go${version}
