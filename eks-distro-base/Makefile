@@ -14,8 +14,8 @@ ifeq ($(DEVELOPMENT),true)
 endif
 
 ifeq ("$(REPO_OWNER)","")
-	$(error No org information was provided, please set REPO_OWNER environment variable. \
-	This is used to raise a pull request against your org after updating tags in the respective files.)
+    $(error No org information was provided, please set and export REPO_OWNER environment variable. \
+      This is used to raise a pull request against your org after updating tags in the respective files.)
 endif
 
 .PHONY: local-images
@@ -49,8 +49,7 @@ images:
 
 .PHONY: docker-public-login
 docker-public-login:
-	aws --region us-east-1 ecr-public get-authorization-token \
-         --output=text \
+	aws --region us-east-1 ecr-public get-authorization-token --output=text \
 	 --query 'authorizationData.authorizationToken' |  \
 	 base64 --decode | cut -d: -f2 | \
 	 docker login -u AWS --password-stdin https://public.ecr.aws
