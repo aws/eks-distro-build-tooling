@@ -51,6 +51,7 @@ spec:
         - --annotation-prefix=eks.amazonaws.com
         - --token-audience=sts.amazonaws.com
         - --token-expiration={{ .Values.webhook.tokenExpiration }}
+        - --aws-default-region={{ .Values.webhook.defaultRegion }}
         - --sts-regional-endpoint={{ .Values.webhook.stsRegionalEndpoint }}
         - --metrics-port={{ .Values.webhook.metricsPort }}
         - --port={{ .Values.webhook.port }}

@@ -32,6 +32,7 @@ fargate: false
 # Parameters to webhook are defined here: https://github.com/aws/amazon-eks-pod-identity-webhook#usage
 webhook:
   tokenExpiration: 3600
+  defaultRegion: us-west-2
   stsRegionalEndpoint: true
   port: 443
   metricsPort: 9999
