@@ -30,7 +30,6 @@ yum update -y
 
 amazon-linux-extras enable docker
 yum install -y \
-    awscli \
     amazon-ecr-credential-helper \
     curl \
     gcc \
@@ -43,9 +42,15 @@ yum install -y \
     python3-pip \
     rsync \
     tar \
+    unzip \
     vim \
     wget \
     which
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+aws --version
 
 GOLANG_VERSION="${GOLANG_VERSION:-1.15.6}"
 wget \
