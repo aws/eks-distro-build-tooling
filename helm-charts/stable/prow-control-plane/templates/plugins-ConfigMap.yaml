@@ -18,7 +18,9 @@ metadata:
   name: plugins
 data:
   plugins.yaml: |
-    plugins:
+    plugins: 
+    {{- if eq (len .Values.repositories) 0 }} []
+    {{- else }}
       {{- range $repo := .Values.repositories }}
       {{ $repo.org }}/{{ $repo.name }}:
       - approve
@@ -39,6 +41,7 @@ data:
       - {{ $extra }}
       {{- end }}
       {{- end }}
+    {{- end }}
     config_updater:
       maps:
 {{ toYaml .Values.plugins.configUpdaterMaps | indent 8 }}
