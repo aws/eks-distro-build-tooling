@@ -51,6 +51,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 			"kube-scheduler",
 			"kubectl",
 			"kubelet",
+			"kubeadm",
 		},
 		"darwin": []string{
 			"kubectl",
