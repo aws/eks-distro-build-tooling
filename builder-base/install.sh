@@ -30,7 +30,6 @@ yum update -y
 
 amazon-linux-extras enable docker
 yum install -y \
-    amazon-ecr-credential-helper \
     curl \
     gcc \
     git \
@@ -107,3 +106,15 @@ setupgo() {
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.13}"
 setupgo "${GOLANG115_VERSION:-1.15.6}"
+
+# install amazon-ecr-credential-helper
+# We are installing a specific commit of this because we need the sts regional endpoint changes in the aws sdk
+# to avoid hitting the global sts endpoint.
+# Commit: https://github.com/awslabs/amazon-ecr-credential-helper/commit/a004738dbac968cb287b47ae8ca39fd3b451e547
+git clone https://github.com/awslabs/amazon-ecr-credential-helper.git
+cd amazon-ecr-credential-helper
+git checkout a004738dbac968cb287b47ae8ca39fd3b451e547
+make
+cp bin/local/docker-credential-ecr-login /usr/bin/
+cd ..
+rm -rf amazon-ecr-credential-helper
