@@ -26,7 +26,7 @@ type ReleaseSpec struct {
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Minimum=1
 	// Monotonically increasing release number
-	Number int `json:"number,omitempty"`
+	Number string `json:"number,omitempty"`
 
 	// +kubebuilder:validation:Required
 	BuildRepoCommit string `json:"buildRepoCommit,omitempty"`

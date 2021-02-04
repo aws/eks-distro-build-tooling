@@ -76,7 +76,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Number),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -107,7 +107,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Number),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -167,7 +167,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Number),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -203,7 +203,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	assetPath, err := r.GetURI(filepath.Join(
 		fmt.Sprintf("kubernetes-%s", spec.Channel),
 		"releases",
-		fmt.Sprintf("%d", spec.Number),
+		fmt.Sprintf("%s", spec.Number),
 		"artifacts",
 		"kubernetes",
 		gitTag,
