@@ -32,9 +32,8 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 	}
 	assets := []distrov1alpha1.Asset{}
 	osArchMap := map[string][]string{
-		"linux":   []string{"arm64", "amd64"},
-		"windows": []string{"amd64"},
-		"darwin":  []string{"amd64"},
+		"linux":  []string{"arm64", "amd64"},
+		"darwin": []string{"amd64"},
 	}
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
@@ -48,7 +47,7 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 			assetPath, err := r.GetURI(path.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
-				fmt.Sprintf("%d", spec.Number),
+				fmt.Sprintf("%s", spec.Release),
 				"artifacts",
 				"aws-iam-authenticator",
 				gitTag,
@@ -79,12 +78,12 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
+			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%s",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,
 				spec.Channel,
-				spec.Number,
+				spec.Release,
 			),
 		},
 	})

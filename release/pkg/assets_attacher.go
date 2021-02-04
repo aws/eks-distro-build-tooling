@@ -39,12 +39,12 @@ func (r *ReleaseConfig) GetAttacherComponent(spec distrov1alpha1.ReleaseSpec) (*
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
+			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%s",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,
 				spec.Channel,
-				spec.Number,
+				spec.Release,
 			),
 		},
 	})

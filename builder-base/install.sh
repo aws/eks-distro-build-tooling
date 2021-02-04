@@ -34,6 +34,7 @@ yum install -y \
     amazon-ecr-credential-helper \
     curl \
     gcc \
+    glibc-static \
     git \
     jq \
     less \

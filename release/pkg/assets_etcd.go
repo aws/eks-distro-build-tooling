@@ -46,7 +46,7 @@ func (r *ReleaseConfig) GetEtcdComponent(spec distrov1alpha1.ReleaseSpec) (*dist
 			assetPath, err := r.GetURI(path.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
-				fmt.Sprintf("%d", spec.Number),
+				fmt.Sprintf("%s", spec.Release),
 				"artifacts",
 				"etcd",
 				gitTag,
@@ -77,12 +77,12 @@ func (r *ReleaseConfig) GetEtcdComponent(spec distrov1alpha1.ReleaseSpec) (*dist
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/etcd-io/%s:%s-eks-%s-%d",
+			URI: fmt.Sprintf("%s/etcd-io/%s:%s-eks-%s-%s",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,
 				spec.Channel,
-				spec.Number,
+				spec.Release,
 			),
 		},
 	})

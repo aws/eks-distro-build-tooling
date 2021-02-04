@@ -34,14 +34,12 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	assets := []distrov1alpha1.Asset{}
 
 	osComponentMap := map[string][]string{
-		"linux":   []string{"client", "server", "node"},
-		"windows": []string{"client", "node"},
-		"darwin":  []string{"client"},
+		"linux":  []string{"client", "server", "node"},
+		"darwin": []string{"client"},
 	}
 	osArchMap := map[string][]string{
-		"linux":   []string{"arm64", "amd64"},
-		"windows": []string{"amd64"},
-		"darwin":  []string{"amd64"},
+		"linux":  []string{"arm64", "amd64"},
+		"darwin": []string{"amd64"},
 	}
 	osBinaryMap := map[string][]string{
 		"linux": []string{
@@ -54,12 +52,6 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 		},
 		"darwin": []string{
 			"kubectl",
-		},
-		"windows": []string{
-			"kube-proxy.exe",
-			"kubeadm.exe",
-			"kubectl.exe",
-			"kubelet.exe",
 		},
 	}
 	binaryAssets := []distrov1alpha1.Asset{}
@@ -75,7 +67,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(path.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Release),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -106,7 +98,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(path.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Release),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -166,7 +158,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 				assetPath, err := r.GetURI(path.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
-					fmt.Sprintf("%d", spec.Number),
+					fmt.Sprintf("%s", spec.Release),
 					"artifacts",
 					"kubernetes",
 					gitTag,
@@ -202,7 +194,7 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	assetPath, err := r.GetURI(path.Join(
 		fmt.Sprintf("kubernetes-%s", spec.Channel),
 		"releases",
-		fmt.Sprintf("%d", spec.Number),
+		fmt.Sprintf("%s", spec.Release),
 		"artifacts",
 		"kubernetes",
 		gitTag,

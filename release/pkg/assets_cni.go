@@ -46,7 +46,7 @@ func (r *ReleaseConfig) GetCniComponent(spec distrov1alpha1.ReleaseSpec) (*distr
 			assetPath, err := r.GetURI(path.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
-				fmt.Sprintf("%d", spec.Number),
+				fmt.Sprintf("%s", spec.Release),
 				"artifacts",
 				"plugins",
 				gitTag,

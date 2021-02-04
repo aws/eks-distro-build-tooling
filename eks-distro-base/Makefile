@@ -10,7 +10,7 @@ IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 ifeq ($(DEVELOPMENT),true)
-	BASE_IMAGE=amazonlinux:2
+	# BASE_IMAGE=amazonlinux:2
 endif
 
 ifeq ("$(REPO_OWNER)","")
@@ -36,16 +36,12 @@ local-images:
 .PHONY: images
 images:
 	# Sleeping until buildkit daemon is running on the other container
-	sleep 10
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt platform=linux/amd64,linux/arm64 \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--local dockerfile=./ \
-		--local context=. \
-		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
-	./update_base_image.sh $(IMAGE_TAG)
+	kubectl build --registry-secret ecr-public \
+		--platform=linux/amd64,linux/arm64 \
+		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
+		--file Dockerfile \
+		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true .
+	# ./update_base_image.sh $(IMAGE_TAG)
 
 .PHONY: docker-public-login
 docker-public-login:

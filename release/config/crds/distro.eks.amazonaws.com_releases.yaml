@@ -55,10 +55,10 @@ spec:
               type: string
             channel:
               type: string
-            number:
-              description: Monotonically increasing release number
+            release:
+              description: String indicating release
               minimum: 1
-              type: integer
+              type: string
           type: object
         status:
           description: ReleaseStatus defines the observed state of Release
