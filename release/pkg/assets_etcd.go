@@ -16,7 +16,7 @@ package pkg
 
 import (
 	"fmt"
-	"path"
+	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
@@ -25,7 +25,7 @@ import (
 // GetEtcdComponent returns the Component for Etcd
 func (r *ReleaseConfig) GetEtcdComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/etcd-io/etcd"
-	tagFile := path.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
+	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
@@ -37,13 +37,14 @@ func (r *ReleaseConfig) GetEtcdComponent(spec distrov1alpha1.ReleaseSpec) (*dist
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
 			filename := fmt.Sprintf("etcd-%s-%s-%s.tar.gz", os, arch, gitTag)
-			tarfile := path.Join(r.BuildRepoSource, projectSource, "_output/tar", filename)
+			dirname := fmt.Sprintf("etcd/%s/", gitTag)
+			tarfile := filepath.Join(r.ArtifactDir, dirname, filename)
 
 			sha256, sha512, err := r.readShaSums(tarfile)
 			if err != nil {
 				return nil, errors.Cause(err)
 			}
-			assetPath, err := r.GetURI(path.Join(
+			assetPath, err := r.GetURI(filepath.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
 				fmt.Sprintf("%d", spec.Number),

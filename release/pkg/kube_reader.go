@@ -16,6 +16,7 @@ package pkg
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -25,9 +26,9 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (r *ReleaseConfig) ReadK8sShaSums(releaseBranch, filename string) (sha256, sha512 string, err error) {
-
-	assetFile := filepath.Join(r.BuildRepoSource, "projects/kubernetes/kubernetes/_output", releaseBranch, filename)
+func (r *ReleaseConfig) ReadK8sShaSums(gitTag, filename string) (sha256, sha512 string, err error) {
+	dirname := fmt.Sprintf("kubernetes/%s/", gitTag)
+	assetFile := filepath.Join(r.ArtifactDir, dirname, filename)
 	return r.readShaSums(assetFile)
 }
 

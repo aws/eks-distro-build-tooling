@@ -16,7 +16,7 @@ package pkg
 
 import (
 	"fmt"
-	"path"
+	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
@@ -25,7 +25,7 @@ import (
 // GetCorednsComponent returns the Component for Kubernetes
 func (r *ReleaseConfig) GetCorednsComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/coredns/coredns"
-	tagFile := path.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
+	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
