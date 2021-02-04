@@ -27,8 +27,7 @@ import (
 )
 
 func (r *ReleaseConfig) ReadK8sShaSums(gitTag, filename string) (sha256, sha512 string, err error) {
-	dirname := fmt.Sprintf("kubernetes/%s/", gitTag)
-	assetFile := filepath.Join(r.ArtifactDir, dirname, filename)
+	assetFile := filepath.Join(r.ArtifactDir, "kubernetes", gitTag, filename)
 	return r.readShaSums(assetFile)
 }
 
