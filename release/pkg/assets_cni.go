@@ -37,8 +37,7 @@ func (r *ReleaseConfig) GetCniComponent(spec distrov1alpha1.ReleaseSpec) (*distr
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
 			filename := fmt.Sprintf("cni-plugins-%s-%s-%s.tar.gz", os, arch, gitTag)
-			dirname := fmt.Sprintf("plugins/%s/", gitTag)
-			tarfile := filepath.Join(r.ArtifactDir, dirname, filename)
+			tarfile := filepath.Join(r.ArtifactDir, "plugins", gitTag, filename)
 
 			sha256, sha512, err := r.readShaSums(tarfile)
 			if err != nil {
