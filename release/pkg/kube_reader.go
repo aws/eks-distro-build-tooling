@@ -16,7 +16,6 @@ package pkg
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
