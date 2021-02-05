@@ -37,7 +37,6 @@ func (r *ReleaseConfig) GetEtcdComponent(spec distrov1alpha1.ReleaseSpec) (*dist
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
 			filename := fmt.Sprintf("etcd-%s-%s-%s.tar.gz", os, arch, gitTag)
-			dirname := fmt.Sprintf("etcd/%s/", gitTag)
 			tarfile := filepath.Join(r.ArtifactDir, "etcd", gitTag, filename)
 
 			sha256, sha512, err := r.readShaSums(tarfile)
