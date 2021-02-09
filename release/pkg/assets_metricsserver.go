@@ -39,7 +39,7 @@ func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpe
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
+			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%s",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,

@@ -24,9 +24,8 @@ type ReleaseSpec struct {
 	// +kubebuilder:validation:Required
 	Channel string `json:"channel,omitempty"`
 	// +kubebuilder:validation:Required
-	// +kubebuilder:validation:Minimum=1
 	// Monotonically increasing release number
-	Number int `json:"number,omitempty"`
+	Number string `json:"number,omitempty"`
 
 	// +kubebuilder:validation:Required
 	BuildRepoCommit string `json:"buildRepoCommit,omitempty"`
@@ -34,7 +33,7 @@ type ReleaseSpec struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:printcolumn:name="Release Channel",type=string,JSONPath=`.spec.channel`,description="The release channel"
-// +kubebuilder:printcolumn:name="Release",type=integer,JSONPath=`.spec.number`,description="Release number"
+// +kubebuilder:printcolumn:name="Release",type=string,JSONPath=`.spec.number`,description="Release number"
 // +kubebuilder:printcolumn:name="Release Date",type=string,format=date-time,JSONPath=`.status.date`,description="The date the release was published"
 // +kubebuilder:resource:singular="release",path="releases",shortName={"rel"}
 

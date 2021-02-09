@@ -49,7 +49,7 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 			assetPath, err := r.GetURI(filepath.Join(
 				fmt.Sprintf("kubernetes-%s", spec.Channel),
 				"releases",
-				fmt.Sprintf("%d", spec.Number),
+				fmt.Sprintf("%s", spec.Number),
 				"artifacts",
 				"aws-iam-authenticator",
 				gitTag,
@@ -80,7 +80,7 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
+			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%s",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,
