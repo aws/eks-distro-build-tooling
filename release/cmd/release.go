@@ -41,11 +41,13 @@ var releaseCmd = &cobra.Command{
 		imageRepository := viper.GetString("image-repository")
 		cdnURL := viper.GetString("cdn")
 		releaseNumber := viper.GetInt("release-number")
+		artifactDir := fmt.Sprintf("kubernetes-%s/releases/%d/artifacts/", releaseBranch, releaseNumber)
 
 		releaseConfig := &pkg.ReleaseConfig{
 			ContainerImageRepository: imageRepository,
 			ArtifactURL:              cdnURL,
 			BuildRepoSource:          sourceDir,
+			ArtifactDir:              artifactDir,
 			ReleaseDate:              time.Now().UTC(),
 		}
 		release := &distrov1alpha1.Release{

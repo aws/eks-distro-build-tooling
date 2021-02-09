@@ -27,6 +27,7 @@ type ReleaseConfig struct {
 	ContainerImageRepository string
 	ArtifactURL              string
 	BuildRepoSource          string
+	ArtifactDir              string
 	ReleaseDate              time.Time
 }
 

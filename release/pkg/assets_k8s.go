@@ -16,7 +16,7 @@ package pkg
 
 import (
 	"fmt"
-	"path"
+	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 )
@@ -68,12 +68,12 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	for os, arches := range osArchMap {
 		for _, arch := range arches {
 			for _, binary := range osBinaryMap[os] {
-				filename := path.Join("bin", os, arch, binary)
-				sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
+				filename := filepath.Join("bin", os, arch, binary)
+				sha256, sha512, err := r.ReadK8sShaSums(gitTag, filename)
 				if err != nil {
 					return nil, err
 				}
-				assetPath, err := r.GetURI(path.Join(
+				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
 					fmt.Sprintf("%d", spec.Number),
@@ -100,11 +100,11 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 			}
 			for _, component := range osComponentMap[os] {
 				filename := fmt.Sprintf("kubernetes-%s-%s-%s.tar.gz", component, os, arch)
-				sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
+				sha256, sha512, err := r.ReadK8sShaSums(gitTag, filename)
 				if err != nil {
 					return nil, err
 				}
-				assetPath, err := r.GetURI(path.Join(
+				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
 					fmt.Sprintf("%d", spec.Number),
@@ -159,12 +159,12 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 		})
 		if binary != "pause" {
 			for _, arch := range linuxImageArches {
-				filename := path.Join("bin", "linux", arch, fmt.Sprintf("%s.tar", binary))
-				sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
+				filename := filepath.Join("bin", "linux", arch, fmt.Sprintf("%s.tar", binary))
+				sha256, sha512, err := r.ReadK8sShaSums(gitTag, filename)
 				if err != nil {
 					return nil, err
 				}
-				assetPath, err := r.GetURI(path.Join(
+				assetPath, err := r.GetURI(filepath.Join(
 					fmt.Sprintf("kubernetes-%s", spec.Channel),
 					"releases",
 					fmt.Sprintf("%d", spec.Number),
@@ -196,11 +196,11 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 	assets = append(assets, imageTarAssets...)
 
 	filename := "kubernetes-src.tar.gz"
-	sha256, sha512, err := r.ReadK8sShaSums(spec.Channel, filename)
+	sha256, sha512, err := r.ReadK8sShaSums(gitTag, filename)
 	if err != nil {
 		return nil, err
 	}
-	assetPath, err := r.GetURI(path.Join(
+	assetPath, err := r.GetURI(filepath.Join(
 		fmt.Sprintf("kubernetes-%s", spec.Channel),
 		"releases",
 		fmt.Sprintf("%d", spec.Number),
