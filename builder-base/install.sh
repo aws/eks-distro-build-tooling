@@ -113,7 +113,7 @@ setupgo "${GOLANG115_VERSION:-1.15.6}"
 # Commit: https://github.com/awslabs/amazon-ecr-credential-helper/commit/a004738dbac968cb287b47ae8ca39fd3b451e547
 git clone https://github.com/awslabs/amazon-ecr-credential-helper.git
 cd amazon-ecr-credential-helper
-git checkout a004738dbac968cb287b47ae8ca39fd3b451e547
+git checkout v0.5.0
 make
 cp bin/local/docker-credential-ecr-login /usr/bin/
 cd ..
