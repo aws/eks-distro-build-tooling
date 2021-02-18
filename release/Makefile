@@ -20,7 +20,7 @@ build: fmt vet
 
 # Run against the configured Kubernetes cluster in ~/.kube/config
 run: generate fmt vet manifests
-	go run ./main.go release
+	go run ./main.go
 
 # Install CRDs into a cluster
 install: manifests

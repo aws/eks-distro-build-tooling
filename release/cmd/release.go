@@ -40,8 +40,8 @@ var releaseCmd = &cobra.Command{
 		gitCommit := viper.GetString("git-commit")
 		imageRepository := viper.GetString("image-repository")
 		cdnURL := viper.GetString("cdn")
-		releaseNumber := viper.GetString("release-number")
-		artifactDir := fmt.Sprintf("kubernetes-%s/releases/%s/artifacts/", releaseBranch, releaseNumber)
+		releaseNumber := viper.GetInt("release-number")
+		artifactDir := fmt.Sprintf("kubernetes-%s/releases/%d/artifacts/", releaseBranch, releaseNumber)
 
 		releaseConfig := &pkg.ReleaseConfig{
 			ContainerImageRepository: imageRepository,
@@ -57,7 +57,7 @@ var releaseCmd = &cobra.Command{
 				BuildRepoCommit: gitCommit,
 			},
 		}
-		release.Name = fmt.Sprintf("kubernetes-%s-eks-%s", releaseBranch, releaseNumber)
+		release.Name = fmt.Sprintf("kubernetes-%s-eks-%d", releaseBranch, releaseNumber)
 		// TODO figure out how to get these automatically added
 		release.APIVersion = "distro.eks.amazonaws.com/v1alpha1"
 		release.Kind = "Release"
@@ -94,6 +94,6 @@ func init() {
 	releaseCmd.Flags().String("git-commit", "", "The eks-distro git commit")
 	releaseCmd.Flags().String("image-repository", "", "The container image repository name")
 	releaseCmd.Flags().String("cdn", "https://distro.eks.amazonaws.com", "The URL base for artifacts")
-	releaseCmd.Flags().String("release-number", "1", "The release-number to create")
+	releaseCmd.Flags().Int("release-number", 1, "The release-number to create")
 
 }

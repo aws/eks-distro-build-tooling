@@ -39,7 +39,7 @@ func (r *ReleaseConfig) GetCorednsComponent(spec distrov1alpha1.ReleaseSpec) (*d
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/coredns/%s:%s-eks-%s-%s",
+			URI: fmt.Sprintf("%s/coredns/%s:%s-eks-%s-%d",
 				r.ContainerImageRepository,
 				binary,
 				gitTag,
