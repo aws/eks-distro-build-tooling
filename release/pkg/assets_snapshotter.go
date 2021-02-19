@@ -40,7 +40,7 @@ func (r *ReleaseConfig) GetSnapshotterComponent(spec distrov1alpha1.ReleaseSpec)
 			OS:          "linux",
 			Arch:        []string{"amd64", "arm64"},
 			Image: &distrov1alpha1.AssetImage{
-				URI: fmt.Sprintf("%s/kubernetes-csi/external-snapshotter/%s:%s-eks-%s-%s",
+				URI: fmt.Sprintf("%s/kubernetes-csi/external-snapshotter/%s:%s-eks-%s-%d",
 					r.ContainerImageRepository,
 					binary,
 					gitTag,
