@@ -70,6 +70,14 @@ sha256sum -c $BASE_DIR/buildkit-checksum
 tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 
+ROOTLESSKIT_VERSION="${ROOTLESSKIT_VERSION:-v0.13.2}"
+wget \
+    --progress dot:giga \
+    https://github.com/rootless-containers/rootlesskit/releases/download/$ROOTLESSKIT_VERSION/rootlesskit-x86_64.tar.gz
+sha256sum -c $BASE_DIR/rootlesskit-checksum
+tar -C /usr/bin -xvf rootlesskit-x86_64.tar.gz
+rm -rf rootlesskit-x86_64.tar.gz
+
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
 wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz 
