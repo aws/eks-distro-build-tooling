@@ -78,6 +78,14 @@ sha256sum -c $BASE_DIR/rootlesskit-checksum
 tar -C /usr/bin -xvf rootlesskit-x86_64.tar.gz
 rm -rf rootlesskit-x86_64.tar.gz
 
+BAZEL_VERSION="${BAZEL_VERSION:-4.0.0}"
+wget \
+    --progress dot:giga \
+    https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-$BAZEL_VERSION-linux-x86_64
+sha256sum -c $BASE_DIR/bazel-checksum
+mv bazel-$BAZEL_VERSION-linux-x86_64 /usr/bin/bazel
+chmod +x /usr/bin/bazel
+
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
 wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz 
