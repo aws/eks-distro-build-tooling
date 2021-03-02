@@ -24,6 +24,8 @@ data:
     sinker:
       # defaults to 1 hour
       resync_period: 2m
+      # approximately equal to 1 month, defaults to 1 week
+      max_prowjob_age: 730h
       # defaults to 1 day
       max_pod_age: 12h
       # defaults to max_pod_age
