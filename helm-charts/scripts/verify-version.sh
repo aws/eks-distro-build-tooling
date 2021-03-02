@@ -21,8 +21,8 @@ CHARTS_DIR=$1
 GIT_REPO_ROOT=$(git rev-parse --show-toplevel)
 REMOTE_URL="https://github.com/aws/eks-distro-build-tooling.git"
 
-# PULL_PULL_SHA is environment variable set by the presubmit job. More info here: https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md#job-environment-variables
-PREV_RELEASE_HASH=${PULL_PULL_SHA}
+# PULL_BASE_SHA is environment variable set by the presubmit job. More info here: https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md#job-environment-variables
+PREV_RELEASE_HASH=${PULL_BASE_SHA}
 git fetch $REMOTE_URL $PREV_RELEASE_HASH
 
 EXIT_CODE=0
