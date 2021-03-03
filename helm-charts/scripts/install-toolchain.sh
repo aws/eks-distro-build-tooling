@@ -24,11 +24,13 @@ TMP_DIR="${BUILD_DIR}/tmp"
 mkdir -p "${TOOLS_DIR}"
 
 HELM_VERSION="v3.4.1"
-KUBECTL_VERSION=v1.18.9
+KUBECTL_VERSION=v1.19.6
 KIND_VERSION=v0.5.1
+RELEASE_BRANCH=1-19
+RELEASE=1
 
 ## Install kubectl
-curl -sSL "https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1/artifacts/kubernetes/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o "${TOOLS_DIR}/kubectl"
+curl -sSL "https://distro.eks.amazonaws.com/kubernetes-${RELEASE_BRANCH}/releases/${RELEASE}/artifacts/kubernetes/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o "${TOOLS_DIR}/kubectl"
 chmod +x "${TOOLS_DIR}/kubectl"
 
 ## Install kubeval
