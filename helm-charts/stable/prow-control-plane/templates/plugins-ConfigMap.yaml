@@ -18,9 +18,8 @@ metadata:
   name: plugins
 data:
   plugins.yaml: |
-    plugins: 
-    {{- if eq (len .Values.repositories) 0 }} []
-    {{- else }}
+    {{- if gt (len .Values.repositories) 0 }} 
+    plugins:
       {{- range $repo := .Values.repositories }}
       {{ $repo.org }}/{{ $repo.name }}:
       - approve
