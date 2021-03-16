@@ -1,4 +1,5 @@
 REPO?="https://github.com/gomods/athens.git"
+GIT_TAG?=$(shell cat GIT_TAG)
 CHART_ROOT?= $(shell git rev-parse --show-toplevel)/projects/gomods/athens
 CHART_BUCKET?="prowdataclusterstack-316-prowchartsbucket2e50b8d9-8b0f36hrcee8"
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
@@ -17,11 +18,11 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 .PHONY: build
 build:
-	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "false"
+	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${GIT_TAG} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "false"
 
 .PHONY: release
 release:
-	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "true"
+	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${GIT_TAG} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "true"
 
 .PHONY: clean
 clean:
