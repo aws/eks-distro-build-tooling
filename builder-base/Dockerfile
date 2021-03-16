@@ -20,6 +20,7 @@ COPY buildkit-checksum /buildkit-checksum
 COPY rootlesskit-checksum /rootlesskit-checksum
 COPY bazel-checksum /bazel-checksum
 COPY bash-checksum /bash-checksum
+COPY buildkit.sh /buildkit.sh
 COPY install.sh /opt/install.sh
 RUN bash /opt/install.sh
 
