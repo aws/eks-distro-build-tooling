@@ -1,0 +1,14 @@
+github.com/containernetworking/cni/pkg,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/containernetworking/cni/LICENSE,Apache-2.0
+github.com/containernetworking/plugins,https://github.com/containernetworking/plugins/blob/master/LICENSE,Apache-2.0
+github.com/mattn/go-shellwords,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/mattn/go-shellwords/LICENSE,MIT
+github.com/alexflint/go-filemutex,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/alexflint/go-filemutex/LICENSE,MIT
+github.com/j-keck/arping,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/j-keck/arping/LICENSE,MIT
+golang.org/x/sys/unix,https://github.com/containernetworking/plugins/blob/master/vendor/golang.org/x/sys/LICENSE,BSD-3-Clause
+github.com/coreos/go-iptables/iptables,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/coreos/go-iptables/LICENSE,Apache-2.0
+github.com/vishvananda/netlink,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/vishvananda/netlink/LICENSE,Apache-2.0
+github.com/vishvananda/netns,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/vishvananda/netns/LICENSE,Apache-2.0
+github.com/godbus/dbus,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/godbus/dbus/LICENSE,BSD-2-Clause
+github.com/coreos/go-systemd/activation,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/coreos/go-systemd/LICENSE,Apache-2.0
+github.com/safchain/ethtool,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/safchain/ethtool/LICENSE,Apache-2.0
+github.com/d2g/dhcp4,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/d2g/dhcp4/LICENSE,BSD-3-Clause
+github.com/d2g/dhcp4client,https://github.com/containernetworking/plugins/blob/master/vendor/github.com/d2g/dhcp4client/LICENSE,MPL-2.0
