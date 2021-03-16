@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+**/attribution/ATTRIBUTION.txt
+**/attribution/summary.txt
+*.bak

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,24 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+REPO_ROOT="$(cd "$(dirname "$(readlink ${BASH_SOURCE[0]})")" && pwd -P)"
 
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
-
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY *-checksum /
-COPY buildkit.sh /buildkit.sh
-COPY install.sh /opt/install.sh
-
-# attribution generation support
-COPY generate-attribution/package*.json \
-    generate-attribution/generate-attribution \
-    generate-attribution/generate-attribution-file.js \
-    generate-attribution/LICENSE-2.0.txt \ 
-    /opt/generate-attribution/
-
-RUN bash /opt/install.sh
-
-WORKDIR /go/src/github.com/aws/eks-distro
+node $REPO_ROOT/generate-attribution-file.js "$@"

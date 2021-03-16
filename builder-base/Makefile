@@ -15,6 +15,14 @@ ifeq ($(DEVELOPMENT),true)
 	BASE_IMAGE=amazonlinux:2
 endif
 
+.PHONY: copy-generate-attribution
+copy-generate-attribution:
+	cp -rf ../generate-attribution ./
+
+.PHONY: remove-generate-attribution
+remove-generate-attribution:
+	rm -rf ./generate-attribution
+
 .PHONY: local-images
 local-images:
 	# Sleeping until buildkit daemon is running on the other container
@@ -44,16 +52,17 @@ images:
 	./update_base_image.sh
 
 # for local development only
-docker:
+docker: copy-generate-attribution
 	docker build \
 		-t $(IMAGE) \
 		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
 		--build-arg TARGETARCH=amd64 \
 		--build-arg TARGETOS=linux \
 		-f Dockerfile .
+	$(MAKE) remove-generate-attribution
 
 .PHONY: build
-build: local-images
+build: copy-generate-attribution local-images remove-generate-attribution
 
 .PHONY: release
-release: images
+release: copy-generate-attribution images remove-generate-attribution
