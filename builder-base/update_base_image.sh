@@ -21,7 +21,7 @@ set -x
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 DRY_RUN_FLAG=$1
 
-if [ $DRY_RUN_FLAG = "--dry-run" ]; then
+if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
     NEW_TAG=$PULL_PULL_SHA
 else
     NEW_TAG=$PULL_BASE_SHA

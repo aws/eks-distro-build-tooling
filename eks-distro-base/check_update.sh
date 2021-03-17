@@ -27,7 +27,7 @@ DRY_RUN_FLAG=$4
 
 BASE_IMAGE=${IMAGE_REPO}/${IMAGE_NAME}:$(cat ${SCRIPT_ROOT}/../EKS_DISTRO_BASE_TAG_FILE)
 mkdir check-update
-cat << EOF >> check-update/Dockerfile
+cat << 'EOF' >> check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
 RUN yum check-update --security; echo $? > ./return_value
@@ -36,6 +36,7 @@ FROM scratch
 
 COPY --from=base_image ./return_value ./return_value
 EOF
+sed -i "s,\$BASE_IMAGE,$BASE_IMAGE," check-update/Dockerfile
 
 buildctl build \
          --frontend dockerfile.v0 \
@@ -44,12 +45,13 @@ buildctl build \
          --local context=. \
          --output type=local,dest=/tmp/${IMAGE_TAG}
 
-if [ ${DRY_RUN_FLAG} = "--dry-run" ]; then
+RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
+
+if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
     echo "Dry run"
     exit 0
 fi
 
-RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
 if [ $RETURN_STATUS -eq 100 ]; then
     echo "Updates required"
 elif [ $RETURN_STATUS -eq 0 ]; then

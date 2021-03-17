@@ -67,7 +67,7 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     git add $FILE
 done
 git commit -m "$COMMIT_MESSAGE" || true
-if [ $DRY_RUN_FLAG = "--dry-run" ]; then
+if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
     exit 0
 fi
 ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin $PR_BRANCH -f'
