@@ -13,7 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Install script for builder-base
+# This script is used to install the necessary dependencies on the pod
+# building the builder-base as well as into the builder-base itself
+# Note: since we run the build in fargate we do not have access to an overlayfs
+# so we use a single script from the dockerfile instead of layers to avoid
+# layer duplicate and running out of disk space 
+# This does make local builds painful.  Its recommended to add new additions
+# in their own script/layer while testing and then when you are done add 
+# to here
 
 set -e
 set -o pipefail
@@ -25,31 +32,27 @@ if [[ "$CI" == "true" ]]; then
     BASE_DIR=$(pwd)/builder-base
 fi
 
+# Only add dependencies needed to build the builder base in this first part
 yum upgrade -y
 yum update -y
 
 amazon-linux-extras enable docker
 yum install -y \
-    curl \
-    gcc \
+    amazon-ecr-credential-helper \
     git \
-    jq \
-    less \
     make \
-    man \
-    procps-ng \
-    python3-pip \
-    rsync \
     tar \
     unzip \
-    vim \
-    wget \
-    which
+    wget
 
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+wget \
+    --progress dot:giga \
+    https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+unzip awscli-exe-linux-x86_64.zip
 ./aws/install
 aws --version
+rm awscli-exe-linux-x86_64.zip
+rm -rf /aws
 
 GOLANG_VERSION="${GOLANG_VERSION:-1.15.6}"
 wget \
@@ -69,6 +72,27 @@ wget \
 sha256sum -c $BASE_DIR/buildkit-checksum
 tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
+
+if [[ "$CI" == "true" ]]; then
+    exit
+fi
+
+# Add any additional dependencies we want in the builder-base image here
+
+# directory setup
+mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
+
+yum install -y \
+    curl \
+    gcc \
+    jq \
+    less \
+    man \
+    procps-ng \
+    python3-pip \
+    rsync \
+    vim \
+    which
 
 ROOTLESSKIT_VERSION="${ROOTLESSKIT_VERSION:-v0.13.2}"
 wget \
@@ -100,13 +124,6 @@ cd ..
 rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
 rm -rf bash-$OVERRIDE_BASH_VERSION
 
-# directory setup
-mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
-
-# install additional versions of go
-export GOPATH=/go
-export PATH=${GOPATH}/bin/:$PATH
-
 # Set up specific go version by using go get, additional versions apart from default can be installed by calling
 # the function again with the specific parameter.
 setupgo() {
@@ -123,14 +140,16 @@ setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.13}"
 setupgo "${GOLANG115_VERSION:-1.15.6}"
 
-# install amazon-ecr-credential-helper
-# We are installing a specific commit of this because we need the sts regional endpoint changes in the aws sdk
-# to avoid hitting the global sts endpoint.
-# Commit: https://github.com/awslabs/amazon-ecr-credential-helper/commit/a004738dbac968cb287b47ae8ca39fd3b451e547
-git clone https://github.com/awslabs/amazon-ecr-credential-helper.git
-cd amazon-ecr-credential-helper
-git checkout v0.5.0
-make
-cp bin/local/docker-credential-ecr-login /usr/bin/
-cd ..
-rm -rf amazon-ecr-credential-helper
+# go-licenses doesnt have any release tags, using the latest master
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237     
+
+NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}" 
+wget --progress dot:giga \
+    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-x64.tar.gz
+sha256sum -c nodejs-checksum
+tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-x64.tar.gz node-$NODEJS_VERSION-linux-x64
+rm -rf node-$NODEJS_VERSION-linux-x64.tar.gz
+
+cd /opt/generate-attribution
+ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
+npm install

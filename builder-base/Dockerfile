@@ -15,14 +15,20 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-COPY golang-checksum /golang-checksum
-COPY buildkit-checksum /buildkit-checksum
-COPY rootlesskit-checksum /rootlesskit-checksum
-COPY bazel-checksum /bazel-checksum
-COPY bash-checksum /bash-checksum
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+
+COPY *-checksum /
 COPY buildkit.sh /buildkit.sh
 COPY install.sh /opt/install.sh
+
+# attribution generation support
+COPY generate-attribution/package*.json \
+    generate-attribution/generate-attribution \
+    generate-attribution/generate-attribution-file.js \
+    generate-attribution/LICENSE-2.0.txt \ 
+    /opt/generate-attribution/
+
 RUN bash /opt/install.sh
 
-ENV GOPATH /go
 WORKDIR /go/src/github.com/aws/eks-distro

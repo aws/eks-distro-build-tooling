@@ -1,0 +1,13 @@
+github.com/gogo/protobuf,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/github.com/gogo/protobuf/LICENSE,BSD-3-Clause
+github.com/kubernetes-csi/csi-lib-utils,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/github.com/kubernetes-csi/csi-lib-utils/LICENSE,Apache-2.0
+github.com/container-storage-interface/spec/lib/go/csi,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/github.com/container-storage-interface/spec/LICENSE,Apache-2.0
+golang.org/x/sys,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/golang.org/x/sys/LICENSE,BSD-3-Clause
+k8s.io/kubelet/pkg/apis/pluginregistration/v1,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/k8s.io/kubelet/LICENSE,Apache-2.0
+golang.org/x/net,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/golang.org/x/net/LICENSE,BSD-3-Clause
+google.golang.org/genproto/googleapis/rpc/status,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/google.golang.org/genproto/LICENSE,Apache-2.0
+golang.org/x/text,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/golang.org/x/text/LICENSE,BSD-3-Clause
+k8s.io/klog,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/k8s.io/klog/LICENSE,Apache-2.0
+github.com/kubernetes-csi/node-driver-registrar,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/LICENSE,Apache-2.0
+github.com/golang/protobuf,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/github.com/golang/protobuf/LICENSE,BSD-3-Clause
+google.golang.org/protobuf,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/google.golang.org/protobuf/LICENSE,BSD-3-Clause
+google.golang.org/grpc,https://github.com/kubernetes-csi/node-driver-registrar/blob/master/vendor/google.golang.org/grpc/LICENSE,Apache-2.0
