@@ -73,6 +73,13 @@ sha256sum -c $BASE_DIR/buildkit-checksum
 tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 
+GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.2.1}"
+wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
+sha256sum -c $BASE_DIR/github-cli-checksum
+tar -xzf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
+mv gh_${GITHUB_CLI_VERSION}_linux_amd64/bin/gh /usr/bin
+rm -rf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
+
 if [[ "$CI" == "true" ]]; then
     exit
 fi
@@ -110,13 +117,6 @@ wget \
 sha256sum -c $BASE_DIR/bazel-checksum
 mv bazel-$BAZEL_VERSION-linux-x86_64 /usr/bin/bazel
 chmod +x /usr/bin/bazel
-
-GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.2.1}"
-wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
-sha256sum -c $BASE_DIR/github-cli-checksum
-tar -xzf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
-mv gh_${GITHUB_CLI_VERSION}_linux_amd64/bin/gh /usr/bin
-rm -rf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
