@@ -27,5 +27,4 @@ else
     NEW_TAG=$PULL_BASE_SHA
 fi
 
-${SCRIPT_ROOT}/../pr-scripts/install_gh.sh
 ${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder:.*' 'builder:'"$NEW_TAG" *.yaml $DRY_RUN_FLAG
