@@ -54,7 +54,7 @@ aws --version
 rm awscli-exe-linux-x86_64.zip
 rm -rf /aws
 
-GOLANG_VERSION="${GOLANG_VERSION:-1.15.6}"
+GOLANG_VERSION="${GOLANG_VERSION:-1.15.10}"
 wget \
     --progress dot:giga \
     --max-redirect=1 \
@@ -145,8 +145,8 @@ setupgo() {
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
-setupgo "${GOLANG114_VERSION:-1.14.13}"
-setupgo "${GOLANG115_VERSION:-1.15.6}"
+setupgo "${GOLANG114_VERSION:-1.14.15}"
+setupgo "${GOLANG115_VERSION:-1.15.10}"
 
 # go-licenses doesnt have any release tags, using the latest master
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237     
