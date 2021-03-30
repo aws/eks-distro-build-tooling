@@ -103,13 +103,35 @@ yum install -y \
     vim \
     which
 
-ROOTLESSKIT_VERSION="${ROOTLESSKIT_VERSION:-v0.13.2}"
+# Install image-builder build dependencies
+# Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
+# Symlinking pip3 to pip, to have pip3 commands work successfully
+pip3 install -U pip setuptools
+ln -s /usr/local/bin/pip /usr/bin/pip3
+ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
+pip3 install "ansible==$ANSIBLE_VERSION"
+
+PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
+pip3 install "pywinrm==$PYWINRM_VERSION"
+
+PACKER_VERSION="${PACKER_VERSION:-1.6.6}"
+rm -rf /usr/sbin/packer
 wget \
     --progress dot:giga \
-    https://github.com/rootless-containers/rootlesskit/releases/download/$ROOTLESSKIT_VERSION/rootlesskit-x86_64.tar.gz
-sha256sum -c $BASE_DIR/rootlesskit-checksum
-tar -C /usr/bin -xvf rootlesskit-x86_64.tar.gz
-rm -rf rootlesskit-x86_64.tar.gz
+    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip
+sha256sum -c $BASE_DIR/packer-checksum
+unzip -o packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/bin
+rm -rf packer_${PACKER_VERSION}_linux_amd64.zip
+
+GOSS_VERSION="${GOSS_VERSION:-2.0.0}"
+wget \
+    --progress dot:giga \
+    https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
+sha256sum -c $BASE_DIR/goss-checksum
+tar -C /usr/bin -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
+rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
+
+useradd -ms /bin/bash -u 1100 imagebuilder
 
 BAZEL_VERSION="${BAZEL_VERSION:-4.0.0}"
 wget \
