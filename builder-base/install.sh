@@ -90,6 +90,7 @@ fi
 mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 
 yum install -y \
+    bind-utils \
     curl \
     gcc \
     jq \
