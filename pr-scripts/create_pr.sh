@@ -66,7 +66,12 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     sed -i "s,${OLD_TAG},${NEW_TAG}," $FILE
     git add $FILE
 done
-git commit -m "$COMMIT_MESSAGE" || true
+FILES_ADDED=$(git diff --staged --name-only)
+if [ "$FILES_CHANGED" = "" ]; then
+    exit 0
+fi
+
+git commit -m "$COMMIT_MESSAGE"
 if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
     exit 0
 fi
