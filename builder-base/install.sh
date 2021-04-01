@@ -123,15 +123,15 @@ sha256sum -c $BASE_DIR/packer-checksum
 unzip -o packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/bin
 rm -rf packer_${PACKER_VERSION}_linux_amd64.zip
 
+useradd -ms /bin/bash -u 1100 imagebuilder
+mkdir -p /home/imagebuilder/.packer.d/plugins
 GOSS_VERSION="${GOSS_VERSION:-2.0.0}"
 wget \
     --progress dot:giga \
     https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
 sha256sum -c $BASE_DIR/goss-checksum
-tar -C /usr/bin -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
+tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
 rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
-
-useradd -ms /bin/bash -u 1100 imagebuilder
 
 BAZEL_VERSION="${BAZEL_VERSION:-4.0.0}"
 wget \
