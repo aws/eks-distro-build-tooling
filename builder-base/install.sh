@@ -73,7 +73,7 @@ sha256sum -c $BASE_DIR/buildkit-checksum
 tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
 
-GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.2.1}"
+GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
 wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
 sha256sum -c $BASE_DIR/github-cli-checksum
 tar -xzf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
