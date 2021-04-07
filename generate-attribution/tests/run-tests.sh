@@ -30,9 +30,9 @@ declare -A cases["coredns/coredns"]='github.com/coredns/coredns'
     cases['kubernetes-csi/livenessprobe']='github.com/kubernetes-csi/livenessprobe'
     cases['kubernetes-csi/node-driver-registrar']='github.com/kubernetes-csi/node-driver-registrar'
     cases['kubernetes-sigs/aws-iam-authenticator']='sigs.k8s.io/aws-iam-authenticator'
+    cases['kubernetes-sigs/cri-tools']='github.com/kubernetes-sigs/cri-tools'
     cases['kubernetes-sigs/metrics-server']='sigs.k8s.io/metrics-server'
     cases['kubernetes/kubernetes-1-19']='k8s.io/'
-
 
 for i in "${!cases[@]}"
 do

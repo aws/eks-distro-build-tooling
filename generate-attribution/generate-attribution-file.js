@@ -22,7 +22,7 @@ const isLicenseFuzzyMatch = (licenseA, linceseB) => {
 
 const moduleTemplate = (mod) => {
     return `
-** ${mod.module}; version ${mod.version} --
+** ${mod.moduleOverride ?? mod.module}; version ${mod.version} --
 ${mod.repository}
 `;
 }
@@ -252,11 +252,11 @@ async function populateVersionAndModuleFromDep(dependencies) {
         if (!goListDep.Module) return false;
         return dep.module === goListDep.Module.Path ||
             dep.module === goListDep.ImportPath ||
-            dep.module === `${goListDep.Module.Path}/pkg`
+            dep.module.startsWith(`${goListDep.Module.Path}/pkg`)
     }
 
     const getDepVersion = (goListDep) => {
-        return goListDep.Module.Version ?? goListDep.Module.Replace?.Version;
+        return goListDep.Module.Replace?.Version ?? goListDep.Module.Version;
     }
 
     const isVersionMismatch = (depVersion, goDepVersion) => {
@@ -264,6 +264,20 @@ async function populateVersionAndModuleFromDep(dependencies) {
             return false;
         }
         return depVersion !== goDepVersion;
+    }
+
+    const isPathMismatch = (dep, goListDep) => {
+        return dep.modulePath !== goListDep.Module.Path && 
+            dep.modulePath !== goListDep.Module.Replace?.Path;
+    }
+
+    const useReplacePath = (goListDep) => {
+        // some replace paths end up being local to the repo
+        // and start with ./ in that case leave the module alone
+        // otherwise the replace module path is more accurate
+        return goListDep.Module.Replace?.Path && 
+            !goListDep.Module.Replace?.Path.startsWith('./') &&
+            goListDep.Module.Replace.Path !== goListDep.Module.Path; 
     }
 
     const finalDeps = [];
@@ -281,19 +295,21 @@ async function populateVersionAndModuleFromDep(dependencies) {
                 if (found &&
                     (
                         isVersionMismatch(dep.version, goDepVersion) || 
-                        dep.modulePath !== goListDep.Module.Path
+                        isPathMismatch(dep, goListDep)
                     )
                 ) {
                     console.log("NOTICE: Dep matched go list more than once.  Check it out", dep, goListDep)
                 }
                 dep.version ??= goDepVersion
-                dep.modulePath = goListDep.Module.Path;
+                dep.modulePath = useReplacePath(goListDep) ? goListDep.Module.Replace.Path : goListDep.Module.Path;
+                dep.moduleOverride = useReplacePath(goListDep) ? goListDep.Module.Replace.Path :  goListDep.module;
                 found = true;
             }
         });
 
         if (!found) {
-            console.log("NOTICE: Dep from go-license.csv was not found. Check it out\n This is probably the module itself and just needs manually modification", dep);
+            console.log("ERROR: Dep from go-license.csv was not found. Check it out", dep);
+            process.exit();
         }
         else {
             finalDeps.push(dep);
