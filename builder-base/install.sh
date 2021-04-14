@@ -141,6 +141,15 @@ sha256sum -c $BASE_DIR/bazel-checksum
 mv bazel-$BAZEL_VERSION-linux-x86_64 /usr/bin/bazel
 chmod +x /usr/bin/bazel
 
+GOVC_VERSION="${GOVC_VERSION:-0.24.0}"
+wget \
+    --progress dot:giga \
+    https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/govc_linux_amd64.gz
+sha256sum -c $BASE_DIR/govc-checksum
+gzip -d govc_linux_amd64.gz
+mv govc_linux_amd64 /usr/bin/govc
+chmod +x /usr/bin/govc
+
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
 wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz 
