@@ -65,6 +65,9 @@ tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
 
+# binary will be $(go env GOPATH)/bin/golangci-lint
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin ${GOLANGCILINT_VERSION:-v1.39.0}
+
 BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.7.2}"
 wget \
     --progress dot:giga \
