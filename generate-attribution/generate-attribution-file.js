@@ -223,7 +223,7 @@ async function readLicenseContent(dep, depLicensesDirPath) {
     }
 
     console.log('No license file for', dep);
-    process.exit();
+    process.exit(1);
 }
 
 async function readNoticeFile(depLicensesDirPath) {
@@ -248,11 +248,12 @@ async function populateVersionAndModuleFromDep(dependencies) {
     const goListDepFileContent = await fsPromises.readFile(goListDepFilePath, 'utf8');
     const goListDeps = JSON.parse(goListDepFileContent);
 
-    const isModuleMatch = (dep, goListDep) => {
+    const isModuleMatch = (dep, goListDep, allowPrefixMatch = false) => {
         if (!goListDep.Module) return false;
         return dep.module === goListDep.Module.Path ||
             dep.module === goListDep.ImportPath ||
-            dep.module.startsWith(`${goListDep.Module.Path}/pkg`)
+            dep.module.startsWith(`${goListDep.Module.Path}/pkg`) || 
+            (allowPrefixMatch &&  dep.module.startsWith(goListDep.Module.Path))
     }
 
     const getDepVersion = (goListDep) => {
@@ -280,6 +281,22 @@ async function populateVersionAndModuleFromDep(dependencies) {
             goListDep.Module.Replace.Path !== goListDep.Module.Path; 
     }
 
+    const handleFound = (dep, goListDep, found) => {
+        const goDepVersion = getDepVersion(goListDep);
+        const bothVersionsUndef = dep.Version ?? goDepVersion;
+        if (found &&
+            (
+                isVersionMismatch(dep.version, goDepVersion) || 
+                isPathMismatch(dep, goListDep)
+            )
+        ) {
+            console.log("NOTICE: Dep matched go list more than once.  Check it out", dep, goListDep)
+        }
+        dep.version ??= goDepVersion
+        dep.modulePath = useReplacePath(goListDep) ? goListDep.Module.Replace.Path : goListDep.Module.Path;
+        dep.moduleOverride = useReplacePath(goListDep) ? goListDep.Module.Replace.Path :  goListDep.module;
+    }
+
     const finalDeps = [];
     dependencies.forEach((dep) => {
         let found = false;
@@ -288,28 +305,26 @@ async function populateVersionAndModuleFromDep(dependencies) {
             finalDeps.push(dep);
             return;
         }
+
         goListDeps.forEach((goListDep) => {
             if (isModuleMatch(dep, goListDep)) {
-                const goDepVersion = getDepVersion(goListDep);
-                const bothVersionsUndef = dep.Version ?? goDepVersion;
-                if (found &&
-                    (
-                        isVersionMismatch(dep.version, goDepVersion) || 
-                        isPathMismatch(dep, goListDep)
-                    )
-                ) {
-                    console.log("NOTICE: Dep matched go list more than once.  Check it out", dep, goListDep)
-                }
-                dep.version ??= goDepVersion
-                dep.modulePath = useReplacePath(goListDep) ? goListDep.Module.Replace.Path : goListDep.Module.Path;
-                dep.moduleOverride = useReplacePath(goListDep) ? goListDep.Module.Replace.Path :  goListDep.module;
+                handleFound(dep, goListDep, found);
                 found = true;
             }
         });
+        
+        if (!found) {
+            goListDeps.forEach((goListDep) => {
+                if (isModuleMatch(dep, goListDep, true)) {
+                    handleFound(dep, goListDep, found);
+                    found = true;
+                }
+            });
+        }
 
         if (!found) {
             console.log("ERROR: Dep from go-license.csv was not found. Check it out", dep);
-            process.exit();
+            process.exit(1);
         }
         else {
             finalDeps.push(dep);
@@ -340,7 +355,7 @@ async function populateLicenseAndNoticeContent(dependencies) {
 
         if (!dep.modulePath) {
             console.log("Dep has no module path", dep);
-            process.exit();
+            process.exit(1);
         }
 
         if (dep.licenseType === 'Apache-2.0') {
