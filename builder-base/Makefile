@@ -66,3 +66,6 @@ build: copy-generate-attribution local-images remove-generate-attribution
 
 .PHONY: release
 release: copy-generate-attribution images remove-generate-attribution
+
+.PHONY: all
+all: release
