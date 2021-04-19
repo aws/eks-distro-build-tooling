@@ -104,3 +104,6 @@ update:
 	elif [ $(RETURN_MESSAGE) = "Error" ]; then \
 		exit 1; \
 	fi
+
+.PHONY: all
+all: release
