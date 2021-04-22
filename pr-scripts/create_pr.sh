@@ -66,6 +66,15 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     sed -i "s,${OLD_TAG},${NEW_TAG}," $FILE
     git add $FILE
 done
+if [ $REPO = "eks-distro-prow-jobs" ]; then
+    if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
+        sed -i "s,.*,${PULL_PULL_SHA}," ./BUILDER_BASE_TAG_FILE
+    else
+        sed -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
+    fi
+    git add ./BUILDER_BASE_TAG_FILE
+fi
+
 FILES_ADDED=$(git diff --staged --name-only)
 if [ "$FILES_ADDED" = "" ]; then
     exit 0
