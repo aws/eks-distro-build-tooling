@@ -5,9 +5,11 @@ AWS_REGION?=us-west-2
 BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-IMAGE_NAME?=eks-distro/base
+IMAGE_NAME?=eks-distro-base
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 ifeq ($(DEVELOPMENT),true)
 	BASE_IMAGE=amazonlinux:2
@@ -18,11 +20,15 @@ ifeq ("$(REPO_OWNER)","")
       This is used to raise a pull request against your org after updating tags in the respective files.)
 endif
 
+.PHONY: setup-public-ecr-push
+setup-public-ecr-push:
+	$(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh
+
 .PHONY: local-images
 local-images:
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10 
-	./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG) --dry-run
+	# ./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG) --dry-run
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -34,7 +40,7 @@ local-images:
 	./update_base_image.sh $(IMAGE_TAG) --dry-run
 
 .PHONY: images
-images:
+images: setup-public-ecr-push
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \

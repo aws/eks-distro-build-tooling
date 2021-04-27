@@ -5,11 +5,13 @@ AWS_REGION?=us-west-2
 BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-IMAGE_NAME?=eks-distro/builder
+IMAGE_NAME?=builder-base
 # This tag is overwritten in the prow job to point to the PR branch commit hash (presubmit)
 # or the base branch commit hash (postsubmit)
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 ifeq ($(DEVELOPMENT),true)
 	BASE_IMAGE=amazonlinux:2
@@ -22,6 +24,10 @@ copy-generate-attribution:
 .PHONY: remove-generate-attribution
 remove-generate-attribution:
 	rm -rf ./generate-attribution
+
+.PHONY: setup-public-ecr-push
+setup-public-ecr-push:
+	$(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh
 
 .PHONY: local-images
 local-images:
@@ -38,7 +44,7 @@ local-images:
 	./update_base_image.sh --dry-run
 
 .PHONY: images
-images:
+images: setup-public-ecr-push
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \
