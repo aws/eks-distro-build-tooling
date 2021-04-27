@@ -271,12 +271,17 @@ async function populateVersionAndModuleFromDep(dependencies) {
             dep.modulePath !== goListDep.Module.Replace?.Path;
     }
 
+    const isRelativePath = (path) => {
+        if(!path) return false;
+        return path.startsWith('./') || path.startsWith('../');
+    }
+
     const useReplacePath = (goListDep) => {
         // some replace paths end up being local to the repo
         // and start with ./ in that case leave the module alone
         // otherwise the replace module path is more accurate
         return goListDep.Module.Replace?.Path && 
-            !goListDep.Module.Replace?.Path.startsWith('./') &&
+            !isRelativePath(goListDep.Module.Replace?.Path) &&
             goListDep.Module.Replace.Path !== goListDep.Module.Path; 
     }
 
