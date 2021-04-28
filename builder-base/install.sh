@@ -114,7 +114,7 @@ pip3 install "ansible==$ANSIBLE_VERSION"
 PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
 pip3 install "pywinrm==$PYWINRM_VERSION"
 
-PACKER_VERSION="${PACKER_VERSION:-1.6.6}"
+PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
 rm -rf /usr/sbin/packer
 wget \
     --progress dot:giga \
@@ -125,7 +125,7 @@ rm -rf packer_${PACKER_VERSION}_linux_amd64.zip
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
-GOSS_VERSION="${GOSS_VERSION:-2.0.0}"
+GOSS_VERSION="${GOSS_VERSION:-3.0.3}"
 wget \
     --progress dot:giga \
     https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
@@ -149,6 +149,16 @@ sha256sum -c $BASE_DIR/govc-checksum
 gzip -d govc_linux_amd64.gz
 mv govc_linux_amd64 /usr/bin/govc
 chmod +x /usr/bin/govc
+
+# needed to parse eks-d release yaml to get latest artifacts
+YQ_VERSION="${YQ_VERSION:-v4.7.1}"
+wget \
+    --progress dot:giga \
+    https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64.tar.gz
+sha256sum -c $BASE_DIR/yq-checksum
+tar -xzf yq_linux_amd64.tar.gz
+mv yq_linux_amd64 /usr/bin/yq
+rm yq_linux_amd64.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
