@@ -20,10 +20,6 @@ ifeq ("$(REPO_OWNER)","")
       This is used to raise a pull request against your org after updating tags in the respective files.)
 endif
 
-.PHONY: setup-public-ecr-push
-setup-public-ecr-push:
-	$(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh
-
 .PHONY: local-images
 local-images:
 	# Sleeping until buildkit daemon is running on the other container
@@ -40,7 +36,7 @@ local-images:
 	./update_base_image.sh $(IMAGE_TAG) --dry-run
 
 .PHONY: images
-images: setup-public-ecr-push
+images:
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 15
 	buildctl \

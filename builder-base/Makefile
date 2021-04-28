@@ -25,12 +25,8 @@ copy-generate-attribution:
 remove-generate-attribution:
 	rm -rf ./generate-attribution
 
-.PHONY: setup-public-ecr-push
-setup-public-ecr-push:
-	$(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh
-
 .PHONY: local-images
-local-images: setup-public-ecr-push
+local-images:
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \
@@ -44,7 +40,7 @@ local-images: setup-public-ecr-push
 	./update_base_image.sh --dry-run
 
 .PHONY: images
-images: setup-public-ecr-push
+images:
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 15
 	buildctl \
