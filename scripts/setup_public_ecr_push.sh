@@ -34,3 +34,7 @@ EOF
 export AWS_CONFIG_FILE=$(pwd)/config
 export AWS_PROFILE=ecr-public-push
 export AWS_DEFAULT_PROFILE=$AWS_PROFILE
+export AWS_REGION=us-east-1
+export AWS_DEFAULT_REGION=$AWS_REGION
+
+unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE

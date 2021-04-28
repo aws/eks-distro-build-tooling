@@ -30,7 +30,7 @@ setup-public-ecr-push:
 	$(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh
 
 .PHONY: local-images
-local-images:
+local-images: setup-public-ecr-push
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10
 	buildctl \
