@@ -20,12 +20,10 @@ set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-IMAGE_REPO=$1
-IMAGE_NAME=$2
-IMAGE_TAG=$3
-DRY_RUN_FLAG=$4
+IMAGE_TAG=$1
+DRY_RUN_FLAG=$2
 
-BASE_IMAGE=${IMAGE_REPO}/${IMAGE_NAME}:$(cat ${SCRIPT_ROOT}/../EKS_DISTRO_BASE_TAG_FILE)
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base:$(cat ${SCRIPT_ROOT}/../EKS_DISTRO_BASE_TAG_FILE)
 mkdir check-update
 cat << 'EOF' >> check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image

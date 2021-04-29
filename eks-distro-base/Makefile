@@ -1,4 +1,3 @@
-DEVELOPMENT?=true
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
@@ -9,12 +8,6 @@ IMAGE_NAME?=eks-distro-base
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
-MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
-
-ifeq ($(DEVELOPMENT),true)
-	BASE_IMAGE=amazonlinux:2
-endif
-
 ifeq ("$(REPO_OWNER)","")
     $(error No org information was provided, please set and export REPO_OWNER environment variable. \
       This is used to raise a pull request against your org after updating tags in the respective files.)
@@ -24,7 +17,7 @@ endif
 local-images:
 	# Sleeping until buildkit daemon is running on the other container
 	sleep 10 
-	# ./check_update.sh $(IMAGE_REPO) $(IMAGE_NAME) $(IMAGE_TAG) --dry-run
+	./check_update.sh $(IMAGE_TAG) --dry-run
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \

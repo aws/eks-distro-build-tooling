@@ -1,4 +1,3 @@
-DEVELOPMENT?=true
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
@@ -10,12 +9,6 @@ IMAGE_NAME?=builder-base
 # or the base branch commit hash (postsubmit)
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
-
-MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
-
-ifeq ($(DEVELOPMENT),true)
-	BASE_IMAGE=amazonlinux:2
-endif
 
 .PHONY: copy-generate-attribution
 copy-generate-attribution:
