@@ -28,6 +28,7 @@ if [ "$ECR_PUBLIC_PUSH_ROLE_ARN" == "" ]; then
     exit 1
 fi
 
+# Creating a config file on the fly to configure assume-role and push to ECR public
 cat << EOF > config
 [default]
 output=json
