@@ -18,6 +18,16 @@ set -e
 set -o pipefail
 set -x
 
+if [ "$AWS_ROLE_ARN" == "" ]; then
+    echo "Empty AWS_ROLE_ARN, this script must be run in a postsubmit pod with IAM Roles for Service Accounts"
+    exit 1
+fi
+
+if [ "$ECR_PUBLIC_PUSH_ROLE_ARN" == "" ]; then
+    echo "Empty ECR_PUBLIC_PUSH_ROLE_ARN, this script must be run in a postsubmit pod with IAM Roles for Service Accounts"
+    exit 1
+fi
+
 cat << EOF > config
 [default]
 output=json
