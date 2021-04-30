@@ -1,3 +1,3 @@
-This PR updates the base image tag in all the prowjobs with the tag of the most recently built builder-base image.
+This PR updates the base image tag in the Tag file and in all the prowjobs with the tag of the most recently built builder-base image. The Codebuild projects will also be updated to use this same tag by a periodic Lambda.
 
 By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
