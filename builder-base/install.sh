@@ -93,6 +93,7 @@ yum install -y \
     bind-utils \
     curl \
     gcc \
+    gettext \
     jq \
     less \
     man \
