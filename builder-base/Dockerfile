@@ -20,6 +20,7 @@ ENV PATH="/go/bin/:$PATH"
 
 COPY *-checksum /
 COPY buildkit.sh /buildkit.sh
+COPY docker.sh /docker.sh
 COPY install.sh /opt/install.sh
 
 # attribution generation support
