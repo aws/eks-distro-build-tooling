@@ -65,7 +65,7 @@ tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
 
-BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.7.2}"
+BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.8.3}"
 wget \
     --progress dot:giga \
     https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
