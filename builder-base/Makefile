@@ -10,6 +10,12 @@ IMAGE_NAME?=builder-base
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
+.PHONY: buildkit-check
+buildkit-check:
+	$(MAKE_ROOT)/../scripts/buildkit_check.sh
+
 .PHONY: copy-generate-attribution
 copy-generate-attribution:
 	cp -rf ../generate-attribution ./
@@ -19,9 +25,7 @@ remove-generate-attribution:
 	rm -rf ./generate-attribution
 
 .PHONY: local-images
-local-images:
-	# Sleeping until buildkit daemon is running on the other container
-	sleep 10
+local-images: buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -33,9 +37,7 @@ local-images:
 	./update_base_image.sh --dry-run
 
 .PHONY: images
-images:
-	# Sleeping until buildkit daemon is running on the other container
-	sleep 15
+images: buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \

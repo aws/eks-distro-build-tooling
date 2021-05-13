@@ -16,12 +16,18 @@ IMAGE_NAME?="gomods/athens"
 IMAGE_TAG?="latest"
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
+.PHONY: buildkit-check
+buildkit-check:
+	$(MAKE_ROOT)/../../../scripts/buildkit_check.sh
+
 .PHONY: build
-build:
+build: buildkit-check
 	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${GIT_TAG} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "false"
 
 .PHONY: release
-release:
+release: buildkit-check
 	${CHART_ROOT}/upload-athens-artifacts.sh ${REPO} ${GIT_TAG} ${CHART_BUCKET} ${BASE_IMAGE} ${IMAGE} "true"
 
 .PHONY: clean
