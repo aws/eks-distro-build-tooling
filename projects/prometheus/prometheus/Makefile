@@ -17,6 +17,7 @@ ifeq ("$(GIT_COMMIT)","")
 	$(error No git commit was provided.)
 endif
 
+
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
@@ -28,6 +29,8 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 IMAGE_OS?="linux"
 IMAGE_ARCH?="amd64"
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
 .PHONY: build-dependencies
 build-dependencies:
 	curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
@@ -38,6 +41,10 @@ build-dependencies:
 clone: clean
 	git clone $(CLONE_URL) $(REPO)
 	cd $(REPO) && git checkout $(GIT_COMMIT)
+
+.PHONY: buildkit-check
+buildkit-check:
+	$(MAKE_ROOT)/../../../scripts/buildkit_check.sh
 
 .PHONY: binaries
 binaries:
@@ -54,7 +61,7 @@ npm_licenses:
 	make -C $(REPO) npm_licenses
 
 .PHONY: local-images
-local-images: clone binaries move-binaries npm_licenses
+local-images: clone binaries move-binaries npm_licenses buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -64,7 +71,7 @@ local-images: clone binaries move-binaries npm_licenses
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/prometheus.tar
 
 .PHONY: images
-images: clone binaries move-binaries npm_licenses
+images: clone binaries move-binaries npm_licenses buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \

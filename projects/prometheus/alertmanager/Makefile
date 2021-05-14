@@ -25,10 +25,16 @@ IMAGE_NAME?=prometheus/alertmanager
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
 .PHONY: clone
 clone: clean
 	git clone $(CLONE_URL) $(REPO)
 	cd $(REPO) && git checkout $(GIT_COMMIT)
+
+.PHONY: buildkit-check
+buildkit-check:
+	$(MAKE_ROOT)/../../../scripts/buildkit_check.sh
 
 .PHONY: binaries
 binaries:
@@ -40,7 +46,7 @@ move-binaries:
 	mv $(REPO)/{alertmanager,amtool} $(REPO)/.build/$(IMAGE_OS)-$(IMAGE_ARCH)
 	
 .PHONY: local-images
-local-images: clone binaries move-binaries
+local-images: clone binaries move-binaries buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -50,7 +56,7 @@ local-images: clone binaries move-binaries
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/alertmanager.tar
 
 .PHONY: images
-images: clone binaries move-binaries
+images: clone binaries move-binaries buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \

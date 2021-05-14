@@ -8,15 +8,19 @@ IMAGE_NAME?=eks-distro-base
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
 ifeq ("$(REPO_OWNER)","")
     $(error No org information was provided, please set and export REPO_OWNER environment variable. \
       This is used to raise a pull request against your org after updating tags in the respective files.)
 endif
 
+.PHONY: buildkit-check
+buildkit-check:
+	$(MAKE_ROOT)/../scripts/buildkit_check.sh
+
 .PHONY: local-images
-local-images:
-	# Sleeping until buildkit daemon is running on the other container
-	sleep 10 
+local-images: buildkit-check
 	./check_update.sh $(IMAGE_TAG) --dry-run
 	buildctl \
 		build \
