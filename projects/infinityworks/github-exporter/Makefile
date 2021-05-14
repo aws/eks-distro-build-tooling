@@ -45,7 +45,7 @@ local-images: clone buildkit-check
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/github-exporter.tar
 
 .PHONY: images
-images: clone buildit-check
+images: clone buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
