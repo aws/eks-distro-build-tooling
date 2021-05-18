@@ -33,9 +33,7 @@ local-images: buildkit-check
 	./update_base_image.sh $(IMAGE_TAG) --dry-run
 
 .PHONY: images
-images:
-	# Sleeping until buildkit daemon is running on the other container
-	sleep 15
+images: buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -94,9 +92,7 @@ build: local-images
 release: images
 
 .PHONY: update
-update:
-	# Sleeping until buildkit daemon is running on the other container
-	sleep 10
+update: buildkit-check
 	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_TAG))")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		$(MAKE) images; \
