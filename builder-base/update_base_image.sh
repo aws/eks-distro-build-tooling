@@ -19,12 +19,11 @@ set -o pipefail
 set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-DRY_RUN_FLAG=$1
 
-if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
+if [ "$JOB_TYPE" = "presubmit" ]; then
     NEW_TAG=$PULL_PULL_SHA
 else
     NEW_TAG=$PULL_BASE_SHA
 fi
 
-${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" *.yaml $DRY_RUN_FLAG
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" *.yaml

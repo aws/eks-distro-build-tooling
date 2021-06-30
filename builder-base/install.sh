@@ -109,7 +109,7 @@ yum install -y \
 # Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
 # Symlinking pip3 to pip, to have pip3 commands work successfully
 pip3 install -U pip setuptools
-ln -s /usr/local/bin/pip /usr/bin/pip3
+ln -sf /usr/local/bin/pip /usr/bin/pip3
 ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
 pip3 install "ansible==$ANSIBLE_VERSION"
 

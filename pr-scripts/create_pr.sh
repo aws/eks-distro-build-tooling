@@ -22,7 +22,6 @@ REPO="$1"
 OLD_TAG="$2"
 NEW_TAG="$3"
 FILEPATH="$4"
-DRY_RUN_FLAG="$5"
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -46,9 +45,21 @@ if [ $REPO = "eks-distro-prow-jobs" ]; then
 fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
-sed -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
-PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body)
-if [ $REPO = "eks-distro-prow-jobs" ]; then
+if [ $REPO = "eks-distro-build-tooling" ] || [ $REPO = "eks-distro" ]; then
+    sed -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
+    cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+    UPDATE_PACKAGES="$(cat ${SCRIPT_ROOT}/../eks-distro-base/update_packages)"
+    if [ "$UPDATE_PACKAGES" != "" ]; then
+        printf "\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+    fi
+    printf "\nBy submitting this pull request,\
+    I confirm that you can use, modify, copy,\
+    and redistribute this contribution,\
+    under the terms of your choice." >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+
+    PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body)
+    rm ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+else
     PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body)
 fi
 PR_BRANCH="image-tag-update"
@@ -67,7 +78,7 @@ for FILE in $(find ./ -type f -name $FILEPATH); do
     git add $FILE
 done
 if [ $REPO = "eks-distro-prow-jobs" ]; then
-    if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
+    if [ "$JOB_TYPE" = "presubmit" ]; then
         sed -i "s,.*,${PULL_PULL_SHA}," ./BUILDER_BASE_TAG_FILE
     else
         sed -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
@@ -81,7 +92,7 @@ if [ "$FILES_ADDED" = "" ]; then
 fi
 
 git commit -m "$COMMIT_MESSAGE"
-if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
+if [ "$JOB_TYPE" = "presubmit" ]; then
     exit 0
 fi
 ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin $PR_BRANCH -f'

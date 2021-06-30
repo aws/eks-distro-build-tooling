@@ -34,7 +34,7 @@ local-images: buildkit-check
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=tar,dest=/tmp/builder-base.tar
-	./update_base_image.sh --dry-run
+	./update_base_image.sh
 
 .PHONY: images
 images: buildkit-check

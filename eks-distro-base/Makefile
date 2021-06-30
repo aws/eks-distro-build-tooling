@@ -23,7 +23,7 @@ buildkit-check:
 
 .PHONY: local-images
 local-images: buildkit-check
-	./check_update.sh $(IMAGE_TAG) --dry-run
+	./check_update.sh $(IMAGE_TAG)
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -32,10 +32,11 @@ local-images: buildkit-check
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/eks-distro-base.tar
-	./update_base_image.sh $(IMAGE_TAG) --dry-run
+	./update_base_image.sh $(IMAGE_TAG)
 
 .PHONY: images
 images: buildkit-check
+	./check_update.sh $(IMAGE_TAG)
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
