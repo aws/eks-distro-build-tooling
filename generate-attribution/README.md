@@ -11,7 +11,7 @@ The builder-base assumes generate-attribution is on the PATH for usage during th
 
 
 ### Arguments
-This process depends on [go-licenses](https://github.com/google/go-licenses) having run and generated the csv file of dependencies as well as copied the all licenses into a LICENSES folder.  A json file of the ouput from `go list -json` is also required.
+This process depends on [go-licenses](https://github.com/google/go-licenses) having run and generated the csv file of dependencies as well as copied the all licenses into a LICENSES folder.  A json file of the output from `go list -json` is also required.
 
 Example run of dependencies
 
@@ -19,7 +19,7 @@ Example run of dependencies
 2. go-licenses save --force ./coredns.go --save_path="_out/LICENSES"
 3. go-licenses csv ./coredns.go > "_out/attribution/go-license.csv"
 
-Argument parsing is primative and positional.  The ordering follows:
+Argument parsing is primitive and positional.  The ordering follows:
 
 1. root module name, ex: github.com/coredns/coredns
     * this is the name of the dependency as it shows in the go-license.csv file
