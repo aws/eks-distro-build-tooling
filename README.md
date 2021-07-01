@@ -8,7 +8,7 @@ https://github.com/aws/eks-distro.
 
 ### builder-base
 
-bulider-base contains a Dockerfile and install scripting for building a
+builder-base contains a Dockerfile and install scripting for building a
 container image used to run [prow
 jobs](https://github.com/aws/eks-distro-prow-jobs) in our [prow
 cluster](https://prow.eks.amazonaws.com).

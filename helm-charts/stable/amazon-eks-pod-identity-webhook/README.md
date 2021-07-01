@@ -9,4 +9,4 @@ All the resources are defined in `templates/` except for the `MutatingWebhookCon
 which gets applied as part of the `Job` during `post-install,post-upgrade`. The resources in
 `template/` related to the job have a `job-` prefix. There is also a `CronJob` that executes
 the same script as the `Job` to also be able to detect for newer `CertificateSigningRequests`
-in case the webhook detects that the certifcate in the secret is about to expire.
+in case the webhook detects that the certificate in the secret is about to expire.
