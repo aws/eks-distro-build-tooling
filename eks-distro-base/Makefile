@@ -36,7 +36,9 @@ local-images: buildkit-check
 
 .PHONY: images
 images: buildkit-check
-	./check_update.sh $(IMAGE_TAG)
+	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
+		./check_update.sh $(IMAGE_TAG); \
+	fi
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
