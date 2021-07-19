@@ -201,7 +201,7 @@ HUGOVERSION=0.85.0
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_${HUGOVERSION}_checksums.txt
 grep hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz hugo_${HUGOVERSION}_checksums.txt \
-	sha256sum -c -
+	| sha256sum -c -
 sha256sum -c hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
