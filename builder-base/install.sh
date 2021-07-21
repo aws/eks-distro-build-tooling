@@ -194,7 +194,15 @@ setupgo "${GOLANG115_VERSION:-1.15.11}"
 setupgo "${GOLANG116_VERSION:-1.16.3}"
 
 # go-licenses doesnt have any release tags, using the latest master
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237     
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237
+
+# Install hugo for docs
+HUGOVERSION=0.85.0
+wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+sha256sum -c ${BASE_DIR}/hugo-checksum
+tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+mv hugo /usr/bin/hugo
+rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz ${BASE_DIR}/hugo-checksum
 
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}" 
 wget --progress dot:giga \
