@@ -203,7 +203,7 @@ wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_${H
 sha256sum -c ${BASE_DIR}/hugo-checksum
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
-rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz hugo_${HUGO_VERSION}_checksums.txt
+rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz ${BASE_DIR}/hugo-checksum
 
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}" 
 wget --progress dot:giga \
