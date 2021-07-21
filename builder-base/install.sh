@@ -199,7 +199,6 @@ GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c
 # Install hugo for docs
 HUGOVERSION=0.85.0
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
-wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_${HUGOVERSION}_checksums.txt
 sha256sum -c ${BASE_DIR}/hugo-checksum
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
