@@ -153,7 +153,8 @@ async function addGoLicense(dependencies) {
 async function readLicenseFromUpstream(upstreamUrl) {
     return new Promise((resolve, reject) => {
         let finalDoc = '';
-        const req = https.get(upstreamUrl, res => {
+        const options = await generateAuthorizationHeader()
+        const req = https.get(upstreamUrl, options, res => {
             res.on('data', d => {
                 finalDoc += d;
             })
@@ -174,7 +175,8 @@ async function getPackageRepo(package) {
     return new Promise((resolve, reject) => {
         let finalDoc = '';
         const url = `https://${package}?go-get=1`
-        const req = https.get(url, res => {
+        const options = await generateAuthorizationHeader()
+        const req = https.get(url, options, res => {
             if (res.statusCode !== 200) {
                 if (package.startsWith('github.com')) {
                     // This is probably happening because github doesnt seem to return the go-import for sub packages
@@ -338,6 +340,21 @@ async function populateVersionAndModuleFromDep(dependencies) {
     return finalDeps;
 }
 
+async function generateAuthorizationHeader() {
+    const githubTokenFile = "/secrets/github-secrets/token";
+    try {
+        await fsPromises.access(githubTokenFile);
+        const githubToken = await fsPromises.readFile(githubTokenFile, 'utf8');
+        const options = {
+            headers: {
+                'Authorization': 'token ' + githubToken
+            }
+        };
+        return options;
+    } catch { 
+        return {};
+    }
+}
 
 async function populateRootComponentVersion(dependencies) {
     const version = await fsPromises.readFile(gitTagPath, 'utf8');
