@@ -21,21 +21,21 @@ set -x
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_TAG=$1
+PACKAGE_LIST=$2
 
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base:$(cat ${SCRIPT_ROOT}/../EKS_DISTRO_BASE_TAG_FILE)
-mkdir check-update
-cat << 'EOF' >> check-update/Dockerfile
+mkdir -p check-update
+cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
-RUN yum check-update > ./check_update_output; echo $? > ./return_value
-RUN cat ./check_update_output | awk 'NR>2 {print $1}' > ./update_packages
+RUN yum check-update $PACKAGE_LIST > ./check_update_output; echo \$? > ./return_value
+RUN cat ./check_update_output | awk 'NR>2 {print \$1}' > ./update_packages
 
 FROM scratch
 
 COPY --from=base_image ./return_value ./return_value
 COPY --from=base_image ./update_packages ./update_packages
 EOF
-sed -i "s,\$BASE_IMAGE,$BASE_IMAGE," check-update/Dockerfile
 
 buildctl build \
          --frontend dockerfile.v0 \
@@ -45,6 +45,7 @@ buildctl build \
          --output type=local,dest=/tmp/${IMAGE_TAG}
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
+# TODO Parameterize "updated_packages" file for each base image
 cat /tmp/${IMAGE_TAG}/update_packages > ${SCRIPT_ROOT}/update_packages
 
 if [ "$JOB_TYPE" != "periodic" ]; then

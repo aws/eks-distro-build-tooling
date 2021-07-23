@@ -10,6 +10,9 @@ IMAGE_NAME?=eks-distro-base
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+DOCKERFILE?=Dockerfile
+PACKAGES?=
+
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 ifeq ("$(REPO_OWNER)","")
@@ -23,30 +26,36 @@ buildkit-check:
 
 .PHONY: local-images
 local-images: buildkit-check
-	./check_update.sh $(IMAGE_TAG)
+	./check_update.sh $(IMAGE_TAG) $(PACKAGES)
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
+		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
 		--local context=. \
-		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/eks-distro-base.tar
-	./update_base_image.sh $(IMAGE_TAG)
+		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/$(IMAGE_NAME).tar
 
 .PHONY: images
 images: buildkit-check
 	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./check_update.sh $(IMAGE_TAG); \
+		# Write out list of packages to update, if any
+		./check_update.sh $(IMAGE_TAG) $(PACKAGES) ; \
 	fi
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
+		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64,linux/arm64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+
+# Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
+.PHONY: create-pr
+create-pr:
 	./update_base_image.sh $(IMAGE_TAG)
 
 .PHONY: docker-public-login
@@ -63,6 +72,7 @@ public-images: docker-public-login
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
+		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64,linux/arm64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
@@ -84,7 +94,7 @@ docker:
 		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
 		--build-arg TARGETARCH=amd64 \
 		--build-arg TARGETOS=linux \
-		-f Dockerfile .
+		-f $(DOCKERFILE) .
 
 .PHONY: docker-push
 docker-push: docker
@@ -98,7 +108,7 @@ release: images
 
 .PHONY: update
 update: buildkit-check
-	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_TAG))")
+	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_TAG) $(PACKAGES) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		source $(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh && $(MAKE) images; \
 	elif [ $(RETURN_MESSAGE) = "Error" ]; then \

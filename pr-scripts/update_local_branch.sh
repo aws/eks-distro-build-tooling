@@ -18,14 +18,24 @@ set -e
 set -o pipefail
 set -x
 
+REPO="$1"
+
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-if [ "$JOB_TYPE" = "presubmit" ]; then
-    NEW_TAG=$PULL_PULL_SHA
+if [ $REPO_OWNER = "aws" ]; then
+    ORIGIN_ORG="eks-distro-pr-bot"
+    UPSTREAM_ORG="aws"
 else
-    NEW_TAG=$PULL_BASE_SHA
+    ORIGIN_ORG=$REPO_OWNER
+    UPSTREAM_ORG=$REPO_OWNER
 fi
 
-${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-prow-jobs
-${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
-${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
+PR_BRANCH="image-tag-update"
+
+cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+git config --global push.default current
+git config user.name "EKS Distro PR Bot"
+git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
+git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
+git fetch upstream
+git checkout upstream/main -b $PR_BRANCH
