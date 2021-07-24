@@ -151,9 +151,9 @@ async function addGoLicense(dependencies) {
 }
 
 async function readLicenseFromUpstream(upstreamUrl) {
+    let finalDoc = '';
+    const options = await generateAuthorizationHeader()
     return new Promise((resolve, reject) => {
-        let finalDoc = '';
-        const options = await generateAuthorizationHeader()
         const req = https.get(upstreamUrl, options, res => {
             res.on('data', d => {
                 finalDoc += d;
@@ -172,10 +172,10 @@ async function readLicenseFromUpstream(upstreamUrl) {
 
 
 async function getPackageRepo(package) {
+    let finalDoc = '';
+    const url = `https://${package}?go-get=1`
+    const options = await generateAuthorizationHeader()
     return new Promise((resolve, reject) => {
-        let finalDoc = '';
-        const url = `https://${package}?go-get=1`
-        const options = await generateAuthorizationHeader()
         const req = https.get(url, options, res => {
             if (res.statusCode !== 200) {
                 if (package.startsWith('github.com')) {
