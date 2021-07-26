@@ -40,7 +40,6 @@ local-images: buildkit-check
 .PHONY: images
 images: buildkit-check
 	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		# Write out list of packages to update, if any
 		./check_update.sh $(IMAGE_TAG) $(PACKAGES) ; \
 	fi
 	buildctl \
