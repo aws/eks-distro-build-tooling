@@ -35,6 +35,7 @@ PR_BRANCH="image-tag-update"
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 git config --global push.default current
 git config user.name "EKS Distro PR Bot"
+git config user.email "aws-model-rocket-bots+eksdistroprbot@amazon.com"
 git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
 git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
 git fetch upstream
