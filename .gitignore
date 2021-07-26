@@ -6,3 +6,4 @@ release/cover.out
 .idea
 index.yaml
 eks-distro-base/check-update/
+eks-distro-base/*-pushed
