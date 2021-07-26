@@ -1,0 +1,55 @@
+# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} as builder
+
+RUN yum upgrade -y && \
+    yum update -y
+
+ENV DOWNLOAD_DIR /tmp/download
+
+# there is a post install script for ca-certificates handled down below
+# there is a post install script for setup, it appears to just remove temp files
+RUN yum reinstall \
+    -y --downloadonly --downloaddir=$DOWNLOAD_DIR \
+    ca-certificates \
+    setup \
+    system-release \
+    tzdata
+
+WORKDIR /newroot
+# ca certs
+RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa ca-certificates).rpm | cpio -idmv
+RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa setup).rpm | cpio -idmv 
+RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa system-release).rpm | cpio -idmv
+RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa tzdata).rpm | cpio -idmv
+RUN mkdir -p /newroot/{bin,boot,lib,root,run,sbin,var}
+RUN mkdir -p /newroot/var/{backups,cache,lib,local,lock,log,run,spool,tmp}
+# cert files created by post install of ca-certs
+RUN cp -rf /etc/pki/ca-trust/extracted /newroot/etc/pki/ca-trust
+# non root user
+RUN mkdir -p /newroot/home/nonroot
+# tmp directory with correct permissions
+RUN mkdir -p /newroot/tmp
+RUN chmod 1777 /newroot/tmp
+RUN cp /etc/nsswitch.conf /newroot/etc/
+RUN cp /etc/passwd /newroot/etc
+RUN cp /etc/group /newroot/etc
+
+FROM scratch
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /newroot /
+# nonroot variant is the same with the USER 65532 defined

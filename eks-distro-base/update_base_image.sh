@@ -21,5 +21,16 @@ set -x
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 IMAGE_TAG=$1
 
-${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-build-tooling '.*' $IMAGE_TAG EKS_DISTRO_BASE_TAG_FILE
-${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro '.*' $IMAGE_TAG EKS_DISTRO_BASE_TAG_FILE
+# update_image_tag.sh for minimal must be run before eks-distro-base. It uses
+# EKS_DISTRO_BASE_TAG_FILE as a reference in "check_update.sh" for any required
+# updates. If eks-distro-minimal-base needs updates, we know those same updates
+# apply to eks-distro-base, but not the inverse.
+${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-build-tooling '.*' $IMAGE_TAG EKS_DISTRO_MINIMAL_BASE_TAG_FILE
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-build-tooling '.*' $IMAGE_TAG EKS_DISTRO_BASE_TAG_FILE
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-build-tooling '.*' $IMAGE_TAG 'EKS_DISTRO*_BASE_TAG_FILE'
+
+${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro '.*' $IMAGE_TAG EKS_DISTRO_MINIMAL_BASE_TAG_FILE
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro '.*' $IMAGE_TAG EKS_DISTRO_BASE_TAG_FILE
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro '.*' $IMAGE_TAG 'EKS_DISTRO*_BASE_TAG_FILE'

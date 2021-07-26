@@ -5,3 +5,4 @@ release/bin/eks-distro-release
 release/cover.out
 .idea
 index.yaml
+eks-distro-base/check-update/

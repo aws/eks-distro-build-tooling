@@ -18,14 +18,34 @@ set -e
 set -o pipefail
 set -x
 
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+REPO="$1"
+OLD_TAG="$2"
+NEW_TAG="$3"
+FILEPATH="$4"
 
-if [ "$JOB_TYPE" = "presubmit" ]; then
-    NEW_TAG=$PULL_PULL_SHA
-else
-    NEW_TAG=$PULL_BASE_SHA
+SED=sed
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    SED=gsed
 fi
 
-${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-prow-jobs
-${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
-${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+if [ $REPO_OWNER = "aws" ]; then
+    ORIGIN_ORG="eks-distro-pr-bot"
+else
+    ORIGIN_ORG=$REPO_OWNER
+fi
+
+cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+pwd
+
+for FILE in $(find ./ -type f -name "$FILEPATH"); do
+    $SED -i "s,${OLD_TAG},${NEW_TAG}," $FILE
+done
+if [ $REPO = "eks-distro-prow-jobs" ]; then
+    if [ "$JOB_TYPE" = "presubmit" ]; then
+        $SED -i "s,.*,${PULL_PULL_SHA}," ./BUILDER_BASE_TAG_FILE
+    else
+        $SED -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
+    fi
+fi
