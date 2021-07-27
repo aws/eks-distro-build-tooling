@@ -55,7 +55,11 @@ images: buildkit-check
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr
 create-pr:
-	./update_base_image.sh $(IMAGE_TAG)
+	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
+		./update_base_image.sh $(IMAGE_TAG); \
+	elif [ "$(shell cat $(MAKE_ROOT)/eks-distro-base-pushed)" = "true" ] || [ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-base-pushed)" = "true" ]; then \
+		./update_base_image.sh $(IMAGE_TAG); \
+	fi
 
 .PHONY: docker-public-login
 docker-public-login:
@@ -107,9 +111,11 @@ release: images
 
 .PHONY: update
 update: buildkit-check
+	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
 	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_TAG) $(PACKAGES) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		source $(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh && $(MAKE) images; \
+		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
 	elif [ $(RETURN_MESSAGE) = "Error" ]; then \
 		exit 1; \
 	fi
