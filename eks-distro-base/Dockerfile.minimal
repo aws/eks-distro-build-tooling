@@ -43,6 +43,7 @@ RUN mkdir -p /newroot/var/{backups,cache,lib,local,lock,log,run,spool,tmp}
 RUN cp -rf /etc/pki/ca-trust/extracted /newroot/etc/pki/ca-trust
 # non root user
 RUN mkdir -p /newroot/home/nonroot
+RUN chown 65532:65532 /newroot/home/nonroot
 # tmp directory with correct permissions
 RUN mkdir -p -m 1777 /newroot/tmp
 COPY files/ /newroot
