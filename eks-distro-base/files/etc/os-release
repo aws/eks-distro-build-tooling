@@ -1,0 +1,8 @@
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Minimal"
+ANSI_COLOR="0;33"
+HOME_URL="https://amazonlinux.com/"
