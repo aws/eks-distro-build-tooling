@@ -1,6 +1,6 @@
 GRAFANA_CHART_REPO?=helm-charts
 GRAFANA_CHART_CLONE_URL?=https://github.com/grafana/$(GRAFANA_CHART_REPO).git
-GRAFANA_CHART_GIT_TAG?=grafana-6.4.4
+GRAFANA_CHART_GIT_TAG?=grafana-6.14.1
 
 ifeq ("$(GRAFANA_CHART_REPO)","")
 	$(error No repository name for Grafana chart was provided.)
