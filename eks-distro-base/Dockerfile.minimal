@@ -31,22 +31,25 @@ RUN yum reinstall \
 
 WORKDIR /newroot
 
-# ca certs
-RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa ca-certificates).rpm | cpio -idmv
-RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa setup).rpm | cpio -idmv 
-RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa system-release).rpm | cpio -idmv
-RUN rpm2cpio $DOWNLOAD_DIR/$(rpm -qa tzdata).rpm | cpio -idmv
-RUN mkdir -p /newroot/{bin,boot,lib,root,run,sbin,var}
-RUN mkdir -p /newroot/var/{backups,cache,lib,local,lock,log,run,spool,tmp}
+RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
+    rm -rf usr/share/man usr/share/doc && \
+    mkdir -p /newroot/{bin,boot,lib,root,run,sbin,var} && \
+    mkdir -p /newroot/var/{backups,cache,lib,local,lock,log,run,spool,tmp} && \
+    # cert files created by post install of ca-certs
+    cp -rf /etc/pki/ca-trust/extracted /newroot/etc/pki/ca-trust
 
-# cert files created by post install of ca-certs
-RUN cp -rf /etc/pki/ca-trust/extracted /newroot/etc/pki/ca-trust
 # non root user
-RUN mkdir -p /newroot/home/nonroot
-RUN chown 65532:65532 /newroot/home/nonroot
+RUN mkdir -p /newroot/home/nonroot && \
+    chown 65532:65532 /newroot/home/nonroot
+
 # tmp directory with correct permissions
 RUN mkdir -p -m 1777 /newroot/tmp
+
 COPY files/ /newroot
+
+# Store package list for future reference
+RUN find /tmp/download/*.rpm  -printf "%f\n" | sort >> /newroot/etc/packages && \
+    cat /newroot/etc/packages
 
 FROM scratch
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

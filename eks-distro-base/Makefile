@@ -33,6 +33,8 @@ local-images: buildkit-check
 		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 \
+		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/$(IMAGE_NAME).tar
@@ -48,6 +50,8 @@ images: buildkit-check
 		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64,linux/arm64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 \
+		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
