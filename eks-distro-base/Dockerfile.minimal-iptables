@@ -13,6 +13,9 @@
 # limitations under the License.
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
+
+FROM ${BASE_IMAGE} as base
+
 FROM ${BUILDER_IMAGE} as builder
 
 RUN yum upgrade -y && \
@@ -21,6 +24,8 @@ RUN yum upgrade -y && \
 
 ENV DOWNLOAD_DIR /tmp/download
 WORKDIR $DOWNLOAD_DIR
+
+COPY --from=base /etc/packages /newroot/etc/packages
 
 RUN repotrack -p $DOWNLOAD_DIR \
     ipset iptables kmod \
@@ -57,6 +62,15 @@ RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
 RUN find /tmp/download/*.rpm  -printf "%f\n" | sort >> /newroot/etc/packages && \
     cat /newroot/etc/packages
 
+# Simulate update-alternatives
+RUN cd usr/sbin && \
+    ln -s ip6tables-legacy ip6tables && \
+    ln -s ip6tables-legacy-restore ip6tables-restore && \
+    ln -s ip6tables-legacy-save ip6tables-save && \
+    ln -s iptables-legacy iptables && \
+    ln -s iptables-legacy-restore iptables-restore && \
+    ln -s iptables-legacy-save iptables-save
 
-FROM ${BASE_IMAGE} 
+
+FROM base as final
 COPY --from=builder /newroot /
