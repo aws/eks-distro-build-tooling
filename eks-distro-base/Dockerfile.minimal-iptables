@@ -54,7 +54,8 @@ RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
     rm etc/nsswitch.conf
 
 # Store package list for future reference
-RUN find /tmp/download/*.rpm  -printf "%f\n" | sort >> /newroot/etc/packages
+RUN find /tmp/download/*.rpm  -printf "%f\n" | sort >> /newroot/etc/packages && \
+    cat /newroot/etc/packages
 
 
 FROM ${BASE_IMAGE} 
