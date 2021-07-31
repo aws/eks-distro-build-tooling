@@ -12,18 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Using one multistage Dockerfile since we use buildkit in prow
+# there is no image repo so building images that build on each other 
+# is not supported, unless we do a multistage build like the following
+# where the caching system can be used for subsequent target builds
+
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE} as builder
 
 RUN yum upgrade -y && \
-    yum update -y
+    yum update -y && \
+    yum install -y yum-utils
 
 ENV DOWNLOAD_DIR /tmp/download
 
 # there is a post install script for ca-certificates handled down below
 # there is a post install script for setup, it appears to just remove temp files
-RUN yum reinstall \
-    -y --downloadonly --downloaddir=$DOWNLOAD_DIR \
+RUN yumdownloader --destdir=$DOWNLOAD_DIR \    
     ca-certificates \
     setup \
     system-release \
@@ -47,11 +52,76 @@ RUN mkdir -p -m 1777 /newroot/tmp
 
 COPY files/ /newroot
 
-# Store package list for future reference
-RUN find /tmp/download/*.rpm  -printf "%f\n" | sort >> /newroot/etc/packages && \
-    cat /newroot/etc/packages
+# Generate rpm db so image scanners can detect out of date packages
+RUN rpm --initdb --dbpath /newroot/var/lib/rpm && \
+    rpm -ivh --nodeps --justdb --dbpath /newroot/var/lib/rpm $DOWNLOAD_DIR/*.rpm && \
+    rpm --dbpath /newroot/var/lib/rpm -qa | sort
 
-FROM scratch
+
+################# BASE ########################
+FROM scratch as base
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /newroot /
+
+
+################# BASE-NONROOT ################
+FROM base as nonroot
+USER 65532
+
+
+################# IPTABLES ####################
+FROM builder as iptables-builder
+
+ENV DOWNLOAD_DIR /tmp/download-iptables
+WORKDIR $DOWNLOAD_DIR
+
+COPY --from=base var/lib/rpm /newroot/var/lib/rpm
+
+RUN repotrack -p $DOWNLOAD_DIR \
+    ipset iptables kmod \
+    # Needed for conntrack-tools
+    libnetfilter_conntrack libnetfilter_cthelper libnetfilter_cttimeout libnetfilter_queue && \
+    # ebtables + conntrack-tools has a dep on systemd, which we do not need
+    # download them seperate and do not resolve dependencies
+    # deps are all downloaded above
+    yumdownloader --destdir=$DOWNLOAD_DIR ebtables conntrack-tools && \
+    # repotrack/yumdownloader will download multiple arch packages
+    rm -f *i686.rpm && \
+    # handled by minimal base
+    rm basesystem-* filesystem-* setup-* system-release-* tzdata* && \
+    # bash is a dep of glibc/common, but we do not want it in the image
+    # **** WE MAY NOT GET AWAY WITH THIS ****
+    rm bash-* ncurses-* && \
+    # chkconfig is used for update-alternatives whichw we do not need
+    rm chkconfig-*
+
+# not a perfect check, but sanity check to make sure we have downloaded
+# "all" deps except systemd
+# not perfect because a number of packages are already installed in the default image
+RUN yum install -y systemd && \
+    yum localinstall -y $DOWNLOAD_DIR/*
+
+WORKDIR /newroot
+
+RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
+    rm -rf usr/share/man usr/share/doc && \
+    # this is provided in minimal base, glibc brings its own, remove it
+    rm etc/nsswitch.conf
+
+# Simulate update-alternatives
+RUN cd usr/sbin && \
+    ln -s ip6tables-legacy ip6tables && \
+    ln -s ip6tables-legacy-restore ip6tables-restore && \
+    ln -s ip6tables-legacy-save ip6tables-save && \
+    ln -s iptables-legacy iptables && \
+    ln -s iptables-legacy-restore iptables-restore && \
+    ln -s iptables-legacy-save iptables-save
+
+# Generate rpm db so image scanners can detect out of date packages
+RUN rpm -ivh --nodeps --justdb --dbpath /newroot/var/lib/rpm $DOWNLOAD_DIR/*.rpm && \
+    rpm --dbpath /newroot/var/lib/rpm -qa | sort
+
+
+FROM base as iptables
+COPY --from=iptables-builder /newroot /

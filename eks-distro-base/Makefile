@@ -9,6 +9,7 @@ IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro-base
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+IMAGE_TARGET=base
 
 DOCKERFILE?=Dockerfile
 PACKAGES?=
@@ -24,8 +25,8 @@ endif
 buildkit-check:
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
 
-.PHONY: local-images
-local-images: buildkit-check
+.PHONY: local-images-%
+local-images-%: buildkit-check
 	./check_update.sh $(IMAGE_TAG) $(PACKAGES)
 	buildctl \
 		build \
@@ -33,14 +34,14 @@ local-images: buildkit-check
 		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--opt build-arg:BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
+		--opt target=$(IMAGE_TARGET) \
 		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/$(IMAGE_NAME).tar
 
-.PHONY: images
-images: buildkit-check
+.PHONY: images-%
+images-%: buildkit-check
 	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./check_update.sh $(IMAGE_TAG) $(PACKAGES) ; \
 	fi
@@ -50,11 +51,31 @@ images: buildkit-check
 		--opt filename=$(DOCKERFILE) \
 		--opt platform=linux/amd64,linux/arm64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--opt build-arg:BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
+		--opt target=$(IMAGE_TARGET) \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+
+.PHONY: minimal-base-%
+minimal-base-%: IMAGE_NAME=eks-distro-minimal-base
+minimal-base-%: DOCKERFILE=Dockerfile.minimal
+minimal-base-%: %-minimal-base
+	echo "Done $(IMAGE_NAME)"
+
+.PHONY: minimal-base-nonroot-%
+minimal-base-nonroot-%: IMAGE_NAME=eks-distro-minimal-base-nonroot
+minimal-base-nonroot-%: DOCKERFILE=Dockerfile.minimal
+minimal-base-nonroot-%: IMAGE_TARGET=nonroot
+minimal-base-nonroot-%: %-minimal-base-nonroot
+	echo "Done $(IMAGE_NAME)"
+
+.PHONY: minimal-base-iptables-%
+minimal-base-iptables-%: IMAGE_NAME=eks-distro-minimal-base-iptables
+minimal-base-iptables-%: DOCKERFILE=Dockerfile.minimal
+minimal-base-iptables-%: IMAGE_TARGET=iptables
+minimal-base-iptables-%: %-minimal-base-iptables
+	echo "Done $(IMAGE_NAME)"
 
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr
@@ -108,10 +129,10 @@ docker-push: docker
 	docker push $(IMAGE)
 
 .PHONY: build
-build: local-images
+build: local-images-standard minimal-base-local-images minimal-base-nonroot-local-images minimal-base-iptables-local-images
 
 .PHONY: release
-release: images
+release: images-standard minimal-base-images minimal-base-nonroot-images minimal-base-iptables-images
 
 .PHONY: update
 update: buildkit-check

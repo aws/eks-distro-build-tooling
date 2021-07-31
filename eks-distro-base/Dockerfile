@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
+FROM ${BASE_IMAGE} as base
 
 RUN yum upgrade -y && \
     yum update -y
