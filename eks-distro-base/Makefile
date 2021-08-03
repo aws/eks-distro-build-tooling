@@ -27,7 +27,7 @@ buildkit-check:
 
 .PHONY: local-images-%
 local-images-%: buildkit-check
-	./check_update.sh $(IMAGE_TAG) $(PACKAGES)
+	./check_update.sh $(IMAGE_NAME) 
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
@@ -43,7 +43,7 @@ local-images-%: buildkit-check
 .PHONY: images-%
 images-%: buildkit-check
 	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./check_update.sh $(IMAGE_TAG) $(PACKAGES) ; \
+		./check_update.sh $(IMAGE_NAME) ; \
 	fi
 	buildctl \
 		build \
@@ -137,7 +137,7 @@ release: images-standard minimal-base-images minimal-base-nonroot-images minimal
 .PHONY: update
 update: buildkit-check
 	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_TAG) $(PACKAGES) )")
+	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		source $(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh && $(MAKE) images; \
 		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
