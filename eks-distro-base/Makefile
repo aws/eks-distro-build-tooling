@@ -155,7 +155,9 @@ minimal-update-%:
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr-%
 create-pr-%:
-	if [ "$(shell cat $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)" = "true" ]; then \
+	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
+		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME); \
+	elif [ "$(shell cat $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME); \
 	fi
 
