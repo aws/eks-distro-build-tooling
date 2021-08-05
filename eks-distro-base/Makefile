@@ -171,8 +171,8 @@ minimal-create-pr-%:
 
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
-	$(shell $(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro 'unused' 'unused' 'EKS_DISTRO*_TAG_FILE')
-	$(shell $(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'unused' 'unused' 'EKS_DISTRO*_TAG_FILE')
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro 'unused' 'unused' 'EKS_DISTRO*_TAG_FILE'
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'unused' 'unused' 'EKS_DISTRO*_TAG_FILE'
 
 .PHONY: update
 update: buildkit-check $(UPDATE_TARGETS)
