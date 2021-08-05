@@ -22,7 +22,8 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_NAME=$1
 
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base/$IMAGE_NAME:$(cat ${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE)
+BASE_IMAGE_TAG_FILE="${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE"
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base/$IMAGE_NAME:$(cat $BASE_IMAGE_TAG_FILE)
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
@@ -46,13 +47,16 @@ buildctl build \
          --opt platform=linux/amd64 \
          --local dockerfile=./check-update \
          --local context=. \
+         --progress plain \
          --output type=local,dest=/tmp/${IMAGE_NAME} \
     || {
             mkdir -p /tmp/${IMAGE_NAME}
             echo "100" > /tmp/${IMAGE_NAME}/return_value
+            echo "" > /tmp/${IMAGE_NAME}/update_packages
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/update_packages-${IMAGE_NAME}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
     exit 0

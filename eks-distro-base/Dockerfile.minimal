@@ -66,7 +66,7 @@ COPY --from=builder /newroot /
 
 
 ################# BASE-NONROOT ################
-FROM base as nonroot
+FROM base as base-nonroot
 USER 65532
 
 
@@ -123,5 +123,5 @@ RUN rpm -ivh --nodeps --justdb --dbpath /newroot/var/lib/rpm $DOWNLOAD_DIR/*.rpm
     rpm --dbpath /newroot/var/lib/rpm -qa | sort
 
 
-FROM base as iptables
+FROM base as base-iptables
 COPY --from=iptables-builder /newroot /

@@ -51,10 +51,15 @@ PR_TITLE="Update base image tag in ${CHANGED_FILE}"
 if [ $REPO = "eks-distro-build-tooling" ] || [ $REPO = "eks-distro" ]; then
     $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
     cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-    UPDATE_PACKAGES="$(cat ${SCRIPT_ROOT}/../eks-distro-base/update_packages)"
-    if [ "$UPDATE_PACKAGES" != "" ]; then
-        printf "\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-    fi
+    
+    for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base -type f -name "update_packages*" ); do
+        UPDATE_PACKAGES="$(cat ${FILE})"
+        if [ "$UPDATE_PACKAGES" != "" ]; then
+            VARIANT=$(basename ${FILE} | sed 's/update_packages-//')
+            printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        fi
+    done    
+
     printf "\nBy submitting this pull request,\
     I confirm that you can use, modify, copy,\
     and redistribute this contribution,\
