@@ -91,7 +91,6 @@ RUN repotrack -p $DOWNLOAD_DIR \
     # handled by minimal base
     rm basesystem-* filesystem-* setup-* system-release-* tzdata* && \
     # bash is a dep of glibc/common, but we do not want it in the image
-    # **** WE MAY NOT GET AWAY WITH THIS ****
     rm bash-* ncurses-* && \
     # chkconfig is used for update-alternatives whichw we do not need
     rm chkconfig-*
