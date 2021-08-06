@@ -19,9 +19,7 @@ set -o pipefail
 set -x
 
 REPO="$1"
-OLD_TAG="$2"
-NEW_TAG="$3"
-FILEPATH="$4"
+FILEPATH="$2"
 
 SED=sed
 if [[ "$(uname -s)" == "Darwin" ]]; then

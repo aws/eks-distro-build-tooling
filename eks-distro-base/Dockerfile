@@ -16,4 +16,6 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE} as base
 
 RUN yum upgrade -y && \
-    yum update -y
+    yum update -y && \
+    yum clean all && \
+    rm -rf /var/cache/yum
