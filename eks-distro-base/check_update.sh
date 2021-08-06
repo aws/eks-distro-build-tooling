@@ -20,21 +20,26 @@ set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-IMAGE_TAG=$1
-PACKAGE_LIST=$2
+IMAGE_NAME=$1
 
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base:$(cat ${SCRIPT_ROOT}/../EKS_DISTRO_BASE_TAG_FILE)
+BASE_IMAGE_TAG_FILE="${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE"
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-base/$IMAGE_NAME:$(cat $BASE_IMAGE_TAG_FILE)
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
-RUN yum check-update $PACKAGE_LIST > ./check_update_output; echo \$? > ./return_value
-RUN cat ./check_update_output | awk 'NR>2 {print \$1}' > ./update_packages
+FROM public.ecr.aws/amazonlinux/amazonlinux:2 as builder
+
+RUN rm -rf /var/lib/rpm
+COPY --from=base_image /var/lib/rpm /var/lib/rpm
+
+RUN yum check-update --security  > ./check_update_output; echo \$? > ./return_value
+RUN cat ./check_update_output | awk '/^$/,0' | awk '{print \$1}' > ./update_packages
 
 FROM scratch
 
-COPY --from=base_image ./return_value ./return_value
-COPY --from=base_image ./update_packages ./update_packages
+COPY --from=builder ./return_value ./return_value
+COPY --from=builder ./update_packages ./update_packages
 EOF
 
 buildctl build \
@@ -42,11 +47,16 @@ buildctl build \
          --opt platform=linux/amd64 \
          --local dockerfile=./check-update \
          --local context=. \
-         --output type=local,dest=/tmp/${IMAGE_TAG}
+         --progress plain \
+         --output type=local,dest=/tmp/${IMAGE_NAME} \
+    || {
+            mkdir -p /tmp/${IMAGE_NAME}
+            echo "100" > /tmp/${IMAGE_NAME}/return_value
+            echo "" > /tmp/${IMAGE_NAME}/update_packages
+        }
 
-RETURN_STATUS=$(cat /tmp/${IMAGE_TAG}/return_value)
-# TODO Parameterize "updated_packages" file for each base image
-cat /tmp/${IMAGE_TAG}/update_packages > ${SCRIPT_ROOT}/update_packages
+RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/update_packages-${IMAGE_NAME}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
     exit 0
