@@ -54,7 +54,7 @@ aws --version
 rm awscli-exe-linux-x86_64.zip
 rm -rf /aws
 
-GOLANG_VERSION="${GOLANG_VERSION:-1.16.3}"
+GOLANG_VERSION="${GOLANG_VERSION:-1.16.7}"
 wget \
     --progress dot:giga \
     --max-redirect=1 \
@@ -65,7 +65,7 @@ tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
 
-BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.8.3}"
+BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
 wget \
     --progress dot:giga \
     https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
@@ -190,8 +190,8 @@ setupgo() {
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
-setupgo "${GOLANG115_VERSION:-1.15.11}"
-setupgo "${GOLANG116_VERSION:-1.16.3}"
+setupgo "${GOLANG115_VERSION:-1.15.14}"
+setupgo "${GOLANG116_VERSION:-1.16.7}"
 
 # go-licenses doesnt have any release tags, using the latest master
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237
