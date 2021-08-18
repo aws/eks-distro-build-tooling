@@ -128,3 +128,18 @@ RUN set -x && \
 
 FROM base-glibc as base-iptables
 COPY --from=iptables-builder /newroot /
+
+# AL2 doesn't setup the ip6tables alternative the same as ubuntu/debian
+# which is what the iptables-wrapper script provided by kubernetes expects
+# since kind's entrypoint assumes this adding the alternative
+# adding the alternative for ip6tabels here so the --set calls would work later on as expected
+# https://github.com/kubernetes/release/blob/master/images/build/debian-iptables/buster/iptables-wrapper
+RUN ["update-alternatives", \
+	    "--install", "/usr/sbin/ip6tables", "ip6tables", "/usr/sbin/ip6tables-legacy", "10", \
+        "--slave", "/usr/sbin/ip6tables-restore", "ip6tables-restore", "/usr/sbin/ip6tables-restore-legacy", \
+        "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-save-legacy"]
+
+RUN ["update-alternatives", \
+	    "--install", "/usr/sbin/ip6tables", "ip6tables", "/usr/sbin/ip6tables-nft", "10", \
+        "--slave", "/usr/sbin/ip6tables-restore", "ip6tables-restore", "/usr/sbin/ip6tables-restore-nft", \
+        "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-save-nft"]

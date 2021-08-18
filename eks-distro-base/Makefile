@@ -106,6 +106,10 @@ public-images: docker-public-login
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
 
 # for local development only
+.PHONY: minimal-base-test
+minimal-base-test: 
+	./tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG)
+
 .PHONY: ecr
 ecr:
 	aws ecr create-repository \
