@@ -17,8 +17,8 @@ MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables
 LOCAL_IMAGE_TARGETS=base-local-images $(addprefix minimal-local-images-, $(MINIMAL_VARIANTS))
-IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
-UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
+IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) minimal-images-base-export
+UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) minimal-images-base-export
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 
 ifeq ("$(REPO_OWNER)","")
@@ -78,6 +78,21 @@ base-%: %-base
 .PHONY: minimal-local-images-%
 minimal-local-images-%:
 	$(MAKE) local-images-minimal-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
+
+.PHONY: minimal-images-base-export
+minimal-images-base-export:
+	buildctl \
+		build \
+		--frontend dockerfile.v0 \
+		--opt filename=Dockerfile.minimal \
+		--opt platform=linux/amd64,linux/arm64 \
+		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--progress plain \
+		--local dockerfile=./ \
+		--local context=. \
+		--opt target=base-export \
+		--output type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages
+
 
 .PHONY: minimal-images-%
 minimal-images-%:
@@ -176,7 +191,7 @@ minimal-create-pr-%:
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro 'EKS_DISTRO*_TAG_FILE'
-	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE'
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE' 'eks-distro-base-minimal-packages/.'
 
 .PHONY: update
 update: buildkit-check $(UPDATE_TARGETS)
@@ -199,6 +214,7 @@ minimal-images-base: ## Build and push minimal base image with base-system/ca-ce
 minimal-images-base-nonroot: ## Build and push minimal base image nonroot variant
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
+minimal-images-base-export: ## Export packages included in minimal images
 
 
 base-update:  ## Check for out of date packages on standard full base image and push new
