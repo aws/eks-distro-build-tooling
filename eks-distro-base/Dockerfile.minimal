@@ -17,6 +17,9 @@
 # is not supported, unless we do a multistage build like the following
 # where the caching system can be used for subsequent target builds
 
+# *NOTE* we have to limit our number of layers heres because in presubmits there
+# is no overlay fs and we will run out of space quickly
+
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE} as builder
 
@@ -25,43 +28,52 @@ RUN yum upgrade -y && \
     yum install -y yum-utils
 
 ENV DOWNLOAD_DIR /tmp/download
+ENV NEWROOT /newroot
+ENV FAKE_INSTALLS bash glibc p11-kit p11-kit-trust
 
-# there is a post install script for ca-certificates handled down below
-# there is a post install script for setup, it appears to just remove temp files
-RUN yumdownloader --destdir=$DOWNLOAD_DIR \    
-    ca-certificates \
-    setup \
-    system-release \
-    tzdata
+COPY scripts/ /usr/bin
 
-WORKDIR /newroot
-
-RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
-    rm -rf usr/share/man usr/share/doc && \
-    mkdir -p /newroot/{bin,boot,lib,root,run,sbin,var} && \
-    mkdir -p /newroot/var/{backups,cache,lib,local,lock,log,run,spool,tmp} && \
-    # cert files created by post install of ca-certs
-    cp -rf /etc/pki/ca-trust/extracted /newroot/etc/pki/ca-trust
+WORKDIR $NEWROOT
 
 # non root user
-RUN mkdir -p /newroot/home/nonroot && \
-    chown 65532:65532 /newroot/home/nonroot
+RUN mkdir -p $NEWROOT/home/nonroot && \
+    chown 65532:65532 $NEWROOT/home/nonroot && \
+    # tmp directory with correct permissions
+    mkdir -p -m 1777 $NEWROOT/tmp
 
-# tmp directory with correct permissions
-RUN mkdir -p -m 1777 /newroot/tmp
+RUN set -x && \
+    # setup rpm + yum
+    yumdownloader --destdir=$DOWNLOAD_DIR \
+        system-release && \
+    rpm -ivh --nodeps --root $NEWROOT $DOWNLOAD_DIR/system-release*.rpm && \
+    # "install" excluded deps we do not want in final image
+    yumdownloader --destdir=/tmp/exclude -x "*.i686"  \
+        $FAKE_INSTALLS && \        
+    rpm -ivh --justdb --nodeps --root $NEWROOT /tmp/exclude/*.rpm && \
+    yum --installroot $NEWROOT install -y \
+        basesystem \
+        filesystem \        
+        setup \        
+        tzdata && \    
+    # postinstall scriptlet for ca-certs will fail, manually extract and copy
+    # key files from host
+    yumdownloader --destdir=$DOWNLOAD_DIR \
+        ca-certificates && \
+    rpm -ivh --root $NEWROOT --justdb $DOWNLOAD_DIR/ca-certificates*.rpm && \
+    for rpm in $DOWNLOAD_DIR/ca-certificates*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
+    # cert files created by post install of ca-certs
+    update-ca-trust && \
+    cp -rf /etc/pki $NEWROOT/etc && \
+    rpm --root $NEWROOT --nodeps --justdb -e $FAKE_INSTALLS && \
+    cleanup "base"
 
-COPY files/ /newroot
-
-# Generate rpm db so image scanners can detect out of date packages
-RUN rpm --initdb --dbpath /newroot/var/lib/rpm && \
-    rpm -ivh --nodeps --justdb --dbpath /newroot/var/lib/rpm $DOWNLOAD_DIR/*.rpm && \
-    rpm --dbpath /newroot/var/lib/rpm -qa | sort
+COPY files/ $NEWROOT
 
 
 ################# BASE ########################
 FROM scratch as base
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
 COPY --from=builder /newroot /
 
 
@@ -70,57 +82,49 @@ FROM base as base-nonroot
 USER 65532
 
 
-################# IPTABLES ####################
-FROM builder as iptables-builder
+################# GLIBC ####################
+FROM builder as glibc-builder
 
-ENV DOWNLOAD_DIR /tmp/download-iptables
-WORKDIR $DOWNLOAD_DIR
-
-COPY --from=base var/lib/rpm /newroot/var/lib/rpm
-
-RUN repotrack -p $DOWNLOAD_DIR \
-    ipset iptables kmod \
-    # Needed for conntrack-tools
-    libnetfilter_conntrack libnetfilter_cthelper libnetfilter_cttimeout libnetfilter_queue && \
-    # ebtables + conntrack-tools has a dep on systemd, which we do not need
-    # download them seperate and do not resolve dependencies
-    # deps are all downloaded above
-    yumdownloader --destdir=$DOWNLOAD_DIR ebtables conntrack-tools && \
-    # repotrack/yumdownloader will download multiple arch packages
-    rm -f *i686.rpm && \
-    # handled by minimal base
-    rm basesystem-* filesystem-* setup-* system-release-* tzdata* && \
-    # bash is a dep of glibc/common, but we do not want it in the image
-    rm bash-* ncurses-* && \
-    # chkconfig is used for update-alternatives whichw we do not need
-    rm chkconfig-*
-
-# not a perfect check, but sanity check to make sure we have downloaded
-# "all" deps except systemd
-# not perfect because a number of packages are already installed in the default image
-RUN yum install -y systemd && \
-    yum localinstall -y $DOWNLOAD_DIR/*
-
-WORKDIR /newroot
-
-RUN for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
-    rm -rf usr/share/man usr/share/doc && \
+RUN set -x && \
+    # let yum install bash since it will be needed for scriptlets
+    # will be removed along with its deps at the end
+    yum --installroot $NEWROOT install -y  \
+        glibc && \
     # this is provided in minimal base, glibc brings its own, remove it
-    rm etc/nsswitch.conf
-
-# Simulate update-alternatives
-RUN cd usr/sbin && \
-    ln -s ip6tables-legacy ip6tables && \
-    ln -s ip6tables-legacy-restore ip6tables-restore && \
-    ln -s ip6tables-legacy-save ip6tables-save && \
-    ln -s iptables-legacy iptables && \
-    ln -s iptables-legacy-restore iptables-restore && \
-    ln -s iptables-legacy-save iptables-save
-
-# Generate rpm db so image scanners can detect out of date packages
-RUN rpm -ivh --nodeps --justdb --dbpath /newroot/var/lib/rpm $DOWNLOAD_DIR/*.rpm && \
-    rpm --dbpath /newroot/var/lib/rpm -qa | sort
+    rm etc/nsswitch.conf.rpmnew && \
+    # remove bash and deps (ncurses)
+    rpm --root $NEWROOT --nodeps -e bash && \
+    yum --installroot $NEWROOT autoremove -y && \
+    cleanup "glibc"
 
 
-FROM base as base-iptables
+FROM base as base-glibc
+COPY --from=glibc-builder /newroot /
+
+
+################# IPTABLES ####################
+FROM glibc-builder as iptables-builder
+
+RUN set -x && \
+    # manually "install" systemd to avoid installing the entire dep tree
+    yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" systemd && \
+    rpm -ivh --nodeps --justdb --root $NEWROOT $DOWNLOAD_DIR/systemd*.rpm && \ 
+    # following are from coreutils needed by install scriptlets
+    for cmd in "readlink" "rm"; do cp /usr/bin/$cmd $NEWROOT/usr/bin/; done && \
+    yum --installroot $NEWROOT install -y  \
+        conntrack-tools \
+        ebtables \
+        ipset \
+        iptables \
+        iptables-nft \
+        kmod && \
+    for cmd in "readlink" "rm"; do rm $NEWROOT/usr/bin/$cmd; done && \
+    # remove bash + systemd and deps
+    rpm --root $NEWROOT --justdb --nodeps -e systemd && \
+    rpm --root $NEWROOT --nodeps -e bash && \
+    yum --installroot $NEWROOT autoremove -y && \
+    cleanup "iptables"
+
+
+FROM base-glibc as base-iptables
 COPY --from=iptables-builder /newroot /

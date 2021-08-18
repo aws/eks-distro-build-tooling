@@ -15,7 +15,7 @@ DOCKERFILE?=Dockerfile
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
-MINIMAL_VARIANTS=base base-nonroot base-iptables
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables
 LOCAL_IMAGE_TARGETS=base-local-images $(addprefix minimal-local-images-, $(MINIMAL_VARIANTS))
 IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
@@ -187,19 +187,24 @@ all: release
 base-local-images: ## Build standard full base image
 minimal-local-images-base: ## Build minimal base image with base-system/ca-certs/user/nsswitch
 minimal-local-images-base-nonroot: ## Build minimal base image nonroot variant
+minimal-local-images-base-glibc: ## Build minimal base image with glibc
 minimal-local-images-base-iptables: ## Build minimal base image with iptables + glibc
 
 base-images: ## Build and push standard full base image
 minimal-images-base: ## Build and push minimal base image with base-system/ca-certs/user/nsswitch
 minimal-images-base-nonroot: ## Build and push minimal base image nonroot variant
+minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
+
 
 base-update:  ## Check for out of date packages on standard full base image and push new
 minimal-base-update: ## Check for out of date packages on minimal base image and push new
 minimal-base-nonroot-update: ## Check for out of date packages on minimal nonroot base image and push new
+minimal-base-glibc-update: ## Check for out of date packages on minimal glibc base image and push new
 minimal-base-iptables-update: ## Check for out of date packages on minimal iptables base image and push new
 
 base-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
 minimal-base-nonroot-create-pr: ## Update minimal base nonroot image tag if pushed
+minimal-base-glibc-create-pr: ## Update minimal base glibc image tag if pushed
 minimal-base-iptables-create-pr: ## Update minimal base iptables image tag if pushed
