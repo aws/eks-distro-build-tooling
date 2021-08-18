@@ -84,6 +84,14 @@ function check_iptables() {
     fi
 }
 
+function check_csi() {
+    if docker run $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
+        echo "csi xfs issue!"
+        exit 1
+    fi
+ }
+
 check_base
 check_glibc
 check_iptables
+check_csi

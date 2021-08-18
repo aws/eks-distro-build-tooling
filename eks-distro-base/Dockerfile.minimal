@@ -145,5 +145,32 @@ RUN ["update-alternatives", \
         "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-save-nft"]
 
 
+################# CSI ####################
+# This image is not exactly minimal. CSI drivers require a number
+# of utils to create and manage volumes
+# Adding this as a variant here to ensure we are keeping it up to date
+FROM glibc-builder as csi-builder
+
+RUN set -x && \
+    # manually "install" systemd to avoid installing the entire dep tree
+    yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" systemd && \
+    rpm -ivh --nodeps --justdb --root $NEWROOT $DOWNLOAD_DIR/systemd*.rpm && \ 
+    # some of the install scriptlets need coreutils
+    yum --installroot $NEWROOT install -y \
+        coreutils && \
+    yum --installroot $NEWROOT install -y  \
+        e2fsprogs \
+        nfs-utils \
+        util-linux \
+        xfsprogs && \
+    rpm --root $NEWROOT --justdb --nodeps -e systemd && \
+    cleanup "csi"
+
+
+FROM base-glibc as base-csi
+COPY --from=csi-builder /newroot /
+
+
 FROM scratch as base-export
 COPY --from=iptables-builder /tmp/packages/* .
+COPY --from=csi-builder /tmp/packages/* .
