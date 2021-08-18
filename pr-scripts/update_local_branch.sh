@@ -39,6 +39,11 @@ if [ $(git branch --show-current) != $PR_BRANCH ]; then
     git config user.email "aws-model-rocket-bots+eksdistroprbot@amazon.com"
     git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
     git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
-    git fetch upstream
-    git checkout upstream/main -b $PR_BRANCH
+    if [ "$JOB_TYPE" = "presubmit" ]; then
+        git fetch upstream pull/$PULL_NUMBER/head:image-update-branch
+        git checkout image-update-branch
+    else
+        git fetch upstream
+        git checkout upstream/main -b $PR_BRANCH
+    fi
 fi
