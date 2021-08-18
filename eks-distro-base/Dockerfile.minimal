@@ -73,6 +73,7 @@ COPY files/ $NEWROOT
 ################# BASE ########################
 FROM scratch as base
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+USER 0
 
 COPY --from=builder /newroot /
 
