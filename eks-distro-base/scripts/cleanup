@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+set -e
+set -o pipefail
+set -x
+
+VARIANT="$1"
+
+clean_docs $NEWROOT
+
+# cleanup downlaods to limit layer size even in builders due to presubmit restrictions
+rm -rf $DOWNLOAD_DIR /tmp/exclude
+yum --installroot $NEWROOT clean all
+rm -rf var/cache/yum 
+# do not need any yum history since we arent including yum in final images
+rm -rf var/lib/yum
+
+# generate final packages list
+mkdir -p /tmp/packages
+rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT
+echo "*** FINAL PACKAGES FOR ${VARIANT^^} ***"
+cat /tmp/packages/$VARIANT && \
+echo "*******************************"
