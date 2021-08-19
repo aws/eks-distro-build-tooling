@@ -31,7 +31,9 @@ else
 fi
 
 PR_BRANCH="image-tag-update"
-
+if [ "$JOB_TYPE" = "presubmit" ]; then
+    PR_BRANCH="image-update-branch"
+fi
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 if [ $(git branch --show-current) != $PR_BRANCH ]; then
     git config --global push.default current
