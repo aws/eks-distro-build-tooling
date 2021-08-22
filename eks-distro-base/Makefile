@@ -17,9 +17,10 @@ MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi
 LOCAL_IMAGE_TARGETS=base-local-images $(addprefix minimal-local-images-, $(MINIMAL_VARIANTS))
-IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) minimal-images-base-export
-UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) minimal-images-base-export
+IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
+UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
+EXPORT_TARGETS=$(addprefix export-minimal-images-, $(MINIMAL_VARIANTS))
 
 ifeq ("$(REPO_OWNER)","")
     $(error No org information was provided, please set and export REPO_OWNER environment variable. \
@@ -79,20 +80,25 @@ base-%: %-base
 minimal-local-images-%:
 	$(MAKE) local-images-minimal-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
 
-.PHONY: minimal-images-base-export
-minimal-images-base-export:
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt filename=Dockerfile.minimal \
-		--opt platform=linux/amd64,linux/arm64 \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--progress plain \
-		--local dockerfile=./ \
-		--local context=. \
-		--opt target=base-export \
-		--output type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages
+.PHONY: export-minimal-images-%
+export-minimal-images-%:
+	if [ "$(JOB_TYPE)" = "postsubmit" ] || \
+		[ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-$*-pushed)" = "true" ]; then \
+		buildctl \
+			build \
+			--frontend dockerfile.v0 \
+			--opt filename=Dockerfile.minimal \
+			--opt platform=linux/amd64,linux/arm64 \
+			--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+			--progress plain \
+			--local dockerfile=./ \
+			--local context=. \
+			--opt target=$*-export \
+			--output type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages; \
+	fi
 
+.PHONY: export-minimal-images
+export-minimal-images: $(EXPORT_TARGETS)
 
 .PHONY: minimal-images-%
 minimal-images-%:
@@ -216,7 +222,11 @@ minimal-images-base-nonroot: ## Build and push minimal base image nonroot varian
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
 minimal-local-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
-minimal-images-base-export: ## Export packages included in minimal images
+export-minimal-images-base: ## Export packages included in base minimal images
+export-minimal-images-base-nonroot: ## Export packages included in base minimal images
+export-minimal-images-base-glibc: ## Export packages included in glibc minimal images
+export-minimal-images-base-iptables: ## Export packages included in iptables minimal images
+export-minimal-images-base-csi: ## Export packages included in csi minimal images
 
 
 base-update:  ## Check for out of date packages on standard full base image and push new

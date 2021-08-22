@@ -171,7 +171,17 @@ RUN set -x && \
 FROM base-glibc as base-csi
 COPY --from=csi-builder /newroot /
 
-
 FROM scratch as base-export
+COPY --from=builder /tmp/packages/* .
+
+FROM scratch as base-nonroot-export
+COPY --from=builder /tmp/packages/* .
+
+FROM scratch as base-glibc-export
+COPY --from=glibc-builder /tmp/packages/* .
+
+FROM scratch as base-iptables-export
 COPY --from=iptables-builder /tmp/packages/* .
+
+FROM scratch as base-csi-export
 COPY --from=csi-builder /tmp/packages/* .
