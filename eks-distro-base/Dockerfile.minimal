@@ -43,28 +43,16 @@ RUN mkdir -p $NEWROOT/home/nonroot && \
 
 RUN set -x && \
     # setup rpm + yum
-    yumdownloader --destdir=$DOWNLOAD_DIR \
-        system-release && \
-    rpm -ivh --nodeps --root $NEWROOT $DOWNLOAD_DIR/system-release*.rpm && \
+    clean_install system-release true && \
     # "install" excluded deps we do not want in final image
-    yumdownloader --destdir=/tmp/exclude -x "*.i686"  \
-        $FAKE_INSTALLS && \        
-    rpm -ivh --justdb --nodeps --root $NEWROOT /tmp/exclude/*.rpm && \
-    yum --installroot $NEWROOT install -y \
-        basesystem \
-        filesystem \        
-        setup \        
-        tzdata && \    
+    clean_install "$FAKE_INSTALLS" true true && \
+    clean_install "basesystem filesystem setup tzdata" && \    
     # postinstall scriptlet for ca-certs will fail, manually extract and copy
-    # key files from host
-    yumdownloader --destdir=$DOWNLOAD_DIR \
-        ca-certificates && \
-    rpm -ivh --root $NEWROOT --justdb $DOWNLOAD_DIR/ca-certificates*.rpm && \
-    for rpm in $DOWNLOAD_DIR/ca-certificates*.rpm; do rpm2cpio $rpm | cpio -idmv; done && \
-    # cert files created by post install of ca-certs
+    # key files from host after running update-ca-trust
+    clean_install ca-certificates true true true && \
     update-ca-trust && \
     cp -rf /etc/pki $NEWROOT/etc && \
-    rpm --root $NEWROOT --nodeps --justdb -e $FAKE_INSTALLS && \
+    remove_package "$FAKE_INSTALLS" true && \    
     cleanup "base"
 
 COPY files/ $NEWROOT
@@ -89,13 +77,11 @@ FROM builder as glibc-builder
 RUN set -x && \
     # let yum install bash since it will be needed for scriptlets
     # will be removed along with its deps at the end
-    yum --installroot $NEWROOT install -y  \
-        glibc && \
+    clean_install glibc && \
     # this is provided in minimal base, glibc brings its own, remove it
     rm etc/nsswitch.conf.rpmnew && \
     # remove bash and deps (ncurses)
-    rpm --root $NEWROOT --nodeps -e bash && \
-    yum --installroot $NEWROOT autoremove -y && \
+    remove_package bash && \
     cleanup "glibc"
 
 
@@ -108,22 +94,14 @@ FROM glibc-builder as iptables-builder
 
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
-    yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" systemd && \
-    rpm -ivh --nodeps --justdb --root $NEWROOT $DOWNLOAD_DIR/systemd*.rpm && \ 
+    clean_install systemd true true && \
     # following are from coreutils needed by install scriptlets
     for cmd in "readlink" "rm"; do cp /usr/bin/$cmd $NEWROOT/usr/bin/; done && \
-    yum --installroot $NEWROOT install -y  \
-        conntrack-tools \
-        ebtables \
-        ipset \
-        iptables \
-        iptables-nft \
-        kmod && \
+    clean_install "conntrack-tools ebtables ipset iptables iptables-nft kmod" && \
     for cmd in "readlink" "rm"; do rm $NEWROOT/usr/bin/$cmd; done && \
     # remove bash + systemd and deps
-    rpm --root $NEWROOT --justdb --nodeps -e systemd && \
-    rpm --root $NEWROOT --nodeps -e bash && \
-    yum --installroot $NEWROOT autoremove -y && \
+    remove_package systemd true && \
+    remove_package bash && \
     cleanup "iptables"
 
 
@@ -154,17 +132,12 @@ FROM glibc-builder as csi-builder
 
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
-    yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" systemd && \
-    rpm -ivh --nodeps --justdb --root $NEWROOT $DOWNLOAD_DIR/systemd*.rpm && \ 
-    # some of the install scriptlets need coreutils
-    yum --installroot $NEWROOT install -y \
-        coreutils && \
-    yum --installroot $NEWROOT install -y  \
-        e2fsprogs \
-        nfs-utils \
-        util-linux \
-        xfsprogs && \
-    rpm --root $NEWROOT --justdb --nodeps -e systemd && \
+    clean_install systemd true true && \
+    # some of the install scriptlets need coreutils but the dep ordering
+    # doesnt reflect, install manually to make sure its first
+    clean_install coreutils && \
+    clean_install "e2fsprogs nfs-utils util-linux xfsprogs" && \
+    remove_package systemd true && \
     cleanup "csi"
 
 
