@@ -18,16 +18,7 @@ set -e
 set -o pipefail
 set -x
 
-VARIANT="$1"
-
-clean_docs $NEWROOT
-
-clean_yum
-rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum
-
-# generate final packages list
-mkdir -p /tmp/packages
-rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT
-echo "*** FINAL PACKAGES FOR ${VARIANT^^} ***"
-cat /tmp/packages/$VARIANT && \
-echo "*******************************"
+yum --installroot $NEWROOT clean all
+yum clean all
+# do not need any yum history since we arent including yum in final images
+rm -rf $NEWROOT/var/cache/yum /var/cache/yum

@@ -18,16 +18,17 @@ set -e
 set -o pipefail
 set -x
 
-VARIANT="$1"
+PACKAGES=$1
+JUSTDB=${2:false}
 
-clean_docs $NEWROOT
+if [ $JUSTDB ]; then
+    JUSTDB="--justdb"
+else
+    JUSTDB=""
+fi
 
+rpm --root $NEWROOT --nodeps $JUSTDB -e $PACKAGES 
 clean_yum
-rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum
 
-# generate final packages list
-mkdir -p /tmp/packages
-rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT
-echo "*** FINAL PACKAGES FOR ${VARIANT^^} ***"
-cat /tmp/packages/$VARIANT && \
-echo "*******************************"
+yum --installroot $NEWROOT autoremove -y
+clean_yum

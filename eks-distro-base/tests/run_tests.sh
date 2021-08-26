@@ -91,7 +91,49 @@ function check_csi() {
     fi
  }
 
+ function check_git() {
+    docker build \
+        -t base-git-test:latest \
+        --target check-git \
+        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG \
+        --build-arg TARGETARCH=amd64 \
+        --build-arg TARGETOS=linux \
+        --build-arg GOPROXY=direct \
+        --progress plain \
+        -f ./tests/Dockerfile ./tests
+    
+    # use git cli to clone private and public repo
+    docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+        base-git-test:latest git clone $PRIVATE_REPO
+
+    docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+        base-git-test:latest git clone https://github.com/aws/eks-distro.git
+
+    # use lib git to clone private and public repo
+    if docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+        -e PRIVATE_REPO=$PRIVATE_REPO base-git-test:latest check-git | grep -v 'Successfully cloned!'; then
+       echo "git issue!"
+       exit 1
+    fi
+
+ }
+
+ check_docker_client() {
+    if ! docker run -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
+        echo "docker client issue!"
+        exit 1
+    fi
+ }
+
 check_base
 check_glibc
 check_iptables
 check_csi
+check_git
+check_docker_client
