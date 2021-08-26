@@ -15,7 +15,7 @@ DOCKERFILE?=Dockerfile
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client
 LOCAL_IMAGE_TARGETS=base-local-images $(addprefix minimal-local-images-, $(MINIMAL_VARIANTS))
 IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
 UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
@@ -215,6 +215,8 @@ minimal-local-images-base-nonroot: ## Build minimal base image nonroot variant
 minimal-local-images-base-glibc: ## Build minimal base image with glibc
 minimal-local-images-base-iptables: ## Build minimal base image with iptables + glibc
 minimal-local-images-base-csi: ## Build minimal base image with common packages needed for csi drivers
+minimal-local-images-base-git: ## Build minimal base image with git + libgit
+minimal-local-images-base-docker-client: ## Build minimal base image with docker client
 
 base-images: ## Build and push standard full base image
 minimal-images-base: ## Build and push minimal base image with base-system/ca-certs/user/nsswitch
@@ -222,12 +224,16 @@ minimal-images-base-nonroot: ## Build and push minimal base image nonroot varian
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
 minimal-local-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
+minimal-local-images-base-git: ## Build and push minimal base image with git + libgit
+minimal-local-images-base-docker-client: ## Build and push minimal base image with docker client
+
 export-minimal-images-base: ## Export packages included in base minimal images
 export-minimal-images-base-nonroot: ## Export packages included in base minimal images
 export-minimal-images-base-glibc: ## Export packages included in glibc minimal images
 export-minimal-images-base-iptables: ## Export packages included in iptables minimal images
 export-minimal-images-base-csi: ## Export packages included in csi minimal images
-
+export-minimal-images-base-git: ## Export packages included in git minimal images
+export-minimal-images-base-docker-client: ## Export packages included in docker client minimal images
 
 base-update:  ## Check for out of date packages on standard full base image and push new
 minimal-base-update: ## Check for out of date packages on minimal base image and push new
@@ -235,6 +241,8 @@ minimal-base-nonroot-update: ## Check for out of date packages on minimal nonroo
 minimal-base-glibc-update: ## Check for out of date packages on minimal glibc base image and push new
 minimal-base-iptables-update: ## Check for out of date packages on minimal iptables base image and push new
 minimal-base-csi-update: ## Check for out of date packages on minimal csi base image and push new
+minimal-base-git-update: ## Check for out of date packages on minimal git base image and push new
+minimal-base-docker-client-update: ## Check for out of date packages on minimal docker client base image and push new
 
 base-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
@@ -242,3 +250,5 @@ minimal-base-nonroot-create-pr: ## Update minimal base nonroot image tag if push
 minimal-base-glibc-create-pr: ## Update minimal base glibc image tag if pushed
 minimal-base-iptables-create-pr: ## Update minimal base iptables image tag if pushed
 minimal-base-csi-create-pr: ## Update minimal base csi image tag if pushed
+minimal-base-git-create-pr: ## Update minimal base git image tag if pushed
+minimal-base-docker-client-create-pr: ## Update minimal base docker client image tag if pushed
