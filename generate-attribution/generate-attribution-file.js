@@ -190,8 +190,14 @@ async function getPackageRepo(package) {
             })
             res.on('end', () => {
                 const htmlDoc = HTMLParser.parse(finalDoc);
-                const metaContent = htmlDoc.querySelector('head meta[name=go-import]').getAttribute('content');
-                resolve(parseRepoURL(metaContent));
+                const metaTag = htmlDoc.querySelector('head meta[name=go-import]')
+                if (metaTag) {
+                    resolve(parseRepoURL(metaTag.getAttribute('content')));
+                }
+                else {
+                    resolve(`https://${package}`)
+                }
+
             });
         })
 
@@ -254,8 +260,8 @@ async function populateVersionAndModuleFromDep(dependencies) {
         if (!goListDep.Module) return false;
         return dep.module === goListDep.Module.Path ||
             dep.module === goListDep.ImportPath ||
-            dep.module.startsWith(`${goListDep.Module.Path}/pkg`) || 
-            (allowPrefixMatch &&  dep.module.startsWith(goListDep.Module.Path))
+            dep.module.startsWith(`${goListDep.Module.Path}/pkg`) ||
+            (allowPrefixMatch && dep.module.startsWith(goListDep.Module.Path))
     }
 
     const getDepVersion = (goListDep) => {
@@ -270,12 +276,12 @@ async function populateVersionAndModuleFromDep(dependencies) {
     }
 
     const isPathMismatch = (dep, goListDep) => {
-        return dep.modulePath !== goListDep.Module.Path && 
+        return dep.modulePath !== goListDep.Module.Path &&
             dep.modulePath !== goListDep.Module.Replace?.Path;
     }
 
     const isRelativePath = (path) => {
-        if(!path) return false;
+        if (!path) return false;
         return path.startsWith('./') || path.startsWith('../');
     }
 
@@ -283,9 +289,9 @@ async function populateVersionAndModuleFromDep(dependencies) {
         // some replace paths end up being local to the repo
         // and start with ./ in that case leave the module alone
         // otherwise the replace module path is more accurate
-        return goListDep.Module.Replace?.Path && 
+        return goListDep.Module.Replace?.Path &&
             !isRelativePath(goListDep.Module.Replace?.Path) &&
-            goListDep.Module.Replace.Path !== goListDep.Module.Path; 
+            goListDep.Module.Replace.Path !== goListDep.Module.Path;
     }
 
     const handleFound = (dep, goListDep, found) => {
@@ -293,7 +299,7 @@ async function populateVersionAndModuleFromDep(dependencies) {
         const bothVersionsUndef = dep.Version ?? goDepVersion;
         if (found &&
             (
-                isVersionMismatch(dep.version, goDepVersion) || 
+                isVersionMismatch(dep.version, goDepVersion) ||
                 isPathMismatch(dep, goListDep)
             )
         ) {
@@ -301,7 +307,7 @@ async function populateVersionAndModuleFromDep(dependencies) {
         }
         dep.version ??= goDepVersion
         dep.modulePath = useReplacePath(goListDep) ? goListDep.Module.Replace.Path : goListDep.Module.Path;
-        dep.moduleOverride = useReplacePath(goListDep) ? goListDep.Module.Replace.Path :  goListDep.module;
+        dep.moduleOverride = useReplacePath(goListDep) ? goListDep.Module.Replace.Path : goListDep.module;
     }
 
     const finalDeps = [];
@@ -319,7 +325,7 @@ async function populateVersionAndModuleFromDep(dependencies) {
                 found = true;
             }
         });
-        
+
         if (!found) {
             goListDeps.forEach((goListDep) => {
                 if (isModuleMatch(dep, goListDep, true)) {
@@ -351,7 +357,7 @@ async function generateAuthorizationHeader() {
             }
         };
         return options;
-    } catch { 
+    } catch {
         return {};
     }
 }
