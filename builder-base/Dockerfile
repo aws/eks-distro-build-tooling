@@ -30,6 +30,7 @@ COPY generate-attribution/package*.json \
     generate-attribution/LICENSE-2.0.txt \ 
     /opt/generate-attribution/
 
-RUN bash /opt/install.sh
+RUN bash /opt/install.sh && \
+    rm /opt/install.sh /*-checksum
 
 WORKDIR /go/src/github.com/aws/eks-distro
