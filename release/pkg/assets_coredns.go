@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetCorednsComponent returns the Component for Kubernetes
+// GetCorednsComponent returns the Component for CoreDNS
 func (r *ReleaseConfig) GetCorednsComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/coredns/coredns"
 	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")

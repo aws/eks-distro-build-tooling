@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetMetricsServerComponent returns the Component for metrics-server
+// GetMetricsServerComponent returns the Component for Metrics Server
 func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-sigs/metrics-server"
 	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")

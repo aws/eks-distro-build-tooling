@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetKubernetesComponent returns the Component for Kubernetes
+// GetCniComponent returns the Component for CNI plugins
 func (r *ReleaseConfig) GetCniComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/containernetworking/plugins"
 	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")

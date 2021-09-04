@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetLivenessprobeComponent returns the Component for Kubernetes
+// GetLivenessprobeComponent returns the Component for Liveness Probe
 func (r *ReleaseConfig) GetLivenessprobeComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/livenessprobe"
 	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
