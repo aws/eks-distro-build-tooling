@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetProvisionerComponent returns the Component for Kubernetes
+// GetProvisionerComponent returns the Component for External Provisioner
 func (r *ReleaseConfig) GetProvisionerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/external-provisioner"
 	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
