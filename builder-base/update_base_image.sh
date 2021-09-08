@@ -29,3 +29,7 @@ fi
 ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-prow-jobs
 ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
 ${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs '*.yaml'
+
+${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-anywhere-prow-jobs
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
+${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-anywhere-prow-jobs '*.yaml'
