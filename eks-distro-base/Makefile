@@ -197,6 +197,7 @@ minimal-create-pr-%:
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro 'EKS_DISTRO*_TAG_FILE'
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-anywhere-build-tooling 'EKS_DISTRO*_TAG_FILE'
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE' 'eks-distro-base-minimal-packages/.'
 
 .PHONY: update
