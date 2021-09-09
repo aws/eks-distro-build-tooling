@@ -29,7 +29,7 @@ fi
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-if [ $REPO = "eks-distro-build-tooling" ] || [ $REPO = "eks-distro" ]; then
+if [[ $REPO =~ "build-tooling" ]] || [ $REPO = "eks-distro" ]; then
     CHANGED_FILE="tag file(s)"
 elif [[ $REPO =~ "prow-jobs" ]]; then
     CHANGED_FILE="Prowjobs"
@@ -47,7 +47,7 @@ if [[ $REPO =~ "prow-jobs" ]]; then
 fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
-if [ $REPO = "eks-distro-build-tooling" ] || [ $REPO = "eks-distro" ]; then
+if [[ $REPO =~ "build-tooling" ]] || [ $REPO = "eks-distro" ]; then
     $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
     cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
     
