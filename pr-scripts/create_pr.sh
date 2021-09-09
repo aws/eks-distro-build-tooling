@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ fi
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 if [ $REPO = "eks-distro-build-tooling" ] || [ $REPO = "eks-distro" ]; then
-    CHANGED_FILE="Tag file"
-elif [ $REPO = "eks-distro-prow-jobs" ]; then
-    CHANGED_FILE="Prow jobs"
+    CHANGED_FILE="tag file(s)"
+elif [[ $REPO =~ "prow-jobs" ]]; then
+    CHANGED_FILE="Prowjobs"
 fi
 
 if [ $REPO_OWNER = "aws" ]; then
@@ -41,8 +41,8 @@ else
     ORIGIN_ORG=$REPO_OWNER
 fi
 
-COMMIT_MESSAGE="[PR BOT] Update EKS Distro base image tag(s)"
-if [ $REPO = "eks-distro-prow-jobs" ]; then
+COMMIT_MESSAGE="[PR BOT] Update base image tag file(s)"
+if [[ $REPO =~ "prow-jobs" ]]; then
     COMMIT_MESSAGE="[PR BOT] Update builder-base image tag in Prow jobs"
 fi
 
