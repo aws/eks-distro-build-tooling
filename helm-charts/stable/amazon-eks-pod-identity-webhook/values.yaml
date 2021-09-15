@@ -22,7 +22,7 @@ uninstallJobName: "eks-distro-pod-identity-webhook-cleaner"
 image: placeholder-webhook:fake
 
 # Used for sleep containers as well as to run our job script
-baseImage: public.ecr.aws/amazonlinux/amazonlinux:2 
+baseImage: public.ecr.aws/amazonlinux/amazonlinux:2
 
 # Adding the value for 'sleep' in seconds as a sleep to the deployment to allow for the webhook to be able to talk to kube-apiserver
 # as fargate pods take longer to bootstrap.
@@ -41,3 +41,7 @@ service:
   port: 443
 
 replicaCount: 1
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
