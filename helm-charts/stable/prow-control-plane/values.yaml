@@ -136,5 +136,10 @@ plugins:
         - default # namespace
         prow-presubmits-cluster: # cluster name
         - default # namespace
+    scripts/registry-entrypoint.sh:
+      name: registry-entrypoint
+      clusters:
+        prow-presubmits-cluster: # cluster name
+        - default # namespace
     jobs/**/*.yaml:
       name: job-config
