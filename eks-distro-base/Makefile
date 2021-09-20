@@ -43,7 +43,7 @@ else ifeq ($(VARIANT), minimal-base)
 	BASE_IMAGE=scratch
 endif
 
-# if the image was built, either via this being a pre/post submit jon
+# if the image was built, either via this being a pre/post submit job
 # or a periodic which pushed and created the -pushed file
 # use the current IMAGE_TAG as the tag
 # if not, use the image tag that will be pulled from the TAG_FILE
@@ -73,9 +73,7 @@ buildkit-check:
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
-# to run locally
-# docker run -d --name buildkitd --privileged moby/buildkit:v0.9.0-rootless  
-# docker run -d  --network container:buildkitd   --name registry registry:2
+# see the README.md on how to run these targets locally
 .PHONY: images-%
 images-%: buildkit-check
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \

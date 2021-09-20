@@ -15,15 +15,15 @@ The minimal variants are now recommended where possible.
 
 The minimal image variants were introduced to decrease the landscape of potential security concerns in EKS-D/EKS-A base images.  The majority of container images
 contain and are intended to only run a static golang binary.  These containers can typically use the [minimal-base](./Dockerfile.minimal-base) variant which, similar to upstream's
-[Distroless](https://github.com/GoogleContainerTools/distroless) images contain the bare minimum package set which is tracked in [base](../eks-distro-minimal-packages/linux-amd64/base).
+[Distroless](https://github.com/GoogleContainerTools/distroless) images contain the bare minimum package set which is tracked in [base](../eks-distro-minimal-packages/linux_amd64/base).
 
 [minimal-base-iptables](./Dockerfile.minimal-base-iptables) is intended to be used as the base for kube-proxy in EKS-D in 1.22+ and currently in use as the base
 for [kindnetd](https://github.com/aws/eks-anywhere-build-tooling/blob/main/projects/kubernetes-sigs/kind/images/kindnetd/Dockerfile) in the EKS-A kind node-image.  The list of packages
-is tracked in [iptables](../eks-distro-minimal-packages/linux-amd64/iptables).
+is tracked in [iptables](../eks-distro-minimal-packages/linux_amd64/iptables).
 
 [minimal-base-glibc] is used as the base image for any image which contains golang binaries which are compiled with `CGO_ENABLED=1` or for containers which require other
 standard linux dependencies, such as the iptables variant.  The list of packages
-is tracked in [glibc](../eks-distro-minimal-packages/linux-amd64/glibc).
+is tracked in [glibc](../eks-distro-minimal-packages/linux_amd64/glibc).
 
 It is **strongly** recommended to create container images based on one of the minimal variants whenever possible.  Security updates are checked for daily for these variants just
 like for the standard base.
