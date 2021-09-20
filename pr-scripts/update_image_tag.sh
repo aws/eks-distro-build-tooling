@@ -36,7 +36,9 @@ else
     ORIGIN_ORG=$REPO_OWNER
 fi
 
-cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+REPO_PATH=${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+cp -rf ${SCRIPT_ROOT}/../eks-distro-base-minimal-packages $REPO_PATH
+cd $REPO_PATH
 pwd
 
 for FILE in $(find ./ -type f -name "$FILEPATH"); do
@@ -49,3 +51,4 @@ if [ $REPO = "eks-distro-prow-jobs" ]; then
         $SED -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
     fi
 fi
+

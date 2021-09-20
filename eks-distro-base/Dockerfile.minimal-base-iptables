@@ -1,0 +1,63 @@
+# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Using one multistage Dockerfile since we use buildkit in prow
+# there is no image repo so building images that build on each other 
+# is not supported, unless we do a multistage build like the following
+# where the caching system can be used for subsequent target builds
+
+# *NOTE* we have to limit our number of layers heres because in presubmits there
+# is no overlay fs and we will run out of space quickly
+
+################# BUILDER #####################
+ARG BASE_IMAGE
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as base-iptables-builder
+
+RUN set -x && \
+    # manually "install" systemd to avoid installing the entire dep tree
+    clean_install systemd true true && \
+    # following are from coreutils needed by install scriptlets
+    for cmd in "readlink" "rm"; do cp /usr/bin/$cmd $NEWROOT/usr/bin/; done && \
+    clean_install "conntrack-tools ebtables ipset iptables iptables-nft kmod" && \
+    for cmd in "readlink" "rm"; do rm $NEWROOT/usr/bin/$cmd; done && \
+    # remove bash + systemd and deps
+    remove_package systemd true && \
+    remove_package bash && \
+    cleanup "iptables"
+
+
+################# IPTABLES ####################
+FROM ${BASE_IMAGE} as base-iptables
+COPY --from=base-iptables-builder /newroot /
+
+# AL2 doesn't setup the ip6tables alternative the same as ubuntu/debian
+# which is what the iptables-wrapper script provided by kubernetes expects
+# since kind's entrypoint assumes this adding the alternative
+# adding the alternative for ip6tabels here so the --set calls would work later on as expected
+# https://github.com/kubernetes/release/blob/master/images/build/debian-iptables/buster/iptables-wrapper
+RUN ["update-alternatives", \
+	    "--install", "/usr/sbin/ip6tables", "ip6tables", "/usr/sbin/ip6tables-legacy", "10", \
+        "--slave", "/usr/sbin/ip6tables-restore", "ip6tables-restore", "/usr/sbin/ip6tables-restore-legacy", \
+        "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-save-legacy"]
+
+RUN ["update-alternatives", \
+	    "--install", "/usr/sbin/ip6tables", "ip6tables", "/usr/sbin/ip6tables-nft", "10", \
+        "--slave", "/usr/sbin/ip6tables-restore", "ip6tables-restore", "/usr/sbin/ip6tables-restore-nft", \
+        "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-save-nft"]
+
+
+################# EXPORT ######################
+FROM scratch as base-iptables-export
+COPY --from=base-iptables-builder /tmp/packages/* .
