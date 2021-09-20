@@ -87,6 +87,7 @@ Building the eks-distro-base images locally requires buildkitd running and eithe
 
 1. `docker run -d --name buildkitd --net host --privileged moby/buildkit:v0.9.0-rootless`
 1. `docker run -d --name registry  --net host registry:2`
+1. `export BUILDKIT_HOST=docker-container://buildkitd`
 1. `export DATE_EPOCH=$(date "+%F-%s")`
     * used as the IMAGE_TAG
 1. `IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make build -C eks-distro-base`
