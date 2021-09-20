@@ -30,5 +30,11 @@ fi
 rpm --root $NEWROOT --nodeps $JUSTDB -e $PACKAGES 
 clean_yum
 
-yum --installroot $NEWROOT autoremove -y
+# autoremove does not always look at the full dep tree and sometimes needs to
+# be run multiple times to get everything that can safely be removed
+while ! yum --installroot $NEWROOT autoremove -y | tee /dev/stderr | grep -q 'No Packages marked for removal'
+do
+    :
+done
+
 clean_yum
