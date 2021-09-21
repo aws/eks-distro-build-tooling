@@ -33,6 +33,7 @@ local-images: buildkit-check
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
 		--local context=. \
+		--progress plain \
 		--output type=tar,dest=/tmp/builder-base.tar
 	./update_base_image.sh
 
@@ -45,6 +46,7 @@ images: buildkit-check
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--local dockerfile=./ \
 		--local context=. \
+		--progress plain \
 		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
 	./update_base_image.sh
 

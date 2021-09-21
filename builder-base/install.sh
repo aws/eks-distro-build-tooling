@@ -177,13 +177,17 @@ setupgo() {
     # Removing the last number as we only care about the major version of golang
     local -r majorversion=${version%.*}
     mkdir -p ${GOPATH}/go${majorversion}/bin
-    cp ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG116_VERSION:-1.16.7}"
+# use the go installed using go get
+rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
+ln -s ${GOPATH}/go1.16/bin/go /usr/bin/go
+ln -s ${GOPATH}/go1.16/bin/gofmt /usr/bin/gofmt
 
 # go-licenses doesnt have any release tags, using the latest master
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
@@ -206,3 +210,11 @@ rm -rf node-$NODEJS_VERSION-linux-x64.tar.gz
 cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
 npm install
+
+yum clean all
+rm -rf /var/cache/yum
+go clean --modcache
+# go get leaves the tar around
+find /root/sdk -type f -name 'go*.tar.gz' -delete
+# pip cache
+rm -rf /root/.cache
