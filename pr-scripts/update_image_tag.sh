@@ -51,3 +51,4 @@ if [ $REPO = "eks-distro-prow-jobs" ]; then
         $SED -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
     fi
 fi
+

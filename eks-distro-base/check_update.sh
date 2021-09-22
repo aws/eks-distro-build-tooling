@@ -21,6 +21,10 @@ set -x
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_NAME=$1
+if [[ $IMAGE_NAME == *-builder ]]; then
+    # ignore checking builder images
+    exit 0
+fi
 
 BASE_IMAGE_TAG_FILE="${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE"
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$(cat $BASE_IMAGE_TAG_FILE)

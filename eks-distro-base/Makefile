@@ -3,30 +3,60 @@ SHELL := /bin/bash
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
-BASE_IMAGE?=public.ecr.aws/amazonlinux/amazonlinux:2
-
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-IMAGE_NAME?=eks-distro-base
+IMAGE_NAME?=eks-distro-$(VARIANT)
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
-IMAGE_TARGET=base
 
-DOCKERFILE?=Dockerfile
+VARIANT?=base
+IMAGE_TARGET?=base
+DOCKERFILE?=Dockerfile.$(VARIANT)
+PLATFORMS?=linux/amd64,linux/arm64
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client
-LOCAL_IMAGE_TARGETS=base-local-images $(addprefix minimal-local-images-, $(MINIMAL_VARIANTS))
 IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
 UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 EXPORT_TARGETS=$(addprefix export-minimal-images-, $(MINIMAL_VARIANTS))
 
-ifeq ("$(REPO_OWNER)","")
-    $(error No org information was provided, please set and export REPO_OWNER environment variable. \
-      This is used to raise a pull request against your org after updating tags in the respective files.)
+BASE_IMAGE_NAME?=eks-distro-base
+BUILDER_IMAGE_NAME?=eks-distro-base
+BASE_IMAGE_TAG?=$(IMAGE_TAG)
+
+BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+
+# base and minimal-base use al2 as the base image
+BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
+BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
+
+ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
+	BASE_IMAGE_NAME=eks-distro-minimal-base
+	BUILDER_IMAGE_NAME=eks-distro-minimal-base-builder
+	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_TAG_FILE)
+else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client))
+	BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+	BUILDER_IMAGE_NAME=eks-distro-minimal-base-glibc-builder
+	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_GLIBC_TAG_FILE)
+else ifeq ($(VARIANT), minimal-base)
+	BASE_IMAGE=scratch
 endif
 
+# if the image was built, either via this being a pre/post submit job
+# or a periodic which pushed and created the -pushed file
+# use the current IMAGE_TAG as the tag
+# if not, use the image tag that will be pulled from the TAG_FILE
+# in the previous if/else block
+ifneq ($(VARIANT),$(filter $(VARIANT), base minimal-base))
+	BASE_IMAGE=$(IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
+	BUILDER_IMAGE=$(IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
+	ifeq ($(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit))		
+		BASE_IMAGE_TAG=$(IMAGE_TAG)
+	 else ifeq ($(shell cat $(MAKE_ROOT)/$(BASE_IMAGE_NAME)-pushed), true)		
+	 	BASE_IMAGE_TAG=$(IMAGE_TAG)
+	endif
+endif
 
 ## --------------------------------------
 ## Help
@@ -40,91 +70,47 @@ help: ## Display this help
 buildkit-check:
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
 
-.PHONY: local-images-%
-local-images-%: buildkit-check
-	 ./check_update.sh $(IMAGE_NAME) 
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt filename=$(DOCKERFILE) \
-		--opt platform=linux/amd64 \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--progress plain \
-		--local dockerfile=./ \
-		--local context=. \
-		--opt target=$(IMAGE_TARGET) \
-		--output type=oci,oci-mediatypes=true,name=$(IMAGE),dest=/tmp/$(IMAGE_NAME).tar
 
+# There is no local images target since the minimal images build on each other we need a registry to push to
+# in prow we run a docker registry as a sidecar
+# see the README.md on how to run these targets locally
 .PHONY: images-%
 images-%: buildkit-check
-	if [ "$(JOB_TYPE)" = "postsubmit" ]; then \
+	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./check_update.sh $(IMAGE_NAME) ; \
 	fi
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
 		--opt filename=$(DOCKERFILE) \
-		--opt platform=linux/amd64,linux/arm64 \
+		--opt platform=$(PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
 		--opt target=$(IMAGE_TARGET) \
-		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+		--output $(BUILDKIT_OUTPUT)
 
+# Standard distro-base image build
 .PHONY: base-%
-base-%: %-base
-	$(MAKE) $*-base
+base-%:
+	$(MAKE) $*-base PLATFORMS=$(PLATFORMS)
 
-.PHONY: minimal-local-images-%
-minimal-local-images-%:
-	$(MAKE) local-images-minimal-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
+.PHONY: minimal-images-%
+minimal-images-%:
+	$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
+	$(MAKE) images-minimal-$*-builder VARIANT=minimal-$* IMAGE_TARGET=$*-builder PLATFORMS=$(PLATFORMS) IMAGE_NAME=eks-distro-minimal-$*-builder 
 
 .PHONY: export-minimal-images-%
 export-minimal-images-%:
 	if [ "$(JOB_TYPE)" = "postsubmit" ] || \
 		[ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-$*-pushed)" = "true" ]; then \
-		buildctl \
-			build \
-			--frontend dockerfile.v0 \
-			--opt filename=Dockerfile.minimal \
-			--opt platform=linux/amd64,linux/arm64 \
-			--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-			--progress plain \
-			--local dockerfile=./ \
-			--local context=. \
-			--opt target=$*-export \
-			--output type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages; \
+		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages"; \
 	fi
 
 .PHONY: export-minimal-images
 export-minimal-images: $(EXPORT_TARGETS)
-
-.PHONY: minimal-images-%
-minimal-images-%:
-	$(MAKE) images-minimal-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
-
-
-.PHONY: docker-public-login
-docker-public-login:
-	aws --region us-east-1 ecr-public get-authorization-token --output=text \
-	 --query 'authorizationData.authorizationToken' |  \
-	 base64 --decode | cut -d: -f2 | \
-	 docker login -u AWS --password-stdin https://public.ecr.aws
-
-.PHONY: public-images
-public-images: docker-public-login
-	$(eval REPOSITORY=$(shell aws --region us-east-1 ecr-public describe-registries --query 'registries[*].registryUri' --output text))
-	$(eval IMAGE=$(REPOSITORY)/$(IMAGE_NAME):$(IMAGE_TAG))
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt filename=$(DOCKERFILE) \
-		--opt platform=linux/amd64,linux/arm64 \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--local dockerfile=./ \
-		--local context=. \
-		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
 
 # for local development only
 .PHONY: minimal-base-test
@@ -138,25 +124,12 @@ ecr:
 		--image-tag-mutability IMMUTABLE \
 		--image-scanning-configuration  scanOnPush=true || true
 
-.PHONY: docker
-docker:
-	docker build \
-		-t $(IMAGE) \
-		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
-		--build-arg TARGETARCH=amd64 \
-		--build-arg TARGETOS=linux \
-		-f $(DOCKERFILE) .
-
-.PHONY: docker-push
-docker-push: docker
-	docker push $(IMAGE)
-
 .PHONY: build
-build: $(LOCAL_IMAGE_TARGETS)
+build: PLATFORMS=linux/amd64
+build: $(IMAGE_TARGETS)
 
 .PHONY: release
 release: $(IMAGE_TARGETS)
-
 
 .PHONY: update-%
 update-%:
@@ -179,7 +152,7 @@ minimal-update-%:
 
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr-%
-create-pr-%:
+create-pr-%: ensure-repo-owner
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME); \
 	elif [ "$(shell cat $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)" = "true" ]; then \
@@ -193,6 +166,13 @@ base-create-pr:
 .PHONY: minimal-create-pr-%
 minimal-create-pr-%:
 	$(MAKE) create-pr-$* IMAGE_NAME=eks-distro-minimal-$*
+
+.PHONY: ensure-repo-owner
+ensure-repo-owner:
+ifndef REPO_OWNER
+	$(error No org information was provided, please set and export REPO_OWNER environment variable. \
+	This is used to raise a pull request against your org after updating tags in the respective files.)
+endif
 
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
@@ -210,23 +190,15 @@ all: release
 ## --------------------------------------
 ## Document dynamic build targets
 ## --------------------------------------
-base-local-images: ## Build standard full base image
-minimal-local-images-base: ## Build minimal base image with base-system/ca-certs/user/nsswitch
-minimal-local-images-base-nonroot: ## Build minimal base image nonroot variant
-minimal-local-images-base-glibc: ## Build minimal base image with glibc
-minimal-local-images-base-iptables: ## Build minimal base image with iptables + glibc
-minimal-local-images-base-csi: ## Build minimal base image with common packages needed for csi drivers
-minimal-local-images-base-git: ## Build minimal base image with git + libgit
-minimal-local-images-base-docker-client: ## Build minimal base image with docker client
 
 base-images: ## Build and push standard full base image
 minimal-images-base: ## Build and push minimal base image with base-system/ca-certs/user/nsswitch
 minimal-images-base-nonroot: ## Build and push minimal base image nonroot variant
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
-minimal-local-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
-minimal-local-images-base-git: ## Build and push minimal base image with git + libgit
-minimal-local-images-base-docker-client: ## Build and push minimal base image with docker client
+minimal-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
+minimal-images-base-git: ## Build and push minimal base image with git + libgit
+minimal-images-base-docker-client: ## Build and push minimal base image with docker client
 
 export-minimal-images-base: ## Export packages included in base minimal images
 export-minimal-images-base-nonroot: ## Export packages included in base minimal images
