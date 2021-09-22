@@ -78,7 +78,7 @@ wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_
 sha256sum -c $BASE_DIR/github-cli-checksum
 tar -xzf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
 mv gh_${GITHUB_CLI_VERSION}_linux_amd64/bin/gh /usr/bin
-rm -rf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
+rm -rf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz gh_${GITHUB_CLI_VERSION}_linux_amd64
 
 if [[ "$CI" == "true" ]]; then
     exit
@@ -135,14 +135,6 @@ sha256sum -c $BASE_DIR/goss-checksum
 tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
 rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
 
-BAZEL_VERSION="${BAZEL_VERSION:-4.0.0}"
-wget \
-    --progress dot:giga \
-    https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-$BAZEL_VERSION-linux-x86_64
-sha256sum -c $BASE_DIR/bazel-checksum
-mv bazel-$BAZEL_VERSION-linux-x86_64 /usr/bin/bazel
-chmod +x /usr/bin/bazel
-
 GOVC_VERSION="${GOVC_VERSION:-0.24.0}"
 wget \
     --progress dot:giga \
@@ -185,16 +177,20 @@ setupgo() {
     # Removing the last number as we only care about the major version of golang
     local -r majorversion=${version%.*}
     mkdir -p ${GOPATH}/go${majorversion}/bin
-    cp ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG116_VERSION:-1.16.7}"
+# use the go installed using go get
+rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
+ln -s ${GOPATH}/go1.16/bin/go /usr/bin/go
+ln -s ${GOPATH}/go1.16/bin/gofmt /usr/bin/gofmt
 
 # go-licenses doesnt have any release tags, using the latest master
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20201026145851-73411c8fa237
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
 
 # Install hugo for docs
 HUGOVERSION=0.85.0
@@ -202,15 +198,23 @@ wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_ext
 sha256sum -c ${BASE_DIR}/hugo-checksum
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
-rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz ${BASE_DIR}/hugo-checksum
+rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
 
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}" 
 wget --progress dot:giga \
     https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-x64.tar.gz
-sha256sum -c nodejs-checksum
+sha256sum -c ${BASE_DIR}/nodejs-checksum
 tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-x64.tar.gz node-$NODEJS_VERSION-linux-x64
 rm -rf node-$NODEJS_VERSION-linux-x64.tar.gz
 
 cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
 npm install
+
+yum clean all
+rm -rf /var/cache/yum
+go clean --modcache
+# go get leaves the tar around
+find /root/sdk -type f -name 'go*.tar.gz' -delete
+# pip cache
+rm -rf /root/.cache
