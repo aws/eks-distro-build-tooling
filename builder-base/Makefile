@@ -9,6 +9,7 @@ IMAGE_NAME?=builder-base
 # or the base branch commit hash (postsubmit)
 IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
@@ -47,7 +48,7 @@ images: buildkit-check
 		--local dockerfile=./ \
 		--local context=. \
 		--progress plain \
-		--output type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+		--output type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
 	./update_base_image.sh
 
 # for local development only
