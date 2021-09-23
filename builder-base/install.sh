@@ -25,6 +25,7 @@
 set -e
 set -o pipefail
 set -x
+shopt -s extglob
 
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
@@ -45,15 +46,6 @@ yum install -y \
     unzip \
     wget
 
-wget \
-    --progress dot:giga \
-    https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-unzip awscli-exe-linux-x86_64.zip
-./aws/install
-aws --version
-rm awscli-exe-linux-x86_64.zip
-rm -rf /aws
-
 GOLANG_VERSION="${GOLANG_VERSION:-1.16.7}"
 wget \
     --progress dot:giga \
@@ -64,6 +56,20 @@ sha256sum -c $BASE_DIR/golang-checksum
 tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
+
+# go-licenses doesnt have any release tags, using the latest master
+# intentionally installing this very early to catch if goproxy is going to be issue
+# such if running in a an env where proxy.golang.org is blocked
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
+
+wget \
+    --progress dot:giga \
+    https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+unzip awscli-exe-linux-x86_64.zip
+./aws/install
+aws --version
+rm awscli-exe-linux-x86_64.zip
+rm -rf /aws
 
 BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
 wget \
@@ -97,7 +103,6 @@ yum install -y \
     gettext \
     jq \
     less \
-    man \
     openssh-clients \
     procps-ng \
     python3-pip \
@@ -178,19 +183,23 @@ setupgo() {
     local -r majorversion=${version%.*}
     mkdir -p ${GOPATH}/go${majorversion}/bin
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
+    # Removing the source code and other files from GOROOT for each version
+    rm -rf /root/sdk/${version}/!(bin/pkg)
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG116_VERSION:-1.16.7}"
+GOLANG_LATEST_MAJOR="1.16"
+
+shopt -u extglob
+
 # use the go installed using go get
 rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
-ln -s ${GOPATH}/go1.16/bin/go /usr/bin/go
-ln -s ${GOPATH}/go1.16/bin/gofmt /usr/bin/gofmt
-
-# go-licenses doesnt have any release tags, using the latest master
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
+ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/go /usr/bin/go
+ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
 
 # Install hugo for docs
 HUGOVERSION=0.85.0
@@ -218,3 +227,7 @@ go clean --modcache
 find /root/sdk -type f -name 'go*.tar.gz' -delete
 # pip cache
 rm -rf /root/.cache
+# Removing doc and man files
+find /usr/share/{doc,man} -type f \
+    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+    -delete
