@@ -183,7 +183,7 @@ setupgo() {
     local -r majorversion=${version%.*}
     mkdir -p ${GOPATH}/go${majorversion}/bin
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
-    ln -s /root/sdk/${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
+    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
     # Removing the source code and other files from GOROOT for each version
     rm -rf /root/sdk/${version}/!(bin/pkg)
 }
