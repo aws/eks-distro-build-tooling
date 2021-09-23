@@ -15,6 +15,8 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
+ARG GOPROXY
+
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 
@@ -30,7 +32,8 @@ COPY generate-attribution/package*.json \
     generate-attribution/LICENSE-2.0.txt \ 
     /opt/generate-attribution/
 
-RUN bash /opt/install.sh && \
+RUN export GOPROXY=${GOPROXY} && \
+    bash /opt/install.sh && \
     rm /opt/install.sh /*-checksum
 
 WORKDIR /go/src/github.com/aws/eks-distro

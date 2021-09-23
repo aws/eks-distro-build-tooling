@@ -11,6 +11,8 @@ IMAGE_TAG?=latest
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
+BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
+
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 .PHONY: buildkit-check
@@ -26,18 +28,9 @@ remove-generate-attribution:
 	rm -rf ./generate-attribution
 
 .PHONY: local-images
-local-images: buildkit-check
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt platform=linux/amd64 \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--local dockerfile=./ \
-		--local context=. \
-		--progress plain \
-		--output type=tar,dest=/tmp/builder-base.tar
-	./update_base_image.sh
-
+local-images: BUILDKIT_OUTPUT=type=tar,dest=/tmp/builder-base.tar
+local-images: images
+	
 .PHONY: images
 images: buildkit-check
 	buildctl \
@@ -45,10 +38,11 @@ images: buildkit-check
 		--frontend dockerfile.v0 \
 		--opt platform=linux/amd64 \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--local dockerfile=./ \
 		--local context=. \
 		--progress plain \
-		--output type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
+		--output $(BUILDKIT_OUTPUT)
 	./update_base_image.sh
 
 # for local development only
