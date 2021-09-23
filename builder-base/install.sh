@@ -25,6 +25,7 @@
 set -e
 set -o pipefail
 set -x
+shopt -s extglob
 
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
@@ -97,7 +98,6 @@ yum install -y \
     gettext \
     jq \
     less \
-    man \
     openssh-clients \
     procps-ng \
     python3-pip \
@@ -178,16 +178,20 @@ setupgo() {
     local -r majorversion=${version%.*}
     mkdir -p ${GOPATH}/go${majorversion}/bin
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+    # Removing the source code and other files from GOROOT for each version
+    rm -rf /root/sdk/${version}/!(bin/pkg)
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG116_VERSION:-1.16.7}"
+
+shopt -u extglob
+
 # use the go installed using go get
-rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
+rm -rf /usr/local/go /usr/bin/go
 ln -s ${GOPATH}/go1.16/bin/go /usr/bin/go
-ln -s ${GOPATH}/go1.16/bin/gofmt /usr/bin/gofmt
 
 # go-licenses doesnt have any release tags, using the latest master
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
@@ -218,3 +222,7 @@ go clean --modcache
 find /root/sdk -type f -name 'go*.tar.gz' -delete
 # pip cache
 rm -rf /root/.cache
+# Removing doc and man files
+find /usr/share/{doc,man} -type f \
+    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+    -delete
