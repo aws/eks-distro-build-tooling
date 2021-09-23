@@ -57,11 +57,6 @@ tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
 
-# go-licenses doesnt have any release tags, using the latest master
-# intentionally installing this very early to catch if goproxy is going to be issue
-# such if running in a an env where proxy.golang.org is blocked
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
-
 wget \
     --progress dot:giga \
     https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
@@ -184,8 +179,6 @@ setupgo() {
     mkdir -p ${GOPATH}/go${majorversion}/bin
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
     ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
-    # Removing the source code and other files from GOROOT for each version
-    rm -rf /root/sdk/${version}/!(bin/pkg)
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
@@ -200,6 +193,13 @@ shopt -u extglob
 rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/go /usr/bin/go
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
+
+# go-licenses doesnt have any release tags, using the latest master
+# installing go-licenses has to happen after we have set the main go 
+# to symlink to the one in /root/sdk due to ensure go-licenses gets built
+# with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
+# to properly find core go packages
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
 
 # Install hugo for docs
 HUGOVERSION=0.85.0
