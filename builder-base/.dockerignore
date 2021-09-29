@@ -1,0 +1,5 @@
+.dockerignore
+.gitignore
+Dockerfile
+README.md
+update_base_image.sh
