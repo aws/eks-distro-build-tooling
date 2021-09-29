@@ -20,10 +20,7 @@ ARG GOPROXY
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 
-COPY *-checksum /
-COPY buildkit.sh /buildkit.sh
-COPY docker.sh /docker.sh
-COPY install.sh /opt/install.sh
+COPY *-checksum *.sh /
 
 # attribution generation support
 COPY generate-attribution/package*.json \
@@ -33,7 +30,7 @@ COPY generate-attribution/package*.json \
     /opt/generate-attribution/
 
 RUN export GOPROXY=${GOPROXY} && \
-    bash /opt/install.sh && \
-    rm /opt/install.sh /*-checksum
+    bash /install.sh && \
+    rm /install.sh /*-checksum
 
 WORKDIR /go/src/github.com/aws/eks-distro

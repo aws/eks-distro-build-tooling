@@ -221,7 +221,8 @@ ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
 npm install
 
 yum clean all
-rm -rf /var/cache/yum
+rm -rf /var/cache/{amzn2extras,yum,ldconfig}
+find /var/log -type f | while read file; do echo -ne '' > $file; done
 go clean --modcache
 # go get leaves the tar around
 find /root/sdk -type f -name 'go*.tar.gz' -delete
