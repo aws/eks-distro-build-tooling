@@ -148,7 +148,7 @@ base-update:
 
 .PHONY: minimal-update-%
 minimal-update-%:
-	$(MAKE) update-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
+	$(MAKE) update-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal-$* IMAGE_TARGET=$*
 
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr-%
