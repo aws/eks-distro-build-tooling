@@ -132,11 +132,12 @@ build: $(IMAGE_TARGETS)
 release: $(IMAGE_TARGETS)
 
 .PHONY: update-%
+update-%: UPDATE_TARGET?=images-$*
 update-%:
 	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
 	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
-		source $(MAKE_ROOT)/../scripts/setup_public_ecr_push.sh && $(MAKE) images-$*; \
+		$(MAKE) $(UPDATE_TARGET); \
 		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
 	elif [ $(RETURN_MESSAGE) = "Error" ]; then \
 		exit 1; \
@@ -148,7 +149,7 @@ base-update:
 
 .PHONY: minimal-update-%
 minimal-update-%:
-	$(MAKE) update-$* IMAGE_NAME=eks-distro-minimal-$* DOCKERFILE=Dockerfile.minimal IMAGE_TARGET=$*
+	$(MAKE) update-$* UPDATE_TARGET=minimal-images-$*
 
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr-%
