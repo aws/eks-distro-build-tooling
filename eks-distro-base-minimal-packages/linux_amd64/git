@@ -1,7 +1,7 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.x86_64
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2020.2.41-70.0.amzn2.0.1.noarch
+ca-certificates-2021.2.50-72.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 cyrus-sasl-lib-2.1.26-23.amzn2.x86_64
 expat-2.1.0-12.amzn2.x86_64

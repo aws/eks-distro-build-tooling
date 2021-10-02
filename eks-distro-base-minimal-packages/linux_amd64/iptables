@@ -1,5 +1,5 @@
 basesystem-10.0-7.amzn2.0.1.noarch
-ca-certificates-2020.2.41-70.0.amzn2.0.1.noarch
+ca-certificates-2021.2.50-72.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 conntrack-tools-1.4.4-5.amzn2.2.x86_64
 ebtables-2.0.10-16.amzn2.0.1.x86_64
