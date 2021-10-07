@@ -99,7 +99,7 @@ yum install -y \
     jq \
     less \
     openssh-clients \
-	openssl \
+    openssl \
     procps-ng \
     python3-pip \
     rsync \
