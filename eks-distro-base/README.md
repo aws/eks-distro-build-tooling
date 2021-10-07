@@ -30,23 +30,23 @@ like for the standard base.
 
 ### Design
 
-The minimal variants are created using multistage builds and `yum --installroot` and `rpm --root` to install packages into `/newroot` which is copied in the final image based on scratch.
-An opinionated approach is taken in deciding the final package set which make up these images.  In some cases dependencies defined in the various package's rpm config explicitly excluded.
-As an example, `systemd` is a dependency of `ebtables` in the iptables variant, but since the image(s) based on this variant are not actually running systemd it along with its
-dependencies are explicitly excluded from the final image.  Another example, `bash` does not exist in most of the minimal variants, however it is a dependency of glibc (and vice-versa), but 
-it is also explicitly excluded.  Packages like this are excluded by manually installing the rpm into the rpm database before yum installing desired packages.  There will be warnings when running
-yum, but it will not install the excluded package or dependencies not needed by other packages being installed.  This is handled by [clean_install](./scripts/clean_install).
+The minimal variants are created using multistage builds and `yum --installroot` and `rpm --root` to install packages into `/newroot` which is copied in the final image based on `scratch`.
+An opinionated approach is taken in deciding the final package set which make up these images.  In some cases, dependencies defined in the various packages' `rpm` config are explicitly excluded.
+As an example, `systemd` is a dependency of `ebtables` in the iptables variant, but since the image(s) based on this variant are not actually running systemd, it is explicitly excluded from the final image, along with its
+dependencies.  Similarly, `bash` does not exist in most of the minimal variants, however it is a dependency of `glibc` (and vice-versa), but 
+it is also explicitly removed.  Packages like these are excluded by manually installing the rpm into the rpm database before running `yum install` for each of the desired packages.  There will be warnings when running
+yum, but it will not install the excluded package or dependencies not required by other packages being installed.  This is handled by [clean_install](./scripts/clean_install).
 
-Some packages depend on core utils (ex: gawk, grep, sed) during their rpm preinstall phase.  For these cases the dependent packages are either explicitly installed ahead of time or allowed to be installed
-with yum installs the desired packages.  These utilities are then removed before creating the final image.
+Some packages depend on core utils (ex: gawk, grep, sed) during their rpm pre-install phase.  For these cases, the dependent packages are either explicitly installed ahead of time or allowed to be installed
+with `yum install` for each of the desired packages.  These utilities are then removed before creating the final image.
 
-The final image contains a rpm database created during the builder stage of the builds.  These rpm database contain the list of packages which were either install via yum or rpm directly.
+The final image contains a rpm database created during the builder stage of the builds.  These rpm databases contain the list of packages which were either install via `yum` or `rpm` directly.
 The rpm database is included to support common container scanning processes, including ECR's automated scanning.  The list of packages in each image is checked into to this repo and kept up
 to date via periodic prow jobs.  These files can found at [eks-distro-minimal-packages](../eks-distro-minimal-packages) for both the linux/amd64 and linux/arm64 builds.
 
 ### Creating new images
 
-Creating new images based off minimal variants where new packages are necessary will require a mulitstage build using the builder images which are also pushed to [ECR](https://gallery.ecr.aws/eks-distro-build-tooling].
+Creating new images based off minimal variants where new packages are necessary will require a multi-stage build using the builder images which are also pushed to [ECR](https://gallery.ecr.aws/eks-distro-build-tooling].
 To ensure consistency and proper cleanup during install and removal of packages, the [scripts](./scripts) are added to `/usr/bin` and are used extensively throughout the variant Dockerfiles.
 As an example, creating a new image which requires `tar`:
 
@@ -83,7 +83,7 @@ buildctl \
 
 ## Building locally
 
-Building the eks-distro-base images locally requires buildkitd running and either a local registry or a publicly accessible registry, such as ECR.  To build the images using a local registry:
+Building the eks-distro-base images locally requires `buildkitd` running and either a local registry or a publicly accessible registry, such as ECR.  To build the images using a local registry:
 
 1. `docker run -d --name buildkitd --net host --privileged moby/buildkit:v0.9.0-rootless`
 1. `docker run -d --name registry  --net host registry:2`
