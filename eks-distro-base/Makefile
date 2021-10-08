@@ -7,6 +7,7 @@ IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=eks-distro-$(VARIANT)
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+LATEST_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 VARIANT?=base
 IMAGE_TARGET?=base
@@ -25,7 +26,7 @@ BASE_IMAGE_NAME?=eks-distro-base
 BUILDER_IMAGE_NAME?=eks-distro-base
 BASE_IMAGE_TAG?=$(IMAGE_TAG)
 
-BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,name=$(IMAGE),push=true
+BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
 
 # base and minimal-base use al2 as the base image
 BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
