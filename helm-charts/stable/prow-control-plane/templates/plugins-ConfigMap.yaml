@@ -34,7 +34,9 @@ data:
       - invalidcommitmsg
       - label
       - lgtm
+      - lifecycle
       - milestone
+      - needs-rebase
       - size
       - trigger
       - verify-owners
