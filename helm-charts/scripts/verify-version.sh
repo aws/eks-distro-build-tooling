@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2020 Amazon.com Inc. or its affiliates. All Rights Reserved.
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,9 +34,21 @@ for d in */; do
   else
     CURR_VERSION=$(grep "version:" $d/Chart.yaml | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+")
     PREV_VERSION=$(git show ${PREV_RELEASE_HASH}:helm-charts/stable/${d}Chart.yaml | grep "version:" | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+")
+    TEMPLATES_CHANGED=false
     if [ "${CURR_VERSION}" = "${PREV_VERSION}" ]; then
-      echo "❌ $d has the same Chart version as the last release $PREV_VERSION"
-      EXIT_CODE=1
+      for file in $d/templates/* $d/values.yaml; do
+        CHANGED_LINES=$(git show -U0 $file | grep '^[+-]' | grep -Ev '^(--- a/|\+\+\+ b/|\+#|-#)' || true)
+        if [ "$CHANGED_LINES" != "" ]; then
+          TEMPLATES_CHANGED=true
+          break
+        fi
+      done
+      if [ "$TEMPLATES_CHANGED" = "true" ]; then
+        echo "❌ $d has the same Chart version as the last release $PREV_VERSION, but templates have been modified"
+        EXIT_CODE=1
+      else
+        echo "✅ $d has the same Chart version as the last release $PREV_VERSION and templates have not been modified"
+      fi
     else 
       echo "✅ $d has a different version since the last release ($PREV_VERSION -> $CURR_VERSION)"
     fi
