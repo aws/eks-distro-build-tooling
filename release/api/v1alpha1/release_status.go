@@ -79,8 +79,13 @@ type AssetArchive struct {
 	// The sha256 of the asset, only applies for 'file' store
 	SHA256 string `json:"sha256,omitempty"`
 }
+
 type AssetImage struct {
 	// +kubebuilder:validation:Required
 	// The image repository, name, and tag
 	URI string `json:"uri,omitempty"`
+
+	// +kubebuilder:validation:Required
+	// SHA256 digest for the image
+	ImageDigest string `json:"imageDigest,omitempty"`
 }
