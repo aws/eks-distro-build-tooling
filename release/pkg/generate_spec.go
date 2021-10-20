@@ -15,9 +15,13 @@
 package pkg
 
 import (
+	"fmt"
 	"net/url"
+	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/ecrpublic"
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 	"github.com/pkg/errors"
 )
@@ -31,9 +35,9 @@ type ReleaseConfig struct {
 	ReleaseDate              time.Time
 }
 
-// UpdateReleaseStatus returns a release struct
-func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release) error {
-	components := []distrov1alpha1.Component{}
+// GenerateComponentsTable generates a table of EKS-D components
+func (r *ReleaseConfig) GenerateComponentsTable(release *distrov1alpha1.Release) (map[string]*distrov1alpha1.Component, error) {
+	componentsTable := map[string]*distrov1alpha1.Component{}
 	componentFuncs := map[string]func(distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error){
 		"kubernetes":            r.GetKubernetesComponent,
 		"aws-iam-authenticator": r.GetAuthenticatorComponent,
@@ -48,12 +52,21 @@ func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release) err
 		"etcd":                  r.GetEtcdComponent,
 		"coredns":               r.GetCorednsComponent,
 	}
-
 	for componentName, componentFunc := range componentFuncs {
 		component, err := componentFunc(release.Spec)
 		if err != nil {
-			return errors.Wrapf(err, "Error getting %s components", componentName)
+			return nil, errors.Wrapf(err, "Error getting %s components", componentName)
 		}
+		componentsTable[componentName] = component
+	}
+
+	return componentsTable, nil
+}
+
+// UpdateReleaseStatus returns a release struct
+func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release, componentsTable map[string]*distrov1alpha1.Component) error {
+	components := []distrov1alpha1.Component{}
+	for _, component := range componentsTable {
 		components = append(components, *component)
 	}
 
@@ -61,6 +74,45 @@ func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release) err
 		Date:       r.ReleaseDate.Format(time.RFC3339),
 		Components: components,
 	}
+	return nil
+}
+
+func UpdateImageDigests(ecrPublicClient *ecrpublic.ECRPublic, r *ReleaseConfig, componentsTable map[string]*distrov1alpha1.Component) error {
+	fmt.Println("============================================================")
+	fmt.Println("                 Updating Image Digests                     ")
+	fmt.Println("============================================================")
+
+	for _, component := range componentsTable {
+		componentDer := *component
+		assets := componentDer.Assets
+		for _, asset := range assets {
+			if asset.Image != nil {
+				var imageTag string
+				releaseUriSplit := strings.Split(asset.Image.URI, ":")
+				repoName := strings.Replace(releaseUriSplit[0], r.ContainerImageRepository+"/", "", -1)
+				imageTag = releaseUriSplit[1]
+				describeImagesOutput, err := ecrPublicClient.DescribeImages(
+					&ecrpublic.DescribeImagesInput{
+						ImageIds: []*ecrpublic.ImageIdentifier{
+							{
+								ImageTag: aws.String(imageTag),
+							},
+						},
+						RepositoryName: aws.String(repoName),
+					},
+				)
+				if err != nil {
+					return errors.Cause(err)
+				}
+
+				imageDigest := describeImagesOutput.ImageDetails[0].ImageDigest
+
+				asset.Image.ImageDigest = *imageDigest
+				fmt.Printf("Image digest for %s - %s\n", asset.Image.URI, *imageDigest)
+			}
+		}
+	}
+
 	return nil
 }
 

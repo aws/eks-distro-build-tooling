@@ -107,6 +107,9 @@ spec:
                           type: string
                         image:
                           properties:
+                            imageDigest:
+                              description: SHA256 digest for the image
+                              type: string
                             uri:
                               description: The image repository, name, and tag
                               type: string
