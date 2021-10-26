@@ -17,15 +17,14 @@
 # building the builder-base as well as into the builder-base itself
 # Note: since we run the build in fargate we do not have access to an overlayfs
 # so we use a single script from the dockerfile instead of layers to avoid
-# layer duplicate and running out of disk space 
+# layer duplicate and running out of disk space
 # This does make local builds painful.  Its recommended to add new additions
-# in their own script/layer while testing and then when you are done add 
+# in their own script/layer while testing and then when you are done add
 # to here
 
 set -e
 set -o pipefail
 set -x
-shopt -s extglob
 
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
@@ -93,13 +92,17 @@ mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 yum install -y \
     bind-utils \
     curl \
+    device-mapper-devel \
     docker \
     gcc \
     gettext \
+    gpgme-devel \
     jq \
     less \
+    libassuan-devel \
     openssh-clients \
     openssl \
+    pkgconfig \
     procps-ng \
     python3-pip \
     rsync \
@@ -157,14 +160,13 @@ rm yq_linux_amd64.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
-wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz 
+wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz
 tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
 sha256sum -c $BASE_DIR/bash-checksum
-
 cd bash-$OVERRIDE_BASH_VERSION
 ./configure --prefix=/usr --without-bash-malloc
-make 
-make install 
+make
+make install
 cd ..
 rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
 rm -rf bash-$OVERRIDE_BASH_VERSION
@@ -188,15 +190,13 @@ setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG116_VERSION:-1.16.7}"
 GOLANG_LATEST_MAJOR="1.16"
 
-shopt -u extglob
-
 # use the go installed using go get
 rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/go /usr/bin/go
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
 
 # go-licenses doesnt have any release tags, using the latest master
-# installing go-licenses has to happen after we have set the main go 
+# installing go-licenses has to happen after we have set the main go
 # to symlink to the one in /root/sdk due to ensure go-licenses gets built
 # with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
 # to properly find core go packages
@@ -210,12 +210,21 @@ tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
 rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
 
-NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}" 
+NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
 wget --progress dot:giga \
     https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-x64.tar.gz
 sha256sum -c ${BASE_DIR}/nodejs-checksum
 tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-x64.tar.gz node-$NODEJS_VERSION-linux-x64
 rm -rf node-$NODEJS_VERSION-linux-x64.tar.gz
+
+SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
+git clone https://github.com/containers/skopeo
+cd skopeo
+git checkout $SKOPEO_VERSION
+make bin/skopeo
+mv bin/skopeo /usr/bin/skopeo
+cd ..
+rm -rf skopeo
 
 cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
