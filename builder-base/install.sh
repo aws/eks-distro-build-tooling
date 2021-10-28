@@ -226,6 +226,14 @@ mv bin/skopeo /usr/bin/skopeo
 cd ..
 rm -rf skopeo
 
+HELM_VERSION="${HELM_VERSION:-3.7.1}"
+curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+tar -xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz linux-amd64/helm
+sha256sum -c $BASE_DIR/helm-checksum
+rm -f helm-v${HELM_VERSION}-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/bin/helm
+chmod +x /usr/bin/helm
+
 cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
 npm install
