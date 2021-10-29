@@ -12,6 +12,7 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
+BUILDKIT_PLATFORMS=linux/amd64,linux/arm64
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
@@ -29,6 +30,7 @@ remove-generate-attribution:
 
 .PHONY: local-images
 local-images: BUILDKIT_OUTPUT=type=tar,dest=/tmp/builder-base.tar
+local-images: BUILDKIT_PLATFORMS=linux/amd64
 local-images: images
 	
 .PHONY: images
@@ -36,7 +38,7 @@ images: buildkit-check
 	buildctl \
 		build \
 		--frontend dockerfile.v0 \
-		--opt platform=linux/amd64 \
+		--opt platform=$(BUILDKIT_PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--local dockerfile=./ \

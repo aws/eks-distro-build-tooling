@@ -26,11 +26,14 @@ set -e
 set -o pipefail
 set -x
 
+TARGETARCH=${TARGETARCH:-amd64}
+
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
 if [[ "$CI" == "true" ]]; then
     BASE_DIR=$(pwd)/builder-base
 fi
+
 
 # Only add dependencies needed to build the builder base in this first part
 yum upgrade -y
@@ -50,35 +53,41 @@ wget \
     --progress dot:giga \
     --max-redirect=1 \
     --domains golang.org \
-    https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
-sha256sum -c $BASE_DIR/golang-checksum
-tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
-rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+    https://golang.org/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
+tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 mv /usr/local/go/bin/* /usr/bin/
+
+if [ $TARGETARCH == 'amd64' ]; then 
+    ARCH='x86_64'
+else 
+    ARCH='aarch64'
+fi
 
 wget \
     --progress dot:giga \
-    https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-unzip awscli-exe-linux-x86_64.zip
+    https://awscli.amazonaws.com/awscli-exe-linux-$ARCH.zip
+unzip awscli-exe-linux-$ARCH.zip
 ./aws/install
 aws --version
-rm awscli-exe-linux-x86_64.zip
+rm awscli-exe-linux-$ARCH.zip
 rm -rf /aws
 
 BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
 wget \
     --progress dot:giga \
-    https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
-sha256sum -c $BASE_DIR/buildkit-checksum
-tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
-rm -rf buildkit-$BUILDKIT_VERSION.linux-amd64.tar.gz
+    https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
+tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
 
 GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
-wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
-sha256sum -c $BASE_DIR/github-cli-checksum
-tar -xzf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz
-mv gh_${GITHUB_CLI_VERSION}_linux_amd64/bin/gh /usr/bin
-rm -rf gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz gh_${GITHUB_CLI_VERSION}_linux_amd64
+wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
+tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh /usr/bin
+rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
 
 if [[ "$CI" == "true" ]]; then
     exit
@@ -124,39 +133,21 @@ PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
 rm -rf /usr/sbin/packer
 wget \
     --progress dot:giga \
-    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip
-sha256sum -c $BASE_DIR/packer-checksum
-unzip -o packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/bin
-rm -rf packer_${PACKER_VERSION}_linux_amd64.zip
+    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
+sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
+unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d /usr/bin
+rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 
-useradd -ms /bin/bash -u 1100 imagebuilder
-mkdir -p /home/imagebuilder/.packer.d/plugins
-GOSS_VERSION="${GOSS_VERSION:-3.0.3}"
-wget \
-    --progress dot:giga \
-    https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
-sha256sum -c $BASE_DIR/goss-checksum
-tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
-rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-amd64.tar.gz
-
-GOVC_VERSION="${GOVC_VERSION:-0.24.0}"
-wget \
-    --progress dot:giga \
-    https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/govc_linux_amd64.gz
-sha256sum -c $BASE_DIR/govc-checksum
-gzip -d govc_linux_amd64.gz
-mv govc_linux_amd64 /usr/bin/govc
-chmod +x /usr/bin/govc
 
 # needed to parse eks-d release yaml to get latest artifacts
 YQ_VERSION="${YQ_VERSION:-v4.7.1}"
 wget \
     --progress dot:giga \
-    https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64.tar.gz
-sha256sum -c $BASE_DIR/yq-checksum
-tar -xzf yq_linux_amd64.tar.gz
-mv yq_linux_amd64 /usr/bin/yq
-rm yq_linux_amd64.tar.gz
+    https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
+tar -xzf yq_linux_$TARGETARCH.tar.gz
+mv yq_linux_$TARGETARCH /usr/bin/yq
+rm yq_linux_$TARGETARCH.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
 OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
@@ -202,20 +193,18 @@ ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
 # to properly find core go packages
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
 
-# Install hugo for docs
-HUGOVERSION=0.85.0
-wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
-sha256sum -c ${BASE_DIR}/hugo-checksum
-tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
-mv hugo /usr/bin/hugo
-rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
+if [ $TARGETARCH == 'amd64' ]; then 
+    ARCH='x64'
+else 
+    ARCH='arm64'
+fi
 
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
 wget --progress dot:giga \
-    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-x64.tar.gz
-sha256sum -c ${BASE_DIR}/nodejs-checksum
-tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-x64.tar.gz node-$NODEJS_VERSION-linux-x64
-rm -rf node-$NODEJS_VERSION-linux-x64.tar.gz
+    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-$ARCH.tar.gz
+sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
+tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-$ARCH.tar.gz node-$NODEJS_VERSION-linux-$ARCH
+rm -rf node-$NODEJS_VERSION-linux-$ARCH.tar.gz
 
 SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
 git clone https://github.com/containers/skopeo
@@ -227,11 +216,11 @@ cd ..
 rm -rf skopeo
 
 HELM_VERSION="${HELM_VERSION:-3.7.1}"
-curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
-tar -xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz linux-amd64/helm
-sha256sum -c $BASE_DIR/helm-checksum
-rm -f helm-v${HELM_VERSION}-linux-amd64.tar.gz
-mv linux-amd64/helm /usr/bin/helm
+curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
+tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
+rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+mv linux-$TARGETARCH/helm /usr/bin/helm
 chmod +x /usr/bin/helm
 
 cd /opt/generate-attribution
@@ -250,3 +239,34 @@ rm -rf /root/.cache
 find /usr/share/{doc,man} -type f \
     ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
     -delete
+
+if [ $TARGETARCH == 'arm64' ]; then
+    exit
+fi
+
+useradd -ms /bin/bash -u 1100 imagebuilder
+mkdir -p /home/imagebuilder/.packer.d/plugins
+GOSS_VERSION="${GOSS_VERSION:-3.0.3}"
+wget \
+    --progress dot:giga \
+    https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/goss-$TARGETARCH-checksum
+tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
+rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
+
+GOVC_VERSION="${GOVC_VERSION:-0.24.0}"
+wget \
+    --progress dot:giga \
+    https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/govc_linux_$TARGETARCH.gz
+sha256sum -c $BASE_DIR/govc-$TARGETARCH-checksum
+gzip -d govc_linux_$TARGETARCH.gz
+mv govc_linux_$TARGETARCH /usr/bin/govc
+chmod +x /usr/bin/govc
+
+# Install hugo for docs
+HUGOVERSION=0.85.0
+wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
+tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+mv hugo /usr/bin/hugo
+rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md

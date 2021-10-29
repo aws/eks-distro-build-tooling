@@ -16,6 +16,7 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
 ARG GOPROXY
+ARG TARGETARCH
 
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -30,6 +31,7 @@ COPY generate-attribution/package*.json \
     /opt/generate-attribution/
 
 RUN export GOPROXY=${GOPROXY} && \
+    export TARGETARCH=${TARGETARCH} && \
     bash /install.sh && \
     rm /install.sh /*-checksum
 
