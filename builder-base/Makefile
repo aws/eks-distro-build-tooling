@@ -30,7 +30,7 @@ remove-generate-attribution:
 
 .PHONY: local-images
 local-images: BUILDKIT_OUTPUT=type=tar,dest=/tmp/builder-base.tar
-local-images: BUILDKIT_PLATFORMS=linux/amd64
+#local-images: BUILDKIT_PLATFORMS=linux/amd64
 local-images: images
 	
 .PHONY: images
