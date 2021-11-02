@@ -15,8 +15,6 @@
 package pkg
 
 import (
-	"fmt"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecrpublic"
@@ -25,8 +23,6 @@ import (
 
 // Function to create release clients for dev release
 func (r *ReleaseConfig) CreateDevReleaseClients() (*ecrpublic.ECRPublic, error) {
-	fmt.Println("Creating new dev release client for ECR public")
-
 	// IAD session for eks-d-build-prod-pdx
 	session, err := session.NewSession(&aws.Config{
 		Region: aws.String("us-east-1"),
@@ -36,7 +32,6 @@ func (r *ReleaseConfig) CreateDevReleaseClients() (*ecrpublic.ECRPublic, error) 
 	}
 
 	// Create release ECR Public client
-	fmt.Printf("Release container registry is: %s", r.ContainerImageRepository)
 	ecrPublicClient := ecrpublic.New(session)
 
 	return ecrPublicClient, nil
@@ -44,8 +39,6 @@ func (r *ReleaseConfig) CreateDevReleaseClients() (*ecrpublic.ECRPublic, error) 
 
 // Function to create clients for production release
 func (r *ReleaseConfig) CreateProdReleaseClients() (*ecrpublic.ECRPublic, error) {
-	fmt.Println("Creating new production release client for ECR public")
-
 	// Session for eks-d-artifact-prod-iad
 	session, err := session.NewSessionWithOptions(session.Options{
 		Config: aws.Config{
@@ -58,7 +51,6 @@ func (r *ReleaseConfig) CreateProdReleaseClients() (*ecrpublic.ECRPublic, error)
 	}
 
 	// Create release ECR Public client
-	fmt.Printf("Release container registry is: %s", r.ContainerImageRepository)
 	ecrPublicClient := ecrpublic.New(session)
 
 	return ecrPublicClient, nil
