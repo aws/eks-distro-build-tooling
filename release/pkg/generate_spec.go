@@ -15,7 +15,6 @@
 package pkg
 
 import (
-	"fmt"
 	"net/url"
 	"strings"
 	"time"
@@ -78,10 +77,6 @@ func (r *ReleaseConfig) UpdateReleaseStatus(release *distrov1alpha1.Release, com
 }
 
 func UpdateImageDigests(ecrPublicClient *ecrpublic.ECRPublic, r *ReleaseConfig, componentsTable map[string]*distrov1alpha1.Component) error {
-	fmt.Println("============================================================")
-	fmt.Println("                 Updating Image Digests                     ")
-	fmt.Println("============================================================")
-
 	for _, component := range componentsTable {
 		componentDer := *component
 		assets := componentDer.Assets
@@ -108,7 +103,6 @@ func UpdateImageDigests(ecrPublicClient *ecrpublic.ECRPublic, r *ReleaseConfig, 
 				imageDigest := describeImagesOutput.ImageDetails[0].ImageDigest
 
 				asset.Image.ImageDigest = *imageDigest
-				fmt.Printf("Image digest for %s - %s\n", asset.Image.URI, *imageDigest)
 			}
 		}
 	}
