@@ -111,6 +111,7 @@ yum install -y \
     libassuan-devel \
     openssh-clients \
     openssl \
+    openssl-devel \
     pkgconfig \
     procps-ng \
     python3-pip \
