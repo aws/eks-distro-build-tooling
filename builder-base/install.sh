@@ -163,6 +163,53 @@ cd ..
 rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
 rm -rf bash-$OVERRIDE_BASH_VERSION
 
+# go-licenses doesnt have any release tags, using the latest master
+# installing go-licenses has to happen after we have set the main go
+# to symlink to the one in /root/sdk due to ensure go-licenses gets built
+# with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
+# to properly find core go packages
+GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
+
+if [ $TARGETARCH == 'amd64' ]; then 
+    ARCH='x64'
+else 
+    ARCH='arm64'
+fi
+
+NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
+wget --progress dot:giga \
+    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-$ARCH.tar.gz
+sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
+tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-$ARCH.tar.gz node-$NODEJS_VERSION-linux-$ARCH
+rm -rf node-$NODEJS_VERSION-linux-$ARCH.tar.gz
+
+HELM_VERSION="${HELM_VERSION:-3.7.1}"
+curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
+tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
+rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+mv linux-$TARGETARCH/helm /usr/bin/helm
+chmod +x /usr/bin/helm
+
+cd /opt/generate-attribution
+ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
+npm install
+
+yum clean all
+rm -rf /var/cache/{amzn2extras,yum,ldconfig}
+find /var/log -type f | while read file; do echo -ne '' > $file; done
+go clean --modcache
+# pip cache
+rm -rf /root/.cache
+# Removing doc and man files
+find /usr/share/{doc,man} -type f \
+    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+    -delete
+
+if [ $TARGETARCH == 'arm64' ]; then
+    exit
+fi
+
 # Set up specific go version by using go get, additional versions apart from default can be installed by calling
 # the function again with the specific parameter.
 setupgo() {
@@ -186,64 +233,6 @@ GOLANG_LATEST_MAJOR="1.16"
 rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/go /usr/bin/go
 ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
-
-# go-licenses doesnt have any release tags, using the latest master
-# installing go-licenses has to happen after we have set the main go
-# to symlink to the one in /root/sdk due to ensure go-licenses gets built
-# with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
-# to properly find core go packages
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
-
-if [ $TARGETARCH == 'amd64' ]; then 
-    ARCH='x64'
-else 
-    ARCH='arm64'
-fi
-
-NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
-wget --progress dot:giga \
-    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-$ARCH.tar.gz
-sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
-tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-$ARCH.tar.gz node-$NODEJS_VERSION-linux-$ARCH
-rm -rf node-$NODEJS_VERSION-linux-$ARCH.tar.gz
-
-SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
-git clone https://github.com/containers/skopeo
-cd skopeo
-git checkout $SKOPEO_VERSION
-make bin/skopeo
-mv bin/skopeo /usr/bin/skopeo
-cd ..
-rm -rf skopeo
-
-HELM_VERSION="${HELM_VERSION:-3.7.1}"
-curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
-sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
-tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
-rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
-mv linux-$TARGETARCH/helm /usr/bin/helm
-chmod +x /usr/bin/helm
-
-cd /opt/generate-attribution
-ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
-npm install
-
-yum clean all
-rm -rf /var/cache/{amzn2extras,yum,ldconfig}
-find /var/log -type f | while read file; do echo -ne '' > $file; done
-go clean --modcache
-# go get leaves the tar around
-find /root/sdk -type f -name 'go*.tar.gz' -delete
-# pip cache
-rm -rf /root/.cache
-# Removing doc and man files
-find /usr/share/{doc,man} -type f \
-    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-    -delete
-
-if [ $TARGETARCH == 'arm64' ]; then
-    exit
-fi
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
@@ -271,3 +260,15 @@ sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 mv hugo /usr/bin/hugo
 rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
+
+SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
+git clone https://github.com/containers/skopeo
+cd skopeo
+git checkout $SKOPEO_VERSION
+make bin/skopeo
+mv bin/skopeo /usr/bin/skopeo
+cd ..
+rm -rf skopeo
+
+# go get leaves the tar around
+find /root/sdk -type f -name 'go*.tar.gz' -delete
