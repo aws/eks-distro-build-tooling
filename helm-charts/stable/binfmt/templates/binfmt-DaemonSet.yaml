@@ -1,0 +1,52 @@
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: binfmt
+  labels:
+    app: binfmt
+spec:
+  selector:
+    matchLabels:
+      app: binfmt
+  template:
+    metadata:
+      labels:
+        app: binfmt
+    spec:
+      initContainers:
+      - name: binfmt-installer
+        securityContext:
+          privileged: true
+        imagePullPolicy: Always
+        image: {{ .Values.images.binfmtInstallerImage }}
+        args:
+        - --install
+        - {{ .Values.formats }}
+      containers:
+      - name: binfmt-idle
+        image: {{ .Values.images.binfmtIdleImage }}
+        command:
+        - bash
+        - -c
+        - sleep 10000
+        resources:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "1"
+            memory: "4Gi"
