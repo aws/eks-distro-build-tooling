@@ -49,15 +49,21 @@ yum install -y \
     wget
 
 GOLANG_VERSION="${GOLANG_VERSION:-1.16.7}"
+GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
+GO_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
+mkdir -p ${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
+mkdir -p ${GO_SDK_ROOT}
 wget \
     --progress dot:giga \
     --max-redirect=1 \
     --domains golang.org \
-    https://golang.org/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+    https://golang.org/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
-tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+tar -C ${GO_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
+ln -s /root/sdk/go${GOLANG_VERSION}/bin/go /usr/bin/go
+ln -s /root/sdk/go${GOLANG_VERSION}/bin/gofmt /usr/bin/gofmt
 rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
-mv /usr/local/go/bin/* /usr/bin/
+go env
 
 if [ $TARGETARCH == 'amd64' ]; then 
     ARCH='x86_64'
@@ -74,20 +80,22 @@ aws --version
 rm awscli-exe-linux-$ARCH.zip
 rm -rf /aws
 
-BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
-wget \
-    --progress dot:giga \
-    https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
-sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
-tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
-rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+if [ $TARGETARCH == 'amd64' ]; then
+    BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
+    wget \
+        --progress dot:giga \
+        https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+    sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
+    tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+    rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
 
-GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
-wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
-sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
-tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
-mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh /usr/bin
-rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
+    GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
+    wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+    sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
+    tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+    mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh /usr/bin
+    rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
+fi
 
 if [[ "$CI" == "true" ]]; then
     exit
@@ -119,27 +127,6 @@ yum install -y \
     vim \
     which
 
-# Install image-builder build dependencies
-# Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
-# Symlinking pip3 to pip, to have pip3 commands work successfully
-pip3 install -U pip setuptools
-ln -sf /usr/local/bin/pip /usr/bin/pip3
-ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
-pip3 install "ansible==$ANSIBLE_VERSION"
-
-PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
-pip3 install "pywinrm==$PYWINRM_VERSION"
-
-PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
-rm -rf /usr/sbin/packer
-wget \
-    --progress dot:giga \
-    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
-sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
-unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d /usr/bin
-rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
-
-
 # needed to parse eks-d release yaml to get latest artifacts
 YQ_VERSION="${YQ_VERSION:-v4.7.1}"
 wget \
@@ -163,6 +150,38 @@ cd ..
 rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
 rm -rf bash-$OVERRIDE_BASH_VERSION
 
+yum clean all
+rm -rf /var/cache/{amzn2extras,yum,ldconfig}
+find /var/log -type f | while read file; do echo -ne '' > $file; done
+# Removing doc and man files
+find /usr/share/{doc,man} -type f \
+    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+    -delete
+
+if [ $TARGETARCH == 'arm64' ]; then
+    exit
+fi
+
+# Install image-builder build dependencies
+# Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
+# Symlinking pip3 to pip, to have pip3 commands work successfully
+pip3 install -U pip setuptools
+ln -sf /usr/local/bin/pip /usr/bin/pip3
+ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
+pip3 install "ansible==$ANSIBLE_VERSION"
+
+PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
+pip3 install "pywinrm==$PYWINRM_VERSION"
+
+PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
+rm -rf /usr/sbin/packer
+wget \
+    --progress dot:giga \
+    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
+sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
+unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d /usr/bin
+rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
+
 # go-licenses doesnt have any release tags, using the latest master
 # installing go-licenses has to happen after we have set the main go
 # to symlink to the one in /root/sdk due to ensure go-licenses gets built
@@ -172,8 +191,6 @@ GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c1
 
 if [ $TARGETARCH == 'amd64' ]; then 
     ARCH='x64'
-else 
-    ARCH='arm64'
 fi
 
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
@@ -195,21 +212,6 @@ cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
 npm install
 
-yum clean all
-rm -rf /var/cache/{amzn2extras,yum,ldconfig}
-find /var/log -type f | while read file; do echo -ne '' > $file; done
-go clean --modcache
-# pip cache
-rm -rf /root/.cache
-# Removing doc and man files
-find /usr/share/{doc,man} -type f \
-    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-    -delete
-
-if [ $TARGETARCH == 'arm64' ]; then
-    exit
-fi
-
 # Set up specific go version by using go get, additional versions apart from default can be installed by calling
 # the function again with the specific parameter.
 setupgo() {
@@ -226,13 +228,6 @@ setupgo() {
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.14}"
-setupgo "${GOLANG116_VERSION:-1.16.7}"
-GOLANG_LATEST_MAJOR="1.16"
-
-# use the go installed using go get
-rm -rf /usr/local/go /usr/bin/go /usr/bin/gofmt
-ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/go /usr/bin/go
-ln -s ${GOPATH}/go${GOLANG_LATEST_MAJOR}/bin/gofmt /usr/bin/gofmt
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
@@ -272,3 +267,6 @@ rm -rf skopeo
 
 # go get leaves the tar around
 find /root/sdk -type f -name 'go*.tar.gz' -delete
+go clean --modcache
+# pip cache
+rm -rf /root/.cache
