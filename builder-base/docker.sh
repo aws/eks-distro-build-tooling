@@ -37,6 +37,3 @@ wait::for::dockerd() {
         try=$(expr $try + 1)
     done
 }
-
-start::dockerd
-wait::for::dockerd
