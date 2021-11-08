@@ -27,6 +27,8 @@ set -o pipefail
 set -x
 
 TARGETARCH=${TARGETARCH:-amd64}
+USR_BIN=/usr/bin
+USR_LOCAL_BIN=/usr/local/bin
 
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
@@ -50,20 +52,23 @@ yum install -y \
 
 GOLANG_VERSION="${GOLANG_VERSION:-1.16.7}"
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
-GO_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
-mkdir -p ${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
-mkdir -p ${GO_SDK_ROOT}
+GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
+GOLANG_MAJOR_VERSION_BIN=${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
+mkdir -p ${GOLANG_MAJOR_VERSION_BIN}
+mkdir -p ${GOLANG_SDK_ROOT}
 wget \
     --progress dot:giga \
     --max-redirect=1 \
     --domains golang.org \
     https://golang.org/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
-tar -C ${GO_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
-ln -s /root/sdk/go${GOLANG_VERSION}/bin/go /usr/bin/go
-ln -s /root/sdk/go${GOLANG_VERSION}/bin/gofmt /usr/bin/gofmt
+tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
+for binary in go gofmt; do
+    for symlink_dest in ${USR_BIN} ${GOLANG_MAJOR_VERSION_BIN}; do
+        ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${symlink_dest}/${binary}
+    done
+done
 rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
-go env
 
 if [ $TARGETARCH == 'amd64' ]; then 
     ARCH='x86_64'
@@ -93,7 +98,7 @@ if [ $TARGETARCH == 'amd64' ]; then
     wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
     sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
     tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
-    mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh /usr/bin
+    mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh $USR_BIN
     rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
 fi
 
@@ -134,7 +139,7 @@ wget \
     https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
 tar -xzf yq_linux_$TARGETARCH.tar.gz
-mv yq_linux_$TARGETARCH /usr/bin/yq
+mv yq_linux_$TARGETARCH $USR_BIN/yq
 rm yq_linux_$TARGETARCH.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
@@ -166,7 +171,7 @@ fi
 # Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
 # Symlinking pip3 to pip, to have pip3 commands work successfully
 pip3 install -U pip setuptools
-ln -sf /usr/local/bin/pip /usr/bin/pip3
+ln -sf $USR_LOCAL_BIN/pip $USR_BIN/pip3
 ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
 pip3 install "ansible==$ANSIBLE_VERSION"
 
@@ -179,7 +184,7 @@ wget \
     --progress dot:giga \
     https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
-unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d /usr/bin
+unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_BIN
 rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 
 # go-licenses doesnt have any release tags, using the latest master
@@ -205,11 +210,11 @@ curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
 tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
 rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
-mv linux-$TARGETARCH/helm /usr/bin/helm
-chmod +x /usr/bin/helm
+mv linux-$TARGETARCH/helm $USR_BIN/helm
+chmod +x $USR_BIN/helm
 
 cd /opt/generate-attribution
-ln -s $(pwd)/generate-attribution /usr/bin/generate-attribution
+ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
 npm install
 
 # Set up specific go version by using go get, additional versions apart from default can be installed by calling
@@ -245,15 +250,15 @@ wget \
     https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/govc_linux_$TARGETARCH.gz
 sha256sum -c $BASE_DIR/govc-$TARGETARCH-checksum
 gzip -d govc_linux_$TARGETARCH.gz
-mv govc_linux_$TARGETARCH /usr/bin/govc
-chmod +x /usr/bin/govc
+mv govc_linux_$TARGETARCH $USR_BIN/govc
+chmod +x $USR_BIN/govc
 
 # Install hugo for docs
 HUGOVERSION=0.85.0
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
 sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
 tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
-mv hugo /usr/bin/hugo
+mv hugo $USR_BIN/hugo
 rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
 
 SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
@@ -261,7 +266,7 @@ git clone https://github.com/containers/skopeo
 cd skopeo
 git checkout $SKOPEO_VERSION
 make bin/skopeo
-mv bin/skopeo /usr/bin/skopeo
+mv bin/skopeo $USR_BIN/skopeo
 cd ..
 rm -rf skopeo
 
