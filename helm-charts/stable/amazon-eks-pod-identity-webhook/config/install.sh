@@ -28,18 +28,7 @@ chmod +x /bin/kubectl
 
 CA_BUNDLE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)
 cat /config/mutatingwebhook.yaml | sed -e "s|\${CA_BUNDLE}|${CA_BUNDLE}|g" | sed -e "s|\${WEBHOOK_NAME}|${WEBHOOK_NAME}|g" | sed -e "s|\${NAMESPACE}|${NAMESPACE}|g" | sed -e "s|\${MWC_NAME}|${MWC_NAME}|g" > mutatingwebhook.yaml
-
-# To work around issue when upgrading from 1.18+, removing last applied annotation since it can cause the apply to fail
-if kubectl get mutatingwebhookconfigurations ${MWC_NAME} > /dev/null 2>&1; then
-    kubectl annotate mutatingwebhookconfigurations ${MWC_NAME} kubectl.kubernetes.io/last-applied-configuration-
-fi
-
 kubectl apply -f mutatingwebhook.yaml
-
-# To work around issue when upgrading from 1.18+, removing old csrs that have signerName "kubernetes.io/legacy-unknown" which will not approve in 1.20+
-for c in $(kubectl get csr -o json | jq -r ".items[] | select(.spec.username==\"system:serviceaccount:$NAMESPACE:$WEBHOOK_NAME\" and .spec.signerName==\"kubernetes.io/legacy-unknown\" and .status=={}).metadata.name"); do
-    kubectl delete csr $c
-done
 
 # Loop for a total of 50 seconds to give time for webhook to create CertificateSigningRequest
 # The default hook timeout is 300, but for fargate there is a sleep container before this is run, and with the boot time of fargate containers, we get closer to the timeout if we increase the loop count
