@@ -30,7 +30,7 @@ CA_BUNDLE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w
 cat /config/mutatingwebhook.yaml | sed -e "s|\${CA_BUNDLE}|${CA_BUNDLE}|g" | sed -e "s|\${WEBHOOK_NAME}|${WEBHOOK_NAME}|g" | sed -e "s|\${NAMESPACE}|${NAMESPACE}|g" | sed -e "s|\${MWC_NAME}|${MWC_NAME}|g" > mutatingwebhook.yaml
 
 # To work around issue when upgrading from 1.18+, removing last applied annotation since it can cause the apply to fail
-if kubectl --context mr-prow-presubmit-beta-pdx-admin get mutatingwebhookconfigurations ${MWC_NAME} > /dev/null 2>&1; then
+if kubectl get mutatingwebhookconfigurations ${MWC_NAME} > /dev/null 2>&1; then
     kubectl annotate mutatingwebhookconfigurations ${MWC_NAME} kubectl.kubernetes.io/last-applied-configuration-
 fi
 
