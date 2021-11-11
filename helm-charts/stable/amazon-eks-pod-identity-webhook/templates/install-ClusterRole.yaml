@@ -39,11 +39,17 @@ rules:
   verbs:
   - get
   - list
-  - delete
 - apiGroups:
   - certificates.k8s.io
   resources:
   - certificatesigningrequests/approval
   verbs:
   - update
-  
+- apiGroups:
+  - certificates.k8s.io
+  resourceNames:
+  - kubernetes.io/legacy-unknown
+  resources:
+  - signers
+  verbs:
+  - approve
