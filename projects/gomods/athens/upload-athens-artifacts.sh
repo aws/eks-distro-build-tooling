@@ -26,10 +26,11 @@ source "${ATHENS_ROOT}/../../../helm-charts/scripts/lib.sh"
 BUILD_DIR="$ATHENS_ROOT/build"
 REPO=${1}
 GIT_TAG=${2}
-CHART_BUCKET_NAME=${3}
-BASE_IMAGE=${4}
-IMAGE=${5}
-UPLOAD=${6}
+CHART_VERSION=${3} 
+CHART_BUCKET_NAME=${4}
+BASE_IMAGE=${5}
+IMAGE=${6}
+UPLOAD=${7}
 BUCKET_URL="https://${CHART_BUCKET_NAME}.s3.amazonaws.com"
 sh "${ATHENS_ROOT}/../../../helm-charts/scripts/install-toolchain.sh"
 mkdir -p $BUILD_DIR
@@ -44,6 +45,7 @@ if [[ $UPLOAD == "true" ]]; then
     OUTPUT="push=true"
     TYPE="type=image"
 fi
+
 buildctl build \
   --frontend dockerfile.v0 \
   --opt platform=linux/amd64 \
@@ -52,9 +54,13 @@ buildctl build \
   --local context=. \
   --output $TYPE,oci-mediatypes=true,name=${IMAGE},$OUTPUT
 
+cp -r ${ATHENS_ROOT}/templates/. charts/athens-proxy/templates
+yq eval -i ".version = \"${CHART_VERSION}\"" charts/athens-proxy/Chart.yaml
+${CHART_ROOT}/scripts/lint-charts.sh $(pwd)/charts
+helm package charts/* --destination stable
+
 if [[ $UPLOAD == "true" ]]
 then
-    helm package "charts/"* --destination stable
     set +e
     RETURN_CODE="$(curl --write-out '%{http_code}' --silent --output /dev/null -X HEAD ${BUCKET_URL}/index.yaml)"
     CURL_EXIT_CODE=$?
