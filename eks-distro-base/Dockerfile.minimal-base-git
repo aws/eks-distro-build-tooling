@@ -26,8 +26,8 @@ FROM ${BUILDER_IMAGE} as base-git-builder
 ARG TARGETARCH
 
 ENV CMAKE_VERSION=3.20.2
-ENV LIBSSH2_VERSION=1.9.0
-ENV LIBGIT2_VERSION=1.1.0
+ENV LIBSSH2_VERSION=1.10.0
+ENV LIBGIT2_VERSION=1.1.1
 ENV BUILD_DEPS="gcc gzip install make openssl-devel openssl-libs tar wget"
 
 COPY "${TARGETARCH}-git-checksums" /tmp/checksums
@@ -56,7 +56,7 @@ RUN set -x && \
         https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${TARGETARCH}.tar.gz && \
     wget \
         --progress dot:giga \ 
-        https://github.com/libgit2/libgit2/releases/download/v${LIBGIT2_VERSION}/libgit2-${LIBGIT2_VERSION}.tar.gz && \
+        https://github.com/libgit2/libgit2/archive/refs/tags/v${LIBGIT2_VERSION}.tar.gz -O libgit2-${LIBGIT2_VERSION}.tar.gz && \
     sha256sum -c /tmp/checksums && \
     # al2 provided libssh is out of date and does not work with ssh/github
     tar -xzf libssh2-${LIBSSH2_VERSION}.tar.gz && \
