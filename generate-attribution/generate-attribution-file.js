@@ -327,12 +327,20 @@ async function populateVersionAndModuleFromDep(dependencies) {
         });
 
         if (!found) {
+            let match;
             goListDeps.forEach((goListDep) => {
+                // these matches were found by the prefix match above
+                // find the longest prefix and use that as our module
                 if (isModuleMatch(dep, goListDep, true)) {
-                    handleFound(dep, goListDep, found);
-                    found = true;
+                    if (!match || goListDep.Module.Path.length > match.Module.Path.length) {
+                        match = goListDep;
+                    }                
                 }
             });
+            if (match) {
+                handleFound(dep, match, found);
+                found = true;
+            }
         }
 
         if (!found) {
@@ -347,6 +355,10 @@ async function populateVersionAndModuleFromDep(dependencies) {
 }
 
 async function generateAuthorizationHeader() {
+    if (process.env.GITHUB_TOKEN) {
+        return { headers: { 'Authorization': 'token ' + process.env.GITHUB_TOKEN } };
+    }
+
     const githubTokenFile = "/secrets/github-secrets/token";
     try {
         await fsPromises.access(githubTokenFile);
