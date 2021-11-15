@@ -39,6 +39,9 @@ cd $BUILD_DIR
 git clone $REPO
 cd athens
 git checkout ${GIT_TAG}
+git config user.email prow@amazonaws.com
+git config user.name "Prow Bot"
+git am ${ATHENS_ROOT}/patches/*
 OUTPUT="dest=/tmp/athens.tar"
 TYPE="type=oci"
 if [[ $UPLOAD == "true" ]]; then
@@ -54,7 +57,6 @@ buildctl build \
   --local context=. \
   --output $TYPE,oci-mediatypes=true,name=${IMAGE},$OUTPUT
 
-cp -r ${ATHENS_ROOT}/templates/. charts/athens-proxy/templates
 yq eval -i ".version = \"${CHART_VERSION}\"" charts/athens-proxy/Chart.yaml
 ${CHART_ROOT}/scripts/lint-charts.sh $(pwd)/charts
 helm package charts/* --destination stable
