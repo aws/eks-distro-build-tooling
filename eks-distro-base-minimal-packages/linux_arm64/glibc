@@ -1,9 +1,9 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 ca-certificates-2021.2.50-72.amzn2.0.1.noarch
 filesystem-3.2-25.amzn2.0.4.aarch64
-glibc-2.26-55.amzn2.aarch64
-glibc-common-2.26-55.amzn2.aarch64
-glibc-minimal-langpack-2.26-55.amzn2.aarch64
+glibc-2.26-56.amzn2.aarch64
+glibc-common-2.26-56.amzn2.aarch64
+glibc-minimal-langpack-2.26-56.amzn2.aarch64
 gpg-pubkey-c87f5b1a-593863f8
 libgcc-7.3.1-13.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
@@ -11,5 +11,5 @@ libsepol-2.5-8.1.amzn2.0.2.aarch64
 libstdc++-7.3.1-13.amzn2.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
-system-release-2-13.amzn2.aarch64
+system-release-2-14.amzn2.aarch64
 tzdata-2021a-1.amzn2.noarch
