@@ -47,3 +47,7 @@ spec:
         configMap:
           name: {{ .Values.uninstallJobName }}-configmap
       restartPolicy: OnFailure
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}

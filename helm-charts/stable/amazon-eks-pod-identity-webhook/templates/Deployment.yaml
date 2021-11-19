@@ -63,3 +63,7 @@ spec:
       volumes:
       - name: webhook-certs
         emptyDir: {}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }} 
