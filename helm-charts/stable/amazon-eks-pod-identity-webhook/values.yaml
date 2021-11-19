@@ -41,3 +41,5 @@ service:
   port: 443
 
 replicaCount: 1
+
+affinity: {}
