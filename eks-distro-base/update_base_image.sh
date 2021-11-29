@@ -32,3 +32,6 @@ ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro '.*' $IMAGE_TAG $BAS
 
 ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-anywhere-build-tooling
 ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere-build-tooling '.*' $IMAGE_TAG $BASE_IMAGE_TAG_FILE
+
+${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-anywhere
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere '.*' $IMAGE_TAG $BASE_IMAGE_TAG_FILE
