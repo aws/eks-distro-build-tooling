@@ -59,8 +59,8 @@ mkdir -p ${GOLANG_SDK_ROOT}
 wget \
     --progress dot:giga \
     --max-redirect=1 \
-    --domains golang.org \
-    https://golang.org/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+    --domains go.dev \
+    https://go.dev/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
 tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
 for binary in go gofmt; do
