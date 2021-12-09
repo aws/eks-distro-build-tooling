@@ -50,7 +50,7 @@ yum install -y \
     unzip \
     wget
 
-GOLANG_VERSION="${GOLANG_VERSION:-1.16.7}"
+GOLANG_VERSION="${GOLANG_VERSION:-1.16.12}"
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
 GOLANG_MAJOR_VERSION_BIN=${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
@@ -232,7 +232,8 @@ setupgo() {
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
-setupgo "${GOLANG115_VERSION:-1.15.14}"
+setupgo "${GOLANG115_VERSION:-1.15.15}"
+setupgo "${GOLANG117_VERSION:-1.17.5}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
