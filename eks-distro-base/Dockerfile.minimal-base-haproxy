@@ -73,10 +73,19 @@ RUN set -x && \
     cd /newroot && \
     rpm2cpio /tmp/downloads/gettext*.rpm | cpio -idv ./usr/bin/envsubst
 
+# create haproxy user
+RUN set -x && \
+    cp /newroot/etc/{group,passwd} /etc && \    
+    groupadd -r haproxy && \
+    useradd -r -g haproxy -u 1000 haproxy && \
+    cp /etc/{group,passwd} /newroot/etc
+
 
 ################# HAPORXY ####################
 FROM ${BASE_IMAGE} as base-haproxy
 COPY --from=base-haproxy-builder /newroot /
+
+USER haproxy
 
 
 ################# EXPORT ######################
