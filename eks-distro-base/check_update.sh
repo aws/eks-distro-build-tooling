@@ -27,6 +27,11 @@ if [[ $IMAGE_NAME == *-builder ]]; then
 fi
 
 BASE_IMAGE_TAG_FILE="${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE"
+if [ ! -f $BASE_IMAGE_TAG_FILE ]; then
+    echo "Updates required"
+    exit 0
+fi
+
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$(cat $BASE_IMAGE_TAG_FILE)
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile

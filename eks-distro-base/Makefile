@@ -4,6 +4,7 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 AWS_REGION?=us-west-2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+BASE_IMAGE_REPO?=$(IMAGE_REPO)
 IMAGE_NAME?=eks-distro-$(VARIANT)
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
@@ -16,7 +17,7 @@ PLATFORMS?=linux/amd64,linux/arm64
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
 IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
 UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
@@ -36,10 +37,14 @@ ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
 	BASE_IMAGE_NAME=eks-distro-minimal-base
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-builder
 	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_TAG_FILE)
-else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client))
+else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client minimal-base-nginx minimal-base-haproxy))
 	BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-glibc-builder
 	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_GLIBC_TAG_FILE)
+else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-kind))
+	BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
+	BUILDER_IMAGE_NAME=eks-distro-minimal-base-iptables-builder
+	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_IPTABLES_TAG_FILE)
 else ifeq ($(VARIANT), minimal-base)
 	BASE_IMAGE=scratch
 endif
@@ -50,9 +55,9 @@ endif
 # if not, use the image tag that will be pulled from the TAG_FILE
 # in the previous if/else block
 ifneq ($(VARIANT),$(filter $(VARIANT), base minimal-base))
-	BASE_IMAGE=$(IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
-	BUILDER_IMAGE=$(IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
-	ifeq ($(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit))		
+	BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
+	BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
+	ifneq ($(and $(JOB_TYPE), $(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit)),)
 		BASE_IMAGE_TAG=$(IMAGE_TAG)
 	 else ifeq ($(shell cat $(MAKE_ROOT)/$(BASE_IMAGE_NAME)-pushed), true)		
 	 	BASE_IMAGE_TAG=$(IMAGE_TAG)
@@ -202,6 +207,9 @@ minimal-images-base-iptables: ## Build and push minimal base image with iptables
 minimal-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
 minimal-images-base-git: ## Build and push minimal base image with git + libgit
 minimal-images-base-docker-client: ## Build and push minimal base image with docker client
+minimal-images-base-nginx: ## Build and push minimal base image with nginx for use by eks-anywhere-test
+minimal-images-base-haproxy: ## Build and push minimal base image with haproxy for use by the kind haproxy image
+minimal-images-base-kind: ## Build and push minimal base image with containerd and other deps for the kind base image
 
 export-minimal-images-base: ## Export packages included in base minimal images
 export-minimal-images-base-nonroot: ## Export packages included in base minimal images
@@ -210,6 +218,9 @@ export-minimal-images-base-iptables: ## Export packages included in iptables min
 export-minimal-images-base-csi: ## Export packages included in csi minimal images
 export-minimal-images-base-git: ## Export packages included in git minimal images
 export-minimal-images-base-docker-client: ## Export packages included in docker client minimal images
+export-minimal-images-base-nginx: ## Export packages included in nginx minimal images
+export-minimal-images-base-haproxy: ## Export packages included in haproxy minimal images
+export-minimal-images-base-kind: ## Export packages included in kind minimal images
 
 base-update:  ## Check for out of date packages on standard full base image and push new
 minimal-base-update: ## Check for out of date packages on minimal base image and push new
@@ -219,6 +230,9 @@ minimal-base-iptables-update: ## Check for out of date packages on minimal iptab
 minimal-base-csi-update: ## Check for out of date packages on minimal csi base image and push new
 minimal-base-git-update: ## Check for out of date packages on minimal git base image and push new
 minimal-base-docker-client-update: ## Check for out of date packages on minimal docker client base image and push new
+minimal-base-nginx: ## Check for out of date packages on minimal nginx base image and push new
+minimal-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
+minimal-base-kind: ## Check for out of date packages on minimal kind base image and push new
 
 base-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
@@ -228,3 +242,6 @@ minimal-base-iptables-create-pr: ## Update minimal base iptables image tag if pu
 minimal-base-csi-create-pr: ## Update minimal base csi image tag if pushed
 minimal-base-git-create-pr: ## Update minimal base git image tag if pushed
 minimal-base-docker-client-create-pr: ## Update minimal base docker client image tag if pushed
+minimal-base-nginx-create-pr: ## Update minimal base nginx image tag if pushed
+minimal-base-haproxy-create-pr: ## Update minimal base haproxy image tag if pushed
+minimal-base-kind-create-pr: ## Update minimal base kind image tag if pushed
