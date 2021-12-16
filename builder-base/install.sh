@@ -36,6 +36,7 @@ if [[ "$CI" == "true" ]]; then
     BASE_DIR=$(pwd)/builder-base
 fi
 
+source $BASE_DIR/versions.sh
 
 # Only add dependencies needed to build the builder base in this first part
 yum upgrade -y
@@ -50,7 +51,6 @@ yum install -y \
     unzip \
     wget
 
-GOLANG_VERSION="${GOLANG_VERSION:-1.16.12}"
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
 GOLANG_MAJOR_VERSION_BIN=${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
@@ -60,7 +60,7 @@ wget \
     --progress dot:giga \
     --max-redirect=1 \
     --domains go.dev \
-    https://go.dev/dl/go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+    $GOLANG_DOWNLOAD_URL -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
 tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
 for binary in go gofmt; do
@@ -86,16 +86,14 @@ rm awscli-exe-linux-$ARCH.zip
 rm -rf /aws
 
 if [ $TARGETARCH == 'amd64' ]; then
-    BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.9.0}"
     wget \
         --progress dot:giga \
-        https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+        $BUILDKIT_DOWNLOAD_URL
     sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
     tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
     rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
 
-    GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
-    wget --progress dot:giga https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+    wget --progress dot:giga $GITHUB_CLI_DOWNLOAD_URL
     sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
     tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
     mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh $USR_BIN
@@ -133,18 +131,14 @@ yum install -y \
     which
 
 # needed to parse eks-d release yaml to get latest artifacts
-YQ_VERSION="${YQ_VERSION:-v4.7.1}"
 wget \
     --progress dot:giga \
-    https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH.tar.gz
+    $YQ_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
-tar -xzf yq_linux_$TARGETARCH.tar.gz
 mv yq_linux_$TARGETARCH $USR_BIN/yq
-rm yq_linux_$TARGETARCH.tar.gz
 
 # Bash 4.3 is required to run kubernetes make test
-OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
-wget http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz
+wget $BASH_DOWNLOAD_URL
 tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
 sha256sum -c $BASE_DIR/bash-checksum
 cd bash-$OVERRIDE_BASH_VERSION
@@ -178,11 +172,10 @@ pip3 install "ansible==$ANSIBLE_VERSION"
 PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
 pip3 install "pywinrm==$PYWINRM_VERSION"
 
-PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
 rm -rf /usr/sbin/packer
 wget \
     --progress dot:giga \
-    https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
+    $PACKER_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
 unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_BIN
 rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
@@ -194,19 +187,12 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # to properly find core go packages
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
 
-if [ $TARGETARCH == 'amd64' ]; then 
-    ARCH='x64'
-fi
-
-NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
-wget --progress dot:giga \
-    https://nodejs.org/dist/$NODEJS_VERSION/node-$NODEJS_VERSION-linux-$ARCH.tar.gz
+wget --progress dot:giga $NODEJS_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
-tar -C /usr --strip-components=1 -xzf node-$NODEJS_VERSION-linux-$ARCH.tar.gz node-$NODEJS_VERSION-linux-$ARCH
-rm -rf node-$NODEJS_VERSION-linux-$ARCH.tar.gz
+tar -C /usr --strip-components=1 -xzf $NODEJS_FILENAME $NDOEJS_FOLDER
+rm -rf $NODEJS_FILENAME
 
-HELM_VERSION="${HELM_VERSION:-3.7.1}"
-curl -O https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+curl -O $HELM_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
 tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
 rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
@@ -237,30 +223,28 @@ setupgo "${GOLANG117_VERSION:-1.17.5}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
-GOSS_VERSION="${GOSS_VERSION:-3.0.3}"
 wget \
     --progress dot:giga \
-    https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
+    $GOSS_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/goss-$TARGETARCH-checksum
 tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 
-GOVC_VERSION="${GOVC_VERSION:-0.24.0}"
 wget \
     --progress dot:giga \
-    https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/govc_linux_$TARGETARCH.gz
+    $GOVC_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/govc-$TARGETARCH-checksum
 gzip -d govc_linux_$TARGETARCH.gz
 mv govc_linux_$TARGETARCH $USR_BIN/govc
 chmod +x $USR_BIN/govc
 
 # Install hugo for docs
-HUGOVERSION=0.85.0
-wget https://github.com/gohugoio/hugo/releases/download/v${HUGOVERSION}/hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+
+wget $HUGO_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
-tar -xf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz
+tar -xf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 mv hugo $USR_BIN/hugo
-rm -rf hugo_extended_${HUGOVERSION}_Linux-64bit.tar.gz LICENSE README.md
+rm -rf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz LICENSE README.md
 
 SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
 git clone https://github.com/containers/skopeo
