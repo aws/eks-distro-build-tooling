@@ -66,13 +66,6 @@ RUN set -x && \
     rpm2cpio /tmp/downloads/coreutils*.rpm | cpio -idv ./usr/bin/cp && \
     rpm2cpio /tmp/downloads/coreutils*.rpm | cpio -idv ./usr/bin/mkdir
 
-# envsubst is needed to generate the config, but it comes from the gettext package
-# which pulls in a number of deps, manually installing envsubt from the rpm
-RUN set -x && \
-    yumdownloader --destdir=/tmp/downloads gettext && \
-    cd /newroot && \
-    rpm2cpio /tmp/downloads/gettext*.rpm | cpio -idv ./usr/bin/envsubst
-
 # create haproxy user
 RUN set -x && \
     cp /newroot/etc/{group,passwd} /etc && \    
