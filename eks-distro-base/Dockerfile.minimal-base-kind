@@ -31,7 +31,13 @@ FROM ${BUILDER_IMAGE} as base-kind-builder
 # will contain yum and the eks-anwyhere build can instal additional packages as neccessary
 # the intent is for the yum installs downstream are no-ops
 RUN set -x && \
-    clean_install "bash conntrack containerd curl ethtool hostname iproute nfs-utils pigz procps rsync seccomp2 socat systemd tar udev util-linux which" && \
+    amazon-linux-extras enable docker && \
+    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo && \
+    # some of the install scriptlets need coreutils but the dep ordering
+    # doesnt reflect, install manually to make sure its first
+    clean_install coreutils && \
+    clean_install findutils && \
+    clean_install "amazon-linux-extras containerd curl ethtool hostname iproute nfs-utils pigz procps rsync seccomp2 socat systemd tar udev util-linux which yum" && \
     cleanup "kind"
 
 
