@@ -136,6 +136,7 @@ wget \
     $YQ_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
 mv yq_linux_$TARGETARCH $USR_BIN/yq
+chmod +x $USR_BIN/yq
 
 # Bash 4.3 is required to run kubernetes make test
 wget $BASH_DOWNLOAD_URL
