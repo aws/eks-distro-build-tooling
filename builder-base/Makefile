@@ -12,7 +12,7 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
-BUILDKIT_PLATFORMS=linux/amd64,linux/arm64
+BUILDKIT_PLATFORMS?=linux/amd64,linux/arm64
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 

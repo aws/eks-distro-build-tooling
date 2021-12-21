@@ -51,10 +51,19 @@ yum install -y \
     unzip \
     wget
 
-GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
+symlink_golang() {
+    local -r version=$1
+
+    # Removing the last number as we only care about the major version of golang
+    local -r majorversion=${version%.*}
+    mkdir -p ${GOPATH}/go${majorversion}/bin
+    for binary in go gofmt; do
+        ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
+    done
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+}
+
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
-GOLANG_MAJOR_VERSION_BIN=${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
-mkdir -p ${GOLANG_MAJOR_VERSION_BIN}
 mkdir -p ${GOLANG_SDK_ROOT}
 wget \
     --progress dot:giga \
@@ -64,10 +73,12 @@ wget \
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
 tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
 for binary in go gofmt; do
-    for symlink_dest in ${USR_BIN} ${GOLANG_MAJOR_VERSION_BIN}; do
-        ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${symlink_dest}/${binary}
-    done
+    ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${USR_BIN}/${binary}
 done
+mkdir -p ${GOPATH}/bin
+ln -s /root/sdk/go${GOLANG_VERSION}/bin/go ${GOPATH}/bin/go${GOLANG_VERSION}
+symlink_golang ${GOLANG_VERSION}
+
 rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 
 if [ $TARGETARCH == 'amd64' ]; then 
@@ -128,7 +139,8 @@ yum install -y \
     python3-pip \
     rsync \
     vim \
-    which
+    which \
+    yum-utils
 
 # needed to parse eks-d release yaml to get latest artifacts
 wget \
@@ -207,19 +219,48 @@ npm install
 # Set up specific go version by using go get, additional versions apart from default can be installed by calling
 # the function again with the specific parameter.
 setupgo() {
-    local -r version=$1
-    go get golang.org/dl/go${version}
-    go${version} download
-    # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
-    mkdir -p ${GOPATH}/go${majorversion}/bin
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
-    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
+    local version=$1
+
+    # AL2 provides a longer supported version of golang, currently this is
+    # 1.15, pull this verison instead of from upstream
+    local -r al2_provided_version=1.15
+
+    if [ "${version%.*}" = "$al2_provided_version" ]; then
+        # Do not install rpm directly instead follow eks-distro base images pattern
+        # of downloading and install rpms directly
+        yumdownloader --destdir=/tmp -x "*.i686" golang golang-bin golang-docs golang-misc golang-src golang-tests
+        mkdir -p /tmp/go-extracted
+        
+        for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
+        
+        local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
+        if [[ "${golang_version%.*}" != "go$al2_provided_version" ]]; then
+            echo "al2 provided golang version does not match expected: $al2_provided_version. Script needs updating!"
+            exit 1
+        fi
+
+        mkdir -p /root/sdk/$golang_version
+        mv /tmp/go-extracted/usr/share/doc/golang-*/* /tmp/go-extracted/usr/lib/golang/
+        mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
+
+        rm -rf /tmp/go-extracted /tmp/golang-*.rpm
+
+        version=$(echo "$golang_version" | grep -o "[0-9].*")
+
+        ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
+    else
+        go get golang.org/dl/go${version}
+        go${version} download
+    fi
+
+    symlink_golang $version
 }
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
-setupgo "${GOLANG115_VERSION:-1.15.15}"
+# Since this verison is coming from yum the patch version is ignored
+# and should not be assumed to be the source of truth
+setupgo "${GOLANG115_VERSION:-1.15.14}"
 setupgo "${GOLANG117_VERSION:-1.17.5}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
