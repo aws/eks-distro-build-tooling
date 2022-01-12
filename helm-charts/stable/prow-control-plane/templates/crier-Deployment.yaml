@@ -56,6 +56,7 @@ spec:
         - --github-token-path=/etc/github/token
         - --github-workers=10
         - --kubernetes-blob-storage-workers=10
+        - --kubeconfig=/etc/kubeconfig/config
         volumeMounts:
         - name: config
           mountPath: /etc/config
@@ -69,6 +70,24 @@ spec:
         - name: s3-credentials
           mountPath: /etc/s3-credentials
           readOnly: true
+        - name: kubeconfig
+          mountPath: /etc/kubeconfig
+          readOnly: true
+        - name: shared-bins
+          mountPath: /shared-bins
+      initContainers:
+      - name: aws-iam-authenticator
+        env:
+        - name: AWS_STS_REGIONAL_ENDPOINTS
+          value: regional
+        image: {{ .Values.awsIamAuthenticator.image }}
+        command:
+        - cp
+        - /aws-iam-authenticator
+        - /shared-bins/aws-iam-authenticator
+        volumeMounts:
+        - name: shared-bins
+          mountPath: /shared-bins
       volumes:
       - name: config
         configMap:
@@ -82,3 +101,9 @@ spec:
       - name: s3-credentials
         secret:
           secretName: s3-credentials
+      - name: shared-bins
+        emptyDir: {}
+      - name: kubeconfig
+        secret:
+          defaultMode: 0644
+          secretName: kubeconfig
