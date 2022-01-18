@@ -158,6 +158,22 @@ find /usr/share/{doc,man} -type f \
     ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
     -delete
 
+
+# Set up specific go version by using go get, additional versions apart from default can be installed by calling
+# the function again with the specific parameter.
+setupgo() {
+    local -r version=$1
+    go get golang.org/dl/go${version}
+    go${version} download
+    # Removing the last number as we only care about the major version of golang
+    local -r majorversion=${version%.*}
+    mkdir -p ${GOPATH}/go${majorversion}/bin
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
+    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
+}
+
+setupgo "${GOLANG117_VERSION:-1.17.5}"
+
 if [ $TARGETARCH == 'arm64' ]; then
     exit
 fi
@@ -204,23 +220,10 @@ cd /opt/generate-attribution
 ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
 npm install
 
-# Set up specific go version by using go get, additional versions apart from default can be installed by calling
-# the function again with the specific parameter.
-setupgo() {
-    local -r version=$1
-    go get golang.org/dl/go${version}
-    go${version} download
-    # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
-    mkdir -p ${GOPATH}/go${majorversion}/bin
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
-    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
-}
 
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.15}"
-setupgo "${GOLANG117_VERSION:-1.17.5}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
