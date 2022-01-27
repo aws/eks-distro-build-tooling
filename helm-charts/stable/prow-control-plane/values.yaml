@@ -16,13 +16,24 @@ repositories:
 - org: "aws"
   name: "eks-distro"
   extraPlugins: []
+  extraExternalPlugins: []
 - org: "aws"
   name: "eks-distro-build-tooling"
   extraPlugins: []
+  extraExternalPlugins: []
 - org: "aws"
   name: "eks-distro-prow-jobs"
   extraPlugins: ["config-updater"]
-
+  extraExternalPlugins: []
+- org: "aws"
+  name: "eks-anywhere"
+  extraPlugins: []
+  extraExternalPlugins:
+  - name: cherrypicker
+    events:
+    - issue_comment
+    - pull_request
+    endpoint: http://cherrypicker
 prow:
   domain: ''
   presubmitsBucketName: ''
@@ -143,3 +154,7 @@ plugins:
         - default # namespace
     jobs/**/*.yaml:
       name: job-config
+
+cherrypicker:
+  serviceName: cherrypicker
+  image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
