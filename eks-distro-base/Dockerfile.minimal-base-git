@@ -28,7 +28,7 @@ ARG TARGETARCH
 ENV CMAKE_VERSION=3.20.2
 ENV LIBSSH2_VERSION=1.10.0
 ENV LIBGIT2_VERSION=1.1.1
-ENV BUILD_DEPS="gcc gzip install make openssl-devel openssl-libs tar wget"
+ENV BUILD_DEPS="gcc gzip make openssl-devel openssl-libs tar wget"
 
 COPY "${TARGETARCH}-git-checksums" /tmp/checksums
 
