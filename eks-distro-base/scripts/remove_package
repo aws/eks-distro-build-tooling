@@ -34,7 +34,7 @@ for rpm in "${RPMS[@]}"; do
         FINAL_RPMS+="$rpm "
     fi
 done
-rpm --root $NEWROOT --nodeps $JUSTDB -e FINAL_RPMS
+rpm --root $NEWROOT --nodeps $JUSTDB -e $FINAL_RPMS
 clean_yum
 
 # autoremove does not always look at the full dep tree and sometimes needs to
