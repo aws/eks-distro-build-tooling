@@ -76,3 +76,7 @@ YQ_VERSION="${YQ_VERSION:-v4.7.1}"
 YQ_DOWNLOAD_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH"
 YQ_CHECKSUM_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums"
 YQ_CHECKSUM_ORDER_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums_hashes_order"
+
+AMAZON_ECR_CRED_HELPER_VERSION="${AMAZON_ECR_CRED_HELPER_VERSION:-0.6.0}"
+AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL="https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/${AMAZON_ECR_CRED_HELPER_VERSION}/linux-$TARGETARCH/docker-credential-ecr-login"
+AMAZON_ECR_CRED_HELPER_CHECKSUM_URL="${AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL}.sha256"

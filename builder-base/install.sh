@@ -38,18 +38,20 @@ fi
 
 source $BASE_DIR/versions.sh
 
-# Only add dependencies needed to build the builder base in this first part
-yum upgrade -y
-yum update -y
-
-amazon-linux-extras enable docker
 yum install -y \
-    amazon-ecr-credential-helper \
-    git \
+    git-core \
     make \
     tar \
     unzip \
     wget
+
+wget \
+    --progress dot:giga \
+    $AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL
+sha256sum -c $BASE_DIR/amazon-ecr-cred-helper-$TARGETARCH-checksum
+mv docker-credential-ecr-login $USR_BIN/
+chmod +x $USR_BIN/docker-credential-ecr-login
+
 
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
@@ -139,17 +141,19 @@ sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
 mv yq_linux_$TARGETARCH $USR_BIN/yq
 chmod +x $USR_BIN/yq
 
-# Bash 4.3 is required to run kubernetes make test
-wget $BASH_DOWNLOAD_URL
-tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
-sha256sum -c $BASE_DIR/bash-checksum
-cd bash-$OVERRIDE_BASH_VERSION
-./configure --prefix=/usr --without-bash-malloc
-make
-make install
-cd ..
-rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
-rm -rf bash-$OVERRIDE_BASH_VERSION
+if ! grep -q "2022" "/etc/os-release"; then 
+    # Bash 4.3 is required to run kubernetes make test
+    wget $BASH_DOWNLOAD_URL
+    tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
+    sha256sum -c $BASE_DIR/bash-checksum
+    cd bash-$OVERRIDE_BASH_VERSION
+    ./configure --prefix=/usr --without-bash-malloc
+    make
+    make install
+    cd ..
+    rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
+    rm -rf bash-$OVERRIDE_BASH_VERSION
+fi
 
 yum clean all
 rm -rf /var/cache/{amzn2extras,yum,ldconfig}
