@@ -21,15 +21,31 @@
 # is no overlay fs and we will run out of space quickly
 
 ################# BUILDER ######################
+
+#### Sketch alert ####
+# We are pulling docker/container from al2 since it is not currently provided by al2022
+# when al2022 adds these as packages we would want to switch asap
+# Looking at the dependencies to the docker and containerd binaries, its really just libc
+# From looking at upstream docs using a binary built against an older libc with a newer libc, which
+# is what we would be doing here, *should* be ok
+######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
+ARG AL2_IMAGE
+FROM ${AL2_IMAGE} as al2
+RUN amazon-linux-extras enable docker
+
+
 FROM ${BUILDER_IMAGE} as base-docker-client-builder
+
+COPY --from=al2 /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2 /etc/pki/rpm-gpg
+COPY --from=al2 /etc/yum.repos.d/amzn2-extras.repo /etc/yum.repos.d
 
 RUN set -x && \
     # we only want the docker client cli and not the service
     # installing the package one off since the only deps of the client
     # are already provided by glibc
-    amazon-linux-extras enable docker && \
+    enable_docker_install && \
     # has to be extracted instead of installed to work around scriptlet
     # issue that only affects the service component which we arent using
     clean_install docker true true true && \

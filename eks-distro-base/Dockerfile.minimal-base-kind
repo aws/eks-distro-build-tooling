@@ -20,10 +20,25 @@
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
 
-################# BUILDER ######################
+#### Sketch alert ####
+# We are pulling docker/container from al2 since it is not currently provided by al2022
+# when al2022 adds these as packages we would want to switch asap
+# Looking at the dependencies to the docker and containerd binaries, its really just libc
+# From looking at upstream docs using a binary built against an older libc with a newer libc, which
+# is what we would be doing here, *should* be ok
+######################
+ARG AL2_IMAGE
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
+FROM ${AL2_IMAGE} as al2
+RUN amazon-linux-extras enable docker
+
+
+################# BUILDER ######################
 FROM ${BUILDER_IMAGE} as base-kind-builder
+
+COPY --from=al2 /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2 /etc/pki/rpm-gpg
+COPY --from=al2 /etc/yum.repos.d/amzn2-extras.repo /etc/yum.repos.d
 
 # This build is meant to include the deps from the kind base image defined in the upstream
 # dockerfile, plus the changes from the patching we do in eks-anywhere-build-tooling
@@ -31,13 +46,13 @@ FROM ${BUILDER_IMAGE} as base-kind-builder
 # will contain yum and the eks-anwyhere build can instal additional packages as neccessary
 # the intent is for the yum installs downstream are no-ops
 RUN set -x && \
-    amazon-linux-extras enable docker && \
-    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo && \
+    enable_docker_install && \
     # some of the install scriptlets need coreutils but the dep ordering
     # doesnt reflect, install manually to make sure its first
     clean_install coreutils && \
     clean_install findutils && \
-    clean_install "amazon-linux-extras containerd curl ethtool hostname iproute nfs-utils pigz procps rsync seccomp2 socat systemd tar udev util-linux which yum" && \
+    install_if_al2 amazon-linux-extras && \    
+    clean_install "containerd curl ethtool hostname iproute nfs-utils pigz procps rsync libseccomp socat systemd tar udev util-linux which yum" && \
     cleanup "kind"
 
 

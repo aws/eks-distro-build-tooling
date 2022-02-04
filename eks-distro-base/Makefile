@@ -8,7 +8,8 @@ BASE_IMAGE_REPO?=$(IMAGE_REPO)
 IMAGE_NAME?=eks-distro-$(VARIANT)
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
-LATEST_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):latest
+LATEST?=latest
+LATEST_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(LATEST)
 
 VARIANT?=base
 IMAGE_TARGET?=base
@@ -30,8 +31,10 @@ BASE_IMAGE_TAG?=$(IMAGE_TAG)
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
 
 # base and minimal-base use al2 as the base image
-BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
-BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
+AL_TAG?=2
+BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+AL2_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
 
 ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
 	BASE_IMAGE_NAME=eks-distro-minimal-base
@@ -92,6 +95,7 @@ images-%: buildkit-check
 		--opt platform=$(PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
+		--opt build-arg:AL2_IMAGE=$(AL2_IMAGE) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
@@ -112,7 +116,7 @@ minimal-images-%:
 export-minimal-images-%:
 	if [ "$(JOB_TYPE)" = "postsubmit" ] || \
 		[ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-$*-pushed)" = "true" ]; then \
-		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages"; \
+		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)"; \
 	fi
 
 .PHONY: export-minimal-images

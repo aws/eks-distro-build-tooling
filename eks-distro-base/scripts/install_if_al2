@@ -18,30 +18,8 @@ set -e
 set -o pipefail
 set -x
 
-PACKAGES=$1
-JUSTDB=${2:false}
+PACKAGES="$1"
 
-if [ $JUSTDB ]; then
-    JUSTDB="--justdb"
-else
-    JUSTDB=""
+if ! grep -q "2022" "/etc/os-release"; then 
+    clean_install $PACKAGES
 fi
-
-RPMS=(${PACKAGES// / })
-FINAL_RPMS=""
-for rpm in "${RPMS[@]}"; do
-    if rpm --root $NEWROOT -q --quiet $rpm ; then
-        FINAL_RPMS+="$rpm "
-    fi
-done
-rpm --root $NEWROOT --nodeps $JUSTDB -e $FINAL_RPMS
-clean_yum
-
-# autoremove does not always look at the full dep tree and sometimes needs to
-# be run multiple times to get everything that can safely be removed
-while ! yum --installroot $NEWROOT autoremove -y | tee /dev/stderr | grep -q 'No Packages marked for removal\|Nothing to do.'
-do
-    :
-done
-
-clean_yum

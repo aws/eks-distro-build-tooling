@@ -45,10 +45,12 @@ RUN set -x && \
     clean_yum && \
     rm -rf haproxy-$HAPROXY_VERSION haproxy-$HAPROXY_VERSION.tar.gz
 
-ENV HAPROXY_DEPS="bash libcrypt openssl-libs zlib"
+ENV HAPROXY_DEPS="bash openssl-libs zlib"
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
     clean_install systemd true true && \
+    install_if_al2 libcrypt && \
+    install_if_al2022 libxcrypt-compat && \
     # libacl is needed for cp + mkdir
     clean_install "libacl $HAPROXY_DEPS" && \
     # remove unncessary utils and other binary deps that are not needed by nginx during runtime

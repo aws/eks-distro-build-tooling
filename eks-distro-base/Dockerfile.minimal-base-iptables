@@ -30,7 +30,10 @@ RUN set -x && \
     clean_install systemd true true && \
     # following are from coreutils needed by install scriptlets
     for cmd in "readlink" "rm"; do cp /usr/bin/$cmd $NEWROOT/usr/bin/; done && \
-    clean_install "conntrack-tools ebtables ipset iptables iptables-nft kmod" && \
+    clean_install "ebtables ipset iptables iptables-nft kmod" && \
+    # al2022 does not have this package yet.  it may not actually be needed but is included in upstrea
+    # kube-proxy base image
+    install_if_al2 conntrack-tools && \
     for cmd in "readlink" "rm"; do rm $NEWROOT/usr/bin/$cmd; done && \
     # remove bash + systemd and deps
     remove_package systemd true && \

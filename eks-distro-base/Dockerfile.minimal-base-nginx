@@ -28,8 +28,8 @@ FROM ${BUILDER_IMAGE} as base-nginx-builder
 # This image will include bash because the downstream eks-anywhere-test image needs it
 # for its entrypoint
 RUN set -x && \
-    amazon-linux-extras enable nginx1 && \
-    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo && \
+    if command -v amazon-linux-extras &> /dev/null; then amazon-linux-extras enable nginx1; fi && \
+    if [ -f /etc/yum.repos.d/amzn2-extras.repo ]; then cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo; fi && \
     # manually "install" systemd to avoid installing the entire dep tree
     clean_install systemd true true && \
     clean_install "nginx" && \
