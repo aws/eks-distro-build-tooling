@@ -40,20 +40,16 @@ ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
 	BASE_IMAGE_NAME=eks-distro-minimal-base
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-builder
 	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_TAG_FILE)
-	BASE_DEP_TARGET=minimal-images-base
 else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client minimal-base-nginx minimal-base-haproxy))
 	BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-glibc-builder
 	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_GLIBC_TAG_FILE)
-	BASE_DEP_TARGET=minimal-images-base-glibc
 else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-kind))
 	BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-iptables-builder
 	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_IPTABLES_TAG_FILE)
-	BASE_DEP_TARGET=minimal-images-base-iptables
 else ifeq ($(VARIANT), minimal-base)
 	BASE_IMAGE=scratch
-	BASE_DEP_TARGET=
 endif
 
 # if the image was built, either via this being a pre/post submit job
@@ -88,7 +84,7 @@ buildkit-check:
 # in prow we run a docker registry as a sidecar
 # see the README.md on how to run these targets locally
 .PHONY: images-%
-images-%: buildkit-check $(BASE_DEP_TARGET)
+images-%: buildkit-check
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./check_update.sh $(IMAGE_NAME) ; \
 	fi
@@ -215,7 +211,7 @@ minimal-images-base-iptables: ## Build and push minimal base image with iptables
 minimal-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
 minimal-images-base-git: ## Build and push minimal base image with git + libgit
 minimal-images-base-docker-client: ## Build and push minimal base image with docker client
-# minimal-images-base-nginx: ## Build and push minimal base image with nginx for use by eks-anywhere-test
+minimal-images-base-nginx: ## Build and push minimal base image with nginx for use by eks-anywhere-test
 minimal-images-base-haproxy: ## Build and push minimal base image with haproxy for use by the kind haproxy image
 minimal-images-base-kind: ## Build and push minimal base image with containerd and other deps for the kind base image
 
