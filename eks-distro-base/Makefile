@@ -86,7 +86,7 @@ buildkit-check:
 .PHONY: images-%
 images-%: buildkit-check
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./check_update.sh $(IMAGE_NAME) ; \
+		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
 	fi
 	buildctl \
 		build \
@@ -145,7 +145,7 @@ release: $(IMAGE_TARGETS)
 update-%: UPDATE_TARGET?=images-$*
 update-%:
 	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) )")
+	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) $(AL_TAG) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		$(MAKE) $(UPDATE_TARGET); \
 		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
