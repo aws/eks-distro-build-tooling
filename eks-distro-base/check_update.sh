@@ -20,7 +20,8 @@ set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-IMAGE_NAME=$1
+IMAGE_NAME="$1"
+AL_TAG="$2"
 if [[ $IMAGE_NAME == *-builder ]]; then
     # ignore checking builder images
     exit 0
@@ -32,7 +33,11 @@ if [ ! -f $BASE_IMAGE_TAG_FILE ]; then
     exit 0
 fi
 
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$(cat $BASE_IMAGE_TAG_FILE)
+TAG=$(cat $BASE_IMAGE_TAG_FILE)
+if [[ "$AL_TAG" == "2022" ]]; then
+    TAG+=".2022"
+fi
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
