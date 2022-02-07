@@ -25,7 +25,7 @@ import (
 // GetSnapshotterComponent returns the Component for External Snapshotter
 func (r *ReleaseConfig) GetSnapshotterComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/external-snapshotter"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
+	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
