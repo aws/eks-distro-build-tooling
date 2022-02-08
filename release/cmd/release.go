@@ -48,7 +48,6 @@ var releaseCmd = &cobra.Command{
 		var ecrPublicClient *ecrpublic.ECRPublic
 		releaseConfig := &pkg.ReleaseConfig{
 			ContainerImageRepository: imageRepository,
-			ArtifactURL:              cdnURL,
 			BuildRepoSource:          sourceDir,
 			ArtifactDir:              artifactDir,
 			ReleaseDate:              time.Now().UTC(),
@@ -75,7 +74,6 @@ var releaseCmd = &cobra.Command{
 				fmt.Printf("Error building dev s3 url: %v\n", err)
 				os.Exit(1)
 			}
-			releaseConfig.ArtifactURL = cdnURL
 		} else {
 			ecrPublicClient, err = releaseConfig.CreateProdReleaseClients()
 			if err != nil {
@@ -83,6 +81,7 @@ var releaseCmd = &cobra.Command{
 				os.Exit(1)
 			}
 		}
+		releaseConfig.ArtifactURL = cdnURL
 
 		componentsTable, err := releaseConfig.GenerateComponentsTable(release)
 		if err != nil {
