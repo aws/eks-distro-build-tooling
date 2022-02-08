@@ -64,22 +64,24 @@ var releaseCmd = &cobra.Command{
 		release.APIVersion = "distro.eks.amazonaws.com/v1alpha1"
 		release.Kind = "Release"
 		if devRelease {
-			ecrPublicClient, err := releaseConfig.CreateDevReleaseClients()
+			client, err := releaseConfig.CreateDevReleaseClients()
 			if err != nil {
 				fmt.Printf("Error creating clients: %v\n", err)
 				os.Exit(1)
 			}
+			ecrPublicClient = client
 			cdnURL, err = buildDevS3URL()
 			if err != nil {
 				fmt.Printf("Error building dev s3 url: %v\n", err)
 				os.Exit(1)
 			}
 		} else {
-			ecrPublicClient, err := releaseConfig.CreateProdReleaseClients()
+			client, err := releaseConfig.CreateProdReleaseClients()
 			if err != nil {
 				fmt.Printf("Error creating clients: %v\n", err)
 				os.Exit(1)
 			}
+			ecrPublicClient = client
 		}
 		releaseConfig.ArtifactURL = cdnURL
 
