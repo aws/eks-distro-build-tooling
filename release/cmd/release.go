@@ -45,9 +45,9 @@ var releaseCmd = &cobra.Command{
 		devRelease := viper.GetBool("dev-release")
 		artifactDir := fmt.Sprintf("kubernetes-%s/releases/%d/artifacts/", releaseBranch, releaseNumber)
 
+		var ecrPublicClient *ecrpublic.ECRPublic
 		releaseConfig := &pkg.ReleaseConfig{
 			ContainerImageRepository: imageRepository,
-			ArtifactURL:              cdnURL,
 			BuildRepoSource:          sourceDir,
 			ArtifactDir:              artifactDir,
 			ReleaseDate:              time.Now().UTC(),
@@ -63,6 +63,27 @@ var releaseCmd = &cobra.Command{
 		// TODO figure out how to get these automatically added
 		release.APIVersion = "distro.eks.amazonaws.com/v1alpha1"
 		release.Kind = "Release"
+		if devRelease {
+			client, err := releaseConfig.CreateDevReleaseClients()
+			if err != nil {
+				fmt.Printf("Error creating clients: %v\n", err)
+				os.Exit(1)
+			}
+			ecrPublicClient = client
+			cdnURL, err = buildDevS3URL()
+			if err != nil {
+				fmt.Printf("Error building dev s3 url: %v\n", err)
+				os.Exit(1)
+			}
+		} else {
+			client, err := releaseConfig.CreateProdReleaseClients()
+			if err != nil {
+				fmt.Printf("Error creating clients: %v\n", err)
+				os.Exit(1)
+			}
+			ecrPublicClient = client
+		}
+		releaseConfig.ArtifactURL = cdnURL
 
 		componentsTable, err := releaseConfig.GenerateComponentsTable(release)
 		if err != nil {
@@ -70,20 +91,6 @@ var releaseCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		var ecrPublicClient *ecrpublic.ECRPublic
-		if devRelease {
-			ecrPublicClient, err = releaseConfig.CreateDevReleaseClients()
-			if err != nil {
-				fmt.Printf("Error creating clients: %v\n", err)
-				os.Exit(1)
-			}
-		} else {
-			ecrPublicClient, err = releaseConfig.CreateProdReleaseClients()
-			if err != nil {
-				fmt.Printf("Error creating clients: %v\n", err)
-				os.Exit(1)
-			}
-		}
 
 		err = pkg.UpdateImageDigests(ecrPublicClient, releaseConfig, componentsTable)
 		if err != nil {
@@ -104,6 +111,15 @@ var releaseCmd = &cobra.Command{
 		}
 		fmt.Println(string(output))
 	},
+}
+
+func buildDevS3URL() (string, error) {
+	bucket := os.Getenv("ARTIFACT_BUCKET")
+	if bucket == "" {
+		return "", fmt.Errorf("ARTIFACT_BUCKET must be set")
+	}
+	region := "us-west-2" // dev buckets stored in this region
+	return fmt.Sprintf("https://%v.s3.%v.amazonaws.com", bucket, region), nil
 }
 
 func init() {
