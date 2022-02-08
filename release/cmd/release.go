@@ -75,7 +75,7 @@ var releaseCmd = &cobra.Command{
 				os.Exit(1)
 			}
 		} else {
-			ecrPublicClient, err = releaseConfig.CreateProdReleaseClients()
+			ecrPublicClient, err := releaseConfig.CreateProdReleaseClients()
 			if err != nil {
 				fmt.Printf("Error creating clients: %v\n", err)
 				os.Exit(1)
