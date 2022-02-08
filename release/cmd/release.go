@@ -64,7 +64,7 @@ var releaseCmd = &cobra.Command{
 		release.APIVersion = "distro.eks.amazonaws.com/v1alpha1"
 		release.Kind = "Release"
 		if devRelease {
-			ecrPublicClient, err = releaseConfig.CreateDevReleaseClients()
+			ecrPublicClient, err := releaseConfig.CreateDevReleaseClients()
 			if err != nil {
 				fmt.Printf("Error creating clients: %v\n", err)
 				os.Exit(1)
