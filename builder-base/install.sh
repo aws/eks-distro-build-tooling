@@ -204,6 +204,10 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # to properly find core go packages
 GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
 
+# linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
+# We need a higher version of linuxkit hence we do go get of a particular commit
+go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
+
 wget --progress dot:giga $NODEJS_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
 tar -C /usr --strip-components=1 -xzf $NODEJS_FILENAME $NDOEJS_FOLDER
