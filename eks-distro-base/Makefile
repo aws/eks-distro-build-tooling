@@ -24,7 +24,9 @@ else
 	# tag al2 build with latest.2 and latest for backward compat
 	LATEST:=$(LATEST) $(LATEST).2
 endif
-LATEST_IMAGE?=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
+
+LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
+LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
 VARIANT?=base
 IMAGE_TARGET?=base
