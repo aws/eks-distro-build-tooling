@@ -8,8 +8,23 @@ BASE_IMAGE_REPO?=$(IMAGE_REPO)
 IMAGE_NAME?=eks-distro-$(VARIANT)
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+
+# base and minimal-base use al2 as the base image
+AL_TAG?=2
+BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+AL2_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
+
 LATEST?=latest
-LATEST_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(LATEST)
+
+IMAGE_TAG:=$(IMAGE_TAG).$(AL_TAG)
+ifeq (2022,$(AL_TAG))
+	LATEST:=$(LATEST).2022
+else
+	# tag al2 build with latest.2 and latest for backward compat
+	LATEST:=$(LATEST) $(LATEST).2
+endif
+LATEST_IMAGE?=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
 
 VARIANT?=base
 IMAGE_TARGET?=base
@@ -30,24 +45,19 @@ BASE_IMAGE_TAG?=$(IMAGE_TAG)
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
 
-# base and minimal-base use al2 as the base image
-AL_TAG?=2
-BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
-BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
-AL2_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
 
 ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
 	BASE_IMAGE_NAME=eks-distro-minimal-base
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-builder
-	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_TAG_FILE)
+	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base)
 else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client minimal-base-nginx minimal-base-haproxy))
 	BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-glibc-builder
-	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_GLIBC_TAG_FILE)
+	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-glibc)
 else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-kind))
 	BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 	BUILDER_IMAGE_NAME=eks-distro-minimal-base-iptables-builder
-	BASE_IMAGE_TAG=$(shell cat $(MAKE_ROOT)/../EKS_DISTRO_MINIMAL_BASE_IPTABLES_TAG_FILE)
+	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-iptables)
 else ifeq ($(VARIANT), minimal-base)
 	BASE_IMAGE=scratch
 endif
@@ -66,6 +76,10 @@ ifneq ($(VARIANT),$(filter $(VARIANT), base minimal-base))
 	 	BASE_IMAGE_TAG=$(IMAGE_TAG)
 	endif
 endif
+
+define BASE_TAG_FROM_TAG_FILE
+$(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
+endef
 
 ## --------------------------------------
 ## Help
@@ -165,9 +179,9 @@ minimal-update-%:
 .PHONY: create-pr-%
 create-pr-%: ensure-repo-owner
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME); \
+		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME) $(AL_TAG); \
 	elif [ "$(shell cat $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)" = "true" ]; then \
-		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME); \
+		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME) $(AL_TAG); \
 	fi
 
 .PHONY: base-create-pr

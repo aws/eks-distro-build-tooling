@@ -27,17 +27,8 @@ if [[ $IMAGE_NAME == *-builder ]]; then
     exit 0
 fi
 
-BASE_IMAGE_TAG_FILE="${SCRIPT_ROOT}/../$(echo ${IMAGE_NAME^^} | tr '-' '_')_TAG_FILE"
-if [ ! -f $BASE_IMAGE_TAG_FILE ]; then
-    echo "Updates required"
-    exit 0
-fi
-
-TAG=$(cat $BASE_IMAGE_TAG_FILE)
-if [[ "$AL_TAG" == "2022" ]]; then
-    TAG+=".2022"
-fi
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$TAG
+BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.$IMAGE_NAME" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
