@@ -27,18 +27,11 @@
 # From looking at upstream docs using a binary built against an older libc with a newer libc, which
 # is what we would be doing here, *should* be ok
 ######################
-ARG AL2_IMAGE
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
-FROM ${AL2_IMAGE} as al2
-RUN amazon-linux-extras enable docker
-
 
 ################# BUILDER ######################
 FROM ${BUILDER_IMAGE} as base-kind-builder
-
-COPY --from=al2 /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2 /etc/pki/rpm-gpg
-COPY --from=al2 /etc/yum.repos.d/amzn2-extras.repo /etc/yum.repos.d
 
 # This build is meant to include the deps from the kind base image defined in the upstream
 # dockerfile, plus the changes from the patching we do in eks-anywhere-build-tooling

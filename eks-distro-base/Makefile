@@ -13,7 +13,6 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 AL_TAG?=2
 BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
-AL2_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2
 
 LATEST?=latest
 
@@ -111,7 +110,6 @@ images-%: buildkit-check
 		--opt platform=$(PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
-		--opt build-arg:AL2_IMAGE=$(AL2_IMAGE) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
