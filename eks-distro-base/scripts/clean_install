@@ -35,7 +35,7 @@ else
     yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $PACKAGES
     rpm -ivh --nodeps --root $NEWROOT $JUSTDB $DOWNLOAD_DIR/*.rpm
     if [ $FORCE ]; then
-        for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | /usr/bin/cpio -idmv; done
+        for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done
     fi
 fi
 
