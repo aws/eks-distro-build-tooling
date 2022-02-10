@@ -42,7 +42,7 @@ RUN mkdir -p $NEWROOT/home/nonroot && \
 RUN set -x && \
     yum upgrade -y && \
     yum update -y && \
-    yum install -y cpio yum-utils && \
+    yum install -y cpio findutils yum-utils && \
     # setup rpm + yum
     clean_install system-release true && \
     # "install" excluded deps we do not want in final image
