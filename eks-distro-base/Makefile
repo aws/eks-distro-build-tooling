@@ -16,7 +16,6 @@ BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 
 LATEST?=latest
 
-IMAGE_TAG:=$(IMAGE_TAG).$(AL_TAG)
 ifeq (2022,$(AL_TAG))
 	LATEST:=$(LATEST).2022
 else
@@ -45,7 +44,6 @@ BUILDER_IMAGE_NAME?=eks-distro-base
 BASE_IMAGE_TAG?=$(IMAGE_TAG)
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
-
 
 ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
 	BASE_IMAGE_NAME=eks-distro-minimal-base
