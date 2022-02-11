@@ -40,10 +40,11 @@ RUN set -x && \
     # do not need openssh, just the clients for git to fork (ssh)
     # rpm and sqlite come from openlbdap/nss but we only need the libs
     clean_install "less openssh rpm sqlite systemd" true true && \
-    clean_install "git-core libssh2 openssh-clients openssl-libs gnupg" && \
+    clean_install "git-core libssh2 libgit2 openssh-clients openssl-libs gnupg" && \
     remove_package "less openssh rpm sqlite systemd" true && \
     # we are keeping bash on this image since downstream images use to exec git
-    remove_package "coreutils findutils gawk grep info sed" && \    
+    remove_package "coreutils findutils gawk grep info sed" && \
+    if grep -q "2022" "/etc/os-release" ; then cleanup "git" && exit; fi && \
     # building libgit2 + libssh2
     mkdir -p /tmp/sources && \
     cd /tmp/sources && \
