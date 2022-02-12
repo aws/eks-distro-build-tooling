@@ -33,7 +33,7 @@ mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
-FROM public.ecr.aws/amazonlinux/amazonlinux:2 as builder
+FROM public.ecr.aws/amazonlinux/amazonlinux:$AL_TAG as builder
 
 RUN rm -rf /var/lib/rpm
 COPY --from=base_image /var/lib/rpm /var/lib/rpm
