@@ -52,7 +52,7 @@ else
     $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
     cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
     
-    for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base -type f -name "update_packages*" ); do
+    for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
         UPDATE_PACKAGES="$(cat ${FILE})"
         if [ "$UPDATE_PACKAGES" != "" ]; then
             VARIANT=$(basename ${FILE} | sed 's/update_packages-//')

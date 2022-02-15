@@ -61,7 +61,7 @@ buildctl build \
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
-cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/update_packages-${IMAGE_NAME}
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${IMAGE_NAME}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
     exit 0
