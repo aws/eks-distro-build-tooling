@@ -43,7 +43,7 @@ RUN set -x && \
     clean_install docker true true true && \
     rm $NEWROOT/usr/bin/docker-* && \
     rm $NEWROOT/usr/bin/dockerd && \
-    cleanup "docker"
+    cleanup "docker-client"
 
 
 ################# DOCKER CLIENT ####################
