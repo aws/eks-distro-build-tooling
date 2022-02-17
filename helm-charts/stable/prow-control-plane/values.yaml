@@ -57,7 +57,7 @@ crier:
 
 deck:
   scrape_metrics: false
-  image: gcr.io/k8s-prow/deck:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-deck:v20200924-369a496323
   serviceAccount:
     create: false
 
