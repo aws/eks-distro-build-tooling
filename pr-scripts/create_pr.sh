@@ -33,6 +33,9 @@ CHANGED_FILE="tag file(s)"
 if [[ $REPO =~ "prow-jobs" ]]; then
     CHANGED_FILE="Prowjobs"
 fi
+if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
+    CHANGED_FILE="Prow controlplane Helm chart values"
+fi
 
 if [ $REPO_OWNER = "aws" ]; then
     ORIGIN_ORG="eks-distro-pr-bot"
@@ -44,33 +47,46 @@ COMMIT_MESSAGE="[PR BOT] Update base image tag file(s)"
 if [[ $REPO =~ "prow-jobs" ]]; then
     COMMIT_MESSAGE="[PR BOT] Update builder-base image tag in Prow jobs"
 fi
+if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
+    COMMIT_MESSAGE="[PR BOT] Update deck image in Prow controlplane Helm chart values"
+fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
 if [[ $REPO =~ "prow-jobs" ]]; then
     PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body)
 else
-    $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
-    cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-    
-    for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
-        UPDATE_PACKAGES="$(cat ${FILE})"
-        if [ "$UPDATE_PACKAGES" != "" ]; then
-            VARIANT=$(basename ${FILE} | sed 's/update_packages-//')
-            printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-        fi
-    done    
+    if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
+        PR_TITLE="Update deck image tag in ${CHANGED_FILE}"
+        PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/prow_deck_pr_body)
+    else
+        $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
+        cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        
+        for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
+            UPDATE_PACKAGES="$(cat ${FILE})"
+            if [ "$UPDATE_PACKAGES" != "" ]; then
+                VARIANT=$(basename ${FILE} | sed 's/update_packages-//')
+                printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+            fi
+        done    
 
-    printf "\nBy submitting this pull request,\
-    I confirm that you can use, modify, copy,\
-    and redistribute this contribution,\
-    under the terms of your choice." >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        printf "\nBy submitting this pull request,\
+        I confirm that you can use, modify, copy,\
+        and redistribute this contribution,\
+        under the terms of your choice." >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
 
-    PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body)
-    rm ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body)
+        rm ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+    fi
 fi
 PR_BRANCH="image-tag-update"
 
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+
+if [[ "$(basename "$FILEPATH")" != "$FILEPATH" ]]; then
+    cd $(dirname $FILEPATH)
+    FILEPATH="$(basename $FILEPATH)"
+fi
 
 for FILE in $(find ./ -type f -name "$FILEPATH" ); do
     git add $FILE
