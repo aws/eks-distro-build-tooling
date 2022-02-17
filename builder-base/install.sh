@@ -123,6 +123,7 @@ yum install -y \
     openssh-clients \
     openssl \
     openssl-devel \
+    patch \
     pkgconfig \
     procps-ng \
     python3-pip \
