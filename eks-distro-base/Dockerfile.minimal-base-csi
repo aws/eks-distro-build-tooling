@@ -29,6 +29,11 @@ ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as base-csi-builder
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
     clean_install systemd true true && \
@@ -48,3 +53,15 @@ COPY --from=base-csi-builder /newroot /
 ################# EXPORT ######################
 FROM scratch as base-csi-export
 COPY --from=base-csi-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-csi-builder /newroot /newroot
+COPY --from=base-csi-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

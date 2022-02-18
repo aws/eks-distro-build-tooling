@@ -25,6 +25,11 @@ ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as base-iptables-builder
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
     clean_install systemd true true && \
@@ -38,6 +43,8 @@ RUN set -x && \
     # remove bash + systemd and deps
     remove_package systemd true && \
     remove_package bash && \
+    # Remove bad symlinks due to deleted man files
+    find $NEWROOT/etc/alternatives -xtype l -name "*-man" -delete -print && \
     cleanup "iptables"
 
 
@@ -64,3 +71,15 @@ RUN ["update-alternatives", \
 ################# EXPORT ######################
 FROM scratch as base-iptables-export
 COPY --from=base-iptables-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-iptables-builder /newroot /newroot
+COPY --from=base-iptables-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

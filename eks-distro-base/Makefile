@@ -123,6 +123,7 @@ minimal-images-%:
 	$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
 	$(MAKE) images-minimal-$*-builder VARIANT=minimal-$* IMAGE_TARGET=$*-builder PLATFORMS=$(PLATFORMS) IMAGE_NAME=eks-distro-minimal-$*-builder 
 	$(MAKE) export-minimal-images-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
+	$(MAKE) images-minimal-$*-validate VARIANT=minimal-$* IMAGE_TARGET=validate PLATFORMS=$(PLATFORMS)
 
 .PHONY: export-minimal-images-%
 export-minimal-images-%:
@@ -145,7 +146,7 @@ ecr:
 		--image-scanning-configuration  scanOnPush=true || true
 
 .PHONY: build
-build: PLATFORMS=linux/amd64
+build: PLATFORMS?=linux/amd64
 build: $(IMAGE_TARGETS)
 
 .PHONY: release

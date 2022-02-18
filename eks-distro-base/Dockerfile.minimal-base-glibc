@@ -25,6 +25,11 @@ ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as base-glibc-builder
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     # let yum install bash since it will be needed for scriptlets
     # will be removed along with its deps at the end
@@ -44,3 +49,15 @@ COPY --from=base-glibc-builder /newroot /
 ################# EXPORT ######################
 FROM scratch as base-glibc-export
 COPY --from=base-glibc-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-glibc-builder /newroot /newroot
+COPY --from=base-glibc-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

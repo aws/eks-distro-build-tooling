@@ -32,16 +32,21 @@ ENV BUILD_DEPS="gcc gzip make openssl-devel openssl-libs tar wget"
 
 COPY "${TARGETARCH}-git-checksums" /tmp/checksums
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     export TARGETARCH="${TARGETARCH/amd64/x86_64}" && \
     export TARGETARCH="${TARGETARCH/arm64/aarch64}" && \
     # manually "install" systemd to avoid installing the entire dep tree
     # git deps on less, which we wont be using in the image
     # do not need openssh, just the clients for git to fork (ssh)
-    # rpm and sqlite come from openlbdap/nss but we only need the libs
-    clean_install "less openssh rpm sqlite systemd" true true && \
+    # rpm comes from openlbdap/nss but we only need the libs
+    clean_install "less openssh rpm systemd" true true && \
     clean_install "git-core libssh2 libgit2 openssh-clients openssl-libs gnupg" && \
-    remove_package "less openssh rpm sqlite systemd" true && \
+    remove_package "less openssh rpm systemd" true && \
     # we are keeping bash on this image since downstream images use to exec git
     remove_package "coreutils findutils gawk grep info sed" && \
     if grep -q "2022" "/etc/os-release" ; then cleanup "git" && exit; fi && \
@@ -106,3 +111,15 @@ COPY --from=base-git-builder /newroot /
 ################# EXPORT ######################
 FROM scratch as base-git-export
 COPY --from=base-git-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-git-builder /newroot /newroot
+COPY --from=base-git-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

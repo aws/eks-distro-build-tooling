@@ -33,3 +33,15 @@ USER 65532
 ################# EXPORT ######################
 FROM scratch as base-nonroot-export
 COPY --from=base-nonroot-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-nonroot-builder /newroot /newroot
+COPY --from=base-nonroot-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

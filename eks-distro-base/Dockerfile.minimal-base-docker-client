@@ -21,17 +21,14 @@
 # is no overlay fs and we will run out of space quickly
 
 ################# BUILDER ######################
-
-#### Sketch alert ####
-# We are pulling docker/container from al2 since it is not currently provided by al2022
-# when al2022 adds these as packages we would want to switch asap
-# Looking at the dependencies to the docker and containerd binaries, its really just libc
-# From looking at upstream docs using a binary built against an older libc with a newer libc, which
-# is what we would be doing here, *should* be ok
-######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as base-docker-client-builder
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
 
 RUN set -x && \
     # we only want the docker client cli and not the service
@@ -54,3 +51,15 @@ COPY --from=base-docker-client-builder /newroot /
 ################# EXPORT ######################
 FROM scratch as base-docker-client-export
 COPY --from=base-docker-client-builder /tmp/packages/* .
+
+
+################# VALIDATE ######################
+# the al2 version of symlinks does not suppor the -C chroot option
+FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
+
+COPY --from=base-docker-client-builder /newroot /newroot
+COPY --from=base-docker-client-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+
+RUN yum install -y symlinks findutils && \
+    validate_libraries && \
+    validate_symlinks

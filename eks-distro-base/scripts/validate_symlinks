@@ -13,18 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 set -e
 set -o pipefail
-set -x
 
-mkdir -p $NEWROOT/usr/share/{doc,man}
+cd /newroot 
 
-# to get all symlinks run twice
-for i in {1..2}; do
-    find $NEWROOT/usr/share/{doc,man} \( -xtype l -o -type f \) \
-        ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-        -delete -print
+EXPECTED_DANGLING_LINKS=("/var/lock" "/etc/mtab")
+
+GREPS=""
+for expected in "${EXPECTED_DANGLING_LINKS[@]}"; do
+    GREPS+="-e $expected "
 done
 
-find $NEWROOT/usr/share/{doc,man} -type d -empty -delete
+DANGLING="$(symlinks -C -r . | grep "dangling" | grep -v $GREPS || true)"
+
+if [ ! -z "$(echo $DANGLING | xargs)" ]; then
+    echo "$DANGLING"
+    exit 1
+fi
