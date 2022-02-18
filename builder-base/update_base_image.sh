@@ -18,13 +18,9 @@ set -e
 set -o pipefail
 set -x
 
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+NEW_TAG="$1"
 
-if [ "$JOB_TYPE" = "presubmit" ]; then
-    NEW_TAG=$PULL_PULL_SHA
-else
-    NEW_TAG=$PULL_BASE_SHA
-fi
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-prow-jobs
 ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
