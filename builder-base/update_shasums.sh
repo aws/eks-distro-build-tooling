@@ -40,6 +40,9 @@ for TARGETARCH in arm64 amd64; do
     echo "${yq_checksums_ar[*]}"
     sha256="${yq_checksums_ar[$yq_checksum_index]}"
     echo "$sha256  yq_linux_$TARGETARCH" > yq-$TARGETARCH-checksum
+
+    # AMAZON_ECR_CRED_HELPER
+    curl -sSL --retry 5 $AMAZON_ECR_CRED_HELPER_CHECKSUM_URL -o amazon-ecr-cred-helper-$TARGETARCH-checksum
 done
 
 # BUILDKIT
@@ -75,6 +78,3 @@ echo "$(curl -sSL --retry 5 $HUGO_CHECKSUM_URL | grep -r $HUGO_FILENAME | cut -d
 # BASH
 sha256=$(curl -sSL --retry 5 $BASH_DOWNLOAD_URL | sha256sum | awk '{print $1}')
 echo "$sha256  bash-$OVERRIDE_BASH_VERSION.tar.gz" > bash-checksum
-
-# AMAZON_ECR_CRED_HELPER
-curl -sSL --retry 5 $AMAZON_ECR_CRED_HELPER_CHECKSUM_URL -o amazon-ecr-cred-helper-$TARGETARCH-checksum

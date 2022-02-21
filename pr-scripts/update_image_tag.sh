@@ -44,11 +44,3 @@ pwd
 for FILE in $(find ./ -type f -name "$FILEPATH"); do
     $SED -i "s,${OLD_TAG},${NEW_TAG}," $FILE
 done
-if [ $REPO = "eks-distro-prow-jobs" ]; then
-    if [ "$JOB_TYPE" = "presubmit" ]; then
-        $SED -i "s,.*,${PULL_PULL_SHA}," ./BUILDER_BASE_TAG_FILE
-    else
-        $SED -i "s,.*,${PULL_BASE_SHA}," ./BUILDER_BASE_TAG_FILE
-    fi
-fi
-
