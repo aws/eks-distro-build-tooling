@@ -22,8 +22,8 @@ data:
     deck:
       branding:
         header_color: "#232F3E"
-        logo: "https://avatars1.githubusercontent.com/u/74887181?s=80"
-        favicon: "https://avatars1.githubusercontent.com/u/74887181?s=20"
+        logo: "https://distro.eks.amazonaws.com/assets/images/amazon-eks-distro-white-logo.png"
+        favicon: "https://distro.eks.amazonaws.com/assets/images/amazon-eks-distro-white-logo.png"
 
       spyglass:
         lenses:
