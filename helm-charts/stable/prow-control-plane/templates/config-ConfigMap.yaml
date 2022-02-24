@@ -85,4 +85,9 @@ data:
           - {{ $repo.org }}/{{ $repo.name }}
         {{- end }}
 
+      merge_method:
+      {{-  range $repo := .Values.repositories }}
+        {{ $repo.org }}/{{ $repo.name }}: squash
+      {{- end }}
+
     decorate_all_jobs: true
