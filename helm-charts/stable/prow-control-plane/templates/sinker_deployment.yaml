@@ -1,37 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prow-controller-manager
+  name: sinker
   labels:
-    app: prow-controller-manager
+    app: sinker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prow-controller-manager
+      app: sinker
   template:
     metadata:
       labels:
-        app: prow-controller-manager
+        app: sinker
     spec:
-      serviceAccountName: prow-controller-manager
+      serviceAccountName: sinker
       containers:
-      - name: prow-controller-manager
+      - name: sinker
         args:
-        - --dry-run={{ .Values.dryRun }}
-        - --deck-url=http://deck/
+        - --kubeconfig=/etc/kubeconfig/config
         - --config-path=/etc/config/config.yaml
         - --job-config-path=/etc/job-config
-        - --github-token-path=/etc/github/token
-        - --github-endpoint=http://ghproxy
-        - --github-endpoint=https://api.github.com
-        - --enable-controller=plank
-        - --kubeconfig=/etc/kubeconfig/config
-        image: {{ .Values.prowControllerManager.image }}
+        image: {{ .Values.sinker.image }}
         volumeMounts:
-        - name: github-token
-          mountPath: /etc/github
-          readOnly: true
         - name: config
           mountPath: /etc/config
           readOnly: true
@@ -54,9 +45,6 @@ spec:
         - name: shared-bins
           mountPath: /shared-bins
       volumes:
-      - name: github-token
-        secret:
-          secretName: github-token
       - name: config
         configMap:
           name: config

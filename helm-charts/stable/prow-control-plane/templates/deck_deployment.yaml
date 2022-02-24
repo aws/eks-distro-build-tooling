@@ -1,9 +1,23 @@
+# Copyright 2016 The Kubernetes Authors All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hook
+  name: deck
   labels:
-    app: hook
+    app: deck
 spec:
   replicas: 2
   strategy:
@@ -13,45 +27,49 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: hook
+      app: deck
   template:
     metadata:
       labels:
-        app: hook
+        app: deck
     spec:
-      serviceAccountName: "hook"
-      terminationGracePeriodSeconds: 180
+      serviceAccountName: deck
+      terminationGracePeriodSeconds: 30
       containers:
-      - name: hook
-        image: {{ .Values.hook.image }}
-        imagePullPolicy: Always
+      - name: deck
+        image: {{ .Values.deck.image }}
         args:
-        - --dry-run={{ .Values.dryRun }}
-        - --deck-url=http://deck/
+        - --kubeconfig=/etc/kubeconfig/config
+        - --tide-url=http://tide/
+        - --hook-url=http://hook:8888/plugin-help
         - --config-path=/etc/config/config.yaml
         - --job-config-path=/etc/job-config
+        - --spyglass=true
         - --github-token-path=/etc/github/token
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
-        - --kubeconfig=/etc/kubeconfig/config
+        - --plugin-config=/etc/plugins/plugins.yaml
+        - --plugin-config=/etc/plugins/plugins.yaml # QUESTION: why duplicate of above?
+        - --github-graphql-endpoint=http://ghproxy/graphql
+        - --s3-credentials-file=/etc/s3-credentials/service-account.json
         ports:
           - name: http
-            containerPort: 8888
+            containerPort: 8080
         volumeMounts:
-        - name: hmac
-          mountPath: /etc/webhook
-          readOnly: true
-        - name: github-token
-          mountPath: /etc/github
-          readOnly: true
         - name: config
           mountPath: /etc/config
           readOnly: true
         - name: job-config
           mountPath: /etc/job-config
-          readOnly: True
+          readOnly: true
+        - name: github-token
+          mountPath: /etc/github
+          readOnly: true
         - name: plugins
           mountPath: /etc/plugins
+          readOnly: true
+        - name: s3-credentials
+          mountPath: /etc/s3-credentials
           readOnly: true
         - name: kubeconfig
           mountPath: /etc/kubeconfig
@@ -82,21 +100,21 @@ spec:
         - name: shared-bins
           mountPath: /shared-bins
       volumes:
-      - name: hmac
-        secret:
-          secretName: hmac-token
-      - name: github-token
-        secret:
-          secretName: github-token
       - name: config
         configMap:
           name: config
-      - name: plugins
-        configMap:
-          name: plugins
       - name: job-config
         configMap:
           name: job-config
+      - name: plugins
+        configMap:
+          name: plugins
+      - name: github-token
+        secret:
+          secretName: github-token
+      - name: s3-credentials
+        secret:
+          secretName: s3-credentials
       - name: shared-bins
         emptyDir: {}
       - name: kubeconfig

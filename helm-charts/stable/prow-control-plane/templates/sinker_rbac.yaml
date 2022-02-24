@@ -1,24 +1,30 @@
+{{ if .Values.sinker.serviceAccount.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "sinker"
+{{ end }}
+---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: prow-controller-manager
+  name: "sinker"
 rules:
   - apiGroups:
       - "prow.k8s.io"
     resources:
       - prowjobs
     verbs:
-      - get
+      - delete
       - list
       - watch
-      - update
-      - patch
+      - get
   - apiGroups:
       - ""
     resources:
       - configmaps
     resourceNames:
-      - prow-controller-manager-leader-lock
+      - prow-sinker-leaderlock
     verbs:
       - get
       - update
@@ -34,6 +40,19 @@ rules:
     resources:
       - pods
     verbs:
-      - get
       - list
       - watch
+      - get
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "sinker"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "sinker"
+subjects:
+- kind: ServiceAccount
+  name: "sinker"
+  namespace: {{ .Release.Namespace }}

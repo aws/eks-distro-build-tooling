@@ -1,0 +1,31 @@
+{{ if .Values.statusreconciler.serviceAccount.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: statusreconciler
+{{ end }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: statusreconciler
+rules:
+  - apiGroups:
+      - "prow.k8s.io"
+    resources:
+      - prowjobs
+    verbs:
+      - create
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: statusreconciler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: statusreconciler
+subjects:
+- kind: ServiceAccount
+  name: statusreconciler
+  namespace: {{ .Release.Namespace }}

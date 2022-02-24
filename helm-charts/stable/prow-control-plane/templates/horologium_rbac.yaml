@@ -1,0 +1,32 @@
+{{ if .Values.horologium.serviceAccount.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "horologium"
+{{ end }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "horologium"
+rules:
+  - apiGroups:
+      - "prow.k8s.io"
+    resources:
+      - prowjobs
+    verbs:
+      - create
+      - list
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "horologium"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "horologium"
+subjects:
+- kind: ServiceAccount
+  name: "horologium"
+  namespace: {{ .Release.Namespace }}
