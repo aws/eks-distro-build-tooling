@@ -64,8 +64,6 @@ data:
             bucket: s3://{{ .Values.prow.presubmitsBucketName }}
             path_strategy: explicit
           s3_credentials_secret: s3-credentials
-          ssh_key_secrets:
-          - ssh-secret
           utility_images:
             clonerefs:  {{ .Values.utility_images.clonerefs }}
             entrypoint: {{ .Values.utility_images.entrypoint }}
