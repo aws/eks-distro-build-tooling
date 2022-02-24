@@ -7,30 +7,43 @@ data:
     prowjob_namespace: {{ .Values.prowJobNamespace }}
     pod_namespace: {{ .Values.dataplaneNamespace }}
 
+    sinker:
+      # defaults to 1 hour
+      resync_period: 2m
+      # defaults to 1 day
+      max_pod_age: 12h
+      # defaults to max_pod_age
+      terminated_pod_ttl: 5m
+
     in_repo_config:
       enabled:
         "*": true
 
     deck:
-     spyglass:
-       lenses:
-       - lens:
-           name: metadata
-         required_files:
-         - started.json|finished.json
-       - lens:
-           config:
-           name: buildlog
-         required_files:
-         - build-log.txt
-       - lens:
-           name: junit
-         required_files:
-         - .*/junit.*\.xml
-       - lens:
-           name: podinfo
-         required_files:
-         - podinfo.json
+      branding:
+        header_color: "#232F3E"
+        logo: "https://avatars1.githubusercontent.com/u/74887181?s=80"
+        favicon: "https://avatars1.githubusercontent.com/u/74887181?s=20"
+
+      spyglass:
+        lenses:
+        - lens:
+            name: metadata
+          required_files:
+          - started.json|finished.json
+        - lens:
+            config:
+            name: buildlog
+          required_files:
+          - build-log.txt
+        - lens:
+            name: junit
+          required_files:
+          - .*/junit.*\.xml
+        - lens:
+            name: podinfo
+          required_files:
+          - podinfo.json
 
     plank:
       job_url_prefix_config:
