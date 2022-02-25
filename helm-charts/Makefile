@@ -9,7 +9,7 @@ all: verify publish
 install-toolchain:
 	${CHART_ROOT}/scripts/install-toolchain.sh
 
-verify: install-toolchain
+verify: install-toolchain prepare-prow-control-plane
 	${CHART_ROOT}/scripts/lint-charts.sh ${STABLE}
 	${CHART_ROOT}/scripts/verify-version.sh ${STABLE}
 
@@ -23,5 +23,9 @@ clean:
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*$$' $(MAKEFILE_LIST) | sort
+
+prepare-prow-control-plane:
+	${CHART_ROOT}/scripts/prepare-prow-control-plane.sh
+
 
 .PHONY: all build verify package help
