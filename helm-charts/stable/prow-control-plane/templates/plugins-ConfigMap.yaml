@@ -22,7 +22,7 @@ data:
       - lgtm
       - lifecycle
       - milestone
-      - needs-rebase
+      - override
       - size
       - trigger
       - verify-owners
