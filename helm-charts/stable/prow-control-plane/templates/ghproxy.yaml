@@ -49,6 +49,12 @@ spec:
   replicas: 1  # TODO(fejta): this should be HA
   template:
     metadata:
+      {{- if .Values.ghproxy.scrape_metrics }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '9090'
+        prometheus.io/scrape: 'true'
+      {{- end }}
       labels:
         app: ghproxy
     spec:

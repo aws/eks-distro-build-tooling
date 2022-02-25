@@ -11,6 +11,12 @@ spec:
       app: sinker
   template:
     metadata:
+      {{- if .Values.sinker.scrape_metrics }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '9090'
+        prometheus.io/scrape: 'true'
+      {{- end }}
       labels:
         app: sinker
     spec:

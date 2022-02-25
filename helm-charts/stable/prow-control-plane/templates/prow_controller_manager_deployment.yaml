@@ -25,6 +25,12 @@ spec:
       app: prow-controller-manager
   template:
     metadata:
+      {{- if .Values.prowControllerManager.scrape_metrics }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '9090'
+        prometheus.io/scrape: 'true'
+      {{- end }}
       labels:
         app: prow-controller-manager
     spec:
