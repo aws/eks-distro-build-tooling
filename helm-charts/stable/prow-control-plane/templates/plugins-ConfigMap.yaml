@@ -32,6 +32,13 @@ data:
       - {{ $extra }}
       {{- end }}
       {{- end }}
+    external_plugins:
+      {{- range $repo := .Values.repositories }}
+      {{- if gt (len $repo.extraExternalPlugins) 0 }}
+      {{ $repo.org }}/{{ $repo.name }}:
+{{ toYaml $repo.extraExternalPlugins | indent 8 }}
+      {{- end }}
+      {{- end }}     
     {{- end }}
     config_updater:
       maps:
