@@ -18,6 +18,7 @@ data:
       - hold
       - label
       - lgtm
+      - size
       - trigger
       - verify-owners
       - wip
