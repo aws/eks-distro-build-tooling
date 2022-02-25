@@ -1,13 +1,14 @@
-From cd8fde56515601c48dd3ca402c80467cef074151 Mon Sep 17 00:00:00 2001
+From 479085313752e8c0641c82813d8c6bb804123eb7 Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
 
 Signed-off-by: Jackson West <jgw@amazon.com>
+Signed-off-by: Prow Bot <prow@amazonaws.com>
 ---
- config/prow/cluster/crier_deployment.yaml     | 66 +++++++++----
+ config/prow/cluster/crier_deployment.yaml     | 66 ++++++++++----
  config/prow/cluster/crier_rbac.yaml           | 47 +---------
- config/prow/cluster/deck_deployment.yaml      | 92 +++++++++++--------
+ config/prow/cluster/deck_deployment.yaml      | 91 +++++++++++--------
  config/prow/cluster/deck_rbac.yaml            | 41 +--------
  config/prow/cluster/deck_service.yaml         |  7 --
  config/prow/cluster/ghproxy.yaml              | 35 ++++---
@@ -25,7 +26,7 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  config/prow/cluster/tide_deployment.yaml      | 39 ++++++--
  config/prow/cluster/tide_rbac.yaml            | 12 +--
  config/prow/cluster/tide_service.yaml         |  9 +-
- 20 files changed, 365 insertions(+), 326 deletions(-)
+ 20 files changed, 364 insertions(+), 326 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index a1e237390f..e7987492c6 100644
@@ -224,7 +225,7 @@ index 13ed371072..699355890e 100644
 +  namespace: {{ .Release.Namespace }}
 +
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
-index bef63c02df..83c5f22af5 100644
+index bef63c02df..9918a62920 100644
 --- a/config/prow/cluster/deck_deployment.yaml
 +++ b/config/prow/cluster/deck_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -254,7 +255,7 @@ index bef63c02df..83c5f22af5 100644
        labels:
          app: deck
      spec:
-@@ -38,49 +43,52 @@ spec:
+@@ -38,49 +43,51 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: deck
@@ -288,7 +289,6 @@ index bef63c02df..83c5f22af5 100644
 -        - --github-oauth-config-file=/etc/githuboauth/secret
 -        - --cookie-secret=/etc/cookie/secret
          - --plugin-config=/etc/plugins/plugins.yaml
-+        - --plugin-config=/etc/plugins/plugins.yaml # QUESTION: why duplicate of above?
 +        - --github-graphql-endpoint=http://ghproxy/graphql
 +        - --s3-credentials-file=/etc/s3-credentials/service-account.json
 +        ports:
@@ -328,7 +328,7 @@ index bef63c02df..83c5f22af5 100644
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -94,20 +102,20 @@ spec:
+@@ -94,20 +101,20 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -362,7 +362,7 @@ index bef63c02df..83c5f22af5 100644
        - name: config
          configMap:
            name: config
-@@ -117,3 +125,15 @@ spec:
+@@ -117,3 +124,15 @@ spec:
        - name: plugins
          configMap:
            name: plugins
