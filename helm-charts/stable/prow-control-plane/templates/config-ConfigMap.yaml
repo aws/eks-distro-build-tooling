@@ -11,6 +11,8 @@ data:
       resync_period: 2m
       # defaults to 1 day
       max_pod_age: 12h
+      # 30 days, defaults to 1 week
+      max_prowjob_age: 720h
       # defaults to max_pod_age
       terminated_pod_ttl: 5m
     in_repo_config:

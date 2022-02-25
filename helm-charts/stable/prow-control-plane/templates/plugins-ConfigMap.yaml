@@ -13,11 +13,14 @@ data:
       - blunderbuss
       - cat
       - dog
+      - golint
       - help
       - heart
       - hold
+     - invalidcommitmsg
       - label
       - lgtm
+      - milestone
       - size
       - trigger
       - verify-owners
