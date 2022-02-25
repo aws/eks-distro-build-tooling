@@ -69,7 +69,6 @@ data:
             entrypoint: {{ .Values.utility_images.entrypoint }}
             initupload: {{ .Values.utility_images.initupload }}
             sidecar: {{ .Values.utility_images.sidecar }}
-
     tide:
       queries:
       - labels:
@@ -81,13 +80,15 @@ data:
         - do-not-merge/work-in-progress
         - do-not-merge/invalid-owners-file
         repos:
-        {{-  range $repo := .Values.repositories }}
-          - {{ $repo.org }}/{{ $repo.name }}
-        {{- end }}
-
+        {{- if eq (len .Values.repositories) 0 }} []
+        {{- else }}
+          {{-  range $repo := .Values.repositories }}
+        - {{ $repo.org }}/{{ $repo.name }}
+          {{- end }}
       merge_method:
-      {{-  range $repo := .Values.repositories }}
+        {{-  range $repo := .Values.repositories }}
         {{ $repo.org }}/{{ $repo.name }}: squash
-      {{- end }}
+        {{- end }}
+        {{- end }}
 
     decorate_all_jobs: true
