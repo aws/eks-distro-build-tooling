@@ -1,0 +1,1449 @@
+From 479085313752e8c0641c82813d8c6bb804123eb7 Mon Sep 17 00:00:00 2001
+From: Jackson West <jgw@amazon.com>
+Date: Fri, 25 Feb 2022 12:37:01 -0600
+Subject: [PATCH] EKS-D changes to helm control plane chart
+
+Signed-off-by: Jackson West <jgw@amazon.com>
+Signed-off-by: Prow Bot <prow@amazonaws.com>
+---
+ config/prow/cluster/crier_deployment.yaml     | 66 ++++++++++----
+ config/prow/cluster/crier_rbac.yaml           | 47 +---------
+ config/prow/cluster/deck_deployment.yaml      | 91 +++++++++++--------
+ config/prow/cluster/deck_rbac.yaml            | 41 +--------
+ config/prow/cluster/deck_service.yaml         |  7 --
+ config/prow/cluster/ghproxy.yaml              | 35 ++++---
+ config/prow/cluster/hook_deployment.yaml      | 68 ++++++++------
+ config/prow/cluster/hook_rbac.yaml            | 10 +-
+ config/prow/cluster/hook_service.yaml         | 10 +-
+ .../prow/cluster/horologium_deployment.yaml   | 19 +++-
+ config/prow/cluster/horologium_rbac.yaml      | 10 +-
+ .../prow_controller_manager_deployment.yaml   | 59 +++++++++---
+ .../cluster/prow_controller_manager_rbac.yaml | 45 ++-------
+ config/prow/cluster/sinker_deployment.yaml    | 48 ++++++++--
+ config/prow/cluster/sinker_rbac.yaml          | 33 +------
+ .../cluster/statusreconciler_deployment.yaml  | 31 +++++--
+ .../prow/cluster/statusreconciler_rbac.yaml   | 10 +-
+ config/prow/cluster/tide_deployment.yaml      | 39 ++++++--
+ config/prow/cluster/tide_rbac.yaml            | 12 +--
+ config/prow/cluster/tide_service.yaml         |  9 +-
+ 20 files changed, 364 insertions(+), 326 deletions(-)
+
+diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
+index a1e237390f..e7987492c6 100644
+--- a/config/prow/cluster/crier_deployment.yaml
++++ b/config/prow/cluster/crier_deployment.yaml
+@@ -15,7 +15,6 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: crier
+   labels:
+     app: crier
+@@ -26,6 +25,12 @@ spec:
+       app: crier
+   template:
+     metadata:
++      {{- if .Values.crier.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: crier
+     spec:
+@@ -33,35 +38,56 @@ spec:
+       terminationGracePeriodSeconds: 30
+       containers:
+       - name: crier
+-        image: gcr.io/k8s-prow/crier:v20201109-a36ed74f01
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.crier.image }}
+         args:
+-        - --blob-storage-workers=1
++        - --blob-storage-workers=10
+         - --config-path=/etc/config/config.yaml
+         - --github-endpoint=http://ghproxy
+         - --github-endpoint=https://api.github.com
+-        - --github-token-path=/etc/github/oauth
+-        - --github-workers=5
++        - --github-token-path=/etc/github/token
++        - --github-workers=10
+         - --job-config-path=/etc/job-config
+         - --kubeconfig=/etc/kubeconfig/config
+-        - --kubernetes-blob-storage-workers=1
+-        - --slack-token-file=/etc/slack/token
+-        - --slack-workers=1
++        - --kubernetes-blob-storage-workers=10
++        - --s3-credentials-file=/etc/s3-credentials/service-account.json
+         volumeMounts:
+-        - mountPath: /etc/kubeconfig
+-          name: kubeconfig
+-          readOnly: true
+         - name: config
+           mountPath: /etc/config
+           readOnly: true
+         - name: job-config
+           mountPath: /etc/job-config
+           readOnly: true
+-        - name: oauth
++        - name: github-token
+           mountPath: /etc/github
+           readOnly: true
+-        - name: slack
+-          mountPath: /etc/slack
++        - name: s3-credentials
++          mountPath: /etc/s3-credentials
++          readOnly: true
++        - name: kubeconfig
++          mountPath: /etc/kubeconfig
+           readOnly: true
++        - name: shared-bins
++          mountPath: /shared-bins
++      initContainers:
++      - name: aws-iam-authenticator
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        image: {{ .Values.awsIamAuthenticator.image }}
++        command:
++        - cp
++        - /aws-iam-authenticator
++        - /shared-bins/aws-iam-authenticator
++        volumeMounts:
++        - name: shared-bins
++          mountPath: /shared-bins
+       volumes:
+       - name: config
+         configMap:
+@@ -69,13 +95,15 @@ spec:
+       - name: job-config
+         configMap:
+           name: job-config
+-      - name: oauth
++      - name: github-token
+         secret:
+-          secretName: oauth-token
+-      - name: slack
++          secretName: github-token
++      - name: s3-credentials
+         secret:
+-          secretName: slack-token
++          secretName: s3-credentials
++      - name: shared-bins
++        emptyDir: {}
+       - name: kubeconfig
+         secret:
+-          defaultMode: 420
++          defaultMode: 0644
+           secretName: kubeconfig
+diff --git a/config/prow/cluster/crier_rbac.yaml b/config/prow/cluster/crier_rbac.yaml
+index 13ed371072..699355890e 100644
+--- a/config/prow/cluster/crier_rbac.yaml
++++ b/config/prow/cluster/crier_rbac.yaml
+@@ -13,18 +13,16 @@
+ # limitations under the License.
+ 
+ ---
++{{ if .Values.crier.serviceAccount.create }}
+ kind: ServiceAccount
+ apiVersion: v1
+ metadata:
+-  annotations:
+-    iam.gke.io/gcp-service-account: control-plane@k8s-prow.iam.gserviceaccount.com
+   name: crier
+-  namespace: default
++{{ end }}
+ ---
+ kind: Role
+ apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: crier
+ rules:
+ - apiGroups:
+@@ -37,46 +35,10 @@ rules:
+     - "list"
+     - "patch"
+ ---
+-kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1
+-metadata:
+-  namespace: test-pods
+-  name: crier
+-rules:
+-- apiGroups:
+-    - ""
+-  resources:
+-    - "pods"
+-    - "events"
+-  verbs:
+-    - "get"
+-    - "list"
+-- apiGroups:
+-    - ""
+-  resources:
+-    - "pods"
+-  verbs:
+-    - "patch"
+----
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  name: crier-namespaced
+-  namespace: default
+-roleRef:
+-  apiGroup: rbac.authorization.k8s.io
+-  kind: Role
+   name: crier
+-subjects:
+-- kind: ServiceAccount
+-  name: crier
+-  namespace: default
+----
+-kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  name: crier-namespaced
+-  namespace: test-pods
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+   kind: Role
+@@ -84,4 +46,5 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: crier
+-  namespace: default
++  namespace: {{ .Release.Namespace }}
++
+diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
+index bef63c02df..9918a62920 100644
+--- a/config/prow/cluster/deck_deployment.yaml
++++ b/config/prow/cluster/deck_deployment.yaml
+@@ -15,12 +15,11 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: deck
+   labels:
+     app: deck
+ spec:
+-  replicas: 3
++  replicas: 2
+   strategy:
+     type: RollingUpdate
+     rollingUpdate:
+@@ -31,6 +30,12 @@ spec:
+       app: deck
+   template:
+     metadata:
++      {{- if .Values.deck.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: deck
+     spec:
+@@ -38,49 +43,51 @@ spec:
+       terminationGracePeriodSeconds: 30
+       containers:
+       - name: deck
+-        image: gcr.io/k8s-prow/deck:v20201109-a36ed74f01
+-        imagePullPolicy: Always
+-        ports:
+-          - name: http
+-            containerPort: 8080
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.deck.image }}
+         args:
+         - --kubeconfig=/etc/kubeconfig/config
+         - --tide-url=http://tide/
+         - --hook-url=http://hook:8888/plugin-help
+-        - --redirect-http-to=prow.k8s.io
+-        - --oauth-url=/github-login
+         - --config-path=/etc/config/config.yaml
+         - --job-config-path=/etc/job-config
+         - --spyglass=true
+-        - --rerun-creates-job
+-        - --github-token-path=/etc/github/oauth
++        - --github-token-path=/etc/github/token
+         - --github-endpoint=http://ghproxy
+         - --github-endpoint=https://api.github.com
+-        - --github-oauth-config-file=/etc/githuboauth/secret
+-        - --cookie-secret=/etc/cookie/secret
+         - --plugin-config=/etc/plugins/plugins.yaml
++        - --github-graphql-endpoint=http://ghproxy/graphql
++        - --s3-credentials-file=/etc/s3-credentials/service-account.json
++        ports:
++          - name: http
++            containerPort: 8080
+         volumeMounts:
+-        - name: oauth-config
+-          mountPath: /etc/githuboauth
+-          readOnly: true
+-        - name: cookie-secret
+-          mountPath: /etc/cookie
+-          readOnly: true
+-        - mountPath: /etc/kubeconfig
+-          name: kubeconfig
+-          readOnly: true
+         - name: config
+           mountPath: /etc/config
+           readOnly: true
+         - name: job-config
+           mountPath: /etc/job-config
+           readOnly: true
+-        - name: oauth-token
++        - name: github-token
+           mountPath: /etc/github
+           readOnly: true
+         - name: plugins
+           mountPath: /etc/plugins
+           readOnly: true
++        - name: s3-credentials
++          mountPath: /etc/s3-credentials
++          readOnly: true
++        - name: kubeconfig
++          mountPath: /etc/kubeconfig
++          readOnly: true
++        - name: shared-bins
++          mountPath: /shared-bins
+         livenessProbe:
+           httpGet:
+             path: /healthz
+@@ -94,20 +101,20 @@ spec:
+           initialDelaySeconds: 10
+           periodSeconds: 3
+           timeoutSeconds: 600
++      initContainers:
++      - name: aws-iam-authenticator
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        image: {{ .Values.awsIamAuthenticator.image }}
++        command:
++        - cp
++        - /aws-iam-authenticator
++        - /shared-bins/aws-iam-authenticator
++        volumeMounts:
++        - name: shared-bins
++          mountPath: /shared-bins
+       volumes:
+-      - name: oauth-config
+-        secret:
+-          secretName: github-oauth-config
+-      - name: oauth-token
+-        secret:
+-          secretName: oauth-token
+-      - name: cookie-secret
+-        secret:
+-          secretName: cookie
+-      - name: kubeconfig
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig
+       - name: config
+         configMap:
+           name: config
+@@ -117,3 +124,15 @@ spec:
+       - name: plugins
+         configMap:
+           name: plugins
++      - name: github-token
++        secret:
++          secretName: github-token
++      - name: s3-credentials
++        secret:
++          secretName: s3-credentials
++      - name: shared-bins
++        emptyDir: {}
++      - name: kubeconfig
++        secret:
++          defaultMode: 0644
++          secretName: kubeconfig
+diff --git a/config/prow/cluster/deck_rbac.yaml b/config/prow/cluster/deck_rbac.yaml
+index e9a2b1895f..23249e1290 100644
+--- a/config/prow/cluster/deck_rbac.yaml
++++ b/config/prow/cluster/deck_rbac.yaml
+@@ -1,15 +1,13 @@
++{{ if .Values.deck.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+-  annotations:
+-    iam.gke.io/gcp-service-account: control-plane@k8s-prow.iam.gserviceaccount.com
+   name: deck
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: deck
+ rules:
+ - apiGroups:
+@@ -20,39 +18,10 @@ rules:
+   - get
+   - list
+   - watch
+-  # Required when deck runs with `--rerun-creates-job=true`
+-  - create
+----
+-kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: test-pods
+-  name: deck
+-rules:
+-- apiGroups:
+-  - ""
+-  resources:
+-  - pods/log
+-  verbs:
+-  - get
+----
+-kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: default
+-  name: deck
+-roleRef:
+-  apiGroup: rbac.authorization.k8s.io
+-  kind: Role
+-  name: deck
+-subjects:
+-- kind: ServiceAccount
+-  name: deck
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: test-pods
+   name: deck
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -61,4 +30,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: deck
+-  namespace: default
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/deck_service.yaml b/config/prow/cluster/deck_service.yaml
+index fcb4771628..ff76c7ad5e 100644
+--- a/config/prow/cluster/deck_service.yaml
++++ b/config/prow/cluster/deck_service.yaml
+@@ -15,17 +15,10 @@
+ apiVersion: v1
+ kind: Service
+ metadata:
+-  labels:
+-    app: deck
+-  namespace: default
+   name: deck
+ spec:
+   selector:
+     app: deck
+   ports:
+-  - name: main
+     port: 80
+     targetPort: 8080
+-  - name: metrics
+-    port: 9090
+-  type: NodePort
+diff --git a/config/prow/cluster/ghproxy.yaml b/config/prow/cluster/ghproxy.yaml
+index a23070fcb4..d91fb7df52 100644
+--- a/config/prow/cluster/ghproxy.yaml
++++ b/config/prow/cluster/ghproxy.yaml
+@@ -15,7 +15,6 @@
+ kind: PersistentVolumeClaim
+ apiVersion: v1
+ metadata:
+-  namespace: default
+   labels:
+     app: ghproxy
+   name: ghproxy
+@@ -24,7 +23,7 @@ spec:
+     - ReadWriteOnce
+   resources:
+     requests:
+-      storage: 100Gi
++      storage: {{ .Values.ghproxy.volumeSize }}Gi
+   # gce-ssd-retain is specified in config/prow/cluster/gce-ssd-retain_storageclass.yaml
+   #
+   # If you are setting up your own Prow instance you can do any of the following:
+@@ -32,12 +31,11 @@ spec:
+   # 2) Specify your own storage class.
+   # 3) If you are using GKE you can use the gce-ssd-retain storage class. It can be
+   #    created with: `kubectl create -f config/prow/cluster/gce-ssd-retain_storageclass.yaml
+-  storageClassName: gce-ssd-retain
++#  storageClassName: gce-ssd-retain
+ ---
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: ghproxy
+   labels:
+     app: ghproxy
+@@ -45,18 +43,34 @@ spec:
+   selector:
+     matchLabels:
+       app: ghproxy
++  strategy:
++    type: Recreate
++  # GHProxy does not support HA
+   replicas: 1  # TODO(fejta): this should be HA
+   template:
+     metadata:
++      {{- if .Values.ghproxy.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: ghproxy
+     spec:
+       containers:
+       - name: ghproxy
+-        image: gcr.io/k8s-prow/ghproxy:v20201109-a36ed74f01
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.ghproxy.image }}
+         args:
+         - --cache-dir=/cache
+-        - --cache-sizeGB=99
++        - --cache-sizeGB={{ add .Values.ghproxy.volumeSize -1 }}
+         - --push-gateway=pushgateway
+         - --serve-metrics=true
+         ports:
+@@ -68,21 +82,12 @@ spec:
+       - name: cache
+         persistentVolumeClaim:
+           claimName: ghproxy
+-      # run on our dedicated node
+-      tolerations:
+-      - key: "dedicated"
+-        operator: "Equal"
+-        value: "ghproxy"
+-        effect: "NoSchedule"
+-      nodeSelector:
+-        dedicated: "ghproxy"
+ ---
+ apiVersion: v1
+ kind: Service
+ metadata:
+   labels:
+     app: ghproxy
+-  namespace: default
+   name: ghproxy
+ spec:
+   ports:
+diff --git a/config/prow/cluster/hook_deployment.yaml b/config/prow/cluster/hook_deployment.yaml
+index 6100ae8123..02940f5c1c 100644
+--- a/config/prow/cluster/hook_deployment.yaml
++++ b/config/prow/cluster/hook_deployment.yaml
+@@ -15,12 +15,11 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: hook
+   labels:
+     app: hook
+ spec:
+-  replicas: 4
++  replicas: 2
+   strategy:
+     type: RollingUpdate
+     rollingUpdate:
+@@ -31,6 +30,12 @@ spec:
+       app: hook
+   template:
+     metadata:
++      {{- if .Values.hook.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: hook
+     spec:
+@@ -38,27 +43,32 @@ spec:
+       terminationGracePeriodSeconds: 180
+       containers:
+       - name: hook
+-        image: gcr.io/k8s-prow/hook:v20201109-a36ed74f01
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.hook.image }}
+         imagePullPolicy: Always
+         args:
+-        - --dry-run=false
+-        - --slack-token-file=/etc/slack/token
++        - --kubeconfig=/etc/kubeconfig/config
++        - --dry-run={{ .Values.dryRun }}
+         - --github-endpoint=http://ghproxy
+         - --github-endpoint=https://api.github.com
+-        - --github-token-path=/etc/github/oauth
++        - --github-token-path=/etc/github/token
+         - --config-path=/etc/config/config.yaml
+         - --job-config-path=/etc/job-config
+-        - --kubeconfig=/etc/kubeconfig/config
++        - --deck-url=http://deck/
+         ports:
+           - name: http
+             containerPort: 8888
+         volumeMounts:
+-        - name: slack
+-          mountPath: /etc/slack
+         - name: hmac
+           mountPath: /etc/webhook
+           readOnly: true
+-        - name: oauth
++        - name: github-token
+           mountPath: /etc/github
+           readOnly: true
+         - name: config
+@@ -70,15 +80,11 @@ spec:
+         - name: plugins
+           mountPath: /etc/plugins
+           readOnly: true
+-        - name: cat-api
+-          mountPath: /etc/cat-api
+-          readOnly: true
+-        - name: unsplash-api
+-          mountPath: /etc/unsplash-api
+-          readOnly: true
+         - name: kubeconfig
+           mountPath: /etc/kubeconfig
+           readOnly: true
++        - name: shared-bins
++          mountPath: /shared-bins
+         livenessProbe:
+           httpGet:
+             path: /healthz
+@@ -92,16 +98,26 @@ spec:
+           initialDelaySeconds: 10
+           periodSeconds: 3
+           timeoutSeconds: 600
++      initContainers:
++      - name: aws-iam-authenticator
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        image: {{ .Values.awsIamAuthenticator.image }}
++        command:
++        - cp
++        - /aws-iam-authenticator
++        - /shared-bins/aws-iam-authenticator
++        volumeMounts:
++        - name: shared-bins
++          mountPath: /shared-bins 
+       volumes:
+-      - name: slack
+-        secret:
+-          secretName: slack-token
+       - name: hmac
+         secret:
+           secretName: hmac-token
+-      - name: oauth
++      - name: github-token
+         secret:
+-          secretName: oauth-token
++          secretName: github-token
+       - name: config
+         configMap:
+           name: config
+@@ -111,13 +127,9 @@ spec:
+       - name: plugins
+         configMap:
+           name: plugins
+-      - name: cat-api
+-        configMap:
+-          name: cat-api-key
+-      - name: unsplash-api
+-        secret:
+-          secretName: unsplash-api-key
++      - name: shared-bins
++        emptyDir: {}
+       - name: kubeconfig
+         secret:
+-          defaultMode: 420
++          defaultMode: 0644
+           secretName: kubeconfig
+diff --git a/config/prow/cluster/hook_rbac.yaml b/config/prow/cluster/hook_rbac.yaml
+index 76913a01a9..9c07a0fafc 100644
+--- a/config/prow/cluster/hook_rbac.yaml
++++ b/config/prow/cluster/hook_rbac.yaml
+@@ -1,13 +1,13 @@
++{{ if .Values.hook.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+   name: "hook"
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "hook"
+ rules:
+   - apiGroups:
+@@ -29,9 +29,8 @@ rules:
+       - update
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "hook"
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -40,3 +39,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: "hook"
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/hook_service.yaml b/config/prow/cluster/hook_service.yaml
+index a17b26c4a4..a636b60490 100644
+--- a/config/prow/cluster/hook_service.yaml
++++ b/config/prow/cluster/hook_service.yaml
+@@ -15,16 +15,10 @@
+ apiVersion: v1
+ kind: Service
+ metadata:
+-  labels:
+-    app: hook
+-  namespace: default
+   name: hook
+ spec:
+   selector:
+     app: hook
+   ports:
+-  - name: main
+-    port: 8888
+-  - name: metrics
+-    port: 9090
+-  type: NodePort
++  - port: 8888
++  type: {{ .Values.hook.service.type }}
+diff --git a/config/prow/cluster/horologium_deployment.yaml b/config/prow/cluster/horologium_deployment.yaml
+index 45a92f02c0..300986b16d 100644
+--- a/config/prow/cluster/horologium_deployment.yaml
++++ b/config/prow/cluster/horologium_deployment.yaml
+@@ -15,7 +15,6 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: horologium
+   labels:
+     app: horologium
+@@ -28,6 +27,12 @@ spec:
+       app: horologium
+   template:
+     metadata:
++      {{- if .Values.horologium.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: horologium
+     spec:
+@@ -35,11 +40,19 @@ spec:
+       terminationGracePeriodSeconds: 30
+       containers:
+       - name: horologium
+-        image: gcr.io/k8s-prow/horologium:v20201109-a36ed74f01
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.horologium.image }}
+         args:
+         - --config-path=/etc/config/config.yaml
+         - --job-config-path=/etc/job-config
+-        - --dry-run=false
++        - --dry-run={{ .Values.dryRun }}
++        - --deck-url=http://deck/
+         volumeMounts:
+         - name: config
+           mountPath: /etc/config
+diff --git a/config/prow/cluster/horologium_rbac.yaml b/config/prow/cluster/horologium_rbac.yaml
+index 06bc201dec..e82bf3cea4 100644
+--- a/config/prow/cluster/horologium_rbac.yaml
++++ b/config/prow/cluster/horologium_rbac.yaml
+@@ -1,13 +1,13 @@
++{{ if .Values.horologium.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+   name: "horologium"
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "horologium"
+ rules:
+   - apiGroups:
+@@ -19,9 +19,8 @@ rules:
+       - list
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "horologium"
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -30,3 +29,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: "horologium"
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/prow_controller_manager_deployment.yaml b/config/prow/cluster/prow_controller_manager_deployment.yaml
+index b561548173..6463cef7ec 100644
+--- a/config/prow/cluster/prow_controller_manager_deployment.yaml
++++ b/config/prow/cluster/prow_controller_manager_deployment.yaml
+@@ -15,50 +15,87 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: prow-controller-manager
+   labels:
+     app: prow-controller-manager
+ spec:
+-  # Mutually exclusive with plank. Only one of them may have more than zero replicas.
+   replicas: 1
+-  revisionHistoryLimit: 2
+   selector:
+     matchLabels:
+       app: prow-controller-manager
+   template:
+     metadata:
++      {{- if .Values.prowControllerManager.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: prow-controller-manager
+     spec:
+       serviceAccountName: prow-controller-manager
+       containers:
+       - name: prow-controller-manager
+-        image: gcr.io/k8s-prow/prow-controller-manager:v20201109-a36ed74f01
++        image: {{ .Values.prowControllerManager.image }}
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
+         args:
+         - --config-path=/etc/config/config.yaml
+-        - --dry-run=false
++        - --dry-run={{ .Values.dryRun }}
+         - --enable-controller=plank
+         - --job-config-path=/etc/job-config
++        - --github-token-path=/etc/github/token
++        - --github-endpoint=http://ghproxy
++        - --github-endpoint=https://api.github.com
++        - --deck-url=http://deck/
+         - --kubeconfig=/etc/kubeconfig/config
+         volumeMounts:
+-        - mountPath: /etc/kubeconfig
+-          name: kubeconfig
+-          readOnly: true
+         - name: config
+           mountPath: /etc/config
+           readOnly: true
+         - name: job-config
+           mountPath: /etc/job-config
+           readOnly: true
++        - name: github-token
++          mountPath: /etc/github
++          readOnly: true
++        - name: kubeconfig
++          mountPath: /etc/kubeconfig
++          readOnly: true
++        - name: shared-bins
++          mountPath: /shared-bins
++      initContainers:
++      - name: aws-iam-authenticator
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        image: {{ .Values.awsIamAuthenticator.image }}
++        command:
++        - cp
++        - /aws-iam-authenticator
++        - /shared-bins/aws-iam-authenticator
++        volumeMounts:
++        - name: shared-bins
++          mountPath: /shared-bins
+       volumes:
+-      - name: kubeconfig
++      - name: github-token
+         secret:
+-          defaultMode: 420
+-          secretName: kubeconfig
++          secretName: github-token
+       - name: config
+         configMap:
+           name: config
+       - name: job-config
+         configMap:
+           name: job-config
++      - name: shared-bins
++        emptyDir: {}          
++      - name: kubeconfig
++        secret:
++          defaultMode: 0644
++          secretName: kubeconfig
+diff --git a/config/prow/cluster/prow_controller_manager_rbac.yaml b/config/prow/cluster/prow_controller_manager_rbac.yaml
+index 3cc6b838cc..81a20f9d00 100644
+--- a/config/prow/cluster/prow_controller_manager_rbac.yaml
++++ b/config/prow/cluster/prow_controller_manager_rbac.yaml
+@@ -12,16 +12,16 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++{{ if .Values.prowControllerManager.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+   name: "prow-controller-manager"
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "prow-controller-manager"
+ rules:
+ - apiGroups:
+@@ -46,47 +46,22 @@ rules:
+   - prowjobs
+   verbs:
+   - get
+-  - update
+   - list
+   - watch
+   - update
+   - patch
+----
+-kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: test-pods
+-  name: "prow-controller-manager"
+-rules:
+ - apiGroups:
+-   - ""
++    - ""
+   resources:
+-  - pods
++    - pods
+   verbs:
+-  - create
+-  - delete
+-  - list
+-  - watch
+-  - get
+-  - patch
+----
+-kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: default
+-  name: "prow-controller-manager"
+-roleRef:
+-  apiGroup: rbac.authorization.k8s.io
+-  kind: Role
+-  name: "prow-controller-manager"
+-subjects:
+-- kind: ServiceAccount
+-  name: "prow-controller-manager"
++    - get
++    - list
++    - watch
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: test-pods
+   name: "prow-controller-manager"
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -95,4 +70,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: "prow-controller-manager"
+-  namespace: default
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
+index 0522b531a5..1d4a89a55e 100644
+--- a/config/prow/cluster/sinker_deployment.yaml
++++ b/config/prow/cluster/sinker_deployment.yaml
+@@ -1,7 +1,6 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: sinker
+   labels:
+     app: sinker
+@@ -12,36 +11,65 @@ spec:
+       app: sinker
+   template:
+     metadata:
++      {{- if .Values.sinker.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: sinker
+     spec:
+       serviceAccountName: sinker
+       containers:
+       - name: sinker
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
+         args:
+         - --kubeconfig=/etc/kubeconfig/config
+         - --config-path=/etc/config/config.yaml
+         - --job-config-path=/etc/job-config
+-        - --dry-run=false
+-        image: gcr.io/k8s-prow/sinker:v20201109-a36ed74f01
++        image: {{ .Values.sinker.image }}
+         volumeMounts:
+-        - mountPath: /etc/kubeconfig
+-          name: kubeconfig
+-          readOnly: true
+         - name: config
+           mountPath: /etc/config
+           readOnly: true
+         - name: job-config
+           mountPath: /etc/job-config
+           readOnly: true
++        - name: kubeconfig
++          mountPath: /etc/kubeconfig
++          readOnly: true
++        - name: shared-bins
++          mountPath: /shared-bins
++      initContainers:
++      - name: aws-iam-authenticator
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        image: {{ .Values.awsIamAuthenticator.image }}
++        command:
++        - cp
++        - /aws-iam-authenticator
++        - /shared-bins/aws-iam-authenticator
++        volumeMounts:
++        - name: shared-bins
++          mountPath: /shared-bins
+       volumes:
+-      - name: kubeconfig
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig
+       - name: config
+         configMap:
+           name: config
+       - name: job-config
+         configMap:
+           name: job-config
++      - name: shared-bins
++        emptyDir: {}
++      - name: kubeconfig
++        secret:
++          defaultMode: 0644
++          secretName: kubeconfig
+diff --git a/config/prow/cluster/sinker_rbac.yaml b/config/prow/cluster/sinker_rbac.yaml
+index 938d1fe798..d0481e2f88 100644
+--- a/config/prow/cluster/sinker_rbac.yaml
++++ b/config/prow/cluster/sinker_rbac.yaml
+@@ -1,13 +1,13 @@
++{{ if .Values.sinker.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+   name: "sinker"
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: "sinker"
+ rules:
+   - apiGroups:
+@@ -35,41 +35,18 @@ rules:
+       - events
+     verbs:
+       - create
+----
+-kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: test-pods
+-  name: "sinker"
+-rules:
+   - apiGroups:
+       - ""
+     resources:
+       - pods
+     verbs:
+-      - delete
+       - list
+       - watch
+       - get
+-      - patch
+----
+-kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
+-metadata:
+-  namespace: default
+-  name: "sinker"
+-roleRef:
+-  apiGroup: rbac.authorization.k8s.io
+-  kind: Role
+-  name: "sinker"
+-subjects:
+-- kind: ServiceAccount
+-  name: "sinker"
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: test-pods
+   name: "sinker"
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -78,4 +55,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: "sinker"
+-  namespace: default
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/statusreconciler_deployment.yaml b/config/prow/cluster/statusreconciler_deployment.yaml
+index 9bfaebeb71..d527e3bceb 100644
+--- a/config/prow/cluster/statusreconciler_deployment.yaml
++++ b/config/prow/cluster/statusreconciler_deployment.yaml
+@@ -15,7 +15,6 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: statusreconciler
+   labels:
+     app: statusreconciler
+@@ -33,20 +32,28 @@ spec:
+       terminationGracePeriodSeconds: 180
+       containers:
+       - name: statusreconciler
+-        image: gcr.io/k8s-prow/status-reconciler:v20201109-a36ed74f01
+-        imagePullPolicy: Always
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.statusreconciler.image }}
+         args:
+-        - --dry-run=false
++        - --dry-run={{ .Values.dryRun }}
+         - --continue-on-error=true
+         - --plugin-config=/etc/plugins/plugins.yaml
+         - --config-path=/etc/config/config.yaml
+-        - --github-token-path=/etc/github/oauth
++        - --github-token-path=/etc/github/token
+         - --github-endpoint=http://ghproxy
+         - --github-endpoint=https://api.github.com
+         - --job-config-path=/etc/job-config
+-        - --blacklist=kubernetes/kubernetes
++        - --s3-credentials-file=/etc/s3-credentials/service-account.json
++        - --status-path=s3://{{ .Values.prow.tideStatusReconcilerBucketName }}/status-reconciler-status
++        - --deck-url=http://deck/
+         volumeMounts:
+-        - name: oauth
++        - name: github-token
+           mountPath: /etc/github
+           readOnly: true
+         - name: config
+@@ -58,10 +65,13 @@ spec:
+         - name: plugins
+           mountPath: /etc/plugins
+           readOnly: true
++        - name: s3-credentials
++          mountPath: /etc/s3-credentials
++          readOnly: true
+       volumes:
+-      - name: oauth
++      - name: github-token
+         secret:
+-          secretName: oauth-token
++          secretName: github-token
+       - name: config
+         configMap:
+           name: config
+@@ -71,3 +81,6 @@ spec:
+       - name: plugins
+         configMap:
+           name: plugins
++      - name: s3-credentials
++        secret:
++          secretName: s3-credentials
+diff --git a/config/prow/cluster/statusreconciler_rbac.yaml b/config/prow/cluster/statusreconciler_rbac.yaml
+index e5df87744f..1def1c63f7 100644
+--- a/config/prow/cluster/statusreconciler_rbac.yaml
++++ b/config/prow/cluster/statusreconciler_rbac.yaml
+@@ -1,13 +1,13 @@
++{{ if .Values.statusreconciler.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  namespace: default
+   name: statusreconciler
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: statusreconciler
+ rules:
+   - apiGroups:
+@@ -18,9 +18,8 @@ rules:
+       - create
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: statusreconciler
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -29,3 +28,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: statusreconciler
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/tide_deployment.yaml b/config/prow/cluster/tide_deployment.yaml
+index b5a0033a9c..2fe4bdac30 100644
+--- a/config/prow/cluster/tide_deployment.yaml
++++ b/config/prow/cluster/tide_deployment.yaml
+@@ -15,7 +15,6 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+-  namespace: default
+   name: tide
+   labels:
+     app: tide
+@@ -28,27 +27,43 @@ spec:
+       app: tide
+   template:
+     metadata:
++      {{- if .Values.tide.scrape_metrics }}
++      annotations:
++        prometheus.io/path: /metrics
++        prometheus.io/port: '9090'
++        prometheus.io/scrape: 'true'
++      {{- end }}
+       labels:
+         app: tide
+     spec:
+       serviceAccountName: tide
+       containers:
+       - name: tide
+-        image: gcr.io/k8s-prow/tide:v20201109-a36ed74f01
++        env:
++        - name: AWS_STS_REGIONAL_ENDPOINTS
++          value: regional
++        - name: AWS_ROLE_SESSION_NAME
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.name
++        image: {{ .Values.tide.image }}
+         args:
+-        - --dry-run=false
++        - --dry-run={{ .Values.dryRun }}
+         - --github-endpoint=http://ghproxy
+         - --github-endpoint=https://api.github.com
+-        - --github-token-path=/etc/github/oauth
++        - --github-token-path=/etc/github/token
+         - --config-path=/etc/config/config.yaml
+         - --job-config-path=/etc/job-config
+-        - --history-uri=gs://k8s-prow/tide-history.json
+-        - --status-path=gs://k8s-prow/tide-status-checkpoint.yaml
++        - --history-uri=s3://{{ .Values.prow.tideStatusReconcilerBucketName }}/tide-history.json
++        - --status-path=s3://{{ .Values.prow.tideStatusReconcilerBucketName }}/tide-status
++        - --github-graphql-endpoint=http://ghproxy/graphql
++        - --s3-credentials-file=/etc/s3-credentials/service-account.json
++        - --deck-url=http://deck/
+         ports:
+         - name: http
+           containerPort: 8888
+         volumeMounts:
+-        - name: oauth
++        - name: github-token
+           mountPath: /etc/github
+           readOnly: true
+         - name: config
+@@ -57,13 +72,19 @@ spec:
+         - name: job-config
+           mountPath: /etc/job-config
+           readOnly: true
++        - name: s3-credentials
++          mountPath: /etc/s3-credentials
++          readOnly: true
+       volumes:
+-      - name: oauth
++      - name: github-token
+         secret:
+-          secretName: oauth-token
++          secretName: github-token
+       - name: config
+         configMap:
+           name: config
+       - name: job-config
+         configMap:
+           name: job-config
++      - name: s3-credentials
++        secret:
++          secretName: s3-credentials
+diff --git a/config/prow/cluster/tide_rbac.yaml b/config/prow/cluster/tide_rbac.yaml
+index cff8d7ee43..4c294156ac 100644
+--- a/config/prow/cluster/tide_rbac.yaml
++++ b/config/prow/cluster/tide_rbac.yaml
+@@ -1,15 +1,13 @@
++{{ if .Values.tide.serviceAccount.create }}
+ apiVersion: v1
+ kind: ServiceAccount
+ metadata:
+-  annotations:
+-    iam.gke.io/gcp-service-account: control-plane@k8s-prow.iam.gserviceaccount.com
+-  namespace: default
+   name: tide
++{{ end }}
+ ---
+ kind: Role
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: tide
+ rules:
+   - apiGroups:
+@@ -23,9 +21,8 @@ rules:
+       - watch
+ ---
+ kind: RoleBinding
+-apiVersion: rbac.authorization.k8s.io/v1beta1
++apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: tide
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -34,3 +31,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
+   name: tide
++  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/tide_service.yaml b/config/prow/cluster/tide_service.yaml
+index 59257b6a35..1195cb16c4 100644
+--- a/config/prow/cluster/tide_service.yaml
++++ b/config/prow/cluster/tide_service.yaml
+@@ -15,17 +15,10 @@
+ apiVersion: v1
+ kind: Service
+ metadata:
+-  labels:
+-    app: tide
+-  namespace: default
+   name: tide
+ spec:
+   selector:
+     app: tide
+   ports:
+-  - name: main
+-    port: 80
++  - port: 80
+     targetPort: 8888
+-  - name: metrics
+-    port: 9090
+-  type: ClusterIP
+-- 
+2.35.1
+
