@@ -108,6 +108,14 @@ fi
 
 # Add any additional dependencies we want in the builder-base image here
 
+
+# The base image is the kind-minimal image with a /etc/passwd file
+# based from the minimal base, which is setup manually.  The root
+# user's shell is configured as /sbin/nologin
+# This doesnt work for the builder-base usage in Codebuild which runs 
+# certain commands specifically as root.  We need the shell to be bash.
+usermod --shell /bin/bash root
+
 # directory setup
 mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 
