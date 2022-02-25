@@ -6,7 +6,6 @@ data:
   config.yaml: |
     prowjob_namespace: {{ .Values.prowJobNamespace }}
     pod_namespace: {{ .Values.dataplaneNamespace }}
-
     sinker:
       # defaults to 1 hour
       resync_period: 2m
@@ -14,17 +13,14 @@ data:
       max_pod_age: 12h
       # defaults to max_pod_age
       terminated_pod_ttl: 5m
-
     in_repo_config:
       enabled:
         "*": true
-
     deck:
       branding:
         header_color: "#232F3E"
         logo: "https://distro.eks.amazonaws.com/assets/images/amazon-eks-distro-white-logo.png"
         favicon: "https://distro.eks.amazonaws.com/assets/images/amazon-eks-distro-white-logo.png"
-
       spyglass:
         lenses:
         - lens:
@@ -50,7 +46,6 @@ data:
             name: podinfo
           required_files:
           - podinfo.json
-
     plank:
       job_url_prefix_config:
         "*": https://{{ .Values.prow.domain }}/view/
@@ -69,6 +64,7 @@ data:
             entrypoint: {{ .Values.utility_images.entrypoint }}
             initupload: {{ .Values.utility_images.initupload }}
             sidecar: {{ .Values.utility_images.sidecar }}
+    {{- if gt (len .Values.repositories) 0 }}
     tide:
       queries:
       - labels:
@@ -80,15 +76,12 @@ data:
         - do-not-merge/work-in-progress
         - do-not-merge/invalid-owners-file
         repos:
-        {{- if eq (len .Values.repositories) 0 }} []
-        {{- else }}
-          {{-  range $repo := .Values.repositories }}
-        - {{ $repo.org }}/{{ $repo.name }}
-          {{- end }}
-      merge_method:
         {{-  range $repo := .Values.repositories }}
+          - {{ $repo.org }}/{{ $repo.name }}
+        {{- end }}
+      merge_method:
+      {{-  range $repo := .Values.repositories }}
         {{ $repo.org }}/{{ $repo.name }}: squash
-        {{- end }}
-        {{- end }}
-
+      {{- end }}
+    {{- end }}
     decorate_all_jobs: true

@@ -4,9 +4,8 @@ metadata:
   name: plugins
 data:
   plugins.yaml: |
+    {{- if gt (len .Values.repositories) 0 }}
     plugins:
-    {{- if eq (len .Values.repositories) 0 }} []
-    {{- else }}
       {{- range $repo := .Values.repositories }}
       {{ $repo.org }}/{{ $repo.name }}:
       - approve
