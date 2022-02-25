@@ -13,7 +13,7 @@ verify: install-toolchain prepare-prow-control-plane
 	${CHART_ROOT}/scripts/lint-charts.sh ${STABLE}
 	${CHART_ROOT}/scripts/verify-version.sh ${STABLE}
 
-publish:
+publish: prepare-prow-control-plane
 	${CHART_ROOT}/scripts/publish-charts.sh ${STABLE}
 
 release: install-toolchain publish
@@ -24,8 +24,6 @@ clean:
 help:
 	@grep -E '^[a-zA-Z_-]+:.*$$' $(MAKEFILE_LIST) | sort
 
-prepare-prow-control-plane:
-	${CHART_ROOT}/scripts/prepare-prow-control-plane.sh
-
-
 .PHONY: all build verify package help
+
+include Prow.mk
