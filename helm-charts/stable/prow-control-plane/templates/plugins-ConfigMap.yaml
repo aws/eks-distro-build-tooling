@@ -17,10 +17,12 @@ data:
       - help
       - heart
       - hold
-     - invalidcommitmsg
+      - invalidcommitmsg
       - label
       - lgtm
+      - lifecycle
       - milestone
+      - needs-rebase
       - size
       - trigger
       - verify-owners
