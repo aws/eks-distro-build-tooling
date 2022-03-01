@@ -44,7 +44,7 @@ update-helm-chart:
 	./update_helm_images.sh "$(foreach image,$(IMAGE_NAMES),$(IMAGE_REPO)/$(image):$(IMAGE_TAG))" "$(VALUES_YAML_PATHS)"
 
 .PHONY: build
-build: local-images
+build: local-images update-helm-chart
 
 .PHONY: release
 release: images update-helm-chart
