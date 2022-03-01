@@ -150,10 +150,12 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 			OS:          "linux",
 			Arch:        []string{"amd64", "arm64"},
 			Image: &distrov1alpha1.AssetImage{
-				URI: fmt.Sprintf("%s/kubernetes/%s:%s",
+				URI: fmt.Sprintf("%s/kubernetes/%s:%s-eks-%s-%d",
 					r.ContainerImageRepository,
 					binary,
-					kgv.KubeGitVersion,
+					gitTag,
+					spec.Channel,
+					spec.Number,
 				),
 			},
 		})
