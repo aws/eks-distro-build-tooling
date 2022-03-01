@@ -91,6 +91,7 @@ for FILE in $(find ./ -type f -name "$FILEPATH" ); do
     git add $FILE
 done
 
+cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 if [ $REPO = "eks-distro-build-tooling" ]; then
     git add ./eks-distro-base-minimal-packages/. ./eks-distro-base-updates/.
 fi
