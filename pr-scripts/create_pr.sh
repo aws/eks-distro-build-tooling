@@ -20,7 +20,6 @@ set -x
 
 REPO="$1"
 FILEPATH="$2"
-ADDITIONAL_GIT_ADD="${3:-}"
 
 SED=sed
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -91,8 +90,9 @@ fi
 for FILE in $(find ./ -type f -name "$FILEPATH" ); do
     git add $FILE
 done
-if [ ! -z "${ADDITIONAL_GIT_ADD}" ]; then
-    git add $ADDITIONAL_GIT_ADD
+
+if [ $REPO = "eks-distro-build-tooling" ]; then
+    git add ./eks-distro-base-minimal-packages/. ./eks-distro-base-updates/.
 fi
 if [ $REPO = "eks-distro-prow-jobs" ]; then
     git add ./BUILDER_BASE_TAG_FILE

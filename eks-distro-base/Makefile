@@ -199,7 +199,7 @@ endif
 
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
-	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' 'eks-distro-base-minimal-packages/.'
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
 
 .PHONY: update
 update: buildkit-check $(UPDATE_TARGETS)
