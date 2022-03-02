@@ -39,6 +39,8 @@ function patch::yaml::with::readability(){
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE="$1"
+VALUES_PATH="$2"
+UPDATE_CHART="$3"
 
 if [ $REPO_OWNER = "aws" ]; then
     ORIGIN_ORG="eks-distro-pr-bot"
@@ -53,11 +55,13 @@ CONTROLPLANE_CHARTS_DIR=$REPO_PATH/helm-charts/stable/prow-control-plane
 HELM_VALUES_FILE=$CONTROLPLANE_CHARTS_DIR/values.yaml
 HELM_CHART_FILE=$CONTROLPLANE_CHARTS_DIR/Chart.yaml
 
-patch::yaml::with::readability $CONTROLPLANE_CHARTS_DIR "values.yaml" ".deck.image = \"$IMAGE\""
+patch::yaml::with::readability $CONTROLPLANE_CHARTS_DIR "values.yaml" ".$VALUES_PATH = \"$IMAGE\""
 
 # Updating Prow controlplane chart version to the next patch release
-chart_version=$(yq eval ".version" $HELM_CHART_FILE)
-IFS=. read -r major minor patch <<<"$chart_version"
-((patch++))
-printf -v updated_chart_version '%d.%d.%d' "$major" "$minor" "$((patch))"
-patch::yaml::with::readability $CONTROLPLANE_CHARTS_DIR "Chart.yaml" ".version = \"$updated_chart_version\""
+if [ $UPDATE_CHART -eq 1 ]; then
+    chart_version=$(yq eval ".version" $HELM_CHART_FILE)
+    IFS=. read -r major minor patch <<<"$chart_version"
+    ((patch++))
+    printf -v updated_chart_version '%d.%d.%d' "$major" "$minor" "$((patch))"
+    patch::yaml::with::readability $CONTROLPLANE_CHARTS_DIR "Chart.yaml" ".version = \"$updated_chart_version\""
+fi
