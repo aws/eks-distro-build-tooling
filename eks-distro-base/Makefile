@@ -199,6 +199,7 @@ endif
 
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
+	$(MAKE_ROOT)/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
 
 .PHONY: update
