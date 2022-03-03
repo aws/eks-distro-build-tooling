@@ -25,7 +25,7 @@ import (
 // GetAttacherComponent returns the Component for External Attacher
 func (r *ReleaseConfig) GetAttacherComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	projectSource := "projects/kubernetes-csi/external-attacher"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, "GIT_TAG")
+	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
 	gitTag, err := readTag(tagFile)
 	if err != nil {
 		return nil, errors.Cause(err)
