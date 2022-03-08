@@ -20,4 +20,5 @@ set -x
 
 if command -v amazon-linux-extras &> /dev/null; then
     amazon-linux-extras enable docker
+    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo
 fi
