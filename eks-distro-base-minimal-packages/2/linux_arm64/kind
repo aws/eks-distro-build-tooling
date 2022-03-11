@@ -26,7 +26,7 @@ elfutils-default-yama-scope-0.176-2.amzn2.noarch
 elfutils-libelf-0.176-2.amzn2.aarch64
 elfutils-libs-0.176-2.amzn2.aarch64
 ethtool-4.8-10.amzn2.aarch64
-expat-2.1.0-12.amzn2.0.2.aarch64
+expat-2.1.0-12.amzn2.0.3.aarch64
 file-libs-5.11-36.amzn2.0.1.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
