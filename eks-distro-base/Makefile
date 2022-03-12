@@ -34,10 +34,9 @@ PLATFORMS?=linux/amd64,linux/arm64
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
-IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
-UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
+IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
+UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
-EXPORT_TARGETS=$(addprefix export-minimal-images-, $(MINIMAL_VARIANTS))
 
 BASE_IMAGE_NAME?=eks-distro-base
 BUILDER_IMAGE_NAME?=eks-distro-base
@@ -123,6 +122,7 @@ base-%:
 minimal-images-%:
 	$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
 	$(MAKE) images-minimal-$*-builder VARIANT=minimal-$* IMAGE_TARGET=$*-builder PLATFORMS=$(PLATFORMS) IMAGE_NAME=eks-distro-minimal-$*-builder 
+	$(MAKE) export-minimal-images-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
 
 .PHONY: export-minimal-images-%
 export-minimal-images-%:
@@ -131,8 +131,6 @@ export-minimal-images-%:
 		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)"; \
 	fi
 
-.PHONY: export-minimal-images
-export-minimal-images: $(EXPORT_TARGETS)
 
 # for local development only
 .PHONY: minimal-base-test
