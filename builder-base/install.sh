@@ -267,7 +267,7 @@ tar -xf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 mv hugo $USR_BIN/hugo
 rm -rf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz LICENSE README.md
 
-SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.0}"
+SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.2}"
 git clone https://github.com/containers/skopeo
 cd skopeo
 git checkout $SKOPEO_VERSION
