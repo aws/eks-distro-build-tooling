@@ -34,8 +34,8 @@ PLATFORMS?=linux/amd64,linux/arm64
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
-IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS)) export-minimal-images
-UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) export-minimal-images
+IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
+UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 
 BASE_IMAGE_NAME?=eks-distro-base
