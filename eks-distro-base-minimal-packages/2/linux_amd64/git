@@ -4,7 +4,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
 ca-certificates-2021.2.50-72.amzn2.0.3.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
-expat-2.1.0-12.amzn2.0.2.x86_64
+expat-2.1.0-12.amzn2.0.3.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 fipscheck-1.4.1-6.amzn2.0.2.x86_64
 fipscheck-lib-1.4.1-6.amzn2.0.2.x86_64

@@ -16,7 +16,7 @@ e2fsprogs-libs-1.42.9-19.amzn2.aarch64
 elfutils-default-yama-scope-0.176-2.amzn2.noarch
 elfutils-libelf-0.176-2.amzn2.aarch64
 elfutils-libs-0.176-2.amzn2.aarch64
-expat-2.1.0-12.amzn2.0.2.aarch64
+expat-2.1.0-12.amzn2.0.3.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
