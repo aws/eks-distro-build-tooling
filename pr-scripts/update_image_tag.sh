@@ -22,6 +22,7 @@ REPO="$1"
 OLD_TAG="$2"
 NEW_TAG="$3"
 FILEPATH="$4"
+USE_YQ="$5"
 
 SED=sed
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -38,9 +39,14 @@ fi
 
 REPO_PATH=${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 cp -rf ${SCRIPT_ROOT}/../eks-distro-base-minimal-packages $REPO_PATH
+cp -rf ${SCRIPT_ROOT}/../eks-distro-base-updates $REPO_PATH
 cd $REPO_PATH
 pwd
 
-for FILE in $(find ./ -type f -name "$FILEPATH"); do
-    $SED -i "s,${OLD_TAG},${NEW_TAG}," $FILE
-done
+if [ "$USE_YQ" = "true" ]; then
+    yq -i e "$NEW_TAG" EKS_DISTRO_TAG_FILE.yaml   
+else
+    for FILE in $(find ./ -type f -name "$FILEPATH"); do
+        $SED -i "s,${OLD_TAG},${NEW_TAG}," $FILE
+    done
+fi
