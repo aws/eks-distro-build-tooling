@@ -41,6 +41,8 @@ RUN set -x && \
     # remove unncessary utils and other binary deps that are not needed by nginx during runtime
     remove_package "chkconfig gawk grep info make openssl p11-kit p11-kit-trust sed shadow-utils" && \
     remove_package systemd true && \
+    # cleanup broken symlinks from nginx package and removing p11
+    rm $NEWROOT/usr/share/nginx/html/icons/poweredby.png $NEWROOT/usr/lib64/p11-kit-trust.so && \
     cleanup "nginx"
 
 # envsubst is needed to generate the config, but it comes from the gettext package

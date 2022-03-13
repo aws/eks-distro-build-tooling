@@ -12,48 +12,49 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-set -x
+
 set -e
 set -o pipefail
 
-# LD_LIBRARY_PATH="/newroot/lib64:/newroot/usr/lib64" 
-# for sub_dir in $(find /newroot/usr/lib64 /newroot/lib64 -mindepth 1 -maxdepth 1 -type d); do
-#     LD_LIBRARY_PATH="$sub_dir:$LD_LIBRARY_PATH"
-# done
+NEWROOT_LD_LIBRARY_PATH="/newroot/lib64:/newroot/usr/lib64" 
+for sub_dir in $(find /newroot/usr/lib64 /newroot/lib64 -mindepth 1 -maxdepth 1 -type d); do
+    NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
+done
 
-# # From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
-# binary_to_libraries() {
-#     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-#     LIBS=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH ldd "${1}") 
-#     echo $LIBS \
-#     `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
-#     | sed -E 's#.* => /#/#' \
-#     `# we want only the path remaining, not the (0x${LOCATION})` \
-#     | awk '{print $1}' \
-#     `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
-#     `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
-#     | grep -v 'linux-vdso.so.1'
+export LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
 
-# }
+# From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
+binary_to_libraries() {
+    # see: https://man7.org/linux/man-pages/man1/ldd.1.html
+    ldd "${1}" \
+    `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
+    | sed -E 's#.* => /#/#' \
+    `# we want only the path remaining, not the (0x${LOCATION})` \
+    | awk '{print $1}' \
+    `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
+    `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
+    | grep -v 'linux-vdso.so.1'
 
-# r_val=0
-# for bin in $(find /newroot -executable -type f -not -name "*.so*"); do
-#     if [ ! -f "${bin}" ] || [ ! -x "${bin}" ] || [ "$(binary_to_libraries $bin)" = "not" ]; then
-#         continue
-#     fi
-#     echo "----- Checking $bin   -----"
-#     while IFS= read -r c_dep; do
-#         if [ "${c_dep}" != "not" ]; then
-#             if [[ $c_dep = /newroot/* ]] && [ -f "${c_dep}" ]; then
-#                 continue
-#             fi
-#             if [ ! -f "/newroot${c_dep}" ] && [ ! -f "/newroot/usr${c_dep}" ]; then
-#                 echo "Missing DEP!!! ${c_dep}"
-#                 r_val=1
-#             fi
-#         fi    
-#     done < <(binary_to_libraries "${bin}")
-#     echo "----------------------------"
-# done
+}
 
-# exit $r_val
+r_val=0
+for bin in $(find /newroot -executable -type f -not -name "*.so*"); do
+    if [ ! -f "${bin}" ] || [ ! -x "${bin}" ] || [ "$(binary_to_libraries $bin)" = "not" ]; then
+        continue
+    fi
+    echo "----- Checking $bin   -----"
+    while IFS= read -r c_dep; do
+        if [ "${c_dep}" != "not" ]; then
+            if [[ $c_dep = /newroot/* ]] && [ -f "${c_dep}" ]; then
+                continue
+            fi
+            if [ ! -f "/newroot${c_dep}" ] && [ ! -f "/newroot/usr${c_dep}" ]; then
+                echo "Missing DEP!!! ${c_dep}"
+                r_val=1
+            fi
+        fi    
+    done < <(binary_to_libraries "${bin}")
+    echo "----------------------------"
+done
+
+exit $r_val
