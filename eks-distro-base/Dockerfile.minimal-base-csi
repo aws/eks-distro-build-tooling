@@ -56,12 +56,16 @@ COPY --from=base-csi-builder /tmp/packages/* .
 
 
 ################# VALIDATE ######################
+FROM base-csi-builder as validate-libraries
+
+RUN yum install -y findutils && \
+    validate_libraries
+
 # the al2 version of symlinks does not suppor the -C chroot option
 FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as validate
 
-COPY --from=base-csi-builder /newroot /newroot
-COPY --from=base-csi-builder /usr/bin/validate_libraries /usr/bin/validate_symlinks /usr/bin/
+COPY --from=validate-libraries /newroot /newroot
+COPY --from=validate-libraries /usr/bin/validate_symlinks /usr/bin/
 
 RUN yum install -y symlinks findutils && \
-    validate_libraries && \
     validate_symlinks

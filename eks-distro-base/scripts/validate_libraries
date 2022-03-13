@@ -21,12 +21,11 @@ for sub_dir in $(find /newroot/usr/lib64 /newroot/lib64 -mindepth 1 -maxdepth 1 
     NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
 done
 
-export LD_LIBRARY_PATH="$NEWROOT_LD_LIBRARY_PATH:/lib64:/usr/lib64"
-
 # From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
 binary_to_libraries() {
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    ldd "${1}" \
+    LIBS=$(LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH ldd "${1}") 
+    echo $LIBS \
     `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
     | sed -E 's#.* => /#/#' \
     `# we want only the path remaining, not the (0x${LOCATION})` \
