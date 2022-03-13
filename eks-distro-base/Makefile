@@ -146,7 +146,7 @@ ecr:
 		--image-scanning-configuration  scanOnPush=true || true
 
 .PHONY: build
-build: PLATFORMS?=linux/amd64
+build: PLATFORMS=linux/amd64
 build: $(IMAGE_TARGETS)
 
 .PHONY: release
