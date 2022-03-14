@@ -1,4 +1,7 @@
-SHELL := /bin/bash
+MAKEFLAGS+=--no-builtin-rules --warn-undefined-variables
+SHELL=bash
+.SHELLFLAGS:=-eu -o pipefail -c
+.SUFFIXES:
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
@@ -122,15 +125,17 @@ base-%:
 minimal-images-%:
 	$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
 	$(MAKE) images-minimal-$*-builder VARIANT=minimal-$* IMAGE_TARGET=$*-builder PLATFORMS=$(PLATFORMS) IMAGE_NAME=eks-distro-minimal-$*-builder 
-	$(MAKE) export-minimal-images-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
+	
+	# $(MAKE) export-minimal-images-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
 	$(MAKE) images-minimal-$*-validate VARIANT=minimal-$* IMAGE_TARGET=validate PLATFORMS=$(PLATFORMS)
 
+.SECONDEXPANSION:
+
 .PHONY: export-minimal-images-%
-export-minimal-images-%:
-	if [ "$(JOB_TYPE)" = "postsubmit" ] || \
-		[ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-$*-pushed)" = "true" ]; then \
-		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)"; \
-	fi
+export-minimal-images-%: VARIANT=minimal-$*
+export-minimal-images-%: IMAGE_NAME=eks-distro-minimal-$*-builder
+export-minimal-images-%: foo
+# $(MAKE) images-minimal-$*-export BUILDER_IMAGE=$(IMAGE) DOCKERFILE=Dockerfile.export-minimal IMAGE_TARGET=export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)"
 
 
 # for local development only

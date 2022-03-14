@@ -12,11 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Using one multistage Dockerfile since we use buildkit in prow
-# there is no image repo so building images that build on each other 
-# is not supported, unless we do a multistage build like the following
-# where the caching system can be used for subsequent target builds
-
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
 
