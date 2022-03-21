@@ -20,9 +20,9 @@ echo "Running install.sh in $(pwd)"
 
 yum install -y jq
 
-KUBECTL_VERSION=v1.20.7
-EKS_D_RELEASE_BRANCH=1-20
-EKS_D_RELEASE_NUMBER=8
+KUBECTL_VERSION=v1.22.6
+EKS_D_RELEASE_BRANCH=1-22
+EKS_D_RELEASE_NUMBER=3
 curl -sSL "https://distro.eks.amazonaws.com/kubernetes-${EKS_D_RELEASE_BRANCH}/releases/${EKS_D_RELEASE_NUMBER}/artifacts/kubernetes/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o /bin/kubectl
 chmod +x /bin/kubectl
 
