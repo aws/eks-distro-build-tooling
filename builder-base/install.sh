@@ -239,7 +239,7 @@ npm install
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.15}"
-setupgo "${GOLANG115_VERSION:-1.16.12}"
+setupgo "${GOLANG116_VERSION:-1.16.12}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
