@@ -185,8 +185,6 @@ setupgo() {
     ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
 }
 
-setupgo "${GOLANG117_VERSION:-1.17.5}"
-
 if [ $TARGETARCH == 'arm64' ]; then
     exit
 fi
@@ -241,6 +239,7 @@ npm install
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.15}"
+setupgo "${GOLANG115_VERSION:-1.16.12}"
 
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
