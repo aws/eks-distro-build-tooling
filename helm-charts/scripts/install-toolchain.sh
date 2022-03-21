@@ -24,10 +24,10 @@ TMP_DIR="${BUILD_DIR}/tmp"
 mkdir -p "${TOOLS_DIR}"
 
 HELM_VERSION=v3.7.1
-KUBECTL_VERSION=v1.20.7
+KUBECTL_VERSION=v1.22.6
 KIND_VERSION=v0.11.1
-RELEASE_BRANCH=1-20
-RELEASE=8
+RELEASE_BRANCH=1-22
+RELEASE=3
 
 ## Install kubectl
 if ! command -v kubectl &> /dev/null; then
