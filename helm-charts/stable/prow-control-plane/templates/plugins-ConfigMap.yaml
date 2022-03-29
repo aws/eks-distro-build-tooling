@@ -24,7 +24,6 @@ data:
       {{ $repo.org }}/{{ $repo.name }}:
       - approve
       - assign
-      - blunderbuss
       - cat
       - dog
       - golint
