@@ -91,7 +91,6 @@ var releaseCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-
 		err = pkg.UpdateImageDigests(ecrPublicClient, releaseConfig, componentsTable)
 		if err != nil {
 			fmt.Printf("Error updating image digests: %+v\n", err)
