@@ -30,6 +30,9 @@ EXIT_CODE=0
 cd $CHARTS_DIR
 for chart in *; do
   DIFF_CHECK_TARGETS="$chart/templates $chart/values.yaml"
+  if [ $chart = "prow-control-plane" ]; then
+    DIFF_CHECK_TARGETS="$GIT_REPO_ROOT/helm-charts/patches/prow-control-plane"
+  fi
   if [ $chart = "amazon-eks-pod-identity-webhook" ]; then
     DIFF_CHECK_TARGETS="$chart/config $DIFF_CHECK_TARGETS"
   fi
