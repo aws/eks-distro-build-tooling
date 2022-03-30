@@ -465,7 +465,8 @@ index fcb4771628..ff76c7ad5e 100644
      app: deck
    ports:
 -  - name: main
-     port: 80
+-    port: 80
++  - port: 80
      targetPort: 8080
 -  - name: metrics
 -    port: 9090
