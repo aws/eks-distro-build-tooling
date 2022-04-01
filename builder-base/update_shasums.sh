@@ -27,7 +27,7 @@ for TARGETARCH in arm64 amd64; do
 
     # YQ
     readarray -t yq_checksum_order <<< $(curl -sSL --retry 5 $YQ_CHECKSUM_ORDER_URL)
-    yq_checksums=$(curl -sSL --retry 5 $YQ_CHECKSUM_URL | grep -r yq_linux_$TARGETARCH | cut -d ":" -f 2)
+    yq_checksums=$(curl -sSL --retry 5 $YQ_CHECKSUM_URL | grep yq_linux_$TARGETARCH | cut -d ":" -f 2)
     IFS=' ' read -r -a yq_checksums_ar <<< "$yq_checksums"
 
     yq_checksum_index=-1

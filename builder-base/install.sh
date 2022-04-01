@@ -185,7 +185,8 @@ setupgo() {
     ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
 }
 
-setupgo "${GOLANG117_VERSION:-1.17.5}"
+setupgo "${GOLANG117_VERSION:-1.17.8}"
+setupgo "${GOLANG117_VERSION:-1.18}"
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
@@ -210,12 +211,12 @@ sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
 unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_BIN
 rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 
-# go-licenses doesnt have any release tags, using the latest master
+
 # installing go-licenses has to happen after we have set the main go
 # to symlink to the one in /root/sdk due to ensure go-licenses gets built
 # with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
 # to properly find core go packages
-GO111MODULE=on go get github.com/google/go-licenses@v0.0.0-20210816172045-3099c18c36e1
+GO111MODULE=on go get github.com/google/go-licenses@v1.0.0
 
 # linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
 # We need a higher version of linuxkit hence we do go get of a particular commit
