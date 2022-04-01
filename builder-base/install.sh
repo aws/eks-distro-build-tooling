@@ -186,7 +186,7 @@ setupgo() {
 }
 
 setupgo "${GOLANG117_VERSION:-1.17.8}"
-setupgo "${GOLANG117_VERSION:-1.18.0}"
+setupgo "${GOLANG117_VERSION:-1.18}"
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
