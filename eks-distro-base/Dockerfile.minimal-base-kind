@@ -45,7 +45,7 @@ RUN set -x && \
     clean_install coreutils && \
     clean_install findutils && \
     install_if_al2 amazon-linux-extras && \    
-    clean_install "containerd curl ethtool hostname iproute nfs-utils pigz procps rsync libseccomp socat systemd tar udev util-linux which yum" && \
+    clean_install "containerd curl ethtool hostname iproute jq lockdev nfs-utils pigz procps rsync libseccomp socat systemd tar util-linux which yum" && \
     cleanup "kind"
 
 
