@@ -176,17 +176,17 @@ find /usr/share/{doc,man} -type f \
 # the function again with the specific parameter.
 setupgo() {
     local -r version=$1
-    go get golang.org/dl/go${version}
+    go install golang.org/dl/go${version}@latest
     go${version} download
     # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
+    local -r majorversion=$(cut -d. -f"1,2" <<< $version)
     mkdir -p ${GOPATH}/go${majorversion}/bin
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
     ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
 }
 
 setupgo "${GOLANG117_VERSION:-1.17.8}"
-setupgo "${GOLANG117_VERSION:-1.18}"
+setupgo "${GOLANG118_VERSION:-1.18}"
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
