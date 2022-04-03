@@ -200,11 +200,15 @@ create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
 
 .PHONY: update
-update: buildkit-check $(UPDATE_TARGETS)
+update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
 update-base-image-other-repos:
 	./update_base_image_other_repos.sh
+
+.PHONY: open-pr-check
+open-pr-check:
+	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling
 
 .PHONY: all
 all: release
