@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Using one multistage Dockerfile since we use buildkit in prow
-# there is no image repo so building images that build on each other 
-# is not supported, unless we do a multistage build like the following
-# where the caching system can be used for subsequent target builds
 
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
@@ -23,7 +19,8 @@
 ################# BUILDER ######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
-FROM ${BUILDER_IMAGE} as base-builder
+ARG BUILT_BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as builder
 
 ENV DOWNLOAD_DIR /tmp/download
 ENV NEWROOT /newroot
@@ -53,20 +50,21 @@ RUN set -x && \
     clean_install ca-certificates true true true && \
     update-ca-trust && \
     cp -rf /etc/pki $NEWROOT/etc && \
-    remove_package "$FAKE_INSTALLS" true && \    
+    remove_package "$FAKE_INSTALLS" true && \
+    # uneccessary symlink to debuginfo which will not exist in these images
+    unlink $NEWROOT/usr/lib/debug/usr/.dwz && \
     cleanup "base"
 
 COPY files/ $NEWROOT
 
+RUN validate_libraries && \
+    validate_symlinks
+
 
 ################# BASE ########################
-FROM ${BASE_IMAGE} as base
+FROM ${BUILT_BUILDER_IMAGE} as base-builder
+FROM ${BASE_IMAGE} as final
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 USER 0
 
 COPY --from=base-builder /newroot /
-
-
-################# EXPORT ######################
-FROM scratch as base-export
-COPY --from=base-builder /tmp/packages/* .

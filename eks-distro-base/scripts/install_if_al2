@@ -21,5 +21,5 @@ set -x
 PACKAGES="$1"
 
 if ! grep -q "2022" "/etc/os-release"; then 
-    clean_install $PACKAGES
+    clean_install "$PACKAGES"
 fi

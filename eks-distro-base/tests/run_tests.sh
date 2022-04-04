@@ -131,9 +131,33 @@ function check_csi() {
     fi
  }
 
+ check_haproxy() {
+    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
+        echo "haproxy issue!"
+        exit 1
+    fi
+ }
+
+ check_nginx() {
+    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
+        echo "nginx issue!"
+        exit 1
+    fi
+ }
+
+ check_kind() {
+    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
+        echo "kind issue!"
+        exit 1
+    fi
+ }
+
 check_base
 check_glibc
 check_iptables
 check_csi
 check_git
 check_docker_client
+check_haproxy
+check_nginx
+check_kind

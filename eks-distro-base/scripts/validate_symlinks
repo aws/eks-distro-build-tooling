@@ -13,24 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 set -e
 set -o pipefail
-set -x
 
-VARIANT="$1"
+cd /newroot 
 
-clean_docs $NEWROOT
+EXPECTED_DANGLING_LINKS=("/var/lock" "/etc/mtab")
 
-clean_yum
-rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum
+GREPS=""
+for expected in "${EXPECTED_DANGLING_LINKS[@]}"; do
+    GREPS+="-e $expected "
+done
 
-# al2202 build includes this folder during some rpm installs, removing since its a bad symlink
-rm -rf $NEWROOT/usr/lib/.build-id
+DANGLING="$(symlinks -C -r . | grep "dangling" | grep -v $GREPS || true)"
 
-# generate final packages list
-mkdir -p /tmp/packages
-rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT
-echo "*** FINAL PACKAGES FOR ${VARIANT^^} ***"
-cat /tmp/packages/$VARIANT && \
-echo "*******************************"
+if [ ! -z "$(echo $DANGLING | xargs)" ]; then
+    echo "$DANGLING"
+    exit 1
+fi
