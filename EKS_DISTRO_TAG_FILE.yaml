@@ -6,8 +6,8 @@ al2:
   eks-distro-minimal-base-iptables: 2022-03-09-1646784337.2
   eks-distro-minimal-base-docker-client: 2022-03-09-1646784337.2
   eks-distro-minimal-base-csi: 2022-03-16-1647457250.2
-  eks-distro-minimal-base-haproxy: rebuild
-  eks-distro-minimal-base-kind: rebuild
+  eks-distro-minimal-base-haproxy: 2022-04-04-1649084514.2
+  eks-distro-minimal-base-kind: 2022-04-04-1649084514.2
   eks-distro-minimal-base-nginx: 2022-03-16-1647457250.2
   eks-distro-minimal-base-git: 2022-03-16-1647457250.2
 al2022:
