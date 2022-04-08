@@ -39,5 +39,4 @@ else
     fi
 fi
 
-clean_yum
 rm -rf $DOWNLOAD_DIR

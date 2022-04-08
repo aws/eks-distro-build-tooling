@@ -12,26 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Using one multistage Dockerfile since we use buildkit in prow
-# there is no image repo so building images that build on each other 
-# is not supported, unless we do a multistage build like the following
-# where the caching system can be used for subsequent target builds
 
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
 
 ################# BUILDER ######################
-
-#### Sketch alert ####
-# We are pulling docker/container from al2 since it is not currently provided by al2022
-# when al2022 adds these as packages we would want to switch asap
-# Looking at the dependencies to the docker and containerd binaries, its really just libc
-# From looking at upstream docs using a binary built against an older libc with a newer libc, which
-# is what we would be doing here, *should* be ok
-######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
-FROM ${BUILDER_IMAGE} as base-docker-client-builder
+ARG BUILT_BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as builder
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
 
 RUN set -x && \
     # we only want the docker client cli and not the service
@@ -45,12 +39,5 @@ RUN set -x && \
     rm $NEWROOT/usr/bin/dockerd && \
     cleanup "docker-client"
 
-
-################# DOCKER CLIENT ####################
-FROM ${BASE_IMAGE} as base-docker-client
-COPY --from=base-docker-client-builder /newroot /
-
-
-################# EXPORT ######################
-FROM scratch as base-docker-client-export
-COPY --from=base-docker-client-builder /tmp/packages/* .
+RUN validate_libraries && \
+    validate_symlinks

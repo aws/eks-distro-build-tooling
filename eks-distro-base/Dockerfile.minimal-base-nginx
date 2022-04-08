@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Using one multistage Dockerfile since we use buildkit in prow
-# there is no image repo so building images that build on each other 
-# is not supported, unless we do a multistage build like the following
-# where the caching system can be used for subsequent target builds
 
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
@@ -23,7 +19,13 @@
 ################# BUILDER ######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
-FROM ${BUILDER_IMAGE} as base-nginx-builder
+ARG BUILT_BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as builder
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
 
 # This image will include bash because the downstream eks-anywhere-test image needs it
 # for its entrypoint
@@ -36,6 +38,8 @@ RUN set -x && \
     # remove unncessary utils and other binary deps that are not needed by nginx during runtime
     remove_package "chkconfig gawk grep info make openssl p11-kit p11-kit-trust sed shadow-utils" && \
     remove_package systemd true && \
+    # cleanup broken symlinks from nginx package and removing p11
+    rm -f $NEWROOT/usr/share/nginx/html/icons/poweredby.png $NEWROOT/usr/lib64/p11-kit-trust.so && \
     cleanup "nginx"
 
 # envsubst is needed to generate the config, but it comes from the gettext package
@@ -45,12 +49,5 @@ RUN set -x && \
     cd /newroot && \
     rpm2cpio /tmp/downloads/gettext*.rpm | cpio -idv ./usr/bin/envsubst
 
-
-################# NGINX ####################
-FROM ${BASE_IMAGE} as base-nginx
-COPY --from=base-nginx-builder /newroot /
-
-
-################# EXPORT ######################
-FROM scratch as base-nginx-export
-COPY --from=base-nginx-builder /tmp/packages/* .
+RUN validate_libraries && \
+    validate_symlinks

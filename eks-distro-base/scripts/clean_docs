@@ -20,8 +20,11 @@ set -x
 
 mkdir -p $NEWROOT/usr/share/{doc,man}
 
-find $NEWROOT/usr/share/{doc,man} -type f \
-    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-    -delete
-    
+# to get all symlinks run twice
+for i in {1..2}; do
+    find $NEWROOT/usr/share/{doc,man} \( -xtype l -o -type f \) \
+        ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+        -delete -print
+done
+
 find $NEWROOT/usr/share/{doc,man} -type d -empty -delete

@@ -1,83 +1,75 @@
-SHELL := /bin/bash
+# Disable built-in rules and variables
+MAKEFLAGS+=--no-builtin-rules --warn-undefined-variables
+SHELL=bash
+.SHELLFLAGS:=-eu -o pipefail -c
+.SUFFIXES:
+
+BASE_DIRECTORY=$(shell git rev-parse --show-toplevel)
+MAKE_ROOT=$(BASE_DIRECTORY)/eks-distro-base
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 AWS_REGION?=us-west-2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 BASE_IMAGE_REPO?=$(IMAGE_REPO)
-IMAGE_NAME?=eks-distro-$(VARIANT)
-IMAGE_TAG?=$(shell date "+%F-%s")
-IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+JOB_TYPE?=
 
 # base and minimal-base use al2 as the base image
 AL_TAG?=2
-BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
-BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+# tag al2 build with latest.2 and latest for backward compat
+LATEST=$(if $(filter $(AL_TAG),2022),latest.2022,latest latest.2)
 
-LATEST?=latest
-
-ifeq (2022,$(AL_TAG))
-	LATEST:=$(LATEST).2022
-else
-	# tag al2 build with latest.2 and latest for backward compat
-	LATEST:=$(LATEST) $(LATEST).2
-endif
-
-LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
-LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
-
-VARIANT?=base
-IMAGE_TARGET?=base
-DOCKERFILE?=Dockerfile.$(VARIANT)
 PLATFORMS?=linux/amd64,linux/arm64
 
-MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
-
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
-IMAGE_TARGETS=base-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
-UPDATE_TARGETS=base-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
-CREATE_PR_TARGETS=base-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
+IMAGE_TAG?=$(shell date "+%F-%s")
+IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 BASE_IMAGE_NAME?=eks-distro-base
-BUILDER_IMAGE_NAME?=eks-distro-base
-BASE_IMAGE_TAG?=$(IMAGE_TAG)
-
-BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
-
-ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-nonroot minimal-base-glibc))
-	BASE_IMAGE_NAME=eks-distro-minimal-base
-	BUILDER_IMAGE_NAME=eks-distro-minimal-base-builder
-	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base)
-else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-iptables minimal-base-csi minimal-base-git minimal-base-docker-client minimal-base-nginx minimal-base-haproxy))
-	BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
-	BUILDER_IMAGE_NAME=eks-distro-minimal-base-glibc-builder
-	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-glibc)
-else ifeq ($(VARIANT),$(filter $(VARIANT), minimal-base-kind))
-	BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
-	BUILDER_IMAGE_NAME=eks-distro-minimal-base-iptables-builder
-	BASE_IMAGE_TAG=$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-iptables)
-else ifeq ($(VARIANT), minimal-base)
-	BASE_IMAGE=scratch
-endif
+BUILDER_IMAGE_NAME?=$(BASE_IMAGE_NAME)-builder
 
 # if the image was built, either via this being a pre/post submit job
 # or a periodic which pushed and created the -pushed file
 # use the current IMAGE_TAG as the tag
 # if not, use the image tag that will be pulled from the TAG_FILE
-# in the previous if/else block
-ifneq ($(VARIANT),$(filter $(VARIANT), base minimal-base))
-	BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
-	BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
-	ifneq ($(and $(JOB_TYPE), $(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit)),)
-		BASE_IMAGE_TAG=$(IMAGE_TAG)
-	 else ifeq ($(shell cat $(MAKE_ROOT)/$(BASE_IMAGE_NAME)-pushed), true)		
-	 	BASE_IMAGE_TAG=$(IMAGE_TAG)
-	endif
-endif
+BASE_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
+BUILT_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(IMAGE_NAME:%-builder=%))
+BASE_IMAGE_TAG=$(if $(or \
+	$(and $(JOB_TYPE), $(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit)), \
+	$(filter $(shell cat $(MAKE_ROOT)/$(BASE_IMAGE_NAME)-pushed), true)),$(IMAGE_TAG),$(BASE_IMAGE_TAG_FROM_FILE))
+
+BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
+BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
+BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(IMAGE_TAG)
+
+LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
+LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
+
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
+IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
+UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
+CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
+
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
+
+define BUILDCTL
+	buildctl \
+		build \
+		--frontend dockerfile.v0 \
+		--opt filename=$(DOCKERFILE) \
+		--opt platform=$(PLATFORMS) \
+		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
+		--opt build-arg:BUILT_BUILDER_IMAGE=$(BUILT_BUILDER_IMAGE) \
+		--progress plain \
+		--local dockerfile=./ \
+		--local context=. \
+		--opt target=$(IMAGE_TARGET) \
+		--output type=$(IMAGE_OUTPUT_TYPE),oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",$(IMAGE_OUTPUT)
+endef
+
 
 ## --------------------------------------
 ## Help
@@ -91,65 +83,90 @@ help: ## Display this help
 buildkit-check:
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
 
+.PHONY: open-pr-check
+open-pr-check:
+	${MAKE_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
+	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling
+
+##@ Image Targets
+
+.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
 # see the README.md on how to run these targets locally
-.PHONY: images-%
-images-%: buildkit-check
+
+# base image overides
+standard-images %-minimal-images-base: BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+standard-images %-minimal-images-base: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+
+# images with custom "base" targets
+final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy: DOCKERFILE=Dockerfile.$(VARIANT)
+
+# dep tree
+%-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
+%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+%-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
+
+# push standard/builder/base image targets
+standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT_TYPE=image
+standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT=push=true
+
+# Standard distro-base image build
+standard-images: DOCKERFILE=Dockerfile.base
+standard-images: IMAGE_TARGET=final
+standard-images: IMAGE_NAME=eks-distro-base
+standard-images:
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
 	fi
-	buildctl \
-		build \
-		--frontend dockerfile.v0 \
-		--opt filename=$(DOCKERFILE) \
-		--opt platform=$(PLATFORMS) \
-		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
-		--progress plain \
-		--local dockerfile=./ \
-		--local context=. \
-		--opt target=$(IMAGE_TARGET) \
-		--output $(BUILDKIT_OUTPUT)
+	$(call BUILDCTL)
 
-# Standard distro-base image build
-.PHONY: base-%
-base-%:
-	$(MAKE) $*-base PLATFORMS=$(PLATFORMS)
+# minimal base main target
+# the implicit matching messes make's ordering of the prereqs for this target, not sure why
+# use an eval to "hardcode" the target and prereqs instead
+# $1 - Variant
+define MINIMAL_IMAGE_TARGET
+	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1)
 
-.PHONY: minimal-images-%
-minimal-images-%:
-	$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
-	$(MAKE) images-minimal-$*-builder VARIANT=minimal-$* IMAGE_TARGET=$*-builder PLATFORMS=$(PLATFORMS) IMAGE_NAME=eks-distro-minimal-$*-builder 
-	$(MAKE) export-minimal-images-$* VARIANT=minimal-$* IMAGE_TARGET=$* PLATFORMS=$(PLATFORMS)
+endef
 
-.PHONY: export-minimal-images-%
-export-minimal-images-%:
-	if [ "$(JOB_TYPE)" = "postsubmit" ] || \
-		[ "$(shell cat $(MAKE_ROOT)/eks-distro-minimal-$*-pushed)" = "true" ]; then \
-		$(MAKE) images-minimal-$* VARIANT=minimal-$* IMAGE_TARGET=$*-export PLATFORMS=$(PLATFORMS) BUILDKIT_OUTPUT="type=local,dest=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)"; \
+$(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
+
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: VARIANT=minimal-$*
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
+
+builder-minimal-images-%: IMAGE_TARGET=builder
+builder-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)-builder
+builder-minimal-images-%:
+	$(call BUILDCTL)
+
+final-minimal-images-%: IMAGE_TARGET=final
+final-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
+final-minimal-images-%:
+	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
+		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
 	fi
+	$(call BUILDCTL)
+
+packages-export-minimal-images-%: IMAGE_TARGET=export
+packages-export-minimal-images-%: IMAGE_OUTPUT_TYPE=local
+packages-export-minimal-images-%: IMAGE_OUTPUT_DIR=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)
+packages-export-minimal-images-%: IMAGE_OUTPUT=dest=$(IMAGE_OUTPUT_DIR)
+packages-export-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
+packages-export-minimal-images-%:
+	$(call BUILDCTL)
 
 
-# for local development only
-.PHONY: minimal-base-test
-minimal-base-test: 
-	./tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG)
+# These vars are all to make sure we pull the public images from ecr vs building locally
+# for use when periodic does not properly update packages and we want to update them manually
+.PHONY: packages-export-all-minimal-images
+packages-export-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
+packages-export-all-minimal-images: IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
+packages-export-all-minimal-images: $(addprefix packages-export-minimal-images-, $(MINIMAL_VARIANTS))
 
-.PHONY: ecr
-ecr:
-	aws ecr create-repository \
-		--repository-name $(IMAGE_NAME) \
-		--image-tag-mutability IMMUTABLE \
-		--image-scanning-configuration  scanOnPush=true || true
-
-.PHONY: build
-build: PLATFORMS=linux/amd64
-build: $(IMAGE_TARGETS)
-
-.PHONY: release
-release: $(IMAGE_TARGETS)
+##@ Update targets
 
 .PHONY: update-%
 update-%: UPDATE_TARGET?=images-$*
@@ -163,13 +180,15 @@ update-%:
 		exit 1; \
 	fi
 
-.PHONY: base-update
+.PHONY: standard-update
 base-update:
 	$(MAKE) update-base
 
 .PHONY: minimal-update-%
 minimal-update-%:
 	$(MAKE) update-$* UPDATE_TARGET=minimal-images-$* VARIANT=minimal-$*
+
+##@ PR Targets
 
 # Update tag files in and create PR against eks-distro-build-tooling and eks-distro repos
 .PHONY: create-pr-%
@@ -180,7 +199,7 @@ create-pr-%: ensure-repo-owner
 		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME) $(AL_TAG); \
 	fi
 
-.PHONY: base-create-pr
+.PHONY: standard-create-pr
 base-create-pr:
 	$(MAKE) create-pr-base
 
@@ -195,6 +214,16 @@ ifndef REPO_OWNER
 	This is used to raise a pull request against your org after updating tags in the respective files.)
 endif
 
+
+##@ Primary Targets
+
+.PHONY: build
+build: PLATFORMS=linux/amd64
+build: buildkit-check $(IMAGE_TARGETS)
+
+.PHONY: release
+release: buildkit-check $(IMAGE_TARGETS)
+
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
@@ -206,19 +235,30 @@ update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 update-base-image-other-repos:
 	./update_base_image_other_repos.sh
 
-.PHONY: open-pr-check
-open-pr-check:
-	${MAKE_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
-	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling
-
 .PHONY: all
 all: release
+
+
+##@ Local Targets
+
+# for local development only
+.PHONY: minimal-base-test
+minimal-base-test: 
+	./tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG)
+
+.PHONY: ecr
+ecr:
+	aws ecr create-repository \
+		--repository-name $(IMAGE_NAME) \
+		--image-tag-mutability IMMUTABLE \
+		--image-scanning-configuration  scanOnPush=true || true
+
 
 ## --------------------------------------
 ## Document dynamic build targets
 ## --------------------------------------
 
-base-images: ## Build and push standard full base image
+standard-images: ## Build and push standard full base image
 minimal-images-base: ## Build and push minimal base image with base-system/ca-certs/user/nsswitch
 minimal-images-base-nonroot: ## Build and push minimal base image nonroot variant
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
@@ -230,18 +270,18 @@ minimal-images-base-nginx: ## Build and push minimal base image with nginx for u
 minimal-images-base-haproxy: ## Build and push minimal base image with haproxy for use by the kind haproxy image
 minimal-images-base-kind: ## Build and push minimal base image with containerd and other deps for the kind base image
 
-export-minimal-images-base: ## Export packages included in base minimal images
-export-minimal-images-base-nonroot: ## Export packages included in base minimal images
-export-minimal-images-base-glibc: ## Export packages included in glibc minimal images
-export-minimal-images-base-iptables: ## Export packages included in iptables minimal images
-export-minimal-images-base-csi: ## Export packages included in csi minimal images
-export-minimal-images-base-git: ## Export packages included in git minimal images
-export-minimal-images-base-docker-client: ## Export packages included in docker client minimal images
-export-minimal-images-base-nginx: ## Export packages included in nginx minimal images
-export-minimal-images-base-haproxy: ## Export packages included in haproxy minimal images
-export-minimal-images-base-kind: ## Export packages included in kind minimal images
+packages-export-minimal-images-base: ## Export packages included in base minimal images
+packages-export-minimal-images-base-nonroot: ## Export packages included in base minimal images
+packages-export-minimal-images-base-glibc: ## Export packages included in glibc minimal images
+packages-export-minimal-images-base-iptables: ## Export packages included in iptables minimal images
+packages-export-minimal-images-base-csi: ## Export packages included in csi minimal images
+packages-export-minimal-images-base-git: ## Export packages included in git minimal images
+packages-export-minimal-images-base-docker-client: ## Export packages included in docker client minimal images
+packages-export-minimal-images-base-nginx: ## Export packages included in nginx minimal images
+packages-export-minimal-images-base-haproxy: ## Export packages included in haproxy minimal images
+packages-export-minimal-images-base-kind: ## Export packages included in kind minimal images
 
-base-update:  ## Check for out of date packages on standard full base image and push new
+standard-update:  ## Check for out of date packages on standard full base image and push new
 minimal-base-update: ## Check for out of date packages on minimal base image and push new
 minimal-base-nonroot-update: ## Check for out of date packages on minimal nonroot base image and push new
 minimal-base-glibc-update: ## Check for out of date packages on minimal glibc base image and push new
@@ -253,7 +293,7 @@ minimal-base-nginx: ## Check for out of date packages on minimal nginx base imag
 minimal-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
 minimal-base-kind: ## Check for out of date packages on minimal kind base image and push new
 
-base-create-pr:  ## Update standard base image tag if pushed
+standard-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
 minimal-base-nonroot-create-pr: ## Update minimal base nonroot image tag if pushed
 minimal-base-glibc-create-pr: ## Update minimal base glibc image tag if pushed

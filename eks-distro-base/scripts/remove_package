@@ -35,7 +35,6 @@ for rpm in "${RPMS[@]}"; do
     fi
 done
 rpm --root $NEWROOT --nodeps $JUSTDB -e $FINAL_RPMS
-clean_yum
 
 # autoremove does not always look at the full dep tree and sometimes needs to
 # be run multiple times to get everything that can safely be removed
@@ -43,5 +42,3 @@ while ! yum --installroot $NEWROOT autoremove -y | tee /dev/stderr | grep -q 'No
 do
     :
 done
-
-clean_yum

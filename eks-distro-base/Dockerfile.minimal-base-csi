@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Using one multistage Dockerfile since we use buildkit in prow
-# there is no image repo so building images that build on each other 
-# is not supported, unless we do a multistage build like the following
-# where the caching system can be used for subsequent target builds
 
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
@@ -27,7 +23,13 @@
 
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
-FROM ${BUILDER_IMAGE} as base-csi-builder
+ARG BUILT_BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as builder
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
 
 RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
@@ -39,12 +41,5 @@ RUN set -x && \
     remove_package systemd true && \
     cleanup "csi"
 
-
-################# CSI ####################
-FROM ${BASE_IMAGE} as base-csi
-COPY --from=base-csi-builder /newroot /
-
-
-################# EXPORT ######################
-FROM scratch as base-csi-export
-COPY --from=base-csi-builder /tmp/packages/* .
+RUN validate_libraries && \
+    validate_symlinks
