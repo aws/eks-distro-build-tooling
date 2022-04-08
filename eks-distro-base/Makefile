@@ -208,6 +208,7 @@ update-base-image-other-repos:
 
 .PHONY: open-pr-check
 open-pr-check:
+	${MAKE_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
 	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling
 
 .PHONY: all
