@@ -104,6 +104,7 @@ standard-images %-minimal-images-base: BUILDER_IMAGE=public.ecr.aws/amazonlinux/
 final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy: DOCKERFILE=Dockerfile.$(VARIANT)
 
 # dep tree
+%-minimal-images-base: BASE_IMAGE=scratch
 %-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
 %-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 %-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
