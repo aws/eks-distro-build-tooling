@@ -18,8 +18,8 @@ fuse-libs-2.9.9-13.amzn2022.aarch64
 gawk-5.1.0-3.amzn2022.aarch64
 gdbm-libs-1.19-2.amzn2022.aarch64
 glibc-2.34-8.amzn2022.aarch64
-glibc-all-langpacks-2.34-8.amzn2022.aarch64
 glibc-common-2.34-8.amzn2022.aarch64
+glibc-minimal-langpack-2.34-8.amzn2022.aarch64
 gmp-6.2.0-6.amzn2022.aarch64
 gpg-pubkey-afaa0026-6185c6ab
 grep-3.6-4.amzn2022.aarch64

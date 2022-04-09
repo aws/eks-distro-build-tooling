@@ -4,11 +4,13 @@ ca-certificates-2021.2.50-1.0.amzn2022.0.2.noarch
 crypto-policies-20210213-1.git5c710c0.amzn2022.noarch
 filesystem-3.14-5.amzn2022.x86_64
 glibc-2.34-8.amzn2022.x86_64
-glibc-all-langpacks-2.34-8.amzn2022.x86_64
 glibc-common-2.34-8.amzn2022.x86_64
+glibc-minimal-langpack-2.34-8.amzn2022.x86_64
 gpg-pubkey-afaa0026-6185c6ab
 ipset-7.11-1.amzn2022.x86_64
 ipset-libs-7.11-1.amzn2022.x86_64
+iptables-legacy-1.8.7-8.amzn2022.x86_64
+iptables-legacy-libs-1.8.7-8.amzn2022.x86_64
 iptables-libs-1.8.7-8.amzn2022.x86_64
 iptables-nft-1.8.7-8.amzn2022.x86_64
 kmod-29-2.amzn2022.0.1.x86_64

@@ -3,8 +3,8 @@ ca-certificates-2021.2.50-1.0.amzn2022.0.2.noarch
 crypto-policies-20210213-1.git5c710c0.amzn2022.noarch
 filesystem-3.14-5.amzn2022.aarch64
 glibc-2.34-8.amzn2022.aarch64
-glibc-all-langpacks-2.34-8.amzn2022.aarch64
 glibc-common-2.34-8.amzn2022.aarch64
+glibc-minimal-langpack-2.34-8.amzn2022.aarch64
 gpg-pubkey-afaa0026-6185c6ab
 libacl-2.3.1-2.amzn2022.aarch64
 libattr-2.5.1-3.amzn2022.aarch64
@@ -12,6 +12,8 @@ libgcc-11.2.1-2.amzn2022.0.2.aarch64
 libxcrypt-4.4.26-4.amzn2022.aarch64
 libxcrypt-compat-4.4.26-4.amzn2022.aarch64
 openssl-libs-3.0.0-1.amzn2022.0.1.aarch64
+pcre2-10.36-4.amzn2022.aarch64
+pcre2-syntax-10.36-4.amzn2022.noarch
 setup-2.13.7-3.amzn2022.noarch
 system-release-2022.0.20220315-0.amzn2022.noarch
 tzdata-2021e-1.amzn2022.noarch
