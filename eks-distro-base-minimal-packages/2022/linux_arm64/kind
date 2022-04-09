@@ -33,8 +33,8 @@ gawk-5.1.0-3.amzn2022.aarch64
 gdbm-libs-1.19-2.amzn2022.aarch64
 glib2-2.68.4-1.amzn2022.aarch64
 glibc-2.34-8.amzn2022.aarch64
-glibc-all-langpacks-2.34-8.amzn2022.aarch64
 glibc-common-2.34-8.amzn2022.aarch64
+glibc-minimal-langpack-2.34-8.amzn2022.aarch64
 gmp-6.2.0-6.amzn2022.aarch64
 gnupg2-2.2.27-4.amzn2022.aarch64
 gnutls-3.7.2-1.amzn2022.aarch64
@@ -48,6 +48,7 @@ ima-evm-utils-1.3.2-2.amzn2022.0.1.aarch64
 iproute-5.10.0-2.amzn2022.aarch64
 ipset-7.11-1.amzn2022.aarch64
 ipset-libs-7.11-1.amzn2022.aarch64
+iptables-legacy-1.8.7-8.amzn2022.aarch64
 iptables-legacy-libs-1.8.7-8.amzn2022.aarch64
 iptables-libs-1.8.7-8.amzn2022.aarch64
 iptables-nft-1.8.7-8.amzn2022.aarch64
