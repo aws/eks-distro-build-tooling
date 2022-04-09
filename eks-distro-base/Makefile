@@ -170,7 +170,6 @@ packages-export-all-minimal-images: $(addprefix packages-export-minimal-images-,
 ##@ Update targets
 
 .PHONY: update-%
-update-%: UPDATE_TARGET?=images-$*
 update-%:
 	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
 	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) $(AL_TAG) )")
@@ -182,12 +181,16 @@ update-%:
 	fi
 
 .PHONY: standard-update
-base-update:
-	$(MAKE) update-base
+standard-update: UPDATE_TARGET=standard-images
+standard-update: IMAGE_NAME=eks-distro-base
+standard-update: update-standard 
 
 .PHONY: minimal-update-%
-minimal-update-%:
-	$(MAKE) update-$* UPDATE_TARGET=minimal-images-$* VARIANT=minimal-$*
+minimal-update-%: UPDATE_TARGET=minimal-images-$*
+minimal-update-%: VARIANT=minimal-$*
+minimal-update-%: IMAGE_NAME=eks-distro-$(VARIANT)
+minimal-update-%: update-%
+	@echo "Done $(@)"
 
 ##@ PR Targets
 
@@ -201,12 +204,13 @@ create-pr-%: ensure-repo-owner
 	fi
 
 .PHONY: standard-create-pr
-base-create-pr:
-	$(MAKE) create-pr-base
+standard-create-pr: IMAGE_NAME=eks-distro-base
+standard-create-pr: create-pr-standard
 
 .PHONY: minimal-create-pr-%
-minimal-create-pr-%:
-	$(MAKE) create-pr-$* IMAGE_NAME=eks-distro-minimal-$*
+minimal-create-pr-%: IMAGE_NAME=eks-distro-minimal-$*
+minimal-create-pr-%: create-pr-%
+	@echo "Done $(@)"
 
 .PHONY: ensure-repo-owner
 ensure-repo-owner:
