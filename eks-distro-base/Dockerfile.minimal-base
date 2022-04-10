@@ -26,7 +26,11 @@ ENV DOWNLOAD_DIR /tmp/download
 ENV NEWROOT /newroot
 ENV FAKE_INSTALLS bash glibc p11-kit p11-kit-trust
 
+ARG TARGETARCH
+ARG TARGETOS
+
 COPY scripts/ /usr/bin
+COPY ${TARGETOS}-${TARGETARCH}/ /
 
 WORKDIR $NEWROOT
 
