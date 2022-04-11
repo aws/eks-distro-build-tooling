@@ -153,6 +153,13 @@ plugins:
         - default # namespace
     jobs/**/*.yaml:
       name: job-config
+    BUILDER_BASE_TAG_FILE:
+      name: builder-base-tag-file
+      clusters:
+        prow-postsubmits-cluster: # cluster name
+        - default # namespace
+        prow-presubmits-cluster: # cluster name
+        - default # namespace
 
 cherrypicker:
   serviceName: cherrypicker
