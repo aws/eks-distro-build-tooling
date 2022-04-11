@@ -36,6 +36,3 @@ RUN set -x && \
     # remove bash and deps (ncurses)
     remove_package bash && \
     cleanup "glibc"
-
-RUN validate_libraries && \
-    validate_symlinks

@@ -42,6 +42,3 @@ RUN set -x && \
     install_if_al2 amazon-linux-extras && \    
     clean_install "containerd curl ethtool hostname iproute jq lockdev nfs-utils pigz procps rsync libseccomp socat systemd tar util-linux which yum" && \
     cleanup "kind"
-
-RUN validate_libraries && \
-    validate_symlinks

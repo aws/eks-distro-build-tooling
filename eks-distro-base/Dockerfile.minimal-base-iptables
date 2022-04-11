@@ -60,6 +60,3 @@ RUN ["chroot", "/newroot", "update-alternatives", \
 	    "--install", "/usr/sbin/ip6tables", "ip6tables", "/usr/sbin/ip6tables-nft", "10", \
         "--slave", "/usr/sbin/ip6tables-restore", "ip6tables-restore", "/usr/sbin/ip6tables-nft-restore", \
         "--slave", "/usr/sbin/ip6tables-save", "ip6tables-save", "/usr/sbin/ip6tables-nft-save"]
-
-RUN validate_libraries && \
-    validate_symlinks

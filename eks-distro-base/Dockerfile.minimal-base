@@ -61,9 +61,6 @@ RUN set -x && \
 
 COPY files/ $NEWROOT
 
-RUN validate_libraries && \
-    validate_symlinks
-
 
 ################# BASE ########################
 FROM ${BUILT_BUILDER_IMAGE} as base-builder

@@ -90,7 +90,7 @@ open-pr-check:
 
 ##@ Image Targets
 
-.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%
+.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
@@ -128,15 +128,15 @@ standard-images:
 # use an eval to "hardcode" the target and prereqs instead
 # $1 - Variant
 define MINIMAL_IMAGE_TARGET
-	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1)
+	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1) validate-minimal-images-$(1)
 
 endef
 
 $(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
 
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: VARIANT=minimal-$*
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: VARIANT=minimal-$*
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
+builder-minimal-images-% final-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
 
 builder-minimal-images-%: IMAGE_TARGET=builder
 builder-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)-builder
@@ -157,6 +157,13 @@ packages-export-minimal-images-%: IMAGE_OUTPUT_DIR=$(MAKE_ROOT)/../eks-distro-ba
 packages-export-minimal-images-%: IMAGE_OUTPUT=dest=$(IMAGE_OUTPUT_DIR)
 packages-export-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
 packages-export-minimal-images-%:
+	$(call BUILDCTL)
+
+validate-minimal-images-%: IMAGE_TARGET=validate
+validate-minimal-images-%: IMAGE_OUTPUT_TYPE=local
+validate-minimal-images-%: IMAGE_OUTPUT=dest=/tmp
+validate-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
+validate-minimal-images-%:
 	$(call BUILDCTL)
 
 
