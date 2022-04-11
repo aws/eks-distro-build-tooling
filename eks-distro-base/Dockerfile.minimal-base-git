@@ -98,6 +98,3 @@ RUN set -x && \
     rm -rf /tmp/sources && \
     yum erase -y "$BUILD_DEPS" && \
     cleanup "git"
-
-RUN validate_libraries && \
-    validate_symlinks

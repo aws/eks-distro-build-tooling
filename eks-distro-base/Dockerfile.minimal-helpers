@@ -26,6 +26,18 @@ FROM scratch as export
 COPY --from=builder /tmp/packages/* .
 
 
+################ Validate #######################
+ARG BUILT_BUILDER_IMAGE
+FROM --platform=$BUILDPLATFORM ${BUILT_BUILDER_IMAGE} as run_validate
+
+RUN set -x && \
+    validate_libraries && \
+    validate_symlinks && \
+    touch /tmp/success
+
+FROM scratch as validate
+COPY --from=run_validate /tmp/success .
+
 ################## SYMLINKS #####################
 # Instead of building this during the build everytime, this is the dockerfile
 # needed to build it, but it is currently checked into the repo under scripts

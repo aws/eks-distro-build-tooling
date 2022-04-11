@@ -38,6 +38,3 @@ RUN set -x && \
     rm $NEWROOT/usr/bin/docker-* && \
     rm $NEWROOT/usr/bin/dockerd && \
     cleanup "docker-client"
-
-RUN validate_libraries && \
-    validate_symlinks
