@@ -56,3 +56,7 @@ data:
     config_updater:
       maps:
 {{ toYaml .Values.plugins.configUpdaterMaps | indent 8 }}
+    approve:
+{{ toYaml .Values.plugins.approve | indent 6 }}
+    lgtm:
+{{ toYaml .Values.plugins.lgtm | indent 6 }}
