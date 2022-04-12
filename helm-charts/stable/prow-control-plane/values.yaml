@@ -160,6 +160,15 @@ plugins:
         - default # namespace
         prow-presubmits-cluster: # cluster name
         - default # namespace
+  approve:
+  - repos:
+    - aws/eks-anywhere
+    require_self_approval: true
+    ignore_review_state: true
+  lgtm:
+  - repos:
+    - aws/eks-anywhere
+    review_acts_as_lgtm: true
 
 cherrypicker:
   serviceName: cherrypicker
