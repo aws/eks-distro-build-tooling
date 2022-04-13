@@ -1,13 +1,14 @@
-From aeb22a37241459bb41e69f305142393405b4b572 Mon Sep 17 00:00:00 2001
+From 77f5ccfc298b963d34d048dfe4c920c911d0f46e Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
 
 Signed-off-by: Jackson West <jgw@amazon.com>
+Signed-off-by: Prow Bot <prow@amazonaws.com>
 ---
  config/prow/cluster/crier_deployment.yaml     |  75 ++++++++-----
  config/prow/cluster/crier_rbac.yaml           |  45 +-------
- config/prow/cluster/deck_deployment.yaml      | 100 ++++++++++--------
+ config/prow/cluster/deck_deployment.yaml      | 101 ++++++++++--------
  config/prow/cluster/deck_rbac.yaml            |  37 +------
  config/prow/cluster/deck_service.yaml         |  11 +-
  config/prow/cluster/ghproxy.yaml              |  35 +++---
@@ -16,16 +17,16 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  config/prow/cluster/hook_service.yaml         |  12 +--
  .../prow/cluster/horologium_deployment.yaml   |  24 +++--
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
- .../prow_controller_manager_deployment.yaml   |  71 +++++++++----
+ .../prow_controller_manager_deployment.yaml   |  71 ++++++++----
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
- config/prow/cluster/sinker_deployment.yaml    |  62 ++++++-----
+ config/prow/cluster/sinker_deployment.yaml    |  63 ++++++-----
  config/prow/cluster/sinker_rbac.yaml          |  37 +------
  .../cluster/statusreconciler_deployment.yaml  |  31 ++++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
  config/prow/cluster/tide_deployment.yaml      |  39 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 348 insertions(+), 381 deletions(-)
+ 20 files changed, 350 insertions(+), 381 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index b11bc0d729..70c9233295 100644
@@ -234,7 +235,7 @@ index 53f4471080..699355890e 100644
 +  namespace: {{ .Release.Namespace }}
 +
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
-index acf85c8902..77d0863bb6 100644
+index acf85c8902..7832158e4c 100644
 --- a/config/prow/cluster/deck_deployment.yaml
 +++ b/config/prow/cluster/deck_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -264,7 +265,7 @@ index acf85c8902..77d0863bb6 100644
        labels:
          app: deck
      spec:
-@@ -38,57 +43,50 @@ spec:
+@@ -38,57 +43,51 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: deck
@@ -279,6 +280,7 @@ index acf85c8902..77d0863bb6 100644
 +          - name: http
 +            containerPort: 8080
          args:
++        - --kubeconfig=/etc/kubeconfig/config
          - --tide-url=http://tide/
          - --hook-url=http://hook:8888/plugin-help
 -        - --redirect-http-to=prow.k8s.io
@@ -343,7 +345,7 @@ index acf85c8902..77d0863bb6 100644
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -102,24 +100,20 @@ spec:
+@@ -102,24 +101,20 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -381,7 +383,7 @@ index acf85c8902..77d0863bb6 100644
        - name: config
          configMap:
            name: config
-@@ -129,3 +123,15 @@ spec:
+@@ -129,3 +124,15 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -1082,7 +1084,7 @@ index 1cace54354..5329eff3bf 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
-index 06478745c6..b90ea6df08 100644
+index 06478745c6..1d4a89a55e 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
 +++ b/config/prow/cluster/sinker_deployment.yaml
 @@ -1,7 +1,6 @@
@@ -1093,7 +1095,7 @@ index 06478745c6..b90ea6df08 100644
    name: sinker
    labels:
      app: sinker
-@@ -12,49 +11,64 @@ spec:
+@@ -12,49 +11,65 @@ spec:
        app: sinker
    template:
      metadata:
@@ -1117,6 +1119,7 @@ index 06478745c6..b90ea6df08 100644
 +            fieldRef:
 +              fieldPath: metadata.name
          args:
++        - --kubeconfig=/etc/kubeconfig/config
          - --config-path=/etc/config/config.yaml
          - --job-config-path=/etc/job-config
 -        - --dry-run=false
