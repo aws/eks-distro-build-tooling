@@ -51,24 +51,24 @@ ingress:
 
 crier:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-crier:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-crier:v20220412-66078146cd
   serviceAccount:
     create: false
 
 deck:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-deck:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-deck:v20220412-66078146cd
   serviceAccount:
     create: false
 
 ghproxy:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-ghproxy:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-ghproxy:v20220412-66078146cd
   volumeSize: 100
 
 hook:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-hook:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-hook:v20220412-66078146cd
   service:
     type: 'LoadBalancer'
   serviceAccount:
@@ -76,30 +76,30 @@ hook:
 
 horologium:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-horologium:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-horologium:v20220412-66078146cd
   serviceAccount:
     create: false
 
 prowControllerManager:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-controller-manager:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-controller-manager:v20220412-66078146cd
   serviceAccount:
     create: false
 
 sinker:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-sinker:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-sinker:v20220412-66078146cd
   serviceAccount:
     create: false
 
 statusreconciler:
-  image: public.ecr.aws/eks-distro-build-tooling/prow-statusreconciler:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-statusreconciler:v20220412-66078146cd
   serviceAccount:
     create: false
 
 tide:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-tide:v20200924-369a496323
+  image: public.ecr.aws/eks-distro-build-tooling/prow-tide:v20220412-66078146cd
   serviceAccount:
     create: false
 
@@ -118,10 +118,10 @@ s3Credentials:
     create: true
 
 utility_images:
-  clonerefs: public.ecr.aws/eks-distro-build-tooling/prow-clonerefs:v20200924-369a496323
-  entrypoint: public.ecr.aws/eks-distro-build-tooling/prow-entrypoint:v20200924-369a496323
-  initupload: public.ecr.aws/eks-distro-build-tooling/prow-initupload:v20200924-369a496323
-  sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20200924-369a496323
+  clonerefs: public.ecr.aws/eks-distro-build-tooling/prow-clonerefs:v20220412-66078146cd
+  entrypoint: public.ecr.aws/eks-distro-build-tooling/prow-entrypoint:v20220412-66078146cd
+  initupload: public.ecr.aws/eks-distro-build-tooling/prow-initupload:v20220412-66078146cd
+  sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20220412-66078146cd
 awsIamAuthenticator:
   image: 520703868821.dkr.ecr.us-east-1.amazonaws.com/kubernetes-sigs/aws-iam-authenticator:v0.5.2-eks-1-18-1
 
