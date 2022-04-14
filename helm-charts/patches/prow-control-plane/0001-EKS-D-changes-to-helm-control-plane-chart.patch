@@ -12,21 +12,21 @@ Signed-off-by: Prow Bot <prow@amazonaws.com>
  config/prow/cluster/deck_rbac.yaml            |  37 +------
  config/prow/cluster/deck_service.yaml         |  11 +-
  config/prow/cluster/ghproxy.yaml              |  35 +++---
- config/prow/cluster/hook_deployment.yaml      |  72 +++++++------
+ config/prow/cluster/hook_deployment.yaml      |  71 ++++++------
  config/prow/cluster/hook_rbac.yaml            |   6 +-
  config/prow/cluster/hook_service.yaml         |  12 +--
- .../prow/cluster/horologium_deployment.yaml   |  24 +++--
+ .../prow/cluster/horologium_deployment.yaml   |  23 ++--
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
- .../prow_controller_manager_deployment.yaml   |  71 ++++++++----
+ .../prow_controller_manager_deployment.yaml   |  70 ++++++++----
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
  config/prow/cluster/sinker_deployment.yaml    |  63 ++++++-----
  config/prow/cluster/sinker_rbac.yaml          |  37 +------
- .../cluster/statusreconciler_deployment.yaml  |  31 ++++--
+ .../cluster/statusreconciler_deployment.yaml  |  30 ++++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
- config/prow/cluster/tide_deployment.yaml      |  39 +++++--
+ config/prow/cluster/tide_deployment.yaml      |  38 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 350 insertions(+), 381 deletions(-)
+ 20 files changed, 345 insertions(+), 381 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index b11bc0d729..70c9233295 100644
@@ -589,7 +589,7 @@ index 2fcc23feb0..b8cbbc4ea6 100644
  spec:
    ports:
 diff --git a/config/prow/cluster/hook_deployment.yaml b/config/prow/cluster/hook_deployment.yaml
-index e8d08a2888..66506913dd 100644
+index e8d08a2888..20195f3d40 100644
 --- a/config/prow/cluster/hook_deployment.yaml
 +++ b/config/prow/cluster/hook_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -619,7 +619,7 @@ index e8d08a2888..66506913dd 100644
        labels:
          app: hook
      spec:
-@@ -38,32 +43,34 @@ spec:
+@@ -38,32 +43,33 @@ spec:
        terminationGracePeriodSeconds: 180
        containers:
        - name: hook
@@ -637,7 +637,6 @@ index e8d08a2888..66506913dd 100644
 +        - --github-token-path=/etc/github/token
          - --config-path=/etc/config/config.yaml
          - --job-config-path=/etc/job-config
-+        - --deck-url=http://deck/
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
@@ -664,7 +663,7 @@ index e8d08a2888..66506913dd 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -75,18 +82,11 @@ spec:
+@@ -75,18 +81,11 @@ spec:
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
@@ -685,7 +684,7 @@ index e8d08a2888..66506913dd 100644
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -100,16 +100,26 @@ spec:
+@@ -100,16 +99,26 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -717,7 +716,7 @@ index e8d08a2888..66506913dd 100644
        - name: config
          configMap:
            name: config
-@@ -119,15 +129,11 @@ spec:
+@@ -119,15 +128,11 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -795,7 +794,7 @@ index f83355a9a7..a636b60490 100644
 +  - port: 8888
 +  type: {{ .Values.hook.service.type }}
 diff --git a/config/prow/cluster/horologium_deployment.yaml b/config/prow/cluster/horologium_deployment.yaml
-index 674184dc7f..fbb2ade656 100644
+index 674184dc7f..5612cd0cf9 100644
 --- a/config/prow/cluster/horologium_deployment.yaml
 +++ b/config/prow/cluster/horologium_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -806,7 +805,7 @@ index 674184dc7f..fbb2ade656 100644
    name: horologium
    labels:
      app: horologium
-@@ -28,21 +27,32 @@ spec:
+@@ -28,21 +27,31 @@ spec:
        app: horologium
    template:
      metadata:
@@ -834,7 +833,6 @@ index 674184dc7f..fbb2ade656 100644
 -        - name: metrics
 -          containerPort: 9090
 +        - --dry-run={{ .Values.dryRun }}
-+        - --deck-url=http://deck/
 +        env:
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
@@ -879,7 +877,7 @@ index 27c3ce2228..bc61184280 100644
    name: "horologium"
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/prow_controller_manager_deployment.yaml b/config/prow/cluster/prow_controller_manager_deployment.yaml
-index a41f13fb85..32d945d04f 100644
+index a41f13fb85..517bb33ec4 100644
 --- a/config/prow/cluster/prow_controller_manager_deployment.yaml
 +++ b/config/prow/cluster/prow_controller_manager_deployment.yaml
 @@ -15,12 +15,10 @@
@@ -895,7 +893,7 @@ index a41f13fb85..32d945d04f 100644
    replicas: 1
    strategy:
      type: RollingUpdate
-@@ -33,38 +31,51 @@ spec:
+@@ -33,38 +31,50 @@ spec:
        app: prow-controller-manager
    template:
      metadata:
@@ -922,7 +920,6 @@ index a41f13fb85..32d945d04f 100644
 +        - --github-token-path=/etc/github/token
 +        - --github-endpoint=http://ghproxy
 +        - --github-endpoint=https://api.github.com
-+        - --deck-url=http://deck/
 +        - --kubeconfig=/etc/kubeconfig/config
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
@@ -961,7 +958,7 @@ index a41f13fb85..32d945d04f 100644
          livenessProbe: # Pod is killed if this fails 3 times.
            httpGet:
              path: /healthz
-@@ -77,18 +88,32 @@ spec:
+@@ -77,18 +87,32 @@ spec:
              port: 8081
            initialDelaySeconds: 10
            periodSeconds: 3
@@ -1252,7 +1249,7 @@ index 70eb9b52bc..d8d6842e19 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/statusreconciler_deployment.yaml b/config/prow/cluster/statusreconciler_deployment.yaml
-index e205f161fc..54ed07ee3d 100644
+index e205f161fc..5a634547a8 100644
 --- a/config/prow/cluster/statusreconciler_deployment.yaml
 +++ b/config/prow/cluster/statusreconciler_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1263,7 +1260,7 @@ index e205f161fc..54ed07ee3d 100644
    name: statusreconciler
    labels:
      app: statusreconciler
-@@ -33,20 +32,28 @@ spec:
+@@ -33,20 +32,27 @@ spec:
        terminationGracePeriodSeconds: 180
        containers:
        - name: statusreconciler
@@ -1284,7 +1281,6 @@ index e205f161fc..54ed07ee3d 100644
 -        - --denylist=kubernetes/kubernetes
 +        - --s3-credentials-file=/etc/s3-credentials/service-account.json
 +        - --status-path=s3://{{ .Values.prow.tideStatusReconcilerBucketName }}/status-reconciler-status
-+        - --deck-url=http://deck/
 +        env:
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
@@ -1298,7 +1294,7 @@ index e205f161fc..54ed07ee3d 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -58,10 +65,13 @@ spec:
+@@ -58,10 +64,13 @@ spec:
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
@@ -1314,7 +1310,7 @@ index e205f161fc..54ed07ee3d 100644
        - name: config
          configMap:
            name: config
-@@ -71,3 +81,6 @@ spec:
+@@ -71,3 +80,6 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -1355,7 +1351,7 @@ index 847cfb47c1..1def1c63f7 100644
    name: statusreconciler
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/tide_deployment.yaml b/config/prow/cluster/tide_deployment.yaml
-index f2d2316e33..3ef9a62cf7 100644
+index f2d2316e33..3f9d26f8f4 100644
 --- a/config/prow/cluster/tide_deployment.yaml
 +++ b/config/prow/cluster/tide_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1366,7 +1362,7 @@ index f2d2316e33..3ef9a62cf7 100644
    name: tide
    labels:
      app: tide
-@@ -28,29 +27,45 @@ spec:
+@@ -28,29 +27,44 @@ spec:
        app: tide
    template:
      metadata:
@@ -1399,7 +1395,6 @@ index f2d2316e33..3ef9a62cf7 100644
 +        - --status-path=s3://{{ .Values.prow.tideStatusReconcilerBucketName }}/tide-status
 +        - --github-graphql-endpoint=http://ghproxy/graphql
 +        - --s3-credentials-file=/etc/s3-credentials/service-account.json
-+        - --deck-url=http://deck/
          ports:
          - name: http
            containerPort: 8888
@@ -1418,7 +1413,7 @@ index f2d2316e33..3ef9a62cf7 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -59,13 +74,19 @@ spec:
+@@ -59,13 +73,19 @@ spec:
          - name: job-config
            mountPath: /etc/job-config
            readOnly: true
@@ -1501,5 +1496,5 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    protocol: TCP
 -  type: ClusterIP
 -- 
-2.35.1
+2.34.1
 

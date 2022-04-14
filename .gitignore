@@ -1,5 +1,6 @@
 .DS_store
 helm-charts/build
+helm-charts/test-infra
 *.swp
 release/bin/eks-distro-release
 release/cover.out
