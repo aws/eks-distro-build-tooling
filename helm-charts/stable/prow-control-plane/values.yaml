@@ -162,12 +162,22 @@ plugins:
         - default # namespace
   approve:
   - repos:
+    - aws/eks-distro
+    - aws/eks-distro-build-tooling
+    - aws/eks-distro-prow-jobs
     - aws/eks-anywhere
+    - aws/eks-anywhere-build-tooling
+    - aws/eks-anywhere-prow-jobs
     require_self_approval: true
     ignore_review_state: true
   lgtm:
   - repos:
+    - aws/eks-distro
+    - aws/eks-distro-build-tooling
+    - aws/eks-distro-prow-jobs
     - aws/eks-anywhere
+    - aws/eks-anywhere-build-tooling
+    - aws/eks-anywhere-prow-jobs
     review_acts_as_lgtm: true
 
 cherrypicker:
