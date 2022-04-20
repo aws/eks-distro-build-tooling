@@ -20,13 +20,13 @@ Signed-off-by: Prow Bot <prow@amazonaws.com>
  .../prow_controller_manager_deployment.yaml   |  70 ++++++++----
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
  config/prow/cluster/sinker_deployment.yaml    |  63 ++++++-----
- config/prow/cluster/sinker_rbac.yaml          |  37 +------
+ config/prow/cluster/sinker_rbac.yaml          |  39 ++-----
  .../cluster/statusreconciler_deployment.yaml  |  30 ++++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
  config/prow/cluster/tide_deployment.yaml      |  38 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 345 insertions(+), 381 deletions(-)
+ 20 files changed, 350 insertions(+), 378 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index b11bc0d729..70c9233295 100644
@@ -1182,7 +1182,7 @@ index 06478745c6..1d4a89a55e 100644
 +          defaultMode: 0644
 +          secretName: kubeconfig
 diff --git a/config/prow/cluster/sinker_rbac.yaml b/config/prow/cluster/sinker_rbac.yaml
-index 70eb9b52bc..d8d6842e19 100644
+index 70eb9b52bc..87f30fe1d2 100644
 --- a/config/prow/cluster/sinker_rbac.yaml
 +++ b/config/prow/cluster/sinker_rbac.yaml
 @@ -1,13 +1,13 @@
@@ -1201,21 +1201,24 @@ index 70eb9b52bc..d8d6842e19 100644
    name: "sinker"
  rules:
    - apiGroups:
-@@ -51,40 +51,9 @@ rules:
+@@ -50,41 +50,18 @@ rules:
+     - events
      verbs:
      - create
- ---
+----
 -kind: Role
 -apiVersion: rbac.authorization.k8s.io/v1
 -metadata:
 -  namespace: test-pods
 -  name: "sinker"
 -rules:
--  - apiGroups:
+   - apiGroups:
 -      - ""
--    resources:
++    - ""
+     resources:
 -      - pods
--    verbs:
++    - pods
+     verbs:
 -      - delete
 -      - list
 -      - watch
@@ -1234,7 +1237,10 @@ index 70eb9b52bc..d8d6842e19 100644
 -subjects:
 -- kind: ServiceAccount
 -  name: "sinker"
-----
++    - get
++    - list
++    - watch
+ ---
  kind: RoleBinding
  apiVersion: rbac.authorization.k8s.io/v1
  metadata:
@@ -1242,7 +1248,7 @@ index 70eb9b52bc..d8d6842e19 100644
    name: "sinker"
  roleRef:
    apiGroup: rbac.authorization.k8s.io
-@@ -93,4 +62,4 @@ roleRef:
+@@ -93,4 +70,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: "sinker"
