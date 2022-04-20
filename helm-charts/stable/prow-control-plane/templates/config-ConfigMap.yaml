@@ -85,6 +85,8 @@ data:
             entrypoint: {{ .Values.utility_images.entrypoint }}
             initupload: {{ .Values.utility_images.initupload }}
             sidecar: {{ .Values.utility_images.sidecar }}
+      pod_unscheduled_timeout: 24h
+      pod_pending_timeout: 24h
     {{- if gt (len .Values.repositories) 0 }}
     tide:
       queries:
