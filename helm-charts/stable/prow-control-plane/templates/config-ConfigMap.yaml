@@ -55,6 +55,42 @@ data:
           - ^artifacts/filtered\.html$
         - lens:
             config:
+              highlight_regexes:
+              - Automatic merge failed
+              - cannot convert.+to type
+              - "cannot use.+as.+(type|value)"
+              - cannot find package
+              - Command failed
+              - curl.+Failed to connect
+              - curl.+no URL specified
+              - ^E\d{4} \d\d:\d\d:\d\d\.\d+
+              - ERR
+              - "(Error|ERROR|error)s?:"
+              - Error is not recoverable
+              - exit (status)?
+              - failed|FAILED"
+              - failed to solve
+              - (FAIL|Failure \[)\b
+              - fatal|FATAL
+              - Traceback
+              - got.+want
+              - imported but not used
+              - "make:.+Error"
+              - Merge conflict
+              - No such file or directory
+              - panic\b
+              - Process did not finish before.+timeout
+              - sha256sum.+did NOT match
+              - Something went wrong
+              - too few arguments
+              - too many errors
+              - "[Tt]imed out"
+              - timeout
+              - type.+has no field
+              - "undefined:"
+              - Unable to connect to the server
+              - "[Uu]nexpected error"
+              - want.+got
             name: buildlog
           required_files:
           - build-log.txt
