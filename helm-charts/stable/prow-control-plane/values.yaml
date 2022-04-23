@@ -123,7 +123,7 @@ utility_images:
   initupload: public.ecr.aws/eks-distro-build-tooling/prow-initupload:v20220412-66078146cd
   sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20220412-66078146cd
 awsIamAuthenticator:
-  image: 520703868821.dkr.ecr.us-east-1.amazonaws.com/kubernetes-sigs/aws-iam-authenticator:v0.5.2-eks-1-18-1
+  image: public.ecr.aws/eks-distro/kubernetes-sigs/aws-iam-authenticator:v0.5.7-eks-1-21-12
 
 # Namespace on the control plane to look for prow jobs
 prowJobNamespace: "default"
