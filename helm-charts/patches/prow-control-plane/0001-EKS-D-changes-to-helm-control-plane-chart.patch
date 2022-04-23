@@ -2,7 +2,7 @@ From 77f5ccfc298b963d34d048dfe4c920c911d0f46e Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
-
+ 
 Signed-off-by: Jackson West <jgw@amazon.com>
 Signed-off-by: Prow Bot <prow@amazonaws.com>
 ---
@@ -19,14 +19,14 @@ Signed-off-by: Prow Bot <prow@amazonaws.com>
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
  .../prow_controller_manager_deployment.yaml   |  70 ++++++++----
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
- config/prow/cluster/sinker_deployment.yaml    |  63 ++++++-----
+ config/prow/cluster/sinker_deployment.yaml    |  64 ++++++-----
  config/prow/cluster/sinker_rbac.yaml          |  39 ++-----
  .../cluster/statusreconciler_deployment.yaml  |  30 ++++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
  config/prow/cluster/tide_deployment.yaml      |  38 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 350 insertions(+), 378 deletions(-)
+ 20 files changed, 351 insertions(+), 378 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index b11bc0d729..70c9233295 100644
@@ -1081,7 +1081,7 @@ index 1cace54354..5329eff3bf 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
-index 06478745c6..1d4a89a55e 100644
+index 06478745c6..d707f54b13 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
 +++ b/config/prow/cluster/sinker_deployment.yaml
 @@ -1,7 +1,6 @@
@@ -1092,7 +1092,7 @@ index 06478745c6..1d4a89a55e 100644
    name: sinker
    labels:
      app: sinker
-@@ -12,49 +11,65 @@ spec:
+@@ -12,49 +11,66 @@ spec:
        app: sinker
    template:
      metadata:
@@ -1128,6 +1128,7 @@ index 06478745c6..1d4a89a55e 100644
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
++        - --dry-run={{ .Values.dryRun }}
 +        image: {{ .Values.sinker.image }}
          volumeMounts:
 -        - mountPath: /etc/kubeconfig
