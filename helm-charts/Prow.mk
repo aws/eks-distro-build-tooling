@@ -26,3 +26,6 @@ $(GIT_PATCH_TARGET): $(GIT_CHECKOUT_TARGET)
 # Copy only template files we care about from upstream into place
 prepare-prow-control-plane: $(GIT_PATCH_TARGET)
 	rsync -a $(PROW_UPSTREAM_REPO)/config/prow/cluster --files-from=$(CHART_ROOT)/scripts/prow-control-plane-upstream-template-files $(CHART_ROOT)/stable/prow-control-plane/templates
+
+clean-test-infra:
+	rm -rf $(CHART_ROOT)/$(PROW_UPSTREAM_REPO)

@@ -18,7 +18,7 @@ publish: prepare-prow-control-plane
 
 release: install-toolchain publish
 
-clean:
+clean: clean-test-infra
 	rm -rf ${CHART_ROOT}/build/
 
 help:
