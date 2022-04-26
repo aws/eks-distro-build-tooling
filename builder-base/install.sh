@@ -216,7 +216,9 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # to symlink to the one in /root/sdk due to ensure go-licenses gets built
 # with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
 # to properly find core go packages
-GO111MODULE=on go get github.com/google/go-licenses@v1.0.0
+# we currently will use 1.17 or 1.16 so install for both
+GO111MODULE=on /go/go1.16/bin/go get github.com/google/go-licenses@v1.0.0
+GO111MODULE=on /go/go1.17/bin/go get github.com/google/go-licenses@v1.0.0 
 
 # linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
 # We need a higher version of linuxkit hence we do go get of a particular commit
