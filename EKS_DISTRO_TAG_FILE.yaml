@@ -9,7 +9,7 @@ al2:
   eks-distro-minimal-base-haproxy: 2022-04-11-1649641850.2
   eks-distro-minimal-base-kind: 2022-04-11-1649641850.2
   eks-distro-minimal-base-nginx: 2022-04-11-1649641850.2
-  eks-distro-minimal-base-git: rebuild
+  eks-distro-minimal-base-git: 2022-04-27-1651020237.2
 al2022:
   eks-distro-base: 2022-04-11-1649641854.2022
   eks-distro-minimal-base: 2022-04-11-1649641854.2022
@@ -21,4 +21,4 @@ al2022:
   eks-distro-minimal-base-haproxy: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-kind: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-nginx: 2022-04-11-1649641854.2022
-  eks-distro-minimal-base-git: rebuild
+  eks-distro-minimal-base-git: 2022-04-27-1651020241.2022
