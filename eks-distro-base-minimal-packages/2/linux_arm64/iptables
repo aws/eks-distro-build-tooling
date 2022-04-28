@@ -14,7 +14,7 @@ iptables-1.8.4-10.amzn2.1.2.aarch64
 iptables-libs-1.8.4-10.amzn2.1.2.aarch64
 iptables-nft-1.8.4-10.amzn2.1.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
-libgcc-7.3.1-13.amzn2.aarch64
+libgcc-7.3.1-14.amzn2.aarch64
 libmnl-1.0.3-7.amzn2.0.2.aarch64
 libnetfilter_conntrack-1.0.6-1.amzn2.0.2.aarch64
 libnetfilter_cthelper-1.0.0-10.amzn2.1.aarch64
@@ -25,11 +25,11 @@ libnftnl-1.1.5-4.amzn2.aarch64
 libpcap-1.5.3-11.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
-libstdc++-7.3.1-13.amzn2.aarch64
+libstdc++-7.3.1-14.amzn2.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 popt-1.13-16.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.aarch64
 tzdata-2021e-1.amzn2.noarch
-xz-libs-5.2.2-1.amzn2.0.2.aarch64
+xz-libs-5.2.2-1.amzn2.0.3.aarch64
 zlib-1.2.7-19.amzn2.0.1.aarch64
