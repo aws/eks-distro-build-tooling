@@ -13,13 +13,13 @@ keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 krb5-libs-1.15.1-37.amzn2.2.4.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
-libcap-2.22-9.amzn2.0.2.aarch64
+libcap-2.54-1.amzn2.0.1.aarch64
 libcom_err-1.42.9-19.amzn2.aarch64
 libcrypt-2.26-58.amzn2.aarch64
-libgcc-7.3.1-13.amzn2.aarch64
+libgcc-7.3.1-14.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
-libstdc++-7.3.1-13.amzn2.aarch64
+libstdc++-7.3.1-14.amzn2.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
 ncurses-6.0-8.20170212.amzn2.1.3.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.3.noarch
