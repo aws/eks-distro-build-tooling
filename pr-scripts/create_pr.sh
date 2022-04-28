@@ -95,7 +95,7 @@ cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 if [ $REPO = "eks-distro-build-tooling" ]; then
     git add ./eks-distro-base-minimal-packages/. ./eks-distro-base-updates/.
 fi
-if [ $REPO = "eks-distro-prow-jobs" ]; then
+if [[ $REPO =~ "prow-jobs" ]]; then
     git add ./BUILDER_BASE_TAG_FILE
 fi
 
