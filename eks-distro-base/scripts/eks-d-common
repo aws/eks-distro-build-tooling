@@ -53,6 +53,43 @@ function build::common::is_dynamic_binary() {
     return 0
 }
 
+function build::common::find_actual_file_for_provides() {
+    local -r file="$1"
+    # sometimes on arm, yum provides will not return results when given
+    # an incomplete file path, which a number of these libs will be since if ldd
+    # cant find them, it will return just the filename
+    # on al22 some libs are at /lib64 but will not return unless passed to yum provides as /usr/lib64
+    # try multiple until one is returned from provides
+    local actual_file="$file"
+    for f in "$(realpath $file)" "/usr$file"; do
+        if build::common::yum_provides "${f}" | tr '\n' ' ' | grep --quiet -vi "No Matches found"; then
+            actual_file=$f
+            break
+        fi
+    done
+
+    echo $actual_file
+}
+
+function build::common::rpm_package_for_binary() {
+    # response from yum will be a list of various versions of the package which provides given file
+    # this list appears to be ordered with most recent at the end
+    # ex:
+    # e2fsprogs-1.42.9-19.amzn2.x86_64 : Utilities for managing ext2, ext3, and ext4 filesystems
+    # Repo        : amzn2-core
+    # Matched from:
+    # Filename    : /usr/sbin/fsck.ext3
+  
+    actual_file="$(build::common::find_actual_file_for_provides $1)"
+    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/\-[0-9].*$//'
+}
+
+function build::common::filename_from_rpm() {
+    # matches filename part of yum provides output to validate supplied filename matches actual
+    actual_file="$(build::common::find_actual_file_for_provides $1)"
+    build::common::yum_provides "${actual_file}" | grep "Filename" | awk '{print $3}' | tail -n 1
+}
+
 function build::common::dep_exists() {
     local -r dep="$1"
 

@@ -40,6 +40,8 @@ COPY --from=prepare-export /tmp/packages/* .
 ARG BUILT_BUILDER_IMAGE
 FROM --platform=$BUILDPLATFORM ${BUILT_BUILDER_IMAGE} as run_validate
 
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     validate_libraries && \
     validate_symlinks && \
