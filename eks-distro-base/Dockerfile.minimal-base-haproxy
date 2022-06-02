@@ -52,7 +52,7 @@ RUN set -x && \
     # manually "install" systemd to avoid installing the entire dep tree
     clean_install systemd true true && \
     install_if_al2 libcrypt && \
-    install_if_al2022 "libxcrypt-compat pcre2" && \
+    install_if_al2022 "libxcrypt-compat libselinux pcre2 pcre" && \
     # libacl is needed for cp + mkdir
     clean_install "libacl $HAPROXY_DEPS" && \
     # remove unncessary utils and other binary deps that are not needed by haproxy during runtime

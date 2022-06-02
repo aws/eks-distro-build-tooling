@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+declare -A PROVIDES_CACHE=()
+
+NEWROOT_LD_LIBRARY_PATH="$NEWROOT/lib64:$NEWROOT/usr/lib64" 
+for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
+    NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
+done
+NEWROOT_LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH
+
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
+# From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
+# returns list of libs required by a dynamic binary
+function build::common::binary_to_libraries() {
+    # see: https://man7.org/linux/man-pages/man1/ldd.1.html
+    LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH ldd "${1}" \
+    `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
+    | sed -E 's#.* => /#/#' \
+    `# we want only the path remaining, not the (0x${LOCATION})` \
+    | awk '{print $1}' \
+    `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
+    `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
+    | grep -v 'linux-vdso.so.1'
+
+}
+
+function build::common::is_dynamic_binary() {
+    local -r bin="$1"
+    if [ ! -x "$bin" ] || \
+        [ "$(build::common::binary_to_libraries $bin)" = "not" ] || [ "$(build::common::binary_to_libraries $bin)" = "statically" ]; then
+        return 1
+    fi
+    return 0
+}
+
+function build::common::dep_exists() {
+    local -r dep="$1"
+
+    # ldd return the dep that exists in the newroot folder, nothing to do
+    if [[ $dep = $NEWROOT/* ]] && [ -f "$dep" ]; then
+        return 0
+    fi
+
+    # the dep also exists in the newroot folder, nothing to do
+    if [ -f "$NEWROOT$dep" ]; then
+        return 0
+    fi
+
+    return 1
+}
