@@ -22,8 +22,18 @@ COPY --from=builder /newroot /
 
 
 ################ Export #######################
+
+FROM builder as prepare-export
+
+ARG VARIANT
+
+WORKDIR $NEWROOT
+RUN set -x && \
+    rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT && \
+    find . -type f -follow -printf '%s\t/%P\n' | numfmt --field=1 --to=iec-i --padding=8 --suffix=B | sort -k 2 > /tmp/packages/$VARIANT-files
+
 FROM scratch as export
-COPY --from=builder /tmp/packages/* .
+COPY --from=prepare-export /tmp/packages/* .
 
 
 ################ Validate #######################

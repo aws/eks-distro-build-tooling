@@ -49,6 +49,9 @@ IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 
+VARIANT_SHORT_NAME=$(if \
+		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%),base)
+
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -63,6 +66,7 @@ define BUILDCTL
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:BUILT_BUILDER_IMAGE=$(BUILT_BUILDER_IMAGE) \
+		--opt build-arg:VARIANT=$(VARIANT_SHORT_NAME) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
