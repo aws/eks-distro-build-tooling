@@ -16,10 +16,21 @@
 declare -A PROVIDES_CACHE=()
 
 NEWROOT_LD_LIBRARY_PATH="$NEWROOT/lib64:$NEWROOT/usr/lib64" 
-for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
+for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 -mindepth 1 -maxdepth 1 -type d); do
     NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
 done
-NEWROOT_LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH
+NEWROOT_LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH:/usr/lib64
+
+function build::common::yum_provides() {
+    local -r bin=$1  
+    
+    # if key exists, 1 is returned which would resolve to true
+    if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
+        PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1)
+    fi
+
+    echo "${PROVIDES_CACHE[$bin]}"
+}
 
 pushd () {
     command pushd "$@" > /dev/null
@@ -81,7 +92,7 @@ function build::common::rpm_package_for_binary() {
     # Filename    : /usr/sbin/fsck.ext3
   
     actual_file="$(build::common::find_actual_file_for_provides $1)"
-    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/\-[0-9].*$//'
+    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]://' | sed -e 's/\-[0-9].*$//'
 }
 
 function build::common::filename_from_rpm() {

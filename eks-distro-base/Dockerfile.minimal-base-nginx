@@ -32,17 +32,9 @@ COPY scripts/ /usr/bin
 RUN set -x && \
     if command -v amazon-linux-extras &> /dev/null; then amazon-linux-extras enable nginx1; fi && \
     if [ -f /etc/yum.repos.d/amzn2-extras.repo ]; then cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo; fi && \
-    # manually "install" systemd to avoid installing the entire dep tree
-    clean_install systemd true true && \
-    clean_install "nginx" && \
-    # remove unncessary utils and other binary deps that are not needed by nginx during runtime
-    remove_package "chkconfig gawk grep info make openssl p11-kit p11-kit-trust sed shadow-utils" && \
-    remove_package systemd true && \
-    # envsubst is needed to generate the config, but it comes from the gettext package
-    # which pulls in a number of deps, manually installing envsubt from the rpm
-    yumdownloader --destdir=/tmp/downloads gettext && \
-    cd /newroot && \
-    rpm2cpio /tmp/downloads/gettext*.rpm | cpio -idv ./usr/bin/envsubst && \
+    install_binary /usr/sbin/nginx \
+        /usr/bin/envsubst && \
+    clean_install "bash coreutils" && \
     # cleanup broken symlinks from nginx package and removing p11
     rm -f $NEWROOT/usr/share/nginx/html/icons/poweredby.png $NEWROOT/usr/lib64/p11-kit-trust.so && \
     cleanup "nginx"

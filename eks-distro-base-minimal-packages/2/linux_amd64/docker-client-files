@@ -775,7 +775,6 @@
    42KiB /usr/lib64/libthread_db.so.1
    14KiB /usr/lib64/libutil-2.26.so
    14KiB /usr/lib64/libutil.so.1
-   42MiB /usr/libexec/docker/cli-plugins/buildx
     241B /usr/libexec/docker/docker-setup-runtimes.sh
    26KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
    26KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -790,7 +789,6 @@
   877KiB /usr/sbin/sln
    23KiB /usr/sbin/zdump
    50KiB /usr/sbin/zic
-  114KiB /usr/share/bash-completion/docker
    11KiB /usr/share/doc/docker-20.10.13/LICENSE
     642B /usr/share/doc/docker-20.10.13/NOTICE
      95B /usr/share/doc/pcre-8.32/COPYING
@@ -824,7 +822,6 @@
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
   3.0KiB /usr/share/locale/locale.alias
-    342B /usr/share/man/man1/docker-manifest-annotate.1.gz
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README
@@ -843,7 +840,7 @@
     265B /usr/share/zoneinfo/Africa/Brazzaville
     171B /usr/share/zoneinfo/Africa/Bujumbura
   2.0KiB /usr/share/zoneinfo/Africa/Cairo
-  2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+  2.4KiB /usr/share/zoneinfo/Africa/Casablanca
   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
     170B /usr/share/zoneinfo/Africa/Conakry
     170B /usr/share/zoneinfo/Africa/Dakar
@@ -1315,7 +1312,7 @@
   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
-  2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+  2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
   1.9KiB /usr/share/zoneinfo/Europe/Zurich
   3.7KiB /usr/share/zoneinfo/GB
   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -1439,7 +1436,7 @@
     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
-  2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+  2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
     170B /usr/share/zoneinfo/posix/Africa/Conakry
     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -1911,7 +1908,7 @@
   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
-  2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+  2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
   3.7KiB /usr/share/zoneinfo/posix/GB
   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -2467,7 +2464,7 @@
   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
-  2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+  2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -2498,7 +2495,7 @@
   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
-  2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+  2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -2506,7 +2503,7 @@
   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
-  2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+  2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
   4.2KiB /usr/share/zoneinfo/right/GB
   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -2633,4 +2630,3 @@
   8.0KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  1.1KiB /var/log/yum.log

@@ -1,6 +1,7 @@
    37KiB /bin/[
      29B /bin/alias
    29KiB /bin/arch
+  423KiB /bin/awk
    37KiB /bin/base64
    29KiB /bin/basename
   915KiB /bin/bash
@@ -26,11 +27,13 @@
    61KiB /bin/date
    70KiB /bin/dd
    99KiB /bin/df
+  502KiB /bin/dgawk
   107KiB /bin/dir
    37KiB /bin/dircolors
    29KiB /bin/dirname
   107KiB /bin/du
    29KiB /bin/echo
+    290B /bin/egrep
    29KiB /bin/env
    36KiB /bin/envsubst
    33KiB /bin/expand
@@ -39,18 +42,25 @@
    29KiB /bin/false
      26B /bin/fc
      26B /bin/fg
+    290B /bin/fgrep
    37KiB /bin/fmt
    33KiB /bin/fold
+  423KiB /bin/gawk
    28KiB /bin/gencat
    26KiB /bin/getconf
    32KiB /bin/getent
      31B /bin/getopts
+  4.6KiB /bin/gettext.sh
+  156KiB /bin/grep
    29KiB /bin/groups
    37KiB /bin/head
    29KiB /bin/hostid
    65KiB /bin/iconv
    37KiB /bin/id
+  3.2KiB /bin/igawk
+  266KiB /bin/info
    56KiB /bin/infocmp
+   22KiB /bin/infokey
    77KiB /bin/infotocap
   136KiB /bin/install
      28B /bin/jobs
@@ -68,6 +78,7 @@
    58KiB /bin/mkfifo
    62KiB /bin/mknod
    37KiB /bin/mktemp
+   13KiB /bin/msghack
   124KiB /bin/mv
     560B /bin/nginx-upgrade
    33KiB /bin/nice
@@ -78,6 +89,7 @@
    65KiB /bin/od
    33KiB /bin/paste
    29KiB /bin/pathchk
+  423KiB /bin/pgawk
    37KiB /bin/pinky
    19KiB /bin/pldd
    66KiB /bin/pr
@@ -93,6 +105,7 @@
    41KiB /bin/rmdir
    93KiB /bin/rpcgen
    33KiB /bin/runcon
+   75KiB /bin/sed
    45KiB /bin/seq
   915KiB /bin/sh
    37KiB /bin/sha1sum
@@ -143,11 +156,10 @@
    49KiB /bin/who
    29KiB /bin/whoami
    29KiB /bin/yes
-     62B /dev/null
-      0B /etc/.pwd.lock
   5.0KiB /etc/DIR_COLORS
   5.6KiB /etc/DIR_COLORS.256color
   4.6KiB /etc/DIR_COLORS.lightbgcolor
+     94B /etc/GREP_COLORS
   1.5KiB /etc/aliases
   2.8KiB /etc/bashrc
     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
@@ -158,10 +170,8 @@
   1.4KiB /etc/ethertypes
       0B /etc/exports
      70B /etc/filesystems
-     77B /etc/group
-     64B /etc/group-
-    208B /etc/gshadow
-    198B /etc/gshadow-
+     64B /etc/group
+    198B /etc/gshadow
       9B /etc/host.conf
     158B /etc/hosts
     370B /etc/hosts.allow
@@ -191,8 +201,7 @@
   3.6KiB /etc/nginx/win-utf
     229B /etc/nsswitch.conf
     161B /etc/os-release
-    211B /etc/passwd
-    149B /etc/passwd-
+    149B /etc/passwd
     166B /etc/pki/ca-trust/README
     980B /etc/pki/ca-trust/ca-legacy.conf
     560B /etc/pki/ca-trust/extracted/README
@@ -221,6 +230,8 @@
    11KiB /etc/pki/tls/openssl.cnf
     233B /etc/printcap
   1.8KiB /etc/profile
+    196B /etc/profile.d/colorgrep.csh
+    201B /etc/profile.d/colorgrep.sh
   1.8KiB /etc/profile.d/colorls.csh
   1.6KiB /etc/profile.d/colorls.sh
      80B /etc/profile.d/csh.local
@@ -230,8 +241,7 @@
      85B /etc/rpm/macros.dist
     221B /etc/securetty
   655KiB /etc/services
-    367B /etc/shadow
-    346B /etc/shadow-
+    346B /etc/shadow
      44B /etc/shells
      18B /etc/skel/.bash_logout
     193B /etc/skel/.bash_profile
@@ -279,9 +289,7 @@
    14KiB /lib64/audit/sotruss-lib.so
    20KiB /lib64/engines-1.1/afalg.so
   6.6KiB /lib64/engines-1.1/capi.so
-   85KiB /lib64/engines-1.1/libpkcs11.so
    24KiB /lib64/engines-1.1/padlock.so
-   85KiB /lib64/engines-1.1/pkcs11.so
      65B /lib64/fipscheck/libgmp.so.10.2.0.hmac
      65B /lib64/fipscheck/libgmp.so.10.hmac
    25KiB /lib64/gconv/ANSI_X3.110.so
@@ -539,6 +547,8 @@
   101KiB /lib64/gconv/libJIS.so
   120KiB /lib64/gconv/libJISX0213.so
    48KiB /lib64/gconv/libKSC.so
+  2.7KiB /lib64/gettext/project-id
+   15KiB /lib64/gettext/user-email
    20KiB /lib64/krb5/plugins/tls/k5tls.so
   171KiB /lib64/ld-2.26.so
   171KiB /lib64/ld-linux-x86-64.so.2
@@ -614,8 +624,6 @@
    27KiB /lib64/libnss_dns.so.2
    70KiB /lib64/libnss_files-2.26.so
    70KiB /lib64/libnss_files.so.2
-   68KiB /lib64/libp11.so.3
-   68KiB /lib64/libp11.so.3.4.2
    15KiB /lib64/libpanel.so.6
    15KiB /lib64/libpanel.so.6.0
    15KiB /lib64/libpanelw.so.6
@@ -692,6 +700,7 @@
   691KiB /sbin/glibc_post_upgrade.x86_64
    29KiB /sbin/iconvconfig
    29KiB /sbin/iconvconfig.x86_64
+  111KiB /sbin/install-info
   877KiB /sbin/ldconfig
   1.2MiB /sbin/nginx
    61KiB /sbin/sefcontext_compile
@@ -702,6 +711,7 @@
    37KiB /usr/bin/[
      29B /usr/bin/alias
    29KiB /usr/bin/arch
+  423KiB /usr/bin/awk
    37KiB /usr/bin/base64
    29KiB /usr/bin/basename
   915KiB /usr/bin/bash
@@ -727,11 +737,13 @@
    61KiB /usr/bin/date
    70KiB /usr/bin/dd
    99KiB /usr/bin/df
+  502KiB /usr/bin/dgawk
   107KiB /usr/bin/dir
    37KiB /usr/bin/dircolors
    29KiB /usr/bin/dirname
   107KiB /usr/bin/du
    29KiB /usr/bin/echo
+    290B /usr/bin/egrep
    29KiB /usr/bin/env
    36KiB /usr/bin/envsubst
    33KiB /usr/bin/expand
@@ -740,18 +752,25 @@
    29KiB /usr/bin/false
      26B /usr/bin/fc
      26B /usr/bin/fg
+    290B /usr/bin/fgrep
    37KiB /usr/bin/fmt
    33KiB /usr/bin/fold
+  423KiB /usr/bin/gawk
    28KiB /usr/bin/gencat
    26KiB /usr/bin/getconf
    32KiB /usr/bin/getent
      31B /usr/bin/getopts
+  4.6KiB /usr/bin/gettext.sh
+  156KiB /usr/bin/grep
    29KiB /usr/bin/groups
    37KiB /usr/bin/head
    29KiB /usr/bin/hostid
    65KiB /usr/bin/iconv
    37KiB /usr/bin/id
+  3.2KiB /usr/bin/igawk
+  266KiB /usr/bin/info
    56KiB /usr/bin/infocmp
+   22KiB /usr/bin/infokey
    77KiB /usr/bin/infotocap
   136KiB /usr/bin/install
      28B /usr/bin/jobs
@@ -769,6 +788,7 @@
    58KiB /usr/bin/mkfifo
    62KiB /usr/bin/mknod
    37KiB /usr/bin/mktemp
+   13KiB /usr/bin/msghack
   124KiB /usr/bin/mv
     560B /usr/bin/nginx-upgrade
    33KiB /usr/bin/nice
@@ -779,6 +799,7 @@
    65KiB /usr/bin/od
    33KiB /usr/bin/paste
    29KiB /usr/bin/pathchk
+  423KiB /usr/bin/pgawk
    37KiB /usr/bin/pinky
    19KiB /usr/bin/pldd
    66KiB /usr/bin/pr
@@ -794,6 +815,7 @@
    41KiB /usr/bin/rmdir
    93KiB /usr/bin/rpcgen
    33KiB /usr/bin/runcon
+   75KiB /usr/bin/sed
    45KiB /usr/bin/seq
   915KiB /usr/bin/sh
    37KiB /usr/bin/sha1sum
@@ -871,9 +893,7 @@
    14KiB /usr/lib64/audit/sotruss-lib.so
    20KiB /usr/lib64/engines-1.1/afalg.so
   6.6KiB /usr/lib64/engines-1.1/capi.so
-   85KiB /usr/lib64/engines-1.1/libpkcs11.so
    24KiB /usr/lib64/engines-1.1/padlock.so
-   85KiB /usr/lib64/engines-1.1/pkcs11.so
      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
      65B /usr/lib64/fipscheck/libgmp.so.10.hmac
    25KiB /usr/lib64/gconv/ANSI_X3.110.so
@@ -1131,6 +1151,8 @@
   101KiB /usr/lib64/gconv/libJIS.so
   120KiB /usr/lib64/gconv/libJISX0213.so
    48KiB /usr/lib64/gconv/libKSC.so
+  2.7KiB /usr/lib64/gettext/project-id
+   15KiB /usr/lib64/gettext/user-email
    20KiB /usr/lib64/krb5/plugins/tls/k5tls.so
   171KiB /usr/lib64/ld-2.26.so
   171KiB /usr/lib64/ld-linux-x86-64.so.2
@@ -1206,8 +1228,6 @@
    27KiB /usr/lib64/libnss_dns.so.2
    70KiB /usr/lib64/libnss_files-2.26.so
    70KiB /usr/lib64/libnss_files.so.2
-   68KiB /usr/lib64/libp11.so.3
-   68KiB /usr/lib64/libp11.so.3.4.2
    15KiB /usr/lib64/libpanel.so.6
    15KiB /usr/lib64/libpanel.so.6.0
    15KiB /usr/lib64/libpanelw.so.6
@@ -1275,10 +1295,13 @@
    25KiB /usr/lib64/openssl/engines/libsureware.so
    21KiB /usr/lib64/openssl/engines/libubsec.so
    16KiB /usr/lib64/security/pam_cap.so
+  7.0KiB /usr/libexec/awk/grcat
+  6.9KiB /usr/libexec/awk/pwcat
   6.8KiB /usr/libexec/coreutils/libstdbuf.so
    26KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
    26KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
    26KiB /usr/libexec/getconf/XBS5_LP64_OFF64
+    253B /usr/libexec/grepconf.sh
   1.1KiB /usr/sbin/amazon-linux-https
   749KiB /usr/sbin/build-locale-archive
    39KiB /usr/sbin/capsh
@@ -1288,6 +1311,7 @@
   691KiB /usr/sbin/glibc_post_upgrade.x86_64
    29KiB /usr/sbin/iconvconfig
    29KiB /usr/sbin/iconvconfig.x86_64
+  111KiB /usr/sbin/install-info
   877KiB /usr/sbin/ldconfig
   1.2MiB /usr/sbin/nginx
    61KiB /usr/sbin/sefcontext_compile
@@ -1295,8 +1319,33 @@
   877KiB /usr/sbin/sln
    23KiB /usr/sbin/zdump
    50KiB /usr/sbin/zic
+    382B /usr/share/awk/assert.awk
+    327B /usr/share/awk/bits2str.awk
+    307B /usr/share/awk/cliff_rand.awk
+    233B /usr/share/awk/ctime.awk
+    317B /usr/share/awk/ftrans.awk
+  2.2KiB /usr/share/awk/getopt.awk
+  2.5KiB /usr/share/awk/gettime.awk
+  1.8KiB /usr/share/awk/group.awk
+    378B /usr/share/awk/join.awk
+    238B /usr/share/awk/libintl.awk
+    425B /usr/share/awk/noassign.awk
+    937B /usr/share/awk/ord.awk
+  1.2KiB /usr/share/awk/passwd.awk
+   1023B /usr/share/awk/quicksort.awk
+    492B /usr/share/awk/readable.awk
+    404B /usr/share/awk/rewind.awk
+    661B /usr/share/awk/round.awk
+  1.5KiB /usr/share/awk/strtonum.awk
+    214B /usr/share/awk/walkarray.awk
+    424B /usr/share/awk/zerofile.awk
    35KiB /usr/share/doc/bash-4.2.46/COPYING
    35KiB /usr/share/doc/coreutils-8.22/COPYING
+   35KiB /usr/share/doc/gawk-4.0.2/COPYING
+   35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
+   26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
+   35KiB /usr/share/doc/grep-2.20/COPYING
+   35KiB /usr/share/doc/info-5.1/COPYING
    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
@@ -1305,6 +1354,8 @@
   3.4KiB /usr/share/doc/nginx-1.20.0/UPGRADE-NOTES-1.6-to-1.10
      95B /usr/share/doc/pcre-8.32/COPYING
   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
+   35KiB /usr/share/doc/sed-4.2.2/COPYING
+   23KiB /usr/share/doc/sed-4.2.2/COPYING.DOC
     118B /usr/share/doc/setup-2.8.71/COPYING
    18KiB /usr/share/doc/system-release/GPL
       1B /usr/share/gcc-7/python/libstdcxx/__init__.py
@@ -1322,9 +1373,39 @@
   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.py
     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyc
     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
+    444B /usr/share/gettext-0.19.8/its/appdata.its
+    192B /usr/share/gettext-0.19.8/its/appdata.loc
+    585B /usr/share/gettext-0.19.8/its/glade.loc
+    874B /usr/share/gettext-0.19.8/its/glade1.its
+  1.3KiB /usr/share/gettext-0.19.8/its/glade2.its
+    647B /usr/share/gettext-0.19.8/its/gsettings.its
+    197B /usr/share/gettext-0.19.8/its/gsettings.loc
+    764B /usr/share/gettext-0.19.8/its/gtkbuilder.its
+   92KiB /usr/share/gettext/ABOUT-NLS
+   18KiB /usr/share/gettext/po/Makefile.in.in
+  3.3KiB /usr/share/gettext/po/Makevars.template
+  2.2KiB /usr/share/gettext/po/Rules-quot
+    217B /usr/share/gettext/po/boldquot.sed
+  1.4KiB /usr/share/gettext/po/en@boldquot.header
+  1.2KiB /usr/share/gettext/po/en@quot.header
+    672B /usr/share/gettext/po/insert-header.sin
+    153B /usr/share/gettext/po/quot.sed
+    432B /usr/share/gettext/po/remove-potcdate.sin
+  1.3KiB /usr/share/gettext/styles/po-default.css
+  1.2KiB /usr/share/gettext/styles/po-emacs-x.css
+  1.2KiB /usr/share/gettext/styles/po-emacs-xterm.css
+  1.2KiB /usr/share/gettext/styles/po-emacs-xterm16.css
+  1.2KiB /usr/share/gettext/styles/po-emacs-xterm256.css
+  1.2KiB /usr/share/gettext/styles/po-vim.css
   121KiB /usr/share/info/bash.info.gz
   203KiB /usr/share/info/coreutils.info.gz
-  8.2KiB /usr/share/info/dir.rpmsave
+  8.5KiB /usr/share/info/dir
+  334KiB /usr/share/info/gawk.info.gz
+   65KiB /usr/share/info/gawkinet.info.gz
+   27KiB /usr/share/info/grep.info.gz
+   27KiB /usr/share/info/info-stnd.info.gz
+   21KiB /usr/share/info/info.info.gz
+   29KiB /usr/share/info/sed.info.gz
    18KiB /usr/share/licenses/glibc-2.26/COPYING
    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -1344,130 +1425,219 @@
   1.4KiB /usr/share/licenses/nginx-1.20.0/LICENSE
   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
-   26KiB /usr/share/licenses/openssl11-pkcs11-0.4.10/COPYING
   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
+  1.4KiB /usr/share/locale/af/LC_MESSAGES/grep.mo
+  3.1KiB /usr/share/locale/af/LC_MESSAGES/sed.mo
    30KiB /usr/share/locale/af/LC_TIME/coreutils.mo
+  9.1KiB /usr/share/locale/ast/LC_MESSAGES/sed.mo
    66KiB /usr/share/locale/be/LC_MESSAGES/coreutils.mo
+  1.7KiB /usr/share/locale/be/LC_MESSAGES/grep.mo
    66KiB /usr/share/locale/be/LC_TIME/coreutils.mo
    35KiB /usr/share/locale/bg/LC_MESSAGES/bash.mo
   155KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
+  1.8KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
   155KiB /usr/share/locale/bg/LC_TIME/coreutils.mo
   9.6KiB /usr/share/locale/ca/LC_MESSAGES/bash.mo
   318KiB /usr/share/locale/ca/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
+   10KiB /usr/share/locale/ca/LC_MESSAGES/sed.mo
   318KiB /usr/share/locale/ca/LC_TIME/coreutils.mo
   132KiB /usr/share/locale/cs/LC_MESSAGES/bash.mo
   351KiB /usr/share/locale/cs/LC_MESSAGES/coreutils.mo
+   19KiB /usr/share/locale/cs/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/cs/LC_MESSAGES/sed.mo
   351KiB /usr/share/locale/cs/LC_TIME/coreutils.mo
   285KiB /usr/share/locale/da/LC_MESSAGES/coreutils.mo
+   46KiB /usr/share/locale/da/LC_MESSAGES/gawk.mo
+   16KiB /usr/share/locale/da/LC_MESSAGES/grep.mo
+  9.6KiB /usr/share/locale/da/LC_MESSAGES/sed.mo
   285KiB /usr/share/locale/da/LC_TIME/coreutils.mo
    45KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
   349KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
+   49KiB /usr/share/locale/de/LC_MESSAGES/gawk.mo
+   19KiB /usr/share/locale/de/LC_MESSAGES/grep.mo
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
+  9.5KiB /usr/share/locale/de/LC_MESSAGES/sed.mo
   349KiB /usr/share/locale/de/LC_TIME/coreutils.mo
    27KiB /usr/share/locale/el/LC_MESSAGES/coreutils.mo
+  8.9KiB /usr/share/locale/el/LC_MESSAGES/grep.mo
+   14KiB /usr/share/locale/el/LC_MESSAGES/sed.mo
    27KiB /usr/share/locale/el/LC_TIME/coreutils.mo
   158KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
   156KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
     410B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
   115KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
   195KiB /usr/share/locale/eo/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/eo/LC_MESSAGES/grep.mo
+  8.8KiB /usr/share/locale/eo/LC_MESSAGES/sed.mo
   195KiB /usr/share/locale/eo/LC_TIME/coreutils.mo
   131KiB /usr/share/locale/es/LC_MESSAGES/bash.mo
   306KiB /usr/share/locale/es/LC_MESSAGES/coreutils.mo
+   49KiB /usr/share/locale/es/LC_MESSAGES/gawk.mo
+   18KiB /usr/share/locale/es/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/es/LC_MESSAGES/sed.mo
   306KiB /usr/share/locale/es/LC_TIME/coreutils.mo
    12KiB /usr/share/locale/et/LC_MESSAGES/bash.mo
   323KiB /usr/share/locale/et/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/et/LC_MESSAGES/grep.mo
+  9.3KiB /usr/share/locale/et/LC_MESSAGES/sed.mo
   323KiB /usr/share/locale/et/LC_TIME/coreutils.mo
    29KiB /usr/share/locale/eu/LC_MESSAGES/coreutils.mo
+  1.5KiB /usr/share/locale/eu/LC_MESSAGES/grep.mo
+  1.7KiB /usr/share/locale/eu/LC_MESSAGES/sed.mo
    29KiB /usr/share/locale/eu/LC_TIME/coreutils.mo
   118KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
   115KiB /usr/share/locale/fi/LC_MESSAGES/coreutils.mo
+   49KiB /usr/share/locale/fi/LC_MESSAGES/gawk.mo
+   19KiB /usr/share/locale/fi/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/fi/LC_MESSAGES/sed.mo
   115KiB /usr/share/locale/fi/LC_TIME/coreutils.mo
   136KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
   360KiB /usr/share/locale/fr/LC_MESSAGES/coreutils.mo
+   50KiB /usr/share/locale/fr/LC_MESSAGES/gawk.mo
+   18KiB /usr/share/locale/fr/LC_MESSAGES/grep.mo
     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
+   11KiB /usr/share/locale/fr/LC_MESSAGES/sed.mo
   360KiB /usr/share/locale/fr/LC_TIME/coreutils.mo
    61KiB /usr/share/locale/ga/LC_MESSAGES/bash.mo
   142KiB /usr/share/locale/ga/LC_MESSAGES/coreutils.mo
+   12KiB /usr/share/locale/ga/LC_MESSAGES/grep.mo
+  9.4KiB /usr/share/locale/ga/LC_MESSAGES/sed.mo
   142KiB /usr/share/locale/ga/LC_TIME/coreutils.mo
    34KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
+   13KiB /usr/share/locale/gl/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/gl/LC_MESSAGES/sed.mo
    34KiB /usr/share/locale/gl/LC_TIME/coreutils.mo
+  1.4KiB /usr/share/locale/he/LC_MESSAGES/grep.mo
+  1.3KiB /usr/share/locale/he/LC_MESSAGES/sed.mo
    16KiB /usr/share/locale/hr/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/hr/LC_MESSAGES/grep.mo
+  9.9KiB /usr/share/locale/hr/LC_MESSAGES/sed.mo
    16KiB /usr/share/locale/hr/LC_TIME/coreutils.mo
   132KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
   312KiB /usr/share/locale/hu/LC_MESSAGES/coreutils.mo
+   18KiB /usr/share/locale/hu/LC_MESSAGES/grep.mo
+  7.8KiB /usr/share/locale/hu/LC_MESSAGES/sed.mo
   312KiB /usr/share/locale/hu/LC_TIME/coreutils.mo
   7.7KiB /usr/share/locale/ia/LC_MESSAGES/coreutils.mo
   7.7KiB /usr/share/locale/ia/LC_TIME/coreutils.mo
   129KiB /usr/share/locale/id/LC_MESSAGES/bash.mo
   185KiB /usr/share/locale/id/LC_MESSAGES/coreutils.mo
+  9.7KiB /usr/share/locale/id/LC_MESSAGES/grep.mo
+  9.0KiB /usr/share/locale/id/LC_MESSAGES/sed.mo
   185KiB /usr/share/locale/id/LC_TIME/coreutils.mo
   211KiB /usr/share/locale/it/LC_MESSAGES/coreutils.mo
+   44KiB /usr/share/locale/it/LC_MESSAGES/gawk.mo
+   18KiB /usr/share/locale/it/LC_MESSAGES/grep.mo
+  9.1KiB /usr/share/locale/it/LC_MESSAGES/sed.mo
   211KiB /usr/share/locale/it/LC_TIME/coreutils.mo
   143KiB /usr/share/locale/ja/LC_MESSAGES/bash.mo
   231KiB /usr/share/locale/ja/LC_MESSAGES/coreutils.mo
+   52KiB /usr/share/locale/ja/LC_MESSAGES/gawk.mo
+   14KiB /usr/share/locale/ja/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/ja/LC_MESSAGES/sed.mo
   231KiB /usr/share/locale/ja/LC_TIME/coreutils.mo
   1.7KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
   1.7KiB /usr/share/locale/kk/LC_TIME/coreutils.mo
    30KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo
+    659B /usr/share/locale/ko/LC_MESSAGES/grep.mo
+  1.3KiB /usr/share/locale/ko/LC_MESSAGES/sed.mo
    30KiB /usr/share/locale/ko/LC_TIME/coreutils.mo
+  4.2KiB /usr/share/locale/ky/LC_MESSAGES/grep.mo
   272KiB /usr/share/locale/lg/LC_MESSAGES/coreutils.mo
   272KiB /usr/share/locale/lg/LC_TIME/coreutils.mo
   3.0KiB /usr/share/locale/locale.alias
    30KiB /usr/share/locale/lt/LC_MESSAGES/bash.mo
    32KiB /usr/share/locale/lt/LC_MESSAGES/coreutils.mo
+  3.5KiB /usr/share/locale/lt/LC_MESSAGES/grep.mo
    32KiB /usr/share/locale/lt/LC_TIME/coreutils.mo
    24KiB /usr/share/locale/ms/LC_MESSAGES/coreutils.mo
    24KiB /usr/share/locale/ms/LC_TIME/coreutils.mo
    21KiB /usr/share/locale/nb/LC_MESSAGES/coreutils.mo
+  1.4KiB /usr/share/locale/nb/LC_MESSAGES/grep.mo
+  9.6KiB /usr/share/locale/nb/LC_MESSAGES/sed.mo
    21KiB /usr/share/locale/nb/LC_TIME/coreutils.mo
   129KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
   341KiB /usr/share/locale/nl/LC_MESSAGES/coreutils.mo
+   47KiB /usr/share/locale/nl/LC_MESSAGES/gawk.mo
+   18KiB /usr/share/locale/nl/LC_MESSAGES/grep.mo
+  9.8KiB /usr/share/locale/nl/LC_MESSAGES/sed.mo
   341KiB /usr/share/locale/nl/LC_TIME/coreutils.mo
+  8.2KiB /usr/share/locale/pa/LC_MESSAGES/grep.mo
    25KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
   349KiB /usr/share/locale/pl/LC_MESSAGES/coreutils.mo
+   49KiB /usr/share/locale/pl/LC_MESSAGES/gawk.mo
+   18KiB /usr/share/locale/pl/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/pl/LC_MESSAGES/sed.mo
   349KiB /usr/share/locale/pl/LC_TIME/coreutils.mo
   135KiB /usr/share/locale/pt/LC_MESSAGES/coreutils.mo
+  1.6KiB /usr/share/locale/pt/LC_MESSAGES/grep.mo
+  9.3KiB /usr/share/locale/pt/LC_MESSAGES/sed.mo
   135KiB /usr/share/locale/pt/LC_TIME/coreutils.mo
   9.5KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
   171KiB /usr/share/locale/pt_BR/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/pt_BR/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/pt_BR/LC_MESSAGES/sed.mo
   171KiB /usr/share/locale/pt_BR/LC_TIME/coreutils.mo
   9.2KiB /usr/share/locale/ro/LC_MESSAGES/bash.mo
    51KiB /usr/share/locale/ro/LC_MESSAGES/coreutils.mo
+  1.5KiB /usr/share/locale/ro/LC_MESSAGES/grep.mo
+  8.4KiB /usr/share/locale/ro/LC_MESSAGES/sed.mo
    51KiB /usr/share/locale/ro/LC_TIME/coreutils.mo
   9.0KiB /usr/share/locale/ru/LC_MESSAGES/bash.mo
   445KiB /usr/share/locale/ru/LC_MESSAGES/coreutils.mo
+   23KiB /usr/share/locale/ru/LC_MESSAGES/grep.mo
+   12KiB /usr/share/locale/ru/LC_MESSAGES/sed.mo
   445KiB /usr/share/locale/ru/LC_TIME/coreutils.mo
   130KiB /usr/share/locale/sk/LC_MESSAGES/bash.mo
    77KiB /usr/share/locale/sk/LC_MESSAGES/coreutils.mo
+   17KiB /usr/share/locale/sk/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/sk/LC_MESSAGES/sed.mo
    77KiB /usr/share/locale/sk/LC_TIME/coreutils.mo
   338KiB /usr/share/locale/sl/LC_MESSAGES/coreutils.mo
+   18KiB /usr/share/locale/sl/LC_MESSAGES/grep.mo
+  9.9KiB /usr/share/locale/sl/LC_MESSAGES/sed.mo
   338KiB /usr/share/locale/sl/LC_TIME/coreutils.mo
+   22KiB /usr/share/locale/sr/LC_MESSAGES/grep.mo
+   13KiB /usr/share/locale/sr/LC_MESSAGES/sed.mo
   126KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
   332KiB /usr/share/locale/sv/LC_MESSAGES/coreutils.mo
+   46KiB /usr/share/locale/sv/LC_MESSAGES/gawk.mo
+   13KiB /usr/share/locale/sv/LC_MESSAGES/grep.mo
+  8.9KiB /usr/share/locale/sv/LC_MESSAGES/sed.mo
   332KiB /usr/share/locale/sv/LC_TIME/coreutils.mo
+   25KiB /usr/share/locale/th/LC_MESSAGES/grep.mo
    25KiB /usr/share/locale/tr/LC_MESSAGES/bash.mo
    98KiB /usr/share/locale/tr/LC_MESSAGES/coreutils.mo
+  1.5KiB /usr/share/locale/tr/LC_MESSAGES/grep.mo
+  8.1KiB /usr/share/locale/tr/LC_MESSAGES/sed.mo
    98KiB /usr/share/locale/tr/LC_TIME/coreutils.mo
   136KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
   438KiB /usr/share/locale/uk/LC_MESSAGES/coreutils.mo
+   24KiB /usr/share/locale/uk/LC_MESSAGES/grep.mo
+   13KiB /usr/share/locale/uk/LC_MESSAGES/sed.mo
   438KiB /usr/share/locale/uk/LC_TIME/coreutils.mo
   140KiB /usr/share/locale/vi/LC_MESSAGES/bash.mo
   372KiB /usr/share/locale/vi/LC_MESSAGES/coreutils.mo
+   55KiB /usr/share/locale/vi/LC_MESSAGES/gawk.mo
+   20KiB /usr/share/locale/vi/LC_MESSAGES/grep.mo
+   11KiB /usr/share/locale/vi/LC_MESSAGES/sed.mo
   372KiB /usr/share/locale/vi/LC_TIME/coreutils.mo
   121KiB /usr/share/locale/zh_CN/LC_MESSAGES/bash.mo
   187KiB /usr/share/locale/zh_CN/LC_MESSAGES/coreutils.mo
+   13KiB /usr/share/locale/zh_CN/LC_MESSAGES/grep.mo
+  8.5KiB /usr/share/locale/zh_CN/LC_MESSAGES/sed.mo
   187KiB /usr/share/locale/zh_CN/LC_TIME/coreutils.mo
   5.9KiB /usr/share/locale/zh_TW/LC_MESSAGES/bash.mo
    52KiB /usr/share/locale/zh_TW/LC_MESSAGES/coreutils.mo
+   16KiB /usr/share/locale/zh_TW/LC_MESSAGES/grep.mo
+  8.0KiB /usr/share/locale/zh_TW/LC_MESSAGES/sed.mo
    52KiB /usr/share/locale/zh_TW/LC_TIME/coreutils.mo
   3.6KiB /usr/share/nginx/html/404.html
   3.7KiB /usr/share/nginx/html/50x.html
   3.5KiB /usr/share/nginx/html/index.html
-    368B /usr/share/nginx/html/nginx-logo.png
-    368B /usr/share/nginx/html/poweredby.png
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README
@@ -1626,7 +1796,7 @@
     265B /usr/share/zoneinfo/Africa/Brazzaville
     171B /usr/share/zoneinfo/Africa/Bujumbura
   2.0KiB /usr/share/zoneinfo/Africa/Cairo
-  2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+  2.4KiB /usr/share/zoneinfo/Africa/Casablanca
   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
     170B /usr/share/zoneinfo/Africa/Conakry
     170B /usr/share/zoneinfo/Africa/Dakar
@@ -2098,7 +2268,7 @@
   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
-  2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+  2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
   1.9KiB /usr/share/zoneinfo/Europe/Zurich
   3.7KiB /usr/share/zoneinfo/GB
   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -2222,7 +2392,7 @@
     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
-  2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+  2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
     170B /usr/share/zoneinfo/posix/Africa/Conakry
     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -2694,7 +2864,7 @@
   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
-  2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+  2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
   3.7KiB /usr/share/zoneinfo/posix/GB
   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -3250,7 +3420,7 @@
   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
-  2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+  2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -3281,7 +3451,7 @@
   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
-  2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+  2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -3289,7 +3459,7 @@
   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
-  2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+  2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
   4.2KiB /usr/share/zoneinfo/right/GB
   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -3400,20 +3570,19 @@
   110KiB /usr/share/zoneinfo/tzdata.zi
    19KiB /usr/share/zoneinfo/zone.tab
    18KiB /usr/share/zoneinfo/zone1970.tab
-  4.3KiB /var/cache/ldconfig/aux-cache
+  4.2KiB /var/cache/ldconfig/aux-cache
       0B /var/lib/rpm/.dbenv.lock
       0B /var/lib/rpm/.rpm.lock
-  388KiB /var/lib/rpm/Basenames
+  348KiB /var/lib/rpm/Basenames
   8.0KiB /var/lib/rpm/Conflictname
-  128KiB /var/lib/rpm/Dirnames
+  120KiB /var/lib/rpm/Dirnames
   8.0KiB /var/lib/rpm/Group
   8.0KiB /var/lib/rpm/Installtid
   8.0KiB /var/lib/rpm/Name
   8.0KiB /var/lib/rpm/Obsoletename
-  3.4MiB /var/lib/rpm/Packages
-   36KiB /var/lib/rpm/Providename
-   32KiB /var/lib/rpm/Requirename
+  2.8MiB /var/lib/rpm/Packages
+   32KiB /var/lib/rpm/Providename
+   24KiB /var/lib/rpm/Requirename
   8.0KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  3.9KiB /var/log/yum.log

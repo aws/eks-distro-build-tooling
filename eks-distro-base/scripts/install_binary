@@ -16,7 +16,7 @@
 
 set -e
 set -o pipefail
-# set -x
+set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
@@ -28,6 +28,11 @@ function build::install::binary() {
 
     local -r rpm_package=$(build::common::rpm_package_for_binary $file)
     local -r expected_filename=$(build::common::filename_from_rpm $file)
+
+    if [ -z "$rpm_package" ]; then
+        echo "Error: RPM not found for $file!"
+        exit 1
+    fi
 
     if [[ "$expected_filename" != "$file" ]]; then
         echo "Warning: Provided filename does not match actual: $file != $expected_filename"
@@ -55,30 +60,6 @@ function build::install::binary() {
     eval $__result="'$final_bin'"
 }
 
-function build::install::deps() {
-    local -r bin="$1"
-
-    local rpm_package=""
-    while IFS= read -r dep; do
-        if build::common::dep_exists $dep; then
-            continue
-        fi
-        
-        rpm_package=$(build::common::rpm_package_for_binary $dep)
-
-        if [[ -z "$rpm_package" ]]; then
-            echo "Error: No rpm found for $dep!"
-            exit 1
-        fi
-
-        echo "Installing $rpm_package for $dep"
-        # install rpm with but do not install rpm dependencies, library deps will all be picked up
-        # by this ldd parse
-        clean_install $rpm_package true
-
-    done < <(build::common::binary_to_libraries "$bin")
-}
-
 function build::install::configs_and_licenses() {
     local -r extract_dir="$1"
 
@@ -96,11 +77,5 @@ function build::install::configs_and_licenses() {
 for file in "$@"; do
     build::install::binary $file installed_bin
 
-    if ! build::common::is_dynmaic_binary $installed_bin; then
-        continue
-    fi
-
-    build::install::deps $installed_bin
+    install_deps_for_binary $installed_bin
 done
-
-# rpm -qp --scripts <rpmname>.rpm
