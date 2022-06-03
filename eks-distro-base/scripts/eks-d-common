@@ -15,11 +15,21 @@
 
 declare -A PROVIDES_CACHE=()
 
-NEWROOT_LD_LIBRARY_PATH="$NEWROOT/lib64:$NEWROOT/usr/lib64" 
+NEWROOT_LD_LIBRARY_PATH="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib" 
 for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
     NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
 done
-NEWROOT_LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH
+
+function build::common::yum_provides() {
+    local -r bin=$1  
+    
+    # if key exists, 1 is returned which would resolve to true
+    if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
+        PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1)
+    fi
+
+    echo "${PROVIDES_CACHE[$bin]}"
+}
 
 pushd () {
     command pushd "$@" > /dev/null
@@ -33,7 +43,7 @@ popd () {
 # returns list of libs required by a dynamic binary
 function build::common::binary_to_libraries() {
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH ldd "${1}" \
+    LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH ldd "${1}" 2>&1 \
     `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
     | sed -E 's#.* => /#/#' \
     `# we want only the path remaining, not the (0x${LOCATION})` \
@@ -46,11 +56,54 @@ function build::common::binary_to_libraries() {
 
 function build::common::is_dynamic_binary() {
     local -r bin="$1"
+    local -r ldd_out="$(build::common::binary_to_libraries $bin)"
     if [ ! -x "$bin" ] || \
-        [ "$(build::common::binary_to_libraries $bin)" = "not" ] || [ "$(build::common::binary_to_libraries $bin)" = "statically" ]; then
+        [[ $ldd_out = not* ]] || [[ $ldd_out = statically* ]]; then
         return 1
     fi
     return 0
+}
+
+function build::common::find_actual_file_for_provides() {
+    local -r file="$1"
+    
+    local to_check=()
+    if [[ $file = /* ]]; then
+        # on al22 some libs are at /lib64 but will not return unless passed to yum provides as /usr/lib64
+        to_check+=($(realpath $file));
+    else
+        # on arm, yum provides will not return results when given incomplete file path
+        #which a number of these libs will be since if ldd cant find them, it will return just the filename
+        to_check+=("$file" "/usr/lib64/$file")
+    fi
+    local actual_file=${to_check[0]}
+    for f in ${to_check[@]}; do
+        if build::common::yum_provides "${f}" | tr '\n' ' ' | grep --quiet -vi "No Matches found"; then
+            actual_file=$f
+            break
+        fi
+    done
+
+    echo $actual_file
+}
+
+function build::common::rpm_package_for_binary() {
+    # response from yum will be a list of various versions of the package which provides given file
+    # this list appears to be ordered with most recent at the end
+    # ex:
+    # e2fsprogs-1.42.9-19.amzn2.x86_64 : Utilities for managing ext2, ext3, and ext4 filesystems
+    # Repo        : amzn2-core
+    # Matched from:
+    # Filename    : /usr/sbin/fsck.ext3
+  
+    actual_file="$(build::common::find_actual_file_for_provides $1)"
+    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]://' | sed -e 's/\-[0-9].*$//'
+}
+
+function build::common::filename_from_rpm() {
+    # matches filename part of yum provides output to validate supplied filename matches actual
+    actual_file="$(build::common::find_actual_file_for_provides $1)"
+    build::common::yum_provides "${actual_file}" | grep "Filename" | awk '{print $3}' | tail -n 1
 }
 
 function build::common::dep_exists() {

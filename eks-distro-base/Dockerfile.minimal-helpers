@@ -33,12 +33,17 @@ RUN set -x && \
     find . -type f -follow -printf '%s\t/%P\n' | numfmt --field=1 --to=iec-i --padding=8 --suffix=B | sort -k 2 > /tmp/packages/$VARIANT-files
 
 FROM scratch as export
-COPY --from=prepare-export /tmp/packages/* .
+
+ARG VARIANT
+
+COPY --from=prepare-export /tmp/packages/$VARIANT* .
 
 
 ################ Validate #######################
 ARG BUILT_BUILDER_IMAGE
 FROM --platform=$BUILDPLATFORM ${BUILT_BUILDER_IMAGE} as run_validate
+
+COPY scripts/ /usr/bin
 
 RUN set -x && \
     validate_libraries && \
