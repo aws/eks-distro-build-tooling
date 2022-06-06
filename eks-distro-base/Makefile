@@ -44,7 +44,7 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(IMAGE_TAG)
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
@@ -110,7 +110,7 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 # dep tree
 %-minimal-images-base: BASE_IMAGE=scratch
 %-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
-%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 %-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # push standard/builder/base image targets
@@ -280,6 +280,7 @@ minimal-images-base-nonroot: ## Build and push minimal base image nonroot varian
 minimal-images-base-glibc: ## Build and push minimal base image with glibc
 minimal-images-base-iptables: ## Build and push minimal base image with iptables + glibc
 minimal-images-base-csi: ## Build and push minimal base image with common packages needed for csi drivers
+minimal-images-base-csi-ebs: ## Build and push minimal base image with common packages needed specifically for the ebs csi driver
 minimal-images-base-git: ## Build and push minimal base image with git + libgit
 minimal-images-base-docker-client: ## Build and push minimal base image with docker client
 minimal-images-base-nginx: ## Build and push minimal base image with nginx for use by eks-anywhere-test
@@ -291,6 +292,7 @@ packages-export-minimal-images-base-nonroot: ## Export packages included in base
 packages-export-minimal-images-base-glibc: ## Export packages included in glibc minimal images
 packages-export-minimal-images-base-iptables: ## Export packages included in iptables minimal images
 packages-export-minimal-images-base-csi: ## Export packages included in csi minimal images
+packages-export-minimal-images-base-csi-ebs: ## Export packages included in ebs csi minimal images
 packages-export-minimal-images-base-git: ## Export packages included in git minimal images
 packages-export-minimal-images-base-docker-client: ## Export packages included in docker client minimal images
 packages-export-minimal-images-base-nginx: ## Export packages included in nginx minimal images
@@ -303,6 +305,7 @@ minimal-base-nonroot-update: ## Check for out of date packages on minimal nonroo
 minimal-base-glibc-update: ## Check for out of date packages on minimal glibc base image and push new
 minimal-base-iptables-update: ## Check for out of date packages on minimal iptables base image and push new
 minimal-base-csi-update: ## Check for out of date packages on minimal csi base image and push new
+minimal-base-csi-ebs-update: ## Check for out of date packages on minimal ebs csi base image and push new
 minimal-base-git-update: ## Check for out of date packages on minimal git base image and push new
 minimal-base-docker-client-update: ## Check for out of date packages on minimal docker client base image and push new
 minimal-base-nginx: ## Check for out of date packages on minimal nginx base image and push new
@@ -315,6 +318,7 @@ minimal-base-nonroot-create-pr: ## Update minimal base nonroot image tag if push
 minimal-base-glibc-create-pr: ## Update minimal base glibc image tag if pushed
 minimal-base-iptables-create-pr: ## Update minimal base iptables image tag if pushed
 minimal-base-csi-create-pr: ## Update minimal base csi image tag if pushed
+minimal-base-csi-ebs-create-pr: ## Update minimal base ebs csi image tag if pushed
 minimal-base-git-create-pr: ## Update minimal base git image tag if pushed
 minimal-base-docker-client-create-pr: ## Update minimal base docker client image tag if pushed
 minimal-base-nginx-create-pr: ## Update minimal base nginx image tag if pushed
