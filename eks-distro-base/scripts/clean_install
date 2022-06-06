@@ -22,6 +22,10 @@ PACKAGES=$1
 SHALLOW=${2:false}
 JUSTDB=${3:false}
 FORCE=${4:false}
+EXTRACT_DIR=${5:-"$NEWROOT"}
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
 
 if [ $JUSTDB ]; then
     JUSTDB="--justdb"
@@ -29,14 +33,24 @@ else
     JUSTDB=""
 fi
 
-if [ ! $SHALLOW ]; then
-    yum --installroot $NEWROOT install -y $PACKAGES
-else
-    yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $PACKAGES
-    rpm -ivh --nodeps --root $NEWROOT $JUSTDB $DOWNLOAD_DIR/*.rpm
-    if [ $FORCE ]; then
-        for rpm in $DOWNLOAD_DIR/*.rpm; do rpm2cpio $rpm | cpio -idmv; done
+RPMS=(${PACKAGES// / })
+for rpm in "${RPMS[@]}"; do
+    # if installed already skip
+    if rpm --root $NEWROOT -q --quiet $rpm ; then
+        continue
     fi
-fi
 
-rm -rf $DOWNLOAD_DIR
+    if [ ! $SHALLOW ]; then
+        yum --installroot $NEWROOT install -y $rpm
+    else
+        yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm
+        rpm_file=$(ls $DOWNLOAD_DIR/$rpm-*.rpm)
+        rpm -ivh --nodeps --root $NEWROOT $JUSTDB $rpm_file
+        if [ $FORCE ]; then
+            mkdir -p $EXTRACT_DIR
+            pushd $EXTRACT_DIR
+            rpm2cpio $rpm_file | cpio -idm
+            popd
+        fi
+    fi
+done

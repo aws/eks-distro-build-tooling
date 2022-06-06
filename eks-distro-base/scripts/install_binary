@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -e
+set -o pipefail
+set -x
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+
+function build::install::binary() {
+    local -r file="$1"
+    local __result=$2
+
+    local -r rpm_package=$(build::common::rpm_package_for_binary $file)
+    local -r expected_filename=$(build::common::filename_from_rpm $file)
+
+    if [ -z "$rpm_package" ]; then
+        echo "Error: RPM not found for $file!"
+        exit 1
+    fi
+
+    if [[ "$expected_filename" != "$file" ]]; then
+        echo "Warning: Provided filename does not match actual: $file != $expected_filename"
+    fi
+
+    local -r extract_dir=$DOWNLOAD_DIR/$rpm_package
+
+    echo "Extracting $rpm_package for $file"
+    # download and extract rpm as well as add to the final rpm db which will be included in the final image
+    clean_install $rpm_package true true true $extract_dir
+
+    local -r extracted_bin=$extract_dir$expected_filename
+
+    if [ ! -f "$extracted_bin" ]; then
+        echo "Error: Filename not included in RPM!"
+        exit 1
+    fi
+
+    # copy desired binary into newroot folder path
+    local -r final_bin=$NEWROOT$expected_filename
+    cp $extracted_bin $final_bin
+
+    build::install::configs_and_licenses $extract_dir
+
+    eval $__result="'$final_bin'"
+}
+
+function build::install::configs_and_licenses() {
+    local -r extract_dir="$1"
+
+    # this is probably not perfect, but try and perserve any txt files, like conf files which may be neccessary
+    # for the exec being copied.
+    # also grabs licenses files
+    cp -rf $extract_dir/etc $NEWROOT 2>/dev/null || :
+    cp -rf $extract_dir/usr/share/{doc,man,licenses} $NEWROOT/usr/share 2>/dev/null || :
+}
+
+
+for file in "$@"; do
+    build::install::binary $file installed_bin
+
+    install_deps_for_binary $installed_bin
+done
