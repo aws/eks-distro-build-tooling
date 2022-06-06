@@ -32,9 +32,5 @@ RUN set -x && \
     # installing the package one off since the only deps of the client
     # are already provided by glibc
     enable_docker_install && \
-    # has to be extracted instead of installed to work around scriptlet
-    # issue that only affects the service component which we arent using
-    clean_install docker true true true && \
-    rm $NEWROOT/usr/bin/docker-* && \
-    rm $NEWROOT/usr/bin/dockerd && \
+    install_binary /usr/bin/docker && \
     cleanup "docker-client"

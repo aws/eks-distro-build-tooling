@@ -232,7 +232,6 @@
    17KiB /usr/lib64/librt.so.1
    42KiB /usr/lib64/libthread_db.so.1
    16KiB /usr/lib64/libutil.so.1
-   51MiB /usr/libexec/docker/cli-plugins/buildx
     245B /usr/libexec/docker/docker-setup-runtimes.sh
    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
    36KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -240,7 +239,6 @@
    33KiB /usr/sbin/iconvconfig
   1.2MiB /usr/sbin/ldconfig
    61KiB /usr/sbin/zic
-  114KiB /usr/share/bash-completion/docker
    11KiB /usr/share/doc/docker/LICENSE
     642B /usr/share/doc/docker/NOTICE
    18KiB /usr/share/licenses/glibc/COPYING
@@ -254,7 +252,6 @@
     118B /usr/share/licenses/setup/COPYING
     252B /usr/share/licenses/tzdata/LICENSE
   3.0KiB /usr/share/locale/locale.alias
-    345B /usr/share/man/man1/docker-manifest-annotate.1.gz
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README

@@ -773,7 +773,6 @@
    78KiB /usr/lib64/libthread_db.so.1
    72KiB /usr/lib64/libutil-2.26.so
    72KiB /usr/lib64/libutil.so.1
-   39MiB /usr/libexec/docker/cli-plugins/buildx
     241B /usr/libexec/docker/docker-setup-runtimes.sh
    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -788,7 +787,6 @@
   698KiB /usr/sbin/sln
    73KiB /usr/sbin/zdump
    75KiB /usr/sbin/zic
-  114KiB /usr/share/bash-completion/docker
    11KiB /usr/share/doc/docker-20.10.13/LICENSE
     642B /usr/share/doc/docker-20.10.13/NOTICE
      95B /usr/share/doc/pcre-8.32/COPYING
@@ -822,7 +820,6 @@
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
   3.0KiB /usr/share/locale/locale.alias
-    342B /usr/share/man/man1/docker-manifest-annotate.1.gz
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README
@@ -2631,4 +2628,3 @@
   8.0KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  1.1KiB /var/log/yum.log
