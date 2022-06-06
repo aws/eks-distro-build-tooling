@@ -17,6 +17,9 @@
    29KiB /bin/sprof
    16KiB /bin/tzselect
   1.1KiB /bin/update-ca-trust
+  5.0KiB /etc/DIR_COLORS
+  5.6KiB /etc/DIR_COLORS.256color
+  4.6KiB /etc/DIR_COLORS.lightbgcolor
   1.5KiB /etc/aliases
   2.8KiB /etc/bashrc
     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
@@ -37,11 +40,17 @@
      23B /etc/issue
      22B /etc/issue.net
     641B /etc/krb5.conf
-  3.3KiB /etc/ld.so.cache
+  3.2KiB /etc/ld.so.cache
      28B /etc/ld.so.conf
       0B /etc/motd
     229B /etc/nsswitch.conf
     161B /etc/os-release
+    715B /etc/pam.d/login
+    640B /etc/pam.d/remote
+    143B /etc/pam.d/runuser
+    138B /etc/pam.d/runuser-l
+    540B /etc/pam.d/su
+    137B /etc/pam.d/su-l
     193B /etc/passwd
     166B /etc/pki/ca-trust/README
     980B /etc/pki/ca-trust/ca-legacy.conf
@@ -71,6 +80,8 @@
    11KiB /etc/pki/tls/openssl.cnf
     233B /etc/printcap
   1.8KiB /etc/profile
+  1.8KiB /etc/profile.d/colorls.csh
+  1.6KiB /etc/profile.d/colorls.sh
      80B /etc/profile.d/csh.local
      81B /etc/profile.d/sh.local
   6.4KiB /etc/protocols
@@ -452,8 +463,6 @@
    42KiB /lib64/libthread_db.so.1
    14KiB /lib64/libutil-2.26.so
    14KiB /lib64/libutil.so.1
-   20KiB /lib64/libverto.so.1
-   20KiB /lib64/libverto.so.1.0.0
    84KiB /lib64/libz.so.1
    84KiB /lib64/libz.so.1.2.7
    20KiB /lib64/openssl/engines/lib4758cca.so
@@ -854,8 +863,6 @@
    42KiB /usr/lib64/libthread_db.so.1
    14KiB /usr/lib64/libutil-2.26.so
    14KiB /usr/lib64/libutil.so.1
-   20KiB /usr/lib64/libverto.so.1
-   20KiB /usr/lib64/libverto.so.1.0.0
    84KiB /usr/lib64/libz.so.1
    84KiB /usr/lib64/libz.so.1.2.7
    20KiB /usr/lib64/openssl/engines/lib4758cca.so
@@ -883,13 +890,13 @@
   877KiB /usr/sbin/sln
    23KiB /usr/sbin/zdump
    50KiB /usr/sbin/zic
+   35KiB /usr/share/doc/coreutils-8.22/COPYING
    18KiB /usr/share/doc/haproxy/gpl.txt
    18KiB /usr/share/doc/haproxy/internals/notes-layers.txt
    26KiB /usr/share/doc/haproxy/lgpl.txt
    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
-  1.1KiB /usr/share/doc/libverto-0.2.5/COPYING
      95B /usr/share/doc/pcre-8.32/COPYING
   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -909,7 +916,6 @@
   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.py
     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyc
     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
-    755B /usr/share/info/dir.rpmsave
    18KiB /usr/share/licenses/glibc-2.26/COPYING
    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -921,6 +927,10 @@
   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
    26KiB /usr/share/licenses/libsepol-2.5/COPYING
   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
+  1.4KiB /usr/share/licenses/util-linux-2.30.2/COPYING.BSD-3
+   18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
+   26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
+  1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
     410B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
@@ -2721,17 +2731,16 @@
   2.8KiB /var/cache/ldconfig/aux-cache
       0B /var/lib/rpm/.dbenv.lock
       0B /var/lib/rpm/.rpm.lock
-  380KiB /var/lib/rpm/Basenames
+  336KiB /var/lib/rpm/Basenames
   8.0KiB /var/lib/rpm/Conflictname
-  124KiB /var/lib/rpm/Dirnames
+  120KiB /var/lib/rpm/Dirnames
   8.0KiB /var/lib/rpm/Group
   8.0KiB /var/lib/rpm/Installtid
   8.0KiB /var/lib/rpm/Name
   8.0KiB /var/lib/rpm/Obsoletename
-  2.9MiB /var/lib/rpm/Packages
+  2.5MiB /var/lib/rpm/Packages
    32KiB /var/lib/rpm/Providename
    20KiB /var/lib/rpm/Requirename
   8.0KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  2.6KiB /var/log/yum.log

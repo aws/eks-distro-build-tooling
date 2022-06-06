@@ -1,6 +1,6 @@
   1.7KiB /bin/ca-legacy
   3.3KiB /bin/catchsegv
-  147KiB /bin/cp
+     49B /bin/cp
    29KiB /bin/gencat
    36KiB /bin/getconf
    37KiB /bin/getent
@@ -9,31 +9,19 @@
   5.4KiB /bin/ldd
    61KiB /bin/locale
   316KiB /bin/localedef
-   69KiB /bin/mkdir
+     52B /bin/mkdir
    25KiB /bin/pldd
   4.2KiB /bin/sotruss
    37KiB /bin/sprof
    15KiB /bin/tzselect
   1.3KiB /bin/update-ca-trust
    28KiB /bin/zdump
+     12B /etc/adjtime
   1.5KiB /etc/aliases
      41B /etc/amazon-linux-release
      35B /etc/amazon-linux-release-cpe
   3.0KiB /etc/bashrc
     590B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
-     75B /etc/crypto-policies/back-ends/bind.config
-  1.4KiB /etc/crypto-policies/back-ends/gnutls.config
-    395B /etc/crypto-policies/back-ends/java.config
-    179B /etc/crypto-policies/back-ends/krb5.config
-    565B /etc/crypto-policies/back-ends/libreswan.config
-  1.2KiB /etc/crypto-policies/back-ends/libssh.config
-    401B /etc/crypto-policies/back-ends/nss.config
-  1.3KiB /etc/crypto-policies/back-ends/openssh.config
-  1.8KiB /etc/crypto-policies/back-ends/opensshserver.config
-    150B /etc/crypto-policies/back-ends/openssl.config
-    571B /etc/crypto-policies/back-ends/opensslcnf.config
-      8B /etc/crypto-policies/config
-      8B /etc/crypto-policies/state/current
   1.7KiB /etc/csh.cshrc
   1.1KiB /etc/csh.login
     134B /etc/dnf/plugins/release-notification.conf
@@ -50,12 +38,18 @@
     943B /etc/inputrc
      28B /etc/issue
      27B /etc/issue.net
-  1.9KiB /etc/ld.so.cache
+  1.5KiB /etc/ld.so.cache
      28B /etc/ld.so.conf
       0B /etc/motd
      58B /etc/networks
     229B /etc/nsswitch.conf
     161B /etc/os-release
+    676B /etc/pam.d/login
+    640B /etc/pam.d/remote
+    143B /etc/pam.d/runuser
+    138B /etc/pam.d/runuser-l
+    540B /etc/pam.d/su
+    137B /etc/pam.d/su-l
     193B /etc/passwd
     166B /etc/pki/ca-trust/README
     980B /etc/pki/ca-trust/ca-legacy.conf
@@ -101,7 +95,6 @@
      41B /etc/system-release
      35B /etc/system-release-cpe
     436B /etc/update-motd.d/70-available-updates
-    817B /etc/xattr.conf
     967B /etc/yum.repos.d/amazonlinux.repo
      28B /lib/issue
      27B /lib/issue.net
@@ -135,8 +128,6 @@
    16KiB /lib64/engines-3/capi.so
    53KiB /lib64/engines-3/loader_attic.so
    28KiB /lib64/engines-3/padlock.so
-     65B /lib64/fipscheck/libcrypt.so.1.1.0.hmac
-     65B /lib64/fipscheck/libcrypt.so.1.hmac
      65B /lib64/fipscheck/libcrypt.so.2.0.0.hmac
      65B /lib64/fipscheck/libcrypt.so.2.hmac
    28KiB /lib64/gconv/ANSI_X3.110.so
@@ -152,15 +143,9 @@
   842KiB /lib64/ld-linux-x86-64.so.2
    16KiB /lib64/libBrokenLocale.so.1
    24KiB /lib64/libSegFault.so
-   41KiB /lib64/libacl.so.1
-   41KiB /lib64/libacl.so.1.1.2301
    16KiB /lib64/libanl.so.1
-   28KiB /lib64/libattr.so.1
-   28KiB /lib64/libattr.so.1.1.2501
   2.3MiB /lib64/libc.so.6
    54KiB /lib64/libc_malloc_debug.so.0
-  198KiB /lib64/libcrypt.so.1
-  198KiB /lib64/libcrypt.so.1.1.0
   198KiB /lib64/libcrypt.so.2
   198KiB /lib64/libcrypt.so.2.0.0
   4.3MiB /lib64/libcrypto.so.3
@@ -175,10 +160,10 @@
    16KiB /lib64/libnss_dns.so.2
    16KiB /lib64/libnss_files.so.2
    16KiB /lib64/libpcprofile.so
-  607KiB /lib64/libpcre2-8.so.0
-  607KiB /lib64/libpcre2-8.so.0.10.1
-   16KiB /lib64/libpcre2-posix.so.2
-   16KiB /lib64/libpcre2-posix.so.2.0.3
+  483KiB /lib64/libpcre.so.1
+  483KiB /lib64/libpcre.so.1.2.12
+   16KiB /lib64/libpcreposix.so.0
+   16KiB /lib64/libpcreposix.so.0.0.7
    16KiB /lib64/libpthread.so.0
    70KiB /lib64/libresolv.so.2
    17KiB /lib64/librt.so.1
@@ -197,7 +182,7 @@
    61KiB /sbin/zic
   1.7KiB /usr/bin/ca-legacy
   3.3KiB /usr/bin/catchsegv
-  147KiB /usr/bin/cp
+     49B /usr/bin/cp
    29KiB /usr/bin/gencat
    36KiB /usr/bin/getconf
    37KiB /usr/bin/getent
@@ -206,7 +191,7 @@
   5.4KiB /usr/bin/ldd
    61KiB /usr/bin/locale
   316KiB /usr/bin/localedef
-   69KiB /usr/bin/mkdir
+     52B /usr/bin/mkdir
    25KiB /usr/bin/pldd
   4.2KiB /usr/bin/sotruss
    37KiB /usr/bin/sprof
@@ -245,8 +230,6 @@
    16KiB /usr/lib64/engines-3/capi.so
    53KiB /usr/lib64/engines-3/loader_attic.so
    28KiB /usr/lib64/engines-3/padlock.so
-     65B /usr/lib64/fipscheck/libcrypt.so.1.1.0.hmac
-     65B /usr/lib64/fipscheck/libcrypt.so.1.hmac
      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
      65B /usr/lib64/fipscheck/libcrypt.so.2.hmac
    28KiB /usr/lib64/gconv/ANSI_X3.110.so
@@ -262,15 +245,9 @@
   842KiB /usr/lib64/ld-linux-x86-64.so.2
    16KiB /usr/lib64/libBrokenLocale.so.1
    24KiB /usr/lib64/libSegFault.so
-   41KiB /usr/lib64/libacl.so.1
-   41KiB /usr/lib64/libacl.so.1.1.2301
    16KiB /usr/lib64/libanl.so.1
-   28KiB /usr/lib64/libattr.so.1
-   28KiB /usr/lib64/libattr.so.1.1.2501
   2.3MiB /usr/lib64/libc.so.6
    54KiB /usr/lib64/libc_malloc_debug.so.0
-  198KiB /usr/lib64/libcrypt.so.1
-  198KiB /usr/lib64/libcrypt.so.1.1.0
   198KiB /usr/lib64/libcrypt.so.2
   198KiB /usr/lib64/libcrypt.so.2.0.0
   4.3MiB /usr/lib64/libcrypto.so.3
@@ -285,10 +262,10 @@
    16KiB /usr/lib64/libnss_dns.so.2
    16KiB /usr/lib64/libnss_files.so.2
    16KiB /usr/lib64/libpcprofile.so
-  607KiB /usr/lib64/libpcre2-8.so.0
-  607KiB /usr/lib64/libpcre2-8.so.0.10.1
-   16KiB /usr/lib64/libpcre2-posix.so.2
-   16KiB /usr/lib64/libpcre2-posix.so.2.0.3
+  483KiB /usr/lib64/libpcre.so.1
+  483KiB /usr/lib64/libpcre.so.1.2.12
+   16KiB /usr/lib64/libpcreposix.so.0
+   16KiB /usr/lib64/libpcreposix.so.0.0.7
    16KiB /usr/lib64/libpthread.so.0
    70KiB /usr/lib64/libresolv.so.2
    17KiB /usr/lib64/librt.so.1
@@ -307,126 +284,10 @@
    33KiB /usr/sbin/iconvconfig
   1.2MiB /usr/sbin/ldconfig
    61KiB /usr/sbin/zic
-     75B /usr/share/crypto-policies/DEFAULT/bind.txt
-  1.4KiB /usr/share/crypto-policies/DEFAULT/gnutls.txt
-    395B /usr/share/crypto-policies/DEFAULT/java.txt
-    179B /usr/share/crypto-policies/DEFAULT/krb5.txt
-    565B /usr/share/crypto-policies/DEFAULT/libreswan.txt
-  1.2KiB /usr/share/crypto-policies/DEFAULT/libssh.txt
-    401B /usr/share/crypto-policies/DEFAULT/nss.txt
-  1.3KiB /usr/share/crypto-policies/DEFAULT/openssh.txt
-  1.8KiB /usr/share/crypto-policies/DEFAULT/opensshserver.txt
-    150B /usr/share/crypto-policies/DEFAULT/openssl.txt
-    571B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
-    123B /usr/share/crypto-policies/EMPTY/bind.txt
-    178B /usr/share/crypto-policies/EMPTY/gnutls.txt
-    797B /usr/share/crypto-policies/EMPTY/java.txt
-     36B /usr/share/crypto-policies/EMPTY/krb5.txt
-     23B /usr/share/crypto-policies/EMPTY/libreswan.txt
-      0B /usr/share/crypto-policies/EMPTY/libssh.txt
-    147B /usr/share/crypto-policies/EMPTY/nss.txt
-     21B /usr/share/crypto-policies/EMPTY/openssh.txt
-     21B /usr/share/crypto-policies/EMPTY/opensshserver.txt
-    214B /usr/share/crypto-policies/EMPTY/openssl.txt
-    283B /usr/share/crypto-policies/EMPTY/opensslcnf.txt
-    105B /usr/share/crypto-policies/FIPS/bind.txt
-  1.6KiB /usr/share/crypto-policies/FIPS/gnutls.txt
-    595B /usr/share/crypto-policies/FIPS/java.txt
-    137B /usr/share/crypto-policies/FIPS/krb5.txt
-    451B /usr/share/crypto-policies/FIPS/libreswan.txt
-    998B /usr/share/crypto-policies/FIPS/libssh.txt
-    368B /usr/share/crypto-policies/FIPS/nss.txt
-    832B /usr/share/crypto-policies/FIPS/openssh.txt
-  1.2KiB /usr/share/crypto-policies/FIPS/opensshserver.txt
-    171B /usr/share/crypto-policies/FIPS/openssl.txt
-    549B /usr/share/crypto-policies/FIPS/opensslcnf.txt
-    105B /usr/share/crypto-policies/FUTURE/bind.txt
-  1.7KiB /usr/share/crypto-policies/FUTURE/gnutls.txt
-    665B /usr/share/crypto-policies/FUTURE/java.txt
-    107B /usr/share/crypto-policies/FUTURE/krb5.txt
-    388B /usr/share/crypto-policies/FUTURE/libreswan.txt
-  1.1KiB /usr/share/crypto-policies/FUTURE/libssh.txt
-    347B /usr/share/crypto-policies/FUTURE/nss.txt
-  1.2KiB /usr/share/crypto-policies/FUTURE/openssh.txt
-  1.7KiB /usr/share/crypto-policies/FUTURE/opensshserver.txt
-    174B /usr/share/crypto-policies/FUTURE/openssl.txt
-    525B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
-     70B /usr/share/crypto-policies/LEGACY/bind.txt
-  1.1KiB /usr/share/crypto-policies/LEGACY/gnutls.txt
-    357B /usr/share/crypto-policies/LEGACY/java.txt
-    179B /usr/share/crypto-policies/LEGACY/krb5.txt
-    594B /usr/share/crypto-policies/LEGACY/libreswan.txt
-  1.5KiB /usr/share/crypto-policies/LEGACY/libssh.txt
-    431B /usr/share/crypto-policies/LEGACY/nss.txt
-  1.6KiB /usr/share/crypto-policies/LEGACY/openssh.txt
-  2.1KiB /usr/share/crypto-policies/LEGACY/opensshserver.txt
-    138B /usr/share/crypto-policies/LEGACY/openssl.txt
-    630B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
-     75B /usr/share/crypto-policies/back-ends/DEFAULT/bind.config
-  1.4KiB /usr/share/crypto-policies/back-ends/DEFAULT/gnutls.config
-    395B /usr/share/crypto-policies/back-ends/DEFAULT/java.config
-    179B /usr/share/crypto-policies/back-ends/DEFAULT/krb5.config
-    565B /usr/share/crypto-policies/back-ends/DEFAULT/libreswan.config
-  1.2KiB /usr/share/crypto-policies/back-ends/DEFAULT/libssh.config
-    401B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
-  1.3KiB /usr/share/crypto-policies/back-ends/DEFAULT/openssh.config
-  1.8KiB /usr/share/crypto-policies/back-ends/DEFAULT/opensshserver.config
-    150B /usr/share/crypto-policies/back-ends/DEFAULT/openssl.config
-    571B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
-    105B /usr/share/crypto-policies/back-ends/FIPS/bind.config
-  1.6KiB /usr/share/crypto-policies/back-ends/FIPS/gnutls.config
-    595B /usr/share/crypto-policies/back-ends/FIPS/java.config
-    137B /usr/share/crypto-policies/back-ends/FIPS/krb5.config
-    451B /usr/share/crypto-policies/back-ends/FIPS/libreswan.config
-    998B /usr/share/crypto-policies/back-ends/FIPS/libssh.config
-    368B /usr/share/crypto-policies/back-ends/FIPS/nss.config
-    832B /usr/share/crypto-policies/back-ends/FIPS/openssh.config
-  1.2KiB /usr/share/crypto-policies/back-ends/FIPS/opensshserver.config
-    171B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
-    549B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
-    105B /usr/share/crypto-policies/back-ends/FUTURE/bind.config
-  1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/gnutls.config
-    665B /usr/share/crypto-policies/back-ends/FUTURE/java.config
-    107B /usr/share/crypto-policies/back-ends/FUTURE/krb5.config
-    388B /usr/share/crypto-policies/back-ends/FUTURE/libreswan.config
-  1.1KiB /usr/share/crypto-policies/back-ends/FUTURE/libssh.config
-    347B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
-  1.2KiB /usr/share/crypto-policies/back-ends/FUTURE/openssh.config
-  1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/opensshserver.config
-    174B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
-    525B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
-     70B /usr/share/crypto-policies/back-ends/LEGACY/bind.config
-  1.1KiB /usr/share/crypto-policies/back-ends/LEGACY/gnutls.config
-    357B /usr/share/crypto-policies/back-ends/LEGACY/java.config
-    179B /usr/share/crypto-policies/back-ends/LEGACY/krb5.config
-    594B /usr/share/crypto-policies/back-ends/LEGACY/libreswan.config
-  1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/libssh.config
-    431B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
-  1.6KiB /usr/share/crypto-policies/back-ends/LEGACY/openssh.config
-  2.1KiB /usr/share/crypto-policies/back-ends/LEGACY/opensshserver.config
-    138B /usr/share/crypto-policies/back-ends/LEGACY/openssl.config
-    630B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
-    688B /usr/share/crypto-policies/default-config
-  2.6KiB /usr/share/crypto-policies/policies/DEFAULT.pol
-    395B /usr/share/crypto-policies/policies/EMPTY.pol
-  2.2KiB /usr/share/crypto-policies/policies/FIPS.pol
-  2.5KiB /usr/share/crypto-policies/policies/FUTURE.pol
-    953B /usr/share/crypto-policies/policies/GOST-ONLY.pol
-  3.0KiB /usr/share/crypto-policies/policies/LEGACY.pol
-  2.6KiB /usr/share/crypto-policies/policies/NEXT.pol
-    306B /usr/share/crypto-policies/policies/modules/AD-SUPPORT.pmod
-    220B /usr/share/crypto-policies/policies/modules/ECDHE-ONLY.pmod
-    442B /usr/share/crypto-policies/policies/modules/FEDORA32.pmod
-    776B /usr/share/crypto-policies/policies/modules/GOST.pmod
-    246B /usr/share/crypto-policies/policies/modules/NO-CAMELLIA.pmod
-    150B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
-    832B /usr/share/crypto-policies/policies/modules/OSPP.pmod
-    135B /usr/share/crypto-policies/policies/modules/SHA1.pmod
-    167B /usr/share/crypto-policies/reload-cmds.sh
    18KiB /usr/share/doc/haproxy/gpl.txt
    18KiB /usr/share/doc/haproxy/internals/notes-layers.txt
    26KiB /usr/share/doc/haproxy/lgpl.txt
-   26KiB /usr/share/licenses/crypto-policies/COPYING.LESSER
+   35KiB /usr/share/licenses/coreutils-single/COPYING
    18KiB /usr/share/licenses/glibc/COPYING
    26KiB /usr/share/licenses/glibc/COPYING.LIB
    19KiB /usr/share/licenses/glibc/LICENSES
@@ -439,10 +300,16 @@
    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
-     97B /usr/share/licenses/pcre2-syntax/COPYING
-  3.4KiB /usr/share/licenses/pcre2-syntax/LICENCE
+     95B /usr/share/licenses/pcre/COPYING
+  3.2KiB /usr/share/licenses/pcre/LICENCE
     118B /usr/share/licenses/setup/COPYING
     252B /usr/share/licenses/tzdata/LICENSE
+  1.4KiB /usr/share/licenses/util-linux/COPYING.BSD-3-Clause
+  1.8KiB /usr/share/licenses/util-linux/COPYING.BSD-4-Clause-UC
+   18KiB /usr/share/licenses/util-linux/COPYING.GPL-2.0-or-later
+   35KiB /usr/share/licenses/util-linux/COPYING.GPL-3.0-or-later
+    697B /usr/share/licenses/util-linux/COPYING.ISC
+   26KiB /usr/share/licenses/util-linux/COPYING.LGPL-2.1-or-later
   5.1KiB /usr/share/licenses/zlib/README
   3.0KiB /usr/share/locale/locale.alias
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
@@ -2243,16 +2110,12 @@
       0B /var/cache/dnf/.gpgkeyschecked.yum
       2B /var/cache/dnf/expired_repos.json
       2B /var/cache/dnf/tempfiles.json
-  2.5KiB /var/cache/ldconfig/aux-cache
+  1.9KiB /var/cache/ldconfig/aux-cache
   116KiB /var/lib/dnf/history.sqlite
    32KiB /var/lib/dnf/history.sqlite-shm
-  1.1MiB /var/lib/dnf/history.sqlite-wal
+  548KiB /var/lib/dnf/history.sqlite-wal
       0B /var/lib/rpm/.rpm.lock
-  3.5MiB /var/lib/rpm/rpmdb.sqlite
+  3.3MiB /var/lib/rpm/rpmdb.sqlite
    32KiB /var/lib/rpm/rpmdb.sqlite-shm
       0B /var/lib/rpm/rpmdb.sqlite-wal
-   16KiB /var/log/dnf.librepo.log
-   42KiB /var/log/dnf.log
-  4.3KiB /var/log/dnf.rpm.log
-  1.3KiB /var/log/hawkey.log
       0B /var/run/motd
