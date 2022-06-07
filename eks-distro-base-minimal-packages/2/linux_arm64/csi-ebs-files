@@ -116,10 +116,7 @@
   2.5KiB /lib/locale/C.utf8/LC_TIME
     264B /lib/systemd/system-preset/85-display-manager.preset
   2.9KiB /lib/systemd/system-preset/90-default.preset
-     96B /lib/systemd/system/fstrim.service
-    170B /lib/systemd/system/fstrim.timer
      34B /lib/tmpfiles.d/libselinux.conf
-    326B /lib/udev/rules.d/60-raw.rules
    71KiB /lib64/audit/sotruss-lib.so
    70KiB /lib64/gconv/ANSI_X3.110.so
    70KiB /lib64/gconv/ARMSCII-8.so
@@ -471,7 +468,6 @@
    69KiB /sbin/fsck
   279KiB /sbin/fsck.ext3
   279KiB /sbin/fsck.ext4
-    433B /sbin/fsck.xfs
   617KiB /sbin/glibc_post_upgrade.aarch64
    75KiB /sbin/iconvconfig
    75KiB /sbin/iconvconfig.aarch64
@@ -483,15 +479,8 @@
    69KiB /sbin/resize2fs
    69KiB /sbin/sefcontext_compile
   698KiB /sbin/sln
-  1.4KiB /sbin/xfs_admin
-    638B /sbin/xfs_bmap
-    767B /sbin/xfs_freeze
   340KiB /sbin/xfs_growfs
-    472B /sbin/xfs_info
   135KiB /sbin/xfs_io
-    747B /sbin/xfs_metadump
-   1007B /sbin/xfs_mkfile
-    650B /sbin/xfs_ncheck
    73KiB /sbin/zdump
    75KiB /sbin/zic
   1.6KiB /usr/bin/ca-legacy
@@ -527,10 +516,7 @@
   2.5KiB /usr/lib/locale/C.utf8/LC_TIME
     264B /usr/lib/systemd/system-preset/85-display-manager.preset
   2.9KiB /usr/lib/systemd/system-preset/90-default.preset
-     96B /usr/lib/systemd/system/fstrim.service
-    170B /usr/lib/systemd/system/fstrim.timer
      34B /usr/lib/tmpfiles.d/libselinux.conf
-    326B /usr/lib/udev/rules.d/60-raw.rules
    71KiB /usr/lib64/audit/sotruss-lib.so
    70KiB /usr/lib64/gconv/ANSI_X3.110.so
    70KiB /usr/lib64/gconv/ARMSCII-8.so
@@ -885,7 +871,6 @@
    69KiB /usr/sbin/fsck
   279KiB /usr/sbin/fsck.ext3
   279KiB /usr/sbin/fsck.ext4
-    433B /usr/sbin/fsck.xfs
   617KiB /usr/sbin/glibc_post_upgrade.aarch64
    75KiB /usr/sbin/iconvconfig
    75KiB /usr/sbin/iconvconfig.aarch64
@@ -897,15 +882,8 @@
    69KiB /usr/sbin/resize2fs
    69KiB /usr/sbin/sefcontext_compile
   698KiB /usr/sbin/sln
-  1.4KiB /usr/sbin/xfs_admin
-    638B /usr/sbin/xfs_bmap
-    767B /usr/sbin/xfs_freeze
   340KiB /usr/sbin/xfs_growfs
-    472B /usr/sbin/xfs_info
   135KiB /usr/sbin/xfs_io
-    747B /usr/sbin/xfs_metadump
-   1007B /usr/sbin/xfs_mkfile
-    650B /usr/sbin/xfs_ncheck
    73KiB /usr/sbin/zdump
    75KiB /usr/sbin/zic
    44KiB /usr/share/doc/e2fsprogs-1.42.9/COPYING
@@ -957,6 +935,7 @@
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
   3.0KiB /usr/share/locale/locale.alias
+  1.8KiB /usr/share/man/man8/xfs_copy.8.gz
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README
