@@ -3856,7 +3856,7 @@
      63B /var/lib/alternatives/libnssckbi.so.x86_64
       0B /var/lib/rpm/.dbenv.lock
       0B /var/lib/rpm/.rpm.lock
-  416KiB /var/lib/rpm/Basenames
+  412KiB /var/lib/rpm/Basenames
   8.0KiB /var/lib/rpm/Conflictname
   132KiB /var/lib/rpm/Dirnames
   8.0KiB /var/lib/rpm/Group
@@ -3864,9 +3864,8 @@
   8.0KiB /var/lib/rpm/Name
   8.0KiB /var/lib/rpm/Obsoletename
   4.0MiB /var/lib/rpm/Packages
-   52KiB /var/lib/rpm/Providename
+   48KiB /var/lib/rpm/Providename
    40KiB /var/lib/rpm/Requirename
    16KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  4.7KiB /var/log/yum.log
