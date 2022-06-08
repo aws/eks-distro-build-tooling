@@ -120,13 +120,10 @@
   9.1KiB /lib/systemd/system-preset/90-default.preset
      27B /lib/systemd/system-preset/91-update-motd.preset
      10B /lib/systemd/system-preset/99-default-disable.preset
-    481B /lib/systemd/system/fstrim.service
-    229B /lib/systemd/system/fstrim.timer
   1.2KiB /lib/systemd/user-preset/90-default-user.preset
      10B /lib/systemd/user-preset/99-default-disable.preset
      30B /lib/tmpfiles.d/libselinux.conf
      60B /lib/tmpfiles.d/setup.conf
-    326B /lib/udev/rules.d/60-raw.rules
    16KiB /lib64/audit/sotruss-lib.so
    28KiB /lib64/gconv/ANSI_X3.110.so
    20KiB /lib64/gconv/CP1252.so
@@ -215,7 +212,6 @@
    45KiB /sbin/fsck
   344KiB /sbin/fsck.ext3
   344KiB /sbin/fsck.ext4
-  2.0KiB /sbin/fsck.xfs
    33KiB /sbin/iconvconfig
   1.2MiB /sbin/ldconfig
    16KiB /sbin/mkfs
@@ -223,15 +219,8 @@
   133KiB /sbin/mkfs.ext4
   398KiB /sbin/mkfs.xfs
    64KiB /sbin/resize2fs
-  1.4KiB /sbin/xfs_admin
-    699B /sbin/xfs_bmap
-    804B /sbin/xfs_freeze
    40KiB /sbin/xfs_growfs
-  1.3KiB /sbin/xfs_info
   203KiB /sbin/xfs_io
-    786B /sbin/xfs_metadump
-  1.1KiB /sbin/xfs_mkfile
-    689B /sbin/xfs_ncheck
    61KiB /sbin/zic
   1.7KiB /usr/bin/ca-legacy
   3.3KiB /usr/bin/catchsegv
@@ -274,13 +263,10 @@
   9.1KiB /usr/lib/systemd/system-preset/90-default.preset
      27B /usr/lib/systemd/system-preset/91-update-motd.preset
      10B /usr/lib/systemd/system-preset/99-default-disable.preset
-    481B /usr/lib/systemd/system/fstrim.service
-    229B /usr/lib/systemd/system/fstrim.timer
   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
      10B /usr/lib/systemd/user-preset/99-default-disable.preset
      30B /usr/lib/tmpfiles.d/libselinux.conf
      60B /usr/lib/tmpfiles.d/setup.conf
-    326B /usr/lib/udev/rules.d/60-raw.rules
    16KiB /usr/lib64/audit/sotruss-lib.so
    28KiB /usr/lib64/gconv/ANSI_X3.110.so
    20KiB /usr/lib64/gconv/CP1252.so
@@ -371,7 +357,6 @@
    45KiB /usr/sbin/fsck
   344KiB /usr/sbin/fsck.ext3
   344KiB /usr/sbin/fsck.ext4
-  2.0KiB /usr/sbin/fsck.xfs
    33KiB /usr/sbin/iconvconfig
   1.2MiB /usr/sbin/ldconfig
    16KiB /usr/sbin/mkfs
@@ -379,15 +364,8 @@
   133KiB /usr/sbin/mkfs.ext4
   398KiB /usr/sbin/mkfs.xfs
    64KiB /usr/sbin/resize2fs
-  1.4KiB /usr/sbin/xfs_admin
-    699B /usr/sbin/xfs_bmap
-    804B /usr/sbin/xfs_freeze
    40KiB /usr/sbin/xfs_growfs
-  1.3KiB /usr/sbin/xfs_info
   203KiB /usr/sbin/xfs_io
-    786B /usr/sbin/xfs_metadump
-  1.1KiB /usr/sbin/xfs_mkfile
-    689B /usr/sbin/xfs_ncheck
    61KiB /usr/sbin/zic
     361B /usr/share/doc/libblkid/COPYING
    18KiB /usr/share/licenses/device-mapper-libs/COPYING
@@ -419,6 +397,7 @@
     697B /usr/share/licenses/util-linux/COPYING.ISC
    26KiB /usr/share/licenses/util-linux/COPYING.LGPL-2.1-or-later
   3.0KiB /usr/share/locale/locale.alias
+  1.8KiB /usr/share/man/man8/xfs_copy.8.gz
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
     937B /usr/share/pki/ca-trust-source/README
@@ -2225,8 +2204,4 @@
   3.4MiB /var/lib/rpm/rpmdb.sqlite
    32KiB /var/lib/rpm/rpmdb.sqlite-shm
       0B /var/lib/rpm/rpmdb.sqlite-wal
-  8.5KiB /var/log/dnf.librepo.log
-   23KiB /var/log/dnf.log
-  2.2KiB /var/log/dnf.rpm.log
-    660B /var/log/hawkey.log
       0B /var/run/motd

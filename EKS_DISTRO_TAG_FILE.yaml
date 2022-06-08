@@ -6,7 +6,7 @@ al2:
   eks-distro-minimal-base-iptables: 2022-04-28-1651172446.2
   eks-distro-minimal-base-docker-client: 2022-04-28-1651172446.2
   eks-distro-minimal-base-csi: 2022-05-05-1651777252.2
-  eks-distro-minimal-base-csi-ebs: null
+  eks-distro-minimal-base-csi-ebs: 2022-06-07-1654628485.2
   eks-distro-minimal-base-haproxy: 2022-04-28-1651172446.2
   eks-distro-minimal-base-kind: 2022-05-05-1651777252.2
   eks-distro-minimal-base-nginx: 2022-04-28-1651172446.2
@@ -19,7 +19,7 @@ al2022:
   eks-distro-minimal-base-iptables: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-docker-client: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-csi: 2022-04-11-1649641854.2022
-  eks-distro-minimal-base-csi-ebs: null
+  eks-distro-minimal-base-csi-ebs: 2022-06-07-1654628495.2022
   eks-distro-minimal-base-haproxy: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-kind: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-nginx: 2022-04-11-1649641854.2022
