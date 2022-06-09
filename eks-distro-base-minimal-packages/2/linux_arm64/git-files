@@ -3862,9 +3862,8 @@
   8.0KiB /var/lib/rpm/Name
   8.0KiB /var/lib/rpm/Obsoletename
   4.0MiB /var/lib/rpm/Packages
-   48KiB /var/lib/rpm/Providename
+   44KiB /var/lib/rpm/Providename
    36KiB /var/lib/rpm/Requirename
-   20KiB /var/lib/rpm/Sha1header
+   16KiB /var/lib/rpm/Sha1header
   8.0KiB /var/lib/rpm/Sigmd5
   8.0KiB /var/lib/rpm/Triggername
-  4.7KiB /var/log/yum.log

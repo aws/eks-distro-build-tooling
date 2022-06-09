@@ -43,9 +43,9 @@ nss-softokn-freebl-3.67.0-3.amzn2.0.1.aarch64
 nss-sysinit-3.67.0-4.amzn2.0.2.aarch64
 nss-tools-3.67.0-4.amzn2.0.2.aarch64
 nss-util-3.67.0-1.amzn2.0.1.aarch64
-openldap-2.4.44-23.amzn2.0.3.aarch64
+openldap-2.4.44-23.amzn2.0.4.aarch64
 openssh-clients-7.4p1-22.amzn2.0.1.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.2.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.3.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 pcre2-10.23-2.amzn2.0.2.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64

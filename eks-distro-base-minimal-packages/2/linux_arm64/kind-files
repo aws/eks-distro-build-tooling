@@ -158,11 +158,12 @@
    68KiB /bin/isosize
      28B /bin/jobs
    69KiB /bin/join
-  591KiB /bin/journalctl
+  590KiB /bin/journalctl
    68KiB /bin/jq
   4.7KiB /bin/kernel-install
    69KiB /bin/keyctl
    69KiB /bin/kill
+   69KiB /bin/killall
   200KiB /bin/kmod
    68KiB /bin/lastlog
   5.3KiB /bin/ldd
@@ -191,7 +192,7 @@
   134KiB /bin/lz4
   134KiB /bin/lz4c
   134KiB /bin/lz4cat
-  590KiB /bin/machinectl
+  591KiB /bin/machinectl
    75KiB /bin/makedb
    69KiB /bin/mcookie
    69KiB /bin/md5sum
@@ -233,7 +234,10 @@
    69KiB /bin/printf
    69KiB /bin/prlimit
   133KiB /bin/procan
+   68KiB /bin/prtstat
   134KiB /bin/ps
+   68KiB /bin/pstree
+   68KiB /bin/pstree.x11
    69KiB /bin/ptx
    69KiB /bin/pwd
    68KiB /bin/pwdx
@@ -398,7 +402,7 @@
   2.0KiB /bin/zless
   2.8KiB /bin/zmore
   5.3KiB /bin/znew
-     40B /dev/null
+      0B /dev/null
       0B /etc/.pwd.lock
   5.0KiB /etc/DIR_COLORS
   5.6KiB /etc/DIR_COLORS.256color
@@ -428,9 +432,9 @@
       0B /etc/exports
      70B /etc/filesystems
     245B /etc/group
-    234B /etc/group-
+    231B /etc/group-
     304B /etc/gshadow
-    303B /etc/gshadow-
+    292B /etc/gshadow-
     189B /etc/gss/mech.d/gssproxy.conf
     152B /etc/gssproxy/24-nfs-server.conf
     276B /etc/gssproxy/99-nfs-client.conf
@@ -443,11 +447,11 @@
   1.2KiB /etc/init.d/README
     942B /etc/inputrc
      85B /etc/iproute2/bpf_pinning
-     75B /etc/iproute2/ematch_map
+     81B /etc/iproute2/ematch_map
      31B /etc/iproute2/group
     262B /etc/iproute2/nl_protos
     331B /etc/iproute2/rt_dsfield
-    326B /etc/iproute2/rt_protos
+    210B /etc/iproute2/rt_protos
     112B /etc/iproute2/rt_realms
      92B /etc/iproute2/rt_scopes
      87B /etc/iproute2/rt_tables
@@ -2046,7 +2050,7 @@
    23KiB /lib64/python2.7/calendar.py
    28KiB /lib64/python2.7/calendar.pyc
    28KiB /lib64/python2.7/calendar.pyo
-   35KiB /lib64/python2.7/cgi.py
+   36KiB /lib64/python2.7/cgi.py
    33KiB /lib64/python2.7/cgi.pyc
    33KiB /lib64/python2.7/cgi.pyo
    12KiB /lib64/python2.7/cgitb.py
@@ -2820,8 +2824,8 @@
    20KiB /lib64/python2.7/fractions.pyc
    20KiB /lib64/python2.7/fractions.pyo
    38KiB /lib64/python2.7/ftplib.py
-   34KiB /lib64/python2.7/ftplib.pyc
-   34KiB /lib64/python2.7/ftplib.pyo
+   35KiB /lib64/python2.7/ftplib.pyc
+   35KiB /lib64/python2.7/ftplib.pyo
   4.7KiB /lib64/python2.7/functools.py
   6.5KiB /lib64/python2.7/functools.pyc
   6.5KiB /lib64/python2.7/functools.pyo
@@ -2870,7 +2874,7 @@
    13KiB /lib64/python2.7/htmllib.py
    20KiB /lib64/python2.7/htmllib.pyc
    20KiB /lib64/python2.7/htmllib.pyo
-   52KiB /lib64/python2.7/httplib.py
+   53KiB /lib64/python2.7/httplib.py
    38KiB /lib64/python2.7/httplib.pyc
    38KiB /lib64/python2.7/httplib.pyo
   8.8KiB /lib64/python2.7/idlelib/AutoComplete.py
@@ -3980,9 +3984,9 @@
    52KiB /lib64/python2.7/urllib2.py
    47KiB /lib64/python2.7/urllib2.pyc
    47KiB /lib64/python2.7/urllib2.pyo
-   17KiB /lib64/python2.7/urlparse.py
-   16KiB /lib64/python2.7/urlparse.pyc
-   16KiB /lib64/python2.7/urlparse.pyo
+   20KiB /lib64/python2.7/urlparse.py
+   18KiB /lib64/python2.7/urlparse.pyc
+   18KiB /lib64/python2.7/urlparse.pyo
   1.6KiB /lib64/python2.7/user.py
   1.7KiB /lib64/python2.7/user.pyc
   1.7KiB /lib64/python2.7/user.pyo
@@ -4299,7 +4303,7 @@
    68KiB /sbin/alternatives
   1.1KiB /sbin/amazon-linux-https
   2.3KiB /sbin/applygnupgdefaults
-   70KiB /sbin/arpd
+  135KiB /sbin/arpd
   206KiB /sbin/arptables-nft
   206KiB /sbin/arptables-nft-restore
   206KiB /sbin/arptables-nft-save
@@ -4309,7 +4313,7 @@
    68KiB /sbin/blkmapd
    69KiB /sbin/blkzone
    69KiB /sbin/blockdev
-  134KiB /sbin/bridge
+  150KiB /sbin/bridge
   688KiB /sbin/build-locale-archive
    70KiB /sbin/capsh
   135KiB /sbin/cfdisk
@@ -4330,7 +4334,7 @@
    69KiB /sbin/ctstat
    68KiB /sbin/delpart
   200KiB /sbin/depmod
-  134KiB /sbin/devlink
+  201KiB /sbin/devlink
    68KiB /sbin/dmfilemapd
   202KiB /sbin/dmsetup
   202KiB /sbin/dmstats
@@ -4352,7 +4356,8 @@
   134KiB /sbin/fsck.minix
    68KiB /sbin/fsfreeze
    69KiB /sbin/fstrim
-   69KiB /sbin/genl
+   69KiB /sbin/fuser
+  134KiB /sbin/genl
    68KiB /sbin/getcap
    68KiB /sbin/getpcaps
   617KiB /sbin/glibc_post_upgrade.aarch64
@@ -4369,11 +4374,11 @@
    75KiB /sbin/iconvconfig
    75KiB /sbin/iconvconfig.aarch64
   3.1KiB /sbin/ifcfg
-   69KiB /sbin/ifstat
+  135KiB /sbin/ifstat
   1.7MiB /sbin/init
   200KiB /sbin/insmod
   135KiB /sbin/install-info
-  609KiB /sbin/ip
+  674KiB /sbin/ip
   136KiB /sbin/ip6tables-legacy
   136KiB /sbin/ip6tables-legacy-restore
   136KiB /sbin/ip6tables-legacy-save
@@ -4417,7 +4422,7 @@
    24KiB /sbin/nfsiostat
    70KiB /sbin/nfsstat
    68KiB /sbin/nologin
-   68KiB /sbin/nstat
+  135KiB /sbin/nstat
   2.6KiB /sbin/osd_login
    68KiB /sbin/packer
    72KiB /sbin/pam_console_apply
@@ -4435,7 +4440,7 @@
   131KiB /sbin/quotaoff
   131KiB /sbin/quotaon
    66KiB /sbin/quotastats
-   68KiB /sbin/rdma
+  136KiB /sbin/rdma
    68KiB /sbin/readprofile
   722KiB /sbin/reboot
   131KiB /sbin/repquota
@@ -4455,7 +4460,7 @@
    68KiB /sbin/rpcinfo
    82KiB /sbin/rtacct
    69KiB /sbin/rtcwake
-   69KiB /sbin/rtmon
+  134KiB /sbin/rtmon
      70B /sbin/rtpr
    69KiB /sbin/rtstat
    11MiB /sbin/runc
@@ -4472,7 +4477,7 @@
   722KiB /sbin/shutdown
   698KiB /sbin/sln
    73KiB /sbin/sm-notify
-  149KiB /sbin/ss
+  215KiB /sbin/ss
     842B /sbin/start-statd
    69KiB /sbin/sulogin
    68KiB /sbin/swaplabel
@@ -4483,7 +4488,7 @@
    69KiB /sbin/tcpd
    69KiB /sbin/tcpdmatch
   722KiB /sbin/telinit
-   69KiB /sbin/tipc
+  136KiB /sbin/tipc
    68KiB /sbin/try-from
   459KiB /sbin/udevadm
   131KiB /sbin/umount.nfs
@@ -4665,11 +4670,12 @@
    68KiB /usr/bin/isosize
      28B /usr/bin/jobs
    69KiB /usr/bin/join
-  591KiB /usr/bin/journalctl
+  590KiB /usr/bin/journalctl
    68KiB /usr/bin/jq
   4.7KiB /usr/bin/kernel-install
    69KiB /usr/bin/keyctl
    69KiB /usr/bin/kill
+   69KiB /usr/bin/killall
   200KiB /usr/bin/kmod
    68KiB /usr/bin/lastlog
   5.3KiB /usr/bin/ldd
@@ -4698,7 +4704,7 @@
   134KiB /usr/bin/lz4
   134KiB /usr/bin/lz4c
   134KiB /usr/bin/lz4cat
-  590KiB /usr/bin/machinectl
+  591KiB /usr/bin/machinectl
    75KiB /usr/bin/makedb
    69KiB /usr/bin/mcookie
    69KiB /usr/bin/md5sum
@@ -4740,7 +4746,10 @@
    69KiB /usr/bin/printf
    69KiB /usr/bin/prlimit
   133KiB /usr/bin/procan
+   68KiB /usr/bin/prtstat
   134KiB /usr/bin/ps
+   68KiB /usr/bin/pstree
+   68KiB /usr/bin/pstree.x11
    69KiB /usr/bin/ptx
    69KiB /usr/bin/pwd
    68KiB /usr/bin/pwdx
@@ -6363,7 +6372,7 @@
    23KiB /usr/lib64/python2.7/calendar.py
    28KiB /usr/lib64/python2.7/calendar.pyc
    28KiB /usr/lib64/python2.7/calendar.pyo
-   35KiB /usr/lib64/python2.7/cgi.py
+   36KiB /usr/lib64/python2.7/cgi.py
    33KiB /usr/lib64/python2.7/cgi.pyc
    33KiB /usr/lib64/python2.7/cgi.pyo
    12KiB /usr/lib64/python2.7/cgitb.py
@@ -7137,8 +7146,8 @@
    20KiB /usr/lib64/python2.7/fractions.pyc
    20KiB /usr/lib64/python2.7/fractions.pyo
    38KiB /usr/lib64/python2.7/ftplib.py
-   34KiB /usr/lib64/python2.7/ftplib.pyc
-   34KiB /usr/lib64/python2.7/ftplib.pyo
+   35KiB /usr/lib64/python2.7/ftplib.pyc
+   35KiB /usr/lib64/python2.7/ftplib.pyo
   4.7KiB /usr/lib64/python2.7/functools.py
   6.5KiB /usr/lib64/python2.7/functools.pyc
   6.5KiB /usr/lib64/python2.7/functools.pyo
@@ -7187,7 +7196,7 @@
    13KiB /usr/lib64/python2.7/htmllib.py
    20KiB /usr/lib64/python2.7/htmllib.pyc
    20KiB /usr/lib64/python2.7/htmllib.pyo
-   52KiB /usr/lib64/python2.7/httplib.py
+   53KiB /usr/lib64/python2.7/httplib.py
    38KiB /usr/lib64/python2.7/httplib.pyc
    38KiB /usr/lib64/python2.7/httplib.pyo
   8.8KiB /usr/lib64/python2.7/idlelib/AutoComplete.py
@@ -8297,9 +8306,9 @@
    52KiB /usr/lib64/python2.7/urllib2.py
    47KiB /usr/lib64/python2.7/urllib2.pyc
    47KiB /usr/lib64/python2.7/urllib2.pyo
-   17KiB /usr/lib64/python2.7/urlparse.py
-   16KiB /usr/lib64/python2.7/urlparse.pyc
-   16KiB /usr/lib64/python2.7/urlparse.pyo
+   20KiB /usr/lib64/python2.7/urlparse.py
+   18KiB /usr/lib64/python2.7/urlparse.pyc
+   18KiB /usr/lib64/python2.7/urlparse.pyo
   1.6KiB /usr/lib64/python2.7/user.py
   1.7KiB /usr/lib64/python2.7/user.pyc
   1.7KiB /usr/lib64/python2.7/user.pyo
@@ -8637,7 +8646,7 @@
    68KiB /usr/sbin/alternatives
   1.1KiB /usr/sbin/amazon-linux-https
   2.3KiB /usr/sbin/applygnupgdefaults
-   70KiB /usr/sbin/arpd
+  135KiB /usr/sbin/arpd
   206KiB /usr/sbin/arptables-nft
   206KiB /usr/sbin/arptables-nft-restore
   206KiB /usr/sbin/arptables-nft-save
@@ -8647,7 +8656,7 @@
    68KiB /usr/sbin/blkmapd
    69KiB /usr/sbin/blkzone
    69KiB /usr/sbin/blockdev
-  134KiB /usr/sbin/bridge
+  150KiB /usr/sbin/bridge
   688KiB /usr/sbin/build-locale-archive
    70KiB /usr/sbin/capsh
   135KiB /usr/sbin/cfdisk
@@ -8668,7 +8677,7 @@
    69KiB /usr/sbin/ctstat
    68KiB /usr/sbin/delpart
   200KiB /usr/sbin/depmod
-  134KiB /usr/sbin/devlink
+  201KiB /usr/sbin/devlink
    68KiB /usr/sbin/dmfilemapd
   202KiB /usr/sbin/dmsetup
   202KiB /usr/sbin/dmstats
@@ -8690,7 +8699,8 @@
   134KiB /usr/sbin/fsck.minix
    68KiB /usr/sbin/fsfreeze
    69KiB /usr/sbin/fstrim
-   69KiB /usr/sbin/genl
+   69KiB /usr/sbin/fuser
+  134KiB /usr/sbin/genl
    68KiB /usr/sbin/getcap
    68KiB /usr/sbin/getpcaps
   617KiB /usr/sbin/glibc_post_upgrade.aarch64
@@ -8707,11 +8717,11 @@
    75KiB /usr/sbin/iconvconfig
    75KiB /usr/sbin/iconvconfig.aarch64
   3.1KiB /usr/sbin/ifcfg
-   69KiB /usr/sbin/ifstat
+  135KiB /usr/sbin/ifstat
   1.7MiB /usr/sbin/init
   200KiB /usr/sbin/insmod
   135KiB /usr/sbin/install-info
-  609KiB /usr/sbin/ip
+  674KiB /usr/sbin/ip
   136KiB /usr/sbin/ip6tables-legacy
   136KiB /usr/sbin/ip6tables-legacy-restore
   136KiB /usr/sbin/ip6tables-legacy-save
@@ -8755,7 +8765,7 @@
    24KiB /usr/sbin/nfsiostat
    70KiB /usr/sbin/nfsstat
    68KiB /usr/sbin/nologin
-   68KiB /usr/sbin/nstat
+  135KiB /usr/sbin/nstat
   2.6KiB /usr/sbin/osd_login
    68KiB /usr/sbin/packer
    72KiB /usr/sbin/pam_console_apply
@@ -8773,7 +8783,7 @@
   131KiB /usr/sbin/quotaoff
   131KiB /usr/sbin/quotaon
    66KiB /usr/sbin/quotastats
-   68KiB /usr/sbin/rdma
+  136KiB /usr/sbin/rdma
    68KiB /usr/sbin/readprofile
   722KiB /usr/sbin/reboot
   131KiB /usr/sbin/repquota
@@ -8793,7 +8803,7 @@
    68KiB /usr/sbin/rpcinfo
    82KiB /usr/sbin/rtacct
    69KiB /usr/sbin/rtcwake
-   69KiB /usr/sbin/rtmon
+  134KiB /usr/sbin/rtmon
      70B /usr/sbin/rtpr
    69KiB /usr/sbin/rtstat
    11MiB /usr/sbin/runc
@@ -8810,7 +8820,7 @@
   722KiB /usr/sbin/shutdown
   698KiB /usr/sbin/sln
    73KiB /usr/sbin/sm-notify
-  149KiB /usr/sbin/ss
+  215KiB /usr/sbin/ss
     842B /usr/sbin/start-statd
    69KiB /usr/sbin/sulogin
    68KiB /usr/sbin/swaplabel
@@ -8821,7 +8831,7 @@
    69KiB /usr/sbin/tcpd
    69KiB /usr/sbin/tcpdmatch
   722KiB /usr/sbin/telinit
-   69KiB /usr/sbin/tipc
+  136KiB /usr/sbin/tipc
    68KiB /usr/sbin/try-from
   459KiB /usr/sbin/udevadm
   131KiB /usr/sbin/umount.nfs
@@ -8884,6 +8894,7 @@
   3.4KiB /usr/share/bash-completion/completions/coredumpctl
     335B /usr/share/bash-completion/completions/ctrlaltdel
     526B /usr/share/bash-completion/completions/delpart
+   24KiB /usr/share/bash-completion/completions/devlink
   1.2KiB /usr/share/bash-completion/completions/dmesg
   1.2KiB /usr/share/bash-completion/completions/eject
     721B /usr/share/bash-completion/completions/fallocate
@@ -9084,6 +9095,7 @@
   1.3KiB /usr/share/doc/popt-1.13/COPYING
    18KiB /usr/share/doc/procps-ng-3.3.10/COPYING
    25KiB /usr/share/doc/procps-ng-3.3.10/COPYING.LIB
+   18KiB /usr/share/doc/psmisc-22.20/COPYING
    27KiB /usr/share/doc/pth-2.0.7/COPYING
    13KiB /usr/share/doc/python-2.7.18/LICENSE
   1.6KiB /usr/share/doc/python-iniparse-0.4/LICENSE
@@ -9210,7 +9222,7 @@
   7.5KiB /usr/share/licenses/gmp-6.0.0/COPYING.LESSERv3
    18KiB /usr/share/licenses/gmp-6.0.0/COPYINGv2
    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
-   18KiB /usr/share/licenses/iproute-4.15.0/COPYING
+   18KiB /usr/share/licenses/iproute-5.10.0/COPYING
    18KiB /usr/share/licenses/iptables-1.8.4/COPYING
    26KiB /usr/share/licenses/kmod-libs-25/COPYING
    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
@@ -9292,6 +9304,7 @@
   131KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
   1.8KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
   7.1KiB /usr/share/locale/bg/LC_MESSAGES/libpwquality.mo
+  5.4KiB /usr/share/locale/bg/LC_MESSAGES/psmisc.mo
    61KiB /usr/share/locale/bg/LC_MESSAGES/tar.mo
    75KiB /usr/share/locale/bg/LC_MESSAGES/yum.mo
   155KiB /usr/share/locale/bg/LC_TIME/coreutils.mo
@@ -9320,6 +9333,7 @@
    56KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
    17KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
     920B /usr/share/locale/ca/LC_MESSAGES/libpwquality.mo
+  1.8KiB /usr/share/locale/ca/LC_MESSAGES/psmisc.mo
    57KiB /usr/share/locale/ca/LC_MESSAGES/rpm.mo
    10KiB /usr/share/locale/ca/LC_MESSAGES/sed.mo
    68KiB /usr/share/locale/ca/LC_MESSAGES/shadow.mo
@@ -9343,6 +9357,7 @@
   4.9KiB /usr/share/locale/cs/LC_MESSAGES/libidn2.mo
   5.9KiB /usr/share/locale/cs/LC_MESSAGES/libpwquality.mo
   1.9KiB /usr/share/locale/cs/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/cs/LC_MESSAGES/psmisc.mo
    74KiB /usr/share/locale/cs/LC_MESSAGES/quota.mo
    51KiB /usr/share/locale/cs/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/cs/LC_MESSAGES/sed.mo
@@ -9370,6 +9385,7 @@
   4.7KiB /usr/share/locale/da/LC_MESSAGES/libidn2.mo
   6.1KiB /usr/share/locale/da/LC_MESSAGES/libpwquality.mo
   1.7KiB /usr/share/locale/da/LC_MESSAGES/popt.mo
+   12KiB /usr/share/locale/da/LC_MESSAGES/psmisc.mo
    30KiB /usr/share/locale/da/LC_MESSAGES/rpm.mo
   9.6KiB /usr/share/locale/da/LC_MESSAGES/sed.mo
    64KiB /usr/share/locale/da/LC_MESSAGES/shadow.mo
@@ -9399,6 +9415,7 @@
     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
   2.1KiB /usr/share/locale/de/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/de/LC_MESSAGES/psmisc.mo
    74KiB /usr/share/locale/de/LC_MESSAGES/quota.mo
    63KiB /usr/share/locale/de/LC_MESSAGES/rpm.mo
   9.5KiB /usr/share/locale/de/LC_MESSAGES/sed.mo
@@ -9419,6 +9436,7 @@
   133KiB /usr/share/locale/el/LC_MESSAGES/glib20.mo
    56KiB /usr/share/locale/el/LC_MESSAGES/gnupg2.mo
   8.9KiB /usr/share/locale/el/LC_MESSAGES/grep.mo
+  6.3KiB /usr/share/locale/el/LC_MESSAGES/psmisc.mo
   2.3KiB /usr/share/locale/el/LC_MESSAGES/rpm.mo
    14KiB /usr/share/locale/el/LC_MESSAGES/sed.mo
    85KiB /usr/share/locale/el/LC_MESSAGES/shadow.mo
@@ -9449,6 +9467,7 @@
    17KiB /usr/share/locale/eo/LC_MESSAGES/grep.mo
    16KiB /usr/share/locale/eo/LC_MESSAGES/libgpg-error.mo
    1005B /usr/share/locale/eo/LC_MESSAGES/libidn2.mo
+   16KiB /usr/share/locale/eo/LC_MESSAGES/psmisc.mo
    68KiB /usr/share/locale/eo/LC_MESSAGES/rpm.mo
   8.8KiB /usr/share/locale/eo/LC_MESSAGES/sed.mo
   195KiB /usr/share/locale/eo/LC_TIME/coreutils.mo
@@ -9496,6 +9515,7 @@
   124KiB /usr/share/locale/eu/LC_MESSAGES/glib20.mo
   1.5KiB /usr/share/locale/eu/LC_MESSAGES/grep.mo
   2.3KiB /usr/share/locale/eu/LC_MESSAGES/libpwquality.mo
+   12KiB /usr/share/locale/eu/LC_MESSAGES/psmisc.mo
   1.7KiB /usr/share/locale/eu/LC_MESSAGES/sed.mo
    49KiB /usr/share/locale/eu/LC_MESSAGES/shadow.mo
    35KiB /usr/share/locale/eu/LC_MESSAGES/tar.mo
@@ -9521,6 +9541,7 @@
    19KiB /usr/share/locale/fi/LC_MESSAGES/grep.mo
    1020B /usr/share/locale/fi/LC_MESSAGES/libidn2.mo
   5.4KiB /usr/share/locale/fi/LC_MESSAGES/libpwquality.mo
+   17KiB /usr/share/locale/fi/LC_MESSAGES/psmisc.mo
    44KiB /usr/share/locale/fi/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/fi/LC_MESSAGES/sed.mo
    20KiB /usr/share/locale/fi/LC_MESSAGES/shadow.mo
@@ -9548,6 +9569,7 @@
   6.5KiB /usr/share/locale/fr/LC_MESSAGES/libpwquality.mo
     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
   2.0KiB /usr/share/locale/fr/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/fr/LC_MESSAGES/psmisc.mo
    50KiB /usr/share/locale/fr/LC_MESSAGES/quota.mo
    73KiB /usr/share/locale/fr/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/fr/LC_MESSAGES/sed.mo
@@ -9615,6 +9637,7 @@
    19KiB /usr/share/locale/hr/LC_MESSAGES/glib20.mo
    17KiB /usr/share/locale/hr/LC_MESSAGES/grep.mo
   1.1KiB /usr/share/locale/hr/LC_MESSAGES/libidn2.mo
+  3.6KiB /usr/share/locale/hr/LC_MESSAGES/psmisc.mo
   9.9KiB /usr/share/locale/hr/LC_MESSAGES/sed.mo
    11KiB /usr/share/locale/hr/LC_MESSAGES/tar.mo
    25KiB /usr/share/locale/hr/LC_MESSAGES/util-linux.mo
@@ -9633,6 +9656,7 @@
   4.8KiB /usr/share/locale/hu/LC_MESSAGES/libidn2.mo
   6.2KiB /usr/share/locale/hu/LC_MESSAGES/libpwquality.mo
     539B /usr/share/locale/hu/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/hu/LC_MESSAGES/psmisc.mo
   7.8KiB /usr/share/locale/hu/LC_MESSAGES/sed.mo
    20KiB /usr/share/locale/hu/LC_MESSAGES/shadow.mo
    12KiB /usr/share/locale/hu/LC_MESSAGES/systemd.mo
@@ -9658,6 +9682,7 @@
    54KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
   9.7KiB /usr/share/locale/id/LC_MESSAGES/grep.mo
     968B /usr/share/locale/id/LC_MESSAGES/libidn2.mo
+   12KiB /usr/share/locale/id/LC_MESSAGES/psmisc.mo
   9.0KiB /usr/share/locale/id/LC_MESSAGES/sed.mo
    16KiB /usr/share/locale/id/LC_MESSAGES/shadow.mo
    57KiB /usr/share/locale/id/LC_MESSAGES/tar.mo
@@ -9684,6 +9709,7 @@
     937B /usr/share/locale/it/LC_MESSAGES/libidn2.mo
   6.2KiB /usr/share/locale/it/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/it/LC_MESSAGES/popt.mo
+   12KiB /usr/share/locale/it/LC_MESSAGES/psmisc.mo
    71KiB /usr/share/locale/it/LC_MESSAGES/rpm.mo
   9.1KiB /usr/share/locale/it/LC_MESSAGES/sed.mo
    23KiB /usr/share/locale/it/LC_MESSAGES/shadow.mo
@@ -9709,6 +9735,7 @@
     669B /usr/share/locale/ja/LC_MESSAGES/libidn2.mo
   7.1KiB /usr/share/locale/ja/LC_MESSAGES/libpwquality.mo
   2.2KiB /usr/share/locale/ja/LC_MESSAGES/popt.mo
+  4.0KiB /usr/share/locale/ja/LC_MESSAGES/psmisc.mo
    80KiB /usr/share/locale/ja/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/ja/LC_MESSAGES/sed.mo
    73KiB /usr/share/locale/ja/LC_MESSAGES/shadow.mo
@@ -9812,6 +9839,7 @@
   1.4KiB /usr/share/locale/nb/LC_MESSAGES/grep.mo
     866B /usr/share/locale/nb/LC_MESSAGES/libpwquality.mo
   1.8KiB /usr/share/locale/nb/LC_MESSAGES/popt.mo
+  4.0KiB /usr/share/locale/nb/LC_MESSAGES/psmisc.mo
    21KiB /usr/share/locale/nb/LC_MESSAGES/rpm.mo
   9.6KiB /usr/share/locale/nb/LC_MESSAGES/sed.mo
    63KiB /usr/share/locale/nb/LC_MESSAGES/shadow.mo
@@ -9840,6 +9868,7 @@
     988B /usr/share/locale/nl/LC_MESSAGES/libidn2.mo
   5.8KiB /usr/share/locale/nl/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/nl/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/nl/LC_MESSAGES/psmisc.mo
   4.6KiB /usr/share/locale/nl/LC_MESSAGES/rpm.mo
   9.8KiB /usr/share/locale/nl/LC_MESSAGES/sed.mo
    21KiB /usr/share/locale/nl/LC_MESSAGES/shadow.mo
@@ -9885,6 +9914,7 @@
   4.9KiB /usr/share/locale/pl/LC_MESSAGES/libidn2.mo
   6.0KiB /usr/share/locale/pl/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/pl/LC_MESSAGES/popt.mo
+   17KiB /usr/share/locale/pl/LC_MESSAGES/psmisc.mo
    67KiB /usr/share/locale/pl/LC_MESSAGES/quota.mo
    72KiB /usr/share/locale/pl/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/pl/LC_MESSAGES/sed.mo
@@ -9905,6 +9935,7 @@
   1.6KiB /usr/share/locale/pt/LC_MESSAGES/grep.mo
   5.8KiB /usr/share/locale/pt/LC_MESSAGES/libpwquality.mo
   1.9KiB /usr/share/locale/pt/LC_MESSAGES/popt.mo
+    598B /usr/share/locale/pt/LC_MESSAGES/psmisc.mo
    37KiB /usr/share/locale/pt/LC_MESSAGES/rpm.mo
   9.3KiB /usr/share/locale/pt/LC_MESSAGES/sed.mo
    67KiB /usr/share/locale/pt/LC_MESSAGES/shadow.mo
@@ -9926,6 +9957,7 @@
    17KiB /usr/share/locale/pt_BR/LC_MESSAGES/grep.mo
   5.0KiB /usr/share/locale/pt_BR/LC_MESSAGES/libidn2.mo
   6.1KiB /usr/share/locale/pt_BR/LC_MESSAGES/libpwquality.mo
+   12KiB /usr/share/locale/pt_BR/LC_MESSAGES/psmisc.mo
    59KiB /usr/share/locale/pt_BR/LC_MESSAGES/rpm.mo
    11KiB /usr/share/locale/pt_BR/LC_MESSAGES/sed.mo
    59KiB /usr/share/locale/pt_BR/LC_MESSAGES/shadow.mo
@@ -9948,6 +9980,7 @@
    15KiB /usr/share/locale/ro/LC_MESSAGES/libgpg-error.mo
     702B /usr/share/locale/ro/LC_MESSAGES/libidn2.mo
   1.2KiB /usr/share/locale/ro/LC_MESSAGES/popt.mo
+  1.8KiB /usr/share/locale/ro/LC_MESSAGES/psmisc.mo
   8.4KiB /usr/share/locale/ro/LC_MESSAGES/sed.mo
    19KiB /usr/share/locale/ro/LC_MESSAGES/shadow.mo
    24KiB /usr/share/locale/ro/LC_MESSAGES/tar.mo
@@ -9966,6 +9999,7 @@
   6.2KiB /usr/share/locale/ru/LC_MESSAGES/libidn2.mo
   7.6KiB /usr/share/locale/ru/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/ru/LC_MESSAGES/popt.mo
+   21KiB /usr/share/locale/ru/LC_MESSAGES/psmisc.mo
    56KiB /usr/share/locale/ru/LC_MESSAGES/rpm.mo
    12KiB /usr/share/locale/ru/LC_MESSAGES/sed.mo
    86KiB /usr/share/locale/ru/LC_MESSAGES/shadow.mo
@@ -10023,6 +10057,7 @@
    22KiB /usr/share/locale/sr/LC_MESSAGES/grep.mo
   1.1KiB /usr/share/locale/sr/LC_MESSAGES/libidn2.mo
   1.1KiB /usr/share/locale/sr/LC_MESSAGES/libpwquality.mo
+   17KiB /usr/share/locale/sr/LC_MESSAGES/psmisc.mo
    67KiB /usr/share/locale/sr/LC_MESSAGES/rpm.mo
    13KiB /usr/share/locale/sr/LC_MESSAGES/sed.mo
    44KiB /usr/share/locale/sr/LC_MESSAGES/yum.mo
@@ -10050,6 +10085,7 @@
   4.8KiB /usr/share/locale/sv/LC_MESSAGES/libidn2.mo
     884B /usr/share/locale/sv/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/sv/LC_MESSAGES/popt.mo
+  9.9KiB /usr/share/locale/sv/LC_MESSAGES/psmisc.mo
    64KiB /usr/share/locale/sv/LC_MESSAGES/rpm.mo
   8.9KiB /usr/share/locale/sv/LC_MESSAGES/sed.mo
    56KiB /usr/share/locale/sv/LC_MESSAGES/shadow.mo
@@ -10117,6 +10153,7 @@
   6.3KiB /usr/share/locale/uk/LC_MESSAGES/libidn2.mo
   7.8KiB /usr/share/locale/uk/LC_MESSAGES/libpwquality.mo
     547B /usr/share/locale/uk/LC_MESSAGES/popt.mo
+   21KiB /usr/share/locale/uk/LC_MESSAGES/psmisc.mo
    91KiB /usr/share/locale/uk/LC_MESSAGES/rpm.mo
    13KiB /usr/share/locale/uk/LC_MESSAGES/sed.mo
    25KiB /usr/share/locale/uk/LC_MESSAGES/shadow.mo
@@ -10144,6 +10181,7 @@
   1.1KiB /usr/share/locale/vi/LC_MESSAGES/libidn2.mo
     921B /usr/share/locale/vi/LC_MESSAGES/libpwquality.mo
   2.4KiB /usr/share/locale/vi/LC_MESSAGES/popt.mo
+   18KiB /usr/share/locale/vi/LC_MESSAGES/psmisc.mo
    11KiB /usr/share/locale/vi/LC_MESSAGES/sed.mo
    57KiB /usr/share/locale/vi/LC_MESSAGES/shadow.mo
    62KiB /usr/share/locale/vi/LC_MESSAGES/tar.mo
@@ -10170,6 +10208,7 @@
     904B /usr/share/locale/zh_CN/LC_MESSAGES/libidn2.mo
   5.4KiB /usr/share/locale/zh_CN/LC_MESSAGES/libpwquality.mo
   2.0KiB /usr/share/locale/zh_CN/LC_MESSAGES/popt.mo
+  4.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/psmisc.mo
    58KiB /usr/share/locale/zh_CN/LC_MESSAGES/rpm.mo
   8.5KiB /usr/share/locale/zh_CN/LC_MESSAGES/sed.mo
    60KiB /usr/share/locale/zh_CN/LC_MESSAGES/shadow.mo
@@ -10191,6 +10230,7 @@
   167KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
    16KiB /usr/share/locale/zh_TW/LC_MESSAGES/grep.mo
   5.5KiB /usr/share/locale/zh_TW/LC_MESSAGES/libpwquality.mo
+  5.0KiB /usr/share/locale/zh_TW/LC_MESSAGES/psmisc.mo
    51KiB /usr/share/locale/zh_TW/LC_MESSAGES/rpm.mo
   8.0KiB /usr/share/locale/zh_TW/LC_MESSAGES/sed.mo
    14KiB /usr/share/locale/zh_TW/LC_MESSAGES/shadow.mo
@@ -12961,7 +13001,7 @@
       0B /var/lib/rpm/.rpm.lock
   632KiB /var/lib/rpm/Basenames
   8.0KiB /var/lib/rpm/Conflictname
-  152KiB /var/lib/rpm/Dirnames
+  156KiB /var/lib/rpm/Dirnames
   8.0KiB /var/lib/rpm/Group
   8.0KiB /var/lib/rpm/Installtid
    16KiB /var/lib/rpm/Name
@@ -12976,8 +13016,7 @@
       0B /var/lib/systemd/random-seed
       0B /var/log/btmp
    24KiB /var/log/lastlog
-      0B /var/log/tallylog
+     40B /var/log/tallylog
       0B /var/log/wtmp
-   12KiB /var/log/yum.log
       0B /var/mail/rpc
       0B /var/spool/mail/rpc
