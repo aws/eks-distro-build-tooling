@@ -71,7 +71,7 @@ define BUILDCTL
 		--local dockerfile=./ \
 		--local context=. \
 		--opt target=$(IMAGE_TARGET) \
-		--output type=$(IMAGE_OUTPUT_TYPE),oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",$(IMAGE_OUTPUT)
+		--output type=$(IMAGE_OUTPUT_TYPE),oci-mediatypes=true,\"name=$(IMAGE)\",$(IMAGE_OUTPUT)
 endef
 
 
@@ -94,7 +94,7 @@ open-pr-check:
 
 ##@ Image Targets
 
-.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%
+.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% push-latest-minimal-images-%
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
@@ -114,8 +114,8 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 %-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # push standard/builder/base image targets
-standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT_TYPE=image
-standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT=push=true
+standard-images final-minimal-images-% builder-minimal-images-% push-latest-minimal-images-%: IMAGE_OUTPUT_TYPE=image
+standard-images final-minimal-images-% builder-minimal-images-% push-latest-minimal-images-%: IMAGE_OUTPUT=push=true
 
 # Standard distro-base image build
 standard-images: DOCKERFILE=Dockerfile.base
@@ -138,8 +138,8 @@ endef
 
 $(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
 
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: VARIANT=minimal-$*
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% push-latest-minimal-images-%: VARIANT=minimal-$*
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% push-latest-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
 builder-minimal-images-% final-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
 
 builder-minimal-images-%: IMAGE_TARGET=builder
@@ -170,6 +170,13 @@ validate-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
 validate-minimal-images-%:
 	$(call BUILDCTL)
 
+push-latest-minimal-images-%: IMAGE=$(LATEST_IMAGE)
+push-latest-minimal-images-%: DOCKERFILE=Dockerfile.push-latest
+push-latest-minimal-images-%: IMAGE_TARGET=push
+push-latest-minimal-images-%: BASE_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+push-latest-minimal-images-%:
+	$(call BUILDCTL)
+
 
 # These vars are all to make sure we pull the public images from ecr vs building locally
 # for use when periodic does not properly update packages and we want to update them manually
@@ -177,6 +184,11 @@ validate-minimal-images-%:
 packages-export-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
 packages-export-all-minimal-images: IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
 packages-export-all-minimal-images: $(addprefix packages-export-minimal-images-, $(MINIMAL_VARIANTS))
+
+.PHONY: push-latest-tags
+push-latest-tags: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
+push-latest-tags: IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
+push-latest-tags: $(addprefix push-latest-minimal-images-, $(MINIMAL_VARIANTS))
 
 ##@ Update targets
 
@@ -249,6 +261,8 @@ update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
 update-base-image-other-repos:
+	$(MAKE) push-latest-tags AL_TAG=2
+	$(MAKE) push-latest-tags AL_TAG=2022
 	./update_base_image_other_repos.sh
 
 .PHONY: all
