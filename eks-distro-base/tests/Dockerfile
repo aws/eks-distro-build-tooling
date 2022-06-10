@@ -1,7 +1,8 @@
 ARG BASE_IMAGE
+ARG AL_TAG
 FROM ${BASE_IMAGE} as base
 
-FROM public.ecr.aws/amazonlinux/amazonlinux:2 as builder
+FROM public.ecr.aws/amazonlinux/amazonlinux:${AL_TAG} as builder
 
 WORKDIR /var/app
 
@@ -22,8 +23,8 @@ COPY --from=base /usr/include/git2.h /usr/include
 COPY --from=base /usr/include/git2 /usr/include/git2
 COPY --from=base /usr/lib64/libgit2* /usr/lib64
 COPY --from=base /usr/lib64/libssh2* /usr/lib64
-
-RUN go get github.com/libgit2/git2go/v31
+RUN ldd /usr/lib64/libgit2.so
+RUN go get github.com/libgit2/git2go/v33
 RUN CGO_ENABLED=1 go build -o check-git ./check_git.go 
 
 FROM ${BASE_IMAGE} as check-base

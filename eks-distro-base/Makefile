@@ -94,7 +94,7 @@ open-pr-check:
 
 ##@ Image Targets
 
-.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%
+.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
@@ -132,14 +132,14 @@ standard-images:
 # use an eval to "hardcode" the target and prereqs instead
 # $1 - Variant
 define MINIMAL_IMAGE_TARGET
-	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1) validate-minimal-images-$(1)
+	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1) validate-minimal-images-$(1) test-minimal-images-$(1)
 
 endef
 
 $(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
 
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: VARIANT=minimal-$*
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: VARIANT=minimal-$*
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
 builder-minimal-images-% final-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
 
 builder-minimal-images-%: IMAGE_TARGET=builder
@@ -162,6 +162,9 @@ packages-export-minimal-images-%: IMAGE_OUTPUT=dest=$(IMAGE_OUTPUT_DIR)
 packages-export-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
 packages-export-minimal-images-%:
 	$(call BUILDCTL)
+	if [ -f $(IMAGE_OUTPUT_DIR)/$(VARIANT_SHORT_NAME) ]; then \
+		mv $(IMAGE_OUTPUT_DIR)/$(VARIANT_SHORT_NAME)* $(IMAGE_OUTPUT_DIR)/$(subst /,_,$(PLATFORMS))/; \
+	fi
 
 validate-minimal-images-%: IMAGE_TARGET=validate
 validate-minimal-images-%: IMAGE_OUTPUT_TYPE=local
@@ -170,6 +173,11 @@ validate-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
 validate-minimal-images-%:
 	$(call BUILDCTL)
 
+test-minimal-images-%:
+	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) check_$*; \
+	fi
+
 
 # These vars are all to make sure we pull the public images from ecr vs building locally
 # for use when periodic does not properly update packages and we want to update them manually
@@ -177,6 +185,13 @@ validate-minimal-images-%:
 packages-export-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
 packages-export-all-minimal-images: IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
 packages-export-all-minimal-images: $(addprefix packages-export-minimal-images-, $(MINIMAL_VARIANTS))
+
+# These vars are all to make sure we pull the public images from ecr vs building locally
+# for use to validate newly built images which have been pushed by the postsubmit
+.PHONY: test-all-minimal-images
+test-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
+test-all-minimal-images: IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
+test-all-minimal-images: $(addprefix test-minimal-images-, $(MINIMAL_VARIANTS))
 
 ##@ Update targets
 

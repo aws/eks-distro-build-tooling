@@ -22,7 +22,7 @@ import (
 	"log"
 	"os"
 
-	git "github.com/libgit2/git2go/v31"
+	git "github.com/libgit2/git2go/v33"
 )
 
 func credentialsMemoryCallback(url string, username string, allowedTypes git.CredType) (*git.Credential, error) {
@@ -52,13 +52,13 @@ func credentialsFileCallback(url string, username string, allowedTypes git.CredT
 }
 
 // Made this one just return 0 during troubleshooting...
-func certificateCheckCallback(cert *git.Certificate, valid bool, hostname string) git.ErrorCode {
-	return 0
+func certificateCheckCallback(cert *git.Certificate, valid bool, hostname string) error {
+	return nil
 }
 
 func main() {
 	cloneOptions := &git.CloneOptions{
-		FetchOptions: &git.FetchOptions{
+		FetchOptions: git.FetchOptions{
 			RemoteCallbacks: git.RemoteCallbacks{
 				CredentialsCallback:      credentialsMemoryCallback,
 				CertificateCheckCallback: certificateCheckCallback,
@@ -75,7 +75,7 @@ func main() {
 	}
 
 	cloneOptions = &git.CloneOptions{
-		FetchOptions: &git.FetchOptions{
+		FetchOptions: git.FetchOptions{
 			RemoteCallbacks: git.RemoteCallbacks{
 				CredentialsCallback:      credentialsFileCallback,
 				CertificateCheckCallback: certificateCheckCallback,
