@@ -217,6 +217,7 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
 # to properly find core go packages
 # we currently will use 1.17 or 1.16 so install for both
+GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go get github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/google/go-licenses@v1.2.1
 # 1.16 is the default so symlink it to /go/bin
