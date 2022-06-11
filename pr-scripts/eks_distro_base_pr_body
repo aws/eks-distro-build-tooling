@@ -1,1 +1,10 @@
 This PR updates the base image tag in CHANGED_FILE with the tag of the newly-built EKS Distro base image.
+
+
+**Note**
+
+Merging this PR may trigger SNS messages, tickets being cut and PRs being opened by the bot across various repos.
+
+Do not merge without:
+- carefully reviewing the package and file changes in the files under `eks-distro-base-minimal-packages`
+- checking out the PR locally and running `make test-all-minimal-images` to ensure newly built images pass smoke tests

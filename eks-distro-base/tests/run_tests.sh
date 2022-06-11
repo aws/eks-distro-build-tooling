@@ -16,10 +16,12 @@
 
 set -e
 set -o pipefail
-set -x
 
 IMAGE_REPO=$1
 IMAGE_TAG=$2
+AL_TAG=$3
+TEST=$4
+
 
 function check_base() {
     docker build \
@@ -28,18 +30,23 @@ function check_base() {
         --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base:$IMAGE_TAG \
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
+        --build-arg AL_TAG=$AL_TAG \
         -f ./tests/Dockerfile ./tests
     docker run base-test:latest
 }
 
+function check_base-nonroot() {
+    echo "not impl"
+}
 
-function check_glibc() {
+function check_base-glibc() {
     docker build \
         -t base-glibc-test:latest \
         --target check-cgo \
         --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-glibc:$IMAGE_TAG \
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
+        --build-arg AL_TAG=$AL_TAG \
         -f ./tests/Dockerfile ./tests
     
     if docker run base-glibc-test:latest | grep -v 'Printed from unsafe C code'; then
@@ -48,13 +55,14 @@ function check_glibc() {
     fi
 }
 
-function check_iptables() {
+function check_base-iptables() {
     docker build \
         -t base-iptables-legacy-test:latest \
         --target check-iptables-legacy \
         --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
+        --build-arg AL_TAG=$AL_TAG \
         -f ./tests/Dockerfile ./tests
     
     if docker run base-iptables-legacy-test:latest iptables --version | grep -v 'legacy'; then
@@ -65,6 +73,14 @@ function check_iptables() {
         echo "ip6tables legacy issue!"
         exit 1
     fi
+    if ! docker run base-iptables-legacy-test:latest iptables-save; then
+        echo "iptables-save legacy issue!"
+        exit 1
+    fi
+    if ! docker run base-iptables-legacy-test:latest ip6tables-save; then
+        echo "ip6tables-save legacy issue!"
+        exit 1
+    fi
 
     docker build \
         -t base-iptables-nft-test:latest \
@@ -72,6 +88,7 @@ function check_iptables() {
         --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
+        --build-arg AL_TAG=$AL_TAG \
         -f ./tests/Dockerfile ./tests
 
     if docker run base-iptables-nft-test:latest iptables --version | grep -v 'nf_tables'; then
@@ -82,16 +99,43 @@ function check_iptables() {
         echo "ip6tables nft issue!"
         exit 1
     fi
+    if ! docker run base-iptables-nft-test:latest ebtables --version; then
+        echo "ebtables nft issue!"
+        exit 1
+    fi
+    if ! docker run base-iptables-nft-test:latest arptables --version; then
+        echo "arptables nft issue!"
+        exit 1
+   fi
 }
 
-function check_csi() {
+function check_base-csi() {
     if docker run $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
         echo "csi xfs issue!"
         exit 1
     fi
  }
 
- function check_git() {
+ function check_base-csi-ebs() {
+    if docker run $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
+        echo "csi xfs issue!"
+        exit 1
+    fi
+ }
+
+ function check_base-git() {
+    if [[ -z "$PRIVATE_REPO" ]]; then
+        echo "Error: Please set PRIVATE_REPO to a private github repo in your github account"
+        echo "example: PRIVATE_REPO=git@github.com:jaxesn/test-private.git"
+        exit 1
+    fi
+
+    if [[ -z "$SSH_KEY_FOLDER" ]]; then
+        echo "Error: Please set SSH_KEY_FOLDER to the local folder which contains your github private/public key"
+        echo "example: SSH_KEY_FOLDER=/Users/jgw/.ssh "
+        exit 1
+    fi
+
     docker build \
         -t base-git-test:latest \
         --target check-git \
@@ -99,6 +143,7 @@ function check_csi() {
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
         --build-arg GOPROXY=direct \
+        --build-arg AL_TAG=$AL_TAG \
         --progress plain \
         -f ./tests/Dockerfile ./tests
     
@@ -124,40 +169,33 @@ function check_csi() {
 
  }
 
- check_docker_client() {
+ check_base-docker-client() {
     if ! docker run -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
         echo "docker client issue!"
         exit 1
     fi
  }
 
- check_haproxy() {
+ check_base-haproxy() {
     if ! docker run $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
         echo "haproxy issue!"
         exit 1
     fi
  }
 
- check_nginx() {
+ check_base-nginx() {
     if ! docker run $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
         echo "nginx issue!"
         exit 1
     fi
  }
 
- check_kind() {
+ check_base-kind() {
     if ! docker run $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
         echo "kind issue!"
         exit 1
     fi
  }
 
-check_base
-check_glibc
-check_iptables
-check_csi
-check_git
-check_docker_client
-check_haproxy
-check_nginx
-check_kind
+
+$TEST
