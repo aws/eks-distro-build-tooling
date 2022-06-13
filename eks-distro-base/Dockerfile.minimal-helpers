@@ -30,7 +30,10 @@ ARG VARIANT
 WORKDIR $NEWROOT
 RUN set -x && \
     rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT && \
-    find . -type f -follow -printf '%s\t/%P\n' | numfmt --field=1 --to=iec-i --padding=8 --suffix=B | sort -k 2 > /tmp/packages/$VARIANT-files
+    printf "****************** Regular Files ******************\n\n" > /tmp/packages/$VARIANT-files && \
+    find . -type f -printf '%M\t%s\t/%P\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$VARIANT-files && \
+    printf "\n****************** Symlinks ******************\n\n" >> /tmp/packages/$VARIANT-files && \
+    find . -type l -printf '%M\t%s\t/%P\t%l\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$VARIANT-files
 
 FROM scratch as export
 
