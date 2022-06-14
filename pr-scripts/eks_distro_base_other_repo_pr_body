@@ -1,0 +1,1 @@
+This PR updates the base image tag in CHANGED_FILE with the tag of the newly-built EKS Distro base image and/or its minimal variants.
