@@ -58,8 +58,13 @@ else
         PR_TITLE="Update deck image tag in ${CHANGED_FILE}"
         PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/prow_deck_pr_body)
     else
-        $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
-        cp ${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_other_repo_pr_body
+        if [ $REPO = "eks-distro-build-tooling" ]; then
+            PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
+        fi
+        cp $PR_BODY_FILE ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        
         
         for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
             UPDATE_PACKAGES="$(cat ${FILE})"
