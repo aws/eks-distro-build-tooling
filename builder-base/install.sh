@@ -185,8 +185,8 @@ setupgo() {
     ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
 }
 
-setupgo "${GOLANG117_VERSION:-1.17.10}"
-setupgo "${GOLANG118_VERSION:-1.18.2}"
+setupgo "${GOLANG117_VERSION:-1.17.11}"
+setupgo "${GOLANG118_VERSION:-1.18.3}"
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
