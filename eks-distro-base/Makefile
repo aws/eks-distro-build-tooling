@@ -44,7 +44,7 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(IMAGE_TAG)
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs base-nsenter
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
@@ -110,7 +110,7 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 # dep tree
 %-minimal-images-base: BASE_IMAGE=scratch
 %-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
-%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs %-minimal-images-base-nsenter: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 %-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # push standard/builder/base image targets
@@ -301,6 +301,7 @@ minimal-images-base-docker-client: ## Build and push minimal base image with doc
 minimal-images-base-nginx: ## Build and push minimal base image with nginx for use by eks-anywhere-test
 minimal-images-base-haproxy: ## Build and push minimal base image with haproxy for use by the kind haproxy image
 minimal-images-base-kind: ## Build and push minimal base image with containerd and other deps for the kind base image
+minimal-images-base-nsenter: ## Build and push minimal base image with nsenter binary for privileged access to host namespaces
 
 packages-export-minimal-images-base: ## Export packages included in base minimal images
 packages-export-minimal-images-base-nonroot: ## Export packages included in base minimal images
@@ -313,6 +314,7 @@ packages-export-minimal-images-base-docker-client: ## Export packages included i
 packages-export-minimal-images-base-nginx: ## Export packages included in nginx minimal images
 packages-export-minimal-images-base-haproxy: ## Export packages included in haproxy minimal images
 packages-export-minimal-images-base-kind: ## Export packages included in kind minimal images
+packages-export-minimal-images-base-nsenter: ## Export packages included in nsenter minimal images
 
 standard-update:  ## Check for out of date packages on standard full base image and push new
 minimal-base-update: ## Check for out of date packages on minimal base image and push new
@@ -326,6 +328,7 @@ minimal-base-docker-client-update: ## Check for out of date packages on minimal 
 minimal-base-nginx: ## Check for out of date packages on minimal nginx base image and push new
 minimal-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
 minimal-base-kind: ## Check for out of date packages on minimal kind base image and push new
+minimal-base-nsenter-update: ## Check for out of date packages on minimal nsenter base image and push new
 
 standard-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
@@ -339,3 +342,4 @@ minimal-base-docker-client-create-pr: ## Update minimal base docker client image
 minimal-base-nginx-create-pr: ## Update minimal base nginx image tag if pushed
 minimal-base-haproxy-create-pr: ## Update minimal base haproxy image tag if pushed
 minimal-base-kind-create-pr: ## Update minimal base kind image tag if pushed
+minimal-base-nsenter-create-pr: ## Update minimal base nsenter image tag if pushed

@@ -197,5 +197,11 @@ function check_base-csi() {
     fi
  }
 
+ check_base-nsenter() {
+    if docker run $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG nsenter --version | grep -v 'nsenter from util-linux'; then
+        echo "nsenter issue!"
+        exit 1
+    fi
+  }
 
 $TEST
