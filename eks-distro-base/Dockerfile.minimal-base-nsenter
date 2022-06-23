@@ -16,7 +16,7 @@
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
 
-################# BASE-NONROOT ################
+################# BUILDER ######################
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 ARG BUILT_BUILDER_IMAGE
