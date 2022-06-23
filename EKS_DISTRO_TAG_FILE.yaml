@@ -25,4 +25,4 @@ al2022:
   eks-distro-minimal-base-kind: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-nginx: 2022-04-11-1649641854.2022
   eks-distro-minimal-base-git: 2022-04-27-1651020241.2022
-  eks-distro-minimal-base-nsenter: latest
+  eks-distro-minimal-base-nsenter: 2022-06-23-1656010859.2022
