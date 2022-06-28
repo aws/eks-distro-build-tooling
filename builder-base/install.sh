@@ -29,6 +29,8 @@ set -x
 TARGETARCH=${TARGETARCH:-amd64}
 USR_BIN=/usr/bin
 USR_LOCAL_BIN=/usr/local/bin
+CARGO_HOME=/root/.cargo
+RUSTUP_HOME=/root/.rustup
 
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
@@ -51,7 +53,6 @@ wget \
 sha256sum -c $BASE_DIR/amazon-ecr-cred-helper-$TARGETARCH-checksum
 mv docker-credential-ecr-login $USR_BIN/
 chmod +x $USR_BIN/docker-credential-ecr-login
-
 
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
@@ -192,7 +193,7 @@ if [ $TARGETARCH == 'arm64' ]; then
     exit
 fi
 
-# Install image-builder build dependencies
+# Install image-builder build dependencies - pip, Ansible, Packer
 # Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
 # Symlinking pip3 to pip, to have pip3 commands work successfully
 pip3 install -U pip setuptools
@@ -213,10 +214,10 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 
 
 # installing go-licenses has to happen after we have set the main go
-# to symlink to the one in /root/sdk due to ensure go-licenses gets built
-# with goroot pointed to /root/sdk/go... instead of /usr/local/go to its able
-# to properly find core go packages
-# we currently will use 1.17 or 1.16 so install for both
+# to symlink to the one in /root/sdk to ensure go-licenses gets built
+# with GOROOT pointed to /root/sdk/go... instead of /usr/local/go so it
+# is able to properly packages from the standard Go library
+# We currently  use 1.17 or 1.16, so installing for both
 GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go get github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/google/go-licenses@v1.2.1
@@ -227,11 +228,21 @@ ln -s ${GOPATH}/go1.16/bin/go-licenses ${GOPATH}/bin
 # We need a higher version of linuxkit hence we do go get of a particular commit
 go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
 
+# Installing NodeJS to run attribution generation script
 wget --progress dot:giga $NODEJS_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
-tar -C /usr --strip-components=1 -xzf $NODEJS_FILENAME $NDOEJS_FOLDER
+tar -C /usr --strip-components=1 -xzf $NODEJS_FILENAME $NODEJS_FOLDER
 rm -rf $NODEJS_FILENAME
 
+# Installing attribution generation script
+mkdir generate-attribution-file
+mv package*.json generate-attribution generate-attribution-file.js LICENSE-2.0.txt generate-attribution-file
+cd generate-attribution-file
+ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
+npm install
+cd ..
+
+# Installing Helm
 curl -O $HELM_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
 tar -xzvf helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz linux-$TARGETARCH/helm
@@ -239,15 +250,11 @@ rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
 mv linux-$TARGETARCH/helm $USR_BIN/helm
 chmod +x $USR_BIN/helm
 
-cd /opt/generate-attribution
-ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
-npm install
-
-
 setupgo "${GOLANG113_VERSION:-1.13.15}"
 setupgo "${GOLANG114_VERSION:-1.14.15}"
 setupgo "${GOLANG115_VERSION:-1.15.15}"
 
+# Installing Goss for imagebuilder validation
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
 wget \
@@ -257,6 +264,7 @@ sha256sum -c $BASE_DIR/goss-$TARGETARCH-checksum
 tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 
+# Installing govc CLI
 wget \
     --progress dot:giga \
     $GOVC_DOWNLOAD_URL
@@ -265,7 +273,7 @@ gzip -d govc_linux_$TARGETARCH.gz
 mv govc_linux_$TARGETARCH $USR_BIN/govc
 chmod +x $USR_BIN/govc
 
-# Install hugo for docs
+# Installing Hugo for docs
 
 wget $HUGO_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
@@ -273,6 +281,7 @@ tar -xf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 mv hugo $USR_BIN/hugo
 rm -rf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz LICENSE README.md
 
+# Installing Skopeo
 SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.2}"
 git clone https://github.com/containers/skopeo
 cd skopeo
@@ -281,6 +290,12 @@ make bin/skopeo
 mv bin/skopeo $USR_BIN/skopeo
 cd ..
 rm -rf skopeo
+
+# Installing Tuftool for Bottlerocket downloads
+curl -fsS $RUSTUP_DOWNLOAD_URL | CARGO_HOME=$CARGO_HOME RUSTUP_HOME=$RUSTUP_HOME sh -s -- -y
+find $CARGO_HOME/bin -type f -not -name "cargo" -not -name "rustc" -not -name "rustup" -delete
+$CARGO_HOME/bin/rustup default stable
+CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool
 
 # go get leaves the tar around
 find /root/sdk -type f -name 'go*.tar.gz' -delete
