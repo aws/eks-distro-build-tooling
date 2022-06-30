@@ -19,20 +19,13 @@ ARG GOPROXY
 ARG TARGETARCH
 
 ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
+ENV CARGO_HOME /root/.cargo
+ENV RUSTUP_HOME /root/.rustup
+ENV PATH="/go/bin/:/root/.cargo/bin:$PATH"
 
-COPY *-checksum *.sh /
-
-# attribution generation support
-COPY generate-attribution/package*.json \
-    generate-attribution/generate-attribution \
-    generate-attribution/generate-attribution-file.js \
-    generate-attribution/LICENSE-2.0.txt \ 
-    /opt/generate-attribution/
+COPY *-checksum *.sh generate-attribution /
 
 RUN export GOPROXY=${GOPROXY} && \
     export TARGETARCH=${TARGETARCH} && \
     bash /install.sh && \
     rm /install.sh /*-checksum
-
-WORKDIR /go/src/github.com/aws/eks-distro

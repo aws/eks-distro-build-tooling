@@ -42,10 +42,10 @@ PACKER_CHECKSUM_URL="https://releases.hashicorp.com/packer/$PACKER_VERSION/packe
 NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
 if [ $TARGETARCH == 'amd64' ]; then 
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-x64.tar.gz"
-    NDOEJS_FOLDER="node-$NODEJS_VERSION-linux-x64"
+    NODEJS_FOLDER="node-$NODEJS_VERSION-linux-x64"
 else
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-arm64.tar.gz"
-    NDOEJS_FOLDER="node-$NODEJS_VERSION-linux-arm64"
+    NODEJS_FOLDER="node-$NODEJS_VERSION-linux-arm64"
 fi
 NODEJS_DOWNLOAD_URL="https://nodejs.org/dist/$NODEJS_VERSION/$NODEJS_FILENAME"
 NODEJS_CHECKSUM_URL="https://nodejs.org/dist/$NODEJS_VERSION/SHASUMS256.txt"
@@ -80,3 +80,5 @@ YQ_CHECKSUM_ORDER_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VE
 AMAZON_ECR_CRED_HELPER_VERSION="${AMAZON_ECR_CRED_HELPER_VERSION:-0.6.0}"
 AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL="https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/${AMAZON_ECR_CRED_HELPER_VERSION}/linux-$TARGETARCH/docker-credential-ecr-login"
 AMAZON_ECR_CRED_HELPER_CHECKSUM_URL="${AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL}.sha256"
+
+RUSTUP_DOWNLOAD_URL="https://sh.rustup.rs"
