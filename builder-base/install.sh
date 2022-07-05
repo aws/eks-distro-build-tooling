@@ -296,6 +296,7 @@ curl -fsS $RUSTUP_DOWNLOAD_URL | CARGO_HOME=$CARGO_HOME RUSTUP_HOME=$RUSTUP_HOME
 find $CARGO_HOME/bin -type f -not -name "cargo" -not -name "rustc" -not -name "rustup" -delete
 $CARGO_HOME/bin/rustup default stable
 CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool
+cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
 
 # go get leaves the tar around
 find /root/sdk -type f -name 'go*.tar.gz' -delete
