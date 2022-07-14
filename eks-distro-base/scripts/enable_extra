@@ -19,27 +19,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-PACKAGES=$1
-JUSTDB=${2:-}
+EXTRA="$1"
 
-if [ $JUSTDB ]; then
-    JUSTDB="--justdb"
-else
-    JUSTDB=""
+if command -v amazon-linux-extras &> /dev/null; then
+    amazon-linux-extras enable $EXTRA
+    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo
 fi
-
-RPMS=(${PACKAGES// / })
-FINAL_RPMS=""
-for rpm in "${RPMS[@]}"; do
-    if rpm --root $NEWROOT -q --quiet $rpm ; then
-        FINAL_RPMS+="$rpm "
-    fi
-done
-rpm --root $NEWROOT --nodeps $JUSTDB -e $FINAL_RPMS
-
-# autoremove does not always look at the full dep tree and sometimes needs to
-# be run multiple times to get everything that can safely be removed
-while ! yum --installroot $NEWROOT autoremove -y | tee /dev/stderr | grep -q 'No Packages marked for removal\|Nothing to do.'
-do
-    :
-done

@@ -14,12 +14,11 @@
 # limitations under the License.
 
 
-set -e
-set -o pipefail
 set -x
-
-PACKAGES="$1"
+set -o errexit
+set -o nounset
+set -o pipefail
 
 if ! grep -q "2022" "/etc/os-release"; then 
-    clean_install "$PACKAGES"
+    "$@"
 fi

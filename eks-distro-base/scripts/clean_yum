@@ -14,9 +14,10 @@
 # limitations under the License.
 
 
-set -e
-set -o pipefail
 set -x
+set -o errexit
+set -o nounset
+set -o pipefail
 
 yum --installroot $NEWROOT clean all
 yum clean all
