@@ -20,7 +20,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   3.5KiB /etc/ld.so.cache
+-rw-r--r--   4.8KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--   1.1KiB /etc/mke2fs.conf
 -rw-r--r--       0B /etc/motd
@@ -87,6 +87,7 @@
 -rwxr-xr-x   5.3KiB /usr/bin/ldd
 -rwxr-xr-x    84KiB /usr/bin/locale
 -rwxr-xr-x   353KiB /usr/bin/localedef
+-rwxr-xr-x   134KiB /usr/bin/lsblk
 -rwxr-xr-x    75KiB /usr/bin/makedb
 -rwxr-xr-x    68KiB /usr/bin/mount
 -rwxr-xr-x    73KiB /usr/bin/pldd
@@ -112,6 +113,21 @@
 -rw-r--r--   2.9KiB /usr/lib/systemd/system-preset/90-default.preset
 -rw-r--r--      34B /usr/lib/tmpfiles.d/libselinux.conf
 -rwxr-xr-x    71KiB /usr/lib64/audit/sotruss-lib.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_aarch64-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_alpha-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_arm-0.176.so
+-rwxr-xr-x    67KiB /usr/lib64/elfutils/libebl_bpf-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_i386-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_ia64-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_m68k-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_ppc-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_ppc64-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_riscv-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_s390-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_sh-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_sparc-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_tilegx-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
 -rwxr-xr-x    70KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    70KiB /usr/lib64/gconv/ARMSCII-8.so
 -rwxr-xr-x    70KiB /usr/lib64/gconv/ASMO_449.so
@@ -371,17 +387,24 @@
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    73KiB /usr/lib64/libanl-2.26.so
+-rwxr-xr-x    69KiB /usr/lib64/libasm-0.176.so
+-rwxr-xr-x    68KiB /usr/lib64/libattr.so.1.1.0
 -rwxr-xr-x   332KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x    71KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   1.8MiB /usr/lib64/libc-2.26.so
+-rwxr-xr-x    68KiB /usr/lib64/libcap.so.2.54
 -rwxr-xr-x   202KiB /usr/lib64/libcidn-2.26.so
 -rwxr-xr-x    68KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    73KiB /usr/lib64/libdl-2.26.so
+-rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    69KiB /usr/lib64/libe2p.so.2.3
+-rwxr-xr-x   134KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   331KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x    71KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x   135KiB /usr/lib64/libformw.so.6.0
 -rwxr-xr-x   131KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x    68KiB /usr/lib64/libhistory.so.6.2
+-rwxr-xr-x   198KiB /usr/lib64/liblzma.so.5.2.2
 -rwxr-xr-x   807KiB /usr/lib64/libm-2.26.so
 -rwxr-xr-x    73KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    69KiB /usr/lib64/libmenu.so.6.0
@@ -393,6 +416,8 @@
 -rwxr-xr-x    76KiB /usr/lib64/libnss_compat-2.26.so
 -rwxr-xr-x    72KiB /usr/lib64/libnss_dns-2.26.so
 -rwxr-xr-x    81KiB /usr/lib64/libnss_files-2.26.so
+-rwxr-xr-x   133KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   331KiB /usr/lib64/libnss_mymachines.so.2
 -rwxr-xr-x    67KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    67KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x    70KiB /usr/lib64/libpcprofile.so
@@ -401,18 +426,29 @@
 -rwxr-xr-x   260KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    68KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    67KiB /usr/lib64/libpcreposix.so.0.0.1
+-rwxr-xr-x    68KiB /usr/lib64/libpsx.so.2.54
 -rwxr-xr-x   186KiB /usr/lib64/libpthread-2.26.so
 -rwxr-xr-x   351KiB /usr/lib64/libreadline.so.6.2
 -rwxr-xr-x   147KiB /usr/lib64/libresolv-2.26.so
 -rwxr-xr-x    81KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   725KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   201KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   1.7MiB /usr/lib64/libstdc++.so.6.0.24
+-rwxr-xr-x    68KiB /usr/lib64/libsystemd-daemon.so.0.0.12
+-rwxr-xr-x    68KiB /usr/lib64/libsystemd-id128.so.0.0.28
+-rwxr-xr-x   198KiB /usr/lib64/libsystemd-journal.so.0.11.5
+-rwxr-xr-x    69KiB /usr/lib64/libsystemd-login.so.0.9.3
+-rwxr-xr-x   263KiB /usr/lib64/libsystemd.so.0.6.0
 -rwxr-xr-x    78KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    69KiB /usr/lib64/libtic.so.6.0
 -rwxr-xr-x   200KiB /usr/lib64/libtinfo.so.6.0
+-rwxr-xr-x   133KiB /usr/lib64/libudev.so.1.6.2
 -rwxr-xr-x    72KiB /usr/lib64/libutil-2.26.so
 -rwxr-xr-x    68KiB /usr/lib64/libuuid.so.1.3.0
+-rwxr-xr-x   132KiB /usr/lib64/libz.so.1.2.7
+-rwxr-xr-x    67KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x   331KiB /usr/lib64/security/pam_systemd.so
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/XBS5_LP64_OFF64
@@ -420,10 +456,13 @@
 -rwxr-xr-x   135KiB /usr/sbin/blkid
 -rwxr-xr-x    69KiB /usr/sbin/blockdev
 -rwx------   688KiB /usr/sbin/build-locale-archive
+-rwxr-xr-x    70KiB /usr/sbin/capsh
 -rwxr-xr-x    68KiB /usr/sbin/dumpe2fs
 -rwxr-xr-x    69KiB /usr/sbin/fsck
 -rwxr-xr-x   279KiB /usr/sbin/fsck.ext3
 -rwxr-xr-x   279KiB /usr/sbin/fsck.ext4
+-rwxr-xr-x    68KiB /usr/sbin/getcap
+-rwxr-xr-x    68KiB /usr/sbin/getpcaps
 -rwx------   617KiB /usr/sbin/glibc_post_upgrade.aarch64
 -rwxr-xr-x    75KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    75KiB /usr/sbin/iconvconfig.aarch64
@@ -434,15 +473,18 @@
 -rwxr-xr-x   404KiB /usr/sbin/mkfs.xfs
 -rwxr-xr-x    69KiB /usr/sbin/resize2fs
 -rwxr-xr-x    69KiB /usr/sbin/sefcontext_compile
+-rwxr-xr-x    68KiB /usr/sbin/setcap
 -rwxr-xr-x   698KiB /usr/sbin/sln
 -rwxr-xr-x   340KiB /usr/sbin/xfs_growfs
 -rwxr-xr-x   135KiB /usr/sbin/xfs_io
 -rwxr-xr-x    73KiB /usr/sbin/zdump
 -rwxr-xr-x    75KiB /usr/sbin/zic
+-rw-r--r--   1.9KiB /usr/share/doc/bzip2-libs-1.0.6/LICENSE
 -rw-r--r--    44KiB /usr/share/doc/e2fsprogs-1.42.9/COPYING
 -rw-r--r--   297KiB /usr/share/doc/e2fsprogs-1.42.9/RELEASE-NOTES
 -rw-r--r--    44KiB /usr/share/doc/e2fsprogs-libs-1.42.9/COPYING
 -rw-r--r--     352B /usr/share/doc/libblkid-2.30.2/COPYING
+-rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
 -rw-r--r--    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
@@ -451,6 +493,10 @@
 -rw-r--r--    18KiB /usr/share/doc/system-release/GPL
 -rw-r--r--    62KiB /usr/share/doc/xfsprogs-4.5.0/COPYING
 -rw-r--r--   2.0KiB /usr/share/doc/xfsprogs-4.5.0/CREDITS
+-rw-r--r--   2.8KiB /usr/share/doc/xz-libs-5.2.2/COPYING
+-rw-r--r--    18KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv2
+-rw-r--r--    35KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv3
+-rw-r--r--    26KiB /usr/share/doc/xz-libs-5.2.2/COPYING.LGPLv2.1
 -rw-r--r--       1B /usr/share/gcc-7/python/libstdcxx/__init__.py
 -rw-r--r--     132B /usr/share/gcc-7/python/libstdcxx/__init__.pyc
 -rw-r--r--     132B /usr/share/gcc-7/python/libstdcxx/__init__.pyo
@@ -468,9 +514,14 @@
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    24KiB /usr/share/info/rluserman.info.gz
+-rw-r--r--    18KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-GPLV2
+-rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-LGPLV3
+-rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
+-rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
+-rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc-7.3.1/COPYING.RUNTIME
@@ -479,15 +530,24 @@
 -rw-r--r--     352B /usr/share/licenses/libmount-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libmount-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
+-rw-r--r--     352B /usr/share/licenses/libsmartcols-2.30.2/COPYING
+-rw-r--r--    26KiB /usr/share/licenses/libsmartcols-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--     217B /usr/share/licenses/libuuid-2.30.2/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/libuuid-2.30.2/COPYING.BSD-3
 -rw-r--r--   1.4KiB /usr/share/licenses/util-linux-2.30.2/COPYING.BSD-3
 -rw-r--r--    18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
 -rw-r--r--    26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
+-rw-r--r--    18KiB /usr/share/locale/de/LC_MESSAGES/elfutils.mo
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
+-rw-r--r--   144KiB /usr/share/locale/en@boldquot/LC_MESSAGES/elfutils.mo
+-rw-r--r--   142KiB /usr/share/locale/en@quot/LC_MESSAGES/elfutils.mo
+-rw-r--r--   109KiB /usr/share/locale/es/LC_MESSAGES/elfutils.mo
 -rw-r--r--     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
+-rw-r--r--    61KiB /usr/share/locale/ja/LC_MESSAGES/elfutils.mo
 -rw-r--r--   3.0KiB /usr/share/locale/locale.alias
+-rw-r--r--   136KiB /usr/share/locale/pl/LC_MESSAGES/elfutils.mo
+-rw-r--r--   166KiB /usr/share/locale/uk/LC_MESSAGES/elfutils.mo
 -rw-r--r--   1.8KiB /usr/share/man/man8/xfs_copy.8.gz
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
@@ -2281,18 +2341,18 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   2.9KiB /var/cache/ldconfig/aux-cache
+-rw-------   4.0KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   328KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   116KiB /var/lib/rpm/Dirnames
+-rw-r--r--   120KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   2.4MiB /var/lib/rpm/Packages
--rw-r--r--    20KiB /var/lib/rpm/Providename
+-rw-r--r--   2.7MiB /var/lib/rpm/Packages
+-rw-r--r--    36KiB /var/lib/rpm/Providename
 -rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
 -rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
@@ -2315,20 +2375,42 @@ lrwxrwxrwx       7B /usr/lib/debug/lib	usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64	usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin	usr/sbin
 lrwxrwxrwx      19B /usr/lib/ld-linux-aarch64.so.1	../lib64/ld-2.26.so
+lrwxrwxrwx      23B /usr/lib64/elfutils/libebl_aarch64.so	libebl_aarch64-0.176.so
+lrwxrwxrwx      21B /usr/lib64/elfutils/libebl_alpha.so	libebl_alpha-0.176.so
+lrwxrwxrwx      19B /usr/lib64/elfutils/libebl_arm.so	libebl_arm-0.176.so
+lrwxrwxrwx      19B /usr/lib64/elfutils/libebl_bpf.so	libebl_bpf-0.176.so
+lrwxrwxrwx      20B /usr/lib64/elfutils/libebl_i386.so	libebl_i386-0.176.so
+lrwxrwxrwx      20B /usr/lib64/elfutils/libebl_ia64.so	libebl_ia64-0.176.so
+lrwxrwxrwx      20B /usr/lib64/elfutils/libebl_m68k.so	libebl_m68k-0.176.so
+lrwxrwxrwx      19B /usr/lib64/elfutils/libebl_ppc.so	libebl_ppc-0.176.so
+lrwxrwxrwx      21B /usr/lib64/elfutils/libebl_ppc64.so	libebl_ppc64-0.176.so
+lrwxrwxrwx      21B /usr/lib64/elfutils/libebl_riscv.so	libebl_riscv-0.176.so
+lrwxrwxrwx      20B /usr/lib64/elfutils/libebl_s390.so	libebl_s390-0.176.so
+lrwxrwxrwx      18B /usr/lib64/elfutils/libebl_sh.so	libebl_sh-0.176.so
+lrwxrwxrwx      21B /usr/lib64/elfutils/libebl_sparc.so	libebl_sparc-0.176.so
+lrwxrwxrwx      22B /usr/lib64/elfutils/libebl_tilegx.so	libebl_tilegx-0.176.so
+lrwxrwxrwx      22B /usr/lib64/elfutils/libebl_x86_64.so	libebl_x86_64-0.176.so
 lrwxrwxrwx      10B /usr/lib64/ld-linux-aarch64.so.1	ld-2.26.so
 lrwxrwxrwx      23B /usr/lib64/libBrokenLocale.so.1	libBrokenLocale-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libanl.so.1	libanl-2.26.so
+lrwxrwxrwx      15B /usr/lib64/libasm.so.1	libasm-0.176.so
+lrwxrwxrwx      16B /usr/lib64/libattr.so.1	libattr.so.1.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1	libblkid.so.1.1.0
+lrwxrwxrwx      15B /usr/lib64/libbz2.so.1	libbz2.so.1.0.6
 lrwxrwxrwx      12B /usr/lib64/libc.so.6	libc-2.26.so
+lrwxrwxrwx      14B /usr/lib64/libcap.so.2	libcap.so.2.54
 lrwxrwxrwx      15B /usr/lib64/libcidn.so.1	libcidn-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2	libcom_err.so.2.1
 lrwxrwxrwx      13B /usr/lib64/libdl.so.2	libdl-2.26.so
+lrwxrwxrwx      14B /usr/lib64/libdw.so.1	libdw-0.176.so
 lrwxrwxrwx      13B /usr/lib64/libe2p.so.2	libe2p.so.2.3
+lrwxrwxrwx      15B /usr/lib64/libelf.so.1	libelf-0.176.so
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2	libext2fs.so.2.4
 lrwxrwxrwx      14B /usr/lib64/libform.so.6	libform.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6	libformw.so.6.0
 lrwxrwxrwx      24B /usr/lib64/libgcc_s.so.1	libgcc_s-7-20180712.so.1
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.6	libhistory.so.6.2
+lrwxrwxrwx      16B /usr/lib64/liblzma.so.5	liblzma.so.5.2.2
 lrwxrwxrwx      12B /usr/lib64/libm.so.6	libm-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libmenu.so.6	libmenu.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6	libmenuw.so.6.0
@@ -2346,16 +2428,25 @@ lrwxrwxrwx      18B /usr/lib64/libpcre16.so.0	libpcre16.so.0.2.0
 lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1
+lrwxrwxrwx      14B /usr/lib64/libpsx.so.2	libpsx.so.2.54
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.6	libreadline.so.6.2
 lrwxrwxrwx      17B /usr/lib64/libresolv.so.2	libresolv-2.26.so
 lrwxrwxrwx      13B /usr/lib64/librt.so.1	librt-2.26.so
+lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1	libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
+lrwxrwxrwx      27B /usr/lib64/libsystemd-daemon.so.0	libsystemd-daemon.so.0.0.12
+lrwxrwxrwx      26B /usr/lib64/libsystemd-id128.so.0	libsystemd-id128.so.0.0.28
+lrwxrwxrwx      28B /usr/lib64/libsystemd-journal.so.0	libsystemd-journal.so.0.11.5
+lrwxrwxrwx      25B /usr/lib64/libsystemd-login.so.0	libsystemd-login.so.0.9.3
+lrwxrwxrwx      19B /usr/lib64/libsystemd.so.0	libsystemd.so.0.6.0
 lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6	libtic.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6	libtinfo.so.6.0
+lrwxrwxrwx      16B /usr/lib64/libudev.so.1	libudev.so.1.6.2
 lrwxrwxrwx      15B /usr/lib64/libutil.so.1	libutil-2.26.so
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1	libuuid.so.1.3.0
+lrwxrwxrwx      13B /usr/lib64/libz.so.1	libz.so.1.2.7
 lrwxrwxrwx      10B /usr/tmp	../var/tmp
 lrwxrwxrwx      11B /var/lock	../run/lock
 lrwxrwxrwx      10B /var/mail	spool/mail
