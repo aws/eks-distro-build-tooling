@@ -49,6 +49,8 @@ IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 
+ALL_IMAGE_NAMES=eks-distro-base $(foreach variant,$(MINIMAL_VARIANTS),eks-distro-minimal-$(variant) eks-distro-minimal-$(variant)-builder)
+
 VARIANT_SHORT_NAME=$(if \
 		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%),base)
 
@@ -105,7 +107,7 @@ standard-images %-minimal-images-base: BASE_IMAGE=public.ecr.aws/amazonlinux/ama
 standard-images %-minimal-images-base: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 
 # images with custom "base" targets
-final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy: DOCKERFILE=Dockerfile.$(VARIANT)
+final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy final-minimal-images-base-nginx: DOCKERFILE=Dockerfile.$(VARIANT)
 
 # dep tree
 %-minimal-images-base: BASE_IMAGE=scratch
@@ -277,12 +279,21 @@ all: release
 minimal-base-test: 
 	./tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG)
 
-.PHONY: ecr
-ecr:
-	aws ecr create-repository \
-		--repository-name $(IMAGE_NAME) \
-		--image-tag-mutability IMMUTABLE \
-		--image-scanning-configuration  scanOnPush=true || true
+.PHONY: %/create-ecr-repo
+%/create-ecr-repo: IMAGE_NAME=$*
+%/create-ecr-repo:
+	cmd=( ecr ); \
+	if [[ "${IMAGE_REPO}" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=$(IMAGE_NAME); \
+	if ! aws $${cmd[*]} describe-repositories --repository-name "$$repo" > /dev/null 2>&1; then \
+		aws $${cmd[*]} create-repository --repository-name "$$repo"; \
+	fi;
+
+.PHONY: create-ecr-repos
+create-ecr-repos: # Create repos in ECR for project images for local testing
+create-ecr-repos: $(foreach image,$(ALL_IMAGE_NAMES),$(image)/create-ecr-repo)
 
 
 ## --------------------------------------

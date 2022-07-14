@@ -25,29 +25,14 @@ ARG TARGETARCH
 ENV CMAKE_VERSION=3.20.2
 ENV LIBSSH2_VERSION=1.10.0
 ENV LIBGIT2_VERSION=1.3.1
-ENV BUILD_DEPS="gcc gzip make openssl-devel openssl-libs tar wget"
+ENV BUILD_DEPS="file gcc gzip make openssl-devel tar wget zlib-devel"
 
 COPY "${TARGETARCH}-git-checksums" /tmp/checksums
 
-# Copy scripts in every variant since we do not rebuild the base
-# every time these scripts change. This ensures whenever a variant is
-# built it has the latest scripts in the builder
-COPY scripts/ /usr/bin
 
 RUN set -x && \
     export TARGETARCH="${TARGETARCH/amd64/x86_64}" && \
     export TARGETARCH="${TARGETARCH/arm64/aarch64}" && \
-    # manually "install" systemd to avoid installing the entire dep tree
-    # git deps on less, which we wont be using in the image
-    # do not need openssh, just the clients for git to fork (ssh)
-    # rpm comes from openlbdap/nss but we only need the libs
-    clean_install "less openssh rpm systemd" true true && \
-    clean_install "git-core libssh2 openssh-clients openssl-libs gnupg" && \
-    install_if_al2022 "libgit2" && \
-    remove_package "less openssh rpm systemd" true && \
-    # we are keeping bash on this image since downstream images use to exec git
-    remove_package "coreutils findutils gawk grep info sed" && \
-    if grep -q "2022" "/etc/os-release" ; then cleanup "git" && exit; fi && \
     # building libgit2 + libssh2
     mkdir -p /tmp/sources && \
     cd /tmp/sources && \
@@ -65,7 +50,7 @@ RUN set -x && \
     # al2 provided libssh is out of date and does not work with ssh/github
     tar -xzf libssh2-${LIBSSH2_VERSION}.tar.gz && \
     cd  /tmp/sources/libssh2-${LIBSSH2_VERSION} && \
-    ./configure --disable-static --enable-shared --prefix=/usr --libdir=/usr/lib64 && \
+    ./configure --disable-static --enable-shared --disable-examples-build --prefix=/usr --libdir=/usr/lib64 && \
     make && \
     make install && \
     mkdir -p $NEWROOT/usr/share/doc/libssh2-${LIBSSH2_VERSION}/ && \
@@ -74,7 +59,7 @@ RUN set -x && \
     # CMAKE for libgit build
     cd /tmp/sources && \
     tar -xzf cmake-${CMAKE_VERSION}-linux-${TARGETARCH}.tar.gz && \
-    mv cmake-${CMAKE_VERSION}-linux-${TARGETARCH}/bin/* /usr/bin && \
+    mv cmake-${CMAKE_VERSION}-linux-${TARGETARCH}/bin/cmake /usr/bin && \
     mkdir /usr/share/cmake-3.20 && \
     mv cmake-${CMAKE_VERSION}-linux-${TARGETARCH}/share/cmake-3.20/* /usr/share/cmake-3.20 && \
     # Install Libgit2
@@ -97,5 +82,27 @@ RUN set -x && \
     cp -rf /usr/local/include/git2* $NEWROOT/usr/include && \
     cd / && \
     rm -rf /tmp/sources && \
-    yum erase -y "$BUILD_DEPS" && \
+    yum erase -y $BUILD_DEPS && \
+    clean_yum
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
+# cyrus-sasl-lib is installed for the libs, but it also includes these bins
+# which are not needed
+# /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
+ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 /etc/krb5.conf.d/crypto-policies"
+
+RUN set -x && \
+    # we are keeping bash on this image since downstream images use to exec git
+    install_rpm bash \
+        git-core \
+        openssh-clients \
+        openssl-libs \
+        gnupg2 && \
+    # ensure all lib deps for the built libssh and libgit are included
+    install_deps_for_binary $NEWROOT/usr/lib64/libssh2.so \
+        $NEWROOT/usr/lib64/libgit2.so && \    
     cleanup "git"

@@ -27,12 +27,18 @@ FROM ${BUILDER_IMAGE} as builder
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
+ENV LIBSEPOL_SCRIPTLET_REQS="/sbin/ldconfig"
+
+# this is provided in minimal base, glibc brings its own, remove it
+ENV CLEANUP_UNNECESSARY_FILES="/etc/nsswitch.conf.rpmnew"
+
 RUN set -x && \
-    # let yum install bash since it will be needed for scriptlets
-    # will be removed along with its deps at the end
-    clean_install "glibc-minimal-langpack glibc" && \
-    # this is provided in minimal base, glibc brings its own, remove it
-    rm etc/nsswitch.conf.rpmnew && \
-    # remove bash and deps (ncurses)
-    remove_package bash && \
+    install_rpm glibc-minimal-langpack \
+        glibc \
+        glibc-common \
+        libgcc \
+        libselinux \
+        libsepol \
+        libstdc++ \
+        pcre && \
     cleanup "glibc"

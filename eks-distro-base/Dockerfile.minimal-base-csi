@@ -37,6 +37,7 @@ RUN set -x && \
     # some of the install scriptlets need coreutils but the dep ordering
     # doesnt reflect, install manually to make sure its first
     clean_install coreutils && \
+    if_al2022 clean_install pcre2 && \
     clean_install "e2fsprogs nfs-utils util-linux xfsprogs" && \
     remove_package systemd true && \
     cleanup "csi"
