@@ -75,6 +75,7 @@
 -rwxr-xr-x   5.3KiB /usr/bin/ldd
 -rwxr-xr-x    77KiB /usr/bin/locale
 -rwxr-xr-x   272KiB /usr/bin/localedef
+-rwxr-xr-x   133KiB /usr/bin/lsblk
 -rwxr-xr-x    68KiB /usr/bin/mount
 -rwxr-xr-x    69KiB /usr/bin/pldd
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
@@ -161,6 +162,7 @@
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    68KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
+-rwxr-xr-x   134KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   790KiB /usr/lib64/libsystemd.so.0.31.0
 -rwxr-xr-x    70KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    69KiB /usr/lib64/libtic.so.6.2
@@ -205,6 +207,8 @@
 -rw-r--r--     355B /usr/share/licenses/libmount/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libmount/COPYING.LGPL-2.1-or-later
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
+-rw-r--r--     361B /usr/share/licenses/libsmartcols/COPYING
+-rw-r--r--    26KiB /usr/share/licenses/libsmartcols/COPYING.LGPL-2.1-or-later
 -rw-r--r--     224B /usr/share/licenses/libuuid/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/libuuid/COPYING.BSD-3-Clause
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
@@ -2068,6 +2072,7 @@ lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.2
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.10.1
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.2 libpcre2-posix.so.2.0.3
+lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.31.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
