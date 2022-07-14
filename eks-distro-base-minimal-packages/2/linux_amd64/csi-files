@@ -18,8 +18,8 @@
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      70B /etc/filesystems
--rw-r--r--     114B /etc/group
--rw-r--r--     100B /etc/group-
+-rw-rw-r--     114B /etc/group
+-rw-rw-r--     100B /etc/group-
 ----------     240B /etc/gshadow
 ----------     228B /etc/gshadow-
 -rw-r--r--     189B /etc/gss/mech.d/gssproxy.conf
@@ -45,9 +45,9 @@
 -rw-r--r--     767B /etc/netconfig
 -rw-r--r--     967B /etc/nfs.conf
 -rw-r--r--   3.4KiB /etc/nfsmount.conf
--rw-r--r--     229B /etc/nsswitch.conf
+-rw-rw-r--     229B /etc/nsswitch.conf
 -rw-r--r--     363B /etc/openldap/ldap.conf
--rw-r--r--     161B /etc/os-release
+-rw-rw-r--     161B /etc/os-release
 -rw-r--r--     232B /etc/pam.d/config-util
 -rw-r--r--     701B /etc/pam.d/fingerprint-auth
 -rw-r--r--     715B /etc/pam.d/login
@@ -61,8 +61,8 @@
 -rw-r--r--     540B /etc/pam.d/su
 -rw-r--r--     137B /etc/pam.d/su-l
 -rw-r--r--     760B /etc/pam.d/system-auth
--rw-r--r--     267B /etc/passwd
--rw-r--r--     207B /etc/passwd-
+-rw-rw-r--     267B /etc/passwd
+-rw-rw-r--     207B /etc/passwd-
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -4482,7 +4482,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Dakar
@@ -4954,7 +4954,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -5078,7 +5078,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -5550,7 +5550,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -6106,7 +6106,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -6137,7 +6137,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -6145,7 +6145,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -6272,8 +6272,8 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   6.5MiB /var/lib/rpm/Packages
--rw-r--r--    72KiB /var/lib/rpm/Providename
+-rw-r--r--   6.3MiB /var/lib/rpm/Packages
+-rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    60KiB /var/lib/rpm/Requirename
 -rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5

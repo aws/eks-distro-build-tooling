@@ -15,8 +15,8 @@
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      70B /etc/filesystems
--rw-r--r--      77B /etc/group
--rw-r--r--      64B /etc/group-
+-rw-rw-r--      77B /etc/group
+-rw-rw-r--      64B /etc/group-
 ----------     208B /etc/gshadow
 ----------     198B /etc/gshadow-
 -rw-r--r--       9B /etc/host.conf
@@ -26,8 +26,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--     641B /etc/krb5.conf
--rw-r--r--   5.0KiB /etc/ld.so.cache
+-rw-r--r--   4.6KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     215B /etc/logrotate.d/nginx
 -rw-r--r--       0B /etc/motd
@@ -46,10 +45,10 @@
 -rw-r--r--     664B /etc/nginx/uwsgi_params
 -rw-r--r--     664B /etc/nginx/uwsgi_params.default
 -rw-r--r--   3.6KiB /etc/nginx/win-utf
--rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
--rw-r--r--     211B /etc/passwd
--rw-r--r--     149B /etc/passwd-
+-rw-rw-r--     229B /etc/nsswitch.conf
+-rw-rw-r--     161B /etc/os-release
+-rw-rw-r--     211B /etc/passwd
+-rw-rw-r--     149B /etc/passwd-
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -62,13 +61,6 @@
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
 -r--r--r--   193KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
--rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
--rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
--rw-r--r--   9.0KiB /etc/pki/nssdb/cert9.db
--rw-r--r--    16KiB /etc/pki/nssdb/key3.db
--rw-r--r--    11KiB /etc/pki/nssdb/key4.db
--rw-r--r--     451B /etc/pki/nssdb/pkcs11.txt
--rw-r--r--    16KiB /etc/pki/nssdb/secmod.db
 -rw-r--r--   2.7KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2
 -rw-r--r--    11KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
@@ -119,7 +111,6 @@
 -rwxr-xr-x    54KiB /usr/bin/chmod
 -rwxr-xr-x    62KiB /usr/bin/chown
 -rwxr-xr-x    33KiB /usr/bin/cksum
--rwxr-xr-x    12KiB /usr/bin/clear
 -rwxr-xr-x    33KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
 -rwxr-xr-x   144KiB /usr/bin/cp
@@ -152,7 +143,6 @@
 -rwxr-xr-x    29KiB /usr/bin/hostid
 -rwxr-xr-x    65KiB /usr/bin/iconv
 -rwxr-xr-x    37KiB /usr/bin/id
--rwxr-xr-x    56KiB /usr/bin/infocmp
 -rwxr-xr-x   136KiB /usr/bin/install
 -rwxr-xr-x      28B /usr/bin/jobs
 -rwxr-xr-x    45KiB /usr/bin/join
@@ -211,20 +201,15 @@
 -rwxr-xr-x    65KiB /usr/bin/stty
 -rwxr-xr-x    37KiB /usr/bin/sum
 -rwxr-xr-x    29KiB /usr/bin/sync
--rwxr-xr-x    16KiB /usr/bin/tabs
 -rwxr-xr-x    33KiB /usr/bin/tac
 -rwxr-xr-x    62KiB /usr/bin/tail
 -rwxr-xr-x    29KiB /usr/bin/tee
 -rwxr-xr-x    37KiB /usr/bin/test
--rwxr-xr-x    77KiB /usr/bin/tic
 -rwxr-xr-x    54KiB /usr/bin/timeout
--rwxr-xr-x    16KiB /usr/bin/toe
 -rwxr-xr-x    57KiB /usr/bin/touch
--rwxr-xr-x    20KiB /usr/bin/tput
 -rwxr-xr-x    45KiB /usr/bin/tr
 -rwxr-xr-x    29KiB /usr/bin/true
 -rwxr-xr-x    49KiB /usr/bin/truncate
--rwxr-xr-x    24KiB /usr/bin/tset
 -rwxr-xr-x    33KiB /usr/bin/tsort
 -rwxr-xr-x    29KiB /usr/bin/tty
 -rwxr-xr-x    16KiB /usr/bin/tzselect
@@ -266,7 +251,6 @@
 -rwxr-xr-x    20KiB /usr/lib64/engines-1.1/afalg.so
 -rwxr-xr-x   6.6KiB /usr/lib64/engines-1.1/capi.so
 -rwxr-xr-x    24KiB /usr/lib64/engines-1.1/padlock.so
--rwxr-xr-x    85KiB /usr/lib64/engines-1.1/pkcs11.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
 -rwxr-xr-x    25KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    13KiB /usr/lib64/gconv/ARMSCII-8.so
@@ -523,7 +507,6 @@
 -rwxr-xr-x   101KiB /usr/lib64/gconv/libJIS.so
 -rwxr-xr-x   120KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    48KiB /usr/lib64/gconv/libKSC.so
--rwxr-xr-x    20KiB /usr/lib64/krb5/plugins/tls/k5tls.so
 -rwxr-xr-x   171KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x   8.1KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    22KiB /usr/lib64/libSegFault.so
@@ -533,7 +516,6 @@
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    36KiB /usr/lib64/libcap.so.2.54
 -rwxr-xr-x   193KiB /usr/lib64/libcidn-2.26.so
--rwxr-xr-x    16KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   2.9MiB /usr/lib64/libcrypto.so.1.1.1g
@@ -543,14 +525,6 @@
 -rwxr-xr-x    87KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x   484KiB /usr/lib64/libgmp.so.10.2.0
 -rwxr-xr-x    27KiB /usr/lib64/libgmpxx.so.4.4.0
--rwxr-xr-x   309KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   128KiB /usr/lib64/libgssrpc.so.4.2
--rwxr-xr-x   198KiB /usr/lib64/libk5crypto.so.3.1
--rwxr-xr-x    78KiB /usr/lib64/libkdb5.so.8.0
--rwxr-xr-x    16KiB /usr/lib64/libkeyutils.so.1.5
--rwxr-xr-x    40KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   925KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x    62KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libm-2.26.so
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
@@ -562,7 +536,6 @@
 -rwxr-xr-x    38KiB /usr/lib64/libnss_compat-2.26.so
 -rwxr-xr-x    27KiB /usr/lib64/libnss_dns-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libnss_files-2.26.so
--rwxr-xr-x    68KiB /usr/lib64/libp11.so.3.4.2
 -rwxr-xr-x    15KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    15KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
@@ -590,7 +563,6 @@
 -rwxr-xr-x    57KiB /usr/lib64/libtic.so.6.0
 -rwxr-xr-x   176KiB /usr/lib64/libtinfo.so.6.0
 -rwxr-xr-x    14KiB /usr/lib64/libutil-2.26.so
--rwxr-xr-x    20KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x    84KiB /usr/lib64/libz.so.1.2.7
 -rwxr-xr-x    20KiB /usr/lib64/openssl/engines/lib4758cca.so
 -rwxr-xr-x    21KiB /usr/lib64/openssl/engines/libaep.so
@@ -626,11 +598,9 @@
 -rwxr-xr-x    50KiB /usr/sbin/zic
 -rw-r--r--    35KiB /usr/share/doc/bash-4.2.46/COPYING
 -rw-r--r--    35KiB /usr/share/doc/coreutils-8.22/COPYING
--rw-r--r--    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
--rw-r--r--    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
+-rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
+-rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
--rw-r--r--   1.1KiB /usr/share/doc/libverto-0.2.5/COPYING
 -rw-r--r--   3.4KiB /usr/share/doc/nginx-1.20.0/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
@@ -653,7 +623,7 @@
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
 -rw-r--r--   121KiB /usr/share/info/bash.info.gz
 -rw-r--r--   203KiB /usr/share/info/coreutils.info.gz
--rw-r--r--   8.2KiB /usr/share/info/dir.rpmsave
+-rw-r--r--       0B /usr/share/info/dir.rpmmodify
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -661,7 +631,6 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/gmp-6.0.0/COPYING.LESSERv3
 -rw-r--r--    18KiB /usr/share/licenses/gmp-6.0.0/COPYINGv2
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
--rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
@@ -669,11 +638,9 @@
 -rw-r--r--    35KiB /usr/share/licenses/libgcc-7.3.1/COPYING3
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
--rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/nginx-1.20.0/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
--rw-r--r--    26KiB /usr/share/licenses/openssl11-pkcs11-0.4.10/COPYING
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_TIME/coreutils.mo
@@ -693,13 +660,11 @@
 -rw-r--r--    45KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
 -rw-r--r--   349KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
--rw-r--r--   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   349KiB /usr/share/locale/de/LC_TIME/coreutils.mo
 -rw-r--r--    27KiB /usr/share/locale/el/LC_MESSAGES/coreutils.mo
 -rw-r--r--    27KiB /usr/share/locale/el/LC_TIME/coreutils.mo
 -rw-r--r--   158KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
 -rw-r--r--   156KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
--rw-r--r--     410B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   115KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
 -rw-r--r--   195KiB /usr/share/locale/eo/LC_MESSAGES/coreutils.mo
 -rw-r--r--   195KiB /usr/share/locale/eo/LC_TIME/coreutils.mo
@@ -800,142 +765,6 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   866KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
--rw-r--r--     135B /usr/share/tabset/std
--rw-r--r--      95B /usr/share/tabset/stdcrt
--rw-r--r--     160B /usr/share/tabset/vt100
--rw-r--r--      64B /usr/share/tabset/vt300
--rw-r--r--   2.2KiB /usr/share/terminfo/A/Apple_Terminal
--rw-r--r--   2.3KiB /usr/share/terminfo/E/Eterm
--rw-r--r--   2.4KiB /usr/share/terminfo/E/Eterm-256color
--rw-r--r--   2.4KiB /usr/share/terminfo/E/Eterm-88color
--rw-r--r--   2.3KiB /usr/share/terminfo/E/Eterm-color
--rw-r--r--   1.5KiB /usr/share/terminfo/a/ansi
--rw-r--r--   1.5KiB /usr/share/terminfo/a/ansi80x25
--rw-r--r--   1.5KiB /usr/share/terminfo/a/ansis
--rw-r--r--   2.2KiB /usr/share/terminfo/a/aterm
--rw-r--r--   1.2KiB /usr/share/terminfo/b/bterm
--rw-r--r--   1.5KiB /usr/share/terminfo/c/cons25
--rw-r--r--   1.5KiB /usr/share/terminfo/c/cygwin
--rw-r--r--     308B /usr/share/terminfo/d/dumb
--rw-r--r--     842B /usr/share/terminfo/e/eterm
--rw-r--r--   1.3KiB /usr/share/terminfo/e/eterm-color
--rw-r--r--   3.0KiB /usr/share/terminfo/g/gnome
--rw-r--r--   3.4KiB /usr/share/terminfo/g/gnome-256color
--rw-r--r--   1.6KiB /usr/share/terminfo/h/hurd
--rw-r--r--   1.7KiB /usr/share/terminfo/j/jfbterm
--rw-r--r--   1.7KiB /usr/share/terminfo/k/kon
--rw-r--r--   1.7KiB /usr/share/terminfo/k/kon2
--rw-r--r--   2.4KiB /usr/share/terminfo/k/konsole
--rw-r--r--   2.7KiB /usr/share/terminfo/k/konsole-256color
--rw-r--r--   1.8KiB /usr/share/terminfo/l/linux
--rw-r--r--     617B /usr/share/terminfo/m/mach
--rw-r--r--     652B /usr/share/terminfo/m/mach-bold
--rw-r--r--   1.1KiB /usr/share/terminfo/m/mach-color
--rw-r--r--   1.1KiB /usr/share/terminfo/m/mach-gnu
--rw-r--r--   1.3KiB /usr/share/terminfo/m/mach-gnu-color
--rw-r--r--   2.9KiB /usr/share/terminfo/m/mlterm
--rw-r--r--   3.0KiB /usr/share/terminfo/m/mrxvt
--rw-r--r--   2.2KiB /usr/share/terminfo/n/nsterm
--rw-r--r--   1.6KiB /usr/share/terminfo/n/nxterm
--rw-r--r--   1.2KiB /usr/share/terminfo/p/pcansi
--rw-r--r--   2.1KiB /usr/share/terminfo/p/putty
--rw-r--r--   2.5KiB /usr/share/terminfo/p/putty-256color
--rw-r--r--   2.3KiB /usr/share/terminfo/r/rxvt
--rw-r--r--   2.5KiB /usr/share/terminfo/r/rxvt-16color
--rw-r--r--   2.4KiB /usr/share/terminfo/r/rxvt-256color
--rw-r--r--   2.4KiB /usr/share/terminfo/r/rxvt-88color
--rw-r--r--   2.2KiB /usr/share/terminfo/r/rxvt-basic
--rw-r--r--   2.2KiB /usr/share/terminfo/r/rxvt-color
--rw-r--r--   2.3KiB /usr/share/terminfo/r/rxvt-cygwin
--rw-r--r--   2.3KiB /usr/share/terminfo/r/rxvt-cygwin-native
--rw-r--r--   2.2KiB /usr/share/terminfo/r/rxvt-unicode
--rw-r--r--   2.2KiB /usr/share/terminfo/r/rxvt-xpm
--rw-r--r--   1.6KiB /usr/share/terminfo/s/screen
--rw-r--r--   2.0KiB /usr/share/terminfo/s/screen-16color
--rw-r--r--   1.9KiB /usr/share/terminfo/s/screen-256color
--rw-r--r--   2.2KiB /usr/share/terminfo/s/screen.Eterm
--rw-r--r--   3.1KiB /usr/share/terminfo/s/screen.gnome
--rw-r--r--   2.6KiB /usr/share/terminfo/s/screen.konsole
--rw-r--r--   2.7KiB /usr/share/terminfo/s/screen.konsole-256color
--rw-r--r--   1.8KiB /usr/share/terminfo/s/screen.linux
--rw-r--r--   2.9KiB /usr/share/terminfo/s/screen.mlterm
--rw-r--r--   3.1KiB /usr/share/terminfo/s/screen.mlterm-256color
--rw-r--r--   3.1KiB /usr/share/terminfo/s/screen.mrxvt
--rw-r--r--   2.4KiB /usr/share/terminfo/s/screen.putty
--rw-r--r--   2.5KiB /usr/share/terminfo/s/screen.putty-256color
--rw-r--r--   2.1KiB /usr/share/terminfo/s/screen.rxvt
--rw-r--r--   1.6KiB /usr/share/terminfo/s/screen.teraterm
--rw-r--r--   3.2KiB /usr/share/terminfo/s/screen.vte
--rw-r--r--   3.3KiB /usr/share/terminfo/s/screen.vte-256color
--rw-r--r--   3.2KiB /usr/share/terminfo/s/screen.xterm-256color
--rw-r--r--   3.4KiB /usr/share/terminfo/s/screen.xterm-new
--rw-r--r--   1.5KiB /usr/share/terminfo/s/screen.xterm-r6
--rw-r--r--   3.4KiB /usr/share/terminfo/s/screen.xterm-xfree86
--rw-r--r--   2.3KiB /usr/share/terminfo/s/st
--rw-r--r--   2.7KiB /usr/share/terminfo/s/st-16color
--rw-r--r--   2.5KiB /usr/share/terminfo/s/st-256color
--rw-r--r--   2.3KiB /usr/share/terminfo/s/stterm
--rw-r--r--   2.7KiB /usr/share/terminfo/s/stterm-16color
--rw-r--r--   2.5KiB /usr/share/terminfo/s/stterm-256color
--rw-r--r--    1004B /usr/share/terminfo/s/sun
--rw-r--r--    1004B /usr/share/terminfo/s/sun1
--rw-r--r--    1004B /usr/share/terminfo/s/sun2
--rw-r--r--   1.6KiB /usr/share/terminfo/t/teraterm
--rw-r--r--   1.6KiB /usr/share/terminfo/t/teraterm2.3
--rw-r--r--   3.0KiB /usr/share/terminfo/t/tmux
--rw-r--r--   3.1KiB /usr/share/terminfo/t/tmux-256color
--rw-r--r--   1.5KiB /usr/share/terminfo/v/vs100
--rw-r--r--   1.2KiB /usr/share/terminfo/v/vt100
--rw-r--r--   1.2KiB /usr/share/terminfo/v/vt100-am
--rw-r--r--   1.1KiB /usr/share/terminfo/v/vt100-nav
--rw-r--r--   1.2KiB /usr/share/terminfo/v/vt102
--rw-r--r--   1.4KiB /usr/share/terminfo/v/vt200
--rw-r--r--   1.4KiB /usr/share/terminfo/v/vt220
--rw-r--r--     470B /usr/share/terminfo/v/vt52
--rw-r--r--   3.2KiB /usr/share/terminfo/v/vte
--rw-r--r--   3.4KiB /usr/share/terminfo/v/vte-256color
--rw-r--r--   1.3KiB /usr/share/terminfo/v/vwmterm
--rw-r--r--   1.6KiB /usr/share/terminfo/w/wsvt25
--rw-r--r--   1.6KiB /usr/share/terminfo/w/wsvt25m
--rw-r--r--   3.0KiB /usr/share/terminfo/x/xfce
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-1002
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-1003
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-1005
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-1006
--rw-r--r--   3.6KiB /usr/share/terminfo/x/xterm-16color
--rw-r--r--   1.5KiB /usr/share/terminfo/x/xterm-24
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-256color
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-88color
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-8bit
--rw-r--r--   1.8KiB /usr/share/terminfo/x/xterm-basic
--rw-r--r--   1.6KiB /usr/share/terminfo/x/xterm-bold
--rw-r--r--   1.6KiB /usr/share/terminfo/x/xterm-color
--rw-r--r--   1.9KiB /usr/share/terminfo/x/xterm-hp
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-new
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-nic
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-noapp
--rw-r--r--   1.5KiB /usr/share/terminfo/x/xterm-old
--rw-r--r--   1.7KiB /usr/share/terminfo/x/xterm-pcolor
--rw-r--r--   1.3KiB /usr/share/terminfo/x/xterm-r5
--rw-r--r--   1.5KiB /usr/share/terminfo/x/xterm-r6
--rw-r--r--   2.1KiB /usr/share/terminfo/x/xterm-sco
--rw-r--r--   2.1KiB /usr/share/terminfo/x/xterm-sun
--rw-r--r--   3.4KiB /usr/share/terminfo/x/xterm-utf8
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-vt220
--rw-r--r--     484B /usr/share/terminfo/x/xterm-vt52
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-x10mouse
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-x11hilite
--rw-r--r--   3.5KiB /usr/share/terminfo/x/xterm-x11mouse
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xf86-v32
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xf86-v33
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xf86-v333
--rw-r--r--   2.2KiB /usr/share/terminfo/x/xterm-xf86-v40
--rw-r--r--   2.2KiB /usr/share/terminfo/x/xterm-xf86-v43
--rw-r--r--   2.3KiB /usr/share/terminfo/x/xterm-xf86-v44
--rw-r--r--   2.2KiB /usr/share/terminfo/x/xterm-xfree86
--rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xi
--rw-r--r--   1.5KiB /usr/share/terminfo/x/xterms
 -rw-r--r--     198B /usr/share/vim/vimfiles/ftdetect/nginx.vim
 -rw-r--r--      29B /usr/share/vim/vimfiles/ftplugin/nginx.vim
 -rw-r--r--     250B /usr/share/vim/vimfiles/indent/nginx.vim
@@ -954,7 +783,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Dakar
@@ -1426,7 +1255,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -1550,7 +1379,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -2022,7 +1851,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -2578,7 +2407,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -2609,7 +2438,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -2617,7 +2446,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -2728,19 +2557,19 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   4.3KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   400KiB /var/lib/rpm/Basenames
+-rw-r--r--   340KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   128KiB /var/lib/rpm/Dirnames
+-rw-r--r--   116KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   3.6MiB /var/lib/rpm/Packages
--rw-r--r--    36KiB /var/lib/rpm/Providename
--rw-r--r--    32KiB /var/lib/rpm/Requirename
+-rw-r--r--   2.5MiB /var/lib/rpm/Packages
+-rw-r--r--    32KiB /var/lib/rpm/Providename
+-rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
 -rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -2758,9 +2587,6 @@ lrwxrwxrwx       7B /lib	usr/lib
 lrwxrwxrwx       9B /lib64	usr/lib64
 lrwxrwxrwx       8B /sbin	usr/sbin
 lrwxrwxrwx      10B /usr/bin/bashbug	bashbug-64
-lrwxrwxrwx       3B /usr/bin/captoinfo	tic
-lrwxrwxrwx       3B /usr/bin/infotocap	tic
-lrwxrwxrwx       4B /usr/bin/reset	tset
 lrwxrwxrwx       4B /usr/bin/sh	bash
 lrwxrwxrwx       7B /usr/lib/debug/bin	usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib	usr/lib
@@ -2770,7 +2596,6 @@ lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.1.1.hmac	.libcrypto.so.1.1.1g.hmac
 lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.10.hmac	.libcrypto.so.1.0.2k.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.1.1.hmac	.libssl.so.1.1.1g.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.10.hmac	.libssl.so.1.0.2k.hmac
-lrwxrwxrwx       9B /usr/lib64/engines-1.1/libpkcs11.so	pkcs11.so
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-x86-64.so.2	ld-2.26.so
 lrwxrwxrwx      23B /usr/lib64/libBrokenLocale.so.1	libBrokenLocale-2.26.so
@@ -2780,7 +2605,6 @@ lrwxrwxrwx      16B /usr/lib64/libattr.so.1	libattr.so.1.1.0
 lrwxrwxrwx      12B /usr/lib64/libc.so.6	libc-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2	libcap.so.2.54
 lrwxrwxrwx      15B /usr/lib64/libcidn.so.1	libcidn-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2	libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.1.1	libcrypto.so.1.1.1g
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
@@ -2790,14 +2614,6 @@ lrwxrwxrwx      15B /usr/lib64/libformw.so.6	libformw.so.6.0
 lrwxrwxrwx      24B /usr/lib64/libgcc_s.so.1	libgcc_s-7-20180712.so.1
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10	libgmp.so.10.2.0
 lrwxrwxrwx      17B /usr/lib64/libgmpxx.so.4	libgmpxx.so.4.4.0
-lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2	libgssapi_krb5.so.2.2
-lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4	libgssrpc.so.4.2
-lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3	libk5crypto.so.3.1
-lrwxrwxrwx      14B /usr/lib64/libkdb5.so.8	libkdb5.so.8.0
-lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1	libkeyutils.so.1.5
-lrwxrwxrwx      14B /usr/lib64/libkrad.so.0	libkrad.so.0.0
-lrwxrwxrwx      14B /usr/lib64/libkrb5.so.3	libkrb5.so.3.3
-lrwxrwxrwx      21B /usr/lib64/libkrb5support.so.0	libkrb5support.so.0.1
 lrwxrwxrwx      12B /usr/lib64/libm.so.6	libm-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libmenu.so.6	libmenu.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6	libmenuw.so.6.0
@@ -2808,7 +2624,6 @@ lrwxrwxrwx      14B /usr/lib64/libnsl.so.1	libnsl-2.26.so
 lrwxrwxrwx      21B /usr/lib64/libnss_compat.so.2	libnss_compat-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libnss_dns.so.2	libnss_dns-2.26.so
 lrwxrwxrwx      20B /usr/lib64/libnss_files.so.2	libnss_files-2.26.so
-lrwxrwxrwx      15B /usr/lib64/libp11.so.3	libp11.so.3.4.2
 lrwxrwxrwx      15B /usr/lib64/libpanel.so.6	libpanel.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6	libpanelw.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpcre.so.1	libpcre.so.1.2.0
@@ -2833,7 +2648,6 @@ lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6	libtic.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6	libtinfo.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libutil.so.1	libutil-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libverto.so.1	libverto.so.1.0.0
 lrwxrwxrwx      13B /usr/lib64/libz.so.1	libz.so.1.2.7
 lrwxrwxrwx      14B /usr/share/nginx/html/poweredby.png	nginx-logo.png
 lrwxrwxrwx      10B /usr/tmp	../var/tmp

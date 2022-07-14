@@ -4,9 +4,9 @@ chkconfig-1.7.4-1.amzn2.0.2.x86_64
 conntrack-tools-1.4.4-5.amzn2.2.x86_64
 ebtables-2.0.10-16.amzn2.0.1.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
-glibc-2.26-58.amzn2.x86_64
-glibc-common-2.26-58.amzn2.x86_64
-glibc-minimal-langpack-2.26-58.amzn2.x86_64
+glibc-2.26-59.amzn2.x86_64
+glibc-common-2.26-59.amzn2.x86_64
+glibc-minimal-langpack-2.26-59.amzn2.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 ipset-6.29-1.amzn2.0.1.x86_64
 ipset-libs-6.29-1.amzn2.0.1.x86_64
@@ -14,7 +14,7 @@ iptables-1.8.4-10.amzn2.1.2.x86_64
 iptables-libs-1.8.4-10.amzn2.1.2.x86_64
 iptables-nft-1.8.4-10.amzn2.1.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
-libgcc-7.3.1-14.amzn2.x86_64
+libgcc-7.3.1-15.amzn2.x86_64
 libmnl-1.0.3-7.amzn2.0.2.x86_64
 libnetfilter_conntrack-1.0.6-1.amzn2.0.2.x86_64
 libnetfilter_cthelper-1.0.0-10.amzn2.1.x86_64
@@ -25,11 +25,11 @@ libnftnl-1.1.5-4.amzn2.x86_64
 libpcap-1.5.3-11.amzn2.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
 libsepol-2.5-8.1.amzn2.0.2.x86_64
-libstdc++-7.3.1-14.amzn2.x86_64
+libstdc++-7.3.1-15.amzn2.x86_64
 pcre-8.32-17.amzn2.0.2.x86_64
 popt-1.13-16.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.x86_64
-tzdata-2021e-1.amzn2.noarch
+tzdata-2022a-1.amzn2.noarch
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
 zlib-1.2.7-19.amzn2.0.1.x86_64

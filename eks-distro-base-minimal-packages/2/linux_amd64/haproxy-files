@@ -1,5 +1,9 @@
 ****************** Regular Files ******************
 
+-rw-r--r--       0B /dev/null
+-rw-r--r--   5.0KiB /etc/DIR_COLORS
+-rw-r--r--   5.6KiB /etc/DIR_COLORS.256color
+-rw-r--r--   4.6KiB /etc/DIR_COLORS.lightbgcolor
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
@@ -10,7 +14,7 @@
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      70B /etc/filesystems
--rw-r--r--      79B /etc/group
+-rw-rw-r--      79B /etc/group
 ----------     198B /etc/gshadow
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
@@ -20,12 +24,18 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     641B /etc/krb5.conf
--rw-r--r--   3.3KiB /etc/ld.so.cache
+-rw-r--r--   3.7KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
--rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
--rw-r--r--     193B /etc/passwd
+-rw-rw-r--     229B /etc/nsswitch.conf
+-rw-rw-r--     161B /etc/os-release
+-rw-r--r--     715B /etc/pam.d/login
+-rw-r--r--     640B /etc/pam.d/remote
+-rw-r--r--     143B /etc/pam.d/runuser
+-rw-r--r--     138B /etc/pam.d/runuser-l
+-rw-r--r--     540B /etc/pam.d/su
+-rw-r--r--     137B /etc/pam.d/su-l
+-rw-rw-r--     193B /etc/passwd
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -38,17 +48,12 @@
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
 -r--r--r--   193KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
--rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
--rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
--rw-r--r--   9.0KiB /etc/pki/nssdb/cert9.db
--rw-r--r--    16KiB /etc/pki/nssdb/key3.db
--rw-r--r--    11KiB /etc/pki/nssdb/key4.db
--rw-r--r--     451B /etc/pki/nssdb/pkcs11.txt
--rw-r--r--    16KiB /etc/pki/nssdb/secmod.db
 -rw-r--r--   2.7KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2
 -rw-r--r--    11KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
 -rw-r--r--   1.8KiB /etc/profile
+-rw-r--r--   1.8KiB /etc/profile.d/colorls.csh
+-rw-r--r--   1.6KiB /etc/profile.d/colorls.sh
 -rw-r--r--      80B /etc/profile.d/csh.local
 -rw-r--r--      81B /etc/profile.d/sh.local
 -rw-r--r--   6.4KiB /etc/protocols
@@ -407,7 +412,6 @@
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    14KiB /usr/lib64/libutil-2.26.so
--rwxr-xr-x    20KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x    84KiB /usr/lib64/libz.so.1.2.7
 -rwxr-xr-x    20KiB /usr/lib64/openssl/engines/lib4758cca.so
 -rwxr-xr-x    21KiB /usr/lib64/openssl/engines/libaep.so
@@ -429,18 +433,18 @@
 -rwxr-xr-x    15MiB /usr/sbin/haproxy
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig.x86_64
--rwxr-xr-x   877KiB /usr/sbin/ldconfig
+-rwxr-xr-x   885KiB /usr/sbin/ldconfig
 -rwxr-xr-x    61KiB /usr/sbin/sefcontext_compile
--rwxr-xr-x   877KiB /usr/sbin/sln
+-rwxr-xr-x   885KiB /usr/sbin/sln
 -rwxr-xr-x    23KiB /usr/sbin/zdump
 -rwxr-xr-x    50KiB /usr/sbin/zic
+-rw-r--r--    35KiB /usr/share/doc/coreutils-8.22/COPYING
 -rw-r--r--    18KiB /usr/share/doc/haproxy/gpl.txt
 -rw-r--r--    18KiB /usr/share/doc/haproxy/internals/notes-layers.txt
 -rw-r--r--    26KiB /usr/share/doc/haproxy/lgpl.txt
 -rw-r--r--    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
 -rw-r--r--    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
 -rw-r--r--    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
--rw-r--r--   1.1KiB /usr/share/doc/libverto-0.2.5/COPYING
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -460,7 +464,6 @@
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.py
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyc
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
--rw-r--r--     755B /usr/share/info/dir.rpmsave
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -472,6 +475,10 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
+-rw-r--r--   1.4KiB /usr/share/licenses/util-linux-2.30.2/COPYING.BSD-3
+-rw-r--r--    18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
+-rw-r--r--    26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
+-rw-r--r--   1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
 -rw-r--r--   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--     410B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
@@ -495,7 +502,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Dakar
@@ -967,7 +974,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -1091,7 +1098,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -1563,7 +1570,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -2119,7 +2126,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -2150,7 +2157,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -2158,7 +2165,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -2269,18 +2276,18 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   2.8KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.2KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   380KiB /var/lib/rpm/Basenames
+-rw-r--r--   336KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   124KiB /var/lib/rpm/Dirnames
+-rw-r--r--   116KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   2.9MiB /var/lib/rpm/Packages
--rw-r--r--    32KiB /var/lib/rpm/Providename
+-rw-r--r--   2.5MiB /var/lib/rpm/Packages
+-rw-r--r--    28KiB /var/lib/rpm/Providename
 -rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
 -rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
@@ -2342,7 +2349,6 @@ lrwxrwxrwx      16B /usr/lib64/libssl.so.10	libssl.so.1.0.2k
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
 lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      15B /usr/lib64/libutil.so.1	libutil-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libverto.so.1	libverto.so.1.0.0
 lrwxrwxrwx      13B /usr/lib64/libz.so.1	libz.so.1.2.7
 lrwxrwxrwx      10B /usr/tmp	../var/tmp
 lrwxrwxrwx      11B /var/lock	../run/lock
