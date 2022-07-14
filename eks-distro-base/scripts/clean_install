@@ -35,17 +35,17 @@ fi
 
 RPMS=(${PACKAGES// / })
 for rpm in "${RPMS[@]}"; do
-    # if installed already skip
-    if rpm --root $NEWROOT -q --quiet $rpm ; then
-        continue
-    fi
-
     if [ ! $SHALLOW ]; then
         yum --installroot $NEWROOT install -y $rpm
     else
         yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm
         rpm_file=$(ls $DOWNLOAD_DIR/$rpm-*.rpm)
-        rpm -ivh --nodeps --root $NEWROOT $JUSTDB $rpm_file
+        
+        # if installed already skip
+        if ! rpm --root $NEWROOT -q --quiet $rpm ; then
+            rpm -ivh --nodeps --root $NEWROOT $JUSTDB $rpm_file
+        fi       
+
         if [ $FORCE ]; then
             mkdir -p $EXTRACT_DIR
             pushd $EXTRACT_DIR

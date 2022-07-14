@@ -35,5 +35,6 @@ RUN set -x && \
                    /usr/sbin/fsck /usr/sbin/fsck.ext4 /usr/sbin/fsck.ext3 \
                    /usr/sbin/mkfs /usr/sbin/mkfs.ext4 /usr/sbin/mkfs.ext3 /usr/sbin/mkfs.xfs \
                    /usr/sbin/xfs_io /usr/sbin/xfs_growfs \
-                   /usr/bin/umount /usr/bin/mount && \
+                   /usr/bin/umount /usr/bin/mount \
+                   /usr/bin/lsblk && \
     cleanup "csi-ebs"
