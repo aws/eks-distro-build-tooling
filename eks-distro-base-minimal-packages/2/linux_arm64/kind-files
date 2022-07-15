@@ -4078,7 +4078,7 @@
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
 -rwxr-xr-x    68KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    69KiB /usr/sbin/ldattach
--rwxr-xr-x   698KiB /usr/sbin/ldconfig
+-rwxr-xr-x   762KiB /usr/sbin/ldconfig
 -rwxr-xr-x    69KiB /usr/sbin/lnstat
 -rwx--s--x    67KiB /usr/sbin/lockdev
 -rwxr-xr-x   134KiB /usr/sbin/losetup
@@ -4141,7 +4141,7 @@
 -rwxr-xr-x   131KiB /usr/sbin/setquota
 -rwxr-xr-x   135KiB /usr/sbin/sfdisk
 -rwxr-xr-x    68KiB /usr/sbin/showmount
--rwxr-xr-x   698KiB /usr/sbin/sln
+-rwxr-xr-x   762KiB /usr/sbin/sln
 -rwxr-xr-x    73KiB /usr/sbin/sm-notify
 -rwxr-xr-x   215KiB /usr/sbin/ss
 -rwxr-xr-x     842B /usr/sbin/start-statd
@@ -8309,7 +8309,7 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   632KiB /var/lib/rpm/Basenames
+-rw-r--r--   636KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   156KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -8317,7 +8317,7 @@
 -rw-r--r--    16KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.4MiB /var/lib/rpm/Packages
--rw-r--r--    96KiB /var/lib/rpm/Providename
+-rw-r--r--    92KiB /var/lib/rpm/Providename
 -rw-r--r--    76KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
