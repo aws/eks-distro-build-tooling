@@ -38,7 +38,72 @@ if [[ "$CI" == "true" ]]; then
     BASE_DIR=$(pwd)/builder-base
 fi
 
+IS_AL22=false
+if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2022" /etc/yum.repos.d/amazonlinux.repo; then 
+    IS_AL22=true
+fi
+
 source $BASE_DIR/versions.sh
+
+function build::go::symlink() {
+    local -r version=$1
+
+    # Removing the last number as we only care about the major version of golang
+    local -r majorversion=${version%.*}
+    mkdir -p ${GOPATH}/go${majorversion}/bin
+    for binary in go gofmt; do
+        ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
+    done
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+}
+
+function build::go::install(){
+    # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+    # the function again with the specific parameter.
+    local version=$1
+
+    # AL2 provides a longer supported version of golang, use AL2 package when possible
+    local yum_provided_versions="1.16 1.15 1.13"
+    if [ "$IS_AL22" = true ]; then 
+        # al22 only includes 1.16
+        # TODO: do we want to install 1.15 and 1.13 from al2?
+        yum_provided_versions="1.16"
+    fi
+    
+    if [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
+        # Do not install rpm directly instead follow eks-distro base images pattern
+        # of downloading and install rpms directly
+        al2_package_version=$(yum --showduplicates list golang | awk -F ' ' '{print $2}' | grep ${version%.*} | tail -n 1)
+        yumdownloader --destdir=/tmp -x "*.i686" golang-$al2_package_version golang-bin-$al2_package_version \
+            golang-docs-$al2_package_version golang-misc-$al2_package_version golang-src-$al2_package_version golang-tests-$al2_package_version \
+            golang-race-$al2_package_version
+        
+        mkdir -p /tmp/go-extracted
+        for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
+        
+        local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
+        
+        mkdir -p /root/sdk/$golang_version
+        mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
+        
+        if [ "$IS_AL22" = true ]; then
+            mv /tmp/go-extracted/usr/share/licenses/golang/* /root/sdk/$golang_version
+        else
+            mv /tmp/go-extracted/usr/share/doc/golang-*/* /root/sdk/$golang_version
+        fi
+
+        version=$(echo "$golang_version" | grep -o "[0-9].*")
+        ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
+        
+        rm -rf /tmp/go-extracted /tmp/golang-*.rpm
+    else
+        go install golang.org/dl/go${version}@latest
+        go${version} download
+    fi
+
+    build::go::symlink $version
+}
+
 
 yum install -y \
     git-core \
@@ -55,9 +120,8 @@ mv docker-credential-ecr-login $USR_BIN/
 chmod +x $USR_BIN/docker-credential-ecr-login
 
 GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
+
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
-GOLANG_MAJOR_VERSION_BIN=${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin
-mkdir -p ${GOLANG_MAJOR_VERSION_BIN}
 mkdir -p ${GOLANG_SDK_ROOT}
 wget \
     --progress dot:giga \
@@ -67,10 +131,12 @@ wget \
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
 tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
 for binary in go gofmt; do
-    for symlink_dest in ${USR_BIN} ${GOLANG_MAJOR_VERSION_BIN}; do
-        ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${symlink_dest}/${binary}
-    done
+    ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${USR_BIN}/${binary}
 done
+mkdir -p ${GOPATH}/bin
+ln -s /root/sdk/go${GOLANG_VERSION}/bin/go ${GOPATH}/bin/go${GOLANG_VERSION}
+build::go::symlink ${GOLANG_VERSION}
+
 rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 
 if [ $TARGETARCH == 'amd64' ]; then 
@@ -122,6 +188,7 @@ mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 
 yum install -y \
     bind-utils \
+    cpio \
     curl \
     device-mapper-devel \
     docker \
@@ -140,7 +207,8 @@ yum install -y \
     python3-pip \
     rsync \
     vim \
-    which
+    which \
+    yum-utils
 
 # needed to parse eks-d release yaml to get latest artifacts
 wget \
@@ -150,7 +218,7 @@ sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
 mv yq_linux_$TARGETARCH $USR_BIN/yq
 chmod +x $USR_BIN/yq
 
-if ! grep -q "2022" "/etc/os-release"; then 
+if [ "$IS_AL22" = false ]; then
     # Bash 4.3 is required to run kubernetes make test
     wget $BASH_DOWNLOAD_URL
     tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
@@ -173,21 +241,8 @@ find /usr/share/{doc,man} -type f \
     -delete
 
 
-# Set up specific go version by using go get, additional versions apart from default can be installed by calling
-# the function again with the specific parameter.
-setupgo() {
-    local -r version=$1
-    go install golang.org/dl/go${version}@latest
-    go${version} download
-    # Removing the last number as we only care about the major version of golang
-    local -r majorversion=$(cut -d. -f"1,2" <<< $version)
-    mkdir -p ${GOPATH}/go${majorversion}/bin
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/go${majorversion}/bin/go
-    ln -s /root/sdk/go${version}/bin/gofmt ${GOPATH}/go${majorversion}/bin/gofmt
-}
-
-setupgo "${GOLANG117_VERSION:-1.17.11}"
-setupgo "${GOLANG118_VERSION:-1.18.3}"
+build::go::install "${GOLANG117_VERSION:-1.17.12}"
+build::go::install "${GOLANG116_VERSION:-1.16.15}"
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
@@ -212,21 +267,20 @@ sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
 unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_BIN
 rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 
-
 # installing go-licenses has to happen after we have set the main go
 # to symlink to the one in /root/sdk to ensure go-licenses gets built
 # with GOROOT pointed to /root/sdk/go... instead of /usr/local/go so it
 # is able to properly packages from the standard Go library
 # We currently  use 1.17 or 1.16, so installing for both
 GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1 
-GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go get github.com/google/go-licenses@v1.2.1 
+GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go install github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/google/go-licenses@v1.2.1
 # 1.16 is the default so symlink it to /go/bin
 ln -s ${GOPATH}/go1.16/bin/go-licenses ${GOPATH}/bin
 
 # linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
 # We need a higher version of linuxkit hence we do go get of a particular commit
-go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
+GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
 
 # Installing NodeJS to run attribution generation script
 wget --progress dot:giga $NODEJS_DOWNLOAD_URL
@@ -250,9 +304,11 @@ rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
 mv linux-$TARGETARCH/helm $USR_BIN/helm
 chmod +x $USR_BIN/helm
 
-setupgo "${GOLANG113_VERSION:-1.13.15}"
-setupgo "${GOLANG114_VERSION:-1.14.15}"
-setupgo "${GOLANG115_VERSION:-1.15.15}"
+# Since these verison is coming from yum do not supply patch version
+build::go::install "${GOLANG113_VERSION:-1.13.15}"
+build::go::install "${GOLANG115_VERSION:-1.15.15}"
+
+build::go::install "${GOLANG114_VERSION:-1.14.15}"
 
 # Installing Goss for imagebuilder validation
 useradd -ms /bin/bash -u 1100 imagebuilder
