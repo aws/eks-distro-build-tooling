@@ -97,7 +97,7 @@ ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 
 
 RUN set -x && \
     # we are keeping bash on this image since downstream images use to exec git
-    install_rpm bash \
+    install_rpm bash ncurses-base \
         git-core \
         openssh-clients \
         openssl-libs \
