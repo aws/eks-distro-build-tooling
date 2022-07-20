@@ -325,6 +325,17 @@ ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
 npm install
 cd ..
 
+# Installing Tuftool for Bottlerocket downloads
+curl -fsS $RUSTUP_DOWNLOAD_URL | CARGO_HOME=$CARGO_HOME RUSTUP_HOME=$RUSTUP_HOME sh -s -- -y
+find $CARGO_HOME/bin -type f -not -name "cargo" -not -name "rustc" -not -name "rustup" -delete
+$CARGO_HOME/bin/rustup default stable
+CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool
+cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
+
+# Cargo cache management tool
+CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool cargo-cache
+cargo-cache  --remove-dir all
+
 # Installing Helm
 curl -O $HELM_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/helm-$TARGETARCH-checksum
@@ -375,15 +386,5 @@ make bin/skopeo
 mv bin/skopeo $USR_BIN/skopeo
 cd ..
 rm -rf skopeo
-
-# Installing Tuftool for Bottlerocket downloads
-curl -fsS $RUSTUP_DOWNLOAD_URL | CARGO_HOME=$CARGO_HOME RUSTUP_HOME=$RUSTUP_HOME sh -s -- -y
-find $CARGO_HOME/bin -type f -not -name "cargo" -not -name "rustc" -not -name "rustup" -delete
-$CARGO_HOME/bin/rustup default stable
-CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool
-cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
-
-# Cargo cache management tool
-CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool cargo-cache
 
 build::cleanup
