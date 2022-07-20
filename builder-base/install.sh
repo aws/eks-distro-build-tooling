@@ -73,10 +73,13 @@ function build::go::install(){
     if [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
         # Do not install rpm directly instead follow eks-distro base images pattern
         # of downloading and install rpms directly
-        al2_package_version=$(yum --showduplicates list golang | awk -F ' ' '{print $2}' | grep ${version%.*} | tail -n 1)
-        yumdownloader --destdir=/tmp -x "*.i686" golang-$al2_package_version golang-bin-$al2_package_version \
-            golang-docs-$al2_package_version golang-misc-$al2_package_version golang-src-$al2_package_version golang-tests-$al2_package_version \
-            golang-race-$al2_package_version
+        for package in golang golang-bin golang-docs golang-misc golang-src golang-tests golang-race; do
+            # arm al22 does not provide golang-race
+            if [[ $(yum --showduplicates list $package) ]]; then
+                al2_package_version=$(yum --showduplicates list $package | awk -F ' ' '{print $2}' | grep ${version%.*} | tail -n 1)
+                yumdownloader --destdir=/tmp -x "*.i686" $package-$al2_package_version
+            fi
+        done
         
         mkdir -p /tmp/go-extracted
         for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
@@ -102,6 +105,38 @@ function build::go::install(){
     fi
 
     build::go::symlink $version
+}
+
+function build::cleanup(){
+    yum clean all
+    rm -rf /var/cache/{amzn2extras,yum,ldconfig}
+    
+    # truncate logs
+    find /var/log -type f | while read file; do echo -ne '' > $file; done
+
+    # Removing doc and man files
+    # to get all symlinks run twice
+    for i in {1..2}; do
+        find /usr/share/{doc,man} \( -xtype l -o -type f \) \
+            ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+            -delete
+    done
+    find /usr/share/{doc,man} -type d -empty -delete
+
+    # go get leaves the tar around
+    find /root/sdk -type f -name 'go*.tar.gz' -delete
+    go clean --modcache
+    
+    # pip cache
+    rm -rf /root/.cache
+
+    # rust docs
+    rm -rf /root/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc
+
+    # cargo cache
+    if command -v cargo-cache &> /dev/null; then
+        cargo-cache  --remove-dir all
+    fi
 }
 
 
@@ -232,17 +267,10 @@ if [ "$IS_AL22" = false ]; then
     rm -rf bash-$OVERRIDE_BASH_VERSION
 fi
 
-yum clean all
-rm -rf /var/cache/{amzn2extras,yum,ldconfig}
-find /var/log -type f | while read file; do echo -ne '' > $file; done
-# Removing doc and man files
-find /usr/share/{doc,man} -type f \
-    ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-    -delete
-
-
 build::go::install "${GOLANG117_VERSION:-1.17.12}"
 build::go::install "${GOLANG116_VERSION:-1.16.15}"
+
+build::cleanup
 
 if [ $TARGETARCH == 'arm64' ]; then
     exit
@@ -291,6 +319,7 @@ rm -rf $NODEJS_FILENAME
 # Installing attribution generation script
 mkdir generate-attribution-file
 mv package*.json generate-attribution generate-attribution-file.js LICENSE-2.0.txt generate-attribution-file
+rm -rf /tests
 cd generate-attribution-file
 ln -s $(pwd)/generate-attribution $USR_BIN/generate-attribution
 npm install
@@ -354,8 +383,7 @@ $CARGO_HOME/bin/rustup default stable
 CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool
 cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
 
-# go get leaves the tar around
-find /root/sdk -type f -name 'go*.tar.gz' -delete
-go clean --modcache
-# pip cache
-rm -rf /root/.cache
+# Cargo cache management tool
+CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool cargo-cache
+
+build::cleanup
