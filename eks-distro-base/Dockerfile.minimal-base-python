@@ -1,0 +1,153 @@
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# *NOTE* we have to limit our number of layers heres because in presubmits there
+# is no overlay fs and we will run out of space quickly
+
+################# BUILDER ######################
+ARG BASE_IMAGE
+ARG BUILDER_IMAGE
+ARG BUILT_BUILDER_IMAGE
+ARG VERSIONED_VARIANT
+FROM ${BUILDER_IMAGE} as builder-python-base
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
+# Google's Distroless has an experimental python3 version based on debian
+# The packages below are cross referenced based on the packages
+# included in distroless and the al2 python3 dependency tree
+# refernce: https://github.com/GoogleContainerTools/distroless/blob/main/experimental/python3/BUILD
+
+RUN set -x && \
+    install_rpm bash \
+        bzip2-libs \
+        # libc-bin - in glibc
+        libdb \
+        expat \
+        xz-libs \
+        sqlite \
+        libuuid \
+        ncurses-base \ 
+        ncurses-libs \
+        # libtinfo5 -> in ncurses-libs
+        zlib \
+        libcom_err \
+        libffi \
+        # libgssapi-krb5-2 - in krb5-libs
+        # libk5crypto3 - in krb5-libs
+        keyutils-libs \
+        krb5-libs \
+        # libkrb5-3 - in krb5-libs
+        # libkrb5support0 - in krb5-libs
+        # libmpdec3 - not in al2
+        # libnsl2 - in glibc
+        readline \
+        libtirpc \
+        gdbm \ 
+        openssl-libs && \
+    if_al2022 install_rpm libxcrypt && \
+    if_al2 install_rpm libcrypt && \
+    cleanup "python-base"
+
+
+FROM builder-python-base as builder-python3.7
+
+RUN set -x && \
+    install_rpm python3 \
+        python3-pip \
+        python3-setuptools && \
+    cleanup "python3.7"
+
+
+FROM builder-python-base as builder-python3.8
+
+RUN set -x && \
+    enable_extra python3.8 && \
+    install_rpm python38-setuptools \
+        python38-pip \
+        python38 && \
+    # Symlink to just 3
+    ln -s python3.8 $NEWROOT/usr/bin/python3 && \
+    ln -s pip3.8 $NEWROOT/usr/bin/pip3 && \
+    cleanup "python3.8"
+
+
+FROM builder-python-base as builder-python3.9
+
+ENV PYTHON_FULL_VERSION="3.9.13"
+ENV PYTHON_FOLDER="python3.9"
+
+# similiar to al2 3.8 rpm config
+ENV CFLAGS="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv"
+ENV LDFLAGS="-Wl,-z,relro  -g"
+
+# /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
+ENV CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies"
+
+RUN set -x && \
+    if grep -q "2022" "/etc/os-release"; then \
+        install_rpm python3-setuptools python-setuptools-wheel python3-pip python-pip-wheel python3 && \
+        # To be symlinkd later
+        rm $NEWROOT/usr/bin/pip && \
+        cleanup "python3.9" && \
+        exit 0; \
+    fi && \
+    BUILD_DEPS="bzip2-devel expat-devel gcc gcc-c++ gdbm-devel glibc-devel gzip libdb-devel libffi-devel libtirpc-devel libuuid-devel make ncurses-devel openssl-devel readline-devel sqlite-devel tar wget xz-devel zlib-devel" && \
+    NEWROOT=/ clean_install "$BUILD_DEPS" && \    
+    # Download
+    mkdir /tmp/buildroot && \
+    cd /tmp/buildroot && \
+    wget https://www.python.org/ftp/python/${PYTHON_FULL_VERSION}/Python-${PYTHON_FULL_VERSION}.tgz && \
+    tar xzf Python-${PYTHON_FULL_VERSION}.tgz && \
+    cd Python-${PYTHON_FULL_VERSION} && \
+    # Build
+    # similiar to al2 3.8 rpm config
+    ./configure --prefix=/usr --enable-optimizations --enable-ipv6 --enable-shared --with-dbmliborder=gdbm:ndbm:bdb --with-system-expat --with-system-ffi \
+        --enable-loadable-sqlite-extensions --with-lto --with-ssl-default-suites=openssl --with-computed-gotos=yes && \
+    make altinstall && \
+    # Cleanup
+    NEWROOT=/ remove_package "$BUILD_DEPS" && \
+    cd / && \
+    rm -rf /tmp/buildroot && \
+    # Clean up files not provided by al2 rpms
+    cd /usr/lib/${PYTHON_FOLDER} && \
+    rm -rf test idlelib tkinter turtledemo ./{distutils,lib2to3}/tests ./{ctypes,unittest}/test distutils/command/wininst config-3.9-x86_64-linux-gnu && \
+    cd / && \
+    # Symlink to just 3    
+    ls -al /usr/bin && \
+    for root in "" "$NEWROOT"; do ln -s python3.9 $root/usr/bin/python3 && ln -s pip3.9 $root/usr/bin/pip3; done && \
+    # Update pip/setuptools
+    /usr/bin/python3 -m pip install --upgrade pip setuptools && \
+    # Copy built artifacts to newroot
+    mkdir -p $NEWROOT/usr/lib/pkgconfig && \
+    cp /usr/bin/{pip3.9,pydoc3.9,python3.9,python3.9-config} $NEWROOT/usr/bin && \
+    cp -rf /usr/include/python3.9 $NEWROOT/usr/include && \
+    cp /usr/lib/pkgconfig/python-3.9*.pc $NEWROOT/usr/lib/pkgconfig && \
+    cp -rf /usr/lib/python3.9 $NEWROOT/usr/lib && \
+    cp --preserve=links /usr/lib/libpython3* $NEWROOT/usr/lib && \
+    # Ensure python libs are registried in /newroot
+    chroot $NEWROOT ldconfig && \    
+    cleanup "python3.9"  
+
+
+FROM builder-python${VERSIONED_VARIANT} as builder
+
+RUN set -x && \
+    ln -s python3 $NEWROOT/usr/bin/python && \
+    ln -s pip3 $NEWROOT/usr/bin/pip && \
+    cleanup "python3"

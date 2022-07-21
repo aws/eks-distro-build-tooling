@@ -22,6 +22,7 @@ IMAGE_TAG=$2
 AL_TAG=$3
 TEST=$4
 
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 function check_base() {
     docker build \
@@ -208,5 +209,63 @@ function check_base-csi() {
         exit 1
     fi
   }
+
+
+ check_base-python3() {
+    local -r version="$1"
+    # Cases based on distroless's test cases
+    # https://github.com/GoogleContainerTools/distroless/blob/main/experimental/python3/testdata/python3.yaml
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "print('Hello World')" | grep -v 'Hello World'; then
+        echo "python3 issue!"
+        exit 1
+    fi
+   
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "import subprocess, sys; subprocess.check_call(sys.executable + ' --version', shell=True)" | grep -v 'Python 3'; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "import ctypes.util; ctypes.CDLL(ctypes.util.find_library('rt')).timer_create"; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "import distutils.dist"; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "open(u'h\\xe9llo', 'w'); import sys; print(sys.getfilesystemencoding())" | grep -v 'utf-8'; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "print(u'h\\xe9llo.txt')" | grep -v 'h\xe9llo'; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if docker run --pull=always -v $SCRIPT_ROOT/python3-test.py:/eks-d-python-validate.py $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 /eks-d-python-validate.py | grep -v 'FINISHED ENTIRE SCRIPT'; then
+        echo "python3 issue!"
+        exit 1
+    fi
+
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG /usr/bin/python3 -c "import ssl; print(ssl.OPENSSL_VERSION)"; then
+        echo "python3 issue!"
+        exit 1
+    fi
+  }
+
+check_base-python3.7() {
+    check_base-python3 3.7
+}
+
+check_base-python3.8() {
+    check_base-python3 3.8
+}
+
+check_base-python3.9() {
+    check_base-python3 3.9
+}
 
 $TEST

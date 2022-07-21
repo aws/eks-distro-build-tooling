@@ -22,7 +22,7 @@ LATEST=$(if $(filter $(AL_TAG),2022),latest.2022,latest latest.2)
 PLATFORMS?=linux/amd64,linux/arm64
 
 IMAGE_TAG?=$(shell date "+%F-%s")
-IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG))
 
 BASE_IMAGE_NAME?=eks-distro-base
 BUILDER_IMAGE_NAME?=$(BASE_IMAGE_NAME)-builder
@@ -39,12 +39,12 @@ BASE_IMAGE_TAG=$(if $(or \
 
 BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
 BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME):$(BASE_IMAGE_TAG)
-BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(IMAGE_TAG)
+BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG))
 
-LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
+LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(tag),$(tag)))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs base-nsenter
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs base-nsenter base-python3.7 base-python3.8 base-python3.9
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
@@ -52,8 +52,13 @@ CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_V
 ALL_IMAGE_NAMES=eks-distro-base $(foreach variant,$(MINIMAL_VARIANTS),eks-distro-minimal-$(variant) eks-distro-minimal-$(variant)-builder)
 
 VARIANT_SHORT_NAME=$(if \
-		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%),base)
+		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%)$(VERSIONED_VARIANT),base)
 
+IMAGE_BUILD_ARGS?=
+VERSIONED_VARIANT?=
+
+REMOVE_VERSIONED=$(if $(VERSIONED_VARIANT),$(1:%$(VERSIONED_VARIANT)=%),$(1))
+ADD_VERSIONED_TO_TAG=$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(1),$(1))
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -69,6 +74,7 @@ define BUILDCTL
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:BUILT_BUILDER_IMAGE=$(BUILT_BUILDER_IMAGE) \
 		--opt build-arg:VARIANT=$(VARIANT_SHORT_NAME) \
+		--opt build-arg:VERSIONED_VARIANT=$(VERSIONED_VARIANT) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
@@ -112,8 +118,15 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 # dep tree
 %-minimal-images-base: BASE_IMAGE=scratch
 %-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
-%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client %-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs %-minimal-images-base-nsenter: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client \
+	%-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs %-minimal-images-base-nsenter \
+	%-minimal-images-base-python3.7 %-minimal-images-base-python3.8 %-minimal-images-base-python3.9: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 %-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
+
+# python variants
+%-minimal-images-base-python3.7 %inimal-update-base-python3.7 %inimal-create-pr-python3.7: VERSIONED_VARIANT=3.7
+%-minimal-images-base-python3.8 %inimal-update-base-python3.8 %inimal-create-pr-python3.8: VERSIONED_VARIANT=3.8
+%-minimal-images-base-python3.9 %inimal-update-base-python3.9 %inimal-create-pr-python3.9: VERSIONED_VARIANT=3.9
 
 # push standard/builder/base image targets
 standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT_TYPE=image
@@ -140,9 +153,9 @@ endef
 
 $(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
 
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: VARIANT=minimal-$*
+builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: VARIANT=minimal-$(call REMOVE_VERSIONED,$*)
 builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
-builder-minimal-images-% final-minimal-images-%: DOCKERFILE=Dockerfile.$(VARIANT)
+builder-minimal-images-% final-minimal-images-%: DOCKERFILE?=Dockerfile.$(VARIANT)
 
 builder-minimal-images-%: IMAGE_TARGET=builder
 builder-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)-builder
@@ -177,7 +190,7 @@ validate-minimal-images-%:
 
 test-minimal-images-%:
 	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) check_$*; \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(AL_TAG) check_$*; \
 	fi
 
 
@@ -200,7 +213,7 @@ test-all-minimal-images: $(addprefix test-minimal-images-, $(MINIMAL_VARIANTS))
 .PHONY: update-%
 update-%:
 	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) $(AL_TAG) )")
+	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) $(AL_TAG) $(VERSIONED_VARIANT) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		$(MAKE) $(UPDATE_TARGET); \
 		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
@@ -226,9 +239,9 @@ minimal-update-%: update-%
 .PHONY: create-pr-%
 create-pr-%: ensure-repo-owner
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME) $(AL_TAG); \
+		./update_base_image.sh $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(IMAGE_NAME) $(AL_TAG); \
 	elif [ "$(shell cat $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)" = "true" ]; then \
-		./update_base_image.sh $(IMAGE_TAG) $(IMAGE_NAME) $(AL_TAG); \
+		./update_base_image.sh $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(IMAGE_NAME) $(AL_TAG); \
 	fi
 
 .PHONY: standard-create-pr
@@ -313,6 +326,7 @@ minimal-images-base-nginx: ## Build and push minimal base image with nginx for u
 minimal-images-base-haproxy: ## Build and push minimal base image with haproxy for use by the kind haproxy image
 minimal-images-base-kind: ## Build and push minimal base image with containerd and other deps for the kind base image
 minimal-images-base-nsenter: ## Build and push minimal base image with nsenter binary for privileged access to host namespaces
+minimal-images-base-python3.9: ## Build and push minimal base image with python3
 
 packages-export-minimal-images-base: ## Export packages included in base minimal images
 packages-export-minimal-images-base-nonroot: ## Export packages included in base minimal images
@@ -326,6 +340,7 @@ packages-export-minimal-images-base-nginx: ## Export packages included in nginx 
 packages-export-minimal-images-base-haproxy: ## Export packages included in haproxy minimal images
 packages-export-minimal-images-base-kind: ## Export packages included in kind minimal images
 packages-export-minimal-images-base-nsenter: ## Export packages included in nsenter minimal images
+packages-export-minimal-images-base-python3.9: ## Export packages included in python3 minimal images
 
 standard-update:  ## Check for out of date packages on standard full base image and push new
 minimal-update-base: ## Check for out of date packages on minimal base image and push new
@@ -340,6 +355,7 @@ minimal-update-base-nginx: ## Check for out of date packages on minimal nginx ba
 minimal-update-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
 minimal-update-base-kind: ## Check for out of date packages on minimal kind base image and push new
 minimal-update-base-nsenter: ## Check for out of date packages on minimal nsenter base image and push new
+minimal-update-base-python3.9: ## Check for out of date packages on minimal python3 base image and push new
 
 standard-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
@@ -354,3 +370,4 @@ minimal-base-nginx-create-pr: ## Update minimal base nginx image tag if pushed
 minimal-base-haproxy-create-pr: ## Update minimal base haproxy image tag if pushed
 minimal-base-kind-create-pr: ## Update minimal base kind image tag if pushed
 minimal-base-nsenter-create-pr: ## Update minimal base nsenter image tag if pushed
+minimal-base-python3.9-create-pr: ## Update minimal base python3 image tag if pushed

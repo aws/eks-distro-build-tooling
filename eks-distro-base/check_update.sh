@@ -22,13 +22,15 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_NAME="$1"
 AL_TAG="$2"
+VERSIONED_VARIANT="${3:-}"
+
 if [[ $IMAGE_NAME == *-builder ]]; then
     # ignore checking builder images
     exit 0
 fi
 
-BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.$IMAGE_NAME" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
+BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/${IMAGE_NAME%$VERSIONED_VARIANT}:$BASE_IMAGE_TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
