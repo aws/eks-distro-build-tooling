@@ -45,7 +45,7 @@ gssproxy-0.7.0-17.amzn2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 hostname-3.13-3.amzn2.0.2.aarch64
 info-5.1-5.amzn2.aarch64
-iproute-5.10.0-2.amzn2.0.2.aarch64
+iproute-5.10.0-2.amzn2.0.3.aarch64
 ipset-6.29-1.amzn2.0.1.aarch64
 ipset-libs-6.29-1.amzn2.0.1.aarch64
 iptables-1.8.4-10.amzn2.1.2.aarch64
@@ -105,7 +105,7 @@ libutempter-1.1.6-4.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.7.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
 libverto-libevent-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.4.aarch64
+libxml2-2.9.1-6.amzn2.5.5.aarch64
 lockdev-1.0.4-0.13.20111007git.amzn2.0.2.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 lz4-1.7.5-2.amzn2.0.1.aarch64
