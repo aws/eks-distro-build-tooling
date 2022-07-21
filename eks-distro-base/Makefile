@@ -317,18 +317,18 @@ packages-export-minimal-images-base-kind: ## Export packages included in kind mi
 packages-export-minimal-images-base-nsenter: ## Export packages included in nsenter minimal images
 
 standard-update:  ## Check for out of date packages on standard full base image and push new
-minimal-base-update: ## Check for out of date packages on minimal base image and push new
-minimal-base-nonroot-update: ## Check for out of date packages on minimal nonroot base image and push new
-minimal-base-glibc-update: ## Check for out of date packages on minimal glibc base image and push new
-minimal-base-iptables-update: ## Check for out of date packages on minimal iptables base image and push new
-minimal-base-csi-update: ## Check for out of date packages on minimal csi base image and push new
-minimal-base-csi-ebs-update: ## Check for out of date packages on minimal ebs csi base image and push new
-minimal-base-git-update: ## Check for out of date packages on minimal git base image and push new
-minimal-base-docker-client-update: ## Check for out of date packages on minimal docker client base image and push new
-minimal-base-nginx: ## Check for out of date packages on minimal nginx base image and push new
-minimal-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
-minimal-base-kind: ## Check for out of date packages on minimal kind base image and push new
-minimal-base-nsenter-update: ## Check for out of date packages on minimal nsenter base image and push new
+minimal-update-base: ## Check for out of date packages on minimal base image and push new
+minimal-update-base-nonroot: ## Check for out of date packages on minimal nonroot base image and push new
+minimal-update-base-glibc: ## Check for out of date packages on minimal glibc base image and push new
+minimal-update-base-iptables: ## Check for out of date packages on minimal iptables base image and push new
+minimal-update-base-csi: ## Check for out of date packages on minimal csi base image and push new
+minimal-update-base-csi-ebs: ## Check for out of date packages on minimal ebs csi base image and push new
+minimal-update-base-git: ## Check for out of date packages on minimal git base image and push new
+minimal-update-base-docker-client: ## Check for out of date packages on minimal docker client base image and push new
+minimal-update-base-nginx: ## Check for out of date packages on minimal nginx base image and push new
+minimal-update-base-haproxy: ## Check for out of date packages on minimal haproxy base image and push new
+minimal-update-base-kind: ## Check for out of date packages on minimal kind base image and push new
+minimal-update-base-nsenter: ## Check for out of date packages on minimal nsenter base image and push new
 
 standard-create-pr:  ## Update standard base image tag if pushed
 minimal-base-create-pr: ## Update minimal base image tag if pushed
