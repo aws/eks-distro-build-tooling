@@ -1,4 +1,4 @@
 
-curl.x86_64
-expat.x86_64
-libcurl.x86_64
+libxml2.x86_64
+vim-data.noarch
+vim-minimal.x86_64
