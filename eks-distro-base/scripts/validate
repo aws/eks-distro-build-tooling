@@ -18,25 +18,5 @@ set -eE
 set -o nounset
 set -o pipefail
 
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-source "${SCRIPT_ROOT}/eks-d-common"
-
-r_val=0
-for bin in $(build::common::find_executables); do
-    if ! build::common::is_dynamic_binary $bin; then
-        continue
-    fi
-
-    echo "----- Checking $bin   -----"    
-    while IFS= read -r c_dep; do
-            if build::common::dep_exists "${c_dep}"; then
-                continue
-            fi
-            echo "Missing DEP!!! ${c_dep}"
-            r_val=1
-           
-    done < <(build::common::binary_to_libraries "$bin")
-    echo "----------------------------"
-done
-
-exit $r_val
+validate_libraries
+validate_symlinks

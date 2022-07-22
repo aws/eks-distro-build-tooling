@@ -17,15 +17,21 @@ declare -A PROVIDES_CACHE=()
 
 DEFAULT_SCRIPTLET_REQS="/bin/sh /usr/bin/mkdir /usr/bin/grep /usr/bin/readlink /usr/sbin/useradd /usr/sbin/groupadd /etc/login.defs /usr/bin/find /usr/sbin/sln /usr/bin/ln"
 
+DEBUG_LOG_FILE=/dev/null
+
 function build::common::yum_provides() {
     local -r bin=$1  
     
+    oldopt=$-
+    set +x
     # if key exists, 1 is returned which would resolve to true
     if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
         PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1)
     fi
 
     echo "${PROVIDES_CACHE[$bin]}"
+
+    set -$oldopt
 }
 
 pushd () {
@@ -34,6 +40,13 @@ pushd () {
 
 popd () {
     command popd "$@" > /dev/null
+}
+
+function build::log::setup() {
+    if [ -n "${OUTPUT_DEBUG_LOG:-}" ]; then
+        set -x
+        DEBUG_LOG_FILE=/dev/stdout
+    fi
 }
 
 # From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
@@ -45,7 +58,6 @@ function build::common::binary_to_libraries() {
     for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
         ld_library_path="$sub_dir:$ld_library_path"
     done
-    set -$oldopt
 
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
     LD_LIBRARY_PATH=$ld_library_path ldd "${1}" 2>&1 \
@@ -56,6 +68,8 @@ function build::common::binary_to_libraries() {
     `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
     `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
     | grep -v 'linux-vdso.so.1'
+
+    set -$oldopt
 
 }
 
@@ -142,6 +156,9 @@ function build::common::find_executables() {
 }
 
 function build::common::cp_common_utils_for_rpm_scriptlets() {
+    oldopt=$-
+    set +x
+    
     local rpm="$(echo ${1} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
     local -r var_name="${rpm^^}_SCRIPTLET_REQS"
     local -r reqs="${DEFAULT_SCRIPTLET_REQS} ${!var_name:-}"
@@ -194,21 +211,26 @@ function build::common::cp_common_utils_for_rpm_scriptlets() {
 
     done
 
+    set -$oldopt
     echo "$linked"
 }
 
 function build::common::rm_common_utils_for_rpm_scriptlets() {
     local -r to_remove="$1"
 
+    oldopt=$-
+    set +x
+
     if [ -n "$to_remove" ]; then
         local -r utils=(${to_remove// / })
         for util in "${utils[@]}"; do
             if [ -L $util ] && [[ "$(readlink $util)" = /fakeroot/* ]]; then
-                echo "Removing $util which was copied from / for RPM scriptlets"
                 rm $util
             fi
         done
     fi
+
+    set -$oldopt
     rm -rf $NEWROOT/fakeroot
 }
 
@@ -244,7 +266,7 @@ function build::common::clean_install() {
     # or if they do, they need to be symlinks
     for dir in bin sbin lib64 lib; do        
         mkdir -p $NEWROOT/usr/$dir        
-        if ! readlink $NEWROOT/$dir; then
+        if ! readlink $NEWROOT/$dir > /dev/null 2>&1; then
             ln -s usr/$dir $NEWROOT/$dir
         fi
     done
@@ -256,13 +278,10 @@ function build::common::clean_install() {
             
             yum --installroot $NEWROOT install -y $rpm
         else
-            if [[ -n $just_db ]]; then
-                echo "Installing $rpm to rpm database only"
-            else
-                echo "Shallow installing $rpm using the rpm directly"
+            if [ ! -f $DOWNLOAD_DIR/$rpm-[0-9]*.rpm ]; then
+                yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
             fi
 
-            yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm
             # Multiple RPMs may be downloaded in the case that the package we want is a prefix to another
             # only get the specific one by looking for the version directly after the rpm name
             # ex: util-linux and util-linux-core
@@ -275,7 +294,12 @@ function build::common::clean_install() {
             local log_file=$(mktemp)
             # if installed already skip
             if ! rpm --root $NEWROOT -q --quiet $rpm ; then
-                rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file 2>&1 | tee $log_file
+                if [[ -n $just_db ]]; then
+                    echo "Installing $rpm to rpm database only"
+                else
+                    echo "Shallow installing $rpm using the rpm directly"
+                fi
+                env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
             fi            
 
             build::common::rm_common_utils_for_rpm_scriptlets "$copied_for_scriptlets"
@@ -290,17 +314,17 @@ function build::common::clean_install() {
                     echo "******************************************************"
                     echo "Preinstall script failed for $rpm_file:"
                     echo "${scripts}"
+                    cat $log_file
                     echo "******************************************************"
                     exit 1
                 fi
             fi
             
-            if [ $force ]; then
+            if [ $force ] && [ ! -d $extract_dir ]; then                
                 echo "Extracting $rpm directly to $extract_dir"
-
                 mkdir -p $extract_dir
                 pushd $extract_dir
-                rpm2cpio $rpm_file | cpio -idm
+                rpm2cpio $rpm_file | cpio -idm >> $DEBUG_LOG_FILE 2>&1
                 popd
             fi
 

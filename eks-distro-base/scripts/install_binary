@@ -13,14 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -x
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
+build::log::setup
 
 function build::install::binary() {
     local -r file="$1"
@@ -52,6 +52,8 @@ function build::install::binary() {
 
     # copy desired binary into newroot folder path
     local -r final_bin=$NEWROOT$expected_filename
+
+    echo "Copying $extracted_bin to $final_bin"
     cp $extracted_bin $final_bin
 
     build::install::configs_and_licenses $extract_dir

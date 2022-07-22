@@ -14,12 +14,16 @@
 # limitations under the License.
 
 
-set -x
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
 VARIANT="$1"
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 clean_docs $NEWROOT
 

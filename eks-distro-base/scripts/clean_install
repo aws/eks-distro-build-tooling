@@ -14,8 +14,7 @@
 # limitations under the License.
 
 
-set -x
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
@@ -27,5 +26,7 @@ EXTRACT_DIR=${5:-"$NEWROOT"}
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 build::common::clean_install "$PACKAGES" "$SHALLOW" "$JUSTDB" "$FORCE" "$EXTRACT_DIR"

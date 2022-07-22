@@ -22,6 +22,9 @@ ARG BUILDER_IMAGE
 ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
+ARG OUTPUT_DEBUG_LOG
+ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
+
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
 # built it has the latest scripts in the builder

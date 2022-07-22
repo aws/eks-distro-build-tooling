@@ -54,6 +54,7 @@ ALL_IMAGE_NAMES=eks-distro-base $(foreach variant,$(MINIMAL_VARIANTS),eks-distro
 VARIANT_SHORT_NAME=$(if \
 		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%),base)
 
+OUTPUT_DEBUG_LOG?=
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -69,6 +70,7 @@ define BUILDCTL
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:BUILT_BUILDER_IMAGE=$(BUILT_BUILDER_IMAGE) \
 		--opt build-arg:VARIANT=$(VARIANT_SHORT_NAME) \
+		--opt build-arg:OUTPUT_DEBUG_LOG=$(OUTPUT_DEBUG_LOG) \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \

@@ -14,12 +14,13 @@
 # limitations under the License.
 
 
-set -x
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 build::common::install_deps_for_binary "$@"
