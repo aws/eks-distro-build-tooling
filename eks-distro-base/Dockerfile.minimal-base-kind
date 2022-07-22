@@ -31,6 +31,9 @@ ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
+# test included with python, obviously not needed, and missing a dep (al22)
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/python3.9/site-packages/hawkey/test/_hawkey_test.so"
+
 # This build is meant to include the deps from the kind base image defined in the upstream
 # dockerfile, plus the changes from the patching we do in eks-anywhere-build-tooling
 # if the packages get out of date, its not the end of the world since the resulting image
