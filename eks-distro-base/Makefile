@@ -44,7 +44,7 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(call ADD_VERSIONED_TO
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(tag),$(tag)))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs base-nsenter base-python3.7 base-python3.8 base-python3.9
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-csi base-git base-docker-client base-nginx base-haproxy base-kind base-csi-ebs base-nsenter base-python3.9 #base-python3.7 base-python3.8
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
