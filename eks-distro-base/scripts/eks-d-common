@@ -152,7 +152,13 @@ function build::common::dep_exists() {
 }
 
 function build::common::find_executables() {
-    find $NEWROOT -executable -type f -not -name "*.so*"
+    local -r include_libs="${1:-}"
+
+    if [ "$include_libs" = "true" ]; then
+        find $NEWROOT -executable -type f
+    else
+        find $NEWROOT -executable -type f -not -name "*.so*"
+    fi
 }
 
 function build::common::cp_common_utils_for_rpm_scriptlets() {
@@ -175,7 +181,7 @@ function build::common::cp_common_utils_for_rpm_scriptlets() {
 
         # its possible the desired bin has been installed in this "transaction"
         # but the libs arent installed yet, skip copying the bin but continue to the libs
-        if [ ! -f $linked_util ]; then
+        if [ ! -f $linked_util ] && [ -f $util ]; then
             mkdir -p $(dirname $copied_util) $(dirname $linked_util)
             cp $util $copied_util
             ln -s /fakeroot$util $linked_util

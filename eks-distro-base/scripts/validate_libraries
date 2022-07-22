@@ -22,7 +22,7 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
 r_val=0
-for bin in $(build::common::find_executables); do
+for bin in $(build::common::find_executables true); do
     if ! build::common::is_dynamic_binary $bin; then
         continue
     fi

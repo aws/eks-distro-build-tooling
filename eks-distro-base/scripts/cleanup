@@ -36,12 +36,13 @@ rm -rf $NEWROOT/usr/lib/.build-id
 if [[ -n "${CLEANUP_UNNECESSARY_FILES:-}" ]]; then
     FILES=(${CLEANUP_UNNECESSARY_FILES// / })
     for f in ${FILES[@]}; do
-        file=$NEWROOT$f
-        if [ -f $file ]; then
-            rm -f $file
-        elif [ -L $file ]; then
-            unlink $file
-        fi
+        for file in $NEWROOT$f; do
+            if [ -f $file ]; then
+                rm -f $file
+            elif [ -L $file ]; then
+                unlink $file
+            fi
+        done
     done
 fi
 
