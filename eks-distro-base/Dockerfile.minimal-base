@@ -29,14 +29,15 @@ COPY scripts/ /usr/bin
 
 ENV DOWNLOAD_DIR /tmp/download
 
+ENV NEWROOT /
 RUN set -x && \
     yum upgrade -y && \
     yum update -y && \
-    yum install -y cpio findutils shadow-utils yum-utils && \
+    clean_install "cpio findutils shadow-utils yum-utils" && \
     # restorecon is needed for the filesystem scriptlet, but it comes from
     # policycoreutils which bloats the builder image, just pull the bin and the necessary libs instead
-    NEWROOT=/ install_binary /usr/sbin/restorecon && \
-    NEWROOT=/ clean_yum
+    install_binary /usr/sbin/restorecon && \
+    clean_yum
 
 ENV NEWROOT /newroot
 WORKDIR $NEWROOT

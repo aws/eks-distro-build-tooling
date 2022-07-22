@@ -14,13 +14,17 @@
 # limitations under the License.
 
 
-set -x
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
 PACKAGES=$1
 JUSTDB=${2:-}
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 if [ $JUSTDB ]; then
     JUSTDB="--justdb"

@@ -14,9 +14,10 @@
 # limitations under the License.
 
 
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
+
 
 cd /newroot 
 

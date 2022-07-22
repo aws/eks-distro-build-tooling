@@ -14,12 +14,10 @@
 # limitations under the License.
 
 
-set -o errexit
+set -eE
 set -o nounset
 set -o pipefail
 
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-source "${SCRIPT_ROOT}/eks-d-common"
 
 r_val=0
 for bin in $(build::common::find_executables); do
