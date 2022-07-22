@@ -51,6 +51,9 @@ RUN set -x && \
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
+# libkrad installed with rpm with required deps but not needed by haproxy and missing deps
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libkrad*"
+
 RUN set -x && \
     install_deps_for_binary $NEWROOT/usr/sbin/haproxy && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling

@@ -44,5 +44,5 @@ RUN set -x && \
         libsepol \
         libstdc++ \
         pcre && \
-    if_al2022 install_rpm pcre2 \
+    if_al2022 install_rpm pcre2 && \
     cleanup "glibc"
