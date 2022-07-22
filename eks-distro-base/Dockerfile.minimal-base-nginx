@@ -31,7 +31,8 @@ ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 COPY scripts/ /usr/bin
 
 # cleanup broken symlinks from nginx package
-ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png"
+# libssl2k installed with openssl but not needed by nginx and missing deps
+ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /usr/lib64/libssl.so.1.0.2k /usr/lib64/libssl.so.10"
 
 RUN set -x && \
     enable_extra nginx1 && \
