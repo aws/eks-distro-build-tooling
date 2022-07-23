@@ -31,7 +31,7 @@ ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 COPY scripts/ /usr/bin
 
 # libraries included in RPMs with required libraries but are not used and missing deps
-ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libsystemd.so.* /usr/lib64/libsystemd-journal.so.* /usr/lib64/security/pam_systemd.so"
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libsystemd.so.* /usr/lib64/libsystemd-journal.so.* /usr/lib64/security/pam_systemd.so /usr/lib64/libnss_systemd.so.2"
 
 RUN set -x && \
     install_binary /usr/sbin/blkid \
