@@ -16,7 +16,7 @@
 
 set -e
 set -o pipefail
-
+set -x
 IMAGE_REPO=$1
 IMAGE_TAG=$2
 AL_TAG=$3
@@ -31,6 +31,7 @@ function check_base() {
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
         --build-arg AL_TAG=$AL_TAG \
+        --pull \
         -f ./tests/Dockerfile ./tests
     docker run base-test:latest
 }
@@ -47,6 +48,7 @@ function check_base-glibc() {
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
         --build-arg AL_TAG=$AL_TAG \
+        --pull \
         -f ./tests/Dockerfile ./tests
     
     if docker run base-glibc-test:latest | grep -v 'Printed from unsafe C code'; then
@@ -63,6 +65,7 @@ function check_base-iptables() {
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
         --build-arg AL_TAG=$AL_TAG \
+        --pull \
         -f ./tests/Dockerfile ./tests
     
     if docker run base-iptables-legacy-test:latest iptables --version | grep -v 'legacy'; then
@@ -89,6 +92,7 @@ function check_base-iptables() {
         --build-arg TARGETARCH=amd64 \
         --build-arg TARGETOS=linux \
         --build-arg AL_TAG=$AL_TAG \
+        --pull \
         -f ./tests/Dockerfile ./tests
 
     if docker run base-iptables-nft-test:latest iptables --version | grep -v 'nf_tables'; then
@@ -110,14 +114,14 @@ function check_base-iptables() {
 }
 
 function check_base-csi() {
-    if docker run $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
         echo "csi xfs issue!"
         exit 1
     fi
  }
 
  function check_base-csi-ebs() {
-    if docker run $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
         echo "csi xfs issue!"
         exit 1
     fi
@@ -145,6 +149,7 @@ function check_base-csi() {
         --build-arg GOPROXY=direct \
         --build-arg AL_TAG=$AL_TAG \
         --progress plain \
+        --pull \
         -f ./tests/Dockerfile ./tests
     
     # use git cli to clone private and public repo
@@ -170,35 +175,35 @@ function check_base-csi() {
  }
 
  check_base-docker-client() {
-    if ! docker run -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
+    if ! docker run --pull=always -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
         echo "docker client issue!"
         exit 1
     fi
  }
 
  check_base-haproxy() {
-    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
         echo "haproxy issue!"
         exit 1
     fi
  }
 
  check_base-nginx() {
-    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
         echo "nginx issue!"
         exit 1
     fi
  }
 
  check_base-kind() {
-    if ! docker run $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
+    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
         echo "kind issue!"
         exit 1
     fi
  }
 
  check_base-nsenter() {
-    if docker run $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG nsenter --version | grep -v 'nsenter from util-linux'; then
+    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG nsenter --version | grep -v 'nsenter from util-linux'; then
         echo "nsenter issue!"
         exit 1
     fi

@@ -14,9 +14,14 @@
 # limitations under the License.
 
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 mkdir -p $NEWROOT/usr/share/{doc,man}
 

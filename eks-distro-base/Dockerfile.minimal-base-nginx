@@ -22,27 +22,32 @@ ARG BUILDER_IMAGE
 ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
+ARG OUTPUT_DEBUG_LOG
+ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
+
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
-# This image will include bash because the downstream eks-anywhere-test image needs it
-# for its entrypoint
+# cleanup broken symlinks from nginx package
+# libssl2k installed with openssl but not needed by nginx and missing deps
+ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /usr/lib64/libssl.so.1.0.2k /usr/lib64/libssl.so.10"
+
 RUN set -x && \
-    if command -v amazon-linux-extras &> /dev/null; then amazon-linux-extras enable nginx1; fi && \
-    if [ -f /etc/yum.repos.d/amzn2-extras.repo ]; then cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo; fi && \
-    # manually "install" systemd to avoid installing the entire dep tree
-    clean_install systemd true true && \
-    clean_install "nginx" && \
-    # remove unncessary utils and other binary deps that are not needed by nginx during runtime
-    remove_package "chkconfig gawk grep info make openssl p11-kit p11-kit-trust sed shadow-utils" && \
-    remove_package systemd true && \
-    # envsubst is needed to generate the config, but it comes from the gettext package
-    # which pulls in a number of deps, manually installing envsubt from the rpm
-    yumdownloader --destdir=/tmp/downloads gettext && \
-    cd /newroot && \
-    rpm2cpio /tmp/downloads/gettext*.rpm | cpio -idv ./usr/bin/envsubst && \
-    # cleanup broken symlinks from nginx package and removing p11
-    rm -f $NEWROOT/usr/share/nginx/html/icons/poweredby.png $NEWROOT/usr/lib64/p11-kit-trust.so && \
+    enable_extra nginx1 && \
+    install_rpm nginx-filesystem \
+        nginx && \
+    if_al2022 install_rpm nginx-mimetypes && \
+    # TODO: remove these when changes can be coordinated in eks-a-build-tooling
+    install_rpm bash \
+        coreutils && \
+    install_binary /usr/bin/envsubst && \
     cleanup "nginx"
+
+################# NGINX ####################
+FROM ${BUILT_BUILDER_IMAGE} as base-nginx-builder 
+FROM ${BASE_IMAGE} as final
+COPY --from=base-nginx-builder /newroot /
+
+USER nginx

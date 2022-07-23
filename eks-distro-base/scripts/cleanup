@@ -14,19 +14,37 @@
 # limitations under the License.
 
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
 VARIANT="$1"
+
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
 
 clean_docs $NEWROOT
 
 clean_yum
-rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum $NEWROOT/var/log/*.log
+rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum $NEWROOT/var/log/*.log $NEWROOT/var/tmp/rpm-tmp*
 
 # al2202 build includes this folder during some rpm installs, removing since its a bad symlink
 rm -rf $NEWROOT/usr/lib/.build-id
+
+if [[ -n "${CLEANUP_UNNECESSARY_FILES:-}" ]]; then
+    FILES=(${CLEANUP_UNNECESSARY_FILES// / })
+    for f in ${FILES[@]}; do
+        for file in $NEWROOT$f; do
+            if [ -f $file ]; then
+                rm -f $file
+            elif [ -L $file ]; then
+                unlink $file
+            fi
+        done
+    done
+fi
 
 # generate final packages list
 mkdir -p /tmp/packages

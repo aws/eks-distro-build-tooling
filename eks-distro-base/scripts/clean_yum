@@ -14,11 +14,17 @@
 # limitations under the License.
 
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
-yum --installroot $NEWROOT clean all
-yum clean all
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
+
+build::log::setup
+
 # do not need any yum history since we arent including yum in final images
-rm -rf $NEWROOT/var/cache/yum /var/cache/yum
+for root in "/" "$NEWROOT"; do 
+    yum --installroot $root clean all > /dev/null 2>&1
+    rm -rf $root/var/cache/yum
+done

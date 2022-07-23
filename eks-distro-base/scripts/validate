@@ -18,15 +18,5 @@ set -eE
 set -o nounset
 set -o pipefail
 
-PACKAGES=$1
-SHALLOW=${2:-}
-JUSTDB=${3:-}
-FORCE=${4:-}
-EXTRACT_DIR=${5:-"$NEWROOT"}
-
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-source "${SCRIPT_ROOT}/eks-d-common"
-
-build::log::setup
-
-build::common::clean_install "$PACKAGES" "$SHALLOW" "$JUSTDB" "$FORCE" "$EXTRACT_DIR"
+validate_libraries
+validate_symlinks

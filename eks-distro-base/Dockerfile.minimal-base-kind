@@ -23,10 +23,16 @@ ARG BUILT_BUILDER_IMAGE
 ################# BUILDER ######################
 FROM ${BUILDER_IMAGE} as builder
 
+ARG OUTPUT_DEBUG_LOG
+ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
+
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
+
+# test included with python, obviously not needed, and missing a dep (al22)
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/python3.9/site-packages/hawkey/test/_hawkey_test.so"
 
 # This build is meant to include the deps from the kind base image defined in the upstream
 # dockerfile, plus the changes from the patching we do in eks-anywhere-build-tooling
@@ -39,6 +45,7 @@ RUN set -x && \
     # doesnt reflect, install manually to make sure its first
     clean_install coreutils && \
     clean_install findutils && \
-    install_if_al2 amazon-linux-extras && \    
+    if_al2 clean_install amazon-linux-extras && \
+    if_al2022 clean_install pcre2 && \
     clean_install "containerd curl ethtool hostname iproute jq lockdev nfs-utils pigz procps rsync libseccomp socat systemd tar util-linux which yum" && \
     cleanup "kind"

@@ -15,20 +15,23 @@
 
 declare -A PROVIDES_CACHE=()
 
-NEWROOT_LD_LIBRARY_PATH="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib" 
-for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
-    NEWROOT_LD_LIBRARY_PATH="$sub_dir:$NEWROOT_LD_LIBRARY_PATH"
-done
+DEFAULT_SCRIPTLET_REQS="/bin/sh /usr/bin/mkdir /usr/bin/grep /usr/bin/readlink /usr/sbin/useradd /usr/sbin/groupadd /etc/login.defs /usr/bin/find /usr/sbin/sln /usr/bin/ln"
+
+DEBUG_LOG_FILE=/dev/null
 
 function build::common::yum_provides() {
     local -r bin=$1  
     
+    oldopt=$-
+    set +x
     # if key exists, 1 is returned which would resolve to true
     if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
         PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1)
     fi
 
     echo "${PROVIDES_CACHE[$bin]}"
+
+    set -$oldopt
 }
 
 pushd () {
@@ -39,11 +42,25 @@ popd () {
     command popd "$@" > /dev/null
 }
 
+function build::log::setup() {
+    if [ -n "${OUTPUT_DEBUG_LOG:-}" ]; then
+        set -x
+        DEBUG_LOG_FILE=/dev/stdout
+    fi
+}
+
 # From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
 # returns list of libs required by a dynamic binary
 function build::common::binary_to_libraries() {
+    oldopt=$-
+    set +x
+    local ld_library_path="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib" 
+    for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
+        ld_library_path="$sub_dir:$ld_library_path"
+    done
+
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    LD_LIBRARY_PATH=$NEWROOT_LD_LIBRARY_PATH ldd "${1}" 2>&1 \
+    LD_LIBRARY_PATH=$ld_library_path ldd "${1}" 2>&1 \
     `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
     | sed -E 's#.* => /#/#' \
     `# we want only the path remaining, not the (0x${LOCATION})` \
@@ -52,15 +69,22 @@ function build::common::binary_to_libraries() {
     `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
     | grep -v 'linux-vdso.so.1'
 
+    set -$oldopt
+
 }
 
 function build::common::is_dynamic_binary() {
     local -r bin="$1"
-    local -r ldd_out="$(build::common::binary_to_libraries $bin)"
-    if [ ! -x "$bin" ] || \
-        [[ $ldd_out = not* ]] || [[ $ldd_out = statically* ]]; then
+
+    if [ ! -x "$bin" ]; then
         return 1
     fi
+
+    local -r ldd_out="$(build::common::binary_to_libraries $bin)"
+    if [[ $ldd_out = not* ]] || [[ $ldd_out = statically* ]]; then
+        return 1
+    fi
+    
     return 0
 }
 
@@ -95,9 +119,9 @@ function build::common::rpm_package_for_binary() {
     # Repo        : amzn2-core
     # Matched from:
     # Filename    : /usr/sbin/fsck.ext3
-  
+    # some filenames have a digit prefix, ex: 14:libpcap-1.5.3-11.amzn2.i686 : A system-independent interface for user-level
     actual_file="$(build::common::find_actual_file_for_provides $1)"
-    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]://' | sed -e 's/\-[0-9].*$//'
+    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//'
 }
 
 function build::common::filename_from_rpm() {
@@ -119,5 +143,229 @@ function build::common::dep_exists() {
         return 0
     fi
 
+    # the dep also exists in the newroot/fakeroot folder, nothing to do
+    if [ -f "$NEWROOT/fakeroot$dep" ]; then
+        return 0
+    fi
+
     return 1
 }
+
+function build::common::find_executables() {
+    local -r include_libs="${1:-}"
+
+    if [ "$include_libs" = "true" ]; then
+        find $NEWROOT -executable -type f
+    else
+        find $NEWROOT -executable -type f -not -name "*.so*"
+    fi
+}
+
+function build::common::cp_common_utils_for_rpm_scriptlets() {
+    oldopt=$-
+    set +x
+    
+    local rpm="$(echo ${1} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+    local -r var_name="${rpm^^}_SCRIPTLET_REQS"
+    local -r reqs="${DEFAULT_SCRIPTLET_REQS} ${!var_name:-}"
+
+    local -r fakeroot="$NEWROOT/fakeroot"
+    mkdir -p $fakeroot
+    
+    local linked=""
+    local utils=(${reqs// / })
+    for util in ${utils[@]}; do
+        local copied_util=$fakeroot$util
+        local linked_util=$NEWROOT$util
+        local real_util=$linked_util
+
+        # its possible the desired bin has been installed in this "transaction"
+        # but the libs arent installed yet, skip copying the bin but continue to the libs
+        if [ ! -f $linked_util ] && [ -f $util ]; then
+            mkdir -p $(dirname $copied_util) $(dirname $linked_util)
+            cp $util $copied_util
+            ln -s /fakeroot$util $linked_util
+
+            linked+="$linked_util "
+            real_util=$copied_util
+        fi
+
+        if ! build::common::is_dynamic_binary $real_util; then
+            continue
+        fi
+
+        local linking=1        
+        while [[ $linking == 1 ]] ; do
+            linking=0
+            while IFS= read -r dep; do
+                if build::common::dep_exists $dep; then
+                    continue
+                fi
+                local copied_dep=$fakeroot$dep
+                local linked_dep=$NEWROOT$dep
+                mkdir -p $(dirname $copied_dep) $(dirname $linked_dep)
+
+                cp $dep $copied_dep
+                ln -s /fakeroot$dep $linked_dep
+
+                linked+="$linked_dep "
+
+                linking=1
+
+            done < <(build::common::binary_to_libraries "$real_util")
+        done
+
+    done
+
+    set -$oldopt
+    echo "$linked"
+}
+
+function build::common::rm_common_utils_for_rpm_scriptlets() {
+    local -r to_remove="$1"
+
+    oldopt=$-
+    set +x
+
+    if [ -n "$to_remove" ]; then
+        local -r utils=(${to_remove// / })
+        for util in "${utils[@]}"; do
+            if [ -L $util ] && [[ "$(readlink $util)" = /fakeroot/* ]]; then
+                rm $util
+            fi
+        done
+    fi
+
+    set -$oldopt
+    rm -rf $NEWROOT/fakeroot
+}
+
+function build::common::rpm_install() {
+    # install rpm_package using rpm directly instead of yum to avoid installing addtional dependencies
+    # all neccessary librairies will be install based on binary_to_libraries
+    local -r packages="$1"
+
+    build::common::clean_install $packages true
+}
+
+function build::common::extract_rpm() {
+    local -r packages="$1"
+    local -r extract_dir="$2"
+
+    build::common::clean_install $packages true true true $extract_dir
+}
+
+function build::common::clean_install() {
+    local -r packages="$1"
+    local -r shallow=${2:-}
+    local just_db=${3:-}
+    local -r force=${4:-}
+    local -r extract_dir="${5:-$NEWROOT}"
+    
+    if [ $just_db ]; then
+        just_db="--justdb"
+    else
+        just_db=""
+    fi
+
+    # when the `filesystem` rpm installs it expects these to not exist
+    # or if they do, they need to be symlinks
+    for dir in bin sbin lib64 lib; do        
+        mkdir -p $NEWROOT/usr/$dir        
+        if ! readlink $NEWROOT/$dir > /dev/null 2>&1; then
+            ln -s usr/$dir $NEWROOT/$dir
+        fi
+    done
+
+    local -r rpms=(${packages// / })
+    for rpm in "${rpms[@]}"; do
+        if [ ! $shallow ]; then
+            echo "Installing $rpm and dependencies using yum"
+            
+            yum --installroot $NEWROOT install -y $rpm
+        else
+            if [ ! -f $DOWNLOAD_DIR/$rpm-[0-9]*.rpm ]; then
+                yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
+            fi
+
+            # Multiple RPMs may be downloaded in the case that the package we want is a prefix to another
+            # only get the specific one by looking for the version directly after the rpm name
+            # ex: util-linux and util-linux-core
+            rpm_file=$(ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm)
+            
+            local scripts=$(rpm -qp --scripts $rpm_file)
+
+            local -r copied_for_scriptlets="$(build::common::cp_common_utils_for_rpm_scriptlets $rpm)"
+           
+            local log_file=$(mktemp)
+            # if installed already skip
+            if ! rpm --root $NEWROOT -q --quiet $rpm ; then
+                if [[ -n $just_db ]]; then
+                    echo "Installing $rpm to rpm database only"
+                else
+                    echo "Shallow installing $rpm using the rpm directly"
+                fi
+                env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
+            fi            
+
+            build::common::rm_common_utils_for_rpm_scriptlets "$copied_for_scriptlets"
+            
+            local -r sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+            local -r var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
+
+            if [[ -z "${!var_name:-}" ]] && grep -q "scriptlet failed\|command not found" $log_file; then
+                local rpm_name=$(basename $rpm_file | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')
+
+                if [[ ${EXPECTED_RPM_SCRIPTLET_FAILURES:-""} != *"$rpm_name"* ]]; then
+                    echo "******************************************************"
+                    echo "Preinstall script failed for $rpm_file:"
+                    echo "${scripts}"
+                    cat $log_file
+                    echo "******************************************************"
+                    exit 1
+                fi
+            fi
+            
+            if [ $force ] && [ ! -d $extract_dir ]; then                
+                echo "Extracting $rpm directly to $extract_dir"
+                mkdir -p $extract_dir
+                pushd $extract_dir
+                rpm2cpio $rpm_file | cpio -idm >> $DEBUG_LOG_FILE 2>&1
+                popd
+            fi
+
+            rm $DOWNLOAD_DIR/$rpm-*.rpm $log_file
+        fi
+    done
+}
+
+function build::common::install_deps_for_binary() {
+    for installed_bin in "$@"; do
+        if ! build::common::is_dynamic_binary $installed_bin; then
+            continue
+        fi
+        local installing=1
+        local rpm_package=""
+        while [[ $installing == 1 ]] ; do
+            installing=0
+            while IFS= read -r dep; do
+                if build::common::dep_exists $dep; then
+                    continue
+                fi
+                
+                rpm_package=$(build::common::rpm_package_for_binary $dep)
+
+                if [[ -z "$rpm_package" ]]; then
+                    echo "Error: No rpm found for $dep!"
+                    exit 1
+                fi
+
+                build::common::rpm_install $rpm_package
+
+                installing=1
+
+            done < <(build::common::binary_to_libraries "$installed_bin")
+        done
+    done
+}
+

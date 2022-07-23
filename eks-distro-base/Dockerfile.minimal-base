@@ -22,16 +22,27 @@ ARG BUILDER_IMAGE
 ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
-ENV DOWNLOAD_DIR /tmp/download
-ENV NEWROOT /newroot
-ENV FAKE_INSTALLS bash glibc p11-kit p11-kit-trust
+ARG OUTPUT_DEBUG_LOG
+ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 
 ARG TARGETARCH
 ARG TARGETOS
 
 COPY scripts/ /usr/bin
-COPY ${TARGETOS}-${TARGETARCH}/ /
 
+ENV DOWNLOAD_DIR /tmp/download
+
+ENV NEWROOT /
+RUN set -x && \
+    yum upgrade -y && \
+    yum update -y && \
+    clean_install "cpio findutils shadow-utils yum-utils" && \
+    # restorecon is needed for the filesystem scriptlet, but it comes from
+    # policycoreutils which bloats the builder image, just pull the bin and the necessary libs instead
+    install_binary /usr/sbin/restorecon && \
+    clean_yum
+
+ENV NEWROOT /newroot
 WORKDIR $NEWROOT
 
 # non root user
@@ -40,23 +51,23 @@ RUN mkdir -p $NEWROOT/home/nonroot && \
     # tmp directory with correct permissions
     mkdir -p -m 1777 $NEWROOT/tmp
 
+COPY ${TARGETOS}-${TARGETARCH}/ /
+
+ENV FILESYSTEM_SCRIPTLET_REQS="/usr/sbin/restorecon"
+ENV CA_CERTIFICATES_SCRIPTLET_REQS="/usr/bin/p11-kit /usr/bin/trust /usr/share/p11-kit/modules/p11-kit-trust.module /usr/lib64/pkcs11/p11-kit-trust.so"
+
+# there is a circular dep between ca-certs and openssl, we do not include openssl in the base
+# and can safely remove these symlinks
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib/debug/usr/.dwz /etc/ssl/ct_log_list.cnf /etc/ssl/openssl.cnf"
+
 RUN set -x && \
-    yum upgrade -y && \
-    yum update -y && \
-    yum install -y cpio findutils yum-utils && \
-    # setup rpm + yum
-    clean_install system-release true && \
-    # "install" excluded deps we do not want in final image
-    clean_install "$FAKE_INSTALLS" true true && \
-    clean_install "basesystem filesystem setup tzdata" && \    
-    # postinstall scriptlet for ca-certs will fail, manually extract and copy
-    # key files from host after running update-ca-trust
-    clean_install ca-certificates true true true && \
-    update-ca-trust && \
-    cp -rf /etc/pki $NEWROOT/etc && \
-    remove_package "$FAKE_INSTALLS" true && \
-    # uneccessary symlink to debuginfo which will not exist in these images
-    unlink $NEWROOT/usr/lib/debug/usr/.dwz && \
+    rpm --root $NEWROOT --import /etc/pki/rpm-gpg/* && \
+    install_rpm system-release \
+        setup \
+        filesystem \
+        basesystem \
+        tzdata \
+        ca-certificates && \
     cleanup "base"
 
 COPY files/ $NEWROOT

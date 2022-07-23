@@ -18,15 +18,9 @@ set -eE
 set -o nounset
 set -o pipefail
 
-PACKAGES=$1
-SHALLOW=${2:-}
-JUSTDB=${3:-}
-FORCE=${4:-}
-EXTRACT_DIR=${5:-"$NEWROOT"}
+EXTRA="$1"
 
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-source "${SCRIPT_ROOT}/eks-d-common"
-
-build::log::setup
-
-build::common::clean_install "$PACKAGES" "$SHALLOW" "$JUSTDB" "$FORCE" "$EXTRACT_DIR"
+if command -v amazon-linux-extras &> /dev/null; then
+    amazon-linux-extras enable $EXTRA
+    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo
+fi

@@ -22,6 +22,9 @@ ARG BUILDER_IMAGE
 ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
+ARG OUTPUT_DEBUG_LOG
+ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
+
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
 # built it has the latest scripts in the builder
@@ -29,12 +32,6 @@ COPY scripts/ /usr/bin
 
 RUN set -x && \
     # we only want the docker client cli and not the service
-    # installing the package one off since the only deps of the client
-    # are already provided by glibc
     enable_docker_install && \
-    # has to be extracted instead of installed to work around scriptlet
-    # issue that only affects the service component which we arent using
-    clean_install docker true true true && \
-    rm $NEWROOT/usr/bin/docker-* && \
-    rm $NEWROOT/usr/bin/dockerd && \
+    install_binary /usr/bin/docker && \
     cleanup "docker-client"

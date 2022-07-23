@@ -14,11 +14,8 @@
 # limitations under the License.
 
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
-if command -v amazon-linux-extras &> /dev/null; then
-    amazon-linux-extras enable docker
-    cp /etc/yum.repos.d/amzn2-extras.repo /newroot/etc/yum.repos.d/amzn2-extras.repo
-fi
+enable_extra docker

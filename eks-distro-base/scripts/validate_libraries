@@ -13,14 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+
+set -eE
+set -o nounset
 set -o pipefail
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
 r_val=0
-for bin in $(find $NEWROOT -executable -type f -not -name "*.so*"); do
+for bin in $(build::common::find_executables true); do
     if ! build::common::is_dynamic_binary $bin; then
         continue
     fi

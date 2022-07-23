@@ -1,20 +1,19 @@
 ****************** Regular Files ******************
 
+-rw-r--r--       0B /dev/null
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
--rw-r--r--       8B /etc/crypto-policies/config
--rw-r--r--       8B /etc/crypto-policies/state/current
 -rw-r--r--   1.7KiB /etc/csh.cshrc
 -rw-r--r--   1.1KiB /etc/csh.login
--rw-r--r--     134B /etc/dnf/plugins/release-notification.conf
+-rw-r--r--     131B /etc/dnf/plugins/release-notification.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
 -rw-r--r--       0B /etc/environment
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      66B /etc/filesystems
--rw-r--r--      79B /etc/group
+-rw-rw-r--      79B /etc/group
 ----------     198B /etc/gshadow
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
@@ -23,9 +22,9 @@
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
--rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
--rw-r--r--     193B /etc/passwd
+-rw-rw-r--     229B /etc/nsswitch.conf
+-rw-rw-r--     161B /etc/os-release
+-rw-rw-r--     193B /etc/passwd
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -54,16 +53,15 @@
 -rw-r--r--   1.6KiB /etc/rpc
 -rw-r--r--   677KiB /etc/services
 ----------     346B /etc/shadow
--rw-r--r--      26B /etc/shells
+-rw-r--r--      44B /etc/shells
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
--rwxr-xr-x     436B /etc/update-motd.d/70-available-updates
--rw-r--r--     817B /etc/xattr.conf
--rw-r--r--     967B /etc/yum.repos.d/amazonlinux.repo
+-rwxr-xr-x     434B /etc/update-motd.d/70-available-updates
+-rw-r--r--     968B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
--rwxr-xr-x   147KiB /usr/bin/cp
+-r-xr-xr-x      49B /usr/bin/cp
 -rwxr-xr-x    29KiB /usr/bin/gencat
 -rwxr-xr-x    36KiB /usr/bin/getconf
 -rwxr-xr-x    37KiB /usr/bin/getent
@@ -72,7 +70,7 @@
 -rwxr-xr-x   5.4KiB /usr/bin/ldd
 -rwxr-xr-x    61KiB /usr/bin/locale
 -rwxr-xr-x   316KiB /usr/bin/localedef
--rwxr-xr-x    69KiB /usr/bin/mkdir
+-r-xr-xr-x      52B /usr/bin/mkdir
 -rwxr-xr-x    25KiB /usr/bin/pldd
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    37KiB /usr/bin/sprof
@@ -81,13 +79,13 @@
 -rwxr-xr-x    28KiB /usr/bin/zdump
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rw-r--r--     131B /usr/lib/locale/C.utf8/LC_ADDRESS
+-rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
 -rw-r--r--     258B /usr/lib/locale/C.utf8/LC_IDENTIFICATION
 -rw-r--r--      23B /usr/lib/locale/C.utf8/LC_MEASUREMENT
--rw-r--r--      53B /usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES
--rw-r--r--     274B /usr/lib/locale/C.utf8/LC_MONETARY
+-rw-r--r--      48B /usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+-rw-r--r--     270B /usr/lib/locale/C.utf8/LC_MONETARY
 -rw-r--r--      62B /usr/lib/locale/C.utf8/LC_NAME
 -rw-r--r--      50B /usr/lib/locale/C.utf8/LC_NUMERIC
 -rw-r--r--      34B /usr/lib/locale/C.utf8/LC_PAPER
@@ -105,13 +103,13 @@
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
+-rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
 -rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
 -rwxr-xr-x    16KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    53KiB /usr/lib64/engines-3/loader_attic.so
--rwxr-xr-x    28KiB /usr/lib64/engines-3/padlock.so
--rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.1.1.0.hmac
+-rwxr-xr-x    32KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x    28KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    20KiB /usr/lib64/gconv/CP1252.so
@@ -123,32 +121,32 @@
 -rwxr-xr-x    28KiB /usr/lib64/gconv/UTF-7.so
 -rw-r--r--   3.8KiB /usr/lib64/gconv/gconv-modules
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
--rwxr-xr-x   842KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   871KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
--rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
--rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
--rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.1.1.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.0
+-rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.3
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   107KiB /usr/lib64/libgcc_s-11-20210728.so.1
+-rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20220421.so.1
 -rwxr-xr-x   886KiB /usr/lib64/libm.so.6
--rwxr-xr-x    20KiB /usr/lib64/libmemusage.so
+-rwxr-xr-x    21KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
--rwxr-xr-x    42KiB /usr/lib64/libnss_compat.so.2
+-rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
--rwxr-xr-x   607KiB /usr/lib64/libpcre2-8.so.0.10.1
--rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.2.0.3
+-rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
+-rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
--rwxr-xr-x   670KiB /usr/lib64/libssl.so.3.0.0
+-rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
+-rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
+-rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.3
+-rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
@@ -161,126 +159,25 @@
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
 -rwxr-xr-x    61KiB /usr/sbin/zic
--rw-r--r--      75B /usr/share/crypto-policies/DEFAULT/bind.txt
--rw-r--r--   1.4KiB /usr/share/crypto-policies/DEFAULT/gnutls.txt
--rw-r--r--     395B /usr/share/crypto-policies/DEFAULT/java.txt
--rw-r--r--     179B /usr/share/crypto-policies/DEFAULT/krb5.txt
--rw-r--r--     565B /usr/share/crypto-policies/DEFAULT/libreswan.txt
--rw-r--r--   1.2KiB /usr/share/crypto-policies/DEFAULT/libssh.txt
--rw-r--r--     401B /usr/share/crypto-policies/DEFAULT/nss.txt
--rw-r--r--   1.3KiB /usr/share/crypto-policies/DEFAULT/openssh.txt
--rw-r--r--   1.8KiB /usr/share/crypto-policies/DEFAULT/opensshserver.txt
--rw-r--r--     150B /usr/share/crypto-policies/DEFAULT/openssl.txt
--rw-r--r--     571B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
--rw-r--r--     123B /usr/share/crypto-policies/EMPTY/bind.txt
--rw-r--r--     178B /usr/share/crypto-policies/EMPTY/gnutls.txt
--rw-r--r--     797B /usr/share/crypto-policies/EMPTY/java.txt
--rw-r--r--      36B /usr/share/crypto-policies/EMPTY/krb5.txt
--rw-r--r--      23B /usr/share/crypto-policies/EMPTY/libreswan.txt
--rw-r--r--       0B /usr/share/crypto-policies/EMPTY/libssh.txt
--rw-r--r--     147B /usr/share/crypto-policies/EMPTY/nss.txt
--rw-r--r--      21B /usr/share/crypto-policies/EMPTY/openssh.txt
--rw-r--r--      21B /usr/share/crypto-policies/EMPTY/opensshserver.txt
--rw-r--r--     214B /usr/share/crypto-policies/EMPTY/openssl.txt
--rw-r--r--     283B /usr/share/crypto-policies/EMPTY/opensslcnf.txt
--rw-r--r--     105B /usr/share/crypto-policies/FIPS/bind.txt
--rw-r--r--   1.6KiB /usr/share/crypto-policies/FIPS/gnutls.txt
--rw-r--r--     595B /usr/share/crypto-policies/FIPS/java.txt
--rw-r--r--     137B /usr/share/crypto-policies/FIPS/krb5.txt
--rw-r--r--     451B /usr/share/crypto-policies/FIPS/libreswan.txt
--rw-r--r--     998B /usr/share/crypto-policies/FIPS/libssh.txt
--rw-r--r--     368B /usr/share/crypto-policies/FIPS/nss.txt
--rw-r--r--     832B /usr/share/crypto-policies/FIPS/openssh.txt
--rw-r--r--   1.2KiB /usr/share/crypto-policies/FIPS/opensshserver.txt
--rw-r--r--     171B /usr/share/crypto-policies/FIPS/openssl.txt
--rw-r--r--     549B /usr/share/crypto-policies/FIPS/opensslcnf.txt
--rw-r--r--     105B /usr/share/crypto-policies/FUTURE/bind.txt
--rw-r--r--   1.7KiB /usr/share/crypto-policies/FUTURE/gnutls.txt
--rw-r--r--     665B /usr/share/crypto-policies/FUTURE/java.txt
--rw-r--r--     107B /usr/share/crypto-policies/FUTURE/krb5.txt
--rw-r--r--     388B /usr/share/crypto-policies/FUTURE/libreswan.txt
--rw-r--r--   1.1KiB /usr/share/crypto-policies/FUTURE/libssh.txt
--rw-r--r--     347B /usr/share/crypto-policies/FUTURE/nss.txt
--rw-r--r--   1.2KiB /usr/share/crypto-policies/FUTURE/openssh.txt
--rw-r--r--   1.7KiB /usr/share/crypto-policies/FUTURE/opensshserver.txt
--rw-r--r--     174B /usr/share/crypto-policies/FUTURE/openssl.txt
--rw-r--r--     525B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
--rw-r--r--      70B /usr/share/crypto-policies/LEGACY/bind.txt
--rw-r--r--   1.1KiB /usr/share/crypto-policies/LEGACY/gnutls.txt
--rw-r--r--     357B /usr/share/crypto-policies/LEGACY/java.txt
--rw-r--r--     179B /usr/share/crypto-policies/LEGACY/krb5.txt
--rw-r--r--     594B /usr/share/crypto-policies/LEGACY/libreswan.txt
--rw-r--r--   1.5KiB /usr/share/crypto-policies/LEGACY/libssh.txt
--rw-r--r--     431B /usr/share/crypto-policies/LEGACY/nss.txt
--rw-r--r--   1.6KiB /usr/share/crypto-policies/LEGACY/openssh.txt
--rw-r--r--   2.1KiB /usr/share/crypto-policies/LEGACY/opensshserver.txt
--rw-r--r--     138B /usr/share/crypto-policies/LEGACY/openssl.txt
--rw-r--r--     630B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
--rw-r--r--      75B /usr/share/crypto-policies/back-ends/DEFAULT/bind.config
--rw-r--r--   1.4KiB /usr/share/crypto-policies/back-ends/DEFAULT/gnutls.config
--rw-r--r--     395B /usr/share/crypto-policies/back-ends/DEFAULT/java.config
--rw-r--r--     179B /usr/share/crypto-policies/back-ends/DEFAULT/krb5.config
--rw-r--r--     565B /usr/share/crypto-policies/back-ends/DEFAULT/libreswan.config
--rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/DEFAULT/libssh.config
--rw-r--r--     401B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
--rw-r--r--   1.3KiB /usr/share/crypto-policies/back-ends/DEFAULT/openssh.config
--rw-r--r--   1.8KiB /usr/share/crypto-policies/back-ends/DEFAULT/opensshserver.config
--rw-r--r--     150B /usr/share/crypto-policies/back-ends/DEFAULT/openssl.config
--rw-r--r--     571B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
--rw-r--r--     105B /usr/share/crypto-policies/back-ends/FIPS/bind.config
--rw-r--r--   1.6KiB /usr/share/crypto-policies/back-ends/FIPS/gnutls.config
--rw-r--r--     595B /usr/share/crypto-policies/back-ends/FIPS/java.config
--rw-r--r--     137B /usr/share/crypto-policies/back-ends/FIPS/krb5.config
--rw-r--r--     451B /usr/share/crypto-policies/back-ends/FIPS/libreswan.config
--rw-r--r--     998B /usr/share/crypto-policies/back-ends/FIPS/libssh.config
--rw-r--r--     368B /usr/share/crypto-policies/back-ends/FIPS/nss.config
--rw-r--r--     832B /usr/share/crypto-policies/back-ends/FIPS/openssh.config
--rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/FIPS/opensshserver.config
--rw-r--r--     171B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
--rw-r--r--     549B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
--rw-r--r--     105B /usr/share/crypto-policies/back-ends/FUTURE/bind.config
--rw-r--r--   1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/gnutls.config
--rw-r--r--     665B /usr/share/crypto-policies/back-ends/FUTURE/java.config
--rw-r--r--     107B /usr/share/crypto-policies/back-ends/FUTURE/krb5.config
--rw-r--r--     388B /usr/share/crypto-policies/back-ends/FUTURE/libreswan.config
--rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/FUTURE/libssh.config
--rw-r--r--     347B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
--rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/FUTURE/openssh.config
--rw-r--r--   1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/opensshserver.config
--rw-r--r--     174B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
--rw-r--r--     525B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
--rw-r--r--      70B /usr/share/crypto-policies/back-ends/LEGACY/bind.config
--rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/LEGACY/gnutls.config
--rw-r--r--     357B /usr/share/crypto-policies/back-ends/LEGACY/java.config
--rw-r--r--     179B /usr/share/crypto-policies/back-ends/LEGACY/krb5.config
--rw-r--r--     594B /usr/share/crypto-policies/back-ends/LEGACY/libreswan.config
--rw-r--r--   1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/libssh.config
--rw-r--r--     431B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
--rw-r--r--   1.6KiB /usr/share/crypto-policies/back-ends/LEGACY/openssh.config
--rw-r--r--   2.1KiB /usr/share/crypto-policies/back-ends/LEGACY/opensshserver.config
--rw-r--r--     138B /usr/share/crypto-policies/back-ends/LEGACY/openssl.config
--rw-r--r--     630B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
--rw-r--r--     688B /usr/share/crypto-policies/default-config
--rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/DEFAULT.pol
--rw-r--r--     395B /usr/share/crypto-policies/policies/EMPTY.pol
--rw-r--r--   2.2KiB /usr/share/crypto-policies/policies/FIPS.pol
--rw-r--r--   2.5KiB /usr/share/crypto-policies/policies/FUTURE.pol
--rw-r--r--     953B /usr/share/crypto-policies/policies/GOST-ONLY.pol
--rw-r--r--   3.0KiB /usr/share/crypto-policies/policies/LEGACY.pol
--rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/NEXT.pol
--rw-r--r--     306B /usr/share/crypto-policies/policies/modules/AD-SUPPORT.pmod
--rw-r--r--     220B /usr/share/crypto-policies/policies/modules/ECDHE-ONLY.pmod
--rw-r--r--     442B /usr/share/crypto-policies/policies/modules/FEDORA32.pmod
--rw-r--r--     776B /usr/share/crypto-policies/policies/modules/GOST.pmod
--rw-r--r--     246B /usr/share/crypto-policies/policies/modules/NO-CAMELLIA.pmod
--rw-r--r--     150B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
--rw-r--r--     832B /usr/share/crypto-policies/policies/modules/OSPP.pmod
--rw-r--r--     135B /usr/share/crypto-policies/policies/modules/SHA1.pmod
--rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    18KiB /usr/share/doc/haproxy/gpl.txt
 -rw-r--r--    18KiB /usr/share/doc/haproxy/internals/notes-layers.txt
 -rw-r--r--    26KiB /usr/share/doc/haproxy/lgpl.txt
--rw-r--r--    26KiB /usr/share/licenses/crypto-policies/COPYING.LESSER
+-rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
+-rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
+-rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
+-rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
+-rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
+-rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
+-rw-r--r--    35KiB /usr/share/licenses/coreutils-single/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
 -rw-r--r--    19KiB /usr/share/licenses/glibc/LICENSES
@@ -289,12 +186,14 @@
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc/COPYING.RUNTIME
 -rw-r--r--    35KiB /usr/share/licenses/libgcc/COPYING3
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc/COPYING3.LIB
+-rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
+-rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
 -rw-r--r--   1.9KiB /usr/share/licenses/libxcrypt/AUTHORS
 -rw-r--r--    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
 -rw-r--r--   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
--rw-r--r--      97B /usr/share/licenses/pcre2-syntax/COPYING
--rw-r--r--   3.4KiB /usr/share/licenses/pcre2-syntax/LICENCE
+-rw-r--r--      95B /usr/share/licenses/pcre/COPYING
+-rw-r--r--   3.2KiB /usr/share/licenses/pcre/LICENCE
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
@@ -1550,7 +1449,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Africa/Tripoli
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/Africa/Tunis
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Africa/Windhoek
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Adak
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Adak
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Anchorage
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Anguilla
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Antigua
@@ -1571,7 +1470,7 @@
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Aruba
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Asuncion
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Atikokan
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Atka
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Atka
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Bahia
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Bahia_Banderas
 -rw-r--r--     986B /usr/share/zoneinfo/right/America/Barbados
@@ -1589,7 +1488,7 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Catamarca
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Cayenne
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Cayman
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Chicago
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Chicago
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Chihuahua
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Coral_Harbour
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Cordoba
@@ -1613,7 +1512,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/America/Glace_Bay
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Godthab
 -rw-r--r--   3.3KiB /usr/share/zoneinfo/right/America/Goose_Bay
--rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Grand_Turk
+-rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Grenada
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Guadeloupe
 -rw-r--r--     830B /usr/share/zoneinfo/right/America/Guatemala
@@ -1635,9 +1534,9 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Iqaluit
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/America/Jamaica
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Jujuy
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Juneau
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Juneau
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Kentucky/Louisville
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Kentucky/Monticello
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Kentucky/Monticello
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Knox_IN
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Kralendijk
 -rw-r--r--     766B /usr/share/zoneinfo/right/America/La_Paz
@@ -1677,7 +1576,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Pangnirtung
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Paramaribo
 -rw-r--r--     878B /usr/share/zoneinfo/right/America/Phoenix
--rw-r--r--   1.5KiB /usr/share/zoneinfo/right/America/Port-au-Prince
+-rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Port-au-Prince
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Port_of_Spain
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/America/Porto_Acre
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/America/Porto_Velho
@@ -1714,13 +1613,13 @@
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Vancouver
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Virgin
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Whitehorse
--rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Winnipeg
+-rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Winnipeg
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Yakutat
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Yellowknife
 -rw-r--r--     916B /usr/share/zoneinfo/right/Antarctica/Casey
 -rw-r--r--     830B /usr/share/zoneinfo/right/Antarctica/Davis
 -rw-r--r--     718B /usr/share/zoneinfo/right/Antarctica/DumontDUrville
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Antarctica/Macquarie
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Antarctica/Macquarie
 -rw-r--r--     732B /usr/share/zoneinfo/right/Antarctica/Mawson
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Antarctica/McMurdo
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Antarctica/Palmer
@@ -1732,7 +1631,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Arctic/Longyearbyen
 -rw-r--r--     698B /usr/share/zoneinfo/right/Asia/Aden
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Almaty
--rw-r--r--   1.9KiB /usr/share/zoneinfo/right/Asia/Amman
+-rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Asia/Amman
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Asia/Anadyr
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Aqtau
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Asia/Aqtobe
@@ -1744,7 +1643,7 @@
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Baku
 -rw-r--r--     732B /usr/share/zoneinfo/right/Asia/Bangkok
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Barnaul
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Asia/Beirut
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Asia/Beirut
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Bishkek
 -rw-r--r--     736B /usr/share/zoneinfo/right/Asia/Brunei
 -rw-r--r--     831B /usr/share/zoneinfo/right/Asia/Calcutta
@@ -1846,10 +1745,10 @@
 -rw-r--r--     966B /usr/share/zoneinfo/right/Australia/Brisbane
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Broken_Hill
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Canberra
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Currie
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Australia/Currie
 -rw-r--r--     870B /usr/share/zoneinfo/right/Australia/Darwin
 -rw-r--r--     998B /usr/share/zoneinfo/right/Australia/Eucla
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Hobart
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Australia/Hobart
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/Australia/LHI
 -rw-r--r--    1022B /usr/share/zoneinfo/right/Australia/Lindeman
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/Australia/Lord_Howe
@@ -1860,7 +1759,7 @@
 -rw-r--r--     966B /usr/share/zoneinfo/right/Australia/Queensland
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/South
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Sydney
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Tasmania
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Australia/Tasmania
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Victoria
 -rw-r--r--     994B /usr/share/zoneinfo/right/Australia/West
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Yancowinna
@@ -1871,7 +1770,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/CET
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/CST6CDT
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/right/Canada/Atlantic
--rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Canada/Central
+-rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Canada/Central
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Canada/Eastern
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Canada/Mountain
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Canada/Newfoundland
@@ -1922,9 +1821,9 @@
 -rw-r--r--     664B /usr/share/zoneinfo/right/Etc/Universal
 -rw-r--r--     664B /usr/share/zoneinfo/right/Etc/Zulu
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Europe/Amsterdam
--rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Andorra
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/right/Europe/Andorra
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Astrakhan
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Athens
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Athens
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Europe/Belfast
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Belgrade
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Berlin
@@ -1970,11 +1869,11 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Skopje
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Sofia
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Stockholm
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Tallinn
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Tallinn
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
--rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Vaduz
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -2049,7 +1948,7 @@
 -rw-r--r--     724B /usr/share/zoneinfo/right/Pacific/Midway
 -rw-r--r--     784B /usr/share/zoneinfo/right/Pacific/Nauru
 -rw-r--r--     736B /usr/share/zoneinfo/right/Pacific/Niue
--rw-r--r--     956B /usr/share/zoneinfo/right/Pacific/Norfolk
+-rw-r--r--     970B /usr/share/zoneinfo/right/Pacific/Norfolk
 -rw-r--r--     836B /usr/share/zoneinfo/right/Pacific/Noumea
 -rw-r--r--     724B /usr/share/zoneinfo/right/Pacific/Pago_Pago
 -rw-r--r--     713B /usr/share/zoneinfo/right/Pacific/Palau
@@ -2075,9 +1974,9 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Turkey
 -rw-r--r--     664B /usr/share/zoneinfo/right/UCT
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/US/Alaska
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/US/Aleutian
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/US/Aleutian
 -rw-r--r--     878B /usr/share/zoneinfo/right/US/Arizona
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/US/Central
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/US/Central
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/US/East-Indiana
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/US/Eastern
 -rw-r--r--     878B /usr/share/zoneinfo/right/US/Hawaii
@@ -2094,38 +1993,18 @@
 -rw-r--r--   111KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-r--r--       2B /var/cache/dnf/tempfiles.json
--rw-------   2.5KiB /var/cache/ldconfig/aux-cache
--rw-r--r--   116KiB /var/lib/dnf/history.sqlite
--rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
--rw-r--r--   1.1MiB /var/lib/dnf/history.sqlite-wal
+-rw-------   2.4KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.5MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   2.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
--rw-r--r--    16KiB /var/log/dnf.librepo.log
--rw-r--r--    42KiB /var/log/dnf.log
--rw-r--r--   4.3KiB /var/log/dnf.rpm.log
--rw-r--r--   1.3KiB /var/log/hawkey.log
 
 ****************** Symlinks ******************
 
 lrwxrwxrwx       7B /bin usr/bin
 lrwxrwxrwx      25B /etc/amazon-linux-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/amazon-linux-release-cpe ../usr/lib/system-release-cpe
-lrwxrwxrwx      43B /etc/crypto-policies/back-ends/bind.config /usr/share/crypto-policies/DEFAULT/bind.txt
-lrwxrwxrwx      45B /etc/crypto-policies/back-ends/gnutls.config /usr/share/crypto-policies/DEFAULT/gnutls.txt
-lrwxrwxrwx      43B /etc/crypto-policies/back-ends/java.config /usr/share/crypto-policies/DEFAULT/java.txt
-lrwxrwxrwx      43B /etc/crypto-policies/back-ends/krb5.config /usr/share/crypto-policies/DEFAULT/krb5.txt
-lrwxrwxrwx      48B /etc/crypto-policies/back-ends/libreswan.config /usr/share/crypto-policies/DEFAULT/libreswan.txt
-lrwxrwxrwx      45B /etc/crypto-policies/back-ends/libssh.config /usr/share/crypto-policies/DEFAULT/libssh.txt
-lrwxrwxrwx      42B /etc/crypto-policies/back-ends/nss.config /usr/share/crypto-policies/DEFAULT/nss.txt
-lrwxrwxrwx      46B /etc/crypto-policies/back-ends/openssh.config /usr/share/crypto-policies/DEFAULT/openssh.txt
-lrwxrwxrwx      52B /etc/crypto-policies/back-ends/opensshserver.config /usr/share/crypto-policies/DEFAULT/opensshserver.txt
-lrwxrwxrwx      46B /etc/crypto-policies/back-ends/openssl.config /usr/share/crypto-policies/DEFAULT/openssl.txt
-lrwxrwxrwx      49B /etc/crypto-policies/back-ends/opensslcnf.config /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
 lrwxrwxrwx      16B /etc/issue ../usr/lib/issue
 lrwxrwxrwx      20B /etc/issue.net ../usr/lib/issue.net
 lrwxrwxrwx      59B /etc/pki/ca-trust/source/ca-bundle.legacy.crt /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
@@ -2135,28 +2014,24 @@ lrwxrwxrwx      49B /etc/pki/tls/certs/ca-bundle.crt /etc/pki/ca-trust/extracted
 lrwxrwxrwx      55B /etc/pki/tls/certs/ca-bundle.trust.crt /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 lrwxrwxrwx      49B /etc/ssl/cert.pem /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 lrwxrwxrwx      18B /etc/ssl/certs /etc/pki/tls/certs
-lrwxrwxrwx      28B /etc/ssl/ct_log_list.cnf /etc/pki/tls/ct_log_list.cnf
-lrwxrwxrwx      24B /etc/ssl/openssl.cnf /etc/pki/tls/openssl.cnf
 lrwxrwxrwx      25B /etc/system-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
 lrwxrwxrwx       7B /lib usr/lib
 lrwxrwxrwx       9B /lib64 usr/lib64
 lrwxrwxrwx       8B /sbin usr/sbin
+lrwxrwxrwx      32B /usr/bin/ld.so ../../lib64/ld-linux-x86-64.so.2
 lrwxrwxrwx       7B /usr/lib/debug/bin usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
-lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.1.hmac libcrypt.so.1.1.0.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
-lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
-lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
-lrwxrwxrwx      17B /usr/lib64/libcrypt.so.1 libcrypt.so.1.1.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.0
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20210728.so.1
-lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.10.1
-lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.2 libpcre2-posix.so.2.0.3
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.0
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.3
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20220421.so.1
+lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
+lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.3
+lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
 lrwxrwxrwx      10B /usr/tmp ../var/tmp
 lrwxrwxrwx      11B /var/lock ../run/lock

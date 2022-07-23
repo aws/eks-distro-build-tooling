@@ -73,7 +73,7 @@ libdb-utils-5.3.21-24.amzn2.0.3.x86_64
 libevent-2.0.21-4.amzn2.0.3.x86_64
 libfdisk-2.30.2-2.amzn2.0.7.x86_64
 libffi-3.0.13-18.amzn2.0.2.x86_64
-libgcc-7.3.1-14.amzn2.x86_64
+libgcc-7.3.1-15.amzn2.x86_64
 libgcrypt-1.5.3-14.amzn2.0.3.x86_64
 libgpg-error-1.12-3.amzn2.0.3.x86_64
 libidn2-2.3.0-1.amzn2.x86_64
@@ -98,7 +98,7 @@ libsemanage-2.5-11.amzn2.x86_64
 libsepol-2.5-8.1.amzn2.0.2.x86_64
 libsmartcols-2.30.2-2.amzn2.0.7.x86_64
 libssh2-1.4.3-12.amzn2.2.3.x86_64
-libstdc++-7.3.1-14.amzn2.x86_64
+libstdc++-7.3.1-15.amzn2.x86_64
 libtirpc-0.2.4-0.16.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
 libutempter-1.1.6-4.amzn2.0.2.x86_64
@@ -164,7 +164,7 @@ systemd-sysv-219-78.amzn2.0.18.x86_64
 tar-1.26-35.amzn2.x86_64
 tcp_wrappers-7.6-77.amzn2.0.2.x86_64
 tcp_wrappers-libs-7.6-77.amzn2.0.2.x86_64
-tzdata-2021e-1.amzn2.noarch
+tzdata-2022a-1.amzn2.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.7.x86_64
 which-2.20-7.amzn2.0.2.x86_64

@@ -13,47 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
-function build::install::deps() {
-    local -r bin="$1"
+build::log::setup
 
-    local installing=1
-    local rpm_package=""
-    while [[ $installing == 1 ]] ; do
-        installing=0
-        while IFS= read -r dep; do
-            if build::common::dep_exists $dep; then
-                continue
-            fi
-            
-            rpm_package=$(build::common::rpm_package_for_binary $dep)
-
-            if [[ -z "$rpm_package" ]]; then
-                echo "Error: No rpm found for $dep!"
-                exit 1
-            fi
-
-            echo "Installing $rpm_package for $dep"
-            # install rpm with but do not install rpm dependencies, library deps will all be picked up
-            # by this ldd parse
-            clean_install $rpm_package true
-
-            installing=1
-
-        done < <(build::common::binary_to_libraries "$bin")
-    done
-}
-
-for installed_bin in "$@"; do
-    if ! build::common::is_dynamic_binary $installed_bin; then
-        continue
-    fi
-
-    build::install::deps $installed_bin
-done
+build::common::install_deps_for_binary "$@"

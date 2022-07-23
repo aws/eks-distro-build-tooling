@@ -32,10 +32,10 @@ like for the standard base.
 
 The minimal variants are created using multistage builds and `yum --installroot` and `rpm --root` to install packages into `/newroot` which is copied in the final image based on `scratch`.
 An opinionated approach is taken in deciding the final package set which make up these images.  In some cases, dependencies defined in the various packages' `rpm` config are explicitly excluded.
-As an example, `systemd` is a dependency of `ebtables` in the iptables variant, but since the image(s) based on this variant are not actually running systemd, it is explicitly excluded from the final image, along with its
-dependencies.  Similarly, `bash` does not exist in most of the minimal variants, however it is a dependency of `glibc` (and vice-versa), but 
+As an example, `systemd` is a dependency of `ebtables` in the iptables variant, but since the image(s) based on this variant are not actually running systemd, it is explicitly excluded from the final image, along with its dependencies.  
+Similarly, `bash` does not exist in most of the minimal variants, however it is a dependency of `glibc` (and vice-versa), but 
 it is also explicitly removed.  Packages like these are excluded by manually installing the rpm into the rpm database before running `yum install` for each of the desired packages.  There will be warnings when running
-yum, but it will not install the excluded package or dependencies not required by other packages being installed.  This is handled by [clean_install](./scripts/clean_install).
+yum, but it will not install the excluded package or dependencies not required by other packages being installed.
 
 Some packages depend on core utils (ex: gawk, grep, sed) during their rpm pre-install phase.  For these cases, the dependent packages are either explicitly installed ahead of time or allowed to be installed
 with `yum install` for each of the desired packages.  These utilities are then removed before creating the final image.
@@ -44,25 +44,89 @@ The final image contains a rpm database created during the builder stage of the 
 The rpm database is included to support common container scanning processes, including ECR's automated scanning.  The list of packages in each image is checked into to this repo and kept up
 to date via periodic prow jobs.  These files can found at [eks-distro-minimal-packages](../eks-distro-minimal-packages) for both the linux/amd64 and linux/arm64 builds.
 
+There are multiple approaches taken to getting the final list of RPMs that should be installed and how they are installed depending on the specific use case.
+
+##**Recommended** 
+
+When the desired executables are known, using the [install_binary](./scripts/install_binary) script is the easiest and best approach.  This approach uses `yum provides` to determine
+the RPM which includes the desired executable, downloads and extracts the RPM and finally manually copies the specific executable (along with text files in `/etc` and `/usr/share` like licenses).
+Once the executable has been copied to its final location, [`ldd`](https://man7.org/linux/man-pages/man1/ldd.1.html) is used to determine the specific dynamic library dependencies.  For each of these dependencies a similar process from above is followed to determine the 
+needed RPM.  These RPMs are installed completely using [`rpm --root`](https://man7.org/linux/man-pages/man8/rpm.8.html) directly instead of `yum install` to avoid other dependencies getting pulled in.  This approach will usually result in the smallest possible image
+with the shallowest CVE scope due to minimal number of included RPM packages.  All RPMs extracted for specific executables or installed for libraries are included in the final image's rpmdb.  
+This approach is used in the [ebs-csi variant](./Dockerfile.minimal-base-csi-ebs) and most desired for any images
+built outside of this repo.
+
+When specific RPMs are desired, for example `iptables` which includes many different executables, [install_rpm](./scripts/install_rpm) can be used to tightly control the RPMs installed
+in the final image.  This will require understanding the dependency tree of these RPMs since it does not use `yum install` which handles installing all necessary dependencies.  The upside to this
+approach is being able to avoid installing packages like `systemd` or common tools needed like `coreutils` or `gawk` just to remove them afterwards to avoid its entire dependencies tree being pulled in and because they are unwanted in the final image.  This approach is used for the [iptables](./Dockerfile.minimal-base-iptables) and [nginx](Dockerfile.minimal-base-nginx) variants.
+
+**Avoid if possible** If the final image is to include a large number of packages and the dependency tree is not easily defined [clean_install](./scripts/clean_install) can be used to install packages
+along with their dependencies.  This approached is used for the [kind](./Dockerfile.minimal-base-kind) and [csi](./Dockerfile.minimal-base-csi) variants because their overall dependency tree is so large.
+Take notice in the case of the `csi` image `systemd` is "fake" installed just to be removed.  This was a common pattern used across most variants when this was the primary installation method and should
+continue to be used when necessary to avoid completely ballooning the scope of images.
+
+### Validation and Tests
+
+After each build there is a validation stage which uses `ldd` to validate that for each dynamic executable the final image contains the required libraries.  It also validates
+there are no dangling symlinks to make sure missing expected files do not go unnoticed.
+
+There is a set of VERY basic [tests](./tests/run_tests.sh) which use docker (and not run in CI) to perform the most minimal validations.  The most interesting ones relate to the
+`git` and `iptables` variants where there are a number of expected executables and libraries.  There is no reason new, or existing, variants couldn't have more sophisticated tests...
+
+### "API"
+
+`CLEANUP_UNNECESSARY_FILES` can be exported in the Dockerfile to automatically remove files that may not be needed in the final image. This is used in a few different variants
+to remove dangling symlinks due to RPMs not being fully installed.
+
+`<rpm_name>_SCRIPTLET_REQS` can be exported in the Dockerfile for packages that require specific tools during the RPM scriptlet preinstall phase.  These tools, along with a default list defined in [eks-d-common](./scripts/eks-d-common) are symlinked into the the `installroot` (/newroot) so that when RPMs are installed the scripts should succeeded.  The build will catch
+common failures here, but not all so pay close attention to the output when adding new RPMs or binaries to images.
+
 ### Creating new images
 
 Creating new images based off minimal variants where new packages are necessary will require a multi-stage build using the builder images which are also pushed to [ECR](https://gallery.ecr.aws/eks-distro-build-tooling].
 To ensure consistency and proper cleanup during install and removal of packages, the [scripts](./scripts) are added to `/usr/bin` and are used extensively throughout the variant Dockerfiles.
-As an example, creating a new image which requires `tar`:
 
-Dockerfile
+#### Examples
+
 ```
 ARG BASE_IMAGE
 ARG BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as tar-builder
 
 RUN set -x && \
-    clean_install tar && \
-    remove_package "bash info" && \
+    install_binary /usr/bin/tar && \
     cleanup "tar"
 
 FROM ${BASE_IMAGE} as tar
 COPY --from=tar-builder /newroot /
+```
+
+```
+ARG BASE_IMAGE
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as iptables-builder
+
+RUN set -x && \
+    install_rpm iptables && \
+    cleanup "iptables"
+
+FROM ${BASE_IMAGE} as iptables
+COPY --from=iptables-builder /newroot /
+```
+
+```
+ARG BASE_IMAGE
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE} as iptables-builder
+
+RUN set -x && \
+    clean_install systemd true true && \
+    clean_install iptables && \
+    remove_package systemd true && \
+    cleanup "iptables"
+
+FROM ${BASE_IMAGE} as iptables
+COPY --from=iptables-builder /newroot /
 ```
 
 ```
@@ -77,7 +141,7 @@ buildctl \
     --progress plain \
     --local dockerfile=./ \
     --local context=. \
-    --opt target=tar \
+    --opt target=<target> \
     --output type=image,oci-mediatypes=true,name=$IMAGE_TAG,push=true
 ```
 
@@ -98,6 +162,9 @@ Building the eks-distro-base images locally requires `buildkitd` running and eit
     * `export SSH_KEY_FOLDER=<ssh_key_folder>`
     * `export PRIVATE_REPO=<private_repo>`
     * `IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-base-test -C eks-distro-base`
+1. To build AL22 based images pass `AL_TAG=2022` to the make call
+1. To build a specific image based on an image published to [the EKS-D ECR](https://gallery.ecr.aws/eks-distro-build-tooling)
+    * `BASE_IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-images-base-iptables -C eks-distro-base`   
 
 There are additional flows that are run in prow.
 

@@ -14,12 +14,19 @@
 # limitations under the License.
 
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
-PACKAGES="$1"
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_ROOT}/eks-d-common"
 
-if grep -q "2022" "/etc/os-release"; then 
-    clean_install "$PACKAGES"
-fi
+build::log::setup
+
+for file in "$@"; do
+    build::common::rpm_install $file    
+done
+
+for bin in $(build::common::find_executables); do
+    build::common::install_deps_for_binary $bin
+done

@@ -13,13 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -eE
+set -o nounset
 set -o pipefail
-set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
+build::log::setup
 
 function build::install::binary() {
     local -r file="$1"
@@ -39,9 +40,8 @@ function build::install::binary() {
 
     local -r extract_dir=$DOWNLOAD_DIR/$rpm_package
 
-    echo "Extracting $rpm_package for $file"
-    # download and extract rpm as well as add to the final rpm db which will be included in the final image
-    clean_install $rpm_package true true true $extract_dir
+    # download/extract rpm and add to the final rpm db which will be included in the final image
+    build::common::extract_rpm $rpm_package $extract_dir
 
     local -r extracted_bin=$extract_dir$expected_filename
 
@@ -52,6 +52,8 @@ function build::install::binary() {
 
     # copy desired binary into newroot folder path
     local -r final_bin=$NEWROOT$expected_filename
+
+    echo "Copying $extracted_bin to $final_bin"
     cp $extracted_bin $final_bin
 
     build::install::configs_and_licenses $extract_dir
@@ -73,5 +75,5 @@ function build::install::configs_and_licenses() {
 for file in "$@"; do
     build::install::binary $file installed_bin
 
-    install_deps_for_binary $installed_bin
+    build::common::install_deps_for_binary $installed_bin
 done
