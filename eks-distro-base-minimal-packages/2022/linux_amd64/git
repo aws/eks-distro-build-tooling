@@ -38,6 +38,7 @@ libtasn1-4.16.0-4.amzn2022.x86_64
 libunistring-0.9.10-10.amzn2022.x86_64
 libusbx-1.0.24-2.amzn2022.x86_64
 libxcrypt-4.4.26-4.amzn2022.x86_64
+ncurses-base-6.2-4.20200222.amzn2022.noarch
 ncurses-libs-6.2-4.20200222.amzn2022.x86_64
 nettle-3.7.3-1.amzn2022.x86_64
 npth-1.6-6.amzn2022.x86_64

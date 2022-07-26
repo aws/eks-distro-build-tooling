@@ -3529,8 +3529,6 @@
 -rw-r--r--    18KiB /usr/share/licenses/pam/gpl-2.0.txt
 -rw-r--r--      95B /usr/share/licenses/pcre/COPYING
 -rw-r--r--   3.2KiB /usr/share/licenses/pcre/LICENCE
--rw-r--r--      97B /usr/share/licenses/pcre2-syntax/COPYING
--rw-r--r--   3.4KiB /usr/share/licenses/pcre2-syntax/LICENCE
 -rw-r--r--   1.3KiB /usr/share/licenses/popt/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/python-pip-wheel/LICENSE.txt
 -rw-r--r--   1.1KiB /usr/share/licenses/python-setuptools-wheel/LICENSE
@@ -6037,7 +6035,7 @@
 -rw-------   7.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--   116KiB /var/lib/dnf/history.sqlite
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
--rw-r--r--   3.5MiB /var/lib/dnf/history.sqlite-wal
+-rw-r--r--   3.4MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock

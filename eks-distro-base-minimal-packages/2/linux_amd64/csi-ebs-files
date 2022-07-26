@@ -21,7 +21,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   5.1KiB /etc/ld.so.cache
+-rw-r--r--   4.7KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--   1.1KiB /etc/mke2fs.conf
 -rw-r--r--       0B /etc/motd
@@ -430,9 +430,7 @@
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x    24KiB /usr/lib64/libsystemd-daemon.so.0.0.12
 -rwxr-xr-x    20KiB /usr/lib64/libsystemd-id128.so.0.0.28
--rwxr-xr-x   138KiB /usr/lib64/libsystemd-journal.so.0.11.5
 -rwxr-xr-x    57KiB /usr/lib64/libsystemd-login.so.0.9.3
--rwxr-xr-x   183KiB /usr/lib64/libsystemd.so.0.6.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    57KiB /usr/lib64/libtic.so.6.0
 -rwxr-xr-x   176KiB /usr/lib64/libtinfo.so.6.0
@@ -441,7 +439,6 @@
 -rwxr-xr-x    20KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    84KiB /usr/lib64/libz.so.1.2.7
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_cap.so
--rwxr-xr-x   282KiB /usr/lib64/security/pam_systemd.so
 -rwxr-xr-x    26KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    26KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    26KiB /usr/libexec/getconf/XBS5_LP64_OFF64
@@ -2334,7 +2331,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   4.4KiB /var/cache/ldconfig/aux-cache
+-rw-------   4.0KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   336KiB /var/lib/rpm/Basenames
@@ -2429,9 +2426,7 @@ lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1	libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
 lrwxrwxrwx      27B /usr/lib64/libsystemd-daemon.so.0	libsystemd-daemon.so.0.0.12
 lrwxrwxrwx      26B /usr/lib64/libsystemd-id128.so.0	libsystemd-id128.so.0.0.28
-lrwxrwxrwx      28B /usr/lib64/libsystemd-journal.so.0	libsystemd-journal.so.0.11.5
 lrwxrwxrwx      25B /usr/lib64/libsystemd-login.so.0	libsystemd-login.so.0.9.3
-lrwxrwxrwx      19B /usr/lib64/libsystemd.so.0	libsystemd.so.0.6.0
 lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6	libtic.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6	libtinfo.so.6.0

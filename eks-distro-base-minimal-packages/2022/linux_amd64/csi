@@ -77,7 +77,6 @@ p11-kit-0.23.22-3.amzn2022.x86_64
 pam-1.5.1-7.amzn2022.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
-pcre2-syntax-10.40-1.amzn2022.noarch
 popt-1.18-6.amzn2022.x86_64
 python-pip-wheel-21.0.1-4.amzn2022.0.1.noarch
 python-setuptools-wheel-53.0.0-2.amzn2022.noarch

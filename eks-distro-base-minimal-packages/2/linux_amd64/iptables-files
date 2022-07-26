@@ -21,7 +21,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   4.0KiB /etc/ld.so.cache
+-rw-r--r--   3.4KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-rw-r--     229B /etc/nsswitch.conf
@@ -2527,7 +2527,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   3.4KiB /var/cache/ldconfig/aux-cache
+-rw-------   2.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     583B /var/lib/alternatives/arptables
 -rw-r--r--     276B /var/lib/alternatives/ebtables
 -rw-r--r--     299B /var/lib/alternatives/ip6tables

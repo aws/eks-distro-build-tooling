@@ -18,7 +18,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   2.7KiB /etc/ld.so.cache
+-rw-r--r--   2.5KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--      15B /etc/libibverbs.d/bnxt_re.driver
 -rw-r--r--      13B /etc/libibverbs.d/cxgb4.driver
@@ -168,6 +168,8 @@
 -rwxr-xr-x   439KiB /usr/lib64/libmlx5.so.1.21.37.0
 -rwxr-xr-x    28KiB /usr/lib64/libmnl.so.0.2.0
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
+-rwxr-xr-x   123KiB /usr/lib64/libnetfilter_conntrack.so.3.7.0
+-rwxr-xr-x    35KiB /usr/lib64/libnfnetlink.so.0.2.0
 -rwxr-xr-x   219KiB /usr/lib64/libnftnl.so.11.5.0
 -rwxr-xr-x   144KiB /usr/lib64/libnl-3.so.200.26.0
 -rwxr-xr-x    38KiB /usr/lib64/libnl-genl-3.so.200.26.0
@@ -181,6 +183,8 @@
 -rwxr-xr-x   308KiB /usr/lib64/libpcap.so.1.10.1
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
+-rwxr-xr-x   627KiB /usr/lib64/libpcre2-8.so.0.11.0
+-rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
@@ -367,6 +371,8 @@
 -rw-r--r--    35KiB /usr/share/licenses/libgcc/COPYING3
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libmnl/COPYING
+-rw-r--r--    18KiB /usr/share/licenses/libnetfilter_conntrack/COPYING
+-rw-r--r--    18KiB /usr/share/licenses/libnfnetlink/COPYING
 -rw-r--r--     868B /usr/share/licenses/libpcap/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
@@ -2173,13 +2179,13 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   3.5KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.2KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
 -rw-r--r--     299B /var/lib/alternatives/ip6tables
 -rw-r--r--     583B /var/lib/alternatives/iptables
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -2236,6 +2242,8 @@ lrwxrwxrwx      18B /usr/lib64/libipset.so.13 libipset.so.13.2.0
 lrwxrwxrwx      19B /usr/lib64/libmlx4.so.1 libmlx4.so.1.0.37.0
 lrwxrwxrwx      20B /usr/lib64/libmlx5.so.1 libmlx5.so.1.21.37.0
 lrwxrwxrwx      15B /usr/lib64/libmnl.so.0 libmnl.so.0.2.0
+lrwxrwxrwx      31B /usr/lib64/libnetfilter_conntrack.so.3 libnetfilter_conntrack.so.3.7.0
+lrwxrwxrwx      21B /usr/lib64/libnfnetlink.so.0 libnfnetlink.so.0.2.0
 lrwxrwxrwx      18B /usr/lib64/libnftnl.so.11 libnftnl.so.11.5.0
 lrwxrwxrwx      19B /usr/lib64/libnl-3.so.200 libnl-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-genl-3.so.200 libnl-genl-3.so.200.26.0
@@ -2245,6 +2253,8 @@ lrwxrwxrwx      25B /usr/lib64/libnl-route-3.so.200 libnl-route-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-xfrm-3.so.200 libnl-xfrm-3.so.200.26.0
 lrwxrwxrwx      17B /usr/lib64/libpcap.so.1 libpcap.so.1.10.1
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
+lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
+lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.3
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29

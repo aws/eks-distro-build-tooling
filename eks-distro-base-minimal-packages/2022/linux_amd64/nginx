@@ -19,6 +19,7 @@ libsepol-3.3-2.amzn2022.x86_64
 libstdc++-11.3.1-2.amzn2022.0.2.x86_64
 libunwind-1.4.0-5.amzn2022.x86_64
 libxcrypt-4.4.26-4.amzn2022.x86_64
+ncurses-base-6.2-4.20200222.amzn2022.noarch
 ncurses-libs-6.2-4.20200222.amzn2022.x86_64
 nginx-1.20.1-8.amzn2022.0.2.x86_64
 nginx-filesystem-1.20.1-8.amzn2022.0.2.noarch

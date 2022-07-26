@@ -20,7 +20,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   2.7KiB /etc/ld.so.cache
+-rw-r--r--   2.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-rw-r--     229B /etc/nsswitch.conf
@@ -2223,7 +2223,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   2.3KiB /var/cache/ldconfig/aux-cache
+-rw-------   1.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   324KiB /var/lib/rpm/Basenames

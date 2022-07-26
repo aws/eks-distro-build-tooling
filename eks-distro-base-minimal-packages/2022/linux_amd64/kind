@@ -89,6 +89,8 @@ libksba-1.6.0-1.amzn2022.x86_64
 libmnl-1.0.4-13.amzn2022.x86_64
 libmodulemd-2.13.0-2.amzn2022.x86_64
 libmount-2.37.4-1.amzn2022.x86_64
+libnetfilter_conntrack-1.0.8-2.amzn2022.x86_64
+libnfnetlink-1.0.1-19.amzn2022.x86_64
 libnfsidmap-2.5.4-2.rc3.amzn2022.x86_64
 libnftnl-1.1.9-2.amzn2022.x86_64
 libnghttp2-1.45.1-1.amzn2022.0.1.x86_64
@@ -140,7 +142,6 @@ p11-kit-trust-0.23.22-3.amzn2022.x86_64
 pam-1.5.1-7.amzn2022.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
-pcre2-syntax-10.40-1.amzn2022.noarch
 pigz-2.5-1.amzn2022.x86_64
 popt-1.18-6.amzn2022.x86_64
 procps-ng-3.3.17-1.amzn2022.1.x86_64
