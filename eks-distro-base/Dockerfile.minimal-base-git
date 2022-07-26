@@ -21,8 +21,6 @@ ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG
-ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
-
 ARG TARGETARCH
 
 ENV CMAKE_VERSION=3.20.2
@@ -99,6 +97,7 @@ COPY scripts/ /usr/bin
 ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 /usr/lib64/sasl2/libsasldb* /usr/lib64/libkrad* /etc/krb5.conf.d/crypto-policies /usr/lib64/libsystemd.so.*"
 
 RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     # we are keeping bash on this image since downstream images use to exec git
     install_rpm bash ncurses-base \
         git-core \

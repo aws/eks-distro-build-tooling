@@ -26,24 +26,26 @@ function build::install::binary() {
     local -r file="$1"
     local __result=$2
 
-    local -r rpm_package=$(build::common::rpm_package_for_binary $file)
-    local -r expected_filename=$(build::common::filename_from_rpm $file)
+    build::common::rpm_package_for_binary $file "__rpm_package"
+    build::common::filename_from_rpm $file "__expected_filename"
 
-    if [ -z "$rpm_package" ]; then
+    echo "Installing ${__expected_filename} from ${__rpm_package}"
+
+    if [ -z "$__rpm_package" ]; then
         echo "Error: RPM not found for $file!"
         exit 1
     fi
 
-    if [[ "$expected_filename" != "$file" ]]; then
-        echo "Warning: Provided filename does not match actual: $file != $expected_filename"
+    if [[ "$__expected_filename" != "$file" ]]; then
+        echo "Warning: Provided filename does not match actual: $file != $__expected_filename"
     fi
 
-    local -r extract_dir=$DOWNLOAD_DIR/$rpm_package
+    local -r extract_dir=$DOWNLOAD_DIR/$__rpm_package
 
     # download/extract rpm and add to the final rpm db which will be included in the final image
-    build::common::extract_rpm $rpm_package $extract_dir
+    build::common::extract_rpm $__rpm_package $extract_dir
 
-    local -r extracted_bin=$extract_dir$expected_filename
+    local -r extracted_bin=$extract_dir$__expected_filename
 
     if [ ! -f "$extracted_bin" ]; then
         echo "Error: Filename not included in RPM!"
@@ -51,9 +53,14 @@ function build::install::binary() {
     fi
 
     # copy desired binary into newroot folder path
-    local -r final_bin=$NEWROOT$expected_filename
+    local -r final_bin=$NEWROOT$__expected_filename
 
     echo "Copying $extracted_bin to $final_bin"
+
+    # if we are installing a bin that was copied into fakeroot for scriptlets
+    # we need to remove the link before copying
+    [ -L $final_bin ] && unlink $final_bin
+
     cp $extracted_bin $final_bin
 
     build::install::configs_and_licenses $extract_dir

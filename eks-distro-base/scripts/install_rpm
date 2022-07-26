@@ -23,10 +23,12 @@ source "${SCRIPT_ROOT}/eks-d-common"
 
 build::log::setup
 
+EXISTING_EXECS=$(build::common::find_executables)
+
 for file in "$@"; do
     build::common::rpm_install $file    
 done
 
-for bin in $(build::common::find_executables); do
-    build::common::install_deps_for_binary $bin
-done
+CURRENT_EXECS=$(build::common::find_executables)
+NEW_EXECS=$(comm -13 <(echo -e "${EXISTING_EXECS}") <(echo -e "${CURRENT_EXECS}"))
+build::common::install_deps_for_binary $NEW_EXECS

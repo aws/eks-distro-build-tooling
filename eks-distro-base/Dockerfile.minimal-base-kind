@@ -24,7 +24,6 @@ ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG
-ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
@@ -40,6 +39,7 @@ ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/python3.9/site-packages/hawkey/test/_h
 # will contain yum and the eks-anwyhere build can instal additional packages as neccessary
 # the intent is for the yum installs downstream are no-ops
 RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     enable_docker_install && \
     # some of the install scriptlets need coreutils but the dep ordering
     # doesnt reflect, install manually to make sure its first

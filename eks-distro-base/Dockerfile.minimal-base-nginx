@@ -23,7 +23,6 @@ ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG
-ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
@@ -35,12 +34,13 @@ COPY scripts/ /usr/bin
 ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /usr/lib64/libssl.so.1.0.2k /usr/lib64/libssl.so.10"
 
 RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     enable_extra nginx1 && \
     install_rpm nginx-filesystem \
         nginx && \
     if_al2022 install_rpm nginx-mimetypes && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
-    install_rpm bash \
+    install_rpm bash ncurses-base \
         coreutils && \
     install_binary /usr/bin/envsubst && \
     cleanup "nginx"

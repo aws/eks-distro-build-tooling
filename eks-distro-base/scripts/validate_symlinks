@@ -18,6 +18,7 @@ set -eE
 set -o nounset
 set -o pipefail
 
+echo "Validating all symlinks are valid"
 
 cd /newroot 
 

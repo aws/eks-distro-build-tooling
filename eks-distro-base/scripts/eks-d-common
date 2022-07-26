@@ -14,6 +14,8 @@
 # limitations under the License.
 
 declare -A PROVIDES_CACHE=()
+declare -A ACTUAL_FILE_CACHE=()
+declare -A LIBRARIES_CACHE=()
 
 DEFAULT_SCRIPTLET_REQS="/bin/sh /usr/bin/mkdir /usr/bin/grep /usr/bin/readlink /usr/sbin/useradd /usr/sbin/groupadd /etc/login.defs /usr/bin/find /usr/sbin/sln /usr/bin/ln"
 
@@ -21,17 +23,22 @@ DEBUG_LOG_FILE=/dev/null
 
 function build::common::yum_provides() {
     local -r bin=$1  
-    
-    oldopt=$-
-    set +x
+    local  __resultvar="$2"
+
+    build::log::off
+
     # if key exists, 1 is returned which would resolve to true
     if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
-        PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1)
+        echo "Finding yum package for ${bin}"
+        PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1 || true)
+        # al22 is not as forgiving when searching
+        [[ ${PROVIDES_CACHE[$bin]} == *"No matches found"* ]] && PROVIDES_CACHE[$bin]=$(yum provides "*/${bin}" 2>&1)
+        PROVIDES_CACHE[$bin]=$(echo "${PROVIDES_CACHE[$bin]}" | sed "s/'//g")
     fi
 
-    echo "${PROVIDES_CACHE[$bin]}"
+    eval $__resultvar="'${PROVIDES_CACHE[$bin]}'"
 
-    set -$oldopt
+    build::log::setup
 }
 
 pushd () {
@@ -49,69 +56,155 @@ function build::log::setup() {
     fi
 }
 
-# From: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
-# returns list of libs required by a dynamic binary
+function build::log::off() {
+    if [ -n "${OUTPUT_DEBUG_LOG:-}" ]; then
+        set +x
+        DEBUG_LOG_FILE=/dev/null
+    fi
+}
+
+# Based from: https://github.com/kubernetes-sigs/kind/blob/main/images/haproxy/stage-binary-and-deps.sh 
+# returns list of libs required by a dynamic binary which are not already installed
 function build::common::binary_to_libraries() {
-    oldopt=$-
-    set +x
+    local -r binary="$1"
+    local  __resultvar="$2"
+
+    # if key exists, 1 is returned which would resolve to true
+    # signifies that the library has been checked and all required libs already exist
+    if [ ${LIBRARIES_CACHE[$binary]+1} ]; then
+        eval $__resultvar="''"
+        return
+    fi
+
+    build::log::off
+
     local ld_library_path="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib" 
     for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
         ld_library_path="$sub_dir:$ld_library_path"
     done
 
+    build::log::setup
+
+    [[ ! $binary == *".so"* ]] && echo "Finding libraries for ${binary}"
+
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    LD_LIBRARY_PATH=$ld_library_path ldd "${1}" 2>&1 \
-    `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
-    | sed -E 's#.* => /#/#' \
-    `# we want only the path remaining, not the (0x${LOCATION})` \
-    | awk '{print $1}' \
-    `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
-    `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
-    | grep -v 'linux-vdso.so.1'
-
-    set -$oldopt
-
-}
-
-function build::common::is_dynamic_binary() {
-    local -r bin="$1"
-
-    if [ ! -x "$bin" ]; then
-        return 1
+    local -r ldd_output=$(LD_LIBRARY_PATH=$ld_library_path ldd "${binary}" 2>&1)
+    local needed_libraries=""
+    local objdump_fallback="false"
+    if [[ $ldd_output == *"core dump"* ]] || [[ $ldd_output == *"Segmentation"* ]] || [[ $ldd_output == *"exited with unknown exit code"* ]] \
+        || [[ -z "$ldd_output" ]]; then
+        # clean up potential core dump files
+        echo "ldd segfaulted for ${binary}, falling back to objdump: ${ldd_output}"
+        rm -f core.* *.core
+        needed_libraries=$(objdump -x "${binary}" | { grep NEEDED || true; } | awk '{print $2}')
+        objdump_fallback="true"
+    else
+        if [[ $ldd_output = *"not a dynamic executable"* ]] || [[ $ldd_output = *"statically"* ]]; then
+            needed_libraries=""
+        else
+            needed_libraries=$(echo -e "${ldd_output}" \
+                `# strip the leading '${name} => ' if any so only '/lib-foo.so (0xf00)' remains` \
+                | sed -E 's#.* => /#/#' \
+                `# we want only the path remaining, not the (0x${LOCATION})` \
+                | awk '{print $1}' \
+                `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
+                `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
+                | grep -v 'linux-vdso.so.1'
+            )
+        fi
     fi
 
-    local -r ldd_out="$(build::common::binary_to_libraries $bin)"
-    if [[ $ldd_out = not* ]] || [[ $ldd_out = statically* ]]; then
-        return 1
-    fi
+    # Most of this logic is only needed when using objdump since ldd already uses ldconfig
+    # to find the full paths if the libraries exists
+    # Using this block for both cases to try and limit the different code paths, making testing
+    # more complicated.  This adds some overhead for sure but feels worth it for the time being.
+    # ldd segfaulting should be a non-issue in al22
+    if [ -n "${needed_libraries}" ]; then
+        local full_paths=""
+        while IFS= read -r library; do             
+            local full_path=""
+
+            # already a full path
+            if [ -f "${library}" ]; then
+                full_path="${library}"
+            fi
+
+            # try to find full path, if file exists, in either / and /newroot using ldconfig
+            for root in "/" "${NEWROOT}/"; do
+                if [ -n "${full_path}" ] || [ ! -f "${root}usr/sbin/ldconfig" ] ; then 
+                    continue 
+                fi
     
-    return 0
+                full_path="$(chroot "${root}" ldconfig -p | sed -E 's#.* => /#/#' | { grep "${library}" || true; } | tail -n 1)"
+
+                if [ -n "$full_path" ]; then
+                    full_path="${root}${full_path:1}"
+                fi
+            done
+            
+            # not found in root or newroot, will fallback and end up using yum to find full path
+            if [ -z "${full_path}" ]; then
+                full_path="${library}"
+            fi
+
+            build::common::dep_exists "${full_path}" || full_paths+="${full_path}\n"  
+
+            # if we had to fallback to objdump above we need recursively go through to find
+            # their dependencies
+            if [ -f "${full_path}" ] && [[ "${objdump_fallback}" = "true" ]]; then
+                build::common::binary_to_libraries "${full_path}" "__library_libraries"
+                [ -n "${__library_libraries}" ] && full_paths+="${__library_libraries}\n"
+            fi      
+        done < <(echo "${needed_libraries}")
+
+        needed_libraries=$(echo -e "${full_paths}" | sort | uniq | sed -r '/^\s*$/d')
+    fi
+
+    # If no needed libraries, cache result to avoid future ldd checks
+    if [ -z "${needed_libraries}" ]; then
+        LIBRARIES_CACHE[$binary]=1
+        [[ ! $binary == *".so"* ]] && echo "No libraries for ${binary}"
+    else
+        [[ ! $binary == *".so"* ]] && echo "Found ${needed_libraries//$'\n'/ } libraries for ${binary}"
+    fi
+
+    eval $__resultvar="'${needed_libraries}'"
 }
 
 function build::common::find_actual_file_for_provides() {
     local -r file="$1"
-    
-    local to_check=()
-    if [[ $file = /* ]]; then
-        # on al22 some libs are at /lib64 but will not return unless passed to yum provides as /usr/lib64
-        to_check+=($(realpath $file));
-    else
-        # on arm, yum provides will not return results when given incomplete file path
-        #which a number of these libs will be since if ldd cant find them, it will return just the filename
-        to_check+=("$file" "/usr/lib64/$file")
-    fi
-    local actual_file=${to_check[0]}
-    for f in ${to_check[@]}; do
-        if build::common::yum_provides "${f}" | tr '\n' ' ' | grep --quiet -vi "No Matches found"; then
-            actual_file=$f
-            break
-        fi
-    done
+    local  __resultvar="$2"
 
-    echo $actual_file
+    # if key exists, 1 is returned which would resolve to true
+    if [ ! ${ACTUAL_FILE_CACHE[$file]+1} ]; then
+        echo "Finding full path via yum provides for ${file}"
+
+        local to_check=()
+        if [[ $file = /* ]]; then
+            # on al22 some libs are at /lib64 but will not return unless passed to yum provides as /usr/lib64
+            to_check+=($(realpath $file));
+        else
+            # on arm, yum provides will not return results when given incomplete file path
+            #which a number of these libs will be since if ldd cant find them, it will return just the filename
+            to_check+=("$file" "/usr/lib64/$file")
+        fi
+        local actual_file=${to_check[0]}
+        for f in ${to_check[@]}; do
+            build::common::yum_provides "${f}" "__provides"
+            if echo "${__provides}" | tr '\n' ' ' | grep --quiet -vi "No Matches found"; then
+                ACTUAL_FILE_CACHE[$file]=$f
+                break
+            fi
+        done
+    fi
+
+    eval $__resultvar="'${ACTUAL_FILE_CACHE[$file]}'"
 }
 
 function build::common::rpm_package_for_binary() {
+    local -r file="${1}"  
+    local  __resultvar="${2}"
+    
     # response from yum will be a list of various versions of the package which provides given file
     # this list appears to be ordered with most recent at the end
     # ex:
@@ -120,18 +213,33 @@ function build::common::rpm_package_for_binary() {
     # Matched from:
     # Filename    : /usr/sbin/fsck.ext3
     # some filenames have a digit prefix, ex: 14:libpcap-1.5.3-11.amzn2.i686 : A system-independent interface for user-level
-    actual_file="$(build::common::find_actual_file_for_provides $1)"
-    build::common::yum_provides "${actual_file}"| grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//'
+    build::common::find_actual_file_for_provides "${file}" "__actual_file"
+    build::common::yum_provides "${__actual_file}" "__provides"
+    eval $__resultvar="'$(echo "${__provides}" | grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')'"
 }
 
 function build::common::filename_from_rpm() {
+    local -r file="${1}"  
+    local  __resultvar="${2}"
+
     # matches filename part of yum provides output to validate supplied filename matches actual
-    actual_file="$(build::common::find_actual_file_for_provides $1)"
-    build::common::yum_provides "${actual_file}" | grep "Filename" | awk '{print $3}' | tail -n 1
+    build::common::find_actual_file_for_provides "${file}" "__actual_file"
+    build::common::yum_provides "${__actual_file}" "__provides"
+    eval $__resultvar="'$(echo "${__provides}" | grep "Filename" | awk '{print $3}' | tail -n 1)'"
 }
 
 function build::common::dep_exists() {
     local -r dep="$1"
+
+    # no dep supplied, return true to signify nothing to do
+    if [ -z "${dep}" ]; then
+        return 0
+    fi
+
+    # if does not start with /, it does not exist
+    if [[ ! $dep = /* ]]; then
+        return 1
+    fi
 
     # ldd return the dep that exists in the newroot folder, nothing to do
     if [[ $dep = $NEWROOT/* ]] && [ -f "$dep" ]; then
@@ -140,11 +248,6 @@ function build::common::dep_exists() {
 
     # the dep also exists in the newroot folder, nothing to do
     if [ -f "$NEWROOT$dep" ]; then
-        return 0
-    fi
-
-    # the dep also exists in the newroot/fakeroot folder, nothing to do
-    if [ -f "$NEWROOT/fakeroot$dep" ]; then
         return 0
     fi
 
@@ -157,23 +260,33 @@ function build::common::find_executables() {
     if [ "$include_libs" = "true" ]; then
         find $NEWROOT -executable -type f
     else
-        find $NEWROOT -executable -type f -not -name "*.so*"
+        find $NEWROOT -executable -type f -not -name "*.so*" -not -path "*/fakeroot/*" | sort
     fi
 }
 
-function build::common::cp_common_utils_for_rpm_scriptlets() {
-    oldopt=$-
-    set +x
-    
-    local rpm="$(echo ${1} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
-    local -r var_name="${rpm^^}_SCRIPTLET_REQS"
-    local -r reqs="${DEFAULT_SCRIPTLET_REQS} ${!var_name:-}"
-
+function build::common::setup_default_utils_for_rpm_scriptlets() {
     local -r fakeroot="$NEWROOT/fakeroot"
-    mkdir -p $fakeroot
     
-    local linked=""
+    if [ -d $fakeroot ]; then        
+        return
+    fi
+    
+    mkdir -p $fakeroot    
+    build::common::cp_common_utils_for_rpm_scriptlets "${DEFAULT_SCRIPTLET_REQS}"
+}
+
+function build::common::cp_common_utils_for_rpm_scriptlets() {
+    local -r reqs="${1}"
+
+    if [ -z "${reqs}" ]; then
+        return
+    fi
+    
     local utils=(${reqs// / })
+    local -r fakeroot="$NEWROOT/fakeroot"
+
+    echo "Copying ${reqs} to fakeroot for RPM scriptlets"
+
     for util in ${utils[@]}; do
         local copied_util=$fakeroot$util
         local linked_util=$NEWROOT$util
@@ -186,58 +299,59 @@ function build::common::cp_common_utils_for_rpm_scriptlets() {
             cp $util $copied_util
             ln -s /fakeroot$util $linked_util
 
-            linked+="$linked_util "
             real_util=$copied_util
         fi
 
-        if ! build::common::is_dynamic_binary $real_util; then
-            continue
-        fi
+        # some prereqs are non executable files, do not send to ldd
+        [[ ! -x "$copied_util" ]] && continue
 
         local linking=1        
         while [[ $linking == 1 ]] ; do
             linking=0
+            build::common::binary_to_libraries "$real_util" "__libraries"
+            [ -z "${__libraries}" ] && continue
             while IFS= read -r dep; do
-                if build::common::dep_exists $dep; then
-                    continue
-                fi
                 local copied_dep=$fakeroot$dep
                 local linked_dep=$NEWROOT$dep
+                
+                # if previously copied or exists already in /newroot
+                if [ -f "${copied_dep}" ] || build::common::dep_exists $dep; then
+                    continue
+                fi
+
                 mkdir -p $(dirname $copied_dep) $(dirname $linked_dep)
 
                 cp $dep $copied_dep
                 ln -s /fakeroot$dep $linked_dep
 
-                linked+="$linked_dep "
-
                 linking=1
-
-            done < <(build::common::binary_to_libraries "$real_util")
+            done < <(echo "${__libraries}")
         done
-
     done
 
-    set -$oldopt
-    echo "$linked"
+    echo "RPM scriptlet prereqs copied"
+}
+
+function build::common::update_ldconfig(){
+    # refresh the ldconfig cache
+    if [ -f "${NEWROOT}/usr/sbin/ldconfig" ]; then
+        chroot $NEWROOT ldconfig
+    fi
 }
 
 function build::common::rm_common_utils_for_rpm_scriptlets() {
-    local -r to_remove="$1"
+    local -r fakeroot="$NEWROOT/fakeroot"
 
-    oldopt=$-
-    set +x
+    for file in $(find $fakeroot -type f); do
+        local util="${file/\/fakeroot/}"  
+        if [ -L $util ] && [[ "$(readlink $util)" = /fakeroot/* ]]; then
+            rm $util
+        fi
+    done
 
-    if [ -n "$to_remove" ]; then
-        local -r utils=(${to_remove// / })
-        for util in "${utils[@]}"; do
-            if [ -L $util ] && [[ "$(readlink $util)" = /fakeroot/* ]]; then
-                rm $util
-            fi
-        done
-    fi
-
-    set -$oldopt
     rm -rf $NEWROOT/fakeroot
+
+    build::common::update_ldconfig
 }
 
 function build::common::rpm_install() {
@@ -284,19 +398,17 @@ function build::common::clean_install() {
             
             yum --installroot $NEWROOT install -y $rpm
         else
-            if [ ! -f $DOWNLOAD_DIR/$rpm-[0-9]*.rpm ]; then
+            if ! ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm 1> /dev/null 2>&1; then
+                echo "Downloading $rpm"
                 yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
+                echo "$rpm downloaded"
             fi
 
             # Multiple RPMs may be downloaded in the case that the package we want is a prefix to another
             # only get the specific one by looking for the version directly after the rpm name
             # ex: util-linux and util-linux-core
-            rpm_file=$(ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm)
-            
-            local scripts=$(rpm -qp --scripts $rpm_file)
-
-            local -r copied_for_scriptlets="$(build::common::cp_common_utils_for_rpm_scriptlets $rpm)"
-           
+            local rpm_file=$(ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm)
+        
             local log_file=$(mktemp)
             # if installed already skip
             if ! rpm --root $NEWROOT -q --quiet $rpm ; then
@@ -304,11 +416,22 @@ function build::common::clean_install() {
                     echo "Installing $rpm to rpm database only"
                 else
                     echo "Shallow installing $rpm using the rpm directly"
+                    build::common::setup_default_utils_for_rpm_scriptlets
+
+                    local -r rpm_sanitized="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+                    local -r reqs_var_name="${rpm_sanitized^^}_SCRIPTLET_REQS"
+                    local -r reqs="${!reqs_var_name:-}"
+
+                    build::common::cp_common_utils_for_rpm_scriptlets "${reqs}"
                 fi
                 env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
-            fi            
+                
+                # not all packages run ldconfig as part of their postinstall scriptlet (they should)
+                # since we are relying on ldconfig now we need this to be refreshed
+                build::common::update_ldconfig
 
-            build::common::rm_common_utils_for_rpm_scriptlets "$copied_for_scriptlets"
+                echo "$rpm installed"
+            fi            
             
             local -r sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
             local -r var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
@@ -319,7 +442,7 @@ function build::common::clean_install() {
                 if [[ ${EXPECTED_RPM_SCRIPTLET_FAILURES:-""} != *"$rpm_name"* ]]; then
                     echo "******************************************************"
                     echo "Preinstall script failed for $rpm_file:"
-                    echo "${scripts}"
+                    echo "$(rpm -qp --scripts $rpm_file)"
                     cat $log_file
                     echo "******************************************************"
                     exit 1
@@ -334,37 +457,44 @@ function build::common::clean_install() {
                 popd
             fi
 
-            rm $DOWNLOAD_DIR/$rpm-*.rpm $log_file
+            rm $log_file
         fi
     done
 }
 
 function build::common::install_deps_for_binary() {
     for installed_bin in "$@"; do
-        if ! build::common::is_dynamic_binary $installed_bin; then
+
+        # if key exists, 1 is returned which would resolve to true
+        # also skip if bin installed to fakeroot for scriptlets
+        if ([ -L $installed_bin ] && [[ "$(readlink $installed_bin)" = /fakeroot/* ]]); then
             continue
         fi
+
+        echo "Installing libraries for ${installed_bin}"
+
         local installing=1
         local rpm_package=""
         while [[ $installing == 1 ]] ; do
             installing=0
+            build::common::binary_to_libraries "${installed_bin}" "__libraries"
+            [ -z "${__libraries}" ] && continue
             while IFS= read -r dep; do
                 if build::common::dep_exists $dep; then
                     continue
                 fi
                 
-                rpm_package=$(build::common::rpm_package_for_binary $dep)
+                build::common::rpm_package_for_binary $dep "__rpm_package"
 
-                if [[ -z "$rpm_package" ]]; then
+                if [[ -z "${__rpm_package}" ]]; then
                     echo "Error: No rpm found for $dep!"
                     exit 1
                 fi
 
-                build::common::rpm_install $rpm_package
+                build::common::rpm_install $__rpm_package
 
                 installing=1
-
-            done < <(build::common::binary_to_libraries "$installed_bin")
+            done < <(echo "${__libraries}")
         done
     done
 }
