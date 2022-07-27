@@ -23,7 +23,6 @@ ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG
-ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
@@ -34,6 +33,7 @@ COPY scripts/ /usr/bin
 ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libsystemd.so.* /usr/lib64/libsystemd-journal.so.* /usr/lib64/security/pam_systemd.so /usr/lib64/libnss_systemd.so.2"
 
 RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     install_binary /usr/sbin/blkid \
                    /usr/sbin/blockdev \
                    /usr/sbin/dumpe2fs \

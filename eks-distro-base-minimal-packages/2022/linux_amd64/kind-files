@@ -53,7 +53,7 @@
 -rw-r--r--      92B /etc/iproute2/rt_scopes
 -rw-r--r--      87B /etc/iproute2/rt_tables
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   9.4KiB /etc/ld.so.cache
+-rw-r--r--   9.5KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--      15B /etc/libibverbs.d/bnxt_re.driver
@@ -1312,7 +1312,9 @@
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x   184KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
+-rwxr-xr-x   123KiB /usr/lib64/libnetfilter_conntrack.so.3.7.0
 -rwxr-xr-x   306KiB /usr/lib64/libnettle.so.8.4
+-rwxr-xr-x    35KiB /usr/lib64/libnfnetlink.so.0.2.0
 -rwxr-xr-x    40KiB /usr/lib64/libnfsidmap.so.1.0.0
 -rwxr-xr-x    36KiB /usr/lib64/libnfsidmap/nsswitch.so
 -rwxr-xr-x    20KiB /usr/lib64/libnfsidmap/regex.so
@@ -3566,7 +3568,6 @@
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/site-packages/hawkey/test/__init__.py
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.pyc
--rwxr-xr-x    37KiB /usr/lib64/python3.9/site-packages/hawkey/test/_hawkey_test.so
 -rw-r--r--     858B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/PKG-INFO
 -rw-r--r--     127B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/SOURCES.txt
 -rw-r--r--       1B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/dependency_links.txt
@@ -4761,6 +4762,8 @@
 -rw-r--r--   1.1KiB /usr/share/licenses/libmodulemd/COPYING
 -rw-r--r--     355B /usr/share/licenses/libmount/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libmount/COPYING.LGPL-2.1-or-later
+-rw-r--r--    18KiB /usr/share/licenses/libnetfilter_conntrack/COPYING
+-rw-r--r--    18KiB /usr/share/licenses/libnfnetlink/COPYING
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libnsl2/COPYING
 -rw-r--r--     868B /usr/share/licenses/libpcap/LICENSE
@@ -4809,8 +4812,6 @@
 -rw-r--r--    18KiB /usr/share/licenses/pam/gpl-2.0.txt
 -rw-r--r--      95B /usr/share/licenses/pcre/COPYING
 -rw-r--r--   3.2KiB /usr/share/licenses/pcre/LICENCE
--rw-r--r--      97B /usr/share/licenses/pcre2-syntax/COPYING
--rw-r--r--   3.4KiB /usr/share/licenses/pcre2-syntax/LICENCE
 -rw-r--r--   1.3KiB /usr/share/licenses/popt/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/procps-ng/COPYING
 -rw-r--r--    25KiB /usr/share/licenses/procps-ng/COPYING.LIB
@@ -7821,7 +7822,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   7.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   7.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--   164KiB /var/lib/systemd/catalog/database
@@ -8075,7 +8076,9 @@ lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
+lrwxrwxrwx      31B /usr/lib64/libnetfilter_conntrack.so.3 libnetfilter_conntrack.so.3.7.0
 lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.4
+lrwxrwxrwx      21B /usr/lib64/libnfnetlink.so.0 libnfnetlink.so.0.2.0
 lrwxrwxrwx      20B /usr/lib64/libnfsidmap.so.1 libnfsidmap.so.1.0.0
 lrwxrwxrwx      18B /usr/lib64/libnftnl.so.11 libnftnl.so.11.5.0
 lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.21.0

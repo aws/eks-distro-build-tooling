@@ -14,7 +14,7 @@ libcom_err-1.45.6-5.amzn2022.x86_64
 libedit-3.1-38.20210714cvs.amzn2022.x86_64
 libgcc-11.3.1-2.amzn2022.0.2.x86_64
 libmount-2.37.4-1.amzn2022.x86_64
-libselinux-3.2-1.amzn2022.x86_64
+libselinux-3.2-1.amzn2022.0.1.x86_64
 libsepol-3.3-2.amzn2022.x86_64
 libsmartcols-2.37.4-1.amzn2022.x86_64
 libstdc++-11.3.1-2.amzn2022.0.2.x86_64
@@ -23,8 +23,8 @@ ncurses-libs-6.2-4.20200222.amzn2022.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
-system-release-2022.0.20220531-0.amzn2022.noarch
-systemd-libs-250.4-1.amzn2022.0.1.x86_64
+system-release-2022.0.20220628-0.amzn2022.noarch
+systemd-libs-250.7-1.amzn2022.0.2.x86_64
 tzdata-2022a-1.amzn2022.noarch
 util-linux-2.37.4-1.amzn2022.x86_64
 util-linux-core-2.37.4-1.amzn2022.x86_64

@@ -15,8 +15,8 @@
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      70B /etc/filesystems
--rw-r--r--      77B /etc/group
--rw-r--r--      64B /etc/group-
+-rw-rw-r--      77B /etc/group
+-rw-rw-r--      64B /etc/group-
 ----------     208B /etc/gshadow
 ----------     198B /etc/gshadow-
 -rw-r--r--       9B /etc/host.conf
@@ -26,10 +26,9 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--     641B /etc/krb5.conf
--rw-r--r--   5.0KiB /etc/ld.so.cache
+-rw-r--r--   4.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
--rw-r--r--     215B /etc/logrotate.d/nginx
+-rw-r--r--     243B /etc/logrotate.d/nginx
 -rw-r--r--       0B /etc/motd
 -rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf
 -rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf.default
@@ -46,10 +45,10 @@
 -rw-r--r--     664B /etc/nginx/uwsgi_params
 -rw-r--r--     664B /etc/nginx/uwsgi_params.default
 -rw-r--r--   3.6KiB /etc/nginx/win-utf
--rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
--rw-r--r--     211B /etc/passwd
--rw-r--r--     149B /etc/passwd-
+-rw-rw-r--     229B /etc/nsswitch.conf
+-rw-rw-r--     161B /etc/os-release
+-rw-rw-r--     211B /etc/passwd
+-rw-rw-r--     149B /etc/passwd-
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -62,13 +61,6 @@
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
 -r--r--r--   193KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
--rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
--rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
--rw-r--r--   9.0KiB /etc/pki/nssdb/cert9.db
--rw-r--r--    16KiB /etc/pki/nssdb/key3.db
--rw-r--r--    11KiB /etc/pki/nssdb/key4.db
--rw-r--r--     451B /etc/pki/nssdb/pkcs11.txt
--rw-r--r--    16KiB /etc/pki/nssdb/secmod.db
 -rw-r--r--   2.7KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2
 -rw-r--r--    11KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
@@ -119,7 +111,6 @@
 -rwxr-xr-x    70KiB /usr/bin/chmod
 -rwxr-xr-x    70KiB /usr/bin/chown
 -rwxr-xr-x    69KiB /usr/bin/cksum
--rwxr-xr-x    68KiB /usr/bin/clear
 -rwxr-xr-x    69KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
 -rwxr-xr-x   200KiB /usr/bin/cp
@@ -152,7 +143,6 @@
 -rwxr-xr-x    69KiB /usr/bin/hostid
 -rwxr-xr-x    79KiB /usr/bin/iconv
 -rwxr-xr-x    69KiB /usr/bin/id
--rwxr-xr-x    68KiB /usr/bin/infocmp
 -rwxr-xr-x   200KiB /usr/bin/install
 -rwxr-xr-x      28B /usr/bin/jobs
 -rwxr-xr-x    69KiB /usr/bin/join
@@ -211,20 +201,15 @@
 -rwxr-xr-x    69KiB /usr/bin/stty
 -rwxr-xr-x    69KiB /usr/bin/sum
 -rwxr-xr-x    69KiB /usr/bin/sync
--rwxr-xr-x    68KiB /usr/bin/tabs
 -rwxr-xr-x    69KiB /usr/bin/tac
 -rwxr-xr-x    70KiB /usr/bin/tail
 -rwxr-xr-x    69KiB /usr/bin/tee
 -rwxr-xr-x    69KiB /usr/bin/test
--rwxr-xr-x   133KiB /usr/bin/tic
 -rwxr-xr-x    70KiB /usr/bin/timeout
--rwxr-xr-x    68KiB /usr/bin/toe
 -rwxr-xr-x    69KiB /usr/bin/touch
--rwxr-xr-x    68KiB /usr/bin/tput
 -rwxr-xr-x    69KiB /usr/bin/tr
 -rwxr-xr-x    69KiB /usr/bin/true
 -rwxr-xr-x    69KiB /usr/bin/truncate
--rwxr-xr-x    68KiB /usr/bin/tset
 -rwxr-xr-x    69KiB /usr/bin/tsort
 -rwxr-xr-x    69KiB /usr/bin/tty
 -rwxr-xr-x    16KiB /usr/bin/tzselect
@@ -266,7 +251,6 @@
 -rwxr-xr-x    68KiB /usr/lib64/engines-1.1/afalg.so
 -rwxr-xr-x    67KiB /usr/lib64/engines-1.1/capi.so
 -rwxr-xr-x    67KiB /usr/lib64/engines-1.1/padlock.so
--rwxr-xr-x   137KiB /usr/lib64/engines-1.1/pkcs11.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
 -rwxr-xr-x    70KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    70KiB /usr/lib64/gconv/ARMSCII-8.so
@@ -523,7 +507,6 @@
 -rwxr-xr-x   134KiB /usr/lib64/gconv/libJIS.so
 -rwxr-xr-x   133KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
--rwxr-xr-x    68KiB /usr/lib64/krb5/plugins/tls/k5tls.so
 -rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
@@ -533,7 +516,6 @@
 -rwxr-xr-x   1.8MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    68KiB /usr/lib64/libcap.so.2.54
 -rwxr-xr-x   202KiB /usr/lib64/libcidn-2.26.so
--rwxr-xr-x    68KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   2.8MiB /usr/lib64/libcrypto.so.1.1.1g
@@ -543,14 +525,6 @@
 -rwxr-xr-x   131KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x   456KiB /usr/lib64/libgmp.so.10.2.0
 -rwxr-xr-x    67KiB /usr/lib64/libgmpxx.so.4.4.0
--rwxr-xr-x   333KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   135KiB /usr/lib64/libgssrpc.so.4.2
--rwxr-xr-x   262KiB /usr/lib64/libk5crypto.so.3.1
--rwxr-xr-x   134KiB /usr/lib64/libkdb5.so.8.0
--rwxr-xr-x    68KiB /usr/lib64/libkeyutils.so.1.5
--rwxr-xr-x    68KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   985KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x    70KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   807KiB /usr/lib64/libm-2.26.so
 -rwxr-xr-x    73KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    69KiB /usr/lib64/libmenu.so.6.0
@@ -561,7 +535,6 @@
 -rwxr-xr-x    76KiB /usr/lib64/libnss_compat-2.26.so
 -rwxr-xr-x    72KiB /usr/lib64/libnss_dns-2.26.so
 -rwxr-xr-x    81KiB /usr/lib64/libnss_files-2.26.so
--rwxr-xr-x    72KiB /usr/lib64/libp11.so.3.4.2
 -rwxr-xr-x    67KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    67KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x    70KiB /usr/lib64/libpcprofile.so
@@ -577,7 +550,6 @@
 -rwxr-xr-x    81KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   725KiB /usr/lib64/libsepol.so.1
--rwxr-xr-x   479KiB /usr/lib64/libssl.so.1.0.2k
 -rwxr-xr-x   608KiB /usr/lib64/libssl.so.1.1.1g
 -rwxr-xr-x   1.7MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x   331KiB /usr/lib64/libtcmalloc.so.4.4.5
@@ -589,7 +561,6 @@
 -rwxr-xr-x    69KiB /usr/lib64/libtic.so.6.0
 -rwxr-xr-x   200KiB /usr/lib64/libtinfo.so.6.0
 -rwxr-xr-x    72KiB /usr/lib64/libutil-2.26.so
--rwxr-xr-x    68KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   132KiB /usr/lib64/libz.so.1.2.7
 -rwxr-xr-x    68KiB /usr/lib64/openssl/engines/lib4758cca.so
 -rwxr-xr-x    69KiB /usr/lib64/openssl/engines/libaep.so
@@ -625,11 +596,9 @@
 -rwxr-xr-x    75KiB /usr/sbin/zic
 -rw-r--r--    35KiB /usr/share/doc/bash-4.2.46/COPYING
 -rw-r--r--    35KiB /usr/share/doc/coreutils-8.22/COPYING
--rw-r--r--    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
--rw-r--r--    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
+-rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
+-rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
--rw-r--r--   1.1KiB /usr/share/doc/libverto-0.2.5/COPYING
 -rw-r--r--   3.4KiB /usr/share/doc/nginx-1.20.0/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
@@ -652,7 +621,7 @@
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
 -rw-r--r--   121KiB /usr/share/info/bash.info.gz
 -rw-r--r--   203KiB /usr/share/info/coreutils.info.gz
--rw-r--r--   8.2KiB /usr/share/info/dir.rpmsave
+-rw-r--r--       0B /usr/share/info/dir.rpmmodify
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -660,7 +629,6 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/gmp-6.0.0/COPYING.LESSERv3
 -rw-r--r--    18KiB /usr/share/licenses/gmp-6.0.0/COPYINGv2
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
--rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
@@ -672,7 +640,6 @@
 -rw-r--r--   1.4KiB /usr/share/licenses/nginx-1.20.0/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
--rw-r--r--    26KiB /usr/share/licenses/openssl11-pkcs11-0.4.10/COPYING
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_TIME/coreutils.mo
@@ -692,13 +659,11 @@
 -rw-r--r--    45KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
 -rw-r--r--   349KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
--rw-r--r--   195KiB /usr/share/locale/de/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   349KiB /usr/share/locale/de/LC_TIME/coreutils.mo
 -rw-r--r--    27KiB /usr/share/locale/el/LC_MESSAGES/coreutils.mo
 -rw-r--r--    27KiB /usr/share/locale/el/LC_TIME/coreutils.mo
 -rw-r--r--   158KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
 -rw-r--r--   156KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
--rw-r--r--     410B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   115KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
 -rw-r--r--   195KiB /usr/share/locale/eo/LC_MESSAGES/coreutils.mo
 -rw-r--r--   195KiB /usr/share/locale/eo/LC_TIME/coreutils.mo
@@ -953,7 +918,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Dakar
@@ -1425,7 +1390,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/GB-Eire
@@ -1549,7 +1514,7 @@
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Dakar
@@ -2021,7 +1986,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Europe/Volgograd
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/posix/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Europe/Zagreb
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/Europe/Zaporozhye
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Europe/Zurich
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/posix/GB-Eire
@@ -2577,7 +2542,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Istanbul
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/Europe/Jersey
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Kaliningrad
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Kiev
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Kiev
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Europe/Lisbon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Ljubljana
@@ -2608,7 +2573,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Vaduz
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
@@ -2616,7 +2581,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zurich
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB
 -rw-r--r--   4.2KiB /usr/share/zoneinfo/right/GB-Eire
@@ -2727,19 +2692,19 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   4.2KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.6KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   404KiB /var/lib/rpm/Basenames
+-rw-r--r--   344KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   132KiB /var/lib/rpm/Dirnames
+-rw-r--r--   116KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   3.6MiB /var/lib/rpm/Packages
--rw-r--r--    32KiB /var/lib/rpm/Providename
--rw-r--r--    24KiB /var/lib/rpm/Requirename
+-rw-r--r--   2.5MiB /var/lib/rpm/Packages
+-rw-r--r--    28KiB /var/lib/rpm/Providename
+-rw-r--r--    16KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
 -rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -2757,9 +2722,6 @@ lrwxrwxrwx       7B /lib	usr/lib
 lrwxrwxrwx       9B /lib64	usr/lib64
 lrwxrwxrwx       8B /sbin	usr/sbin
 lrwxrwxrwx      10B /usr/bin/bashbug	bashbug-64
-lrwxrwxrwx       3B /usr/bin/captoinfo	tic
-lrwxrwxrwx       3B /usr/bin/infotocap	tic
-lrwxrwxrwx       4B /usr/bin/reset	tset
 lrwxrwxrwx       4B /usr/bin/sh	bash
 lrwxrwxrwx       7B /usr/lib/debug/bin	usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib	usr/lib
@@ -2770,7 +2732,6 @@ lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.1.1.hmac	.libcrypto.so.1.1.1g.hmac
 lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.10.hmac	.libcrypto.so.1.0.2k.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.1.1.hmac	.libssl.so.1.1.1g.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.10.hmac	.libssl.so.1.0.2k.hmac
-lrwxrwxrwx       9B /usr/lib64/engines-1.1/libpkcs11.so	pkcs11.so
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-aarch64.so.1	ld-2.26.so
 lrwxrwxrwx      23B /usr/lib64/libBrokenLocale.so.1	libBrokenLocale-2.26.so
@@ -2780,7 +2741,6 @@ lrwxrwxrwx      16B /usr/lib64/libattr.so.1	libattr.so.1.1.0
 lrwxrwxrwx      12B /usr/lib64/libc.so.6	libc-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2	libcap.so.2.54
 lrwxrwxrwx      15B /usr/lib64/libcidn.so.1	libcidn-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2	libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.1.1	libcrypto.so.1.1.1g
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
@@ -2790,14 +2750,6 @@ lrwxrwxrwx      15B /usr/lib64/libformw.so.6	libformw.so.6.0
 lrwxrwxrwx      24B /usr/lib64/libgcc_s.so.1	libgcc_s-7-20180712.so.1
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10	libgmp.so.10.2.0
 lrwxrwxrwx      17B /usr/lib64/libgmpxx.so.4	libgmpxx.so.4.4.0
-lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2	libgssapi_krb5.so.2.2
-lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4	libgssrpc.so.4.2
-lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3	libk5crypto.so.3.1
-lrwxrwxrwx      14B /usr/lib64/libkdb5.so.8	libkdb5.so.8.0
-lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1	libkeyutils.so.1.5
-lrwxrwxrwx      14B /usr/lib64/libkrad.so.0	libkrad.so.0.0
-lrwxrwxrwx      14B /usr/lib64/libkrb5.so.3	libkrb5.so.3.3
-lrwxrwxrwx      21B /usr/lib64/libkrb5support.so.0	libkrb5support.so.0.1
 lrwxrwxrwx      12B /usr/lib64/libm.so.6	libm-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libmenu.so.6	libmenu.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6	libmenuw.so.6.0
@@ -2807,7 +2759,6 @@ lrwxrwxrwx      14B /usr/lib64/libnsl.so.1	libnsl-2.26.so
 lrwxrwxrwx      21B /usr/lib64/libnss_compat.so.2	libnss_compat-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libnss_dns.so.2	libnss_dns-2.26.so
 lrwxrwxrwx      20B /usr/lib64/libnss_files.so.2	libnss_files-2.26.so
-lrwxrwxrwx      15B /usr/lib64/libp11.so.3	libp11.so.3.4.2
 lrwxrwxrwx      15B /usr/lib64/libpanel.so.6	libpanel.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6	libpanelw.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpcre.so.1	libpcre.so.1.2.0
@@ -2821,7 +2772,6 @@ lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libresolv.so.2	libresolv-2.26.so
 lrwxrwxrwx      13B /usr/lib64/librt.so.1	librt-2.26.so
 lrwxrwxrwx      16B /usr/lib64/libssl.so.1.1	libssl.so.1.1.1g
-lrwxrwxrwx      16B /usr/lib64/libssl.so.10	libssl.so.1.0.2k
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
 lrwxrwxrwx      20B /usr/lib64/libtcmalloc.so.4	libtcmalloc.so.4.4.5
 lrwxrwxrwx      33B /usr/lib64/libtcmalloc_and_profiler.so.4	libtcmalloc_and_profiler.so.4.4.5
@@ -2832,7 +2782,6 @@ lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6	libtic.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6	libtinfo.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libutil.so.1	libutil-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libverto.so.1	libverto.so.1.0.0
 lrwxrwxrwx      13B /usr/lib64/libz.so.1	libz.so.1.2.7
 lrwxrwxrwx      14B /usr/share/nginx/html/poweredby.png	nginx-logo.png
 lrwxrwxrwx      10B /usr/tmp	../var/tmp

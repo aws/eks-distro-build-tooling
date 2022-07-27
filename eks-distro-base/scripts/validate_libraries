@@ -21,21 +21,27 @@ set -o pipefail
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_ROOT}/eks-d-common"
 
+echo "Validating all executables and libraries have all dependencies"
+
 r_val=0
 for bin in $(build::common::find_executables true); do
-    if ! build::common::is_dynamic_binary $bin; then
+    if [[ $bin = /newroot/usr/lib64/gconv/* ]]; then
+        # there are a number of libraries in this folder which are not validating
+        # since all deps come along with them
         continue
     fi
 
     echo "----- Checking $bin   -----"    
+    build::common::binary_to_libraries "$bin" "__libraries" > /dev/null 2>&1
+    [ -z "${__libraries}" ] && continue
     while IFS= read -r c_dep; do
-            if build::common::dep_exists "${c_dep}"; then
-                continue
-            fi
-            echo "Missing DEP!!! ${c_dep}"
-            r_val=1
+        if build::common::dep_exists "${c_dep}"; then
+            continue
+        fi
+        echo "Missing DEP!!! ${c_dep}"
+        r_val=1
            
-    done < <(build::common::binary_to_libraries "$bin")
+    done < <(echo "${__libraries}")
     echo "----------------------------"
 done
 

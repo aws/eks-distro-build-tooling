@@ -33,6 +33,8 @@ rm -rf $DOWNLOAD_DIR $NEWROOT/var/lib/yum $NEWROOT/var/log/*.log $NEWROOT/var/tm
 # al2202 build includes this folder during some rpm installs, removing since its a bad symlink
 rm -rf $NEWROOT/usr/lib/.build-id
 
+build::common::rm_common_utils_for_rpm_scriptlets
+
 if [[ -n "${CLEANUP_UNNECESSARY_FILES:-}" ]]; then
     FILES=(${CLEANUP_UNNECESSARY_FILES// / })
     for f in ${FILES[@]}; do

@@ -18,7 +18,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   1.7KiB /etc/ld.so.cache
+-rw-r--r--   1.4KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
@@ -126,6 +126,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
+-rwxr-xr-x   627KiB /usr/lib64/libpcre2-8.so.0.11.0
+-rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
@@ -1967,7 +1969,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   2.2KiB /var/cache/ldconfig/aux-cache
+-rw-------   1.8KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   2.8MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -1999,6 +2001,8 @@ lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20220421.so.1
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
+lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
+lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      10B /usr/tmp ../var/tmp

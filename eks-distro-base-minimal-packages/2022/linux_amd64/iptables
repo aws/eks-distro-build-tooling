@@ -17,6 +17,8 @@ kmod-29-2.amzn2022.0.2.x86_64
 libgcc-11.3.1-2.amzn2022.0.2.x86_64
 libibverbs-37.0-1.amzn2022.0.1.x86_64
 libmnl-1.0.4-13.amzn2022.x86_64
+libnetfilter_conntrack-1.0.8-2.amzn2022.x86_64
+libnfnetlink-1.0.1-19.amzn2022.x86_64
 libnftnl-1.1.9-2.amzn2022.x86_64
 libnl3-3.5.0-6.amzn2022.x86_64
 libpcap-1.10.1-1.amzn2022.x86_64
@@ -25,6 +27,7 @@ libsepol-3.3-2.amzn2022.x86_64
 libstdc++-11.3.1-2.amzn2022.0.2.x86_64
 openssl-libs-3.0.3-1.amzn2022.0.1.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
+pcre2-10.40-1.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
 system-release-2022.0.20220628-0.amzn2022.noarch
 tzdata-2022a-1.amzn2022.noarch

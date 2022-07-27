@@ -23,7 +23,6 @@ ARG BUILT_BUILDER_IMAGE
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG
-ENV OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG}
 
 ARG TARGETARCH
 ARG TARGETOS
@@ -36,7 +35,7 @@ ENV NEWROOT /
 RUN set -x && \
     yum upgrade -y && \
     yum update -y && \
-    clean_install "cpio findutils shadow-utils yum-utils" && \
+    clean_install "binutils cpio findutils shadow-utils yum-utils" && \
     # restorecon is needed for the filesystem scriptlet, but it comes from
     # policycoreutils which bloats the builder image, just pull the bin and the necessary libs instead
     install_binary /usr/sbin/restorecon && \
@@ -61,6 +60,7 @@ ENV CA_CERTIFICATES_SCRIPTLET_REQS="/usr/bin/p11-kit /usr/bin/trust /usr/share/p
 ENV CLEANUP_UNNECESSARY_FILES="/usr/lib/debug/usr/.dwz /etc/ssl/ct_log_list.cnf /etc/ssl/openssl.cnf"
 
 RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     rpm --root $NEWROOT --import /etc/pki/rpm-gpg/* && \
     install_rpm system-release \
         setup \

@@ -19,7 +19,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   2.8KiB /etc/ld.so.cache
+-rw-r--r--   2.5KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     812B /etc/mke2fs.conf
 -rw-r--r--       0B /etc/motd
@@ -151,7 +151,6 @@
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   342KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
@@ -166,7 +165,6 @@
 -rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   106KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   899KiB /usr/lib64/libsystemd.so.0.33.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
@@ -2039,7 +2037,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   3.7KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.3KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -2091,7 +2089,6 @@ lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
-lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.33.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.3
