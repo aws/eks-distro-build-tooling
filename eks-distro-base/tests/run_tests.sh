@@ -17,23 +17,34 @@
 set -e
 set -o pipefail
 set -x
+
 IMAGE_REPO=$1
 IMAGE_TAG=$2
 AL_TAG=$3
-TEST=$4
+PLATFORMS="$4"
+TEST=$5
+
+LOCAL_REGISTRY=localhost:5000
 
 
 function check_base() {
-    docker build \
-        -t base-test:latest \
-        --target check-base \
-        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base:$IMAGE_TAG \
-        --build-arg TARGETARCH=amd64 \
-        --build-arg TARGETOS=linux \
-        --build-arg AL_TAG=$AL_TAG \
-        --pull \
-        -f ./tests/Dockerfile ./tests
-    docker run base-test:latest
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-base \
+        --local dockerfile=./ \
+		--local context=./tests \
+        --opt platform=$PLATFORMS \
+		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:latest\",push=true
+
+    for platform in ${PLATFORMS//,/ }; do
+        docker run --platform=$platform $LOCAL_REGISTRY/base-test:latest
+    done
 }
 
 function check_base-nonroot() {
@@ -41,90 +52,117 @@ function check_base-nonroot() {
 }
 
 function check_base-glibc() {
-    docker build \
-        -t base-glibc-test:latest \
-        --target check-cgo \
-        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-glibc:$IMAGE_TAG \
-        --build-arg TARGETARCH=amd64 \
-        --build-arg TARGETOS=linux \
-        --build-arg AL_TAG=$AL_TAG \
-        --pull \
-        -f ./tests/Dockerfile ./tests
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-glibc:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-cgo \
+        --local dockerfile=./ \
+		--local context=./tests \
+        --opt platform=$PLATFORMS \
+		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-glibc:latest\",push=true
     
-    if docker run base-glibc-test:latest | grep -v 'Printed from unsafe C code'; then
-        echo "glibc issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --platform=$platform $LOCAL_REGISTRY/base-glibc-test:latest | grep -v 'Printed from unsafe C code'; then
+            echo "glibc issue!"
+            exit 1
+        fi
+    done
 }
 
 function check_base-iptables() {
-    docker build \
-        -t base-iptables-legacy-test:latest \
-        --target check-iptables-legacy \
-        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
-        --build-arg TARGETARCH=amd64 \
-        --build-arg TARGETOS=linux \
-        --build-arg AL_TAG=$AL_TAG \
-        --pull \
-        -f ./tests/Dockerfile ./tests
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-iptables-legacy \
+        --local dockerfile=./ \
+		--local context=./tests \
+        --opt platform=$PLATFORMS \
+		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-iptables-legacy-test:latest\",push=true
     
-    if docker run base-iptables-legacy-test:latest iptables --version | grep -v 'legacy'; then
-        echo "iptables legacy issue!"
-        exit 1
-    fi
-    if docker run base-iptables-legacy-test:latest ip6tables --version | grep -v 'legacy'; then
-        echo "ip6tables legacy issue!"
-        exit 1
-    fi
-    if ! docker run base-iptables-legacy-test:latest iptables-save; then
-        echo "iptables-save legacy issue!"
-        exit 1
-    fi
-    if ! docker run base-iptables-legacy-test:latest ip6tables-save; then
-        echo "ip6tables-save legacy issue!"
-        exit 1
-    fi
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-iptables-nft \
+        --local dockerfile=./ \
+		--local context=./tests \
+        --opt platform=$PLATFORMS \
+		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-iptables-nft-test:latest\",push=true
+    
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-legacy-test:latest iptables --version | grep -v 'legacy'; then
+            echo "iptables legacy issue!"
+            exit 1
+        fi
 
-    docker build \
-        -t base-iptables-nft-test:latest \
-        --target check-iptables-nft \
-        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
-        --build-arg TARGETARCH=amd64 \
-        --build-arg TARGETOS=linux \
-        --build-arg AL_TAG=$AL_TAG \
-        --pull \
-        -f ./tests/Dockerfile ./tests
+        if docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-legacy-test:latest ip6tables --version | grep -v 'legacy'; then
+            echo "ip6tables legacy issue!"
+            exit 1
+        fi
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-legacy-test:latest iptables-save; then
+            echo "iptables-save legacy issue!"
+            exit 1
+        fi
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-legacy-test:latest ip6tables-save; then
+            echo "ip6tables-save legacy issue!"
+            exit 1
+        fi
 
-    if docker run base-iptables-nft-test:latest iptables --version | grep -v 'nf_tables'; then
-        echo "iptables nft issue!"
-        exit 1
-    fi
-    if docker run base-iptables-nft-test:latest ip6tables --version | grep -v 'nf_tables'; then
-        echo "ip6tables nft issue!"
-        exit 1
-    fi
-    if ! docker run base-iptables-nft-test:latest ebtables --version; then
-        echo "ebtables nft issue!"
-        exit 1
-    fi
-    if ! docker run base-iptables-nft-test:latest arptables --version; then
-        echo "arptables nft issue!"
-        exit 1
-   fi
+        # nft mode will fail when running on a host that does not match the arch, both arch have been confirmed to work on their respective
+        # arch based instances
+        if [[ ! "$platform" = "linux/$(go env GOHOSTARCH)" ]]; then
+            continue
+        fi
+
+        if docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-nft-test:latest iptables --version | grep -v 'nf_tables'; then
+            echo "iptables nft issue!"
+            exit 1
+        fi
+        if docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-nft-test:latest ip6tables --version | grep -v 'nf_tables'; then
+            echo "ip6tables nft issue!"
+            exit 1
+        fi
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-nft-test:latest ebtables --version; then
+            echo "ebtables nft issue!"
+            exit 1
+        fi
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-iptables-nft-test:latest arptables --version; then
+            echo "arptables nft issue!"
+            exit 1
+        fi
+    done
 }
 
 function check_base-csi() {
-    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
-        echo "csi xfs issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi:$IMAGE_TAG xfs_info -V | grep -v 'xfs_info version'; then
+            echo "csi xfs issue!"
+            exit 1
+        fi
+    done
  }
 
  function check_base-csi-ebs() {
-    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
-        echo "csi xfs issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
+            echo "csi xfs issue!"
+            exit 1
+        fi
+    done
  }
 
  function check_base-git() {
@@ -140,73 +178,88 @@ function check_base-csi() {
         exit 1
     fi
 
-    docker build \
-        -t base-git-test:latest \
-        --target check-git \
-        --build-arg BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG \
-        --build-arg TARGETARCH=amd64 \
-        --build-arg TARGETOS=linux \
-        --build-arg GOPROXY=direct \
-        --build-arg AL_TAG=$AL_TAG \
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --opt build-arg:GOPROXY=${GOPROXY:-direct} \
         --progress plain \
-        --pull \
-        -f ./tests/Dockerfile ./tests
+        --opt target=check-git \
+        --local dockerfile=./ \
+		--local context=./tests \
+        --opt platform=$PLATFORMS \
+		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-git-test:latest\",push=true
     
-    # use git cli to clone private and public repo
-    docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
-        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
-        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-        base-git-test:latest git clone $PRIVATE_REPO
+    for platform in ${PLATFORMS//,/ }; do
+        # use git cli to clone private and public repo
+        docker run --platform=$platform --pull=always -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+            -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+            -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+            $LOCAL_REGISTRY/base-git-test:latest git clone $PRIVATE_REPO
 
-    docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
-        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
-        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-        base-git-test:latest git clone https://github.com/aws/eks-distro.git
+        docker run --platform=$platform --pull=always -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+            -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+            -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+            $LOCAL_REGISTRY/base-git-test:latest git clone https://github.com/aws/eks-distro.git
 
-    # use lib git to clone private and public repo
-    if docker run -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
-        -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
-        -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-        -e PRIVATE_REPO=$PRIVATE_REPO base-git-test:latest check-git | grep -v 'Successfully cloned!'; then
-       echo "git issue!"
-       exit 1
-    fi
+        # use lib git to clone private and public repo
+        if docker run --platform=$platform --pull=always -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+            -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
+            -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
+            -e PRIVATE_REPO=$PRIVATE_REPO $LOCAL_REGISTRY/base-git-test:latest check-git | grep -v 'Successfully cloned!'; then
+            echo "git issue!"
+            exit 1
+        fi
+    done
 
  }
 
  check_base-docker-client() {
-    if ! docker run --pull=always -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
-        echo "docker client issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --platform=$platform --pull=always -v /var/run/docker.sock:/var/run/docker.sock $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG docker info; then
+            echo "docker client issue!"
+            exit 1
+        fi
+    done
  }
 
  check_base-haproxy() {
-    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
-        echo "haproxy issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG haproxy -v; then
+            echo "haproxy issue!"
+            exit 1
+        fi
+    done
  }
 
  check_base-nginx() {
-    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
-        echo "nginx issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG nginx -v; then
+            echo "nginx issue!"
+            exit 1
+        fi
+    done
  }
 
  check_base-kind() {
-    if ! docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
-        echo "kind issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-kind:$IMAGE_TAG ctr -v; then
+            echo "kind issue!"
+            exit 1
+        fi
+    done
  }
 
  check_base-nsenter() {
-    if docker run --pull=always $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG nsenter --version | grep -v 'nsenter from util-linux'; then
-        echo "nsenter issue!"
-        exit 1
-    fi
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG nsenter --version | grep -v 'nsenter from util-linux'; then
+            echo "nsenter issue!"
+            exit 1
+        fi
+    done
   }
 
 $TEST
