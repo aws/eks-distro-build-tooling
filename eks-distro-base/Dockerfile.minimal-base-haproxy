@@ -28,7 +28,7 @@ ARG OUTPUT_DEBUG_LOG
 # for now build haproxy from source, version 2.5 which is newer than what kind uses but this is the first
 # version to support openssl3 which al2022 ships with
 ENV DEV_DEPS="make gcc gcc-c++ pcre-devel openssl-devel readline-devel systemd-devel tar zlib-devel"
-ENV HAPROXY_VERSION="2.5.5"
+ENV HAPROXY_VERSION="2.5.8"
 RUN set -x && \
     cd /tmp && \
     yum install -y $DEV_DEPS && \
