@@ -179,7 +179,7 @@ validate-minimal-images-%:
 
 test-minimal-images-%:
 	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) check_$*; \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) $(PLATFORMS) check_$*; \
 	fi
 
 
