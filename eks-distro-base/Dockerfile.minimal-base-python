@@ -33,7 +33,7 @@ COPY scripts/ /usr/bin
 # Google's Distroless has an experimental python3 version based on debian
 # The packages below are cross referenced based on the packages
 # included in distroless and the al2 python3 dependency tree
-# refernce: https://github.com/GoogleContainerTools/distroless/blob/main/experimental/python3/BUILD
+# reference: https://github.com/GoogleContainerTools/distroless/blob/main/experimental/python3/BUILD
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
