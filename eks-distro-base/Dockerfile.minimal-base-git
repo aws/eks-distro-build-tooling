@@ -83,7 +83,7 @@ RUN set -x && \
     cp -rf /usr/local/include/git2* $NEWROOT/usr/include && \
     cd / && \
     rm -rf /tmp/sources && \
-    yum erase -y $BUILD_DEPS && \
+    yum erase -y --setopt=protected_packages=False $BUILD_DEPS && \
     clean_yum
 
 # Copy scripts in every variant since we do not rebuild the base
