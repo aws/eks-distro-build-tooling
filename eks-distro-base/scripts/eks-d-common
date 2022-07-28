@@ -32,7 +32,7 @@ function build::common::yum_provides() {
         echo "Finding yum package for ${bin}"
         PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1 || true)
         # al22 is not as forgiving when searching
-        [[ ${PROVIDES_CACHE[$bin]} == *"No matches found"* ]] && PROVIDES_CACHE[$bin]=$(yum provides "*/${bin}" 2>&1)
+        [[ ${PROVIDES_CACHE[$bin]} == *"No matches found"* ]] && PROVIDES_CACHE[$bin]=$(yum provides "*/$(basename ${bin})" 2>&1)
         PROVIDES_CACHE[$bin]=$(echo "${PROVIDES_CACHE[$bin]}" | sed "s/'//g")
     fi
 
@@ -341,7 +341,11 @@ function build::common::update_ldconfig(){
 
 function build::common::rm_common_utils_for_rpm_scriptlets() {
     local -r fakeroot="$NEWROOT/fakeroot"
-
+    
+    if [ ! -d "${fakeroot}" ]; then
+        return
+    fi
+    
     for file in $(find $fakeroot -type f); do
         local util="${file/\/fakeroot/}"  
         if [ -L $util ] && [[ "$(readlink $util)" = /fakeroot/* ]]; then
@@ -376,6 +380,15 @@ function build::common::clean_install() {
     local -r force=${4:-}
     local -r extract_dir="${5:-$NEWROOT}"
     
+
+    if [ ! $shallow ]; then
+        echo "Installing $packages and dependencies using yum"
+        
+        yum --installroot $NEWROOT install -y --setopt=install_weak_deps=False $packages
+
+        return
+    fi
+
     if [ $just_db ]; then
         just_db="--justdb"
     else
@@ -393,72 +406,66 @@ function build::common::clean_install() {
 
     local -r rpms=(${packages// / })
     for rpm in "${rpms[@]}"; do
-        if [ ! $shallow ]; then
-            echo "Installing $rpm and dependencies using yum"
-            
-            yum --installroot $NEWROOT install -y $rpm
-        else
-            if ! ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm 1> /dev/null 2>&1; then
-                echo "Downloading $rpm"
-                yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
-                echo "$rpm downloaded"
-            fi
-
-            # Multiple RPMs may be downloaded in the case that the package we want is a prefix to another
-            # only get the specific one by looking for the version directly after the rpm name
-            # ex: util-linux and util-linux-core
-            local rpm_file=$(ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm)
-        
-            local log_file=$(mktemp)
-            # if installed already skip
-            if ! rpm --root $NEWROOT -q --quiet $rpm ; then
-                if [[ -n $just_db ]]; then
-                    echo "Installing $rpm to rpm database only"
-                else
-                    echo "Shallow installing $rpm using the rpm directly"
-                    build::common::setup_default_utils_for_rpm_scriptlets
-
-                    local -r rpm_sanitized="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
-                    local -r reqs_var_name="${rpm_sanitized^^}_SCRIPTLET_REQS"
-                    local -r reqs="${!reqs_var_name:-}"
-
-                    build::common::cp_common_utils_for_rpm_scriptlets "${reqs}"
-                fi
-                env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
-                
-                # not all packages run ldconfig as part of their postinstall scriptlet (they should)
-                # since we are relying on ldconfig now we need this to be refreshed
-                build::common::update_ldconfig
-
-                echo "$rpm installed"
-            fi            
-            
-            local -r sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
-            local -r var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
-
-            if [[ -z "${!var_name:-}" ]] && grep -q "scriptlet failed\|command not found" $log_file; then
-                local rpm_name=$(basename $rpm_file | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')
-
-                if [[ ${EXPECTED_RPM_SCRIPTLET_FAILURES:-""} != *"$rpm_name"* ]]; then
-                    echo "******************************************************"
-                    echo "Preinstall script failed for $rpm_file:"
-                    echo "$(rpm -qp --scripts $rpm_file)"
-                    cat $log_file
-                    echo "******************************************************"
-                    exit 1
-                fi
-            fi
-            
-            if [ $force ] && [ ! -d $extract_dir ]; then                
-                echo "Extracting $rpm directly to $extract_dir"
-                mkdir -p $extract_dir
-                pushd $extract_dir
-                rpm2cpio $rpm_file | cpio -idm >> $DEBUG_LOG_FILE 2>&1
-                popd
-            fi
-
-            rm $log_file
+        if ! ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm 1> /dev/null 2>&1; then
+            echo "Downloading $rpm"
+            yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
+            echo "$rpm downloaded"
         fi
+
+        # Multiple RPMs may be downloaded in the case that the package we want is a prefix to another
+        # only get the specific one by looking for the version directly after the rpm name
+        # ex: util-linux and util-linux-core
+        local rpm_file=$(ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm)
+    
+        local log_file=$(mktemp)
+        # if installed already skip
+        if ! rpm --root $NEWROOT -q --quiet $rpm ; then
+            if [[ -n $just_db ]]; then
+                echo "Installing $rpm to rpm database only"
+            else
+                echo "Shallow installing $rpm using the rpm directly"
+                build::common::setup_default_utils_for_rpm_scriptlets
+
+                local -r rpm_sanitized="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+                local -r reqs_var_name="${rpm_sanitized^^}_SCRIPTLET_REQS"
+                local -r reqs="${!reqs_var_name:-}"
+
+                build::common::cp_common_utils_for_rpm_scriptlets "${reqs}"
+            fi
+            env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
+            
+            # not all packages run ldconfig as part of their postinstall scriptlet (they should)
+            # since we are relying on ldconfig now we need this to be refreshed
+            build::common::update_ldconfig
+
+            echo "$rpm installed"
+        fi            
+        
+        local -r sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+        local -r var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
+
+        if [[ -z "${!var_name:-}" ]] && grep -q "scriptlet failed\|command not found" $log_file; then
+            local rpm_name=$(basename $rpm_file | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')
+
+            if [[ ${EXPECTED_RPM_SCRIPTLET_FAILURES:-""} != *"$rpm_name"* ]]; then
+                echo "******************************************************"
+                echo "Preinstall script failed for $rpm_file:"
+                echo "$(rpm -qp --scripts $rpm_file)"
+                cat $log_file
+                echo "******************************************************"
+                exit 1
+            fi
+        fi
+        
+        if [ $force ] && [ ! -d $extract_dir ]; then                
+            echo "Extracting $rpm directly to $extract_dir"
+            mkdir -p $extract_dir
+            pushd $extract_dir
+            rpm2cpio $rpm_file | cpio -idm >> $DEBUG_LOG_FILE 2>&1
+            popd
+        fi
+
+        rm $log_file        
     done
 }
 

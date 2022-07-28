@@ -32,7 +32,13 @@ COPY scripts/ /usr/bin
 ENV DOWNLOAD_DIR /tmp/download
 
 ENV NEWROOT /
+
 RUN set -x && \
+    if grep -q "2022" "/etc/os-release"; then \
+        yum install -y dnf-plugin-release-notification && \
+        NEW_RELEASE=$(yum check-release-update 2>&1 | grep 'dnf update --releasever' | tail -n 1) && \
+        [ -n "${NEW_RELEASE}" ] && ${NEW_RELEASE} -y; \
+    fi && \
     yum upgrade -y && \
     yum update -y && \
     clean_install "binutils cpio findutils shadow-utils yum-utils" && \
