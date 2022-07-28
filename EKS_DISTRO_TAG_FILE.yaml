@@ -7,10 +7,10 @@ al2:
   eks-distro-minimal-base-docker-client: 2022-07-27-1658910674.2
   eks-distro-minimal-base-csi: 2022-07-27-1658910674.2
   eks-distro-minimal-base-csi-ebs: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-haproxy: null
+  eks-distro-minimal-base-haproxy: 2022-07-27-1658959285.2
   eks-distro-minimal-base-kind: 2022-07-27-1658910674.2
   eks-distro-minimal-base-nginx: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-git: null
+  eks-distro-minimal-base-git: 2022-07-27-1658959285.2
   eks-distro-minimal-base-nsenter: 2022-07-27-1658910674.2
 al2022:
   eks-distro-base: 2022-07-27-1658910731.2022
