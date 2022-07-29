@@ -63,7 +63,7 @@ RUN set -x && \
         libtirpc \
         gdbm \ 
         openssl-libs && \
-    if_al2022 install_rpm libnsl2 libxcrypt sqlite-libs && \
+    if_al2022 install_rpm libxcrypt sqlite-libs && \
     if_al2 install_rpm libcrypt && \
     cleanup "python-base"
 
@@ -106,7 +106,7 @@ ENV CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies /usr/lib64/libkr
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     if grep -q "2022" "/etc/os-release"; then \
-        install_rpm python3-setuptools python-setuptools-wheel python3-pip python-pip-wheel python3 && \
+        install_rpm python3-setuptools python3-setuptools-wheel python3-pip python3-pip-wheel python3 && \
         # To be symlinkd later
         rm $NEWROOT/usr/bin/pip && \
         cleanup "python3.9" && \
