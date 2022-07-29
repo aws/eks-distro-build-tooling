@@ -71,7 +71,7 @@ ALL_TEST_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),test-minim
 # if wanting to build the base image, for use locally or in presubmits
 # returns the base image target needed
 # $1 - minimal images variant
-MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEP)),\
+MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
 	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
 
 define BASE_TAG_FROM_TAG_FILE
