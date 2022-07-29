@@ -3,6 +3,7 @@ MAKEFLAGS+=--no-builtin-rules --warn-undefined-variables
 SHELL=bash
 .SHELLFLAGS:=-eu -o pipefail -c
 .SUFFIXES:
+.SECONDEXPANSION:
 
 BASE_DIRECTORY=$(shell git rev-parse --show-toplevel)
 MAKE_ROOT=$(BASE_DIRECTORY)/eks-distro-base
@@ -51,15 +52,27 @@ CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_V
 
 ALL_IMAGE_NAMES=eks-distro-base $(foreach variant,$(MINIMAL_VARIANTS),eks-distro-minimal-$(variant) eks-distro-minimal-$(variant)-builder)
 
-VARIANT_SHORT_NAME=$(if \
-		$(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%)$(VERSIONED_VARIANT),base)
-
 OUTPUT_DEBUG_LOG?=
 IMAGE_BUILD_ARGS?=
 VERSIONED_VARIANT?=
+BUILD_DEPS?=false
+EXPORT_NAME?=
 
 REMOVE_VERSIONED=$(if $(VERSIONED_VARIANT),$(1:%$(VERSIONED_VARIANT)=%),$(1))
 ADD_VERSIONED_TO_TAG=$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(1),$(1))
+
+ALL_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),minimal-images-$(variant))
+ALL_BUILDER_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),builder-minimal-images-$(variant))
+ALL_FINAL_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),final-minimal-images-$(variant))
+ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),packages-export-minimal-images-$(variant))
+ALL_VALIDATE_IMAGES_MINIMAL_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),validate-minimal-images-$(variant))
+ALL_TEST_MINIMAL_IMAGES_TARGETS=$(foreach variant,$(MINIMAL_VARIANTS),test-minimal-images-$(variant))
+
+# if wanting to build the base image, for use locally or in presubmits
+# returns the base image target needed
+# $1 - minimal images variant
+MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
+	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -74,7 +87,7 @@ define BUILDCTL
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:BUILT_BUILDER_IMAGE=$(BUILT_BUILDER_IMAGE) \
-		--opt build-arg:VARIANT=$(VARIANT_SHORT_NAME) \
+		--opt build-arg:EXPORT_NAME=$(EXPORT_NAME) \
 		--opt build-arg:OUTPUT_DEBUG_LOG=$(OUTPUT_DEBUG_LOG) \
 		--opt build-arg:VERSIONED_VARIANT=$(VERSIONED_VARIANT) \
 		--progress plain \
@@ -104,26 +117,31 @@ open-pr-check:
 
 ##@ Image Targets
 
-.PHONY: standard-images minimal-images-% builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%
+.PHONY: minimal-images-% $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS) $(ALL_FINAL_MINIMAL_IMAGES_TARGETS) \
+	$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS) $(ALL_TEST_MINIMAL_IMAGES_TARGETS)
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
 # see the README.md on how to run these targets locally
 
 # base image overides
-standard-images %-minimal-images-base: BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
-standard-images %-minimal-images-base: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+standard-images: BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
+standard-images: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 
 # images with custom "base" targets
+$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
 final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy final-minimal-images-base-nginx: DOCKERFILE=Dockerfile.$(VARIANT)
 
 # dep tree
+%-minimal-images-base: BUILDER_IMAGE:=$(BASE_IMAGE)
 %-minimal-images-base: BASE_IMAGE=scratch
-%-minimal-images-base-nonroot %-minimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
-%-minimal-images-base-iptables %-minimal-images-base-csi %-minimal-images-base-git %-minimal-images-base-docker-client \
-	%-minimal-images-base-nginx %-minimal-images-base-haproxy %-minimal-images-base-csi-ebs %-minimal-images-base-nsenter \
-	%-minimal-images-base-python3.7 %-minimal-images-base-python3.8 %-minimal-images-base-python3.9: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
-%-minimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
+
+# using %inimal to match all the minimal targets
+%inimal-images-base-nonroot %inimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
+%inimal-images-base-iptables %inimal-images-base-csi %inimal-images-base-git %inimal-images-base-docker-client \
+	%inimal-images-base-nginx %inimal-images-base-haproxy %inimal-images-base-csi-ebs %inimal-images-base-nsenter \
+	%inimal-images-base-python3.7 %inimal-images-base-python3.8 %inimal-images-base-python3.9: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+%inimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # python variants
 %-minimal-images-base-python3.7 %inimal-update-base-python3.7 %inimal-create-pr-python3.7: VERSIONED_VARIANT=3.7
@@ -144,55 +162,60 @@ standard-images:
 	fi
 	$(call BUILDCTL)
 
-# minimal base main target
-# the implicit matching messes make's ordering of the prereqs for this target, not sure why
-# use an eval to "hardcode" the target and prereqs instead
-# $1 - Variant
-define MINIMAL_IMAGE_TARGET
-	minimal-images-$(1): builder-minimal-images-$(1) final-minimal-images-$(1) packages-export-minimal-images-$(1) validate-minimal-images-$(1) test-minimal-images-$(1)
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS) $(ALL_FINAL_MINIMAL_IMAGES_TARGETS) \
+	$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS) $(ALL_TEST_MINIMAL_IMAGES_TARGETS): VARIANT=minimal-$(call REMOVE_VERSIONED,$(VARIANT_SHORT_NAME))
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS) $(ALL_FINAL_MINIMAL_IMAGES_TARGETS) \
+	$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS) $(ALL_TEST_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)
 
-endef
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS) $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): DOCKERFILE?=Dockerfile.$(VARIANT)
 
-$(eval $(foreach variant, $(MINIMAL_VARIANTS), $(call MINIMAL_IMAGE_TARGET,$(variant))))
+# Relying on secndary expansion for this target so that pre-reqs can use the variant var
+$(ALL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-images-%=%)
+$(ALL_MINIMAL_IMAGES_TARGETS): $$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) builder-minimal-images-$$(VARIANT_SHORT_NAME) \
+		final-minimal-images-$$(VARIANT_SHORT_NAME) packages-export-minimal-images-$$(VARIANT_SHORT_NAME) \
+		validate-minimal-images-$$(VARIANT_SHORT_NAME) test-minimal-images-$$(VARIANT_SHORT_NAME)
+	@echo Building $(VARIANT_SHORT_NAME) complete!
 
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: VARIANT=minimal-$(call REMOVE_VERSIONED,$*)
-builder-minimal-images-% final-minimal-images-% packages-export-minimal-images-% validate-minimal-images-% test-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)
-builder-minimal-images-% final-minimal-images-%: DOCKERFILE?=Dockerfile.$(VARIANT)
-
-builder-minimal-images-%: IMAGE_TARGET=builder
-builder-minimal-images-%: IMAGE_NAME=eks-distro-$(VARIANT)-builder
-builder-minimal-images-%:
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:builder-minimal-images-%=%)
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=builder
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)-builder
+$(ALL_BUILDER_MINIMAL_IMAGES_TARGETS):
 	$(call BUILDCTL)
 
-final-minimal-images-%: IMAGE_TARGET=final
-final-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
-final-minimal-images-%:
+$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images-%=%)
+$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
+$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
 		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
 	fi
 	$(call BUILDCTL)
 
-packages-export-minimal-images-%: IMAGE_TARGET=export
-packages-export-minimal-images-%: IMAGE_OUTPUT_TYPE=local
-packages-export-minimal-images-%: IMAGE_OUTPUT_DIR=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)
-packages-export-minimal-images-%: IMAGE_OUTPUT=dest=$(IMAGE_OUTPUT_DIR)
-packages-export-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
-packages-export-minimal-images-%:
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:packages-export-minimal-images-%=%)
+# to make the file names `kind` vs `base-kind`
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): EXPORT_NAME=$(if $(and $(filter-out minimal-base,$(VARIANT)),$(filter-out minimal-base-nonroot,$(VARIANT))),$(VARIANT:minimal-base-%=%)$(VERSIONED_VARIANT),base)
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=export
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): IMAGE_OUTPUT_TYPE=local
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): IMAGE_OUTPUT_DIR=$(MAKE_ROOT)/../eks-distro-base-minimal-packages/$(AL_TAG)
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): IMAGE_OUTPUT=dest=$(IMAGE_OUTPUT_DIR)
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
+$(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS):
 	$(call BUILDCTL)
-	if [ -f $(IMAGE_OUTPUT_DIR)/$(VARIANT_SHORT_NAME) ]; then \
-		mv $(IMAGE_OUTPUT_DIR)/$(VARIANT_SHORT_NAME)* $(IMAGE_OUTPUT_DIR)/$(subst /,_,$(PLATFORMS))/; \
+	if [ -f $(IMAGE_OUTPUT_DIR)/$(EXPORT_NAME) ]; then \
+		mv $(IMAGE_OUTPUT_DIR)/$(EXPORT_NAME)* $(IMAGE_OUTPUT_DIR)/$(subst /,_,$(PLATFORMS))/; \
 	fi
 
-validate-minimal-images-%: IMAGE_TARGET=validate
-validate-minimal-images-%: IMAGE_OUTPUT_TYPE=local
-validate-minimal-images-%: IMAGE_OUTPUT=dest=/tmp
-validate-minimal-images-%: DOCKERFILE=Dockerfile.minimal-helpers
-validate-minimal-images-%:
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): VARIANT_SHORT_NAME=$(@:validate-minimal-images-%=%)
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): IMAGE_TARGET=validate
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): IMAGE_OUTPUT_TYPE=local
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): IMAGE_OUTPUT=dest=/tmp
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
+$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS):
 	$(call BUILDCTL)
 
-test-minimal-images-%:
+$(ALL_TEST_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:test-minimal-images-%=%)
+$(ALL_TEST_MINIMAL_IMAGES_TARGETS):
 	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(AL_TAG) $(PLATFORMS) check_$*; \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(AL_TAG) $(PLATFORMS) check_$(VARIANT_SHORT_NAME); \
 	fi
 
 

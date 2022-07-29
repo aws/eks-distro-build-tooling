@@ -39,14 +39,20 @@ FROM public.ecr.aws/amazonlinux/amazonlinux:$AL_TAG as builder
 
 RUN set -x && \
     if grep -q "2022" "/etc/os-release"; then \
-        yum install -y dnf-plugin-release-notification && \
-        yum check-release-update &> /tmp/new-release && \
-        if grep "A newer release" /tmp/new-release; then echo "100" > ./return_value; fi \
+        yum install -y dnf-plugin-release-notification; \
     fi
 
 RUN rm -rf /var/lib/rpm
 COPY --from=base_image /var/lib/rpm /var/lib/rpm
 COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
+
+# check-release-update must happen after copying over the rpm db
+# otherwise it wouldnt neccessarily see the update
+RUN set -x && \
+    if grep -q "2022" "/etc/os-release"; then \
+        yum check-release-update &> /tmp/new-release && \
+        if grep "A newer release" /tmp/new-release; then echo "100" > ./return_value; fi \
+    fi
 
 RUN set -x && \
     if [ -f ./return_value ] && [ "\$(cat ./return_value)" = "100" ]; then \
