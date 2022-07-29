@@ -20,7 +20,7 @@ AL_TAG?=2
 # tag al2 build with latest.2 and latest for backward compat
 LATEST=$(if $(filter $(AL_TAG),2022),latest.2022,latest latest.2)
 
-PLATFORMS?=linux/amd64
+PLATFORMS?=linux/amd64,linux/arm64
 
 IMAGE_TAG?=$(shell date "+%F-%s")
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG))
