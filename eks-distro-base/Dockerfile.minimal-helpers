@@ -25,21 +25,21 @@ COPY --from=builder /newroot /
 
 FROM builder as prepare-export
 
-ARG VARIANT
+ARG EXPORT_NAME
 
 WORKDIR $NEWROOT
 RUN set -x && \
-    rpm --root $NEWROOT -qa | sort > /tmp/packages/$VARIANT && \
-    printf "****************** Regular Files ******************\n\n" > /tmp/packages/$VARIANT-files && \
-    find . -type f -printf '%M\t%s\t/%P\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$VARIANT-files && \
-    printf "\n****************** Symlinks ******************\n\n" >> /tmp/packages/$VARIANT-files && \
-    find . -type l -printf '%M\t%s\t/%P\t%l\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$VARIANT-files
+    rpm --root $NEWROOT -qa | sort > /tmp/packages/$EXPORT_NAME && \
+    printf "****************** Regular Files ******************\n\n" > /tmp/packages/$EXPORT_NAME-files && \
+    find . -type f -printf '%M\t%s\t/%P\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$EXPORT_NAME-files && \
+    printf "\n****************** Symlinks ******************\n\n" >> /tmp/packages/$EXPORT_NAME-files && \
+    find . -type l -printf '%M\t%s\t/%P\t%l\n' | numfmt --field=2 --to=iec-i --padding=8 --suffix=B | sort -k 3 >> /tmp/packages/$EXPORT_NAME-files
 
 FROM scratch as export
 
-ARG VARIANT
+ARG EXPORT_NAME
 
-COPY --from=prepare-export /tmp/packages/$VARIANT* .
+COPY --from=prepare-export /tmp/packages/$EXPORT_NAME* .
 
 
 ################ Validate #######################
