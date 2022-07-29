@@ -12,7 +12,6 @@ al2:
   eks-distro-minimal-base-nginx: 2022-07-27-1658910674.2
   eks-distro-minimal-base-git: 2022-07-27-1658959285.2
   eks-distro-minimal-base-nsenter: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-python3.9: null
   eks-distro-minimal-base-python3:
     9: 2022-07-29-1659099157.2
 al2022:
