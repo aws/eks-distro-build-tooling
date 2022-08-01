@@ -110,7 +110,7 @@ if [ "$FILES_ADDED" = "" ]; then
 fi
 
 if [ "$JOB_TYPE" = "presubmit" ]; then
-    git diff
+    git diff --staged
     exit 0
 fi
 
