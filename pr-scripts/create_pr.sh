@@ -109,10 +109,13 @@ if [ "$FILES_ADDED" = "" ]; then
     exit 0
 fi
 
-git commit -m "$COMMIT_MESSAGE"
 if [ "$JOB_TYPE" = "presubmit" ]; then
+    git diff --staged
     exit 0
 fi
+
+git commit -m "$COMMIT_MESSAGE"
+
 ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin $PR_BRANCH -f'
 
 gh auth login --with-token < /secrets/github-secrets/token
