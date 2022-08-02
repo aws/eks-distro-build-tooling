@@ -29,8 +29,8 @@ if [[ $IMAGE_NAME == *-builder ]]; then
     exit 0
 fi
 
-BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
-BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/${IMAGE_NAME%$VERSIONED_VARIANT}:$BASE_IMAGE_TAG
+BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME$VERSIONED_VARIANT\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
+BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
