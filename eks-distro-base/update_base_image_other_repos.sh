@@ -32,7 +32,7 @@ while IFS=, read -r image
 do
     image=${image:2} # strip leading - space
     BASE_IMAGE_TAG_FILE="$(echo ${image^^} | tr '-' '_')_TAG_FILE"
-    IMAGE_TAG=$(yq e ".al$AL_TAG.$image" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
+    IMAGE_TAG=$(yq e ".al$AL_TAG.\"$image\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
     # we will set the tag to null to trigger new builds. we dont want PRs being open setting
     # tag file values to null
     if [[ "${IMAGE_TAG}" = "null" ]]; then

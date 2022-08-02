@@ -75,7 +75,7 @@ MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
 	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
 
 define BASE_TAG_FROM_TAG_FILE
-$(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
+$(shell yq e ".al$(AL_TAG).\"$(1)$(VERSIONED_VARIANT)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 define BUILDCTL
@@ -144,9 +144,9 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 %inimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # python variants
-%-minimal-images-base-python3.7 %inimal-update-base-python3.7 %inimal-create-pr-python3.7: VERSIONED_VARIANT=3.7
-%-minimal-images-base-python3.8 %inimal-update-base-python3.8 %inimal-create-pr-python3.8: VERSIONED_VARIANT=3.8
-%-minimal-images-base-python3.9 %inimal-update-base-python3.9 %inimal-create-pr-python3.9: VERSIONED_VARIANT=3.9
+%-minimal-images-base-python3.7 %inimal-update-base-python3.7 %inimal-create-pr-base-python3.7: VERSIONED_VARIANT=3.7
+%-minimal-images-base-python3.8 %inimal-update-base-python3.8 %inimal-create-pr-base-python3.8: VERSIONED_VARIANT=3.8
+%-minimal-images-base-python3.9 %inimal-update-base-python3.9 %inimal-create-pr-base-python3.9: VERSIONED_VARIANT=3.9
 
 # push standard/builder/base image targets
 standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT_TYPE=image
@@ -186,7 +186,7 @@ $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
+		./check_update.sh $(IMAGE_NAME) $(AL_TAG) $(VERSIONED_VARIANT); \
 	fi
 	$(call BUILDCTL)
 
@@ -215,7 +215,7 @@ $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS):
 $(ALL_TEST_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:test-minimal-images-%=%)
 $(ALL_TEST_MINIMAL_IMAGES_TARGETS):
 	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(AL_TAG) $(PLATFORMS) check_$(VARIANT_SHORT_NAME); \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) $(PLATFORMS) check_$(VARIANT_SHORT_NAME); \
 	fi
 
 
