@@ -33,7 +33,7 @@ BUILDER_IMAGE_NAME?=$(BASE_IMAGE_NAME)-builder
 # use the current IMAGE_TAG as the tag
 # if not, use the image tag that will be pulled from the TAG_FILE
 BASE_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-BUILT_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(IMAGE_NAME:%-builder=%))
+BUILT_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(IMAGE_NAME:%-builder=%)$(VERSIONED_VARIANT))
 BASE_IMAGE_TAG=$(if $(or \
 	$(and $(JOB_TYPE), $(JOB_TYPE),$(filter $(JOB_TYPE), presubmit postsubmit)), \
 	$(filter $(shell cat $(MAKE_ROOT)/$(BASE_IMAGE_NAME)-pushed), true)),$(IMAGE_TAG),$(BASE_IMAGE_TAG_FROM_FILE))
@@ -75,7 +75,7 @@ MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
 	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
 
 define BASE_TAG_FROM_TAG_FILE
-$(shell yq e ".al$(AL_TAG).\"$(1)$(VERSIONED_VARIANT)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
+$(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 define BUILDCTL
@@ -252,8 +252,9 @@ standard-update: IMAGE_NAME=eks-distro-base
 standard-update: update-standard 
 
 .PHONY: minimal-update-%
-minimal-update-%: UPDATE_TARGET=minimal-images-$*
-minimal-update-%: VARIANT=minimal-$*
+minimal-update-%: VARIANT_SHORT_NAME=$*
+minimal-update-%: UPDATE_TARGET=minimal-images-$(VARIANT_SHORT_NAME)
+minimal-update-%: VARIANT=minimal-$(call REMOVE_VERSIONED,$(VARIANT_SHORT_NAME))
 minimal-update-%: IMAGE_NAME=eks-distro-$(VARIANT)
 minimal-update-%: update-%
 	@echo "Done $(@)"
