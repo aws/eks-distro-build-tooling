@@ -186,7 +186,7 @@ $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then \
-		./check_update.sh $(IMAGE_NAME) $(AL_TAG); \
+		./check_update.sh $(IMAGE_NAME) $(AL_TAG) $(VERSIONED_VARIANT); \
 	fi
 	$(call BUILDCTL)
 
