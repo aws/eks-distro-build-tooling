@@ -111,7 +111,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/gconv/UTF-7.so
 -rw-r--r--   3.8KiB /usr/lib64/gconv/gconv-modules
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
--rwxr-xr-x   871KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   897KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
@@ -119,7 +119,7 @@
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20220421.so.1
--rwxr-xr-x   886KiB /usr/lib64/libm.so.6
+-rwxr-xr-x   885KiB /usr/lib64/libm.so.6
 -rwxr-xr-x    21KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
@@ -131,7 +131,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
@@ -156,8 +156,8 @@
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
 -rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
@@ -1972,7 +1972,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.8KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   2.8MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   2.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

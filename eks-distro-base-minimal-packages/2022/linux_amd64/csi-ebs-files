@@ -19,7 +19,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   2.5KiB /etc/ld.so.cache
+-rw-r--r--   2.8KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     812B /etc/mke2fs.conf
 -rw-r--r--       0B /etc/motd
@@ -121,7 +121,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/gconv/UTF-7.so
 -rw-r--r--   3.8KiB /usr/lib64/gconv/gconv-modules
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
--rwxr-xr-x   871KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   897KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
@@ -129,7 +129,6 @@
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
--r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x    46KiB /usr/lib64/libe2p.so.2.3
 -rwxr-xr-x   239KiB /usr/lib64/libedit.so.0.0.67
@@ -138,7 +137,7 @@
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
 -rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20220421.so.1
 -rwxr-xr-x    16KiB /usr/lib64/libinih.so.49
--rwxr-xr-x   886KiB /usr/lib64/libm.so.6
+-rwxr-xr-x   885KiB /usr/lib64/libm.so.6
 -rwxr-xr-x    21KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    41KiB /usr/lib64/libmenu.so.6.2
 -rwxr-xr-x    41KiB /usr/lib64/libmenuw.so.6.2
@@ -159,7 +158,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
@@ -169,6 +168,14 @@
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   176KiB /usr/lib64/libudev.so.1.7.3
+-rwxr-xr-x    41KiB /usr/lib64/liburcu-bp.so.6.1.0
+-rwxr-xr-x    45KiB /usr/lib64/liburcu-cds.so.6.1.0
+-rwxr-xr-x    24KiB /usr/lib64/liburcu-common.so.6.1.0
+-rwxr-xr-x    41KiB /usr/lib64/liburcu-mb.so.6.1.0
+-rwxr-xr-x    41KiB /usr/lib64/liburcu-memb.so.6.1.0
+-rwxr-xr-x    41KiB /usr/lib64/liburcu-qsbr.so.6.1.0
+-rwxr-xr-x    41KiB /usr/lib64/liburcu-signal.so.6.1.0
+-rwxr-xr-x    41KiB /usr/lib64/liburcu.so.6.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x    33KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
@@ -185,10 +192,10 @@
 -rwxr-xr-x    16KiB /usr/sbin/mkfs
 -rwxr-xr-x   133KiB /usr/sbin/mkfs.ext3
 -rwxr-xr-x   133KiB /usr/sbin/mkfs.ext4
--rwxr-xr-x   398KiB /usr/sbin/mkfs.xfs
+-rwxr-xr-x   402KiB /usr/sbin/mkfs.xfs
 -rwxr-xr-x    64KiB /usr/sbin/resize2fs
--rwxr-xr-x    40KiB /usr/sbin/xfs_growfs
--rwxr-xr-x   203KiB /usr/sbin/xfs_io
+-rwxr-xr-x    44KiB /usr/sbin/xfs_growfs
+-rwxr-xr-x   199KiB /usr/sbin/xfs_io
 -rwxr-xr-x    61KiB /usr/sbin/zic
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
@@ -203,11 +210,9 @@
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
 -rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
--rw-r--r--    18KiB /usr/share/licenses/device-mapper-libs/COPYING
--rw-r--r--    26KiB /usr/share/licenses/device-mapper-libs/COPYING.LIB
 -rw-r--r--    44KiB /usr/share/licenses/e2fsprogs-libs/NOTICE
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
@@ -233,6 +238,10 @@
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/systemd/LICENSE.LGPL2.1
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
+-rw-r--r--   1.5KiB /usr/share/licenses/userspace-rcu/LICENSE
+-rw-r--r--    18KiB /usr/share/licenses/userspace-rcu/gpl-2.0.txt
+-rw-r--r--    26KiB /usr/share/licenses/userspace-rcu/lgpl-2.1.txt
+-rw-r--r--   1.1KiB /usr/share/licenses/userspace-rcu/lgpl-relicensing.txt
 -rw-r--r--   1.4KiB /usr/share/licenses/util-linux/COPYING.BSD-3-Clause
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux/COPYING.BSD-4-Clause-UC
 -rw-r--r--    18KiB /usr/share/licenses/util-linux/COPYING.GPL-2.0-or-later
@@ -2037,7 +2046,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   3.3KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -2092,6 +2101,14 @@ lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.3
+lrwxrwxrwx      19B /usr/lib64/liburcu-bp.so.6 liburcu-bp.so.6.1.0
+lrwxrwxrwx      20B /usr/lib64/liburcu-cds.so.6 liburcu-cds.so.6.1.0
+lrwxrwxrwx      23B /usr/lib64/liburcu-common.so.6 liburcu-common.so.6.1.0
+lrwxrwxrwx      19B /usr/lib64/liburcu-mb.so.6 liburcu-mb.so.6.1.0
+lrwxrwxrwx      21B /usr/lib64/liburcu-memb.so.6 liburcu-memb.so.6.1.0
+lrwxrwxrwx      21B /usr/lib64/liburcu-qsbr.so.6 liburcu-qsbr.so.6.1.0
+lrwxrwxrwx      23B /usr/lib64/liburcu-signal.so.6 liburcu-signal.so.6.1.0
+lrwxrwxrwx      16B /usr/lib64/liburcu.so.6 liburcu.so.6.1.0
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      10B /usr/tmp ../var/tmp
 lrwxrwxrwx      11B /var/lock ../run/lock

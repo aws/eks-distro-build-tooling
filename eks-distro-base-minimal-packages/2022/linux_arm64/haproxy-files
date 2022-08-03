@@ -62,7 +62,7 @@
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
 -r-xr-xr-x      49B /usr/bin/cp
--rwxr-xr-x    68KiB /usr/bin/gencat
+-rwxr-xr-x    69KiB /usr/bin/gencat
 -rwxr-xr-x    68KiB /usr/bin/getconf
 -rwxr-xr-x    69KiB /usr/bin/getent
 -rwxr-xr-x    70KiB /usr/bin/iconv
@@ -73,13 +73,13 @@
 -r-xr-xr-x      52B /usr/bin/mkdir
 -rwxr-xr-x    68KiB /usr/bin/pldd
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
--rwxr-xr-x    68KiB /usr/bin/sprof
+-rwxr-xr-x    69KiB /usr/bin/sprof
 -rwxr-xr-x    15KiB /usr/bin/tzselect
 -rwxr-xr-x   1.3KiB /usr/bin/update-ca-trust
 -rwxr-xr-x    68KiB /usr/bin/zdump
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   818KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   844KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -107,7 +107,7 @@
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rwxr-xr-x    68KiB /usr/lib64/audit/sotruss-lib.so
--rwxr-xr-x    68KiB /usr/lib64/engines-3/afalg.so
+-rwxr-xr-x    69KiB /usr/lib64/engines-3/afalg.so
 -rwxr-xr-x    68KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    69KiB /usr/lib64/engines-3/loader_attic.so
 -rwxr-xr-x    68KiB /usr/lib64/engines-3/padlock.so
@@ -142,8 +142,8 @@
 -rwxr-xr-x    68KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    68KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    68KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
--rwxr-xr-x    69KiB /usr/lib64/librt.so.1
+-rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    68KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   721KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   670KiB /usr/lib64/libssl.so.3.0.3
@@ -156,7 +156,7 @@
 -rwxr-xr-x    68KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    68KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    68KiB /usr/libexec/getconf/XBS5_LP64_OFF64
--rwxr-xr-x    13MiB /usr/sbin/haproxy
+-rwxr-xr-x    14MiB /usr/sbin/haproxy
 -rwxr-xr-x    69KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   868KiB /usr/sbin/ldconfig
 -rwxr-xr-x    69KiB /usr/sbin/zic
@@ -175,8 +175,8 @@
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
 -rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
 -rw-r--r--    35KiB /usr/share/licenses/coreutils-single/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
