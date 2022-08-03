@@ -36,9 +36,9 @@ ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /usr/li
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     enable_extra nginx1 && \
-    install_rpm nginx-filesystem \
+    install_rpm nginx-filesystem \         
         nginx && \
-    if_al2022 install_rpm nginx-mimetypes && \
+    if_al2022 install_rpm nginx-core nginx-mimetypes && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
     install_rpm bash ncurses-base \
         coreutils && \

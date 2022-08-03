@@ -58,7 +58,7 @@
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
--rwxr-xr-x    68KiB /usr/bin/gencat
+-rwxr-xr-x    69KiB /usr/bin/gencat
 -rwxr-xr-x    68KiB /usr/bin/getconf
 -rwxr-xr-x    69KiB /usr/bin/getent
 -rwxr-xr-x    70KiB /usr/bin/iconv
@@ -68,13 +68,13 @@
 -rwxr-xr-x    69KiB /usr/bin/nsenter
 -rwxr-xr-x    68KiB /usr/bin/pldd
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
--rwxr-xr-x    68KiB /usr/bin/sprof
+-rwxr-xr-x    69KiB /usr/bin/sprof
 -rwxr-xr-x    15KiB /usr/bin/tzselect
 -rwxr-xr-x   1.3KiB /usr/bin/update-ca-trust
 -rwxr-xr-x    68KiB /usr/bin/zdump
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   818KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   844KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -130,8 +130,8 @@
 -rwxr-xr-x    68KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    68KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    68KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
--rwxr-xr-x    69KiB /usr/lib64/librt.so.1
+-rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    68KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   721KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
@@ -155,8 +155,8 @@
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
 -rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
@@ -1971,7 +1971,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   2.8MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   2.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
