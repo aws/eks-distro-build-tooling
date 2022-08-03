@@ -24,7 +24,7 @@ al2022:
   eks-distro-minimal-base-csi-ebs: 2022-08-02-1659466868.2022
   eks-distro-minimal-base-haproxy: 2022-08-02-1659466868.2022
   eks-distro-minimal-base-kind: 2022-08-02-1659466868.2022
-  eks-distro-minimal-base-nginx: 2022-08-02-1659466868.2022
+  eks-distro-minimal-base-nginx: null
   eks-distro-minimal-base-git: null
   eks-distro-minimal-base-nsenter: 2022-08-02-1659466868.2022
   eks-distro-minimal-base-python3.9: null
