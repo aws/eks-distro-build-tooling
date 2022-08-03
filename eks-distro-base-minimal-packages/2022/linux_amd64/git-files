@@ -20,7 +20,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   4.4KiB /etc/ld.so.cache
+-rw-r--r--   4.1KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
@@ -61,7 +61,7 @@
 -rw-r--r--     141B /etc/skel/.bash_profile
 -rw-r--r--     492B /etc/skel/.bashrc
 -rw-r--r--   1.9KiB /etc/ssh/ssh_config
--rw-r--r--     831B /etc/ssh/ssh_config.d/50-redhat.conf
+-rw-r--r--     581B /etc/ssh/ssh_config.d/50-redhat.conf
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
 -rwxr-xr-x     434B /etc/update-motd.d/70-available-updates
@@ -75,28 +75,29 @@
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
 -rwxr-xr-x      30B /usr/bin/cd
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x   445KiB /usr/bin/dirmngr
+-rwxr-xr-x   454KiB /usr/bin/dirmngr
 -rwxr-xr-x    57KiB /usr/bin/dirmngr-client
 -rwxr-xr-x      30B /usr/bin/fc
 -rwxr-xr-x      30B /usr/bin/fg
--rwxr-xr-x   116KiB /usr/bin/g13
+-rwxr-xr-x   112KiB /usr/bin/g13
 -rwxr-xr-x    29KiB /usr/bin/gencat
 -rwxr-xr-x    36KiB /usr/bin/getconf
 -rwxr-xr-x    37KiB /usr/bin/getent
 -rwxr-xr-x      35B /usr/bin/getopts
 -rwxr-xr-x   3.7MiB /usr/bin/git
--rwxr-xr-x   582KiB /usr/bin/git-shell
+-rwxr-xr-x   610KiB /usr/bin/git-shell
 -rwxr-xr-x   1.1MiB /usr/bin/gpg
--rwxr-xr-x   323KiB /usr/bin/gpg-agent
+-rwxr-xr-x   348KiB /usr/bin/gpg-agent
+-rwxr-xr-x   172KiB /usr/bin/gpg-card
 -rwxr-xr-x    86KiB /usr/bin/gpg-connect-agent
 -rwxr-xr-x    37KiB /usr/bin/gpg-error
--rwxr-xr-x   119KiB /usr/bin/gpg-wks-server
--rwxr-xr-x   3.5KiB /usr/bin/gpg-zip
--rwxr-xr-x   130KiB /usr/bin/gpgconf
--rwxr-xr-x    36KiB /usr/bin/gpgparsemail
+-rwxr-xr-x   131KiB /usr/bin/gpg-wks-client
+-rwxr-xr-x   123KiB /usr/bin/gpg-wks-server
+-rwxr-xr-x   110KiB /usr/bin/gpgconf
+-rwxr-xr-x    37KiB /usr/bin/gpgparsemail
 -rwxr-xr-x    29KiB /usr/bin/gpgsplit
 -rwxr-xr-x    66KiB /usr/bin/gpgtar
--rwxr-xr-x   277KiB /usr/bin/gpgv
+-rwxr-xr-x   297KiB /usr/bin/gpgv
 -rwxr-xr-x      32B /usr/bin/hash
 -rwxr-xr-x    66KiB /usr/bin/iconv
 -rwxr-xr-x      32B /usr/bin/jobs
@@ -106,11 +107,11 @@
 -rwxr-xr-x    33KiB /usr/bin/p11-kit
 -rwxr-xr-x    25KiB /usr/bin/pldd
 -rwxr-xr-x      32B /usr/bin/read
--rwxr-xr-x    64KiB /usr/bin/scp
--rwxr-xr-x   142KiB /usr/bin/sftp
+-rwxr-xr-x   134KiB /usr/bin/scp
+-rwxr-xr-x   146KiB /usr/bin/sftp
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    37KiB /usr/bin/sprof
--rwxr-xr-x   836KiB /usr/bin/ssh
+-rwxr-xr-x   840KiB /usr/bin/ssh
 -rwxr-xr-x   165KiB /usr/bin/ssh-add
 -rwxr-xr-x   285KiB /usr/bin/ssh-agent
 -rwxr-xr-x    13KiB /usr/bin/ssh-copy-id
@@ -122,7 +123,7 @@
 -rwxr-xr-x      35B /usr/bin/unalias
 -rwxr-xr-x   1.3KiB /usr/bin/update-ca-trust
 -rwxr-xr-x      32B /usr/bin/wait
--rwxr-xr-x    20KiB /usr/bin/watchgnupg
+-rwxr-xr-x    24KiB /usr/bin/watchgnupg
 -rwxr-xr-x    41KiB /usr/bin/xmlwf
 -rwxr-xr-x    28KiB /usr/bin/zdump
 -rw-r--r--   1.8KiB /usr/include/git2.h
@@ -255,13 +256,13 @@
 -rw-r--r--      65B /usr/lib64/.libgcrypt.so.20.hmac
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.0.hmac
 -rw-r--r--      65B /usr/lib64/.libgnutls.so.30.30.0.hmac
--rw-r--r--      65B /usr/lib64/.libhogweed.so.6.4.hmac
--rw-r--r--      65B /usr/lib64/.libnettle.so.8.4.hmac
+-rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
+-rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
--rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
+-rwxr-xr-x    25KiB /usr/lib64/engines-3/afalg.so
 -rwxr-xr-x    16KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    53KiB /usr/lib64/engines-3/loader_attic.so
--rwxr-xr-x    32KiB /usr/lib64/engines-3/padlock.so
+-rwxr-xr-x    33KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x    28KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    20KiB /usr/lib64/gconv/CP1252.so
@@ -275,14 +276,11 @@
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
 -rwxr-xr-x    89KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   871KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   897KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x    85KiB /usr/lib64/libassuan.so.0.8.5
--rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
--rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
--rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
 -rwxr-xr-x    79KiB /usr/lib64/libbz2.so.1.0.8
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
@@ -300,14 +298,14 @@
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
 -rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20220421.so.1
 -rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.3.3
--rwxr-xr-x   1.5MiB /usr/lib64/libgit2.so.1.3.1
+-rwxr-xr-x   1.5MiB /usr/lib64/libgit2.so.1.3.2
 -rwxr-xr-x   671KiB /usr/lib64/libgmp.so.10.4.0
 -rwxr-xr-x   2.1MiB /usr/lib64/libgnutls.so.30.30.0
 -rwxr-xr-x   150KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   351KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   139KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x    53KiB /usr/lib64/libhistory.so.8.1
--rwxr-xr-x   268KiB /usr/lib64/libhogweed.so.6.4
+-rwxr-xr-x   268KiB /usr/lib64/libhogweed.so.6.5
 -rwxr-xr-x   128KiB /usr/lib64/libidn2.so.0.3.7
 -rwxr-xr-x    97KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    89KiB /usr/lib64/libkdb5.so.10.0
@@ -317,14 +315,14 @@
 -rwxr-xr-x   267KiB /usr/lib64/libksba.so.8.14.0
 -rwxr-xr-x    70KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   358KiB /usr/lib64/libldap_r-2.4.so.2.11.5
--rwxr-xr-x   886KiB /usr/lib64/libm.so.6
+-rwxr-xr-x   885KiB /usr/lib64/libm.so.6
 -rwxr-xr-x    21KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    41KiB /usr/lib64/libmenu.so.6.2
 -rwxr-xr-x    41KiB /usr/lib64/libmenuw.so.6.2
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x   184KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
--rwxr-xr-x   306KiB /usr/lib64/libnettle.so.8.4
+-rwxr-xr-x   342KiB /usr/lib64/libnettle.so.8.5
 -rwxr-xr-x   162KiB /usr/lib64/libnghttp2.so.14.21.0
 -rwxr-xr-x    24KiB /usr/lib64/libnpth.so.0.1.2
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
@@ -341,17 +339,15 @@
 -rwxr-xr-x   627KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
--rwxr-xr-x    72KiB /usr/lib64/libpsl.so.5.3.3
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x   350KiB /usr/lib64/libreadline.so.8.1
--rwxr-xr-x    71KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   127KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   142KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   450KiB /usr/lib64/libssh.so.4.8.7
 -rwxr-xr-x     951B /usr/lib64/libssh2.la
 -rwxr-xr-x   954KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.3
@@ -376,68 +372,70 @@
 -rw-r--r--     219B /usr/lib64/pkgconfig/openssl.pc
 -rw-r--r--     240B /usr/lib64/pkgconfig/zlib.pc
 -rwxr-xr-x    20KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x    45KiB /usr/libexec/dirmngr_ldap
+-rwxr-xr-x    41KiB /usr/libexec/dirmngr_ldap
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x   2.1KiB /usr/libexec/git-core/git-bisect
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   607KiB /usr/libexec/git-core/git-http-backend
--rwxr-xr-x   677KiB /usr/libexec/git-core/git-http-fetch
--rwxr-xr-x  1020KiB /usr/libexec/git-core/git-http-push
--rwxr-xr-x   664KiB /usr/libexec/git-core/git-imap-send
+-rwxr-xr-x   635KiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   701KiB /usr/libexec/git-core/git-http-fetch
+-rwxr-xr-x   1.1MiB /usr/libexec/git-core/git-http-push
+-rwxr-xr-x   697KiB /usr/libexec/git-core/git-imap-send
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-merge-octopus
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-merge-one-file
 -rwxr-xr-x     948B /usr/libexec/git-core/git-merge-resolve
 -rwxr-xr-x    12KiB /usr/libexec/git-core/git-mergetool
--rw-r--r--   9.6KiB /usr/libexec/git-core/git-mergetool--lib
+-rw-r--r--   9.7KiB /usr/libexec/git-core/git-mergetool--lib
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
--rwxr-xr-x   709KiB /usr/libexec/git-core/git-remote-http
+-rwxr-xr-x   738KiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   581KiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   610KiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.6KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    12KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.4KiB /usr/libexec/git-core/git-web--browse
--rw-r--r--     358B /usr/libexec/git-core/mergetools/araxis
--rw-r--r--     423B /usr/libexec/git-core/mergetools/bc
--rw-r--r--     353B /usr/libexec/git-core/mergetools/codecompare
--rw-r--r--     663B /usr/libexec/git-core/mergetools/deltawalker
--rw-r--r--     309B /usr/libexec/git-core/mergetools/diffmerge
--rw-r--r--     248B /usr/libexec/git-core/mergetools/diffuse
--rw-r--r--     306B /usr/libexec/git-core/mergetools/ecmerge
--rw-r--r--     438B /usr/libexec/git-core/mergetools/emerge
--rw-r--r--     336B /usr/libexec/git-core/mergetools/examdiff
--rw-r--r--     263B /usr/libexec/git-core/mergetools/guiffy
+-rw-r--r--     515B /usr/libexec/git-core/mergetools/araxis
+-rw-r--r--     584B /usr/libexec/git-core/mergetools/bc
+-rw-r--r--     510B /usr/libexec/git-core/mergetools/codecompare
+-rw-r--r--     818B /usr/libexec/git-core/mergetools/deltawalker
+-rw-r--r--     460B /usr/libexec/git-core/mergetools/diffmerge
+-rw-r--r--     395B /usr/libexec/git-core/mergetools/diffuse
+-rw-r--r--     453B /usr/libexec/git-core/mergetools/ecmerge
+-rw-r--r--     535B /usr/libexec/git-core/mergetools/emerge
+-rw-r--r--     493B /usr/libexec/git-core/mergetools/examdiff
+-rw-r--r--     432B /usr/libexec/git-core/mergetools/guiffy
 -rw-r--r--      29B /usr/libexec/git-core/mergetools/gvimdiff
--rw-r--r--     673B /usr/libexec/git-core/mergetools/kdiff3
--rw-r--r--     117B /usr/libexec/git-core/mergetools/kompare
--rw-r--r--   2.0KiB /usr/libexec/git-core/mergetools/meld
+-rw-r--r--     818B /usr/libexec/git-core/mergetools/kdiff3
+-rw-r--r--     264B /usr/libexec/git-core/mergetools/kompare
+-rw-r--r--   2.2KiB /usr/libexec/git-core/mergetools/meld
 -rw-r--r--      29B /usr/libexec/git-core/mergetools/nvimdiff
--rw-r--r--     267B /usr/libexec/git-core/mergetools/opendiff
--rw-r--r--     264B /usr/libexec/git-core/mergetools/smerge
--rw-r--r--     258B /usr/libexec/git-core/mergetools/tkdiff
--rw-r--r--     602B /usr/libexec/git-core/mergetools/tortoisemerge
--rw-r--r--   1.2KiB /usr/libexec/git-core/mergetools/vimdiff
--rw-r--r--     361B /usr/libexec/git-core/mergetools/winmerge
--rw-r--r--     768B /usr/libexec/git-core/mergetools/xxdiff
+-rw-r--r--     418B /usr/libexec/git-core/mergetools/opendiff
+-rw-r--r--     423B /usr/libexec/git-core/mergetools/smerge
+-rw-r--r--     403B /usr/libexec/git-core/mergetools/tkdiff
+-rw-r--r--     761B /usr/libexec/git-core/mergetools/tortoisemerge
+-rw-r--r--    16KiB /usr/libexec/git-core/mergetools/vimdiff
+-rw-r--r--     510B /usr/libexec/git-core/mergetools/winmerge
+-rw-r--r--     913B /usr/libexec/git-core/mergetools/xxdiff
 -rwxr-xr-x    61KiB /usr/libexec/gpg-check-pattern
+-rwxr-xr-x    66KiB /usr/libexec/gpg-pair-tool
 -rwxr-xr-x    37KiB /usr/libexec/gpg-preset-passphrase
--rwxr-xr-x    90KiB /usr/libexec/gpg-protect-tool
--rwxr-xr-x   135KiB /usr/libexec/gpg-wks-client
+-rwxr-xr-x    86KiB /usr/libexec/gpg-protect-tool
+-rwxr-xr-x      50B /usr/libexec/gpg-wks-client
+-rwxr-xr-x   160KiB /usr/libexec/keyboxd
 -rwxr-xr-x   125KiB /usr/libexec/openssh/ssh-pkcs11-helper
--rwxr-xr-x   141KiB /usr/libexec/openssh/ssh-sk-helper
+-rwxr-xr-x   137KiB /usr/libexec/openssh/ssh-sk-helper
 -rwxr-xr-x    16KiB /usr/libexec/p11-kit/p11-kit-remote
--rwxr-xr-x   342KiB /usr/libexec/scdaemon
+-rwxr-xr-x   477KiB /usr/libexec/scdaemon
 -rwxr-xr-x   3.1KiB /usr/sbin/addgnupghome
 -rwxr-xr-x   2.2KiB /usr/sbin/applygnupgdefaults
--rwxr-xr-x    94KiB /usr/sbin/g13-syshelp
+-rwxr-xr-x    90KiB /usr/sbin/g13-syshelp
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
 -rwxr-xr-x    61KiB /usr/sbin/zic
 -rw-r--r--    78KiB /usr/share/bash-completion/completions/git
 -rw-r--r--     520B /usr/share/bash-completion/completions/p11-kit
 -rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
--rw-r--r--    57KiB /usr/share/doc/libgit2-1.3.1/COPYING
+-rw-r--r--    57KiB /usr/share/doc/libgit2-1.3.2/COPYING
 -rw-r--r--   2.0KiB /usr/share/doc/libssh2-1.10.0/COPYING
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -451,8 +449,8 @@
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
 -rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     733B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
 -rw-r--r--   4.8KiB /usr/share/git-core/contrib/completion/git-completion.tcsh
 -rw-r--r--    18KiB /usr/share/git-core/contrib/completion/git-prompt.sh
@@ -471,7 +469,7 @@
 -rwxr-xr-x   2.8KiB /usr/share/git-core/templates/hooks/push-to-checkout.sample
 -rwxr-xr-x   3.6KiB /usr/share/git-core/templates/hooks/update.sample
 -rw-r--r--     240B /usr/share/git-core/templates/info/exclude
--rw-r--r--   2.9KiB /usr/share/gnupg/distsigkey.gpg
+-rw-r--r--   3.9KiB /usr/share/gnupg/distsigkey.gpg
 -rw-r--r--   9.6KiB /usr/share/gnupg/help.be.txt
 -rw-r--r--   9.6KiB /usr/share/gnupg/help.ca.txt
 -rw-r--r--   9.6KiB /usr/share/gnupg/help.cs.txt
@@ -487,7 +485,7 @@
 -rw-r--r--   8.1KiB /usr/share/gnupg/help.hu.txt
 -rw-r--r--   7.4KiB /usr/share/gnupg/help.id.txt
 -rw-r--r--   7.6KiB /usr/share/gnupg/help.it.txt
--rw-r--r--    14KiB /usr/share/gnupg/help.ja.txt
+-rw-r--r--    16KiB /usr/share/gnupg/help.ja.txt
 -rw-r--r--   9.6KiB /usr/share/gnupg/help.nb.txt
 -rw-r--r--   7.4KiB /usr/share/gnupg/help.pl.txt
 -rw-r--r--   7.7KiB /usr/share/gnupg/help.pt.txt
@@ -497,16 +495,17 @@
 -rw-r--r--   7.9KiB /usr/share/gnupg/help.sk.txt
 -rw-r--r--   9.6KiB /usr/share/gnupg/help.sv.txt
 -rw-r--r--   7.5KiB /usr/share/gnupg/help.tr.txt
--rw-r--r--    13KiB /usr/share/gnupg/help.txt
--rw-r--r--   7.0KiB /usr/share/gnupg/help.zh_CN.txt
--rw-r--r--   7.0KiB /usr/share/gnupg/help.zh_TW.txt
+-rw-r--r--    14KiB /usr/share/gnupg/help.txt
+-rw-r--r--    13KiB /usr/share/gnupg/help.zh_CN.txt
+-rw-r--r--    13KiB /usr/share/gnupg/help.zh_TW.txt
 -rw-r--r--   2.0KiB /usr/share/gnupg/sks-keyservers.netCA.pem
 -rw-r--r--   141KiB /usr/share/info/bash.info.gz
 -rw-r--r--    90KiB /usr/share/info/gnupg.info-1.gz
--rw-r--r--    67KiB /usr/share/info/gnupg.info-2.gz
+-rw-r--r--    79KiB /usr/share/info/gnupg.info-2.gz
+-rw-r--r--   1.9KiB /usr/share/info/gnupg.info-3.gz
 -rw-r--r--   2.8KiB /usr/share/info/gnupg.info.gz
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
--rw-r--r--    68KiB /usr/share/info/nettle.info.gz
+-rw-r--r--    69KiB /usr/share/info/nettle.info.gz
 -rw-r--r--    26KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    39KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    35KiB /usr/share/licenses/bash/COPYING
@@ -529,7 +528,6 @@
 -rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/libassuan/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libassuan/COPYING.LIB
--rw-r--r--   1.1KiB /usr/share/licenses/libbrotli/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libcbor/LICENSE.md
 -rw-r--r--    44KiB /usr/share/licenses/libcom_err/NOTICE
 -rw-r--r--   1.1KiB /usr/share/licenses/libcurl-minimal/COPYING
@@ -553,10 +551,8 @@
 -rw-r--r--    35KiB /usr/share/licenses/libksba/COPYING.GPLv3
 -rw-r--r--   7.5KiB /usr/share/licenses/libksba/COPYING.LGPLv3
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2/COPYING
--rw-r--r--   1.1KiB /usr/share/licenses/libpsl/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
--rw-r--r--    25KiB /usr/share/licenses/libssh/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/libtasn1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libtasn1/COPYING.LESSER
 -rw-r--r--     605B /usr/share/licenses/libtasn1/LICENSE
@@ -588,29 +584,29 @@
 -rw-r--r--     491B /usr/share/locale/ast/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     484B /usr/share/locale/az/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   215KiB /usr/share/locale/bg/LC_MESSAGES/bash.mo
--rw-r--r--   822KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
+-rw-r--r--   852KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
 -rw-r--r--     486B /usr/share/locale/bg/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     494B /usr/share/locale/bn_IN/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   141KiB /usr/share/locale/ca/LC_MESSAGES/bash.mo
--rw-r--r--   608KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
--rw-r--r--    44KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   605KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
+-rw-r--r--    43KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   8.0KiB /usr/share/locale/ca/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     510B /usr/share/locale/ca@valencia/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   161KiB /usr/share/locale/cs/LC_MESSAGES/bash.mo
--rw-r--r--   232KiB /usr/share/locale/cs/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   222KiB /usr/share/locale/cs/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/cs/LC_MESSAGES/gnutls.mo
 -rw-r--r--    22KiB /usr/share/locale/cs/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.5KiB /usr/share/locale/cs/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.7KiB /usr/share/locale/cs/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     523B /usr/share/locale/cy/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    71KiB /usr/share/locale/da/LC_MESSAGES/bash.mo
--rw-r--r--   134KiB /usr/share/locale/da/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   129KiB /usr/share/locale/da/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    21KiB /usr/share/locale/da/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   4.7KiB /usr/share/locale/da/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.7KiB /usr/share/locale/da/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    93KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
--rw-r--r--   625KiB /usr/share/locale/de/LC_MESSAGES/git.mo
--rw-r--r--   237KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   634KiB /usr/share/locale/de/LC_MESSAGES/git.mo
+-rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    25KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
 -rw-r--r--    35KiB /usr/share/locale/de/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.6KiB /usr/share/locale/de/LC_MESSAGES/libidn2.mo
@@ -618,41 +614,41 @@
 -rw-r--r--   8.4KiB /usr/share/locale/de/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    73KiB /usr/share/locale/el/LC_MESSAGES/bash.mo
 -rw-r--r--   176KiB /usr/share/locale/el/LC_MESSAGES/git.mo
--rw-r--r--    58KiB /usr/share/locale/el/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    57KiB /usr/share/locale/el/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/el/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   170KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
--rw-r--r--   215KiB /usr/share/locale/en@boldquot/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   218KiB /usr/share/locale/en@boldquot/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   168KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
--rw-r--r--   213KiB /usr/share/locale/en@quot/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   215KiB /usr/share/locale/en@quot/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   7.5KiB /usr/share/locale/en_GB/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     369B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   149KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
--rw-r--r--    29KiB /usr/share/locale/eo/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    28KiB /usr/share/locale/eo/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    33KiB /usr/share/locale/eo/LC_MESSAGES/gnutls.mo
 -rw-r--r--    16KiB /usr/share/locale/eo/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.3KiB /usr/share/locale/eo/LC_MESSAGES/libidn2.mo
 -rw-r--r--   1.5KiB /usr/share/locale/eo/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   159KiB /usr/share/locale/es/LC_MESSAGES/bash.mo
--rw-r--r--   593KiB /usr/share/locale/es/LC_MESSAGES/git.mo
--rw-r--r--   220KiB /usr/share/locale/es/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   559KiB /usr/share/locale/es/LC_MESSAGES/git.mo
+-rw-r--r--   211KiB /usr/share/locale/es/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/es/LC_MESSAGES/gnutls.mo
 -rw-r--r--    27KiB /usr/share/locale/es/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   1.4KiB /usr/share/locale/es/LC_MESSAGES/libidn2.mo
 -rw-r--r--   8.0KiB /usr/share/locale/es/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    12KiB /usr/share/locale/et/LC_MESSAGES/bash.mo
--rw-r--r--    42KiB /usr/share/locale/et/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    41KiB /usr/share/locale/et/LC_MESSAGES/gnupg2.mo
 -rw-r--r--     481B /usr/share/locale/et/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     483B /usr/share/locale/eu/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     477B /usr/share/locale/fa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    73KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
--rw-r--r--    44KiB /usr/share/locale/fi/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    43KiB /usr/share/locale/fi/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/fi/LC_MESSAGES/gnutls.mo
 -rw-r--r--    1020B /usr/share/locale/fi/LC_MESSAGES/libidn2.mo
 -rw-r--r--   8.0KiB /usr/share/locale/fi/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     480B /usr/share/locale/fo/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   164KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
--rw-r--r--   625KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
--rw-r--r--   207KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   634KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
+-rw-r--r--   198KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/fr/LC_MESSAGES/gnutls.mo
 -rw-r--r--    23KiB /usr/share/locale/fr/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.6KiB /usr/share/locale/fr/LC_MESSAGES/libidn2.mo
@@ -671,26 +667,26 @@
 -rw-r--r--   1.1KiB /usr/share/locale/hr/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.6KiB /usr/share/locale/hr/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   158KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
--rw-r--r--    45KiB /usr/share/locale/hu/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    44KiB /usr/share/locale/hu/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    18KiB /usr/share/locale/hu/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   5.2KiB /usr/share/locale/hu/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.8KiB /usr/share/locale/hu/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     488B /usr/share/locale/ia/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    86KiB /usr/share/locale/id/LC_MESSAGES/bash.mo
--rw-r--r--   449KiB /usr/share/locale/id/LC_MESSAGES/git.mo
--rw-r--r--    42KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   477KiB /usr/share/locale/id/LC_MESSAGES/git.mo
+-rw-r--r--    41KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
 -rw-r--r--     968B /usr/share/locale/id/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.3KiB /usr/share/locale/id/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   1.9KiB /usr/share/locale/is/LC_MESSAGES/git.mo
 -rw-r--r--    84KiB /usr/share/locale/it/LC_MESSAGES/bash.mo
 -rw-r--r--   589KiB /usr/share/locale/it/LC_MESSAGES/git.mo
--rw-r--r--   230KiB /usr/share/locale/it/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   232KiB /usr/share/locale/it/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/it/LC_MESSAGES/gnutls.mo
 -rw-r--r--    21KiB /usr/share/locale/it/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--     937B /usr/share/locale/it/LC_MESSAGES/libidn2.mo
 -rw-r--r--   8.1KiB /usr/share/locale/it/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    98KiB /usr/share/locale/ja/LC_MESSAGES/bash.mo
--rw-r--r--   242KiB /usr/share/locale/ja/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   245KiB /usr/share/locale/ja/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    38KiB /usr/share/locale/ja/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--     669B /usr/share/locale/ja/LC_MESSAGES/libidn2.mo
 -rw-r--r--   8.9KiB /usr/share/locale/ja/LC_MESSAGES/p11-kit.mo
@@ -709,7 +705,7 @@
 -rw-r--r--    20KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   150KiB /usr/share/locale/nb/LC_MESSAGES/bash.mo
--rw-r--r--   215KiB /usr/share/locale/nb/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   207KiB /usr/share/locale/nb/LC_MESSAGES/gnupg2.mo
 -rw-r--r--     490B /usr/share/locale/nb/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   157KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
 -rw-r--r--    24KiB /usr/share/locale/nl/LC_MESSAGES/gnutls.mo
@@ -722,13 +718,13 @@
 -rw-r--r--   9.9KiB /usr/share/locale/pa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   160KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
 -rw-r--r--   600KiB /usr/share/locale/pl/LC_MESSAGES/git.mo
--rw-r--r--   234KiB /usr/share/locale/pl/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   225KiB /usr/share/locale/pl/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/pl/LC_MESSAGES/gnutls.mo
 -rw-r--r--    35KiB /usr/share/locale/pl/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.5KiB /usr/share/locale/pl/LC_MESSAGES/libidn2.mo
 -rw-r--r--   8.1KiB /usr/share/locale/pl/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   156KiB /usr/share/locale/pt/LC_MESSAGES/bash.mo
--rw-r--r--    37KiB /usr/share/locale/pt/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    36KiB /usr/share/locale/pt/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    21KiB /usr/share/locale/pt/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   7.8KiB /usr/share/locale/pt/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   160KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
@@ -737,13 +733,13 @@
 -rw-r--r--   8.0KiB /usr/share/locale/pt_BR/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   477KiB /usr/share/locale/pt_PT/LC_MESSAGES/git.mo
 -rw-r--r--    14KiB /usr/share/locale/ro/LC_MESSAGES/bash.mo
--rw-r--r--    83KiB /usr/share/locale/ro/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    82KiB /usr/share/locale/ro/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    15KiB /usr/share/locale/ro/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   5.0KiB /usr/share/locale/ro/LC_MESSAGES/libidn2.mo
 -rw-r--r--     522B /usr/share/locale/ro/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   123KiB /usr/share/locale/ru/LC_MESSAGES/bash.mo
--rw-r--r--   522KiB /usr/share/locale/ru/LC_MESSAGES/git.mo
--rw-r--r--   297KiB /usr/share/locale/ru/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   474KiB /usr/share/locale/ru/LC_MESSAGES/git.mo
+-rw-r--r--   285KiB /usr/share/locale/ru/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    39KiB /usr/share/locale/ru/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.2KiB /usr/share/locale/ru/LC_MESSAGES/libidn2.mo
 -rw-r--r--    11KiB /usr/share/locale/ru/LC_MESSAGES/p11-kit.mo
@@ -760,8 +756,8 @@
 -rw-r--r--   9.7KiB /usr/share/locale/sr/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     574B /usr/share/locale/sr@latin/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   154KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
--rw-r--r--   590KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
--rw-r--r--   134KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   598KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
+-rw-r--r--   130KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
 -rw-r--r--    17KiB /usr/share/locale/sv/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   4.8KiB /usr/share/locale/sv/LC_MESSAGES/libidn2.mo
@@ -770,33 +766,33 @@
 -rw-r--r--     483B /usr/share/locale/te/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     470B /usr/share/locale/th/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   124KiB /usr/share/locale/tr/LC_MESSAGES/bash.mo
--rw-r--r--   608KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
--rw-r--r--   132KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   617KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
+-rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   7.5KiB /usr/share/locale/tr/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   205KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
--rw-r--r--   302KiB /usr/share/locale/uk/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   290KiB /usr/share/locale/uk/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    43KiB /usr/share/locale/uk/LC_MESSAGES/gnutls.mo
 -rw-r--r--    45KiB /usr/share/locale/uk/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   8.1KiB /usr/share/locale/uk/LC_MESSAGES/libidn2.mo
 -rw-r--r--    11KiB /usr/share/locale/uk/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   136KiB /usr/share/locale/vi/LC_MESSAGES/bash.mo
--rw-r--r--   674KiB /usr/share/locale/vi/LC_MESSAGES/git.mo
+-rw-r--r--   684KiB /usr/share/locale/vi/LC_MESSAGES/git.mo
 -rw-r--r--    26KiB /usr/share/locale/vi/LC_MESSAGES/gnutls.mo
 -rw-r--r--    18KiB /usr/share/locale/vi/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   1.1KiB /usr/share/locale/vi/LC_MESSAGES/libidn2.mo
 -rw-r--r--     476B /usr/share/locale/vi/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     479B /usr/share/locale/wa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   145KiB /usr/share/locale/zh_CN/LC_MESSAGES/bash.mo
--rw-r--r--   559KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
--rw-r--r--   207KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   567KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
+-rw-r--r--   215KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    22KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnutls.mo
 -rw-r--r--    31KiB /usr/share/locale/zh_CN/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   6.1KiB /usr/share/locale/zh_CN/LC_MESSAGES/libidn2.mo
 -rw-r--r--   6.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     495B /usr/share/locale/zh_HK/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   146KiB /usr/share/locale/zh_TW/LC_MESSAGES/bash.mo
--rw-r--r--   561KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
--rw-r--r--   180KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
+-rw-r--r--   569KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
+-rw-r--r--   172KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    32KiB /usr/share/locale/zh_TW/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--     548B /usr/share/locale/zh_TW/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.1KiB /usr/share/man/man1/ssh-copy-id.1.gz
@@ -2739,7 +2735,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   5.7KiB /var/cache/ldconfig/aux-cache
+-rw-------   5.4KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   3.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -2778,13 +2774,10 @@ lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.0.hmac
 lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.30.0.hmac
-lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.4.hmac
-lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.4.hmac
+lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
+lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
-lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
-lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
-lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9
 lrwxrwxrwx      15B /usr/lib64/libbz2.so.1 libbz2.so.1.0.8
 lrwxrwxrwx      16B /usr/lib64/libcbor.so.0.7 libcbor.so.0.7.0
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
@@ -2800,14 +2793,14 @@ lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
 lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20220421.so.1
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.3.3
 lrwxrwxrwx      14B /usr/lib64/libgit2.so libgit2.so.1.3
-lrwxrwxrwx      16B /usr/lib64/libgit2.so.1.3 libgit2.so.1.3.1
+lrwxrwxrwx      16B /usr/lib64/libgit2.so.1.3 libgit2.so.1.3.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.0
 lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.30.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
 lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2 libgssapi_krb5.so.2.2
 lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
-lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.4
+lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.5
 lrwxrwxrwx      16B /usr/lib64/libidn2.so.0 libidn2.so.0.3.7
 lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3 libk5crypto.so.3.1
 lrwxrwxrwx      15B /usr/lib64/libkdb5.so.10 libkdb5.so.10.0
@@ -2821,7 +2814,7 @@ lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.2
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.4
+lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.5
 lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.21.0
 lrwxrwxrwx      16B /usr/lib64/libnpth.so.0 libnpth.so.0.1.2
 lrwxrwxrwx      19B /usr/lib64/libp11-kit.so.0 libp11-kit.so.0.3.0
@@ -2831,16 +2824,12 @@ lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
-lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.3
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3 libsasl2.so.3.0.0
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.8.7
 lrwxrwxrwx      16B /usr/lib64/libssh2.so libssh2.so.1.0.1
 lrwxrwxrwx      16B /usr/lib64/libssh2.so.1 libssh2.so.1.0.1
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.8.7
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.8.7 libssh.so.4.8.7
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.3
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.0

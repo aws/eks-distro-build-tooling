@@ -237,11 +237,11 @@ test-all-minimal-images: $(addprefix test-minimal-images-, $(MINIMAL_VARIANTS))
 
 .PHONY: update-%
 update-%:
-	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
+	echo "false" > $(MAKE_ROOT)/$(IMAGE_NAME)$(VERSIONED_VARIANT)-pushed
 	$(eval RETURN_MESSAGE="$(shell ./check_update.sh $(IMAGE_NAME) $(AL_TAG) $(VERSIONED_VARIANT) )")
 	if [ $(RETURN_MESSAGE) = "Updates required" ]; then \
 		$(MAKE) $(UPDATE_TARGET); \
-		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed; \
+		echo "true" > $(MAKE_ROOT)/$(IMAGE_NAME)$(VERSIONED_VARIANT)-pushed; \
 	elif [ $(RETURN_MESSAGE) = "Error" ]; then \
 		exit 1; \
 	fi
