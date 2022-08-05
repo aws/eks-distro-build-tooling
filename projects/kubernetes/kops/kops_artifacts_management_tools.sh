@@ -117,14 +117,14 @@ sync_artifacts_to_s3() {
     echo "this is not a dry run!"
   fi
 
-  public_acl_argument=" "
+  public_acl_argument=""
   if [ "$public_read" = "true" ]; then
-    public_acl_argument=" --acl public-read "
+    public_acl_argument="--acl public-read"
   fi
 
   if [ "$dry_run" = "true" ]; then
-  aws s3 cp $src_dir s3://${artifact_bucket}/${dest_dir}${public_acl_argument}--recursive --dryrun
+  aws s3 cp $src_dir s3://${artifact_bucket}/${dest_dir} --recursive --dryrun ${public_acl_argument}
     else
-  aws s3 sync $src_dir s3://${artifact_bucket}/${dest_dir}${public_acl_argument}
+  aws s3 sync $src_dir s3://${artifact_bucket}/${dest_dir} ${public_acl_argument}
 fi
 }
