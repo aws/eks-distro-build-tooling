@@ -5,8 +5,13 @@ CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/kops
 KOPS_VERSION_TAG?="v1.23.2"
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 
+ARTIFACTS_BUCKET?=""
+
 .PHONY: build
-build: clone-kops patch-nodeup build-nodeup pull-binaries pull-images copy-nodeup-binaries
+build: clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries
+
+.PHONY: release
+release: build sync-artifacts-to-s3
 
 .PHONY: clone-kops
 clone-kops:
@@ -29,9 +34,18 @@ pull-binaries:
 pull-images:
 	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && fetch_kops_images
 
-.PHONY: copy-nodeup-binaries
-copy-nodeup-binaries:
-	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && copy_nodeup_binaries
+.PHONY: move-nodeup-binaries
+move-nodeup-binaries:
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && move_nodeup_binaries
+
+.PHONY: sync-artifacts-to-s3-dry-run
+sync-artifacts-to-s3-dry-run:
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops false true
+
+
+.PHONY: sync-artifacts-to-s3
+sync-artifacts-to-s3:
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops false false
 
 .PHONY: clean
 clean:

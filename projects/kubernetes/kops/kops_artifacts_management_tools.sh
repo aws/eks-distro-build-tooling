@@ -62,7 +62,7 @@ fetch_kops_images() {
   do
       for ARCH in "${SUPPORTED_ARCHS[@]}"
       do
-        local image_name="$IMAGE-{$ARCH}{$TARBALL_SUFFIX}"
+        local image_name="$IMAGE-${ARCH}${TARBALL_SUFFIX}"
         local image_output_dir="$OUTPUT_DIR/$KOPS_VERSION_TAG/images"
         local image_url="$KOPS_BINARIES_BASE_URL/$KOPS_VERSION_TAG/images/$image_name"
         local image_checksum_url="${image_url}${SHA_SUFFIX}"
@@ -84,4 +84,47 @@ move_nodeup_binaries() {
       shasum -a 256 "$binary_path" | cut -d " " -f 1 >> "${binary_upload_path}${SHA_SUFFIX}"
     done
   done
+}
+
+sync_artifacts_to_s3() {
+  local artifact_bucket=$1
+  local src_dir=$2
+  local dest_dir=$3
+  local public_read=$4
+  local dry_run=$5
+
+  if [ $# -le 3 ] ; then
+    echo "not enough parameters supplied!"
+  fi
+
+  if [ -z "$1" ] ; then
+    echo "first parameter, target artifacts s3 bucket, is required!" && exit 1;
+  fi
+
+  if [ -z "$2" ] ; then
+    echo "second parameter source directory is required!" && exit 1;
+  fi
+
+  if [ -z "$3" ] ; then
+    echo "third parameter destination directory is required!" && exit 1;
+  fi
+
+  if [ -z "$4" ] ; then
+    echo "fourth parameter, public read for s3, is required" && exit 1;
+  fi
+
+  if [ -z "$5" ] ; then
+    echo "this is not a dry run!"
+  fi
+
+  public_acl_argument=" "
+  if [ "$public_read" = "true" ]; then
+    public_acl_argument=" --acl public-read "
+  fi
+
+  if [ "$dry_run" = "true" ]; then
+  aws s3 cp $src_dir s3://${artifact_bucket}/${dest_dir}${public_acl_argument}--recursive --dryrun
+    else
+  aws s3 sync $src_dir s3://${artifact_bucket}/${dest_dir}${public_acl_argument}
+fi
 }
