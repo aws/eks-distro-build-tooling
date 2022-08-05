@@ -6,7 +6,7 @@ KOPS_VERSION_TAG?="v1.23.2"
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 NODEUP_FLANNEL_PLUGIN_PATCH="0001-remove-hardcoded-requierment-on-flannel-plugin.patch"
 
-.PHONY build:
+.PHONY: build
 build: clone-kops patch-nodeup build-nodeup pull-binaries pull-images copy-nodeup-binaries
 
 .PHONY: clone-kops
