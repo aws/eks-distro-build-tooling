@@ -8,7 +8,7 @@ KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 ARTIFACTS_BUCKET?=""
 
 .PHONY: build
-build: clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries
+build: clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries sync-artifacts-to-s3-dry-run
 
 .PHONY: release
 release: build sync-artifacts-to-s3
@@ -20,7 +20,7 @@ clone-kops:
 .PHONY: patch-nodeup
 patch-nodeup:
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am ../patches/*
+	git -C $(CLONED_REPO_DIRECTORY) am $(PROJECT_DIRECTORY)/patches/*
 
 .PHONY: build-nodeup
 build-nodeup:
