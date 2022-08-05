@@ -16,7 +16,7 @@ clone-kops:
 .PHONY: patch-nodeup
 patch-nodeup:
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am ../patches/$(NODEUP_FLANNEL_PLUGIN_PATCH)
+	git -C $(CLONED_REPO_DIRECTORY) am ../patches/*
 
 .PHONY: build-nodeup
 build-nodeup:
