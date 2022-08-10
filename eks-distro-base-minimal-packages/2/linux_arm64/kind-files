@@ -1,6 +1,6 @@
 ****************** Regular Files ******************
 
--rw-rw-rw-       0B /dev/null
+-rw-rw-rw-      40B /dev/null
 -rw-------       0B /etc/.pwd.lock
 -rw-r--r--   5.0KiB /etc/DIR_COLORS
 -rw-r--r--   5.6KiB /etc/DIR_COLORS.256color
@@ -10,7 +10,7 @@
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
--rw-r--r--   4.3KiB /etc/containerd/config.toml
+-rw-r--r--   7.4KiB /etc/containerd/config.toml
 -rw-r--r--   1.6KiB /etc/csh.cshrc
 -rw-r--r--     866B /etc/csh.login
 -rw-r--r--     838B /etc/dbus-1/session.conf
@@ -29,9 +29,9 @@
 -rw-r--r--       0B /etc/exports
 -rw-r--r--      70B /etc/filesystems
 -rw-r--r--     245B /etc/group
--rw-r--r--     231B /etc/group-
+-rw-r--r--     234B /etc/group-
 ----------     304B /etc/gshadow
-----------     292B /etc/gshadow-
+----------     303B /etc/gshadow-
 -rw-r--r--     189B /etc/gss/mech.d/gssproxy.conf
 -rw-------     152B /etc/gssproxy/24-nfs-server.conf
 -rw-------     276B /etc/gssproxy/99-nfs-client.conf
@@ -215,10 +215,10 @@
 -rwxr-xr-x    69KiB /usr/bin/column
 -rwxr-xr-x    69KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
--rwxr-xr-x    36MiB /usr/bin/containerd
--rwxr-xr-x   5.9MiB /usr/bin/containerd-shim
--rwxr-xr-x   7.7MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x   7.7MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    37MiB /usr/bin/containerd
+-rwxr-xr-x   6.9MiB /usr/bin/containerd-shim
+-rwxr-xr-x   8.8MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x   8.9MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   199KiB /usr/bin/coredumpctl
 -rwxr-xr-x   200KiB /usr/bin/cp
 -rwxr-xr-x   203KiB /usr/bin/cpio
@@ -1384,7 +1384,7 @@
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
 -rwxr-xr-x   133KiB /usr/lib64/gssproxy/proxymech.so
 -rwxr-xr-x    68KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    69KiB /usr/lib64/libacl.so.1.1.0
@@ -4131,7 +4131,7 @@
 -rwxr-xr-x    69KiB /usr/sbin/rtcwake
 -rwxr-xr-x   134KiB /usr/sbin/rtmon
 -rwxr-xr-x      70B /usr/sbin/rtpr
--rwxr-xr-x    11MiB /usr/sbin/runc
+-rwxr-xr-x   9.1MiB /usr/sbin/runc
 -rwxr-xr-x    69KiB /usr/sbin/runuser
 -rwxr-xr-x    68KiB /usr/sbin/safe_finger
 -rwxr-xr-x    68KiB /usr/sbin/sasldblistusers2
@@ -4514,7 +4514,7 @@
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-1.4.13/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-1.6.6/LICENSE
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
 -rw-r--r--    29KiB /usr/share/licenses/dbus-1.10.24/COPYING
@@ -4568,7 +4568,7 @@
 -rw-r--r--   1.4KiB /usr/share/licenses/oniguruma-5.9.6/COPYING
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.0.3/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.1.3/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1
@@ -8309,7 +8309,7 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   632KiB /var/lib/rpm/Basenames
+-rw-r--r--   636KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   148KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -8317,8 +8317,8 @@
 -rw-r--r--    16KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.4MiB /var/lib/rpm/Packages
--rw-r--r--    96KiB /var/lib/rpm/Providename
--rw-r--r--    80KiB /var/lib/rpm/Requirename
+-rw-r--r--    92KiB /var/lib/rpm/Providename
+-rw-r--r--    76KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -8326,7 +8326,7 @@
 -rw-------       0B /var/lib/systemd/random-seed
 -rw-------       0B /var/log/btmp
 -rw-r--r--    24KiB /var/log/lastlog
--rw-------      40B /var/log/tallylog
+-rw-------       0B /var/log/tallylog
 -rw-rw-r--       0B /var/log/wtmp
 -rw-------       0B /var/spool/mail/rpc
 
