@@ -11,12 +11,12 @@ krb5-libs-1.15.1-37.amzn2.2.4.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
 libcom_err-1.42.9-19.amzn2.aarch64
-libcrypt-2.26-59.amzn2.aarch64
+libcrypt-2.26-60.amzn2.aarch64
 libgcc-7.3.1-15.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
 libstdc++-7.3.1-15.amzn2.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.3.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.4.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.aarch64
