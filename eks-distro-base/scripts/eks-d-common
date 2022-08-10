@@ -96,7 +96,7 @@ function build::common::binary_to_libraries() {
         # clean up potential core dump files
         echo "ldd segfaulted for ${binary}, falling back to objdump: ${ldd_output}"
         rm -f core.* *.core
-        needed_libraries=$(objdump -x "${binary}" | { grep NEEDED || true; } | awk '{print $2}')
+        needed_libraries=$({ objdump -x "${binary}" || true; } | { grep NEEDED || true; } | awk '{print $2}')
         objdump_fallback="true"
     else
         if [[ $ldd_output = *"not a dynamic executable"* ]] || [[ $ldd_output = *"statically"* ]]; then
