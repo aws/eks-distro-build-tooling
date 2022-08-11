@@ -1,9 +1,9 @@
 basesystem-11-11.amzn2022.noarch
 ca-certificates-2021.2.50-1.0.amzn2022.0.2.noarch
 filesystem-3.14-5.amzn2022.x86_64
-glibc-2.34-38.amzn2022.0.2.x86_64
-glibc-common-2.34-38.amzn2022.0.2.x86_64
-glibc-minimal-langpack-2.34-38.amzn2022.0.2.x86_64
+glibc-2.34-40.amzn2022.0.1.x86_64
+glibc-common-2.34-40.amzn2022.0.1.x86_64
+glibc-minimal-langpack-2.34-40.amzn2022.0.1.x86_64
 gpg-pubkey-afaa0026-6185c6ab
 libgcc-11.3.1-2.amzn2022.0.5.x86_64
 libselinux-3.2-1.amzn2022.0.1.x86_64
@@ -12,6 +12,6 @@ libstdc++-11.3.1-2.amzn2022.0.5.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
-system-release-2022.0.20220728-0.amzn2022.noarch
+system-release-2022.0.20220810-0.amzn2022.noarch
 tzdata-2022a-1.amzn2022.noarch
-util-linux-core-2.37.4-1.amzn2022.x86_64
+util-linux-core-2.37.4-1.amzn2022.0.1.x86_64

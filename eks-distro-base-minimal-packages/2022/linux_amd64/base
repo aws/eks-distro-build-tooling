@@ -3,5 +3,5 @@ ca-certificates-2021.2.50-1.0.amzn2022.0.2.noarch
 filesystem-3.14-5.amzn2022.x86_64
 gpg-pubkey-afaa0026-6185c6ab
 setup-2.13.7-3.amzn2022.noarch
-system-release-2022.0.20220728-0.amzn2022.noarch
+system-release-2022.0.20220810-0.amzn2022.noarch
 tzdata-2022a-1.amzn2022.noarch

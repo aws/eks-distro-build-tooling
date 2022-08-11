@@ -66,7 +66,7 @@
 -rwxr-xr-x    36KiB /usr/bin/getconf
 -rwxr-xr-x    37KiB /usr/bin/getent
 -rwxr-xr-x    66KiB /usr/bin/iconv
--rwxr-xr-x    32KiB /usr/bin/kill
+-rwxr-xr-x    33KiB /usr/bin/kill
 -rwxr-xr-x   5.4KiB /usr/bin/ldd
 -rwxr-xr-x    61KiB /usr/bin/locale
 -rwxr-xr-x   316KiB /usr/bin/localedef
@@ -1998,7 +1998,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   2.0KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   2.9MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.0MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
