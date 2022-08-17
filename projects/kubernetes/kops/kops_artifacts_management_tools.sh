@@ -81,7 +81,7 @@ move_nodeup_binaries() {
       local binary_upload_path="$OUTPUT_DIR/$KOPS_VERSION_TAG/$PLATFORM/$ARCH/nodeup"
       cp "$binary_path" "$binary_upload_path"
       # While we're in here, we generate the checksums for the nodeup binaries and output them to the output dir
-      shasum -a 256 "$binary_path" | cut -d " " -f 1 >> "${binary_upload_path}${SHA_SUFFIX}"
+      sha256sum "$binary_path" | cut -d " " -f 1 >> "${binary_upload_path}${SHA_SUFFIX}"
     done
   done
 }
