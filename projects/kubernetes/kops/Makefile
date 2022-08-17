@@ -5,6 +5,9 @@ CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/kops
 KOPS_VERSION_TAG?="v1.23.2"
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 
+GITHUB_EMAIL?="prow@amazonaws.com"
+GITHUB_USER?="Prow Bot"
+
 .PHONY: build
 build: check-env clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries sync-artifacts-to-s3-dry-run
 
@@ -17,8 +20,10 @@ clone-kops:
 
 .PHONY: patch-nodeup
 patch-nodeup:
+	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
+	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am $(PROJECT_DIRECTORY)/patches/*
+	git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(PROJECT_DIRECTORY)/patches/*
 
 .PHONY: build-nodeup
 build-nodeup:
