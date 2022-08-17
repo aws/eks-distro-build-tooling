@@ -66,7 +66,7 @@
 -rwxr-xr-x    68KiB /usr/bin/getconf
 -rwxr-xr-x    69KiB /usr/bin/getent
 -rwxr-xr-x    70KiB /usr/bin/iconv
--rwxr-xr-x    68KiB /usr/bin/kill
+-rwxr-xr-x    69KiB /usr/bin/kill
 -rwxr-xr-x   5.3KiB /usr/bin/ldd
 -rwxr-xr-x    77KiB /usr/bin/locale
 -rwxr-xr-x   336KiB /usr/bin/localedef

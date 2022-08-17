@@ -327,9 +327,9 @@
 -rwxr-xr-x    70KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    68KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    68KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   198KiB /usr/lib64/libnss_myhostname.so.2
--rwxr-xr-x   134KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   329KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   199KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   135KiB /usr/lib64/libnss_resolve.so.2
+-rwxr-xr-x   330KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    68KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x    68KiB /usr/lib64/libpanelw.so.6.2
@@ -355,7 +355,7 @@
 -rwxr-xr-x    70KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    69KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   200KiB /usr/lib64/libtinfo.so.6.2
--rwxr-xr-x   199KiB /usr/lib64/libudev.so.1.7.3
+-rwxr-xr-x   200KiB /usr/lib64/libudev.so.1.7.3
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x   134KiB /usr/lib64/libusb-1.0.so.0.3.0
 -rwxr-xr-x    68KiB /usr/lib64/libutil.so.1
