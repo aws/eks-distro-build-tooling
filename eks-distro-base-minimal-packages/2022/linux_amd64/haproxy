@@ -15,7 +15,7 @@ openssl-libs-3.0.3-1.amzn2022.0.2.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
-system-release-2022.0.20220810-0.amzn2022.noarch
+system-release-2022.0.20220817-0.amzn2022.noarch
 tzdata-2022a-1.amzn2022.noarch
 util-linux-core-2.37.4-1.amzn2022.0.1.x86_64
 zlib-1.2.11-32.amzn2022.0.2.x86_64

@@ -48,7 +48,7 @@ pcre2-10.40-1.amzn2022.x86_64
 readline-8.1-2.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
 sqlite-libs-3.34.1-2.amzn2022.x86_64
-system-release-2022.0.20220810-0.amzn2022.noarch
+system-release-2022.0.20220817-0.amzn2022.noarch
 systemd-libs-250.7-1.amzn2022.0.4.x86_64
 tzdata-2022a-1.amzn2022.noarch
 zlib-1.2.11-32.amzn2022.0.2.x86_64
