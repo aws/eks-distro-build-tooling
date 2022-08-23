@@ -10,7 +10,7 @@ git-core-2.37.1-1.amzn2.0.1.aarch64
 glibc-2.26-59.amzn2.aarch64
 glibc-common-2.26-59.amzn2.aarch64
 glibc-minimal-langpack-2.26-59.amzn2.aarch64
-gnupg2-2.0.22-5.amzn2.0.4.aarch64
+gnupg2-2.0.22-5.amzn2.0.5.aarch64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 krb5-libs-1.15.1-37.amzn2.2.4.aarch64
