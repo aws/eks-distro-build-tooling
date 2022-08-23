@@ -22,7 +22,7 @@
 # in their own script/layer while testing and then when you are done add
 # to here
 
-GOLANG_VERSION="${GOLANG_VERSION:-1.18.4}"
+GOLANG_VERSION="${GOLANG_VERSION:-1.18.5}"
 GOLANG_DOWNLOAD_URL="https://go.dev/dl/go$GOLANG_VERSION.linux-$TARGETARCH.tar.gz"
 
 BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.10.1}"
