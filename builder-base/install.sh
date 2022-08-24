@@ -310,6 +310,8 @@ ln -s ${GOPATH}/go1.16/bin/go-licenses ${GOPATH}/bin
 # We need a higher version of linuxkit hence we do go get of a particular commit
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
 
+build::cleanup
+
 # Installing NodeJS to run attribution generation script
 wget --progress dot:giga $NODEJS_DOWNLOAD_URL
 sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
