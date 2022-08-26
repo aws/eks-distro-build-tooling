@@ -2,7 +2,7 @@ BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/kubernetes/kops
 CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/kops
 
-KOPS_VERSION_TAG?=$(shell cat ./$(PROJECT_DIRECTORY)/GIT_TAG)
+KOPS_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 
 GITHUB_EMAIL?="prow@amazonaws.com"
