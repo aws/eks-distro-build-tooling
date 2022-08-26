@@ -22,7 +22,7 @@ PROJECT_DIRECTORY="$BASE_DIRECTORY/projects/kubernetes/kops"
 
 OUTPUT_DIR="$PROJECT_DIRECTORY/output/kops"
 
-KOPS_VERSION_TAG="1.23.2"
+KOPS_VERSION_TAG="1.24.1"
 
 KOPS_BINARIES_BASE_URL="https://artifacts.k8s.io/binaries/kops"
 CHANNELS_BINARY="channels"
