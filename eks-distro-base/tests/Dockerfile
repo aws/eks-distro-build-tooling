@@ -54,3 +54,20 @@ FROM ${BASE_IMAGE} as check-git
 COPY --from=git-builder /var/app/check-git /bin
 
 CMD ["/bin/check-git"]
+
+
+FROM public.ecr.aws/amazonlinux/amazonlinux:${AL_TAG} as java-builder
+
+ARG JAVA_VERSION
+
+RUN yum install -y https://corretto.aws/downloads/latest/amazon-corretto-${JAVA_VERSION}-x64-al2-jdk.rpm
+
+COPY *.java ./
+
+RUN javac CheckCerts.java && \
+    javac CheckEncoding.java
+
+
+FROM ${BASE_IMAGE} as check-java
+
+COPY --from=java-builder *.class /testdata/

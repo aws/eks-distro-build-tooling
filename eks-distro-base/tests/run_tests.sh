@@ -318,4 +318,39 @@ check_base-python3.9() {
     check_base-python3 3.9
 }
 
+check_base-java17() {
+    buildctl \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+        --opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-java:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --opt build-arg:JAVA_VERSION=17 \
+        --progress plain \
+        --opt target=check-java \
+        --local dockerfile=./ \
+        --local context=./tests \
+        --opt platform=$PLATFORMS \
+        --output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-java17-test:latest\",push=true
+
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-java:$IMAGE_TAG java --version | grep -v 'openjdk 17'; then
+            echo "java17 issue!"
+            exit 1
+        fi
+
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-java17-test:latest java -cp /testdata CheckCerts | grep -v "Successfully connected: 200"; then
+            echo "java17 issue!"
+            exit 1
+        fi
+        
+        if ! docker run --platform=$platform --pull=always $LOCAL_REGISTRY/base-java17-test:latest java -cp /testdata CheckEncoding | grep -v "sun.jnu.encoding=UTF-8"; then
+            echo "java17 issue!"
+            exit 1
+        fi
+        
+    done
+}
+
 $TEST

@@ -45,7 +45,7 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME)-builder:$(call ADD_VERSIONED_TO
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(tag),$(tag)))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
-MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-client base-nginx base-csi-ebs base-csi base-kind base-haproxy base-git base-python3.9 #base-python3.7 base-python3.8
+MINIMAL_VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-client base-nginx base-csi-ebs base-csi base-kind base-haproxy base-git base-python3.9 base-java17 base-java11 #base-python3.7 base-python3.8
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
@@ -130,7 +130,7 @@ standard-images: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 
 # images with custom "base" targets
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
-final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy final-minimal-images-base-nginx: DOCKERFILE=Dockerfile.$(VARIANT)
+final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images-base-haproxy final-minimal-images-base-nginx final-minimal-images-base-java11 final-minimal-images-base-java17: DOCKERFILE=Dockerfile.$(VARIANT)
 
 # dep tree
 %-minimal-images-base: BUILDER_IMAGE:=$(BASE_IMAGE)
@@ -140,13 +140,16 @@ final-minimal-images-base final-minimal-images-base-nonroot final-minimal-images
 %inimal-images-base-nonroot %inimal-images-base-glibc: BASE_IMAGE_NAME=eks-distro-minimal-base
 %inimal-images-base-iptables %inimal-images-base-csi %inimal-images-base-git %inimal-images-base-docker-client \
 	%inimal-images-base-nginx %inimal-images-base-haproxy %inimal-images-base-csi-ebs %inimal-images-base-nsenter \
-	%inimal-images-base-python3.7 %inimal-images-base-python3.8 %inimal-images-base-python3.9: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+	%inimal-images-base-python3.7 %inimal-images-base-python3.8 %inimal-images-base-python3.9 %inimal-images-base-java17 %inimal-images-base-java11: BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 %inimal-images-base-kind: BASE_IMAGE_NAME=eks-distro-minimal-base-iptables
 
 # python variants
 %-minimal-images-base-python3.7 %inimal-update-base-python3.7 %inimal-create-pr-base-python3.7: VERSIONED_VARIANT=3.7
 %-minimal-images-base-python3.8 %inimal-update-base-python3.8 %inimal-create-pr-base-python3.8: VERSIONED_VARIANT=3.8
 %-minimal-images-base-python3.9 %inimal-update-base-python3.9 %inimal-create-pr-base-python3.9: VERSIONED_VARIANT=3.9
+
+%-minimal-images-base-java17 %inimal-update-base-java17 %inimal-create-pr-base-java17: VERSIONED_VARIANT=17
+%-minimal-images-base-java11 %inimal-update-base-java11 %inimal-create-pr-base-java11: VERSIONED_VARIANT=11
 
 # push standard/builder/base image targets
 standard-images final-minimal-images-% builder-minimal-images-%: IMAGE_OUTPUT_TYPE=image
