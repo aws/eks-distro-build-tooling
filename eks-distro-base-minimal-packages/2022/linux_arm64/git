@@ -10,7 +10,7 @@ glibc-2.34-40.amzn2022.0.1.aarch64
 glibc-common-2.34-40.amzn2022.0.1.aarch64
 glibc-minimal-langpack-2.34-40.amzn2022.0.1.aarch64
 gmp-6.2.0-6.amzn2022.aarch64
-gnupg2-2.3.4-1.amzn2022.0.1.aarch64
+gnupg2-2.3.7-1.amzn2022.0.1.aarch64
 gnutls-3.7.2-2.amzn2022.0.1.aarch64
 gpg-pubkey-afaa0026-6185c6ab
 keyutils-libs-1.6.1-2.amzn2022.aarch64
@@ -33,7 +33,6 @@ libsepol-3.3-2.amzn2022.aarch64
 libstdc++-11.3.1-2.amzn2022.0.5.aarch64
 libtasn1-4.16.0-4.amzn2022.aarch64
 libunistring-0.9.10-10.amzn2022.aarch64
-libusbx-1.0.24-2.amzn2022.aarch64
 libxcrypt-4.4.26-4.amzn2022.aarch64
 ncurses-base-6.2-4.20200222.amzn2022.noarch
 ncurses-libs-6.2-4.20200222.amzn2022.aarch64
@@ -48,7 +47,7 @@ pcre2-10.40-1.amzn2022.aarch64
 readline-8.1-2.amzn2022.aarch64
 setup-2.13.7-3.amzn2022.noarch
 sqlite-libs-3.34.1-2.amzn2022.aarch64
-system-release-2022.0.20220817-0.amzn2022.noarch
+system-release-2022.0.20220824-0.amzn2022.noarch
 systemd-libs-250.7-1.amzn2022.0.4.aarch64
 tzdata-2022a-1.amzn2022.noarch
 zlib-1.2.11-32.amzn2022.0.2.aarch64

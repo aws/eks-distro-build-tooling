@@ -35,7 +35,7 @@ glibc-2.34-40.amzn2022.0.1.x86_64
 glibc-common-2.34-40.amzn2022.0.1.x86_64
 glibc-minimal-langpack-2.34-40.amzn2022.0.1.x86_64
 gmp-6.2.0-6.amzn2022.x86_64
-gnupg2-2.3.4-1.amzn2022.0.1.x86_64
+gnupg2-2.3.7-1.amzn2022.0.1.x86_64
 gnutls-3.7.2-2.amzn2022.0.1.x86_64
 gpg-pubkey-afaa0026-6185c6ab
 gpgme-1.15.1-6.amzn2022.0.1.x86_64
@@ -114,7 +114,6 @@ libstdc++-11.3.1-2.amzn2022.0.5.x86_64
 libtasn1-4.16.0-4.amzn2022.x86_64
 libtirpc-1.3.2-0.rc1.amzn2022.x86_64
 libunistring-0.9.10-10.amzn2022.x86_64
-libusbx-1.0.24-2.amzn2022.x86_64
 libutempter-1.2.1-4.amzn2022.x86_64
 libuuid-2.37.4-1.amzn2022.0.1.x86_64
 libverto-0.3.2-1.amzn2022.x86_64
@@ -170,7 +169,7 @@ setup-2.13.7-3.amzn2022.noarch
 shadow-utils-4.8.1-9.amzn2022.x86_64
 socat-1.7.4.2-1.amzn2022.0.1.x86_64
 sqlite-libs-3.34.1-2.amzn2022.x86_64
-system-release-2022.0.20220817-0.amzn2022.noarch
+system-release-2022.0.20220824-0.amzn2022.noarch
 systemd-250.7-1.amzn2022.0.4.x86_64
 systemd-libs-250.7-1.amzn2022.0.4.x86_64
 systemd-pam-250.7-1.amzn2022.0.4.x86_64
