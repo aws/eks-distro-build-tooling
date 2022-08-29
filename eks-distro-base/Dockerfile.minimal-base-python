@@ -37,15 +37,13 @@ COPY scripts/ /usr/bin
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    install_rpm bash \
-        bzip2-libs \
+    install_rpm bzip2-libs \
         # libc-bin - in glibc
         libdb \
         expat \
         xz-libs \
         sqlite \
         libuuid \
-        ncurses-base \ 
         ncurses-libs \
         # libtinfo5 -> in ncurses-libs
         zlib \
@@ -65,6 +63,8 @@ RUN set -x && \
         openssl-libs && \
     if_al2022 install_rpm libxcrypt sqlite-libs && \
     if_al2 install_rpm libcrypt && \
+    # python depends on bash for shell execs
+    install_rpm bash && \
     cleanup "python-base"
 
 

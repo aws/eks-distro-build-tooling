@@ -98,13 +98,13 @@ ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    # we are keeping bash on this image since downstream images use to exec git
-    install_rpm bash ncurses-base \
-        git-core \
+    install_rpm git-core \
         openssh-clients \
         openssl-libs \
         gnupg2 && \
     # ensure all lib deps for the built libssh and libgit are included
     install_deps_for_binary $NEWROOT/usr/lib64/libssh2.so \
         $NEWROOT/usr/lib64/libgit2.so && \    
+    # we are keeping bash on this image since downstream images use to exec git
+    install_rpm bash && \
     cleanup "git"

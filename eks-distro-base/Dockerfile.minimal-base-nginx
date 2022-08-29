@@ -40,7 +40,7 @@ RUN set -x && \
         nginx && \
     if_al2022 install_rpm nginx-core nginx-mimetypes && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
-    install_rpm bash ncurses-base \
+    install_rpm bash \
         coreutils && \
     install_binary /usr/bin/envsubst && \
     cleanup "nginx"

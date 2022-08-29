@@ -45,11 +45,14 @@ function build::install::binary() {
     # download/extract rpm and add to the final rpm db which will be included in the final image
     build::common::extract_rpm $__rpm_package $extract_dir
 
-    local -r extracted_bin=$extract_dir$__expected_filename
+    local extracted_bin=$extract_dir$__expected_filename
 
     if [ ! -f "$extracted_bin" ]; then
-        echo "Error: Filename not included in RPM!"
-        exit 1
+        extracted_bin=$extract_dir${__expected_filename#/usr}
+        if [ ! -f "$extracted_bin" ]; then
+            echo "Error: Filename not included in RPM!"
+            exit 1
+        fi
     fi
 
     # copy desired binary into newroot folder path

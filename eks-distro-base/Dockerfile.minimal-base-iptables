@@ -33,11 +33,12 @@ RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     if_al2 install_rpm chkconfig && \
     if_al2022 install_rpm alternatives && \
-    install_rpm ipset \
+    install_rpm conntrack-tools \
+        ipset \
         kmod \
         iptables-nft && \
-    if_al2 install_rpm iptables conntrack-tools ebtables && \
-    if_al2022 install_rpm iptables-legacy ebtables-legacy libnetfilter_conntrack libnfnetlink && \
+    if_al2 install_rpm iptables ebtables && \
+    if_al2022 install_rpm iptables-legacy ebtables-legacy && \
     # AL2 doesn't setup the ip6tables alternative the same as ubuntu/debian
     # which is what the iptables-wrapper script provided by kubernetes expects
     # since kind's entrypoint assumes this adding the alternative

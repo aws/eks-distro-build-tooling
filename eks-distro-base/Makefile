@@ -215,7 +215,7 @@ $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS):
 $(ALL_TEST_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:test-minimal-images-%=%)
 $(ALL_TEST_MINIMAL_IMAGES_TARGETS):
 	if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG) $(AL_TAG) $(PLATFORMS) check_$(VARIANT_SHORT_NAME); \
+		$(MAKE_ROOT)/tests/run_tests.sh $(IMAGE_REPO) $(call ADD_VERSIONED_TO_TAG,$(IMAGE_TAG)) $(AL_TAG) $(PLATFORMS) check_$(VARIANT_SHORT_NAME); \
 	fi
 
 
