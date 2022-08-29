@@ -43,11 +43,11 @@ move-nodeup-binaries:
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env
-	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops false true
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env
-	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops false false
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(PROJECT_DIRECTORY)/output/kops kops true false
 
 .PHONY: clean
 clean:
