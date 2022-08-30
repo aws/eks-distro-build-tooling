@@ -48,6 +48,9 @@ RUN set -x && \
     # doesnt reflect, install manually to make sure its first
     clean_install coreutils && \
     if_al2022 clean_install pcre2 && \
-    clean_install "e2fsprogs nfs-utils util-linux xfsprogs" && \
+    clean_install e2fsprogs \
+        nfs-utils \
+        util-linux \
+        xfsprogs && \
     if_al2 remove_package systemd true && \
     cleanup "csi"

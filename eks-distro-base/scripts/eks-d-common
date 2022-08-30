@@ -163,9 +163,9 @@ function build::common::binary_to_libraries() {
     # If no needed libraries, cache result to avoid future ldd checks
     if [ -z "${needed_libraries}" ]; then
         LIBRARIES_CACHE[$binary]=1
-        [[ ! $binary == *".so"* ]] && echo "No libraries for ${binary}"
+        [[ ! $binary == *".so"* ]] && echo "No missing libraries for ${binary}"
     else
-        [[ ! $binary == *".so"* ]] && echo "Found ${needed_libraries//$'\n'/ } libraries for ${binary}"
+        [[ ! $binary == *".so"* ]] && echo "Found ${needed_libraries//$'\n'/ } libraries needed for ${binary}"
     fi
 
     eval $__resultvar="'${needed_libraries}'"
@@ -286,7 +286,11 @@ function build::common::cp_common_utils_for_rpm_scriptlets() {
     local -r fakeroot="$NEWROOT/fakeroot"
 
     echo "Copying ${reqs} to fakeroot for RPM scriptlets"
-
+    
+    # hide finding libraries output
+    exec 4<&1
+    exec 1> /tmp/out
+    
     for util in ${utils[@]}; do
         local copied_util=$fakeroot$util
         local linked_util=$NEWROOT$util
@@ -328,7 +332,11 @@ function build::common::cp_common_utils_for_rpm_scriptlets() {
             done < <(echo "${__libraries}")
         done
     done
-
+    
+    # restore stdout
+    exec 1<&4
+    rm /tmp/out
+    
     echo "RPM scriptlet prereqs copied"
 }
 
@@ -374,12 +382,25 @@ function build::common::extract_rpm() {
 }
 
 function build::common::clean_install() {
-    local -r packages="$1"
+    local packages="$1"
     local -r shallow=${2:-}
     local just_db=${3:-}
     local -r force=${4:-}
     local -r extract_dir="${5:-$NEWROOT}"
     
+    if [ $just_db ]; then
+        just_db="--justdb"
+    else
+        just_db=""
+
+        # if install bash, there is a transitive dependency, ncurses-base which
+        # is a dependecy of ncurses-libs, which can be installed during previous install_binary/rpm calls
+        # since ncurses-base does not provide .so files, it will not be picked up and it is easy to miss
+        # force installing it to be safe
+        if [[ "$packages" = *"bash"* ]]; then
+            packages+=" ncurses-base"
+        fi
+    fi
 
     if [ ! $shallow ]; then
         echo "Installing $packages and dependencies using yum"
@@ -387,12 +408,6 @@ function build::common::clean_install() {
         yum --installroot $NEWROOT install -y --setopt=install_weak_deps=False $packages
 
         return
-    fi
-
-    if [ $just_db ]; then
-        just_db="--justdb"
-    else
-        just_db=""
     fi
 
     # when the `filesystem` rpm installs it expects these to not exist
@@ -408,7 +423,14 @@ function build::common::clean_install() {
     for rpm in "${rpms[@]}"; do
         if ! ls -d -- $DOWNLOAD_DIR/$rpm-[0-9]*.rpm 1> /dev/null 2>&1; then
             echo "Downloading $rpm"
-            yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
+            local url_regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]+'
+            if [[ $rpm =~ $url_regex ]]; then
+                mkdir -p $DOWNLOAD_DIR               
+                curl -sSL $rpm -o $DOWNLOAD_DIR/$(basename $rpm)
+                rpm=$(basename $rpm | sed -e 's/\-[0-9].*$//')
+            else
+                yumdownloader --destdir=$DOWNLOAD_DIR -x "*.i686" $rpm > /dev/null 2>&1
+            fi
             echo "$rpm downloaded"
         fi
 
@@ -426,9 +448,9 @@ function build::common::clean_install() {
                 echo "Shallow installing $rpm using the rpm directly"
                 build::common::setup_default_utils_for_rpm_scriptlets
 
-                local -r rpm_sanitized="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
-                local -r reqs_var_name="${rpm_sanitized^^}_SCRIPTLET_REQS"
-                local -r reqs="${!reqs_var_name:-}"
+                local rpm_sanitized="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+                local reqs_var_name="${rpm_sanitized^^}_SCRIPTLET_REQS"
+                local reqs="${!reqs_var_name:-}"
 
                 build::common::cp_common_utils_for_rpm_scriptlets "${reqs}"
             fi
@@ -441,8 +463,8 @@ function build::common::clean_install() {
             echo "$rpm installed"
         fi            
         
-        local -r sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
-        local -r var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
+        local sanitized_rpm="$(echo ${rpm} | sed 's/\+/PLUS/g; s/\./_/g; s/\-/_/g;')"
+        local var_name="${sanitized_rpm^^}_IGNORE_SCRIPTLET_ERRORS"
 
         if [[ -z "${!var_name:-}" ]] && grep -q "scriptlet failed\|command not found" $log_file; then
             local rpm_name=$(basename $rpm_file | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')

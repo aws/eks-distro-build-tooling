@@ -13,12 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 set -eE
 set -o nounset
 set -o pipefail
 
 PACKAGES=$1
+
+if [ -n "${2:-}" ] && [[ "$2" != "true" ]] && [[ "$2" != "false" ]]; then
+    # If the second arg is not a bool value, lets assume its the list of packages
+    # which allows the simple case of just installing packages to have a cleaner ux
+    PACKAGES="$@"
+    for arg; do
+        shift
+    done
+fi
+
 SHALLOW=${2:-}
 JUSTDB=${3:-}
 FORCE=${4:-}

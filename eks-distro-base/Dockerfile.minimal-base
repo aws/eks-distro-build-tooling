@@ -34,7 +34,11 @@ ENV DOWNLOAD_DIR /tmp/download
 ENV NEWROOT /
 
 RUN set -x && \
-    clean_install "binutils cpio findutils shadow-utils yum-utils" && \
+    clean_install binutils \
+        cpio \
+        findutils \
+        shadow-utils \
+        yum-utils && \
     # restorecon is needed for the filesystem scriptlet, but it comes from
     # policycoreutils which bloats the builder image, just pull the bin and the necessary libs instead
     install_binary /usr/sbin/restorecon && \
