@@ -12,5 +12,5 @@ libstdc++-11.3.1-2.amzn2022.0.5.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.x86_64
 setup-2.13.7-3.amzn2022.noarch
-system-release-2022.0.20220824-0.amzn2022.noarch
-tzdata-2022a-1.amzn2022.noarch
+system-release-2022.0.20220831-0.amzn2022.noarch
+tzdata-2022c-1.amzn2022.0.1.noarch
