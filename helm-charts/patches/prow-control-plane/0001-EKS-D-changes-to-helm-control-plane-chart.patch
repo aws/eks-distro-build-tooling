@@ -1,35 +1,35 @@
-From 77f5ccfc298b963d34d048dfe4c920c911d0f46e Mon Sep 17 00:00:00 2001
+From 4f10f7ea5dc0c4288dde01e64a7c85b4f8a08ed0 Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
- 
+
 Signed-off-by: Jackson West <jgw@amazon.com>
 Signed-off-by: Prow Bot <prow@amazonaws.com>
 ---
- config/prow/cluster/crier_deployment.yaml     |  75 ++++++++-----
+ config/prow/cluster/crier_deployment.yaml     |  78 ++++++++-----
  config/prow/cluster/crier_rbac.yaml           |  45 +-------
- config/prow/cluster/deck_deployment.yaml      | 101 ++++++++++--------
- config/prow/cluster/deck_rbac.yaml            |  37 +------
+ config/prow/cluster/deck_deployment.yaml      | 107 +++++++++---------
+ config/prow/cluster/deck_rbac.yaml            |  37 +-----
  config/prow/cluster/deck_service.yaml         |  11 +-
  config/prow/cluster/ghproxy.yaml              |  35 +++---
- config/prow/cluster/hook_deployment.yaml      |  71 ++++++------
+ config/prow/cluster/hook_deployment.yaml      |  74 ++++++------
  config/prow/cluster/hook_rbac.yaml            |   6 +-
- config/prow/cluster/hook_service.yaml         |  12 +--
+ config/prow/cluster/hook_service.yaml         |  12 +-
  .../prow/cluster/horologium_deployment.yaml   |  23 ++--
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
- .../prow_controller_manager_deployment.yaml   |  70 ++++++++----
+ .../prow_controller_manager_deployment.yaml   |  77 ++++++++-----
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
- config/prow/cluster/sinker_deployment.yaml    |  64 ++++++-----
+ config/prow/cluster/sinker_deployment.yaml    |  71 +++++++-----
  config/prow/cluster/sinker_rbac.yaml          |  39 ++-----
- .../cluster/statusreconciler_deployment.yaml  |  30 ++++--
+ .../cluster/statusreconciler_deployment.yaml  |  29 +++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
  config/prow/cluster/tide_deployment.yaml      |  38 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 351 insertions(+), 378 deletions(-)
+ 20 files changed, 351 insertions(+), 403 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
-index b11bc0d729..70c9233295 100644
+index dd8bcade61..f8a3798aab 100644
 --- a/config/prow/cluster/crier_deployment.yaml
 +++ b/config/prow/cluster/crier_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -53,11 +53,11 @@ index b11bc0d729..70c9233295 100644
        labels:
          app: crier
      spec:
-@@ -33,44 +38,56 @@ spec:
+@@ -33,47 +38,56 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: crier
--        image: gcr.io/k8s-prow/crier:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/crier:v20220726-a4debcf864
 +        image: {{ .Values.crier.image }}
          args:
 -        - --blob-storage-workers=1
@@ -79,7 +79,7 @@ index b11bc0d729..70c9233295 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig"
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -95,6 +95,9 @@ index b11bc0d729..70c9233295 100644
 -          readOnly: true
 -        - mountPath: /etc/kubeconfig-build-test-infra-trusted
 -          name: kubeconfig-build-test-infra-trusted
+-          readOnly: true
+-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
+-          name: kubeconfig-build-k8s-prow-builds
 -          readOnly: true
          - name: config
            mountPath: /etc/config
@@ -132,7 +135,7 @@ index b11bc0d729..70c9233295 100644
        volumes:
        - name: config
          configMap:
-@@ -78,15 +95,17 @@ spec:
+@@ -81,15 +95,17 @@ spec:
        - name: job-config
          configMap:
            name: job-config
@@ -235,7 +238,7 @@ index 53f4471080..699355890e 100644
 +  namespace: {{ .Release.Namespace }}
 +
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
-index acf85c8902..7832158e4c 100644
+index fbfa961a3d..e829c32a53 100644
 --- a/config/prow/cluster/deck_deployment.yaml
 +++ b/config/prow/cluster/deck_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -265,13 +268,13 @@ index acf85c8902..7832158e4c 100644
        labels:
          app: deck
      spec:
-@@ -38,57 +43,51 @@ spec:
+@@ -38,60 +43,52 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: deck
--        image: gcr.io/k8s-prow/deck:v20220411-ad5dbdfe6e
--        imagePullPolicy: Always
+-        image: gcr.io/k8s-prow/deck:v20220726-a4debcf864
 +        image: {{ .Values.deck.image }}
+         imagePullPolicy: Always
          ports:
 -        - name: http
 -          containerPort: 8080
@@ -301,7 +304,7 @@ index acf85c8902..7832158e4c 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig"
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
 +        - name: AWS_ROLE_SESSION_NAME
@@ -320,6 +323,9 @@ index acf85c8902..7832158e4c 100644
 -          readOnly: true
 -        - mountPath: /etc/kubeconfig-build-test-infra-trusted
 -          name: kubeconfig-build-test-infra-trusted
+-          readOnly: true
+-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
+-          name: kubeconfig-build-k8s-prow-builds
 -          readOnly: true
          - name: config
            mountPath: /etc/config
@@ -345,7 +351,7 @@ index acf85c8902..7832158e4c 100644
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -102,24 +101,20 @@ spec:
+@@ -105,28 +102,20 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -380,10 +386,14 @@ index acf85c8902..7832158e4c 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-test-infra-trusted
+-      - name: kubeconfig-build-k8s-prow-builds
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-build-k8s-prow-builds
        - name: config
          configMap:
            name: config
-@@ -129,3 +124,15 @@ spec:
+@@ -136,3 +125,15 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -493,7 +503,7 @@ index e65a50ebcb..8a418f3b6c 100644
 -    protocol: TCP
 -  type: NodePort
 diff --git a/config/prow/cluster/ghproxy.yaml b/config/prow/cluster/ghproxy.yaml
-index 2fcc23feb0..b8cbbc4ea6 100644
+index 0e9f5f5fca..b8cbbc4ea6 100644
 --- a/config/prow/cluster/ghproxy.yaml
 +++ b/config/prow/cluster/ghproxy.yaml
 @@ -15,7 +15,6 @@
@@ -548,7 +558,7 @@ index 2fcc23feb0..b8cbbc4ea6 100644
      spec:
        containers:
        - name: ghproxy
--        image: gcr.io/k8s-prow/ghproxy:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/ghproxy:v20220726-a4debcf864
 +        image: {{ .Values.ghproxy.image }}
          args:
          - --cache-dir=/cache
@@ -589,7 +599,7 @@ index 2fcc23feb0..b8cbbc4ea6 100644
  spec:
    ports:
 diff --git a/config/prow/cluster/hook_deployment.yaml b/config/prow/cluster/hook_deployment.yaml
-index e8d08a2888..20195f3d40 100644
+index afea7d6616..ca6a6facd5 100644
 --- a/config/prow/cluster/hook_deployment.yaml
 +++ b/config/prow/cluster/hook_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -623,7 +633,7 @@ index e8d08a2888..20195f3d40 100644
        terminationGracePeriodSeconds: 180
        containers:
        - name: hook
--        image: gcr.io/k8s-prow/hook:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/hook:v20220726-a4debcf864
 +        image: {{ .Values.hook.image }}
          imagePullPolicy: Always
          args:
@@ -640,7 +650,7 @@ index e8d08a2888..20195f3d40 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig"
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
 +        - name: AWS_ROLE_SESSION_NAME
@@ -663,7 +673,7 @@ index e8d08a2888..20195f3d40 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -75,18 +81,11 @@ spec:
+@@ -75,21 +81,11 @@ spec:
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
@@ -679,12 +689,15 @@ index e8d08a2888..20195f3d40 100644
 -        - mountPath: /etc/kubeconfig-build-test-infra-trusted
 -          name: kubeconfig-build-test-infra-trusted
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
+-          name: kubeconfig-build-k8s-prow-builds
+-          readOnly: true
 +        - name: shared-bins
 +          mountPath: /shared-bins
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -100,16 +99,26 @@ spec:
+@@ -103,16 +99,26 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -716,7 +729,7 @@ index e8d08a2888..20195f3d40 100644
        - name: config
          configMap:
            name: config
-@@ -119,15 +128,11 @@ spec:
+@@ -122,15 +128,11 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -794,7 +807,7 @@ index f83355a9a7..a636b60490 100644
 +  - port: 8888
 +  type: {{ .Values.hook.service.type }}
 diff --git a/config/prow/cluster/horologium_deployment.yaml b/config/prow/cluster/horologium_deployment.yaml
-index 674184dc7f..5612cd0cf9 100644
+index 5c6d2a9ffa..5612cd0cf9 100644
 --- a/config/prow/cluster/horologium_deployment.yaml
 +++ b/config/prow/cluster/horologium_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -822,7 +835,7 @@ index 674184dc7f..5612cd0cf9 100644
        terminationGracePeriodSeconds: 30
        containers:
 -      - name: horologium
--        image: gcr.io/k8s-prow/horologium:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/horologium:v20220726-a4debcf864
 +      - name: horologium      
 +        image: {{ .Values.horologium.image }}
          args:
@@ -877,7 +890,7 @@ index 27c3ce2228..bc61184280 100644
    name: "horologium"
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/prow_controller_manager_deployment.yaml b/config/prow/cluster/prow_controller_manager_deployment.yaml
-index a41f13fb85..517bb33ec4 100644
+index 12ccf4f6e7..517bb33ec4 100644
 --- a/config/prow/cluster/prow_controller_manager_deployment.yaml
 +++ b/config/prow/cluster/prow_controller_manager_deployment.yaml
 @@ -15,12 +15,10 @@
@@ -893,7 +906,7 @@ index a41f13fb85..517bb33ec4 100644
    replicas: 1
    strategy:
      type: RollingUpdate
-@@ -33,38 +31,50 @@ spec:
+@@ -33,41 +31,50 @@ spec:
        app: prow-controller-manager
    template:
      metadata:
@@ -909,7 +922,7 @@ index a41f13fb85..517bb33ec4 100644
        serviceAccountName: prow-controller-manager
        containers:
        - name: prow-controller-manager
--        image: gcr.io/k8s-prow/prow-controller-manager:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/prow-controller-manager:v20220726-a4debcf864
 +        image: {{ .Values.prowControllerManager.image }}
          args:
          - --config-path=/etc/config/config.yaml
@@ -924,7 +937,7 @@ index a41f13fb85..517bb33ec4 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig"
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -940,6 +953,9 @@ index a41f13fb85..517bb33ec4 100644
 -          readOnly: true
 -        - mountPath: /etc/kubeconfig-build-test-infra-trusted
 -          name: kubeconfig-build-test-infra-trusted
+-          readOnly: true
+-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
+-          name: kubeconfig-build-k8s-prow-builds
 -          readOnly: true
          - name: config
            mountPath: /etc/config
@@ -958,7 +974,7 @@ index a41f13fb85..517bb33ec4 100644
          livenessProbe: # Pod is killed if this fails 3 times.
            httpGet:
              path: /healthz
-@@ -77,18 +87,32 @@ spec:
+@@ -80,22 +87,32 @@ spec:
              port: 8081
            initialDelaySeconds: 10
            periodSeconds: 3
@@ -981,10 +997,14 @@ index a41f13fb85..517bb33ec4 100644
 -          defaultMode: 420
 -          secretName: kubeconfig
 -      - name: kubeconfig-build-test-infra-trusted
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-build-test-infra-trusted
+-      - name: kubeconfig-build-k8s-prow-builds
 +      - name: github-token
          secret:
 -          defaultMode: 420
--          secretName: kubeconfig-build-test-infra-trusted
+-          secretName: kubeconfig-build-k8s-prow-builds
 +          secretName: github-token
        - name: config
          configMap:
@@ -999,7 +1019,7 @@ index a41f13fb85..517bb33ec4 100644
 +          defaultMode: 0644
 +          secretName: kubeconfig
 diff --git a/config/prow/cluster/prow_controller_manager_rbac.yaml b/config/prow/cluster/prow_controller_manager_rbac.yaml
-index 1cace54354..5329eff3bf 100644
+index 63e4f5ad56..6b33ac1032 100644
 --- a/config/prow/cluster/prow_controller_manager_rbac.yaml
 +++ b/config/prow/cluster/prow_controller_manager_rbac.yaml
 @@ -12,16 +12,16 @@
@@ -1021,14 +1041,13 @@ index 1cace54354..5329eff3bf 100644
    name: "prow-controller-manager"
  rules:
  - apiGroups:
-@@ -61,47 +61,22 @@ rules:
+@@ -61,46 +61,21 @@ rules:
    - prowjobs
    verbs:
    - get
 -  - update
    - list
    - watch
-   - update
    - patch
 ----
 -kind: Role
@@ -1074,14 +1093,14 @@ index 1cace54354..5329eff3bf 100644
    name: "prow-controller-manager"
  roleRef:
    apiGroup: rbac.authorization.k8s.io
-@@ -110,4 +85,4 @@ roleRef:
+@@ -109,4 +84,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: "prow-controller-manager"
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
-index 06478745c6..d707f54b13 100644
+index 46469a6299..d707f54b13 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
 +++ b/config/prow/cluster/sinker_deployment.yaml
 @@ -1,7 +1,6 @@
@@ -1092,7 +1111,7 @@ index 06478745c6..d707f54b13 100644
    name: sinker
    labels:
      app: sinker
-@@ -12,49 +11,66 @@ spec:
+@@ -12,56 +11,66 @@ spec:
        app: sinker
    template:
      metadata:
@@ -1120,11 +1139,11 @@ index 06478745c6..d707f54b13 100644
          - --config-path=/etc/config/config.yaml
          - --job-config-path=/etc/job-config
 -        - --dry-run=false
--        image: gcr.io/k8s-prow/sinker:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/sinker:v20220726-a4debcf864
 -        env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig"
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -1136,6 +1155,9 @@ index 06478745c6..d707f54b13 100644
 -          readOnly: true
 -        - mountPath: /etc/kubeconfig-build-test-infra-trusted
 -          name: kubeconfig-build-test-infra-trusted
+-          readOnly: true
+-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
+-          name: kubeconfig-build-k8s-prow-builds
 -          readOnly: true
          - name: config
            mountPath: /etc/config
@@ -1170,6 +1192,10 @@ index 06478745c6..d707f54b13 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-test-infra-trusted
+-      - name: kubeconfig-build-k8s-prow-builds
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-build-k8s-prow-builds
        - name: config
          configMap:
            name: config
@@ -1256,7 +1282,7 @@ index 70eb9b52bc..87f30fe1d2 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/statusreconciler_deployment.yaml b/config/prow/cluster/statusreconciler_deployment.yaml
-index e205f161fc..5a634547a8 100644
+index 90aef98d1f..6dccad51d6 100644
 --- a/config/prow/cluster/statusreconciler_deployment.yaml
 +++ b/config/prow/cluster/statusreconciler_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1267,13 +1293,13 @@ index e205f161fc..5a634547a8 100644
    name: statusreconciler
    labels:
      app: statusreconciler
-@@ -33,20 +32,27 @@ spec:
+@@ -33,20 +32,28 @@ spec:
        terminationGracePeriodSeconds: 180
        containers:
        - name: statusreconciler
--        image: gcr.io/k8s-prow/status-reconciler:v20220411-ad5dbdfe6e
--        imagePullPolicy: Always
+-        image: gcr.io/k8s-prow/status-reconciler:v20220726-a4debcf864
 +        image: {{ .Values.statusreconciler.image }}
+         imagePullPolicy: Always
          args:
 -        - --dry-run=false
 +        - --dry-run={{ .Values.dryRun }}
@@ -1301,7 +1327,7 @@ index e205f161fc..5a634547a8 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -58,10 +64,13 @@ spec:
+@@ -58,10 +65,13 @@ spec:
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
@@ -1317,7 +1343,7 @@ index e205f161fc..5a634547a8 100644
        - name: config
          configMap:
            name: config
-@@ -71,3 +80,6 @@ spec:
+@@ -71,3 +81,6 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -1358,7 +1384,7 @@ index 847cfb47c1..1def1c63f7 100644
    name: statusreconciler
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/tide_deployment.yaml b/config/prow/cluster/tide_deployment.yaml
-index f2d2316e33..3f9d26f8f4 100644
+index 3a9dbbb8b3..3f9d26f8f4 100644
 --- a/config/prow/cluster/tide_deployment.yaml
 +++ b/config/prow/cluster/tide_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1385,7 +1411,7 @@ index f2d2316e33..3f9d26f8f4 100644
        serviceAccountName: tide
        containers:
        - name: tide
--        image: gcr.io/k8s-prow/tide:v20220411-ad5dbdfe6e
+-        image: gcr.io/k8s-prow/tide:v20220726-a4debcf864
 +        image: {{ .Values.tide.image }}
          args:
 -        - --dry-run=false
@@ -1503,5 +1529,5 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    protocol: TCP
 -  type: ClusterIP
 -- 
-2.34.1
+2.37.0
 
