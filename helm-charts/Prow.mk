@@ -1,5 +1,5 @@
 # prow-control-plane chart handling
-PROW_GIT_TAG=66078146cd07488dcc190615b709d15f5392fb98
+PROW_GIT_TAG=a57f8abeb442eab70a13d2b1c25285a7beb7ed84
 PROW_UPSTREAM_REPO=test-infra
 PROW_CLONE_URL=https://github.com/kubernetes/$(PROW_UPSTREAM_REPO).git
 
