@@ -18,7 +18,7 @@ metadata:
   name: plugins
 data:
   plugins.yaml: |
-    {{- if gt (len .Values.repositories) 0 }} 
+    {{- if gt (len .Values.repositories) 0 }}
     plugins:
       {{- range $repo := .Values.repositories }}
       {{ $repo.org }}/{{ $repo.name }}:
@@ -47,11 +47,11 @@ data:
       {{- end }}
     external_plugins:
       {{- range $repo := .Values.repositories }}
-      {{- if gt (len $repo.extraExternalPlugins) 0 }} 
+      {{- if gt (len $repo.extraExternalPlugins) 0 }}
       {{ $repo.org }}/{{ $repo.name }}:
 {{ toYaml $repo.extraExternalPlugins | indent 8 }}
       {{- end }}
-      {{- end }} 
+      {{- end }}
     {{- end }}
     config_updater:
       maps:

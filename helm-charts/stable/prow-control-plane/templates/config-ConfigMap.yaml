@@ -102,6 +102,9 @@ data:
             name: podinfo
           required_files:
           - podinfo.json
+      default_rerun_auth_configs:
+      - rerun_auth_configs:
+          allow_anyone: true
 
     plank:
       job_url_prefix_config:
@@ -142,5 +145,5 @@ data:
       {{-  range $repo := .Values.repositories }}
         {{ $repo.org }}/{{ $repo.name }}: squash
       {{- end }}
-    {{- end }}  
+    {{- end }}
     decorate_all_jobs: true
