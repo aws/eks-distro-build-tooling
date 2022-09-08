@@ -1,4 +1,4 @@
-From 4f10f7ea5dc0c4288dde01e64a7c85b4f8a08ed0 Mon Sep 17 00:00:00 2001
+From 06b03de5c2ea37194a68ab478b5d504e44cc71c2 Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
@@ -9,7 +9,7 @@ Signed-off-by: Prow Bot <prow@amazonaws.com>
  config/prow/cluster/crier_deployment.yaml     |  78 ++++++++-----
  config/prow/cluster/crier_rbac.yaml           |  45 +-------
  config/prow/cluster/deck_deployment.yaml      | 107 +++++++++---------
- config/prow/cluster/deck_rbac.yaml            |  37 +-----
+ config/prow/cluster/deck_rbac.yaml            |  38 +------
  config/prow/cluster/deck_service.yaml         |  11 +-
  config/prow/cluster/ghproxy.yaml              |  35 +++---
  config/prow/cluster/hook_deployment.yaml      |  74 ++++++------
@@ -26,7 +26,7 @@ Signed-off-by: Prow Bot <prow@amazonaws.com>
  config/prow/cluster/tide_deployment.yaml      |  38 +++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 351 insertions(+), 403 deletions(-)
+ 20 files changed, 352 insertions(+), 403 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index dd8bcade61..f8a3798aab 100644
@@ -410,7 +410,7 @@ index fbfa961a3d..e829c32a53 100644
 +          defaultMode: 0644
 +          secretName: kubeconfig
 diff --git a/config/prow/cluster/deck_rbac.yaml b/config/prow/cluster/deck_rbac.yaml
-index 6c7456d47b..23249e1290 100644
+index 6c7456d47b..d1a8489a38 100644
 --- a/config/prow/cluster/deck_rbac.yaml
 +++ b/config/prow/cluster/deck_rbac.yaml
 @@ -1,15 +1,13 @@
@@ -431,7 +431,7 @@ index 6c7456d47b..23249e1290 100644
    name: deck
  rules:
  - apiGroups:
-@@ -20,39 +18,10 @@ rules:
+@@ -20,39 +18,11 @@ rules:
    - get
    - list
    - watch
@@ -463,6 +463,7 @@ index 6c7456d47b..23249e1290 100644
 -subjects:
 -- kind: ServiceAccount
 -  name: deck
++  - patch
  ---
  kind: RoleBinding
  apiVersion: rbac.authorization.k8s.io/v1
@@ -471,7 +472,7 @@ index 6c7456d47b..23249e1290 100644
    name: deck
  roleRef:
    apiGroup: rbac.authorization.k8s.io
-@@ -61,4 +30,4 @@ roleRef:
+@@ -61,4 +31,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: deck
