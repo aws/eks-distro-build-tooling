@@ -1,7 +1,7 @@
 From 228f3afcd8e7ee489b8a5108ac09ca59c8976bc1 Mon Sep 17 00:00:00 2001
 From: Julie Qiu <julie@golang.org>
 Date: Tue, 1 Mar 2022 10:19:38 -0600
-Subject: [PATCH 05/15] [release-branch.go1.17] encoding/pem: fix stack
+Subject: [PATCH 05/18] [release-branch.go1.17] encoding/pem: fix stack
  overflow in Decode
 
 Previously, Decode called decodeError, a recursive function that was

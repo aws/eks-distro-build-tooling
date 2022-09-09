@@ -1,7 +1,7 @@
 From 9161430bd1a1d7bc38c2a901c1134133c3cce153 Mon Sep 17 00:00:00 2001
 From: Filippo Valsorda <filippo@golang.org>
 Date: Thu, 31 Mar 2022 12:31:58 -0400
-Subject: [PATCH 04/15] crypto/elliptic: tolerate zero-padded scalars in
+Subject: [PATCH 04/18] crypto/elliptic: tolerate zero-padded scalars in
  generic P-256
 
 Fixes #52075

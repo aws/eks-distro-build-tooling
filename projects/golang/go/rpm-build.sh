@@ -31,7 +31,10 @@ function common::download::go-1-16() {
     #mkdir -p /tmp/go-1-16
     #(cd /tmp/go-1-16 && rpm2cpio /tmp/golang-1.16.15-1.amzn2.0.1.src.rpm | cpio -idmv)
 
-    cp -rf $MAKE_ROOT/sources/1-16/eks/* /root/rpmbuild/SOURCES
+    # build al2s version without eks additional patches
+    cp -rf $MAKE_ROOT/sources/1-16/al2/* /root/rpmbuild/SOURCES
+    #cp -rf $MAKE_ROOT/sources/1-16/eks/* /root/rpmbuild/SOURCES
+    
     mv /root/rpmbuild/SOURCES/golang.spec /root/rpmbuild/SPECS
 
 }

@@ -1,7 +1,7 @@
 From add9fe5182c06afdaeeaa7f098f7dd4f64efee1f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Mon, 27 May 2019 15:12:53 +0200
-Subject: [PATCH 03/15] cmd/go: disable Google's proxy and sumdb
+Subject: [PATCH 03/18] cmd/go: disable Google's proxy and sumdb
 
 Signed-off-by: Jackson West <jgw@amazon.com>
 ---

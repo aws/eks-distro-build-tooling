@@ -1,7 +1,7 @@
 From d82eb6f39251bf4b18e3c3d7968b958e406a416b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Thu, 22 Mar 2018 11:49:09 +0100
-Subject: [PATCH 01/15] Don't use the bundled tzdata at runtime, except for the
+Subject: [PATCH 01/18] Don't use the bundled tzdata at runtime, except for the
  internal test suite
 
 Signed-off-by: Jackson West <jgw@amazon.com>

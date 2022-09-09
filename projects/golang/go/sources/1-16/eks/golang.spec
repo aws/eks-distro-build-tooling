@@ -170,6 +170,9 @@ Patch12:     0012-release-branch.go1.17-math-big-check-buffer-lengths-.patch
 Patch13:     0013-release-branch.go1.18-net-http-update-bundled-golang.patch
 Patch14:     0014-release-branch.go1.17-syscall-check-correct-group-in.patch
 Patch15:     0015-release-branch.go1.17-io-fs-fix-stack-exhaustion-in-.patch
+Patch16:     0016-release-branch.go1.17-net-http-don-t-strip-whitespac.patch
+Patch17:     0017-release-branch.go1.17-net-http-preserve-nil-values-i.patch
+Patch18:     0018-release-branch.go1.17-path-filepath-fix-stack-exhaus.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4

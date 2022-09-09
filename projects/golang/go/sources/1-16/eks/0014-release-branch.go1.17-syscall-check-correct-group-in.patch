@@ -1,7 +1,7 @@
 From e13d51dae376f08ea381869af4880ca312111086 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Tue, 12 Apr 2022 13:38:17 -0700
-Subject: [PATCH 14/15] [release-branch.go1.17] syscall: check correct group in
+Subject: [PATCH 14/18] [release-branch.go1.17] syscall: check correct group in
  Faccessat
 
 The Faccessat call checks the user, group, or other permission bits of a

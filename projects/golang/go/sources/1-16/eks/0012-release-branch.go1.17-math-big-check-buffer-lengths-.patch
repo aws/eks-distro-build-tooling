@@ -1,7 +1,7 @@
 From 268843be59812ff1b91b8b879ea9e4c376f0b602 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <roland@golang.org>
 Date: Fri, 15 Jul 2022 10:43:44 -0700
-Subject: [PATCH 12/15] [release-branch.go1.17] math/big: check buffer lengths
+Subject: [PATCH 12/18] [release-branch.go1.17] math/big: check buffer lengths
  in GobDecode
 
 In Float.GobDecode and Rat.GobDecode, check buffer sizes before

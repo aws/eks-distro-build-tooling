@@ -1,7 +1,7 @@
 From bec4aae2e82de05eb8276c60440b588c3868e659 Mon Sep 17 00:00:00 2001
 From: Tatiana Bradley <tatiana@golang.org>
 Date: Fri, 6 May 2022 11:25:06 -0400
-Subject: [PATCH 07/15] [release-branch.go1.17] compress/gzip: fix stack
+Subject: [PATCH 07/18] [release-branch.go1.17] compress/gzip: fix stack
  exhaustion bug in Reader.Read
 
 Replace recursion with iteration in Reader.Read to avoid stack

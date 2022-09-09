@@ -1,7 +1,7 @@
 From 36e93c226040ebe6535f04fe68926eba6b13677f Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Wed, 15 Jun 2022 10:43:05 -0700
-Subject: [PATCH 11/15] [release-branch.go1.17] go/parser: limit recursion
+Subject: [PATCH 11/18] [release-branch.go1.17] go/parser: limit recursion
  depth
 
 EKS:

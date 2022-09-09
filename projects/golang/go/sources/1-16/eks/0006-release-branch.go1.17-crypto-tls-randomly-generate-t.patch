@@ -1,7 +1,7 @@
 From 3beb7c1912ecbc0b10829e631706ca4bf22a6598 Mon Sep 17 00:00:00 2001
 From: Tatiana Bradley <tatiana@golang.org>
 Date: Thu, 12 May 2022 14:58:29 -0400
-Subject: [PATCH 06/15] [release-branch.go1.17] crypto/tls: randomly generate
+Subject: [PATCH 06/18] [release-branch.go1.17] crypto/tls: randomly generate
  ticket_age_add
 
 As required by RFC 8446, section 4.6.1, ticket_age_add now holds a

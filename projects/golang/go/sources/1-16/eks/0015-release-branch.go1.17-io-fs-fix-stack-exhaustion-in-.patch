@@ -1,7 +1,7 @@
 From 9aaea0af75a151a290326d09dd5b2d0dfd031867 Mon Sep 17 00:00:00 2001
 From: Julie Qiu <julieqiu@google.com>
 Date: Thu, 23 Jun 2022 23:17:53 +0000
-Subject: [PATCH 15/15] [release-branch.go1.17] io/fs: fix stack exhaustion in
+Subject: [PATCH 15/18] [release-branch.go1.17] io/fs: fix stack exhaustion in
  Glob
 
 A limit is added to the number of path separators allowed by an input to

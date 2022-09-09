@@ -1,7 +1,7 @@
 From f17d272b7401bca27f5b0e0636d81d66e342da9b Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 22 Aug 2022 16:21:02 -0700
-Subject: [PATCH 13/15] [release-branch.go1.18] net/http: update bundled
+Subject: [PATCH 13/18] [release-branch.go1.18] net/http: update bundled
  golang.org/x/net/http2
 
 Disable cmd/internal/moddeps test, since this update includes PRIVATE

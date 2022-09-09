@@ -1,7 +1,7 @@
 From 8b42417f0aa146e27a43fb690eff572d4cff0b91 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 7 Jun 2022 13:00:43 -0700
-Subject: [PATCH 10/15] [release-branch.go1.17] encoding/gob: add a depth limit
+Subject: [PATCH 10/18] [release-branch.go1.17] encoding/gob: add a depth limit
  for ignored fields
 
 Enforce a nesting limit of 10,000 for ignored fields during decoding
