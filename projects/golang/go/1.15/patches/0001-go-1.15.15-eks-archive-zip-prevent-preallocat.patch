@@ -11,6 +11,7 @@ Backported On: Thu, 22 Sept 2022
 Backported By: budris@amazon.com
 Backported From: release-branch.go1.16
 Source Commit: https://github.com/golang/go/commit/6c480017ae600b2c90a264a922e041df04dfa785
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/e522c55230750158d1f28953981b63bc93453178
 
 # Original Information
 
