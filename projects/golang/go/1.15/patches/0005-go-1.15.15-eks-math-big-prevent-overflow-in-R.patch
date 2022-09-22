@@ -1,0 +1,71 @@
+From f56e2b486b1cba8eae7326dac48da67c16ebba28 Mon Sep 17 00:00:00 2001
+From: Katie Hockman <katie@golang.org>
+Date: Wed, 19 Jan 2022 16:54:41 -0500
+Subject: [PATCH] [go-1.15.15-eks] math/big: prevent overflow in
+ (*Rat).SetString
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.16
+Upstream Source Commit: https://github.com/golang/go/commit/07ee9e6445057e181fb3895df978748ffef30327
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/f56e2b486b1cba8eae7326dac48da67c16ebba28
+
+# Original Information
+
+Credit to rsc@ for the original patch.
+
+Thanks to the OSS-Fuzz project for discovering this
+issue and to Emmanuel Odeke (@odeke_et) for reporting it.
+
+Updates #50699
+Fixes #50700
+Fixes CVE-2022-23772
+
+Change-Id: I590395a3d55689625390cf1e58f5f40623b26ee5
+Reviewed-on: https://go-review.googlesource.com/c/go/+/379537
+Trust: Katie Hockman <katie@golang.org>
+Run-TryBot: Katie Hockman <katie@golang.org>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Emmanuel Odeke <emmanuel@orijtech.com>
+Reviewed-by: Roland Shoemaker <roland@golang.org>
+Reviewed-by: Julie Qiu <julie@golang.org>
+(cherry picked from commit ad345c265916bbf6c646865e4642eafce6d39e78)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/381337
+---
+ src/math/big/ratconv.go      | 5 +++++
+ src/math/big/ratconv_test.go | 1 +
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/math/big/ratconv.go b/src/math/big/ratconv.go
+index ac3c8bd11f..90053a9c81 100644
+--- a/src/math/big/ratconv.go
++++ b/src/math/big/ratconv.go
+@@ -169,6 +169,11 @@ func (z *Rat) SetString(s string) (*Rat, bool) {
+ 		n := exp5
+ 		if n < 0 {
+ 			n = -n
++			if n < 0 {
++				// This can occur if -n overflows. -(-1 << 63) would become
++				// -1 << 63, which is still negative.
++				return nil, false
++			}
+ 		}
+ 		if n > 1e6 {
+ 			return nil, false // avoid excessively large exponents
+diff --git a/src/math/big/ratconv_test.go b/src/math/big/ratconv_test.go
+index 15d206cb38..e55e655718 100644
+--- a/src/math/big/ratconv_test.go
++++ b/src/math/big/ratconv_test.go
+@@ -104,6 +104,7 @@ var setStringTests = []StringTest{
+ 	{in: "4/3/"},
+ 	{in: "4/3."},
+ 	{in: "4/"},
++	{in: "13e-9223372036854775808"}, // CVE-2022-23772
+ 
+ 	// valid
+ 	{"0", "0", true},
+-- 
+2.30.1 (Apple Git-130)
+

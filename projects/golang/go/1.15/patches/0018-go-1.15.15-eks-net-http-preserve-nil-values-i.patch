@@ -1,0 +1,77 @@
+From a9668978d166b751bc8efd90152feaa7fa0b31e9 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Fri, 17 Jun 2022 10:09:45 -0700
+Subject: [PATCH] [go-1.15.15-eks] net/http: preserve nil values in
+ Header.Clone
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/a9668978d166b751bc8efd90152feaa7fa0b31e9
+Upstream Source Commit: https://github.com/golang/go/commit/ed2f33e1a7e0d18f61bd56f7ee067331d612c27e
+
+# Original Information
+
+ReverseProxy makes a distinction between nil and zero-length header values.
+Avoid losing nil-ness when cloning a request.
+
+Thanks to Christian Mehlmauer for discovering this.
+
+For #53423
+For CVE-2022-32148
+Fixes #53620
+
+Change-Id: Ice369cdb4712e2d62e25bb881b080847aa4801f5
+Reviewed-on: https://go-review.googlesource.com/c/go/+/412857
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Brad Fitzpatrick <bradfitz@golang.org>
+(cherry picked from commit b2cc0fecc2ccd80e6d5d16542cc684f97b3a9c8a)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/415221
+Reviewed-by: Heschi Kreinick <heschi@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+Run-TryBot: Heschi Kreinick <heschi@google.com>
+Reviewed-by: Michael Knyszek <mknyszek@google.com>
+---
+ src/net/http/header.go      | 6 ++++++
+ src/net/http/header_test.go | 5 +++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/src/net/http/header.go b/src/net/http/header.go
+index b9b53911f3..221f613f64 100644
+--- a/src/net/http/header.go
++++ b/src/net/http/header.go
+@@ -100,6 +100,12 @@ func (h Header) Clone() Header {
+ 	sv := make([]string, nv) // shared backing array for headers' values
+ 	h2 := make(Header, len(h))
+ 	for k, vv := range h {
++		if vv == nil {
++			// Preserve nil values. ReverseProxy distinguishes
++			// between nil and zero-length header values.
++			h2[k] = nil
++			continue
++		}
+ 		n := copy(sv, vv)
+ 		h2[k] = sv[:n:n]
+ 		sv = sv[n:]
+diff --git a/src/net/http/header_test.go b/src/net/http/header_test.go
+index 4789362919..80c003551d 100644
+--- a/src/net/http/header_test.go
++++ b/src/net/http/header_test.go
+@@ -235,6 +235,11 @@ func TestCloneOrMakeHeader(t *testing.T) {
+ 			in:   Header{"foo": {"bar"}},
+ 			want: Header{"foo": {"bar"}},
+ 		},
++		{
++			name: "nil value",
++			in:   Header{"foo": nil},
++			want: Header{"foo": nil},
++		},
+ 	}
+ 
+ 	for _, tt := range tests {
+-- 
+2.30.1 (Apple Git-130)
+
