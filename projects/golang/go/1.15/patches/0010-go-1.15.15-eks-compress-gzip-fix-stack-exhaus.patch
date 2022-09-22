@@ -1,0 +1,140 @@
+From c046c3053cd9a288dd04c7dd84acb983a56f8753 Mon Sep 17 00:00:00 2001
+From: Tatiana Bradley <tatiana@golang.org>
+Date: Fri, 6 May 2022 11:25:06 -0400
+Subject: [PATCH] [go-1.15.15-eks] compress/gzip: fix stack exhaustion
+ bug in Reader.Read
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/c046c3053cd9a288dd04c7dd84acb983a56f8753
+Upstream Source Commit: https://github.com/golang/go/commit/0117dee7dccbbd7803d88f65a2ce8bd686219ad3
+
+# Original Information
+
+Replace recursion with iteration in Reader.Read to avoid stack
+exhaustion when there are a large number of files.
+
+Fixes CVE-2022-30631
+Fixes #53717
+Updates #53168
+
+Change-Id: I47d8afe3f2d40b0213ab61431df9b221794dbfe0
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1455673
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+(cherry picked from commit cf498969c8a0bae9d7a24b98fc1f66c824a4775d)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/417071
+Reviewed-by: Heschi Kreinick <heschi@google.com>
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+---
+ src/compress/gzip/gunzip.go      | 60 +++++++++++++++-----------------
+ src/compress/gzip/gunzip_test.go | 16 +++++++++
+ 2 files changed, 45 insertions(+), 31 deletions(-)
+
+diff --git a/src/compress/gzip/gunzip.go b/src/compress/gzip/gunzip.go
+index 924bce10b7..237b2b928b 100644
+--- a/src/compress/gzip/gunzip.go
++++ b/src/compress/gzip/gunzip.go
+@@ -248,42 +248,40 @@ func (z *Reader) Read(p []byte) (n int, err error) {
+ 		return 0, z.err
+ 	}
+ 
+-	n, z.err = z.decompressor.Read(p)
+-	z.digest = crc32.Update(z.digest, crc32.IEEETable, p[:n])
+-	z.size += uint32(n)
+-	if z.err != io.EOF {
+-		// In the normal case we return here.
+-		return n, z.err
+-	}
++	for n == 0 {
++		n, z.err = z.decompressor.Read(p)
++		z.digest = crc32.Update(z.digest, crc32.IEEETable, p[:n])
++		z.size += uint32(n)
++		if z.err != io.EOF {
++			// In the normal case we return here.
++			return n, z.err
++		}
+ 
+-	// Finished file; check checksum and size.
+-	if _, err := io.ReadFull(z.r, z.buf[:8]); err != nil {
+-		z.err = noEOF(err)
+-		return n, z.err
+-	}
+-	digest := le.Uint32(z.buf[:4])
+-	size := le.Uint32(z.buf[4:8])
+-	if digest != z.digest || size != z.size {
+-		z.err = ErrChecksum
+-		return n, z.err
+-	}
+-	z.digest, z.size = 0, 0
++		// Finished file; check checksum and size.
++		if _, err := io.ReadFull(z.r, z.buf[:8]); err != nil {
++			z.err = noEOF(err)
++			return n, z.err
++		}
++		digest := le.Uint32(z.buf[:4])
++		size := le.Uint32(z.buf[4:8])
++		if digest != z.digest || size != z.size {
++			z.err = ErrChecksum
++			return n, z.err
++		}
++		z.digest, z.size = 0, 0
+ 
+-	// File is ok; check if there is another.
+-	if !z.multistream {
+-		return n, io.EOF
+-	}
+-	z.err = nil // Remove io.EOF
++		// File is ok; check if there is another.
++		if !z.multistream {
++			return n, io.EOF
++		}
++		z.err = nil // Remove io.EOF
+ 
+-	if _, z.err = z.readHeader(); z.err != nil {
+-		return n, z.err
++		if _, z.err = z.readHeader(); z.err != nil {
++			return n, z.err
++		}
+ 	}
+ 
+-	// Read from next file, if necessary.
+-	if n > 0 {
+-		return n, nil
+-	}
+-	return z.Read(p)
++	return n, nil
+ }
+ 
+ // Close closes the Reader. It does not close the underlying io.Reader.
+diff --git a/src/compress/gzip/gunzip_test.go b/src/compress/gzip/gunzip_test.go
+index 1b01404169..95220ae82d 100644
+--- a/src/compress/gzip/gunzip_test.go
++++ b/src/compress/gzip/gunzip_test.go
+@@ -516,3 +516,19 @@ func TestTruncatedStreams(t *testing.T) {
+ 		}
+ 	}
+ }
++
++func TestCVE202230631(t *testing.T) {
++	var empty = []byte{0x1f, 0x8b, 0x08, 0x00, 0xa7, 0x8f, 0x43, 0x62, 0x00,
++		0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
++	r := bytes.NewReader(bytes.Repeat(empty, 4e6))
++	z, err := NewReader(r)
++	if err != nil {
++		t.Fatalf("NewReader: got %v, want nil", err)
++	}
++	// Prior to CVE-2022-30631 fix, this would cause an unrecoverable panic due
++	// to stack exhaustion.
++	_, err = z.Read(make([]byte, 10))
++	if err != io.EOF {
++		t.Errorf("Reader.Read: got %v, want %v", err, io.EOF)
++	}
++}
+-- 
+2.30.1 (Apple Git-130)
+

@@ -1,0 +1,87 @@
+From fec4bf70097d724c1206bf9751ab6c2bd7ed883f Mon Sep 17 00:00:00 2001
+From: Russ Cox <rsc@golang.org>
+Date: Wed, 8 Dec 2021 18:05:11 -0500
+Subject: [PATCH] [go-1.15.15-eks] syscall: fix ForkLock spurious close(0) on pipe failure
+
+# AWS EKS
+
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/a76511f3a40ea69ee4f5cd86e735e1c8a84f0aa2
+
+# Original Information
+
+Pipe (and therefore forkLockPipe) does not make any guarantees
+about the state of p after a failed Pipe(p). Avoid that assumption
+and the too-clever goto, so that we don't accidentally Close a real fd
+if the failed pipe leaves p[0] or p[1] set >= 0.
+
+Fixes #50057
+Fixes CVE-2021-44717
+
+Change-Id: Iff8e19a6efbba0c73cc8b13ecfae381c87600bb4
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1291270
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/370576
+Run-TryBot: Filippo Valsorda <filippo@golang.org>
+Trust: Russ Cox <rsc@golang.org>
+Reviewed-by: Alex Rakoczy <alex@golang.org>
+---
+ src/syscall/exec_unix.go | 20 ++++++--------------
+ 1 file changed, 6 insertions(+), 14 deletions(-)
+
+diff --git a/src/syscall/exec_unix.go b/src/syscall/exec_unix.go
+index cb08b7084c..3a8ef0925e 100644
+--- a/src/syscall/exec_unix.go
++++ b/src/syscall/exec_unix.go
+@@ -152,9 +152,6 @@ func forkExec(argv0 string, argv []string, attr *ProcAttr) (pid int, err error)
+ 		sys = &zeroSysProcAttr
+ 	}
+ 
+-	p[0] = -1
+-	p[1] = -1
+-
+ 	// Convert args to C form.
+ 	argv0p, err := BytePtrFromString(argv0)
+ 	if err != nil {
+@@ -204,14 +201,17 @@ func forkExec(argv0 string, argv []string, attr *ProcAttr) (pid int, err error)
+ 
+ 	// Allocate child status pipe close on exec.
+ 	if err = forkExecPipe(p[:]); err != nil {
+-		goto error
++		ForkLock.Unlock()
++		return 0, err
+ 	}
+ 
+ 	// Kick off child.
+ 	pid, err1 = forkAndExecInChild(argv0p, argvp, envvp, chroot, dir, attr, sys, p[1])
+ 	if err1 != 0 {
+-		err = Errno(err1)
+-		goto error
++		Close(p[0])
++		Close(p[1])
++		ForkLock.Unlock()
++		return 0, Errno(err1)
+ 	}
+ 	ForkLock.Unlock()
+ 
+@@ -243,14 +243,6 @@ func forkExec(argv0 string, argv []string, attr *ProcAttr) (pid int, err error)
+ 
+ 	// Read got EOF, so pipe closed on exec, so exec succeeded.
+ 	return pid, nil
+-
+-error:
+-	if p[0] >= 0 {
+-		Close(p[0])
+-		Close(p[1])
+-	}
+-	ForkLock.Unlock()
+-	return 0, err
+ }
+ 
+ // Combination of fork and exec, careful to be thread safe.
+-- 
+2.30.1 (Apple Git-130)
+

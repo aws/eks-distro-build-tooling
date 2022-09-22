@@ -1,0 +1,87 @@
+From f4338f72eacc92df4760094fcc81b70fc902779a Mon Sep 17 00:00:00 2001
+From: Carlos Amedee <carlos@golang.org>
+Date: Wed, 5 Jan 2022 21:08:15 -0500
+Subject: [PATCH] [go-1.15.15-eks] net/http: update bundled
+ golang.org/x/net/http2
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.16
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/f4338f72eacc92df4760094fcc81b70fc902779a
+Upstream Source Commit: https://github.com/golang/go/commit/0551247ca30c574aec0252c27476e218002f6bbc
+
+# Original Information
+
+Pull in approved backports to golang.org/x/net/http2:
+
+    aa5a62b http2: prioritize RST_STREAM frames in random write scheduler
+
+By doing:
+
+    $ go get -d golang.org/x/net@internal-branch.go1.16-vendor
+    $ go mod tidy
+    $ go mod vendor
+    $ go generate -run=bundle std
+
+Fixes #50449
+
+Change-Id: I4a6a8ae943d2d1705209e648a63421914062d3e4
+Reviewed-on: https://go-review.googlesource.com/c/go/+/375815
+Reviewed-by: Dmitri Shuralyov <dmitshur@golang.org>
+Run-TryBot: Carlos Amedee <carlos@golang.org>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Trust: Carlos Amedee <carlos@golang.org>
+---
+ src/net/http/h2_bundle.go | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/src/net/http/h2_bundle.go b/src/net/http/h2_bundle.go
+index 042a4168c7..0fc00e89cb 100644
+--- a/src/net/http/h2_bundle.go
++++ b/src/net/http/h2_bundle.go
+@@ -9577,7 +9577,8 @@ type http2WriteScheduler interface {
+ 
+ 	// Pop dequeues the next frame to write. Returns false if no frames can
+ 	// be written. Frames with a given wr.StreamID() are Pop'd in the same
+-	// order they are Push'd. No frames should be discarded except by CloseStream.
++	// order they are Push'd, except RST_STREAM frames. No frames should be
++	// discarded except by CloseStream.
+ 	Pop() (wr http2FrameWriteRequest, ok bool)
+ }
+ 
+@@ -9597,6 +9598,7 @@ type http2FrameWriteRequest struct {
+ 
+ 	// stream is the stream on which this frame will be written.
+ 	// nil for non-stream frames like PING and SETTINGS.
++	// nil for RST_STREAM streams, which use the StreamError.StreamID field instead.
+ 	stream *http2stream
+ 
+ 	// done, if non-nil, must be a buffered channel with space for
+@@ -10276,11 +10278,11 @@ func (ws *http2randomWriteScheduler) AdjustStream(streamID uint32, priority http
+ }
+ 
+ func (ws *http2randomWriteScheduler) Push(wr http2FrameWriteRequest) {
+-	id := wr.StreamID()
+-	if id == 0 {
++	if wr.isControl() {
+ 		ws.zero.push(wr)
+ 		return
+ 	}
++	id := wr.StreamID()
+ 	q, ok := ws.sq[id]
+ 	if !ok {
+ 		q = ws.queuePool.get()
+@@ -10290,7 +10292,7 @@ func (ws *http2randomWriteScheduler) Push(wr http2FrameWriteRequest) {
+ }
+ 
+ func (ws *http2randomWriteScheduler) Pop() (http2FrameWriteRequest, bool) {
+-	// Control frames first.
++	// Control and RST_STREAM frames first.
+ 	if !ws.zero.empty() {
+ 		return ws.zero.shift(), true
+ 	}
+-- 
+2.30.1 (Apple Git-130)
+

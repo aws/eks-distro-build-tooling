@@ -1,0 +1,69 @@
+From b8c48c141bf340627ba16c2a6d4439e229851d96 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Wed, 1 Jun 2022 11:17:07 -0700
+Subject: [PATCH] [go-1.15.15-eks] net/http: don't strip whitespace from
+ Transfer-Encoding headers
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/b8c48c141bf340627ba16c2a6d4439e229851d96
+Upstream Source Commit: https://github.com/golang/go/commit/d13431c37ab62f9755f705731536ff74e7165b08
+
+# Original Information
+
+Do not accept "Transfer-Encoding: \rchunked" as a valid TE header
+setting chunked encoding.
+
+Thanks to Zeyu Zhang (https://www.zeyu2001.com/) for identifying
+the issue.
+
+For #53188
+For CVE-2022-1705
+Fixes #53432
+
+Change-Id: I1a16631425159267f2eca68056b057192a7edf6c
+Reviewed-on: https://go-review.googlesource.com/c/go/+/409874
+Reviewed-by: Roland Shoemaker <roland@golang.org>
+Reviewed-by: Brad Fitzpatrick <bradfitz@golang.org>
+(cherry picked from commit e5017a93fcde94f09836200bca55324af037ee5f)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/415217
+Reviewed-by: Dmitri Shuralyov <dmitshur@golang.org>
+Run-TryBot: Dmitri Shuralyov <dmitshur@golang.org>
+Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+---
+ src/net/http/serve_test.go | 1 +
+ src/net/http/transfer.go   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/net/http/serve_test.go b/src/net/http/serve_test.go
+index 5f56932778..c3f33a5e40 100644
+--- a/src/net/http/serve_test.go
++++ b/src/net/http/serve_test.go
+@@ -6151,6 +6151,7 @@ func TestUnsupportedTransferEncodingsReturn501(t *testing.T) {
+ 		"fugazi",
+ 		"foo-bar",
+ 		"unknown",
++		"\rchunked",
+ 	}
+ 
+ 	for _, badTE := range unsupportedTEs {
+diff --git a/src/net/http/transfer.go b/src/net/http/transfer.go
+index 50d434b1fb..99f640e07b 100644
+--- a/src/net/http/transfer.go
++++ b/src/net/http/transfer.go
+@@ -629,7 +629,7 @@ func (t *transferReader) parseTransferEncoding() error {
+ 	if len(raw) != 1 {
+ 		return &unsupportedTEError{fmt.Sprintf("too many transfer encodings: %q", raw)}
+ 	}
+-	if strings.ToLower(textproto.TrimString(raw[0])) != "chunked" {
++	if strings.ToLower(raw[0]) != "chunked" {
+ 		return &unsupportedTEError{fmt.Sprintf("unsupported transfer encoding: %q", raw[0])}
+ 	}
+ 
+-- 
+2.30.1 (Apple Git-130)
+

@@ -1,0 +1,109 @@
+From 691b4953603ca3d97da8f73433d45086dd41f3e0 Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <roland@golang.org>
+Date: Mon, 28 Mar 2022 18:41:26 -0700
+Subject: [PATCH] [go-1.15.15-eks] encoding/xml: use iterative Skip,
+ rather than recursive
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 22 Sept 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/691b4953603ca3d97da8f73433d45086dd41f3e0
+Upstream Source Commit: https://github.com/golang/go/commit/58facfbe7db2fbb9afed794b281a70bdb12a60ae
+
+# Original Information
+
+Prevents exhausting the stack limit in _incredibly_ deeply nested
+structures.
+
+Fixes #53711
+Updates #53614
+Fixes CVE-2022-28131
+
+Change-Id: I47db4595ce10cecc29fbd06afce7b299868599e6
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1419912
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+(cherry picked from commit 9278cb78443d2b4deb24cbb5b61c9ba5ac688d49)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/417068
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Heschi Kreinick <heschi@google.com>
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+---
+ src/encoding/xml/read.go      | 15 ++++++++-------
+ src/encoding/xml/read_test.go | 17 +++++++++++++++++
+ 2 files changed, 25 insertions(+), 7 deletions(-)
+
+diff --git a/src/encoding/xml/read.go b/src/encoding/xml/read.go
+index e0ed8b527c..c77579880c 100644
+--- a/src/encoding/xml/read.go
++++ b/src/encoding/xml/read.go
+@@ -743,12 +743,12 @@ Loop:
+ }
+ 
+ // Skip reads tokens until it has consumed the end element
+-// matching the most recent start element already consumed.
+-// It recurs if it encounters a start element, so it can be used to
+-// skip nested structures.
++// matching the most recent start element already consumed,
++// skipping nested structures.
+ // It returns nil if it finds an end element matching the start
+ // element; otherwise it returns an error describing the problem.
+ func (d *Decoder) Skip() error {
++	var depth int64
+ 	for {
+ 		tok, err := d.Token()
+ 		if err != nil {
+@@ -756,11 +756,12 @@ func (d *Decoder) Skip() error {
+ 		}
+ 		switch tok.(type) {
+ 		case StartElement:
+-			if err := d.Skip(); err != nil {
+-				return err
+-			}
++			depth++
+ 		case EndElement:
+-			return nil
++			if depth == 0 {
++				return nil
++			}
++			depth--
+ 		}
+ 	}
+ }
+diff --git a/src/encoding/xml/read_test.go b/src/encoding/xml/read_test.go
+index e2026d9d5b..7a621a5302 100644
+--- a/src/encoding/xml/read_test.go
++++ b/src/encoding/xml/read_test.go
+@@ -9,6 +9,7 @@ import (
+ 	"errors"
+ 	"io"
+ 	"reflect"
++	"runtime"
+ 	"strings"
+ 	"testing"
+ 	"time"
+@@ -1094,3 +1095,19 @@ func TestCVE202228131(t *testing.T) {
+ 		t.Fatalf("Unmarshal unexpected error: got %q, want %q", err, errExeceededMaxUnmarshalDepth)
+ 	}
+ }
++
++func TestCVE202230633(t *testing.T) {
++	if runtime.GOARCH == "wasm" {
++		t.Skip("causes memory exhaustion on js/wasm")
++	}
++	defer func() {
++		p := recover()
++		if p != nil {
++			t.Fatal("Unmarshal panicked")
++		}
++	}()
++	var example struct {
++		Things []string
++	}
++	Unmarshal(bytes.Repeat([]byte("<a>"), 17_000_000), &example)
++}
+-- 
+2.30.1 (Apple Git-130)
+
