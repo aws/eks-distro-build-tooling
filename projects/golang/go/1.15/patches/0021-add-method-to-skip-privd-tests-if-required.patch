@@ -1,0 +1,48 @@
+From f927fdcc2633f3865cbeb975446393acaf83e272 Mon Sep 17 00:00:00 2001
+From: Daniel Budris <budris@amazon.com>
+Date: Fri, 23 Sep 2022 10:20:16 -0400
+Subject: [PATCH] add method to skip privd tests if required
+
+In some cases, such as Fargate presubmits, we want to be able to explicitly skip certain tests
+which require a high level of privileges.
+
+---
+ src/syscall/exec_linux_test.go | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/src/syscall/exec_linux_test.go b/src/syscall/exec_linux_test.go
+index df4ed62630..7d802babd1 100644
+--- a/src/syscall/exec_linux_test.go
++++ b/src/syscall/exec_linux_test.go
+@@ -50,6 +50,12 @@ func skipInContainer(t *testing.T) {
+ 	}
+ }
+ 
++func skipPrivilegedTests(t *testing.T) {
++	if os.Getenv("SKIP_PRIVILEGED_TESTS") == "true" {
++		t.Skip("skipping this privileged test")
++	}
++}
++
+ func skipNoUserNamespaces(t *testing.T) {
+ 	if _, err := os.Stat("/proc/self/ns/user"); err != nil {
+ 		if os.IsNotExist(err) {
+@@ -195,6 +201,7 @@ func TestEmptyCredGroupsDisableSetgroups(t *testing.T) {
+ 
+ func TestUnshare(t *testing.T) {
+ 	skipInContainer(t)
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+@@ -386,6 +393,7 @@ func TestUnshareMountNameSpace(t *testing.T) {
+ // Test for Issue 20103: unshare fails when chroot is used
+ func TestUnshareMountNameSpaceChroot(t *testing.T) {
+ 	skipInContainer(t)
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+-- 
+2.30.1 (Apple Git-130)
+
