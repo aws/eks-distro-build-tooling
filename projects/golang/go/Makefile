@@ -48,12 +48,20 @@ ifeq (,$(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH)")
 	$(shell yum install -y rpmbuild)
 endif
-	rpmbuild -bs $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
+	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_topdir $(VERSION_DIRECTORY)/rpmbuild" --define "_tmpdir $(VERSION_DIRECTORY)/rpmbuild/tmp)" --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
 .PHONY: clean
 clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/${SOURCES,noarch,x86_64}
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/noarch
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/x86_64
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SRPMS
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/BUILD
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/BUILDROOT
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/tmp
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.patch
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/go-$(GIT_TAG)
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.tar.gz
 
 .PHONY: check-env
 check-env:
