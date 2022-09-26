@@ -33,7 +33,7 @@ build-golang-rpm: fetch-golang-source-archive copy-patches-to-rpmbuild-tree rpmb
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
-	curl -OL https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs --output-dir $(VERSION_DIRECTORY)/rpmbuild/SOURCES
+	curl -L -o $(VERSION_DIRECTORY)/rpmbuild/SOURCES/$(GIT_TAG).src.tar.gz https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs 
 
 .PHONY: copy-patches-to-rpmbuild-tree
 copy-patches-to-rpmbuild-tree:
@@ -41,19 +41,19 @@ copy-patches-to-rpmbuild-tree:
 
 .PHONY: rpmbuild-golang
 rpmbuild-golang:
-	ifeq("Darwin", $(shell uname))
-	$(error "rpmbuild is being run on a Mac (Darwin); build this on an Amazon Linux machine!")
-	endif
-	ifeq(, $(shell which rpmbuild))
+ifeq ($(shell uname),Darwin)
+	$(error "rpmbuild is being run on a Mac, build this on an Amazon Linux machine!")
+endif
+ifeq (,$(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH)")
 	$(shell yum install -y rpmbuild)
-	endif
-	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec
+endif
+	rpmbuild -bs $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
 .PHONY: clean
 clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/${SOURCES,noarch,x86_64}
 
 .PHONY: check-env
 check-env:
