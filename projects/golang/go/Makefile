@@ -1,9 +1,10 @@
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
-PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go/$(GO_SOURCE_VERSION)
-CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/go
+PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
+VERSION_DIRECTORY:=$(PROJECT_DIRECTORY)/$(GO_SOURCE_VERSION)
+CLONED_REPO_DIRECTORY:=$(VERSION_DIRECTORY)/go
 
-GO_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
+GO_VERSION_TAG?=$(shell cat $(VERSION_DIRECTORY)/GIT_TAG)
 GO_REPO_URL?="https://github.com/golang/go.git"
 
 GITHUB_EMAIL?="prow@amazonaws.com"
@@ -14,22 +15,45 @@ build: check-env clone-golang patch-golang build-golang
 
 .PHONY: clone-golang
 clone-golang:
-	git -C $(PROJECT_DIRECTORY) clone $(GO_REPO_URL)
+	git -C $(VERSION_DIRECTORY) clone $(GO_REPO_URL)
 
 .PHONY: patch-golang
 patch-golang:
 	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
 	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(GO_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(PROJECT_DIRECTORY)/patches/*
+	git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(VERSION_DIRECTORY)/patches/*
 
 .PHONY: build-golang
 build-golang:
 	(cd $(CLONED_REPO_DIRECTORY)/src && ./all.bash)
 
+.PHONY: build-golang-rpm
+build-golang-rpm: fetch-golang-source-archive copy-patches-to-rpmbuild-tree rpmbuild-golang
+
+.PHONY: fetch-golang-source-archive
+fetch-golang-source-archive:
+	curl -OL https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs --output-dir $(VERSION_DIRECTORY)/rpmbuild/SOURCES
+
+.PHONY: copy-patches-to-rpmbuild-tree
+copy-patches-to-rpmbuild-tree:
+	cp -r $(VERSION_DIRECTORY)/patches/* $(VERSION_DIRECTORY)/rpmbuild/SOURCES/
+
+.PHONY: rpmbuild-golang
+rpmbuild-golang:
+	ifeq("Darwin", $(shell uname))
+	$(error "rpmbuild is being run on a Mac (Darwin); build this on an Amazon Linux machine!")
+	endif
+	ifeq(, $(shell which rpmbuild))
+	$(error "No rpmbuild in $(PATH)")
+	$(shell yum install -y rpmbuild)
+	endif
+	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec
+
 .PHONY: clean
 clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES
 
 .PHONY: check-env
 check-env:
