@@ -375,7 +375,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%setup -q -n go1.15.15
+%setup -q -n go-go1.15.15
 
 %patch1 -p1
 %patch2 -p1
