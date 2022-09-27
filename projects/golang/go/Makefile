@@ -65,7 +65,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum -y update && yum -y install yum-plugin-ovl && yum install -y rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static
+	yum -y install yum-plugin-ovl && yum install -y rpm-build golang-1.15.14-1.amzn2.0.1 glibc-static
 
 .PHONY: check-env
 check-env:
