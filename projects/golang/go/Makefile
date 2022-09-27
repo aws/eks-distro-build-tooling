@@ -65,7 +65,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y rpm-build
+	yum install -y rpmbuilder
 
 .PHONY: check-env
 check-env:
