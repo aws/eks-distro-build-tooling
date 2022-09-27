@@ -62,10 +62,9 @@ clean:
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/go-$(GIT_TAG)
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.tar.gz
 
-
 .PHONY: install-deps
 install-deps:
-	yum install -y rpm-builder
+	yum update -y && yum install -y rpm-builder golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static
 
 .PHONY: check-env
 check-env:
