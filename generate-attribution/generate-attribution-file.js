@@ -153,6 +153,7 @@ async function addGoLicense(dependencies) {
 async function readLicenseFromUpstream(upstreamUrl) {
     let finalDoc = '';
     const options = await generateAuthorizationHeader()
+    options.timeout = 15 * 1000
     return new Promise((resolve, reject) => {
         const req = https.get(upstreamUrl, options, res => {
             res.on('data', d => {
@@ -175,6 +176,7 @@ async function getPackageRepo(package) {
     let finalDoc = '';
     const url = `https://${package}?go-get=1`
     const options = await generateAuthorizationHeader()
+    options.timeout = 15 * 1000
     return new Promise((resolve, reject) => {
         const req = https.get(url, options, res => {
             if (res.statusCode !== 200) {
