@@ -11,7 +11,7 @@ GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
 .PHONY: build
-build: check-env clone-golang patch-golang build-golang
+build: check-env clone-golang patch-golang build-golang build-golang-rpm
 
 .PHONY: clone-golang
 clone-golang:
