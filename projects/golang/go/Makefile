@@ -11,7 +11,7 @@ GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
 .PHONY: build
-build: check-env clone-golang patch-golang build-golang build-golang-rpm
+build: check-env clone-golang patch-golang build-golang-rpm
 
 .PHONY: clone-golang
 clone-golang:
@@ -64,7 +64,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y rpm-builder golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static
+	yum update -y && yum install -y rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static
 
 .PHONY: check-env
 check-env:
