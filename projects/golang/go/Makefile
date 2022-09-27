@@ -44,9 +44,8 @@ rpmbuild-golang:
 ifeq ($(shell uname),Darwin)
 	$(error "rpmbuild is being run on a Mac, build this on an Amazon Linux machine!")
 endif
-ifeq (,$(shell which rpmbuild))
-	$(shell echo "No rpmbuild in $(PATH)")
-	$(shell yum install -y rpmbuild)
+ifeq(, $(shell which rpmbuild))
+	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
 	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_topdir $(VERSION_DIRECTORY)/rpmbuild" --define "_tmpdir $(VERSION_DIRECTORY)/rpmbuild/tmp)" --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
@@ -62,6 +61,11 @@ clean:
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.patch
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/go-$(GIT_TAG)
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.tar.gz
+
+
+.PHONY: install-deps
+install-deps:
+	yum install -y rpmbuild rpmdevtools golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static
 
 .PHONY: check-env
 check-env:
