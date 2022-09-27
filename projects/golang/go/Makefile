@@ -65,7 +65,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum install -y rpm-build golang-1.15.14-1.amzn2.0.1 glibc-static
+	yum update -y && yum install -y rpm-build
 
 .PHONY: check-env
 check-env:
