@@ -29,15 +29,23 @@ build-golang:
 	(cd $(CLONED_REPO_DIRECTORY)/src && ./all.bash)
 
 .PHONY: build-golang-rpm
-build-golang-rpm: fetch-golang-source-archive copy-patches-to-rpmbuild-tree rpmbuild-golang
+build-golang-rpm: setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree rpmbuild-golang
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
-	curl -L -o $(VERSION_DIRECTORY)/rpmbuild/SOURCES/$(GIT_TAG).src.tar.gz https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs 
+	curl -L -o $(HOME)/rpmbuild/SOURCES/$(GIT_TAG).src.tar.gz https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs 
 
 .PHONY: copy-patches-to-rpmbuild-tree
 copy-patches-to-rpmbuild-tree:
-	cp -r $(VERSION_DIRECTORY)/patches/* $(VERSION_DIRECTORY)/rpmbuild/SOURCES/
+	cp -r $(VERSION_DIRECTORY)/patches/* $(HOME)/rpmbuild/SOURCES/
+
+.PHONY: copy-sources-to-rpmbuild-tree
+copy-sources-to-rpmbuild-tree:
+	cp -r $(VERSION_DIRECTORY)/rpmbuild/SOURCES/* $(HOME)/rpmbuild/SOURCES/
+
+.PHONY: setup-rpm-tree
+setup-rpm-tree:
+	rpmdev-setuptree
 
 .PHONY: rpmbuild-golang
 rpmbuild-golang:
@@ -47,7 +55,7 @@ endif
 ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
-	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_topdir $(VERSION_DIRECTORY)/rpmbuild" --define "_tmpdir $(VERSION_DIRECTORY)/rpmbuild/tmp)" --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
+	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
 .PHONY: clean
 clean:
@@ -59,12 +67,11 @@ clean:
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/BUILDROOT
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/tmp
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.patch
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/go-$(GIT_TAG)
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.tar.gz
+	rm -rf $(HOME)/rpmbuild/SOURCES/go-$(GIT_TAG)
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y which git rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
+	yum update -y && yum install -y which git rpmdevtools rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
 
 .PHONY: check-env
 check-env:
