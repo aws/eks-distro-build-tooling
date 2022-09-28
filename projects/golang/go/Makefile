@@ -72,6 +72,12 @@ ifndef ARTIFACTS_BUCKET
 $(error environment variable ARTIFACTS_BUCKET is undefined)
 endif
 
+.PHONY: check-env-release
+check-env-release:
+ifndef ARTIFACTS_BUCKET
+$(error environment variable ARTIFACTS_BUCKET is undefined)
+endif
+
 .PHONY: check-env
 check-env:
 ifndef GO_SOURCE_VERSION
