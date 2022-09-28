@@ -267,7 +267,7 @@ if [ "$IS_AL22" = false ]; then
     rm -rf bash-$OVERRIDE_BASH_VERSION
 fi
 
-build::go::install "${GOLANG117_VERSION:-1.17.12}"
+build::go::install "${GOLANG117_VERSION:-1.17.13}"
 build::go::install "${GOLANG116_VERSION:-1.16.15}"
 
 build::cleanup
