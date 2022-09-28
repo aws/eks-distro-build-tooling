@@ -267,6 +267,7 @@ if [ "$IS_AL22" = false ]; then
     rm -rf bash-$OVERRIDE_BASH_VERSION
 fi
 
+build::go::install "${GOLANG119_VERSION:-1.19.1}"
 build::go::install "${GOLANG117_VERSION:-1.17.13}"
 build::go::install "${GOLANG116_VERSION:-1.16.15}"
 
@@ -299,7 +300,8 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # to symlink to the one in /root/sdk to ensure go-licenses gets built
 # with GOROOT pointed to /root/sdk/go... instead of /usr/local/go so it
 # is able to properly packages from the standard Go library
-# We currently  use 1.17 or 1.16, so installing for both
+# We currently  use 1.19, 1.17 or 1.16, so installing for all
+GO111MODULE=on GOBIN=${GOPATH}/go1.19/bin ${GOPATH}/go1.19/bin/go install github.com/google/go-licenses@v1.2.1
 GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go install github.com/google/go-licenses@v1.2.1 
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/google/go-licenses@v1.2.1
