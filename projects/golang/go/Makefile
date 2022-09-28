@@ -47,6 +47,7 @@ clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/noarch
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/x86_64
+	rm -rf $(HOME)/rpmbuild
 
 .PHONY: install-deps
 install-deps:
