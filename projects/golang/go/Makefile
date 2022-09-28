@@ -11,25 +11,7 @@ GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
 .PHONY: build
-build: check-env build-golang-rpm
-
-.PHONY: clone-golang
-clone-golang:
-	git -C $(VERSION_DIRECTORY) clone $(GO_REPO_URL)
-
-.PHONY: patch-golang
-patch-golang:
-	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
-	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
-	git -C $(CLONED_REPO_DIRECTORY) checkout $(GO_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(VERSION_DIRECTORY)/patches/*
-
-.PHONY: build-golang
-build-golang:
-	(cd $(CLONED_REPO_DIRECTORY)/src && ./all.bash)
-
-.PHONY: build-golang-rpm
-build-golang-rpm: setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree rpmbuild-golang
+build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -45,10 +27,13 @@ copy-sources-to-rpmbuild-tree:
 
 .PHONY: setup-rpm-tree
 setup-rpm-tree:
+ifeq (, $(shell which rpmdev-setuptree))
+	$(error "no rpmdev-setuptree in $(PATH); get it with 'yum install rpmdevtools'")
+endif
 	rpmdev-setuptree
 
-.PHONY: rpmbuild-golang
-rpmbuild-golang:
+.PHONY: build-golang-rpm
+build-golang-rpm:
 ifeq ($(shell uname),Darwin)
 	$(error "rpmbuild is being run on a Mac, build this on an Amazon Linux machine!")
 endif
@@ -62,12 +47,6 @@ clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/noarch
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/x86_64
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SRPMS
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/BUILD
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/BUILDROOT
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/tmp
-	rm -rf $(VERSION_DIRECTORY)/rpmbuild/SOURCES/*.patch
-	rm -rf $(HOME)/rpmbuild/SOURCES/go-$(GIT_TAG)
 
 .PHONY: install-deps
 install-deps:
