@@ -11,7 +11,7 @@ GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
 .PHONY: build
-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm  sync-artifacts-to-s3-dry-run
+build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm sync-artifacts-to-s3-dry-run
 
 .PHONY: release
 release: build sync-artifacts-to-s3
@@ -47,11 +47,11 @@ endif
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
-	source $(BASE_DIRECTORY)/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env-release
-	source $(BASE_DIRECTORY)/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true false
 
 .PHONY: clean
 clean:
