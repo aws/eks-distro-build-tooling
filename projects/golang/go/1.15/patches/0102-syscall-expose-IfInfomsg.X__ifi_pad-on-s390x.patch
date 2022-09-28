@@ -1,0 +1,41 @@
+From 817407fc2d6a861e65086388766f58082d38bc0b Mon Sep 17 00:00:00 2001
+From: Michael Munday <munday@ca.ibm.com>
+Date: Tue, 17 Jan 2017 11:33:38 -0500
+Subject: [PATCH 2/3] syscall: expose IfInfomsg.X__ifi_pad on s390x
+
+Exposing this field on s390x improves compatibility with the other
+linux architectures, all of which already expose it.
+
+Fixes #18628 and updates #18632.
+
+Change-Id: I08e8e1eb705f898cd8822f8bee0d61ce11d514b5
+---
+ src/syscall/ztypes_linux_s390x.go | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/syscall/ztypes_linux_s390x.go b/src/syscall/ztypes_linux_s390x.go
+index 63c4a83b19..b5894255df 100644
+--- a/src/syscall/ztypes_linux_s390x.go
++++ b/src/syscall/ztypes_linux_s390x.go
+@@ -449,12 +449,12 @@ type RtAttr struct {
+ }
+ 
+ type IfInfomsg struct {
+-	Family uint8
+-	_      uint8
+-	Type   uint16
+-	Index  int32
+-	Flags  uint32
+-	Change uint32
++	Family     uint8
++	X__ifi_pad uint8
++	Type       uint16
++	Index      int32
++	Flags      uint32
++	Change     uint32
+ }
+ 
+ type IfAddrmsg struct {
+-- 
+2.14.3
+

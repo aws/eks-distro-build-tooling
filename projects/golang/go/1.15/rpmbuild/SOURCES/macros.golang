@@ -1,0 +1,8 @@
+# Where to set GOPATH for builds. Like:
+# export GOPATH=$(pwd)/_build:%{gopath}
+%gopath          %{_datadir}/gocode
+
+# for use like:
+# ExclusiveArch:  %{go_arches}
+%go_arches       x86_64 aarch64 ppc64le s390x
+
