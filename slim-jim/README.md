@@ -1,13 +1,3 @@
-#WS EKS Distro Release Automation
+# EKS-D Minimal Images CLI
 
-##Usage
-
-### Environment Variables
-#### Required Env Vars
-
-#### Optional Env Vars
-
-###Development
-####Building
-
-####Testing
+## TODO
