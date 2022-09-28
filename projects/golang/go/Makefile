@@ -47,11 +47,13 @@ endif
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/x86_64 golang/go/$(GIT_TAG)/RPMS/x86_64 true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/RPMS golang/go/$(GIT_TAG)/RPMS true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/x86_64 golang/go/$(GIT_TAG)/RPMS/x86_64 true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true false
 
 .PHONY: clean
 clean:
@@ -62,7 +64,13 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y which git rpmdevtools rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
+	yum update -y && yum install -y which git rpmdevtools awscli rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
+
+.PHONY: check-env-release
+check-env-release:
+ifndef ARTIFACTS_BUCKET
+$(error environment variable ARTIFACTS_BUCKET is undefined)
+endif
 
 .PHONY: check-env-release
 check-env-release:
