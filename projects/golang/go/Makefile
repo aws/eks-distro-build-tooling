@@ -51,7 +51,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y which git rpmdevtools rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
+	yum update -y && yum install -y which git rpmdevtools awscli rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
 
 .PHONY: check-env
 check-env:
