@@ -251,6 +251,7 @@ Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
 Patch22:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch23:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch24:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch25:       0104-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -401,6 +402,7 @@ Requires:       %{name} = %{version}-%{release}
 %patch22 -p1
 %patch23 -p1
 %patch24 -p1
+%patch25 -p1
 
 %build
 
