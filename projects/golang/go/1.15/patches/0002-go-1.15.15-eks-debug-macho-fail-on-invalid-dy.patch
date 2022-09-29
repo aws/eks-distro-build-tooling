@@ -8,7 +8,6 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 # AWS EKS
-
 Backported To: go-1.15.15-eks
 Backported On: Thu, 22 Sept 2022
 Backported By: budris@amazon.com

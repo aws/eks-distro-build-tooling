@@ -4,7 +4,6 @@ Date: Wed, 8 Dec 2021 18:05:11 -0500
 Subject: [PATCH] [go-1.15.15-eks] syscall: fix ForkLock spurious close(0) on pipe failure
 
 # AWS EKS
-
 Backported To: go-1.15.15-eks
 Backported On: Thu, 22 Sept 2022
 Backported By: budris@amazon.com
