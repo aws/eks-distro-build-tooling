@@ -1,4 +1,4 @@
-From 4ffa2f1c23d5d43be18c4ebf74ca553119683670 Mon Sep 17 00:00:00 2001
+From 64a9dea455e63bf62c206dc6740dd64a02ec107b Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 4 Aug 2021 16:07:28 -0700
 Subject: [PATCH] time: fallback to slower TestTicker test after one failure
@@ -26,7 +26,7 @@ Reviewed-by: Ian Lance Taylor <iant@golang.org>
  1 file changed, 17 insertions(+), 6 deletions(-)
 
 diff --git a/src/time/tick_test.go b/src/time/tick_test.go
-index b5d0a189bc..d8cd59228f 100644
+index c0c6e76b53..8be358173f 100644
 --- a/src/time/tick_test.go
 +++ b/src/time/tick_test.go
 @@ -15,10 +15,11 @@ func TestTicker(t *testing.T) {
@@ -43,7 +43,7 @@ index b5d0a189bc..d8cd59228f 100644
 +	baseDelta := 20 * Millisecond
  
  	// On Darwin ARM64 the tick frequency seems limited. Issue 35692.
- 	if (runtime.GOOS == "darwin" || runtime.GOOS == "ios") && runtime.GOARCH == "arm64" {
+ 	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm64" {
 @@ -27,8 +28,8 @@ func TestTicker(t *testing.T) {
  		// Since tick frequency is limited on Darwin ARM64, use even
  		// number to give the ticks more time to let the test pass.
@@ -75,5 +75,5 @@ index b5d0a189bc..d8cd59228f 100644
  		t0 := Now()
  		for i := 0; i < count/2; i++ {
 -- 
-2.30.1 (Apple Git-130)
+2.37.1
 
