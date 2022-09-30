@@ -3,7 +3,7 @@
 -rw-r--r--       0B /dev/null
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
--rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
+-rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--   1.7KiB /etc/csh.cshrc
 -rw-r--r--   1.1KiB /etc/csh.login
 -rw-r--r--     131B /etc/dnf/plugins/release-notification.conf
@@ -64,7 +64,7 @@
 -rw-r--r--     581B /etc/ssh/ssh_config.d/50-redhat.conf
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
--rwxr-xr-x     434B /etc/update-motd.d/70-available-updates
+-rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     968B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x      33B /usr/bin/alias
@@ -232,9 +232,9 @@
 -rw-r--r--      47B /usr/lib/locale/C.utf8/LC_TELEPHONE
 -rw-r--r--   3.3KiB /usr/lib/locale/C.utf8/LC_TIME
 -rw-r--r--       0B /usr/lib/motd
--rwxr-xr-x     139B /usr/lib/motd.d/30-banner
--rw-r--r--     242B /usr/lib/os-release
--rw-r--r--     107B /usr/lib/rpm/macros.d/macros.dist
+-rwxr-xr-x     140B /usr/lib/motd.d/30-banner
+-rw-r--r--     313B /usr/lib/os-release
+-rw-r--r--     296B /usr/lib/rpm/macros.d/macros.dist
 -rw-r--r--      41B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
@@ -254,7 +254,7 @@
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgcrypt.so.20.hmac
--rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.0.hmac
+-rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
 -rw-r--r--      65B /usr/lib64/.libgnutls.so.30.30.0.hmac
 -rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
 -rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
@@ -299,7 +299,7 @@
 -rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20220421.so.1
 -rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.3.3
 -rwxr-xr-x   1.5MiB /usr/lib64/libgit2.so.1.3.2
--rwxr-xr-x   671KiB /usr/lib64/libgmp.so.10.4.0
+-rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
 -rwxr-xr-x   2.1MiB /usr/lib64/libgnutls.so.30.30.0
 -rwxr-xr-x   150KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   351KiB /usr/lib64/libgssapi_krb5.so.2.2
@@ -349,7 +349,7 @@
 -rwxr-xr-x   142KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x     951B /usr/lib64/libssh2.la
--rwxr-xr-x   954KiB /usr/lib64/libssh2.so.1.0.1
+-rwxr-xr-x   953KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.3
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.0
@@ -2774,7 +2774,7 @@ lrwxrwxrwx       7B /usr/lib/debug/bin usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
-lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.0.hmac
+lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
 lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.30.0.hmac
 lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
 lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
@@ -2796,7 +2796,7 @@ lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20220421.so.1
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.3.3
 lrwxrwxrwx      14B /usr/lib64/libgit2.so libgit2.so.1.3
 lrwxrwxrwx      16B /usr/lib64/libgit2.so.1.3 libgit2.so.1.3.2
-lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.0
+lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
 lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.30.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
 lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2 libgssapi_krb5.so.2.2
