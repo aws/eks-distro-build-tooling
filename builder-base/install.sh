@@ -69,8 +69,19 @@ function build::go::install(){
         # TODO: do we want to install 1.15 and 1.13 from al2?
         yum_provided_versions="1.16"
     fi
-    
-    if [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
+
+    local eks_built_versions="1.15"
+    if [[ $eks_built_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) && $TARGETARCH == "amd64" ]]; then
+        local artifacts_bucket='eks-d-postsubmit-artifacts'
+        local arch='x86_64'
+        for artifact in golang golang-bin golang-race; do
+          aws s3 cp s3://$artifacts_bucket/golang/go/go1.15.15/RPMS/$arch/$artifact-1.15.15-1.amzn2.0.1.$arch.rpm /tmp
+        done
+
+        for artifact in golang-docs golang-misc golang-tests golang-src; do
+          aws s3 cp s3://$artifacts_bucket/golang/go/go1.15.15/RPMS/noarch/$artifact-1.15.15-1.amzn2.0.1.noarch.rpm /tmp
+        done
+    elif [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
         # Do not install rpm directly instead follow eks-distro base images pattern
         # of downloading and install rpms directly
         for package in golang golang-bin golang-docs golang-misc golang-src golang-tests golang-race; do
