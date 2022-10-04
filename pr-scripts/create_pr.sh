@@ -52,37 +52,37 @@ fi
 
 PR_TITLE="Update base image tag in ${CHANGED_FILE}"
 if [[ $REPO =~ "prow-jobs" ]]; then
-    PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body)
+    PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body
 else
     if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
         PR_TITLE="Update deck image tag in ${CHANGED_FILE}"
-        PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/prow_deck_pr_body)
+        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/prow_deck_pr_body
     else
         PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_other_repo_pr_body
         if [ $REPO = "eks-distro-build-tooling" ]; then
             PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_pr_body
         fi
         cp $PR_BODY_FILE ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-        $SED -i "s,in .* with,in ${CHANGED_FILE} with," ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-        
+        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        $SED -i "s,in .* with,in ${CHANGED_FILE} with," $PR_BODY_FILE
         
         for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
             UPDATE_PACKAGES="$(cat ${FILE})"
             if [ "$UPDATE_PACKAGES" != "" ]; then
                 VARIANT=$(basename ${FILE} | sed 's/update_packages-//')
-                printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+                printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> $PR_BODY_FILE
             fi
-        done    
-
-        printf "\nBy submitting this pull request,\
-        I confirm that you can use, modify, copy,\
-        and redistribute this contribution,\
-        under the terms of your choice." >> ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
-
-        PR_BODY=$(cat ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body)
-        rm ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
+        done
     fi
 fi
+
+PROW_BUCKET_NAME=$(echo $JOB_SPEC | jq -r ".decoration_config.gcs_configuration.bucket" | awk -F// '{print $NF}')
+printf "\nClick [here](https://prow.eks.amazonaws.com/view/s3/$PROW_BUCKET_NAME/logs/$JOB_NAME/$BUILD_ID) to view job logs.
+\nBy submitting this pull request,\
+I confirm that you can use, modify, copy,\
+and redistribute this contribution,\
+under the terms of your choice." >> $PR_BODY_FILE
+PR_BODY=$(cat $PR_BODY_FILE)
 PR_BRANCH="image-tag-update"
 
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
