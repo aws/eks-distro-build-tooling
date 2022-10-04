@@ -43,7 +43,7 @@ endif
 ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
-	rpmbuild -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
+	rpmbuild -bav $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
