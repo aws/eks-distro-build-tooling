@@ -1,0 +1,103 @@
+From ccea19b185fb267f9c54ccd3b6aa810c43d4ccae Mon Sep 17 00:00:00 2001
+From: Julie Qiu <julieqiu@google.com>
+Date: Thu, 23 Jun 2022 23:17:53 +0000
+Subject: [PATCH 13/16] [go-1.16.15-eks] io/fs: fix stack exhaustion in
+ Glob
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Tue, 04 Oct 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+EKS Patch Source Commit: https://github.com/danbudris/go/commit/9aaea0af75a151a290326d09dd5b2d0dfd031867
+Upstream Source Commit: https://github.com/golang/go/commit/8c1d8c836270615cfb5b229932269048ef59ac07
+
+# Original Information
+
+A limit is added to the number of path separators allowed by an input to
+Glob, to prevent stack exhaustion issues.
+
+Thanks to Juho Nurminen of Mattermost who reported a similar issue in
+path/filepath.
+
+Fixes #53719
+Updates #53415
+Fixes CVE-2022-30630
+
+Change-Id: I5a9d02591fed90cd3d52627f5945f1301e53465d
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1497588
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+(cherry picked from commit fdccc5d7bd0f276d0a8de3a818ca844f0bed5d97)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/417072
+Reviewed-by: Heschi Kreinick <heschi@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+---
+ src/io/fs/glob.go      | 14 ++++++++++++--
+ src/io/fs/glob_test.go | 10 ++++++++++
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/src/io/fs/glob.go b/src/io/fs/glob.go
+index 45d9cb61b9..0e529cd05d 100644
+--- a/src/io/fs/glob.go
++++ b/src/io/fs/glob.go
+@@ -31,6 +31,16 @@ type GlobFS interface {
+ // Otherwise, Glob uses ReadDir to traverse the directory tree
+ // and look for matches for the pattern.
+ func Glob(fsys FS, pattern string) (matches []string, err error) {
++	return globWithLimit(fsys, pattern, 0)
++}
++
++func globWithLimit(fsys FS, pattern string, depth int) (matches []string, err error) {
++	// This limit is added to prevent stack exhaustion issues. See
++	// CVE-2022-30630.
++	const pathSeparatorsLimit = 10000
++	if depth > pathSeparatorsLimit {
++		return nil, path.ErrBadPattern
++	}
+ 	if fsys, ok := fsys.(GlobFS); ok {
+ 		return fsys.Glob(pattern)
+ 	}
+@@ -59,9 +69,9 @@ func Glob(fsys FS, pattern string) (matches []string, err error) {
+ 	}
+ 
+ 	var m []string
+-	m, err = Glob(fsys, dir)
++	m, err = globWithLimit(fsys, dir, depth+1)
+ 	if err != nil {
+-		return
++		return nil, err
+ 	}
+ 	for _, d := range m {
+ 		matches, err = glob(fsys, d, file, matches)
+diff --git a/src/io/fs/glob_test.go b/src/io/fs/glob_test.go
+index f19bebed77..d052eab371 100644
+--- a/src/io/fs/glob_test.go
++++ b/src/io/fs/glob_test.go
+@@ -8,6 +8,7 @@ import (
+ 	. "io/fs"
+ 	"os"
+ 	"path"
++	"strings"
+ 	"testing"
+ )
+ 
+@@ -55,6 +56,15 @@ func TestGlobError(t *testing.T) {
+ 	}
+ }
+ 
++func TestCVE202230630(t *testing.T) {
++	// Prior to CVE-2022-30630, a stack exhaustion would occur given a large
++	// number of separators. There is now a limit of 10,000.
++	_, err := Glob(os.DirFS("."), "/*"+strings.Repeat("/", 10001))
++	if err != path.ErrBadPattern {
++		t.Fatalf("Glob returned err=%v, want %v", err, path.ErrBadPattern)
++	}
++}
++
+ // contains reports whether vector contains the string s.
+ func contains(vector []string, s string) bool {
+ 	for _, elem := range vector {
+-- 
+2.30.1 (Apple Git-130)
+
