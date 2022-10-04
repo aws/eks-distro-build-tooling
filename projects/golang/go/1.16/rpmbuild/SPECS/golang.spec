@@ -300,7 +300,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go
+%autosetup -p1 -n go-go1.16.15
 
 cp %{SOURCE1} ./src/runtime/
 
