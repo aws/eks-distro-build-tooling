@@ -43,7 +43,7 @@ endif
 ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
-	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild" --define "_golang_arches x86_64"
+	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
@@ -64,7 +64,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum update -y && yum install -y which git rpmdevtools awscli rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
+	yum update -y && yum install -y which git rpmdevtools go-srpm-macros awscli rpm-build golang-1.15.14-1.amzn2.0.1 pcre-devel glibc-static hostname procps-ng
 
 .PHONY: check-env-release
 check-env-release:
