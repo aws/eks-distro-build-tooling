@@ -39,7 +39,7 @@ PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
 PACKER_DOWNLOAD_URL="https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip"
 PACKER_CHECKSUM_URL="https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_SHA256SUMS"
 
-NODEJS_VERSION="${NODEJS_VERSION:-v15.11.0}"
+NODEJS_VERSION="${NODEJS_VERSION:-v16.17.1}"
 if [ $TARGETARCH == 'amd64' ]; then 
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-x64.tar.gz"
     NODEJS_FOLDER="node-$NODEJS_VERSION-linux-x64"
