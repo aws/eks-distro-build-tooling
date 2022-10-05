@@ -6,15 +6,15 @@ import {
 	"log"
 }
 
-var handleCmd = &cobra.Command{
-	Use: "",
+var cleandocsCmd = &cobra.Command{
+	Use: "cleandocs",
 	Short: "",
 	Long: "",
 	PreRun: prerunHandleCmdBindFlags,
 }
 
 func init() {
-
+	rootCmd.AddCommand(createCmd)
 }
 
 func prerunHandleCmdBindFlags(cmd *cobra.Command, args []string) {
