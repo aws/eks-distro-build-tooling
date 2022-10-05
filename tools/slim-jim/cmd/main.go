@@ -1,9 +1,9 @@
 package main
 
-import {
+import ( 
 	"github.com/aws/eks-distro-build-tooling/slim-jim/cmd/slim-jim/cmd"
 	"os"
-}
+)
 
 func main() {
 	if cmd.Execute() == nil {
