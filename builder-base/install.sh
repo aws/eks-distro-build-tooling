@@ -63,23 +63,17 @@ function build::go::install(){
     local version=$1
 
     # AL2 provides a longer supported version of golang, use AL2 package when possible
-    local yum_provided_versions="1.16 1.13"
-    if [ "$IS_AL22" = true ]; then 
-        # al22 only includes 1.16
-        # TODO: do we want to install 1.15 and 1.13 from al2?
-        yum_provided_versions="1.16"
-    fi
-
-    local eks_built_versions="1.15"
+    local yum_provided_versions="1.13"
+    local eks_built_versions="1.16.15 1.15.15"
     if [[ $eks_built_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) && $TARGETARCH == "amd64" ]]; then
         local artifacts_bucket='eks-d-postsubmit-artifacts'
         local arch='x86_64'
         for artifact in golang golang-bin golang-race; do
-          aws s3 cp s3://$artifacts_bucket/golang/go/go1.15.15/RPMS/$arch/$artifact-1.15.15-1.amzn2.0.1.$arch.rpm /tmp
+          aws s3 cp s3://$artifacts_bucket/golang/go/go$version/RPMS/$arch/$artifact-$version.amzn2.0.1.$arch.rpm /tmp
         done
 
         for artifact in golang-docs golang-misc golang-tests golang-src; do
-          aws s3 cp s3://$artifacts_bucket/golang/go/go1.15.15/RPMS/noarch/$artifact-1.15.15-1.amzn2.0.1.noarch.rpm /tmp
+          aws s3 cp s3://$artifacts_bucket/golang/go/go$version/RPMS/noarch/$artifact-$version-1.amzn2.0.1.noarch.rpm /tmp
         done
 
         build::go::extract $version
