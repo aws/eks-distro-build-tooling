@@ -248,10 +248,12 @@ Patch18:       0018-go-1.15.15-eks-net-http-preserve-nil-values-i.patch
 Patch19:       0019-go-1.15.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch20:       0020-go-1.15.15-eks-net-http-update-bundled-golang.patch
 Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
-Patch22:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
-Patch23:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch24:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
-Patch25:       0104-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
+Patch22:       0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch
+
+Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
+Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
+Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch104:       0104-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -400,9 +402,10 @@ Requires:       %{name} = %{version}-%{release}
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
-%patch23 -p1
-%patch24 -p1
-%patch25 -p1
+%patch101 -p1
+%patch102 -p1
+%patch103 -p1
+%patch104 -p1
 
 %build
 
