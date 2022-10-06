@@ -189,6 +189,8 @@ Obsoletes:      emacs-%{name} < 1.4
 # These are the only RHEL/Fedora architectures that we compile this package for
 ExclusiveArch:  %{golang_arches}
 
+# Source required for CVE-2022-2879 patch 0015
+Source15:       pax-bad-hdr-large-tar-bz2
 Source100:      golang-gdbinit
 
 %description
@@ -447,6 +449,9 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/go
 ln -sf /etc/alternatives/go $RPM_BUILD_ROOT%{_bindir}/go
 rm -f $RPM_BUILD_ROOT%{_bindir}/gofmt
 ln -sf /etc/alternatives/gofmt $RPM_BUILD_ROOT%{_bindir}/gofmt
+
+# pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE15} $RPM_BUILD_ROOT%{gopath}/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 # gdbinit
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
