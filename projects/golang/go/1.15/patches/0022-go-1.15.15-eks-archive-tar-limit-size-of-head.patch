@@ -51,7 +51,7 @@ TryBot-Result: Gopher Robot <gobot@golang.org>
  create mode 100644 src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 diff --git a/src/archive/tar/format.go b/src/archive/tar/format.go
-index cfe24a5e1d..6642364de1 100644
+index cfe24a5e1d339540c26feb898bfa6ce09d1813d8..6642364de1e6886137fcd2c37c57b46c22c9b4da 100644
 --- a/src/archive/tar/format.go
 +++ b/src/archive/tar/format.go
 @@ -143,6 +143,10 @@ const (
@@ -66,7 +66,7 @@ index cfe24a5e1d..6642364de1 100644
  
  // blockPadding computes the number of bytes needed to pad offset up to the
 diff --git a/src/archive/tar/reader.go b/src/archive/tar/reader.go
-index 4f9135b791..d964c3b6b3 100644
+index 4f9135b791943774cbda7d8527db9c1e547e7a32..d964c3b6b39bbecfa519d8febc70dfee13e478ab 100644
 --- a/src/archive/tar/reader.go
 +++ b/src/archive/tar/reader.go
 @@ -104,7 +104,7 @@ func (tr *Reader) next() (*Header, error) {
@@ -105,7 +105,7 @@ index 4f9135b791..d964c3b6b3 100644
  func discard(r io.Reader, n int64) error {
  	// If possible, Seek to the last byte before the end of the data section.
 diff --git a/src/archive/tar/reader_test.go b/src/archive/tar/reader_test.go
-index f153b668de..c68a859ad8 100644
+index f153b668deff8687376a20da0da756c884956757..c68a859ad81dcd8520df381f8f49e9aef66b81a3 100644
 --- a/src/archive/tar/reader_test.go
 +++ b/src/archive/tar/reader_test.go
 @@ -6,6 +6,7 @@ package tar
@@ -156,7 +156,7 @@ literal 0
 HcmV?d00001
 
 diff --git a/src/archive/tar/writer.go b/src/archive/tar/writer.go
-index e80498d03e..893eac00ae 100644
+index e80498d03e39c0699a4f6d51c91fd4dda471ffa4..893eac00ae2038d9e24412b37c4acc12be8634d2 100644
 --- a/src/archive/tar/writer.go
 +++ b/src/archive/tar/writer.go
 @@ -199,6 +199,9 @@ func (tw *Writer) writePAXHeader(hdr *Header, paxHdrs map[string]string) error {
@@ -170,7 +170,7 @@ index e80498d03e..893eac00ae 100644
  			return err // Global headers return here
  		}
 diff --git a/src/archive/tar/writer_test.go b/src/archive/tar/writer_test.go
-index 30556d27d0..4bd69fd548 100644
+index 30556d27d027f370bd88396aae497526a3a8488a..4bd69fd548be5270c00b839204d70ccd5c4adf90 100644
 --- a/src/archive/tar/writer_test.go
 +++ b/src/archive/tar/writer_test.go
 @@ -1007,6 +1007,33 @@ func TestIssue12594(t *testing.T) {
