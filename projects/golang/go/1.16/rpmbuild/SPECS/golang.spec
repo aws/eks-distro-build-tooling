@@ -169,6 +169,7 @@ Patch11:       0011-go-1.16.15-eks-io-fs-fix-stack-exhaustion-in-.patch
 Patch12:       0012-go-1.16.15-eks-net-http-don-t-strip-whitespac.patch
 Patch13:       0013-go-1.16.15-eks-net-http-preserve-nil-values-i.patch
 Patch14:       0014-go-1.16.15-eks-path-filepath-fix-stack-exhaus.patch
+Patch15:       0015-go-1.16.15-eks-archive-tar-limit-size-of-head.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
