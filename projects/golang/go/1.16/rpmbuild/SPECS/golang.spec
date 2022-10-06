@@ -451,7 +451,7 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/gofmt
 ln -sf /etc/alternatives/gofmt $RPM_BUILD_ROOT%{_bindir}/gofmt
 
 # pax-bad-hdr-large.tar.bz2
-cp -av %{SOURCE15} $RPM_BUILD_ROOT%{gopath}/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE15} $RPM_BUILD_ROOT%{goroot}/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 # gdbinit
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
