@@ -50,7 +50,7 @@ TryBot-Result: Gopher Robot <gobot@golang.org>
  create mode 100644 src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 diff --git a/src/archive/tar/format.go b/src/archive/tar/format.go
-index cfe24a5e1d339540c26feb898bfa6ce09d1813d8..6642364de1e6886137fcd2c37c57b46c22c9b4da 100644
+index cfe24a5e1d..6642364de1 100644
 --- a/src/archive/tar/format.go
 +++ b/src/archive/tar/format.go
 @@ -143,6 +143,10 @@ const (
@@ -65,7 +65,7 @@ index cfe24a5e1d339540c26feb898bfa6ce09d1813d8..6642364de1e6886137fcd2c37c57b46c
  
  // blockPadding computes the number of bytes needed to pad offset up to the
 diff --git a/src/archive/tar/reader.go b/src/archive/tar/reader.go
-index 1b1d5b46891b6bc972ed6bd9bfb1efc63eef1433..f645af8016fb64d101aec737d68ac1ac2add94df 100644
+index 1b1d5b4689..f645af8016 100644
 --- a/src/archive/tar/reader.go
 +++ b/src/archive/tar/reader.go
 @@ -103,7 +103,7 @@ func (tr *Reader) next() (*Header, error) {
@@ -104,7 +104,7 @@ index 1b1d5b46891b6bc972ed6bd9bfb1efc63eef1433..f645af8016fb64d101aec737d68ac1ac
  func discard(r io.Reader, n int64) error {
  	// If possible, Seek to the last byte before the end of the data section.
 diff --git a/src/archive/tar/reader_test.go b/src/archive/tar/reader_test.go
-index 789ddc1bc0345ae95058f6fafa7311b54c5f6c25..5a644a43a47727c1c99e9006d589ac0502e3722b 100644
+index 789ddc1bc0..5a644a43a4 100644
 --- a/src/archive/tar/reader_test.go
 +++ b/src/archive/tar/reader_test.go
 @@ -6,6 +6,7 @@ package tar
@@ -143,19 +143,10 @@ index 789ddc1bc0345ae95058f6fafa7311b54c5f6c25..5a644a43a47727c1c99e9006d589ac05
  				rdbuf   = make([]byte, 8)
 diff --git a/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2 b/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 new file mode 100644
-index 0000000000000000000000000000000000000000..06bf710d3ae4e96a27487124f08e30c9e318699d
-GIT binary patch
-literal 156
-zcmV;N0Av3`T4*^jL0KkKS;SwlM*sj&-;n5#Kmq^806<7UW<Xv*06+)`AOM6LQB%`R
-zAoUtF^&Y00G(AA7R6Rgw0K{a`;)ySob}qf{K(WW#h);2a@?<AStKizfO^|VdbRoJj
-zqj=52lgiv7w2N0MDEF-8t!>m)Y~!#90LDZj0F4RNS<;o$l$z=JG_q>Xyl@Bs{9VZu
-K;X*?Ze#IONT1LeH
-
-literal 0
-HcmV?d00001
-
+index 0000000000..06bf710d3a
+Binary files /dev/null and b/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2 differ
 diff --git a/src/archive/tar/writer.go b/src/archive/tar/writer.go
-index e80498d03e39c0699a4f6d51c91fd4dda471ffa4..893eac00ae2038d9e24412b37c4acc12be8634d2 100644
+index e80498d03e..893eac00ae 100644
 --- a/src/archive/tar/writer.go
 +++ b/src/archive/tar/writer.go
 @@ -199,6 +199,9 @@ func (tw *Writer) writePAXHeader(hdr *Header, paxHdrs map[string]string) error {
@@ -169,7 +160,7 @@ index e80498d03e39c0699a4f6d51c91fd4dda471ffa4..893eac00ae2038d9e24412b37c4acc12
  			return err // Global headers return here
  		}
 diff --git a/src/archive/tar/writer_test.go b/src/archive/tar/writer_test.go
-index a00f02d8fab698a588872ade0e5693b0d0dc0660..4e709e5cacc1e2514d50c362c8844c0f9ef1150f 100644
+index a00f02d8fa..4e709e5cac 100644
 --- a/src/archive/tar/writer_test.go
 +++ b/src/archive/tar/writer_test.go
 @@ -1006,6 +1006,33 @@ func TestIssue12594(t *testing.T) {
