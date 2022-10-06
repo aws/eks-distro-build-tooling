@@ -190,7 +190,7 @@ Obsoletes:      emacs-%{name} < 1.4
 ExclusiveArch:  %{golang_arches}
 
 # Source required for CVE-2022-2879 patch 0015
-Source15:       pax-bad-hdr-large-tar-bz2
+Source15:       pax-bad-hdr-large.tar.bz2
 Source100:      golang-gdbinit
 
 %description
