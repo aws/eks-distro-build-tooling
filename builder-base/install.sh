@@ -69,7 +69,7 @@ function build::go::install(){
         local artifacts_bucket='eks-d-postsubmit-artifacts'
         local arch='x86_64'
         for artifact in golang golang-bin golang-race; do
-          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/$arch/$artifact-$version.amzn2.0.1.$arch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.$arch.rpm
+          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/$arch/$artifact-$version-1.amzn2.0.1.$arch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.$arch.rpm
         done
 
         for artifact in golang-docs golang-misc golang-tests golang-src; do
