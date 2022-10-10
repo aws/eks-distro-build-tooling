@@ -455,7 +455,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
 cp -av %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d/golang.gdb
 
 # pax-bad-hdr-large.tar.bz2
-cp -av %{SOURCE15} /root/rpmbuild/BUILD/go-golang1.16.15/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE15} /root/rpmbuild/BUILD/go-go1.16.15/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 %check
 export GOROOT=$(pwd -P)
