@@ -65,7 +65,7 @@ function build::go::install(){
     # AL2 provides a longer supported version of golang, use AL2 package when possible
     local yum_provided_versions="1.13"
     local eks_built_versions="1.16.15 1.15.15"
-    if [[ $eks_built_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) && $TARGETARCH == "amd64" ]]; then
+    if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" ]]; then
         local artifacts_bucket='eks-d-postsubmit-artifacts'
         local arch='x86_64'
         for artifact in golang golang-bin golang-race; do
