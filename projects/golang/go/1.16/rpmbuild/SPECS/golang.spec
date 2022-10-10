@@ -450,12 +450,12 @@ ln -sf /etc/alternatives/go $RPM_BUILD_ROOT%{_bindir}/go
 rm -f $RPM_BUILD_ROOT%{_bindir}/gofmt
 ln -sf /etc/alternatives/gofmt $RPM_BUILD_ROOT%{_bindir}/gofmt
 
-# pax-bad-hdr-large.tar.bz2
-cp -av %{SOURCE15} $RPM_BUILD_ROOT%{goroot}/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
-
 # gdbinit
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
 cp -av %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d/golang.gdb
+
+# pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE15} /root/rpmbuild/BUILD/go-golang1.16.15/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 %check
 export GOROOT=$(pwd -P)
@@ -1336,4 +1336,5 @@ fi
 - Update to beta2
 
 * Tue Apr  9 2013 Adam Goode <adam@spicenitz.org> - 1.1-0.1.beta1
+
 - Initial packaging.
