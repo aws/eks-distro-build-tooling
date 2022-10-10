@@ -62,12 +62,6 @@ function build::go::install(){
     # the function again with the specific parameter.
     local version=$1
 
-    if [ "$IS_AL22" = true ]; then
-        # al22 only includes 1.16
-        # TODO: do we want to install 1.15 and 1.13 from al2?
-        yum_provided_versions="1.16"
-    fi
-
     # AL2 provides a longer supported version of golang, use AL2 package when possible
     local yum_provided_versions="1.13"
     local eks_built_versions="1.16.15 1.15.15"
