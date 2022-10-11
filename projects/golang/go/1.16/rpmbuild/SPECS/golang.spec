@@ -169,6 +169,7 @@ Patch11:       0011-go-1.16.15-eks-io-fs-fix-stack-exhaustion-in-.patch
 Patch12:       0012-go-1.16.15-eks-net-http-don-t-strip-whitespac.patch
 Patch13:       0013-go-1.16.15-eks-net-http-preserve-nil-values-i.patch
 Patch14:       0014-go-1.16.15-eks-path-filepath-fix-stack-exhaus.patch
+Patch15:       0015-go-1.16.15-eks-archive-tar-limit-size-of-head.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -188,6 +189,8 @@ Obsoletes:      emacs-%{name} < 1.4
 # These are the only RHEL/Fedora architectures that we compile this package for
 ExclusiveArch:  %{golang_arches}
 
+# Source required for CVE-2022-2879 patch 0015
+Source15:       pax-bad-hdr-large.tar.bz2
 Source100:      golang-gdbinit
 
 %description
@@ -451,6 +454,9 @@ ln -sf /etc/alternatives/gofmt $RPM_BUILD_ROOT%{_bindir}/gofmt
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
 cp -av %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d/golang.gdb
 
+# pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE15} /root/rpmbuild/BUILD/go-go1.16.15/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
+
 %check
 export GOROOT=$(pwd -P)
 export PATH="$GOROOT"/bin:"$PATH"
@@ -545,6 +551,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
+- Included backported patch for CVE-2022-2879
+
 * Thu Mar 10 2022 Alejandro Sáez <asm@redhat.com> - 1.16.15-1
 - Update to go1.16.15
 
@@ -1330,4 +1339,5 @@ fi
 - Update to beta2
 
 * Tue Apr  9 2013 Adam Goode <adam@spicenitz.org> - 1.1-0.1.beta1
+
 - Initial packaging.
