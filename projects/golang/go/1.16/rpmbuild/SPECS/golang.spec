@@ -551,6 +551,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
+- Included backported patch for CVE-2022-2879
+
 * Thu Mar 10 2022 Alejandro Sáez <asm@redhat.com> - 1.16.15-1
 - Update to go1.16.15
 
