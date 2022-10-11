@@ -1,1 +1,4 @@
 
+systemd-libs.x86_64
+systemd-sysv.x86_64
+zlib.x86_64

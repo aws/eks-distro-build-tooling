@@ -362,7 +362,7 @@
 -rwxr-xr-x   136KiB /usr/bin/luac
 -rwxr-xr-x   134KiB /usr/bin/lz4
 -rwxr-xr-x   134KiB /usr/bin/lz4c
--rwxr-xr-x   591KiB /usr/bin/machinectl
+-rwxr-xr-x   590KiB /usr/bin/machinectl
 -rwxr-xr-x    75KiB /usr/bin/makedb
 -rwxr-xr-x    69KiB /usr/bin/mcookie
 -rwxr-xr-x    69KiB /usr/bin/md5sum
@@ -486,7 +486,7 @@
 -rwxr-xr-x   396KiB /usr/bin/systemd-run
 -rwxr-xr-x   330KiB /usr/bin/systemd-stdio-bridge
 -rwxr-xr-x   3.9KiB /usr/bin/systemd-sysv-convert
--rwxr-xr-x   199KiB /usr/bin/systemd-tmpfiles
+-rwxr-xr-x   198KiB /usr/bin/systemd-tmpfiles
 -rwxr-xr-x   133KiB /usr/bin/systemd-tty-ask-password-agent
 -rwxr-xr-x    68KiB /usr/bin/tabs
 -rwxr-xr-x    69KiB /usr/bin/tac
@@ -8318,7 +8318,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.4MiB /var/lib/rpm/Packages
 -rw-r--r--    92KiB /var/lib/rpm/Providename
--rw-r--r--    76KiB /var/lib/rpm/Requirename
+-rw-r--r--    80KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername

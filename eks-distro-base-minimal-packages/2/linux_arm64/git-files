@@ -1,6 +1,6 @@
 ****************** Regular Files ******************
 
--rw-r--r--      72B /dev/null
+-rw-r--r--     119B /dev/null
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg

@@ -105,8 +105,8 @@ setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.2.x86_64
 sqlite-3.7.17-8.amzn2.1.1.x86_64
 system-release-2-14.amzn2.x86_64
-systemd-libs-219-78.amzn2.0.18.x86_64
-systemd-sysv-219-78.amzn2.0.18.x86_64
+systemd-libs-219-78.amzn2.0.20.x86_64
+systemd-sysv-219-78.amzn2.0.20.x86_64
 tcp_wrappers-7.6-77.amzn2.0.2.x86_64
 tcp_wrappers-libs-7.6-77.amzn2.0.2.x86_64
 tzdata-2022a-1.amzn2.noarch
@@ -114,4 +114,4 @@ ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.7.x86_64
 xfsprogs-4.5.0-18.amzn2.0.1.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
-zlib-1.2.7-19.amzn2.0.1.x86_64
+zlib-1.2.7-19.amzn2.0.2.x86_64

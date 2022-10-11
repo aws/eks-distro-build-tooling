@@ -316,7 +316,7 @@
 -rwxr-xr-x    49KiB /usr/bin/hexdump
 -rwxr-xr-x    29KiB /usr/bin/hostid
 -rwxr-xr-x    16KiB /usr/bin/hostname
--rwxr-xr-x   302KiB /usr/bin/hostnamectl
+-rwxr-xr-x   303KiB /usr/bin/hostnamectl
 -rwxr-xr-x    65KiB /usr/bin/iconv
 -rwxr-xr-x    37KiB /usr/bin/id
 -rwxr-xr-x   3.2KiB /usr/bin/igawk
@@ -992,7 +992,7 @@
 -rwxr-xr-x    82KiB /usr/lib/systemd/systemd-sleep
 -rwxr-xr-x   102KiB /usr/lib/systemd/systemd-socket-proxyd
 -rwxr-xr-x    61KiB /usr/lib/systemd/systemd-sysctl
--rwxr-xr-x   356KiB /usr/lib/systemd/systemd-timedated
+-rwxr-xr-x   360KiB /usr/lib/systemd/systemd-timedated
 -rwxr-xr-x   407KiB /usr/lib/systemd/systemd-udevd
 -rwxr-xr-x    40KiB /usr/lib/systemd/systemd-update-done
 -rwxr-xr-x   290KiB /usr/lib/systemd/systemd-update-utmp
@@ -1554,7 +1554,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/libsystemd-daemon.so.0.0.12
 -rwxr-xr-x    20KiB /usr/lib64/libsystemd-id128.so.0.0.28
 -rwxr-xr-x   138KiB /usr/lib64/libsystemd-journal.so.0.11.5
--rwxr-xr-x    57KiB /usr/lib64/libsystemd-login.so.0.9.3
+-rwxr-xr-x    53KiB /usr/lib64/libsystemd-login.so.0.9.3
 -rwxr-xr-x   183KiB /usr/lib64/libsystemd.so.0.6.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    57KiB /usr/lib64/libtic.so.6.0
@@ -8320,7 +8320,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.4MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
--rw-r--r--    88KiB /var/lib/rpm/Requirename
+-rw-r--r--    92KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
