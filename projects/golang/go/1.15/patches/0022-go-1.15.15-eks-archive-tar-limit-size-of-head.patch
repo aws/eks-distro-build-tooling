@@ -94,7 +94,7 @@ index 4f9135b791..d964c3b6b3 100644
 +// readSpecialFile is like io.ReadAll except it returns
 +// ErrFieldTooLong if more than maxSpecialFileSize is read.
 +func readSpecialFile(r io.Reader) ([]byte, error) {
-+	buf, err := io.ReadAll(io.LimitReader(r, maxSpecialFileSize+1))
++	buf, err := ioutil.ReadAll(io.LimitReader(r, maxSpecialFileSize+1))
 +	if len(buf) > maxSpecialFileSize {
 +		return nil, ErrFieldTooLong
 +	}
