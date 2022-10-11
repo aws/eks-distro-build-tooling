@@ -268,6 +268,7 @@ Obsoletes:      emacs-%{name} < 1.4
 # These are the only RHEL/Fedora architectures that we compile this package for
 ExclusiveArch:  %{golang_arches}
 
+Source1:	pax-bad-hdr-large.tar.bz2
 Source100:      golang-gdbinit
 Source101:      golang-prelink.conf
 Source102:      macros.golang
@@ -565,6 +566,8 @@ mkdir -p $RPM_BUILD_ROOT%{_rpmconfigdir}/macros.d
 cp -av %{SOURCE102} $RPM_BUILD_ROOT%{_rpmconfigdir}/macros.d/macros.golang
 %endif
 
+## Testfile added for patch 0022-Archive-tar-limit-size-of-head
+cp -av %{SOURCE1} /root/rpmbuild/BUILD/go-go1.15.15/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 %check
 export GOROOT=$(pwd -P)
@@ -668,6 +671,10 @@ fi
 %endif
 
 %changelog
+* Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-2
+- Include CVE-2022-2879 fix backported from 1.18.7
+- Add Source1 to copy testfile from fix
+
 * Fri Sep 23 2022 Daniel Budris <budris@amazon.com> - 1.15.15-1
 - Update to go1.15.15
 - Include backported security fixes for all applicable Golang CVEs since 1.15.15
