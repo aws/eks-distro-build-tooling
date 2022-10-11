@@ -188,7 +188,7 @@ index 30556d27d0..4bd69fd548 100644
 +		name: "PAX header too long",
 +		h:    &Header{PAXRecords: map[string]string{"GOLANG.x": strings.Repeat("a", maxSpecialFileSize)}},
 +	}} {
-+		w := NewWriter(io.Discard)
++		w := NewWriter(ioutil.Discard)
 +		if err := w.WriteHeader(test.h); err != ErrFieldTooLong {
 +			t.Errorf("%v: w.WriteHeader() = %v, want ErrFieldTooLong", test.name, err)
 +		}
