@@ -7,9 +7,15 @@ Subject: [PATCH] [release-branch.go1.18] archive/tar: limit size of headers
 Backported To: go-1.16.15-eks
 Backported On: Wed, 5 Oct 2022
 Backported By: rcrozean@amazon.com
-Backported From: release-branch.go1.16
+Backported From: release-branch.go1.18
 Source Commit: https://github.com/golang/go/commit/0a723816cd205576945fa57fbdde7e6532d59d08
 EKS Patch Source Commit: https://github.com/aws/eks-distro-build-tooling/pull/493/commits/f4ce232728044852548ea01f0704fc1b2de7b30d
+
+For building an internal version of go1.15, we removed the binary
+information from this patch, describing ./src/archive/tar/pax-bad-hdr-large.tar.bz2
+The file itself was added directly to the repository.
+This was done due to fact that `diff`, used by RPMs for patch application, does not support binary diffs.
+https://github.com/aws/eks-distro-build-tooling/projects/golang/go/1.16/rpmbuild/SOURCE/pax-bad-hdr-large.tar.bz2
 
 # Original Information
 
@@ -141,10 +147,6 @@ index 789ddc1bc0..5a644a43a4 100644
  				hdrs    []*Header
  				chksums []string
  				rdbuf   = make([]byte, 8)
-diff --git a/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2 b/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
-new file mode 100644
-index 0000000000..06bf710d3a
-Binary files /dev/null and b/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2 differ
 diff --git a/src/archive/tar/writer.go b/src/archive/tar/writer.go
 index e80498d03e..893eac00ae 100644
 --- a/src/archive/tar/writer.go
