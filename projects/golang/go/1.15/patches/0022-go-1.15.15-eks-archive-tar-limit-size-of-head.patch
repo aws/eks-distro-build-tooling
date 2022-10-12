@@ -13,7 +13,8 @@ EKS Patch Source Commit: https://github.com/aws/eks-distro-build-tooling/commit/
 
 For building an internal version of go1.15, we removed the binary
 information from this patch caused by ./src/archive/tar/pax-bad-hdr-large.tar.bz2
-it was added to the repo:
+The file itself was added directly to the repository.
+This was done due to fact that `diff`, used by RPMs for patch application, does not support binary diffs.
 https://github.com/aws/eks-distro-build-tooling/projects/golang/go/1.15/rpmbuild/SOURCE/pax-bad-hdr-large.tar.bz2
 
 # Originial Information
