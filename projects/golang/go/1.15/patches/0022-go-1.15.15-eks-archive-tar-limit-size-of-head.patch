@@ -1,7 +1,7 @@
 From 18bab2267ddb865bbff5f778bf60a115b145bd74 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Fri, 2 Sep 2022 20:45:18 -0700
-Subject: [PATCH] [release-branch.go1.18] archive/tar: limit size of headers
+Subject: [PATCH] [go-1.15.15-eks] archive/tar: limit size of headers
 
 # AWS EKS
 Backported To: go-1.15.15-eks
@@ -9,7 +9,7 @@ Backported On: Wed, 5 Oct 2022
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.15
 Source Commit: https://github.com/golang/go/commit/0a723816cd205576945fa57fbdde7e6532d59d08
-EKS Patch Source Commit: 
+EKS Patch Source Commit: https://github.com/aws/eks-distro-build-tooling/commit/1de4158fdca55859eb7cc47dccc9aacbfc0697ed
 
 For building an internal version of go1.15, we removed the binary
 information from this patch caused by ./src/archive/tar/pax-bad-hdr-large.tar.bz2
