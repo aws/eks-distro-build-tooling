@@ -63,14 +63,21 @@ function build::go::install(){
     local version=$1
 
     # AL2 provides a longer supported version of golang, use AL2 package when possible
-    local yum_provided_versions="1.16 1.13"
-    if [ "$IS_AL22" = true ]; then 
-        # al22 only includes 1.16
-        # TODO: do we want to install 1.15 and 1.13 from al2?
-        yum_provided_versions="1.16"
-    fi
-    
-    if [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
+    local yum_provided_versions="1.13"
+    local eks_built_versions="1.16.15 1.15.15"
+    if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" && $IS_AL22 == false ]]; then
+        local artifacts_bucket='eks-d-postsubmit-artifacts'
+        local arch='x86_64'
+        for artifact in golang golang-bin golang-race; do
+          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/$arch/$artifact-$version-1.amzn2.0.1.$arch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.$arch.rpm
+        done
+
+        for artifact in golang-docs golang-misc golang-tests golang-src; do
+          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/noarch/$artifact-$version-1.amzn2.0.1.noarch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.noarch.rpm
+        done
+
+        build::go::extract $version
+    elif [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
         # Do not install rpm directly instead follow eks-distro base images pattern
         # of downloading and install rpms directly
         for package in golang golang-bin golang-docs golang-misc golang-src golang-tests golang-race; do
@@ -80,31 +87,35 @@ function build::go::install(){
                 yumdownloader --destdir=/tmp -x "*.i686" $package-$al2_package_version
             fi
         done
-        
-        mkdir -p /tmp/go-extracted
-        for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
-        
-        local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
-        
-        mkdir -p /root/sdk/$golang_version
-        mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
-        
-        if [ "$IS_AL22" = true ]; then
-            mv /tmp/go-extracted/usr/share/licenses/golang/* /root/sdk/$golang_version
-        else
-            mv /tmp/go-extracted/usr/share/doc/golang-*/* /root/sdk/$golang_version
-        fi
-
-        version=$(echo "$golang_version" | grep -o "[0-9].*")
-        ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
-        
-        rm -rf /tmp/go-extracted /tmp/golang-*.rpm
+        build::go::extract $version
     else
         go install golang.org/dl/go${version}@latest
         go${version} download
     fi
 
     build::go::symlink $version
+}
+
+function build::go::extract() {
+      local version=$1
+      mkdir -p /tmp/go-extracted
+      for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
+
+      local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
+
+      mkdir -p /root/sdk/$golang_version
+      mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
+
+      if [ "$IS_AL22" = true ]; then
+          mv /tmp/go-extracted/usr/share/licenses/golang/* /root/sdk/$golang_version
+      else
+          mv /tmp/go-extracted/usr/share/doc/golang-*/* /root/sdk/$golang_version
+      fi
+
+      version=$(echo "$golang_version" | grep -o "[0-9].*")
+      ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
+
+      rm -rf /tmp/go-extracted /tmp/golang-*.rpm
 }
 
 function build::cleanup(){
