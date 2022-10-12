@@ -150,8 +150,8 @@ index aab94da9a1..2825dabdb6 100644
 +	defer frontend.Close()
 +
 +	// Don't spam output with logs of queries containing semicolons.
-+	backend.Config.ErrorLog = log.New(io.Discard, "", 0)
-+	frontend.Config.ErrorLog = log.New(io.Discard, "", 0)
++	backend.Config.ErrorLog = log.New(ioutil.Discard, "", 0)
++	frontend.Config.ErrorLog = log.New(ioutil.Discard, "", 0)
 +
 +	for _, test := range []struct {
 +		rawQuery   string
@@ -168,7 +168,7 @@ index aab94da9a1..2825dabdb6 100644
 +			t.Fatalf("Get: %v", err)
 +		}
 +		defer res.Body.Close()
-+		body, _ := io.ReadAll(res.Body)
++		body, _ := ioutil.ReadAll(res.Body)
 +		wantQuery := test.rawQuery
 +		if wantCleanQuery {
 +			wantQuery = test.cleanQuery
