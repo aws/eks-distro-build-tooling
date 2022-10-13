@@ -1,7 +1,7 @@
 From 577cd3889ed150ab96210668e318665c1460fb11 Mon Sep 17 00:00:00 2001
 From: Russ Cox <rsc@golang.org>
 Date: Wed, 28 Sep 2022 11:18:51 -0400
-Subject: [PATCH] [release-branch.go1.18] regexp: limit size of parsed regexps
+Subject: [PATCH] [go-1.15.15-eks] regexp: limit size of parsed regexps
 
 # AWS EKS
 Backported To: go-1.15.15-eks
