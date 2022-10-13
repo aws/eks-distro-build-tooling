@@ -25,9 +25,9 @@ pcre-8.32-17.amzn2.0.2.x86_64
 readline-6.2-10.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.x86_64
-systemd-libs-219-78.amzn2.0.18.x86_64
+systemd-libs-219-78.amzn2.0.20.x86_64
 tzdata-2022a-1.amzn2.noarch
 util-linux-2.30.2-2.amzn2.0.7.x86_64
 xfsprogs-4.5.0-18.amzn2.0.1.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
-zlib-1.2.7-19.amzn2.0.1.x86_64
+zlib-1.2.7-19.amzn2.0.2.x86_64
