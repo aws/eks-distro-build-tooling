@@ -249,6 +249,7 @@ Patch19:       0019-go-1.15.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch20:       0020-go-1.15.15-eks-net-http-update-bundled-golang.patch
 Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
 Patch22:       0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch
+Patch24:       0024-go-1.15.15-eks-regexp-limit-size-of-parsed-regexps.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
@@ -403,6 +404,7 @@ Requires:       %{name} = %{version}-%{release}
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
+%patch24 -p1
 %patch101 -p1
 %patch102 -p1
 %patch103 -p1
@@ -671,6 +673,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 13 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-2
+- Include CVE-2022-41715 fix backported from 1.18.7
+
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-2
 - Include CVE-2022-2879 fix backported from 1.18.7
 - Add Source1 to copy testfile from fix
