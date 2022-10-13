@@ -9,7 +9,7 @@ Backported On: Thu, 13 Oct 2022
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.18
 Source Commit:  https://github.com/golang/go/commit/e9017c2416ad0ef642f5e0c2eab2dbf3cba4d997
-EKS Patch Source Commit: 
+EKS Patch Source Commit: https://github.com/aws/eks-distro-build-tooling/commit/2b8c4a31b6f89737b5ce9a93e7d92808a5941f14
 
 # Original Information
 
