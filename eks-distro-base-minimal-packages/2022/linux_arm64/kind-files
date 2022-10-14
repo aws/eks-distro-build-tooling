@@ -54,7 +54,7 @@
 -rw-r--r--      92B /etc/iproute2/rt_scopes
 -rw-r--r--      87B /etc/iproute2/rt_tables
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   8.9KiB /etc/ld.so.cache
+-rw-r--r--   9.0KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--      15B /etc/libibverbs.d/bnxt_re.driver
@@ -214,11 +214,11 @@
 -rwxr-xr-x    69KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x    39MiB /usr/bin/containerd
--rwxr-xr-x   7.8MiB /usr/bin/containerd-shim
--rwxr-xr-x    10MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    10MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x   7.9MiB /usr/bin/containerd-shim
+-rwxr-xr-x    11MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x    11MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   134KiB /usr/bin/cp
--rwxr-xr-x   134KiB /usr/bin/csplit
+-rwxr-xr-x   135KiB /usr/bin/csplit
 -rwxr-xr-x    20MiB /usr/bin/ctr
 -rwxr-xr-x   262KiB /usr/bin/curl
 -rwxr-xr-x    69KiB /usr/bin/cut
@@ -232,25 +232,25 @@
 -rwxr-xr-x    69KiB /usr/bin/dircolors
 -rwxr-xr-x   462KiB /usr/bin/dirmngr
 -rwxr-xr-x    69KiB /usr/bin/dirmngr-client
--rwxr-xr-x    68KiB /usr/bin/dirname
+-rwxr-xr-x    69KiB /usr/bin/dirname
 -rwxr-xr-x    77KiB /usr/bin/dmesg
 -rwxr-xr-x   2.1KiB /usr/bin/dnf-3
 -rwxr-xr-x   199KiB /usr/bin/du
--rwxr-xr-x    68KiB /usr/bin/echo
--rwxr-xr-x     106B /usr/bin/egrep
+-rwxr-xr-x    69KiB /usr/bin/echo
+-rwxr-xr-x      45B /usr/bin/egrep
 -rwxr-xr-x    69KiB /usr/bin/eject
 -rwxr-xr-x    69KiB /usr/bin/env
 -rwxr-xr-x    69KiB /usr/bin/expand
 -rwxr-xr-x   134KiB /usr/bin/expr
 -rwxr-xr-x    69KiB /usr/bin/factor
 -rwxr-xr-x    68KiB /usr/bin/fallocate
--rwxr-xr-x    68KiB /usr/bin/false
+-rwxr-xr-x    69KiB /usr/bin/false
 -rwxr-xr-x      30B /usr/bin/fc
 -rwxr-xr-x      30B /usr/bin/fg
--rwxr-xr-x     106B /usr/bin/fgrep
+-rwxr-xr-x      45B /usr/bin/fgrep
 -rwxr-xr-x    69KiB /usr/bin/filan
 -rwxr-xr-x    69KiB /usr/bin/fincore
--rwxr-xr-x   330KiB /usr/bin/find
+-rwxr-xr-x   331KiB /usr/bin/find
 -rwxr-xr-x    70KiB /usr/bin/findmnt
 -rwxr-xr-x    69KiB /usr/bin/flock
 -rwxr-xr-x    69KiB /usr/bin/fmt
@@ -311,7 +311,7 @@
 -rwxr-xr-x    68KiB /usr/bin/jq
 -rwxr-xr-x    69KiB /usr/bin/keyctl
 -rwxr-xr-x    69KiB /usr/bin/kill
--rwxr-xr-x    69KiB /usr/bin/killall
+-rwxr-xr-x    70KiB /usr/bin/killall
 -rwxr-xr-x   199KiB /usr/bin/kmod
 -rwxr-xr-x    69KiB /usr/bin/last
 -rwxr-xr-x    70KiB /usr/bin/lastlog
@@ -359,10 +359,10 @@
 -rwxr-xr-x    69KiB /usr/bin/numfmt
 -rwxr-xr-x    69KiB /usr/bin/od
 -rwxr-xr-x    69KiB /usr/bin/oomctl
--rwxr-xr-x    68KiB /usr/bin/p11-kit
+-rwxr-xr-x    69KiB /usr/bin/p11-kit
 -rwxr-xr-x    69KiB /usr/bin/paste
 -rwxr-xr-x    69KiB /usr/bin/pathchk
--rwxr-xr-x    68KiB /usr/bin/peekfd
+-rwxr-xr-x    69KiB /usr/bin/peekfd
 -rwxr-xr-x    68KiB /usr/bin/pgrep
 -rwxr-xr-x    68KiB /usr/bin/pidof
 -rwxr-xr-x    68KiB /usr/bin/pidwait
@@ -373,11 +373,11 @@
 -rwxr-xr-x    68KiB /usr/bin/pmap
 -rwxr-xr-x    69KiB /usr/bin/portablectl
 -rwxr-xr-x    69KiB /usr/bin/pr
--rwxr-xr-x    68KiB /usr/bin/printenv
+-rwxr-xr-x    69KiB /usr/bin/printenv
 -rwxr-xr-x    69KiB /usr/bin/printf
 -rwxr-xr-x    69KiB /usr/bin/prlimit
 -rwxr-xr-x    68KiB /usr/bin/procan
--rwxr-xr-x    68KiB /usr/bin/prtstat
+-rwxr-xr-x    69KiB /usr/bin/prtstat
 -rwxr-xr-x   198KiB /usr/bin/ps
 -rwxr-xr-x    68KiB /usr/bin/pslog
 -rwxr-xr-x    69KiB /usr/bin/pstree
@@ -388,7 +388,7 @@
 -rwxr-xr-x    68KiB /usr/bin/pwscore
 -rwxr-xr-x      78B /usr/bin/pydoc3.9
 -rwxr-xr-x    68KiB /usr/bin/python3.9
--rwxr-xr-x   134KiB /usr/bin/quota
+-rwxr-xr-x   135KiB /usr/bin/quota
 -rwxr-xr-x    70KiB /usr/bin/quotasync
 -rwxr-xr-x      32B /usr/bin/read
 -rwxr-xr-x    69KiB /usr/bin/readlink
@@ -406,8 +406,8 @@
 -rwxr-xr-x    68KiB /usr/bin/rpm2cpio
 -rwxr-xr-x    69KiB /usr/bin/rpmdb
 -rwxr-xr-x    69KiB /usr/bin/rpmkeys
--rwxr-xr-x   603KiB /usr/bin/rsync
--rwxr-xr-x   4.9KiB /usr/bin/rsync-ssl
+-rwxr-xr-x   538KiB /usr/bin/rsync
+-rwxr-xr-x   5.1KiB /usr/bin/rsync-ssl
 -rwxr-xr-x    69KiB /usr/bin/runcon
 -rwxr-xr-x    69KiB /usr/bin/script
 -rwxr-xr-x    69KiB /usr/bin/scriptlive
@@ -477,7 +477,7 @@
 -rwxr-xr-x   137KiB /usr/bin/top
 -rwxr-xr-x   133KiB /usr/bin/touch
 -rwxr-xr-x    69KiB /usr/bin/tr
--rwxr-xr-x    68KiB /usr/bin/true
+-rwxr-xr-x    69KiB /usr/bin/true
 -rwxr-xr-x    69KiB /usr/bin/truncate
 -rwxr-xr-x   262KiB /usr/bin/trust
 -rwxr-xr-x    69KiB /usr/bin/tsort
@@ -902,7 +902,7 @@
 -rwxr-xr-x   2.3KiB /usr/lib/systemd/purge-nobody-user
 -rw-r--r--     710B /usr/lib/systemd/resolv.conf
 -rwxr-xr-x    69KiB /usr/lib/systemd/system-generators/nfs-server-generator
--rwxr-xr-x    68KiB /usr/lib/systemd/system-generators/rpc-pipefs-generator
+-rwxr-xr-x    69KiB /usr/lib/systemd/system-generators/rpc-pipefs-generator
 -rwxr-xr-x    69KiB /usr/lib/systemd/system-generators/systemd-debug-generator
 -rwxr-xr-x    69KiB /usr/lib/systemd/system-generators/systemd-fstab-generator
 -rwxr-xr-x    69KiB /usr/lib/systemd/system-generators/systemd-getty-generator
@@ -1163,7 +1163,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/conntrack-tools/ct_helper_dhcpv6.so
 -rwxr-xr-x    69KiB /usr/lib64/conntrack-tools/ct_helper_ftp.so
 -rwxr-xr-x    68KiB /usr/lib64/conntrack-tools/ct_helper_mdns.so
--rwxr-xr-x    68KiB /usr/lib64/conntrack-tools/ct_helper_rpc.so
+-rwxr-xr-x    69KiB /usr/lib64/conntrack-tools/ct_helper_rpc.so
 -rwxr-xr-x    68KiB /usr/lib64/conntrack-tools/ct_helper_sane.so
 -rwxr-xr-x    68KiB /usr/lib64/conntrack-tools/ct_helper_slp.so
 -rwxr-xr-x    69KiB /usr/lib64/conntrack-tools/ct_helper_ssdp.so
@@ -1206,13 +1206,13 @@
 -rwxr-xr-x    68KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   847KiB /usr/lib64/libarchive.so.13.5.3
 -rwxr-xr-x    69KiB /usr/lib64/libasm-0.187.so
--rwxr-xr-x   133KiB /usr/lib64/libassuan.so.0.8.5
--rwxr-xr-x    68KiB /usr/lib64/libattr.so.1.1.2501
+-rwxr-xr-x   134KiB /usr/lib64/libassuan.so.0.8.5
+-rwxr-xr-x    69KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   133KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   198KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    68KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   132KiB /usr/lib64/libbrotlicommon.so.1.0.9
+-rwxr-xr-x   196KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    68KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   582KiB /usr/lib64/libbrotlienc.so.1.0.9
 -rwxr-xr-x   136KiB /usr/lib64/libbz2.so.1.0.8
@@ -1221,11 +1221,11 @@
 -rwxr-xr-x    68KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x    69KiB /usr/lib64/libcap.so.2.48
 -rwxr-xr-x    70KiB /usr/lib64/libcollection.so.4.1.1
--rwxr-xr-x    68KiB /usr/lib64/libcom_err.so.2.1
--rwxr-xr-x   200KiB /usr/lib64/libcomps.so.0
+-rwxr-xr-x    69KiB /usr/lib64/libcom_err.so.2.1
+-rwxr-xr-x   201KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x    68KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   197KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.1MiB /usr/lib64/libcrypto.so.3.0.3
+-rwxr-xr-x   4.1MiB /usr/lib64/libcrypto.so.3.0.5
 -rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   405KiB /usr/lib64/libdevmapper.so.1.02
@@ -1243,10 +1243,10 @@
 -rwxr-xr-x   394KiB /usr/lib64/libevent-2.1.so.7.0.1
 -rwxr-xr-x   264KiB /usr/lib64/libevent_core-2.1.so.7.0.1
 -rwxr-xr-x   199KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
--rwxr-xr-x    68KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
+-rwxr-xr-x    69KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
 -rwxr-xr-x    68KiB /usr/lib64/libevent_pthreads-2.1.so.7.0.1
 -rwxr-xr-x   199KiB /usr/lib64/libexpat.so.1.8.7
--rwxr-xr-x   458KiB /usr/lib64/libext2fs.so.2.4
+-rwxr-xr-x   459KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   338KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    68KiB /usr/lib64/libffi.so.6.0.2
 -rwxr-xr-x   135KiB /usr/lib64/libform.so.6.2
@@ -1262,40 +1262,40 @@
 -rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.30.0
 -rwxr-xr-x   463KiB /usr/lib64/libgobject-2.0.so.0.7302.0
 -rwxr-xr-x   268KiB /usr/lib64/libgomp.so.1.0.0
--rwxr-xr-x   198KiB /usr/lib64/libgpg-error.so.0.32.0
+-rwxr-xr-x   199KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   399KiB /usr/lib64/libgpgme.so.11.24.1
--rwxr-xr-x   330KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   135KiB /usr/lib64/libgssrpc.so.4.2
+-rwxr-xr-x   332KiB /usr/lib64/libgssapi_krb5.so.2.2
+-rwxr-xr-x   136KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x    68KiB /usr/lib64/libgthread-2.0.so.0.7302.0
 -rwxr-xr-x    69KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   264KiB /usr/lib64/libhogweed.so.6.5
 -rwxr-xr-x   136KiB /usr/lib64/libibverbs.so.1.14.37.0
 -rwxr-xr-x    68KiB /usr/lib64/libibverbs/libbnxt_re-rdmav34.so
--rwxr-xr-x    68KiB /usr/lib64/libibverbs/libcxgb4-rdmav34.so
+-rwxr-xr-x    69KiB /usr/lib64/libibverbs/libcxgb4-rdmav34.so
 -rwxr-xr-x    68KiB /usr/lib64/libibverbs/libhfi1verbs-rdmav34.so
 -rwxr-xr-x    69KiB /usr/lib64/libibverbs/libhns-rdmav34.so
 -rwxr-xr-x    68KiB /usr/lib64/libibverbs/libipathverbs-rdmav34.so
 -rwxr-xr-x    69KiB /usr/lib64/libibverbs/libirdma-rdmav34.so
--rwxr-xr-x    68KiB /usr/lib64/libibverbs/libmthca-rdmav34.so
--rwxr-xr-x    68KiB /usr/lib64/libibverbs/libocrdma-rdmav34.so
--rwxr-xr-x    68KiB /usr/lib64/libibverbs/libqedr-rdmav34.so
+-rwxr-xr-x    69KiB /usr/lib64/libibverbs/libmthca-rdmav34.so
+-rwxr-xr-x    69KiB /usr/lib64/libibverbs/libocrdma-rdmav34.so
+-rwxr-xr-x    69KiB /usr/lib64/libibverbs/libqedr-rdmav34.so
 -rwxr-xr-x    69KiB /usr/lib64/libibverbs/librxe-rdmav34.so
 -rwxr-xr-x    68KiB /usr/lib64/libibverbs/libsiw-rdmav34.so
 -rwxr-xr-x    68KiB /usr/lib64/libibverbs/libvmw_pvrdma-rdmav34.so
--rwxr-xr-x   132KiB /usr/lib64/libidn2.so.0.3.7
--rwxr-xr-x   134KiB /usr/lib64/libini_config.so.5.2.1
+-rwxr-xr-x   133KiB /usr/lib64/libidn2.so.0.3.7
+-rwxr-xr-x   135KiB /usr/lib64/libini_config.so.5.2.1
 -rwxr-xr-x    69KiB /usr/lib64/libip4tc.so.2.0.0
 -rwxr-xr-x    69KiB /usr/lib64/libip6tc.so.2.0.0
 -rwxr-xr-x   249KiB /usr/lib64/libipset.so.13.2.0
 -rwxr-xr-x   330KiB /usr/lib64/libjq.so.1.0.4
--rwxr-xr-x    70KiB /usr/lib64/libjson-c.so.5.0.0
--rwxr-xr-x   133KiB /usr/lib64/libk5crypto.so.3.1
--rwxr-xr-x   133KiB /usr/lib64/libkdb5.so.10.0
+-rwxr-xr-x    69KiB /usr/lib64/libjson-c.so.5.0.0
+-rwxr-xr-x   134KiB /usr/lib64/libk5crypto.so.3.1
+-rwxr-xr-x   134KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x    69KiB /usr/lib64/libkeyutils.so.1.9
--rwxr-xr-x   133KiB /usr/lib64/libkmod.so.2.3.7
--rwxr-xr-x    68KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   918KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x    69KiB /usr/lib64/libkrb5support.so.0.1
+-rwxr-xr-x   134KiB /usr/lib64/libkmod.so.2.3.7
+-rwxr-xr-x    69KiB /usr/lib64/libkrad.so.0.0
+-rwxr-xr-x   919KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x    70KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   263KiB /usr/lib64/libksba.so.8.14.0
 -rwxr-xr-x    70KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   394KiB /usr/lib64/libldap_r-2.4.so.2.11.5
@@ -1315,7 +1315,7 @@
 -rwxr-xr-x   583KiB /usr/lib64/libmodulemd.so.2.13.0
 -rwxr-xr-x   330KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   521KiB /usr/lib64/libmpfr.so.6.1.0
--rwxr-xr-x   200KiB /usr/lib64/libncurses.so.6.2
+-rwxr-xr-x   201KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   265KiB /usr/lib64/libncursesw.so.6.2
 -rwxr-xr-x   135KiB /usr/lib64/libnetfilter_conntrack.so.3.7.0
 -rwxr-xr-x    68KiB /usr/lib64/libnetfilter_cthelper.so.0.0.0
@@ -1323,12 +1323,12 @@
 -rwxr-xr-x    68KiB /usr/lib64/libnetfilter_queue.so.1.5.0
 -rwxr-xr-x   330KiB /usr/lib64/libnettle.so.8.5
 -rwxr-xr-x    67KiB /usr/lib64/libnfnetlink.so.0.2.0
--rwxr-xr-x    68KiB /usr/lib64/libnfsidmap.so.1.0.0
--rwxr-xr-x    68KiB /usr/lib64/libnfsidmap/nsswitch.so
+-rwxr-xr-x    69KiB /usr/lib64/libnfsidmap.so.1.0.0
+-rwxr-xr-x    69KiB /usr/lib64/libnfsidmap/nsswitch.so
 -rwxr-xr-x    68KiB /usr/lib64/libnfsidmap/regex.so
--rwxr-xr-x    68KiB /usr/lib64/libnfsidmap/static.so
+-rwxr-xr-x    69KiB /usr/lib64/libnfsidmap/static.so
 -rwxr-xr-x    69KiB /usr/lib64/libnfsidmap/umich_ldap.so
--rwxr-xr-x   269KiB /usr/lib64/libnftnl.so.11.5.0
+-rwxr-xr-x   270KiB /usr/lib64/libnftnl.so.11.5.0
 -rwxr-xr-x   198KiB /usr/lib64/libnghttp2.so.14.21.0
 -rwxr-xr-x   200KiB /usr/lib64/libnl-3.so.200.26.0
 -rwxr-xr-x    70KiB /usr/lib64/libnl-genl-3.so.200.26.0
@@ -1350,8 +1350,8 @@
 -rwxr-xr-x    68KiB /usr/lib64/libpamc.so.0.82.1
 -rwxr-xr-x    68KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x    68KiB /usr/lib64/libpanelw.so.6.2
--rwxr-xr-x    68KiB /usr/lib64/libpath_utils.so.1.0.1
--rwxr-xr-x   327KiB /usr/lib64/libpcap.so.1.10.1
+-rwxr-xr-x    69KiB /usr/lib64/libpath_utils.so.1.0.1
+-rwxr-xr-x   328KiB /usr/lib64/libpcap.so.1.10.1
 -rwxr-xr-x    68KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   455KiB /usr/lib64/libpcre.so.1.2.12
 -rwxr-xr-x   583KiB /usr/lib64/libpcre2-8.so.0.11.0
@@ -1362,7 +1362,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libpsl.so.5.3.3
 -rwxr-xr-x    68KiB /usr/lib64/libpsx.so.2.48
 -rwxr-xr-x    68KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x    68KiB /usr/lib64/libpwquality.so.1.0.2
+-rwxr-xr-x    69KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x   3.3MiB /usr/lib64/libpython3.9.so.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libpython3.so
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
@@ -1380,13 +1380,13 @@
 -rwxr-xr-x   268KiB /usr/lib64/libsemanage.so.2
 -rwxr-xr-x   721KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x    68KiB /usr/lib64/libsigsegv.so.2.0.6
--rwxr-xr-x   198KiB /usr/lib64/libslapi-2.4.so.2.11.5
+-rwxr-xr-x   199KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   135KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   590KiB /usr/lib64/libsolv.so.1
--rwxr-xr-x   269KiB /usr/lib64/libsolvext.so.1
+-rwxr-xr-x   270KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   465KiB /usr/lib64/libssh.so.4.8.7
--rwxr-xr-x   670KiB /usr/lib64/libssl.so.3.0.3
+-rwxr-xr-x   670KiB /usr/lib64/libssl.so.3.0.5
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   919KiB /usr/lib64/libsystemd.so.0.33.0
 -rwxr-xr-x   133KiB /usr/lib64/libtasn1.so.6.6.0
@@ -1403,6 +1403,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   1.7MiB /usr/lib64/libxml2.so.2.9.14
 -rwxr-xr-x    69KiB /usr/lib64/libxtables.so.12.4.0
+-rwxr-xr-x    69KiB /usr/lib64/libxxhash.so.0.8.0
 -rwxr-xr-x   133KiB /usr/lib64/libyaml-0.so.2.0.9
 -rwxr-xr-x   133KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   650KiB /usr/lib64/libzstd.so.1.5.2
@@ -3557,7 +3558,7 @@
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/site-packages/hawkey/test/__init__.py
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.pyc
--rw-r--r--     858B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/PKG-INFO
+-rw-r--r--     847B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/PKG-INFO
 -rw-r--r--     127B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/SOURCES.txt
 -rw-r--r--       1B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/dependency_links.txt
 -rw-r--r--       1B /usr/lib64/python3.9/site-packages/libcomps-0.1.18-py3.9.egg-info/top_level.txt
@@ -3585,11 +3586,11 @@
 -rw-r--r--   8.2KiB /usr/lib64/python3.9/site-packages/libdnf/__pycache__/utils.cpython-39.opt-1.pyc
 -rw-r--r--   8.2KiB /usr/lib64/python3.9/site-packages/libdnf/__pycache__/utils.cpython-39.pyc
 -rwxr-xr-x   540KiB /usr/lib64/python3.9/site-packages/libdnf/_common_types.so
--rwxr-xr-x   682KiB /usr/lib64/python3.9/site-packages/libdnf/_conf.so
--rwxr-xr-x    69KiB /usr/lib64/python3.9/site-packages/libdnf/_error.so
+-rwxr-xr-x   683KiB /usr/lib64/python3.9/site-packages/libdnf/_conf.so
+-rwxr-xr-x    70KiB /usr/lib64/python3.9/site-packages/libdnf/_error.so
 -rwxr-xr-x   933KiB /usr/lib64/python3.9/site-packages/libdnf/_module.so
 -rwxr-xr-x   342KiB /usr/lib64/python3.9/site-packages/libdnf/_repo.so
--rwxr-xr-x   271KiB /usr/lib64/python3.9/site-packages/libdnf/_smartcols.so
+-rwxr-xr-x   272KiB /usr/lib64/python3.9/site-packages/libdnf/_smartcols.so
 -rwxr-xr-x   476KiB /usr/lib64/python3.9/site-packages/libdnf/_transaction.so
 -rwxr-xr-x   137KiB /usr/lib64/python3.9/site-packages/libdnf/_utils.so
 -rw-r--r--    29KiB /usr/lib64/python3.9/site-packages/libdnf/common_types.py
@@ -3895,10 +3896,10 @@
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/zoneinfo/_common.py
 -rw-r--r--   5.0KiB /usr/lib64/python3.9/zoneinfo/_tzpath.py
 -rw-r--r--    24KiB /usr/lib64/python3.9/zoneinfo/_zoneinfo.py
--rwxr-xr-x    68KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x    68KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x    69KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x    69KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x    67KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x    68KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    73KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_debug.so
@@ -3955,8 +3956,8 @@
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_arp.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_arpreply.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_dnat.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_ip.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_ip6.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libebt_ip.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libebt_ip6.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_log.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_mark.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_mark_m.so
@@ -3966,7 +3967,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_snat.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_stp.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libebt_vlan.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_DNAT.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libip6t_DNAT.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_DNPT.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_HL.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_LOG.so
@@ -3978,7 +3979,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_SNPT.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_ah.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_dst.so
--rwxr-xr-x    67KiB /usr/lib64/xtables/libip6t_eui64.so
+-rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_eui64.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_frag.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_hbh.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_hl.so
@@ -3986,9 +3987,9 @@
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_ipv6header.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_mh.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_rt.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libip6t_srh.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libip6t_srh.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_CLUSTERIP.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_DNAT.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libipt_DNAT.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_ECN.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_LOG.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_MASQUERADE.so
@@ -4004,73 +4005,73 @@
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libipt_ttl.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_AUDIT.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_CHECKSUM.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_CLASSIFY.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_CONNMARK.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_CLASSIFY.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_CONNMARK.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_CONNSECMARK.so
--rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_CT.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_DSCP.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_HMARK.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_IDLETIMER.so
+-rwxr-xr-x    70KiB /usr/lib64/xtables/libxt_CT.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_DSCP.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_HMARK.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_IDLETIMER.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_LED.so
 -rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_MARK.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_NFLOG.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_NFQUEUE.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_NFQUEUE.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_RATEEST.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_SECMARK.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_SET.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_SET.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_SYNPROXY.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TCPMSS.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_TCPMSS.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TCPOPTSTRIP.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TEE.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TOS.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TPROXY.so
--rwxr-xr-x    67KiB /usr/lib64/xtables/libxt_TRACE.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_addrtype.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_bpf.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_cgroup.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_TEE.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_TOS.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_TPROXY.so
+-rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_TRACE.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_addrtype.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_bpf.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_cgroup.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_cluster.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_comment.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_connbytes.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_connlabel.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_connlimit.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_connmark.so
--rwxr-xr-x    70KiB /usr/lib64/xtables/libxt_conntrack.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_connlimit.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_connmark.so
+-rwxr-xr-x    71KiB /usr/lib64/xtables/libxt_conntrack.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_cpu.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_dccp.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_devgroup.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_dscp.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_devgroup.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_dscp.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_ecn.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_esp.so
--rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_hashlimit.so
+-rwxr-xr-x    70KiB /usr/lib64/xtables/libxt_hashlimit.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_helper.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_ipcomp.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_iprange.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_ipvs.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_iprange.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_ipvs.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_length.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_limit.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_limit.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_mac.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_mark.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_multiport.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_nfacct.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_mark.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_multiport.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_nfacct.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_osf.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_owner.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_owner.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_physdev.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_pkttype.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_policy.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_policy.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_quota.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_rateest.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_recent.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_recent.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_rpfilter.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_sctp.so
 -rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_set.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_socket.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_socket.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_standard.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_statistic.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_string.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_string.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_tcp.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_tcpmss.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_time.so
--rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_tos.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_time.so
+-rwxr-xr-x    69KiB /usr/lib64/xtables/libxt_tos.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_u32.so
 -rwxr-xr-x    68KiB /usr/lib64/xtables/libxt_udp.so
 -rwxr-xr-x   1.4KiB /usr/libexec/arptables-nft-helper
@@ -4090,14 +4091,14 @@
 -rwxr-xr-x     166B /usr/libexec/hostname/nis-domainname
 -rwxr-xr-x   199KiB /usr/libexec/keyboxd
 -rwxr-xr-x     658B /usr/libexec/nfs-utils/nfsconvert.sh
--rwxr-xr-x    68KiB /usr/libexec/p11-kit/p11-kit-remote
+-rwxr-xr-x    69KiB /usr/libexec/p11-kit/p11-kit-remote
 -rwxr-xr-x     275B /usr/libexec/p11-kit/trust-extract-compat
 -rwxr-xr-x   461KiB /usr/libexec/scdaemon
 -rwx--s--x    68KiB /usr/libexec/utempter/utempter
 -rwxr-xr-x   3.1KiB /usr/sbin/addgnupghome
 -rwxr-xr-x    68KiB /usr/sbin/addpart
 -rwxr-xr-x    70KiB /usr/sbin/agetty
--rwxr-xr-x    68KiB /usr/sbin/alternatives
+-rwxr-xr-x    69KiB /usr/sbin/alternatives
 -rwxr-xr-x   2.2KiB /usr/sbin/applygnupgdefaults
 -rwxr-xr-x    69KiB /usr/sbin/arpd
 -r-xr-xr-x    16KiB /usr/sbin/blkdeactivate
@@ -4124,14 +4125,14 @@
 -rwxr-xr-x    68KiB /usr/sbin/ctrlaltdel
 -rwxr-xr-x    68KiB /usr/sbin/delpart
 -rwxr-xr-x   135KiB /usr/sbin/devlink
--r-xr-xr-x    68KiB /usr/sbin/dmfilemapd
--r-xr-xr-x   202KiB /usr/sbin/dmsetup
+-r-xr-xr-x    69KiB /usr/sbin/dmfilemapd
+-r-xr-xr-x   203KiB /usr/sbin/dmsetup
 -rwxr-xr-x    68KiB /usr/sbin/ebtables-legacy
 -rwxr-xr-x    68KiB /usr/sbin/ebtables-legacy-restore
 -rwxr-xr-x     855B /usr/sbin/ebtables-legacy-save
 -rwxr-xr-x   134KiB /usr/sbin/edquota
--rwxr-xr-x   585KiB /usr/sbin/ethtool
--rwxr-xr-x    73KiB /usr/sbin/exportfs
+-rwxr-xr-x   586KiB /usr/sbin/ethtool
+-rwxr-xr-x    74KiB /usr/sbin/exportfs
 -rwxr-xr-x    68KiB /usr/sbin/faillock
 -rwxr-xr-x    68KiB /usr/sbin/fdformat
 -rwxr-xr-x   133KiB /usr/sbin/fdisk
@@ -4141,7 +4142,7 @@
 -rwxr-xr-x    69KiB /usr/sbin/fsck.minix
 -rwxr-xr-x    68KiB /usr/sbin/fsfreeze
 -rwxr-xr-x    69KiB /usr/sbin/fstrim
--rwxr-xr-x    69KiB /usr/sbin/fuser
+-rwxr-xr-x    70KiB /usr/sbin/fuser
 -rwxr-xr-x   134KiB /usr/sbin/g13-syshelp
 -rwxr-xr-x   135KiB /usr/sbin/genl
 -rwxr-xr-x    68KiB /usr/sbin/getcap
@@ -4153,25 +4154,25 @@
 -rwxr-xr-x    73KiB /usr/sbin/grpck
 -rwxr-xr-x    72KiB /usr/sbin/grpconv
 -rwxr-xr-x    72KiB /usr/sbin/grpunconv
--rwxr-xr-x   134KiB /usr/sbin/gssproxy
+-rwxr-xr-x   135KiB /usr/sbin/gssproxy
 -rwxr-xr-x    69KiB /usr/sbin/hwclock
 -rwxr-xr-x    69KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   3.1KiB /usr/sbin/ifcfg
 -rwxr-xr-x    69KiB /usr/sbin/ifstat
 -rwxr-xr-x   739KiB /usr/sbin/ip
 -rwxr-xr-x    68KiB /usr/sbin/ipset
--rwxr-xr-x    68KiB /usr/sbin/key.dns_resolver
+-rwxr-xr-x    69KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    68KiB /usr/sbin/ldattach
 -rwxr-xr-x   868KiB /usr/sbin/ldconfig
 -rwxr-xr-x    69KiB /usr/sbin/lnstat
--rwx--s--x    68KiB /usr/sbin/lockdev
+-rwx--s--x    69KiB /usr/sbin/lockdev
 -rwxr-xr-x    69KiB /usr/sbin/losetup
 -rwxr-xr-x    68KiB /usr/sbin/mkfs
 -rwxr-xr-x    69KiB /usr/sbin/mkfs.cramfs
 -rwxr-xr-x    69KiB /usr/sbin/mkfs.minix
 -rwxr-xr-x    76KiB /usr/sbin/mkhomedir_helper
 -rwxr-xr-x    69KiB /usr/sbin/mkswap
--rwsr-xr-x   154KiB /usr/sbin/mount.nfs
+-rwsr-xr-x   151KiB /usr/sbin/mount.nfs
 -rwxr-xr-x    43KiB /usr/sbin/mountstats
 -rwxr-xr-x   141KiB /usr/sbin/newusers
 -rwxr-xr-x    69KiB /usr/sbin/nfct
@@ -4181,7 +4182,7 @@
 -rwxr-xr-x    10KiB /usr/sbin/nfsdclddb
 -rwxr-xr-x   9.1KiB /usr/sbin/nfsdclnts
 -rwxr-xr-x    69KiB /usr/sbin/nfsdcltrack
--rwxr-xr-x    68KiB /usr/sbin/nfsidmap
+-rwxr-xr-x    69KiB /usr/sbin/nfsidmap
 -rwxr-xr-x    25KiB /usr/sbin/nfsiostat
 -rwxr-xr-x    69KiB /usr/sbin/nfsref
 -rwxr-xr-x    71KiB /usr/sbin/nfsstat
@@ -4196,13 +4197,13 @@
 -rwxr-xr-x    72KiB /usr/sbin/pwconv
 -rwxr-xr-x    68KiB /usr/sbin/pwhistory_helper
 -rwxr-xr-x    72KiB /usr/sbin/pwunconv
--rwxr-xr-x   134KiB /usr/sbin/quotacheck
+-rwxr-xr-x   135KiB /usr/sbin/quotacheck
 -rwxr-xr-x    70KiB /usr/sbin/quotaon
 -rwxr-xr-x    68KiB /usr/sbin/quotastats
 -rwxr-xr-x   134KiB /usr/sbin/rdma
 -rwxr-xr-x    69KiB /usr/sbin/readprofile
 -rwxr-xr-x   134KiB /usr/sbin/repquota
--rwxr-xr-x    68KiB /usr/sbin/request-key
+-rwxr-xr-x    69KiB /usr/sbin/request-key
 -rwxr-xr-x    69KiB /usr/sbin/resizepart
 -rwxr-xr-x    69KiB /usr/sbin/rfkill
 -rwxr-xr-x     211B /usr/sbin/routef
@@ -4217,12 +4218,12 @@
 -rwxr-xr-x    69KiB /usr/sbin/rtcwake
 -rwxr-xr-x   134KiB /usr/sbin/rtmon
 -rwxr-xr-x      73B /usr/sbin/rtpr
--rwxr-xr-x   9.1MiB /usr/sbin/runc
+-rwxr-xr-x   9.3MiB /usr/sbin/runc
 -rwxr-xr-x    69KiB /usr/sbin/runuser
--rwxr-xr-x    68KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x    68KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x    69KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x    69KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x    68KiB /usr/sbin/setcap
--rwxr-xr-x   134KiB /usr/sbin/setquota
+-rwxr-xr-x   135KiB /usr/sbin/setquota
 -rwxr-xr-x   133KiB /usr/sbin/sfdisk
 -rwxr-xr-x    69KiB /usr/sbin/showmount
 -rwxr-xr-x    73KiB /usr/sbin/sm-notify
@@ -4237,7 +4238,7 @@
 -rwxr-xr-x   134KiB /usr/sbin/tipc
 -rwsr-xr-x    69KiB /usr/sbin/unix_chkpwd
 -rwx------    69KiB /usr/sbin/unix_update
--rwxr-xr-x   143KiB /usr/sbin/useradd
+-rwxr-xr-x   142KiB /usr/sbin/useradd
 -rwxr-xr-x   141KiB /usr/sbin/userdel
 -rwxr-xr-x   143KiB /usr/sbin/usermod
 -rwxr-xr-x    75KiB /usr/sbin/vipw
@@ -4838,6 +4839,7 @@
 -rw-r--r--     697B /usr/share/licenses/util-linux/COPYING.ISC
 -rw-r--r--    26KiB /usr/share/licenses/util-linux/COPYING.LGPL-2.1-or-later
 -rw-r--r--    35KiB /usr/share/licenses/which/COPYING
+-rw-r--r--   2.2KiB /usr/share/licenses/xxhash-libs/LICENSE
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
 -rw-r--r--     494B /usr/share/locale/af/LC_MESSAGES/Linux-PAM.mo
@@ -5839,7 +5841,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   878KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--   877KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--   3.0KiB /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
 -rw-r--r--   1.9KiB /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
 -rw-r--r--    25KiB /usr/share/polkit-1/actions/org.freedesktop.login1.policy
@@ -7676,7 +7678,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Zagreb
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Zurich
 -rw-r--r--     664B /usr/share/zoneinfo/right/Factory
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/GB
@@ -7785,7 +7787,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     664B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   106KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   105KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--   9.4KiB /usr/share/zsh/site-functions/_busctl
@@ -7823,7 +7825,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   7.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--   164KiB /var/lib/systemd/catalog/database
@@ -7999,7 +8001,7 @@ lrwxrwxrwx      22B /usr/lib64/libcollection.so.4 libcollection.so.4.1.1
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.3
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.5
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
@@ -8125,7 +8127,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.8.7
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.8.7
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.8.7 libssh.so.4.8.7
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.3
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.5
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.33.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.0
@@ -8140,11 +8142,11 @@ lrwxrwxrwx      23B /usr/lib64/libverto-libev.so.1 libverto-libev.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.9.14
 lrwxrwxrwx      20B /usr/lib64/libxtables.so.12 libxtables.so.12.4.0
+lrwxrwxrwx      18B /usr/lib64/libxxhash.so.0 libxxhash.so.0.8.0
 lrwxrwxrwx      18B /usr/lib64/libyaml-0.so.2 libyaml-0.so.2.0.9
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
 lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.2
 lrwxrwxrwx      15B /usr/lib64/p11-kit-proxy.so libp11-kit.so.0
-lrwxrwxrwx      13B /usr/lib64/p11-kit-trust.so libnssckbi.so
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so libanonymous.so.3.0.0
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so.3 libanonymous.so.3.0.0
 lrwxrwxrwx      18B /usr/lib64/sasl2/libsasldb.so libsasldb.so.3.0.0
