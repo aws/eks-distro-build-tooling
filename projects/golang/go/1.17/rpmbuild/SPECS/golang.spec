@@ -345,7 +345,7 @@ mkdir -p $RPM_BUILD_ROOT%{goroot}
 
 # install everything into libdir (until symlink problems are fixed)
 # https://code.google.com/p/go/issues/detail?id=5830
-cp -apv api bin doc favicon.ico lib pkg robots.txt src misc test VERSION \
+cp -apv api bin doc lib pkg src misc test VERSION \
    $RPM_BUILD_ROOT%{goroot}
 
 # bz1099206
@@ -489,8 +489,6 @@ fi
 %dir %{goroot}
 %{goroot}/api/
 %{goroot}/lib/time/
-%{goroot}/favicon.ico
-%{goroot}/robots.txt
 
 # ensure directory ownership, so they are cleaned up if empty
 %dir %{gopath}
