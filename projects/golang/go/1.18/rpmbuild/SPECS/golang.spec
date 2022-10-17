@@ -165,6 +165,8 @@ Requires:       go-srpm-macros
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch103:       0103-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
+Patch104:       0104-add-method-to-skip-privd-tests-if-required.patch
+Patch105:       0105-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
