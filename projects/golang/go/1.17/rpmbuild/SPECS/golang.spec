@@ -105,8 +105,8 @@
 %global gohostarch  s390x
 %endif
 
-%global go_api 1.16
-%global go_version %{go_api}.15
+%global go_api 1.17
+%global go_version %{go_api}.13
 
 # For rpmdev-bumpspec and releng automation
 %global baserelease 1
@@ -154,26 +154,6 @@ Provides: bundled(golang(golang.org/x/xerrors)) = 0.0.0.20200804184101.5ec99f83a
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
-
-Patch1:       0001-crypto-elliptic-tolerate-zero-padded-scalars-in-gene.patch
-Patch2:       0002-go-1.16.15-eks-encoding-pem-fix-stack-overflo.patch
-Patch3:       0003-go-1.16.15-eks-crypto-tls-randomly-generate-t.patch
-Patch4:       0004-go-1.16.15-eks-compress-gzip-fix-stack-exhaus.patch
-Patch5:       0005-go-1.16.15-eks-encoding-xml-use-iterative-Ski.patch
-Patch6:       0006-go-1.16.15-eks-encoding-xml-limit-depth-of-ne.patch
-Patch7:       0007-go-1.16.15-eks-encoding-gob-add-a-depth-limit.patch
-Patch8:       0008-go-1.16.15-eks-math-big-check-buffer-lengths-.patch
-Patch9:       0009-go-1.16.15-eks-net-http-update-bundled-golang.patch
-Patch10:       0010-go-1.16.15-eks-syscall-check-correct-group-in.patch
-Patch11:       0011-go-1.16.15-eks-io-fs-fix-stack-exhaustion-in-.patch
-Patch12:       0012-go-1.16.15-eks-net-http-don-t-strip-whitespac.patch
-Patch13:       0013-go-1.16.15-eks-net-http-preserve-nil-values-i.patch
-Patch14:       0014-go-1.16.15-eks-path-filepath-fix-stack-exhaus.patch
-
-Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
-Patch103:       0103-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
-Patch104:       0104-add-method-to-skip-privd-tests-if-required.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -301,7 +281,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go-go1.16.15
+%autosetup -p1 -n go-go1.17.13
 
 cp %{SOURCE1} ./src/runtime/
 
