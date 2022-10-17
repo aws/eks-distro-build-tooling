@@ -294,7 +294,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go
+%autosetup -p1 -n go-go1.18.7
 
 cp %{SOURCE1} ./src/runtime/
 
