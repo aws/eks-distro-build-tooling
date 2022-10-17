@@ -162,9 +162,9 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
-Patch1:       0001-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
-Patch2:       0002-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch3:       0003-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
+Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch103:       0103-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
