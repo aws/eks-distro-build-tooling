@@ -174,7 +174,7 @@ Obsoletes:      emacs-%{name} < 1.4
 # These are the only RHEL/Fedora architectures that we compile this package for
 ExclusiveArch:  %{golang_arches}
 
-#Source2 required for CVE-2022-2879 (Patch1:)
+# Source2 required for CVE-2022-2879 (Patch1:)
 Source2:	pax-bad-hdr-large.tar.bz2
 Source100:      golang-gdbinit
 
