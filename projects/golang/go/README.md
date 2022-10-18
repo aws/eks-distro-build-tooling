@@ -3,7 +3,7 @@ EKS supports a larger set of Golang version than upstream Golang. These versions
 
 ## Upstream Patches
 EKS Golang Versions are distributed as RPMs built from upstream Golang source for the given version with relevant security and utility patches, and their tests, backported.
-The patches applied to a given version of Golang are stored in the [EKS Distro Build Tooling Github repository](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go), alongside the build system for EKS Golang. For example, the patches associated with EKS Go v1.16 can be found here https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/1.15/patches. 
+The patches applied to a given version of Golang are stored in the [EKS Distro Build Tooling Github repository](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go), alongside the build system for EKS Golang. For example, you can see the patches associated with EKS Go v1.16 [here](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/1.16/patches). 
 
 EKS currently supports the following Golang versions:
 - Go v1.15.15
