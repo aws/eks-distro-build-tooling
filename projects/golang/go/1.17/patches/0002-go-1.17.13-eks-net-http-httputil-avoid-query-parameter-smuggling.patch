@@ -1,7 +1,7 @@
 From 1ff22d76e2d76aea0361091ef62c7df27ec09256 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Thu, 22 Sep 2022 13:32:00 -0700
-Subject: [PATCH] [release-branch.go1.18] net/http/httputil: avoid query
+Subject: [PATCH] [go-1.17.13-eks] net/http/httputil: avoid query
  parameter smuggling
 
 # AWS EKS
