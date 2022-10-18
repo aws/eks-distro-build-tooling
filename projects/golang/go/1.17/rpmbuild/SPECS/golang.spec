@@ -156,6 +156,7 @@ Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
 Patch1:		0001-go-1.17.13-eks-archive-tar-limit-size-of-head.patch
+Patch2:		0002-go-1.17.13-eks-net-http-httputil-avoid-query-parameter-smuggling.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
