@@ -1,0 +1,79 @@
+From 4ffa2f1c23d5d43be18c4ebf74ca553119683670 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Wed, 4 Aug 2021 16:07:28 -0700
+Subject: [PATCH] time: fallback to slower TestTicker test after one failure
+
+TestTicker is sensitive to overloaded or slow systems, where a 20ms
+ticker running for 10 ticks has a total run time out of the range
+[110ms, 290ms]. To counter this flakiness, it tries five times to
+get a successful result. This is insufficient--an overloaded test
+machine can introduce more than 100ms of delay across the test.
+
+Reduce the five attempts to two, but use a 1s ticker for 8 ticks
+in the second attempt.
+
+Updates #46474.
+Updates #35692.
+
+Change-Id: Ibd5187b00ccceeb981b652f2af9a1c3766357b78
+Reviewed-on: https://go-review.googlesource.com/c/go/+/339892
+Trust: Damien Neil <dneil@google.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+TryBot-Result: Go Bot <gobot@golang.org>
+Reviewed-by: Ian Lance Taylor <iant@golang.org>
+---
+ src/time/tick_test.go | 23 +++++++++++++++++------
+ 1 file changed, 17 insertions(+), 6 deletions(-)
+
+diff --git a/src/time/tick_test.go b/src/time/tick_test.go
+index b5d0a189bc..d8cd59228f 100644
+--- a/src/time/tick_test.go
++++ b/src/time/tick_test.go
+@@ -15,10 +15,11 @@ func TestTicker(t *testing.T) {
+ 	// We want to test that a ticker takes as much time as expected.
+ 	// Since we don't want the test to run for too long, we don't
+ 	// want to use lengthy times. This makes the test inherently flaky.
+-	// So only report an error if it fails five times in a row.
++	// Start with a short time, but try again with a long one if the
++	// first test fails.
+ 
+-	count := 10
+-	delta := 20 * Millisecond
++	baseCount := 10
++	baseDelta := 20 * Millisecond
+ 
+ 	// On Darwin ARM64 the tick frequency seems limited. Issue 35692.
+ 	if (runtime.GOOS == "darwin" || runtime.GOOS == "ios") && runtime.GOARCH == "arm64" {
+@@ -27,8 +28,8 @@ func TestTicker(t *testing.T) {
+ 		// Since tick frequency is limited on Darwin ARM64, use even
+ 		// number to give the ticks more time to let the test pass.
+ 		// See CL 220638.
+-		count = 6
+-		delta = 100 * Millisecond
++		baseCount = 6
++		baseDelta = 100 * Millisecond
+ 	}
+ 
+ 	var errs []string
+@@ -38,7 +39,17 @@ func TestTicker(t *testing.T) {
+ 		}
+ 	}
+ 
+-	for i := 0; i < 5; i++ {
++	for _, test := range []struct {
++		count int
++		delta Duration
++	}{{
++		count: baseCount,
++		delta: baseDelta,
++	}, {
++		count: 8,
++		delta: 1 * Second,
++	}} {
++		count, delta := test.count, test.delta
+ 		ticker := NewTicker(delta)
+ 		t0 := Now()
+ 		for i := 0; i < count/2; i++ {
+-- 
+2.30.1 (Apple Git-130)
+
