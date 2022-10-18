@@ -4,7 +4,7 @@ Date: Fri, 2 Sep 2022 20:45:18 -0700
 Subject: [PATCH] [go-1.17.13-eks] archive/tar: limit size of headers
 
 # AWS EKS
-Backported To: go-1.15.15-eks
+Backported To: go-1.17.13-eks
 Backported On: Thu, 13 Oct 2022
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.18
