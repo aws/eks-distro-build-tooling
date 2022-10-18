@@ -9,7 +9,7 @@ EKS currently supports the following Golang versions:
 - Go v1.15.15
 - Go v1.16.15
 
-EKS Go plans to suport all relevnt versions of Go (e.g. those used by a supported Kubernetes version or other Kubernetes ecosystem component) in the near future.
+EKS Go plans to support all relevant versions of Go (e.g. those used by a supported Kubernetes version or other Kubernetes ecosystem component) in the near future.
 
 ## EKS Go architectures
 EKS Go currently supports the following architectures:
