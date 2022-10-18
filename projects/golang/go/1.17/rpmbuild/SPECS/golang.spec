@@ -155,6 +155,8 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
+Patch3:		0003-go-1.17.13-eks-regexp-limit-size-of-parsed-regexps.patch
+
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch103:       0103-time-fallback-to-slower-TestTicker-test-after-one-fa.patch
