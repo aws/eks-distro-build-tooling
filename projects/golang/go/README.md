@@ -1,5 +1,5 @@
 # EKS Supported Go Versions
-EKS supports a larger set of Golang version than upstream Golang. These versions are used to build Kubernetes and other Kubernetes ecosystem components used by EKS. Relevent upstream security fixes are backported to these Go versions. These patched versions are then built into RPMs and tested by building the relevent version of EKS Distro (e.g. Go 1.16 and Kubernetes 1.21) and executing the Kubernetes conformance tests.
+EKS supports a larger set of Golang version than upstream Golang. These versions are used to build Kubernetes and other Kubernetes ecosystem components used by EKS. Relevant upstream security fixes are backported to these Go versions. These patched versions are then built into RPMs and tested by building the relevant version of EKS Distro (e.g. Go 1.16 and Kubernetes 1.21) and executing the Kubernetes conformance tests.
 
 ## Upstream Patches
 EKS Golang Versions are distributed as RPMs built from upstream Golang source for the given version with relevant security and utility patches, and their tests, backported.
