@@ -155,6 +155,7 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
+Patch1:		0001-go-1.17.13-eks-archive-tar-limit-size-of-head.patch
 Patch2:		0002-go-1.17.13-eks-net-http-httputil-avoid-query-parameter-smuggling.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
@@ -174,6 +175,8 @@ Obsoletes:      emacs-%{name} < 1.4
 # These are the only RHEL/Fedora architectures that we compile this package for
 ExclusiveArch:  %{golang_arches}
 
+# Source2 required for CVE-2022-2879 (Patch1:)
+Source2:	pax-bad-hdr-large.tar.bz2
 Source100:      golang-gdbinit
 
 %description
@@ -436,6 +439,9 @@ ln -sf /etc/alternatives/gofmt $RPM_BUILD_ROOT%{_bindir}/gofmt
 # gdbinit
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d
 cp -av %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/gdbinit.d/golang.gdb
+
+# pax-bad-hdr-large.tar.bz2
+cp -av %{SOURCE2} /root/rpmbuild/BUILD/go-go1.17.13/src/archive/tar/testdata/pax-bad-hdr-large.tar.bz2
 
 %check
 export GOROOT=$(pwd -P)
