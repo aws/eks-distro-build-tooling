@@ -1,36 +1,30 @@
-From add9fe5182c06afdaeeaa7f098f7dd4f64efee1f Mon Sep 17 00:00:00 2001
+From fa250374b727439159bc9f203b854bb5df00186f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Mon, 27 May 2019 15:12:53 +0200
-Subject: [PATCH 02/16] cmd/go: disable Google's proxy and sumdb
+Subject: [PATCH] cmd/go: disable Google's proxy and sumdb
 
 ---
- src/cmd/go/internal/cfg/cfg.go                  | 10 +++++-----
- src/cmd/go/testdata/script/mod_sumdb_golang.txt |  6 +++---
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ src/cmd/go/internal/cfg/cfg.go                  | 4 ++--
+ src/cmd/go/testdata/script/mod_sumdb_golang.txt | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/src/cmd/go/internal/cfg/cfg.go b/src/cmd/go/internal/cfg/cfg.go
-index c48904eacc..66ef0339d0 100644
+index 57a3c1ff6f..e56c60e591 100644
 --- a/src/cmd/go/internal/cfg/cfg.go
 +++ b/src/cmd/go/internal/cfg/cfg.go
-@@ -261,11 +261,11 @@ var (
- 	GOPPC64  = envOr("GOPPC64", fmt.Sprintf("%s%d", "power", objabi.GOPPC64))
- 	GOWASM   = envOr("GOWASM", fmt.Sprint(objabi.GOWASM))
+@@ -266,8 +266,8 @@ var (
+ 	GOPPC64  = envOr("GOPPC64", fmt.Sprintf("%s%d", "power", buildcfg.GOPPC64))
+ 	GOWASM   = envOr("GOWASM", fmt.Sprint(buildcfg.GOWASM))
  
 -	GOPROXY    = envOr("GOPROXY", "https://proxy.golang.org,direct")
 -	GOSUMDB    = envOr("GOSUMDB", "sum.golang.org")
--	GOPRIVATE  = Getenv("GOPRIVATE")
--	GONOPROXY  = envOr("GONOPROXY", GOPRIVATE)
--	GONOSUMDB  = envOr("GONOSUMDB", GOPRIVATE)
-+	GOPROXY   = envOr("GOPROXY", "direct")
-+	GOSUMDB   = envOr("GOSUMDB", "off")
-+	GOPRIVATE = Getenv("GOPRIVATE")
-+	GONOPROXY = envOr("GONOPROXY", GOPRIVATE)
-+	GONOSUMDB = envOr("GONOSUMDB", GOPRIVATE)
- 	GOINSECURE = Getenv("GOINSECURE")
- 	GOVCS      = Getenv("GOVCS")
- )
++	GOPROXY    = envOr("GOPROXY", "direct")
++	GOSUMDB    = envOr("GOSUMDB", "off")
+ 	GOPRIVATE  = Getenv("GOPRIVATE")
+ 	GONOPROXY  = envOr("GONOPROXY", GOPRIVATE)
+ 	GONOSUMDB  = envOr("GONOSUMDB", GOPRIVATE)
 diff --git a/src/cmd/go/testdata/script/mod_sumdb_golang.txt b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
-index cc0b0da474..b50689e209 100644
+index becd88b52e..b2a1250372 100644
 --- a/src/cmd/go/testdata/script/mod_sumdb_golang.txt
 +++ b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
 @@ -2,12 +2,12 @@
@@ -48,7 +42,7 @@ index cc0b0da474..b50689e209 100644
 +stdout '^off$'
  
  # Download direct from github.
- [!net] skip
+ 
 -- 
-2.30.1 (Apple Git-130)
+2.31.1
 
