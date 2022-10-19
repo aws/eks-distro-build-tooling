@@ -10,6 +10,15 @@ GO_REPO_URL?="https://github.com/golang/go.git"
 GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
+ARCHITECTURE?="AMD64"
+ifeq (${ARCHITECTURE},AMD64)
+	RPM_ARCH=x86_64
+endif
+ifeq (${ARCHITECTURE},ARM64)
+	RPM_ARCH=aarch64
+endif
+
+
 .PHONY: build
 build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm sync-artifacts-to-s3-dry-run
 
@@ -47,12 +56,12 @@ endif
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/x86_64 golang/go/$(GIT_TAG)/RPMS/x86_64 true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH) true true
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/x86_64 golang/go/$(GIT_TAG)/RPMS/x86_64 true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH) true false
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true false
 
 .PHONY: clean
