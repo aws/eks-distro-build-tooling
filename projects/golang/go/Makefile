@@ -69,17 +69,16 @@ install-deps:
 .PHONY: check-env-release
 check-env-release:
 ifndef ARTIFACTS_BUCKET
-$(error environment variable ARTIFACTS_BUCKET is undefined)
-endif
-
-.PHONY: check-env-release
-check-env-release:
-ifndef ARTIFACTS_BUCKET
-$(error environment variable ARTIFACTS_BUCKET is undefined)
+	$(error environment variable ARTIFACTS_BUCKET is undefined)
 endif
 
 .PHONY: check-env
 check-env:
 ifndef GO_SOURCE_VERSION
-$(error environment variable GO_SOURCE_VERSION, e.g. 1.15, is undefined)
+	$(error environment variable GO_SOURCE_VERSION, e.g. 1.15, is undefined)
 endif
+
+.PHONY: clone-go
+clone-go:
+	echo "Hello World"
+
