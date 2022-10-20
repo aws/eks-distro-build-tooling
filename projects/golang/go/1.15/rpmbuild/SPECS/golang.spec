@@ -673,7 +673,7 @@ fi
 %endif
 
 %changelog
-* Thu Oct 12 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-3
+* Wed Oct 12 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-3
 - Include CVE-2022-2880 fix backported from 1.18.7
 
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.15.15-2
