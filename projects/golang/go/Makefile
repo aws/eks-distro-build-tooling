@@ -1,5 +1,5 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
-BUILD_ID?=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
 
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
