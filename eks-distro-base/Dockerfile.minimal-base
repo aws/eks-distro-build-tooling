@@ -71,6 +71,7 @@ RUN set -x && \
         basesystem \
         tzdata \
         ca-certificates && \
+    if_al2022 install_rpm amazon-linux-repo-cdn && \
     cleanup "base"
 
 COPY files/ $NEWROOT
