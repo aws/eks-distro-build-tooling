@@ -64,16 +64,16 @@ function build::go::install(){
 
     # AL2 provides a longer supported version of golang, use AL2 package when possible
     local yum_provided_versions="1.13"
-    local eks_built_versions="1.16.15 1.15.15"
+    local eks_built_versions="1.16.15 1.15.15 1.17.13"
     if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" && $IS_AL22 == false ]]; then
-        local artifacts_bucket='eks-d-postsubmit-artifacts'
         local arch='x86_64'
+        local golang_release=1
         for artifact in golang golang-bin golang-race; do
-          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/$arch/$artifact-$version-1.amzn2.0.1.$arch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.$arch.rpm
+          curl https://distro.eks.amazonaws.com/golang-go$version/releases/$golang_release/RPMS/$arch/$artifact-$version-$golang_release.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$golang_release.amzn2.eks.$arch.rpm
         done
 
         for artifact in golang-docs golang-misc golang-tests golang-src; do
-          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/noarch/$artifact-$version-1.amzn2.0.1.noarch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.noarch.rpm
+          curl https://distro.eks.amazonaws.com/golang-go$version/releases/$golang_release/RPMS/noarch/$artifact-$version-$golang_release.amzn2.eks.noarch.rpm -o /tmp/$artifact-$version-$golang_release.amzn2.eks.noarch.rpm
         done
 
         build::go::extract $version

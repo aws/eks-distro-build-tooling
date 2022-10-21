@@ -27,6 +27,7 @@ build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmb
 release: build sync-artifacts-to-s3
 
 .PHONY: prod-release
+<<<<<<< HEAD
 prod-release: ARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
 prod-release: NOARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 prod-release: build sync-artifacts-to-s3
