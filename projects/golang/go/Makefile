@@ -18,12 +18,19 @@ ifeq (${ARCHITECTURE},ARM64)
 	RPM_ARCH=aarch64
 endif
 
+ARCH_RPM_OUT_PATH?=golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH)
+NOARCH_RPM_OUT_PATH?=golang/go/$(GIT_TAG)/RPMS/noarch
 
 .PHONY: build
 build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm sync-artifacts-to-s3-dry-run
 
 .PHONY: release
 release: build sync-artifacts-to-s3
+
+.PHONY: prod-release
+ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
+NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
+prod-release: build sync-artifacts-to-s3
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -56,13 +63,13 @@ endif
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH) true true
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) ARCH_RPM_OUT_PATH true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch NOARCH_RPM_OUT_PATH true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env-release
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH) true false
-	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch golang/go/$(GIT_TAG)/RPMS/noarch true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) ARCH_RPM_OUT_PATH true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch NOARCH_RPM_OUT_PATH true false
 
 .PHONY: clean
 clean:
