@@ -1,5 +1,5 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
-BUILD_ID?=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
 
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
@@ -60,7 +60,7 @@ endif
 ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
-	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild"
+	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild" --define "_buildid $(BUILD_ID)"
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
