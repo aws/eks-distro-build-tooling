@@ -29,7 +29,7 @@ release: build sync-artifacts-to-s3
 
 .PHONY: prod-release
 prod-release: ARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
-NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
+prod-release: NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 prod-release: build sync-artifacts-to-s3
 
 .PHONY: fetch-golang-source-archive
