@@ -79,7 +79,7 @@ $(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 define BUILDCTL
-	buildctl \
+	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
 		--opt filename=$(DOCKERFILE) \
