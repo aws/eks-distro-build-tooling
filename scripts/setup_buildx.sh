@@ -13,25 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 set -e
 set -o pipefail
 set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5s
-    else
-      SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-      $SCRIPT_ROOT/setup_buildx.sh
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
-}
+if ! docker buildx version > /dev/null 2>&1; then
+    # TODO move to builder base
+    mkdir -p ~/.docker/cli-plugins
+    curl -L https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx  
+    chmod a+x ~/.docker/cli-plugins/docker-buildx    
+fi
 
-buildkit_ready
+docker buildx version
+
+if ! docker buildx ls | grep "sidecar-builder" > /dev/null 2>&1; then
+    docker buildx create --name sidecar-builder --driver remote ${BUILDKIT_HOST:-unix:///run/buildkit/buildkitd.sock}
+    docker buildx use sidecar-builder
+fi
+
+docker buildx inspect
