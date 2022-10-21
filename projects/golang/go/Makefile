@@ -1,10 +1,11 @@
-BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
+BUILD_ID?=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+
+BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
 VERSION_DIRECTORY:=$(PROJECT_DIRECTORY)/$(GO_SOURCE_VERSION)
 CLONED_REPO_DIRECTORY:=$(VERSION_DIRECTORY)/go
 
-GO_VERSION_TAG?=$(shell cat $(VERSION_DIRECTORY)/GIT_TAG)
 GO_REPO_URL?="https://github.com/golang/go.git"
 
 GITHUB_EMAIL?="prow@amazonaws.com"
