@@ -1,3 +1,4 @@
+amazon-linux-repo-cdn-2022.0.20221019-2.amzn2022.noarch
 basesystem-11-11.amzn2022.0.1.noarch
 ca-certificates-2021.2.50-1.0.amzn2022.0.3.noarch
 filesystem-3.14-5.amzn2022.0.2.aarch64
@@ -12,5 +13,5 @@ libstdc++-11.3.1-2.amzn2022.0.8.aarch64
 pcre-8.44-3.amzn2022.1.aarch64
 pcre2-10.40-1.amzn2022.0.1.aarch64
 setup-2.13.7-3.amzn2022.0.1.noarch
-system-release-2022.0.20221012-0.amzn2022.noarch
-tzdata-2022d-1.amzn2022.0.1.noarch
+system-release-2022.0.20221019-2.amzn2022.noarch
+tzdata-2022e-1.amzn2022.0.1.noarch
