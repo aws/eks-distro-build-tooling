@@ -249,6 +249,7 @@ Patch19:       0019-go-1.15.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch20:       0020-go-1.15.15-eks-net-http-update-bundled-golang.patch
 Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
 Patch22:       0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch
+Patch23:       0023-unicode-upgrade-to-Unicode-13.0.0.patch
 Patch24:       0024-go-1.15.15-eks-regexp-limit-size-of-parsed-regexps.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
@@ -404,6 +405,7 @@ Requires:       %{name} = %{version}-%{release}
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
+%patch23 -p1
 %patch24 -p1
 %patch101 -p1
 %patch102 -p1
