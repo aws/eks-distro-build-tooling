@@ -1,5 +1,4 @@
 ## Golang 1.15.15 Build for EKS
-
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.15*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
