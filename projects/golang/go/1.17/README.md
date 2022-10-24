@@ -1,7 +1,6 @@
 # EKS Golang 1.17
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.17*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
-# EKS Golang 1.17
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.16*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
