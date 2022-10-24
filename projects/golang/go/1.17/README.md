@@ -1,7 +1,6 @@
 # EKS Golang 1.17
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.17*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
-[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.16*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
 The patches in `./patches` include relevant security fixes for go `v1.17.13` which have been released since `1.17.13` left support.
