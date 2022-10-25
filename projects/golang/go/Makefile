@@ -73,6 +73,8 @@ sync-artifacts-to-s3: check-env-release
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch $(NOARCH_RPM_OUT_PATH) true false
 
 .PHONY: setup-prod-release-s3-credentials
+setup-prod-release-s3-credentials: export AWS_CONFIG_FILE="$(BASE_DIRECTORY)/awscliconfig"
+setup-prod-release-s3-credentials: export AWS_PROFILE="release-account"
 setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
 
