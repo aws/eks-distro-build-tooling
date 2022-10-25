@@ -5,6 +5,8 @@ const csvParse = require('csv-parse/lib/sync')
 const HTMLParser = require('node-html-parser');
 const { https } = require('follow-redirects');
 const retry = require('async-retry')
+const glob = require("glob-promise")
+
 
 // https://github.com/google/licenseclassifier/blob/842c0d70d7027215932deb13801890992c9ba364/license_type.go#L323
 const RECIPROCAL_LICENSE_TYPES = ["APSL-1.0", "APSL-1.1", "APSL-1.2", "APSL-2.0", "CDDL-1.0", "CDDL-1.1", "CPL-1.0", "EPL-1.0", "FreeImage", "IPL-1.0", "MPL-1.0", "MPL-1.1", "MPL-2.0", "Ruby"];
@@ -212,15 +214,16 @@ async function getPackageRepo(package) {
 
 async function readLicenseContent(dep, depLicensesDirPath) {
     const possiblePaths = [];
-    const possibleNames = ['LICENSE', 'LICENSE.txt', 'LICENCE.md', 'LICENCE', 'LICENSE.md'];
 
     if (dep.licensePath !== 'Unknown') {
         const licensePathFromGoLicenseOutput = path.join(depLicensesDirPath, path.basename(dep.licensePath));
         possiblePaths.push(licensePathFromGoLicenseOutput);
     }
 
-    possibleNames.forEach((possibleName) => {
-        possiblePaths.push(path.join(depLicensesDirPath, possibleName));
+    const files = await glob('LICEN+(S|C)E?(.md|.txt)', {cwd: depLicensesDirPath, nocase: true})
+    
+    files.forEach((file) => {
+        possiblePaths.push(path.join(depLicensesDirPath, file));
     });
 
     for (let i = 0; i < possiblePaths.length; i++) {
