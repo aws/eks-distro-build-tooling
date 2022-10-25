@@ -1,19 +1,16 @@
-From 248280d92b95ddc8518797b095aec1ce275e4d10 Mon Sep 17 00:00:00 2001
+From f4da22bd8f55d8f1ad512403e8122c0d9a8fa79c Mon Sep 17 00:00:00 2001
 From: Marcel van Lohuizen <mpvl@golang.org>
 Date: Mon, 17 Aug 2020 19:10:12 +0200
 Subject: [PATCH] unicode: upgrade to Unicode 13.0.0
 
 # AWS EKS
+
 Backported To: go-1.15.15-eks
 Backported On: Fri, 21 Oct 2022
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.16
 Source Commit:  https://github.com/golang/go/commit/8ec5a052ec8d4e628353fb5099b29341fae9b3a4
 EKS Patch Source Commit: https://github.com/rcrozean/go/commit/248280d92b95ddc8518797b095aec1ce275e4d10
-
-This fix was required for the CVE-2022-41715 fix. The change in Unicode
-cause the regexp rune size calculation to be off an fail to brake as
-expected.
 
 # Original Information
 
@@ -25,31 +22,10 @@ Run-TryBot: Marcel van Lohuizen <mpvl@golang.org>
 TryBot-Result: Gobot Gobot <gobot@golang.org>
 Reviewed-by: Ian Lance Taylor <iant@golang.org>
 ---
- api/except.txt         |   1 +
- api/next.txt           |   5 +
  src/strconv/isprint.go |  98 ++++----
  src/unicode/tables.go  | 544 ++++++++++++++++++++++++++---------------
- 4 files changed, 405 insertions(+), 243 deletions(-)
+ 2 files changed, 399 insertions(+), 243 deletions(-)
 
-diff --git a/api/except.txt b/api/except.txt
-index ccfdf06c55..962bb14271 100644
---- a/api/except.txt
-+++ b/api/except.txt
-@@ -456,3 +456,4 @@ pkg syscall (freebsd-arm-cgo), type Statfs_t struct, Mntonname [88]int8
- pkg text/scanner, const GoTokens = 1012
- pkg unicode, const Version = "10.0.0"
- pkg unicode, const Version = "11.0.0"
-+pkg unicode, const Version = "12.0.0"
-diff --git a/api/next.txt b/api/next.txt
-index e69de29bb2..fe7509bf82 100644
---- a/api/next.txt
-+++ b/api/next.txt
-@@ -0,0 +1,5 @@
-+pkg unicode, const Version = "13.0.0"
-+pkg unicode, var Chorasmian *RangeTable
-+pkg unicode, var Dives_Akuru *RangeTable
-+pkg unicode, var Khitan_Small_Script *RangeTable
-+pkg unicode, var Yezidi *RangeTable
 diff --git a/src/strconv/isprint.go b/src/strconv/isprint.go
 index 7ada2d1b04..994a8e423c 100644
 --- a/src/strconv/isprint.go
