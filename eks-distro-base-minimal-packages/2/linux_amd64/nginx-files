@@ -26,9 +26,25 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   3.5KiB /etc/ld.so.cache
+-rw-r--r--   4.4KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
+-rw-r--r--     261B /etc/logrotate.d/nginx
 -rw-r--r--       0B /etc/motd
+-rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf
+-rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf.default
+-rw-r--r--    1007B /etc/nginx/fastcgi_params
+-rw-r--r--    1007B /etc/nginx/fastcgi_params.default
+-rw-r--r--   2.8KiB /etc/nginx/koi-utf
+-rw-r--r--   2.2KiB /etc/nginx/koi-win
+-rw-r--r--   5.3KiB /etc/nginx/mime.types
+-rw-r--r--   5.3KiB /etc/nginx/mime.types.default
+-rw-r--r--   2.3KiB /etc/nginx/nginx.conf
+-rw-r--r--   2.6KiB /etc/nginx/nginx.conf.default
+-rw-r--r--     636B /etc/nginx/scgi_params
+-rw-r--r--     636B /etc/nginx/scgi_params.default
+-rw-r--r--     664B /etc/nginx/uwsgi_params
+-rw-r--r--     664B /etc/nginx/uwsgi_params.default
+-rw-r--r--   3.6KiB /etc/nginx/win-utf
 -rw-r--r--     229B /etc/nsswitch.conf
 -rw-r--r--     161B /etc/os-release
 -rw-r--r--     211B /etc/passwd
@@ -228,8 +244,13 @@
 -rw-r--r--     651B /usr/lib/systemd/system/nginx.service
 -rw-r--r--      34B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      65B /usr/lib64/.libcrypto.so.1.0.2k.hmac
+-rw-r--r--      65B /usr/lib64/.libcrypto.so.1.1.1g.hmac
 -rw-r--r--      65B /usr/lib64/.libssl.so.1.0.2k.hmac
+-rw-r--r--      65B /usr/lib64/.libssl.so.1.1.1g.hmac
 -rwxr-xr-x    14KiB /usr/lib64/audit/sotruss-lib.so
+-rwxr-xr-x    20KiB /usr/lib64/engines-1.1/afalg.so
+-rwxr-xr-x   6.6KiB /usr/lib64/engines-1.1/capi.so
+-rwxr-xr-x    24KiB /usr/lib64/engines-1.1/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
 -rwxr-xr-x    25KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    13KiB /usr/lib64/gconv/ARMSCII-8.so
@@ -495,7 +516,9 @@
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    36KiB /usr/lib64/libcap.so.2.54
 -rwxr-xr-x   193KiB /usr/lib64/libcidn-2.26.so
+-rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
+-rwxr-xr-x   2.9MiB /usr/lib64/libcrypto.so.1.1.1g
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
@@ -518,16 +541,25 @@
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   401KiB /usr/lib64/libpcre.so.1.2.0
 -rwxr-xr-x   365KiB /usr/lib64/libpcre16.so.0.2.0
+-rwxr-xr-x   490KiB /usr/lib64/libpcre2-8.so.0.5.0
+-rwxr-xr-x    11KiB /usr/lib64/libpcre2-posix.so.1.0.1
 -rwxr-xr-x   349KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    36KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libpcreposix.so.0.0.1
+-rwxr-xr-x    61KiB /usr/lib64/libprofiler.so.0.4.14
 -rwxr-xr-x    16KiB /usr/lib64/libpsx.so.2.54
 -rwxr-xr-x   146KiB /usr/lib64/libpthread-2.26.so
 -rwxr-xr-x    92KiB /usr/lib64/libresolv-2.26.so
 -rwxr-xr-x    43KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   153KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   637KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   572KiB /usr/lib64/libssl.so.1.1.1g
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
+-rwxr-xr-x   291KiB /usr/lib64/libtcmalloc.so.4.4.5
+-rwxr-xr-x   315KiB /usr/lib64/libtcmalloc_and_profiler.so.4.4.5
+-rwxr-xr-x   343KiB /usr/lib64/libtcmalloc_debug.so.4.4.5
+-rwxr-xr-x   156KiB /usr/lib64/libtcmalloc_minimal.so.4.4.5
+-rwxr-xr-x   208KiB /usr/lib64/libtcmalloc_minimal_debug.so.4.4.5
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    57KiB /usr/lib64/libtic.so.6.0
 -rwxr-xr-x   176KiB /usr/lib64/libtinfo.so.6.0
@@ -559,6 +591,7 @@
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig.x86_64
 -rwxr-xr-x   885KiB /usr/sbin/ldconfig
+-rwxr-xr-x   1.2MiB /usr/sbin/nginx
 -rwxr-xr-x    61KiB /usr/sbin/sefcontext_compile
 -rwxr-xr-x    12KiB /usr/sbin/setcap
 -rwxr-xr-x   885KiB /usr/sbin/sln
@@ -607,7 +640,11 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
+-rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.22.0/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
+-rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
+-rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
+-rw-r--r--   2.9KiB /usr/share/licenses/pcre2-10.23/LICENCE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_TIME/coreutils.mo
@@ -2660,7 +2697,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   3.0KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   344KiB /var/lib/rpm/Basenames
@@ -2670,9 +2707,9 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   2.4MiB /var/lib/rpm/Packages
--rw-r--r--    24KiB /var/lib/rpm/Providename
--rw-r--r--    16KiB /var/lib/rpm/Requirename
+-rw-r--r--   2.6MiB /var/lib/rpm/Packages
+-rw-r--r--    32KiB /var/lib/rpm/Providename
+-rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
 -rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -2695,7 +2732,9 @@ lrwxrwxrwx       7B /usr/lib/debug/bin	usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib	usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64	usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin	usr/sbin
+lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.1.1.hmac	.libcrypto.so.1.1.1g.hmac
 lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.10.hmac	.libcrypto.so.1.0.2k.hmac
+lrwxrwxrwx      22B /usr/lib64/.libssl.so.1.1.hmac	.libssl.so.1.1.1g.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.10.hmac	.libssl.so.1.0.2k.hmac
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-x86-64.so.2	ld-2.26.so
@@ -2706,6 +2745,8 @@ lrwxrwxrwx      16B /usr/lib64/libattr.so.1	libattr.so.1.1.0
 lrwxrwxrwx      12B /usr/lib64/libc.so.6	libc-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2	libcap.so.2.54
 lrwxrwxrwx      15B /usr/lib64/libcidn.so.1	libcidn-2.26.so
+lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
+lrwxrwxrwx      19B /usr/lib64/libcrypto.so.1.1	libcrypto.so.1.1.1g
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
 lrwxrwxrwx      13B /usr/lib64/libdl.so.2	libdl-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libform.so.6	libform.so.6.0
@@ -2727,14 +2768,23 @@ lrwxrwxrwx      15B /usr/lib64/libpanel.so.6	libpanel.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6	libpanelw.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpcre.so.1	libpcre.so.1.2.0
 lrwxrwxrwx      18B /usr/lib64/libpcre16.so.0	libpcre16.so.0.2.0
+lrwxrwxrwx      19B /usr/lib64/libpcre2-8.so.0	libpcre2-8.so.0.5.0
+lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.1	libpcre2-posix.so.1.0.1
 lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1
+lrwxrwxrwx      21B /usr/lib64/libprofiler.so.0	libprofiler.so.0.4.14
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2	libpsx.so.2.54
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libresolv.so.2	libresolv-2.26.so
 lrwxrwxrwx      13B /usr/lib64/librt.so.1	librt-2.26.so
+lrwxrwxrwx      16B /usr/lib64/libssl.so.1.1	libssl.so.1.1.1g
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
+lrwxrwxrwx      20B /usr/lib64/libtcmalloc.so.4	libtcmalloc.so.4.4.5
+lrwxrwxrwx      33B /usr/lib64/libtcmalloc_and_profiler.so.4	libtcmalloc_and_profiler.so.4.4.5
+lrwxrwxrwx      26B /usr/lib64/libtcmalloc_debug.so.4	libtcmalloc_debug.so.4.4.5
+lrwxrwxrwx      28B /usr/lib64/libtcmalloc_minimal.so.4	libtcmalloc_minimal.so.4.4.5
+lrwxrwxrwx      34B /usr/lib64/libtcmalloc_minimal_debug.so.4	libtcmalloc_minimal_debug.so.4.4.5
 lrwxrwxrwx      19B /usr/lib64/libthread_db.so.1	libthread_db-1.0.so
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6	libtic.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6	libtinfo.so.6.0
