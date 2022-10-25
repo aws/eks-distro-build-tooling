@@ -8,30 +8,40 @@ PROJECT_DIRECTORY="$BASE_DIRECTORY/projects/golang/go/"
 
 GO_REPO="$(dirname "$BASE_DIRECTORY")/go"
 
-GO_VERSIONS=('1.15.15', '1.16.15', '1.17.13')
+GO_VERSIONS=('1.15.15' '1.16.15' '1.17.13')
 
-clone-go() {
+function build::go::clone() {
 	if [[ ! -e $GO_REPO ]]; then
 		git clone "$GO_REPO_URL" "$(dirname "$GO_REPO")"
 	fi
 }
 
-create-eks-patch-branches() {
-	for ver in "${GO_VERSION[@]}"; do
+function build::go::create_eks_branches() {
+	cd $GO_REPO
+	for ver in "${GO_VERSIONS[@]}"; do
 		git checkout "release-branch.go${ver:0:4}"
 		git checkout -B "go-$ver-eks"
-		git am $PROJECTS_DIRECTORY/${ver:0:4}/patches/*.patch
+		git am $PROJECT_DIRECTORY/${ver:0:4}/patches/*.patch
 	done	
 }
 
-cherry-pick-commit() {
-	git cherry-pick $1
+function build::cherry_pick_commit() {
+	git cherry-pick $1 || echo "Failed to cherry-pick apply manually for $2"
 }
 
-create-patch() {
-	echo "create patch"
+function patch::create() {
+	git format-patch -1
 }
 
-remove-golang-repo() {
-	echo "remove go repo"
+function build::cleanup() {
+	rm -rv "$GO_REPO"
 }
+
+build::go::clone
+build::go::create_eks_branches
+for ver in "${GO_VERSIONS[@]}"; do
+	build::cherry_pick_commit $1 $ver
+done
+
+#TODO if cherry-pick is success create patch
+#TODO add option to erase golang/go repo
