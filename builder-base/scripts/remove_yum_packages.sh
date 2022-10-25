@@ -15,21 +15,5 @@
 
 set -e
 set -o pipefail
-set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
-}
-
-buildkit_ready
+yum history | awk -F '|' 'NR>2{print $1}' | awk 'NF{print $1}' | grep -o '[0-9]\+' | while read id; do yum history undo --skip-broken --setopt=protected_packages=False -y $id; done
