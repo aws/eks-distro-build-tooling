@@ -12,10 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-region: 'us-west-2'
-
-s3Credentials:
-  Secret:
-    create: true
-
-serviceAccountName: default
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: buildkit-orchestration-rolebinding
+  namespace: buildkit-orchestration
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: buildkit-orchestration-role
+subjects:
+- namespace: default 
+  kind: ServiceAccount
+  name: {{ .Values.serviceAccountName }}
