@@ -12,10 +12,8 @@ GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
 ARCHITECTURE?="AMD64"
-ifeq (${ARCHITECTURE},AMD64)
-	RPM_ARCH=x86_64
-endif
-ifeq (${ARCHITECTURE},ARM64)
+RPM_ARCH?=x86_64
+ifeq ($(ARCHITECTURE), ARM64)
 	RPM_ARCH=aarch64
 endif
 
@@ -31,7 +29,7 @@ release: build sync-artifacts-to-s3
 .PHONY: prod-release
 prod-release: ARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
 prod-release: NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
-prod-release: build prow-release
+prod-release: build sync-artifacts-to-s3
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -72,10 +70,6 @@ sync-artifacts-to-s3: check-env-release
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) $(ARCH_RPM_OUT_PATH) true false
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch $(NOARCH_RPM_OUT_PATH) true false
 
-.PHONY: prow-release
-prow-release: check-env-release
-	$(PROJECT_DIRECTORY)/scripts/prow-release.sh
-
 .PHONY: setup-prod-release-s3-credentials
 setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
@@ -95,15 +89,6 @@ install-deps:
 check-env-release:
 ifndef ARTIFACTS_BUCKET
 	$(error environment variable ARTIFACTS_BUCKET is undefined)
-endif
-
-.PHONY: check-env-prod-release
-check-env-prod-release:
-ifndef AWS_REGION
-	$(error environment variable AWS_REGION is undefined)
-endif
-ifndef ARTIFACT_DEPLOYMENT_ROLE_ARN
-	$(error environment variable ARTIFACT_DEPLOYMENT_ROLE_ARN is undefined)
 endif
 
 .PHONY: check-env
