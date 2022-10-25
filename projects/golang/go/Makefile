@@ -31,7 +31,7 @@ release: build sync-artifacts-to-s3
 .PHONY: prod-release
 prod-release: ARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
 prod-release: NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
-prod-release: build setup-prod-release-s3-credentials sync-artifacts-to-s3
+prod-release: build prow-release
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -72,9 +72,11 @@ sync-artifacts-to-s3: check-env-release
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) $(ARCH_RPM_OUT_PATH) true false
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch $(NOARCH_RPM_OUT_PATH) true false
 
+.PHONY: prow-release
+prow-release: check-env-release
+	$(PROJECT_DIRECTORY)/scripts/prow-release.sh
+
 .PHONY: setup-prod-release-s3-credentials
-setup-prod-release-s3-credentials: export AWS_CONFIG_FILE="$(BASE_DIRECTORY)/awscliconfig"
-setup-prod-release-s3-credentials: export AWS_PROFILE="release-account"
 setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
 
