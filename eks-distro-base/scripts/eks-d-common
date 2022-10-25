@@ -236,9 +236,13 @@ function build::common::dep_exists() {
         return 0
     fi
 
-    # if does not start with /, it does not exist
     if [[ ! $dep = /* ]]; then
-        return 1
+        # try using find in case it in fact does exist but in a uncommon folder
+        if find $NEWROOT -type f -name $dep -exec false {} +; then
+            # not found
+            return 1
+        fi
+        return 0
     fi
 
     # ldd return the dep that exists in the newroot folder, nothing to do
