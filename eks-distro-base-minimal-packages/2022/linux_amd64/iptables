@@ -1,4 +1,5 @@
 alternatives-1.15-2.amzn2022.0.1.x86_64
+amazon-linux-repo-cdn-2022.0.20221019-2.amzn2022.noarch
 basesystem-11-11.amzn2022.0.1.noarch
 ca-certificates-2021.2.50-1.0.amzn2022.0.3.noarch
 conntrack-tools-1.4.6-2.amzn2022.0.1.x86_64
@@ -34,8 +35,8 @@ openssl-libs-3.0.5-1.amzn2022.0.2.x86_64
 pcre-8.44-3.amzn2022.1.x86_64
 pcre2-10.40-1.amzn2022.0.1.x86_64
 setup-2.13.7-3.amzn2022.0.1.noarch
-system-release-2022.0.20221012-0.amzn2022.noarch
-systemd-libs-250.8-1.amzn2022.0.1.x86_64
-tzdata-2022d-1.amzn2022.0.1.noarch
+system-release-2022.0.20221019-2.amzn2022.noarch
+systemd-libs-250.8-1.amzn2022.0.2.x86_64
+tzdata-2022e-1.amzn2022.0.1.noarch
 xz-libs-5.2.5-9.amzn2022.0.1.x86_64
 zlib-1.2.11-32.amzn2022.0.3.x86_64
