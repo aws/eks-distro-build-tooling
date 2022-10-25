@@ -1,5 +1,10 @@
 # EKS Golang 1.18
-[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=*golang-1.18*-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
+
+### ARM64 Builds
+[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1.18-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
+
+### AMD64 Builds
+[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1.18-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
 The patches in `./patches` include relevant security fixes for go `v1.18.7`.
