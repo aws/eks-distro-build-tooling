@@ -1,6 +1,6 @@
 // +build rpm_crashtraceback
 
-package SOURCES
+package runtime
 
 func init() {
 	setTraceback("crash")
