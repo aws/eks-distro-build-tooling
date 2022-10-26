@@ -290,7 +290,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go
+%autosetup -p1 -n go-go%{go_version}
 
 cp %{SOURCE1} ./src/runtime/
 
@@ -538,7 +538,7 @@ fi
 %endif
 
 %changelog
-* Tue Oct 26 2022 Daniel Budris <budris@amazon.com> - 1.19.2-1
+* Wed Oct 26 2022 Daniel Budris <budris@amazon.com> - 1.19.2-1
 - Adapt to EKS Go release string convention
 - Adapt patch ordering to EKS Go convention
 
