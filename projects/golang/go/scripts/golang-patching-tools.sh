@@ -5,14 +5,15 @@ set -x
 
 BASE_DIRECTORY="$(git rev-parse --show-toplevel)"
 PROJECT_DIRECTORY="$BASE_DIRECTORY/projects/golang/go/"
+GO_REPO_URL="https://github.com/golang/go.git"
 
 GO_REPO="$(dirname "$BASE_DIRECTORY")/go"
 
-GO_VERSIONS=('1.15.15' '1.16.15' '1.17.13')
+GO_VERSIONS=('1.15.15' '1.16.15' '1.17.13' '1.18.7' '1.19.2')
 
 function build::go::clone() {
 	if [[ ! -e $GO_REPO ]]; then
-		git clone "$GO_REPO_URL" "$(dirname "$GO_REPO")"
+		git clone "$GO_REPO_URL" $GO_REPO
 	fi
 }
 
@@ -37,6 +38,9 @@ function build::cleanup() {
 	rm -rv "$GO_REPO"
 }
 
+if [ -v 2 ]; then
+  GO_VERSIONS=("$2")
+fi
 build::go::clone
 build::go::create_eks_branches
 for ver in "${GO_VERSIONS[@]}"; do
