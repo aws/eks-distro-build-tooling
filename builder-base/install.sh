@@ -32,6 +32,18 @@ USR_LOCAL_BIN=/usr/local/bin
 CARGO_HOME=/root/.cargo
 RUSTUP_HOME=/root/.rustup
 
+if [[ -z "${ARCHITECTURE}" ]]; then
+  ARCHITECTURE="AMD64"
+fi
+
+if [[ $ARCHITECTURE -eq "AMD64" ]]; then
+  RPM_ARCH="x86_64"
+elif [[ $ARCHITECTURE -eq "ARM64" ]]; then
+  RPM_ARCH="aarch64"
+else
+    echo ERROR: invalid ARCHITECTURE specified; should be AMD64 or ARM64
+    exit 1
+fi
 
 if [[ -z "${EKS_GO_ARTIFACTS_SOURCE}" ]]; then
   EKS_GO_ARTIFACTS_SOURCE=https://distro.eks.amazonaws.com
@@ -75,9 +87,8 @@ function build::go::install(){
     local yum_provided_versions="1.13"
     local eks_built_versions="1.16.15 1.15.15 1.17.13 1.18.7 1.19.2"
     if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" && $IS_AL22 == false ]]; then
-        local arch='x86_64'
         for artifact in golang golang-bin golang-race; do
-          curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$EKS_GO_VERSION/RPMS/$arch/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.$arch.rpm
+          curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$EKS_GO_VERSION/RPMS/$RPM_ARCH/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.$RPM_ARCH.rpm -o /tmp/$artifact-$version-$EKS_GO_VERSION.amzn2ß.eks.$RPM_ARCH.rpm
         done
 
         for artifact in golang-docs golang-misc golang-tests golang-src; do
