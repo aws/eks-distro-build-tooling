@@ -12,10 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-region: 'us-west-2'
-
-s3Credentials:
-  Secret:
-    create: true
-
-serviceAccountName: default
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: buildkit-orchestration-role
+  namespace: buildkit-orchestration
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - delete
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - pods/exec
+  verbs:
+  - create
