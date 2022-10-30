@@ -84,6 +84,10 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
             --platform=linux/arm64 \
             --node=builder-arm64-${PROW_JOB_ID:-1} \
             --driver-opt=namespace=buildkit-orchestration,nodeselector="arch=ARM64",rootless=true,image=${BUILDKITD_IMAGE:-moby/buildkit:v0.10.5-rootless}
+
+        kubectl get pods -n buildkit-orchestration
+        kubectl get deployments -n buildkit-orchestration
+
     else
         # in presubmit we just attach to the sidecar container
         docker buildx create --name $BUILDER_NAME --driver remote ${BUILDKIT_HOST:-unix:///run/buildkit/buildkitd.sock}
@@ -93,5 +97,3 @@ fi
 docker buildx inspect $BUILDER_NAME
 docker buildx use $BUILDER_NAME
 
-kubectl get pods -n buildkit-orchestration
-kubectl get deployments -n buildkit-orchestration
