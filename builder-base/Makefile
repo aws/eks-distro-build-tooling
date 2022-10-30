@@ -48,13 +48,13 @@ remove-generate-attribution:
 	rm -rf ./generate-attribution
 
 .PHONY: local-images
-local-images: BUILDKIT_OUTPUT=type=tar,dest=/dev/null
+local-images: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 local-images: BUILDKIT_PLATFORMS=linux/amd64
 local-images: images
 	
 .PHONY: images
 images: buildkit-check
-	buildctl \
+	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
 		--opt platform=$(BUILDKIT_PLATFORMS) \
