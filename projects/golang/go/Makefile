@@ -17,8 +17,8 @@ ifeq ($(ARCHITECTURE), ARM64)
 	RPM_ARCH=aarch64
 endif
 
-ARCH_RPM_OUT_PATH?=golang/go/$(GIT_TAG)/RPMS/$(RPM_ARCH)
-NOARCH_RPM_OUT_PATH?=golang/go/$(GIT_TAG)/RPMS/noarch
+ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
+NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 
 .PHONY: build
 build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm sync-artifacts-to-s3-dry-run
@@ -27,8 +27,6 @@ build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmb
 release: build sync-artifacts-to-s3
 
 .PHONY: prod-release
-prod-release: ARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
-prod-release: NOARCH_RPM_OUT_PATH=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 prod-release: build sync-artifacts-to-s3
 
 .PHONY: fetch-golang-source-archive

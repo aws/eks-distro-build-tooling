@@ -32,135 +32,146 @@ USR_LOCAL_BIN=/usr/local/bin
 CARGO_HOME=/root/.cargo
 RUSTUP_HOME=/root/.rustup
 
+if [[ -z "${EKS_GO_ARTIFACTS_SOURCE}" ]]; then
+  EKS_GO_ARTIFACTS_SOURCE=https://distro.eks.amazonaws.com
+fi
+
+if [[ -z "${EKS_GO_VERSION}" ]]; then
+  EKS_GO_VERSION=1
+fi
+
 echo "Running install.sh in $(pwd)"
 BASE_DIR=""
 if [[ "$CI" == "true" ]]; then
-    BASE_DIR=$(pwd)/builder-base
+  BASE_DIR=$(pwd)/builder-base
 fi
 
 IS_AL22=false
-if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2022" /etc/yum.repos.d/amazonlinux.repo; then 
-    IS_AL22=true
+if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2022" /etc/yum.repos.d/amazonlinux.repo; then
+  IS_AL22=true
 fi
 
 source $BASE_DIR/versions.sh
 
 function build::go::symlink() {
-    local -r version=$1
+  local -r version=$1
 
-    # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
-    mkdir -p ${GOPATH}/go${majorversion}/bin
-    for binary in go gofmt; do
-        ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
-    done
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+  # Removing the last number as we only care about the major version of golang
+  local -r majorversion=${version%.*}
+  mkdir -p ${GOPATH}/go${majorversion}/bin
+  for binary in go gofmt; do
+    ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
+  done
+  ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
 }
 
-function build::go::install(){
-    # Set up specific go version by using go get, additional versions apart from default can be installed by calling
-    # the function again with the specific parameter.
-    local version=$1
+function build::go::install() {
+  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+  # the function again with the specific parameter.
+  local version=$1
 
-    # AL2 provides a longer supported version of golang, use AL2 package when possible
-    local yum_provided_versions="1.13"
-    local eks_built_versions="1.16.15 1.15.15"
-    if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" && $IS_AL22 == false ]]; then
-        local artifacts_bucket='eks-d-postsubmit-artifacts'
-        local arch='x86_64'
-        for artifact in golang golang-bin golang-race; do
-          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/$arch/$artifact-$version-1.amzn2.0.1.$arch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.$arch.rpm
-        done
+  if [ $TARGETARCH == 'amd64' ]; then
+      local arch='x86_64'
+  else
+      local arch='aarch64'
+  fi
 
-        for artifact in golang-docs golang-misc golang-tests golang-src; do
-          curl https://$artifacts_bucket.s3.amazonaws.com/golang/go/go$version/RPMS/noarch/$artifact-$version-1.amzn2.0.1.noarch.rpm -o /tmp/$artifact-$version-1.amzn2.0.1.noarch.rpm
-        done
+  # AL2 provides a longer supported version of golang, use AL2 package when possible
+  local yum_provided_versions="1.13"
+  local eks_built_versions="1.16.15 1.15.15 1.17.13 1.18.7 1.19.2"
+  if [[ $eks_built_versions =~ (^|[[:space:]])${version}($|[[:space:]]) && $TARGETARCH == "amd64" && $IS_AL22 == false ]]; then
+    for artifact in golang golang-bin golang-race; do
+      curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$EKS_GO_VERSION/RPMS/$arch/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$EKS_GO_VERSION.amzn2ß.eks.$arch.rpm
+    done
 
-        build::go::extract $version
-    elif [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
-        # Do not install rpm directly instead follow eks-distro base images pattern
-        # of downloading and install rpms directly
-        for package in golang golang-bin golang-docs golang-misc golang-src golang-tests golang-race; do
-            # arm al22 does not provide golang-race
-            if [[ $(yum --showduplicates list $package) ]]; then
-                al2_package_version=$(yum --showduplicates list $package | awk -F ' ' '{print $2}' | grep ${version%.*} | tail -n 1)
-                yumdownloader --destdir=/tmp -x "*.i686" $package-$al2_package_version
-            fi
-        done
-        build::go::extract $version
-    else
-        go install golang.org/dl/go${version}@latest
-        go${version} download
-    fi
+    for artifact in golang-docs golang-misc golang-tests golang-src; do
+      curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$EKS_GO_VERSION/RPMS/noarch/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.noarch.rpm -o /tmp/$artifact-$version-$EKS_GO_VERSION.amzn2.eks.noarch.rpm
+    done
 
-    build::go::symlink $version
+    build::go::extract $version
+  elif [[ $yum_provided_versions =~ (^|[[:space:]])${version%.*}($|[[:space:]]) ]]; then
+    # Do not install rpm directly instead follow eks-distro base images pattern
+    # of downloading and install rpms directly
+    for package in golang golang-bin golang-docs golang-misc golang-src golang-tests golang-race; do
+      # arm al22 does not provide golang-race
+      if [[ $(yum --showduplicates list $package) ]]; then
+        al2_package_version=$(yum --showduplicates list $package | awk -F ' ' '{print $2}' | grep ${version%.*} | tail -n 1)
+        yumdownloader --destdir=/tmp -x "*.i686" $package-$al2_package_version
+      fi
+    done
+    build::go::extract $version
+  else
+    go install golang.org/dl/go${version}@latest
+    go${version} download
+  fi
+
+  build::go::symlink $version
 }
 
 function build::go::extract() {
-      local version=$1
-      mkdir -p /tmp/go-extracted
-      for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
+  local version=$1
+  mkdir -p /tmp/go-extracted
+  for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idmv); done
 
-      local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
+  local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
 
-      mkdir -p /root/sdk/$golang_version
-      mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
+  mkdir -p /root/sdk/$golang_version
+  mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
 
-      if [ "$IS_AL22" = true ]; then
-          mv /tmp/go-extracted/usr/share/licenses/golang/* /root/sdk/$golang_version
-      else
-          mv /tmp/go-extracted/usr/share/doc/golang-*/* /root/sdk/$golang_version
-      fi
+  if [ "$IS_AL22" = true ]; then
+    mv /tmp/go-extracted/usr/share/licenses/golang/* /root/sdk/$golang_version
+  else
+    mv /tmp/go-extracted/usr/share/doc/golang-*/* /root/sdk/$golang_version
+  fi
 
-      version=$(echo "$golang_version" | grep -o "[0-9].*")
-      ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
+  version=$(echo "$golang_version" | grep -o "[0-9].*")
+  ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
 
-      rm -rf /tmp/go-extracted /tmp/golang-*.rpm
+  rm -rf /tmp/go-extracted /tmp/golang-*.rpm
 }
 
-function build::cleanup(){
-    yum clean all
-    rm -rf /var/cache/{amzn2extras,yum,ldconfig}
-    
-    # truncate logs
-    find /var/log -type f | while read file; do echo -ne '' > $file; done
+function build::cleanup() {
+  yum clean all
+  rm -rf /var/cache/{amzn2extras,yum,ldconfig}
 
-    # Removing doc and man files
-    # to get all symlinks run twice
-    for i in {1..2}; do
-        find /usr/share/{doc,man} \( -xtype l -o -type f \) \
-            ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
-            -delete
-    done
-    find /usr/share/{doc,man} -type d -empty -delete
+  # truncate logs
+  find /var/log -type f | while read file; do echo -ne '' >$file; done
 
-    # go get leaves the tar around
-    find /root/sdk -type f -name 'go*.tar.gz' -delete
-    go clean --modcache
-    
-    # pip cache
-    rm -rf /root/.cache
+  # Removing doc and man files
+  # to get all symlinks run twice
+  for i in {1..2}; do
+    find /usr/share/{doc,man} \( -xtype l -o -type f \) \
+      ! \( -iname '*lice*' -o -iname '*copy*' -o -iname '*gpl*' -o -iname '*not*' -o -iname "*credits*" \) \
+      -delete
+  done
+  find /usr/share/{doc,man} -type d -empty -delete
 
-    # rust docs
-    rm -rf /root/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc
+  # go get leaves the tar around
+  find /root/sdk -type f -name 'go*.tar.gz' -delete
+  go clean --modcache
 
-    # cargo cache
-    if command -v cargo-cache &> /dev/null; then
-        cargo-cache  --remove-dir all
-    fi
+  # pip cache
+  rm -rf /root/.cache
+
+  # rust docs
+  rm -rf /root/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc
+
+  # cargo cache
+  if command -v cargo-cache &>/dev/null; then
+    cargo-cache --remove-dir all
+  fi
 }
-
 
 yum install -y \
-    git-core \
-    make \
-    tar \
-    unzip \
-    wget
+  git-core \
+  make \
+  tar \
+  unzip \
+  wget
 
 wget \
-    --progress dot:giga \
-    $AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL
+  --progress dot:giga \
+  $AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/amazon-ecr-cred-helper-$TARGETARCH-checksum
 mv docker-credential-ecr-login $USR_BIN/
 chmod +x $USR_BIN/docker-credential-ecr-login
@@ -170,14 +181,14 @@ GOLANG_MAJOR_VERSION=${GOLANG_VERSION%.*}
 GOLANG_SDK_ROOT=/root/sdk/go${GOLANG_VERSION}
 mkdir -p ${GOLANG_SDK_ROOT}
 wget \
-    --progress dot:giga \
-    --max-redirect=1 \
-    --domains go.dev \
-    $GOLANG_DOWNLOAD_URL -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
+  --progress dot:giga \
+  --max-redirect=1 \
+  --domains go.dev \
+  $GOLANG_DOWNLOAD_URL -O go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 sha256sum -c $BASE_DIR/golang-$TARGETARCH-checksum
 tar -C ${GOLANG_SDK_ROOT} -xzf go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz --strip-components=1
 for binary in go gofmt; do
-    ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${USR_BIN}/${binary}
+  ln -s /root/sdk/go${GOLANG_VERSION}/bin/${binary} ${USR_BIN}/${binary}
 done
 mkdir -p ${GOPATH}/bin
 ln -s /root/sdk/go${GOLANG_VERSION}/bin/go ${GOPATH}/bin/go${GOLANG_VERSION}
@@ -185,15 +196,15 @@ build::go::symlink ${GOLANG_VERSION}
 
 rm go${GOLANG_VERSION}.linux-$TARGETARCH.tar.gz
 
-if [ $TARGETARCH == 'amd64' ]; then 
-    ARCH='x86_64'
-else 
-    ARCH='aarch64'
+if [ $TARGETARCH == 'amd64' ]; then
+  ARCH='x86_64'
+else
+  ARCH='aarch64'
 fi
 
 wget \
-    --progress dot:giga \
-    https://awscli.amazonaws.com/awscli-exe-linux-$ARCH.zip
+  --progress dot:giga \
+  https://awscli.amazonaws.com/awscli-exe-linux-$ARCH.zip
 unzip awscli-exe-linux-$ARCH.zip
 ./aws/install
 aws --version
@@ -201,31 +212,30 @@ rm awscli-exe-linux-$ARCH.zip
 rm -rf /aws
 
 if [ $TARGETARCH == 'amd64' ]; then
-    wget \
-        --progress dot:giga \
-        $BUILDKIT_DOWNLOAD_URL
-    sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
-    tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
-    rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+  wget \
+    --progress dot:giga \
+    $BUILDKIT_DOWNLOAD_URL
+  sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
+  tar -C /usr -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+  rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
 
-    wget --progress dot:giga $GITHUB_CLI_DOWNLOAD_URL
-    sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
-    tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
-    mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh $USR_BIN
-    rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
+  wget --progress dot:giga $GITHUB_CLI_DOWNLOAD_URL
+  sha256sum -c $BASE_DIR/github-cli-$TARGETARCH-checksum
+  tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
+  mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh $USR_BIN
+  rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
 fi
 
 if [[ "$CI" == "true" ]]; then
-    exit
+  exit
 fi
 
 # Add any additional dependencies we want in the builder-base image here
 
-
 # The base image is the kind-minimal image with a /etc/passwd file
 # based from the minimal base, which is setup manually.  The root
 # user's shell is configured as /sbin/nologin
-# This doesnt work for the builder-base usage in Codebuild which runs 
+# This doesnt work for the builder-base usage in Codebuild which runs
 # certain commands specifically as root.  We need the shell to be bash.
 usermod --shell /bin/bash root
 
@@ -233,49 +243,49 @@ usermod --shell /bin/bash root
 mkdir -p /go/src /go/bin /go/pkg /go/src/github.com/aws/eks-distro
 
 yum install -y \
-    bind-utils \
-    cpio \
-    curl \
-    device-mapper-devel \
-    docker \
-    gcc \
-    gettext \
-    gpgme-devel \
-    jq \
-    less \
-    libassuan-devel \
-    openssh-clients \
-    openssl \
-    openssl-devel \
-    patch \
-    pkgconfig \
-    procps-ng \
-    python3-pip \
-    rsync \
-    vim \
-    which \
-    yum-utils
+  bind-utils \
+  cpio \
+  curl \
+  device-mapper-devel \
+  docker \
+  gcc \
+  gettext \
+  gpgme-devel \
+  jq \
+  less \
+  libassuan-devel \
+  openssh-clients \
+  openssl \
+  openssl-devel \
+  patch \
+  pkgconfig \
+  procps-ng \
+  python3-pip \
+  rsync \
+  vim \
+  which \
+  yum-utils
 
 # needed to parse eks-d release yaml to get latest artifacts
 wget \
-    --progress dot:giga \
-    $YQ_DOWNLOAD_URL
+  --progress dot:giga \
+  $YQ_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/yq-$TARGETARCH-checksum
 mv yq_linux_$TARGETARCH $USR_BIN/yq
 chmod +x $USR_BIN/yq
 
 if [ "$IS_AL22" = false ]; then
-    # Bash 4.3 is required to run kubernetes make test
-    wget $BASH_DOWNLOAD_URL
-    tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
-    sha256sum -c $BASE_DIR/bash-checksum
-    cd bash-$OVERRIDE_BASH_VERSION
-    ./configure --prefix=/usr --without-bash-malloc
-    make
-    make install
-    cd ..
-    rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
-    rm -rf bash-$OVERRIDE_BASH_VERSION
+  # Bash 4.3 is required to run kubernetes make test
+  wget $BASH_DOWNLOAD_URL
+  tar -xf bash-$OVERRIDE_BASH_VERSION.tar.gz
+  sha256sum -c $BASE_DIR/bash-checksum
+  cd bash-$OVERRIDE_BASH_VERSION
+  ./configure --prefix=/usr --without-bash-malloc
+  make
+  make install
+  cd ..
+  rm -f bash-$OVERRIDE_BASH_VERSION.tar.gz
+  rm -rf bash-$OVERRIDE_BASH_VERSION
 fi
 
 build::go::install "${GOLANG119_VERSION:-1.19.1}"
@@ -285,7 +295,7 @@ build::go::install "${GOLANG116_VERSION:-1.16.15}"
 build::cleanup
 
 if [ $TARGETARCH == 'arm64' ]; then
-    exit
+  exit
 fi
 
 # Install image-builder build dependencies - pip, Ansible, Packer
@@ -301,8 +311,8 @@ pip3 install "pywinrm==$PYWINRM_VERSION"
 
 rm -rf /usr/sbin/packer
 wget \
-    --progress dot:giga \
-    $PACKER_DOWNLOAD_URL
+  --progress dot:giga \
+  $PACKER_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
 unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_BIN
 rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
@@ -313,8 +323,8 @@ rm -rf packer_${PACKER_VERSION}_linux_$TARGETARCH.zip
 # is able to properly packages from the standard Go library
 # We currently  use 1.19, 1.17 or 1.16, so installing for all
 GO111MODULE=on GOBIN=${GOPATH}/go1.19/bin ${GOPATH}/go1.19/bin/go install github.com/google/go-licenses@v1.2.1
-GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1 
-GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go install github.com/google/go-licenses@v1.2.1 
+GO111MODULE=on GOBIN=${GOPATH}/go1.18/bin ${GOPATH}/go1.18/bin/go install github.com/google/go-licenses@v1.2.1
+GO111MODULE=on GOBIN=${GOPATH}/go1.17/bin ${GOPATH}/go1.17/bin/go install github.com/google/go-licenses@v1.2.1
 GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/google/go-licenses@v1.2.1
 # 1.16 is the default so symlink it to /go/bin
 ln -s ${GOPATH}/go1.16/bin/go-licenses ${GOPATH}/bin
@@ -349,7 +359,7 @@ cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
 
 # Cargo cache management tool
 CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force --root $CARGO_HOME tuftool cargo-cache
-cargo-cache  --remove-dir all
+cargo-cache --remove-dir all
 
 # Installing Helm
 curl -O $HELM_DOWNLOAD_URL
@@ -369,16 +379,16 @@ build::go::install "${GOLANG114_VERSION:-1.14.15}"
 useradd -ms /bin/bash -u 1100 imagebuilder
 mkdir -p /home/imagebuilder/.packer.d/plugins
 wget \
-    --progress dot:giga \
-    $GOSS_DOWNLOAD_URL
+  --progress dot:giga \
+  $GOSS_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/goss-$TARGETARCH-checksum
 tar -C /home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
 
 # Installing govc CLI
 wget \
-    --progress dot:giga \
-    $GOVC_DOWNLOAD_URL
+  --progress dot:giga \
+  $GOVC_DOWNLOAD_URL
 sha256sum -c $BASE_DIR/govc-$TARGETARCH-checksum
 gzip -d govc_linux_$TARGETARCH.gz
 mv govc_linux_$TARGETARCH $USR_BIN/govc
