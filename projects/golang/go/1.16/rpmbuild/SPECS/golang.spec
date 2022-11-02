@@ -171,6 +171,8 @@ Patch13:       0013-go-1.16.15-eks-net-http-preserve-nil-values-i.patch
 Patch14:       0014-go-1.16.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch15:       0015-go-1.16.15-eks-archive-tar-limit-size-of-head.patch
 Patch17:       0017-go-1.16.15-eks-regexp-limit-size-of-parsed-regexps.patch
+Patch18:       0018-go-1.16.15-eks-net-url-reject-query-values-with-semicolons.patch
+Patch19:       0019-go-1.16.15-eks-net-http-httputil-avoid-query-.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch

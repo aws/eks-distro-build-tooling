@@ -1,0 +1,360 @@
+From e6dda19888180c5159460486d30c0412e4980748 Mon Sep 17 00:00:00 2001
+From: Katie Hockman <katie@golang.org>
+Date: Mon, 7 Jun 2021 14:29:43 -0400
+Subject: [PATCH] [go-1.16.15-eks] net/url: reject query values with semicolons
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 02 Nov 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+Source Commit: https://github.com/golang/go/commit/e6dda19888180c5159460486d30c0412e4980748
+
+This fix is a pre-requisite for the query-paramter smuggling present in #54663 for CVE-2022-2880.
+The use of a semicolon as a query parameter seperator is now deprecated in the URL spec. See: https://url.spec.whatwg.org/#urlencoded-parsing
+
+# Original Information
+
+Semicolons are no longer valid separators, so
+net/url.ParseQuery will now return an error
+if any part of the query contains a semicolon.
+
+net/http.(*Request).ParseMultipartForm has been
+changed to fall through and continue parsing
+even if the call to (*Request).ParseForm fails.
+
+This change also includes a few minor refactors
+to existing tests.
+
+Fixes #25192
+
+Change-Id: Iba3f108950fb99b9288e402c41fe71ca3a2ababd
+Reviewed-on: https://go-review.googlesource.com/c/go/+/325697
+Trust: Katie Hockman <katie@golang.org>
+Run-TryBot: Katie Hockman <katie@golang.org>
+TryBot-Result: Go Bot <gobot@golang.org>
+Reviewed-by: Filippo Valsorda <filippo@golang.org>
+---
+ src/net/http/request.go      |  12 ++--
+ src/net/http/request_test.go |  31 +++++++++-
+ src/net/http/server.go       |   5 ++
+ src/net/url/example_test.go  |   4 +-
+ src/net/url/url.go           |  13 ++--
+ src/net/url/url_test.go      | 116 +++++++++++++++++++++++++++--------
+ 6 files changed, 145 insertions(+), 36 deletions(-)
+
+diff --git a/src/net/http/request.go b/src/net/http/request.go
+index 7895417af5..09cb0c7f56 100644
+--- a/src/net/http/request.go
++++ b/src/net/http/request.go
+@@ -1293,16 +1293,18 @@ func (r *Request) ParseForm() error {
+ // its file parts are stored in memory, with the remainder stored on
+ // disk in temporary files.
+ // ParseMultipartForm calls ParseForm if necessary.
++// If ParseForm returns an error, ParseMultipartForm returns it but also
++// continues parsing the request body.
+ // After one call to ParseMultipartForm, subsequent calls have no effect.
+ func (r *Request) ParseMultipartForm(maxMemory int64) error {
+ 	if r.MultipartForm == multipartByReader {
+ 		return errors.New("http: multipart handled by MultipartReader")
+ 	}
++	var parseFormErr error
+ 	if r.Form == nil {
+-		err := r.ParseForm()
+-		if err != nil {
+-			return err
+-		}
++		// Let errors in ParseForm fall through, and just
++		// return it at the end.
++		parseFormErr = r.ParseForm()
+ 	}
+ 	if r.MultipartForm != nil {
+ 		return nil
+@@ -1329,7 +1331,7 @@ func (r *Request) ParseMultipartForm(maxMemory int64) error {
+ 
+ 	r.MultipartForm = f
+ 
+-	return nil
++	return parseFormErr
+ }
+ 
+ // FormValue returns the first value for the named component of the query.
+diff --git a/src/net/http/request_test.go b/src/net/http/request_test.go
+index 952828b395..4e0c4ba207 100644
+--- a/src/net/http/request_test.go
++++ b/src/net/http/request_test.go
+@@ -32,9 +32,26 @@ func TestQuery(t *testing.T) {
+ 	}
+ }
+ 
++// Issue #25192: Test that ParseForm fails but still parses the form when an URL
++// containing a semicolon is provided.
++func TestParseFormSemicolonSeparator(t *testing.T) {
++	for _, method := range []string{"POST", "PATCH", "PUT", "GET"} {
++		req, _ := NewRequest(method, "http://www.google.com/search?q=foo;q=bar&a=1",
++			strings.NewReader("q"))
++		err := req.ParseForm()
++		if err == nil {
++			t.Fatalf(`for method %s, ParseForm expected an error, got success`, method)
++		}
++		wantForm := url.Values{"a": []string{"1"}}
++		if !reflect.DeepEqual(req.Form, wantForm) {
++			t.Fatalf("for method %s, ParseForm expected req.Form = %v, want %v", method, req.Form, wantForm)
++		}
++	}
++}
++
+ func TestParseFormQuery(t *testing.T) {
+ 	req, _ := NewRequest("POST", "http://www.google.com/search?q=foo&q=bar&both=x&prio=1&orphan=nope&empty=not",
+-		strings.NewReader("z=post&both=y&prio=2&=nokey&orphan;empty=&"))
++		strings.NewReader("z=post&both=y&prio=2&=nokey&orphan&empty=&"))
+ 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
+ 
+ 	if q := req.FormValue("q"); q != "foo" {
+@@ -365,6 +382,18 @@ func TestMultipartRequest(t *testing.T) {
+ 	validateTestMultipartContents(t, req, false)
+ }
+ 
++// Issue #25192: Test that ParseMultipartForm fails but still parses the
++// multi-part form when an URL containing a semicolon is provided.
++func TestParseMultipartFormSemicolonSeparator(t *testing.T) {
++	req := newTestMultipartRequest(t)
++	req.URL = &url.URL{RawQuery: "q=foo;q=bar"}
++	if err := req.ParseMultipartForm(25); err == nil {
++		t.Fatal("ParseMultipartForm expected error due to invalid semicolon, got nil")
++	}
++	defer req.MultipartForm.RemoveAll()
++	validateTestMultipartContents(t, req, false)
++}
++
+ func TestMultipartRequestAuto(t *testing.T) {
+ 	// Test that FormValue and FormFile automatically invoke
+ 	// ParseMultipartForm and return the right values.
+diff --git a/src/net/http/server.go b/src/net/http/server.go
+index 430019de50..8a1847e67a 100644
+--- a/src/net/http/server.go
++++ b/src/net/http/server.go
+@@ -2863,6 +2863,11 @@ func (sh serverHandler) ServeHTTP(rw ResponseWriter, req *Request) {
+ 		handler = globalOptionsHandler{}
+ 	}
+ 	handler.ServeHTTP(rw, req)
++	if req.URL != nil && strings.Contains(req.URL.RawQuery, ";") {
++		// TODO(filippo): update this not to log if the special
++		// semicolon handler was called.
++		sh.srv.logf("http: URL query contains semicolon, which is no longer a supported separator; parts of the query may be stripped when parsed; see golang.org/issue/25192")
++	}
+ }
+ 
+ // ListenAndServe listens on the TCP network address srv.Addr and then
+diff --git a/src/net/url/example_test.go b/src/net/url/example_test.go
+index cb9e8922a2..476132a1c9 100644
+--- a/src/net/url/example_test.go
++++ b/src/net/url/example_test.go
+@@ -72,13 +72,13 @@ func ExampleURL_ResolveReference() {
+ }
+ 
+ func ExampleParseQuery() {
+-	m, err := url.ParseQuery(`x=1&y=2&y=3;z`)
++	m, err := url.ParseQuery(`x=1&y=2&y=3`)
+ 	if err != nil {
+ 		log.Fatal(err)
+ 	}
+ 	fmt.Println(toJSON(m))
+ 	// Output:
+-	// {"x":["1"], "y":["2", "3"], "z":[""]}
++	// {"x":["1"], "y":["2", "3"]}
+ }
+ 
+ func ExampleURL_EscapedPath() {
+diff --git a/src/net/url/url.go b/src/net/url/url.go
+index 73bef22e45..20de0f6f51 100644
+--- a/src/net/url/url.go
++++ b/src/net/url/url.go
+@@ -921,9 +921,10 @@ func (v Values) Has(key string) bool {
+ // valid query parameters found; err describes the first decoding error
+ // encountered, if any.
+ //
+-// Query is expected to be a list of key=value settings separated by
+-// ampersands or semicolons. A setting without an equals sign is
+-// interpreted as a key set to an empty value.
++// Query is expected to be a list of key=value settings separated by ampersands.
++// A setting without an equals sign is interpreted as a key set to an empty
++// value.
++// Settings containing a non-URL-encoded semicolon are considered invalid.
+ func ParseQuery(query string) (Values, error) {
+ 	m := make(Values)
+ 	err := parseQuery(m, query)
+@@ -933,11 +934,15 @@ func ParseQuery(query string) (Values, error) {
+ func parseQuery(m Values, query string) (err error) {
+ 	for query != "" {
+ 		key := query
+-		if i := strings.IndexAny(key, "&;"); i >= 0 {
++		if i := strings.IndexAny(key, "&"); i >= 0 {
+ 			key, query = key[:i], key[i+1:]
+ 		} else {
+ 			query = ""
+ 		}
++		if strings.Contains(key, ";") {
++			err = fmt.Errorf("invalid semicolon separator in query")
++			continue
++		}
+ 		if key == "" {
+ 			continue
+ 		}
+diff --git a/src/net/url/url_test.go b/src/net/url/url_test.go
+index 55348c4a7d..63c8e695af 100644
+--- a/src/net/url/url_test.go
++++ b/src/net/url/url_test.go
+@@ -1334,57 +1334,125 @@ func TestQueryValues(t *testing.T) {
+ type parseTest struct {
+ 	query string
+ 	out   Values
++	ok    bool
+ }
+ 
+ var parseTests = []parseTest{
++	{
++		query: "a=1",
++		out:   Values{"a": []string{"1"}},
++		ok:    true,
++	},
+ 	{
+ 		query: "a=1&b=2",
+ 		out:   Values{"a": []string{"1"}, "b": []string{"2"}},
++		ok:    true,
+ 	},
+ 	{
+ 		query: "a=1&a=2&a=banana",
+ 		out:   Values{"a": []string{"1", "2", "banana"}},
++		ok:    true,
+ 	},
+ 	{
+ 		query: "ascii=%3Ckey%3A+0x90%3E",
+ 		out:   Values{"ascii": []string{"<key: 0x90>"}},
++		ok:    true,
++	}, {
++		query: "a=1;b=2",
++		out:   Values{},
++		ok:    false,
++	}, {
++		query: "a;b=1",
++		out:   Values{},
++		ok:    false,
++	}, {
++		query: "a=%3B", // hex encoding for semicolon
++		out:   Values{"a": []string{";"}},
++		ok:    true,
+ 	},
+ 	{
+-		query: "a=1;b=2",
+-		out:   Values{"a": []string{"1"}, "b": []string{"2"}},
++		query: "a%3Bb=1",
++		out:   Values{"a;b": []string{"1"}},
++		ok:    true,
+ 	},
+ 	{
+ 		query: "a=1&a=2;a=banana",
+-		out:   Values{"a": []string{"1", "2", "banana"}},
++		out:   Values{"a": []string{"1"}},
++		ok:    false,
++	},
++	{
++		query: "a;b&c=1",
++		out:   Values{"c": []string{"1"}},
++		ok:    false,
++	},
++	{
++		query: "a=1&b=2;a=3&c=4",
++		out:   Values{"a": []string{"1"}, "c": []string{"4"}},
++		ok:    false,
++	},
++	{
++		query: "a=1&b=2;c=3",
++		out:   Values{"a": []string{"1"}},
++		ok:    false,
++	},
++	{
++		query: ";",
++		out:   Values{},
++		ok:    false,
++	},
++	{
++		query: "a=1;",
++		out:   Values{},
++		ok:    false,
++	},
++	{
++		query: "a=1&;",
++		out:   Values{"a": []string{"1"}},
++		ok:    false,
++	},
++	{
++		query: ";a=1&b=2",
++		out:   Values{"b": []string{"2"}},
++		ok:    false,
++	},
++	{
++		query: "a=1&b=2;",
++		out:   Values{"a": []string{"1"}},
++		ok:    false,
+ 	},
+ }
+ 
+ func TestParseQuery(t *testing.T) {
+-	for i, test := range parseTests {
+-		form, err := ParseQuery(test.query)
+-		if err != nil {
+-			t.Errorf("test %d: Unexpected error: %v", i, err)
+-			continue
+-		}
+-		if len(form) != len(test.out) {
+-			t.Errorf("test %d: len(form) = %d, want %d", i, len(form), len(test.out))
+-		}
+-		for k, evs := range test.out {
+-			vs, ok := form[k]
+-			if !ok {
+-				t.Errorf("test %d: Missing key %q", i, k)
+-				continue
++	for _, test := range parseTests {
++		t.Run(test.query, func(t *testing.T) {
++			form, err := ParseQuery(test.query)
++			if test.ok != (err == nil) {
++				want := "<error>"
++				if test.ok {
++					want = "<nil>"
++				}
++				t.Errorf("Unexpected error: %v, want %v", err, want)
+ 			}
+-			if len(vs) != len(evs) {
+-				t.Errorf("test %d: len(form[%q]) = %d, want %d", i, k, len(vs), len(evs))
+-				continue
++			if len(form) != len(test.out) {
++				t.Errorf("len(form) = %d, want %d", len(form), len(test.out))
+ 			}
+-			for j, ev := range evs {
+-				if v := vs[j]; v != ev {
+-					t.Errorf("test %d: form[%q][%d] = %q, want %q", i, k, j, v, ev)
++			for k, evs := range test.out {
++				vs, ok := form[k]
++				if !ok {
++					t.Errorf("Missing key %q", k)
++					continue
++				}
++				if len(vs) != len(evs) {
++					t.Errorf("len(form[%q]) = %d, want %d", k, len(vs), len(evs))
++					continue
++				}
++				for j, ev := range evs {
++					if v := vs[j]; v != ev {
++						t.Errorf("form[%q][%d] = %q, want %q", k, j, v, ev)
++					}
+ 				}
+ 			}
+-		}
++		})
+ 	}
+ }
+ 
+-- 
+2.30.1 (Apple Git-130)
+
