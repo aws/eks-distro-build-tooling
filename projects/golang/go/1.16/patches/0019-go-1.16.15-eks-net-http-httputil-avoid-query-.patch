@@ -1,8 +1,17 @@
 From cf8efeac2b34cd3d317394d6e1292d123a08b74f Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Thu, 22 Sep 2022 13:32:00 -0700
-Subject: [PATCH] [release-branch.go1.18] net/http/httputil: avoid query
+Subject: [PATCH] [go-1.16.15-eks] net/http/httputil: avoid query
  parameter smuggling
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 12 Oct 2022
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/9d2c73a9fd69e45876509bb3bdb2af99bf77da1e
+
+# Original Information
 
 Query parameter smuggling occurs when a proxy's interpretation
 of query parameters differs from that of a downstream server.

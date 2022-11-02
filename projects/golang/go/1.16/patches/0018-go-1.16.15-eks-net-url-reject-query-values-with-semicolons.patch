@@ -1,7 +1,16 @@
 From e6dda19888180c5159460486d30c0412e4980748 Mon Sep 17 00:00:00 2001
 From: Katie Hockman <katie@golang.org>
 Date: Mon, 7 Jun 2021 14:29:43 -0400
-Subject: [PATCH] net/url: reject query values with semicolons
+Subject: [PATCH] [go-1.16.15-eks] net/url: reject query values with semicolons
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 02 Nov 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/e6dda19888180c5159460486d30c0412e4980748
+
+# Original Information
 
 Semicolons are no longer valid separators, so
 net/url.ParseQuery will now return an error
