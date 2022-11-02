@@ -178,7 +178,7 @@
 -rw-r--r--   1.4KiB /etc/systemd/user.conf
 -rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     817B /etc/xattr.conf
--rw-r--r--     835B /etc/yum.repos.d/amazonlinux.repo
+-rw-r--r--     845B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x    53KiB /usr/bin/[
 -rwxr-xr-x      33B /usr/bin/alias
@@ -7876,6 +7876,7 @@ lrwxrwxrwx      49B /etc/ssl/cert.pem /etc/pki/ca-trust/extracted/pem/tls-ca-bun
 lrwxrwxrwx      18B /etc/ssl/certs /etc/pki/tls/certs
 lrwxrwxrwx      25B /etc/system-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
+lrwxrwxrwx      45B /etc/systemd/system/basic.target.wants/rpmdb-rebuild.service /usr/lib/systemd/system/rpmdb-rebuild.service
 lrwxrwxrwx      37B /etc/systemd/system/ctrl-alt-del.target /usr/lib/systemd/system/reboot.target
 lrwxrwxrwx      43B /etc/systemd/system/dbus.service /usr/lib/systemd/system/dbus-broker.service
 lrwxrwxrwx      38B /etc/systemd/system/getty.target.wants/getty@tty1.service /usr/lib/systemd/system/getty@.service
