@@ -79,8 +79,6 @@ $(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 
-export USE_BUILDX=true
-
 define BUILDCTL
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
