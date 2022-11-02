@@ -7,8 +7,11 @@ Subject: [PATCH] [go-1.16.15-eks] net/url: reject query values with semicolons
 Backported To: go-1.16.15-eks
 Backported On: Wed, 02 Nov 2022
 Backported By: budris@amazon.com
-Backported From: release-branch.go1.18
+Backported From: release-branch.go1.17
 Source Commit: https://github.com/golang/go/commit/e6dda19888180c5159460486d30c0412e4980748
+
+This fix is a pre-requisite for the query-paramter smuggling present in #54663 for CVE-2022-2880.
+The use of a semicolon as a query parameter seperator is now deprecated in the URL spec. See: https://url.spec.whatwg.org/#urlencoded-parsing
 
 # Original Information
 
