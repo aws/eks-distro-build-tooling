@@ -538,7 +538,7 @@ fi
 %endif
 
 %changelog
-* Thu Nov 03 2022 Dan Budris <budris@amazon.com> - 1.17.15-1
+* Thu Nov 03 2022 Dan Budris <budris@amazon.com> - 1.17.13-1
 - Include backported patch for CVE-2022-41716
 - Fixes: CVE-2022-41716
 
