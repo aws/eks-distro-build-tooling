@@ -79,6 +79,7 @@ $(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 define BUILDCTL
+	echo $(FARGATE_PROFILE_NAME)
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
@@ -108,7 +109,6 @@ help: ## Display this help
 
 .PHONY: buildkit-check
 buildkit-check:
-	echo $(FARGATE_PROFILE_NAME)
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
 
 .PHONY: open-pr-check
