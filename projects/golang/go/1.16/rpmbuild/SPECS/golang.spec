@@ -173,6 +173,7 @@ Patch15:       0015-go-1.16.15-eks-archive-tar-limit-size-of-head.patch
 Patch17:       0017-go-1.16.15-eks-regexp-limit-size-of-parsed-regexps.patch
 Patch18:       0018-go-1.16.15-eks-net-url-reject-query-values-with-semicolons.patch
 Patch19:       0019-go-1.16.15-eks-net-http-httputil-avoid-query-.patch
+Patch20:       0020-go-1.16.15-eks-syscall-os-exec-reject-environ.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -554,11 +555,17 @@ fi
 %endif
 
 %changelog
+* Thu Nov 03 2022 Dan Budris <budris@amazon.com> - 1.16.15.2
+- Include backported patch for CVE-2022-41716
+- Fixes: CVE-2022-41716
+
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
 - Include backported patch for CVE-2022-41715
+- Fixes: CVE-2022-41715
 
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
 - Included backported patch for CVE-2022-2879
+- Fixes: CVE-2022-2879
 
 * Thu Mar 10 2022 Alejandro Sáez <asm@redhat.com> - 1.16.15-1
 - Update to go1.16.15
