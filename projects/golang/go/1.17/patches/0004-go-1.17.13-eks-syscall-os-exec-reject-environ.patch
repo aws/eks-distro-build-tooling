@@ -1,7 +1,7 @@
 From 5210f46055d4f98ecea3297846a2bbac28d62ff4 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 17 Oct 2022 17:38:29 -0700
-Subject: [PATCH] [release-branch.go1.18] syscall, os/exec: reject environment
+Subject: [PATCH] [go-1.17.13-eks] syscall, os/exec: reject environment
  variables containing NULs
 
 # AWS EKS
