@@ -92,7 +92,7 @@ function build::go::install() {
     fi
 
     for artifact in golang golang-bin golang-race; do
-      curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$eks_go_release/RPMS/$arch/$artifact-$version-$eks_go_release.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$eks_go_release.amzn2ß.eks.$arch.rpm
+      curl $EKS_GO_ARTIFACTS_SOURCE/golang-go$version/releases/$eks_go_release/RPMS/$arch/$artifact-$version-$eks_go_release.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$eks_go_release.amzn2.eks.$arch.rpm
     done
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
