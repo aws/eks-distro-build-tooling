@@ -1,0 +1,261 @@
+From c72498b2690bf0f9d0b0a17d2f549c88d463ffce Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <roland@golang.org>
+Date: Mon, 25 Apr 2022 19:02:35 -0700
+Subject: [PATCH] [go-1.16.15-eks] crypto/rand: properly handle large
+ Read on windows
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Thu, 03 Nov 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+Source Commit: https://github.com/golang/go/commit/2be03d789de905a4b050ff5f3a51b724e1b09494
+
+Backporting the original commit 2be03d789de905a4b050ff5f3a51b724e1b09494 to 1.16
+required conflict resolution in /src/crypto/rand/rand_openbsd.go, as this file
+was re-named to `rand_getentropy.go` in Go 1.17 and the method signature changed to
+`getEntropy` from `getRandomOpenBSD`.
+
+# Original Information
+
+Use the batched reader to chunk large Read calls on windows to a max of
+1 << 31 - 1 bytes. This prevents an infinite loop when trying to read
+more than 1 << 32 -1 bytes, due to how RtlGenRandom works.
+
+This change moves the batched function from rand_unix.go to rand.go,
+since it is now needed for both windows and unix implementations.
+
+Updates #52561
+Fixes #52932
+Fixes CVE-2022-30634
+
+Change-Id: Id98fc4b1427e5cb2132762a445b2aed646a37473
+Reviewed-on: https://go-review.googlesource.com/c/go/+/402257
+Run-TryBot: Roland Shoemaker <roland@golang.org>
+Reviewed-by: Filippo Valsorda <filippo@golang.org>
+Reviewed-by: Filippo Valsorda <valsorda@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+(cherry picked from commit bb1f4416180511231de6d17a1f2f55c82aafc863)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/406635
+Reviewed-by: Damien Neil <dneil@google.com>
+---
+ src/crypto/rand/rand.go              | 18 ++++++++++++++++++
+ src/crypto/rand/rand_batched.go      | 22 ++++++----------------
+ src/crypto/rand/rand_batched_test.go | 21 +++++++++++----------
+ src/crypto/rand/rand_openbsd.go      |  8 ++++----
+ src/crypto/rand/rand_unix.go         |  4 ++--
+ src/crypto/rand/rand_windows.go      | 18 ++++++------------
+ 6 files changed, 47 insertions(+), 44 deletions(-)
+
+diff --git a/src/crypto/rand/rand.go b/src/crypto/rand/rand.go
+index fddd1147e6..f2c276008d 100644
+--- a/src/crypto/rand/rand.go
++++ b/src/crypto/rand/rand.go
+@@ -23,3 +23,21 @@ var Reader io.Reader
+ func Read(b []byte) (n int, err error) {
+ 	return io.ReadFull(Reader, b)
+ }
++
++// batched returns a function that calls f to populate a []byte by chunking it
++// into subslices of, at most, readMax bytes.
++func batched(f func([]byte) error, readMax int) func([]byte) error {
++	return func(out []byte) error {
++		for len(out) > 0 {
++			read := len(out)
++			if read > readMax {
++				read = readMax
++			}
++			if err := f(out[:read]); err != nil {
++				return err
++			}
++			out = out[read:]
++		}
++		return nil
++	}
++}
+diff --git a/src/crypto/rand/rand_batched.go b/src/crypto/rand/rand_batched.go
+index 60267fd4bc..cad958d79c 100644
+--- a/src/crypto/rand/rand_batched.go
++++ b/src/crypto/rand/rand_batched.go
+@@ -7,6 +7,7 @@
+ package rand
+ 
+ import (
++	"errors"
+ 	"internal/syscall/unix"
+ )
+ 
+@@ -15,20 +16,6 @@ func init() {
+ 	altGetRandom = batched(getRandomBatch, maxGetRandomRead)
+ }
+ 
+-// batched returns a function that calls f to populate a []byte by chunking it
+-// into subslices of, at most, readMax bytes.
+-func batched(f func([]byte) bool, readMax int) func([]byte) bool {
+-	return func(buf []byte) bool {
+-		for len(buf) > readMax {
+-			if !f(buf[:readMax]) {
+-				return false
+-			}
+-			buf = buf[readMax:]
+-		}
+-		return len(buf) == 0 || f(buf)
+-	}
+-}
+-
+ // If the kernel is too old to support the getrandom syscall(),
+ // unix.GetRandom will immediately return ENOSYS and we will then fall back to
+ // reading from /dev/urandom in rand_unix.go. unix.GetRandom caches the ENOSYS
+@@ -36,7 +23,10 @@ func batched(f func([]byte) bool, readMax int) func([]byte) bool {
+ // If the kernel supports the getrandom() syscall, unix.GetRandom will block
+ // until the kernel has sufficient randomness (as we don't use GRND_NONBLOCK).
+ // In this case, unix.GetRandom will not return an error.
+-func getRandomBatch(p []byte) (ok bool) {
++func getRandomBatch(p []byte) error {
+ 	n, err := unix.GetRandom(p, 0)
+-	return n == len(p) && err == nil
++	if n != len(p) {
++		return errors.New("short read")
++	}
++	return err
+ }
+diff --git a/src/crypto/rand/rand_batched_test.go b/src/crypto/rand/rand_batched_test.go
+index 837db83f77..8122bceba4 100644
+--- a/src/crypto/rand/rand_batched_test.go
++++ b/src/crypto/rand/rand_batched_test.go
+@@ -8,20 +8,21 @@ package rand
+ 
+ import (
+ 	"bytes"
++	"errors"
+ 	"testing"
+ )
+ 
+ func TestBatched(t *testing.T) {
+-	fillBatched := batched(func(p []byte) bool {
++	fillBatched := batched(func(p []byte) error {
+ 		for i := range p {
+ 			p[i] = byte(i)
+ 		}
+-		return true
++		return nil
+ 	}, 5)
+ 
+ 	p := make([]byte, 13)
+-	if !fillBatched(p) {
+-		t.Fatal("batched function returned false")
++	if err := fillBatched(p); err != nil {
++		t.Fatalf("batched function returned error: %s", err)
+ 	}
+ 	expected := []byte{0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2}
+ 	if !bytes.Equal(expected, p) {
+@@ -30,15 +31,15 @@ func TestBatched(t *testing.T) {
+ }
+ 
+ func TestBatchedError(t *testing.T) {
+-	b := batched(func(p []byte) bool { return false }, 5)
+-	if b(make([]byte, 13)) {
+-		t.Fatal("batched function should have returned false")
++	b := batched(func(p []byte) error { return errors.New("") }, 5)
++	if b(make([]byte, 13)) == nil {
++		t.Fatal("batched function should have returned an error")
+ 	}
+ }
+ 
+ func TestBatchedEmpty(t *testing.T) {
+-	b := batched(func(p []byte) bool { return false }, 5)
+-	if !b(make([]byte, 0)) {
+-		t.Fatal("empty slice should always return true")
++	b := batched(func(p []byte) error { return errors.New("") }, 5)
++	if err := b(make([]byte, 0)); err != nil {
++		t.Fatalf("empty slice should always return nil: %s", err)
+ 	}
+ }
+diff --git a/src/crypto/rand/rand_openbsd.go b/src/crypto/rand/rand_openbsd.go
+index 9cc39f72d1..154d1509a0 100644
+--- a/src/crypto/rand/rand_openbsd.go
++++ b/src/crypto/rand/rand_openbsd.go
+@@ -9,10 +9,10 @@ import (
+ )
+ 
+ func init() {
+-	altGetRandom = getRandomOpenBSD
++	altGetRandom = getEntropy
+ }
+ 
+-func getRandomOpenBSD(p []byte) (ok bool) {
++func getEntropy(p []byte) error {
+ 	// getentropy(2) returns a maximum of 256 bytes per call
+ 	for i := 0; i < len(p); i += 256 {
+ 		end := i + 256
+@@ -21,8 +21,8 @@ func getRandomOpenBSD(p []byte) (ok bool) {
+ 		}
+ 		err := unix.GetEntropy(p[i:end])
+ 		if err != nil {
+-			return false
++			return err
+ 		}
+ 	}
+-	return true
++	return nil
+ }
+diff --git a/src/crypto/rand/rand_unix.go b/src/crypto/rand/rand_unix.go
+index 548a5e4cb9..026edc2c2d 100644
+--- a/src/crypto/rand/rand_unix.go
++++ b/src/crypto/rand/rand_unix.go
+@@ -45,7 +45,7 @@ type devReader struct {
+ 
+ // altGetRandom if non-nil specifies an OS-specific function to get
+ // urandom-style randomness.
+-var altGetRandom func([]byte) (ok bool)
++var altGetRandom func([]byte) (err error)
+ 
+ func warnBlocked() {
+ 	println("crypto/rand: blocked for 60 seconds waiting to read random data from the kernel")
+@@ -58,7 +58,7 @@ func (r *devReader) Read(b []byte) (n int, err error) {
+ 		t := time.AfterFunc(60*time.Second, warnBlocked)
+ 		defer t.Stop()
+ 	}
+-	if altGetRandom != nil && r.name == urandomDevice && altGetRandom(b) {
++	if altGetRandom != nil && r.name == urandomDevice && altGetRandom(b) == nil {
+ 		return len(b), nil
+ 	}
+ 	r.mu.Lock()
+diff --git a/src/crypto/rand/rand_windows.go b/src/crypto/rand/rand_windows.go
+index 7379f1489a..6c0655c72b 100644
+--- a/src/crypto/rand/rand_windows.go
++++ b/src/crypto/rand/rand_windows.go
+@@ -9,7 +9,6 @@ package rand
+ 
+ import (
+ 	"internal/syscall/windows"
+-	"os"
+ )
+ 
+ func init() { Reader = &rngReader{} }
+@@ -17,16 +16,11 @@ func init() { Reader = &rngReader{} }
+ type rngReader struct{}
+ 
+ func (r *rngReader) Read(b []byte) (n int, err error) {
+-	// RtlGenRandom only accepts 2**32-1 bytes at a time, so truncate.
+-	inputLen := uint32(len(b))
+-
+-	if inputLen == 0 {
+-		return 0, nil
+-	}
+-
+-	err = windows.RtlGenRandom(b)
+-	if err != nil {
+-		return 0, os.NewSyscallError("RtlGenRandom", err)
++	// RtlGenRandom only returns 1<<32-1 bytes at a time. We only read at
++	// most 1<<31-1 bytes at a time so that  this works the same on 32-bit
++	// and 64-bit systems.
++	if err := batched(windows.RtlGenRandom, 1<<31-1)(b); err != nil {
++		return 0, err
+ 	}
+-	return int(inputLen), nil
++	return len(b), nil
+ }
+-- 
+2.30.1 (Apple Git-130)
+
