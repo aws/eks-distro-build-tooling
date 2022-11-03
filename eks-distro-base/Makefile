@@ -108,6 +108,7 @@ help: ## Display this help
 
 .PHONY: buildkit-check
 buildkit-check:
+	echo $(FARGATE_PROFILE_NAME)
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
 
 .PHONY: open-pr-check
