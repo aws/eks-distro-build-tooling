@@ -1,0 +1,3 @@
+check-update eks-distro-minimal-base-kind 2 
+echo false > /override/root/eks-distro-minimal-base-kind-pushed
+exit 1

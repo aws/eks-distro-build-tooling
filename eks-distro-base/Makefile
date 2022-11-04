@@ -127,6 +127,11 @@ LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 # ************************************************************
 
+# ****************** PYTHON VARIANTS *************************
+PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
+BASE_PYTHON_VARIANT_VERSIONS=3.9
+# ************************************************************
+
 # ************** MINIMAL VARIANT MAGIC VARS ******************
 
 # Foreach minimal variant (+ versioned variants) new vars are created to make it easier to override
@@ -343,8 +348,8 @@ $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_KIND): BASE_IMAGE_NAME=eks-distro-minimal-b
 # ***********************************************************
 
 # ****************** PYTHON VARIANTS ************************
-$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
-$(ALL_MINIMAL_IMAGE_TARGETS_FOR_PYTHON_3.9): VERSIONED_VARIANT=3.9
+$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_PYTHON_3.9): VERSIONED_VARIANT=3.9
 # ************************************************************
 
 # ****************** STANDARD EKS-DISTRO IMAGE TARGETS *******

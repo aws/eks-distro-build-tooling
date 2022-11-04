@@ -1,0 +1,3 @@
+check-update eks-distro-base 2 
+echo false > /override/root/eks-distro-base-pushed
+exit 1

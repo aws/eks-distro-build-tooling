@@ -1,0 +1,3 @@
+cat pushed file /override/root/eks-distro-minimal-base-nonroot
+update_base_image.sh test-tag eks-distro-minimal-base-nonroot 2
+echo Updated base image tag file

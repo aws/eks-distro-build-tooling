@@ -1,0 +1,29 @@
+update_base_image.sh test-tag eks-distro-base 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-nonroot 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-glibc 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-iptables 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-nsenter 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-docker-client 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-nginx 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-csi-ebs 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-csi 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-kind 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-haproxy 2
+echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-git 2
+echo Updated base image tag file
+update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-3.9 2
+echo Updated base image tag file
+/override/root/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'

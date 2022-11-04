@@ -1,0 +1,3 @@
+check-update eks-distro-minimal-base-iptables 2 
+echo false > /override/root/eks-distro-minimal-base-iptables-pushed
+exit 1

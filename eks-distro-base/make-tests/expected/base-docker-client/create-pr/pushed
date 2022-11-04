@@ -1,0 +1,3 @@
+cat pushed file /override/root/eks-distro-minimal-base-docker-client
+update_base_image.sh test-tag eks-distro-minimal-base-docker-client 2
+echo Updated base image tag file

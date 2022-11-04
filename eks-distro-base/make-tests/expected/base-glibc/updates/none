@@ -1,0 +1,3 @@
+check-update eks-distro-minimal-base-glibc 2 
+echo false > /override/root/eks-distro-minimal-base-glibc-pushed
+echo No updates for minimal-update-base-glibc
