@@ -347,7 +347,6 @@ COPY --link --from=nodejs /nodejs /
 COPY --link --from=golang-1.15 /golang-1.15 /
 COPY --link --from=golang-1.16 /golang-1.16 /
 COPY --link --from=linuxkit /linuxkit /
-COPY --link --from=go-licenses-1.16 /go-licenses-1.16 /
 COPY --link --from=golang-1.17 /golang-1.17 /
 COPY --link --from=go-licenses-1.17 /go-licenses-1.17 /
 COPY --link --from=golang-1.19 /golang-1.19 /
@@ -356,6 +355,7 @@ COPY --link --from=go-licenses-1.19 /go-licenses-1.19 /
 # takes precendent
 COPY --link --from=golang-1.18 /golang-1.18 /
 COPY --link --from=go-licenses-1.18 /go-licenses-1.18 /
+COPY --link --from=go-licenses-1.16 /go-licenses-1.16 /
 
 FROM ${FINAL_STAGE_BASE} as final
 
