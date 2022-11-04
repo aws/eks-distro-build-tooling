@@ -163,3 +163,8 @@ RUN set -x && \
     ln -s python3 $NEWROOT/usr/bin/python && \
     ln -s pip3 $NEWROOT/usr/bin/pip && \
     cleanup "python3"
+
+
+FROM ${BUILT_BUILDER_IMAGE} as base-python-builder 
+FROM ${BASE_IMAGE} as final
+COPY --from=base-python-builder /newroot /
