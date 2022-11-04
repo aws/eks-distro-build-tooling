@@ -49,7 +49,8 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
 
     # validate default symlinks are correctly setup
     go version
-
+    go-licenses version
+    
     /go/bin/go1.15 version
     /go/bin/go1.16 version
     /go/go1.16/bin/go-licenses --help
