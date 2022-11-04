@@ -29,6 +29,10 @@ if [[ $IMAGE_NAME == *-builder ]]; then
     exit 0
 fi
 
+if [ -n "$VERSIONED_VARIANT" ]; then
+    VERSIONED_VARIANT="-${VERSIONED_VARIANT}"
+fi
+
 BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME$VERSIONED_VARIANT\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
@@ -82,16 +86,17 @@ buildctl build \
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
-cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${IMAGE_NAME}
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${IMAGE_NAME}${VERSIONED_VARIANT}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
+    echo "none" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
     exit 0
 fi
 
 if [ $RETURN_STATUS -eq 100 ]; then
-    echo "Updates required"
+    echo "updates" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
 elif [ $RETURN_STATUS -eq 0 ]; then
-    echo "No updates required"
+    echo "none" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
 elif [ $RETURN_STATUS -eq 1 ]; then
-    echo "Error"
+    echo "error" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
 fi

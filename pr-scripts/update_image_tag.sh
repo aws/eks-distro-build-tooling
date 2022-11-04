@@ -31,13 +31,15 @@ fi
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
+OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
+
 if [ $REPO_OWNER = "aws" ]; then
     ORIGIN_ORG="eks-distro-pr-bot"
 else
     ORIGIN_ORG=$REPO_OWNER
 fi
 
-REPO_PATH=${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+REPO_PATH=${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 cp -rf ${SCRIPT_ROOT}/../eks-distro-base-minimal-packages $REPO_PATH
 cp -rf ${SCRIPT_ROOT}/../eks-distro-base-updates $REPO_PATH
 cd $REPO_PATH
