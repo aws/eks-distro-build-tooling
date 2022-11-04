@@ -40,9 +40,9 @@ function instal_ansible() {
 
     PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
     pip3 install --user --no-cache-dir "pywinrm==$PYWINRM_VERSION"
-
-    mkdir -p ${NEWROOT}/root
-    mv /root/.local ${NEWROOT}/root
+    
+    rm -rf ${NEWROOT}/usr/*
+    mv /root/.local/* ${NEWROOT}/usr
 
     rm -rf /root/.cache
 }

@@ -17,7 +17,7 @@ IMAGE_NAME?=builder-base
 IMAGE_TAG?=latest
 
 AL_TAG?=2
-LATEST?=$(if $(filter $(AL_TAG),2022),$(VARIANT)-latest.al22,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest,))
+LATEST?=$(if $(filter $(AL_TAG),2022),$(VARIANT)-latest.al22,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest latest.2,))
 
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG)
 
@@ -33,7 +33,6 @@ BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base
 BUILDER_IMAGE?=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME)-builder:$(call BASE_TAG_FROM_TAG_FILE,$(BUILDER_IMAGE_NAME))
 
-CURRENT_BUILDER_BASE_TAG=$(or $(and $(wildcard /config/BUILDER_BASE_TAG_FILE),$(shell cat /config/BUILDER_BASE_TAG_FILE)),$(word 1,$(LATEST)))
 IMPORT_CACHE_REPOS=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
@@ -82,7 +81,7 @@ images-%: buildkit-check
 		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
 		--export-cache type=inline \
-		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(CURRENT_BUILDER_BASE_TAG)) \
+		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \
 		--opt no-cache=final \
 		--local dockerfile=./ \
 		--local context=. \
