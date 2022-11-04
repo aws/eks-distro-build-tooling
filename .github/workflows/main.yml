@@ -1,0 +1,15 @@
+name: Backporter
+on: [issue_comment]
+
+jobs:
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+#     if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER: $COMMENT
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+          COMMENT: ${{ github.event.issue.comment }}
