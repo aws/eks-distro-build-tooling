@@ -52,6 +52,7 @@ if ! docker buildx version > /dev/null 2>&1; then
 fi
 
 docker buildx version
+# CREATE_BUILDER_PODS=true
 
 if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
     # in postsubmit we create builders for both amd and arm since buildx doesnt support
@@ -89,11 +90,15 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
         kubectl get deployments -n buildkit-orchestration
 
     else
-        # in presubmit we just attach to the sidecar container
-        docker buildx create --name $BUILDER_NAME --driver remote ${BUILDKIT_HOST:-unix:///run/buildkit/buildkitd.sock}
+        if [ -n "${BUILDKIT_HOST_AMD64}" ] && [ -n "${BUILDKIT_HOST_ARM64}" ]; then
+            docker buildx create --name $BUILDER_NAME --platform=linux/amd64 --driver remote ${BUILDKIT_HOST_AMD64}
+            docker buildx create --append --name $BUILDER_NAME --platform=linux/arm64 --driver remote ${BUILDKIT_HOST_ARM64}
+        else
+            # in presubmit we just attach to the sidecar container
+            docker buildx create --name $BUILDER_NAME --driver remote ${BUILDKIT_HOST:-unix:///run/buildkit/buildkitd.sock}
+        fi
     fi
 fi
 
 docker buildx inspect $BUILDER_NAME
 docker buildx use $BUILDER_NAME
-

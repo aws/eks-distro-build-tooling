@@ -15,21 +15,27 @@
 
 set -e
 set -o pipefail
-set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+NEWROOT=/skopeo
+
+source $SCRIPT_ROOT/common_vars.sh
+
+function install_skopeo() {
+    local -r deps="device-mapper-devel libassuan-devel gpgme-devel"
+    yum install -y $deps
+
+    # Installing Skopeo
+    SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.2}"
+    git clone https://github.com/containers/skopeo
+    cd skopeo
+    git checkout $SKOPEO_VERSION
+    make bin/skopeo
+    mv bin/skopeo $USR_BIN/skopeo
+
+    cd ..
+    rm -rf ${GOPATH} skopeo
 }
 
-buildkit_ready
+[ ${SKIP_INSTALL:-false} != false ] || install_skopeo

@@ -15,21 +15,22 @@
 
 set -e
 set -o pipefail
-set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+NEWROOT=/linuxkit
+
+source $SCRIPT_ROOT/common_vars.sh
+
+
+function install_linuxkit() {
+    # linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
+    # We need a higher version of linuxkit hence we do go get of a particular commit
+    GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
+
+    mv ${GOPATH}/go1.16/bin/linuxkit ${USR_BIN}/linuxkit
+
+    rm -rf ${GOPATH}
 }
 
-buildkit_ready
+[ ${SKIP_INSTALL:-false} != false ] || install_linuxkit

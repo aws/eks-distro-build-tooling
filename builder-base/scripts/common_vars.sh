@@ -15,21 +15,18 @@
 
 set -e
 set -o pipefail
-set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
-}
+TARGETARCH=${TARGETARCH:-amd64}
+USR=${USR:-${NEWROOT}/usr}
+USR_LOCAL=${USR_LOCAL:-${USR}/local}
+USR_BIN=${USR}/bin
+USR_LOCAL_BIN=${USR_LOCAL}/bin
 
-buildkit_ready
+BASE_DIR=""
+
+IS_AL22=false
+if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2022" /etc/yum.repos.d/amazonlinux.repo; then 
+    IS_AL22=true
+fi
+
+[ ${SKIP_INSTALL:-false} != false ] || mkdir -p $USR_BIN $USR_LOCAL_BIN

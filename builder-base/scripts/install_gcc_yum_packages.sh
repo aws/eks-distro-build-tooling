@@ -15,21 +15,18 @@
 
 set -e
 set -o pipefail
-set -x
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
-}
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source $SCRIPT_ROOT/common_vars.sh
 
-buildkit_ready
+$SCRIPT_ROOT/install_base_yum_packages.sh
+
+yum install --setopt=install_weak_deps=False -y \
+    gcc \
+    git-core \
+    make \
+    pkgconfig
+
+if [ $IS_AL22 = 'true' ]; then
+    yum install --setopt=install_weak_deps=False -y amazon-rpm-config
+fi

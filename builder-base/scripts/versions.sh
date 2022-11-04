@@ -13,23 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-set -o pipefail
-set -x
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-function buildkit_ready() {
-  for i in {1..24}
-  do
-    if ! buildctl debug workers > /dev/null 2>&1;
-    then
-      echo "Buildkit daemon is not running. Retrying."
-      sleep 5
-    else
-      exit 0
-    fi
-  done
-  echo "Buildkit daemon is not available"
-  exit 1
-}
+export SKIP_INSTALL="true"
 
-buildkit_ready
+source $SCRIPT_ROOT/install_aws_cli.sh
+source $SCRIPT_ROOT/install_buildkit.sh
+source $SCRIPT_ROOT/install_docker_buildx.sh
+source $SCRIPT_ROOT/install_ecr_cred_helper.sh
+source $SCRIPT_ROOT/install_gh_cli.sh
+source $SCRIPT_ROOT/install_yq.sh
+source $SCRIPT_ROOT/install_packer.sh
+source $SCRIPT_ROOT/install_nodejs.sh
+source $SCRIPT_ROOT/install_helm.sh
+source $SCRIPT_ROOT/install_goss.sh
+source $SCRIPT_ROOT/install_govc.sh
+source $SCRIPT_ROOT/install_hugo.sh
+source $SCRIPT_ROOT/install_bash.sh
