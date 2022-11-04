@@ -308,8 +308,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
--rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
--rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
+-rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
+-rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.5
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   320KiB /usr/lib64/libtcmalloc.so.4.5.9

@@ -344,8 +344,8 @@
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   127KiB /usr/lib64/libsasl2.so.3.0.0
--rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
--rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
+-rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
+-rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x     951B /usr/lib64/libssh2.la
