@@ -17,7 +17,7 @@ IMAGE_NAME?=builder-base
 IMAGE_TAG?=latest
 
 AL_TAG?=2
-LATEST?=$(if $(filter $(AL_TAG),2022),$(VARIANT)-latest.al22,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest,))
+LATEST?=$(if $(filter $(AL_TAG),2022),$(VARIANT)-latest.al22,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest latest.2,))
 
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG)
 

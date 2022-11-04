@@ -33,11 +33,12 @@ function install_go_licenses() {
     # is able to properly packages from the standard Go library
     # We currently  use 1.19, 1.17 or 1.16, so installing for all
     GO111MODULE=on GOBIN=${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin go install github.com/google/go-licenses@v1.2.1
-    
+
     # symlink to go/bin and depending on which go-licenses vs is added last to
     # the final image, will take precedent and be the default
     # similiar to the strategy with golang
-    ln -s ${GOPATH}/${GOLANG_MAJOR_VERSION}/bin/go-licenses ${NEWROOT}/${GOPATH}/bin
+    mkdir -p ${NEWROOT}/${GOPATH}/bin
+    ln -s ${GOPATH}/${GOLANG_MAJOR_VERSION}/bin/go-licenses ${NEWROOT}/${GOPATH}/bin/go-licenses
     
     rm -rf ${GOPATH}
 }

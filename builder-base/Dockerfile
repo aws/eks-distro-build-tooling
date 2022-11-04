@@ -363,7 +363,7 @@ ARG TARGETARCH
 ARG FINAL_STAGE_BASE
 
 ENV GOPATH /go
-ENV PATH="/root/.local/bin:/go/bin/:$PATH"
+ENV PATH="/go/bin/:$PATH"
 
 COPY ./scripts/docker.sh ./scripts/buildkit.sh ./scripts/common_vars.sh ./scripts/validate_components.sh \
     ./scripts/install_final.sh /
