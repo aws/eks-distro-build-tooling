@@ -538,6 +538,9 @@ update-make-tests-expected:
 var-value-%:
 	@echo $($*)
 
+# Temp until merge and we change prow job
+.PHONY: minimal-images-base-python3.9
+minimal-images-base-python3.9: minimal-images-base-python-3.9
 
 ########### DO NOT EDIT #############################
 # To update call: make add-generated-help-block
