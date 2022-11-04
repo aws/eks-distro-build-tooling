@@ -28,7 +28,7 @@ LOCAL_REGISTRY=$6
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 function check_base() {
-    buildctl \
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
         --opt filename=./tests/Dockerfile \
@@ -39,7 +39,6 @@ function check_base() {
         --opt target=check-base \
         --local dockerfile=./ \
 		--local context=./tests \
-        --opt platform=$PLATFORMS \
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:latest\",push=true
 
     for platform in ${PLATFORMS//,/ }; do
@@ -52,7 +51,7 @@ function check_base-nonroot() {
 }
 
 function check_base-glibc() {
-    buildctl \
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
         --opt filename=./tests/Dockerfile \
@@ -63,7 +62,6 @@ function check_base-glibc() {
         --opt target=check-cgo \
         --local dockerfile=./ \
 		--local context=./tests \
-        --opt platform=$PLATFORMS \
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:glibc-latest\",push=true
     
     for platform in ${PLATFORMS//,/ }; do
@@ -75,7 +73,7 @@ function check_base-glibc() {
 }
 
 function check_base-iptables() {
-    buildctl \
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
         --opt filename=./tests/Dockerfile \
@@ -86,10 +84,9 @@ function check_base-iptables() {
         --opt target=check-iptables-legacy \
         --local dockerfile=./ \
 		--local context=./tests \
-        --opt platform=$PLATFORMS \
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:iptables-legacy-latest\",push=true
     
-    buildctl \
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
         --opt filename=./tests/Dockerfile \
@@ -100,7 +97,6 @@ function check_base-iptables() {
         --opt target=check-iptables-nft \
         --local dockerfile=./ \
 		--local context=./tests \
-        --opt platform=$PLATFORMS \
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:iptables-nft-latest\",push=true
     
     for platform in ${PLATFORMS//,/ }; do
@@ -178,7 +174,12 @@ function check_base-csi() {
         exit 1
     fi
 
-    buildctl \
+    local netrc=""
+    if [ -f $HOME/.netrc ]; then
+        netrc="--secret id=netrc,src=$HOME/.netrc"
+    fi
+
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
         --opt filename=./tests/Dockerfile \
@@ -189,8 +190,7 @@ function check_base-csi() {
         --progress plain \
         --opt target=check-git \
         --local dockerfile=./ \
-		--local context=./tests \
-        --opt platform=$PLATFORMS \
+		--local context=./tests $netrc \
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:git-latest\",push=true
     
     for platform in ${PLATFORMS//,/ }; do
@@ -313,3 +313,5 @@ check_base-python-3.9() {
         exit 1
     fi
 }
+
+$TEST

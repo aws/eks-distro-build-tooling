@@ -72,10 +72,9 @@ COPY --from=builder ./return_value ./return_value
 COPY --from=builder ./update_packages ./update_packages
 EOF
 
-buildctl build \
-         --frontend dockerfile.v0 \
+$SCRIPT_ROOT/../scripts/buildkit.sh build --frontend dockerfile.v0 \
          --opt platform=linux/amd64 \
-         --local dockerfile=./check-update \
+         --opt filename=./check-update/Dockerfile \
          --local context=. \
          --progress plain \
          --output type=local,dest=/tmp/${IMAGE_NAME} \

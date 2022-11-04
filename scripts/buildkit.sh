@@ -20,7 +20,7 @@ set -o pipefail
 BUILD_LIB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/" && pwd -P)"
 
 if [ "${USE_BUILDX:-}" == "true" ]; then
-    printf "\nBuilding with with docker buildx\n"
+    printf "\nBuilding with with docker buildx\n" >&2
 
     CMD="docker buildx"
     ARGS=""
@@ -65,7 +65,7 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
         esac
     done
 else
-    printf "\nBuilding with buildctl\n"
+    printf "\nBuilding with buildctl\n" >&2
 
     CMD="buildctl"
     ARGS="$@"
