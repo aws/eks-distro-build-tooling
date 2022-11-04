@@ -1837,8 +1837,8 @@
 -rwxr-xr-x   350KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
--rwxr-xr-x   169KiB /usr/lib64/libselinux.so.1
--rwxr-xr-x   717KiB /usr/lib64/libsepol.so.2
+-rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
+-rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.5
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
