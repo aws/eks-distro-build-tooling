@@ -36,7 +36,7 @@ jobs:
     - id: get_issue_title
       run: echo "ISSUE_TITLE=$(curl -s $ISSUE_URL | jq -r '.title')" >> $GITHUB_ENV
     - id: create_issue
-      uses: dacbd/create-issue-action@main
+      uses: dacbd/create-issue-action@v1.21
       with:
         token: ${{ github.token }}
         title: ${{ env.ISSUE_TITLE }} - [go${{ matrix.go_version }} backport]
