@@ -21,7 +21,7 @@ jobs:
             echo "go_version_array=$(cat ${GITHUB_WORKSPACE}/main/projects/golang/go/MAINTAINED_EOL_VERSIONS | jq -R -s -c 'split("\n") | map(select(length > 0))')" >> $GITHUB_OUTPUT
     outputs:
       go_version_array: ${{ steps.check_the_comment.outputs.go_version_array }}
-      proceed_with_backport: ${{ steps.check_the_comment.outputs.PROCEED_WITH_BACKPORT }}
+      proceed_with_backport: ${{ steps.check_the_comment.outputs.proceed_with_backport }}
   open_issues:
     if: ${{ needs.check_comment.outputs.proceed_with_backport }}
     runs-on: ubuntu-latest
