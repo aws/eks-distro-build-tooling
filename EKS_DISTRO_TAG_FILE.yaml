@@ -1,30 +1,30 @@
 al2:
-  eks-distro-base: 2022-10-11-1665514870.2
+  eks-distro-base: 2022-10-25-1666703745.2
   eks-distro-minimal-base: 2022-07-27-1658910674.2
   eks-distro-minimal-base-nonroot: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-glibc: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-iptables: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-docker-client: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-csi: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-csi-ebs: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-haproxy: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-kind: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-nginx: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-git: 2022-10-11-1665514870.2
-  eks-distro-minimal-base-nsenter: 2022-07-27-1658910674.2
-  eks-distro-minimal-base-python3.9: 3.9-2022-10-11-1665514870.2
+  eks-distro-minimal-base-glibc: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-iptables: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-docker-client: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-csi: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-csi-ebs: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-haproxy: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-kind: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-nginx: 2022-10-25-1666716836.2
+  eks-distro-minimal-base-git: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-nsenter: 2022-10-25-1666703745.2
+  eks-distro-minimal-base-python3.9: 3.9-2022-10-25-1666703745.2
 al2022:
-  eks-distro-base: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-nonroot: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-glibc: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-iptables: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-docker-client: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-csi: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-csi-ebs: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-haproxy: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-kind: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-nginx: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-git: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-nsenter: 2022-10-13-1665687739.2022
-  eks-distro-minimal-base-python3.9: 3.9-2022-10-13-1665687739.2022
+  eks-distro-base: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-nonroot: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-glibc: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-iptables: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-docker-client: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-csi: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-csi-ebs: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-haproxy: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-kind: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-nginx: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-git: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-nsenter: 2022-11-04-1667588501.2022
+  eks-distro-minimal-base-python3.9: 3.9-2022-11-04-1667588501.2022

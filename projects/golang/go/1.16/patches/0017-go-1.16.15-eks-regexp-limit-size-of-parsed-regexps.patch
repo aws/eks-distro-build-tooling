@@ -1,7 +1,7 @@
 From 21018d66be36720d6122ebab7e1d915c1fc26ffc Mon Sep 17 00:00:00 2001
 From: Russ Cox <rsc@golang.org>
 Date: Wed, 28 Sep 2022 11:18:51 -0400
-Subject: [PATCH] [release-branch.go1.18] regexp: limit size of parsed regexps
+Subject: [PATCH] [go-1.16.15-eks] regexp: limit size of parsed regexps
 
 Set a 128 MB limit on the amount of space used by []syntax.Inst
 in the compiled form corresponding to a given regexp.

@@ -385,7 +385,7 @@
 -rwxr-xr-x   134KiB /usr/lib64/gconv/libJIS.so
 -rwxr-xr-x   133KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
--rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    73KiB /usr/lib64/libanl-2.26.so

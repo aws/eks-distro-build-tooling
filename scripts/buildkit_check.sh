@@ -23,7 +23,7 @@ function buildkit_ready() {
     if ! buildctl debug workers > /dev/null 2>&1;
     then
       echo "Buildkit daemon is not running. Retrying."
-      sleep 5s
+      sleep 5
     else
       exit 0
     fi

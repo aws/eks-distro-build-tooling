@@ -26,9 +26,9 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   4.2KiB /etc/ld.so.cache
+-rw-r--r--   4.4KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
--rw-r--r--     243B /etc/logrotate.d/nginx
+-rw-r--r--     261B /etc/logrotate.d/nginx
 -rw-r--r--       0B /etc/motd
 -rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf
 -rw-r--r--   1.1KiB /etc/nginx/fastcgi.conf.default
@@ -36,8 +36,8 @@
 -rw-r--r--    1007B /etc/nginx/fastcgi_params.default
 -rw-r--r--   2.8KiB /etc/nginx/koi-utf
 -rw-r--r--   2.2KiB /etc/nginx/koi-win
--rw-r--r--   5.2KiB /etc/nginx/mime.types
--rw-r--r--   5.2KiB /etc/nginx/mime.types.default
+-rw-r--r--   5.3KiB /etc/nginx/mime.types
+-rw-r--r--   5.3KiB /etc/nginx/mime.types.default
 -rw-r--r--   2.3KiB /etc/nginx/nginx.conf
 -rw-r--r--   2.6KiB /etc/nginx/nginx.conf.default
 -rw-r--r--     636B /etc/nginx/scgi_params
@@ -507,7 +507,7 @@
 -rwxr-xr-x   134KiB /usr/lib64/gconv/libJIS.so
 -rwxr-xr-x   133KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
--rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    69KiB /usr/lib64/libacl.so.1.1.0
@@ -540,6 +540,8 @@
 -rwxr-xr-x    70KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   260KiB /usr/lib64/libpcre.so.1.2.0
 -rwxr-xr-x   260KiB /usr/lib64/libpcre16.so.0.2.0
+-rwxr-xr-x   454KiB /usr/lib64/libpcre2-8.so.0.5.0
+-rwxr-xr-x    67KiB /usr/lib64/libpcre2-posix.so.1.0.1
 -rwxr-xr-x   260KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    68KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    67KiB /usr/lib64/libpcreposix.so.0.0.1
@@ -599,7 +601,7 @@
 -rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
 -rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--   3.4KiB /usr/share/doc/nginx-1.20.0/UPGRADE-NOTES-1.6-to-1.10
+-rw-r--r--   3.4KiB /usr/share/doc/nginx-1.22.0/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -637,9 +639,11 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
--rw-r--r--   1.4KiB /usr/share/licenses/nginx-1.20.0/LICENSE
+-rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.22.0/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
+-rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
+-rw-r--r--   2.9KiB /usr/share/licenses/pcre2-10.23/LICENCE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_TIME/coreutils.mo
@@ -758,7 +762,7 @@
 -rw-r--r--    52KiB /usr/share/locale/zh_TW/LC_TIME/coreutils.mo
 -rw-r--r--   3.6KiB /usr/share/nginx/html/404.html
 -rw-r--r--   3.7KiB /usr/share/nginx/html/50x.html
--rw-r--r--   3.5KiB /usr/share/nginx/html/index.html
+-rw-r--r--     615B /usr/share/nginx/html/index.html
 -rw-r--r--     368B /usr/share/nginx/html/nginx-logo.png
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
@@ -903,7 +907,7 @@
 -rw-r--r--     198B /usr/share/vim/vimfiles/ftdetect/nginx.vim
 -rw-r--r--      29B /usr/share/vim/vimfiles/ftplugin/nginx.vim
 -rw-r--r--     250B /usr/share/vim/vimfiles/indent/nginx.vim
--rw-r--r--   133KiB /usr/share/vim/vimfiles/syntax/nginx.vim
+-rw-r--r--   137KiB /usr/share/vim/vimfiles/syntax/nginx.vim
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Abidjan
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Accra
 -rw-r--r--     299B /usr/share/zoneinfo/Africa/Addis_Ababa
@@ -2692,7 +2696,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   3.6KiB /var/cache/ldconfig/aux-cache
+-rw-------   3.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   344KiB /var/lib/rpm/Basenames
@@ -2702,7 +2706,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   2.5MiB /var/lib/rpm/Packages
+-rw-r--r--   2.6MiB /var/lib/rpm/Packages
 -rw-r--r--    28KiB /var/lib/rpm/Providename
 -rw-r--r--    16KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
@@ -2763,6 +2767,8 @@ lrwxrwxrwx      15B /usr/lib64/libpanel.so.6	libpanel.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6	libpanelw.so.6.0
 lrwxrwxrwx      16B /usr/lib64/libpcre.so.1	libpcre.so.1.2.0
 lrwxrwxrwx      18B /usr/lib64/libpcre16.so.0	libpcre16.so.0.2.0
+lrwxrwxrwx      19B /usr/lib64/libpcre2-8.so.0	libpcre2-8.so.0.5.0
+lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.1	libpcre2-posix.so.1.0.1
 lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1

@@ -69,7 +69,7 @@
 -rw-r--r--       7B /etc/yum/vars/target
 -rwxr-xr-x   1.6KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
--rwxr-xr-x    49MiB /usr/bin/docker
+-rwxr-xr-x    41MiB /usr/bin/docker
 -rwxr-xr-x    73KiB /usr/bin/gencat
 -rwxr-xr-x    71KiB /usr/bin/getconf
 -rwxr-xr-x    77KiB /usr/bin/getent
@@ -355,7 +355,7 @@
 -rwxr-xr-x   134KiB /usr/lib64/gconv/libJIS.so
 -rwxr-xr-x   133KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
--rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    73KiB /usr/lib64/libanl-2.26.so
@@ -396,8 +396,8 @@
 -rwxr-xr-x   762KiB /usr/sbin/sln
 -rwxr-xr-x    73KiB /usr/sbin/zdump
 -rwxr-xr-x    75KiB /usr/sbin/zic
--rw-r--r--    11KiB /usr/share/doc/docker-20.10.13/LICENSE
--rw-r--r--     642B /usr/share/doc/docker-20.10.13/NOTICE
+-rw-r--r--    11KiB /usr/share/doc/docker-20.10.17/LICENSE
+-rw-r--r--     642B /usr/share/doc/docker-20.10.17/NOTICE
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -429,7 +429,7 @@
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
 -rw-r--r--     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
 -rw-r--r--   3.0KiB /usr/share/locale/locale.alias
--rw-r--r--     342B /usr/share/man/man1/docker-manifest-annotate.1.gz
+-rw-r--r--     341B /usr/share/man/man1/docker-manifest-annotate.1.gz
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README

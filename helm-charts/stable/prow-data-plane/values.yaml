@@ -17,3 +17,5 @@ region: 'us-west-2'
 s3Credentials:
   Secret:
     create: true
+
+serviceAccountName: default

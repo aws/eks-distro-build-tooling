@@ -1,6 +1,6 @@
 ****************** Regular Files ******************
 
--rw-r--r--      40B /dev/null
+-rw-rw-rw-      40B /dev/null
 -rw-------       0B /etc/.pwd.lock
 -rw-r--r--   5.0KiB /etc/DIR_COLORS
 -rw-r--r--   5.6KiB /etc/DIR_COLORS.256color
@@ -6271,7 +6271,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   6.5MiB /var/lib/rpm/Packages
+-rw-r--r--   6.3MiB /var/lib/rpm/Packages
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header

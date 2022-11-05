@@ -113,7 +113,7 @@
 
 Name:           golang
 Version:        %{go_version}
-Release: %{baserelease}%{?dist}.0.1
+Release:        %{?_buildid}%{?dist}.eks
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
 License:        BSD and Public Domain
@@ -171,6 +171,10 @@ Patch13:       0013-go-1.16.15-eks-net-http-preserve-nil-values-i.patch
 Patch14:       0014-go-1.16.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch15:       0015-go-1.16.15-eks-archive-tar-limit-size-of-head.patch
 Patch17:       0017-go-1.16.15-eks-regexp-limit-size-of-parsed-regexps.patch
+Patch18:       0018-go-1.16.15-eks-net-url-reject-query-values-with-semicolons.patch
+Patch19:       0019-go-1.16.15-eks-net-http-httputil-avoid-query-.patch
+Patch20:       0020-go-1.16.15-eks-syscall-os-exec-reject-environ.patch
+Patch21:       0021-go-1.16.15-eks-crypto-rand-properly-handle-la.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -305,7 +309,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go-go1.16.15
+%autosetup -p1 -n go-go%{go_version}
 
 cp %{SOURCE1} ./src/runtime/
 
@@ -552,11 +556,19 @@ fi
 %endif
 
 %changelog
+* Thu Nov 03 2022 Dan Budris <budris@amazon.com> - 1.16.15.2
+- Include backported patch for CVE-2022-41716
+- Fixes: CVE-2022-41716
+- Include backported patch for CVE-2022-30634
+- Fixes: CVE-2022-30634
+
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
 - Include backported patch for CVE-2022-41715
+- Fixes: CVE-2022-41715
 
 * Thu Oct 06 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15-2
 - Included backported patch for CVE-2022-2879
+- Fixes: CVE-2022-2879
 
 * Thu Mar 10 2022 Alejandro Sáez <asm@redhat.com> - 1.16.15-1
 - Update to go1.16.15

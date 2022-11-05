@@ -108,7 +108,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.18
 #global go_prerelease rc1
-%global go_patch 7
+%global go_patch 8
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -118,7 +118,7 @@
  
 Name:           golang
 Version:        %{go_version}
-Release:        %{baserelease}%{?dist}
+Release:        %{?_buildid}%{?dist}.eks
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
 License:        BSD and Public Domain
@@ -293,7 +293,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go-go1.18.7
+%autosetup -p1 -n go-go%{go_version}
 
 cp %{SOURCE1} ./src/runtime/
 
