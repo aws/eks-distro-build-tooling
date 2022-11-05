@@ -4,4 +4,4 @@ filesystem-3.2-25.amzn2.0.4.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.x86_64
-tzdata-2022a-1.amzn2.noarch
+tzdata-2022e-1.amzn2.0.1.noarch

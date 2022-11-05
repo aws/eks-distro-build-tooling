@@ -42,7 +42,7 @@ function check_base() {
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:latest\",push=true
 
     for platform in ${PLATFORMS//,/ }; do
-        docker run --rm --platform=$platform $LOCAL_REGISTRY/base-test:latest
+        $SCRIPT_ROOT/docker_run_to_buildctl.sh --rm --platform=$platform $LOCAL_REGISTRY/base-test:latest -- /bin/check-certs
     done
 }
 
@@ -65,7 +65,7 @@ function check_base-glibc() {
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:glibc-latest\",push=true
     
     for platform in ${PLATFORMS//,/ }; do
-        if docker run --rm --platform=$platform $LOCAL_REGISTRY/base-test:glibc-latest | grep -v 'Printed from unsafe C code'; then
+        if $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform $LOCAL_REGISTRY/base-test:glibc-latest -- /bin/check-cgo | grep -v 'Printed from unsafe C code'; then
             echo "glibc issue!"
             exit 1
         fi
@@ -100,20 +100,20 @@ function check_base-iptables() {
 		--output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/base-test:iptables-nft-latest\",push=true
     
     for platform in ${PLATFORMS//,/ }; do
-        if docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest iptables --version | grep -v 'legacy'; then
+        if $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest -- iptables --version | grep -v 'legacy'; then
             echo "iptables legacy issue!"
             exit 1
         fi
 
-        if docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest ip6tables --version | grep -v 'legacy'; then
+        if $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest -- ip6tables --version | grep -v 'legacy'; then
             echo "ip6tables legacy issue!"
             exit 1
         fi
-        if ! docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest iptables-save; then
+        if ! $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest -- iptables-save; then
             echo "iptables-save legacy issue!"
             exit 1
         fi
-        if ! docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest ip6tables-save; then
+        if ! $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-legacy-latest -- ip6tables-save; then
             echo "ip6tables-save legacy issue!"
             exit 1
         fi
@@ -124,19 +124,19 @@ function check_base-iptables() {
             continue
         fi
 
-        if docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest iptables --version | grep -v 'nf_tables'; then
+        if $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest -- iptables --version | grep -v 'nf_tables'; then
             echo "iptables nft issue!"
             exit 1
         fi
-        if docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest ip6tables --version | grep -v 'nf_tables'; then
+        if $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest -- ip6tables --version | grep -v 'nf_tables'; then
             echo "ip6tables nft issue!"
             exit 1
         fi
-        if ! docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest ebtables --version; then
+        if ! $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest -- ebtables --version; then
             echo "ebtables nft issue!"
             exit 1
         fi
-        if ! docker run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest arptables --version; then
+        if ! $SCRIPT_ROOT/docker_run_to_buildctl.sh run --rm --platform=$platform --pull=always $LOCAL_REGISTRY/base-test:iptables-nft-latest -- arptables --version; then
             echo "arptables nft issue!"
             exit 1
         fi

@@ -2,6 +2,8 @@ ARG BASE_IMAGE
 ARG AL_TAG
 FROM ${BASE_IMAGE} as base
 
+FROM public.ecr.aws/eks-distro/kubernetes/go-runner:v0.14.0-eks-1-24-2 as go-runner
+
 FROM public.ecr.aws/amazonlinux/amazonlinux:${AL_TAG} as builder
 
 WORKDIR /var/app
@@ -15,26 +17,23 @@ RUN CGO_ENABLED=1 go build -o check-cgo ./check_cgo.go
 
 FROM ${BASE_IMAGE} as check-base
 COPY --from=builder /var/app/check-certs /bin
+COPY --from=go-runner /go-runner /
 USER 65534
 ENV TZ=Europe/Berlin
 
-CMD ["/bin/check-certs"]
-
 FROM ${BASE_IMAGE} as check-cgo
 COPY --from=builder /var/app/check-cgo /bin
-
-CMD ["/bin/check-cgo"]
+COPY --from=go-runner /go-runner /
 
 FROM ${BASE_IMAGE} as check-iptables-legacy
-
-CMD ["iptables"]
+COPY --from=go-runner /go-runner /
 
 FROM ${BASE_IMAGE} as check-iptables-nft
+COPY --from=go-runner /go-runner /
 
 RUN ["update-alternatives", "--set", "iptables", "/usr/sbin/iptables-nft"]
 RUN ["update-alternatives", "--set", "ip6tables", "/usr/sbin/ip6tables-nft"]
 
-CMD ["iptables"]
 
 FROM builder as git-builder
 
