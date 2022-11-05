@@ -1,15 +1,49 @@
-name: Backporter
-on: [issue_comment]
+name: Issue comment handler
+on: [issue_comment, workflow_dispatch]
 
 jobs:
-  issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
-#     if: ${{ !github.event.issue.pull_request }}
+  check_comment:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo A comment on issue $NUMBER: $COMMENT
-        env:
-          NUMBER: ${{ github.event.issue.number }}
-          COMMENT: ${{ github.event.issue.comment }}
+    - id: checkout_repo
+      uses: actions/checkout@v3
+      with:
+        path: main
+    - id: check_the_comment
+      run: |
+            if [[ $COMMENT =~ "/backport" ]]; then 
+              echo Comment contains request to backport...
+              echo "proceed_with_backport=true" >> $GITHUB_OUTPUT
+            else 
+              echo No backport request...ending job.
+            fi
+
+            echo "go_version_array=$(cat ${GITHUB_WORKSPACE}/main/projects/golang/go/MAINTAINED_EOL_VERSIONS | jq -R -s -c 'split("\n") | map(select(length > 0))')" >> $GITHUB_OUTPUT
+    outputs:
+      go_version_array: ${{ steps.check_the_comment.outputs.go_version_array }}
+      proceed_with_backport: ${{ steps.check_the_comment.outputs.PROCEED_WITH_BACKPORT }}
+  open_issues:
+    if: ${{ needs.check_comment.outputs.proceed_with_backport }}
+    runs-on: ubuntu-latest
+    needs: check_comment
+    strategy:
+      fail-fast: false
+      matrix: 
+        go_version: ${{ fromJson(needs.check_comment.outputs.go_version_array) }}
+    steps:
+    - id: notify
+      run: echo "Opening backport issues..."
+    - id: get_issue_title
+      run: echo "ISSUE_TITLE=$(curl -s $ISSUE_URL | jq -r '.title')" >> $GITHUB_ENV
+    - id: create_issue
+      uses: dacbd/create-issue-action@main
+      with:
+        token: ${{ github.token }}
+        title: ${{ env.ISSUE_TITLE }} - [go${{ matrix.go_version }} backport]
+        body: Backport requested for this go version in ${{ env.HTML_URL }}
+        labels: security,golang
+env:
+  COMMENT: ${{ github.event.comment.body }}
+  ISSUE_URL: ${{ github.event.comment.issue_url }}
+  HTML_URL: ${{ github.event.comment.html_url }}
+
