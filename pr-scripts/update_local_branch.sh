@@ -22,7 +22,8 @@ REPO="$1"
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-if [ $REPO_OWNER = "aws" ]; then
+OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
+if [ "$REPO_OWNER" = "aws" ]; then
     ORIGIN_ORG="eks-distro-pr-bot"
     UPSTREAM_ORG="aws"
 else
@@ -34,13 +35,18 @@ PR_BRANCH="image-tag-update"
 if [ "$JOB_TYPE" = "presubmit" ]; then
     PR_BRANCH="image-update-branch"
 fi
-cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+
+if [ ! -d ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO} ]; then
+    git clone https://github.com/${ORIGIN_ORG}/${REPO}.git ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
+fi
+
+cd ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 if [ $(git branch --show-current) != $PR_BRANCH ]; then
     git config --global push.default current
     git config user.name "EKS Distro PR Bot"
     git config user.email "aws-model-rocket-bots+eksdistroprbot@amazon.com"
-    git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
-    git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
+    git config remote.origin.url >&- || git remote add origin git@github.com:${ORIGIN_ORG}/${REPO}.git
+    git config remote.upstream.url >&- || git remote add upstream https://github.com/${UPSTREAM_ORG}/${REPO}.git
     if [ "$REPO" = "eks-distro-build-tooling" ] && [ "$JOB_TYPE" = "presubmit" ]; then
         git fetch upstream pull/$PULL_NUMBER/head:image-update-branch
         git checkout $PR_BRANCH

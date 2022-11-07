@@ -20,7 +20,7 @@ set -o pipefail
 BUILD_LIB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/" && pwd -P)"
 
 if [ "${USE_BUILDX:-}" == "true" ]; then
-    printf "\nBuilding with with docker buildx\n"
+    printf "\nBuilding with with docker buildx\n" >&2
 
     CMD="docker buildx"
     ARGS=""
@@ -65,7 +65,7 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
         esac
     done
 else
-    printf "\nBuilding with buildctl\n"
+    printf "\nBuilding with buildctl\n" >&2
 
     CMD="buildctl"
     ARGS="$@"
@@ -90,7 +90,7 @@ if [ -f "/buildkit.sh" ]; then
 
     # space is limited on presubmit nodes, after each image build clear the build cache
     if [ "${JOB_TYPE:-}" == "presubmit" ] && [ "${PRUNE_BUILDCTL:-false}" == "true" ]; then
-        buildctl prune --all
+        buildctl prune --all >&2
     fi
 
     (exit $s)

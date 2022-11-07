@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG BASE_IMAGE
+ARG BASE_IMAGE=unused
 FROM ${BASE_IMAGE} as builder
 
 RUN set -x && \

@@ -28,6 +28,8 @@ fi
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
+OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
+
 CHANGED_FILE="tag file(s)"
 if [[ $REPO =~ "prow-jobs" ]]; then
     CHANGED_FILE="Prowjobs"
@@ -85,7 +87,7 @@ under the terms of your choice." >> $PR_BODY_FILE
 PR_BODY=$(cat $PR_BODY_FILE)
 PR_BRANCH="image-tag-update"
 
-cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+cd ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 
 if [[ "$(basename "$FILEPATH")" != "$FILEPATH" ]]; then
     cd $(dirname $FILEPATH)
@@ -96,7 +98,7 @@ for FILE in $(find ./ -type f -name "$FILEPATH" ); do
     git add $FILE
 done
 
-cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
+cd ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 if [ $REPO = "eks-distro-build-tooling" ]; then
     git add ./eks-distro-base-minimal-packages/. ./eks-distro-base-updates/.
 fi

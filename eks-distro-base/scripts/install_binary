@@ -29,6 +29,14 @@ function build::install::binary() {
     build::common::rpm_package_for_binary $file "__rpm_package"
     build::common::filename_from_rpm $file "__expected_filename"
 
+    local -r final_bin=$NEWROOT$__expected_filename
+
+    if [ -f $final_bin ]; then
+        echo "${__expected_filename} already exists, skipping."
+        eval $__result="''"
+        return
+    fi
+
     echo "Installing ${__expected_filename} from ${__rpm_package}"
 
     if [ -z "$__rpm_package" ]; then
@@ -56,8 +64,6 @@ function build::install::binary() {
     fi
 
     # copy desired binary into newroot folder path
-    local -r final_bin=$NEWROOT$__expected_filename
-
     echo "Copying $extracted_bin to $final_bin"
 
     # if we are installing a bin that was copied into fakeroot for scriptlets
@@ -85,5 +91,7 @@ function build::install::configs_and_licenses() {
 for file in "$@"; do
     build::install::binary $file installed_bin
 
-    build::common::install_deps_for_binary $installed_bin
+    if [ -n "${installed_bin}" ]; then 
+        build::common::install_deps_for_binary $installed_bin
+    fi
 done

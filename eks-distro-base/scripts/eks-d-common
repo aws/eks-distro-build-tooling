@@ -458,8 +458,15 @@ function build::common::clean_install() {
 
                 build::common::cp_common_utils_for_rpm_scriptlets "${reqs}"
             fi
-            env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file
             
+            if ! env -u BASH_XTRACEFD rpm -ivvh --nodeps --root $NEWROOT $just_db $rpm_file &> $log_file; then
+                echo "******************************************************"
+                echo "RPM install failed for $rpm_file:"                
+                cat $log_file
+                echo "******************************************************"
+                exit 1
+            fi
+
             # not all packages run ldconfig as part of their postinstall scriptlet (they should)
             # since we are relying on ldconfig now we need this to be refreshed
             build::common::update_ldconfig
