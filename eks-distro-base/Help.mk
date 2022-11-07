@@ -19,6 +19,9 @@ minimal-images-base-csi: ## Build, export packages, validate and run tests for m
 minimal-images-base-kind: ## Build, export packages, validate and run tests for minimal variant `base-kind`
 minimal-images-base-haproxy: ## Build, export packages, validate and run tests for minimal variant `base-haproxy`
 minimal-images-base-git: ## Build, export packages, validate and run tests for minimal variant `base-git`
+minimal-images-base-compiler-base: ## Build, export packages, validate and run tests for minimal variant `base-compiler-base`
+minimal-images-base-compiler-yum: ## Build, export packages, validate and run tests for minimal variant `base-compiler-yum`
+minimal-images-base-compiler-gcc: ## Build, export packages, validate and run tests for minimal variant `base-compiler-gcc`
 minimal-images-base-python-3.9: ## Build, export packages, validate and run tests for minimal variant `base-python-3.9`
 
 ##@ Package Export Minimal Targets
@@ -34,6 +37,9 @@ packages-export-minimal-images-base-csi: ## Export packages for minimal variant 
 packages-export-minimal-images-base-kind: ## Export packages for minimal variant `base-kind`
 packages-export-minimal-images-base-haproxy: ## Export packages for minimal variant `base-haproxy`
 packages-export-minimal-images-base-git: ## Export packages for minimal variant `base-git`
+packages-export-minimal-images-base-compiler-base: ## Export packages for minimal variant `base-compiler-base`
+packages-export-minimal-images-base-compiler-yum: ## Export packages for minimal variant `base-compiler-yum`
+packages-export-minimal-images-base-compiler-gcc: ## Export packages for minimal variant `base-compiler-gcc`
 packages-export-minimal-images-base-python-3.9: ## Export packages for minimal variant `base-python-3.9`
 
 ##@ Validate Minimal Targets
@@ -49,6 +55,9 @@ validate-minimal-images-base-csi: ## Validate for minimal variant `base-csi`
 validate-minimal-images-base-kind: ## Validate for minimal variant `base-kind`
 validate-minimal-images-base-haproxy: ## Validate for minimal variant `base-haproxy`
 validate-minimal-images-base-git: ## Validate for minimal variant `base-git`
+validate-minimal-images-base-compiler-base: ## Validate for minimal variant `base-compiler-base`
+validate-minimal-images-base-compiler-yum: ## Validate for minimal variant `base-compiler-yum`
+validate-minimal-images-base-compiler-gcc: ## Validate for minimal variant `base-compiler-gcc`
 validate-minimal-images-base-python-3.9: ## Validate for minimal variant `base-python-3.9`
 
 ##@ Test Minimal Targets
@@ -64,6 +73,9 @@ test-minimal-images-base-csi: ## Run tests for minimal variant `base-csi`
 test-minimal-images-base-kind: ## Run tests for minimal variant `base-kind`
 test-minimal-images-base-haproxy: ## Run tests for minimal variant `base-haproxy`
 test-minimal-images-base-git: ## Run tests for minimal variant `base-git`
+test-minimal-images-base-compiler-base: ## Run tests for minimal variant `base-compiler-base`
+test-minimal-images-base-compiler-yum: ## Run tests for minimal variant `base-compiler-yum`
+test-minimal-images-base-compiler-gcc: ## Run tests for minimal variant `base-compiler-gcc`
 test-minimal-images-base-python-3.9: ## Run tests for minimal variant `base-python-3.9`
 
 ##@ Update Minimal Targets
@@ -79,6 +91,9 @@ minimal-update-base-csi: ## Run update logic for minimal variant `base-csi`
 minimal-update-base-kind: ## Run update logic for minimal variant `base-kind`
 minimal-update-base-haproxy: ## Run update logic for minimal variant `base-haproxy`
 minimal-update-base-git: ## Run update logic for minimal variant `base-git`
+minimal-update-base-compiler-base: ## Run update logic for minimal variant `base-compiler-base`
+minimal-update-base-compiler-yum: ## Run update logic for minimal variant `base-compiler-yum`
+minimal-update-base-compiler-gcc: ## Run update logic for minimal variant `base-compiler-gcc`
 minimal-update-base-python-3.9: ## Run update logic for minimal variant `base-python-3.9`
 
 ##@ Create PR Minimal Targets
@@ -94,6 +109,9 @@ minimal-create-pr-base-csi: ## Run create pr logic for minimal variant `base-csi
 minimal-create-pr-base-kind: ## Run create pr logic for minimal variant `base-kind`
 minimal-create-pr-base-haproxy: ## Run create pr logic for minimal variant `base-haproxy`
 minimal-create-pr-base-git: ## Run create pr logic for minimal variant `base-git`
+minimal-create-pr-base-compiler-base: ## Run create pr logic for minimal variant `base-compiler-base`
+minimal-create-pr-base-compiler-yum: ## Run create pr logic for minimal variant `base-compiler-yum`
+minimal-create-pr-base-compiler-gcc: ## Run create pr logic for minimal variant `base-compiler-gcc`
 minimal-create-pr-base-python-3.9: ## Run create pr logic for minimal variant `base-python-3.9`
 
 ########### END GENERATED ###########################

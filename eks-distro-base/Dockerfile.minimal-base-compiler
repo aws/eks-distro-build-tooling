@@ -1,0 +1,79 @@
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+ARG BASE_IMAGE=unused
+ARG BUILDER_IMAGE=unused
+ARG VERSIONED_VARIANT=base
+ARG BUILT_BUILDER_IMAGE=unused
+FROM ${BUILDER_IMAGE} as compiler-base-builder
+
+ARG OUTPUT_DEBUG_LOG
+
+# compiler-base is intended to stay "somewhat" minimal,
+# but we can add other packages if usage would be high
+# if not critical to include, we should push the use of the compiler-yum
+# variant where users can install the packages they need at build time
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    clean_install bash \
+        binutils \
+        coreutils \
+        curl \
+        findutils \
+        gawk \
+        grep \
+        gzip \
+        tar \
+        sed && \
+    cleanup "compiler-base-builder"
+
+
+FROM ${BUILDER_IMAGE} as compiler-yum-builder
+
+ARG OUTPUT_DEBUG_LOG
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    clean_install yum && \
+    # not defined as a dep, but python hawkey is installed with the required libs
+    if_al2022 install_rpm python3-hawkey && \
+    cleanup "compiler-yum-builder"
+
+
+
+FROM ${BUILDER_IMAGE} as compiler-gcc-builder
+
+ARG OUTPUT_DEBUG_LOG
+
+# some of the gcc links do not exist because the packages are not included
+# they could be included in a downstream image so best to leave them
+ENV IGNORE_DANGLING_SYMLINKS=true
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    clean_install cpp \
+        gcc \        
+        glibc-devel \
+        make \
+        pkgconfig && \
+    cleanup "compiler-gcc-builder"
+
+
+FROM compiler-${VERSIONED_VARIANT}-builder as builder
+
+
+################# FINAL ########################
+FROM ${BUILT_BUILDER_IMAGE} as built
+FROM ${BASE_IMAGE} as final
+COPY --from=built /newroot /
