@@ -1,0 +1,2 @@
+update_base_image.sh test-tag eks-distro-minimal-base-kind 2
+echo Updated base image tag file

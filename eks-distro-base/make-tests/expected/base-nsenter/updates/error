@@ -1,0 +1,3 @@
+check-update eks-distro-minimal-base-nsenter 2 
+echo false > /override/root/eks-distro-minimal-base-nsenter-pushed
+exit 1
