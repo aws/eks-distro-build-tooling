@@ -1,9 +1,9 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 ca-certificates-2021.2.50-72.amzn2.0.3.noarch
 filesystem-3.2-25.amzn2.0.4.aarch64
-glibc-2.26-61.amzn2.aarch64
-glibc-common-2.26-61.amzn2.aarch64
-glibc-minimal-langpack-2.26-61.amzn2.aarch64
+glibc-2.26-62.amzn2.aarch64
+glibc-common-2.26-62.amzn2.aarch64
+glibc-minimal-langpack-2.26-62.amzn2.aarch64
 gpg-pubkey-c87f5b1a-593863f8
 libcap-2.54-1.amzn2.0.1.aarch64
 libgcc-7.3.1-15.amzn2.aarch64
@@ -14,4 +14,4 @@ pcre-8.32-17.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.aarch64
 tzdata-2022a-1.amzn2.noarch
-util-linux-2.30.2-2.amzn2.0.7.aarch64
+util-linux-2.30.2-2.amzn2.0.9.aarch64

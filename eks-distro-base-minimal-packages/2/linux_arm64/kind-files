@@ -244,10 +244,10 @@
 -rwxr-xr-x    68KiB /usr/bin/db_upgrade
 -rwxr-xr-x    68KiB /usr/bin/db_verify
 -rwxr-xr-x    67KiB /usr/bin/dbus-cleanup-sockets
--rwxr-xr-x   267KiB /usr/bin/dbus-daemon
+-rwxr-xr-x   266KiB /usr/bin/dbus-daemon
 -rwxr-xr-x    68KiB /usr/bin/dbus-monitor
 -rwxr-xr-x    67KiB /usr/bin/dbus-run-session
--rwxr-xr-x    68KiB /usr/bin/dbus-send
+-rwxr-xr-x    67KiB /usr/bin/dbus-send
 -rwxr-xr-x    68KiB /usr/bin/dbus-test-tool
 -rwxr-xr-x    67KiB /usr/bin/dbus-update-activation-environment
 -rwxr-xr-x    67KiB /usr/bin/dbus-uuidgen
@@ -429,7 +429,7 @@
 -rwxr-xr-x    68KiB /usr/bin/rpm2cpio
 -rwxr-xr-x    68KiB /usr/bin/rpmdb
 -rwxr-xr-x    68KiB /usr/bin/rpmkeys
--rwxr-xr-x   536KiB /usr/bin/rsync
+-rwxr-xr-x   537KiB /usr/bin/rsync
 -rwxr-xr-x    69KiB /usr/bin/runcon
 -rwxr-xr-x    68KiB /usr/bin/script
 -rwxr-xr-x    68KiB /usr/bin/scriptreplay
