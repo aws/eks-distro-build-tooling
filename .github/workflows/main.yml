@@ -12,18 +12,29 @@ jobs:
     - id: check_the_comment
       run: |
             if [[ $COMMENT =~ "/backport" ]]; then 
-              echo Comment contains request to backport...
-              echo "proceed_with_backport=true" >> $GITHUB_OUTPUT
+              echo "Comment contains request to backport..."
+              echo "is_backport_comment=true" >> $GITHUB_OUTPUT
             else 
-              echo No backport request...ending job.
+              echo "No backport request...ending job."
             fi
 
             echo "go_version_array=$(cat ${GITHUB_WORKSPACE}/main/projects/golang/go/MAINTAINED_EOL_VERSIONS | jq -R -s -c 'split("\n") | map(select(length > 0))')" >> $GITHUB_OUTPUT
+    - id: check_owners
+      run: |
+            owners=($(awk '/-/ {print $2}' ${GITHUB_WORKSPACE}/OWNERS))
+            for i in "${owners[@]}"; do
+              if [[ ${{ github.event.comment.user.login }} == "$i" ]]; then
+                echo "$i is a repository owner"
+                echo "is_owner=true" >> $GITHUB_OUTPUT
+                break
+              fi
+            done
     outputs:
       go_version_array: ${{ steps.check_the_comment.outputs.go_version_array }}
-      proceed_with_backport: ${{ steps.check_the_comment.outputs.proceed_with_backport }}
+      is_backport_comment: ${{ steps.check_the_comment.outputs.is_backport_comment }}
+      is_owner: ${{ steps.check_the_comment.outputs.is_owner }}
   open_issues:
-    if: ${{ needs.check_comment.outputs.proceed_with_backport }}
+    if: ${{ needs.check_comment.outputs.is_backport_comment }} && ${{ needs.check_comment.outputs.is_owner }}
     runs-on: ubuntu-latest
     needs: check_comment
     strategy:
