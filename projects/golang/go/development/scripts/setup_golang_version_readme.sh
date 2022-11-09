@@ -18,36 +18,39 @@ set -o pipefail
 set -x
 
 if [ "$1" == "" ]; then
-    echo "Please specify a Go Minor Version to set up for EKS Go"
-    exit 1
+  echo "Please specify a Go Minor Version to set up for EKS Go"
+  exit 1
 fi
 GOLANG_MINOR_VERSION=$1
-
-if [ "$2" == "" ]; then
-    echo "Please specify a Go Git Tag to use for the given Go Minor Version"
-    exit 1
-fi
-GOLANG_GIT_TAG=$2
 
 BASE_DIRECTORY="$(git rev-parse --show-toplevel)"
 PROJECT_DIRECTORY="$BASE_DIRECTORY/projects/golang/go/"
 VERSION_DIRECTORY="${PROJECT_DIRECTORY}${GOLANG_MINOR_VERSION}"
 
+GOLANG_GIT_TAG=$(cat $VERSION_DIRECTORY/GIT_TAG)
+GOLANG_RELEASE=$(cat $VERSION_DIRECTORY/RELEASE)
+
 touch ${VERSION_DIRECTORY}/README.md
 
 cat >${VERSION_DIRECTORY}/README.md <<EOF
-# EKS Golang ${1}
+# EKS Golang ${GOLANG_MINOR_VERSION}
+
+Current Release: \`${GOLANG_RELEASE}\`
+
+Tracking Tag: \`${GOLANG_GIT_TAG}\`
+
+Artifacts: https://distro.eks.amazonaws.com/golang-go${GOLANG_MINOR_VERSION}/releases/${GOLANG_RELEASE}/RPMS
 
 ### ARM64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-${GOLANG_MINOR_VERSION}-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
-
+bro
 ### AMD64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-${GOLANG_MINOR_VERSION}-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
-The patches in `./patches` include relevant utility fixes for go `${GOLANG_GIT_TAG}`.
+The patches in \`./patches\` include relevant utility fixes for go \`${GOLANG_MINOR_VERSION}\`.
 
 ### Spec
-The RPM spec file in `./rpmbuild/SPECS` is sourced from the go `${GOLANG_GIT_TAG}` SRPM available on Fedora, and modified to include the relevant patches and build the `${GOLANG_GIT_TAG}` source.
+The RPM spec file in \`./rpmbuild/SPECS\` is sourced from the go ${GOLANG_MINOR_VERSION} SRPM available on Fedora, and modified to include the relevant patches and build the \`${GOLANG_GIT_TAG}\` source.
 
 EOF
