@@ -1,0 +1,72 @@
+From 590b53fac9ebdb259b32e82805dec1cc96987930 Mon Sep 17 00:00:00 2001
+From: Russ Cox <rsc@golang.org>
+Date: Tue, 3 May 2022 15:14:56 -0400
+Subject: [PATCH] [go-1.16.15-eks] os/exec: return clear error for
+ missing cmd.Path
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 09 Nov 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+Source Commit: https://github.com/golang/go/commit/590b53fac9ebdb259b32e82805dec1cc96987930
+
+# Original Information
+
+Following up on CL 403694, there is a bit of confusion about
+when Path is and isn't set, along with now the exported Err field.
+Catch the case where Path and Err (and lookPathErr) are all unset
+and give a helpful error.
+
+Updates #52574
+Followup after #43724.
+
+Fixes #53056
+Fixes CVE-2022-30580
+
+Change-Id: I03205172aef3801c3194f5098bdb93290c02b1b6
+Reviewed-on: https://go-review.googlesource.com/c/go/+/403759
+Reviewed-by: Bryan Mills <bcmills@google.com>
+Reviewed-by: Roland Shoemaker <roland@golang.org>
+(cherry picked from commit 960ffa98ce73ef2c2060c84c7ac28d37a83f345e)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/408578
+Run-TryBot: Roland Shoemaker <roland@golang.org>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+---
+ src/os/exec/exec.go      | 3 +++
+ src/os/exec/exec_test.go | 8 ++++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/src/os/exec/exec.go b/src/os/exec/exec.go
+index 0c49575511..505de58e84 100644
+--- a/src/os/exec/exec.go
++++ b/src/os/exec/exec.go
+@@ -374,6 +374,9 @@ func lookExtensions(path, dir string) (string, error) {
+ // The Wait method will return the exit code and release associated resources
+ // once the command exits.
+ func (c *Cmd) Start() error {
++	if c.Path == "" && c.lookPathErr == nil {
++		c.lookPathErr = errors.New("exec: no command")
++	}
+ 	if c.lookPathErr != nil {
+ 		c.closeDescriptors(c.closeAfterStart)
+ 		c.closeDescriptors(c.closeAfterWait)
+diff --git a/src/os/exec/exec_test.go b/src/os/exec/exec_test.go
+index d854e0de84..a951be718d 100644
+--- a/src/os/exec/exec_test.go
++++ b/src/os/exec/exec_test.go
+@@ -1156,3 +1156,11 @@ func TestChildCriticalEnv(t *testing.T) {
+ 		t.Error("no SYSTEMROOT found")
+ 	}
+ }
++
++func TestNoPath(t *testing.T) {
++	err := new(exec.Cmd).Start()
++	want := "exec: no command"
++	if err == nil || err.Error() != want {
++		t.Errorf("new(Cmd).Start() = %v, want %q", err, want)
++	}
++}
+-- 
+2.30.1 (Apple Git-130)
+
