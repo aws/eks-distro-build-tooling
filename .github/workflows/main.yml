@@ -32,7 +32,7 @@ jobs:
     outputs:
       go_version_array: ${{ steps.check_the_comment.outputs.go_version_array }}
       is_backport_comment: ${{ steps.check_the_comment.outputs.is_backport_comment }}
-      is_owner: ${{ steps.check_the_comment.outputs.is_owner }}
+      is_owner: ${{ steps.check_owners.outputs.is_owner }}
   open_issues:
     if: ${{ needs.check_comment.outputs.is_backport_comment }} && ${{ needs.check_comment.outputs.is_owner }}
     runs-on: ubuntu-latest
@@ -59,4 +59,6 @@ env:
   ISSUE_URL: ${{ github.event.comment.issue_url }}
   HTML_URL: ${{ github.event.comment.html_url }}
   REQUESTER: ${{ github.event.comment.user.login }}
+  IS_BACKPORT: false
+  IS_OWNER: false
 
