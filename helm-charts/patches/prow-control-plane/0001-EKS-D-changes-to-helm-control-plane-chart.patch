@@ -1,4 +1,4 @@
-From 1562e3e2d42444734d0cbd7ee25fae171a603e95 Mon Sep 17 00:00:00 2001
+From a805641e4d218a058cde42c742f7f980be17241e Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
@@ -28,7 +28,7 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  20 files changed, 350 insertions(+), 453 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
-index d3c8a7f3a9..ecb49e4f79 100644
+index 4405f98e78..ecb49e4f79 100644
 --- a/config/prow/cluster/crier_deployment.yaml
 +++ b/config/prow/cluster/crier_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -56,7 +56,7 @@ index d3c8a7f3a9..ecb49e4f79 100644
        terminationGracePeriodSeconds: 30
        containers:
        - name: crier
--        image: gcr.io/k8s-prow/crier:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/crier:v20221104-4497ace285
 +        image: {{ .Values.crier.image }}
          args:
 -        - --blob-storage-workers=1
@@ -249,7 +249,7 @@ index 53f4471080..57393297a9 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
-index fe8c2ebd1a..e829c32a53 100644
+index a37074bbb8..e829c32a53 100644
 --- a/config/prow/cluster/deck_deployment.yaml
 +++ b/config/prow/cluster/deck_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -283,7 +283,7 @@ index fe8c2ebd1a..e829c32a53 100644
        terminationGracePeriodSeconds: 30
        containers:
        - name: deck
--        image: gcr.io/k8s-prow/deck:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/deck:v20221104-4497ace285
 +        image: {{ .Values.deck.image }}
          imagePullPolicy: Always
          ports:
@@ -522,7 +522,7 @@ index e65a50ebcb..8a418f3b6c 100644
 -    protocol: TCP
 -  type: NodePort
 diff --git a/config/prow/cluster/ghproxy.yaml b/config/prow/cluster/ghproxy.yaml
-index 5aab9f96d1..b8cbbc4ea6 100644
+index 61cc8368a4..b8cbbc4ea6 100644
 --- a/config/prow/cluster/ghproxy.yaml
 +++ b/config/prow/cluster/ghproxy.yaml
 @@ -15,7 +15,6 @@
@@ -577,7 +577,7 @@ index 5aab9f96d1..b8cbbc4ea6 100644
      spec:
        containers:
        - name: ghproxy
--        image: gcr.io/k8s-prow/ghproxy:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/ghproxy:v20221104-4497ace285
 +        image: {{ .Values.ghproxy.image }}
          args:
          - --cache-dir=/cache
@@ -618,7 +618,7 @@ index 5aab9f96d1..b8cbbc4ea6 100644
  spec:
    ports:
 diff --git a/config/prow/cluster/hook_deployment.yaml b/config/prow/cluster/hook_deployment.yaml
-index 24ab41f9e6..8333694b39 100644
+index 3884d90bce..8333694b39 100644
 --- a/config/prow/cluster/hook_deployment.yaml
 +++ b/config/prow/cluster/hook_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -652,7 +652,7 @@ index 24ab41f9e6..8333694b39 100644
        terminationGracePeriodSeconds: 180
        containers:
        - name: hook
--        image: gcr.io/k8s-prow/hook:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/hook:v20221104-4497ace285
 +        image: {{ .Values.hook.image }}
          imagePullPolicy: Always
          args:
@@ -839,7 +839,7 @@ index f83355a9a7..a636b60490 100644
 +  - port: 8888
 +  type: {{ .Values.hook.service.type }}
 diff --git a/config/prow/cluster/horologium_deployment.yaml b/config/prow/cluster/horologium_deployment.yaml
-index b068f33488..a15c7c30cd 100644
+index afcc87aa92..a15c7c30cd 100644
 --- a/config/prow/cluster/horologium_deployment.yaml
 +++ b/config/prow/cluster/horologium_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -867,7 +867,7 @@ index b068f33488..a15c7c30cd 100644
        terminationGracePeriodSeconds: 30
        containers:
        - name: horologium
--        image: gcr.io/k8s-prow/horologium:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/horologium:v20221104-4497ace285
 +        image: {{ .Values.horologium.image }}
          args:
          - --config-path=/etc/config/config.yaml
@@ -921,7 +921,7 @@ index 27c3ce2228..bc61184280 100644
    name: "horologium"
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/prow_controller_manager_deployment.yaml b/config/prow/cluster/prow_controller_manager_deployment.yaml
-index 36abc86ff7..0399c1882e 100644
+index a1ec26df3a..0399c1882e 100644
 --- a/config/prow/cluster/prow_controller_manager_deployment.yaml
 +++ b/config/prow/cluster/prow_controller_manager_deployment.yaml
 @@ -15,12 +15,10 @@
@@ -953,7 +953,7 @@ index 36abc86ff7..0399c1882e 100644
        serviceAccountName: prow-controller-manager
        containers:
        - name: prow-controller-manager
--        image: gcr.io/k8s-prow/prow-controller-manager:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/prow-controller-manager:v20221104-4497ace285
 +        image: {{ .Values.prowControllerManager.image }}
          args:
          - --config-path=/etc/config/config.yaml
@@ -1138,7 +1138,7 @@ index 63e4f5ad56..6b33ac1032 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
-index 39f9e0e8fb..d707f54b13 100644
+index e0fe0b9cd6..d707f54b13 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
 +++ b/config/prow/cluster/sinker_deployment.yaml
 @@ -1,7 +1,6 @@
@@ -1177,7 +1177,7 @@ index 39f9e0e8fb..d707f54b13 100644
          - --config-path=/etc/config/config.yaml
          - --job-config-path=/etc/job-config
 -        - --dry-run=false
--        image: gcr.io/k8s-prow/sinker:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/sinker:v20221104-4497ace285
 -        env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
@@ -1327,7 +1327,7 @@ index 70eb9b52bc..87f30fe1d2 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/statusreconciler_deployment.yaml b/config/prow/cluster/statusreconciler_deployment.yaml
-index 59b50d5021..6dccad51d6 100644
+index ddc6d45531..6dccad51d6 100644
 --- a/config/prow/cluster/statusreconciler_deployment.yaml
 +++ b/config/prow/cluster/statusreconciler_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1342,7 +1342,7 @@ index 59b50d5021..6dccad51d6 100644
        terminationGracePeriodSeconds: 180
        containers:
        - name: statusreconciler
--        image: gcr.io/k8s-prow/status-reconciler:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/status-reconciler:v20221104-4497ace285
 +        image: {{ .Values.statusreconciler.image }}
          imagePullPolicy: Always
          args:
@@ -1429,7 +1429,7 @@ index 847cfb47c1..1def1c63f7 100644
    name: statusreconciler
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/tide_deployment.yaml b/config/prow/cluster/tide_deployment.yaml
-index c7fa153925..3f9d26f8f4 100644
+index 54134c3eda..3f9d26f8f4 100644
 --- a/config/prow/cluster/tide_deployment.yaml
 +++ b/config/prow/cluster/tide_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1456,7 +1456,7 @@ index c7fa153925..3f9d26f8f4 100644
        serviceAccountName: tide
        containers:
        - name: tide
--        image: gcr.io/k8s-prow/tide:v20220929-df51d670b0
+-        image: gcr.io/k8s-prow/tide:v20221104-4497ace285
 +        image: {{ .Values.tide.image }}
          args:
 -        - --dry-run=false
