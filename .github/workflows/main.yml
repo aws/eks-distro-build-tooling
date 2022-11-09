@@ -21,7 +21,7 @@ jobs:
             echo "go_version_array=$(cat ${GITHUB_WORKSPACE}/main/projects/golang/go/MAINTAINED_EOL_VERSIONS | jq -R -s -c 'split("\n") | map(select(length > 0))')" >> $GITHUB_OUTPUT
     - id: check_owners
       run: |
-            owners=($(awk '/-/ {print $2}' ${GITHUB_WORKSPACE}/OWNERS))
+            owners=($(awk '/-/ {print $2}' ${GITHUB_WORKSPACE}/main/OWNERS))
             for i in "${owners[@]}"; do
               if [[ ${{ github.event.comment.user.login }} == "$i" ]]; then
                 echo "$i is a repository owner"
@@ -47,14 +47,16 @@ jobs:
     - id: get_issue_title
       run: echo "ISSUE_TITLE=$(curl -s $ISSUE_URL | jq -r '.title')" >> $GITHUB_ENV
     - id: create_issue
-      uses: dacbd/create-issue-action@v1.21
+      uses: dacbd/create-issue-action@v1.2.1
       with:
         token: ${{ github.token }}
-        title: ${{ env.ISSUE_TITLE }} - [go${{ matrix.go_version }} backport]
-        body: Backport requested for this go version in ${{ env.HTML_URL }}
+        title: ${{ env.ISSUE_TITLE }} - [eks go${{ matrix.go_version }} backport]
+        body: |
+          A backport to EKS Go ${{ matrix.go_version }} is [requested by ${{ env.REQUESTER }}](${{ env.HTML_URL }})
         labels: security,golang
 env:
   COMMENT: ${{ github.event.comment.body }}
   ISSUE_URL: ${{ github.event.comment.issue_url }}
   HTML_URL: ${{ github.event.comment.html_url }}
+  REQUESTER: ${{ github.event.comment.user.login }}
 
