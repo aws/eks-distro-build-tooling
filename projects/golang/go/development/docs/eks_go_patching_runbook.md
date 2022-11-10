@@ -77,8 +77,10 @@ and modify it to use our format:
    Golang RPM spec files after Go 1.16 use the RPM directive [`autosetup`](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.19/rpmbuild/SPECS/golang.spec#L293), so all you need to do to apply a patch at build time is define it as a Patch source in the spec.
    
    EKS Go currently requires one custom patch for each Go version, above and beyond the security patches. 
-   This patch allows us to skip specific Golang standard library tests in certain circumstances, such as skipping privilleged tests which call `mount` when we're building the RPM in a container. 
+   This patch allows us to skip specific Golang standard library tests in certain circumstances, such as skipping privilleged tests which call `mount` when we're building the RPM in a container[^1]. 
    You can find [the Go 1.19 version of that patch here](../../1.19/patches/0104-add-method-to-skip-privd-tests-if-required.patch). 
+   
+   
 
 1. Document your work in the RPM spec changelog
 
@@ -143,3 +145,10 @@ A copied patch file from a previous version may not apply cleanly.
 
 #### "No such file or directory" when executing the RPM spec Prep or Autosetup directives
 Ensure that you've adjusted the RPM spec [as outlined above](#golang-rpm-spec-for-eks-go) to run the `autosetup` directive in the correct directory, nameley ` go-go%{go_version}`
+
+### Notes
+[^1]: This is required because of the way that EKS Go builds and tests Golang in an unprivileged container running in our prow cluster.
+There are a few Go standard library tests which call `mount` as part of the test.
+The [`mount` syscall](https://man7.org/linux/man-pages/man2/mount.2.html), which attaches a specified filesystem, requires highly elevated privileges, such as [the CAP_SYS_ADMIN capability](https://man7.org/linux/man-pages/man7/capabilities.7.html).
+This level of permission if not appropriate or secure in a containerized environment, as it would allow unfettered modification of the host system by the container, and we do not provide our test containers with this level of privilege. 
+Therefore, we apply a patch that allows us to skip the few tests that require `mount` calls in our CI environment.
