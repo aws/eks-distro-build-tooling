@@ -35,8 +35,8 @@ PROJECT_DIRECTORY="$BASE_DIRECTORY/projects/golang/go/"
 VERSION_DIRECTORY="${PROJECT_DIRECTORY}${GOLANG_MINOR_VERSION}"
 
 if [ -d "$VERSION_DIRECTORY" ]; then
-  echo "$VERSION_DIRECTORY already exists; existing so as not to over-write an existing project structure"
-  exit 1
+    echo "$VERSION_DIRECTORY already exists; existing so as not to over-write an existing project structure"
+    exit 1
 fi
 
 mkdir "$VERSION_DIRECTORY"
