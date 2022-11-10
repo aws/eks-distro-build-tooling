@@ -99,7 +99,7 @@ EKS Go prow jobs can be found in [the EKS Distro Prow Jobs repository](https://g
 In order to add a pre-submit for testing new EKS Go minor versions, copy an existing pre-submit, such as [this one for EKS Go `1.19`](https://github.com/aws/eks-distro-prow-jobs/blob/main/templater/jobs/presubmit/eks-distro-build-tooling/eks-distro-base-presubmits-golang-1-19.yaml),
 and replace all occurrences of `1.19` with the new minor version of Go you wish to support (e.g. `1.20`).
 
-Once you've added a template for this new job, use the standard prow make commands to generate the job yaml from the template (e.g. `make -C templater prow-jobs`).
+Once you've added a template for this new job, [use the standard prow make commands](https://github.com/aws/eks-distro-prow-jobs/blob/main/docs/prowjobs.md) to generate the job yaml from the template (e.g. `make -C templater prow-jobs`).
 
 Once this pre-submit is merged into EKS Distro Prow jobs, it will run against the PR you created in the previous step, attempting to build the RPM spec file, applying the patches, and doing a dry-run push to S3 for the resulting RPMs. 
 Debug any failures of this prowjob to ensure that the spec file is correct and the project is building as expected. For some common issues, see [the debugging FAQ below](#debugging-eks-go-builds)
