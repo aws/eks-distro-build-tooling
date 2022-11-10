@@ -60,5 +60,4 @@ env:
   ISSUE_URL: ${{ github.event.comment.issue_url }}
   HTML_URL: ${{ github.event.comment.html_url }}
   REQUESTER: ${{ github.event.comment.user.login }}
-  IS_BACKPORT: false
   IS_OWNER: false
