@@ -17,12 +17,16 @@ This work breaks down into a few steps:
 1. [configure EKS Go prow pre-submits in EKS Distro Prow Jobs](#prow-jobs-pre-submits)
 1. [configure EKS Go prow post-submits in EKS Distro Prow Jobs](#prow-jobs-post-submits)
 
+### Developer Setup
+All work done in EKS Distro Build Tooling should be done in a fork of the repo, with pull requests made from the fork into the `main` branch of the upstream repo.
+So, to get started, you'll [want to fork EKS Distro Build Tooling on Github](https://github.com/aws/eks-distro-build-tooling/fork).
+
 ### Setup Project Structure
 
 First, we need to set up the new Go minor version project structure, mirroring the other Go minor versions supported by EKS Go.
 You can use the [the helper script](../scripts/setup_golang_minor_version.sh) to set up the initial structure.
 For example, to set up Go `1.19` starting at the Git tag `go1.19.2`, 
-you would invoke the following command in a clone of EKS Distro Build Tooling and commit the results:
+you would invoke the following command in your fork of EKS Distro Build Tooling and commit the results:
 
 ```shell
 ../scripts/setup_golang_minor_version.sh 1.19 go1.19.2
