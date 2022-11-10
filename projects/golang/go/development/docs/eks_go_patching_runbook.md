@@ -3,8 +3,113 @@
 Documentation for EKS Go developers and those looking to extend and work with the EKS Go build and distribution systems.
 
 ## Contents
+1. [Applying a New Patch to an EKS Go Version](#adding-a-patch-to-an-eks-go-version)
 1. [Adding a Go minor version to EKS Go](#adding-a-go-minor-version-to-eks-go)
 1. [Updating an EKS Go minor version to use a new upstream Go patch version](#new-patch-versions)
+
+## Generating and Applying a Patch to an EKS Go Version
+When a new Golang versions is released there are often security fixes included.
+Any security fixes included in the release will be noted in the release announcement on the Golang google group; 
+[for example, in this announcement for `1.19.3`.](https://groups.google.com/g/golang-announce/c/mbHY1UY3BaM/m/hSpmRzk-AgAJ)
+
+When these security fixes are available, EKS Go must review the fixes, determine if they are applicable to EKS Go,
+and then backport the fixes to the Go versions we maintain. In addition, if the security fixes are part of a patch version release, 
+we need [to update the supported Go versions git tag to track the newly released patch version](#new-patch-versions).
+
+1. Identify the commits that needs to be backported to EKS Go
+   
+   Golang release announcements containing security fixes ([like this one](https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE/m/3SeTTJs9AwAJ))
+   will include links to [the associated upstream Github issues](https://github.com/golang/go/issues/53188). 
+   Each of these Github issues are linked [to upstream Backport Issues](https://github.com/golang/go/issues/53432). 
+   These are for tracking the backport of the fix to the maintained release branches.
+   Each of these Github issues will [be linked to the commit containing the fix for the issue](https://github.com/golang/go/commit/d13431c37ab62f9755f705731536ff74e7165b08) by a [comment from the gopherbot](https://github.com/golang/go/issues/53433#issuecomment-1181860952). 
+   
+   So, what we want to do, is:
+   1. Go to the [Github issue associated with the given fix]((https://github.com/golang/go/issues/53188))
+   1. Go to the [backport issue for the oldest release branch available](https://github.com/golang/go/issues/53432); this is so that the commit we're working from is as close to our EOL versions as possible, thus helping to minimize conflicts.
+   1. Find the [commit which closed the backport issue](https://github.com/golang/go/commit/d13431c37ab62f9755f705731536ff74e7165b08). This is the commit we'll be testing and generating a patch from.
+
+1. __Determine if the issue is applicable to EKS Go__
+   1. __Does the issue apply to EKS Go versions?__
+      
+      Check if the issue applies to supported EKS Go versions, and if so, which ones.
+      In some cases the fixes may only apply to a subset of versions, or have been introduced in a recent version.
+      This can be determined by reviewing the CVE, the security announcement, and the accompanying pull requests and issues.
+      
+   1. __Does the issue apply to EKS Go use cases?__
+       
+      In some cases, the issue may not apply ot the EKS Go use case; in which case, we will not take the patch.
+      The most common case is if the issue affects only `GOOS=js` and `GOARCH=wasm`. We neither build or support EKS Go on Web Assembly.
+      However, unless it's obvious that it does not apply to us (e.g. `GOARCH=wasm`), we should take the patch.
+      
+1. __Generate the patch__
+   1. __check out the appropriate upstream tag__
+      
+      In a local fork of upstream Go, check out the git tag associated with the version you wish to update (e.g. [`go1.17.13`](https://github.com/golang/go/tree/go1.17.13)).
+      This will be the same as the tag [in the `GIT_TAG` file in EKS Distro Build Tooling](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.18/GIT_TAG) for the given EKS Go version.
+      
+   1. __cherry-pick and fix conflicts__
+      
+      Cherry-pick the commit to your fork of Go: `git cherry-pick $COMMIT_HASH`
+   
+      In some cases there will be merge conflicts. 
+      In these cases, it is important to carefully review the blame for the source file at both our tag and the upstream release branch
+      to determine if there are other patches we need to take or modifications that need to be made. 
+      Any changes that are made to the upstream commit need to be carefully documented and included in the header file of the patch we'll generate below
+
+   1. __compile Golang and run tests with the commit applied to the standard library__
+      
+      Once you've applied the cherry-picked commit and addressed any merge conflicts, we need to compile Golang 
+      and run the standard library tests. The best way to do this is to execute `all.bash`, a script in the `src` dir in the Golang repository.
+      This will compile the language, including the cherry-picked commit, and then execute the tests.
+
+   1. __generate patch__
+
+      Once the tests have passed and the language has compiled, we have can generate a patch file from the commit.      
+      `git format-patch -1 $COMMIT_HASH` 
+      
+      This will generate a patch file which we can then format to match EKS Go conventions and test in pre-submits.
+
+   1. __format the patch with EKS Go conventions__
+      Each EKS Go patch includes [a header which contains metadata about when, where and who generated the patch](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.15/patches/0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch#L6).
+      It additionally includes any information [about merge conflict resolution and modification of the original commit.](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.15/patches/0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch#L14).
+      The header is of the format:
+      
+   ```shell
+   # AWS EKS
+   Backported To: go-1.15.15-eks
+   Backported On: Wed, 5 Oct 2022
+   Backported By: email@amazon.com
+   Backported From: release-branch.go1.15
+   Source Commit: https://github.com/golang/go/commit/$COMMIT_HASH
+
+   Information about conflict resolution lorem ipsum etc
+
+   # Original Information
+   ```    
+   
+1. __Add the Patch to EKS Go Builds__
+   
+    1. Move the generated, tested, and formatted patch into the EKS Distro Build Tooling repository for the given version of Go.
+    
+        The patch will be moved [into the 'patches' directory of the given version of EKS Go](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/1.17/patches),
+        and re-numbered to the latest patch number. Security patches are numbered starting at 1, 
+        while utility patches (such as those we add to skip privilleged tests) are numbered starting at 100.
+       
+   1. Update the RPM Spec for the given EKS Go version to apply the patch. 
+      
+      Add [the patch file as a `Patch` in the the RPM spec](https://github.com/aws/eks-distro-build-tooling/commit/9fcdad63779ea6872b7d6a644c691acd7a7fd0bd#diff-6c65bfc608f0c7549cad3e5b55e43264ac1470d6135b284192f77add5b0ee775R160); 
+      this will apply the patch file at build time, ensuring it's properly applied to the EKS Go build. 
+
+1. __Cut a PR and Monitor Pre-submits__
+   Finally, with the patch generated, tested, and in the right place, we cut a PR.
+   When you cut the PR, the EKS D golang pre-submits will run, building the EKS Go RPM using your changes.
+   Carefully monitor these prow pre-submit jobs to ensure that they pass and that the patch you've added to the spec file is applied.
+   
+
+1. __Monitor Post-submits__
+   Finally done! Once the PR containing the patch is merged you'll want to [check out the Golang post-submits running in EKS Distro Build Tooling](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit&job=golang*), 
+   and ensure that the post-submit triggered by your change runs successfully.
 
 ## Adding a Go Minor Version to EKS Go
 When a new Golang minor version is released EKS Go will need to track and build that version.
