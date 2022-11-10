@@ -1,0 +1,114 @@
+From 4c69fd51a9ed70da0a6399d0b084b828bc30d562 Mon Sep 17 00:00:00 2001
+From: Yasuhiro Matsumoto <mattn.jp@gmail.com>
+Date: Fri, 22 Apr 2022 10:07:51 +0900
+Subject: [PATCH] [go-1.16.15-eks] path/filepath: do not remove prefix
+ "." when following path contains ":".
+
+
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 09 Nov 2022
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.17
+Source Commit: https://github.com/golang/go/commit/4c69fd51a9ed70da0a6399d0b084b828bc30d562
+
+# Original Information
+
+For #52476
+Fixes #52478
+Fixes CVE-2022-29804
+
+Change-Id: I9eb72ac7dbccd6322d060291f31831dc389eb9bb
+Reviewed-on: https://go-review.googlesource.com/c/go/+/401595
+Auto-Submit: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Alex Brainman <alex.brainman@gmail.com>
+Run-TryBot: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/405235
+Reviewed-by: Yasuhiro Matsumoto <mattn.jp@gmail.com>
+---
+ src/path/filepath/path.go              | 14 +++++++++++++-
+ src/path/filepath/path_test.go         |  3 +++
+ src/path/filepath/path_windows_test.go | 26 ++++++++++++++++++++++++++
+ 3 files changed, 42 insertions(+), 1 deletion(-)
+
+diff --git a/src/path/filepath/path.go b/src/path/filepath/path.go
+index b56534dead..8300a32cb1 100644
+--- a/src/path/filepath/path.go
++++ b/src/path/filepath/path.go
+@@ -117,9 +117,21 @@ func Clean(path string) string {
+ 		case os.IsPathSeparator(path[r]):
+ 			// empty path element
+ 			r++
+-		case path[r] == '.' && (r+1 == n || os.IsPathSeparator(path[r+1])):
++		case path[r] == '.' && r+1 == n:
+ 			// . element
+ 			r++
++		case path[r] == '.' && os.IsPathSeparator(path[r+1]):
++			// ./ element
++			r++
++
++			for r < len(path) && os.IsPathSeparator(path[r]) {
++				r++
++			}
++			if out.w == 0 && volumeNameLen(path[r:]) > 0 {
++				// When joining prefix "." and an absolute path on Windows,
++				// the prefix should not be removed.
++				out.append('.')
++			}
+ 		case path[r] == '.' && path[r+1] == '.' && (r+2 == n || os.IsPathSeparator(path[r+2])):
+ 			// .. element: remove to last separator
+ 			r += 2
+diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
+index bc5509b49c..ed17a8854d 100644
+--- a/src/path/filepath/path_test.go
++++ b/src/path/filepath/path_test.go
+@@ -93,6 +93,9 @@ var wincleantests = []PathTest{
+ 	{`//host/share/foo/../baz`, `\\host\share\baz`},
+ 	{`\\a\b\..\c`, `\\a\b\c`},
+ 	{`\\a\b`, `\\a\b`},
++	{`.\c:`, `.\c:`},
++	{`.\c:\foo`, `.\c:\foo`},
++	{`.\c:foo`, `.\c:foo`},
+ }
+ 
+ func TestClean(t *testing.T) {
+diff --git a/src/path/filepath/path_windows_test.go b/src/path/filepath/path_windows_test.go
+index 76a459ac96..3edafb5a85 100644
+--- a/src/path/filepath/path_windows_test.go
++++ b/src/path/filepath/path_windows_test.go
+@@ -530,3 +530,29 @@ func TestNTNamespaceSymlink(t *testing.T) {
+ 		t.Errorf(`EvalSymlinks(%q): got %q, want %q`, filelink, got, want)
+ 	}
+ }
++
++func TestIssue52476(t *testing.T) {
++	tests := []struct {
++		lhs, rhs string
++		want     string
++	}{
++		{`..\.`, `C:`, `..\C:`},
++		{`..`, `C:`, `..\C:`},
++		{`.`, `:`, `:`},
++		{`.`, `C:`, `.\C:`},
++		{`.`, `C:/a/b/../c`, `.\C:\a\c`},
++		{`.`, `\C:`, `.\C:`},
++		{`C:\`, `.`, `C:\`},
++		{`C:\`, `C:\`, `C:\C:`},
++		{`C`, `:`, `C\:`},
++		{`\.`, `C:`, `\C:`},
++		{`\`, `C:`, `\C:`},
++	}
++
++	for _, test := range tests {
++		got := filepath.Join(test.lhs, test.rhs)
++		if got != test.want {
++			t.Errorf(`Join(%q, %q): got %q, want %q`, test.lhs, test.rhs, got, test.want)
++		}
++	}
++}
+-- 
+2.30.1 (Apple Git-130)
+
