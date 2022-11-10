@@ -78,7 +78,7 @@ and modify it to use our format:
    
    EKS Go currently requires one custom patch for each Go version, above and beyond the security patches. 
    This patch allows us to skip specific Golang standard library tests in certain circumstances, such as skipping privilleged tests which call `mount` when we're building the RPM in a container. 
-   You can find [the GO 1.19 version of that patch here](../../1.19/patches/0104-add-method-to-skip-privd-tests-if-required.patch). 
+   You can find [the Go 1.19 version of that patch here](../../1.19/patches/0104-add-method-to-skip-privd-tests-if-required.patch). 
 
 1. Document your work in the RPM spec changelog
 
