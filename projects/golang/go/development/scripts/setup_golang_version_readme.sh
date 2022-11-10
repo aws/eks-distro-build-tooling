@@ -18,7 +18,7 @@ set -o pipefail
 set -x
 
 if [ "$1" == "" ]; then
-  echo "Please specify a Go Minor Version to set up for EKS Go"
+  echo "Please specify an EKS Go Minor Version to configure the readme for"
   exit 1
 fi
 GOLANG_MINOR_VERSION=$1
