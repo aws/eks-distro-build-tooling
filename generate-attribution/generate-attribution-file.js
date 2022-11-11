@@ -3,16 +3,19 @@ const fs = require('fs');
 const fsPromises = fs.promises;
 const csvParse = require('csv-parse/lib/sync')
 const HTMLParser = require('node-html-parser');
-const { https } = require('follow-redirects');
+const { https, http } = require('follow-redirects');
 const retry = require('async-retry')
 const glob = require("glob-promise")
-
+const homedir = require('os').homedir();
 
 // https://github.com/google/licenseclassifier/blob/842c0d70d7027215932deb13801890992c9ba364/license_type.go#L323
 const RECIPROCAL_LICENSE_TYPES = ["APSL-1.0", "APSL-1.1", "APSL-1.2", "APSL-2.0", "CDDL-1.0", "CDDL-1.1", "CPL-1.0", "EPL-1.0", "FreeImage", "IPL-1.0", "MPL-1.0", "MPL-1.1", "MPL-2.0", "Ruby"];
 const typesCanBeMergedWithoutCopyRight = ['MIT'];
 
 const sortByModule = (a, b) => a.module.localeCompare(b.module);
+
+const cacheFile = path.join(homedir, ".generate-attribution", '.cache');
+let httpCache = {};
 
 const doesRequireSourceLink = (licenseType) => {
     return RECIPROCAL_LICENSE_TYPES.findIndex((type) => licenseType.startsWith(type)) !== -1;
@@ -152,11 +155,23 @@ async function addGoLicense(dependencies) {
     return dependencies;
 }
 
+async function cacheHttp(url, prom) {
+    return new Promise((resolve, reject) => {
+        if (Object.hasOwn(httpCache, url)) {
+            return resolve(httpCache[url]);
+        }
+        prom.then((res) => {
+            httpCache[url] = res;
+            resolve(res);
+        }).catch(reject);
+    });
+}
+
 async function readLicenseFromUpstream(upstreamUrl) {
     let finalDoc = '';
     const options = await generateAuthorizationHeader()
     options.timeout = 15 * 1000
-    return new Promise((resolve, reject) => {
+    return cacheHttp(upstreamUrl, new Promise((resolve, reject) => {
         const req = https.get(upstreamUrl, options, res => {
             res.on('data', d => {
                 finalDoc += d;
@@ -170,7 +185,7 @@ async function readLicenseFromUpstream(upstreamUrl) {
             reject(err);
         });
         req.end();
-    });
+    }));
 }
 
 
@@ -179,7 +194,7 @@ async function getPackageRepo(package) {
     const url = `https://${package}?go-get=1`
     const options = await generateAuthorizationHeader()
     options.timeout = 15 * 1000
-    return new Promise((resolve, reject) => {
+    return cacheHttp(url, new Promise((resolve, reject) => {
         const req = https.get(url, options, res => {
             if (res.statusCode !== 200) {
                 if (package.startsWith('github.com')) {
@@ -209,7 +224,7 @@ async function getPackageRepo(package) {
             reject(err);
         });
         req.end();
-    });
+    }));
 }
 
 async function readLicenseContent(dep, depLicensesDirPath) {
@@ -220,8 +235,8 @@ async function readLicenseContent(dep, depLicensesDirPath) {
         possiblePaths.push(licensePathFromGoLicenseOutput);
     }
 
-    const files = await glob('LICEN+(S|C)E?(.md|.txt)', {cwd: depLicensesDirPath, nocase: true})
-    
+    const files = await glob('LICEN+(S|C)E?(.md|.txt)', { cwd: depLicensesDirPath, nocase: true })
+
     files.forEach((file) => {
         possiblePaths.push(path.join(depLicensesDirPath, file));
     });
@@ -339,7 +354,7 @@ async function populateVersionAndModuleFromDep(dependencies) {
                 if (isModuleMatch(dep, goListDep, true)) {
                     if (!match || goListDep.Module.Path.length > match.Module.Path.length) {
                         match = goListDep;
-                    }                
+                    }
                 }
             });
             if (match) {
@@ -487,10 +502,23 @@ async function generateAttribution(dependenciesByLicenseType) {
     return fsPromises.writeFile(path.join(projectAttributionDirectory, "ATTRIBUTION.txt"), attributionOutput);
 }
 
+async function loadHttpCache() {
+    try {
+        await fsPromises.access(cacheFile);
+    } catch {
+        return
+    }
+    const data = await fsPromises.readFile(cacheFile);
+    httpCache = JSON.parse(data);
+}
+
+async function saveHttpCache() {
+    await fsPromises.mkdir(path.dirname(cacheFile), { recursive: true });
+    return fsPromises.writeFile(cacheFile, JSON.stringify(httpCache));
+}
 
 async function execute() {
-
-    parseCSV()
+    return parseCSV()
         .then(fixEmptyModule)
         .then(populateVersionAndModuleFromDep)
         .then(populateRootComponentVersion)
@@ -511,4 +539,6 @@ const projectLicensesDirectory = path.join(projectOutputDirectory, "LICENSES");
 const projectAttributionDirectory = path.join(projectOutputDirectory, "attribution");
 
 
-execute();
+loadHttpCache()
+    .then(execute)
+    .then(saveHttpCache);
