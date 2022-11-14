@@ -5,7 +5,7 @@ import (
 )
 
 var validateLibrariesCmd = &cobra.Command{
-	Use:   "Libraries",
+	Use:   "libraries",
 	Short: "Validate all executables and libraries have all dependencies",
 	Long:  "Validate all executables and libraries have all dependencies",
 }
