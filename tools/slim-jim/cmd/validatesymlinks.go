@@ -5,7 +5,7 @@ import (
 )
 
 var validateSymlinksCmd = &cobra.Command{
-	Use:   "Symlinks",
+	Use:   "symlinks",
 	Short: "Validate all symlinks",
 	Long:  "Validate all symlinks",
 }
