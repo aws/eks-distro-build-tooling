@@ -8,7 +8,7 @@ While the last task will require effort by the team, the rest of the task can be
 
 # Solution Overview
 
-I prepose creating a go application for patching. Starting with Golang and potentially extending the functionality to Kubernetes as the workflow should be similar.
+I propose creating a go application for patching. Starting with Golang and potentially extending the functionality to Kubernetes as the workflow should be similar.
 
 ## Golang Patching Runbook
 
