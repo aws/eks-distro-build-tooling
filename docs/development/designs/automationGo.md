@@ -35,7 +35,8 @@ Use a prow job to a call the cve search Golang repo for CVE [backport] issue. On
 
 ## Tools
 
-Cobra cli to make easy calls and pass [options]/flags
+Cobra cli to make easy calls and pass [options]/flags.
+Add to the existing scaffolding under eks-distro-build-tooling/tools/cmd/eksGoTool.
 
 # Alternative solutions
 
