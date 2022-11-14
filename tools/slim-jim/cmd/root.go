@@ -17,6 +17,9 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.PersistentFlags().IntP("verbosity", "v", 0, "Set the log level verbosity")
+	if err := viper.BindPFlags(rootCmd.PersistentFlags()); err != nil {
+		log.Fatalf("failed to bind flags for root: %v", err)
+	}
 }
 
 func rootPersistentPreRun(cmd *cobra.Command, args []string) {
