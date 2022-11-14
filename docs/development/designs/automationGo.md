@@ -4,7 +4,7 @@ Maintaining unsupported versions of Kubernetes and by extention Golang/Go requir
 
 Specifically for patching golang, we are required to monitor their announcements for vulnerabilities, open our own CVE issues for backports that are consistent to allow for easily searchable auditing and transparency for the open-source community, attempt backporting the fixes, and when the backport doesn't apply cleanly, discover the differences in versions to make the backport apply, if applicable.
 
-While the last task will require effort by the team, the rest of the task can be automated to provide clear and consistent [unknown phrasing/word here]. An automated solution would build a consistant audit trail for which CVEs have been patched or why they weren't, any public discussion on the decision process, and many other data points that could be of interest.
+While the last task will require effort by the team, the rest of the tasks can be automated to provide clear and consistent results. An automated solution would build a consistent audit trail for which CVEs have been patched or why they weren't, any public discussion on the decision process, and many other data points that could be of interest.
 
 # Solution Overview
 
