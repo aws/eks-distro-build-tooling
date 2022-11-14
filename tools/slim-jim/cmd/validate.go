@@ -5,10 +5,9 @@ import (
 )
 
 var validateCmd = &cobra.Command{
-	Use:    "validate",
-	Short:  "Validate Libraries and Symlinks",
-	Long:   "",
-	PreRun: prerunHandleCmdBindFlags,
+	Use:   "validate",
+	Short: "Validate Libraries and Symlinks",
+	Long:  "",
 }
 
 func init() {
