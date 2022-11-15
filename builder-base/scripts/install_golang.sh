@@ -46,7 +46,7 @@ function build::go::symlink() {
 function build::go::install(){
     # Set up specific go version by using go get, additional versions apart from default can be installed by calling
     # the function again with the specific parameter.
-    local version=$1
+    local version=${1%-*}
 
     if [ $TARGETARCH == 'amd64' ]; then 
         local arch='x86_64'
