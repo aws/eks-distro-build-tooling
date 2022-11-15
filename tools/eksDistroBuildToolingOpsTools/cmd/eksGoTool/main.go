@@ -1,11 +1,10 @@
 package main
 
 import (
+	cmd2 "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksGoTool/cmd"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/aws/eks-distro-build-tooling/tools/cmd/eksGoTool/cmd"
 )
 
 func main() {
@@ -15,7 +14,7 @@ func main() {
 		<-sigChannel
 		os.Exit(-1)
 	}()
-	if cmd.Execute() == nil {
+	if cmd2.Execute() == nil {
 		os.Exit(0)
 	}
 	os.Exit(-1)
