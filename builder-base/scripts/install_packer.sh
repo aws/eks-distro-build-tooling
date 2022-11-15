@@ -22,7 +22,6 @@ NEWROOT=/packer
 
 source $SCRIPT_ROOT/common_vars.sh
 
-PACKER_VERSION="${PACKER_VERSION:-1.7.2}"
 PACKER_DOWNLOAD_URL="https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_$TARGETARCH.zip"
 PACKER_CHECKSUM_URL="https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_SHA256SUMS"
 

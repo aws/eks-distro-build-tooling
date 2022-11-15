@@ -22,7 +22,6 @@ NEWROOT=/gh-cli
 
 source $SCRIPT_ROOT/common_vars.sh
 
-GITHUB_CLI_VERSION="${GITHUB_CLI_VERSION:-1.8.0}"
 GITHUB_CLI_DOWNLOAD_URL="https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz"
 GITHUB_CLI_CHECKSUM_URL="https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_checksums.txt"
 

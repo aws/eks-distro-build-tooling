@@ -31,7 +31,6 @@ NEWROOT=/bash
 
 source $SCRIPT_ROOT/common_vars.sh
 
-OVERRIDE_BASH_VERSION="${OVERRIDE_BASH_VERSION:-4.3}"
 BASH_DOWNLOAD_URL="http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.gz"
 
 function install_bash() {

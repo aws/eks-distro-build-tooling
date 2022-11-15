@@ -35,10 +35,10 @@ function instal_ansible() {
         ln -sf $USR_LOCAL_BIN/pip $USR_BIN/pip3
     fi
 
-    ANSIBLE_VERSION="${ANSIBLE_VERSION:-2.10.0}"
+    ANSIBLE_VERSION="$ANSIBLE_VERSION"
     pip3 install --user --no-cache-dir "ansible==$ANSIBLE_VERSION"
 
-    PYWINRM_VERSION="${PYWINRM_VERSION:-0.4.1}"
+    PYWINRM_VERSION="$PYWINRM_VERSION"
     pip3 install --user --no-cache-dir "pywinrm==$PYWINRM_VERSION"
     
     rm -rf ${NEWROOT}/usr/*

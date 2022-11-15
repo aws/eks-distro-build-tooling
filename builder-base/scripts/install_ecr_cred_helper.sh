@@ -22,7 +22,6 @@ NEWROOT=/ecr-cred-helper
 
 source $SCRIPT_ROOT/common_vars.sh
 
-AMAZON_ECR_CRED_HELPER_VERSION="${AMAZON_ECR_CRED_HELPER_VERSION:-0.6.0}"
 AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL="https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/${AMAZON_ECR_CRED_HELPER_VERSION}/linux-$TARGETARCH/docker-credential-ecr-login"
 AMAZON_ECR_CRED_HELPER_CHECKSUM_URL="${AMAZON_ECR_CRED_HELPER_DOWNLOAD_URL}.sha256"
 

@@ -31,7 +31,6 @@ NEWROOT=/buildkit
 
 source $SCRIPT_ROOT/common_vars.sh
 
-BUILDKIT_VERSION="${BUILDKIT_VERSION:-v0.10.5}"
 BUILDKIT_DOWNLOAD_URL="https://github.com/moby/buildkit/releases/download/$BUILDKIT_VERSION/buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz"
 
 

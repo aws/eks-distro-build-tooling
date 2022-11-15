@@ -26,7 +26,7 @@ source $SCRIPT_ROOT/common_vars.sh
 function install_linuxkit() {
     # linuxkit is used by tinkerbell/hook for building an operating system installation environment (osie)
     # We need a higher version of linuxkit hence we do go get of a particular commit
-    GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@v0.0.0-20210616134744-ccece6a4889e
+    GO111MODULE=on GOBIN=${GOPATH}/go1.16/bin ${GOPATH}/go1.16/bin/go get github.com/linuxkit/linuxkit/src/cmd/linuxkit@$LINUXKIT_VERSION
 
     mv ${GOPATH}/go1.16/bin/linuxkit ${USR_BIN}/linuxkit
 

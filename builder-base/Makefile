@@ -46,6 +46,10 @@ define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
+define NEWLINE
+
+
+endef
 
 .PHONY: buildkit-check
 buildkit-check:
@@ -72,6 +76,8 @@ images-minimal: VARIANT=minimal
 
 .PHONY: images-%
 images-%: buildkit-check
+	$(eval $(subst #,$(NEWLINE),$(shell yq  e 'to_entries | .[] | [.key,.value] | join("=") ' versions.yaml | tr '\n' '#')))
+	$(eval IMAGE_BUILD_ARGS=$(shell yq  e 'to_entries | .[] | .key ' versions.yaml))
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
@@ -80,6 +86,7 @@ images-%: buildkit-check
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
+		$(foreach BUILD_ARG,$(IMAGE_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
 		--export-cache type=inline \
 		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \
 		--opt no-cache=final \
