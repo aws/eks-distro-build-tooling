@@ -4,12 +4,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var installRpmCmd = &cobra.Command{
-	Use:   "rpm",
+var installCmd = &cobra.Command{
+	Use:   "install",
 	Short: "",
 	Long:  "",
 }
 
 func init() {
-	installCmd.AddCommand(installRpmCmd)
+	rootCmd.AddCommand(installCmd)
 }
