@@ -27,6 +27,12 @@ update_base_image.sh test-tag eks-distro-minimal-base-haproxy 2
 echo Updated base image tag file
 update_base_image.sh test-tag eks-distro-minimal-base-git 2
 echo Updated base image tag file
+update_base_image.sh test-tag eks-distro-minimal-base-compiler-base 2
+echo Updated base image tag file
+update_base_image.sh yum-test-tag eks-distro-minimal-base-compiler-yum 2
+echo Updated base image tag file
+update_base_image.sh gcc-test-tag eks-distro-minimal-base-compiler-gcc 2
+echo Updated base image tag file
 update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-3.9 2
 echo Updated base image tag file
 /override/root/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
