@@ -84,7 +84,7 @@ BASE_TAG_FROM_TAG_FILE=$(if $(MOCK_BASE_TAG_FROM_TAG_FILE),$(info tag from file 
 #    intended to be versioned_image_tag when getting tag for versioned variant
 IMAGE_TAG_FOR_VARIANT=$(if $(or \
 	$(and $(JOB_TYPE),$(filter $(JOB_TYPE),presubmit postsubmit)), \
-	$(filter true, $(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed))),$(or $(2),$(IMAGE_TAG)),$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME)) \
+	$(filter true, $(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed))),$(or $(2),$(IMAGE_TAG)),$(call BASE_TAG_FROM_TAG_FILE,$(1)) \
 )
 # ************************************************************
 
@@ -94,7 +94,7 @@ AL_TAG?=2
 BUILD_DEPS?=false
 OUTPUT_DEBUG_LOG?=
 
-GLIBC_VARIANT_NAME=eks-distro-minimal-base-glibc
+MINIMAL_BASE_VARIANT_NAME=eks-distro-minimal-base
 
 # ******************** Image Setup ***************************
 IMAGE_TAG?=$(shell date "+%F-%s")
@@ -107,6 +107,8 @@ BASE_IMAGE_NAME?=eks-distro-base
 BASE_IMAGE_COMPONENT?=$(BASE_IMAGE_NAME)
 VERSIONED_BASE_IMAGE_TAG?=$(call ADD_BASE_VERSIONED_VARIANT,$(BASE_IMAGE_TAG))
 
+COMPILER_VERSION=$(word 1,$(subst -, ,$(VERSIONED_VARIANT)))
+
 # if the image was built, either via this being a pre/post submit job
 # or a periodic which pushed and created the -pushed file
 # use the current IMAGE_TAG as the tag
@@ -114,6 +116,8 @@ VERSIONED_BASE_IMAGE_TAG?=$(call ADD_BASE_VERSIONED_VARIANT,$(BASE_IMAGE_TAG))
 BASE_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
 BUILT_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(IMAGE_NAME:%-builder=%))
 BASE_IMAGE_TAG=$(call IMAGE_TAG_FOR_VARIANT,$(BASE_IMAGE_NAME),)
+
+MINIMAL_BASE_BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(MINIMAL_BASE_VARIANT_NAME)-builder:$(call IMAGE_TAG_FOR_VARIANT,$(MINIMAL_BASE_VARIANT_NAME),)
 
 BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_COMPONENT):$(VERSIONED_BASE_IMAGE_TAG)
 BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_COMPONENT)-builder:$(VERSIONED_BASE_IMAGE_TAG)
@@ -125,6 +129,12 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_COMPONENT)-builder:$(VERSIONED_IMAGE_
 # ******************** Latest Setup **************************
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
+
+STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2022),latest-al22,latest latest.2 latest-al2),$(call ADD_VERSIONED_VARIANT,$(tag)))
+
+COMPILER_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION))
+COMPILER_FULL_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION))
+COMPILER_LATEST=$(if $(filter $(AL_TAG),2022),$(COMPILER_VERSION_WITH_VARIANT)-al22 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al22,$(COMPILER_VERSION_WITH_VARIANT) $(COMPILER_FULL_VERSION_WITH_VARIANT) $(COMPILER_VERSION_WITH_VARIANT)-al2 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al2)
 # ************************************************************
 
 # ****************** COMPILER BASE VARIANTS ******************
@@ -134,6 +144,20 @@ BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
 BASE_PYTHON_VARIANT_VERSIONS=3.9
+# ************************************************************
+
+
+# ****************** GOLANG VARIANTS *************************
+GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang
+BASE_GOLANG_VARIANT_VERSIONS=1.15 1.16 1.17 1.18 1.19
+
+GOLANG_1.15_FULL_VERSION=1.15.15-1
+GOLANG_1.16_FULL_VERSION=1.16.15-1
+GOLANG_1.17_FULL_VERSION=1.17.13-1
+GOLANG_1.18_FULL_VERSION=1.18.7-1
+GOLANG_1.19_FULL_VERSION=1.19.2-1
+
+BASE_GOLANG_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_COMPILER_VARIANT_VERSIONS),$(addsuffix -$(ver),$(BASE_GOLANG_VARIANT_VERSIONS)))
 # ************************************************************
 
 # ************** MINIMAL VARIANT MAGIC VARS ******************
@@ -148,7 +172,7 @@ BASE_PYTHON_VARIANT_VERSIONS=3.9
 
 VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-client base-nginx \
 	base-csi-ebs base-csi base-kind base-haproxy base-git base-compiler \
-	base-python
+	base-python base-golang-compiler
 
 ALL_IMAGE_NAMES=eks-distro-base
 
@@ -240,6 +264,62 @@ define CREATE_PR_TARGET_BODY
 	)
 endef
 
+# $1 - language short name (python/nodejs/golang/java)
+define COMPILER_TARGET_OVERRIDES
+$(eval COMPILER_VARIANTS:=$(BASE_$(call TO_UPPER,$(1))_COMPILER_VARIANT_VERSIONS))
+$(eval VERSIONS:=$(BASE_$(call TO_UPPER,$(1))_VARIANT_VERSIONS))
+$(eval COMPILER_VERSIONED_VARIANTS:=$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_COMPILER))
+$(eval COMPILER_BUILDER_VERSIONED_VARIANTS:=$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_COMPILER))
+$(eval VARIANT_NAME:=$($(call TO_UPPER,$(1))_VARIANT_NAME))
+
+.PHONY: $(1)-compiler-images
+$(1)-compiler-images: $(addprefix minimal-images-base-$(1)-compiler-,$(COMPILER_VARIANTS))
+
+$(COMPILER_VERSIONED_VARIANTS): DOCKERFILE=Dockerfile.minimal-base-$(1)
+$(COMPILER_VERSIONED_VARIANTS): COMPILER_FULL_VERSION=$$($(call TO_UPPER,$(1))_$$(COMPILER_VERSION)_FULL_VERSION)
+$(COMPILER_VERSIONED_VARIANTS): LATEST=$$(call COMPILER_LATEST)
+
+# For all images we are using the cached compiled staged from the runtime image, or golang-builder in the case of golang, to avoid compiling during each build
+$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_NO_CACHE=--opt no-cache=builder-$(1)-base
+$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$(BASE_IMAGE_REPO)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION),$$(COMPILER_VERSION)-$$(IMAGE_TAG))
+
+$(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(1)-builder
+$(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
+
+$(eval $(foreach ver,$(VERSIONS),$(call COMPILER_TARGET_OVERRIDES_FOR_VERSION,base-$(1)-compiler,$(ver),$(1))))
+
+$(eval $(foreach ver,$(VERSIONS),$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_$(ver)): VERSIONED_VARIANT=$(ver)))
+
+endef
+
+# $1 - variant
+# $2 - versioned variant
+# $3 - image component override
+define COMPILER_TARGET_OVERRIDES_FOR_VERSION
+$(eval BASE_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_BASE))
+$(eval YUM_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_YUM))
+$(eval GCC_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_GCC))
+
+$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): BASE_IMAGE_COMPONENT=compiler-base
+$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): IMAGE_COMPONENT=$(3)
+$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT AL_TAG COMPILER_VERSION COMPILER_FULL_VERSION IS_COMPILER
+$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): IS_COMPILER=true
+
+$(BASE_TARGETS): VERSIONED_VARIANT=$(2)
+$(BASE_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-base
+
+$(YUM_TARGETS): VERSIONED_VARIANT=$(2)-yum
+$(YUM_TARGETS): BASE_VERSIONED_VARIANT=yum
+$(YUM_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-yum
+
+$(GCC_TARGETS): VERSIONED_VARIANT=$(2)-gcc
+$(GCC_TARGETS): BASE_VERSIONED_VARIANT=gcc
+$(GCC_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-gcc
+
+.PHONY: $(3)-$(2)-compiler-images
+$(3)-$(2)-compiler-images: $(addprefix minimal-images-base-$(3)-compiler-$(2)-,base yum gcc)
+endef
+
 # There is no local images target since the minimal images build on each other we need a registry to push to
 # in prow we run a docker registry as a sidecar
 # see the README.md on how to run these targets locally
@@ -285,7 +365,7 @@ $(ALL_MINIMAL_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
 # tag al2 build with latest.2 and latest for backward compat
-$(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(if $(filter $(AL_TAG),2022),latest-al22,latest latest.2 latest-al2)
+$(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(call STANDARD_LATEST)
 
 # By default use the minimal-helpers dockerfile for the final stage since its just a copy
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
@@ -362,6 +442,11 @@ $(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPO
 
 $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_PYTHON_3.9): VERSIONED_VARIANT=3.9
 
+# ****************** GOLANG VARIANTS ************************
+$(eval $(call COMPILER_TARGET_OVERRIDES,golang,true))
+
+# ************************************************************
+
 # ****************** COMPILER BASE VARIANTS ******************
 .PHONY: compiler-base-images
 compiler-base-images: $(addprefix minimal-images-base-compiler-,$(BASE_COMPILER_VARIANT_VERSIONS))
@@ -402,7 +487,7 @@ standard-images: BUILDCTL_BUILD_ARGS=BASE_IMAGE
 standard-images: BUILDCTL_IMPORT_CACHE=
 standard-images: BUILDCTL_NO_CACHE=
 # tag al2 build with latest.2 and latest for backward compat
-standard-images: LATEST=$(if $(filter $(AL_TAG),2022),latest-al22,latest latest.2 latest-al2)
+standard-images: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),)
@@ -578,6 +663,7 @@ minimal-images-base-python3.9: minimal-images-base-python-3.9
 
 .PHONY: python-3.9-compiler-images
 python-3.9-compiler-images: minimal-images-base-python-3.9
+
 
 ########### DO NOT EDIT #############################
 # To update call: make add-generated-help-block

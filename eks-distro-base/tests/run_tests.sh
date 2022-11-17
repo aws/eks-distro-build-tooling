@@ -340,4 +340,80 @@ check_base-compiler-gcc() {
     done
 }
 
+check_base-golang-compiler() {
+    local -r version="$1"
+    local -r variant="$2"
+
+    check_base-compiler-$2 golang
+    
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/golang:$IMAGE_TAG go version | grep -v $version; then
+            echo "golang issue!"
+            exit 1
+        fi
+    done
+}
+
+
+check_base-golang-compiler-1.15-base() {
+    check_base-golang-compiler 1.15 base
+}
+
+check_base-golang-compiler-1.15-yum() {
+    check_base-golang-compiler 1.15 yum
+}
+
+check_base-golang-compiler-1.15-gcc() {
+    check_base-golang-compiler 1.15 gcc
+}
+
+check_base-golang-compiler-1.16-base() {
+    check_base-golang-compiler 1.16 base
+}
+
+check_base-golang-compiler-1.16-yum() {
+    check_base-golang-compiler 1.16 yum
+}
+
+check_base-golang-compiler-1.16-gcc() {
+    check_base-golang-compiler 1.16 gcc
+}
+
+check_base-golang-compiler-1.17-base() {
+    check_base-golang-compiler 1.17 base
+}
+
+check_base-golang-compiler-1.17-yum() {
+    check_base-golang-compiler 1.17 yum
+}
+
+check_base-golang-compiler-1.17-gcc() {
+    check_base-golang-compiler 1.17 gcc
+}
+
+check_base-golang-compiler-1.18-base() {
+    check_base-golang-compiler 1.18 base
+}
+
+check_base-golang-compiler-1.18-yum() {
+    check_base-golang-compiler 1.18 yum
+}
+
+check_base-golang-compiler-1.18-gcc() {
+    check_base-golang-compiler 1.18 gcc
+}
+
+check_base-golang-compiler-1.19-base() {
+    check_base-golang-compiler 1.19 base
+}
+
+check_base-golang-compiler-1.19-yum() {
+    check_base-golang-compiler 1.19 yum
+}
+
+check_base-golang-compiler-1.19-gcc() {
+    check_base-golang-compiler 1.19 gcc
+}
+
+
 $TEST
