@@ -22,7 +22,6 @@ NEWROOT=/helm
 
 source $SCRIPT_ROOT/common_vars.sh
 
-HELM_VERSION="${HELM_VERSION:-3.8.1}"
 HELM_DOWNLOAD_URL="https://get.helm.sh/helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz"
 HELM_CHECKSUM_URL="$HELM_DOWNLOAD_URL.sha256"
 

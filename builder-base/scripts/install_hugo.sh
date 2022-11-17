@@ -22,7 +22,6 @@ NEWROOT=/hugo
 
 source $SCRIPT_ROOT/common_vars.sh
 
-HUGO_VERSION=0.85.0
 if [ $TARGETARCH == 'amd64' ]; then 
     HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
 else

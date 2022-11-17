@@ -20,8 +20,8 @@ set -o pipefail
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 VERSION="$1"
-RELEASE_NUMBER="$2"
-AMZN_RELEASE="$3"
+
+RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 
 GOLANG_MAJOR_VERSION=${VERSION%.*}
 
@@ -46,7 +46,7 @@ function build::go::symlink() {
 function build::go::install(){
     # Set up specific go version by using go get, additional versions apart from default can be installed by calling
     # the function again with the specific parameter.
-    local version=$1
+    local version=${1%-*}
 
     if [ $TARGETARCH == 'amd64' ]; then 
         local arch='x86_64'
@@ -55,15 +55,15 @@ function build::go::install(){
     fi
 
     for artifact in golang golang-bin; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.$arch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.$arch.rpm
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     done
 
     if [ $TARGETARCH == 'amd64' ]; then 
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.$arch.rpm -o /tmp/golang-race-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.$arch.rpm
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o /tmp/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     fi
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.noarch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.$AMZN_RELEASE.eks.noarch.rpm
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
     done
 
     build::go::extract $version

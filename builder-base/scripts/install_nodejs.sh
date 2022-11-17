@@ -22,7 +22,6 @@ NEWROOT=/nodejs
 
 source $SCRIPT_ROOT/common_vars.sh
 
-NODEJS_VERSION="${NODEJS_VERSION:-v16.18.1}"
 if [ $TARGETARCH == 'amd64' ]; then 
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-x64.tar.gz"
     NODEJS_FOLDER="node-$NODEJS_VERSION-linux-x64"

@@ -19,6 +19,8 @@ set -o pipefail
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 CHECKSUMS_ROOT="$SCRIPT_ROOT/.."
 
+eval $(yq  e 'to_entries | .[] | [.key,.value] | join("=") ' versions.yaml)
+
 for TARGETARCH in arm64 amd64; do
     source $SCRIPT_ROOT/versions.sh
 
