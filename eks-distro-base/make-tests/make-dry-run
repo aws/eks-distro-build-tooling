@@ -87,12 +87,16 @@ common::run_target "packages-export-all-minimal-images" "export/all" "BUILD_DEPS
 common::run_target "test-all-minimal-images" "test/all" "BUILD_DEPS=false MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=someotherjob"
 
 # Validate base image tag logic, when the job type is not pre/postsubmit and the pushed file resolves to false, the tag from the tag file is used for the base image
-for variant in "base" "base-compiler-yum"; do
+for variant in "base" "base-compiler-yum" "base-golang-compiler-1.18-gcc"; do
     common::run_target "minimal-images-$variant" "$variant/base-image-tag/use-tag-from-file" "BUILD_DEPS=true JOB_TYPE=someotherjob MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates MOCK_CAT_PUSHED_FILE=false"
     common::run_target "minimal-images-$variant" "$variant/base-image-tag/presubmit-use-new-tag" "BUILD_DEPS=true JOB_TYPE=presubmit MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates MOCK_CAT_PUSHED_FILE=false"
     common::run_target "minimal-images-$variant" "$variant/base-image-tag/postsubmit-use-new-tag" "BUILD_DEPS=true JOB_TYPE=postsubmit MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates MOCK_CAT_PUSHED_FILE=false"
     common::run_target "minimal-images-$variant" "$variant/base-image-tag/pushed-file-true" "BUILD_DEPS=true JOB_TYPE=someotherjob MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates MOCK_CAT_PUSHED_FILE=true"
 done
+
+# check dynamic compiler targets
+common::run_target "golang-compiler-images" "base-golang-compiler/images/all-compiler-images" "BUILD_DEPS=true MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit MOCK_CAT_PUSHED_FILE=false"
+common::run_target "golang-1.18-compiler-images" "base-golang-compiler-1.18/images/compiler-images" "BUILD_DEPS=true MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit MOCK_CAT_PUSHED_FILE=false"
 
 if [[ "$EXIT_CODE" -eq 0 ]]; then
     echo "No makefile test failures!"
