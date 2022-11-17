@@ -127,6 +127,10 @@ LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 # ************************************************************
 
+# ****************** COMPILER BASE VARIANTS ******************
+BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
+# ************************************************************
+
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
 BASE_PYTHON_VARIANT_VERSIONS=3.9
@@ -143,7 +147,8 @@ BASE_PYTHON_VARIANT_VERSIONS=3.9
 #  - BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_${varaint} - for versioned variants
 
 VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-client base-nginx \
-	base-csi-ebs base-csi base-kind base-haproxy base-git base-python
+	base-csi-ebs base-csi base-kind base-haproxy base-git base-compiler \
+	base-python
 
 ALL_IMAGE_NAMES=eks-distro-base
 
@@ -356,6 +361,29 @@ $(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPONENT
 $(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPONENT=eks-distro-minimal-base-python-builder
 
 $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_PYTHON_3.9): VERSIONED_VARIANT=3.9
+
+# ****************** COMPILER BASE VARIANTS ******************
+.PHONY: compiler-base-images
+compiler-base-images: $(addprefix minimal-images-base-compiler-,$(BASE_COMPILER_VARIANT_VERSIONS))
+
+$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_COMPILER): DOCKERFILE=Dockerfile.minimal-base-compiler
+$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_COMPILER): IMAGE_COMPONENT=compiler-base
+$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_COMPILER): IMAGE_COMPONENT=compiler-base-builder
+
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_BASE): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+
+# ****************** COMPILER YUM ******************
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_YUM): VERSIONED_VARIANT=yum
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_YUM): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_YUM): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-base
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_YUM): BASE_IMAGE_COMPONENT=compiler-base
+
+# ****************** COMPILER GCC ******************
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): VERSIONED_VARIANT=gcc
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-yum
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): BASE_IMAGE_COMPONENT=compiler-base
+$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): BASE_VERSIONED_VARIANT=yum
 # ************************************************************
 
 # ****************** STANDARD EKS-DISTRO IMAGE TARGETS *******
@@ -548,6 +576,8 @@ var-value-%:
 .PHONY: minimal-images-base-python3.9
 minimal-images-base-python3.9: minimal-images-base-python-3.9
 
+.PHONY: python-3.9-compiler-images
+python-3.9-compiler-images: minimal-images-base-python-3.9
 
 ########### DO NOT EDIT #############################
 # To update call: make add-generated-help-block

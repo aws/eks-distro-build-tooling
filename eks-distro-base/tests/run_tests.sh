@@ -310,4 +310,34 @@ check_base-python-3.9() {
     check_base-python3 3.9
 }
 
+check_base-compiler-base() {
+    local -r image_component="${1:-compiler-base}"
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --rm --platform=$platform --pull=always $IMAGE_REPO/$image_component:$IMAGE_TAG curl --version; then
+            echo "compiler-base issue!"
+            exit 1
+        fi
+    done
+}
+
+check_base-compiler-yum() {
+    local -r image_component="${1:-compiler-base}"
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --rm --platform=$platform --pull=always $IMAGE_REPO/$image_component:$IMAGE_TAG yum --version; then
+            echo "compiler-base issue!"
+            exit 1
+        fi
+    done
+}
+
+check_base-compiler-gcc() {
+    local -r image_component="${1:-compiler-base}"
+    for platform in ${PLATFORMS//,/ }; do
+        if ! docker run --rm --platform=$platform --pull=always $IMAGE_REPO/$image_component:$IMAGE_TAG gcc --version; then
+            echo "compiler-base issue!"
+            exit 1
+        fi
+    done
+}
+
 $TEST

@@ -49,6 +49,18 @@ tag from file for eks-distro-minimal-base-git
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-git localhost:5000; \
 	fi
+tag from file for eks-distro-minimal-base-compiler-base
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-base localhost:5000; \
+	fi
+tag from file for eks-distro-minimal-base-compiler-yum
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-yum localhost:5000; \
+	fi
+tag from file for eks-distro-minimal-base-compiler-gcc
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-gcc localhost:5000; \
+	fi
 tag from file for eks-distro-minimal-base-python-3.9
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-3.9 localhost:5000; \
