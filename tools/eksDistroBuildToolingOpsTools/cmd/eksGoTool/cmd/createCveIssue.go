@@ -85,6 +85,14 @@ var (
 
 			return nil
 		},
+		PostRunE: func(cmd *cobra.Command, args []string) error {
+			if backportFlag {
+				if err := createBackportIssues(); err != nil {
+					return fmt.Errorf("opening backport issues from toplevel: %v", err)
+				}
+			}
+			return nil
+		},
 	}
 )
 
