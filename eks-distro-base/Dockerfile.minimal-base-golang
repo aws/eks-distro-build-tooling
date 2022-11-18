@@ -1,0 +1,90 @@
+# syntax=docker/dockerfile:1.4
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# *NOTE* we have to limit our number of layers heres because in presubmits there
+# is no overlay fs and we will run out of space quickly
+
+################# BUILDER ######################
+ARG BASE_IMAGE=unused
+ARG BUILDER_IMAGE=unused
+ARG BUILT_BUILDER_IMAGE=unused
+ARG MINIMAL_BASE_BUILDER_IMAGE=unused
+ARG VERSIONED_VARIANT
+ARG AL_TAG
+ARG COMPILER_VERSION=${VERSIONED_VARIANT}
+ARG IS_COMPILER=false
+
+################# DOWNLOAD ON GLIBC ######################
+# Download in the minimal base builder image to allow sharing result across compiler
+# and runtime images. We also build the cache into the runtime image
+# which includes the cache data for this layer and along with COPY --link
+# this also us to ensure this layer is always reusable across the runtime + compiler
+# builds without relying on the buildkitd local cache
+FROM ${MINIMAL_BASE_BUILDER_IMAGE} as golang-download
+
+ARG OUTPUT_DEBUG_LOG
+
+ARG COMPILER_FULL_VERSION
+ARG COMPILER_VERSION
+ARG TARGETARCH
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    # build time deps    
+    NEWROOT=/ install_binary /usr/bin/wget \
+        /usr/bin/tar \
+        /usr/bin/gzip && \    
+    install_golang "${COMPILER_FULL_VERSION}" && \
+    cleanup "golang-${COMPILER_VERSION}"
+
+
+################# COPIED LAYER ######################
+FROM ${BUILDER_IMAGE} as golang
+
+ARG COMPILER_VERSION
+
+COPY --link --from=golang-download /golang-${COMPILER_VERSION} /newroot
+
+
+################# BASE WITH YUM PACKAGES ######################
+# Install the base packages needed for node from yum
+# this layer is is not cached to ensure latest yum packages are installed
+FROM golang as builder-golang-base
+
+ARG OUTPUT_DEBUG_LOG
+
+RUN set -x && \    
+    clean_install git-core && \
+    cleanup "golang-base"
+
+FROM builder-golang-base as builder
+
+################# FINAL ######################
+FROM ${BUILT_BUILDER_IMAGE} as built
+FROM ${BASE_IMAGE} as final
+
+ENV GOPATH /go
+ENV GOENV "${GOPATH}/.config/go/env"
+ENV GOCACHE "${GOPATH}/.cache/go-build"
+ENV PATH="${GOPATH}/bin/:$PATH"
+
+WORKDIR ${GOPATH}
+COPY --from=built /newroot /
