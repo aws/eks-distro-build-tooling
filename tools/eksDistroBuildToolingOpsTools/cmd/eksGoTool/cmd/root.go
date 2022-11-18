@@ -11,6 +11,14 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
 )
 
+const (
+	repositoryOwnerFlag = "owner"
+	repositoryFlag      = "repository"
+	githubEmailFlag     = "githubEmail"
+	commitBranch        = "baseBranch"
+	authorNameFlag      = "author"
+)
+
 var rootCmd = &cobra.Command{
 	Use:              "eksGoTool",
 	Short:            "Amazon EKS Golang Operational Tooling",
