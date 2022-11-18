@@ -41,30 +41,17 @@ FROM $BASE_IMAGE AS base_image
 
 FROM public.ecr.aws/amazonlinux/amazonlinux:$AL_TAG as builder
 
-RUN set -x && \
-    if grep -q "2022" "/etc/os-release"; then \
-        yum install -y dnf-plugin-release-notification; \
-    fi
-
 RUN rm -rf /var/lib/rpm
 COPY --from=base_image /var/lib/rpm /var/lib/rpm
 COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 
-# check-release-update must happen after copying over the rpm db
-# otherwise it wouldnt neccessarily see the update
 RUN set -x && \
     if grep -q "2022" "/etc/os-release"; then \
-        yum check-release-update &> /tmp/new-release && \
-        if grep "A newer release" /tmp/new-release; then echo "100" > ./return_value; fi \
-    fi
-
-RUN set -x && \
-    if [ -f ./return_value ] && [ "\$(cat ./return_value)" = "100" ]; then \
-        echo "" > ./update_packages; \
+        yum check-update --security --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     else \
-        yum check-update --security  > ./check_update_output; echo \$? > ./return_value && \
-        cat ./check_update_output | awk '/^$/,0' | awk '{print \$1}' > ./update_packages; \
-    fi
+        yum check-update --security  > ./check_update_output; echo \$? > ./return_value; \    
+    fi && \
+    cat ./check_update_output | awk '/^$/,0' | awk '{print \$1}' > ./update_packages
 
 FROM scratch
 
