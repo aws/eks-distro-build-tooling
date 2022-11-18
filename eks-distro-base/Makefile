@@ -253,7 +253,7 @@ define UPDATE_TARGET_BODY
 	$(eval CHECK_UPDATE_RESULT:=$(shell cat $(call CHECK_UPDATE_FILE_PATH,$(IMAGE_COMPONENT),$(VERSIONED_VARIANT))))
 	$(if $(filter error,$(CHECK_UPDATE_RESULT)),@exit 1,)
 	$(if $(filter none,$(CHECK_UPDATE_RESULT)),@echo No updates for $(@),)
-	$(if $(filter updates,$(CHECK_UPDATE_RESULT)),make $(UPDATE_TARGET) && @echo true > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)
+	$(if $(filter updates,$(CHECK_UPDATE_RESULT)),make $(UPDATE_TARGET) && echo true > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)
 endef
 
 define CREATE_PR_TARGET_BODY
@@ -287,8 +287,6 @@ $(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(1)-builder
 $(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
 
 $(eval $(foreach ver,$(VERSIONS),$(call COMPILER_TARGET_OVERRIDES_FOR_VERSION,base-$(1)-compiler,$(ver),$(1))))
-
-$(eval $(foreach ver,$(VERSIONS),$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_$(ver)): VERSIONED_VARIANT=$(ver)))
 
 endef
 

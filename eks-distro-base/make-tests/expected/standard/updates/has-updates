@@ -3,4 +3,4 @@
 
 check-update eks-distro-base 2 
 echo false > /override/root/eks-distro-base-pushed
-make standard-images && @echo true > /override/root/eks-distro-base-pushed
+make standard-images && echo true > /override/root/eks-distro-base-pushed
