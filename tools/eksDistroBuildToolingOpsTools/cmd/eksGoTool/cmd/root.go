@@ -28,8 +28,13 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.PersistentFlags().IntP("verbosity", "v", 0, "Set the log level verbosity")
+	rootCmd.PersistentFlags().String(repositoryFlag, "", "The name of the repository to operate against")
+	rootCmd.PersistentFlags().String(repositoryOwnerFlag, "", "Name of the owner of the target GitHub repository")
+	rootCmd.PersistentFlags().String(githubEmailFlag, "", "Email associated with the GitHub account")
+	rootCmd.PersistentFlags().String(commitBranch, "", "Base branch against which pull requests should be made")
+	rootCmd.PersistentFlags().String(authorNameFlag, "", "Author of any commits made by the CLI")
 	if err := viper.BindPFlags(rootCmd.PersistentFlags()); err != nil {
-		log.Fatalf("failed to bind flags for root: %v", err)
+		log.Fatalf("failed to binPersistentF flags for root: %v", err)
 	}
 }
 
