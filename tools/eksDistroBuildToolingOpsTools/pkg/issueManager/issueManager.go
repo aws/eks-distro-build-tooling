@@ -3,7 +3,7 @@ package issueManager
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"strings"
 	"time"
 
@@ -19,7 +19,6 @@ type IssueManager struct {
 	sourceOwner string
 	sourceRepo  string
 	retrier     *retrier.Retrier
-
 }
 
 type Opts struct {
@@ -46,11 +45,11 @@ type CreateIssueOpts struct {
 
 func (p *IssueManager) CreateIssue(ctx context.Context, opts *CreateIssueOpts) (*gogithub.Issue, error) {
 	i := &gogithub.IssueRequest{
-		Title:     opts.Title,
-		Body:      opts.Body,
-		Labels:    opts.Labels,
-		Assignee:  opts.Assignee,
-		State:     opts.State,
+		Title:    opts.Title,
+		Body:     opts.Body,
+		Labels:   opts.Labels,
+		Assignee: opts.Assignee,
+		State:    opts.State,
 	}
 
 	var issue *gogithub.Issue
@@ -59,7 +58,7 @@ func (p *IssueManager) CreateIssue(ctx context.Context, opts *CreateIssueOpts) (
 	issue, resp, err = p.client.Issues.Create(ctx, p.sourceOwner, p.sourceRepo, i)
 	if resp != nil {
 		if resp.StatusCode == github.SecondaryRateLimitStatusCode {
-			b, err := ioutil.ReadAll(resp.Body)
+			b, err := io.ReadAll(resp.Body)
 			if err != nil {
 				return nil, fmt.Errorf("reading Github response body: %v", err)
 			}
@@ -70,7 +69,7 @@ func (p *IssueManager) CreateIssue(ctx context.Context, opts *CreateIssueOpts) (
 		}
 
 		if resp.StatusCode == github.ResourceGoneStatusCode {
-			b, err := ioutil.ReadAll(resp.Body)
+			b, err := io.ReadAll(resp.Body)
 			if err != nil {
 				return nil, fmt.Errorf("reading Github response body: %v", err)
 			}
