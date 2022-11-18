@@ -98,7 +98,7 @@ func init() {
 func GenerateIssueBody() *string {
 	b := strings.Builder{}
 	if announcementSourceUrlFlag != "" {
-		b.WriteString(fmt.Sprintf("\nFrom %s", announcementSourceUrl))
+		b.WriteString(fmt.Sprintf("From [Goland Security Announcemnt](%s)", announcementSourceUrl))
 	}
 	if announcementBodyFlag != "" {
 		b.WriteString(fmt.Sprintf("\n`%s`", announcementBody))
