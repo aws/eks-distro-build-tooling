@@ -1,4 +1,5 @@
 al2:
+  compiler-base: 2022-11-18-1668810385.2
   eks-distro-base: 2022-11-08-1667934093.2
   eks-distro-minimal-base: 2022-07-27-1658910674.2
   eks-distro-minimal-base-nonroot: 2022-07-27-1658910674.2
