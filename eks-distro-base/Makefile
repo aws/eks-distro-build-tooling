@@ -148,7 +148,7 @@ BASE_PYTHON_VARIANT_VERSIONS=3.9
 
 
 # ****************** GOLANG VARIANTS *************************
-GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang
+GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang-compiler
 BASE_GOLANG_VARIANT_VERSIONS=1.15 1.16 1.17 1.18 1.19
 
 GOLANG_1.15_FULL_VERSION=1.15.15-1
@@ -259,8 +259,8 @@ endef
 define CREATE_PR_TARGET_BODY
 	$(if \
 		$(or $(filter presubmit,$(JOB_TYPE)),$(filter postsubmit,$(JOB_TYPE)),$(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)))), \
-		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG))) @echo Updated base image tag file, \
-		$(shell echo No update) \
+		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG))) @echo Updated base image tag file for $(IMAGE_NAME), \
+		@echo $(IMAGE_NAME) not built \
 	)
 endef
 
@@ -281,7 +281,7 @@ $(COMPILER_VERSIONED_VARIANTS): LATEST=$$(call COMPILER_LATEST)
 
 # For all images we are using the cached compiled staged from the runtime image, or golang-builder in the case of golang, to avoid compiling during each build
 $(COMPILER_VERSIONED_VARIANTS): BUILDCTL_NO_CACHE=--opt no-cache=builder-$(1)-base
-$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$(BASE_IMAGE_REPO)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION),$$(COMPILER_VERSION)-$$(IMAGE_TAG))
+$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$(BASE_IMAGE_REPO)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base,$$(COMPILER_VERSION)-$$(IMAGE_TAG))
 
 $(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(1)-builder
 $(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
