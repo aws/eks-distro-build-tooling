@@ -33,7 +33,12 @@ if [ -n "$VERSIONED_VARIANT" ]; then
     VERSIONED_VARIANT="-${VERSIONED_VARIANT}"
 fi
 
-BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME$VERSIONED_VARIANT\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
+NAME_FOR_TAG_FILE=$IMAGE_NAME$VERSIONED_VARIANT
+if [[ $IMAGE_NAME != eks-distro-minimal-base-* ]];then
+    NAME_FOR_TAG_FILE=eks-distro-minimal-base-$NAME_FOR_TAG_FILE
+fi
+
+BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
