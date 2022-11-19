@@ -35,7 +35,7 @@ fi
 
 NAME_FOR_TAG_FILE=$IMAGE_NAME$VERSIONED_VARIANT
 if [[ $IMAGE_NAME != eks-distro-minimal-base-* ]];then
-    NAME_FOR_TAG_FILE=eks-distro-minimal-base-$NAME_FOR_TAG_FILE
+    NAME_FOR_TAG_FILE=eks-distro-minimal-base-$IMAGE_NAME-compiler$VERSIONED_VARIANT
 fi
 
 BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"

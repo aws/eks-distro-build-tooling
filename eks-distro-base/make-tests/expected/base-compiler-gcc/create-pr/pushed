@@ -3,4 +3,4 @@
 
 cat pushed file /override/root/eks-distro-minimal-base-compiler-gcc
 update_base_image.sh gcc-test-tag eks-distro-minimal-base-compiler-gcc 2
-echo Updated base image tag file
+echo Updated base image tag file for eks-distro-minimal-base-compiler-gcc
