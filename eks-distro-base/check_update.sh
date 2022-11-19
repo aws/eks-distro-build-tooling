@@ -22,20 +22,11 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_NAME="$1"
 AL_TAG="$2"
-VERSIONED_VARIANT="${3:-}"
+NAME_FOR_TAG_FILE="$3"
 
 if [[ $IMAGE_NAME == *-builder ]]; then
     # ignore checking builder images
     exit 0
-fi
-
-if [ -n "$VERSIONED_VARIANT" ]; then
-    VERSIONED_VARIANT="-${VERSIONED_VARIANT}"
-fi
-
-NAME_FOR_TAG_FILE=$IMAGE_NAME$VERSIONED_VARIANT
-if [[ $IMAGE_NAME != eks-distro-* ]];then
-    NAME_FOR_TAG_FILE=eks-distro-minimal-base-$IMAGE_NAME-compiler$VERSIONED_VARIANT
 fi
 
 BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
@@ -90,17 +81,17 @@ $SCRIPT_ROOT/../scripts/buildkit.sh build --frontend dockerfile.v0 \
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
-cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${IMAGE_NAME}${VERSIONED_VARIANT}
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${NAME_FOR_TAG_FILE}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
-    echo "none" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
+    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
     exit 0
 fi
 
 if [ $RETURN_STATUS -eq 100 ]; then
-    echo "updates" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
+    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 0 ]; then
-    echo "none" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
+    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 1 ]; then
-    echo "error" > ./check-update/${IMAGE_NAME}${VERSIONED_VARIANT}
+    echo "error" > ./check-update/${NAME_FOR_TAG_FILE}
 fi

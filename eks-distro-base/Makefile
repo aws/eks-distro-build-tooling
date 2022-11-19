@@ -46,16 +46,15 @@ MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
 	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
 
 # $1 - image name
-# $2 - versioned variant
-CHECK_UPDATE_FILE_PATH=$(MAKE_ROOT)/check-update/$(1)$(if $(2),-$(2),)
+CHECK_UPDATE_FILE_PATH=$(MAKE_ROOT)/check-update/$(1)
 
 # overridden in dry run tests to track calls
-# $1 - image name
+# $1 - image component
 # $2 - AL_TAG
-# $3 - versioned variant
+# $3 - image name
 MOCK_CHECK_UPDATE?=
 CHECK_UPDATE?=$(if $(MOCK_CHECK_UPDATE), \
-	$(info check-update $(1) $(2) $(3))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(1),$(3))), \
+	$(info check-update $(1) $(2) $(3))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3))), \
 	$(shell ./check_update.sh $(1) $(2) $(3)) \
 )
 CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update.sh $(1) $(2) $(3); fi)
@@ -130,6 +129,7 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_COMPONENT)-builder:$(VERSIONED_IMAGE_
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
+# tag al2 build with latest.2 and latest for backward compat
 STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2022),latest-al22,latest latest.2 latest-al2),$(call ADD_VERSIONED_VARIANT,$(tag)))
 
 COMPILER_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION))
@@ -249,8 +249,8 @@ endef
 
 define UPDATE_TARGET_BODY	
 	@echo false > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(AL_TAG),$(VERSIONED_VARIANT))
-	$(eval CHECK_UPDATE_RESULT:=$(shell cat $(call CHECK_UPDATE_FILE_PATH,$(IMAGE_COMPONENT),$(VERSIONED_VARIANT))))
+	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME))
+	$(eval CHECK_UPDATE_RESULT:=$(shell cat $(call CHECK_UPDATE_FILE_PATH,$(IMAGE_NAME))))
 	$(if $(filter error,$(CHECK_UPDATE_RESULT)),@exit 1,)
 	$(if $(filter none,$(CHECK_UPDATE_RESULT)),@echo No updates for $(@),)
 	$(if $(filter updates,$(CHECK_UPDATE_RESULT)),make $(UPDATE_TARGET) && echo true > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)
@@ -362,7 +362,6 @@ $(ALL_MINIMAL_IMAGE_TARGETS): VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
-# tag al2 build with latest.2 and latest for backward compat
 $(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(call STANDARD_LATEST)
 
 # By default use the minimal-helpers dockerfile for the final stage since its just a copy
@@ -488,7 +487,7 @@ standard-images: BUILDCTL_NO_CACHE=
 standard-images: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
-	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),)
+	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME))
 	$(call BUILDCTL)
 
 # ************************************************************
@@ -506,13 +505,13 @@ $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=builder
 $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)-builder
 $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS):
 	@printf "\n\nBuilding $(VARIANT_SHORT_NAME) builder stage\n\n"
-	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(VERSIONED_VARIANT))
 	$(call BUILDCTL)
 
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images-%=%)
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "\n\nBuilding $(VARIANT_SHORT_NAME) final stage\n\n"
+	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME))
 	$(call BUILDCTL)
 
 $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:packages-export-minimal-images-%=%)
