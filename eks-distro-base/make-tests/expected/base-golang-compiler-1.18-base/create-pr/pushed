@@ -3,4 +3,4 @@
 
 cat pushed file /override/root/eks-distro-minimal-base-golang-compiler-1.18-base
 update_base_image.sh 1.18-test-tag eks-distro-minimal-base-golang-compiler-1.18-base 2
-echo Updated base image tag file
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-base

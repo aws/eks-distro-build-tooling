@@ -3,4 +3,4 @@
 
 cat pushed file /override/root/eks-distro-minimal-base-compiler-yum
 update_base_image.sh yum-test-tag eks-distro-minimal-base-compiler-yum 2
-echo Updated base image tag file
+echo Updated base image tag file for eks-distro-minimal-base-compiler-yum

@@ -3,4 +3,4 @@
 
 cat pushed file /override/root/eks-distro-base
 update_base_image.sh test-tag eks-distro-base 2
-echo Updated base image tag file
+echo Updated base image tag file for eks-distro-base
