@@ -34,7 +34,7 @@ if [ -n "$VERSIONED_VARIANT" ]; then
 fi
 
 NAME_FOR_TAG_FILE=$IMAGE_NAME$VERSIONED_VARIANT
-if [[ $IMAGE_NAME != eks-distro-minimal-base-* ]];then
+if [[ $IMAGE_NAME != eks-distro-* ]];then
     NAME_FOR_TAG_FILE=eks-distro-minimal-base-$IMAGE_NAME-compiler$VERSIONED_VARIANT
 fi
 
