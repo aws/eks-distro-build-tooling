@@ -258,7 +258,7 @@ endef
 
 define CREATE_PR_TARGET_BODY
 	$(if \
-		$(or $(filter presubmit,$(JOB_TYPE)),$(filter postsubmit,$(JOB_TYPE)),$(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)))), \
+		$(or $(filter presubmit,$(JOB_TYPE)),$(filter postsubmit,$(JOB_TYPE)),$(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)-pushed))), \
 		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG))) @echo Updated base image tag file for $(IMAGE_NAME), \
 		@echo $(IMAGE_NAME) not built \
 	)
