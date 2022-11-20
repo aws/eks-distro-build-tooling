@@ -20,6 +20,11 @@ FROM ${BUILDER_IMAGE} as compiler-base-builder
 
 ARG OUTPUT_DEBUG_LOG
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 # compiler-base is intended to stay "somewhat" minimal,
 # but we can add other packages if usage would be high
 # if not critical to include, we should push the use of the compiler-yum
