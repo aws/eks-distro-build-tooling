@@ -22,7 +22,6 @@ NEWROOT=/yq
 
 source $SCRIPT_ROOT/common_vars.sh
 
-YQ_VERSION="${YQ_VERSION:-v4.24.5}"
 YQ_DOWNLOAD_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH.tar.gz"
 YQ_CHECKSUM_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums"
 YQ_CHECKSUM_ORDER_URL="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums_hashes_order"

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG BUILT_BUILDER_IMAGE
-ARG BASE_IMAGE
+ARG BUILT_BUILDER_IMAGE=unused
+ARG BASE_IMAGE=unused
 FROM ${BUILT_BUILDER_IMAGE} as builder
 
 ################# BASE ########################
@@ -39,11 +39,10 @@ FROM scratch as export
 
 ARG EXPORT_NAME
 
-COPY --from=prepare-export /tmp/packages/$EXPORT_NAME* .
+COPY --from=prepare-export /tmp/packages/$EXPORT_NAME /tmp/packages/$EXPORT_NAME-files .
 
 
 ################ Validate #######################
-ARG BUILT_BUILDER_IMAGE
 FROM --platform=$BUILDPLATFORM ${BUILT_BUILDER_IMAGE} as run_validate
 
 COPY scripts/ /usr/bin

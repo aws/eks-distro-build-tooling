@@ -28,7 +28,6 @@ else
     ARCH='arm64'
 fi
 
-GOVC_VERSION="${GOVC_VERSION:-0.25.0}"
 GOVC_FILENAME="govc_Linux_$ARCH.tar.gz"
 GOVC_DOWNLOAD_URL="https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/${GOVC_FILENAME}"
 GOVC_CHECKSUM_URL="https://github.com/vmware/govmomi/releases/download/v${GOVC_VERSION}/checksums.txt"

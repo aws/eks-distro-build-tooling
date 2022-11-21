@@ -20,7 +20,7 @@ set -o pipefail
 BUILD_LIB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/" && pwd -P)"
 
 if [ "${USE_BUILDX:-}" == "true" ]; then
-    printf "\nBuilding with with docker buildx\n"
+    printf "\nBuilding with with docker buildx\n" >&2
 
     CMD="docker buildx"
     ARGS=""
@@ -65,7 +65,7 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
         esac
     done
 else
-    printf "\nBuilding with buildctl\n"
+    printf "\nBuilding with buildctl\n" >&2
 
     CMD="buildctl"
     ARGS="$@"
@@ -90,11 +90,21 @@ if [ -f "/buildkit.sh" ]; then
 
     # space is limited on presubmit nodes, after each image build clear the build cache
     if [ "${JOB_TYPE:-}" == "presubmit" ] && [ "${PRUNE_BUILDCTL:-false}" == "true" ]; then
-        buildctl prune --all
+        buildctl prune --all >&2
     fi
 
     (exit $s)
 else
     # skip retry when running locally
-    $CMD $ARGS
+    log_file=$(mktemp)
+    trap "rm -f $log_file" EXIT
+    if ! $CMD $ARGS 2>&1 | tee $log_file; then        
+        if grep -q "blobs/uploads/\": EOF" $log_file ; then
+            echo "******************************************************"
+            echo "Ensure container registry and repository exists!!"
+            echo "Try running make create-ecr-repos to create ecr repositories in your aws account."
+            echo "******************************************************"
+        fi
+        exit 1
+    fi
 fi

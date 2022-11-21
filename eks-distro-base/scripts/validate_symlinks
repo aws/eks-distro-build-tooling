@@ -20,6 +20,10 @@ set -o pipefail
 
 echo "Validating all symlinks are valid"
 
+if [[ "${IGNORE_DANGLING_SYMLINKS:-false}" = "true" ]]; then
+    exit 0
+fi
+
 cd /newroot 
 
 EXPECTED_DANGLING_LINKS=("/var/lock" "/etc/mtab")

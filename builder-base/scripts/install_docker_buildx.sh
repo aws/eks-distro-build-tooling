@@ -23,7 +23,6 @@ NEWROOT=/docker_buildx
 source $SCRIPT_ROOT/common_vars.sh
 
 
-DOCKER_BUILDX_VERSION="${DOCKER_BUILDX_VERSION:-v0.9.1}"
 DOCKER_BUILDX_URL="https://github.com/docker/buildx/releases/download/$DOCKER_BUILDX_VERSION/buildx-$DOCKER_BUILDX_VERSION.linux-$TARGETARCH"
 DOCKER_BUILDX_CHECKSUM_URL="https://github.com/docker/buildx/releases/download/$DOCKER_BUILDX_VERSION/checksums.txt"
 

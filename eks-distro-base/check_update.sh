@@ -22,14 +22,14 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 IMAGE_NAME="$1"
 AL_TAG="$2"
-VERSIONED_VARIANT="${3:-}"
+NAME_FOR_TAG_FILE="$3"
 
 if [[ $IMAGE_NAME == *-builder ]]; then
     # ignore checking builder images
     exit 0
 fi
 
-BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME$VERSIONED_VARIANT\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
+BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 cat << EOF > check-update/Dockerfile
@@ -68,10 +68,9 @@ COPY --from=builder ./return_value ./return_value
 COPY --from=builder ./update_packages ./update_packages
 EOF
 
-buildctl build \
-         --frontend dockerfile.v0 \
+$SCRIPT_ROOT/../scripts/buildkit.sh build --frontend dockerfile.v0 \
          --opt platform=linux/amd64 \
-         --local dockerfile=./check-update \
+         --opt filename=./check-update/Dockerfile \
          --local context=. \
          --progress plain \
          --output type=local,dest=/tmp/${IMAGE_NAME} \
@@ -82,16 +81,17 @@ buildctl build \
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
-cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${IMAGE_NAME}
+cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${NAME_FOR_TAG_FILE}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
+    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
     exit 0
 fi
 
 if [ $RETURN_STATUS -eq 100 ]; then
-    echo "Updates required"
+    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 0 ]; then
-    echo "No updates required"
+    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 1 ]; then
-    echo "Error"
+    echo "error" > ./check-update/${NAME_FOR_TAG_FILE}
 fi

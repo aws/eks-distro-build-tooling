@@ -27,7 +27,6 @@ function install_skopeo() {
     yum install -y $deps
 
     # Installing Skopeo
-    SKOPEO_VERSION="${SKOPEO_VERSION:-v1.5.2}"
     git clone https://github.com/containers/skopeo
     cd skopeo
     git checkout $SKOPEO_VERSION

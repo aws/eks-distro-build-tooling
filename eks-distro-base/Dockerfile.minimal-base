@@ -17,9 +17,9 @@
 # is no overlay fs and we will run out of space quickly
 
 ################# BUILDER ######################
-ARG BASE_IMAGE
-ARG BUILDER_IMAGE
-ARG BUILT_BUILDER_IMAGE
+ARG BASE_IMAGE=unused
+ARG BUILDER_IMAGE=unused
+ARG BUILT_BUILDER_IMAGE=unused
 FROM ${BUILDER_IMAGE} as builder
 
 ARG OUTPUT_DEBUG_LOG

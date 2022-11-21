@@ -35,6 +35,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as buildkit
 ARG TARGETARCH
 WORKDIR /workdir
+ARG BUILDKIT_VERSION
+ENV BUILDKIT_VERSION=$BUILDKIT_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_buildkit.sh ./checksums/buildkit-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -45,6 +47,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as ecr-cred-helper
 ARG TARGETARCH
 WORKDIR /workdir
+ARG AMAZON_ECR_CRED_HELPER_VERSION
+ENV AMAZON_ECR_CRED_HELPER_VERSION=$AMAZON_ECR_CRED_HELPER_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_ecr_cred_helper.sh ./checksums/amazon-ecr-cred-helper-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -55,6 +59,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as gh_cli
 ARG TARGETARCH
 WORKDIR /workdir
+ARG GITHUB_CLI_VERSION
+ENV GITHUB_CLI_VERSION=$GITHUB_CLI_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_gh_cli.sh ./checksums/github-cli-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -65,6 +71,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as docker_buildx
 ARG TARGETARCH
 WORKDIR /workdir
+ARG DOCKER_BUILDX_VERSION
+ENV DOCKER_BUILDX_VERSION=$DOCKER_BUILDX_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_docker_buildx.sh ./checksums/docker-buildx-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -75,6 +83,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as yq
 ARG TARGETARCH
 WORKDIR /workdir
+ARG YQ_VERSION
+ENV YQ_VERSION=$YQ_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_yq.sh ./checksums/yq-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -85,6 +95,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as packer
 ARG TARGETARCH
 WORKDIR /workdir
+ARG PACKER_VERSION
+ENV PACKER_VERSION=$PACKER_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_packer.sh ./checksums/packer-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -95,6 +107,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as helm
 ARG TARGETARCH
 WORKDIR /workdir
+ARG HELM_VERSION
+ENV HELM_VERSION=$HELM_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_helm.sh ./checksums/helm-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -105,6 +119,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as nodejs
 ARG TARGETARCH
 WORKDIR /workdir
+ARG NODEJS_VERSION
+ENV NODEJS_VERSION=$NODEJS_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_nodejs.sh \
     generate-attribution/package*.json  \
@@ -120,6 +136,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as hugo
 ARG TARGETARCH
 WORKDIR /workdir
+ARG HUGO_VERSION
+ENV HUGO_VERSION=$HUGO_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_hugo.sh ./checksums/hugo-amd64-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -130,6 +148,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as govc
 ARG TARGETARCH
 WORKDIR /workdir
+ARG GOVC_VERSION
+ENV GOVC_VERSION=$GOVC_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_govc.sh ./checksums/govc-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -140,6 +160,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as goss
 ARG TARGETARCH
 WORKDIR /workdir
+ARG GOSS_VERSION
+ENV GOSS_VERSION=$GOSS_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_goss.sh ./checksums/goss-amd64-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -163,6 +185,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE}  as bash
 ARG TARGETARCH
 WORKDIR /workdir
+ARG OVERRIDE_BASH_VERSION
+ENV OVERRIDE_BASH_VERSION=$OVERRIDE_BASH_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/common_vars.sh ./scripts/install_bash.sh ./checksums/bash-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -173,6 +197,10 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as ansible
 ARG TARGETARCH
 WORKDIR /workdir
+ARG ANSIBLE_VERSION
+ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
+ARG PYWINRM_VERSION
+ENV PYWINRM_VERSION=$PYWINRM_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_ansible.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -182,6 +210,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 
 FROM ${BUILDER_IMAGE} as golang-1.15
 ARG TARGETARCH
+ARG GOLANG_VERSION_115
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -189,11 +218,12 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh 1.15.15 1 amzn2 && \
+    /install_golang.sh $GOLANG_VERSION_115 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as golang-1.16
 ARG TARGETARCH
+ARG GOLANG_VERSION_116
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -201,11 +231,12 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh 1.16.15 1 amzn2 && \
+    /install_golang.sh $GOLANG_VERSION_116 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as golang-1.17
 ARG TARGETARCH
+ARG GOLANG_VERSION_117
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -213,11 +244,12 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh 1.17.13 1 amzn2 && \
+    /install_golang.sh $GOLANG_VERSION_117 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as golang-1.18
 ARG TARGETARCH
+ARG GOLANG_VERSION_118
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -225,11 +257,12 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh 1.18.7 1 amzn2 && \
+    /install_golang.sh $GOLANG_VERSION_118 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as golang-1.19
 ARG TARGETARCH
+ARG GOLANG_VERSION_119
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -237,12 +270,14 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh 1.19.2 1 amzn2 && \
+    /install_golang.sh $GOLANG_VERSION_119 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
+ARG SKOPEO_VERSION
+ENV SKOPEO_VERSION=$SKOPEO_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -259,6 +294,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
 FROM ${BUILDER_IMAGE} as linuxkit
 ARG TARGETARCH
 ARG GOPROXY
+ARG LINUXKIT_VERSION
+ENV LINUXKIT_VERSION=$LINUXKIT_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -272,6 +309,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
 FROM ${BUILDER_IMAGE} as go-licenses-1.16
 ARG TARGETARCH
 ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -285,6 +324,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
 FROM ${BUILDER_IMAGE} as go-licenses-1.17
 ARG TARGETARCH
 ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -298,6 +339,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
 FROM ${BUILDER_IMAGE} as go-licenses-1.18
 ARG TARGETARCH
 ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -311,6 +354,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
 FROM ${BUILDER_IMAGE} as go-licenses-1.19
 ARG TARGETARCH
 ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"

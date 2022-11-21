@@ -17,9 +17,9 @@
 # is no overlay fs and we will run out of space quickly
 
 ################# BASE-NONROOT ################
-ARG BASE_IMAGE
-ARG BUILDER_IMAGE
-ARG BUILT_BUILDER_IMAGE
+ARG BASE_IMAGE=unused
+ARG BUILDER_IMAGE=unused
+ARG BUILT_BUILDER_IMAGE=unused
 # Need the builder target to match the others to support common makefile
 FROM ${BUILDER_IMAGE} as builder
 

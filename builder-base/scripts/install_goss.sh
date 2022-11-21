@@ -22,7 +22,6 @@ NEWROOT=/goss
 
 source $SCRIPT_ROOT/common_vars.sh
 
-GOSS_VERSION="${GOSS_VERSION:-3.0.3}"
 GOSS_DOWNLOAD_URL="https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz"
 GOSS_CHECKSUM_URL="https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}_SHA256SUMS"
 

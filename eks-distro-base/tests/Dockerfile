@@ -2,11 +2,11 @@ ARG BASE_IMAGE
 ARG AL_TAG
 FROM ${BASE_IMAGE} as base
 
-FROM public.ecr.aws/amazonlinux/amazonlinux:${AL_TAG} as builder
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.18-gcc-al${AL_TAG} as builder
 
 WORKDIR /var/app
 
-RUN yum install git-core golang pkgconfig openssl-devel -y
+RUN yum install openssl-devel -y
 
 RUN go mod init check
 COPY *.go ./
@@ -47,8 +47,10 @@ COPY --from=base /usr/include/git2 /usr/include/git2
 COPY --from=base /usr/lib64/libgit2* /usr/lib64
 COPY --from=base /usr/lib64/libssh2* /usr/lib64
 RUN ldd /usr/lib64/libgit2.so
-RUN go get github.com/libgit2/git2go/v33
-RUN CGO_ENABLED=1 go build -o check-git ./check_git.go 
+RUN --mount=type=secret,id=netrc,target=/root/.netrc \
+    go get github.com/libgit2/git2go/v33
+RUN --mount=type=secret,id=netrc,target=/root/.netrc \
+    CGO_ENABLED=1 go build -o check-git ./check_git.go 
 
 FROM ${BASE_IMAGE} as check-git
 COPY --from=git-builder /var/app/check-git /bin
