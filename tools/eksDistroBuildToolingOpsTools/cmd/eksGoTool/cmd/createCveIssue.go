@@ -98,7 +98,7 @@ var (
 
 func init() {
 	rootCmd.AddCommand(createCveIssue)
-	createCveIssue.Flags().BoolP(backportFlag, "b", true, "Create backport issue to all or specified EOL Supported Golang Version(s). All versions by default")
+	createCveIssue.Flags().BoolVarP(&backportFlag, "b", true, "Create backport issue to all or specified EOL Supported Golang Version(s). All versions by default")
 	createCveIssue.Flags().StringVar(&announcementSourceUrl, announcementSourceUrlFlag, "", "Announcement Source URL e.g. https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ")
 	createCveIssue.Flags().StringVar(&announcementBody, announcementBodyFlag, "", "String for the body of the issue created")
 }
