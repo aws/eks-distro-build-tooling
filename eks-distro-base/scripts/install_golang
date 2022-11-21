@@ -55,6 +55,16 @@ function build::go::symlink() {
     ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
 }
 
+function build::go::download_rpm(){
+    local -r url="$1"
+    local filename="$(basename $url)"
+
+    curl -sSL --retry 5 $url -o /tmp/$filename
+
+    # track "installed" rpms to install to rpm db in later stage
+    echo $url >> $NEWROOT/installed_golang_rpms
+}
+
 function build::go::install(){
     # Set up specific go version by using go get, additional versions apart from default can be installed by calling
     # the function again with the specific parameter.
@@ -67,15 +77,15 @@ function build::go::install(){
     fi
 
     for artifact in golang golang-bin; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     done
 
     if [ $TARGETARCH == 'amd64' ]; then 
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o /tmp/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     fi
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o /tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
     done
 
     build::go::extract $version
