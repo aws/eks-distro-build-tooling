@@ -239,7 +239,7 @@ function check_base-csi() {
     for platform in ${PLATFORMS//,/ }; do
         # use git cli to clone private and public repo
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest
-        docker run -it --platform=$platform -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
+        docker run --rm --platform=$platform -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
             -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
             -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
             $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest git clone $PRIVATE_REPO
