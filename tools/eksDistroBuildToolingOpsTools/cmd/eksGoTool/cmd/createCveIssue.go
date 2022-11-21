@@ -52,15 +52,6 @@ var (
 				return fmt.Errorf("setting up Github client: %v", err)
 			}
 
-			// set up PR Creator Handler
-			//o := &prmanager.Opts{
-			//	SourceOwner: owner,
-			//	SourceRepo:  repo,
-			//	PrRepo:      repo,
-			//	PrRepoOwner: owner,
-			//}
-			// prCreator := prmanager.New(retrier, githubClient, o)
-
 			// set up Issue Creator handler
 			issueManagerOpts := &issueManager.Opts{
 				SourceOwner: owner,
@@ -87,8 +78,8 @@ var (
 		},
 		PostRunE: func(cmd *cobra.Command, args []string) error {
 			if backportFlag {
-				if err := createBackportIssues(); err != nil {
-					return fmt.Errorf("opening backport issues from toplevel: %v", err)
+				if err := backportIssueCmd.Run(cmd, []string{backportVersions}; err != nil {
+					return fmt.Errorf("opening backport issues from createCveIssue: %v", err)
 				}
 			}
 			return nil
@@ -105,10 +96,10 @@ func init() {
 
 func GenerateIssueBody() *string {
 	b := strings.Builder{}
-	if announcementSourceUrlFlag != "" {
+	if announcementSourceUrl != "" {
 		b.WriteString(fmt.Sprintf("From [Goland Security Announcemnt](%s)", announcementSourceUrl))
 	}
-	if announcementBodyFlag != "" {
+	if announcementBody != "" {
 		b.WriteString(fmt.Sprintf("\n`%s`", announcementBody))
 	}
 	b.WriteString("\n\n")
