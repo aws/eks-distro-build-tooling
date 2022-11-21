@@ -624,20 +624,23 @@ minimal-base-test:
 	./tests/run_tests.sh $(IMAGE_REPO) $(IMAGE_TAG)
 
 .PHONY: %/create-ecr-repo
-%/create-ecr-repo: IMAGE_NAME=$*
+%/create-ecr-repo: IMAGE_COMPONENT=$*
 %/create-ecr-repo:
 	cmd=( ecr ); \
 	if [[ "${IMAGE_REPO}" =~ ^public\.ecr\.aws/ ]]; then \
 		cmd=( ecr-public --region us-east-1 ); \
 	fi; \
-	repo=$(IMAGE_NAME); \
+	repo=$(IMAGE_COMPONENT); \
 	if ! aws $${cmd[*]} describe-repositories --repository-name "$$repo" > /dev/null 2>&1; then \
 		aws $${cmd[*]} create-repository --repository-name "$$repo"; \
 	fi;
 
 .PHONY: create-ecr-repos
 create-ecr-repos: # Create repos in ECR for project images for local testing
-create-ecr-repos: $(foreach image,$(ALL_IMAGE_NAMES),$(image)/create-ecr-repo)
+create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler golang-compiler,eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
+create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base golang,$(variant) $(variant)-builder)
+create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-minimal-images-base-test
+create-ecr-repos: $$(foreach image,$$(ALL_IMAGE_NAMES),$$(image)/create-ecr-repo)
 
 ##@ Make tests Targets
 

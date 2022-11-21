@@ -2,11 +2,11 @@ ARG BASE_IMAGE
 ARG AL_TAG
 FROM ${BASE_IMAGE} as base
 
-FROM public.ecr.aws/amazonlinux/amazonlinux:${AL_TAG} as builder
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.18-gcc-al${AL_TAG} as builder
 
 WORKDIR /var/app
 
-RUN yum install git-core golang pkgconfig openssl-devel -y
+RUN yum install openssl-devel -y
 
 RUN go mod init check
 COPY *.go ./
