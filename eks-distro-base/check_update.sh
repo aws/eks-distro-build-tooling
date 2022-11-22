@@ -44,7 +44,10 @@ COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 RUN set -x && \
     # yum will think there are updates avail for the golang packages which we are managing
     # seperately. Remove them to ensure they do not trigger builds
-    rpm -e --justdb --nodeps \$(rpm -qav | grep golang) || true && \
+    golang_packages=\$(rpm -qav | grep golang) && \
+    if [ -n "\$golang_packages" ]; then \
+        rpm -e --justdb --nodeps \$golang_packages; \
+    fi && \
     if grep -q "2022" "/etc/os-release"; then \
         yum check-update --security --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     else \
