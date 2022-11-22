@@ -90,6 +90,8 @@
 -rw-r--r--     500B /etc/profile.d/less.csh
 -rw-r--r--     253B /etc/profile.d/less.sh
 -rw-r--r--      81B /etc/profile.d/sh.local
+-rw-r--r--     120B /etc/profile.d/which2.csh
+-rw-r--r--     478B /etc/profile.d/which2.sh
 -rw-r--r--   6.5KiB /etc/protocols
 -rw-r--r--   1.6KiB /etc/rpc
 -rw-r--r--   4.5KiB /etc/security/access.conf
@@ -9958,6 +9960,7 @@
 -rwxr-xr-x    69KiB /usr/bin/wc
 -rwxr-xr-x    69KiB /usr/bin/wdctl
 -rwxr-xr-x    69KiB /usr/bin/whereis
+-rwxr-xr-x    69KiB /usr/bin/which
 -rwxr-xr-x    69KiB /usr/bin/who
 -rwxr-xr-x    69KiB /usr/bin/whoami
 -rwxr-sr-x    69KiB /usr/bin/write
@@ -10680,6 +10683,7 @@
 -rw-r--r--    88KiB /usr/share/info/tar.info-1.gz
 -rw-r--r--    93KiB /usr/share/info/tar.info-2.gz
 -rw-r--r--   5.1KiB /usr/share/info/tar.info.gz
+-rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/audit-libs/lgpl-2.1.txt
 -rw-r--r--    35KiB /usr/share/licenses/bash/COPYING
@@ -10790,6 +10794,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/util-linux/COPYING.GPL-3.0-or-later
 -rw-r--r--     697B /usr/share/licenses/util-linux/COPYING.ISC
 -rw-r--r--    26KiB /usr/share/licenses/util-linux/COPYING.LGPL-2.1-or-later
+-rw-r--r--    35KiB /usr/share/licenses/which/COPYING
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
 -rw-r--r--     494B /usr/share/locale/af/LC_MESSAGES/Linux-PAM.mo
@@ -13391,7 +13396,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   3.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   2.7MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.8MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog

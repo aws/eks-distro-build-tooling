@@ -114,6 +114,7 @@ sqlite-libs-3.34.1-2.amzn2022.0.1.aarch64
 system-release-2022.0.20221103-0.amzn2022.noarch
 tar-1.34-1.amzn2022.0.1.aarch64
 tzdata-2022f-1.amzn2022.0.1.noarch
+which-2.21-26.amzn2022.0.1.aarch64
 xz-libs-5.2.5-9.amzn2022.0.1.aarch64
 yum-4.12.0-2.amzn2022.0.3.noarch
 zlib-1.2.11-32.amzn2022.0.3.aarch64

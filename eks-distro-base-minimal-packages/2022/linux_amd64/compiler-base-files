@@ -68,6 +68,8 @@
 -rw-r--r--   3.4KiB /etc/profile.d/lang.csh
 -rw-r--r--   3.2KiB /etc/profile.d/lang.sh
 -rw-r--r--      81B /etc/profile.d/sh.local
+-rw-r--r--     120B /etc/profile.d/which2.csh
+-rw-r--r--     478B /etc/profile.d/which2.sh
 -rw-r--r--   6.5KiB /etc/protocols
 -rw-r--r--   1.6KiB /etc/rpc
 -rw-r--r--   677KiB /etc/services
@@ -242,6 +244,7 @@
 -rwxr-xr-x   139KiB /usr/bin/vdir
 -rwxr-xr-x      32B /usr/bin/wait
 -rwxr-xr-x    45KiB /usr/bin/wc
+-rwxr-xr-x    29KiB /usr/bin/which
 -rwxr-xr-x    53KiB /usr/bin/who
 -rwxr-xr-x    33KiB /usr/bin/whoami
 -rwxr-xr-x    65KiB /usr/bin/xargs
@@ -647,6 +650,7 @@
 -rw-r--r--    88KiB /usr/share/info/tar.info-1.gz
 -rw-r--r--    93KiB /usr/share/info/tar.info-2.gz
 -rw-r--r--   5.1KiB /usr/share/info/tar.info.gz
+-rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/bash/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/binutils/COPYING
@@ -721,6 +725,7 @@
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/tar/COPYING
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
+-rw-r--r--    35KiB /usr/share/licenses/which/COPYING
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
