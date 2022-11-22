@@ -105,7 +105,9 @@ sqlite-3.7.17-8.amzn2.1.1.aarch64
 system-release-2-14.amzn2.aarch64
 tar-1.26-35.amzn2.aarch64
 tzdata-2022a-1.amzn2.noarch
+which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 yum-3.4.3-158.amzn2.0.6.noarch
 yum-metadata-parser-1.1.4-10.amzn2.0.2.aarch64
+yum-plugin-ovl-1.1.31-46.amzn2.0.1.noarch
 zlib-1.2.7-19.amzn2.0.2.aarch64
