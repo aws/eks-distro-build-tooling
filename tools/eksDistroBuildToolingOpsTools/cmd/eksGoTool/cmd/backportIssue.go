@@ -9,7 +9,7 @@ const ()
 
 var (
 	backportIssueCmd = &cobra.Command{
-		Use:   "backport",
+		Use:   "issue",
 		Short: "Opens backport issues for top level github issue",
 		Long:  `Opens issues to backport top level issue to EKS-Distro supported versions of Golang`,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -30,5 +30,5 @@ var (
 )
 
 func init() {
-	rootCmd.AddCommand(backportIssue)
+	backportCmd.AddCommand(backportIssue)
 }
