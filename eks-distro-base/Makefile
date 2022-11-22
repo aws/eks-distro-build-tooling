@@ -112,6 +112,7 @@ PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit 
 AL_TAG?=2
 
 BUILD_DEPS?=false
+
 OUTPUT_DEBUG_LOG?=
 
 MINIMAL_BASE_VARIANT_NAME=eks-distro-minimal-base
@@ -157,6 +158,23 @@ STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2022),latest-al22,latest l
 COMPILER_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION))
 COMPILER_FULL_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION))
 COMPILER_LATEST=$(if $(filter $(AL_TAG),2022),$(COMPILER_VERSION_WITH_VARIANT)-al22 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al22,$(COMPILER_VERSION_WITH_VARIANT) $(COMPILER_FULL_VERSION_WITH_VARIANT) $(COMPILER_VERSION_WITH_VARIANT)-al2 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al2)
+
+# $1 - language short name (python/nodejs/golang/java)
+# $2 - no runtime image
+COMPILER_IMAGE_IMPORT_CACHE_IMAGE_REPO=$(call IMAGE_REPO_FOR_VARIANT,$(if $(filter true,$(2)),eks-distro-minimal-base-$(1)-compiler-$(COMPILER_VERSION)-base,eks-distro-minimal-base-$(1)-$(COMPILER_VERSION)))
+
+# $1 - language short name (python/nodejs/golang/java)
+# $2 - no runtime image
+COMPILER_IMAGE_IMPORT_CACHE_IMAGE_COMPONENT=$(if $(filter true,$(2)),$(1)-builder,eks-distro-minimal-base-$(1)-builder)
+
+# $1 - variant name
+# $2 - no runtime image
+COMPILER_IMAGE_IMPORT_CACHE_IMAGE_TAG=$(call IMAGE_TAG_FOR_VARIANT,$(1)-$(COMPILER_VERSION)$(if $(filter true,$(2)),-base,),$(COMPILER_VERSION)-$(IMAGE_TAG))
+
+# $1 - language short name (python/nodejs/golang/java)
+# $2 - variant name
+# $3 - no runtime image
+COMPILER_IMAGE_IMPORT_CACHE_IMAGE=$(call COMPILER_IMAGE_IMPORT_CACHE_IMAGE_REPO,$(1),$(3))/$(call COMPILER_IMAGE_IMPORT_CACHE_IMAGE_COMPONENT,$(1),$(3)):$(call COMPILER_IMAGE_IMPORT_CACHE_IMAGE_TAG,$(2),$(3))
 # ************************************************************
 
 # ****************** COMPILER BASE VARIANTS ******************
@@ -168,6 +186,13 @@ PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
 BASE_PYTHON_VARIANT_VERSIONS=3.9
 # ************************************************************
 
+# ****************** NODEJS VARIANTS *************************
+NODEJS_VARIANT_NAME=eks-distro-minimal-base-nodejs
+BASE_NODEJS_VARIANT_VERSIONS=16
+NODEJS_16_FULL_VERSION=16.18.1
+
+BASE_NODEJS_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_COMPILER_VARIANT_VERSIONS),$(addsuffix -$(ver),$(BASE_NODEJS_VARIANT_VERSIONS)))
+# ************************************************************
 
 # ****************** GOLANG VARIANTS *************************
 GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang-compiler
@@ -197,6 +222,8 @@ WINDOWS_IMAGE_CREATE_PR_TARGETS:=$(addprefix windows-create-pr-,$(BASE_WINDOWS_V
 
 # ************** MINIMAL VARIANT MAGIC VARS ******************
 
+COMPILERS=golang nodejs
+
 # Foreach minimal variant (+ versioned variants) new vars are created to make it easier to override
 # target prereqs and vars. The vars will follow the patterns:
 #  - ALL_MINIMAL_IMAGE_TARGETS_FOR_${variant}
@@ -207,7 +234,7 @@ WINDOWS_IMAGE_CREATE_PR_TARGETS:=$(addprefix windows-create-pr-,$(BASE_WINDOWS_V
 
 VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-client base-nginx \
 	base-csi-ebs base-csi base-kind base-haproxy base-git base-compiler \
-	base-python base-golang-compiler
+	base-python base-nodejs $(foreach compiler,$(COMPILERS),base-$(compiler)-compiler)
 
 ALL_IMAGE_NAMES=eks-distro-base
 
@@ -224,7 +251,9 @@ $(foreach variant,$(VARIANTS), \
 	$(foreach version,$(VARIANT_VERSIONS), \
 		$(eval MINIMAL_VARIANTS+=$(variant)-$(version)) \
 		$(eval ALL_VERSION_VARIANT_VAR:=ALL_MINIMAL_IMAGE_TARGETS_FOR_$(VARIANT_UPPER)_$(call TO_UPPER,$(version))) \
+		$(eval ALL_VERSION_VARIANT_MAIN_VAR:=MAIN_MINIMAL_IMAGE_TARGETS_FOR_$(VARIANT_UPPER)_$(call TO_UPPER,$(version))) \
 		$(eval $(ALL_VERSION_VARIANT_VAR):=$(addsuffix -$(variant)-$(version),$(MINIMAL_IMAGE_TARGET_PREFIXS))) \
+		$(eval $(ALL_VERSION_VARIANT_MAIN_VAR):=minimal-images-$(variant)-$(version)) \
 		$(eval ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_$(VARIANT_UPPER)+=$(value $(ALL_VERSION_VARIANT_VAR))) \
 	) \
 	$(eval BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_$(VARIANT_UPPER):=$(addprefix builder-minimal-images-$(variant)-,$(VARIANT_VERSIONS))) \
@@ -245,10 +274,6 @@ ALL_MINIMAL_IMAGE_TARGETS=$(ALL_MAIN_MINIMAL_IMAGES_TARGETS) $(ALL_BUILDER_MINIM
 # ************************************************************
 
 # ************** VERSION VARIANTS ***************************
-VERSIONED_VARIANT?=
-# # if the base image is a versioned version of the base image, like compiler-base (base being the "version") or compiler-base:yum
-BASE_VERSIONED_VARIANT?=
-
 # $1 - tag to prepend version info to
 ADD_VERSIONED_VARIANT=$(if $(VERSIONED_VARIANT),$(VERSIONED_VARIANT)-$(1),$(1))
 ADD_BASE_VERSIONED_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(BASE_VERSIONED_VARIANT)-$(1),$(1))
@@ -301,58 +326,97 @@ define CREATE_PR_TARGET_BODY
 	)
 endef
 
-# $1 - language short name (python/nodejs/golang/java)
 define COMPILER_TARGET_OVERRIDES
-$(eval COMPILER_VARIANTS:=$(BASE_$(call TO_UPPER,$(1))_COMPILER_VARIANT_VERSIONS))
-$(eval VERSIONS:=$(BASE_$(call TO_UPPER,$(1))_VARIANT_VERSIONS))
-$(eval COMPILER_VERSIONED_VARIANTS:=$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_COMPILER))
-$(eval COMPILER_BUILDER_VERSIONED_VARIANTS:=$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(call TO_UPPER,$(1))_COMPILER))
-$(eval VARIANT_NAME:=$($(call TO_UPPER,$(1))_VARIANT_NAME))
+$(eval COMPILER_NAME:=$(1))
+$(eval NO_RUNTIME_IMAGE:=$(2))
 
-.PHONY: $(1)-compiler-images
-$(1)-compiler-images: $(addprefix minimal-images-base-$(1)-compiler-,$(COMPILER_VARIANTS))
+$(eval COMPILER_NAME_UPPER:=$(call TO_UPPER,$(COMPILER_NAME)))
+$(eval COMPILER_VARIANTS:=$(BASE_$(COMPILER_NAME_UPPER)_COMPILER_VARIANT_VERSIONS))
+$(eval VERSIONS:=$(BASE_$(COMPILER_NAME_UPPER)_VARIANT_VERSIONS))
 
-$(COMPILER_VERSIONED_VARIANTS): DOCKERFILE=Dockerfile.minimal-base-$(1)
-$(COMPILER_VERSIONED_VARIANTS): COMPILER_FULL_VERSION=$$($(call TO_UPPER,$(1))_$$(COMPILER_VERSION)_FULL_VERSION)
-$(COMPILER_VERSIONED_VARIANTS): LATEST=$$(call COMPILER_LATEST)
+$(eval RUNTIME_VERSIONED_VARIANTS:=$(if $(filter true,$(NO_RUNTIME_IMAGE)),,$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER))))
+
+$(eval COMPILER_VERSIONED_VARIANTS:=$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_COMPILER))
+$(eval COMPILER_BUILDER_VERSIONED_VARIANTS:=$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_COMPILER))
+$(eval VARIANT_NAME:=$($(COMPILER_NAME_UPPER)_VARIANT_NAME))
+
+.PHONY: $(COMPILER_NAME)-compiler-images
+$(COMPILER_NAME)-compiler-images: $(addprefix minimal-images-base-$(COMPILER_NAME)-compiler-,$(COMPILER_VARIANTS))
+
+$(RUNTIME_VERSIONED_VARIANTS) $(COMPILER_VERSIONED_VARIANTS): DOCKERFILE=Dockerfile.minimal-base-$(COMPILER_NAME)
+$(RUNTIME_VERSIONED_VARIANTS) $(COMPILER_VERSIONED_VARIANTS): COMPILER_FULL_VERSION=$$($(COMPILER_NAME_UPPER)_$$(COMPILER_VERSION)_FULL_VERSION)
+$(RUNTIME_VERSIONED_VARIANTS) $(COMPILER_VERSIONED_VARIANTS): LATEST=$$(call COMPILER_LATEST)
 
 # For all images we are using the cached compiled staged from the runtime image, or golang-builder in the case of golang, to avoid compiling during each build
-$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_NO_CACHE=--opt no-cache=builder-$(1)-base
-$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$$(call IMAGE_REPO_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base,$$(COMPILER_VERSION)-$$(IMAGE_TAG))
+$(RUNTIME_VERSIONED_VARIANTS) $(COMPILER_VERSIONED_VARIANTS): BUILDCTL_NO_CACHE=--opt no-cache=builder-$(COMPILER_NAME)-base
+$(RUNTIME_VERSIONED_VARIANTS) $(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$$(call COMPILER_IMAGE_IMPORT_CACHE_IMAGE,$(COMPILER_NAME),$(VARIANT_NAME),$(NO_RUNTIME_IMAGE))
 
-$(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(1)-builder
-$(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
+$(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(COMPILER_NAME)-builder
 
-$(eval $(foreach ver,$(VERSIONS),$(call COMPILER_TARGET_OVERRIDES_FOR_VERSION,base-$(1)-compiler,$(ver),$(1))))
+$(RUNTIME_BUILDER_VERSIONED_VARIANTS) $(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
+
+$(eval $(if $(filter true,$(NO_RUNTIME_IMAGE)),,$(call COMPILER_RUNTIME_IMAGE_OVERRIDES,$(COMPILER_NAME),$(RUNTIME_VERSIONED_VARIANTS),$(VERSIONS))))
+
+$(eval $(foreach ver,$(VERSIONS),$(call COMPILER_TARGET_OVERRIDES_FOR_VERSION,base-$(COMPILER_NAME)-compiler,$(ver),$(COMPILER_NAME))))
 
 endef
 
-# $1 - variant
-# $2 - versioned variant
-# $3 - image component override
+define COMPILER_RUNTIME_IMAGE_OVERRIDES
+$(eval COMPILER_NAME:=$(1))
+$(eval RUNTIME_VERSIONED_VARIANTS:=$(2))
+$(eval VERSIONS:=$(3))
+
+$(eval COMPILER_NAME_UPPER:=$(call TO_UPPER,$(COMPILER_NAME)))
+$(eval RUNTIME_BUILDER_VERSIONED_VARIANTS:=$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)))
+
+$(RUNTIME_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT AL_TAG COMPILER_FULL_VERSION
+$(RUNTIME_VERSIONED_VARIANTS): IMAGE_COMPONENT=eks-distro-minimal-base-$(COMPILER_NAME)
+$(RUNTIME_VERSIONED_VARIANTS): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+
+$(RUNTIME_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=eks-distro-minimal-base-$(COMPILER_NAME)-builder
+
+# If building deps and the compiler has a runtime image, build it fist
+$(eval $(if $(filter-out true,$(BUILD_DEPS)),,\
+	$(foreach ver,$(VERSIONS), \
+		$(eval MAIN_TARGETS:=$(foreach variant,$(BASE_COMPILER_VARIANT_VERSIONS),$(MAIN_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_COMPILER_$(ver)_$(call TO_UPPER,$(variant))))) \
+		$(MAIN_TARGETS): BUILD_DEP_IMAGE_TARGET=$$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) minimal-images-base-$(COMPILER_NAME)-$(ver))\
+	)
+)
+
+$(eval $(foreach ver,$(VERSIONS),$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_$(ver)): VERSIONED_VARIANT=$(ver)))
+
+endef
+
 define COMPILER_TARGET_OVERRIDES_FOR_VERSION
-$(eval BASE_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_BASE))
-$(eval YUM_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_YUM))
-$(eval GCC_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(call TO_UPPER,$(1)-$(2))_GCC))
+$(eval VARIANT:=$(1))
+$(eval VERSIONED_VARIANT:=$(2))
+$(eval COMPILER_NAME:=$(3))
+
+$(eval VARIANT_NAME_UPPER:=$(call TO_UPPER,$(VARIANT)))
+$(eval VERSIONED_VARIANT_UPPER:=$(call TO_UPPER,$(VERSIONED_VARIANT)))
+
+$(eval BASE_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(VARIANT_NAME_UPPER)_$(VERSIONED_VARIANT_UPPER)_BASE))
+$(eval YUM_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(VARIANT_NAME_UPPER)_$(VERSIONED_VARIANT_UPPER)_YUM))
+$(eval GCC_TARGETS:=$(ALL_MINIMAL_IMAGE_TARGETS_FOR_$(VARIANT_NAME_UPPER)_$(VERSIONED_VARIANT_UPPER)_GCC))
 
 $(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): BASE_IMAGE_COMPONENT=compiler-base
-$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): IMAGE_COMPONENT=$(3)
+$(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): IMAGE_COMPONENT=$(COMPILER_NAME)
 $(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT AL_TAG COMPILER_VERSION COMPILER_FULL_VERSION IS_COMPILER
 $(BASE_TARGETS) $(YUM_TARGETS) $(GCC_TARGETS): IS_COMPILER=true
 
-$(BASE_TARGETS): VERSIONED_VARIANT=$(2)
+$(BASE_TARGETS): VERSIONED_VARIANT=$(VERSIONED_VARIANT)
 $(BASE_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-base
 
-$(YUM_TARGETS): VERSIONED_VARIANT=$(2)-yum
+$(YUM_TARGETS): VERSIONED_VARIANT=$(VERSIONED_VARIANT)-yum
 $(YUM_TARGETS): BASE_VERSIONED_VARIANT=yum
 $(YUM_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-yum
 
-$(GCC_TARGETS): VERSIONED_VARIANT=$(2)-gcc
+$(GCC_TARGETS): VERSIONED_VARIANT=$(VERSIONED_VARIANT)-gcc
 $(GCC_TARGETS): BASE_VERSIONED_VARIANT=gcc
 $(GCC_TARGETS): BASE_IMAGE_NAME=eks-distro-minimal-base-compiler-gcc
 
-.PHONY: $(3)-$(2)-compiler-images
-$(3)-$(2)-compiler-images: $(addprefix minimal-images-base-$(3)-compiler-$(2)-,base yum gcc)
+.PHONY: $(COMPILER_NAME)-$(VERSIONED_VARIANT)-compiler-images
+$(COMPILER_NAME)-$(VERSIONED_VARIANT)-compiler-images: $(addprefix minimal-images-base-$(COMPILER_NAME)-compiler-$(VERSIONED_VARIANT)-,$(BASE_COMPILER_VARIANT_VERSIONS))
 endef
 
 # There is no local images target since the minimal images build on each other we need a registry to push to
@@ -479,6 +543,13 @@ $(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPO
 
 $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_PYTHON_3.9): VERSIONED_VARIANT=3.9
 
+# ************************************************************
+
+# ****************** NODEJS VARIANTS ************************
+$(eval $(call COMPILER_TARGET_OVERRIDES,nodejs,false))
+
+# ************************************************************
+
 # ****************** GOLANG VARIANTS ************************
 $(eval $(call COMPILER_TARGET_OVERRIDES,golang,true))
 
@@ -510,6 +581,7 @@ $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_COMPILER_GCC): BASE_VERSIONED_VARIANT=yum
 
 # ****************** STANDARD EKS-DISTRO IMAGE TARGETS *******
 # Standard distro-base image build
+standard-update standard-images standard-create-pr: VERSIONED_VARIANT=
 standard-images: BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 standard-images: BUILDER_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:$(AL_TAG)
 standard-images: IMAGE_OUTPUT_TYPE=image
@@ -518,7 +590,6 @@ standard-images: DOCKERFILE=Dockerfile.base
 standard-images: IMAGE_TARGET=final
 standard-images: IMAGE_NAME=eks-distro-base
 standard-images: IMAGE_COMPONENT=$(IMAGE_NAME)
-standard-images: VERSIONED_VARIANT=
 standard-images: BASE_VERSIONED_VARIANT=
 standard-images: BUILDCTL_BUILD_ARGS=BASE_IMAGE
 standard-images: BUILDCTL_IMPORT_CACHE=
@@ -585,7 +656,8 @@ windows-create-pr: $(WINDOWS_IMAGE_CREATE_PR_TARGETS)
 
 # Relying on secndary expansion for this target so that pre-reqs can use the variant var
 $(ALL_MAIN_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-images-%=%)
-$(ALL_MAIN_MINIMAL_IMAGES_TARGETS): buildkit-check $$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) builder-minimal-images-$$(VARIANT_SHORT_NAME) \
+$(ALL_MAIN_MINIMAL_IMAGES_TARGETS): BUILD_DEP_IMAGE_TARGET?=$(call MINIMAL_IMAGES_BASE_IMAGE,$(VARIANT_SHORT_NAME))
+$(ALL_MAIN_MINIMAL_IMAGES_TARGETS): buildkit-check $$(BUILD_DEP_IMAGE_TARGET) builder-minimal-images-$$(VARIANT_SHORT_NAME) \
 		final-minimal-images-$$(VARIANT_SHORT_NAME) packages-export-minimal-images-$$(VARIANT_SHORT_NAME) \
 		validate-minimal-images-$$(VARIANT_SHORT_NAME) test-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "Building $(VARIANT_SHORT_NAME) complete!\n\n"
@@ -729,7 +801,7 @@ minimal-base-test:
 .PHONY: create-ecr-repos
 create-ecr-repos: # Create repos in ECR for project images for local testing
 create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler golang-compiler,eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
-create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base golang,$(variant) $(variant)-builder)
+create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base $(COMPILERS),$(variant) $(variant)-builder)
 create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-windows-base eks-distro-minimal-images-base-test
 create-ecr-repos: $$(foreach image,$$(ALL_IMAGE_NAMES),$$(image)/create-ecr-repo)
 

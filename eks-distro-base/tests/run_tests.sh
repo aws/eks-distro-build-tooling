@@ -366,6 +366,61 @@ check_base-python-3.9() {
     check_base-python3 3.9
 }
 
+check_base-nodejs() {
+    local -r version="$1"
+    local -r image_component="${2:-eks-distro-minimal-base-nodejs}"
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/$image_component:$IMAGE_TAG node --version | grep -v $version; then
+            echo "nodejs issue!"
+            exit 1
+        fi
+
+        if ! docker run --rm --platform=$platform --pull=always $IMAGE_REPO/$image_component:$IMAGE_TAG env node; then
+            echo "nodejs issue!"
+            exit 1
+        fi
+
+    done
+}
+
+check_base-nodejs-16() {
+    check_base-nodejs 16
+
+    if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-nodejs:$IMAGE_TAG npm --version > /dev/null 2>&1; then
+        echo "npm should not exist!"
+        exit 1
+    fi
+}
+
+check_base-nodejs-compiler() {
+    local -r version="$1"
+    local -r variant="$2"
+
+    check_base-compiler-$2 nodejs
+    check_base-nodejs "$1" nodejs
+
+    for platform in ${PLATFORMS//,/ }; do
+        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/nodejs:$IMAGE_TAG npm --version | grep -v '8'; then
+            echo "npm issue!"
+            exit 1
+        fi
+    done
+}
+
+
+check_base-nodejs-compiler-16-base() {
+    check_base-nodejs-compiler 16 base
+}
+
+check_base-nodejs-compiler-16-yum() {
+    check_base-nodejs-compiler 16 yum
+}
+
+check_base-nodejs-compiler-16-gcc() {
+    check_base-nodejs-compiler 16 gcc
+}
+
+
 check_base-compiler-base() {
     local -r image_component="${1:-compiler-base}"
     for platform in ${PLATFORMS//,/ }; do

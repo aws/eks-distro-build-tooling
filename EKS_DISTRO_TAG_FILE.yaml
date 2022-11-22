@@ -13,6 +13,7 @@ al2:
   eks-distro-minimal-base-git: 2022-12-07-1670439705.2
   eks-distro-minimal-base-nsenter: 2022-12-07-1670439705.2
   eks-distro-minimal-base-python-3.9: 3.9-2022-12-07-1670439705.2
+  eks-distro-minimal-base-nodejs-16: null
   eks-distro-minimal-base-compiler-base: 2022-12-07-1670439705.2
   eks-distro-minimal-base-compiler-yum: yum-2022-12-07-1670439705.2
   eks-distro-minimal-base-compiler-gcc: gcc-2022-12-13-1670958074.2
@@ -46,6 +47,7 @@ al2022:
   eks-distro-minimal-base-git: 2022-12-15-1671132599.2022
   eks-distro-minimal-base-nsenter: 2022-12-15-1671132599.2022
   eks-distro-minimal-base-python-3.9: 3.9-2022-12-15-1671132599.2022
+  eks-distro-minimal-base-nodejs-16: null
   eks-distro-minimal-base-compiler-base: 2022-12-15-1671132599.2022
   eks-distro-minimal-base-compiler-yum: yum-2022-12-15-1671132599.2022
   eks-distro-minimal-base-compiler-gcc: gcc-2022-12-15-1671132599.2022
