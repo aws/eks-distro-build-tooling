@@ -63,6 +63,8 @@
 -rw-r--r--   1.6KiB /etc/profile.d/colorls.sh
 -rw-r--r--      80B /etc/profile.d/csh.local
 -rw-r--r--      81B /etc/profile.d/sh.local
+-rw-r--r--     164B /etc/profile.d/which2.csh
+-rw-r--r--     169B /etc/profile.d/which2.sh
 -rw-r--r--   6.4KiB /etc/protocols
 -rw-r--r--     381B /etc/python/cert-verification.cfg
 -rw-r--r--   1.6KiB /etc/rpc
@@ -82,6 +84,7 @@
 -rwxr-xr-x     454B /etc/update-motd.d/70-available-updates
 -rw-r--r--     862B /etc/yum.conf
 -rw-r--r--    1003B /etc/yum.repos.d/amzn2-core.repo
+-rw-r--r--      17B /etc/yum/pluginconf.d/ovl.conf
 -rw-r--r--      12B /etc/yum/vars/amazonlinux
 -rw-r--r--      14B /etc/yum/vars/awsdomain
 -rw-r--r--       5B /etc/yum/vars/awsproto
@@ -319,6 +322,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    68KiB /usr/bin/watchgnupg
 -rwxr-xr-x    69KiB /usr/bin/wc
+-rwxr-xr-x    68KiB /usr/bin/which
 -rwxr-xr-x    69KiB /usr/bin/who
 -rwxr-xr-x    69KiB /usr/bin/whoami
 -rwxr-xr-x    69KiB /usr/bin/xargs
@@ -530,6 +534,9 @@
 -rw-r--r--      85B /usr/lib/tmpfiles.d/openldap.conf
 -rw-r--r--      16B /usr/lib/tmpfiles.d/python.conf
 -rw-r--r--      22B /usr/lib/tmpfiles.d/rpm.conf
+-rw-r--r--   1.5KiB /usr/lib/yum-plugins/ovl.py
+-rw-r--r--   2.2KiB /usr/lib/yum-plugins/ovl.pyc
+-rw-r--r--   2.2KiB /usr/lib/yum-plugins/ovl.pyo
 -rw-r--r--      65B /usr/lib64/.libcrypto.so.1.0.2k.hmac
 -rw-r--r--      65B /usr/lib64/.libgcrypt.so.11.hmac
 -rw-r--r--      65B /usr/lib64/.libssl.so.1.0.2k.hmac
@@ -3272,11 +3279,13 @@
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
 -rw-r--r--    18KiB /usr/share/doc/system-release/GPL
 -rw-r--r--    35KiB /usr/share/doc/tar-1.26/COPYING
+-rw-r--r--    35KiB /usr/share/doc/which-2.20/COPYING
 -rw-r--r--   2.8KiB /usr/share/doc/xz-libs-5.2.2/COPYING
 -rw-r--r--    18KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv2
 -rw-r--r--    35KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv3
 -rw-r--r--    26KiB /usr/share/doc/xz-libs-5.2.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/doc/yum-3.4.3/COPYING
+-rw-r--r--    18KiB /usr/share/doc/yum-plugin-ovl-1.1.31/COPYING
 -rw-r--r--       1B /usr/share/gcc-7/python/libstdcxx/__init__.py
 -rw-r--r--     132B /usr/share/gcc-7/python/libstdcxx/__init__.pyc
 -rw-r--r--     132B /usr/share/gcc-7/python/libstdcxx/__init__.pyo
@@ -3349,6 +3358,7 @@
 -rw-r--r--    89KiB /usr/share/info/tar.info-1.gz
 -rw-r--r--    85KiB /usr/share/info/tar.info-2.gz
 -rw-r--r--   4.8KiB /usr/share/info/tar.info.gz
+-rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/binutils-2.29.1/COPYING
 -rw-r--r--    25KiB /usr/share/licenses/binutils-2.29.1/COPYING.LIB
 -rw-r--r--    35KiB /usr/share/licenses/binutils-2.29.1/COPYING3
@@ -6913,12 +6923,12 @@
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   484KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   132KiB /var/lib/rpm/Dirnames
+-rw-r--r--   136KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   4.9MiB /var/lib/rpm/Packages
+-rw-r--r--   5.0MiB /var/lib/rpm/Packages
 -rw-r--r--    52KiB /var/lib/rpm/Providename
 -rw-r--r--    40KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header

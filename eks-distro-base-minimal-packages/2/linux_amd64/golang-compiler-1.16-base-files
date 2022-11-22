@@ -99,6 +99,8 @@
 -rw-r--r--     123B /etc/profile.d/less.csh
 -rw-r--r--     121B /etc/profile.d/less.sh
 -rw-r--r--      81B /etc/profile.d/sh.local
+-rw-r--r--     164B /etc/profile.d/which2.csh
+-rw-r--r--     169B /etc/profile.d/which2.sh
 -rw-r--r--   6.4KiB /etc/protocols
 -rw-r--r--   1.2KiB /etc/rc.d/init.d/README
 -rw-r--r--     473B /etc/rc.d/rc.local
@@ -10482,6 +10484,7 @@
 -rwxr-xr-x    37KiB /usr/bin/wc
 -rwxr-xr-x    32KiB /usr/bin/wdctl
 -rwxr-xr-x    25KiB /usr/bin/whereis
+-rwxr-xr-x    24KiB /usr/bin/which
 -rwxr-xr-x    49KiB /usr/bin/who
 -rwxr-xr-x    29KiB /usr/bin/whoami
 -rwxr-sr-x    20KiB /usr/bin/write
@@ -11712,6 +11715,7 @@
 -rw-r--r--   1.5KiB /usr/share/doc/ustr-1.0.4/LICENSE_BSD
 -rw-r--r--    26KiB /usr/share/doc/ustr-1.0.4/LICENSE_LGPL
 -rw-r--r--   1.1KiB /usr/share/doc/ustr-1.0.4/LICENSE_MIT
+-rw-r--r--    35KiB /usr/share/doc/which-2.20/COPYING
 -rw-r--r--   2.8KiB /usr/share/doc/xz-libs-5.2.2/COPYING
 -rw-r--r--    18KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv2
 -rw-r--r--    35KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv3
@@ -11905,6 +11909,7 @@
 -rw-r--r--    89KiB /usr/share/info/tar.info-1.gz
 -rw-r--r--    85KiB /usr/share/info/tar.info-2.gz
 -rw-r--r--   4.8KiB /usr/share/info/tar.info.gz
+-rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/binutils-2.29.1/COPYING
 -rw-r--r--    25KiB /usr/share/licenses/binutils-2.29.1/COPYING.LIB
 -rw-r--r--    35KiB /usr/share/licenses/binutils-2.29.1/COPYING3
@@ -14811,18 +14816,18 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   464KiB /var/lib/rpm/Basenames
+-rw-r--r--   952KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   136KiB /var/lib/rpm/Dirnames
+-rw-r--r--   276KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   5.9MiB /var/lib/rpm/Packages
+-rw-r--r--   7.4MiB /var/lib/rpm/Packages
 -rw-r--r--    72KiB /var/lib/rpm/Providename
 -rw-r--r--    48KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
--rw-r--r--   8.0KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
 -rw-------       0B /var/lib/systemd/random-seed
