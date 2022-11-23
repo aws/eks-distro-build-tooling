@@ -22,8 +22,11 @@ if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 printf "Building base complete!\n\n"
 cat pushed file /override/root/eks-distro-minimal-base-pushed
 cat pushed file /override/root/eks-distro-minimal-base-pushed
+cat pushed file /override/root/eks-distro-minimal-base-pushed
+cat pushed file /override/root/eks-distro-minimal-base-pushed
 printf "\n\nBuilding base-glibc builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-glibc --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base:test-tag --opt build-arg:BUILDER_IMAGE=localhost:5000/eks-distro-minimal-base-builder:test-tag --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-minimal-base-glibc-builder:test-tag,localhost:5000/eks-distro-minimal-base-glibc-builder:latest,localhost:5000/eks-distro-minimal-base-glibc-builder:latest.2,localhost:5000/eks-distro-minimal-base-glibc-builder:latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-pushed
 cat pushed file /override/root/eks-distro-minimal-base-pushed
 printf "\n\nBuilding base-glibc final stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base:test-tag --opt build-arg:BUILT_BUILDER_IMAGE=localhost:5000/eks-distro-minimal-base-glibc-builder:test-tag --progress plain --local dockerfile=./ --local context=. --opt target=final --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-minimal-base-glibc:test-tag,localhost:5000/eks-distro-minimal-base-glibc:latest,localhost:5000/eks-distro-minimal-base-glibc:latest.2,localhost:5000/eks-distro-minimal-base-glibc:latest-al2\",push=true
@@ -40,8 +43,11 @@ if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 printf "Building base-glibc complete!\n\n"
 cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 printf "\n\nBuilding base-compiler-base builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base-glibc:test-tag --opt build-arg:BUILDER_IMAGE=localhost:5000/eks-distro-minimal-base-glibc-builder:test-tag --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base-builder:test-tag,localhost:5000/compiler-base-builder:latest,localhost:5000/compiler-base-builder:latest.2,localhost:5000/compiler-base-builder:latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 printf "\n\nBuilding base-compiler-base final stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base-glibc:test-tag --opt build-arg:BUILT_BUILDER_IMAGE=localhost:5000/compiler-base-builder:test-tag --progress plain --local dockerfile=./ --local context=. --opt target=final --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base:test-tag,localhost:5000/compiler-base:latest,localhost:5000/compiler-base:latest.2,localhost:5000/compiler-base:latest-al2\",push=true
@@ -58,8 +64,11 @@ if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 printf "Building base-compiler-base complete!\n\n"
 cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 printf "\n\nBuilding base-compiler-yum builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/compiler-base:test-tag --opt build-arg:BUILDER_IMAGE=localhost:5000/compiler-base-builder:test-tag --opt build-arg:VERSIONED_VARIANT=yum --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base-builder:yum-test-tag,localhost:5000/compiler-base-builder:yum-latest,localhost:5000/compiler-base-builder:yum-latest.2,localhost:5000/compiler-base-builder:yum-latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 printf "\n\nBuilding base-compiler-yum final stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/compiler-base:test-tag --opt build-arg:BUILT_BUILDER_IMAGE=localhost:5000/compiler-base-builder:yum-test-tag --opt build-arg:VERSIONED_VARIANT=yum --progress plain --local dockerfile=./ --local context=. --opt target=final --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base:yum-test-tag,localhost:5000/compiler-base:yum-latest,localhost:5000/compiler-base:yum-latest.2,localhost:5000/compiler-base:yum-latest-al2\",push=true

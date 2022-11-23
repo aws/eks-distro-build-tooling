@@ -25,8 +25,14 @@ cat pushed file /override/root/eks-distro-minimal-base-pushed
 tag from file for eks-distro-minimal-base
 cat pushed file /override/root/eks-distro-minimal-base-pushed
 tag from file for eks-distro-minimal-base
+cat pushed file /override/root/eks-distro-minimal-base-pushed
+tag from file for eks-distro-minimal-base
+cat pushed file /override/root/eks-distro-minimal-base-pushed
+tag from file for eks-distro-minimal-base
 printf "\n\nBuilding base-glibc builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-glibc --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base:some-previous-tag  --opt build-arg:BUILDER_IMAGE=localhost:5000/eks-distro-minimal-base-builder:some-previous-tag  --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-minimal-base-glibc-builder:test-tag,localhost:5000/eks-distro-minimal-base-glibc-builder:latest,localhost:5000/eks-distro-minimal-base-glibc-builder:latest.2,localhost:5000/eks-distro-minimal-base-glibc-builder:latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-pushed
+tag from file for eks-distro-minimal-base
 cat pushed file /override/root/eks-distro-minimal-base-pushed
 tag from file for eks-distro-minimal-base
 printf "\n\nBuilding base-glibc final stage\n\n"
@@ -46,8 +52,14 @@ cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 tag from file for eks-distro-minimal-base-glibc
 cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 tag from file for eks-distro-minimal-base-glibc
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
+tag from file for eks-distro-minimal-base-glibc
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
+tag from file for eks-distro-minimal-base-glibc
 printf "\n\nBuilding base-compiler-base builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/eks-distro-minimal-base-glibc:some-previous-tag  --opt build-arg:BUILDER_IMAGE=localhost:5000/eks-distro-minimal-base-glibc-builder:some-previous-tag  --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base-builder:test-tag,localhost:5000/compiler-base-builder:latest,localhost:5000/compiler-base-builder:latest.2,localhost:5000/compiler-base-builder:latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
+tag from file for eks-distro-minimal-base-glibc
 cat pushed file /override/root/eks-distro-minimal-base-glibc-pushed
 tag from file for eks-distro-minimal-base-glibc
 printf "\n\nBuilding base-compiler-base final stage\n\n"
@@ -67,8 +79,14 @@ cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 tag from file for eks-distro-minimal-base-compiler-base
 cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 tag from file for eks-distro-minimal-base-compiler-base
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
+tag from file for eks-distro-minimal-base-compiler-base
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
+tag from file for eks-distro-minimal-base-compiler-base
 printf "\n\nBuilding base-compiler-yum builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base-compiler --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=localhost:5000/compiler-base:some-previous-tag  --opt build-arg:BUILDER_IMAGE=localhost:5000/compiler-base-builder:some-previous-tag  --opt build-arg:VERSIONED_VARIANT=yum --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/compiler-base-builder:yum-test-tag,localhost:5000/compiler-base-builder:yum-latest,localhost:5000/compiler-base-builder:yum-latest.2,localhost:5000/compiler-base-builder:yum-latest-al2\",push=true
+cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
+tag from file for eks-distro-minimal-base-compiler-base
 cat pushed file /override/root/eks-distro-minimal-base-compiler-base-pushed
 tag from file for eks-distro-minimal-base-compiler-base
 printf "\n\nBuilding base-compiler-yum final stage\n\n"
