@@ -65,6 +65,10 @@ tag from file for eks-distro-minimal-base-python-3.9: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-3.9 localhost:5000; \
 	fi
+tag from file for eks-distro-minimal-base-nodejs-16: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-16 localhost:5000; \
+	fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.15-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.15-base localhost:5000; \
@@ -124,4 +128,16 @@ if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 tag from file for eks-distro-minimal-base-golang-compiler-1.19-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.19-gcc localhost:5000; \
+	fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-base localhost:5000; \
+	fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-16-yum: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-yum localhost:5000; \
+	fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-16-gcc: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+		/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-gcc localhost:5000; \
 	fi
