@@ -37,32 +37,32 @@ update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-3.9 2
 echo Updated base image tag file for eks-distro-minimal-base-python-3.9
 update_base_image.sh 1.15-test-tag eks-distro-minimal-base-golang-compiler-1.15-base 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.15-base
-update_base_image.sh 1.16-test-tag eks-distro-minimal-base-golang-compiler-1.16-base 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.16-base
-update_base_image.sh 1.17-test-tag eks-distro-minimal-base-golang-compiler-1.17-base 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-base
-update_base_image.sh 1.18-test-tag eks-distro-minimal-base-golang-compiler-1.18-base 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-base
-update_base_image.sh 1.19-test-tag eks-distro-minimal-base-golang-compiler-1.19-base 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.19-base
 update_base_image.sh 1.15-yum-test-tag eks-distro-minimal-base-golang-compiler-1.15-yum 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.15-yum
-update_base_image.sh 1.16-yum-test-tag eks-distro-minimal-base-golang-compiler-1.16-yum 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.16-yum
-update_base_image.sh 1.17-yum-test-tag eks-distro-minimal-base-golang-compiler-1.17-yum 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-yum
-update_base_image.sh 1.18-yum-test-tag eks-distro-minimal-base-golang-compiler-1.18-yum 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-yum
-update_base_image.sh 1.19-yum-test-tag eks-distro-minimal-base-golang-compiler-1.19-yum 2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.19-yum
 update_base_image.sh 1.15-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.15-gcc 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.15-gcc
+update_base_image.sh 1.16-test-tag eks-distro-minimal-base-golang-compiler-1.16-base 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.16-base
+update_base_image.sh 1.16-yum-test-tag eks-distro-minimal-base-golang-compiler-1.16-yum 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.16-yum
 update_base_image.sh 1.16-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.16-gcc 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.16-gcc
+update_base_image.sh 1.17-test-tag eks-distro-minimal-base-golang-compiler-1.17-base 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-base
+update_base_image.sh 1.17-yum-test-tag eks-distro-minimal-base-golang-compiler-1.17-yum 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-yum
 update_base_image.sh 1.17-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.17-gcc 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-gcc
+update_base_image.sh 1.18-test-tag eks-distro-minimal-base-golang-compiler-1.18-base 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-base
+update_base_image.sh 1.18-yum-test-tag eks-distro-minimal-base-golang-compiler-1.18-yum 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-yum
 update_base_image.sh 1.18-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.18-gcc 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-gcc
+update_base_image.sh 1.19-test-tag eks-distro-minimal-base-golang-compiler-1.19-base 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.19-base
+update_base_image.sh 1.19-yum-test-tag eks-distro-minimal-base-golang-compiler-1.19-yum 2
+echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.19-yum
 update_base_image.sh 1.19-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.19-gcc 2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.19-gcc
 /override/root/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
