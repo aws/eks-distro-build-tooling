@@ -15,9 +15,19 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version"
 )
 
+const (
+	cveIdFlag                 = "cveId"
+	upstreamIssueIdFlag       = "upstreamIssueId"
+	upstreamCommitHashFlag    = "upstreamCommitHash"
+	announcementSourceUrlFlag = "announcementSourceUrl"
+	dryRunFlag                = "dryRun"
+)
+
 var (
 	// Flag Variables
+	cveId                 string
 	upstreamIssueId       int
+	upstreamCommitHash    string
 	announcementSourceUrl string
 	dryRun                bool
 
@@ -81,15 +91,14 @@ var (
 
 func init() {
 	rootCmd.AddCommand(createCveIssue)
-	createCveIssue.Flags().StringVar(&cveId, cveIdFlag, "", "CVE ID")
+	createCveIssue.Flags().StringVarP(&cveId, cveIdFlag, "c", "", "CVE ID")
 	createCveIssue.Flags().IntVarP(&upstreamIssueId, upstreamIssueIdFlag, "i", 0, "Upstream Issue ID e.g. ")
-	createCveIssue.Flags().StringVarP(&upstreamCommitHash, upstreamCommitHashFlag, "c", "", "Upstream Commit ID e.g. ")
+	createCveIssue.Flags().StringVarP(&upstreamCommitHash, upstreamCommitHashFlag, "u", "", "Upstream Commit ID e.g. ")
 	createCveIssue.Flags().StringVar(&announcementSourceUrl, "announcemenSourceUrl", "", "Announcement Source URL e.g. https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ")
 	createCveIssue.Flags().BoolVar(&dryRun, "dry-run", true, "Output the results without opening github issues/prs")
 
 	requiredFlags := []string{
 		cveIdFlag,
-		upstreamCommitHashFlag,
 		upstreamIssueIdFlag,
 	}
 	for _, flag := range requiredFlags {
@@ -106,7 +115,11 @@ func GenerateIssueBody(ui *gogithub.Issue) *string {
 		b.WriteString(fmt.Sprintf("From [Goland Security Announcemnt](%s)", announcementSourceUrl))
 	}
 
-	b.WriteString(fmt.Sprintf("For additional information for %s, find the checkout the upstream issue %s and fix %s", cveId, *ui.HTMLURL, upstreamCommitHash))
+	b.WriteString(fmt.Sprintf("For additional information for %s, go to the upstream issue %s", cveId, *ui.HTMLURL))
+
+	if upstreamCommitHash != "" {
+		b.WriteString(fmt.Sprintf(" and fix commit %s", upstreamCommitHash))
+	}
 
 	b.WriteString("\n\n")
 	b.WriteString(fmt.Sprintf("\n%s: %s", issueAutocreatedTemplate, authorNameFlag))
