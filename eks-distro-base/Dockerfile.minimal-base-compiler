@@ -39,6 +39,7 @@ RUN set -x && \
         gawk \
         grep \
         gzip \
+        make \
         tar \
         sed \
         which && \
