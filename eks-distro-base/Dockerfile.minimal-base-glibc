@@ -35,6 +35,9 @@ ENV CLEANUP_UNNECESSARY_FILES="/etc/nsswitch.conf.rpmnew"
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    # the version of glibc in the builder image vs the final image
+    # needs to be the same otherwise ldd can start to randomly segfault
+    yum update -y && \
     install_rpm glibc-minimal-langpack \
         glibc \
         glibc-common \
