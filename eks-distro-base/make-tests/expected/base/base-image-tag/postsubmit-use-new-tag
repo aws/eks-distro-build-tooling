@@ -5,6 +5,8 @@
 printf "Building standard eks-distro-base\n\n"
 ./check_update.sh eks-distro-base 2 eks-distro-base
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.base --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 --progress plain --local dockerfile=./ --local context=. --opt target=final --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-base:test-tag,localhost:5000/eks-distro-base:latest,localhost:5000/eks-distro-base:latest.2,localhost:5000/eks-distro-base:latest-al2\",push=true
+echo true > /override/root/eks-distro-base-pushed
+checking pushed file: /override/root/eks-distro-base-pushed - true
 printf "\n\nBuilding base builder stage\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-base --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=scratch --opt build-arg:BUILDER_IMAGE=localhost:5000/eks-distro-base:test-tag --progress plain --local dockerfile=./ --local context=. --opt target=builder --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-minimal-base-builder:test-tag,localhost:5000/eks-distro-minimal-base-builder:latest,localhost:5000/eks-distro-minimal-base-builder:latest.2,localhost:5000/eks-distro-minimal-base-builder:latest-al2\",push=true
 printf "\n\nBuilding base final stage\n\n"
@@ -21,3 +23,4 @@ if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 		/override/root/tests/run_tests.sh localhost:5000 test-tag 2 linux/amd64 check_base localhost:5000; \
 	fi
 printf "Building base complete!\n\n"
+echo true > /override/root/eks-distro-minimal-base-pushed

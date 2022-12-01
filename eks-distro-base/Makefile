@@ -12,7 +12,7 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 AWS_REGION?=us-west-2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-BASE_IMAGE_REPO?=$(IMAGE_REPO)
+
 JOB_TYPE?=
 TEST_IMAGE_REPO?=localhost:5000
 IGNORE_NO_CACHE?=false
@@ -68,23 +68,44 @@ UPDATE_BASE_IMAGE?=$(if $(MOCK_UPDATE_BASE_IMAGE), \
 	$(shell ./update_base_image.sh $(1) $(2) $(3)) \
 )
 
-MOCK_CAT_PUSHED_FILE?=
+LOG_CAT_PUSHED_FILE?=
 # $1 - pushed file path
-CAT_PUSHED_FILE=$(if $(MOCK_CAT_PUSHED_FILE),$(info cat pushed file $(1))$(MOCK_CAT_PUSHED_FILE),$(shell [ -f $(1) ] && cat $(1)))
+CAT_PUSHED_FILE=$(strip $(if $(call IF_OVERRIDE_VARIABLE,_CAT_PUSHED_FILE_CACHE_$1,),,\
+	$(eval _CAT_PUSHED_FILE_CACHE_$1 := $(shell \
+			if [ -n "$(LOG_CAT_PUSHED_FILE)" ]; then \
+				>&2 echo "checking pushed file: $(1) - $$([ -f $(1) ] && \cat $(1) || echo false)"; \
+			fi && \
+			[ -f $(1) ] && cat $(1) || echo false; \
+		)))$(_CAT_PUSHED_FILE_CACHE_$1))
 
 EKS_DISTRO_TAG_FILE=$(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml
 
 # $1 - image name
 MOCK_BASE_TAG_FROM_TAG_FILE?=
-BASE_TAG_FROM_TAG_FILE=$(if $(MOCK_BASE_TAG_FROM_TAG_FILE),$(info tag from file for $(1))$(MOCK_BASE_TAG_FROM_TAG_FILE),$(shell [[ -f $(EKS_DISTRO_TAG_FILE) ]] && yq e ".al$(AL_TAG).\"$(1)\"" $(EKS_DISTRO_TAG_FILE)))
+BASE_TAG_FROM_TAG_FILE=$(strip $(if $(call IF_OVERRIDE_VARIABLE,_BASE_TAG_FROM_TAG_FILE_CACHE_$1,),,\
+	$(eval _BASE_TAG_FROM_TAG_FILE_CACHE_$1 := $(shell \
+			if [ -n "$(MOCK_BASE_TAG_FROM_TAG_FILE)" ]; then \
+				>&2 echo "tag from file for $(1): $(MOCK_BASE_TAG_FROM_TAG_FILE)" && \
+				echo $(MOCK_BASE_TAG_FROM_TAG_FILE); \
+			elif [[ -f $(EKS_DISTRO_TAG_FILE) ]]; then \
+				yq e ".al$(AL_TAG).\"$(1)\"" $(EKS_DISTRO_TAG_FILE); \
+			fi \
+	)))$(_BASE_TAG_FROM_TAG_FILE_CACHE_$1))
 
 # $1 - base image name
 # $2 - image tag if not reading from file, empty value will default to IMAGE_TAG
 #    intended to be versioned_image_tag when getting tag for versioned variant
-IMAGE_TAG_FOR_VARIANT=$(if $(or \
-	$(and $(JOB_TYPE),$(filter $(JOB_TYPE),presubmit postsubmit)), \
-	$(filter true, $(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed))),$(or $(2),$(IMAGE_TAG)),$(call BASE_TAG_FROM_TAG_FILE,$(1)) \
-)
+IMAGE_TAG_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed)),$(or $(2),$(IMAGE_TAG)),$(call BASE_TAG_FROM_TAG_FILE,$(1)))
+
+# $1 - base image name
+IMAGE_REPO_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed)),$(IMAGE_REPO),public.ecr.aws/eks-distro-build-tooling)
+
+# when writing true to the file, clear previous cached result
+PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit postsubmit), \
+	$(eval _PUSHED_FILE := $(MAKE_ROOT)/$(IMAGE_NAME)-pushed) \
+	$(eval _CAT_PUSHED_FILE_CACHE_$(_PUSHED_FILE) := ) \
+	$(shell if [ -n "$(LOG_CAT_PUSHED_FILE)" ]; then echo "echo true > $(_PUSHED_FILE)"; fi && echo true > $(_PUSHED_FILE)),)
+
 # ************************************************************
 
 # base and minimal-base use al2 as the base image
@@ -116,6 +137,7 @@ BASE_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
 BUILT_IMAGE_TAG_FROM_FILE=$(call BASE_TAG_FROM_TAG_FILE,$(IMAGE_NAME:%-builder=%))
 BASE_IMAGE_TAG=$(call IMAGE_TAG_FOR_VARIANT,$(BASE_IMAGE_NAME),)
 
+BASE_IMAGE_REPO?=$(call IMAGE_REPO_FOR_VARIANT,$(BASE_IMAGE_NAME))
 MINIMAL_BASE_BUILDER_IMAGE=$(BASE_IMAGE_REPO)/$(MINIMAL_BASE_VARIANT_NAME)-builder:$(call IMAGE_TAG_FOR_VARIANT,$(MINIMAL_BASE_VARIANT_NAME),)
 
 BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_COMPONENT):$(VERSIONED_BASE_IMAGE_TAG)
@@ -257,8 +279,7 @@ define UPDATE_TARGET_BODY
 endef
 
 define CREATE_PR_TARGET_BODY
-	$(if \
-		$(or $(filter presubmit,$(JOB_TYPE)),$(filter postsubmit,$(JOB_TYPE)),$(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)-pushed))), \
+	$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)-pushed)), \
 		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG))) @echo Updated base image tag file for $(IMAGE_NAME), \
 		@echo $(IMAGE_NAME) not built \
 	)
@@ -281,7 +302,7 @@ $(COMPILER_VERSIONED_VARIANTS): LATEST=$$(call COMPILER_LATEST)
 
 # For all images we are using the cached compiled staged from the runtime image, or golang-builder in the case of golang, to avoid compiling during each build
 $(COMPILER_VERSIONED_VARIANTS): BUILDCTL_NO_CACHE=--opt no-cache=builder-$(1)-base
-$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$(BASE_IMAGE_REPO)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base,$$(COMPILER_VERSION)-$$(IMAGE_TAG))
+$(COMPILER_VERSIONED_VARIANTS): BUILDCTL_IMPORT_CACHE=type=registry,ref=$$(call IMAGE_REPO_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base)/$(1)-builder:$$(call IMAGE_TAG_FOR_VARIANT,$(VARIANT_NAME)-$$(COMPILER_VERSION)-base,$$(COMPILER_VERSION)-$$(IMAGE_TAG))
 
 $(COMPILER_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=$(1)-builder
 $(COMPILER_BUILDER_VERSIONED_VARIANTS): BUILDCTL_BUILD_ARGS+=MINIMAL_BASE_BUILDER_IMAGE
@@ -489,6 +510,7 @@ standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME))
 	$(call BUILDCTL)
+	$(call PUSHED_FILE_TRUE)
 
 # ************************************************************
 
@@ -499,6 +521,7 @@ $(ALL_MAIN_MINIMAL_IMAGES_TARGETS): buildkit-check $$(call MINIMAL_IMAGES_BASE_I
 		final-minimal-images-$$(VARIANT_SHORT_NAME) packages-export-minimal-images-$$(VARIANT_SHORT_NAME) \
 		validate-minimal-images-$$(VARIANT_SHORT_NAME) test-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "Building $(VARIANT_SHORT_NAME) complete!\n\n"
+	$(call PUSHED_FILE_TRUE)
 
 $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:builder-minimal-images-%=%)
 $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=builder
