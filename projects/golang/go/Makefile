@@ -11,17 +11,22 @@ GO_REPO_URL?="https://github.com/golang/go.git"
 GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
+GOOS?=linux
+
 ARCHITECTURE?="AMD64"
 RPM_ARCH?=x86_64
 ifeq ($(ARCHITECTURE), ARM64)
 	RPM_ARCH=aarch64
 endif
+ARCH_LOWER=$(shell echo $(ARCHITECTURE) | awk '{print tolower($0)}')
+
 
 ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
 NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
+ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 .PHONY: build
-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm sync-artifacts-to-s3-dry-run
+build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive sync-artifacts-to-s3-dry-run
 
 .PHONY: release
 release: build sync-artifacts-to-s3
@@ -58,15 +63,36 @@ ifeq (, $(shell which rpmbuild))
 endif
 	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild" --define "_buildid $(BUILD_ID)"
 
+.PHONY: generate-golang-archive
+generate-golang-archive: extract-golang-rpm tar-golang-sources
+
+.PHONY: extract-golang-rpm
+extract-golang-rpm:
+	mkdir /tmp/go-extracted
+	for rpm in $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)/golang-*.rpm; do \
+		cd /tmp/go-extracted && rpm2cpio $$rpm | cpio -idm ; \
+	done
+
+	for rpm in $(VERSION_DIRECTORY)/rpmbuild/noarch/golang-*.rpm; do \
+		cd /tmp/go-extracted && rpm2cpio $$rpm | cpio -idm ; \
+	done
+
+.PHONY: tar-golang-sources
+tar-golang-sources:
+	mkdir -p $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)
+	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && tar czf $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz .
+
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) $(ARCH_RPM_OUT_PATH) true true
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch $(NOARCH_RPM_OUT_PATH) true true
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/archives $(ARCHIVES_OUT_PATH) true true
 
 .PHONY: sync-artifacts-to-s3
 sync-artifacts-to-s3: check-env-release
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) $(ARCH_RPM_OUT_PATH) true false
 	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/rpmbuild/noarch $(NOARCH_RPM_OUT_PATH) true false
+	source $(BASE_DIRECTORY)/scripts/sync_to_s3.sh && sync_artifacts_to_s3 $(ARTIFACTS_BUCKET) $(VERSION_DIRECTORY)/archives $(ARCHIVES_OUT_PATH) true false
 
 .PHONY: setup-prod-release-s3-credentials
 setup-prod-release-s3-credentials:
@@ -81,7 +107,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum install -y which git rpmdevtools go-srpm-macros awscli rpm-build pcre-devel glibc-static hostname procps-ng
+	yum install -y which git rpmdevtools go-srpm-macros awscli rpm-build pcre-devel glibc-static hostname procps-ng tar
 
 .PHONY: check-env-release
 check-env-release:
