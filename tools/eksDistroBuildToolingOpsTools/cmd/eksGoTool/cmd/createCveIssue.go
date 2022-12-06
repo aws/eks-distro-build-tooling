@@ -51,7 +51,7 @@ func init() {
 var createCveIssue = &cobra.Command{
 	Use:   "createCveIssue [OPTIONS]",
 	Short: "Create new top level CVE Issue",
-	Long:  `Create a new top level CVE Issue in aws/eks-distro-build-tooling`,
+	Long:  "Create a new top level CVE Issue in aws/eks-distro-build-tooling",
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		label := []string{"golang", "security"}

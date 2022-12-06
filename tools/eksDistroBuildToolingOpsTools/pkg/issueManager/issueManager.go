@@ -85,8 +85,6 @@ func (p *IssueManager) CreateIssue(ctx context.Context, opts *CreateIssueOpts) (
 	}
 	logger.V(4).Info("create issue response", "response", resp.Response.StatusCode)
 	logger.V(1).Info("Github issue created", "issue URL", issue.GetHTMLURL())
-	logger.V(4).Info("sleeping after Issue creation to avoid secondary rate limiting by Github content API")
-	time.Sleep(time.Second * 1)
 	return issue, nil
 }
 
