@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -78,7 +79,7 @@ func readConfig() error {
 	// Attempt to parse the config file when flag present
 	if config != "" {
 		filename := filepath.Base(config)
-		viper.SetConfigName(filename[:len(filename)-len(filepath.Ext(filename))])
+		viper.SetConfigName(strings.TrimSuffix(filename, filename.Ext(filename)))
 		viper.AddConfigPath(filepath.Dir(config))
 
 		if err := viper.ReadInConfig(); err != nil {
