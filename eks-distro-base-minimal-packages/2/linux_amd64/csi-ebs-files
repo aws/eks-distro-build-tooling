@@ -21,7 +21,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--   4.7KiB /etc/ld.so.cache
+-rw-r--r--   4.8KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--   1.1KiB /etc/mke2fs.conf
 -rw-r--r--       0B /etc/motd
@@ -387,6 +387,7 @@
 -rwxr-xr-x    36KiB /usr/lib64/libcap.so.2.54
 -rwxr-xr-x   193KiB /usr/lib64/libcidn-2.26.so
 -rwxr-xr-x    16KiB /usr/lib64/libcom_err.so.2.1
+-r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
 -rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    33KiB /usr/lib64/libe2p.so.2.3
@@ -460,13 +461,13 @@
 -rwxr-xr-x    12KiB /usr/sbin/mkfs
 -rwxr-xr-x    95KiB /usr/sbin/mkfs.ext3
 -rwxr-xr-x    95KiB /usr/sbin/mkfs.ext4
--rwxr-xr-x   364KiB /usr/sbin/mkfs.xfs
+-rwxr-xr-x   442KiB /usr/sbin/mkfs.xfs
 -rwxr-xr-x    49KiB /usr/sbin/resize2fs
 -rwxr-xr-x    61KiB /usr/sbin/sefcontext_compile
 -rwxr-xr-x    12KiB /usr/sbin/setcap
 -rwxr-xr-x   885KiB /usr/sbin/sln
--rwxr-xr-x   332KiB /usr/sbin/xfs_growfs
--rwxr-xr-x   123KiB /usr/sbin/xfs_io
+-rwxr-xr-x   390KiB /usr/sbin/xfs_growfs
+-rwxr-xr-x   172KiB /usr/sbin/xfs_io
 -rwxr-xr-x    23KiB /usr/sbin/zdump
 -rwxr-xr-x    50KiB /usr/sbin/zic
 -rw-r--r--   1.9KiB /usr/share/doc/bzip2-libs-1.0.6/LICENSE
@@ -481,8 +482,6 @@
 -rw-r--r--    35KiB /usr/share/doc/readline-6.2/COPYING
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
 -rw-r--r--    18KiB /usr/share/doc/system-release/GPL
--rw-r--r--    62KiB /usr/share/doc/xfsprogs-4.5.0/COPYING
--rw-r--r--   2.0KiB /usr/share/doc/xfsprogs-4.5.0/CREDITS
 -rw-r--r--   2.8KiB /usr/share/doc/xz-libs-5.2.2/COPYING
 -rw-r--r--    18KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv2
 -rw-r--r--    35KiB /usr/share/doc/xz-libs-5.2.2/COPYING.GPLv3
@@ -504,6 +503,8 @@
 -rw-r--r--     932B /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.24-gdb.pyo
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    24KiB /usr/share/info/rluserman.info.gz
+-r-xr-xr-x    18KiB /usr/share/licenses/device-mapper-libs-1.02.170/COPYING
+-r-xr-xr-x    26KiB /usr/share/licenses/device-mapper-libs-1.02.170/COPYING.LIB
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-LGPLV3
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
@@ -2331,7 +2332,7 @@
 -rw-r--r--   110KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   4.0KiB /var/cache/ldconfig/aux-cache
+-rw-------   4.1KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   336KiB /var/lib/rpm/Basenames
@@ -2341,7 +2342,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   2.7MiB /var/lib/rpm/Packages
+-rw-r--r--   2.9MiB /var/lib/rpm/Packages
 -rw-r--r--    36KiB /var/lib/rpm/Providename
 -rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header

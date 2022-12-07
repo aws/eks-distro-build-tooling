@@ -1,0 +1,13 @@
+
+curl.x86_64
+expat.x86_64
+libblkid.x86_64
+libcom_err.x86_64
+libcurl.x86_64
+libmount.x86_64
+libuuid.x86_64
+ncurses.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64
+vim-data.noarch
+vim-minimal.x86_64
