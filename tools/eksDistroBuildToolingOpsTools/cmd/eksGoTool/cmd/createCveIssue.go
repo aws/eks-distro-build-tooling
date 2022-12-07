@@ -70,7 +70,7 @@ var createCveIssue = &cobra.Command{
 
 		// set up Issue Creator handler
 		issueManagerOpts := &issueManager.Opts{
-			SourceOwner: "rcrozean",
+			SourceOwner: constants.Aws,
 			SourceRepo:  constants.EksdBuildTooling,
 		}
 		im := issueManager.New(retrier, githubClient, issueManagerOpts)
