@@ -79,7 +79,7 @@ func readConfig() error {
 	// Attempt to parse the config file when flag present
 	if config != "" {
 		filename := filepath.Base(config)
-		viper.SetConfigName(strings.TrimSuffix(filename, filename.Ext(filename)))
+		viper.SetConfigName(strings.TrimSuffix(filename, filepath.Ext(filename)))
 		viper.AddConfigPath(filepath.Dir(config))
 
 		if err := viper.ReadInConfig(); err != nil {
