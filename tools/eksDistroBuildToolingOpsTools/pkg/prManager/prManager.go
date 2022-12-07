@@ -15,12 +15,12 @@ import (
 )
 
 type PrCreator struct {
-	client       *github.Client
-	sourceOwner  string
-	sourceRepo   string
-	prRepo       string
-	prRepoOwner  string
-	retrier      *retrier.Retrier
+	client      *github.Client
+	sourceOwner string
+	sourceRepo  string
+	prRepo      string
+	prRepoOwner string
+	retrier     *retrier.Retrier
 }
 
 type Opts struct {
@@ -44,7 +44,7 @@ func New(retrier *retrier.Retrier, client *github.Client, opts *Opts) *PrCreator
 // getRef returns the commit branch reference object if it exists or creates it
 // from the base branch before returning it.
 func (p *PrCreator) getRef(ctx context.Context, commitBranch string, baseBranch string) (ref *gogithub.Reference, err error) {
-	if ref, _, err = p.client.Git.GetRef(ctx, p.sourceOwner, p.sourceRepo, "refs/heads/" + commitBranch); err == nil {
+	if ref, _, err = p.client.Git.GetRef(ctx, p.sourceOwner, p.sourceRepo, "refs/heads/"+commitBranch); err == nil {
 		return ref, nil
 	}
 
@@ -53,7 +53,7 @@ func (p *PrCreator) getRef(ctx context.Context, commitBranch string, baseBranch 
 	}
 
 	var baseRef *gogithub.Reference
-	if baseRef, _, err = p.client.Git.GetRef(ctx, p.sourceOwner, p.sourceRepo, "refs/heads/" + baseBranch); err != nil {
+	if baseRef, _, err = p.client.Git.GetRef(ctx, p.sourceOwner, p.sourceRepo, "refs/heads/"+baseBranch); err != nil {
 		return nil, err
 	}
 	newRef := &gogithub.Reference{Ref: gogithub.String("refs/heads/" + commitBranch), Object: &gogithub.GitObject{SHA: baseRef.Object.SHA}}
@@ -85,15 +85,15 @@ func (p *PrCreator) pushCommit(ctx context.Context, ref *gogithub.Reference, tre
 	// Create the commit using the tree.
 	date := time.Now()
 	author := &gogithub.CommitAuthor{
-		Date: &date,
-		Name: &authorName,
+		Date:  &date,
+		Name:  &authorName,
 		Email: &authorEmail,
 	}
 
 	commit := &gogithub.Commit{
-		Author: author,
+		Author:  author,
 		Message: &commitMessage,
-		Tree: tree,
+		Tree:    tree,
 		Parents: []*gogithub.Commit{
 			parent.Commit,
 		},
@@ -111,8 +111,8 @@ func (p *PrCreator) pushCommit(ctx context.Context, ref *gogithub.Reference, tre
 
 func (p *PrCreator) getPr(ctx context.Context, opts *GetPrOpts) (*gogithub.PullRequest, error) {
 	o := &gogithub.PullRequestListOptions{
-		Head:        fmt.Sprintf("%v:%v", p.prRepoOwner, opts.CommitBranch),
-		Base:        opts.BaseBranch,
+		Head: fmt.Sprintf("%v:%v", p.prRepoOwner, opts.CommitBranch),
+		Base: opts.BaseBranch,
 	}
 	list, r, err := p.client.PullRequests.List(ctx, p.prRepoOwner, p.prRepo, o)
 	if err != nil {
@@ -174,7 +174,7 @@ func (p *PrCreator) createPR(ctx context.Context, opts *CreatePrOpts) (pr *gogit
 			// there can only be one PR per branch; if there's already an existing PR for the branch, we won't create one, but continue
 			logger.V(1).Info("A Pull Request already exists for the given branch", "branch", opts.CommitBranch)
 			getPrOpts := &GetPrOpts{
-				CommitBranch:  opts.CommitBranch,
+				CommitBranch: opts.CommitBranch,
 				BaseBranch:   "main",
 			}
 			pullRequest, err = p.getPr(ctx, getPrOpts)
@@ -190,10 +190,8 @@ func (p *PrCreator) createPR(ctx context.Context, opts *CreatePrOpts) (pr *gogit
 		return nil
 	})
 	if err != nil {
-		return  nil, fmt.Errorf("creating github pull request: %v", err)
+		return nil, fmt.Errorf("creating github pull request: %v", err)
 	}
-	logger.V(4).Info("sleeping after PR creation to avoid secondary rate limiting by Github content API")
-	time.Sleep(time.Second * 1)
 	return pullRequest, nil
 }
 
@@ -207,7 +205,7 @@ type CreatePrOpts struct {
 	PrBranch        string
 	PrDescription   string
 	DestFileGitPath string
-	SourceFileBody []byte
+	SourceFileBody  []byte
 }
 
 func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, error) {
@@ -228,7 +226,8 @@ func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, e
 		return "", fmt.Errorf("creating the commit: %s\n", err)
 	}
 
-	pr, err := p.createPR(ctx, opts); if err != nil {
+	pr, err := p.createPR(ctx, opts)
+	if err != nil {
 		return "", fmt.Errorf("creating pull request: %s", err)
 	}
 	return pr.GetHTMLURL(), nil
@@ -240,7 +239,8 @@ type GetPrOpts struct {
 }
 
 func (p *PrCreator) GetPr(ctx context.Context, opts *GetPrOpts) (string, error) {
-	pr, err := p.getPr(ctx, opts); if err != nil {
+	pr, err := p.getPr(ctx, opts)
+	if err != nil {
 		return "", fmt.Errorf("getting pull request: %s", err)
 	}
 	return pr.GetHTMLURL(), nil
