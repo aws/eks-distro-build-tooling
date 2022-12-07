@@ -9,8 +9,10 @@ import (
 	gogithub "github.com/google/go-github/v48/github"
 	"github.com/spf13/cobra"
 
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/issueManager"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
 )
 
@@ -22,10 +24,10 @@ const (
 )
 
 type createToplevelIssueOptions struct {
-	cveId                 string
-	upstreamIssueId       int
-	upstreamCommitHash    string
 	announcementSourceUrl string
+	cveId                 string
+	upstreamCommitHash    string
+	upstreamIssueId       int
 }
 
 var ctiOpts = &createToplevelIssueOptions{}
@@ -53,11 +55,8 @@ var createCveIssue = &cobra.Command{
 	Short: "Create new top level CVE Issue",
 	Long:  "Create a new top level CVE Issue in aws/eks-distro-build-tooling",
 	RunE: func(cmd *cobra.Command, args []string) error {
-
-		label := []string{"golang", "security"}
-		assignee := "rcrozean"
+		cveLabels := []string{"golang", "security"}
 		issueState := "open"
-
 		retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
 
 		token, err := github.GetGithubToken()
@@ -71,8 +70,8 @@ var createCveIssue = &cobra.Command{
 
 		// set up Issue Creator handler
 		issueManagerOpts := &issueManager.Opts{
-			SourceOwner: constants.aws,
-			SourceRepo:  constants.eksdBuildTooling,
+			SourceOwner: "rcrozean",
+			SourceRepo:  constants.EksdBuildTooling,
 		}
 		im := issueManager.New(retrier, githubClient, issueManagerOpts)
 
@@ -90,8 +89,8 @@ var createCveIssue = &cobra.Command{
 		issueOpts := &issueManager.CreateIssueOpts{
 			Title:    GenerateIssueTitle(upstreamIssue),
 			Body:     GenerateIssueBody(upstreamIssue),
-			Labels:   &label,
-			Assignee: &assignee,
+			Labels:   &cveLabels,
+			Assignee: nil,
 			State:    &issueState,
 		}
 
@@ -113,12 +112,11 @@ func GenerateIssueBody(ui *gogithub.Issue) *string {
 	b.WriteString(fmt.Sprintf("For additional information for %s, go to the upstream issue %s", ctiOpts.cveId, *ui.HTMLURL))
 
 	if ctiOpts.upstreamCommitHash != "" {
-		b.WriteString(fmt.Sprintf(" and fix commit %s", ctiOpts.upstreamCommitHash))
+		b.WriteString(fmt.Sprintf(" and fix commit https://github.com/golang/go/commit/%s", ctiOpts.upstreamCommitHash))
 	}
 
-	b.WriteString("\n\n")
 	bs := b.String()
-	fmt.Printf("Created Issues Body: `%s`\n", bs)
+	logger.V(4).Info(fmt.Sprintf("Created Issues Body: `%s`\n", bs))
 	return &bs
 }
 
@@ -126,10 +124,9 @@ func GenerateIssueTitle(ui *gogithub.Issue) *string {
 	t := strings.Builder{}
 
 	if *ui.Title != "" {
-		t.WriteString(fmt.Sprintf("%v - %v", *ui.Title, ctiOpts.cveId))
+		t.WriteString(fmt.Sprintf("%v", *ui.Title))
 	}
 	ts := t.String()
-
-	fmt.Printf("Created Issues Title: `%s`\n", ts)
+	logger.V(4).Info(fmt.Sprintf("Created Issues Title: `%s`\n", ts))
 	return &ts
 }
