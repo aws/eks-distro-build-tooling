@@ -154,6 +154,22 @@ func (mr *MockIssueClientMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockIssueClient)(nil).Create), arg0, arg1, arg2, arg3)
 }
 
+// Get mocks base method.
+func (m *MockIssueClient) Get(arg0 context.Context, arg1, arg2 string, arg3 int) (*github.Issue, *github.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Get", arg0, arg1, arg2, arg3)
+	ret0, _ := ret[0].(*github.Issue)
+	ret1, _ := ret[1].(*github.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// Get indicates an expected call of Get.
+func (mr *MockIssueClientMockRecorder) Get(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockIssueClient)(nil).Get), arg0, arg1, arg2, arg3)
+}
+
 // MockRepoClient is a mock of RepoClient interface.
 type MockRepoClient struct {
 	ctrl     *gomock.Controller

@@ -36,6 +36,7 @@ type PullRequestClient interface {
 
 type IssueClient interface {
 	Create(ctx context.Context, owner string, repo string, issue *github.IssueRequest) (*github.Issue, *github.Response, error)
+	Get(ctx context.Context, owner string, repo string, issueNum int) (*github.Issue, *github.Response, error)
 }
 
 func NewClient(ctx context.Context, personalAccessToken string) (*Client, error) {
