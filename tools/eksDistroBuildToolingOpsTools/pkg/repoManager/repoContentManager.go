@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"strings"
-	"time"
 
 	gogithub "github.com/google/go-github/v48/github"
 
@@ -72,7 +71,5 @@ func (p *repoContentManager) GetFile(ctx context.Context, opts *GetFileOpts) (*g
 	}
 	logger.V(4).Info("get file response", "response", resp.Response.StatusCode)
 	logger.V(1).Info("Github file received", "fileContent URL", fileContent.GetHTMLURL())
-	logger.V(4).Info("sleeping after Issue request to avoid secondary rate limiting by Github content API")
-	time.Sleep(time.Second * 1)
 	return fileContent, nil
 }
