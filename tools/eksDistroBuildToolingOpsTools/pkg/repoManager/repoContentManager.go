@@ -1,4 +1,4 @@
-package repoContentManager
+package repoManager
 
 import (
 	"context"
