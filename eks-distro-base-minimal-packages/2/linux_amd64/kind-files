@@ -1408,7 +1408,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   167KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   617KiB /usr/lib64/libcurl.so.4.7.0
+-rwxr-xr-x   613KiB /usr/lib64/libcurl.so.4.7.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   314KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
@@ -1431,7 +1431,7 @@
 -rw-r--r--     899B /usr/lib64/libfreebl3.chk
 -rwxr-xr-x    12KiB /usr/lib64/libfreebl3.so
 -rw-r--r--     899B /usr/lib64/libfreeblpriv3.chk
--rwxr-xr-x   744KiB /usr/lib64/libfreeblpriv3.so
+-rwxr-xr-x   748KiB /usr/lib64/libfreeblpriv3.so
 -rwxr-xr-x    87KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x   510KiB /usr/lib64/libgcrypt.so.11.8.2
 -rwxr-xr-x    53KiB /usr/lib64/libgdbm.so.4.0.0
@@ -1492,7 +1492,7 @@
 -rwxr-xr-x   184KiB /usr/lib64/libnftnl.so.11.2.0
 -rwxr-xr-x   159KiB /usr/lib64/libnghttp2.so.14.20.0
 -rwxr-xr-x   103KiB /usr/lib64/libnsl-2.26.so
--rwxr-xr-x   238KiB /usr/lib64/libnspr4.so
+-rwxr-xr-x   242KiB /usr/lib64/libnspr4.so
 -rwxr-xr-x   1.2MiB /usr/lib64/libnss3.so
 -rwxr-xr-x    38KiB /usr/lib64/libnss_compat-2.26.so
 -rwxr-xr-x    27KiB /usr/lib64/libnss_dns-2.26.so
@@ -1549,7 +1549,7 @@
 -rwxr-xr-x   716KiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   162KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   448KiB /usr/lib64/libssl.so.1.0.2k
--rwxr-xr-x   388KiB /usr/lib64/libssl3.so
+-rwxr-xr-x   396KiB /usr/lib64/libssl3.so
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x    24KiB /usr/lib64/libsystemd-daemon.so.0.0.12
 -rwxr-xr-x    20KiB /usr/lib64/libsystemd-id128.so.0.0.28
@@ -1572,12 +1572,13 @@
 -rwxr-xr-x   1.4MiB /usr/lib64/libxml2.so.2.9.1
 -rwxr-xr-x    57KiB /usr/lib64/libxtables.so.12.2.0
 -rwxr-xr-x    84KiB /usr/lib64/libz.so.1.2.7
--rwxr-xr-x   519KiB /usr/lib64/nss/libnssckbi.so
+-rwxr-xr-x   545KiB /usr/lib64/nss/libnssckbi.so
 -rwxr-xr-x    12KiB /usr/lib64/nss/unsupported-tools/atob
--rwxr-xr-x   395KiB /usr/lib64/nss/unsupported-tools/bltest
+-rwxr-xr-x   399KiB /usr/lib64/nss/unsupported-tools/bltest
 -rwxr-xr-x    12KiB /usr/lib64/nss/unsupported-tools/btoa
+-rwxr-xr-x    93KiB /usr/lib64/nss/unsupported-tools/dbtool
 -rwxr-xr-x    90KiB /usr/lib64/nss/unsupported-tools/derdump
--rwxr-xr-x   414KiB /usr/lib64/nss/unsupported-tools/fipstest
+-rwxr-xr-x   418KiB /usr/lib64/nss/unsupported-tools/fipstest
 -rwxr-xr-x    86KiB /usr/lib64/nss/unsupported-tools/listsuites
 -rwxr-xr-x    99KiB /usr/lib64/nss/unsupported-tools/ocspclnt
 -rwxr-xr-x    90KiB /usr/lib64/nss/unsupported-tools/pp
@@ -1587,6 +1588,7 @@
 -rwxr-xr-x   107KiB /usr/lib64/nss/unsupported-tools/strsclnt
 -rwxr-xr-x   104KiB /usr/lib64/nss/unsupported-tools/symkeyutil
 -rwxr-xr-x   119KiB /usr/lib64/nss/unsupported-tools/tstclnt
+-rwxr-xr-x    24KiB /usr/lib64/nss/unsupported-tools/validation
 -rwxr-xr-x    99KiB /usr/lib64/nss/unsupported-tools/vfychain
 -rwxr-xr-x   103KiB /usr/lib64/nss/unsupported-tools/vfyserv
 -rwxr-xr-x    20KiB /usr/lib64/openssl/engines/lib4758cca.so
@@ -8318,10 +8320,10 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--    16KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   7.4MiB /var/lib/rpm/Packages
+-rw-r--r--   7.5MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    92KiB /var/lib/rpm/Requirename
--rw-r--r--    28KiB /var/lib/rpm/Sha1header
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
