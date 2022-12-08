@@ -57,7 +57,6 @@ var backportIssueCmd = &cobra.Command{
 	Short: "Opens backport issues for top level github issue",
 	Long:  "Opens issues to backport top level issue to EKS-Distro supported versions of Golang",
 	RunE: func(cmd *cobra.Command, args []string) error {
-
 		label := []string{"golang", "security"}
 		issueState := "open"
 
