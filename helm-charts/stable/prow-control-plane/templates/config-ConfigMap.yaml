@@ -104,7 +104,8 @@ data:
           - podinfo.json
       default_rerun_auth_configs:
       - rerun_auth_configs:
-          allow_anyone: true
+          github_team_ids:
+          - 4630040
 
     plank:
       job_url_prefix_config:
