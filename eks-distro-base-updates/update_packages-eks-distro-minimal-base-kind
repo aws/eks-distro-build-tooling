@@ -1,18 +1,13 @@
 
 curl.x86_64
+dbus.x86_64
+dbus-common.noarch
 e2fsprogs-libs.x86_64
 expat.x86_64
-libblkid.x86_64
 libcom_err.x86_64
 libcurl.x86_64
-libfdisk.x86_64
-libmount.x86_64
-libsmartcols.x86_64
-libuuid.x86_64
-ncurses.x86_64
+libksba.x86_64
+libxml2.x86_64
 ncurses-base.noarch
 ncurses-libs.x86_64
-systemd.x86_64
-systemd-libs.x86_64
-systemd-sysv.x86_64
-util-linux.x86_64
+zlib.x86_64
