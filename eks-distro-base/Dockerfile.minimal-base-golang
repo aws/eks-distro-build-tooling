@@ -73,13 +73,6 @@ ARG OUTPUT_DEBUG_LOG
 
 RUN set -x && \    
     clean_install git-core && \
-    while read rpm; do \
-        mkdir -p $DOWNLOAD_DIR; \
-        (cd $DOWNLOAD_DIR && curl -O $rpm); \
-        rpm -i --nodeps --justdb --root $NEWROOT $rpm; \
-        rm -f $rpm; \
-    done <$NEWROOT/installed_golang_rpms && \
-    rm $NEWROOT/installed_golang_rpms && \
     cleanup "golang-base"
 
 FROM builder-golang-base as builder
