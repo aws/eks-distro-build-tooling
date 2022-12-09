@@ -23,6 +23,7 @@ file-libs-5.39-7.amzn2022.0.1.aarch64
 filesystem-3.14-5.amzn2022.0.2.aarch64
 findutils-4.8.0-2.amzn2022.0.1.aarch64
 gawk-5.1.0-3.amzn2022.0.1.aarch64
+gc-8.0.4-5.amzn2022.0.1.aarch64
 gdbm-libs-1.19-2.amzn2022.0.1.aarch64
 git-core-2.37.1-1.amzn2022.0.3.aarch64
 glib2-2.73.2-678.amzn2022.aarch64
@@ -41,6 +42,7 @@ golang-tests-1.15.15-1.amzn2.eks.noarch
 gpg-pubkey-afaa0026-6185c6ab
 gpgme-1.15.1-6.amzn2022.0.2.aarch64
 grep-3.8-1.amzn2022.0.3.aarch64
+guile22-2.2.7-2.amzn2022.0.1.aarch64
 gzip-1.10-5.amzn2022.0.1.aarch64
 json-c-0.14-8.amzn2022.0.1.aarch64
 keyutils-libs-1.6.1-2.amzn2022.0.1.aarch64
@@ -88,6 +90,7 @@ libssh-0.9.6-1.amzn2022.0.2.aarch64
 libssh-config-0.9.6-1.amzn2022.0.2.noarch
 libstdc++-11.3.1-2.amzn2022.0.8.aarch64
 libtasn1-4.16.0-4.amzn2022.0.1.aarch64
+libtool-ltdl-2.4.7-1.amzn2022.0.2.aarch64
 libunistring-0.9.10-10.amzn2022.0.1.aarch64
 libutempter-1.2.1-4.amzn2022.0.1.aarch64
 libuuid-2.37.4-1.amzn2022.0.2.aarch64
@@ -98,6 +101,7 @@ libyaml-0.2.5-5.amzn2022.0.1.aarch64
 libzstd-1.5.2-1.amzn2022.0.1.aarch64
 lua-libs-5.4.4-3.amzn2022.0.1.aarch64
 lz4-libs-1.9.4-1.amzn2022.0.1.aarch64
+make-4.3-5.amzn2022.0.1.aarch64
 mpfr-4.1.0-7.amzn2022.0.1.aarch64
 ncurses-base-6.2-4.20200222.amzn2022.0.1.noarch
 ncurses-libs-6.2-4.20200222.amzn2022.0.1.aarch64
