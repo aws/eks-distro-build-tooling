@@ -2,6 +2,13 @@
 curl.x86_64
 expat.x86_64
 git-core.x86_64
+golang.x86_64
+golang-bin.x86_64
+golang-docs.noarch
+golang-misc.noarch
+golang-race.x86_64
+golang-src.noarch
+golang-tests.noarch
 libcom_err.x86_64
 libcurl.x86_64
 libksba.x86_64
