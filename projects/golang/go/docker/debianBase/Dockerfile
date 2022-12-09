@@ -5,9 +5,7 @@ ARG GOLANG_ARCHIVE_PATH
 ADD $GOLANG_ARCHIVE_PATH /usr/local
 
 ENV GOPATH /go
-ENV PATH /usr/local/go/bin:$PATH
-ENV PATH $GOPATH/bin:$PATH
-ENV GOLANG_VERSION GOLANG_VERSION
+ENV PATH /usr/local/go/bin:$GOPATH/bin:$PATH
 
 RUN set -eux; \
 	apt-get update; \
