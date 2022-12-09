@@ -33,8 +33,6 @@ BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_D
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 
-# yum will think there are updates avail for the golang packages which we are managing
-# seperately. Remove them to ensure they do not trigger builds
 cat << EOF > check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
@@ -45,7 +43,6 @@ COPY --from=base_image /var/lib/rpm /var/lib/rpm
 COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 
 RUN set -x && \
-    rpm -e --justdb --nodeps golang golang-bin golang-src golang-race golang-docs golang-misc golang-tests golang-src || true && \
     if grep -q "2022" "/etc/os-release"; then \
         yum check-update --security --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     else \

@@ -60,9 +60,6 @@ function build::go::download_rpm(){
     local filename="$(basename $url)"
 
     curl -sSL --retry 5 $url -o /tmp/$filename
-
-    # track "installed" rpms to install to rpm db in later stage
-    echo $url >> $NEWROOT/installed_golang_rpms
 }
 
 function build::go::install(){
