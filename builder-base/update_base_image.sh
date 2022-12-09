@@ -23,11 +23,11 @@ NEW_TAG="$1"
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-prow-jobs
-${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs 'builder-base:(.+)-.*' 'builder-base:'"\1-$NEW_TAG" '*.yaml'
 ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-prow-jobs '.*' $NEW_TAG BUILDER_BASE_TAG_FILE
 ${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-distro-prow-jobs '*.yaml'
 
-${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-anywhere-prow-jobs
-${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere-prow-jobs 'builder-base:.*' 'builder-base:'"$NEW_TAG" '*.yaml'
+${SCRIPT_ROOT}/../pr-scripts/u.sh eks-anywhere-prow-jobs
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere-prow-jobs 'builder-base:(.+).*' 'builder-base:'"\1-$NEW_TAG" '*.yaml'
 ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-anywhere-prow-jobs '.*' $NEW_TAG BUILDER_BASE_TAG_FILE
 ${SCRIPT_ROOT}/../pr-scripts/create_pr.sh eks-anywhere-prow-jobs '*.yaml'
