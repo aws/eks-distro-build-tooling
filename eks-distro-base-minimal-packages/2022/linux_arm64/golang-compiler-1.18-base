@@ -27,12 +27,6 @@ glibc-2.34-40.amzn2022.0.2.aarch64
 glibc-common-2.34-40.amzn2022.0.2.aarch64
 glibc-minimal-langpack-2.34-40.amzn2022.0.2.aarch64
 gmp-6.2.1-2.amzn2022.0.1.aarch64
-golang-1.18.7-1.amzn2.eks.aarch64
-golang-bin-1.18.7-1.amzn2.eks.aarch64
-golang-docs-1.18.7-1.amzn2.eks.noarch
-golang-misc-1.18.7-1.amzn2.eks.noarch
-golang-src-1.18.7-1.amzn2.eks.noarch
-golang-tests-1.18.7-1.amzn2.eks.noarch
 gpg-pubkey-afaa0026-6185c6ab
 grep-3.8-1.amzn2022.0.3.aarch64
 guile22-2.2.7-2.amzn2022.0.1.aarch64

@@ -31,13 +31,6 @@ glibc-2.26-62.amzn2.x86_64
 glibc-common-2.26-62.amzn2.x86_64
 glibc-minimal-langpack-2.26-62.amzn2.x86_64
 gmp-6.0.0-15.amzn2.0.2.x86_64
-golang-1.15.15-1.amzn2.eks.x86_64
-golang-bin-1.15.15-1.amzn2.eks.x86_64
-golang-docs-1.15.15-1.amzn2.eks.noarch
-golang-misc-1.15.15-1.amzn2.eks.noarch
-golang-race-1.15.15-1.amzn2.eks.x86_64
-golang-src-1.15.15-1.amzn2.eks.noarch
-golang-tests-1.15.15-1.amzn2.eks.noarch
 gpg-pubkey-c87f5b1a-593863f8
 grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
