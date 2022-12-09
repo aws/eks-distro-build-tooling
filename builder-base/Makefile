@@ -96,7 +96,7 @@ images-%: buildkit-check
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
 	if [ "$(AL_TAG)" = "2" ] && [ "$(VARIANT)" = "standard" ]; then \
-		./update_base_image.sh $(VARIANT)-$(IMAGE_TAG); \
+		./update_base_image.sh $(IMAGE_TAG); \
 	fi
 	
 
