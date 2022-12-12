@@ -42,6 +42,11 @@ TO_LOWER=$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst \
 	M,m,$(subst N,n,$(subst O,o,$(subst P,p,$(subst Q,q,$(subst R,r,$(subst S,s,$(subst \
 	T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$(subst _,-,$(1))))))))))))))))))))))))))))
 
+RELEASE_TARGETS = golang-build sync-artifacts-to-s3
+ifeq ($(ARCHITECTURE),AMD64)
+    BUILD_TARGETS += images
+endif
+
 .PHONY: golang-build
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive
 
@@ -49,10 +54,10 @@ golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-
 build: golang-build sync-artifacts-to-s3-dry-run local-images
 
 .PHONY: release
-release: golang-build sync-artifacts-to-s3 images
+release: $(RELEASE_TARGETS)
 
 .PHONY: prod-release
-prod-release: golang-build sync-artifacts-to-s3 images
+prod-release: $(RELEASE_TARGETS)
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
