@@ -26,7 +26,7 @@ NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 .PHONY: build
-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive sync-artifacts-to-s3-dry-run
+build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive generate-golang-checksum sync-artifacts-to-s3-dry-run
 
 .PHONY: release
 release: build sync-artifacts-to-s3
@@ -81,6 +81,19 @@ extract-golang-rpm:
 tar-golang-sources:
 	mkdir -p $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)
 	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && tar czf $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz .
+
+.PHONY: generate-golang-checksum
+generate-golang-checksum: generate-rmp-checksum generate-archive-checksum
+
+.PHONY: generate-rpm-checksum
+generate-rpm-checksum: extract-golang-rpm generate-golang-rpm-checksum
+
+.PHONY: generate-golang-rpm-checksum
+generate-golang-rpm-checksum:
+	mkdir -p $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)
+	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && ls
+
+
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
