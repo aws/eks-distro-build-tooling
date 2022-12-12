@@ -119,7 +119,7 @@ tar-golang-sources:
 	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && tar czf $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz .
 
 .PHONY: generate-golang-checksum
-generate-golang-checksum: generate-rmp-checksum generate-archive-checksum
+generate-golang-checksum: generate-rpm-checksum generate-archive-checksum
 
 .PHONY: generate-rpm-checksum
 generate-rpm-checksum: extract-golang-rpm generate-golang-rpm-checksum
