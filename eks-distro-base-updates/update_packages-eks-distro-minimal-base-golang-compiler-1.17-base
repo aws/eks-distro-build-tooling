@@ -1,0 +1,9 @@
+
+curl.x86_64
+expat.x86_64
+git-core.x86_64
+libcom_err.x86_64
+libcurl.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64
+zlib.x86_64
