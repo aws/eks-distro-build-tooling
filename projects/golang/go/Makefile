@@ -1,6 +1,8 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
 BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
 
+export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
+
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
 VERSION_DIRECTORY:=$(PROJECT_DIRECTORY)/$(GO_SOURCE_VERSION)
@@ -13,26 +15,44 @@ GITHUB_USER?="Prow Bot"
 
 GOOS?=linux
 
-ARCHITECTURE?="AMD64"
+ARCHITECTURE?=AMD64
 RPM_ARCH?=x86_64
 ifeq ($(ARCHITECTURE), ARM64)
 	RPM_ARCH=aarch64
 endif
-ARCH_LOWER=$(shell echo $(ARCHITECTURE) | awk '{print tolower($0)}')
-
+ARCH_LOWER=$(call TO_LOWER,$(ARCHITECTURE))
 
 ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
 NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
 ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
+AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
+
+# This build is specifically focused on a debian base image for use with EKS build systems
+IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+IMAGE_NAME?=golang-debian
+IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)
+IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+
+PUSH_IMAGES?=true
+BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
+
+TO_LOWER=$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst \
+	F,f,$(subst G,g,$(subst H,h,$(subst I,i,$(subst J,j,$(subst K,k,$(subst L,l,$(subst \
+	M,m,$(subst N,n,$(subst O,o,$(subst P,p,$(subst Q,q,$(subst R,r,$(subst S,s,$(subst \
+	T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$(subst _,-,$(1))))))))))))))))))))))))))))
+
+.PHONY: golang-build
+golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive generate-golang-checksum
+
 .PHONY: build
-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive generate-golang-checksum sync-artifacts-to-s3-dry-run
+build: golang-build sync-artifacts-to-s3-dry-run local-images
 
 .PHONY: release
-release: build sync-artifacts-to-s3
+release: golang-build sync-artifacts-to-s3 images
 
 .PHONY: prod-release
-prod-release: build sync-artifacts-to-s3
+prod-release: golang-build sync-artifacts-to-s3 images
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -62,6 +82,22 @@ ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
 	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild" --define "_buildid $(BUILD_ID)"
+
+.PHONY: local-images
+local-images: PUSH_IMAGES=false
+local-images: images
+
+.PHONY: images
+images: buildkit-check
+	$(BASE_DIRECTORY)/scripts/buildkit.sh \
+		build \
+		--frontend dockerfile.v0 \
+		--opt platform=$(GOOS)/$(ARCH_LOWER) \
+		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz \
+		--local dockerfile=$(PROJECT_DIRECTORY)/docker/debianBase \
+		--local context=$(VERSION_DIRECTORY)/archives \
+		--progress plain \
+		--output $(BUILDKIT_OUTPUT)
 
 .PHONY: generate-golang-archive
 generate-golang-archive: extract-golang-rpm tar-golang-sources
@@ -120,7 +156,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum install -y which git rpmdevtools go-srpm-macros awscli rpm-build pcre-devel glibc-static hostname procps-ng tar
+	yum install -y yum-plugin-ovl && yum install -y rpmdevtools go-srpm-macros rpm-build glibc-static
 
 .PHONY: check-env-release
 check-env-release:
@@ -133,6 +169,10 @@ check-env:
 ifndef GO_SOURCE_VERSION
 	$(error environment variable GO_SOURCE_VERSION, e.g. 1.15, is undefined)
 endif
+
+.PHONY: buildkit-check
+buildkit-check:
+	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
 
 .PHONY: clone-go
 clone-go:

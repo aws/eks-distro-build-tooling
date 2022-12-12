@@ -49,6 +49,6 @@ if [ "$USE_YQ" = "true" ]; then
     yq -i e "$NEW_TAG" EKS_DISTRO_TAG_FILE.yaml   
 else
     for FILE in $(find ./ -type f -name "$FILEPATH"); do
-        $SED -i "s,${OLD_TAG},${NEW_TAG}," $FILE
+        $SED -i -E "s,${OLD_TAG},${NEW_TAG}," $FILE
     done
 fi
