@@ -80,8 +80,8 @@ var backportIssueCmd = &cobra.Command{
 			rm := repoManager.New(retrier, githubClient, repoManagerOpts)
 
 			gfOpts := &repoManager.GetFileOpts{
-				Owner: "aws",
-				Repo:  "eks-distro-build-tooling",
+				Owner: constants.Aws,
+				Repo:  constants.EksdBuildTooling,
 				Path:  eksGoSupportedVersionsPath,
 				Ref:   nil,
 			}
