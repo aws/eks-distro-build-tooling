@@ -128,6 +128,7 @@ generate-rpm-checksum: extract-golang-rpm generate-golang-rpm-checksum
 generate-golang-rpm-checksum:
 	mkdir -p $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)
 	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && ls
+	find . -type f \( -exec sha256sum "$PWD"/{} \; \) | awk '{print $1}' | sort | sha256sum
 
 
 
