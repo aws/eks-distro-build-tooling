@@ -17,22 +17,23 @@ import (
 )
 
 const (
-	HttpOkStatusCode = 200
+	HttpOkStatusCode        = 200
 	rateLimitingIssuesError = "rate limited while attempting to create github issues"
 )
 
 var (
-	TestRepoOwner      = "TestTesterson"
+	TestRepoOwner      = "TestTestPerson"
 	TestRepo           = "TestRepo"
 	IssueTitle         = "Title"
 	IssueBody          = "Body"
 	IssueAssignee      = "Jeff"
 	IssueState         = "Open"
 	ReturnIssueHtmlUrl = "https://github.com/testrepo/issues/999"
+	IssueNumber        = 999
 )
 
 func expectedLabels() *[]string {
-	return &[]string{"sup","test"}
+	return &[]string{"sup", "test"}
 }
 
 func TestIssueManagerCreateIssueSuccess(t *testing.T) {
@@ -46,11 +47,11 @@ func TestIssueManagerCreateIssueSuccess(t *testing.T) {
 		State:    &IssueState,
 	}
 	expectedIssue := &gogithub.IssueRequest{
-		Title:     &IssueTitle,
-		Body:      &IssueBody,
-		Labels:    expectedLabels(),
-		Assignee:  &IssueAssignee,
-		State:     &IssueState,
+		Title:    &IssueTitle,
+		Body:     &IssueBody,
+		Labels:   expectedLabels(),
+		Assignee: &IssueAssignee,
+		State:    &IssueState,
 	}
 	expectedReturnIssue := &gogithub.Issue{
 		HTMLURL: &ReturnIssueHtmlUrl,
@@ -78,11 +79,11 @@ func TestIssueManagerCreateIssueRateLimitedFail(t *testing.T) {
 		State:    &IssueState,
 	}
 	expectedIssue := &gogithub.IssueRequest{
-		Title:     &IssueTitle,
-		Body:      &IssueBody,
-		Labels:    expectedLabels(),
-		Assignee:  &IssueAssignee,
-		State:     &IssueState,
+		Title:    &IssueTitle,
+		Body:     &IssueBody,
+		Labels:   expectedLabels(),
+		Assignee: &IssueAssignee,
+		State:    &IssueState,
 	}
 	expectedReturnIssue := &gogithub.Issue{
 		HTMLURL: &ReturnIssueHtmlUrl,
@@ -91,6 +92,29 @@ func TestIssueManagerCreateIssueRateLimitedFail(t *testing.T) {
 	_, err := im.issueManager.CreateIssue(context.Background(), opts)
 	if err != nil && !strings.Contains(err.Error(), rateLimitingIssuesError) {
 		t.Errorf("IssueManager.CreateIssue() rate limiting exepcted error; error = nil, want %s", rateLimitingIssuesError)
+	}
+}
+
+func TestIssueManagerGetIssueSuccess(t *testing.T) {
+	ctx := context.Background()
+	im := newTestIssueManager(t)
+	opts := &issueManager.GetIssueOpts{
+		Owner: TestRepoOwner,
+		Repo:  TestRepo,
+		Issue: IssueNumber,
+	}
+	expectedReturnIssue := &gogithub.Issue{
+		HTMLURL: &ReturnIssueHtmlUrl,
+	}
+	expectedResponse := &gogithub.Response{
+		Response: &http.Response{
+			StatusCode: HttpOkStatusCode,
+		},
+	}
+	im.issuesClient.EXPECT().Get(ctx, TestRepoOwner, TestRepo, IssueNumber).Return(expectedReturnIssue, expectedResponse, nil)
+	_, err := im.issueManager.GetIssue(context.Background(), opts)
+	if err != nil {
+		t.Errorf("IssueManager.CreateIssue() error = %v, want nil", err)
 	}
 }
 
@@ -107,7 +131,7 @@ func newTestIssueManager(t *testing.T) testIssueManager {
 	mockCtrl := gomock.NewController(t)
 	issueClient := githubMocks.NewMockIssueClient(mockCtrl)
 	githubClient := &github.Client{
-		Issues:       issueClient,
+		Issues: issueClient,
 	}
 
 	o := &issueManager.Opts{
@@ -126,7 +150,7 @@ func rateLimitedResponseBody() *gogithub.Response {
 	return &gogithub.Response{
 		Response: &http.Response{
 			StatusCode: github.SecondaryRateLimitStatusCode,
-			Body: rateLimitResponseBody,
+			Body:       rateLimitResponseBody,
 		},
 	}
 }
