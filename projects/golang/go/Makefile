@@ -165,8 +165,3 @@ endif
 .PHONY: buildkit-check
 buildkit-check:
 	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
-
-.PHONY: clone-go
-clone-go:
-	echo "Hello World"
-
