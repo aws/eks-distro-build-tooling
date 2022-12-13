@@ -34,7 +34,7 @@ var bpOptions = &backportIssueOptions{}
 func init() {
 	backportCmd.AddCommand(backportIssueCmd)
 	backportIssueCmd.Flags().IntVarP(&bpOptions.toplevelIssueId, toplevelIssueIdFlag, "i", 0, "Issue ID to be backported e.g. 254")
-	backportIssueCmd.Flags().StringSliceVarP(&bpOptions.backportVersions, backportVersionFlag, "b", nil, "to specify versions to backport use this flag. Multiple versions can be specified separated by commas. e.g. <ver>,<ver>,<ver>")
+	backportIssueCmd.Flags().StringSliceVarP(&bpOptions.backportVersions, backportVersionFlag, "b", nil, "to specify versions to backport use this flag. Multiple versions can be specified separated by commas. e.g. <ver>,<ver>,<ver>. If no option is supplied, default is to use MAINTAINED_EOL_VERSIONS file in eks-distro-build-tooling/golang/go")
 
 	requiredFlags := []string{
 		toplevelIssueIdFlag,
