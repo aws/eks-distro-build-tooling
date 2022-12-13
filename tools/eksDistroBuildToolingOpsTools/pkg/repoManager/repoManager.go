@@ -15,9 +15,9 @@ import (
 
 type RepoContentManager struct {
 	client      *github.Client
+	retrier     *retrier.Retrier
 	sourceOwner string
 	sourceRepo  string
-	retrier     *retrier.Retrier
 }
 
 type Opts struct {
@@ -54,7 +54,7 @@ func (p *RepoContentManager) GetFile(ctx context.Context, opts *GetFileOpts) (*g
 			}
 			if strings.Contains(string(b), github.SecondaryRateLimitResponse) {
 				logger.V(4).Info("rate limited while attempting to get github file")
-				return nil, fmt.Errorf("rate limited while attempting to get github file: %v", err)
+				return nil, fmt.Errorf("rate limited while attempting to get github file")
 			}
 		}
 

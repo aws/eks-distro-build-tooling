@@ -22,7 +22,7 @@ const (
 )
 
 var (
-	TestRepoOwner      = "TestTestPerson"
+	TestRepoOwner      = "TestTesterson"
 	TestRepo           = "TestRepo"
 	IssueTitle         = "Title"
 	IssueBody          = "Body"
