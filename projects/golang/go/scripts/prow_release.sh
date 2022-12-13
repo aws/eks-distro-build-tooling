@@ -23,8 +23,13 @@ if [ "$ARTIFACT_DEPLOYMENT_ROLE_ARN" == "" ]; then
     exit 1
 fi
 
+if [ "$ECR_PUBLIC_PUSH_ROLE_ARN" == "" ]; then
+    echo "Empty ECR_PUBLIC_PUSH_ROLE_ARN"
+    exit 1
+fi
+
 BASE_DIRECTORY=$(git rev-parse --show-toplevel)
-cd ${BASE_DIRECTORY}
+cd ${BASE_DIRECTORY} || exit
 
 cat << EOF > awscliconfig
 [default]
@@ -33,13 +38,18 @@ region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-west-2}}
 role_arn=$AWS_ROLE_ARN
 web_identity_token_file=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
 
-[profile release-account]
+[profile artifacts-push]
 role_arn=$ARTIFACT_DEPLOYMENT_ROLE_ARN
 region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}
 source_profile=default
+
+[profile ecr-public-push]
+role_arn=$ECR_PUBLIC_PUSH_ROLE_ARN
+region=us-east-1
+source_profile=default
 EOF
 export AWS_CONFIG_FILE=$(pwd)/awscliconfig
-export AWS_PROFILE=release-account
+export AWS_PROFILE=artifacts-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
 make -C ${BASE_DIRECTORY}/projects/golang/go prod-release
