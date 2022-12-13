@@ -1,4 +1,4 @@
-From 64a9dea455e63bf62c206dc6740dd64a02ec107b Mon Sep 17 00:00:00 2001
+From d492ebc9a6f9d2ba01197bf1a1987108331cba66 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 4 Aug 2021 16:07:28 -0700
 Subject: [PATCH] time: fallback to slower TestTicker test after one failure
@@ -75,5 +75,5 @@ index c0c6e76b53..8be358173f 100644
  		t0 := Now()
  		for i := 0; i < count/2; i++ {
 -- 
-2.37.1
+2.38.1
 
