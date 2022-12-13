@@ -60,7 +60,11 @@ release: $(RELEASE_TARGETS)
 prod-release: golang-build sync-artifacts-to-s3
 
 .PHONY: prod-release-images
-prod-release-images: golang-build images
+prod-release-images: fetch-eks-go-archive images
+
+.PHONY: fetch-eks-go-archive
+fetch-eks-go-archive:
+	curl -L -o $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz https://distro.eks.amazonaws.com/golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz --create-dirs
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
