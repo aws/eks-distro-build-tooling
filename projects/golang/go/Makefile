@@ -127,9 +127,7 @@ generate-rpm-checksum: extract-golang-rpm generate-golang-rpm-checksum
 .PHONY: generate-golang-rpm-checksum
 generate-golang-rpm-checksum:
 	mkdir -p $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)
-	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && ls
-	find . -type f \( -exec sha256sum "$PWD"/{} \; \) | awk '{print $1}' | sort | sha256sum
-
+	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && find . \( -not -name . \) -type f -exec cat {} + | sha256sum > $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER)_RPM_CHECKSUM
 
 
 .PHONY: sync-artifacts-to-s3-dry-run
