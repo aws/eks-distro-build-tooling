@@ -8,7 +8,6 @@ import (
 
 	gogithub "github.com/google/go-github/v48/github"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
@@ -20,12 +19,14 @@ import (
 
 const (
 	// Flag Names
-	toplevelIssueIdFlag = "toplevelIssueId"
 	backportVersionFlag = "backportVersions"
+	requestedByFlag     = "requestedBy"
+	toplevelIssueIdFlag = "toplevelIssueId"
 )
 
 type backportIssueOptions struct {
 	backportVersions []string
+	requestedBy      string
 	toplevelIssueId  int
 }
 
@@ -34,6 +35,7 @@ var bpOptions = &backportIssueOptions{}
 func init() {
 	backportCmd.AddCommand(backportIssueCmd)
 	backportIssueCmd.Flags().IntVarP(&bpOptions.toplevelIssueId, toplevelIssueIdFlag, "i", 0, "Issue ID to be backported e.g. 254")
+	backportIssueCmd.Flags().StringVarP(&bpOptions.requestedBy, requestedByFlag, "r", "", "github username of the requester")
 	backportIssueCmd.Flags().StringSliceVarP(&bpOptions.backportVersions, backportVersionFlag, "b", nil, "to specify versions to backport use this flag. Multiple versions can be specified separated by commas. e.g. <ver>,<ver>,<ver>. If no option is supplied, default is to use MAINTAINED_EOL_VERSIONS file in eks-distro-build-tooling/golang/go")
 
 	requiredFlags := []string{
@@ -135,7 +137,7 @@ var backportIssueCmd = &cobra.Command{
 func GenerateBackportIssueBody(ui *gogithub.Issue, ver string) *string {
 	b := strings.Builder{}
 
-	b.WriteString(fmt.Sprintf("A backport of issue %v to EKS Go %v was requested by %v\n", *ui.HTMLURL, ver, viper.GetString(authorNameFlag)))
+	b.WriteString(fmt.Sprintf("A backport of issue %v to EKS Go %v was requested by @%v\n", *ui.HTMLURL, ver, bpOptions.requestedBy))
 	b.WriteString(fmt.Sprintf("%v", *ui.Body))
 	bs := b.String()
 	logger.V(4).Info("Created Issues Body: `%s`\n", bs)

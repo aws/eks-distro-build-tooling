@@ -29,10 +29,6 @@ var (
 	FileName        = "File"
 )
 
-func expectedLabels() *[]string {
-	return &[]string{"sup", "test"}
-}
-
 func TestRepoManagerGetFileSuccess(t *testing.T) {
 	ctx := context.Background()
 	rm := newTestRepoManager(t)
