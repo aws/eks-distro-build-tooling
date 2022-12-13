@@ -41,28 +41,20 @@ function check_dirty {
 function apply_cve_patches {
   local version_dir=$1
   local golang_dir=$2
-  #  local STARTING_PATCH=$3
-#  local patches_dir="$version_dir/patches"
-  #  local PRIVATE_patches_dir="$version_dir/1-private"
 
   local git_tag
-  git_tag=$(get_golang_git_tag "$version_dir")
+  git_tag="$(get_golang_git_tag "${version_dir}")"
 
   echo "Checking out $git_tag in $golang_dir"
   checkout_golang "$git_tag" "$golang_dir"
   echo "$git_tag checked out!"
 
   echo "Applying patches in $version_dir to $golang_dir..."
-  #  echo "Applying public patches in $PUBLIC_patches_dir to $golang_dir..."
   if apply_patches "$version_dir" "$golang_dir" "true"; then
-    #    echo "Applying private patches in $PRIVATE_patches_dir to $golang_dir..."
-    #    if apply_patches "$PRIVATE_patches_dir" "$golang_dir" "$STARTING_PATCH"; then
     echo "All patches succeeded!"
     echo "HEAD is at the last successful patch."
     return 0
   fi
-  #  fi
-
   echo "A patch failed!"
   echo "HEAD is at the last successful patch."
   return 1
@@ -75,15 +67,11 @@ function apply_other_patches {
 echo "Assuming previous patches are already applied in $golang_dir"
 
   echo "Applying patches in $version_dir to $golang_dir..."
-  #  echo "Applying public patches in $PUBLIC_patches_dir to $golang_dir..."
   if apply_patches "$version_dir" "$golang_dir" "false"; then
-    #    echo "Applying private patches in $PRIVATE_patches_dir to $golang_dir..."
-    #    if apply_patches "$PRIVATE_patches_dir" "$golang_dir" "$STARTING_PATCH"; then
     echo "All patches succeeded!"
     echo "HEAD is at the last successful patch."
     return 0
   fi
-  #  fi
 
   echo "A patch failed!"
   echo "HEAD is at the last successful patch."
@@ -129,7 +117,7 @@ function get_patches {
   fi
 
   local file_name_regex
-  file_name_regex="^[0-9]{4}-$(get_eks_go_id "$version_dir")-.*\.patch$"
+  file_name_regex="^.*[0-9]{4}-$(get_eks_go_id "$version_dir")-.*\.patch$"
   local is_match
 
   declare -a patches
@@ -139,9 +127,8 @@ function get_patches {
     if [[ $file =~ $file_name_regex ]]; then
       is_match=true
     fi
-    #    patch_number=$(get_patch_number $file)
-    if [ $is_match = $is_apply_for_cve_patches ]; then
-      patches+=("$file")
+
+    if [ $is_match = $is_apply_for_cve_patches ]; then patches+=("$file")
     fi
   done
   echo "${patches[@]}"
@@ -158,7 +145,7 @@ function checkout_golang {
   fi
 
   git fetch upstream --tags -f
-  git checkout "$git_tag"
+  git checkout tags/"$git_tag"
 
   popd
 }
@@ -178,8 +165,8 @@ function get_golang_git_tag {
 
   local version
 
-  pushd "$version_dir"
+  pushd "$version_dir" > /dev/null
   version="$(cat GIT_TAG)"
-  popd
+  popd > /dev/null
   echo "$version"
 }

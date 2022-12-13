@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "./lib/patch.sh"
+BASE_DIRECTORY="$(git rev-parse --show-toplevel)/projects/golang/go/development/scripts/patches/lib/patch.sh"
+source "$BASE_DIRECTORY"
 
 set -e
 set -o pipefail
@@ -26,5 +27,5 @@ APPLY_OTHER_PATCHES="${4:-false}"
 
 clone_golang "$GOLANG_DIR"
 check_dirty "$GOLANG_DIR"
-apply_cve_patches "$VERSION_DIR" "$GOLANG_DIR"
-#apply_patches_all "$VERSION_DIR" "$GOLANG_DIR" #"$STARTING_PATCH_NUM"
+#apply_cve_patches "$VERSION_DIR" "$GOLANG_DIR"
+apply_other_patches "$VERSION_DIR" "$GOLANG_DIR"
