@@ -102,7 +102,6 @@ local-images: images
 .PHONY: images
 images: buildkit-check
 images:
-	echo $(AWS_PROFILE)
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
