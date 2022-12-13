@@ -129,6 +129,12 @@ generate-golang-rpm-checksum:
 	mkdir -p $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)
 	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && find . \( -not -name . \) -type f -exec cat {} + | sha256sum > $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER)_RPM_CHECKSUM
 
+.PHONY: generate-archive-checksum
+generate-archive-checksum: generate-golang-archive generate-golang-archive-checksum
+
+.PHONY: generate-golang-archive-checksum
+generate-golang-archive-checksum: 
+	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && sha256sum $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz > $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER)_ARCHIVE_CHECKSUM
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
