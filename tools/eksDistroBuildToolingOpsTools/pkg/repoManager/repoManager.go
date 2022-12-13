@@ -13,7 +13,7 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
 )
 
-type repoContentManager struct {
+type RepoContentManager struct {
 	client      *github.Client
 	sourceOwner string
 	sourceRepo  string
@@ -25,8 +25,8 @@ type Opts struct {
 	SourceRepo  string
 }
 
-func New(r *retrier.Retrier, githubClient *github.Client, opts *Opts) *repoContentManager {
-	return &repoContentManager{
+func New(r *retrier.Retrier, githubClient *github.Client, opts *Opts) *RepoContentManager {
+	return &RepoContentManager{
 		client:      githubClient,
 		sourceOwner: opts.SourceOwner,
 		sourceRepo:  opts.SourceRepo,
@@ -41,7 +41,7 @@ type GetFileOpts struct {
 	Ref   *gogithub.RepositoryContentGetOptions // Can be a SHA, branch, or tag. Optional
 }
 
-func (p *repoContentManager) GetFile(ctx context.Context, opts *GetFileOpts) (*gogithub.RepositoryContent, error) {
+func (p *RepoContentManager) GetFile(ctx context.Context, opts *GetFileOpts) (*gogithub.RepositoryContent, error) {
 	var fileContent *gogithub.RepositoryContent
 	var resp *gogithub.Response
 	var err error
