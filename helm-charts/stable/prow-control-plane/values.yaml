@@ -149,6 +149,15 @@ plugins:
     scripts/registry-entrypoint.sh:
       name: registry-entrypoint
       clusters:
+        prow-postsubmits-cluster: # cluster name
+        - default # namespace
+        prow-presubmits-cluster: # cluster name
+        - default # namespace
+    scripts/disk-usage-entrypoint.sh:
+      name: disk-usage-entrypoint
+      clusters:
+        prow-postsubmits-cluster: # cluster name
+        - default # namespace
         prow-presubmits-cluster: # cluster name
         - default # namespace
     jobs/**/*.yaml:
