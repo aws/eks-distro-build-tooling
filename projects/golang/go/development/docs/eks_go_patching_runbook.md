@@ -12,9 +12,10 @@ When a new Golang versions is released there are often security fixes included.
 Any security fixes included in the release will be noted in the release announcement on the Golang google group; 
 [for example, in this announcement for `1.19.3`.](https://groups.google.com/g/golang-announce/c/mbHY1UY3BaM/m/hSpmRzk-AgAJ)
 
-When these security fixes are available, EKS Go must review the fixes, determine if they are applicable to EKS Go,
-and then backport the fixes to the Go versions we maintain. In addition, if the security fixes are part of a patch version release, 
-we need [to update the supported Go versions git tag to track the newly released patch version](#new-patch-versions).
+When these security fixes are available, we need to update the supported Go versions git tag to track the newly released patch version if available. Next EKS Go must review the fixes, determine if they are applicable to EKS Go,
+and then backport the fixes to the Go versions we maintain that are out of support upstream. 
+
+1. [Update the supported Go versions git tag to track the newly released patch version](#new-patch-versions) if the security fixes are part of a patch release 
 
 1. Identify the commits that needs to be backported to EKS Go
    
@@ -57,20 +58,20 @@ we need [to update the supported Go versions git tag to track the newly released
       to determine if there are other patches we need to take or modifications that need to be made. 
       Any changes that are made to the upstream commit need to be carefully documented and included in the header file of the patch we'll generate below
 
-   1. __compile Golang and run tests with the commit applied to the standard library__
+   1. __Compile Golang and run tests with the commit applied to the standard library__
       
       Once you've applied the cherry-picked commit and addressed any merge conflicts, we need to compile Golang 
       and run the standard library tests. The best way to do this is to execute `all.bash`, a script in the `src` dir in the Golang repository.
       This will compile the language, including the cherry-picked commit, and then execute the tests.
 
-   1. __generate patch__
+   1. __Generate patch__
 
       Once the tests have passed and the language has compiled, we have can generate a patch file from the commit.      
       `git format-patch -1 $COMMIT_HASH` 
       
       This will generate a patch file which we can then format to match EKS Go conventions and test in pre-submits.
 
-   1. __format the patch with EKS Go conventions__
+   1. __Format the patch with EKS Go conventions__
       Each EKS Go patch includes [a header which contains metadata about when, where and who generated the patch](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.15/patches/0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch#L6).
       It additionally includes any information [about merge conflict resolution and modification of the original commit.](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.15/patches/0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch#L14).
       The header is of the format:
