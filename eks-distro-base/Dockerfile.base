@@ -17,7 +17,7 @@ FROM ${BASE_IMAGE} as builder
 
 RUN set -x && \
     if grep -q "2022" "/etc/os-release"; then \
-        dnf upgrade --releasever=latest -y; fi \
+        dnf upgrade --releasever=latest -y; \
     fi && \
     yum upgrade -y && \
     yum update -y && \
