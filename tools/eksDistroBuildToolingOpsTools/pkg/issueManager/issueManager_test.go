@@ -114,7 +114,7 @@ func TestIssueManagerGetIssueSuccess(t *testing.T) {
 	im.issuesClient.EXPECT().Get(ctx, TestRepoOwner, TestRepo, IssueNumber).Return(expectedReturnIssue, expectedResponse, nil)
 	_, err := im.issueManager.GetIssue(context.Background(), opts)
 	if err != nil {
-		t.Errorf("IssueManager.CreateIssue() error = %v, want nil", err)
+		t.Errorf("IssueManager.GetIssue() error = %v, want nil", err)
 	}
 }
 
