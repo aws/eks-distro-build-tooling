@@ -64,7 +64,7 @@ function apply_other_patches {
   local version_dir=$1
   local golang_dir=$2
 
-echo "Assuming previous patches are already applied in $golang_dir"
+  echo "Assuming previous patches are already applied in $golang_dir"
 
   echo "Applying patches in $version_dir to $golang_dir..."
   if apply_patches "$version_dir" "$golang_dir" "false"; then
@@ -128,7 +128,8 @@ function get_patches {
       is_match=true
     fi
 
-    if [ $is_match = $is_apply_for_cve_patches ]; then patches+=("$file")
+    if [ $is_match = $is_apply_for_cve_patches ]; then
+      patches+=("$file")
     fi
   done
   echo "${patches[@]}"
@@ -165,8 +166,8 @@ function get_golang_git_tag {
 
   local version
 
-  pushd "$version_dir" > /dev/null
+  pushd "$version_dir" >/dev/null
   version="$(cat GIT_TAG)"
-  popd > /dev/null
+  popd >/dev/null
   echo "$version"
 }

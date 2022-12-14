@@ -23,9 +23,15 @@ set -x
 VERSION_DIR=$(realpath "$1")
 GOLANG_DIR=$(realpath "$2")
 APPLY_CVE_PATCHES="${3:-true}"
-APPLY_OTHER_PATCHES="${4:-false}"
+APPLY_OTHER_PATCHES="${4:-true}"
 
 clone_golang "$GOLANG_DIR"
 check_dirty "$GOLANG_DIR"
-#apply_cve_patches "$VERSION_DIR" "$GOLANG_DIR"
-apply_other_patches "$VERSION_DIR" "$GOLANG_DIR"
+
+if [ "$APPLY_CVE_PATCHES" = "true" ]; then
+  apply_cve_patches "$VERSION_DIR" "$GOLANG_DIR"
+fi
+
+if [ "$APPLY_OTHER_PATCHES" = "true" ]; then
+  apply_other_patches "$VERSION_DIR" "$GOLANG_DIR"
+fi
