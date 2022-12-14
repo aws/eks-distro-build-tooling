@@ -64,8 +64,8 @@ CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYP
 # $3 - al tag
 MOCK_UPDATE_BASE_IMAGE?=
 UPDATE_BASE_IMAGE?=$(if $(MOCK_UPDATE_BASE_IMAGE), \
-	$(info update_base_image.sh $(1) $(2) $(3)), \
-	$(shell ./update_base_image.sh $(1) $(2) $(3)) \
+	$(info update_base_image.sh $(1) $(2) $(3) $(4)), \
+	$(shell ./update_base_image.sh $(1) $(2) $(3) $(4)) \
 )
 
 LOG_CAT_PUSHED_FILE?=
@@ -247,6 +247,8 @@ UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
 # ************************************************************
 
+IMAGE_UPDATE_BRANCH=image-tag-update-al$(AL_TAG)
+
 BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 BUILDCTL_BUILD_ARGS?=
 PLATFORMS?=linux/amd64,linux/arm64
@@ -280,7 +282,7 @@ endef
 
 define CREATE_PR_TARGET_BODY
 	$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)-pushed)), \
-		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG))) @echo Updated base image tag file for $(IMAGE_NAME), \
+		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG),$(IMAGE_UPDATE_BRANCH))) @echo Updated base image tag file for $(IMAGE_NAME), \
 		@echo $(IMAGE_NAME) not built \
 	)
 endef
@@ -357,8 +359,8 @@ buildkit-check:
 
 .PHONY: open-pr-check
 open-pr-check:
-	${MAKE_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
-	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling
+	${MAKE_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling $(IMAGE_UPDATE_BRANCH)
+	$(MAKE_ROOT)/../pr-scripts/open_pr_check.sh eks-distro-build-tooling $(IMAGE_UPDATE_BRANCH)
 
 .PHONY: ensure-repo-owner
 ensure-repo-owner:
@@ -626,7 +628,7 @@ release: buildkit-check $(IMAGE_TARGETS)
 
 .PHONY: create-pr
 create-pr: $(CREATE_PR_TARGETS)
-	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*'
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
 .PHONY: update
 update: buildkit-check open-pr-check $(UPDATE_TARGETS)
