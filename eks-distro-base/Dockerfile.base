@@ -17,7 +17,9 @@ FROM ${BASE_IMAGE} as builder
 
 RUN set -x && \
     if grep -q "2022" "/etc/os-release"; then \
-        dnf upgrade --releasever=latest -y; \
+        # to ensure all downstream yum commands always resolve using the latest releasever 
+        # available at that time
+        echo latest > /etc/dnf/vars/releasever; \
     fi && \
     yum upgrade -y && \
     yum update -y && \
