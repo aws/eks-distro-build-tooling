@@ -253,6 +253,14 @@ cmd=( ecr ); \
 	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
 		cmd=( ecr-public --region us-east-1 ); \
 	fi; \
+	repo=eks-distro-base-windows; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
 	repo=eks-distro-minimal-images-base-test; \
 	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
 		aws ${cmd[*]} create-repository --repository-name "$repo"; \
