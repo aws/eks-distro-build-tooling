@@ -71,7 +71,12 @@ RUN set -x && \
         basesystem \
         tzdata \
         ca-certificates && \
-    if_al2022 install_rpm amazon-linux-repo-cdn && \
+    if grep -q "2022" "/etc/os-release"; then \
+        install_rpm amazon-linux-repo-cdn; \
+        # to ensure all downstream yum commands always resolve using the latest releasever 
+        # available at that time
+        echo latest > /etc/dnf/vars/releasever; \
+    fi && \    
     cleanup "base"
 
 COPY files/ $NEWROOT
