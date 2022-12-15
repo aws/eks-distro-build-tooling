@@ -1,0 +1,94 @@
+From 9736bb3aa533d96cb9713dcfd78409c676ad637d Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Wed, 30 Nov 2022 16:37:07 -0500
+Subject: [PATCH] [go1.16.15-eks] net/http: update bundled
+ golang.org/x/net/http2
+
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 15 Dec 2022
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/76cad4edc29d28432a7a0aa27e87385d3d7db7a1
+
+#Original Information
+
+Disable cmd/internal/moddeps test, since this update includes PRIVATE
+track fixes.
+
+For #56350
+For #57008
+Fixes CVE-2022-41717
+
+Change-Id: I31ebd2b9ae190ef6f7646187103ea1c8a713ff2e
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1663833
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/455361
+Run-TryBot: Jenny Rakoczy <jenny@golang.org>
+Reviewed-by: Michael Pratt <mpratt@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+---
+ src/cmd/internal/moddeps/moddeps_test.go |  1 +
+ src/net/http/h2_bundle.go                | 18 +++++++++++-------
+ 2 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/src/cmd/internal/moddeps/moddeps_test.go b/src/cmd/internal/moddeps/moddeps_test.go
+index 2ab04db458..f74bc6c8b7 100644
+--- a/src/cmd/internal/moddeps/moddeps_test.go
++++ b/src/cmd/internal/moddeps/moddeps_test.go
+@@ -35,6 +35,7 @@ import (
+ func TestAllDependencies(t *testing.T) {
+ 	// EKS: Skip brought in by cherry-pick of 5bc9106, but not applicable to v1.16
+ 	// t.Skip("TODO(#53977): 1.18.5 contains unreleased changes from vendored modules")
++	t.Skip("TODO(#57008): 1.18.9 contains unreleased changes from vendored modules")
+ 
+ 	goBin := testenv.GoToolPath(t)
+ 
+diff --git a/src/net/http/h2_bundle.go b/src/net/http/h2_bundle.go
+index fd1f41f361..08d02c4cbb 100644
+--- a/src/net/http/h2_bundle.go
++++ b/src/net/http/h2_bundle.go
+@@ -4180,6 +4180,7 @@ type http2serverConn struct {
+ 	headerTableSize             uint32
+ 	peerMaxHeaderListSize       uint32            // zero means unknown (default)
+ 	canonHeader                 map[string]string // http2-lower-case -> Go-Canonical-Case
++	canonHeaderKeysSize         int               // canonHeader keys size in bytes
+ 	writingFrame                bool              // started writing a frame (on serve goroutine or separate)
+ 	writingFrameAsync           bool              // started a frame on its own goroutine but haven't heard back on wroteFrameCh
+ 	needsFrameFlush             bool              // last frame write wasn't a flush
+@@ -4359,6 +4360,13 @@ func (sc *http2serverConn) condlogf(err error, format string, args ...interface{
+ 	}
+ }
+ 
++// maxCachedCanonicalHeadersKeysSize is an arbitrarily-chosen limit on the size
++// of the entries in the canonHeader cache.
++// This should be larger than the size of unique, uncommon header keys likely to
++// be sent by the peer, while not so high as to permit unreasonable memory usage
++// if the peer sends an unbounded number of unique header keys.
++const http2maxCachedCanonicalHeadersKeysSize = 2048
++
+ func (sc *http2serverConn) canonicalHeader(v string) string {
+ 	sc.serveG.check()
+ 	http2buildCommonHeaderMapsOnce()
+@@ -4374,14 +4382,10 @@ func (sc *http2serverConn) canonicalHeader(v string) string {
+ 		sc.canonHeader = make(map[string]string)
+ 	}
+ 	cv = CanonicalHeaderKey(v)
+-	// maxCachedCanonicalHeaders is an arbitrarily-chosen limit on the number of
+-	// entries in the canonHeader cache. This should be larger than the number
+-	// of unique, uncommon header keys likely to be sent by the peer, while not
+-	// so high as to permit unreaasonable memory usage if the peer sends an unbounded
+-	// number of unique header keys.
+-	const maxCachedCanonicalHeaders = 32
+-	if len(sc.canonHeader) < maxCachedCanonicalHeaders {
++	size := 100 + len(v)*2 // 100 bytes of map overhead + key + value
++	if sc.canonHeaderKeysSize+size <= http2maxCachedCanonicalHeadersKeysSize {
+ 		sc.canonHeader[v] = cv
++		sc.canonHeaderKeysSize += size
+ 	}
+ 	return cv
+ }
+-- 
+2.38.1
+
