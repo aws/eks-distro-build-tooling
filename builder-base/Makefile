@@ -42,6 +42,16 @@ VARIANT?=standard
 
 NETRC=--secret id=netrc,src=$(HOME)/.netrc
 
+# $1 - golang tag file
+GOLANG_VAR_FROM_FILENAME=$(subst .,,$(notdir $(basename $(subst GOLANG_,GOLANG_VERSION_,$(1)))))
+
+# $1 - golang tag file
+GOLANG_VERSION_FROM_FILENAME=$(shell cat $(1))
+
+GOLANG_VERSION_FILES:=$(wildcard $(BASE_DIRECTORY)/tag-files/GOLANG_*.yaml)
+
+GOLANG_VERSIONS=$(foreach go-tag-file,$(GOLANG_VERSION_FILES),$(call GOLANG_VAR_FROM_FILENAME, $(go-tag-file)))
+
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
@@ -77,7 +87,8 @@ images-minimal: VARIANT=minimal
 .PHONY: images-%
 images-%: buildkit-check
 	$(eval $(subst #,$(NEWLINE),$(shell yq  e 'to_entries | .[] | [.key,.value] | join("=") ' versions.yaml | tr '\n' '#')))
-	$(eval IMAGE_BUILD_ARGS=$(shell yq  e 'to_entries | .[] | .key ' versions.yaml))
+	$(eval IMAGE_BUILD_ARGS=$(shell yq  e 'to_entries | .[] | .key ' versions.yaml) $(GOLANG_VERSIONS))
+	$(foreach go-tag-file,$(GOLANG_VERSION_FILES),$(eval $(call GOLANG_VAR_FROM_FILENAME,$(go-tag-file)) := $(call GOLANG_VERSION_FROM_FILENAME,$(go-tag-file))))
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \

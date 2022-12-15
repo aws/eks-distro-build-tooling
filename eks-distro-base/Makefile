@@ -171,13 +171,18 @@ BASE_PYTHON_VARIANT_VERSIONS=3.9
 
 # ****************** GOLANG VARIANTS *************************
 GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang-compiler
-BASE_GOLANG_VARIANT_VERSIONS=1.15 1.16 1.17 1.18 1.19
 
-GOLANG_1.15_FULL_VERSION=1.15.15-1
-GOLANG_1.16_FULL_VERSION=1.16.15-1
-GOLANG_1.17_FULL_VERSION=1.17.13-1
-GOLANG_1.18_FULL_VERSION=1.18.7-1
-GOLANG_1.19_FULL_VERSION=1.19.2-1
+# $1 - golang tag file
+GOLANG_VAR_FROM_FILENAME=$(notdir $(basename $(1)))_FULL_VERSION
+
+# $1 - golang tag file
+GOLANG_VERSION_FROM_FILENAME=$(shell cat $(1))
+
+GOLANG_VERSION_FILES:=$(wildcard $(BASE_DIRECTORY)/tag-files/GOLANG_*.yaml)
+
+# 1.15 1.16 1.17 1.18 1.19
+BASE_GOLANG_VARIANT_VERSIONS=$(foreach go-tag-file,$(GOLANG_VERSION_FILES),$(lastword $(subst _, ,$(basename $(go-tag-file)))))
+$(foreach go-tag-file,$(GOLANG_VERSION_FILES),$(eval $(call GOLANG_VAR_FROM_FILENAME,$(go-tag-file)) := $(call GOLANG_VERSION_FROM_FILENAME,$(go-tag-file))))
 
 BASE_GOLANG_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(addprefix $(ver)-,$(BASE_COMPILER_VARIANT_VERSIONS)))
 # ************************************************************

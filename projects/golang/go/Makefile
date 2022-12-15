@@ -59,7 +59,13 @@ release: $(RELEASE_TARGETS)
 .PHONY: prod-release
 prod-release: golang-build sync-artifacts-to-s3
 
+# When downloading from s3 and building prod images we use the golang version from the tag-files
+# instead of git_tag local to this project. This allows us to ensure all golang images are built from
+# the same versions based on the tag-file changes
 .PHONY: prod-release-images
+prod-release-images: RELEASED_VERSION=$(shell cat $(BASE_DIRECTORY)/tag-files/GOLANG_$(GO_SOURCE_VERSION).yaml)
+prod-release-images: GIT_TAG=go$(firstword $(subst -, ,$(RELEASED_VERSION)))
+prod-release-images: BUILD_ID=$(lastword $(subst -, ,$(RELEASED_VERSION)))
 prod-release-images: fetch-eks-go-archive images
 
 .PHONY: fetch-eks-go-archive
