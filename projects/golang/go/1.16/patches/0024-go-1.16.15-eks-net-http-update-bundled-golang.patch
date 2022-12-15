@@ -5,7 +5,7 @@ Subject: [PATCH] [go1.16.15-eks] net/http: update bundled
  golang.org/x/net/http2
 
 # AWS EKS
-Backported To: go-1.15.15-eks
+Backported To: go-1.16.15-eks
 Backported On: Thu, 15 Dec 2022
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.18
