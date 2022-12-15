@@ -1,0 +1,16 @@
+'1.19':
+  full_version: 1.19.4
+  upstream_supported: true
+  latest_image_tag: '123'
+'1.18':
+  full_version: 1.18.9
+  upstream_supported: true
+  latest_image_tag: '123'
+'1.17':
+	full_version: 1.17.13
+	upstream_supported: false 
+	latest_image_tag: '123'
+'1.16': 
+	full_version: 1.16.15
+	upstream_supported: false 
+	latest_image_tag: '123'
