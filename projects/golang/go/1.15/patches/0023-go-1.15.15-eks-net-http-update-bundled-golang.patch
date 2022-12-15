@@ -4,6 +4,16 @@ Date: Wed, 30 Nov 2022 16:37:07 -0500
 Subject: [PATCH] [release-branch.go1.18] net/http: update bundled
  golang.org/x/net/http2
 
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Thu, 15 Dec 2022
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/76cad4edc29d28432a7a0aa27e87385d3d7db7a1
+EKS Patch Source Commit: 
+
+# Original Information
+
 Disable cmd/internal/moddeps test, since this update includes PRIVATE
 track fixes.
 
