@@ -7,10 +7,10 @@
   upstream_supported: true
   latest_image_tag: '123'
 '1.17':
-	full_version: 1.17.13
-	upstream_supported: false 
-	latest_image_tag: '123'
+  full_version: 1.17.13
+  upstream_supported: false
+  latest_image_tag: '123'
 '1.16': 
-	full_version: 1.16.15
-	upstream_supported: false 
-	latest_image_tag: '123'
+  full_version: 1.16.15
+  upstream_supported: false 
+  latest_image_tag: '123'
