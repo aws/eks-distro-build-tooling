@@ -1,7 +1,7 @@
 From 6bfec9646c4088c587ebe768d3b6d6e4f170486a Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 30 Nov 2022 16:37:07 -0500
-Subject: [PATCH] [release-branch.go1.18] net/http: update bundled
+Subject: [PATCH] [go1.15.15-eks] net/http: update bundled
  golang.org/x/net/http2
 
 # AWS EKS
