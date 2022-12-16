@@ -4,7 +4,7 @@ Date: Thu, 10 Nov 2022 12:16:27 -0800
 Subject: [PATCH 1/5] [go-1.16.15-eks] os, net/http: avoid escapes from
  os.DirFS and http.Dir on Windows
 
-#AWS EKS 
+# AWS EKS 
 Backported To: go-1.16.15-eks
 Backported On: Fri, 16 Dec 2022
 Backported By: ksschumy@amazon.com
