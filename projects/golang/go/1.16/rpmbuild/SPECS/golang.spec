@@ -153,7 +153,7 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
-Patch1:       0001-crypto-elliptic-tolerate-zero-padded-scalars-in-gene.patch
+Patch1:       0001-go-1.16.15-crypto-elliptic-tolerate-zero-padded-.patch
 Patch2:       0002-go-1.16.15-eks-encoding-pem-fix-stack-overflo.patch
 Patch3:       0003-go-1.16.15-eks-crypto-tls-randomly-generate-t.patch
 Patch4:       0004-go-1.16.15-eks-compress-gzip-fix-stack-exhaus.patch
@@ -175,6 +175,7 @@ Patch20:       0020-go-1.16.15-eks-syscall-os-exec-reject-environ.patch
 Patch21:       0021-go-1.16.15-eks-crypto-rand-properly-handle-la.patch
 Patch22:       0022-go-1.16.15-eks-os-exec-return-clear-error-for.patch
 Patch23:       0023-go-1.16.15-eks-path-filepath-do-not-remove-pr.patch
+Patch24:       0024-go-1.16.15-eks-os-net-http-avoid-escapes-from-os.Dir.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -556,6 +557,10 @@ fi
 %endif
 
 %changelog
+* Fri Dec 16 2022 Kirsten Schumy <ksschumy@amazon.com> - 1.16.15.2
+- Include backported patch for CVE-2022-41720
+- Fixes: CVE-2022-41720
+
 * Wed Nov 09 2022 Dan Budris <budris@amazon.com> - 1.16.15.2
 - Include backported patch for CVE-2022-29804
 - Fixes: CVE-2022-29804
