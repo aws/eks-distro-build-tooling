@@ -1,5 +1,6 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
 BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+IMAGE_BUILD_ID=$(shell cat ./docker/debianBase/RELEASE)
 
 export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
 
@@ -31,7 +32,7 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 # This build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
-IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)
+IMAGE_TAG?=$(GIT_TAG)-$(IMAGE_BUILD_ID)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 PUSH_IMAGES?=true
