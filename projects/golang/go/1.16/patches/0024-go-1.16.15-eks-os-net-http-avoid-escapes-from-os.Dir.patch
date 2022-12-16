@@ -10,7 +10,7 @@ Backported On: Fri, 16 Dec 2022
 Backported By: ksschumy@amazon.com
 Backported From: release-branch.go1.18
 Upstream Source Commit: https://github.com/golang/go/commit/7013a4f5f816af62033ad63dd06b77c30d7a62a7
-Merge conflict fix: in src/os/file.go, took two funtions that were
+Merge conflict fix: in src/os/file.go, took two functions that were
 added after the release of go1.16.15
 
 # Original Information
