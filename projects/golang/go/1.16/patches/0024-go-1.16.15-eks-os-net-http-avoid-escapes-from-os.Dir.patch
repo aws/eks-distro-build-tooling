@@ -4,6 +4,7 @@ Date: Thu, 10 Nov 2022 12:16:27 -0800
 Subject: [PATCH 1/5] [go-1.16.15-eks] os, net/http: avoid escapes from
  os.DirFS and http.Dir on Windows
 
+#AWS EKS 
 Backported To: go-1.16.15-eks
 Backported On: Fri, 16 Dec 2022
 Backported By: ksschumy@amazon.com
@@ -11,6 +12,8 @@ Backported From: release-branch.go1.18
 Upstream Source Commit: https://github.com/golang/go/commit/7013a4f5f816af62033ad63dd06b77c30d7a62a7
 Merge conflict fix: in src/os/file.go, took two funtions that were
 added after the release of go1.16.15
+
+# Original Information
 
 Do not permit access to Windows reserved device names (NUL, COM1, etc.)
 via os.DirFS and http.Dir filesystems.
