@@ -2,7 +2,9 @@ FROM buildpack-deps:bullseye-scm
 
 ARG GOLANG_ARCHIVE_PATH
 
-ADD $GOLANG_ARCHIVE_PATH /usr/local
+RUN mkdir -p /usr/local/go
+
+ADD $GOLANG_ARCHIVE_PATH /usr/local/go
 
 ENV GOPATH /go
 ENV PATH /usr/local/go/bin:$GOPATH/bin:$PATH
