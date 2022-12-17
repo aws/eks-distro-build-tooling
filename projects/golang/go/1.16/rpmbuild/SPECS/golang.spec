@@ -153,7 +153,7 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
-Patch1:       0001-go-1.16.15-crypto-elliptic-tolerate-zero-padded-.patch
+Patch1:       0001-go-1.16.15-eks-crypto-elliptic-tolerate-zero-padded-.patch
 Patch2:       0002-go-1.16.15-eks-encoding-pem-fix-stack-overflo.patch
 Patch3:       0003-go-1.16.15-eks-crypto-tls-randomly-generate-t.patch
 Patch4:       0004-go-1.16.15-eks-compress-gzip-fix-stack-exhaus.patch
