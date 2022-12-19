@@ -19,6 +19,7 @@ set -o pipefail
 set -x
 
 REPO="$1"
+PR_BRANCH="${2:-image-tag-update}"
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -31,7 +32,6 @@ else
     UPSTREAM_ORG=$REPO_OWNER
 fi
 
-PR_BRANCH="image-tag-update"
 if [ "$JOB_TYPE" = "presubmit" ]; then
     PR_BRANCH="image-update-branch"
 fi
