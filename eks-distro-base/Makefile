@@ -54,10 +54,10 @@ CHECK_UPDATE_FILE_PATH=$(MAKE_ROOT)/check-update/$(1)
 # $3 - image name
 MOCK_CHECK_UPDATE?=
 CHECK_UPDATE?=$(if $(MOCK_CHECK_UPDATE), \
-	$(info check-update $(1) $(2) $(3))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3))), \
-	$(shell ./check_update.sh $(1) $(2) $(3)) \
+	$(info check-update$(if $(filter windows,$(2)),-windows,) $(1) $(2) $(3))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3))), \
+	$(shell ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3)) \
 )
-CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update.sh $(1) $(2) $(3); fi)
+CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3); fi)
 
 # $1 - versioned image tag
 # $2 - image name
@@ -182,6 +182,19 @@ GOLANG_1.19_FULL_VERSION=1.19.2-1
 BASE_GOLANG_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(addprefix $(ver)-,$(BASE_COMPILER_VARIANT_VERSIONS)))
 # ************************************************************
 
+############# WINDOWS #############################
+# similiar to https://github.com/kubernetes-csi/livenessprobe/blob/master/release-tools/prow.sh#L78
+WINDOWS_IMAGE_REGISTRY=mcr.microsoft.com/windows
+WINDOWS_BASE_IMAGE_NAME=nanoserver
+WINDOWS_ADDON_IMAGE_NAME=servercore
+BASE_WINDOWS_VARIANT_VERSIONS=1809 20H2 ltsc2022
+
+WINDOWS_IMAGE_TARGETS:=$(addprefix windows-images-,$(BASE_WINDOWS_VARIANT_VERSIONS))
+WINDOWS_IMAGE_UPDATE_TARGETS:=$(addprefix windows-update-,$(BASE_WINDOWS_VARIANT_VERSIONS))
+WINDOWS_IMAGE_CREATE_PR_TARGETS:=$(addprefix windows-create-pr-,$(BASE_WINDOWS_VARIANT_VERSIONS))
+####################################################
+
+
 # ************** MINIMAL VARIANT MAGIC VARS ******************
 
 # Foreach minimal variant (+ versioned variants) new vars are created to make it easier to override
@@ -243,15 +256,13 @@ ADD_BASE_VERSIONED_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(BASE_VERSIONED_VARIA
 
 # ************** FINAL TARGETS *******************************
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
-UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS))
-CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS))
+UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) windows-update
+CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) windows-create-pr
 # ************************************************************
 
 IMAGE_UPDATE_BRANCH=image-tag-update-al$(AL_TAG)
 
-BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 BUILDCTL_BUILD_ARGS?=
-PLATFORMS?=linux/amd64,linux/arm64
 
 define BUILDCTL
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
@@ -265,24 +276,27 @@ define BUILDCTL
 		--local dockerfile=./ \
 		--local context=. \
 		--opt target=$(IMAGE_TARGET) \
+		$(if $(IMAGE_METADATA_FILE),--metadata-file $(IMAGE_METADATA_FILE),) \
 		$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,--export-cache type=inline) \
 		$(foreach IMPORT_CACHE,$(BUILDCTL_IMPORT_CACHE),--import-cache $(IMPORT_CACHE)) \
 		$(if $(filter false,$(IGNORE_NO_CACHE)),$(BUILDCTL_NO_CACHE),) \
 		--output type=$(IMAGE_OUTPUT_TYPE)$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,$(BUILDCTL_IMAGE_TAGS)),$(IMAGE_OUTPUT)
 endef
 
+# $1 - AL_TAG (may be windows)
 define UPDATE_TARGET_BODY	
 	@echo false > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME))
+	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(1),$(IMAGE_NAME))
 	$(eval CHECK_UPDATE_RESULT:=$(shell cat $(call CHECK_UPDATE_FILE_PATH,$(IMAGE_NAME))))
 	$(if $(filter error,$(CHECK_UPDATE_RESULT)),@exit 1,)
 	$(if $(filter none,$(CHECK_UPDATE_RESULT)),@echo No updates for $(@),)
 	$(if $(filter updates,$(CHECK_UPDATE_RESULT)),make $(UPDATE_TARGET) && echo true > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed)
 endef
 
+# $1 - AL_TAG (may be windows)
 define CREATE_PR_TARGET_BODY
 	$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(IMAGE_NAME)-pushed)), \
-		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(AL_TAG),$(IMAGE_UPDATE_BRANCH))) @echo Updated base image tag file for $(IMAGE_NAME), \
+		$(eval UPDATE_BASE_IMAGE_RESULT:=$(call UPDATE_BASE_IMAGE,$(VERSIONED_IMAGE_TAG),$(IMAGE_NAME),$(1),$(IMAGE_UPDATE_BRANCH))) @echo Updated base image tag file for $(IMAGE_NAME), \
 		@echo $(IMAGE_NAME) not built \
 	)
 endef
@@ -386,6 +400,9 @@ $(ALL_MINIMAL_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(call STANDARD_LATEST)
+$(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+$(ALL_MINIMAL_IMAGE_TARGETS): IMAGE_METADATA_FILE=
+$(ALL_MINIMAL_IMAGE_TARGETS): PLATFORMS?=linux/amd64,linux/arm64
 
 # By default use the minimal-helpers dockerfile for the final stage since its just a copy
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): DOCKERFILE=Dockerfile.minimal-helpers
@@ -506,6 +523,9 @@ standard-images: BASE_VERSIONED_VARIANT=
 standard-images: BUILDCTL_BUILD_ARGS=BASE_IMAGE
 standard-images: BUILDCTL_IMPORT_CACHE=
 standard-images: BUILDCTL_NO_CACHE=
+standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+standard-images: IMAGE_METADATA_FILE=
+standard-images: PLATFORMS?=linux/amd64,linux/arm64
 # tag al2 build with latest.2 and latest for backward compat
 standard-images: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
@@ -515,6 +535,52 @@ standard-images: buildkit-check
 	$(call PUSHED_FILE_TRUE)
 
 # ************************************************************
+
+# ****************** WINDOWS EKS-DISTRO IMAGE TARGETS *******
+$(WINDOWS_IMAGE_TARGETS): BUILDER_IMAGE=$(WINDOWS_IMAGE_REGISTRY)/$(WINDOWS_ADDON_IMAGE_NAME):$(VERSIONED_VARIANT)
+$(WINDOWS_IMAGE_TARGETS): BASE_IMAGE=$(WINDOWS_IMAGE_REGISTRY)/$(WINDOWS_BASE_IMAGE_NAME):$(VERSIONED_VARIANT)
+$(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT_TYPE=image
+$(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT=push=true,push-by-digest=true
+$(WINDOWS_IMAGE_TARGETS): DOCKERFILE=Dockerfile.base-windows
+$(WINDOWS_IMAGE_TARGETS): IMAGE_TARGET=final
+$(WINDOWS_IMAGE_TARGETS): IMAGE_COMPONENT=eks-distro-base-windows
+$(WINDOWS_IMAGE_TARGETS): IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
+$(WINDOWS_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
+$(WINDOWS_IMAGE_TARGETS): BUILDCTL_BUILD_ARGS=BASE_IMAGE BUILDER_IMAGE
+$(WINDOWS_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
+$(WINDOWS_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
+$(WINDOWS_IMAGE_TARGETS): PLATFORMS=windows/amd64
+$(WINDOWS_IMAGE_TARGETS): LATEST=$(VERSIONED_VARIANT)
+$(WINDOWS_IMAGE_TARGETS): IMAGE_METADATA_FILE=/tmp/$(IMAGE_NAME)-metadata.json
+$(WINDOWS_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE_REPO)/$(IMAGE_COMPONENT)\"
+
+windows-images-%: VERSIONED_VARIANT=$*
+windows-images-%: buildkit-check
+	@printf "Building windows-$(VERSIONED_VARIANT)\n\n"
+	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),windows,$(IMAGE_NAME))
+	$(call BUILDCTL)
+	./create_windows_manifest.sh $(IMAGE_NAME) $(IMAGE) $(LATEST_IMAGE) $(VERSIONED_VARIANT) $(WINDOWS_IMAGE_REGISTRY) $(WINDOWS_BASE_IMAGE_NAME)
+	$(call PUSHED_FILE_TRUE)
+
+windows-update-%: VERSIONED_VARIANT=$*
+windows-update-%: IMAGE_COMPONENT=eks-distro-base-windows
+windows-update-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
+windows-update-%: UPDATE_TARGET=windows-images-$(VERSIONED_VARIANT)
+windows-update-%:
+	$(call UPDATE_TARGET_BODY,windows)
+
+windows-create-pr-%: VERSIONED_VARIANT=$*
+windows-create-pr-%: IMAGE_COMPONENT=eks-distro-base-windows
+windows-create-pr-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
+windows-create-pr-%:
+	$(call CREATE_PR_TARGET_BODY,windows)
+
+windows-images: $(WINDOWS_IMAGE_TARGETS)
+windows-update: $(WINDOWS_IMAGE_UPDATE_TARGETS)
+windows-create-pr: $(WINDOWS_IMAGE_CREATE_PR_TARGETS)
+
+# ************************************************************
+
 
 
 # Relying on secndary expansion for this target so that pre-reqs can use the variant var
@@ -574,12 +640,12 @@ $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): UPDATE_TARGET=minimal-images-$(VARIANT_SHO
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): VARIANT=minimal-$(VARIANT_SHORT_NAME)
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS):
-	$(call UPDATE_TARGET_BODY)
+	$(call UPDATE_TARGET_BODY,$(AL_TAG))
 
 $(ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-create-pr-%=%)
 $(ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)
 $(ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS):
-	$(call CREATE_PR_TARGET_BODY)
+	$(call CREATE_PR_TARGET_BODY,$(AL_TAG))
 
 # Just to keep the buildctl commands clean/minimal, the export and validate stages never need cache info or additional build args
 $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): BUILDCTL_BUILD_ARGS=BUILT_BUILDER_IMAGE
@@ -607,7 +673,7 @@ standard-update: UPDATE_TARGET=standard-images
 standard-update: IMAGE_NAME=eks-distro-base
 standard-update: IMAGE_COMPONENT=$(IMAGE_NAME)
 standard-update:
-	$(call UPDATE_TARGET_BODY)
+	$(call UPDATE_TARGET_BODY,$(AL_TAG))
 
 ##@ PR Targets
 
@@ -615,7 +681,7 @@ standard-update:
 .PHONY: standard-create-pr
 standard-create-pr: IMAGE_NAME=eks-distro-base
 standard-create-pr:
-	$(call CREATE_PR_TARGET_BODY)
+	$(call CREATE_PR_TARGET_BODY,$(AL_TAG))
 
 ##@ Primary Targets
 
@@ -664,7 +730,7 @@ minimal-base-test:
 create-ecr-repos: # Create repos in ECR for project images for local testing
 create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler golang-compiler,eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
 create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base golang,$(variant) $(variant)-builder)
-create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-minimal-images-base-test
+create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-base-windows eks-distro-minimal-images-base-test
 create-ecr-repos: $$(foreach image,$$(ALL_IMAGE_NAMES),$$(image)/create-ecr-repo)
 
 ##@ Make tests Targets
@@ -676,7 +742,8 @@ run-make-tests:
 
 .PHONY: update-make-tests-expected
 update-make-tests-expected:
-	rm -rf make-tests/expected && mv make-tests/actual make-tests/expected  
+	find ./make-tests/actual -type f  -exec bash -c \
+		'actual_file=$$0 && expected_file=$${0/actual/expected} && ([ -f $$expected_file ] && diff -wr $$actual_file $$expected_file 2>&1 > /dev/null) || (mkdir -p $$(dirname $$expected_file) && cp $$actual_file $$expected_file)' {} \;
 
 .PHONY: var-value-%
 var-value-%:

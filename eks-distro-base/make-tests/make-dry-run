@@ -52,10 +52,10 @@ function common::run_target() {
     rm -rf $MAKE_ROOT/*-pushed
 }
 
+
 # when building the main image target, in presubmits check update is executed for testing, otherwise it is skipped
 common::run_target "standard-images" "standard/images/no-deps-presubmit" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused LOG_CAT_PUSHED_FILE=true JOB_TYPE=presubmit"
 common::run_target "standard-images" "standard/images/no-deps-no-job-type" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
-
 common::run_target "standard-update" "standard/updates/has-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=updates LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
 common::run_target "standard-update" "standard/updates/no-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=none LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
 common::run_target "standard-update" "standard/updates/error-check-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=error LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
@@ -65,6 +65,23 @@ common::run_target "standard-create-pr" "standard/create-pr/pushed-file-false" "
 
 echo true > $MAKE_ROOT/eks-distro-base-pushed
 common::run_target "standard-create-pr" "standard/create-pr/pushed-file-true" "BUILD_DEPS=false REPO_OWNER=foo MOCK_UPDATE_BASE_IMAGE=unused JOB_TYPE=someotherjob LOG_CAT_PUSHED_FILE=true"
+
+common::run_target "windows-images" "windows/images/no-deps-presubmit" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused LOG_CAT_PUSHED_FILE=true JOB_TYPE=presubmit PLATFORMS=windows/amd64"
+common::run_target "windows-images" "windows/images/no-deps-no-job-type" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob PLATFORMS=windows/amd64"
+
+WINDOWS_VERSIONS=$(make --no-print-directory -C $MAKE_ROOT var-value-BASE_WINDOWS_VARIANT_VERSIONS)
+WINDOWS_VERSIONS=(${WINDOWS_VERSIONS// / })
+for version in "${WINDOWS_VERSIONS[@]}"; do
+    common::run_target "windows-update-$version" "windows-$version/updates/has-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=updates LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
+    common::run_target "windows-update-$version" "windows-$version/updates/no-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=none LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
+    common::run_target "windows-update-$version" "windows-$version/updates/error-check-updates" "BUILD_DEPS=false MOCK_CHECK_UPDATE=error LOG_CAT_PUSHED_FILE=true JOB_TYPE=someotherjob"
+
+    echo false > $MAKE_ROOT/eks-distro-base-windows-$version-pushed
+    common::run_target "windows-create-pr-$version" "windows-$version/create-pr/pushed-file-false" "BUILD_DEPS=false REPO_OWNER=foo MOCK_UPDATE_BASE_IMAGE=unused JOB_TYPE=someotherjob LOG_CAT_PUSHED_FILE=true"
+
+    echo true > $MAKE_ROOT/eks-distro-base-windows-$version-pushed
+    common::run_target "windows-create-pr-$version" "windows-$version/create-pr/pushed-file-true" "BUILD_DEPS=false REPO_OWNER=foo MOCK_UPDATE_BASE_IMAGE=unused JOB_TYPE=someotherjob LOG_CAT_PUSHED_FILE=true"
+done
 
 VARIANTS=$(make --no-print-directory -C $MAKE_ROOT var-value-MINIMAL_VARIANTS)
 VARIANTS=(${VARIANTS// / })
@@ -100,11 +117,14 @@ common::run_target "golang-1.18-compiler-images" "base-golang-compiler-1.18/imag
 
 common::run_target "create-ecr-repos" "create-ecr-repos/all"
 
-# ensure additional deps dont creap in on the all create pr target which is run in presubmit
+# ensure additional deps dont creep in on the all create pr target which is run in presubmit
 for variant in "${VARIANTS[@]}"; do
     echo true > $MAKE_ROOT/eks-distro-minimal-$variant-pushed
 done
 echo true > $MAKE_ROOT/eks-distro-base-pushed
+for version in "${WINDOWS_VERSIONS[@]}"; do
+    echo true > $MAKE_ROOT/eks-distro-base-windows-$version-pushed
+done
 common::run_target "create-pr" "standard/create-pr/all-create-prs" "BUILD_DEPS=true REPO_OWNER=foo MOCK_UPDATE_BASE_IMAGE=unused JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true"
 
 if [[ "$EXIT_CODE" -eq 0 ]]; then
