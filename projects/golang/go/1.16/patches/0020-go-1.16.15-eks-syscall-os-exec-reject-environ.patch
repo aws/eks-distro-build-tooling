@@ -1,4 +1,4 @@
-From bdd6e90830216c96364d56e7f0997700bdc2c534 Mon Sep 17 00:00:00 2001
+From a06dcf9d739df79eba29adad7539e433bb9deacc Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 17 Oct 2022 17:38:29 -0700
 Subject: [PATCH] [go-1.16.15-eks] syscall, os/exec: reject environment
@@ -46,19 +46,20 @@ Reviewed-by: Heschi Kreinick <heschi@google.com>
 Run-TryBot: Matthew Dempsky <mdempsky@google.com>
 TryBot-Result: Gopher Robot <gobot@golang.org>
 Reviewed-by: Tatiana Bradley <tatiana@golang.org>
+
 ---
- src/os/exec/env_test.go     | 19 +++++++++-----
- src/os/exec/exec.go         | 19 +++++++++++---
- src/os/exec/exec_test.go    |  9 +++++++
- src/syscall/exec_windows.go | 52 +++++++++++++++++++++++++++++++++----
- 4 files changed, 84 insertions(+), 15 deletions(-)
+ src/os/exec/env_test.go     | 19 +++++++++++++------
+ src/os/exec/exec.go         | 19 +++++++++++++++----
+ src/os/exec/exec_test.go    |  9 +++++++++
+ src/syscall/exec_windows.go | 20 +++++++++++++++-----
+ 4 files changed, 52 insertions(+), 15 deletions(-)
 
 diff --git a/src/os/exec/env_test.go b/src/os/exec/env_test.go
 index b5ac398c27..47b7c04705 100644
 --- a/src/os/exec/env_test.go
 +++ b/src/os/exec/env_test.go
 @@ -11,9 +11,10 @@ import (
- 
+
  func TestDedupEnv(t *testing.T) {
  	tests := []struct {
 -		noCase bool
@@ -99,7 +100,7 @@ index 0c49575511..00a0a58da4 100644
 @@ -419,10 +419,14 @@ func (c *Cmd) Start() error {
  		return err
  	}
- 
+
 +	env, err := dedupEnv(envv)
 +	if err != nil {
 +		return err
@@ -122,7 +123,7 @@ index 0c49575511..00a0a58da4 100644
 +func dedupEnv(env []string) ([]string, error) {
  	return dedupEnvCase(runtime.GOOS == "windows", env)
  }
- 
+
  // dedupEnvCase is dedupEnv with a case option for testing.
  // If caseInsensitive is true, the case of keys is ignored.
 -func dedupEnvCase(caseInsensitive bool, env []string) []string {
@@ -145,7 +146,7 @@ index 0c49575511..00a0a58da4 100644
 -	return out
 +	return out, err
  }
- 
+
  // addCriticalEnv adds any critical environment variables that are required
 diff --git a/src/os/exec/exec_test.go b/src/os/exec/exec_test.go
 index 8b0c93f382..0dfbdbd621 100644
@@ -154,7 +155,7 @@ index 8b0c93f382..0dfbdbd621 100644
 @@ -1122,6 +1122,15 @@ func TestDedupEnvEcho(t *testing.T) {
  	}
  }
- 
+
 +func TestEnvNULCharacter(t *testing.T) {
 +	cmd := helperCommand(t, "echoenv", "FOO", "BAR")
 +	cmd.Env = append(cmd.Env, "FOO=foo\x00BAR=bar")
@@ -168,19 +169,18 @@ index 8b0c93f382..0dfbdbd621 100644
  	echoPath, err := exec.LookPath("echo")
  	if err != nil {
 diff --git a/src/syscall/exec_windows.go b/src/syscall/exec_windows.go
-index 46cbd7567d..56d187cc18 100644
+index 46cbd7567d..a4dda0ec00 100644
 --- a/src/syscall/exec_windows.go
 +++ b/src/syscall/exec_windows.go
-@@ -7,6 +7,8 @@
+@@ -7,6 +7,7 @@
  package syscall
- 
+
  import (
 +	"internal/bytealg"
-+	"runtime"
  	"sync"
  	"unicode/utf16"
  	"unsafe"
-@@ -114,12 +116,16 @@ func makeCmdLine(args []string) string {
+@@ -114,12 +115,16 @@ func makeCmdLine(args []string) string {
  // the representation required by CreateProcess: a sequence of NUL
  // terminated strings followed by a nil.
  // Last bytes are two UCS-2 NULs, or four NUL bytes.
@@ -199,67 +199,35 @@ index 46cbd7567d..56d187cc18 100644
  		length += len(s) + 1
  	}
  	length += 1
-@@ -134,7 +140,7 @@ func createEnvBlock(envv []string) *uint16 {
+@@ -134,7 +139,7 @@ func createEnvBlock(envv []string) *uint16 {
  	}
  	copy(b[i:i+1], []byte{0})
- 
+
 -	return &utf16.Encode([]rune(string(b)))[0]
 +	return &utf16.Encode([]rune(string(b)))[0], nil
  }
- 
+
  func CloseOnExec(fd Handle) {
-@@ -338,13 +344,49 @@ func StartProcess(argv0 string, argv []string, attr *ProcAttr) (pid int, handle
+@@ -338,13 +343,18 @@ func StartProcess(argv0 string, argv []string, attr *ProcAttr) (pid int, handle
  	si.StdOutput = fd[1]
  	si.StdErr = fd[2]
- 
-+	fd = append(fd, sys.AdditionalInheritedHandles...)
-+
-+	// On Windows 7, console handles aren't real handles, so don't pass them
-+	// through to PROC_THREAD_ATTRIBUTE_HANDLE_LIST.
-+	for i := range fd {
-+		if isLegacyWin7ConsoleHandle(fd[i]) {
-+			fd[i] = 0
-+		}
-+	}
-+
-+	// The presence of a NULL handle in the list is enough to cause PROC_THREAD_ATTRIBUTE_HANDLE_LIST
-+	// to treat the entire list as empty, so remove NULL handles.
-+	j := 0
-+	for i := range fd {
-+		if fd[i] != 0 {
-+			fd[j] = fd[i]
-+			j++
-+		}
-+	}
-+	fd = fd[:j]
-+
-+	willInheritHandles := len(fd) > 0 && !sys.NoInheritHandles
-+
-+	// Do not accidentally inherit more than these handles.
-+	if willInheritHandles {
-+		err = updateProcThreadAttribute(si.ProcThreadAttributeList, 0, _PROC_THREAD_ATTRIBUTE_HANDLE_LIST, unsafe.Pointer(&fd[0]), uintptr(len(fd))*unsafe.Sizeof(fd[0]), nil, nil)
-+		if err != nil {
-+			return 0, 0, err
-+		}
-+	}
-+
+
 +	envBlock, err := createEnvBlock(attr.Env)
 +	if err != nil {
 +		return 0, 0, err
 +	}
 +
  	pi := new(ProcessInformation)
- 
+
  	flags := sys.CreationFlags | CREATE_UNICODE_ENVIRONMENT
  	if sys.Token != 0 {
 -		err = CreateProcessAsUser(sys.Token, argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, !sys.NoInheritHandles, flags, createEnvBlock(attr.Env), dirp, si, pi)
-+		err = CreateProcessAsUser(sys.Token, argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, willInheritHandles, flags, envBlock, dirp, &si.StartupInfo, pi)
++		err = CreateProcessAsUser(sys.Token, argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, !sys.NoInheritHandles, flags, envBlock, dirp, si, pi)
  	} else {
 -		err = CreateProcess(argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, !sys.NoInheritHandles, flags, createEnvBlock(attr.Env), dirp, si, pi)
-+		err = CreateProcess(argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, willInheritHandles, flags, envBlock, dirp, &si.StartupInfo, pi)
++		err = CreateProcess(argv0p, argvp, sys.ProcessAttributes, sys.ThreadAttributes, !sys.NoInheritHandles, flags, envBlock, dirp, si, pi)
  	}
  	if err != nil {
  		return 0, 0, err
--- 
+--
 2.30.1 (Apple Git-130)
-
