@@ -49,7 +49,7 @@ ifeq ($(ARCHITECTURE), AMD64)
 endif
 
 .PHONY: golang-build
-golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive
+golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test
 
 .PHONY: build
 build: golang-build sync-artifacts-to-s3-dry-run local-images
@@ -147,6 +147,29 @@ sync-artifacts-to-s3: check-env-release
 .PHONY: setup-prod-release-s3-credentials
 setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
+
+.PHONY: test
+test: version_output = $(shell /tmp/go-extracted/usr/lib/golang/bin/go version)
+test: expected_version_output = go version $(GIT_TAG) $(GOOS)/$(ARCH_LOWER)
+test:
+	if [ "$(version_output)" != $(expected_version_output) ]; $(error incorrect Go version; got $(version_output), wanted $(expected_version_output)); fi;
+
+.PHONY: test-windows
+test-windows: test-platform-windows-amd64 test-platform-windows-s86
+
+.PHONY: test-darwin
+test-darwin: test-platform-darwin-amd64
+
+.PHONY: test-linux
+test-linux: test-platform-linux-s390x test-platform-linux-ppc64le test-platform-linux-arm test-platform-linux-arm64 test-platform-linux-386
+
+.PHONY: test-platform-%
+test-platform-%: platform_tuple = $(subst -, ,$(*))
+test-platform-%: goos = $(word 1, $(platform_tuple))
+test-platform-%: goarch = $(word 2, $(platform_tuple))
+test-platform-%:
+	echo installing standard library for GOOS=$(goos) GOARCH=$(goarch)
+	GOOS=$(goos) GOARCH=$(goarch) /tmp/go-extracted/usr/lib/golang/bin/go install std
 
 .PHONY: clean
 clean:
