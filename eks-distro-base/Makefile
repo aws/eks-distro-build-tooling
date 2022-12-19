@@ -543,7 +543,7 @@ $(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT_TYPE=image
 $(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT=push=true,push-by-digest=true
 $(WINDOWS_IMAGE_TARGETS): DOCKERFILE=Dockerfile.base-windows
 $(WINDOWS_IMAGE_TARGETS): IMAGE_TARGET=final
-$(WINDOWS_IMAGE_TARGETS): IMAGE_COMPONENT=eks-distro-base-windows
+$(WINDOWS_IMAGE_TARGETS): IMAGE_COMPONENT=eks-distro-windows-base
 $(WINDOWS_IMAGE_TARGETS): IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 $(WINDOWS_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_BUILD_ARGS=BASE_IMAGE BUILDER_IMAGE
@@ -563,14 +563,14 @@ windows-images-%: buildkit-check
 	$(call PUSHED_FILE_TRUE)
 
 windows-update-%: VERSIONED_VARIANT=$*
-windows-update-%: IMAGE_COMPONENT=eks-distro-base-windows
+windows-update-%: IMAGE_COMPONENT=eks-distro-windows-base
 windows-update-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 windows-update-%: UPDATE_TARGET=windows-images-$(VERSIONED_VARIANT)
 windows-update-%:
 	$(call UPDATE_TARGET_BODY,windows)
 
 windows-create-pr-%: VERSIONED_VARIANT=$*
-windows-create-pr-%: IMAGE_COMPONENT=eks-distro-base-windows
+windows-create-pr-%: IMAGE_COMPONENT=eks-distro-windows-base
 windows-create-pr-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 windows-create-pr-%:
 	$(call CREATE_PR_TARGET_BODY,windows)
@@ -730,7 +730,7 @@ minimal-base-test:
 create-ecr-repos: # Create repos in ECR for project images for local testing
 create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler golang-compiler,eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
 create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base golang,$(variant) $(variant)-builder)
-create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-base-windows eks-distro-minimal-images-base-test
+create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-windows-base eks-distro-minimal-images-base-test
 create-ecr-repos: $$(foreach image,$$(ALL_IMAGE_NAMES),$$(image)/create-ecr-repo)
 
 ##@ Make tests Targets
