@@ -62,6 +62,10 @@ For example, the first release of the Golang `1.16.15` RPM is available at the f
 
 https://distro.eks.amazonaws.com/golang-go1.16.15/releases/1/RPMS/x86_64/golang-1.16.15-1.amzn2.eks.x86_64.rpm
 
+### EKS Go Debian Base Image
+EKS Go maintains a Debian-based image containing EKS Go for use with the upstream Kubernetes toolchahin.
+You can find the Dockerfile and more information [here](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/docker/debianBase).
+
 
 ## Getting Started
 ### Installing EKS Golang on x86_64 Amazon Linux

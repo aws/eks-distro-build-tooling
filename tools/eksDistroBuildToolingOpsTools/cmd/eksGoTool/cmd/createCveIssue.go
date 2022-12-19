@@ -116,7 +116,7 @@ func GenerateIssueBody(ui *gogithub.Issue) *string {
 	}
 
 	bs := b.String()
-	logger.V(4).Info(fmt.Sprintf("Created Issues Body: `%s`\n", bs))
+	logger.V(4).Info("Created Issues Body: `%s`\n", bs)
 	return &bs
 }
 
@@ -127,6 +127,6 @@ func GenerateIssueTitle(ui *gogithub.Issue) *string {
 		t.WriteString(fmt.Sprintf("%v", *ui.Title))
 	}
 	ts := t.String()
-	logger.V(4).Info(fmt.Sprintf("Created Issues Title: `%s`\n", ts))
+	logger.V(4).Info("Created Issues Title: `%s`\n", ts)
 	return &ts
 }

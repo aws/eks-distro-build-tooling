@@ -19,6 +19,7 @@ set -o pipefail
 set -x
 
 REPO="$1"
+PR_BRANCH="${2:-image-tag-update}"
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -33,8 +34,6 @@ else
 fi
 
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
-
-PR_BRANCH="image-tag-update"
 
 gh auth login --with-token < /secrets/github-secrets/token
 
