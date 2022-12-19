@@ -1,5 +1,6 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
 BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+IMAGE_BUILD_ID=$(shell cat ./docker/debianBase/RELEASE)
 
 export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
 
@@ -31,7 +32,7 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 # This build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
-IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)
+IMAGE_TAG?=$(GIT_TAG)-$(IMAGE_BUILD_ID)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 PUSH_IMAGES?=true
@@ -43,10 +44,8 @@ TO_LOWER=$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst \
 	T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$(subst _,-,$(1))))))))))))))))))))))))))))
 
 RELEASE_TARGETS = golang-build sync-artifacts-to-s3
-PROD_RELEASE_TARGETS = golang-build sync-artifacts-to-s3
 ifeq ($(ARCHITECTURE), AMD64)
     RELEASE_TARGETS += images
-    PROD_RELEASE_TARGETS += prod-images
 endif
 
 .PHONY: golang-build
@@ -59,7 +58,14 @@ build: golang-build sync-artifacts-to-s3-dry-run local-images
 release: $(RELEASE_TARGETS)
 
 .PHONY: prod-release
-prod-release: $(PROD_RELEASE_TARGETS)
+prod-release: golang-build sync-artifacts-to-s3
+
+.PHONY: prod-release-images
+prod-release-images: fetch-eks-go-archive images
+
+.PHONY: fetch-eks-go-archive
+fetch-eks-go-archive:
+	curl -L -o $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz https://distro.eks.amazonaws.com/golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz --create-dirs
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -94,12 +100,9 @@ endif
 local-images: PUSH_IMAGES=false
 local-images: images
 
-.PHONY: prod-images
-prod-images: export AWS_PROFILE=ecr-public-push
-prod-images: images
-
 .PHONY: images
 images: buildkit-check
+images:
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
@@ -171,3 +174,4 @@ endif
 .PHONY: buildkit-check
 buildkit-check:
 	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
+

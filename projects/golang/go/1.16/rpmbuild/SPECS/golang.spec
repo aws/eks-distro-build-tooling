@@ -175,6 +175,7 @@ Patch20:       0020-go-1.16.15-eks-syscall-os-exec-reject-environ.patch
 Patch21:       0021-go-1.16.15-eks-crypto-rand-properly-handle-la.patch
 Patch22:       0022-go-1.16.15-eks-os-exec-return-clear-error-for.patch
 Patch23:       0023-go-1.16.15-eks-path-filepath-do-not-remove-pr.patch
+Patch25:       0025-go-1.16.15-eks-net-http-update-bundled-golang.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -556,6 +557,10 @@ fi
 %endif
 
 %changelog
+* Thu Dec 15 2022 Cameron Rozean <rcrozean@amazon.com> - 1.16.15.2
+- Include backported patch for CVE-2022-41717
+- Fixes: CVE-2022-41717
+
 * Wed Nov 09 2022 Dan Budris <budris@amazon.com> - 1.16.15.2
 - Include backported patch for CVE-2022-29804
 - Fixes: CVE-2022-29804

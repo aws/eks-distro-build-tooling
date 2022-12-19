@@ -20,6 +20,7 @@ set -x
 
 REPO="$1"
 FILEPATH="$2"
+PR_BRANCH="${3:-image-tag-update}"
 
 SED=sed
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -85,7 +86,7 @@ I confirm that you can use, modify, copy,\
 and redistribute this contribution,\
 under the terms of your choice." >> $PR_BODY_FILE
 PR_BODY=$(cat $PR_BODY_FILE)
-PR_BRANCH="image-tag-update"
+
 
 cd ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 

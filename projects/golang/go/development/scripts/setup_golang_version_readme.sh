@@ -43,7 +43,7 @@ Artifacts: https://distro.eks.amazonaws.com/golang-go${GOLANG_MINOR_VERSION}/rel
 
 ### ARM64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-${GOLANG_MINOR_VERSION}-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
-bro
+
 ### AMD64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-${GOLANG_MINOR_VERSION}-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
