@@ -149,13 +149,10 @@ setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
 
 .PHONY: test
-test: version_output = $(shell /tmp/go-extracted/usr/lib/golang/bin/go version)
-test: expected_version_output = go version $(GIT_TAG) $(GOOS)/$(ARCH_LOWER)
-test:
-	if [ "$(version_output)" != $(expected_version_output) ]; $(error incorrect Go version; got $(version_output), wanted $(expected_version_output)); fi;
+test: test-windows test-darwin test-linux
 
 .PHONY: test-windows
-test-windows: test-platform-windows-amd64 test-platform-windows-s86
+test-windows: test-platform-windows-amd64 test-platform-windows-386
 
 .PHONY: test-darwin
 test-darwin: test-platform-darwin-amd64
