@@ -135,7 +135,7 @@ index 0000000000..dc662c18b3
 +
 +import (
 +	"internal/safefilepath"
-+	"os"
++	"ioutil"
 +	"path/filepath"
 +	"runtime"
 +	"testing"
@@ -211,8 +211,8 @@ index 0000000000..dc662c18b3
 +
 +func canWriteFile(t *testing.T, name string) bool {
 +	path := filepath.Join(t.TempDir(), name)
-+	os.WriteFile(path, []byte("ok"), 0666)
-+	b, _ := os.ReadFile(path)
++	ioutil.WriteFile(path, []byte("ok"), 0666)
++	b, _ := ioutil.ReadFile(path)
 +	return string(b) == "ok"
 +}
 diff --git a/src/internal/safefilepath/path_windows.go b/src/internal/safefilepath/path_windows.go
