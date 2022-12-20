@@ -246,7 +246,7 @@ Patch19:       0019-go-1.15.15-eks-path-filepath-fix-stack-exhaus.patch
 Patch20:       0020-go-1.15.15-eks-net-http-update-bundled-golang.patch
 Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
 Patch22:       0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch
-Patch23:       0022-go-1.15.15-eks-os-net-http-avoid-escapes-from-os.Dir.patch
+Patch23:       0023-go-1.15.15-eks-os-net-http-avoid-escapes-from-os.Dir.patch
 Patch24:       0024-go-1.15.15-eks-net-http-update-bundled-golang.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
