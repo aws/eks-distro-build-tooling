@@ -1,4 +1,4 @@
-From c1ac178bd9f0148b28f2b421030df77e6aff46a6 Mon Sep 17 00:00:00 2001
+From e34194de563c6589a3b72fe5dade8b494098588c Mon Sep 17 00:00:00 2001
 From: Daniel Budris <budris@amazon.com>
 Date: Tue, 4 Oct 2022 16:31:07 -0400
 Subject: [PATCH] add method to skip privd tests if required
@@ -41,5 +41,5 @@ index 181fb1e849..085ee7f7eb 100644
  	// and create a network namespace.
  	if os.Getuid() != 0 {
 -- 
-2.30.1 (Apple Git-130)
+2.38.1
 
