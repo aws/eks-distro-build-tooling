@@ -65,6 +65,6 @@ al2022:
   eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2022-12-15-1671132599.2022
   eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2022-12-15-1671132599.2022
 windows:
-  eks-distro-windows-base-1809: null
-  eks-distro-windows-base-20H2: null
-  eks-distro-windows-base-ltsc2022: null
+  eks-distro-windows-base-1809: 1809-2022-12-19-1671485888.2
+  eks-distro-windows-base-20H2: 20H2-2022-12-19-1671485888.2
+  eks-distro-windows-base-ltsc2022: ltsc2022-2022-12-19-1671485888.2
