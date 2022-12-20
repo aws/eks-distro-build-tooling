@@ -119,6 +119,8 @@ common::run_target "golang-1.18-compiler-images" "base-golang-compiler-1.18/imag
 
 common::run_target "create-ecr-repos" "create-ecr-repos/all"
 
+common::run_target "mirror" "mirror/all" "JOB_TYPE=postsubmit MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag"
+
 # ensure additional deps dont creep in on the all create pr target which is run in presubmit
 for variant in "${VARIANTS[@]}"; do
     echo true > $MAKE_ROOT/eks-distro-minimal-$variant-pushed
