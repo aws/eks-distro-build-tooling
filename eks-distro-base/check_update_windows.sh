@@ -54,9 +54,7 @@ BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME
 # Pull the buildinfo from the last published image which will contain the sha of the two windows images
 # used to build that image. Compare these sha with the current shas tagged upstream for this given
 # windows version. If the current tag points to a different sha, the image needs updating
-IMAGE_SHA=$(retry docker buildx imagetools inspect $BASE_IMAGE:$BASE_IMAGE_TAG --raw | jq -r '.manifests[0].digest')
-DIGEST_SHA=$(retry docker buildx imagetools inspect $BASE_IMAGE@$IMAGE_SHA --raw | jq -r '.config.digest')
-BUILDINFO=$(retry docker buildx imagetools inspect $BASE_IMAGE@$DIGEST_SHA --raw | jq -r '."moby.buildkit.buildinfo.v1"' | base64 -d)
+BUILDINFO=$(retry skopeo inspect --config --override-os windows --override-arch amd64 docker://$BASE_IMAGE:$BASE_IMAGE_TAG --raw   | jq -r '."moby.buildkit.buildinfo.v1"' | base64 -d)
 
 for variant in "nanoserver" "servercore"; do
     SOURCE_IMAGE_REF=$(jq -r ".sources | .[] | select(.ref | contains(\"$variant\")) | .ref" <<< "$BUILDINFO")
