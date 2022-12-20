@@ -155,7 +155,7 @@ test: test-windows test-darwin test-linux
 test-windows: test-platform-windows-amd64 test-platform-windows-386
 
 .PHONY: test-darwin
-test-darwin: test-platform-darwin-amd64
+test-darwin: test-platform-darwin-amd64 test-platform-darwin-arm64
 
 .PHONY: test-linux
 test-linux: test-platform-linux-s390x test-platform-linux-ppc64le test-platform-linux-arm test-platform-linux-arm64 test-platform-linux-386
