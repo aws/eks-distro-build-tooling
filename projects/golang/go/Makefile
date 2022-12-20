@@ -164,9 +164,11 @@ test-linux: test-platform-linux-s390x test-platform-linux-ppc64le test-platform-
 test-platform-%: platform_tuple = $(subst -, ,$(*))
 test-platform-%: goos = $(word 1, $(platform_tuple))
 test-platform-%: goarch = $(word 2, $(platform_tuple))
+test-platform-%: goroot = $(shell /tmp/go-extracted/usr/lib/golang/bin/go env GOROOT)
 test-platform-%:
 	echo installing standard library for GOOS=$(goos) GOARCH=$(goarch)
 	GOOS=$(goos) GOARCH=$(goarch) /tmp/go-extracted/usr/lib/golang/bin/go install std
+	rm -rf $(goroot)/pkg/$(goos)_$(goarch)
 
 .PHONY: clean
 clean:
