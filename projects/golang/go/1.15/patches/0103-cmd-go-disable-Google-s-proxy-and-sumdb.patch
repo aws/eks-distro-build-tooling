@@ -1,4 +1,4 @@
-From b38cd2374c2395f5a77802ef8ea3d7ac5b8a86ad Mon Sep 17 00:00:00 2001
+From 6675cdb91e1e8e0ff12d936f5b5e4b9974d0917b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Mon, 27 May 2019 15:12:53 +0200
 Subject: [PATCH 3/3] cmd/go: disable Google's proxy and sumdb
@@ -9,10 +9,10 @@ Subject: [PATCH 3/3] cmd/go: disable Google's proxy and sumdb
  2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/src/cmd/go/internal/cfg/cfg.go b/src/cmd/go/internal/cfg/cfg.go
-index 61dc6bdda6..e8658dc56c 100644
+index 7f8f8e92be..b80e0647d4 100644
 --- a/src/cmd/go/internal/cfg/cfg.go
 +++ b/src/cmd/go/internal/cfg/cfg.go
-@@ -245,11 +245,11 @@ var (
+@@ -246,11 +246,11 @@ var (
  	GOPPC64  = envOr("GOPPC64", fmt.Sprintf("%s%d", "power", objabi.GOPPC64))
  	GOWASM   = envOr("GOWASM", fmt.Sprint(objabi.GOWASM))
  
@@ -50,5 +50,5 @@ index 40a07fc7e9..50436e32d7 100644
  # download direct from github
  [!net] skip
 -- 
-2.21.0
+2.38.1
 
