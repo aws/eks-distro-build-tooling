@@ -19,10 +19,9 @@ set -o pipefail
 
 IMAGE_NAME="$1"
 IMAGE="$2"
-LATEST_IMAGE="$3"
-WINDOWS_IMAGE_VERSION="$4"
-WINDOWS_IMAGE_REGISTRY="$5"
-WINDOWS_BASE_IMAGE_NAME="$6"
+WINDOWS_IMAGE_VERSION="$3"
+WINDOWS_IMAGE_REGISTRY="$4"
+WINDOWS_BASE_IMAGE_NAME="$5"
 
 function retry() {
     local n=1
@@ -54,7 +53,7 @@ retry docker buildx imagetools inspect --raw $WINDOWS_IMAGE_REGISTRY/$WINDOWS_BA
     | jq add -s - /tmp/$IMAGE_NAME-descr.json > /tmp/$IMAGE_NAME-descr-final.json
 
 
-retry docker buildx imagetools create --dry-run -f /tmp/$IMAGE_NAME-descr-final.json -t $IMAGE -t $LATEST_IMAGE > /tmp/$IMAGE_NAME-manfiest-final.json
+retry docker buildx imagetools create --dry-run -f /tmp/$IMAGE_NAME-descr-final.json -t $IMAGE > /tmp/$IMAGE_NAME-manfiest-final.json
 
 cat  /tmp/$IMAGE_NAME-manfiest-final.json
 
@@ -63,19 +62,8 @@ if [ "$(jq '.manifests[].platform | select( has("os.version") == true ) | ."os.v
     exit 1
 fi
 
-retry docker buildx imagetools create -f /tmp/$IMAGE_NAME-descr-final.json -t $IMAGE -t $LATEST_IMAGE
+retry docker buildx imagetools create -f /tmp/$IMAGE_NAME-descr-final.json -t $IMAGE 
 
 retry docker buildx imagetools inspect $IMAGE
-
-# Public ecr's tagging appears to have some delay when retagging existing tags, like latest
-# retry the diff to give it time to make sure the latest manifest has been updated to new verion
-function validate_latest() {
-    if ! diff <(retry docker buildx imagetools inspect $IMAGE --raw) <(retry docker buildx imagetools inspect $LATEST_IMAGE --raw); then
-        echo "image manifest and latest manifest do not match!"
-        return 1
-    fi
-}
-
-retry validate_latest
 
 rm -rf /tmp/$IMAGE_NAME-*.json

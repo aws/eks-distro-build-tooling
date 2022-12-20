@@ -12,6 +12,7 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 AWS_REGION?=us-west-2
 
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+PUBLIC_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 
 JOB_TYPE?=
 TEST_IMAGE_REPO?=localhost:5000
@@ -42,8 +43,9 @@ IF_OVERRIDE_VARIABLE=$(if $(filter undefined,$(origin $1)),$(2),$(value $(1)))
 # if wanting to build the base image, for use locally or in presubmits
 # returns the base image target needed
 # $1 - minimal images variant
+# $2 - target (images, mirror)
 MINIMAL_IMAGES_BASE_IMAGE=$(and $(filter true,$(BUILD_DEPS)),\
-	$(if $(filter-out base,$(1)),minimal-images-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-images))
+	$(if $(filter-out base,$(1)),minimal-$2-$(BASE_IMAGE_NAME:eks-distro-minimal-%=%),standard-$2))
 
 # $1 - image name
 CHECK_UPDATE_FILE_PATH=$(MAKE_ROOT)/check-update/$(1)
@@ -98,7 +100,7 @@ BASE_TAG_FROM_TAG_FILE=$(strip $(if $(call IF_OVERRIDE_VARIABLE,_BASE_TAG_FROM_T
 IMAGE_TAG_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed)),$(or $(2),$(IMAGE_TAG)),$(call BASE_TAG_FROM_TAG_FILE,$(1)))
 
 # $1 - base image name
-IMAGE_REPO_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed)),$(IMAGE_REPO),public.ecr.aws/eks-distro-build-tooling)
+IMAGE_REPO_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(1)-pushed)),$(IMAGE_REPO),$(PUBLIC_IMAGE_REPO))
 
 # when writing true to the file, clear previous cached result
 PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit postsubmit), \
@@ -192,6 +194,7 @@ BASE_WINDOWS_VARIANT_VERSIONS=1809 20H2 ltsc2022
 WINDOWS_IMAGE_TARGETS:=$(addprefix windows-images-,$(BASE_WINDOWS_VARIANT_VERSIONS))
 WINDOWS_IMAGE_UPDATE_TARGETS:=$(addprefix windows-update-,$(BASE_WINDOWS_VARIANT_VERSIONS))
 WINDOWS_IMAGE_CREATE_PR_TARGETS:=$(addprefix windows-create-pr-,$(BASE_WINDOWS_VARIANT_VERSIONS))
+WINDOWS_IMAGE_MIRROR_TARGETS:=$(addprefix windows-mirror-,$(BASE_WINDOWS_VARIANT_VERSIONS))
 ####################################################
 
 
@@ -211,7 +214,7 @@ VARIANTS=base base-nonroot base-glibc base-iptables base-nsenter base-docker-cli
 
 ALL_IMAGE_NAMES=eks-distro-base
 
-MINIMAL_IMAGE_TARGET_PREFIXS=minimal-images $(addsuffix -minimal-images,builder final packages-export validate test) minimal-update minimal-create-pr update
+MINIMAL_IMAGE_TARGET_PREFIXS=minimal-images $(addsuffix -minimal-images,builder final packages-export validate test) minimal-update minimal-create-pr minimal-mirror update
 $(foreach variant,$(VARIANTS), \
 	$(eval VARIANT_UPPER:=$(call TO_UPPER,$(variant))) \
 	$(eval VARIANT_VERSIONS:=$(call IF_OVERRIDE_VARIABLE,$(VARIANT_UPPER)_VARIANT_VERSIONS,)) \
@@ -238,9 +241,10 @@ ALL_VALIDATE_IMAGES_MINIMAL_TARGETS:=$(foreach variant,$(MINIMAL_VARIANTS),valid
 ALL_TEST_MINIMAL_IMAGES_TARGETS:=$(foreach variant,$(MINIMAL_VARIANTS),test-minimal-images-$(variant))
 ALL_UPDATE_MINIMAL_IMAGES_TARGETS:=$(foreach variant,$(MINIMAL_VARIANTS),minimal-update-$(variant))
 ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS:=$(foreach variant,$(MINIMAL_VARIANTS),minimal-create-pr-$(variant))
+ALL_MIRROR_MINIMAL_IMAGES_TARGETS:=$(foreach variant,$(MINIMAL_VARIANTS),minimal-mirror-$(variant))
 
 ALL_MINIMAL_IMAGE_TARGETS=$(ALL_MAIN_MINIMAL_IMAGES_TARGETS) $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS) $(ALL_FINAL_MINIMAL_IMAGES_TARGETS) $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) \
-	$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS) $(ALL_TEST_MINIMAL_IMAGES_TARGETS) $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS) $(ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS)
+	$(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS) $(ALL_TEST_MINIMAL_IMAGES_TARGETS) $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS) $(ALL_CREATE_PR_MINIMAL_IMAGES_TARGETS) $(ALL_MIRROR_MINIMAL_IMAGES_TARGETS)
 
 # ************************************************************
 
@@ -258,6 +262,7 @@ ADD_BASE_VERSIONED_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(BASE_VERSIONED_VARIA
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
 UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) windows-update
 CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) windows-create-pr
+MIRROR_TARGETS=standard-mirror $(addprefix minimal-mirror-, $(MINIMAL_VARIANTS)) windows-mirror
 # ************************************************************
 
 IMAGE_UPDATE_BRANCH=image-tag-update-al$(AL_TAG)
@@ -281,6 +286,19 @@ define BUILDCTL
 		$(foreach IMPORT_CACHE,$(BUILDCTL_IMPORT_CACHE),--import-cache $(IMPORT_CACHE)) \
 		$(if $(filter false,$(IGNORE_NO_CACHE)),$(BUILDCTL_NO_CACHE),) \
 		--output type=$(IMAGE_OUTPUT_TYPE)$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,$(BUILDCTL_IMAGE_TAGS)),$(IMAGE_OUTPUT)
+endef
+
+# $1 - IMAGE_COMPONENT (eks-distro-minimal-base,eks-distro-minimal-base-builder)
+define SKOPEO
+	$(eval _IMAGE_COMPONENT := $1)
+	@if [ "$(BUILT_IMAGE_TAG_FROM_FILE)" = "null" ]; then \
+		exit; \
+	fi && \
+	printf "Mirroring $(_IMAGE_COMPONENT) tags '$(BUILT_IMAGE_TAG_FROM_FILE) $(LATEST)' from $(IMAGE_REPO) to $(PUBLIC_IMAGE_REPO)\n\n" && \
+	set -x && \
+	for tag in $(BUILT_IMAGE_TAG_FROM_FILE) $(LATEST); do \
+		skopeo copy --all --retry-times 15 --preserve-digests docker://$(IMAGE_REPO)/$(_IMAGE_COMPONENT):$(BUILT_IMAGE_TAG_FROM_FILE) docker://$(PUBLIC_IMAGE_REPO)/$(_IMAGE_COMPONENT):$$tag; \
+	done
 endef
 
 # $1 - AL_TAG (may be windows)
@@ -400,7 +418,7 @@ $(ALL_MINIMAL_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(call STANDARD_LATEST)
-$(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+$(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE)\"
 $(ALL_MINIMAL_IMAGE_TARGETS): IMAGE_METADATA_FILE=
 $(ALL_MINIMAL_IMAGE_TARGETS): PLATFORMS?=linux/amd64,linux/arm64
 
@@ -516,24 +534,27 @@ standard-images: IMAGE_OUTPUT_TYPE=image
 standard-images: IMAGE_OUTPUT=push=true
 standard-images: DOCKERFILE=Dockerfile.base
 standard-images: IMAGE_TARGET=final
-standard-images: IMAGE_NAME=eks-distro-base
-standard-images: IMAGE_COMPONENT=$(IMAGE_NAME)
 standard-images: VERSIONED_VARIANT=
 standard-images: BASE_VERSIONED_VARIANT=
 standard-images: BUILDCTL_BUILD_ARGS=BASE_IMAGE
 standard-images: BUILDCTL_IMPORT_CACHE=
 standard-images: BUILDCTL_NO_CACHE=
-standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE)\"
 standard-images: IMAGE_METADATA_FILE=
 standard-images: PLATFORMS?=linux/amd64,linux/arm64
-# tag al2 build with latest.2 and latest for backward compat
-standard-images: LATEST=$(call STANDARD_LATEST)
+standard-images standard-mirror: IMAGE_NAME=eks-distro-base
+standard-images standard-mirror: IMAGE_COMPONENT=$(IMAGE_NAME)
+standard-images standard-mirror: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME))
 	$(call BUILDCTL)
 	$(call PUSHED_FILE_TRUE)
 
+
+standard-mirror:
+	$(call SKOPEO,$(IMAGE_COMPONENT))
+	
 # ************************************************************
 
 # ****************** WINDOWS EKS-DISTRO IMAGE TARGETS *******
@@ -543,25 +564,30 @@ $(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT_TYPE=image
 $(WINDOWS_IMAGE_TARGETS): IMAGE_OUTPUT=push=true,push-by-digest=true
 $(WINDOWS_IMAGE_TARGETS): DOCKERFILE=Dockerfile.base-windows
 $(WINDOWS_IMAGE_TARGETS): IMAGE_TARGET=final
-$(WINDOWS_IMAGE_TARGETS): IMAGE_COMPONENT=eks-distro-windows-base
-$(WINDOWS_IMAGE_TARGETS): IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 $(WINDOWS_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_BUILD_ARGS=BASE_IMAGE BUILDER_IMAGE
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
 $(WINDOWS_IMAGE_TARGETS): PLATFORMS=windows/amd64
-$(WINDOWS_IMAGE_TARGETS): LATEST=$(VERSIONED_VARIANT)
 $(WINDOWS_IMAGE_TARGETS): IMAGE_METADATA_FILE=/tmp/$(IMAGE_NAME)-metadata.json
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE_REPO)/$(IMAGE_COMPONENT)\"
+$(WINDOWS_IMAGE_TARGETS) $(WINDOWS_IMAGE_MIRROR_TARGETS): IMAGE_COMPONENT=eks-distro-windows-base
+$(WINDOWS_IMAGE_TARGETS) $(WINDOWS_IMAGE_MIRROR_TARGETS): IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
+$(WINDOWS_IMAGE_TARGETS) $(WINDOWS_IMAGE_MIRROR_TARGETS): LATEST=$(VERSIONED_VARIANT)
 
 windows-images-%: VERSIONED_VARIANT=$*
 windows-images-%: buildkit-check
 	@printf "Building windows-$(VERSIONED_VARIANT)\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),windows,$(IMAGE_NAME))
 	$(call BUILDCTL)
-	./create_windows_manifest.sh $(IMAGE_NAME) $(IMAGE) $(LATEST_IMAGE) $(VERSIONED_VARIANT) $(WINDOWS_IMAGE_REGISTRY) $(WINDOWS_BASE_IMAGE_NAME)
+	./create_windows_manifest.sh $(IMAGE_NAME) $(IMAGE) $(VERSIONED_VARIANT) $(WINDOWS_IMAGE_REGISTRY) $(WINDOWS_BASE_IMAGE_NAME)
 	$(call PUSHED_FILE_TRUE)
 
+windows-mirror-%: VERSIONED_VARIANT=$*
+windows-mirror-%: BUILT_IMAGE_TAG_FROM_FILE=$(shell yq e ".windows.\"eks-distro-windows-base-$(VERSIONED_VARIANT)\"" $(EKS_DISTRO_TAG_FILE))
+windows-mirror-%:
+	$(call SKOPEO,$(IMAGE_COMPONENT))
+	
 windows-update-%: VERSIONED_VARIANT=$*
 windows-update-%: IMAGE_COMPONENT=eks-distro-windows-base
 windows-update-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
@@ -578,6 +604,7 @@ windows-create-pr-%:
 windows-images: $(WINDOWS_IMAGE_TARGETS)
 windows-update: $(WINDOWS_IMAGE_UPDATE_TARGETS)
 windows-create-pr: $(WINDOWS_IMAGE_CREATE_PR_TARGETS)
+windows-mirror: $(WINDOWS_IMAGE_MIRROR_TARGETS)
 
 # ************************************************************
 
@@ -585,7 +612,7 @@ windows-create-pr: $(WINDOWS_IMAGE_CREATE_PR_TARGETS)
 
 # Relying on secndary expansion for this target so that pre-reqs can use the variant var
 $(ALL_MAIN_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-images-%=%)
-$(ALL_MAIN_MINIMAL_IMAGES_TARGETS): buildkit-check $$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) builder-minimal-images-$$(VARIANT_SHORT_NAME) \
+$(ALL_MAIN_MINIMAL_IMAGES_TARGETS): buildkit-check $$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME),images) builder-minimal-images-$$(VARIANT_SHORT_NAME) \
 		final-minimal-images-$$(VARIANT_SHORT_NAME) packages-export-minimal-images-$$(VARIANT_SHORT_NAME) \
 		validate-minimal-images-$$(VARIANT_SHORT_NAME) test-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "Building $(VARIANT_SHORT_NAME) complete!\n\n"
@@ -653,17 +680,23 @@ $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): BUILDCTL_BUILD_ARGS=BUILT_BUILDER
 $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS) $(ALL_VALIDATE_IMAGES_MINIMAL_TARGETS): BUILDCTL_NO_CACHE=
 
+$(ALL_MIRROR_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-mirror-%=%)
+$(ALL_MIRROR_MINIMAL_IMAGES_TARGETS): BUILD_DEPS=true
+$(ALL_MIRROR_MINIMAL_IMAGES_TARGETS): $$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME),mirror)
+	$(call SKOPEO,$(IMAGE_COMPONENT))
+	$(call SKOPEO,$(IMAGE_COMPONENT)-builder)
+
 # These vars are all to make sure we pull the public images from ecr vs building locally
 # for use when periodic does not properly update packages and we want to update them manually
 .PHONY: packages-export-all-minimal-images
-packages-export-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
+packages-export-all-minimal-images: IMAGE_REPO=$(PUBLIC_IMAGE_REPO)
 packages-export-all-minimal-images: VERSIONED_IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
 packages-export-all-minimal-images: $(addprefix packages-export-minimal-images-, $(MINIMAL_VARIANTS))
 
 # These vars are all to make sure we pull the public images from ecr vs building locally
 # for use to validate newly built images which have been pushed by the postsubmit
 .PHONY: test-all-minimal-images
-test-all-minimal-images: IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling
+test-all-minimal-images: IMAGE_REPO=$(PUBLIC_IMAGE_REPO)
 test-all-minimal-images: VERSIONED_IMAGE_TAG=$(BUILT_IMAGE_TAG_FROM_FILE)
 test-all-minimal-images: $(addprefix test-minimal-images-, $(MINIMAL_VARIANTS))
 
@@ -696,11 +729,14 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
+.PHONY: mirror
+mirror: $(MIRROR_TARGETS)
+
 .PHONY: update
 update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
-update-base-image-other-repos:
+update-base-image-other-repos: mirror
 	./update_base_image_other_repos.sh
 
 .PHONY: all
