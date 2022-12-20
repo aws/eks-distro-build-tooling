@@ -135,7 +135,7 @@ index 0000000000..dc662c18b3
 +
 +import (
 +	"internal/safefilepath"
-+	"ioutil"
++	"io/ioutil"
 +	"path/filepath"
 +	"runtime"
 +	"testing"
