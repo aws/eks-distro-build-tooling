@@ -856,6 +856,7 @@
 -rw-r--r--   1.1MiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/profile.a
 -rw-r--r--    12KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/race.a
 -rw-r--r--   811KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/reflectlite.a
+-rw-r--r--   9.2KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/safefilepath.a
 -rw-r--r--    49KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/singleflight.a
 -rw-r--r--   3.7KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/syscall/execenv.a
 -rw-r--r--    33KiB /root/sdk/go1.17.13/pkg/linux_amd64/internal/syscall/unix.a
@@ -897,7 +898,7 @@
 -rw-r--r--   221KiB /root/sdk/go1.17.13/pkg/linux_amd64/net/smtp.a
 -rw-r--r--   300KiB /root/sdk/go1.17.13/pkg/linux_amd64/net/textproto.a
 -rw-r--r--   291KiB /root/sdk/go1.17.13/pkg/linux_amd64/net/url.a
--rw-r--r--   808KiB /root/sdk/go1.17.13/pkg/linux_amd64/os.a
+-rw-r--r--   816KiB /root/sdk/go1.17.13/pkg/linux_amd64/os.a
 -rw-r--r--   467KiB /root/sdk/go1.17.13/pkg/linux_amd64/os/exec.a
 -rw-r--r--   154KiB /root/sdk/go1.17.13/pkg/linux_amd64/os/signal.a
 -rw-r--r--   104KiB /root/sdk/go1.17.13/pkg/linux_amd64/os/signal/internal/pty.a
@@ -1075,6 +1076,7 @@
 -rw-r--r--   1.3MiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/profile.a
 -rw-r--r--    34KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/race.a
 -rw-r--r--   1.3MiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/reflectlite.a
+-rw-r--r--    11KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/safefilepath.a
 -rw-r--r--    56KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/singleflight.a
 -rw-r--r--   3.9KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/syscall/execenv.a
 -rw-r--r--    35KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/internal/syscall/unix.a
@@ -1116,7 +1118,7 @@
 -rw-r--r--   248KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/net/smtp.a
 -rw-r--r--   331KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/net/textproto.a
 -rw-r--r--   290KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/net/url.a
--rw-r--r--   932KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/os.a
+-rw-r--r--   941KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/os.a
 -rw-r--r--   525KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/os/exec.a
 -rw-r--r--   170KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/os/signal.a
 -rw-r--r--   111KiB /root/sdk/go1.17.13/pkg/linux_amd64_race/os/signal/internal/pty.a
@@ -3199,7 +3201,7 @@
 -rw-r--r--   3.9KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/mkbuiltin.go
 -rw-r--r--    24KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/objfile.go
 -rw-r--r--   3.1KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/objfile_test.go
--rw-r--r--    18KiB /root/sdk/go1.17.13/src/cmd/internal/moddeps/moddeps_test.go
+-rw-r--r--    19KiB /root/sdk/go1.17.13/src/cmd/internal/moddeps/moddeps_test.go
 -rw-r--r--     351B /root/sdk/go1.17.13/src/cmd/internal/obj/abi_string.go
 -rw-r--r--     572B /root/sdk/go1.17.13/src/cmd/internal/obj/addrtype_string.go
 -rw-r--r--   7.1KiB /root/sdk/go1.17.13/src/cmd/internal/obj/arm/a.out.go
@@ -5788,6 +5790,10 @@
 -rw-r--r--   2.5KiB /root/sdk/go1.17.13/src/internal/reflectlite/tostring_test.go
 -rw-r--r--    25KiB /root/sdk/go1.17.13/src/internal/reflectlite/type.go
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/internal/reflectlite/value.go
+-rw-r--r--     630B /root/sdk/go1.17.13/src/internal/safefilepath/path.go
+-rw-r--r--     470B /root/sdk/go1.17.13/src/internal/safefilepath/path_other.go
+-rw-r--r--   2.1KiB /root/sdk/go1.17.13/src/internal/safefilepath/path_test.go
+-rw-r--r--   2.2KiB /root/sdk/go1.17.13/src/internal/safefilepath/path_windows.go
 -rw-r--r--   3.3KiB /root/sdk/go1.17.13/src/internal/singleflight/singleflight.go
 -rw-r--r--   1.9KiB /root/sdk/go1.17.13/src/internal/singleflight/singleflight_test.go
 -rw-r--r--     508B /root/sdk/go1.17.13/src/internal/syscall/execenv/execenv_default.go
@@ -6273,7 +6279,7 @@
 -rw-r--r--   3.0KiB /root/sdk/go1.17.13/src/net/http/filetransport.go
 -rw-r--r--   1.6KiB /root/sdk/go1.17.13/src/net/http/filetransport_test.go
 -rw-r--r--    27KiB /root/sdk/go1.17.13/src/net/http/fs.go
--rw-r--r--    38KiB /root/sdk/go1.17.13/src/net/http/fs_test.go
+-rw-r--r--    39KiB /root/sdk/go1.17.13/src/net/http/fs_test.go
 -rw-r--r--   331KiB /root/sdk/go1.17.13/src/net/http/h2_bundle.go
 -rw-r--r--   7.6KiB /root/sdk/go1.17.13/src/net/http/header.go
 -rw-r--r--   5.7KiB /root/sdk/go1.17.13/src/net/http/header_test.go
@@ -6597,7 +6603,7 @@
 -rw-r--r--    13KiB /root/sdk/go1.17.13/src/os/file_unix.go
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/os/file_windows.go
 -rw-r--r--   2.6KiB /root/sdk/go1.17.13/src/os/getwd.go
--rw-r--r--    65KiB /root/sdk/go1.17.13/src/os/os_test.go
+-rw-r--r--    66KiB /root/sdk/go1.17.13/src/os/os_test.go
 -rw-r--r--   8.6KiB /root/sdk/go1.17.13/src/os/os_unix_test.go
 -rw-r--r--    33KiB /root/sdk/go1.17.13/src/os/os_windows_test.go
 -rw-r--r--   2.1KiB /root/sdk/go1.17.13/src/os/path.go
@@ -7863,7 +7869,6 @@
 -rw-r--r--   7.5KiB /root/sdk/go1.17.13/src/syscall/exec_libc2.go
 -rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux.go
 -rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux_test.go
--rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux_test.go.orig
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/syscall/exec_plan9.go
 -rw-r--r--     827B /root/sdk/go1.17.13/src/syscall/exec_solaris_test.go
 -rw-r--r--   8.9KiB /root/sdk/go1.17.13/src/syscall/exec_unix.go
