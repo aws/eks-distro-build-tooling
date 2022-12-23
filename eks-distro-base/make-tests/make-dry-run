@@ -23,10 +23,12 @@ rm -rf $SCRIPT_ROOT/actual $MAKE_ROOT/check-update $MAKE_ROOT/*-pushed
 
 EXIT_CODE=0
 
+GO_VERSION_OVERRIDES="GOLANG_1.15_FULL_VERSION=1.15.15-mock GOLANG_1.16_FULL_VERSION=1.16.15-mock GOLANG_1.17_FULL_VERSION=1.17.13-mock  GOLANG_1.18_FULL_VERSION=1.18.9-mock GOLANG_1.19_FULL_VERSION=1.19.4-mock"
+
 function common::run_target() {
     local -r target="$1"
     local -r output_file="$2"
-    local -r extra_make_vars="${3:-}"
+    local -r extra_make_vars="${3:-} $GO_VERSION_OVERRIDES"
 
     mkdir -p $(dirname $SCRIPT_ROOT/actual/$output_file)
    
