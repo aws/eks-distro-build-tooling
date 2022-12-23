@@ -5,4 +5,5 @@ phases:
     commands:
     - ls && pwd && whoami
     - yum install -y make
+    - make -C projects/golang/go install-deps
     - GO_SOURCE_VERSION=1.16 make -C projects/golang/go build
