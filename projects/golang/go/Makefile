@@ -6,9 +6,9 @@ export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
 
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 
-// In a codebuild environment the source is not a git repo, but simply a directory.
+# In a codebuild environment the source is not a git repo, but simply a directory.
 ifdef CODEBUILD_SRC_DIR
-	BASE_DIRECTORY:=$(CODEBUILD_SRC_DIR)
+	BASE_DIRECTORY=$(CODEBUILD_SRC_DIR)
 endif
 
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
