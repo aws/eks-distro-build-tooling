@@ -123,7 +123,7 @@ ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChe
 
 gh auth login --with-token < /secrets/github-secrets/token
 
-PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
+PR_EXISTS=$(gh pr list -H "${PR_BRANCH}" || true)
 if [ $PR_EXISTS -eq 0 ]; then
   gh pr create --title "$PR_TITLE" --body "$PR_BODY" --label "do-not-merge/hold"
 fi
