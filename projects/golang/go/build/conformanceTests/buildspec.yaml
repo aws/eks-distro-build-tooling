@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     ARTIFACTS_BUCKET: "eks-d-postsubmit-artifacts"
+    BUILD_PREPROD_IMAGES: "false"
     GO_SOURCE_VERSION: "1.16"
 
 phases:
