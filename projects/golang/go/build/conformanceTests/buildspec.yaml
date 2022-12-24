@@ -1,9 +1,13 @@
 version: 0.2
 
+env:
+  variables:
+    ARTIFACTS_BUCKET: "eks-d-postsubmit-artifacts"
+    GO_SOURCE_VERSION: "1.16
 phases:
   build:
     commands:
     - ls && pwd && whoami
     - yum install -y make
     - make -C projects/golang/go install-deps
-    - GO_SOURCE_VERSION=1.16 make -C projects/golang/go build
+    - make -C projects/golang/go build
