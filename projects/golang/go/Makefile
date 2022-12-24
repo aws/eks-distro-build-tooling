@@ -35,6 +35,10 @@ ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 
+# This allows us to skip the image-build in the pre-prod build target if we want to
+# This is useful if you only want to test the RPM build and not worry about having buildkit set up on the host
+BUILD_PREPROD_IMAGES?=true
+
 # This build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
@@ -58,7 +62,10 @@ endif
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test
 
 .PHONY: build
-build: golang-build sync-artifacts-to-s3-dry-run local-images
+build: golang-build sync-artifacts-to-s3-dry-run
+ifeq ($(BUILD_PREPROD_IMAGES),true)
+build: local-images
+endif
 
 .PHONY: release
 release: $(RELEASE_TARGETS)
