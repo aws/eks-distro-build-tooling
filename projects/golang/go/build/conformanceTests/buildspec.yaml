@@ -12,3 +12,8 @@ phases:
     - yum install -y make
     - make -C projects/golang/go install-deps
     - make -C projects/golang/go build
+
+artifacts:
+  files:
+  - projects/golang/go/$GO_SOURCE_VERSION/rpmbuild/**/*
+  - projects/golang/go/$GO_SOURCE_VERSION/archives/**/*
