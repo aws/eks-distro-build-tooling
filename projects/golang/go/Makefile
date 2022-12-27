@@ -66,6 +66,9 @@ build: golang-build sync-artifacts-to-s3-dry-run
 ifeq ($(BUILD_PREPROD_IMAGES),true)
 build: local-images
 endif
+build: golang-build sync-artifacts-to-s3-dry-run local-images
+build:
+	echo "test"
 
 .PHONY: release
 release: $(RELEASE_TARGETS)
@@ -209,4 +212,5 @@ endif
 .PHONY: buildkit-check
 buildkit-check:
 	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
+
 
