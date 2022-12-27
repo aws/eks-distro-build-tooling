@@ -56,6 +56,8 @@ golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-
 
 .PHONY: build
 build: golang-build sync-artifacts-to-s3-dry-run local-images
+build:
+	echo "test"
 
 .PHONY: release
 release: $(RELEASE_TARGETS)
@@ -199,4 +201,5 @@ endif
 .PHONY: buildkit-check
 buildkit-check:
 	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
+
 
