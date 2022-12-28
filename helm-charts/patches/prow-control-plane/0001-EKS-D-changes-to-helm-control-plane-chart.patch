@@ -1,11 +1,11 @@
-From a805641e4d218a058cde42c742f7f980be17241e Mon Sep 17 00:00:00 2001
-From: Jackson West <jgw@amazon.com>
-Date: Fri, 25 Feb 2022 12:37:01 -0600
-Subject: [PATCH] EKS-D changes to helm control plane chart
+From aee2f095d9d0f6465581ac12c2acee52afc60034 Mon Sep 17 00:00:00 2001
+From: Mark Pruett <mpruett@amazon.com>
+Date: Wed, 28 Dec 2022 11:16:51 -0600
+Subject: [PATCH] EKS-D Changes to Helm control plane chart
 
-Signed-off-by: Jackson West <jgw@amazon.com>
+Signed-off-by: Mark Pruett <mpruett@amazon.com>
 ---
- config/prow/cluster/crier_deployment.yaml     |  93 +++++++-------
+ config/prow/cluster/crier_deployment.yaml     |  89 ++++++++------
  config/prow/cluster/crier_rbac.yaml           |  44 +------
  config/prow/cluster/deck_deployment.yaml      | 114 +++++++++---------
  config/prow/cluster/deck_rbac.yaml            |  38 +-----
@@ -25,10 +25,11 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  config/prow/cluster/tide_deployment.yaml      |  38 ++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 350 insertions(+), 453 deletions(-)
+ config/prow/config.yaml                       |   2 +-
+ 21 files changed, 353 insertions(+), 448 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
-index 4405f98e78..ecb49e4f79 100644
+index 4405f98e78..fcd659aa4b 100644
 --- a/config/prow/cluster/crier_deployment.yaml
 +++ b/config/prow/cluster/crier_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -52,7 +53,7 @@ index 4405f98e78..ecb49e4f79 100644
        labels:
          app: crier
      spec:
-@@ -33,50 +38,56 @@ spec:
+@@ -33,50 +38,61 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: crier
@@ -70,11 +71,11 @@ index 4405f98e78..ecb49e4f79 100644
 +        - --github-workers=10
          - --job-config-path=/etc/job-config
 -        - --kubernetes-blob-storage-workers=1
--        - --slack-token-file=/etc/slack/token
--        - --slack-workers=1
 +        - --kubeconfig=/etc/kubeconfig/config
 +        - --kubernetes-blob-storage-workers=10
 +        - --s3-credentials-file=/etc/s3-credentials/service-account.json
+         - --slack-token-file=/etc/slack/token
+         - --slack-workers=1
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
@@ -111,14 +112,15 @@ index 4405f98e78..ecb49e4f79 100644
 +        - name: github-token
            mountPath: /etc/github
            readOnly: true
--        - name: slack
--          mountPath: /etc/slack
 +        - name: s3-credentials
 +          mountPath: /etc/s3-credentials
 +          readOnly: true
+         - name: slack
+           mountPath: /etc/slack
+           readOnly: true
 +        - name: kubeconfig
 +          mountPath: /etc/kubeconfig
-           readOnly: true
++          readOnly: true
 +        - name: shared-bins
 +          mountPath: /shared-bins
 +      initContainers:
@@ -137,20 +139,21 @@ index 4405f98e78..ecb49e4f79 100644
        volumes:
        - name: config
          configMap:
-@@ -84,25 +95,15 @@ spec:
+@@ -84,25 +100,18 @@ spec:
        - name: job-config
          configMap:
            name: job-config
 -      - name: oauth
 +      - name: github-token
-         secret:
--          secretName: oauth-token
--      - name: slack
++        secret:
 +          secretName: github-token
 +      - name: s3-credentials
          secret:
--          secretName: slack-token
+-          secretName: oauth-token
 +          secretName: s3-credentials
+       - name: slack
+         secret:
+           secretName: slack-token
 +      - name: shared-bins
 +        emptyDir: {}
        - name: kubeconfig
@@ -1573,6 +1576,19 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    port: 9090
 -    protocol: TCP
 -  type: ClusterIP
+diff --git a/config/prow/config.yaml b/config/prow/config.yaml
+index 6834bd0182..ae8ea0b0f9 100644
+--- a/config/prow/config.yaml
++++ b/config/prow/config.yaml
+@@ -215,7 +215,7 @@ slack_reporter_configs:
+     job_states_to_report:
+       - failure
+       - error
+-    channel: test-failures
++    channel: modelrocket-prow-failures
+     # The template shown below is the default
+     report_template: 'Job {{.Spec.Job}} of type {{.Spec.Type}} ended with state {{.Status.State}}. <{{.Status.URL}}|View logs>'
+ 
 -- 
-2.37.0
+2.39.0
 
