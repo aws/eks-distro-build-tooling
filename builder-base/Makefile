@@ -51,6 +51,8 @@ define NEWLINE
 
 endef
 
+GOLANG_RPM_OUTPUT_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
+
 .PHONY: buildkit-check
 buildkit-check:
 	$(MAKE_ROOT)/../scripts/buildkit_check.sh
@@ -75,7 +77,7 @@ images-minimal: FINAL_STAGE_BASE=minimal-copy-stage
 images-minimal: VARIANT=minimal
 
 .PHONY: images-%
-images-%: buildkit-check
+images-%: buildkit-check download-golang
 	$(eval $(subst #,$(NEWLINE),$(shell yq  e 'to_entries | .[] | [.key,.value] | join("=") ' versions.yaml | tr '\n' '#')))
 	$(eval IMAGE_BUILD_ARGS=$(shell yq  e 'to_entries | .[] | .key ' versions.yaml))
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
@@ -86,12 +88,13 @@ images-%: buildkit-check
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
+		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell realpath --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
 		$(foreach BUILD_ARG,$(IMAGE_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
 		--export-cache type=inline \
 		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \
 		--opt no-cache=final \
 		--local dockerfile=./ \
-		--local context=. \
+		--local context=$(MAKE_ROOT) \
 		$(if $(wildcard $(HOME)/.netrc),$(NETRC),) \
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
@@ -126,3 +129,15 @@ update-shasums:
 .PHONY: validate-shasums
 validate-shasums: update-shasums
 	git diff --exit-code ./checksums
+
+.PHONY: download-golang
+download-golang: clean-golang-download $(shell yq  e 'to_entries | .[] | select(.key == "*GOLANG_VERSION*") | .value |= "download-golang-" + . | .value' ${MAKE_ROOT}/versions.yaml)
+
+.PHONY: clean-golang-download
+clean-golang-download:
+	rm -f ${GOLANG_RPM_OUTPUT_DIR}/golang-*.rpm
+	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
+
+.PHONY: download-golang-%
+download-golang-%:
+	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR}
