@@ -52,6 +52,9 @@ define NEWLINE
 endef
 
 GOLANG_RPM_OUTPUT_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
+# Resolves to the download-golang-% targets for each golang version present in ./versions.yaml
+# For example, the `GOLANG_VERSION_116: 1.16.15-3` entry in versions.yaml resolves to `download-golang-1.16.15-3`, and so on
+GOLANG_RPM_DOWNLOAD_TARGETS?=$(shell yq  e 'to_entries | .[] | select(.key == "*GOLANG_VERSION*") | .value |= "download-golang-" + . | .value' ${MAKE_ROOT}/versions.yaml)
 
 .PHONY: buildkit-check
 buildkit-check:
@@ -131,7 +134,7 @@ validate-shasums: update-shasums
 	git diff --exit-code ./checksums
 
 .PHONY: download-golang
-download-golang: clean-golang-download $(shell yq  e 'to_entries | .[] | select(.key == "*GOLANG_VERSION*") | .value |= "download-golang-" + . | .value' ${MAKE_ROOT}/versions.yaml)
+download-golang: clean-golang-download $(GOLANG_RPM_DOWNLOAD_TARGETS)
 
 .PHONY: clean-golang-download
 clean-golang-download:
