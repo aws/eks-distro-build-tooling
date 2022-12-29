@@ -135,7 +135,7 @@ download-golang: clean-golang-download $(shell yq  e 'to_entries | .[] | select(
 
 .PHONY: clean-golang-download
 clean-golang-download:
-	rm ${GOLANG_RPM_OUTPUT_DIR}/golang-*.rpm
+	rm -f ${GOLANG_RPM_OUTPUT_DIR}/golang-*.rpm
 	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
 
 .PHONY: download-golang-%
