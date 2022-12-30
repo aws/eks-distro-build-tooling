@@ -211,11 +211,13 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as golang-1.15
 ARG TARGETARCH
 ARG GOLANG_VERSION_115
+ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
+ADD $GOLANG_RPM_SOURCE_DIR/golang*1.15*.rpm /tmp/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_115 && \
@@ -224,11 +226,13 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as golang-1.16
 ARG TARGETARCH
 ARG GOLANG_VERSION_116
+ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
+ADD $GOLANG_RPM_SOURCE_DIR/golang*1.16*.rpm /tmp/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_116 && \
@@ -237,11 +241,13 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as golang-1.17
 ARG TARGETARCH
 ARG GOLANG_VERSION_117
+ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
+ADD $GOLANG_RPM_SOURCE_DIR/golang*1.17*.rpm /tmp/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_117 && \
@@ -250,11 +256,13 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as golang-1.18
 ARG TARGETARCH
 ARG GOLANG_VERSION_118
+ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
+ADD $GOLANG_RPM_SOURCE_DIR/golang*1.18*.rpm /tmp/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_118 && \
@@ -263,11 +271,13 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 FROM ${BUILDER_IMAGE} as golang-1.19
 ARG TARGETARCH
 ARG GOLANG_VERSION_119
+ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
+ADD $GOLANG_RPM_SOURCE_DIR/golang*1.19*.rpm /tmp/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_119 && \
