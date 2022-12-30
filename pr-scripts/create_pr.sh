@@ -79,6 +79,10 @@ else
     fi
 fi
 
+# Adding this here to include the "do-not-merge/hold" label. Trying to use the gh client with the --label arg will not succeed
+# as the bot doesn't have permission to add labels. Doing it this way our Prow chatops will pick it up and add it.
+printf "\n/hold\n" >> $PR_BODY_FILE
+
 PROW_BUCKET_NAME=$(echo $JOB_SPEC | jq -r ".decoration_config.gcs_configuration.bucket" | awk -F// '{print $NF}')
 printf "\nClick [here](https://prow.eks.amazonaws.com/view/s3/$PROW_BUCKET_NAME/logs/$JOB_NAME/$BUILD_ID) to view job logs.
 \nBy submitting this pull request,\
@@ -125,5 +129,5 @@ gh auth login --with-token < /secrets/github-secrets/token
 
 PR_EXISTS=$(gh pr list -H "${PR_BRANCH}" || true)
 if [ $PR_EXISTS -eq 0 ]; then
-  gh pr create --title "$PR_TITLE" --body "$PR_BODY" --label "do-not-merge/hold"
+  gh pr create --title "$PR_TITLE" --body "$PR_BODY"
 fi
