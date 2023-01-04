@@ -291,14 +291,7 @@ endef
 # $1 - IMAGE_COMPONENT (eks-distro-minimal-base,eks-distro-minimal-base-builder)
 define SKOPEO
 	$(eval _IMAGE_COMPONENT := $1)
-	@if [ "$(BUILT_IMAGE_TAG_FROM_FILE)" = "null" ]; then \
-		exit; \
-	fi && \
-	printf "Mirroring $(_IMAGE_COMPONENT) tags '$(BUILT_IMAGE_TAG_FROM_FILE) $(LATEST)' from $(IMAGE_REPO) to $(PUBLIC_IMAGE_REPO)\n\n" && \
-	set -x && \
-	for tag in $(BUILT_IMAGE_TAG_FROM_FILE) $(LATEST); do \
-		skopeo copy --all --retry-times 15 --preserve-digests docker://$(IMAGE_REPO)/$(_IMAGE_COMPONENT):$(BUILT_IMAGE_TAG_FROM_FILE) docker://$(PUBLIC_IMAGE_REPO)/$(_IMAGE_COMPONENT):$$tag; \
-	done
+	$(MAKE_ROOT)/mirror_images.sh "$(_IMAGE_COMPONENT)" "$(BUILT_IMAGE_TAG_FROM_FILE)" "$(LATEST)" "$(IMAGE_REPO)" "$(PUBLIC_IMAGE_REPO)"
 endef
 
 # $1 - AL_TAG (may be windows)

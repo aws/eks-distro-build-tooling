@@ -17,28 +17,15 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+source $SCRIPT_ROOT/build/lib/common.sh
+
 IMAGE_NAME="$1"
 IMAGE="$2"
 WINDOWS_IMAGE_VERSION="$3"
 WINDOWS_IMAGE_REGISTRY="$4"
 WINDOWS_BASE_IMAGE_NAME="$5"
-
-function retry() {
-    local n=1
-    local max=120
-    local delay=5
-    while true; do
-        "$@" && break || {
-            if [[ $n -lt $max ]]; then
-            ((n++))
-            >&2 echo "Command failed. Attempt $n/$max:"
-            sleep $delay;
-            else
-            fail "The command has failed after $n attempts."
-            fi
-        }
-    done
-}
 
 if [ ! -f /tmp/$IMAGE_NAME-metadata.json ]; then
     echo "No metadata file for image: /tmp/$IMAGE_NAME-metadata.json!"

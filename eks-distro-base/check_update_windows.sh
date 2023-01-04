@@ -16,29 +16,14 @@
 set -e
 set -o pipefail
 set -x
+
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+source $SCRIPT_ROOT/build/lib/common.sh
 
 IMAGE_NAME="$1"
 AL_TAG="$2"
 NAME_FOR_TAG_FILE="$3"
-
-function retry() {
-    local n=1
-    local max=120
-    local delay=5
-    while true; do
-        "$@" && break || {
-            if [[ $n -lt $max ]]; then
-            ((n++))
-            >&2 echo "Command failed. Attempt $n/$max:"
-            sleep $delay;
-            else
-            fail "The command has failed after $n attempts."
-            fi
-        }
-    done
-}
-
 
 BASE_IMAGE_TAG="$(yq e ".windows.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 
