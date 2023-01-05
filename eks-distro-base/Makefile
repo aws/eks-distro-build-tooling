@@ -183,7 +183,11 @@ BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
 
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
-BASE_PYTHON_VARIANT_VERSIONS=3.9
+BASE_PYTHON_VARIANT_VERSIONS=$(if $(filter $(AL_TAG),2022),,3.7) 3.9
+PYTHON_3.7_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh)
+PYTHON_3.9_FULL_VERSION=3.9.14
+
+BASE_PYTHON_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_COMPILER_VARIANT_VERSIONS),$(addsuffix -$(ver),$(BASE_PYTHON_VARIANT_VERSIONS)))
 # ************************************************************
 
 # ****************** NODEJS VARIANTS *************************
@@ -222,7 +226,7 @@ WINDOWS_IMAGE_CREATE_PR_TARGETS:=$(addprefix windows-create-pr-,$(BASE_WINDOWS_V
 
 # ************** MINIMAL VARIANT MAGIC VARS ******************
 
-COMPILERS=golang nodejs
+COMPILERS=golang nodejs python
 
 # Foreach minimal variant (+ versioned variants) new vars are created to make it easier to override
 # target prereqs and vars. The vars will follow the patterns:
@@ -377,14 +381,16 @@ $(RUNTIME_VERSIONED_VARIANTS): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
 $(RUNTIME_BUILDER_VERSIONED_VARIANTS): IMAGE_COMPONENT=eks-distro-minimal-base-$(COMPILER_NAME)-builder
 
 # If building deps and the compiler has a runtime image, build it fist
-$(eval $(if $(filter-out true,$(BUILD_DEPS)),,\
+$(if $(filter-out true,$(BUILD_DEPS)),,\
 	$(foreach ver,$(VERSIONS), \
 		$(eval MAIN_TARGETS:=$(foreach variant,$(BASE_COMPILER_VARIANT_VERSIONS),$(MAIN_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_COMPILER_$(ver)_$(call TO_UPPER,$(variant))))) \
-		$(MAIN_TARGETS): BUILD_DEP_IMAGE_TARGET=$$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) minimal-images-base-$(COMPILER_NAME)-$(ver))\
+		$(eval \
+			$(MAIN_TARGETS): BUILD_DEP_IMAGE_TARGET=$$(call MINIMAL_IMAGES_BASE_IMAGE,$$(VARIANT_SHORT_NAME)) minimal-images-base-$(COMPILER_NAME)-$(ver) \
+	 	) \
 	)
 )
 
-$(eval $(foreach ver,$(VERSIONS),$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_$(ver)): VERSIONED_VARIANT=$(ver)))
+$(foreach ver,$(VERSIONS),$(eval $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_$(COMPILER_NAME_UPPER)_$(ver)): VERSIONED_VARIANT=$(ver)))
 
 endef
 
@@ -535,14 +541,7 @@ $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_KIND): BASE_IMAGE_NAME=eks-distro-minimal-b
 # ***********************************************************
 
 # ****************** PYTHON VARIANTS ************************
-$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
-$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): DOCKERFILE=Dockerfile.minimal-base-python
-$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): BUILDCTL_BUILD_ARGS+=VERSIONED_VARIANT
-
-$(ALL_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPONENT=eks-distro-minimal-base-python
-$(BUILDER_MINIMAL_IMAGE_VERSIONED_VARIANTS_TARGETS_FOR_BASE_PYTHON): IMAGE_COMPONENT=eks-distro-minimal-base-python-builder
-
-$(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_PYTHON_3.9): VERSIONED_VARIANT=3.9
+$(eval $(call COMPILER_TARGET_OVERRIDES,python,false))
 
 # ************************************************************
 
@@ -801,7 +800,7 @@ minimal-base-test:
 
 .PHONY: create-ecr-repos
 create-ecr-repos: # Create repos in ECR for project images for local testing
-create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler golang-compiler,eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
+create-ecr-repos: OVERRIDDEN_IMAGES=$(foreach variant,compiler $(foreach compiler,$(COMPILERS),$(compiler)-compiler),eks-distro-minimal-base-$(variant) eks-distro-minimal-base-$(variant)-builder)
 create-ecr-repos: IMAGE_OVERRIDES=$(foreach variant,compiler-base $(COMPILERS),$(variant) $(variant)-builder)
 create-ecr-repos: ALL_IMAGE_NAMES:=$(filter-out $(OVERRIDDEN_IMAGES),$(ALL_IMAGE_NAMES)) $(IMAGE_OVERRIDES) eks-distro-windows-base eks-distro-minimal-images-base-test
 create-ecr-repos: $$(foreach image,$$(ALL_IMAGE_NAMES),$$(image)/create-ecr-repo)

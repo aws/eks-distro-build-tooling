@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 # Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +21,95 @@
 ARG BASE_IMAGE=unused
 ARG BUILDER_IMAGE=unused
 ARG BUILT_BUILDER_IMAGE=unused
+ARG MINIMAL_BASE_BUILDER_IMAGE=unused
 ARG VERSIONED_VARIANT
-FROM ${BUILDER_IMAGE} as builder-python-base
+ARG AL_TAG
+ARG COMPILER_VERSION=${VERSIONED_VARIANT}
+ARG IS_COMPILER=false
+
+
+################# COMPILE ON GLIBC ######################
+# Compile in the minimal base builder  image to allow sharing result across compiler
+# and runtime images. We also build the cache into the runtime image
+# which includes the cache data for this layer and along with COPY --link
+# this also us to ensure this layer is always reusable across the runtime + compiler
+# builds without relying on the buildkitd local cache
+FROM ${MINIMAL_BASE_BUILDER_IMAGE} as python-compile-3.9-al2
 
 ARG OUTPUT_DEBUG_LOG
+ARG COMPILER_FULL_VERSION
 
-# Copy scripts in every variant since we do not rebuild the base
-# every time these scripts change. This ensures whenever a variant is
-# built it has the latest scripts in the builder
-COPY scripts/ /usr/bin
+ARG TARGETARCH
+
+ENV PYTHON_FULL_VERSION="${COMPILER_FULL_VERSION}"
+ENV PYTHON_FOLDER="python3.9"
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    # similiar to al2 3.8 rpm config
+    CFLAGS_AMD64="-m64 -mtune=generic" && \
+    CFLAGS_ARM64="-moutline-atomics -Wno-unused-result -Wsign-compare" && \
+    EXTRA_CFLAGS_VAR="CFLAGS_${TARGETARCH^^}" && \
+    export CFLAGS="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -D_GNU_SOURCE -fPIC -fwrapv ${!EXTRA_CFLAGS_VAR}" && \
+    export LDFLAGS="-Wl,-z,relro  -g" && \
+    BUILD_DEPS="bzip2-devel expat-devel gcc gcc-c++ gdbm-devel glibc-devel gzip libdb-devel libffi-devel libtirpc-devel libuuid-devel make ncurses-devel openssl-devel readline-devel sqlite-devel tar wget xz-devel zlib-devel" && \
+    NEWROOT=/ clean_install "$BUILD_DEPS" && \    
+    # Download
+    mkdir /tmp/buildroot && \
+    cd /tmp/buildroot && \
+    wget https://www.python.org/ftp/python/${PYTHON_FULL_VERSION}/Python-${PYTHON_FULL_VERSION}.tgz && \
+    tar xzf Python-${PYTHON_FULL_VERSION}.tgz && \
+    cd Python-${PYTHON_FULL_VERSION} && \
+    # Build
+    # similiar to al2 3.8 rpm config
+    ./configure --prefix=/usr --enable-optimizations --enable-ipv6 --enable-shared --with-dbmliborder=gdbm:ndbm:bdb --with-system-expat --with-system-ffi \
+        --enable-loadable-sqlite-extensions --with-lto --with-ssl-default-suites=openssl --with-computed-gotos=yes && \
+    make altinstall && \
+    # Cleanup
+    NEWROOT=/ remove_package "$BUILD_DEPS" && \
+    cd / && \
+    rm -rf /tmp/buildroot && \
+    # Clean up files not provided by al2 rpms
+    cd /usr/lib/${PYTHON_FOLDER} && \
+    rm -rf test idlelib tkinter turtledemo ./{distutils,lib2to3}/tests ./{ctypes,unittest}/test distutils/command/wininst config-3.9-x86_64-linux-gnu && \
+    cd / && \
+    NEWROOT=/newroot-python-compiled && \
+    mkdir -p $NEWROOT/usr/lib/pkgconfig $NEWROOT/usr/{bin,include} && \
+    # Symlink to just 3
+    for root in "" "$NEWROOT"; do ln -s python3.9 $root/usr/bin/python3; done && \    
+    # Remove pip/setuptools
+    /usr/bin/python3 -m pip uninstall -y pip setuptools && \
+    # Copy built artifacts to newroot-python-compiled
+    mkdir -p $NEWROOT/usr/lib/pkgconfig && \
+    cp /usr/bin/{pydoc3.9,python3.9,python3.9-config} $NEWROOT/usr/bin && \
+    cp -rf /usr/include/python3.9 $NEWROOT/usr/include && \
+    cp /usr/lib/pkgconfig/python-3.9*.pc $NEWROOT/usr/lib/pkgconfig && \
+    cp -rf /usr/lib/python3.9 $NEWROOT/usr/lib && \
+    cp --preserve=links /usr/lib/libpython3* $NEWROOT/usr/lib
+
+
+################# AL2 #########################
+# python will installed via yum later on this stage exists to match al2 3.9 which
+# copies from the compile stage
+FROM ${BUILDER_IMAGE} as builder-python-3.7-al2
+
+# Copy compiled version on top of builder image
+FROM ${BUILDER_IMAGE} as builder-python-3.9-al2
+
+COPY --link --from=python-compile-3.9-al2 /newroot-python-compiled /newroot
+
+################# AL2022 ######################
+# python will installed via yum later on this stage exists to match al2 which
+# copies from the compile stage
+FROM ${BUILDER_IMAGE} as builder-python-3.9-al2022
+
+
+################# BASE WITH YUM PACKAGES ######################
+# Install the base packages needed for python from yum
+# this layer is is not cached to ensure latest yum packages are installed
+FROM builder-python-${COMPILER_VERSION}-al${AL_TAG} as builder-python-base
+
+ARG OUTPUT_DEBUG_LOG
 
 # Google's Distroless has an experimental python3 version based on debian
 # The packages below are cross referenced based on the packages
@@ -68,103 +149,81 @@ RUN set -x && \
     cleanup "python-base"
 
 
-FROM builder-python-base as builder-python3.7
+################# AL2 #########################
+# install from yum which al2 provides
+FROM builder-python-base as builder-python-3.7-al2-with-compiler-false
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    install_rpm python3 \
-        python3-pip \
-        python3-setuptools && \
-    cleanup "python3.7"
+    install_rpm python3 && \
+    cleanup "python3.7-al2"
 
 
-FROM builder-python-base as builder-python3.8
+FROM builder-python-3.7-al2-with-compiler-false as builder-python-3.7-al2-with-compiler-true
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    enable_extra python3.8 && \
-    install_rpm python38-setuptools \
-        python38-pip \
-        python38 && \
-    # Symlink to just 3
-    ln -s python3.8 $NEWROOT/usr/bin/python3 && \
-    ln -s pip3.8 $NEWROOT/usr/bin/pip3 && \
-    cleanup "python3.8"
+    install_rpm python3-setuptools python3-pip && \
+    cleanup "python3.9-al2-with-compiler"
 
 
-FROM builder-python-base as builder-python3.9
+FROM builder-python-base as builder-python-3.9-al2-with-compiler-false
 
-ARG TARGETARCH
+# Ensure python libs are registried in /newroot
+RUN chroot $NEWROOT ldconfig
 
-ENV PYTHON_FULL_VERSION="3.9.13"
-ENV PYTHON_FOLDER="python3.9"
 
-# /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
-# libkrad installed with rpm with required deps but not needed by haproxy and missing deps
-ENV CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies /usr/lib64/libkrad*"
+FROM builder-python-3.9-al2-with-compiler-false as builder-python-3.9-al2-with-compiler-true
+        
+RUN set -x && \
+    chroot $NEWROOT python3 -m ensurepip --upgrade && \
+    chroot $NEWROOT python3 -m pip install --upgrade setuptools
+
+
+################# AL2022 ######################
+# install from yum which al22 provides
+FROM builder-python-base as builder-python-3.9-al2022-with-compiler-false
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    if grep -q "2022" "/etc/os-release"; then \
-        install_rpm python3-setuptools python3-setuptools-wheel python3-pip python3-pip-wheel python3 && \
-        # To be symlinkd later
-        rm $NEWROOT/usr/bin/pip && \
-        cleanup "python3.9" && \
-        exit 0; \
+    install_rpm python3 && \
+    cleanup "python3.9-al2022"
+
+
+FROM builder-python-3.9-al2022-with-compiler-false as builder-python-3.9-al2022-with-compiler-true
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    install_rpm python3-setuptools python3-setuptools-wheel python3-pip python3-pip-wheel && \
+    # To be symlinkd later
+    rm $NEWROOT/usr/bin/pip && \
+    cleanup "python3.9-al2022-with-compiler"
+
+
+################# BUILDER ######################
+FROM builder-python-${COMPILER_VERSION}-al${AL_TAG}-with-compiler-${IS_COMPILER} as builder
+
+ARG IS_COMPILER
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    # for the yum/gcc base image we cant change the default to python3 since it breaks yum
+    if [ ! -L $NEWROOT/usr/bin/python ]; then \
+        ln -s python3 $NEWROOT/usr/bin/python; \
+    fi && \  
+    # /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
+    # libkrad installed with rpm with required deps but not needed by haproxy and missing deps
+    if [ "${IS_COMPILER}" = "false" ]; then \
+        export CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies /usr/lib64/libkrad*"; \
+    else \
+        if [ ! -L $NEWROOT/usr/bin/pip ]; then \
+            ln -s pip3 $NEWROOT/usr/bin/pip; \
+        fi \        
     fi && \
-    # similiar to al2 3.8 rpm config
-    CFLAGS_AMD64="-m64 -mtune=generic" && \
-    CFLAGS_ARM64="-moutline-atomics -Wno-unused-result -Wsign-compare" && \
-    EXTRA_CFLAGS_VAR="CFLAGS_${TARGETARCH^^}" && \
-    export CFLAGS="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -D_GNU_SOURCE -fPIC -fwrapv ${!EXTRA_CFLAGS_VAR}" && \
-    export LDFLAGS="-Wl,-z,relro  -g" && \
-    BUILD_DEPS="bzip2-devel expat-devel gcc gcc-c++ gdbm-devel glibc-devel gzip libdb-devel libffi-devel libtirpc-devel libuuid-devel make ncurses-devel openssl-devel readline-devel sqlite-devel tar wget xz-devel zlib-devel" && \
-    NEWROOT=/ clean_install "$BUILD_DEPS" && \    
-    # Download
-    mkdir /tmp/buildroot && \
-    cd /tmp/buildroot && \
-    wget https://www.python.org/ftp/python/${PYTHON_FULL_VERSION}/Python-${PYTHON_FULL_VERSION}.tgz && \
-    tar xzf Python-${PYTHON_FULL_VERSION}.tgz && \
-    cd Python-${PYTHON_FULL_VERSION} && \
-    # Build
-    # similiar to al2 3.8 rpm config
-    ./configure --prefix=/usr --enable-optimizations --enable-ipv6 --enable-shared --with-dbmliborder=gdbm:ndbm:bdb --with-system-expat --with-system-ffi \
-        --enable-loadable-sqlite-extensions --with-lto --with-ssl-default-suites=openssl --with-computed-gotos=yes && \
-    make altinstall && \
-    # Cleanup
-    NEWROOT=/ remove_package "$BUILD_DEPS" && \
-    cd / && \
-    rm -rf /tmp/buildroot && \
-    # Clean up files not provided by al2 rpms
-    cd /usr/lib/${PYTHON_FOLDER} && \
-    rm -rf test idlelib tkinter turtledemo ./{distutils,lib2to3}/tests ./{ctypes,unittest}/test distutils/command/wininst config-3.9-x86_64-linux-gnu && \
-    cd / && \
-    # Symlink to just 3    
-    ls -al /usr/bin && \
-    for root in "" "$NEWROOT"; do ln -s python3.9 $root/usr/bin/python3 && ln -s pip3.9 $root/usr/bin/pip3; done && \
-    # Update pip/setuptools
-    /usr/bin/python3 -m pip install --upgrade pip setuptools && \
-    # Copy built artifacts to newroot
-    mkdir -p $NEWROOT/usr/lib/pkgconfig && \
-    cp /usr/bin/{pip3.9,pydoc3.9,python3.9,python3.9-config} $NEWROOT/usr/bin && \
-    cp -rf /usr/include/python3.9 $NEWROOT/usr/include && \
-    cp /usr/lib/pkgconfig/python-3.9*.pc $NEWROOT/usr/lib/pkgconfig && \
-    cp -rf /usr/lib/python3.9 $NEWROOT/usr/lib && \
-    cp --preserve=links /usr/lib/libpython3* $NEWROOT/usr/lib && \
-    # Ensure python libs are registried in /newroot
-    chroot $NEWROOT ldconfig && \    
-    cleanup "python3.9"  
-
-
-FROM builder-python${VERSIONED_VARIANT} as builder
-
-RUN set -x && \
-    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    ln -s python3 $NEWROOT/usr/bin/python && \
-    ln -s pip3 $NEWROOT/usr/bin/pip && \
     cleanup "python3"
 
 
-FROM ${BUILT_BUILDER_IMAGE} as base-python-builder 
+################# FINAL ######################
+FROM ${BUILT_BUILDER_IMAGE} as built
 FROM ${BASE_IMAGE} as final
-COPY --from=base-python-builder /newroot /
+COPY --from=built /newroot /
