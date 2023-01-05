@@ -13,7 +13,7 @@
 # limitations under the License.
 
 images:
-  binfmtInstallerImage: public.ecr.aws/eks-distro-build-tooling/binfmt-misc:qemu-v6.1.0
+  binfmtInstallerImage: public.ecr.aws/eks-distro-build-tooling/binfmt-misc:qemu-v7.0.0
   binfmtIdleImage: public.ecr.aws/eks-distro-build-tooling/eks-distro-base:latest
 
 formats: "aarch64"
