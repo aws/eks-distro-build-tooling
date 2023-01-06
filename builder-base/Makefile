@@ -39,6 +39,7 @@ BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 BUILDKIT_PLATFORMS?=linux/amd64,linux/arm64
 FINAL_STAGE_BASE?=full-copy-stage
 VARIANT?=standard
+IGNORE_NO_CACHE?=false
 
 NETRC=--secret id=netrc,src=$(HOME)/.netrc
 
@@ -95,7 +96,7 @@ images-%: buildkit-check download-golang
 		$(foreach BUILD_ARG,$(IMAGE_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
 		--export-cache type=inline \
 		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \
-		--opt no-cache=final \
+		$(if $(filter false,$(IGNORE_NO_CACHE)),--opt no-cache=final,) \
 		--local dockerfile=./ \
 		--local context=$(MAKE_ROOT) \
 		$(if $(wildcard $(HOME)/.netrc),$(NETRC),) \
@@ -134,13 +135,13 @@ validate-shasums: update-shasums
 	git diff --exit-code ./checksums
 
 .PHONY: download-golang
-download-golang: clean-golang-download $(GOLANG_RPM_DOWNLOAD_TARGETS)
+download-golang: $(GOLANG_RPM_DOWNLOAD_TARGETS)
 
 .PHONY: clean-golang-download
 clean-golang-download:
 	rm -f ${GOLANG_RPM_OUTPUT_DIR}/golang-*.rpm
-	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
 
 .PHONY: download-golang-%
 download-golang-%:
+	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
 	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR}
