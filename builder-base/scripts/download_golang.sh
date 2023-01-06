@@ -27,29 +27,33 @@ RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 source $SCRIPT_ROOT/common_vars.sh
 
 function build::go::download(){
-      # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+    # Set up specific go version by using go get, additional versions apart from default can be installed by calling
     # the function again with the specific parameter.
     local version=${1%-*}
     local outputDir=${2}
-
-    if [ $TARGETARCH == 'amd64' ]; then
-        local arch='x86_64'
-    else
-        local arch='aarch64'
-    fi
+    local arch=${3}
 
     for artifact in golang golang-bin; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+        if [ ! -f $filename ]; then
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
+        fi
     done
 
-    if [ $TARGETARCH == 'amd64' ]; then
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $outputDir/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+    if [ $arch == 'x86_64' ]; then
+        local filename="$outputDir/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+        if [ ! -f $filename ]; then
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
+        fi
     fi
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
+        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
+        if [ ! -f $filename ]; then
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
+        fi
     done
 }
 
-build::go::download "${VERSION}" "$OUTPUT_DIR"
-
+build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
+build::go::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
