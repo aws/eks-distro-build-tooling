@@ -61,11 +61,23 @@ for variant in "${VARIANTS[@]}"; do
     CREATE_PR_MINIMAL_TARGETS+="${NL}minimal-create-pr-${variant}: ## Run create pr logic for minimal variant \`${variant}\`"
 done
 
+COMPILERS_TARGETS="${NL}${NL}##@ Compiler Images Targets"
+COMPILERS=$(make --no-print-directory -C $MAKE_ROOT var-value-COMPILERS)
+COMPILERS=(${COMPILERS// / })
+for compiler in "${COMPILERS[@]}"; do
+    COMPILERS_TARGETS+="${NL}${compiler}-compiler-images: ## Build compiler images for all versions of ${compiler}"
+    VERSIONS=$(make --no-print-directory -C $MAKE_ROOT var-value-BASE_${compiler^^}_VARIANT_VERSIONS)
+    VERSIONS=(${VERSIONS// / })
+    for version in "${VERSIONS[@]}"; do
+        COMPILERS_TARGETS+="${NL}${compiler}-${version}-compiler-images: ## Build compiler images for ${compiler}-${version}"
+    done
+done
+
 cat >> $HELPFILE << EOF
 ${NL}${NL}${NL}${HEADER}
 # To update call: make add-generated-help-block
 # This is added to help document dynamic targets and support shell autocompletion
-${MAIN_MINIMAL_TARGETS}${EXPORT_MINIMAL_TARGETS}${VALIDATE_MINIMAL_TARGETS}${TEST_MINIMAL_TARGETS}${UPDATE_MINIMAL_TARGETS}${CREATE_PR_MINIMAL_TARGETS}
+${MAIN_MINIMAL_TARGETS}${EXPORT_MINIMAL_TARGETS}${VALIDATE_MINIMAL_TARGETS}${TEST_MINIMAL_TARGETS}${UPDATE_MINIMAL_TARGETS}${CREATE_PR_MINIMAL_TARGETS}${COMPILERS_TARGETS}
 
 ${FOOTER}
 EOF
