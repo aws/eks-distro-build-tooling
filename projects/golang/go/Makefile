@@ -1,5 +1,6 @@
 GIT_TAG?=$(shell cat ./$(GO_SOURCE_VERSION)/GIT_TAG)
 BUILD_ID=$(shell cat ./$(GO_SOURCE_VERSION)/RELEASE)
+IMAGE_BUILD_ID=$(shell cat ./docker/debianBase/RELEASE)
 
 export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
 
@@ -15,6 +16,8 @@ GITHUB_USER?="Prow Bot"
 
 GOOS?=linux
 
+# the values used by rpmbuild for indicating architecture are different than that of our other systems.
+# rather than use 'x86_64' throughout, we just make sure to set the RPM arch to the right value here.
 ARCHITECTURE?=AMD64
 RPM_ARCH?=x86_64
 ifeq ($(ARCHITECTURE), ARM64)
@@ -28,10 +31,10 @@ ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 
-# This build is specifically focused on a debian base image for use with EKS build systems
+# This image build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
-IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)
+IMAGE_TAG?=$(GIT_TAG)-$(IMAGE_BUILD_ID)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 PUSH_IMAGES?=true
@@ -42,17 +45,32 @@ TO_LOWER=$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst \
 	M,m,$(subst N,n,$(subst O,o,$(subst P,p,$(subst Q,q,$(subst R,r,$(subst S,s,$(subst \
 	T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$(subst _,-,$(1))))))))))))))))))))))))))))
 
+RELEASE_TARGETS = golang-build sync-artifacts-to-s3
+# We only build the Debian base image for AAMD64. Skip for other architectures.
+ifeq ($(ARCHITECTURE), AMD64)
+    RELEASE_TARGETS += images
+endif
+
 .PHONY: golang-build
-golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive generate-golang-checksum
+golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
 build: golang-build sync-artifacts-to-s3-dry-run local-images
+build:
+	echo "test"
 
 .PHONY: release
-release: golang-build sync-artifacts-to-s3 images
+release: $(RELEASE_TARGETS)
 
 .PHONY: prod-release
-prod-release: golang-build sync-artifacts-to-s3 images
+prod-release: golang-build sync-artifacts-to-s3
+
+.PHONY: prod-release-images
+prod-release-images: fetch-eks-go-archive images
+
+.PHONY: fetch-eks-go-archive
+fetch-eks-go-archive:
+	curl -L -o $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz https://distro.eks.amazonaws.com/golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz --create-dirs
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
@@ -89,6 +107,7 @@ local-images: images
 
 .PHONY: images
 images: buildkit-check
+images:
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
@@ -165,6 +184,28 @@ sync-artifacts-to-s3: check-env-release
 setup-prod-release-s3-credentials:
 	$(PROJECT_DIRECTORY)/scripts/release_s3_configuration.sh
 
+.PHONY: test
+test: test-windows test-darwin test-linux
+
+.PHONY: test-windows
+test-windows: test-platform-windows-amd64 test-platform-windows-386
+
+.PHONY: test-darwin
+test-darwin: test-platform-darwin-amd64 test-platform-darwin-arm64
+
+.PHONY: test-linux
+test-linux: test-platform-linux-s390x test-platform-linux-ppc64le test-platform-linux-arm test-platform-linux-arm64 test-platform-linux-386
+
+.PHONY: test-platform-%
+test-platform-%: platform_tuple = $(subst -, ,$(*))
+test-platform-%: goos = $(word 1, $(platform_tuple))
+test-platform-%: goarch = $(word 2, $(platform_tuple))
+test-platform-%: goroot = $(shell /tmp/go-extracted/usr/lib/golang/bin/go env GOROOT)
+test-platform-%:
+	echo installing standard library for GOOS=$(goos) GOARCH=$(goarch)
+	GOOS=$(goos) GOARCH=$(goarch) /tmp/go-extracted/usr/lib/golang/bin/go install std
+	rm -rf $(goroot)/pkg/$(goos)_$(goarch) # clean up the std lib installs as we go to avoid space issues
+
 .PHONY: clean
 clean:
 	rm -rf $(CLONED_REPO_DIRECTORY)
@@ -192,7 +233,4 @@ endif
 buildkit-check:
 	$(BASE_DIRECTORY)/scripts/buildkit_check.sh
 
-.PHONY: clone-go
-clone-go:
-	echo "Hello World"
 

@@ -1,7 +1,8 @@
-From 4ffa2f1c23d5d43be18c4ebf74ca553119683670 Mon Sep 17 00:00:00 2001
+From 5f6c35a152589df083b7fd3316d836d8ddf94abf Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 4 Aug 2021 16:07:28 -0700
-Subject: [PATCH] time: fallback to slower TestTicker test after one failure
+Subject: [PATCH 8/9] time: fallback to slower TestTicker test after one
+ failure
 
 TestTicker is sensitive to overloaded or slow systems, where a 20ms
 ticker running for 10 ticks has a total run time out of the range
@@ -75,5 +76,5 @@ index b5d0a189bc..d8cd59228f 100644
  		t0 := Now()
  		for i := 0; i < count/2; i++ {
 -- 
-2.30.1 (Apple Git-130)
+2.38.1
 

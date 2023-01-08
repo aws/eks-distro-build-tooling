@@ -39,6 +39,7 @@
 -rw-r--r--      99B /etc/libssh/libssh_server.config
 -rw-r--r--   7.4KiB /etc/login.defs
 -rw-r--r--      88B /etc/logrotate.d/dnf
+-rw-r--r--     111B /etc/magic
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
@@ -860,6 +861,7 @@
 -rw-r--r--   1.1MiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/profile.a
 -rw-r--r--    11KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/race.a
 -rw-r--r--   785KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/reflectlite.a
+-rw-r--r--   9.6KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/safefilepath.a
 -rw-r--r--    46KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/singleflight.a
 -rw-r--r--   4.4KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/syscall/execenv.a
 -rw-r--r--    33KiB /root/sdk/go1.17.13/pkg/linux_arm64/internal/syscall/unix.a
@@ -901,8 +903,8 @@
 -rw-r--r--   222KiB /root/sdk/go1.17.13/pkg/linux_arm64/net/smtp.a
 -rw-r--r--   307KiB /root/sdk/go1.17.13/pkg/linux_arm64/net/textproto.a
 -rw-r--r--   296KiB /root/sdk/go1.17.13/pkg/linux_arm64/net/url.a
--rw-r--r--   833KiB /root/sdk/go1.17.13/pkg/linux_arm64/os.a
--rw-r--r--   459KiB /root/sdk/go1.17.13/pkg/linux_arm64/os/exec.a
+-rw-r--r--   842KiB /root/sdk/go1.17.13/pkg/linux_arm64/os.a
+-rw-r--r--   461KiB /root/sdk/go1.17.13/pkg/linux_arm64/os/exec.a
 -rw-r--r--   150KiB /root/sdk/go1.17.13/pkg/linux_arm64/os/signal.a
 -rw-r--r--    95KiB /root/sdk/go1.17.13/pkg/linux_arm64/os/signal/internal/pty.a
 -rw-r--r--   234KiB /root/sdk/go1.17.13/pkg/linux_arm64/os/user.a
@@ -2984,7 +2986,7 @@
 -rw-r--r--   3.9KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/mkbuiltin.go
 -rw-r--r--    24KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/objfile.go
 -rw-r--r--   3.1KiB /root/sdk/go1.17.13/src/cmd/internal/goobj/objfile_test.go
--rw-r--r--    18KiB /root/sdk/go1.17.13/src/cmd/internal/moddeps/moddeps_test.go
+-rw-r--r--    19KiB /root/sdk/go1.17.13/src/cmd/internal/moddeps/moddeps_test.go
 -rw-r--r--     351B /root/sdk/go1.17.13/src/cmd/internal/obj/abi_string.go
 -rw-r--r--     572B /root/sdk/go1.17.13/src/cmd/internal/obj/addrtype_string.go
 -rw-r--r--   7.1KiB /root/sdk/go1.17.13/src/cmd/internal/obj/arm/a.out.go
@@ -5377,7 +5379,7 @@
 -rw-r--r--     189B /root/sdk/go1.17.13/src/internal/abi/testdata/x.s
 -rw-r--r--   3.0KiB /root/sdk/go1.17.13/src/internal/buildcfg/cfg.go
 -rw-r--r--   5.7KiB /root/sdk/go1.17.13/src/internal/buildcfg/exp.go
--rw-r--r--     458B /root/sdk/go1.17.13/src/internal/buildcfg/zbootstrap.go
+-rw-r--r--     459B /root/sdk/go1.17.13/src/internal/buildcfg/zbootstrap.go
 -rw-r--r--   3.8KiB /root/sdk/go1.17.13/src/internal/bytealg/bytealg.go
 -rw-r--r--   2.7KiB /root/sdk/go1.17.13/src/internal/bytealg/compare_386.s
 -rw-r--r--   4.9KiB /root/sdk/go1.17.13/src/internal/bytealg/compare_amd64.s
@@ -5573,6 +5575,10 @@
 -rw-r--r--   2.5KiB /root/sdk/go1.17.13/src/internal/reflectlite/tostring_test.go
 -rw-r--r--    25KiB /root/sdk/go1.17.13/src/internal/reflectlite/type.go
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/internal/reflectlite/value.go
+-rw-r--r--     630B /root/sdk/go1.17.13/src/internal/safefilepath/path.go
+-rw-r--r--     470B /root/sdk/go1.17.13/src/internal/safefilepath/path_other.go
+-rw-r--r--   2.1KiB /root/sdk/go1.17.13/src/internal/safefilepath/path_test.go
+-rw-r--r--   2.2KiB /root/sdk/go1.17.13/src/internal/safefilepath/path_windows.go
 -rw-r--r--   3.3KiB /root/sdk/go1.17.13/src/internal/singleflight/singleflight.go
 -rw-r--r--   1.9KiB /root/sdk/go1.17.13/src/internal/singleflight/singleflight_test.go
 -rw-r--r--     508B /root/sdk/go1.17.13/src/internal/syscall/execenv/execenv_default.go
@@ -6058,7 +6064,7 @@
 -rw-r--r--   3.0KiB /root/sdk/go1.17.13/src/net/http/filetransport.go
 -rw-r--r--   1.6KiB /root/sdk/go1.17.13/src/net/http/filetransport_test.go
 -rw-r--r--    27KiB /root/sdk/go1.17.13/src/net/http/fs.go
--rw-r--r--    38KiB /root/sdk/go1.17.13/src/net/http/fs_test.go
+-rw-r--r--    39KiB /root/sdk/go1.17.13/src/net/http/fs_test.go
 -rw-r--r--   331KiB /root/sdk/go1.17.13/src/net/http/h2_bundle.go
 -rw-r--r--   7.6KiB /root/sdk/go1.17.13/src/net/http/header.go
 -rw-r--r--   5.7KiB /root/sdk/go1.17.13/src/net/http/header_test.go
@@ -6336,7 +6342,7 @@
 -rw-r--r--   4.8KiB /root/sdk/go1.17.13/src/os/example_test.go
 -rw-r--r--   5.9KiB /root/sdk/go1.17.13/src/os/exec.go
 -rw-r--r--     492B /root/sdk/go1.17.13/src/os/exec/bench_test.go
--rw-r--r--     832B /root/sdk/go1.17.13/src/os/exec/env_test.go
+-rw-r--r--   1.1KiB /root/sdk/go1.17.13/src/os/exec/env_test.go
 -rw-r--r--   3.2KiB /root/sdk/go1.17.13/src/os/exec/example_test.go
 -rw-r--r--    23KiB /root/sdk/go1.17.13/src/os/exec/exec.go
 -rw-r--r--   1.3KiB /root/sdk/go1.17.13/src/os/exec/exec_linux_test.go
@@ -6382,7 +6388,7 @@
 -rw-r--r--    13KiB /root/sdk/go1.17.13/src/os/file_unix.go
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/os/file_windows.go
 -rw-r--r--   2.6KiB /root/sdk/go1.17.13/src/os/getwd.go
--rw-r--r--    65KiB /root/sdk/go1.17.13/src/os/os_test.go
+-rw-r--r--    66KiB /root/sdk/go1.17.13/src/os/os_test.go
 -rw-r--r--   8.6KiB /root/sdk/go1.17.13/src/os/os_unix_test.go
 -rw-r--r--    33KiB /root/sdk/go1.17.13/src/os/os_windows_test.go
 -rw-r--r--   2.1KiB /root/sdk/go1.17.13/src/os/path.go
@@ -7648,7 +7654,6 @@
 -rw-r--r--   7.5KiB /root/sdk/go1.17.13/src/syscall/exec_libc2.go
 -rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux.go
 -rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux_test.go
--rw-r--r--    19KiB /root/sdk/go1.17.13/src/syscall/exec_linux_test.go.orig
 -rw-r--r--    14KiB /root/sdk/go1.17.13/src/syscall/exec_plan9.go
 -rw-r--r--     827B /root/sdk/go1.17.13/src/syscall/exec_solaris_test.go
 -rw-r--r--   8.9KiB /root/sdk/go1.17.13/src/syscall/exec_unix.go
@@ -10783,7 +10788,7 @@
 -rwxr-xr-x    69KiB /usr/bin/basename
 -rwxr-xr-x    69KiB /usr/bin/basenc
 -rwxr-xr-x   1.4MiB /usr/bin/bash
--rwxr-xr-x   7.0KiB /usr/bin/bashbug-64
+-rwxr-xr-x   7.1KiB /usr/bin/bashbug-64
 -rwxr-xr-x      30B /usr/bin/bg
 -rwxr-xr-x    68KiB /usr/bin/c++filt
 -rwxr-xr-x     228B /usr/bin/c89
@@ -10811,7 +10816,7 @@
 -rwxr-xr-x   134KiB /usr/bin/cp
 -rwxr-xr-x   1.3MiB /usr/bin/cpp
 -rwxr-xr-x   135KiB /usr/bin/csplit
--rwxr-xr-x   262KiB /usr/bin/curl
+-rwxr-xr-x   263KiB /usr/bin/curl
 -rwxr-xr-x    69KiB /usr/bin/cut
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   133KiB /usr/bin/date
@@ -10826,6 +10831,7 @@
 -rwxr-xr-x    77KiB /usr/bin/dmesg
 -rwxr-xr-x   2.1KiB /usr/bin/dnf-3
 -rwxr-xr-x   199KiB /usr/bin/du
+-rwxr-xr-x   265KiB /usr/bin/dwz
 -rwxr-xr-x    69KiB /usr/bin/echo
 -rwxr-xr-x      45B /usr/bin/egrep
 -rwxr-xr-x    69KiB /usr/bin/eject
@@ -10839,12 +10845,14 @@
 -rwxr-xr-x      30B /usr/bin/fc
 -rwxr-xr-x      30B /usr/bin/fg
 -rwxr-xr-x      45B /usr/bin/fgrep
+-rwxr-xr-x    69KiB /usr/bin/file
 -rwxr-xr-x    69KiB /usr/bin/fincore
 -rwxr-xr-x   331KiB /usr/bin/find
 -rwxr-xr-x    70KiB /usr/bin/findmnt
 -rwxr-xr-x    69KiB /usr/bin/flock
 -rwxr-xr-x    69KiB /usr/bin/fmt
 -rwxr-xr-x    69KiB /usr/bin/fold
+-rwxr-xr-x    69KiB /usr/bin/funzip
 -rwxr-xr-x   136KiB /usr/bin/g13
 -rwxr-xr-x    68KiB /usr/bin/gapplication
 -rwxr-xr-x   719KiB /usr/bin/gawk
@@ -10863,7 +10871,7 @@
 -rwxr-xr-x      35B /usr/bin/getopts
 -rwxr-xr-x   133KiB /usr/bin/gio
 -rwxr-xr-x    68KiB /usr/bin/gio-querymodules-64
--rwxr-xr-x   3.6MiB /usr/bin/git
+-rwxr-xr-x   3.7MiB /usr/bin/git
 -rwxr-xr-x   662KiB /usr/bin/git-shell
 -rwxr-xr-x    69KiB /usr/bin/glib-compile-schemas
 -rwsr-xr-x    73KiB /usr/bin/gpasswd
@@ -10992,6 +11000,7 @@
 -rwxr-xr-x    69KiB /usr/bin/rpmdb
 -rwxr-xr-x    69KiB /usr/bin/rpmkeys
 -rwxr-xr-x    69KiB /usr/bin/runcon
+-rwxr-xr-x   663KiB /usr/bin/scalar
 -rwxr-xr-x   134KiB /usr/bin/scp
 -rwxr-xr-x    69KiB /usr/bin/script
 -rwxr-xr-x    69KiB /usr/bin/scriptlive
@@ -11057,6 +11066,8 @@
 -rwxr-xr-x    69KiB /usr/bin/uniq
 -rwxr-xr-x    69KiB /usr/bin/unlink
 -rwxr-xr-x    69KiB /usr/bin/unshare
+-rwxr-xr-x   198KiB /usr/bin/unzip
+-rwxr-xr-x   133KiB /usr/bin/unzipsfx
 -rwxr-xr-x   1.3KiB /usr/bin/update-ca-trust
 -rwxr-xr-x    69KiB /usr/bin/users
 -rwxr-xr-x    68KiB /usr/bin/utmpdump
@@ -11086,6 +11097,12 @@
 -rwxr-xr-x      33B /usr/bin/zfgrep
 -rwxr-xr-x   2.1KiB /usr/bin/zforce
 -rwxr-xr-x   7.5KiB /usr/bin/zgrep
+-rwxr-xr-x   199KiB /usr/bin/zip
+-rwxr-xr-x    69KiB /usr/bin/zipcloak
+-rwxr-xr-x   2.9KiB /usr/bin/zipgrep
+-rwxr-xr-x   198KiB /usr/bin/zipinfo
+-rwxr-xr-x    69KiB /usr/bin/zipnote
+-rwxr-xr-x    69KiB /usr/bin/zipsplit
 -rwxr-xr-x   2.2KiB /usr/bin/zless
 -rwxr-xr-x   1.9KiB /usr/bin/zmore
 -rwxr-xr-x   4.5KiB /usr/bin/znew
@@ -11281,7 +11298,7 @@
 -rw-r--r--   1.7KiB /usr/include/bits/sigthread.h
 -rw-r--r--   1.5KiB /usr/include/bits/sockaddr.h
 -rw-r--r--   2.5KiB /usr/include/bits/socket-constants.h
--rw-r--r--    13KiB /usr/include/bits/socket.h
+-rw-r--r--    14KiB /usr/include/bits/socket.h
 -rw-r--r--   3.0KiB /usr/include/bits/socket2.h
 -rw-r--r--   2.2KiB /usr/include/bits/socket_type.h
 -rw-r--r--   1.2KiB /usr/include/bits/ss_flags.h
@@ -11295,12 +11312,13 @@
 -rw-r--r--   1.1KiB /usr/include/bits/stdint-uintn.h
 -rw-r--r--   3.4KiB /usr/include/bits/stdio-ldbl.h
 -rw-r--r--   5.5KiB /usr/include/bits/stdio.h
--rw-r--r--    13KiB /usr/include/bits/stdio2.h
+-rw-r--r--   4.2KiB /usr/include/bits/stdio2-decl.h
+-rw-r--r--   9.9KiB /usr/include/bits/stdio2.h
 -rw-r--r--   1.2KiB /usr/include/bits/stdio_lim.h
 -rw-r--r--   1.6KiB /usr/include/bits/stdlib-bsearch.h
 -rw-r--r--   1.1KiB /usr/include/bits/stdlib-float.h
 -rw-r--r--   2.0KiB /usr/include/bits/stdlib-ldbl.h
--rw-r--r--   5.4KiB /usr/include/bits/stdlib.h
+-rw-r--r--   5.7KiB /usr/include/bits/stdlib.h
 -rw-r--r--   4.3KiB /usr/include/bits/string_fortified.h
 -rw-r--r--   1.3KiB /usr/include/bits/strings_fortified.h
 -rw-r--r--   3.1KiB /usr/include/bits/struct_mutex.h
@@ -11389,7 +11407,8 @@
 -rw-r--r--   2.3KiB /usr/include/bits/waitstatus.h
 -rw-r--r--   3.1KiB /usr/include/bits/wchar-ldbl.h
 -rw-r--r--   1.9KiB /usr/include/bits/wchar.h
--rw-r--r--    18KiB /usr/include/bits/wchar2.h
+-rw-r--r--   4.5KiB /usr/include/bits/wchar2-decl.h
+-rw-r--r--    15KiB /usr/include/bits/wchar2.h
 -rw-r--r--   6.2KiB /usr/include/bits/wctype-wchar.h
 -rw-r--r--   1.1KiB /usr/include/bits/wordsize.h
 -rw-r--r--   3.8KiB /usr/include/bits/xopen_lim.h
@@ -12337,7 +12356,7 @@
 -rw-r--r--   3.4KiB /usr/include/rdma/siw-abi.h
 -rw-r--r--   7.9KiB /usr/include/rdma/vmw_pvrdma-abi.h
 -rw-r--r--     963B /usr/include/re_comp.h
--rw-r--r--    25KiB /usr/include/regex.h
+-rw-r--r--    26KiB /usr/include/regex.h
 -rw-r--r--   1.5KiB /usr/include/regexp.h
 -rw-r--r--    13KiB /usr/include/resolv.h
 -rw-r--r--   2.9KiB /usr/include/rpc/netdb.h
@@ -12537,10 +12556,12 @@
 -rw-r--r--     362B /usr/lib/gcc/aarch64-amazon-linux/11/libsanitizer.spec
 -rw-r--r--      38B /usr/lib/gcc/aarch64-amazon-linux/11/libtsan.so
 -rw-r--r--   4.6KiB /usr/lib/gcc/aarch64-amazon-linux/11/libtsan_preinit.o
+-rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin-plugin-version-info
+-rwxr-xr-x    69KiB /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so.0.0.0
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/rpmver
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   844KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   771KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -12802,9 +12823,42 @@
 -rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/yum/__pycache__/rpmtrans.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib/python3.9/site-packages/dnf/yum/misc.py
 -rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/yum/rpmtrans.py
+-rwxr-xr-x   1.5KiB /usr/lib/rpm/brp-boot-efi-times
+-rw-r--r--     948B /usr/lib/rpm/fileattrs/kmod.attr
+-rw-r--r--     268B /usr/lib/rpm/fileattrs/libsymlink.attr
+-rwxr-xr-x   1.7KiB /usr/lib/rpm/generate-rpm-note.sh
+-rw-r--r--   9.5KiB /usr/lib/rpm/lua/fedora/common.lua
+-rw-r--r--   8.6KiB /usr/lib/rpm/lua/fedora/srpm/fonts.lua
+-rw-r--r--    16KiB /usr/lib/rpm/lua/fedora/srpm/forge.lua
+-rw-r--r--    16KiB /usr/lib/rpm/lua/fedora/srpm/go.lua
+-rw-r--r--   2.4KiB /usr/lib/rpm/lua/fedora/srpm/python.lua
 -rw-r--r--    44KiB /usr/lib/rpm/macros
 -rw-r--r--     296B /usr/lib/rpm/macros.d/macros.dist
+-rw-r--r--   1.8KiB /usr/lib/rpm/macros.d/macros.dwz
+-rw-r--r--   3.3KiB /usr/lib/rpm/macros.d/macros.efi-srpm
+-rw-r--r--   2.5KiB /usr/lib/rpm/macros.d/macros.fedora-misc
+-rw-r--r--   1.7KiB /usr/lib/rpm/macros.d/macros.fedora-misc-srpm
+-rw-r--r--   5.2KiB /usr/lib/rpm/macros.d/macros.fonts-srpm
+-rw-r--r--   3.3KiB /usr/lib/rpm/macros.d/macros.forge
+-rw-r--r--     535B /usr/lib/rpm/macros.d/macros.ghc-srpm
+-rw-r--r--   9.0KiB /usr/lib/rpm/macros.d/macros.go-srpm
+-rw-r--r--      80B /usr/lib/rpm/macros.d/macros.java-srpm
+-rw-r--r--     116B /usr/lib/rpm/macros.d/macros.kernel-srpm
+-rw-r--r--      70B /usr/lib/rpm/macros.d/macros.ldc-srpm
+-rw-r--r--     307B /usr/lib/rpm/macros.d/macros.ldconfig
+-rw-r--r--     283B /usr/lib/rpm/macros.d/macros.lua-srpm
+-rw-r--r--     181B /usr/lib/rpm/macros.d/macros.mono-srpm
+-rw-r--r--     324B /usr/lib/rpm/macros.d/macros.nodejs-srpm
+-rw-r--r--     745B /usr/lib/rpm/macros.d/macros.ocaml-srpm
+-rw-r--r--     104B /usr/lib/rpm/macros.d/macros.openblas-srpm
+-rw-r--r--   3.0KiB /usr/lib/rpm/macros.d/macros.package-notes-srpm
+-rw-r--r--     862B /usr/lib/rpm/macros.d/macros.perl-srpm
 -rw-r--r--      61B /usr/lib/rpm/macros.d/macros.pkgconf
+-rw-r--r--    12KiB /usr/lib/rpm/macros.d/macros.python-srpm
+-rw-r--r--     492B /usr/lib/rpm/macros.d/macros.qt5-srpm
+-rw-r--r--   1.4KiB /usr/lib/rpm/macros.d/macros.rust-srpm
+-rw-r--r--     127B /usr/lib/rpm/macros.d/macros.valgrind-srpm
+-rw-r--r--     241B /usr/lib/rpm/macros.d/macros.vpath
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/aarch64-linux/macros
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/alpha-linux/macros
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/alphaev5-linux/macros
@@ -12871,6 +12925,27 @@
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/sparcv9-linux/macros
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/sparcv9v-linux/macros
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/x86_64-linux/macros
+-rwxr-xr-x     560B /usr/lib/rpm/redhat/brp-fix-pyc-reproducibility
+-rwxr-xr-x     413B /usr/lib/rpm/redhat/brp-ldconfig
+-rwxr-xr-x   1.5KiB /usr/lib/rpm/redhat/brp-llvm-compile-lto-elf
+-rwxr-xr-x   4.4KiB /usr/lib/rpm/redhat/brp-mangle-shebangs
+-rwxr-xr-x   5.7KiB /usr/lib/rpm/redhat/brp-python-bytecompile
+-rwxr-xr-x     558B /usr/lib/rpm/redhat/brp-strip-lto
+-rw-r--r--    22KiB /usr/lib/rpm/redhat/compileall2.py
+-rwxr-xr-x    49KiB /usr/lib/rpm/redhat/config.guess
+-rwxr-xr-x    35KiB /usr/lib/rpm/redhat/config.sub
+-rwxr-xr-x   2.0KiB /usr/lib/rpm/redhat/dist.sh
+-rwxr-xr-x   1.2KiB /usr/lib/rpm/redhat/find-provides
+-rwxr-xr-x     990B /usr/lib/rpm/redhat/find-requires
+-rwxr-xr-x   3.6KiB /usr/lib/rpm/redhat/gpgverify
+-rw-r--r--    18KiB /usr/lib/rpm/redhat/macros
+-rwxr-xr-x   6.1KiB /usr/lib/rpm/redhat/redhat-annobin-plugin-select.sh
+-r--r--r--      90B /usr/lib/rpm/redhat/redhat-annobin-select-annobin-built-plugin
+-r--r--r--      94B /usr/lib/rpm/redhat/redhat-annobin-select-gcc-built-plugin
+-r--r--r--      76B /usr/lib/rpm/redhat/redhat-hardened-cc1
+-r--r--r--       6B /usr/lib/rpm/redhat/redhat-hardened-clang.cfg
+-r--r--r--      47B /usr/lib/rpm/redhat/redhat-hardened-ld
+-rw-r--r--   5.6KiB /usr/lib/rpm/redhat/rpmrc
 -rw-r--r--     296B /usr/lib/rpm/rpm.daily
 -rw-r--r--      61B /usr/lib/rpm/rpm.log
 -rw-r--r--     688B /usr/lib/rpm/rpm.supp
@@ -12938,15 +13013,261 @@
 -rwxr-xr-x    68KiB /usr/lib64/gawk/rwarray.so
 -rwxr-xr-x    68KiB /usr/lib64/gawk/time.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/ANSI_X3.110.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ARMSCII-8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ASMO_449.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/BIG5.so
+-rwxr-xr-x   260KiB /usr/lib64/gconv/BIG5HKSCS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/BRF.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP10007.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1125.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1250.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1251.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/CP1252.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1253.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1254.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1255.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1256.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1257.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP1258.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP737.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP770.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP771.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP772.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP773.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP774.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CP775.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/CP932.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CSN_369103.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/CWI.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/DEC-MCS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-AT-DE-A.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-AT-DE.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-CA-FR.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-DK-NO-A.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-DK-NO.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-ES-A.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-ES-S.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-ES.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-FI-SE-A.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-FI-SE.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-FR.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-IS-FRISS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-IT.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-PT.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-UK.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EBCDIC-US.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ECMA-CYRILLIC.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EUC-CN.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EUC-JISX0213.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/EUC-JP-MS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EUC-JP.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EUC-KR.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/EUC-TW.so
+-rwxr-xr-x   196KiB /usr/lib64/gconv/GB18030.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GBBIG5.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GBGBK.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/GBK.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GEORGIAN-ACADEMY.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GEORGIAN-PS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GOST_19768-74.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GREEK-CCITT.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GREEK7-OLD.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/GREEK7.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/HP-GREEK8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/HP-ROMAN8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/HP-ROMAN9.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/HP-THAI8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/HP-TURKISH8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM037.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM038.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1004.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1008.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1008_420.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1025.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1026.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1046.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1047.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1097.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1112.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1122.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1123.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1124.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1129.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1130.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1132.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1133.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1137.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1140.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1141.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1142.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1143.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1144.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1145.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1146.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1147.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1148.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1149.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1153.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1154.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1155.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1156.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1157.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1158.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1160.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1161.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1162.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1163.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1164.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1166.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM1167.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM12712.so
+-rwxr-xr-x   196KiB /usr/lib64/gconv/IBM1364.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM1371.so
+-rwxr-xr-x   196KiB /usr/lib64/gconv/IBM1388.so
+-rwxr-xr-x   260KiB /usr/lib64/gconv/IBM1390.so
+-rwxr-xr-x   260KiB /usr/lib64/gconv/IBM1399.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM16804.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM256.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM273.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM274.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM275.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM277.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM278.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM280.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM281.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM284.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM285.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM290.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM297.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM420.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM423.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM424.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM437.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM4517.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM4899.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM4909.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM4971.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM500.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM5347.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM803.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM850.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM851.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM852.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM855.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM856.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM857.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM858.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM860.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM861.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM862.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM863.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM864.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM865.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM866.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM866NAV.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM868.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM869.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM870.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM871.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM874.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM875.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM880.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM891.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM901.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM902.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM903.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM9030.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM904.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM905.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM9066.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM918.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM921.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM922.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM930.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM932.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM933.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM935.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM937.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM939.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/IBM943.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IBM9448.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/IEC_P27-1.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/INIS-8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/INIS-CYRILLIC.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/INIS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISIRI-3342.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-2022-CN-EXT.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-2022-CN.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-2022-JP-3.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-2022-JP.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-2022-KR.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-IR-197.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO-IR-209.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO646.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-1.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-10.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-11.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-13.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-14.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-15.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-16.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-2.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-3.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-4.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-5.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-6.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-7.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-9.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO8859-9E.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_10367-BOX.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_11548-1.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_2033.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_5427-EXT.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_5427.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_5428.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_6937-2.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/ISO_6937.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/JOHAB.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/KOI-8.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/KOI8-R.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/KOI8-RU.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/KOI8-T.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/KOI8-U.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/LATIN-GREEK-1.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/LATIN-GREEK.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MAC-CENTRALEUROPE.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MAC-IS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MAC-SAMI.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MAC-UK.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MACINTOSH.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/MIK.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/NATS-DANO.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/NATS-SEFI.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/PT154.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/RK1048.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/SAMI-WS2.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/SHIFT_JISX0213.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/SJIS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/T.61.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/TCVN5712-1.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/TIS-620.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/TSCII.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/UHC.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/UNICODE.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/UTF-16.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/UTF-32.so
 -rwxr-xr-x    68KiB /usr/lib64/gconv/UTF-7.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/VISCII.so
 -rw-r--r--   3.8KiB /usr/lib64/gconv/gconv-modules
--rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
+-rw-r--r--    27KiB /usr/lib64/gconv/gconv-modules.cache
+-rw-r--r--    53KiB /usr/lib64/gconv/gconv-modules.d/gconv-modules-extra.conf
+-rwxr-xr-x   516KiB /usr/lib64/gconv/libCNS.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/libGB.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/libISOIR165.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/libJIS.so
+-rwxr-xr-x   132KiB /usr/lib64/gconv/libJISX0213.so
+-rwxr-xr-x    68KiB /usr/lib64/gconv/libKSC.so
 -rw-r--r--    26KiB /usr/lib64/gcrt1.o
 -rw-r--r--    53KiB /usr/lib64/girepository-1.0/Modulemd-2.0.typelib
 -rw-r--r--    20KiB /usr/lib64/grcrt1.o
@@ -13303,7 +13624,7 @@
 -rwxr-xr-x    69KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   135KiB /usr/lib64/libelf-0.187.so
--rwxr-xr-x   199KiB /usr/lib64/libexpat.so.1.8.7
+-rwxr-xr-x   199KiB /usr/lib64/libexpat.so.1.8.10
 -rwxr-xr-x   338KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    68KiB /usr/lib64/libffi.so.6.0.2
 -rwxr-xr-x   264KiB /usr/lib64/libfido2.so.1.10.0
@@ -13339,7 +13660,7 @@
 -rwxr-xr-x    69KiB /usr/lib64/libkrad.so.0.0
 -rwxr-xr-x   919KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x    70KiB /usr/lib64/libkrb5support.so.0.1
--rwxr-xr-x   263KiB /usr/lib64/libksba.so.8.14.0
+-rwxr-xr-x   327KiB /usr/lib64/libksba.so.8.14.2
 -rwxr-xr-x    70KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   394KiB /usr/lib64/libldap_r-2.4.so.2.11.5
 -rwxr-xr-x    69KiB /usr/lib64/libltdl.so.7.3.2
@@ -13424,7 +13745,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x    69KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    68KiB /usr/lib64/libverto.so.1.0.0
--rwxr-xr-x   1.7MiB /usr/lib64/libxml2.so.2.9.14
+-rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.3
 -rwxr-xr-x   133KiB /usr/lib64/libyaml-0.so.2.0.9
 -rwxr-xr-x   133KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   650KiB /usr/lib64/libzstd.so.1.5.2
@@ -15992,15 +16313,15 @@
 -rwxr-xr-x   728KiB /usr/libexec/git-core/git-imap-send
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-merge-octopus
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-merge-one-file
--rwxr-xr-x     948B /usr/libexec/git-core/git-merge-resolve
+-rwxr-xr-x   1.3KiB /usr/libexec/git-core/git-merge-resolve
 -rwxr-xr-x    12KiB /usr/libexec/git-core/git-mergetool
 -rw-r--r--   9.7KiB /usr/libexec/git-core/git-mergetool--lib
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
--rwxr-xr-x   729KiB /usr/libexec/git-core/git-remote-http
+-rwxr-xr-x   730KiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   598KiB /usr/libexec/git-core/git-sh-i18n--envsubst
--rw-r--r--   8.6KiB /usr/libexec/git-core/git-sh-setup
--rwxr-xr-x    12KiB /usr/libexec/git-core/git-submodule
+-rwxr-xr-x   662KiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
+-rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.4KiB /usr/libexec/git-core/git-web--browse
 -rw-r--r--     515B /usr/libexec/git-core/mergetools/araxis
 -rw-r--r--     584B /usr/libexec/git-core/mergetools/bc
@@ -16021,7 +16342,7 @@
 -rw-r--r--     423B /usr/libexec/git-core/mergetools/smerge
 -rw-r--r--     403B /usr/libexec/git-core/mergetools/tkdiff
 -rw-r--r--     761B /usr/libexec/git-core/mergetools/tortoisemerge
--rw-r--r--    16KiB /usr/libexec/git-core/mergetools/vimdiff
+-rw-r--r--    18KiB /usr/libexec/git-core/mergetools/vimdiff
 -rw-r--r--     510B /usr/libexec/git-core/mergetools/winmerge
 -rw-r--r--     913B /usr/libexec/git-core/mergetools/xxdiff
 -rwxr-xr-x    69KiB /usr/libexec/gpg-check-pattern
@@ -16409,6 +16730,7 @@
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
+-rw-r--r--   9.2KiB /usr/share/doc/annobin-plugin/annotation.proposal.txt
 -rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
 -rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
@@ -16432,7 +16754,7 @@
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
 -rw-r--r--   4.8KiB /usr/share/git-core/contrib/completion/git-completion.tcsh
--rw-r--r--    18KiB /usr/share/git-core/contrib/completion/git-prompt.sh
+-rw-r--r--    19KiB /usr/share/git-core/contrib/completion/git-prompt.sh
 -rw-r--r--     239B /usr/share/git-core/contrib/hooks/multimail/README.Git
 -rwxr-xr-x    22KiB /usr/share/git-core/contrib/hooks/post-receive-email
 -rwxr-xr-x   1.3KiB /usr/share/git-core/contrib/hooks/pre-auto-gc-battery
@@ -16798,8 +17120,9 @@
 -rw-r--r--    16KiB /usr/share/guile/2.2/web/server.scm
 -rw-r--r--   6.4KiB /usr/share/guile/2.2/web/server/http.scm
 -rw-r--r--    20KiB /usr/share/guile/2.2/web/uri.scm
+-rw-r--r--    41KiB /usr/share/info/annobin.info.gz
 -rw-r--r--   290KiB /usr/share/info/as.info.gz
--rw-r--r--   141KiB /usr/share/info/bash.info.gz
+-rw-r--r--   148KiB /usr/share/info/bash.info.gz
 -rw-r--r--   131KiB /usr/share/info/bfd.info.gz
 -rw-r--r--    70KiB /usr/share/info/binutils.info.gz
 -rw-r--r--   233KiB /usr/share/info/coreutils.info.gz
@@ -16850,6 +17173,8 @@
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rw-r--r--    39KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
+-rw-r--r--    35KiB /usr/share/licenses/annobin-docs/COPYING3
+-rw-r--r--     570B /usr/share/licenses/annobin-docs/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/audit-libs/lgpl-2.1.txt
 -rw-r--r--    35KiB /usr/share/licenses/bash/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/binutils/COPYING
@@ -16863,13 +17188,19 @@
 -rw-r--r--   1.9KiB /usr/share/licenses/cyrus-sasl-lib/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/dnf/COPYING
 -rw-r--r--     415B /usr/share/licenses/dnf/PACKAGE-LICENSING
+-rw-r--r--    18KiB /usr/share/licenses/dwz/COPYING
+-rw-r--r--   3.3KiB /usr/share/licenses/dwz/COPYING.RUNTIME
+-rw-r--r--    35KiB /usr/share/licenses/dwz/COPYING3
+-rw-r--r--    35KiB /usr/share/licenses/efi-srpm-macros/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libelf/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libelf/COPYING-LGPLV3
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs/COPYING-LGPLV3
 -rw-r--r--   1.2KiB /usr/share/licenses/expat/COPYING
 -rw-r--r--   1.7KiB /usr/share/licenses/file-libs/COPYING
+-rw-r--r--   1.7KiB /usr/share/licenses/file/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/findutils/COPYING
+-rw-r--r--    35KiB /usr/share/licenses/fonts-rpm-macros/LICENSE.txt
 -rw-r--r--    35KiB /usr/share/licenses/gawk/COPYING
 -rw-rw-r--   1.5KiB /usr/share/licenses/gawk/LICENSE.BSD
 -rw-rw-r--    18KiB /usr/share/licenses/gawk/LICENSE.GPLv2
@@ -16893,6 +17224,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gnutls/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/gnutls/COPYING.LESSER
 -rw-r--r--     936B /usr/share/licenses/gnutls/LICENSE
+-rw-r--r--    35KiB /usr/share/licenses/go-rpm-macros/LICENSE.txt
 -rw-r--r--    18KiB /usr/share/licenses/gpgme/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/gpgme/COPYING.LESSER
 -rw-r--r--    35KiB /usr/share/licenses/grep/COPYING
@@ -16976,6 +17308,7 @@
 -rw-r--r--   1.1KiB /usr/share/licenses/libyaml/License
 -rw-r--r--    18KiB /usr/share/licenses/libzstd/COPYING
 -rw-r--r--   1.5KiB /usr/share/licenses/libzstd/LICENSE
+-rw-rw-r--   1.1KiB /usr/share/licenses/lua-srpm-macros/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/make/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/mpfr/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/mpfr/COPYING.LESSER
@@ -17000,6 +17333,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/readline/COPYING
 -rw-r--r--   2.0KiB /usr/share/licenses/readline/USAGE
 -rw-r--r--    44KiB /usr/share/licenses/rpm/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/rust-srpm-macros/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/sed/COPYING
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-rw-r--    18KiB /usr/share/licenses/shadow-utils/gpl-2.0.txt
@@ -17007,6 +17341,8 @@
 -rw-r--r--    26KiB /usr/share/licenses/systemd/LICENSE.LGPL2.1
 -rw-r--r--    35KiB /usr/share/licenses/tar/COPYING
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/unzip/COPYING.OLD
+-rw-r--r--   3.6KiB /usr/share/licenses/unzip/LICENSE
 -rw-r--r--   1.4KiB /usr/share/licenses/util-linux/COPYING.BSD-3-Clause
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux/COPYING.BSD-4-Clause-UC
 -rw-r--r--    18KiB /usr/share/licenses/util-linux/COPYING.GPL-2.0-or-later
@@ -17015,6 +17351,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/util-linux/COPYING.LGPL-2.1-or-later
 -rw-r--r--    35KiB /usr/share/licenses/which/COPYING
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
+-rw-r--r--   3.4KiB /usr/share/licenses/zip/LICENSE
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
 -rw-r--r--     494B /usr/share/locale/af/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
@@ -17055,12 +17392,12 @@
 -rw-r--r--   6.5KiB /usr/share/locale/be/LC_MESSAGES/make.mo
 -rw-r--r--    37KiB /usr/share/locale/be@latin/LC_MESSAGES/glib20.mo
 -rw-r--r--   8.9KiB /usr/share/locale/bg/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   215KiB /usr/share/locale/bg/LC_MESSAGES/bash.mo
+-rw-r--r--   243KiB /usr/share/locale/bg/LC_MESSAGES/bash.mo
 -rw-r--r--   124KiB /usr/share/locale/bg/LC_MESSAGES/binutils.mo
 -rw-r--r--   476KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    49KiB /usr/share/locale/bg/LC_MESSAGES/dnf.mo
 -rw-r--r--    47KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   852KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
+-rw-r--r--   872KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
 -rw-r--r--   177KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/bg/LC_MESSAGES/gprof.mo
 -rw-r--r--    24KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
@@ -17086,14 +17423,14 @@
 -rw-r--r--    99KiB /usr/share/locale/bs/LC_MESSAGES/glib20.mo
 -rw-r--r--   3.0KiB /usr/share/locale/bs/LC_MESSAGES/shadow.mo
 -rw-r--r--    11KiB /usr/share/locale/ca/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   141KiB /usr/share/locale/ca/LC_MESSAGES/bash.mo
+-rw-r--r--   180KiB /usr/share/locale/ca/LC_MESSAGES/bash.mo
 -rw-r--r--   152KiB /usr/share/locale/ca/LC_MESSAGES/binutils.mo
 -rw-r--r--   359KiB /usr/share/locale/ca/LC_MESSAGES/coreutils.mo
 -rw-r--r--    16KiB /usr/share/locale/ca/LC_MESSAGES/cpplib.mo
 -rw-r--r--   2.0KiB /usr/share/locale/ca/LC_MESSAGES/cracklib.mo
 -rw-r--r--    50KiB /usr/share/locale/ca/LC_MESSAGES/dnf.mo
 -rw-r--r--   7.8KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   605KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
+-rw-r--r--   644KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
 -rw-r--r--   141KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    12KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
@@ -17109,7 +17446,7 @@
 -rw-r--r--     510B /usr/share/locale/ca@valencia/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    54KiB /usr/share/locale/cmn/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.7KiB /usr/share/locale/cs/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   161KiB /usr/share/locale/cs/LC_MESSAGES/bash.mo
+-rw-r--r--   181KiB /usr/share/locale/cs/LC_MESSAGES/bash.mo
 -rw-r--r--   368KiB /usr/share/locale/cs/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/cs/LC_MESSAGES/cracklib.mo
 -rw-r--r--    50KiB /usr/share/locale/cs/LC_MESSAGES/dnf.mo
@@ -17134,7 +17471,7 @@
 -rw-r--r--    27KiB /usr/share/locale/cy/LC_MESSAGES/glib20.mo
 -rw-r--r--     523B /usr/share/locale/cy/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   9.5KiB /usr/share/locale/da/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    71KiB /usr/share/locale/da/LC_MESSAGES/bash.mo
+-rw-r--r--    69KiB /usr/share/locale/da/LC_MESSAGES/bash.mo
 -rw-r--r--   151KiB /usr/share/locale/da/LC_MESSAGES/bfd.mo
 -rw-r--r--    69KiB /usr/share/locale/da/LC_MESSAGES/binutils.mo
 -rw-r--r--   337KiB /usr/share/locale/da/LC_MESSAGES/coreutils.mo
@@ -17162,7 +17499,7 @@
 -rw-r--r--    59KiB /usr/share/locale/da/LC_MESSAGES/tar.mo
 -rw-r--r--   402KiB /usr/share/locale/da/LC_MESSAGES/util-linux.mo
 -rw-r--r--   9.9KiB /usr/share/locale/de/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    93KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
+-rw-r--r--   123KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
 -rw-r--r--   369KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
 -rw-r--r--    25KiB /usr/share/locale/de/LC_MESSAGES/cpplib.mo
 -rw-r--r--   2.0KiB /usr/share/locale/de/LC_MESSAGES/cracklib.mo
@@ -17170,7 +17507,7 @@
 -rw-r--r--    18KiB /usr/share/locale/de/LC_MESSAGES/elfutils.mo
 -rw-r--r--    36KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
 -rw-r--r--   2.0MiB /usr/share/locale/de/LC_MESSAGES/gcc.mo
--rw-r--r--   634KiB /usr/share/locale/de/LC_MESSAGES/git.mo
+-rw-r--r--   649KiB /usr/share/locale/de/LC_MESSAGES/git.mo
 -rw-r--r--   139KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
@@ -17195,7 +17532,7 @@
 -rw-r--r--    35KiB /usr/share/locale/dz/LC_MESSAGES/glib20.mo
 -rw-r--r--    33KiB /usr/share/locale/dz/LC_MESSAGES/shadow.mo
 -rw-r--r--     467B /usr/share/locale/el/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    73KiB /usr/share/locale/el/LC_MESSAGES/bash.mo
+-rw-r--r--    82KiB /usr/share/locale/el/LC_MESSAGES/bash.mo
 -rw-r--r--    24KiB /usr/share/locale/el/LC_MESSAGES/coreutils.mo
 -rw-r--r--     723B /usr/share/locale/el/LC_MESSAGES/cpplib.mo
 -rw-r--r--   2.2KiB /usr/share/locale/el/LC_MESSAGES/cracklib.mo
@@ -17212,10 +17549,10 @@
 -rw-r--r--    12KiB /usr/share/locale/el/LC_MESSAGES/sed.mo
 -rw-r--r--    83KiB /usr/share/locale/el/LC_MESSAGES/shadow.mo
 -rw-r--r--    15KiB /usr/share/locale/el/LC_MESSAGES/tar.mo
--rw-r--r--   170KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
+-rw-r--r--   161KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
 -rw-r--r--   154KiB /usr/share/locale/en@boldquot/LC_MESSAGES/elfutils.mo
 -rw-r--r--   218KiB /usr/share/locale/en@boldquot/LC_MESSAGES/gnupg2.mo
--rw-r--r--   168KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
+-rw-r--r--   160KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
 -rw-r--r--   152KiB /usr/share/locale/en@quot/LC_MESSAGES/elfutils.mo
 -rw-r--r--   216KiB /usr/share/locale/en@quot/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    69KiB /usr/share/locale/en@shaw/LC_MESSAGES/glib20.mo
@@ -17225,7 +17562,7 @@
 -rw-r--r--   7.5KiB /usr/share/locale/en_GB/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     369B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--     494B /usr/share/locale/eo/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   149KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
+-rw-r--r--   159KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
 -rw-r--r--   165KiB /usr/share/locale/eo/LC_MESSAGES/coreutils.mo
 -rw-r--r--    24KiB /usr/share/locale/eo/LC_MESSAGES/cpplib.mo
 -rw-r--r--    38KiB /usr/share/locale/eo/LC_MESSAGES/dnf.mo
@@ -17243,7 +17580,7 @@
 -rw-r--r--    16KiB /usr/share/locale/eo/LC_MESSAGES/sed.mo
 -rw-r--r--    60KiB /usr/share/locale/eo/LC_MESSAGES/tar.mo
 -rw-r--r--   7.4KiB /usr/share/locale/es/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   159KiB /usr/share/locale/es/LC_MESSAGES/bash.mo
+-rw-r--r--   180KiB /usr/share/locale/es/LC_MESSAGES/bash.mo
 -rw-r--r--   204KiB /usr/share/locale/es/LC_MESSAGES/bfd.mo
 -rw-r--r--   148KiB /usr/share/locale/es/LC_MESSAGES/binutils.mo
 -rw-r--r--   252KiB /usr/share/locale/es/LC_MESSAGES/coreutils.mo
@@ -17254,7 +17591,7 @@
 -rw-r--r--    25KiB /usr/share/locale/es/LC_MESSAGES/findutils.mo
 -rw-r--r--   500KiB /usr/share/locale/es/LC_MESSAGES/gas.mo
 -rw-r--r--   1.1MiB /usr/share/locale/es/LC_MESSAGES/gcc.mo
--rw-r--r--   559KiB /usr/share/locale/es/LC_MESSAGES/git.mo
+-rw-r--r--   626KiB /usr/share/locale/es/LC_MESSAGES/git.mo
 -rw-r--r--   138KiB /usr/share/locale/es/LC_MESSAGES/glib20.mo
 -rw-r--r--   211KiB /usr/share/locale/es/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/es/LC_MESSAGES/gnutls.mo
@@ -17305,7 +17642,7 @@
 -rw-r--r--     360B /usr/share/locale/fa/LC_MESSAGES/libpwquality.mo
 -rw-r--r--     477B /usr/share/locale/fa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   8.7KiB /usr/share/locale/fi/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    73KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
+-rw-r--r--    72KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
 -rw-r--r--   159KiB /usr/share/locale/fi/LC_MESSAGES/bfd.mo
 -rw-r--r--   207KiB /usr/share/locale/fi/LC_MESSAGES/binutils.mo
 -rw-r--r--   109KiB /usr/share/locale/fi/LC_MESSAGES/coreutils.mo
@@ -17337,7 +17674,7 @@
 -rw-r--r--     518B /usr/share/locale/fil/LC_MESSAGES/libdnf.mo
 -rw-r--r--     480B /usr/share/locale/fo/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    11KiB /usr/share/locale/fr/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   164KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
+-rw-r--r--   186KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
 -rw-r--r--   227KiB /usr/share/locale/fr/LC_MESSAGES/bfd.mo
 -rw-r--r--   307KiB /usr/share/locale/fr/LC_MESSAGES/binutils.mo
 -rw-r--r--   379KiB /usr/share/locale/fr/LC_MESSAGES/coreutils.mo
@@ -17347,7 +17684,7 @@
 -rw-r--r--    36KiB /usr/share/locale/fr/LC_MESSAGES/findutils.mo
 -rw-r--r--   562KiB /usr/share/locale/fr/LC_MESSAGES/gas.mo
 -rw-r--r--   2.0MiB /usr/share/locale/fr/LC_MESSAGES/gcc.mo
--rw-r--r--   634KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
+-rw-r--r--   649KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
 -rw-r--r--   145KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
 -rw-r--r--   197KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/fr/LC_MESSAGES/gnutls.mo
@@ -17374,7 +17711,7 @@
 -rw-r--r--   5.9KiB /usr/share/locale/fur/LC_MESSAGES/libpwquality.mo
 -rw-r--r--   7.9KiB /usr/share/locale/fur/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   7.6KiB /usr/share/locale/ga/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   115KiB /usr/share/locale/ga/LC_MESSAGES/bash.mo
+-rw-r--r--   113KiB /usr/share/locale/ga/LC_MESSAGES/bash.mo
 -rw-r--r--   111KiB /usr/share/locale/ga/LC_MESSAGES/coreutils.mo
 -rw-r--r--    21KiB /usr/share/locale/ga/LC_MESSAGES/findutils.mo
 -rw-r--r--    15KiB /usr/share/locale/ga/LC_MESSAGES/glib20.mo
@@ -17390,7 +17727,7 @@
 -rw-r--r--     415B /usr/share/locale/gd/LC_MESSAGES/dnf.mo
 -rw-r--r--    12KiB /usr/share/locale/gd/LC_MESSAGES/glib20.mo
 -rw-r--r--     493B /usr/share/locale/gl/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    54KiB /usr/share/locale/gl/LC_MESSAGES/bash.mo
+-rw-r--r--    53KiB /usr/share/locale/gl/LC_MESSAGES/bash.mo
 -rw-r--r--    28KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    24KiB /usr/share/locale/gl/LC_MESSAGES/findutils.mo
 -rw-r--r--   138KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
@@ -17428,7 +17765,7 @@
 -rw-r--r--   8.2KiB /usr/share/locale/hi/LC_MESSAGES/libpwquality.mo
 -rw-r--r--     478B /usr/share/locale/hi/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     565B /usr/share/locale/hr/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   154KiB /usr/share/locale/hr/LC_MESSAGES/bash.mo
+-rw-r--r--   175KiB /usr/share/locale/hr/LC_MESSAGES/bash.mo
 -rw-r--r--   5.1KiB /usr/share/locale/hr/LC_MESSAGES/bfd.mo
 -rw-r--r--    22KiB /usr/share/locale/hr/LC_MESSAGES/binutils.mo
 -rw-r--r--   357KiB /usr/share/locale/hr/LC_MESSAGES/coreutils.mo
@@ -17444,7 +17781,7 @@
 -rw-r--r--    63KiB /usr/share/locale/hr/LC_MESSAGES/tar.mo
 -rw-r--r--   482KiB /usr/share/locale/hr/LC_MESSAGES/util-linux.mo
 -rw-r--r--   7.1KiB /usr/share/locale/hu/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   158KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
+-rw-r--r--   150KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
 -rw-r--r--   352KiB /usr/share/locale/hu/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/hu/LC_MESSAGES/cracklib.mo
 -rw-r--r--    91KiB /usr/share/locale/hu/LC_MESSAGES/dnf.mo
@@ -17469,7 +17806,7 @@
 -rw-r--r--     464B /usr/share/locale/ia/LC_MESSAGES/libdnf.mo
 -rw-r--r--     488B /usr/share/locale/ia/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   4.0KiB /usr/share/locale/id/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    86KiB /usr/share/locale/id/LC_MESSAGES/bash.mo
+-rw-r--r--    96KiB /usr/share/locale/id/LC_MESSAGES/bash.mo
 -rw-r--r--   141KiB /usr/share/locale/id/LC_MESSAGES/bfd.mo
 -rw-r--r--   150KiB /usr/share/locale/id/LC_MESSAGES/binutils.mo
 -rw-r--r--   140KiB /usr/share/locale/id/LC_MESSAGES/coreutils.mo
@@ -17479,7 +17816,7 @@
 -rw-r--r--    20KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
 -rw-r--r--   409KiB /usr/share/locale/id/LC_MESSAGES/gas.mo
 -rw-r--r--   321KiB /usr/share/locale/id/LC_MESSAGES/gcc.mo
--rw-r--r--   477KiB /usr/share/locale/id/LC_MESSAGES/git.mo
+-rw-r--r--   604KiB /usr/share/locale/id/LC_MESSAGES/git.mo
 -rw-r--r--   130KiB /usr/share/locale/id/LC_MESSAGES/glib20.mo
 -rw-r--r--    41KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/gprof.mo
@@ -17504,7 +17841,7 @@
 -rw-r--r--   1.8KiB /usr/share/locale/is/LC_MESSAGES/popt.mo
 -rw-r--r--   5.9KiB /usr/share/locale/is/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.7KiB /usr/share/locale/it/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    84KiB /usr/share/locale/it/LC_MESSAGES/bash.mo
+-rw-r--r--    82KiB /usr/share/locale/it/LC_MESSAGES/bash.mo
 -rw-r--r--   189KiB /usr/share/locale/it/LC_MESSAGES/binutils.mo
 -rw-r--r--   162KiB /usr/share/locale/it/LC_MESSAGES/coreutils.mo
 -rw-r--r--   2.0KiB /usr/share/locale/it/LC_MESSAGES/cracklib.mo
@@ -17531,7 +17868,7 @@
 -rw-r--r--    63KiB /usr/share/locale/it/LC_MESSAGES/tar.mo
 -rw-r--r--    32KiB /usr/share/locale/it/LC_MESSAGES/util-linux.mo
 -rw-r--r--   7.6KiB /usr/share/locale/ja/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    98KiB /usr/share/locale/ja/LC_MESSAGES/bash.mo
+-rw-r--r--   113KiB /usr/share/locale/ja/LC_MESSAGES/bash.mo
 -rw-r--r--   132KiB /usr/share/locale/ja/LC_MESSAGES/bfd.mo
 -rw-r--r--   147KiB /usr/share/locale/ja/LC_MESSAGES/binutils.mo
 -rw-r--r--   183KiB /usr/share/locale/ja/LC_MESSAGES/coreutils.mo
@@ -17582,7 +17919,7 @@
 -rw-r--r--   9.3KiB /usr/share/locale/kn/LC_MESSAGES/libpwquality.mo
 -rw-r--r--     473B /usr/share/locale/kn/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   7.0KiB /usr/share/locale/ko/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    52KiB /usr/share/locale/ko/LC_MESSAGES/bash.mo
+-rw-r--r--   182KiB /usr/share/locale/ko/LC_MESSAGES/bash.mo
 -rw-r--r--    25KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo
 -rw-r--r--   2.1KiB /usr/share/locale/ko/LC_MESSAGES/cracklib.mo
 -rw-r--r--    90KiB /usr/share/locale/ko/LC_MESSAGES/dnf.mo
@@ -17654,7 +17991,7 @@
 -rw-r--r--   9.5KiB /usr/share/locale/ms/LC_MESSAGES/tar.mo
 -rw-r--r--     485B /usr/share/locale/my/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   9.4KiB /usr/share/locale/nb/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   150KiB /usr/share/locale/nb/LC_MESSAGES/bash.mo
+-rw-r--r--   169KiB /usr/share/locale/nb/LC_MESSAGES/bash.mo
 -rw-r--r--   342KiB /usr/share/locale/nb/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.8KiB /usr/share/locale/nb/LC_MESSAGES/cracklib.mo
 -rw-r--r--   6.4KiB /usr/share/locale/nb/LC_MESSAGES/dnf.mo
@@ -17675,7 +18012,7 @@
 -rw-r--r--   124KiB /usr/share/locale/ne/LC_MESSAGES/glib20.mo
 -rw-r--r--    28KiB /usr/share/locale/ne/LC_MESSAGES/shadow.mo
 -rw-r--r--   9.7KiB /usr/share/locale/nl/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   157KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
+-rw-r--r--   178KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
 -rw-r--r--   329KiB /usr/share/locale/nl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    22KiB /usr/share/locale/nl/LC_MESSAGES/cpplib.mo
 -rw-r--r--   2.0KiB /usr/share/locale/nl/LC_MESSAGES/cracklib.mo
@@ -17721,7 +18058,7 @@
 -rw-r--r--   8.5KiB /usr/share/locale/pa/LC_MESSAGES/libpwquality.mo
 -rw-r--r--   9.9KiB /usr/share/locale/pa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   9.9KiB /usr/share/locale/pl/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   160KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
+-rw-r--r--   180KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
 -rw-r--r--   368KiB /usr/share/locale/pl/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/pl/LC_MESSAGES/cracklib.mo
 -rw-r--r--    92KiB /usr/share/locale/pl/LC_MESSAGES/dnf.mo
@@ -17746,7 +18083,7 @@
 -rw-r--r--   484KiB /usr/share/locale/pl/LC_MESSAGES/util-linux.mo
 -rw-r--r--    12KiB /usr/share/locale/ps/LC_MESSAGES/glib20.mo
 -rw-r--r--    10KiB /usr/share/locale/pt/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   156KiB /usr/share/locale/pt/LC_MESSAGES/bash.mo
+-rw-r--r--   167KiB /usr/share/locale/pt/LC_MESSAGES/bash.mo
 -rw-r--r--   214KiB /usr/share/locale/pt/LC_MESSAGES/bfd.mo
 -rw-r--r--   289KiB /usr/share/locale/pt/LC_MESSAGES/binutils.mo
 -rw-r--r--   350KiB /usr/share/locale/pt/LC_MESSAGES/coreutils.mo
@@ -17768,7 +18105,7 @@
 -rw-r--r--    62KiB /usr/share/locale/pt/LC_MESSAGES/tar.mo
 -rw-r--r--   475KiB /usr/share/locale/pt/LC_MESSAGES/util-linux.mo
 -rw-r--r--   9.5KiB /usr/share/locale/pt_BR/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   160KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
+-rw-r--r--   170KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
 -rw-r--r--   366KiB /usr/share/locale/pt_BR/LC_MESSAGES/coreutils.mo
 -rw-r--r--    25KiB /usr/share/locale/pt_BR/LC_MESSAGES/cpplib.mo
 -rw-r--r--   1.9KiB /usr/share/locale/pt_BR/LC_MESSAGES/cracklib.mo
@@ -17792,7 +18129,7 @@
 -rw-r--r--   484KiB /usr/share/locale/pt_BR/LC_MESSAGES/util-linux.mo
 -rw-r--r--   477KiB /usr/share/locale/pt_PT/LC_MESSAGES/git.mo
 -rw-r--r--     534B /usr/share/locale/ro/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    14KiB /usr/share/locale/ro/LC_MESSAGES/bash.mo
+-rw-r--r--   186KiB /usr/share/locale/ro/LC_MESSAGES/bash.mo
 -rw-r--r--    16KiB /usr/share/locale/ro/LC_MESSAGES/bfd.mo
 -rw-r--r--    13KiB /usr/share/locale/ro/LC_MESSAGES/binutils.mo
 -rw-r--r--    47KiB /usr/share/locale/ro/LC_MESSAGES/coreutils.mo
@@ -17810,7 +18147,7 @@
 -rw-r--r--    19KiB /usr/share/locale/ro/LC_MESSAGES/shadow.mo
 -rw-r--r--    64KiB /usr/share/locale/ro/LC_MESSAGES/tar.mo
 -rw-r--r--    13KiB /usr/share/locale/ru/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   123KiB /usr/share/locale/ru/LC_MESSAGES/bash.mo
+-rw-r--r--   126KiB /usr/share/locale/ru/LC_MESSAGES/bash.mo
 -rw-r--r--   275KiB /usr/share/locale/ru/LC_MESSAGES/bfd.mo
 -rw-r--r--   334KiB /usr/share/locale/ru/LC_MESSAGES/binutils.mo
 -rw-r--r--   470KiB /usr/share/locale/ru/LC_MESSAGES/coreutils.mo
@@ -17849,7 +18186,7 @@
 -rw-r--r--     552B /usr/share/locale/si/LC_MESSAGES/libdnf.mo
 -rw-r--r--     729B /usr/share/locale/si/LC_MESSAGES/libpwquality.mo
 -rw-r--r--   9.7KiB /usr/share/locale/sk/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    83KiB /usr/share/locale/sk/LC_MESSAGES/bash.mo
+-rw-r--r--    82KiB /usr/share/locale/sk/LC_MESSAGES/bash.mo
 -rw-r--r--   147KiB /usr/share/locale/sk/LC_MESSAGES/binutils.mo
 -rw-r--r--    69KiB /usr/share/locale/sk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/sk/LC_MESSAGES/cracklib.mo
@@ -17867,7 +18204,7 @@
 -rw-r--r--    43KiB /usr/share/locale/sk/LC_MESSAGES/shadow.mo
 -rw-r--r--    11KiB /usr/share/locale/sk/LC_MESSAGES/tar.mo
 -rw-r--r--     546B /usr/share/locale/sl/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--    81KiB /usr/share/locale/sl/LC_MESSAGES/bash.mo
+-rw-r--r--    79KiB /usr/share/locale/sl/LC_MESSAGES/bash.mo
 -rw-r--r--   303KiB /usr/share/locale/sl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    34KiB /usr/share/locale/sl/LC_MESSAGES/findutils.mo
 -rw-r--r--   133KiB /usr/share/locale/sl/LC_MESSAGES/glib20.mo
@@ -17888,7 +18225,7 @@
 -rw-r--r--     485B /usr/share/locale/sq/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   1.1KiB /usr/share/locale/sq/LC_MESSAGES/shadow.mo
 -rw-r--r--   8.9KiB /usr/share/locale/sr/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   201KiB /usr/share/locale/sr/LC_MESSAGES/bash.mo
+-rw-r--r--   228KiB /usr/share/locale/sr/LC_MESSAGES/bash.mo
 -rw-r--r--   274KiB /usr/share/locale/sr/LC_MESSAGES/bfd.mo
 -rw-r--r--   364KiB /usr/share/locale/sr/LC_MESSAGES/binutils.mo
 -rw-r--r--   394KiB /usr/share/locale/sr/LC_MESSAGES/coreutils.mo
@@ -17920,7 +18257,7 @@
 -rw-r--r--     574B /usr/share/locale/sr@latin/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    45KiB /usr/share/locale/sr@latin/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.6KiB /usr/share/locale/sv/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   154KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
+-rw-r--r--   173KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
 -rw-r--r--   152KiB /usr/share/locale/sv/LC_MESSAGES/bfd.mo
 -rw-r--r--   290KiB /usr/share/locale/sv/LC_MESSAGES/binutils.mo
 -rw-r--r--   348KiB /usr/share/locale/sv/LC_MESSAGES/coreutils.mo
@@ -17930,7 +18267,7 @@
 -rw-r--r--    34KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
 -rw-r--r--   513KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--   1.9MiB /usr/share/locale/sv/LC_MESSAGES/gcc.mo
--rw-r--r--   598KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
+-rw-r--r--   613KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
 -rw-r--r--   132KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
@@ -17976,7 +18313,7 @@
 -rw-r--r--    18KiB /usr/share/locale/tl/LC_MESSAGES/glib20.mo
 -rw-r--r--    19KiB /usr/share/locale/tl/LC_MESSAGES/shadow.mo
 -rw-r--r--   9.6KiB /usr/share/locale/tr/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   124KiB /usr/share/locale/tr/LC_MESSAGES/bash.mo
+-rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/bash.mo
 -rw-r--r--    68KiB /usr/share/locale/tr/LC_MESSAGES/bfd.mo
 -rw-r--r--   127KiB /usr/share/locale/tr/LC_MESSAGES/binutils.mo
 -rw-r--r--   140KiB /usr/share/locale/tr/LC_MESSAGES/coreutils.mo
@@ -17986,7 +18323,7 @@
 -rw-r--r--    33KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
 -rw-r--r--   249KiB /usr/share/locale/tr/LC_MESSAGES/gas.mo
 -rw-r--r--   243KiB /usr/share/locale/tr/LC_MESSAGES/gcc.mo
--rw-r--r--   617KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
+-rw-r--r--   631KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
 -rw-r--r--   134KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
 -rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/tr/LC_MESSAGES/gprof.mo
@@ -18006,7 +18343,7 @@
 -rw-r--r--   7.0KiB /usr/share/locale/tt/LC_MESSAGES/glib20.mo
 -rw-r--r--   122KiB /usr/share/locale/ug/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   205KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
+-rw-r--r--   232KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
 -rw-r--r--   284KiB /usr/share/locale/uk/LC_MESSAGES/bfd.mo
 -rw-r--r--   374KiB /usr/share/locale/uk/LC_MESSAGES/binutils.mo
 -rw-r--r--   462KiB /usr/share/locale/uk/LC_MESSAGES/coreutils.mo
@@ -18040,7 +18377,7 @@
 -rw-r--r--     415B /usr/share/locale/ur/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.1KiB /usr/share/locale/ur/LC_MESSAGES/libpwquality.mo
 -rw-r--r--   7.2KiB /usr/share/locale/vi/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   136KiB /usr/share/locale/vi/LC_MESSAGES/bash.mo
+-rw-r--r--   131KiB /usr/share/locale/vi/LC_MESSAGES/bash.mo
 -rw-r--r--   157KiB /usr/share/locale/vi/LC_MESSAGES/bfd.mo
 -rw-r--r--   206KiB /usr/share/locale/vi/LC_MESSAGES/binutils.mo
 -rw-r--r--   368KiB /usr/share/locale/vi/LC_MESSAGES/coreutils.mo
@@ -18073,7 +18410,7 @@
 -rw-r--r--    16KiB /usr/share/locale/yi/LC_MESSAGES/glib20.mo
 -rw-r--r--     392B /usr/share/locale/yo/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   8.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   145KiB /usr/share/locale/zh_CN/LC_MESSAGES/bash.mo
+-rw-r--r--   167KiB /usr/share/locale/zh_CN/LC_MESSAGES/bash.mo
 -rw-r--r--    18KiB /usr/share/locale/zh_CN/LC_MESSAGES/bfd.mo
 -rw-r--r--    91KiB /usr/share/locale/zh_CN/LC_MESSAGES/binutils.mo
 -rw-r--r--   289KiB /usr/share/locale/zh_CN/LC_MESSAGES/coreutils.mo
@@ -18083,7 +18420,7 @@
 -rw-r--r--    32KiB /usr/share/locale/zh_CN/LC_MESSAGES/findutils.mo
 -rw-r--r--   3.8KiB /usr/share/locale/zh_CN/LC_MESSAGES/gas.mo
 -rw-r--r--   435KiB /usr/share/locale/zh_CN/LC_MESSAGES/gcc.mo
--rw-r--r--   567KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
+-rw-r--r--   581KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
 -rw-r--r--   123KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
 -rw-r--r--   215KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    22KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnutls.mo
@@ -18106,7 +18443,7 @@
 -rw-r--r--    93KiB /usr/share/locale/zh_HK/LC_MESSAGES/glib20.mo
 -rw-r--r--     495B /usr/share/locale/zh_HK/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   8.9KiB /usr/share/locale/zh_TW/LC_MESSAGES/Linux-PAM.mo
--rw-r--r--   146KiB /usr/share/locale/zh_TW/LC_MESSAGES/bash.mo
+-rw-r--r--   165KiB /usr/share/locale/zh_TW/LC_MESSAGES/bash.mo
 -rw-r--r--    86KiB /usr/share/locale/zh_TW/LC_MESSAGES/binutils.mo
 -rw-r--r--   322KiB /usr/share/locale/zh_TW/LC_MESSAGES/coreutils.mo
 -rw-r--r--    22KiB /usr/share/locale/zh_TW/LC_MESSAGES/cpplib.mo
@@ -18114,7 +18451,7 @@
 -rw-r--r--    72KiB /usr/share/locale/zh_TW/LC_MESSAGES/dnf.mo
 -rw-r--r--    19KiB /usr/share/locale/zh_TW/LC_MESSAGES/findutils.mo
 -rw-r--r--   222KiB /usr/share/locale/zh_TW/LC_MESSAGES/gcc.mo
--rw-r--r--   569KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
+-rw-r--r--   582KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
 -rw-r--r--   121KiB /usr/share/locale/zh_TW/LC_MESSAGES/glib20.mo
 -rw-r--r--   171KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    17KiB /usr/share/locale/zh_TW/LC_MESSAGES/grep.mo
@@ -18134,6 +18471,7 @@
 -rw-r--r--     697B /usr/share/locale/zu/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    15KiB /usr/share/man/man1/objcopy.1.gz
 -rw-r--r--   3.1KiB /usr/share/man/man1/ssh-copy-id.1.gz
+-rw-r--r--     819B /usr/share/man/man1/zipnote.1.gz
 -rw-r--r--   1.2MiB /usr/share/misc/magic
 -rw-r--r--   6.4MiB /usr/share/misc/magic.mgc
 -rw-r--r--     902B /usr/share/p11-kit/modules/p11-kit-trust.module
@@ -20083,6 +20421,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
+-rw-r--r--   836KiB /usr/src/annobin/latest-annobin.tar.xz
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
@@ -20093,7 +20432,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.0MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog
@@ -20176,6 +20515,10 @@ lrwxrwxrwx      34B /usr/lib/gcc/aarch64-amazon-linux/11/libasan.so ../../../../
 lrwxrwxrwx      36B /usr/lib/gcc/aarch64-amazon-linux/11/libatomic.so ../../../../lib64/libatomic.so.1.2.0
 lrwxrwxrwx      34B /usr/lib/gcc/aarch64-amazon-linux/11/libgomp.so ../../../../lib64/libgomp.so.1.0.0
 lrwxrwxrwx      35B /usr/lib/gcc/aarch64-amazon-linux/11/libubsan.so ../../../../lib64/libubsan.so.1.0.0
+lrwxrwxrwx      16B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so annobin.so.0.0.0
+lrwxrwxrwx      16B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so.0 annobin.so.0.0.0
+lrwxrwxrwx       6B /usr/lib/rpm/amazon redhat
+lrwxrwxrwx      42B /usr/lib/rpm/redhat/redhat-annobin-cc1 redhat-annobin-select-annobin-built-plugin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
 lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
 lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
@@ -20220,7 +20563,7 @@ lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.187.so
 lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.187.so
-lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.8.7
+lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0
@@ -20255,7 +20598,7 @@ lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.9
 lrwxrwxrwx      14B /usr/lib64/libkrad.so.0 libkrad.so.0.0
 lrwxrwxrwx      14B /usr/lib64/libkrb5.so.3 libkrb5.so.3.3
 lrwxrwxrwx      21B /usr/lib64/libkrb5support.so.0 libkrb5support.so.0.1
-lrwxrwxrwx      17B /usr/lib64/libksba.so.8 libksba.so.8.14.0
+lrwxrwxrwx      17B /usr/lib64/libksba.so.8 libksba.so.8.14.2
 lrwxrwxrwx      21B /usr/lib64/liblber-2.4.so.2 liblber-2.4.so.2.11.5
 lrwxrwxrwx      23B /usr/lib64/libldap_r-2.4.so.2 libldap_r-2.4.so.2.11.5
 lrwxrwxrwx      16B /usr/lib64/libltdl.so.7 libltdl.so.7.3.2
@@ -20317,7 +20660,7 @@ lrwxrwxrwx      21B /usr/lib64/libunistring.so.2 libunistring.so.2.1.0
 lrwxrwxrwx      20B /usr/lib64/libutempter.so.0 libutempter.so.1.2.1
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
-lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.9.14
+lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.3
 lrwxrwxrwx      18B /usr/lib64/libyaml-0.so.2 libyaml-0.so.2.0.9
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
 lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.2
@@ -20368,6 +20711,7 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-credential-cache ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-credential-cache--daemon ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-credential-store ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-describe ../../bin/git
+lrwxrwxrwx      13B /usr/libexec/git-core/git-diagnose ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-files ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-index ../../bin/git
@@ -20471,9 +20815,11 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-var ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-verify-commit ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-verify-pack ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-verify-tag ../../bin/git
+lrwxrwxrwx      13B /usr/libexec/git-core/git-version ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-whatchanged ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-worktree ../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-write-tree ../../bin/git
+lrwxrwxrwx      16B /usr/libexec/git-core/scalar ../../bin/scalar
 lrwxrwxrwx       7B /usr/sbin/adduser useradd
 lrwxrwxrwx       7B /usr/sbin/clock hwclock
 lrwxrwxrwx      12B /usr/sbin/update-alternatives alternatives

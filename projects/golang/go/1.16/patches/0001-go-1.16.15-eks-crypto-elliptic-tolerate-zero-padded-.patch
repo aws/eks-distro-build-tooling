@@ -1,15 +1,14 @@
-From 9161430bd1a1d7bc38c2a901c1134133c3cce153 Mon Sep 17 00:00:00 2001
+From 4f61340e1ded29332180a68a46b670271837275c Mon Sep 17 00:00:00 2001
 From: Filippo Valsorda <filippo@golang.org>
 Date: Thu, 31 Mar 2022 12:31:58 -0400
-Subject: [PATCH 03/16] crypto/elliptic: tolerate zero-padded scalars in
- generic P-256
+Subject: [PATCH] [go-1.16.15-eks] crypto/elliptic: tolerate zero-padded
+ scalars in generic P-256
 
 # AWS EKS
 Backported To: go-1.16.15-eks
 Backported On: Tue, 04 Oct 2022
 Backported By: budris@amazon.com
 Backported From: release-branch.go1.17
-EKS Patch Source Commit: https://github.com/danbudris/go/commit/9161430bd1a1d7bc38c2a901c1134133c3cce153
 Upstream Source Commit: https://github.com/golang/go/commit/37065847d87df92b5eb246c88ba2085efcf0b331
 
 # Original Information
@@ -71,5 +70,5 @@ index 0000000000..1ced90e524
 +	}
 +}
 -- 
-2.30.1 (Apple Git-130)
+2.38.1
 

@@ -19,6 +19,7 @@ set -o pipefail
 set -x
 
 REPO="$1"
+PR_BRANCH="${2:-image-tag-update}"
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -34,11 +35,9 @@ fi
 
 cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 
-PR_BRANCH="image-tag-update"
-
 gh auth login --with-token < /secrets/github-secrets/token
 
-PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
+PR_EXISTS=$(gh pr list -H "${PR_BRANCH}" || true)
 if [ $PR_EXISTS -eq 1 ]; then
     echo "There is an existing PR already open, please merge/close before building new images!"
     exit 1

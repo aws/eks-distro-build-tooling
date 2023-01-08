@@ -44,15 +44,7 @@ function setup_kubeconfig_in_pod() {
     kubectl config use-context cfc
 }
 
-if ! docker buildx version > /dev/null 2>&1; then
-    # TODO move to builder base
-    mkdir -p ~/.docker/cli-plugins
-    curl -L https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx  
-    chmod a+x ~/.docker/cli-plugins/docker-buildx    
-fi
-
 docker buildx version
-# CREATE_BUILDER_PODS=true
 
 if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
     # in postsubmit we create builders for both amd and arm since buildx doesnt support
@@ -68,6 +60,12 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
 
         kubectl get pods -n buildkit-orchestration
         kubectl get deployments -n buildkit-orchestration
+
+        # created buildkit are destroyed in a trap at the end of the prow job
+        # in the case where jobs are evicted or otherwise crash where the trap does
+        # not fire, they can be left around. cleanup any instances older than 1 day
+        # https://stackoverflow.com/a/53989428 - match the 5 column which is the age against a nuber folloed by "d"
+        kubectl delete deployments -n buildkit-orchestration $(kubectl get deployments -n buildkit-orchestration | awk 'match($5,/[0-9]+d/) {print $1}')
 
         docker buildx create \
             --bootstrap \

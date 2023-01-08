@@ -1,4 +1,4 @@
-From 817407fc2d6a861e65086388766f58082d38bc0b Mon Sep 17 00:00:00 2001
+From dfb103ce39379bd70db1c98972f70edaf8b66ed1 Mon Sep 17 00:00:00 2001
 From: Michael Munday <munday@ca.ibm.com>
 Date: Tue, 17 Jan 2017 11:33:38 -0500
 Subject: [PATCH 2/3] syscall: expose IfInfomsg.X__ifi_pad on s390x
@@ -14,7 +14,7 @@ Change-Id: I08e8e1eb705f898cd8822f8bee0d61ce11d514b5
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/src/syscall/ztypes_linux_s390x.go b/src/syscall/ztypes_linux_s390x.go
-index 63c4a83b19..b5894255df 100644
+index 91f5ceff20..59a8b1fccd 100644
 --- a/src/syscall/ztypes_linux_s390x.go
 +++ b/src/syscall/ztypes_linux_s390x.go
 @@ -449,12 +449,12 @@ type RtAttr struct {
@@ -37,5 +37,5 @@ index 63c4a83b19..b5894255df 100644
  
  type IfAddrmsg struct {
 -- 
-2.14.3
+2.38.1
 

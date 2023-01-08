@@ -22,9 +22,14 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 IMAGE_TAG=$1
 IMAGE_NAME=$2
 AL_TAG=$3
+PR_BRANCH="$4"
+
+if [ "$AL_TAG" != "windows" ]; then
+    AL_TAG="al$AL_TAG"
+fi
 
 OLD_TAG="$(yq e ".al$AL_TAG.\"$IMAGE_NAME\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 BASE_IMAGE_TAG_FILE="$(echo ${IMAGE_NAME^^} | sed 's/[\.-]/_/g')_TAG_FILE"
 
-${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling
-${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-build-tooling $OLD_TAG ".al$AL_TAG.\"$IMAGE_NAME\" |= \"$IMAGE_TAG\"" "EKS_DISTRO_TAG_FILE.yaml" true
+${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh eks-distro-build-tooling $PR_BRANCH
+${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh eks-distro-build-tooling $OLD_TAG ".$AL_TAG.\"$IMAGE_NAME\" |= \"$IMAGE_TAG\"" "EKS_DISTRO_TAG_FILE.yaml" true

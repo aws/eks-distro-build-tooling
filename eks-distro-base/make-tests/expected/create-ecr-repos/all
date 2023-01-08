@@ -221,6 +221,38 @@ cmd=( ecr ); \
 	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
 		cmd=( ecr-public --region us-east-1 ); \
 	fi; \
+	repo=eks-distro-minimal-base-nodejs; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=eks-distro-minimal-base-nodejs-builder; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=eks-distro-minimal-base-nodejs-compiler; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=eks-distro-minimal-base-nodejs-compiler-builder; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
 	repo=compiler-base; \
 	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
 		aws ${cmd[*]} create-repository --repository-name "$repo"; \
@@ -246,6 +278,30 @@ cmd=( ecr ); \
 		cmd=( ecr-public --region us-east-1 ); \
 	fi; \
 	repo=golang-builder; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=nodejs; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=nodejs-builder; \
+	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
+		aws ${cmd[*]} create-repository --repository-name "$repo"; \
+	fi;
+cmd=( ecr ); \
+	if [[ "localhost:5000" =~ ^public\.ecr\.aws/ ]]; then \
+		cmd=( ecr-public --region us-east-1 ); \
+	fi; \
+	repo=eks-distro-windows-base; \
 	if ! aws ${cmd[*]} describe-repositories --repository-name "$repo" > /dev/null 2>&1; then \
 		aws ${cmd[*]} create-repository --repository-name "$repo"; \
 	fi;

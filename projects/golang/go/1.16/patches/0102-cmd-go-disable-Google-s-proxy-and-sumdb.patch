@@ -1,4 +1,4 @@
-From add9fe5182c06afdaeeaa7f098f7dd4f64efee1f Mon Sep 17 00:00:00 2001
+From e48e8d29fb505b9b12613d225185ab53407d542f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Mon, 27 May 2019 15:12:53 +0200
 Subject: [PATCH 02/16] cmd/go: disable Google's proxy and sumdb
@@ -50,5 +50,5 @@ index cc0b0da474..b50689e209 100644
  # Download direct from github.
  [!net] skip
 -- 
-2.30.1 (Apple Git-130)
+2.38.1
 
