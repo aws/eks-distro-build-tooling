@@ -122,13 +122,32 @@ tar-golang-sources:
 generate-golang-checksum: generate-rpm-checksum generate-archive-checksum
 
 .PHONY: generate-rpm-checksum
-generate-rpm-checksum:
-	mkdir -p $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)
-	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && find . \( -not -name . \) -type f -exec cat {} + | sha256sum > $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER)_RPM_CHECKSUM
+generate-rpm-checksum: generate-rpm-arch-checksum generate-rpm-nonarch-checksum
+
+generate-rpm-arch-checksum:
+	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
+	for file in $(find . -type f -name 'golang-*.rpm'); do \
+    	filePath=${file%/*} ; \
+		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
+	done
+
+generate-rpm-nonarch-checksum:
+	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
+	for file in $(find . -type f -name 'golang-*.rpm'); do \
+    	filePath=${file%/*} ; \
+		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
+	done
 
 .PHONY: generate-archive-checksum
 generate-archive-checksum:
-	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && sha256sum $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz > $(VERSION_DIRECTORY)/checksums/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER)_ARCHIVE_CHECKSUM
+	cd (VERSION_DIRECTORY)/archives
+	for file in $(find . -type f -name '*.tar.gz'); do \
+    	filePath=${file%/*} ; \
+		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
+	done
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
