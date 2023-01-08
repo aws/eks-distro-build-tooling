@@ -147,7 +147,8 @@ generate-rpm-arch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
 	for file in $(find . -type f -name 'golang-*.rpm'); do \
     	filePath=${file%/*} ; \
-		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		fileBase=${file##*/} ; \
+		fileName=${fileBase%.*} ; \
 		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
 	done
 
@@ -155,7 +156,8 @@ generate-rpm-nonarch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
 	for file in $(find . -type f -name 'golang-*.rpm'); do \
     	filePath=${file%/*} ; \
-		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		fileBase=${file##*/} ; \
+		fileName=${fileBase%.*} ; \
 		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
 	done
 
@@ -164,7 +166,8 @@ generate-archive-checksum:
 	cd (VERSION_DIRECTORY)/archives
 	for file in $(find . -type f -name '*.tar.gz'); do \
     	filePath=${file%/*} ; \
-		fileName=$(basename $file | sed -r "s/.+\/(.+)\..+/\1/") ; \
+		fileBase=${file##*/} ; \
+		fileName=${fileBase%.*} ; \
 		sha256sum $file > "${filePath}/${fileName}.sha256" ; \
 	done
 
