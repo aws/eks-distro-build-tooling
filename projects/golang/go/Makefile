@@ -163,7 +163,7 @@ generate-rpm-nonarch-checksum:
 
 .PHONY: generate-archive-checksum
 generate-archive-checksum:
-	cd (VERSION_DIRECTORY)/archives
+	cd $(VERSION_DIRECTORY)/archives
 	for file in $(find . -type f -name '*.tar.gz'); do \
     	filePath=${file%/*} ; \
 		fileBase=${file##*/} ; \
