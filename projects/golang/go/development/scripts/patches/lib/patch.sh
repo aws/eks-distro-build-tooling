@@ -19,65 +19,47 @@ set -x
 
 GOLANG_GIT_URL="https://github.com/golang/go.git"
 
-function clone_golang {
-  local golang_dir=$1
-  if [ ! "$(ls -A "$golang_dir")" ]; then
-    echo "Golang repo expected at $golang_dir but was not found. Cloning..."
-    git clone "$GOLANG_GIT_URL" "$golang_dir" --origin upstream
-  fi
-}
-
-function check_dirty {
-  local golang_dir=$1
-  pushd "$golang_dir"
-  if ! git diff-index --quiet HEAD --; then
-    echo "Local $golang_dir repository is in a dirty state. Stash, commit, or reset in-progress work."
-    popd
-    return 1
-  fi
-  popd
-}
-
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+# Arg 2:  absolute path to the root directory of the locally cloned Golang repo
 function apply_cve_patches {
   local version_dir=$1
   local golang_dir=$2
 
-  local git_tag
-  git_tag="$(get_golang_git_tag "${version_dir}")"
-
-  echo "Checking out $git_tag in $golang_dir"
-  checkout_golang "$git_tag" "$golang_dir"
-  echo "$git_tag checked out!"
-
-  echo "Applying patches in $version_dir to $golang_dir..."
+  echo "Applying *CVE* patches in $version_dir to $golang_dir..."
   if apply_patches "$version_dir" "$golang_dir" "true"; then
-    echo "All patches succeeded!"
-    echo "HEAD is at the last successful patch."
+    echo "All *CVE* patches succeeded!"
+    echo "HEAD is at the last successful *CVE* patch."
     return 0
   fi
-  echo "A patch failed!"
-  echo "HEAD is at the last successful patch."
+  echo "A *CVE* patch failed to apply"
+  echo "HEAD is at the last successful *CVE* patch."
   return 1
 }
 
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+# Arg 2:  absolute path to the root directory of the locally cloned Golang repo
 function apply_other_patches {
   local version_dir=$1
   local golang_dir=$2
 
-  echo "Assuming previous patches are already applied in $golang_dir"
+  echo "Assuming CVE patches, if they exist, are already applied in $golang_dir"
 
-  echo "Applying patches in $version_dir to $golang_dir..."
+  echo "Applying *other* patches in $version_dir to $golang_dir..."
   if apply_patches "$version_dir" "$golang_dir" "false"; then
-    echo "All patches succeeded!"
-    echo "HEAD is at the last successful patch."
+    echo "All *other* patches succeeded!"
+    echo "HEAD is at the last successful *other* patch."
     return 0
   fi
 
-  echo "A patch failed!"
-  echo "HEAD is at the last successful patch."
+  echo "An *other* patch failed to apply"
+  echo "HEAD is at the last successful *other* patch."
   return 1
 }
 
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+# Arg 2:  absolute path to the root directory of the locally cloned Golang repo
+# Arg 3:  must be "true" if the applied patches are CVE patches. All other values indicate that the
+#         patches are not CVE patches.
 function apply_patches {
   local version_dir=$1
   local golang_dir=$2
@@ -88,7 +70,7 @@ function apply_patches {
   pushd "$golang_dir"
 
   if [[ -n "$(ls "$version_dir")" ]]; then
-    patches=$(get_patches "${version_dir}" "${is_apply_for_cve_patches}")
+    patches=$(_get_patches "${version_dir}" "${is_apply_for_cve_patches}")
     echo "Patches to apply: ${patches}"
     for file in ${patches}; do
       if git am <"$file"; then
@@ -107,7 +89,12 @@ function apply_patches {
   popd
 }
 
-function get_patches {
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+# Arg 2:  should be "true" if the applied patches are CVE patches. All other values indicate that
+#         the patches are not CVE patches.
+#
+# Returns:  names of patch files
+function _get_patches {
   local version_dir=$1
   local is_apply_for_cve_patches_string=$2
 
@@ -117,7 +104,7 @@ function get_patches {
   fi
 
   local file_name_regex
-  file_name_regex="^.*[0-9]{4}-$(get_eks_go_id "$version_dir")-.*\.patch$"
+  file_name_regex="^.*[0-9]{4}-$(get_eks_go_git_tag "$version_dir")-.*\.patch$"
   local is_match
 
   declare -a patches
@@ -135,32 +122,57 @@ function get_patches {
   echo "${patches[@]}"
 }
 
-function checkout_golang {
-  local git_tag=$1
+# Arg 1:  absolute path to the root directory of where the Golang repo is locally cloned or will be
+#         locally cloned if it is not already
+function clone_golang {
+  local golang_dir=$1
+  if [ ! "$(ls -A "$golang_dir")" ]; then
+    echo "Golang repo expected at $golang_dir but was not found. Cloning..."
+    git clone "$GOLANG_GIT_URL" "$golang_dir" --origin upstream
+  fi
+}
+
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+# Arg 2:  absolute path to the root directory of the locally cloned Golang repo
+function checkout_golang_at_git_tag {
+  local version_dir=$1
   local golang_dir=$2
 
   pushd "$golang_dir"
+  if ! git diff-index --quiet HEAD --; then
+    echo "Local $golang_dir repository is in a dirty state. Stash, commit, or reset in-progress work."
+    popd
+    return 1
+  fi
 
   if ! git config remote.upstream.url >/dev/null; then
     git remote add upstream "$GOLANG_GIT_URL"
   fi
-
   git fetch upstream --tags -f
-  git checkout tags/"$git_tag"
 
+  local git_tag
+  git_tag="$(get_golang_git_tag "${version_dir}")"
+
+  echo "Checking out $git_tag in $golang_dir"
+  git checkout tags/"$git_tag"
+  echo "$git_tag checked out!"
   popd
 }
 
-function get_eks_go_id {
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+#
+# Returns:  EKS Go git tag, e.g. go-1.17.13-eks
+function get_eks_go_git_tag {
   local version_dir=$1
 
   local golang_git_tag
   golang_git_tag=$(get_golang_git_tag "$version_dir")
-
   echo "${golang_git_tag//go/go-}-eks"
 }
 
-# TODO: rename func
+# Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
+#
+# Returns:  EKS Go git tag, e.g. go1.17.13
 function get_golang_git_tag {
   local version_dir=$1
 

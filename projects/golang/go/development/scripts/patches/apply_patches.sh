@@ -20,13 +20,25 @@ set -e
 set -o pipefail
 set -x
 
+# * VERSION_DIR:  absolute path to the Golang minor version directory under this repo's projects/golang/go,
+#                 e.g. ~/go/eks-distro-build-tooling/projects/golang/go/1.16
+#
+# * GOLANG_DIR:   the absolute path to the root directory of the Golang repo, which must be cloned locally,
+#                 must be up-to-date with upstream, and must not be "dirty".
+#
+# * APPLY_CVE_PATCHES:  "true" if CVE patches should be applied. All other values are interpreted as "false".
+#                        Minor versions supported by upstream are not presumed to have any CVE patches. CVE
+#                        patch files must start with ####-go-1.XX.YY-eks-..., with 1.XX.YY the Go version.
+#
+# * APPLY_OTHER_PATCHES:  "true" if non-CVE patches should be applied. All other values are interpreted as
+#                         "false". Other patch files must NOT include the Golang version at the start.
 VERSION_DIR=$(realpath "$1")
 GOLANG_DIR=$(realpath "$2")
 APPLY_CVE_PATCHES="${3:-true}"
 APPLY_OTHER_PATCHES="${4:-true}"
 
 clone_golang "$GOLANG_DIR"
-check_dirty "$GOLANG_DIR"
+checkout_golang_at_git_tag "$VERSION_DIR" "$GOLANG_DIR"
 
 if [ "$APPLY_CVE_PATCHES" = "true" ]; then
   apply_cve_patches "$VERSION_DIR" "$GOLANG_DIR"
