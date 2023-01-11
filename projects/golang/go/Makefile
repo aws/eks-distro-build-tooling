@@ -52,7 +52,7 @@ ifeq ($(ARCHITECTURE), AMD64)
 endif
 
 .PHONY: golang-build
-golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test
+golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
 build: golang-build sync-artifacts-to-s3-dry-run local-images
@@ -136,6 +136,33 @@ extract-golang-rpm:
 tar-golang-sources:
 	mkdir -p $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)
 	cd /tmp/go-extracted/usr/lib/golang && rm -rf ./pkg/obj && tar czf $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz .
+
+.PHONY: generate-golang-checksum
+generate-golang-checksum: generate-rpm-checksum generate-archive-checksum
+
+.PHONY: generate-rpm-checksum
+generate-rpm-checksum: generate-rpm-arch-checksum generate-rpm-nonarch-checksum
+
+.PHONY: generate-rpm-arch-checksum
+generate-rpm-arch-checksum:
+	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
+	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+	done
+
+.PHONY: generate-rpm-nonarch-checksum
+generate-rpm-nonarch-checksum:
+	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
+	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+	done
+
+.PHONY: generate-archive-checksum
+generate-archive-checksum:
+	cd $(VERSION_DIRECTORY)/archives
+	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+	done
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env-release
