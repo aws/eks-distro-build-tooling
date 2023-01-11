@@ -146,7 +146,7 @@ generate-rpm-checksum: generate-rpm-arch-checksum generate-rpm-nonarch-checksum
 .PHONY: generate-rpm-arch-checksum
 generate-rpm-arch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
-	for fileDir in $$(find . -type f -name "golang-*.rpm") ; do \
+	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
 		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
 	done
 
