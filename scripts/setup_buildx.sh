@@ -65,7 +65,10 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
         # in the case where jobs are evicted or otherwise crash where the trap does
         # not fire, they can be left around. cleanup any instances older than 1 day
         # https://stackoverflow.com/a/53989428 - match the 5 column which is the age against a nuber folloed by "d"
-        kubectl delete deployments -n buildkit-orchestration $(kubectl get deployments -n buildkit-orchestration | awk 'match($5,/[0-9]+d/) {print $1}')
+        DEPLOYMENTS=$(kubectl get deployments -n buildkit-orchestration | awk 'match($5,/[0-9]+d/) {printf $1" "}')
+        if [ -n "$DEPLOYMENTS" ]; then
+            kubectl delete deployments -n buildkit-orchestration $DEPLOYMENTS
+        fi
 
         docker buildx create \
             --bootstrap \
