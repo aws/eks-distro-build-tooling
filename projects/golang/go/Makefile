@@ -159,7 +159,7 @@ generate-rpm-nonarch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
 	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
     	filePath=$${fileDir%/*} ; \
-		fileBase=$${file##*/} ; \
+		fileBase=$${fileDir##*/} ; \
 		fileName=$${fileBase%.*} ; \
 		targetDir="$${filePath}/$${fileName}.sha256" ; \
 		sha256sum $${fileDir} > $${targetDir} ; \
@@ -170,7 +170,7 @@ generate-archive-checksum:
 	cd $(VERSION_DIRECTORY)/archives
 	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
     	filePath=$${fileDir%/*} ; \
-		fileBase=$${file##*/} ; \
+		fileBase=$${fileDir##*/} ; \
 		fileName=$${fileBase%.*} ; \
 		targetDir="$${filePath}/$${fileName}.sha256" ; \
 		sha256sum $${fileDir} > $${targetDir} ; \
