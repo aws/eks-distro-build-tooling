@@ -2,7 +2,7 @@
 
 Current Release: `1`
 
-Tracking Tag: `go1.18.9`
+Tracking Tag: `go1.18.10`
 
 Artifacts: https://distro.eks.amazonaws.com/golang-go1.18/releases/1/RPMS
 
