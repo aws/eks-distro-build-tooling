@@ -37,8 +37,8 @@ cd ${SCRIPT_ROOT}/../../../${ORIGIN_ORG}/${REPO}
 
 gh auth login --with-token < /secrets/github-secrets/token
 
-PR_EXISTS=$(gh pr list -H "${PR_BRANCH}" || true)
-if [ $PR_EXISTS -eq 1 ]; then
+PR_EXISTS=$(GH_PAGER='' gh pr list --json number -H "${PR_BRANCH}")
+if [ "$PR_EXISTS" != "[]" ]; then
     echo "There is an existing PR already open, please merge/close before building new images!"
     exit 1
 fi
