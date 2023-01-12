@@ -108,7 +108,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.19
 #global go_prerelease rc2
-%global go_patch 4
+%global go_patch 5
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -536,6 +536,9 @@ fi
 %endif
 
 %changelog
+* Wed Jan 11 2023 Daniel Budris <budris@amazon.com> - 1.19.5-1
+- Bump tracking patch version to 1.19.5 from 1.19.4
+
 * Wed Oct 26 2022 Daniel Budris <budris@amazon.com> - 1.19.2-1
 - Adapt to EKS Go release string convention
 - Adapt patch ordering to EKS Go convention
