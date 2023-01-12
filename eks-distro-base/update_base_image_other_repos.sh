@@ -27,21 +27,22 @@ REPOS=(eks-distro eks-anywhere-build-tooling eks-anywhere)
 for repo in "${REPOS[@]}"; do
     ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh "$repo"    
 done
-
-while IFS=, read -r image
-do
-    image=${image:2} # strip leading - space
-    BASE_IMAGE_TAG_FILE="$(echo ${image^^} | tr '-' '_')_TAG_FILE"
-    IMAGE_TAG=$(yq e ".al$AL_TAG.\"$image\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
-    # we will set the tag to null to trigger new builds. we dont want PRs being open setting
-    # tag file values to null
-    if [[ "${IMAGE_TAG}" = "null" ]]; then
-        continue
-    fi
-    for repo in "${REPOS[@]}"; do
-        ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh "$repo" '.*' $IMAGE_TAG $BASE_IMAGE_TAG_FILE
-    done
-done < <(yq e ".al$AL_TAG | keys" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
+for key in "al$AL_TAG" "windows"; do
+    while IFS=, read -r image
+    do
+        image=${image:2} # strip leading - space
+        BASE_IMAGE_TAG_FILE="$(echo ${image^^} | tr '-' '_')_TAG_FILE"
+        IMAGE_TAG=$(yq e ".$key.\"$image\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
+        # we will set the tag to null to trigger new builds. we dont want PRs being open setting
+        # tag file values to null
+        if [[ "${IMAGE_TAG}" = "null" ]]; then
+            continue
+        fi
+        for repo in "${REPOS[@]}"; do
+            ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh "$repo" '.*' $IMAGE_TAG $BASE_IMAGE_TAG_FILE
+        done
+    done < <(yq e ".$key | keys" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)
+done
 
 for repo in "${REPOS[@]}"; do
    ${SCRIPT_ROOT}/../pr-scripts/create_pr.sh "$repo" 'EKS_DISTRO*_TAG_FILE'
