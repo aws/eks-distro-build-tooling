@@ -69,8 +69,23 @@ prod-release: golang-build sync-artifacts-to-s3
 prod-release-images: fetch-eks-go-archive images
 
 .PHONY: fetch-eks-go-archive
-fetch-eks-go-archive:
-	curl -L -o $(VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz https://distro.eks.amazonaws.com/golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives/$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz --create-dirs
+fetch-eks-go-archive: download-go-archive validate-go-archive-checksum
+
+.PHONY: download-go-archive
+download-go-archive:
+	curl -L -o $(VERSION_DIRECTORY)/archives/linux/amd64/go1.19.5.linux-amd64.tar.gz https://distro.eks.amazonaws.com/golang-go1.19.5/releases/1/archives/linux/amd64/go1.19.5.linux-amd64.tar.gz --create-dirs
+	curl -L -o $(VERSION_DIRECTORY)/archives/linux/amd64/go1.19.5.linux-amd64.tar.gz.sha256 https://distro.eks.amazonaws.com/golang-go1.19.5/releases/1/archives/linux/amd64/go1.19.5.linux-amd64.tar.gz.sha256 --create-dirs
+
+.PHONY: validate-go-archive-checksum
+validate-go-archive-checksum:
+	cd $(VERSION_DIRECTORY)/archives
+
+	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
+		if [[ $$(sha256sum $${fileDir} | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$${fileDir}.sha256") ]] ; then \
+			echo "Chekcsum doesn't match!" ; \
+			exit 1 ; \
+		fi ; \
+	done
 
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
