@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-BASE_DIRECTORY="$(git rev-parse --show-toplevel)/projects/golang/go/development/scripts/patches/lib/patch.sh"
-source "$BASE_DIRECTORY"
-
 set -e
 set -o pipefail
 set -x
+
+PATCHING_TOOLS="$(git rev-parse --show-toplevel)/projects/golang/go/development/scripts/patches/lib/patch.sh"
+source "$PATCHING_TOOLS"
 
 # * VERSION_DIR:  absolute path to the Golang minor version directory under this repo's projects/golang/go,
 #                 e.g. ~/go/eks-distro-build-tooling/projects/golang/go/1.16
