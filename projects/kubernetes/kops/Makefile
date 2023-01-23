@@ -6,7 +6,9 @@ KOPS_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 
 GITHUB_EMAIL?="prow@amazonaws.com"
-GITHUB_USER?="Prow Bot"
+GITHUB_USER_?="Prow Bot"
+
+GO_SOURCE_VERSION?=$(shell cat $(BASE_DIRECTORY)/projects/golang/go/1.19/GIT_TAG)
 
 .PHONY: build
 build: check-env clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries sync-artifacts-to-s3-dry-run
