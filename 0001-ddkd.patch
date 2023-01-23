@@ -1,12 +1,7 @@
 From 562c10d67fe06953953428223743a0c12ba76316 Mon Sep 17 00:00:00 2001
-From: Daniel Budris <budris@amazon.com>
+From: Kirsten Schumy <ksschumy@amazon.com>
 Date: Thu, 19 Jan 2023 15:33:41 -0800
-Subject: [PATCH] remove hardcoded requierment on flannel plugin
-
-In CNI v1.0.0 the flannel plugin was removed; so, when building EKS Distro 1.23
-or greater the plugin is not present and cannot be loaded.
-However, EKS Distro does not use the flannel plugin in any cases
-and the requirement hard-coded in kOps can be safely removed.
+Subject: [PATCH] ddkd
 
 ---
  nodeup/pkg/model/networking/common.go | 1 -
@@ -24,3 +19,6 @@ index 0f3b170fc5..e514689151 100644
  		"host-device",
  		"host-local",
  		"ipvlan",
+-- 
+2.39.0
+
