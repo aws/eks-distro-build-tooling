@@ -6,7 +6,7 @@ KOPS_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 
 GITHUB_EMAIL?="prow@amazonaws.com"
-GITHUB_USER_?="Prow Bot"
+GITHUB_USER?="Prow Bot"
 
 GO_SOURCE_VERSION?="go1.19"
 
