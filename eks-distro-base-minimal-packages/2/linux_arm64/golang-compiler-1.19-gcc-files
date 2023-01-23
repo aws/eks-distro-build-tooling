@@ -39,7 +39,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--     641B /etc/krb5.conf
+-rw-r--r--     646B /etc/krb5.conf
 -rw-r--r--    13KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
