@@ -33,7 +33,7 @@ info-5.1-5.amzn2.aarch64
 keyutils-1.5.8-3.amzn2.0.2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
-krb5-libs-1.15.1-37.amzn2.2.4.aarch64
+krb5-libs-1.15.1-55.amzn2.2.5.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
 libbasicobjects-0.1.1-29.amzn2.aarch64
@@ -103,7 +103,7 @@ rpm-libs-4.11.3-48.amzn2.0.2.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.2.aarch64
-sqlite-3.7.17-8.amzn2.1.1.aarch64
+sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
 systemd-libs-219-78.amzn2.0.21.aarch64
 systemd-sysv-219-78.amzn2.0.21.aarch64

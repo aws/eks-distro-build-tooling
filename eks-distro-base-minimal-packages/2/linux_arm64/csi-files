@@ -34,7 +34,7 @@
 -rw-r--r--     942B /etc/inputrc
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
--rw-r--r--     641B /etc/krb5.conf
+-rw-r--r--     646B /etc/krb5.conf
 -rw-r--r--    11KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
@@ -6273,7 +6273,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   6.3MiB /var/lib/rpm/Packages
--rw-r--r--    68KiB /var/lib/rpm/Providename
+-rw-r--r--    64KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5

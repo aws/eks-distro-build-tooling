@@ -33,7 +33,7 @@ gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
 kernel-headers-4.14.301-224.520.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-37.amzn2.2.4.x86_64
+krb5-libs-1.15.1-55.amzn2.2.5.x86_64
 libacl-2.2.51-14.amzn2.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
 libatomic-7.3.1-15.amzn2.x86_64
@@ -104,7 +104,7 @@ rpm-libs-4.11.3-48.amzn2.0.2.x86_64
 sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 shared-mime-info-1.8-4.amzn2.x86_64
-sqlite-3.7.17-8.amzn2.1.1.x86_64
+sqlite-3.7.17-8.amzn2.1.2.x86_64
 system-release-2-14.amzn2.x86_64
 tar-1.26-35.amzn2.x86_64
 tzdata-2022a-1.amzn2.noarch
