@@ -8,7 +8,7 @@ KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
-PATH?="/go/go1.19/bin:$(PATH)"
+export PATH="/go/go1.19/bin:$(PATH)"
 
 .PHONY: build
 build: check-env clone-kops patch-nodeup build-nodeup pull-binaries pull-images move-nodeup-binaries sync-artifacts-to-s3-dry-run
