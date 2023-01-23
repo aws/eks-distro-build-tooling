@@ -23,7 +23,8 @@ clone-kops:
 .PHONY: patch-nodeup
 patch-nodeup:
 	go version
-	echo $PATH
+	echo $(PATH)
+	echo ${PATH}
 	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
 	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
@@ -32,7 +33,8 @@ patch-nodeup:
 .PHONY: build-nodeup
 build-nodeup:
 	go version
-	echo $PATH
+	echo $(PATH)
+	echo ${PATH}
 	(cd $(CLONED_REPO_DIRECTORY) && make crossbuild-nodeup)
 
 .PHONY: pull-binaries
