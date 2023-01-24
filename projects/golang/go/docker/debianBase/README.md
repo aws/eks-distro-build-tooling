@@ -10,3 +10,6 @@ Move EKS Go archive path from `/usr/local` to `/usr/local/go`, in line with upst
 
 ### 3
 Take fixes for Go 1.16 CVE-2022-41716 patch; see https://github.com/aws/eks-distro-build-tooling/pull/728
+
+### 4
+Release for images of Go 1.19.5 and 1.18.10
