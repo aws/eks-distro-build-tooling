@@ -20,8 +20,8 @@ jobs:
           go-version: 1.18
       - uses: actions/checkout@v3
       - run: go version
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v3.4.0
         with:
           version: v3.4.0
           working-directory: 'tools/eksDistroBuildToolingOpsTools'
