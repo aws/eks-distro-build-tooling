@@ -5,6 +5,7 @@ on:
       - v*
     branches:
       - main
+      - add-gh-action-opstool
   pull_request:
 permissions:
   contents: read
