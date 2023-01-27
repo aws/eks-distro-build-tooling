@@ -8,6 +8,8 @@ on:
     paths:
       - 'tools/eksDistroBuildToolingOpsTools/**'
   pull_request:
+    paths:
+      - 'tools/eksDistroBuildToolingOpsTools/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,4 +27,3 @@ jobs:
         with:
           working-directory: 'tools/eksDistroBuildToolingOpsTools'
           files: ./coverage.txt
-          
