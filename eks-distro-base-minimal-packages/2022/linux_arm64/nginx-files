@@ -92,7 +92,7 @@
 -rwxr-xr-x    69KiB /usr/bin/base64
 -rwxr-xr-x    69KiB /usr/bin/basename
 -rwxr-xr-x    69KiB /usr/bin/basenc
--rwxr-xr-x   1.4MiB /usr/bin/bash
+-rwxr-xr-x   1.5MiB /usr/bin/bash
 -rwxr-xr-x   7.1KiB /usr/bin/bashbug-64
 -rwxr-xr-x      30B /usr/bin/bg
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
@@ -337,7 +337,7 @@
 -rwxr-xr-x    68KiB /usr/sbin/getpcaps
 -rwxr-xr-x    69KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   868KiB /usr/sbin/ldconfig
--rwxr-xr-x   1.3MiB /usr/sbin/nginx
+-rwxr-xr-x   1.5MiB /usr/sbin/nginx
 -rwxr-xr-x    68KiB /usr/sbin/setcap
 -rwxr-xr-x    69KiB /usr/sbin/zic
 -rw-r--r--    35KiB /usr/share/doc/gettext/COPYING

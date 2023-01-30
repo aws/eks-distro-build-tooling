@@ -348,12 +348,12 @@
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
--rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
+-rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x     951B /usr/lib64/libssh2.la
 -rwxr-xr-x   953KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.5
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.0
+-rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
@@ -555,7 +555,6 @@
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/libtasn1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libtasn1/COPYING.LESSER
--rw-r--r--     605B /usr/share/licenses/libtasn1/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/libunistring/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/libunistring/COPYING.LIB
 -rw-r--r--   1.9KiB /usr/share/licenses/libxcrypt/AUTHORS
@@ -2834,7 +2833,7 @@ lrwxrwxrwx      16B /usr/lib64/libssh2.so libssh2.so.1.0.1
 lrwxrwxrwx      16B /usr/lib64/libssh2.so.1 libssh2.so.1.0.1
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.5
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
-lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.0
+lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.3
