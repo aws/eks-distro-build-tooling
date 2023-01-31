@@ -38,6 +38,14 @@ function build::go::download(){
         if [ ! -f $filename ]; then
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
+
+        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 $filename.sha256
+
+        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
+			echo "Chekcsum doesn't match!" 
+			exit 1 
+		fi
+
     done
 
     if [ $arch == 'x86_64' ]; then
@@ -45,6 +53,14 @@ function build::go::download(){
         if [ ! -f $filename ]; then
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
+
+        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 $filename.sha256
+
+        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
+			echo "Chekcsum doesn't match!"
+			exit 1
+		fi
+
     fi
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
@@ -52,6 +68,14 @@ function build::go::download(){
         if [ ! -f $filename ]; then
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
         fi
+
+        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 $filename.sha256
+
+        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
+			echo "Chekcsum doesn't match!"
+			exit 1
+		fi
+
     done
 }
 
