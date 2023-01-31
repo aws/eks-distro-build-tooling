@@ -26,6 +26,7 @@ build-eks-go-tools:
 .PHONY: build-%
 build-%: unit-test
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(*) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(*)
+build-%: images-$(*)
 
 .PHONY: unit-test
 unit-test:
