@@ -81,8 +81,8 @@ validate-go-archive-checksum:
 	cd $(VERSION_DIRECTORY)/archives
 
 	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
-		if [[ $$(sha256sum $${fileDir} | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$${fileDir}.sha256") ]] ; then \
-			echo "Chekcsum doesn't match!" ; \
+		if [[ $$(sha256sum $${fileDir} | cut -d ' ' -f1) != $$(cut -d ' ' -f1 "$${fileDir}.sha256") ]] ; then \
+			echo "Checksum doesn't match!" ; \
 			exit 1 ; \
 		fi ; \
 	done

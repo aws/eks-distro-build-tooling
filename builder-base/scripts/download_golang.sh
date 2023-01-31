@@ -31,7 +31,7 @@ function build::go::download(){
     # the function again with the specific parameter.
     local version=${1%-*}
     local outputDir=${2}
-    local arch=${3}
+    local arch=${1}
 
     for artifact in golang golang-bin; do
         local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
@@ -39,13 +39,12 @@ function build::go::download(){
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
 
-        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 $filename.sha256
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
 
-        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
-			echo "Chekcsum doesn't match!" 
-			exit 1 
+        if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
+			echo "Checksum doesn't match!"
+            exit 1
 		fi
-
     done
 
     if [ $arch == 'x86_64' ]; then
@@ -54,11 +53,11 @@ function build::go::download(){
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
 
-        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 $filename.sha256
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
 
-        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
-			echo "Chekcsum doesn't match!"
-			exit 1
+        if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
+			echo "Checksum doesn't match!"
+            exit 1
 		fi
 
     fi
@@ -69,13 +68,12 @@ function build::go::download(){
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
         fi
 
-        curl -L -o https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 $filename.sha256
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
 
-        if [[ $$(sha256sum $filename | cut -d ' ' -f1) -ne $$(cut -d ' ' -f1 "$filename.sha256") ]] ; then 
-			echo "Chekcsum doesn't match!"
-			exit 1
+        if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
+			echo "Checksum doesn't match!"
+            exit 1
 		fi
-
     done
 }
 
