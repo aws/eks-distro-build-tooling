@@ -71,11 +71,13 @@ func gatherOptions() options {
 	fs.BoolVar(&o.prowAssignments, "use-prow-assignments", true, "Use prow commands to assign backported issues.")
 	fs.BoolVar(&o.allowAll, "allow-all", false, "Allow anybody to use automated backports by skipping GitHub organization membership checks.")
 	fs.BoolVar(&o.issueOnConflict, "create-issue-on-conflict", false, "Create a GitHub issue and assign it to the requestor on cherrypick conflict.")
-	//	fs.StringVar(&o.labelPrefix, "label-prefix", defaultLabelPrefix, "Set a custom label prefix.")
+	fs.StringVar(&o.labelPrefix, "label-prefix", "", "Set a custom label prefix.")
 	for _, group := range []flagutil.OptionGroup{&o.github, &o.instrumentationOptions} {
 		group.AddFlags(fs)
 	}
-	fs.Parse(os.Args[1:])
+	if err := fs.Parse(os.Args[1:]); err != nil {
+		logrus.Fatalf("Parsing Args: %v", err)
+	}
 	return o
 }
 

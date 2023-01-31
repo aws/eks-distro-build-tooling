@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"strconv"
 	"sync"
 
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksDistroOpsProwPlugin/lib/upstreampicker"
 	"github.com/sirupsen/logrus"
 	"k8s.io/test-infra/prow/config"
 	"k8s.io/test-infra/prow/plugins"
@@ -31,21 +31,19 @@ import (
 	"k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
 const pluginName = "golangPatchRelease"
 
 type githubClient interface {
-	eAddLabel(org, repo string, number int, label string) error
 	AssignIssue(org, repo string, number int, logins []string) error
 	CreateComment(org, repo string, number int, comment string) error
 	CreateIssue(org, repo, title, body string, milestone int, labels, assignees []string) (int, error)
+	FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error)
 	GetIssue(org, repo string, number int) (*github.Issue, error)
-	GetRepo(owner, name string) (github.FullRepo, error)
 	IsMember(org, user string) (bool, error)
-	ListIssueComments(org, repo string, number int) ([]github.IssueComment, error)
-	GetIssueLabels(org, repo string, number int) ([]github.Label, error)
-	ListOrgMembers(org, role string) ([]github.TeamMember, error)
 }
 
 // HelpProvider construct the pluginhelp.PluginHelp for this plugin.
@@ -70,11 +68,9 @@ type Server struct {
 	botUser        *github.UserData
 	email          string
 
-	gc git.ClientFactory
-	// Used for unit testing
-	push func(forkName, newBranch string, force bool) error
-	ghc  githubClient
-	log  *logrus.Entry
+	gc  git.ClientFactory
+	ghc githubClient
+	log *logrus.Entry
 
 	// Labels to apply to the backported issue.
 	labels []string
@@ -90,10 +86,15 @@ type Server struct {
 	bare     *http.Client
 	patchURL string
 
-	repoLock sync.Mutex
-	repos    []github.Repo
-	mapLock  sync.Mutex
-	lockMap  map[cherryPickRequest]*sync.Mutex
+	repos   []github.Repo
+	mapLock sync.Mutex
+	lockMap map[upstreamPickRequest]*sync.Mutex
+}
+
+type upstreamPickRequest struct {
+	org    string
+	repo   string
+	issNum int
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
@@ -165,146 +166,80 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 
 	//Currently handling Golang Patch Releases and Golang Minor Releases
 	var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
-	var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
+	//var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
 
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
-		upstreampicker.HandleGolangPatchRelease(*s.ghc, ie.Issue)
+		if err := s.handle(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, num); err != nil {
+			return fmt.Errorf("handle GolangPatchrelease: %w", err)
+		}
 	}
-	golangMinorMatches := golangMinorReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
+	//TODO: add golangMinorMatches := golangMinorReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 
 	return nil
 }
 
-func (s *Server) handle(logger *logrus.Entry, requestor string, comment *github.IssueComment, org, repo, targetBranch, baseBranch, title, body string, num int) error {
+func (s *Server) handle(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
 		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[cherryPickRequest{org, repo, num, targetBranch}]; !ok {
+		if _, ok := s.lockMap[upstreamPickRequest{org, repo, num}]; !ok {
 			if s.lockMap == nil {
-				s.lockMap = map[cherryPickRequest]*sync.Mutex{}
+				s.lockMap = map[upstreamPickRequest]*sync.Mutex{}
 			}
-			s.lockMap[cherryPickRequest{org, repo, num, targetBranch}] = &sync.Mutex{}
+			s.lockMap[upstreamPickRequest{org, repo, num}] = &sync.Mutex{}
 		}
-		lock = s.lockMap[cherryPickRequest{org, repo, num, targetBranch}]
+		lock = s.lockMap[upstreamPickRequest{org, repo, num}]
 	}()
 	lock.Lock()
 	defer lock.Unlock()
 
-	// Fetch the patch from GitHub
-	localPath, err := s.getPatch(org, repo, targetBranch, num)
-	if err != nil {
-		return fmt.Errorf("failed to get patch: %w", err)
+	if err := s.HandleGolangPatchRelease(logger, issue); err != nil {
+		return fmt.Errorf("failed to handle Golang Patch Release: %w", err)
 	}
 
-	if err := r.Config("user.name", s.botUser.Login); err != nil {
-		return fmt.Errorf("failed to configure git user: %w", err)
-	}
-	email := s.email
-	if email == "" {
-		email = s.botUser.Email
-	}
-	if err := r.Config("user.email", email); err != nil {
-		return fmt.Errorf("failed to configure git email: %w", err)
-	}
-
-	// New branch for the cherry-pick.
-	newBranch := fmt.Sprintf(cherryPickBranchFmt, num, targetBranch)
-
-	// Check if that branch already exists, which means there is already a PR for that cherry-pick.
-	if r.BranchExists(newBranch) {
-		// Find the PR and link to it.
-		prs, err := s.ghc.GetPullRequests(org, repo)
-		if err != nil {
-			return fmt.Errorf("failed to get pullrequests for %s/%s: %w", org, repo, err)
-		}
-		for _, pr := range prs {
-			if pr.Head.Ref == fmt.Sprintf("%s:%s", s.botUser.Login, newBranch) {
-				logger.WithField("preexisting_cherrypick", pr.HTMLURL).Info("PR already has cherrypick")
-				resp := fmt.Sprintf("Looks like #%d has already been cherry picked in %s", num, pr.HTMLURL)
-				return s.createComment(logger, org, repo, num, comment, resp)
-			}
-		}
-	}
-
-	// Create the branch for the cherry-pick.
-	if err := r.CheckoutNewBranch(newBranch); err != nil {
-		return fmt.Errorf("failed to checkout %s: %w", newBranch, err)
-	}
-
-	// Title for GitHub issue/PR.
-	titleTargetBranchIndicator := fmt.Sprintf(titleTargetBranchIndicatorTemplate, targetBranch)
-	title = fmt.Sprintf("%s%s", titleTargetBranchIndicator, omitBaseBranchFromTitle(title, baseBranch))
-
-	// Apply the patch.
-	if err := r.Am(localPath); err != nil {
-		errs := []error{fmt.Errorf("failed to `git am`: %w", err)}
-		logger.WithError(err).Warn("failed to apply PR on top of target branch")
-		resp := fmt.Sprintf("#%d failed to apply on top of branch %q:\n```\n%v\n```", num, targetBranch, err)
-		if err := s.createComment(logger, org, repo, num, comment, resp); err != nil {
-			errs = append(errs, fmt.Errorf("failed to create comment: %w", err))
-		}
-
-		if s.issueOnConflict {
-			resp = fmt.Sprintf("Manual cherrypick required.\n\n%v", resp)
-			if err := s.createIssue(logger, org, repo, title, resp, num, comment, nil, []string{requestor}); err != nil {
-				errs = append(errs, fmt.Errorf("failed to create issue: %w", err))
-			}
-		}
-
-		return utilerrors.NewAggregate(errs)
-	}
-
-	push := r.PushToNamedFork
-	if s.push != nil {
-		push = s.push
-	}
-	// Push the new branch in the bot's fork.
-	if err := push(forkName, newBranch, true); err != nil {
-		logger.WithError(err).Warn("failed to push chery-picked changes to GitHub")
-		resp := fmt.Sprintf("failed to push cherry-picked changes in GitHub: %v", err)
-		return utilerrors.NewAggregate([]error{err, s.createComment(logger, org, repo, num, comment, resp)})
-	}
-
-	// Open a PR in GitHub.
-	var cherryPickBody string
-	if s.prowAssignments {
-		cherryPickBody = cherrypicker.CreateCherrypickBody(num, requestor, releaseNoteFromParentPR(body))
-	} else {
-		cherryPickBody = cherrypicker.CreateCherrypickBody(num, "", releaseNoteFromParentPR(body))
-	}
-	head := fmt.Sprintf("%s:%s", s.botUser.Login, newBranch)
-	createdNum, err := s.ghc.CreatePullRequest(org, repo, title, cherryPickBody, head, targetBranch, true)
-	if err != nil {
-		logger.WithError(err).Warn("failed to create new pull request")
-		resp := fmt.Sprintf("new pull request could not be created: %v", err)
-		return utilerrors.NewAggregate([]error{err, s.createComment(logger, org, repo, num, comment, resp)})
-	}
-	*logger = *logger.WithField("new_pull_request_number", createdNum)
-	resp := fmt.Sprintf("new pull request created: #%d", createdNum)
-	logger.Info("new pull request created")
-	if err := s.createComment(logger, org, repo, num, comment, resp); err != nil {
-		return fmt.Errorf("failed to create comment: %w", err)
-	}
-	for _, label := range s.labels {
-		if err := s.ghc.AddLabel(org, repo, createdNum, label); err != nil {
-			return fmt.Errorf("failed to add label %s: %w", label, err)
-		}
-	}
-	if s.prowAssignments {
-		if err := s.ghc.AssignIssue(org, repo, createdNum, []string{requestor}); err != nil {
-			logger.WithError(err).Warn("failed to assign to new PR")
-			// Ignore returning errors on failure to assign as this is most likely
-			// due to users not being members of the org so that they can't be assigned
-			// in PRs.
-			return nil
-		}
-	}
 	return nil
 }
 
 // Created based off plugins.FormatICResponse
 func FormatIEResponse(ie github.IssueEvent, s string) string {
 	return plugins.FormatResponseRaw(ie.Issue.Title, ie.Issue.HTMLURL, ie.Sender.Login, s)
+}
+
+func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) error {
+	var golangVersionsRe = regexp.MustCompile(`(?m)(\d+.\d+.\d+)`)
+	var issNumRe = regexp.MustCompile(`(#\d+)`)
+	m := make(map[string]int)
+	for _, version := range golangVersionsRe.FindAllString(upIss.Title, -1) {
+		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.Golang, constants.Go, version)
+		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.Golang, query, "", false)
+		if err != nil {
+			return fmt.Errorf("Find Golang Milestone: %v", err)
+		}
+		for _, i := range milestoneIssues {
+			for _, biMatch := range issNumRe.FindAllString(i.Body, -1) {
+				if m[biMatch] == 0 {
+					m[biMatch] = 1
+				}
+			}
+			return nil
+		}
+	}
+	for biNum := range m {
+		biInt, err := strconv.Atoi(biNum)
+		if err != nil {
+			return fmt.Errorf("Converting issue number to int: %w", err)
+		}
+		baseIssue, err := s.ghc.GetIssue(constants.Golang, constants.Go, biInt)
+		if err != nil {
+			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.Golang, constants.Go, biInt, err)
+		}
+		miNum, err := s.ghc.CreateIssue(constants.Aws, constants.EksdBuildTooling, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		if err != nil {
+			return fmt.Errorf("Creating mirrored issue: %w", err)
+		}
+		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.Aws, constants.EksdBuildTooling, miNum))
+	}
+	return nil
 }

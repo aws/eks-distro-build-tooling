@@ -34,23 +34,23 @@ var ctiOpts = &createToplevelIssueOptions{}
 
 func init() {
 	upstreampickerCmd.AddCommand(upstreampickerIssueCmd)
-	createCveIssue.Flags().StringVarP(&ctiOpts.cveId, cveIdFlag, "c", "", "CVE ID")
-	createCveIssue.Flags().IntVarP(&ctiOpts.upstreamIssueId, upstreamIssueIdFlag, "i", 0, "Upstream Issue ID e.g. 56350")
-	createCveIssue.Flags().StringVarP(&ctiOpts.upstreamCommitHash, upstreamCommitHashFlag, "u", "", "Upstream Commit Hash e.g. 76cad4edc29d28432a7a0aa27e87385d3d7db7a1")
-	createCveIssue.Flags().StringVarP(&ctiOpts.announcementSourceUrl, announcementSourceUrlFlag, "a", "", "Announcement Source URL e.g. https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ")
+	upstreampickerIssueCmd.Flags().StringVarP(&ctiOpts.cveId, cveIdFlag, "c", "", "CVE ID")
+	upstreampickerIssueCmd.Flags().IntVarP(&ctiOpts.upstreamIssueId, upstreamIssueIdFlag, "i", 0, "Upstream Issue ID e.g. 56350")
+	upstreampickerIssueCmd.Flags().StringVarP(&ctiOpts.upstreamCommitHash, upstreamCommitHashFlag, "u", "", "Upstream Commit Hash e.g. 76cad4edc29d28432a7a0aa27e87385d3d7db7a1")
+	upstreampickerIssueCmd.Flags().StringVarP(&ctiOpts.announcementSourceUrl, announcementSourceUrlFlag, "a", "", "Announcement Source URL e.g. https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ")
 
 	requiredFlags := []string{
 		cveIdFlag,
 		upstreamIssueIdFlag,
 	}
 	for _, flag := range requiredFlags {
-		if err := createCveIssue.MarkFlagRequired(flag); err != nil {
+		if err := upstreampickerIssueCmd.MarkFlagRequired(flag); err != nil {
 			log.Fatalf("failed to mark flag %v as requred: %v", flag, err)
 		}
 	}
 }
 
-var upstreampickerIssue = &cobra.Command{
+var upstreampickerIssueCmd = &cobra.Command{
 	Use:   "issue [OPTIONS]",
 	Short: "Duplicate upstream issue into desired repo",
 	Long:  "Create a new issue in duplicating an issue of an upstream project. ie. Copy CVE issue from golang to eks-distro-build-tooling",
