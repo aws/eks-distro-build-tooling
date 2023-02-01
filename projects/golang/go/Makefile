@@ -150,7 +150,7 @@ generate-rpm-arch-checksum:
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
 		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
-		cat $${fileDir}.sha256" ; \
+		cat "$${fileDir}.sha256" ; \
 	done
 
 .PHONY: generate-rpm-nonarch-checksum
@@ -160,7 +160,7 @@ generate-rpm-nonarch-checksum:
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
 		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
-		cat $${fileDir}.sha256" ; \
+		cat "$${fileDir}.sha256" ; \
 	done
 
 .PHONY: generate-archive-checksum
@@ -170,7 +170,7 @@ generate-archive-checksum:
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
 		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
-		cat $${fileDir}.sha256" ; \
+		cat "$${fileDir}.sha256" ; \
 	done
 
 .PHONY: sync-artifacts-to-s3-dry-run
