@@ -148,7 +148,9 @@ generate-rpm-arch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
 	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
 		echo $${fileDir} ; \
-		echo sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		$$(echo sha256sum $${fileDir}) ; \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		cat $${fileDir}.sha256" ; \
 	done
 
 .PHONY: generate-rpm-nonarch-checksum
@@ -156,7 +158,9 @@ generate-rpm-nonarch-checksum:
 	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
 	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
 		echo $${fileDir} ; \
-		echo sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		$$(echo sha256sum $${fileDir}) ; \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		cat $${fileDir}.sha256" ; \
 	done
 
 .PHONY: generate-archive-checksum
@@ -164,7 +168,9 @@ generate-archive-checksum:
 	cd $(VERSION_DIRECTORY)/archives
 	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
 		echo $${fileDir} ; \
-		echo sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		$$(echo sha256sum $${fileDir}) ; \
+		sha256sum $${fileDir} > "$${fileDir}.sha256" ; \
+		cat $${fileDir}.sha256" ; \
 	done
 
 .PHONY: sync-artifacts-to-s3-dry-run
