@@ -59,6 +59,7 @@ function build::go::download(){
             echo "Checksum doesn't match!"
             exit 1
         fi
+        
     fi
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
