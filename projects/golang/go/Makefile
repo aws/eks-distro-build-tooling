@@ -52,7 +52,7 @@ ifeq ($(ARCHITECTURE), AMD64)
 endif
 
 .PHONY: golang-build
-golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
+golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive generate-golang-checksum test
 
 .PHONY: build
 build: golang-build sync-artifacts-to-s3-dry-run local-images
