@@ -145,8 +145,8 @@ generate-rpm-checksum: generate-rpm-arch-checksum generate-rpm-nonarch-checksum
 
 .PHONY: generate-rpm-arch-checksum
 generate-rpm-arch-checksum:
-	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH)
-	pwd && ls
+	cd $(VERSION_DIRECTORY)/rpmbuild/$(RPM_ARCH) ; \
+	pwd && ls ; \
 	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
@@ -156,8 +156,8 @@ generate-rpm-arch-checksum:
 
 .PHONY: generate-rpm-nonarch-checksum
 generate-rpm-nonarch-checksum:
-	cd $(VERSION_DIRECTORY)/rpmbuild/noarch
-	pwd && ls
+	cd $(VERSION_DIRECTORY)/rpmbuild/noarch ; \
+	pwd && ls ; \
 	for fileDir in $$(find . -type f -name 'golang-*.rpm'); do \
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
@@ -167,8 +167,8 @@ generate-rpm-nonarch-checksum:
 
 .PHONY: generate-archive-checksum
 generate-archive-checksum:
-	cd $(VERSION_DIRECTORY)/archives
-	pwd && ls
+	cd $(VERSION_DIRECTORY)/archives ; \
+	pwd && ls ; \
 	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
 		echo $${fileDir} ; \
 		$$(echo sha256sum $${fileDir}) ; \
