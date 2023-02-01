@@ -16,9 +16,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
-  name: cherrypicker
+  name: eksDistroOpsProwPlugin
   labels:
-    app: cherrypicker
+    app: eksDistroOpsProwPlugin
 spec:
   replicas: 1
   strategy:
@@ -28,16 +28,16 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: cherrypicker
+      app: eksDistroOpsProwPlugin
   template:
     metadata:
       labels:
-        app: cherrypicker
+        app: eksDistroOpsProwPlugin
     spec:
       terminationGracePeriodSeconds: 180
       containers:
-      - name: cherrypicker
-        image: {{ .Values.cherrypicker.image }}
+      - name: eksDistroOpsProwPlugin
+        image: {{ .Values.eksDistroOpsProwPlugin.image }}
         imagePullPolicy: Always
         args:
         - --github-token-path=/etc/github/token

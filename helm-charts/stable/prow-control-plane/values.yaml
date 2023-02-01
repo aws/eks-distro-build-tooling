@@ -34,6 +34,11 @@ repositories:
     - issue_comment
     - pull_request
     endpoint: http://cherrypicker
+  - name: eksDistroOpsProwPlugin
+    events:
+    - issue_comment
+    - pull_request
+    endpoint: http://eksDistroOpsProwPlugin
 prow:
   domain: ''
   presubmitsBucketName: ''
@@ -192,3 +197,7 @@ plugins:
 cherrypicker:
   serviceName: cherrypicker
   image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
+
+eksDistroOpsProwPlugin:
+  serviceName: eksDistroOpsProwPlugin
+  image:  public.ecr.aws/eks-distro-build-tooling/eksDistroOpsProwPlugin:latest 
