@@ -78,7 +78,7 @@ download-go-archive:
 
 .PHONY: validate-go-archive-checksum
 validate-go-archive-checksum:
-	cd $(VERSION_DIRECTORY)/archives
+	cd $(VERSION_DIRECTORY)/archives ; \
 
 	for fileDir in $$(find . -type f -name '*.tar.gz'); do \
 		if [[ $$(sha256sum $${fileDir} | cut -d ' ' -f1) != $$(cut -d ' ' -f1 "$${fileDir}.sha256") ]] ; then \
