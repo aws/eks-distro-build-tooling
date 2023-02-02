@@ -49,6 +49,9 @@ echo Updated base image tag file for eks-distro-minimal-base-compiler-yum
 checking pushed file: /override/root/eks-distro-minimal-base-compiler-gcc-pushed - true
 update_base_image.sh gcc-test-tag eks-distro-minimal-base-compiler-gcc 2 image-tag-update-al2
 echo Updated base image tag file for eks-distro-minimal-base-compiler-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-3.7-pushed - true
+update_base_image.sh 3.7-test-tag eks-distro-minimal-base-python-3.7 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-3.7
 checking pushed file: /override/root/eks-distro-minimal-base-python-3.9-pushed - true
 update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-3.9 2 image-tag-update-al2
 echo Updated base image tag file for eks-distro-minimal-base-python-3.9
@@ -109,6 +112,24 @@ echo Updated base image tag file for eks-distro-minimal-base-nodejs-compiler-16-
 checking pushed file: /override/root/eks-distro-minimal-base-nodejs-compiler-16-gcc-pushed - true
 update_base_image.sh 16-gcc-test-tag eks-distro-minimal-base-nodejs-compiler-16-gcc 2 image-tag-update-al2
 echo Updated base image tag file for eks-distro-minimal-base-nodejs-compiler-16-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.7-base-pushed - true
+update_base_image.sh 3.7-test-tag eks-distro-minimal-base-python-compiler-3.7-base 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.7-base
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-base-pushed - true
+update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-compiler-3.9-base 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-base
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.7-yum-pushed - true
+update_base_image.sh 3.7-yum-test-tag eks-distro-minimal-base-python-compiler-3.7-yum 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.7-yum
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-yum-pushed - true
+update_base_image.sh 3.9-yum-test-tag eks-distro-minimal-base-python-compiler-3.9-yum 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-yum
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.7-gcc-pushed - true
+update_base_image.sh 3.7-gcc-test-tag eks-distro-minimal-base-python-compiler-3.7-gcc 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.7-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-gcc-pushed - true
+update_base_image.sh 3.9-gcc-test-tag eks-distro-minimal-base-python-compiler-3.9-gcc 2 image-tag-update-al2
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-gcc
 checking pushed file: /override/root/eks-distro-windows-base-1809-pushed - true
 update_base_image.sh 1809-test-tag eks-distro-windows-base-1809 windows image-tag-update-al2
 echo Updated base image tag file for eks-distro-windows-base-1809
