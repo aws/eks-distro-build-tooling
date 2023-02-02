@@ -8,7 +8,7 @@ PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/tools/eksDistroBuildToolingOpsTools
 
 # This image build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-PUSH_IMAGES?=false
+PUSH_IMAGES?=true
 
 GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
@@ -52,7 +52,6 @@ mocks: ## Generate mocks
 .PHONY: images-eksDistroOpsProwPlugin
 images-eksDistroOpsProwPlugin: build-eksDistroOpsProwPlugin
 images-eksDistroOpsProwPlugin: buildkit-check
-images-eksDistroOpsProwPlugin: PUSH_IMAGES?=true
 images-eksDistroOpsProwPlugin: IMAGE_NAME=$(*)
 images-eksDistroOpsProwPlugin: IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
 images-eksDistroOpsProwPlugin: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
