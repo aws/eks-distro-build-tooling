@@ -23,9 +23,12 @@ EKS_PROW_PLUGIN_BINARY_NAME="eksDistroOpsProwPlugin"
 build-eks-go-tools:
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_GO_TOOLS_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksGoTool
 
-.PHONY: build-%
-build-%: unit-test
-	CGO_ENABLED=0 GOOS=linux GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/linux/$(GO_ARCH)/$(*) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(*)
+.PHONY: build-prowPlugin
+build-prowPlugin: unit-test
+	CGO_ENABLED=0 GOOS=linux GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/linux/$(GO_ARCH)/$(EKS_DISTRO_PROW_PLUGIN_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(EKS_DISTRO_PROW_PLUGIN_BINARY_NAME)
+
+.PHONY: build-eksDistroOpsProwPlugin
+build-%: unit-test build-prowPlugin local-images-eksDistroOpsProwPlugin
 
 .PHONY: unit-test
 unit-test:
@@ -49,11 +52,14 @@ mocks: ## Generate mocks
 	go get github.com/golang/mock/mockgen@v1.6.0
 	${GOPATH}/bin/mockgen -destination=pkg/github/mocks/github.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github" GitClient,IssueClient,RepoClient,PullRequestClient
 
+.PHONY: local-images-eksDistroOpsProwPlugin
+local-images: PUSH_IMAGE=false
+local-images: images-eksDistroOpsProwPlugin
+
 .PHONY: images-eksDistroOpsProwPlugin
-images-eksDistroOpsProwPlugin: build-eksDistroOpsProwPlugin
 images-eksDistroOpsProwPlugin: buildkit-check
-images-eksDistroOpsProwPlugin: IMAGE_NAME=$(*)
-images-eksDistroOpsProwPlugin: IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
+images-eksDistroOpsProwPlugin: IMAGE_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
+images-eksDistroOpsProwPlugin: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
 images-eksDistroOpsProwPlugin: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
 images-eksDistroOpsProwPlugin:
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
