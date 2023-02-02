@@ -12,8 +12,8 @@ al2:
   eks-distro-minimal-base-nginx: 2022-12-07-1670439705.2
   eks-distro-minimal-base-git: 2023-01-23-1674500492.2
   eks-distro-minimal-base-nsenter: 2022-12-07-1670439705.2
-  eks-distro-minimal-base-python-3.7: null
-  eks-distro-minimal-base-python-3.9: null
+  eks-distro-minimal-base-python-3.7: 3.7-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-3.9: 3.9-2023-02-02-1675364505.2
   eks-distro-minimal-base-nodejs-16: 16-2023-01-11-1673475326.2
   eks-distro-minimal-base-compiler-base: 2023-01-23-1674500492.2
   eks-distro-minimal-base-compiler-yum: yum-2023-01-23-1674500492.2
@@ -36,12 +36,12 @@ al2:
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2023-01-23-1674500492.2
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2023-01-23-1674500492.2
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2023-01-23-1674500492.2
-  eks-distro-minimal-base-python-compiler-3.7-base: null
-  eks-distro-minimal-base-python-compiler-3.7-yum: null
-  eks-distro-minimal-base-python-compiler-3.7-gcc: null
-  eks-distro-minimal-base-python-compiler-3.9-base: null
-  eks-distro-minimal-base-python-compiler-3.9-yum: null
-  eks-distro-minimal-base-python-compiler-3.9-gcc: null
+  eks-distro-minimal-base-python-compiler-3.7-base: 3.7-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-compiler-3.7-yum: 3.7-yum-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-compiler-3.7-gcc: 3.7-gcc-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-compiler-3.9-base: 3.9-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-compiler-3.9-yum: 3.9-yum-2023-02-02-1675364505.2
+  eks-distro-minimal-base-python-compiler-3.9-gcc: 3.9-gcc-2023-02-02-1675364505.2
 al2022:
   eks-distro-base: 2023-01-25-1674673284.2022
   eks-distro-minimal-base: 2022-12-15-1671132599.2022
