@@ -192,7 +192,3 @@ plugins:
 cherrypicker:
   serviceName: cherrypicker
   image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
-
-eksDistroOpsProwPlugin:
-  serviceName: eksDistroOpsProwPlugin
-  image:  public.ecr.aws/eks-distro-build-tooling/eksDistroOpsProwPlugin:latest 
