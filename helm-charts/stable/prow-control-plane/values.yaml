@@ -20,7 +20,7 @@ repositories:
 - org: "aws"
   name: "eks-distro-build-tooling"
   extraPlugins: []
-  extraExternalPlugins: []
+  extraExternalPlugins: [] 
 - org: "aws"
   name: "eks-distro-prow-jobs"
   extraPlugins: ["config-updater"]
@@ -34,11 +34,6 @@ repositories:
     - issue_comment
     - pull_request
     endpoint: http://cherrypicker
-  - name: eksDistroOpsProwPlugin
-    events:
-    - issue_comment
-    - pull_request
-    endpoint: http://eksDistroOpsProwPlugin
 prow:
   domain: ''
   presubmitsBucketName: ''
