@@ -29,7 +29,6 @@ build-prowPlugin:
 
 .PHONY: images-eksDistroOpsProwPlugin
 images-eksDistroOpsProwPlugin: unit-test build-prowPlugin local-images-eksProwPlugin
-	echo "TEST"
 
 .PHONY: unit-test
 unit-test:
