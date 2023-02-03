@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"reflect"
 	"sync"
@@ -21,7 +20,6 @@ type fghc struct {
 	isMember bool
 
 	comments   []string
-	prs        []github.PullRequest
 	iComments  []github.IssueComment
 	iLabels    []github.Label
 	orgMembers []github.TeamMember
@@ -155,8 +153,6 @@ func Foo(wow int) int {
 `),
 }
 
-var body = "This PR updates the magic number.\n\n```release-note\nUpdate the magic number from 42 to 49\n```"
-
 func makeFakeRepoWithCommit(clients localgit.Clients, t *testing.T) (*localgit.LocalGit, v2.ClientFactory) {
 	lg, c, err := clients()
 	if err != nil {
@@ -271,48 +267,4 @@ func TestUpstreamPickCreateIssue(t *testing.T) {
 		}
 
 	}
-}
-
-func TestHandleLocks(t *testing.T) {
-	t.Parallel()
-	s := &Server{
-		ghc:     &threadUnsafeFGHC{fghc: &fghc{}},
-		botUser: &github.UserData{},
-	}
-
-	routine1Done := make(chan struct{})
-	routine2Done := make(chan struct{})
-
-	l := logrus.WithField("test", t.Name())
-
-	go func() {
-		defer close(routine1Done)
-
-		if err := s.handle(l, "", &github.Issue{}, "org", "repo", "title", "body", 0); err != nil {
-			t.Errorf("routine failed: %v", err)
-		}
-	}()
-	go func() {
-		defer close(routine2Done)
-		if err := s.handle(l, "", &github.Issue{}, "org", "repo", "title", "body", 0); err != nil {
-			t.Errorf("routine failed: %v", err)
-		}
-	}()
-
-	<-routine1Done
-	<-routine2Done
-
-	if actual := s.ghc.(*threadUnsafeFGHC).orgRepoCountCalled; actual != 0 {
-		t.Errorf("expected zero EnsureFork calls, got %d", actual)
-	}
-}
-
-type threadUnsafeFGHC struct {
-	*fghc
-	orgRepoCountCalled int
-}
-
-func (tuf *threadUnsafeFGHC) EnsureFork(login, org, repo string) (string, error) {
-	tuf.orgRepoCountCalled++
-	return "", errors.New("that is enough")
 }
