@@ -78,7 +78,7 @@ type Server struct {
 	prowAssignments bool
 	// Allow anybody to do backports.
 	allowAll bool
-	// Create an issue on cherrypick conflict.
+	// Create an issue on upstreampick conflict.
 	issueOnConflict bool
 	// Set a custom label prefix.
 	labelPrefix string
@@ -242,4 +242,28 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.Aws, constants.EksdBuildTooling, miNum))
 	}
 	return nil
+}
+
+func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comment *github.IssueComment, resp string) error {
+	if err := func() error {
+		if comment != nil {
+			return s.ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
+		}
+		return s.ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
+	}(); err != nil {
+		l.WithError(err).Warn("failed to create comment")
+		return err
+	}
+	logrus.Debug("Created comment")
+	return nil
+}
+
+// createIssue creates an issue on GitHub.
+func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) error {
+	issueNum, err := s.ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
+	if err != nil {
+		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for failed upstreampick: %v", err))
+	}
+
+	return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for failed upstreampick: #%d", issueNum))
 }
