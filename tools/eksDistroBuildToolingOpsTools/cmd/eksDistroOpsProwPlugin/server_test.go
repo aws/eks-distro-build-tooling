@@ -7,8 +7,6 @@ import (
 	"testing"
 
 	"github.com/sirupsen/logrus"
-	"k8s.io/test-infra/prow/git/localgit"
-	v2 "k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 )
 
@@ -131,9 +129,7 @@ func (f *fghc) FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Is
 	f.Lock()
 	defer f.Unlock()
 	var iss []github.Issue
-	for _, issue := range f.issues {
-		iss = append(iss, issue)
-	}
+	iss = append(iss, f.issues...)
 	for _, i := range f.issues {
 		iss = append(iss, github.Issue{
 			User:   i.User,
@@ -141,38 +137,6 @@ func (f *fghc) FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Is
 		})
 	}
 	return iss, nil
-}
-
-var initialFiles = map[string][]byte{
-	"bar.go": []byte(`// Package bar does an interesting thing.
-package bar
-// Foo does a thing.
-func Foo(wow int) int {
-	return 42 + wow
-}
-`),
-}
-
-func makeFakeRepoWithCommit(clients localgit.Clients, t *testing.T) (*localgit.LocalGit, v2.ClientFactory) {
-	lg, c, err := clients()
-	if err != nil {
-		t.Fatalf("Making localgit: %v", err)
-	}
-	t.Cleanup(func() {
-		if err := lg.Clean(); err != nil {
-			t.Errorf("Cleaning up localgit: %v", err)
-		}
-		if err := c.Clean(); err != nil {
-			t.Errorf("Cleaning up client: %v", err)
-		}
-	})
-	if err := lg.MakeFakeRepo("foo", "bar"); err != nil {
-		t.Fatalf("Making fake repo: %v", err)
-	}
-	if err := lg.AddCommit("foo", "bar", initialFiles); err != nil {
-		t.Fatalf("Adding initial commit: %v", err)
-	}
-	return lg, c
 }
 
 func TestUpstreamPickCreateIssue(t *testing.T) {

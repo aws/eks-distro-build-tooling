@@ -15,8 +15,8 @@ GITHUB_USER?="Prow Bot"
 GO_ARCH:=$(shell go env GOARCH)
 GO_OS:=$(shell go env GOOS)
 
-EKS_GO_TOOLS_BINARY_NAME="eksGoTools"
-EKS_PROW_PLUGIN_BINARY_NAME="eksDistroOpsProwPlugin"
+EKS_GO_TOOLS_BINARY_NAME=eksGoTools
+EKS_PROW_PLUGIN_BINARY_NAME=eksDistroOpsProwPlugin
 
 .PHONY: build-eks-go-tools
 build-eks-go-tools: unit-test
