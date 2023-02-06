@@ -1,19 +1,3 @@
-/*
-Copyright 2017 The Kubernetes Authors.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package main
 
 import (
@@ -166,7 +150,6 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 
 	//Currently handling Golang Patch Releases and Golang Minor Releases
 	var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
-	//var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
 
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
@@ -175,6 +158,8 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		}
 	}
 	//TODO: add golangMinorMatches := golangMinorReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
+	//Regex for thisi is below.
+	//var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
 
 	return nil
 }
@@ -212,8 +197,8 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 	var issNumRe = regexp.MustCompile(`(#\d+)`)
 	m := make(map[string]int)
 	for _, version := range golangVersionsRe.FindAllString(upIss.Title, -1) {
-		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.Golang, constants.Go, version)
-		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.Golang, query, "", false)
+		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
+		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
 		if err != nil {
 			return fmt.Errorf("Find Golang Milestone: %v", err)
 		}
@@ -231,15 +216,15 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 		if err != nil {
 			return fmt.Errorf("Converting issue number to int: %w", err)
 		}
-		baseIssue, err := s.ghc.GetIssue(constants.Golang, constants.Go, biInt)
+		baseIssue, err := s.ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
 		if err != nil {
-			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.Golang, constants.Go, biInt, err)
+			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
-		miNum, err := s.ghc.CreateIssue(constants.Aws, constants.EksdBuildTooling, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		miNum, err := s.ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}
-		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.Aws, constants.EksdBuildTooling, miNum))
+		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.AwsOrgName, constants.EksdBuildToolingRepoName, miNum))
 	}
 	return nil
 }
