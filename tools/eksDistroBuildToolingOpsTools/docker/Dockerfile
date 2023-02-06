@@ -1,6 +1,8 @@
 FROM public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base:latest
 
-ARG BINARY_OUTPUT_PATH BINARY_NAME
+ARG BINARY_OUTPUT_PATH
+
+ARG BINARY_NAME
 
 ADD $BINARY_OUTPUT_PATH /usr/bin
 
