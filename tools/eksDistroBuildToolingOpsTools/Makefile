@@ -73,7 +73,7 @@ images-eksDistroOpsProwPlugin:
 		--local context=$(PROJECT_DIRECTORY) \
 		--progress plain \
 		--opt build-arg:BINARY_OUTPUT_PATH=bin/$(GO_OS)/$(GO_ARCH)/$(EKS_PROW_PLUGIN_BINARY_NAME) \
-		--opt build-arg:BINARY_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
+		--opt build-arg:BINARY_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME) \
 		--output $(BUILDKIT_OUTPUT)
 
 .PHONY: buildkit-check
