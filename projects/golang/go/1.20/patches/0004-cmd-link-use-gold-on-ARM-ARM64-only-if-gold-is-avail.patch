@@ -1,4 +1,4 @@
-From 5ccf9f47bf4f5ba53e0ab7338a7fd4626714cfb2 Mon Sep 17 00:00:00 2001
+From 60d4917661c3fa9b9e5c1eb928270e9c832513ba Mon Sep 17 00:00:00 2001
 From: Jeffery To <jeffery.to@gmail.com>
 Date: Tue, 23 Nov 2021 15:05:37 +0800
 Subject: [PATCH] cmd/link: use gold on ARM/ARM64 only if gold is available
@@ -12,10 +12,10 @@ Fixes #22040.
  1 file changed, 7 insertions(+), 12 deletions(-)
 
 diff --git a/src/cmd/link/internal/ld/lib.go b/src/cmd/link/internal/ld/lib.go
-index 9e13db7b71..2b379259a2 100644
+index c0730179db..8d93e72ae0 100644
 --- a/src/cmd/link/internal/ld/lib.go
 +++ b/src/cmd/link/internal/ld/lib.go
-@@ -1390,25 +1390,20 @@ func (ctxt *Link) hostlink() {
+@@ -1535,25 +1535,20 @@ func (ctxt *Link) hostlink() {
  		}
  
  		if ctxt.Arch.InFamily(sys.ARM, sys.ARM64) && buildcfg.GOOS == "linux" {
@@ -49,5 +49,5 @@ index 9e13db7b71..2b379259a2 100644
  			}
  		}
 -- 
-2.32.0
+2.39.1
 
