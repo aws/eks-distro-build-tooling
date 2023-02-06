@@ -2,7 +2,7 @@
 
 Current Release: `0`
 
-Tracking Tag: `go1.20.0`
+Tracking Tag: `go1.20`
 
 Artifacts: https://distro.eks.amazonaws.com/golang-go1.20/releases/0/RPMS
 
@@ -16,5 +16,5 @@ Artifacts: https://distro.eks.amazonaws.com/golang-go1.20/releases/0/RPMS
 The patches in `./patches` include relevant utility fixes for go `1.20`.
 
 ### Spec
-The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.20 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.20.0` source.
+The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.20 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.20` source.
 

@@ -535,7 +535,7 @@ fi
 %endif
 
 %changelog
-* Thu Feb 06 2023 Kirsten Schumy <ksschumy@amazon.com> - !!!!!
+* Thu Feb 06 2023 Kirsten Schumy <ksschumy@amazon.com> - 1.20-1
 - Added go1.20 to eks-distro-build-tooling
 
 * Thu Feb 02 2023 Alejandro Sáez <asm@redhat.com> - 1.20-1
