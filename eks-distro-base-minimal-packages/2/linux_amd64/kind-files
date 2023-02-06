@@ -225,7 +225,7 @@
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
 -rwxr-xr-x    26MiB /usr/bin/ctr
--rwxr-xr-x   222KiB /usr/bin/curl
+-rwxr-xr-x   235KiB /usr/bin/curl
 -rwxr-xr-x    41KiB /usr/bin/cut
 -rwxr-xr-x    61KiB /usr/bin/date
 -rwxr-xr-x    12KiB /usr/bin/db_archive
@@ -1408,7 +1408,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   167KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   613KiB /usr/lib64/libcurl.so.4.7.0
+-rwxr-xr-x   638KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   314KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
@@ -4543,7 +4543,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.79.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -8280,7 +8280,7 @@
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--     721B /usr/share/zsh/site-functions/_bootctl
 -rw-r--r--   1.5KiB /usr/share/zsh/site-functions/_coredumpctl
--rw-r--r--    15KiB /usr/share/zsh/site-functions/_curl
+-rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--   2.2KiB /usr/share/zsh/site-functions/_hostnamectl
 -rw-r--r--   4.6KiB /usr/share/zsh/site-functions/_journalctl
 -rw-r--r--     614B /usr/share/zsh/site-functions/_kernel-install
@@ -8548,7 +8548,7 @@ lrwxrwxrwx      17B /usr/lib64/libcrack.so.2	libcrack.so.2.9.0
 lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
 lrwxrwxrwx      22B /usr/lib64/libcryptsetup.so.4	libcryptsetup.so.4.7.0
-lrwxrwxrwx      16B /usr/lib64/libcurl.so.4	libcurl.so.4.7.0
+lrwxrwxrwx      16B /usr/lib64/libcurl.so.4	libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so	libdb-5.3.so
 lrwxrwxrwx      20B /usr/lib64/libdbus-1.so.3	libdbus-1.so.3.14.14
 lrwxrwxrwx      13B /usr/lib64/libdl.so.2	libdl-2.26.so

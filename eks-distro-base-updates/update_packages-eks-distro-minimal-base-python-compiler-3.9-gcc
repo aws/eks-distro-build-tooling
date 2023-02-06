@@ -1,1 +1,6 @@
 
+curl.x86_64
+libblkid.x86_64
+libcurl.x86_64
+libmount.x86_64
+libuuid.x86_64

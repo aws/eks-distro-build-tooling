@@ -6,7 +6,7 @@ ca-certificates-2021.2.50-72.amzn2.0.3.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.11-28.amzn2.aarch64
-curl-7.79.1-7.amzn2.0.1.aarch64
+curl-7.87.0-2.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 diffutils-3.3-5.amzn2.aarch64
 elfutils-libelf-0.176-2.amzn2.aarch64
@@ -32,11 +32,11 @@ krb5-libs-1.15.1-55.amzn2.2.5.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libassuan-2.1.0-3.amzn2.0.2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
-libblkid-2.30.2-2.amzn2.0.10.aarch64
+libblkid-2.30.2-2.amzn2.0.11.aarch64
 libcap-2.54-1.amzn2.0.1.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-62.amzn2.aarch64
-libcurl-7.79.1-7.amzn2.0.1.aarch64
+libcurl-7.87.0-2.amzn2.0.1.aarch64
 libdb-5.3.21-24.amzn2.0.3.aarch64
 libdb-utils-5.3.21-24.amzn2.0.3.aarch64
 libffi-3.0.13-18.amzn2.0.2.aarch64
@@ -44,7 +44,7 @@ libgcc-7.3.1-15.amzn2.aarch64
 libgcrypt-1.5.3-14.amzn2.0.3.aarch64
 libgpg-error-1.12-3.amzn2.0.3.aarch64
 libidn2-2.3.0-1.amzn2.aarch64
-libmount-2.30.2-2.amzn2.0.10.aarch64
+libmount-2.30.2-2.amzn2.0.11.aarch64
 libnghttp2-1.41.0-1.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
@@ -52,7 +52,7 @@ libssh2-1.4.3-12.amzn2.2.3.aarch64
 libstdc++-7.3.1-15.amzn2.aarch64
 libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
-libuuid-2.30.2-2.amzn2.0.10.aarch64
+libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
 libxml2-2.9.1-6.amzn2.5.6.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64

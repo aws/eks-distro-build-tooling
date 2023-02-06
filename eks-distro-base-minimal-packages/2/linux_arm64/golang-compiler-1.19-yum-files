@@ -13568,7 +13568,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   203KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   665KiB /usr/lib64/libcurl.so.4.7.0
+-rwxr-xr-x   666KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
@@ -15999,7 +15999,7 @@
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/XBS5_LP64_OFF64
--rwxr-xr-x   2.1KiB /usr/libexec/git-core/git-bisect
+-rwxr-xr-x   1.6KiB /usr/libexec/git-core/git-bisect
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
 -rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-http-backend
 -rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-fetch
@@ -16635,7 +16635,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
 -rw-r--r--    35KiB /usr/share/licenses/gdbm-1.13/COPYING
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.38.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glib2-2.56.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
@@ -16647,7 +16647,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.79.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -16723,7 +16723,7 @@
 -rw-r--r--    12KiB /usr/share/locale/bg/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   155KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    26KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   872KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
+-rw-r--r--   879KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
 -rw-r--r--   131KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/bg/LC_MESSAGES/gprof.mo
 -rw-r--r--   1.8KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
@@ -16754,7 +16754,7 @@
 -rw-r--r--   318KiB /usr/share/locale/ca/LC_MESSAGES/coreutils.mo
 -rw-r--r--   7.9KiB /usr/share/locale/ca/LC_MESSAGES/diffutils.mo
 -rw-r--r--    11KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   644KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
+-rw-r--r--   650KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
 -rw-r--r--   128KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
 -rw-r--r--    56KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    17KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
@@ -16834,7 +16834,7 @@
 -rw-r--r--    24KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
 -rw-r--r--    49KiB /usr/share/locale/de/LC_MESSAGES/gawk.mo
 -rw-r--r--    13KiB /usr/share/locale/de/LC_MESSAGES/gdbm.mo
--rw-r--r--   649KiB /usr/share/locale/de/LC_MESSAGES/git.mo
+-rw-r--r--   655KiB /usr/share/locale/de/LC_MESSAGES/git.mo
 -rw-r--r--   127KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   186KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
@@ -17009,7 +17009,7 @@
 -rw-r--r--   520KiB /usr/share/locale/fr/LC_MESSAGES/gas.mo
 -rw-r--r--    50KiB /usr/share/locale/fr/LC_MESSAGES/gawk.mo
 -rw-r--r--    17KiB /usr/share/locale/fr/LC_MESSAGES/gdbm.mo
--rw-r--r--   649KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
+-rw-r--r--   655KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
 -rw-r--r--   133KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
 -rw-r--r--   191KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    85KiB /usr/share/locale/fr/LC_MESSAGES/gold.mo
@@ -17141,7 +17141,7 @@
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/diffutils.mo
 -rw-r--r--    24KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
 -rw-r--r--   409KiB /usr/share/locale/id/LC_MESSAGES/gas.mo
--rw-r--r--   604KiB /usr/share/locale/id/LC_MESSAGES/git.mo
+-rw-r--r--   612KiB /usr/share/locale/id/LC_MESSAGES/git.mo
 -rw-r--r--   119KiB /usr/share/locale/id/LC_MESSAGES/glib20.mo
 -rw-r--r--    54KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    48KiB /usr/share/locale/id/LC_MESSAGES/gold.mo
@@ -17586,7 +17586,7 @@
 -rw-r--r--    23KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
 -rw-r--r--   463KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--    46KiB /usr/share/locale/sv/LC_MESSAGES/gawk.mo
--rw-r--r--   613KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
+-rw-r--r--   618KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
 -rw-r--r--   121KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   176KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   5.3KiB /usr/share/locale/sv/LC_MESSAGES/gold.mo
@@ -17637,7 +17637,7 @@
 -rw-r--r--    34KiB /usr/share/locale/tr/LC_MESSAGES/diffutils.mo
 -rw-r--r--    20KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
 -rw-r--r--   249KiB /usr/share/locale/tr/LC_MESSAGES/gas.mo
--rw-r--r--   631KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
+-rw-r--r--   637KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
 -rw-r--r--   123KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
 -rw-r--r--   173KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/tr/LC_MESSAGES/gprof.mo
@@ -17738,7 +17738,7 @@
 -rw-r--r--   7.4KiB /usr/share/locale/zh_CN/LC_MESSAGES/diffutils.mo
 -rw-r--r--    28KiB /usr/share/locale/zh_CN/LC_MESSAGES/findutils.mo
 -rw-r--r--   3.8KiB /usr/share/locale/zh_CN/LC_MESSAGES/gas.mo
--rw-r--r--   581KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
+-rw-r--r--   586KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
 -rw-r--r--   105KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
 -rw-r--r--   109KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   8.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/gold.mo
@@ -17768,7 +17768,7 @@
 -rw-r--r--   1.8KiB /usr/share/locale/zh_TW/LC_MESSAGES/cracklib.mo
 -rw-r--r--   7.6KiB /usr/share/locale/zh_TW/LC_MESSAGES/diffutils.mo
 -rw-r--r--   7.3KiB /usr/share/locale/zh_TW/LC_MESSAGES/findutils.mo
--rw-r--r--   583KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
+-rw-r--r--   589KiB /usr/share/locale/zh_TW/LC_MESSAGES/git.mo
 -rw-r--r--   104KiB /usr/share/locale/zh_TW/LC_MESSAGES/glib20.mo
 -rw-r--r--   167KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/zh_TW/LC_MESSAGES/grep.mo
@@ -20508,7 +20508,7 @@
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--     721B /usr/share/zsh/site-functions/_bootctl
 -rw-r--r--   1.5KiB /usr/share/zsh/site-functions/_coredumpctl
--rw-r--r--    15KiB /usr/share/zsh/site-functions/_curl
+-rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--   2.2KiB /usr/share/zsh/site-functions/_hostnamectl
 -rw-r--r--   4.6KiB /usr/share/zsh/site-functions/_journalctl
 -rw-r--r--     614B /usr/share/zsh/site-functions/_kernel-install
@@ -20758,7 +20758,7 @@ lrwxrwxrwx      17B /usr/lib64/libcrack.so.2	libcrack.so.2.9.0
 lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
 lrwxrwxrwx      22B /usr/lib64/libcryptsetup.so.4	libcryptsetup.so.4.7.0
-lrwxrwxrwx      16B /usr/lib64/libcurl.so.4	libcurl.so.4.7.0
+lrwxrwxrwx      16B /usr/lib64/libcurl.so.4	libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so	libdb-5.3.so
 lrwxrwxrwx      20B /usr/lib64/libdbus-1.so.3	libdbus-1.so.3.14.14
 lrwxrwxrwx      13B /usr/lib64/libdl.so.2	libdl-2.26.so
@@ -21036,7 +21036,6 @@ lrwxrwxrwx      16B /usr/sbin/telinit	../bin/systemctl
 lrwxrwxrwx      14B /usr/sbin/udevadm	../bin/udevadm
 lrwxrwxrwx      12B /usr/sbin/update-alternatives	alternatives
 lrwxrwxrwx       4B /usr/sbin/vigr	vipw
-lrwxrwxrwx       3B /usr/share/bash-completion/completions/gitk	git
 lrwxrwxrwx       2B /usr/share/bash-completion/completions/runuser	su
 lrwxrwxrwx       3B /usr/share/bash-completion/completions/yummain.py	yum
 lrwxrwxrwx      51B /usr/share/dbus-1/services/org.freedesktop.systemd1.service	../system-services/org.freedesktop.systemd1.service
