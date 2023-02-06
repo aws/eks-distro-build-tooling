@@ -72,10 +72,10 @@ type Server struct {
 
 	repos   []github.Repo
 	mapLock sync.Mutex
-	lockMap map[upstreamPickRequest]*sync.Mutex
+	lockMap map[upstreamIssuePickRequest]*sync.Mutex
 }
 
-type upstreamPickRequest struct {
+type upstreamIssuePickRequest struct {
 	org    string
 	repo   string
 	issNum int
@@ -169,13 +169,13 @@ func (s *Server) handle(logger *logrus.Entry, requestor string, issue *github.Is
 	func() {
 		s.mapLock.Lock()
 		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[upstreamPickRequest{org, repo, num}]; !ok {
+		if _, ok := s.lockMap[upstreamIssuePickRequest{org, repo, num}]; !ok {
 			if s.lockMap == nil {
-				s.lockMap = map[upstreamPickRequest]*sync.Mutex{}
+				s.lockMap = map[upstreamIssuePickRequest]*sync.Mutex{}
 			}
-			s.lockMap[upstreamPickRequest{org, repo, num}] = &sync.Mutex{}
+			s.lockMap[upstreamIssuePickRequest{org, repo, num}] = &sync.Mutex{}
 		}
-		lock = s.lockMap[upstreamPickRequest{org, repo, num}]
+		lock = s.lockMap[upstreamIssuePickRequest{org, repo, num}]
 	}()
 	lock.Lock()
 	defer lock.Unlock()
