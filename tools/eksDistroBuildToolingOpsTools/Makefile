@@ -1,5 +1,4 @@
 GIT_VERSION?=v0.0.0-dev
-IMAGE_BUILD_ID=$(shell cat ./EKS_DISTRO_PROW_PLUGIN_RELEASE)
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 
@@ -20,16 +19,19 @@ EKS_GO_TOOLS_BINARY_NAME="eksGoTools"
 EKS_PROW_PLUGIN_BINARY_NAME="eksDistroOpsProwPlugin"
 
 .PHONY: build-eks-go-tools
-build-eks-go-tools:
+build-eks-go-tools: unit-test
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_GO_TOOLS_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksGoTool
 
-.PHONY: build-prowPlugin
-build-prowPlugin: 
+.PHONY: build-binary-eksDistroOpsProwPlugin
+build-binary-eksDistroOpsProwPlugin: unit-test lint 
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_PROW_PLUGIN_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(EKS_PROW_PLUGIN_BINARY_NAME)
 
-.PHONY: images-eksDistroOpsProwPlugin
-images-eksDistroOpsProwPlugin: unit-test build-prowPlugin local-images-eksProwPlugin
+.PHONY: build-eksDistroOpsProwPlugin
+build-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin local-images-eksDistroOpsProwPlugin
 
+.PHONY: release-eksDistroOpsProwPlugin
+release-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin images-eksDistroOpsProwPlugin
+	
 .PHONY: unit-test
 unit-test:
 	go test -v ./... --cover
@@ -52,16 +54,17 @@ mocks: ## Generate mocks
 	go get github.com/golang/mock/mockgen@v1.6.0
 	${GOPATH}/bin/mockgen -destination=pkg/github/mocks/github.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github" GitClient,IssueClient,RepoClient,PullRequestClient
 
-.PHONY: local-images-eksProwPlugin
-local-images-eksProwPlugin: PUSH_IMAGE=false
-local-images-eksProwPlugin: images-eksProwPlugin
+.PHONY: local-images-eksDistroOpsProwPlugin
+local-images-eksDistroOpsProwPlugin: PUSH_IMAGE=false
+local-images-eksDistroOpsProwPlugin: images-eksDistroOpsProwPlugin
 
-.PHONY: images-eksProwPlugin
-images-eksProwPlugin: buildkit-check
-images-eksProwPlugin: IMAGE_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
-images-eksProwPlugin: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
-images-eksProwPlugin: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
-images-eksProwPlugin:
+.PHONY: images-eksDistroOpsProwPlugin
+images-eksDistroOpsProwPlugin: buildkit-check
+images-eksDistroOpsProwPlugin: IMAGE_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
+images-eksDistroOpsProwPlugin: IMAGE_BUILD_ID=$(PROJECT_DIRECTORY)/EKS_DISTRO_PROW_PLUGIN_RELEASE
+images-eksDistroOpsProwPlugin: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
+images-eksDistroOpsProwPlugin: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
+images-eksDistroOpsProwPlugin:
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
 		build \
 		--frontend dockerfile.v0 \
@@ -69,7 +72,8 @@ images-eksProwPlugin:
 		--local dockerfile=$(PROJECT_DIRECTORY)/docker \
 		--local context=$(PROJECT_DIRECTORY) \
 		--progress plain \
-		--opt build-arg:BINARY_OUTPUT_PATH=bin/$(GO_OS)/$(GO_ARCH)/eksDistroOpsProwPlugin \
+		--opt build-arg:BINARY_OUTPUT_PATH=bin/$(GO_OS)/$(GO_ARCH)/$(EKS_PROW_PLUGIN_BINARY_NAME) \
+		--opt build-arg:BINARY_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
 		--output $(BUILDKIT_OUTPUT)
 
 .PHONY: buildkit-check
