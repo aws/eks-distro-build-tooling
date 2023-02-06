@@ -1,4 +1,4 @@
-FROM public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base:latest
+FROM public.ecr.aws/eks-distro-build-tooling/eks-distro-base:latest
 
 ARG BINARY_OUTPUT_PATH
 
