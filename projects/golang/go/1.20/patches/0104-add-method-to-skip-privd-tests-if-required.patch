@@ -1,0 +1,53 @@
+From 7293851230d330152fde30d3263e94005795591f Mon Sep 17 00:00:00 2001
+From: Daniel Budris <budris@amazon.com>
+Date: Tue, 4 Oct 2022 16:31:07 -0400
+Subject: [PATCH] add method to skip privd tests if required
+
+---
+ src/syscall/exec_linux_test.go | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/src/syscall/exec_linux_test.go b/src/syscall/exec_linux_test.go
+index a6900f9033..09fc8322cf 100644
+--- a/src/syscall/exec_linux_test.go
++++ b/src/syscall/exec_linux_test.go
+@@ -52,6 +52,12 @@ func skipInContainer(t *testing.T) {
+ 	}
+ }
+ 
++func skipPrivilegedTests(t *testing.T) {
++	if os.Getenv("SKIP_PRIVILEGED_TESTS") == "true" {
++		t.Skip("skipping this privileged test")
++	}
++}
++
+ func skipNoUserNamespaces(t *testing.T) {
+ 	if _, err := os.Stat("/proc/self/ns/user"); err != nil {
+ 		if os.IsNotExist(err) {
+@@ -327,6 +333,7 @@ func TestUnshareMountNameSpaceHelper(*testing.T) {
+ // Test for Issue 38471: unshare fails because systemd has forced / to be shared
+ func TestUnshareMountNameSpace(t *testing.T) {
+ 	skipInContainer(t)
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+@@ -369,6 +376,7 @@ func TestUnshareMountNameSpace(t *testing.T) {
+ // Test for Issue 20103: unshare fails when chroot is used
+ func TestUnshareMountNameSpaceChroot(t *testing.T) {
+ 	skipInContainer(t)
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+@@ -634,6 +642,7 @@ func TestAmbientCapsHelper(*testing.T) {
+ }
+
+ func TestAmbientCaps(t *testing.T) {
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+--
+2.39.1
+
