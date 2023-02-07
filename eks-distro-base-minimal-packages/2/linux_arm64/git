@@ -6,7 +6,7 @@ cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 fipscheck-lib-1.4.1-6.amzn2.0.2.aarch64
-git-core-2.38.1-1.amzn2.0.1.aarch64
+git-core-2.39.1-1.amzn2.0.1.aarch64
 glibc-2.26-62.amzn2.aarch64
 glibc-common-2.26-62.amzn2.aarch64
 glibc-minimal-langpack-2.26-62.amzn2.aarch64
@@ -17,7 +17,7 @@ krb5-libs-1.15.1-55.amzn2.2.5.aarch64
 libassuan-2.1.0-3.amzn2.0.2.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-62.amzn2.aarch64
-libcurl-7.79.1-7.amzn2.0.1.aarch64
+libcurl-7.87.0-2.amzn2.0.1.aarch64
 libedit-3.0-12.20121213cvs.amzn2.0.2.aarch64
 libgcc-7.3.1-15.amzn2.aarch64
 libgcrypt-1.5.3-14.amzn2.0.3.aarch64
