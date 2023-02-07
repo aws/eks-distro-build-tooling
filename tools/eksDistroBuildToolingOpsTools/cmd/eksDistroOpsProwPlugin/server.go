@@ -19,7 +19,7 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
-const pluginName = "golangPatchRelease"
+const pluginName = "eksdistroopstool"
 
 type githubClient interface {
 	AssignIssue(org, repo string, number int, logins []string) error
