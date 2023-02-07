@@ -55,7 +55,7 @@ endif
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
-build: golang-build sync-artifacts-to-s3-dry-run local-images
+build: golang-build sync-artifacts-to-s3-dry-run remove-rpmbuild local-images
 build:
 	echo "test"
 
@@ -100,6 +100,10 @@ ifeq (, $(shell which rpmbuild))
 	$(error "No rpmbuild in $(PATH), try 'yum install rpmbuild'")
 endif
 	rpmbuild -v -ba $(VERSION_DIRECTORY)/rpmbuild/SPECS/golang.spec --define "_rpmdir $(VERSION_DIRECTORY)/rpmbuild" --define "_buildid $(BUILD_ID)"
+
+.PHONY: remove-rpmbuild
+remove-rpmbuild:
+	rm -rf $(VERSION_DIRECTORY)/rpmbuild
 
 .PHONY: local-images
 local-images: PUSH_IMAGES=false
