@@ -61,7 +61,7 @@ local-images-eksDistroOpsProwPlugin: images-eksDistroOpsProwPlugin
 .PHONY: images-eksDistroOpsProwPlugin
 images-eksDistroOpsProwPlugin: buildkit-check
 images-eksDistroOpsProwPlugin: IMAGE_NAME=$(EKS_PROW_PLUGIN_BINARY_NAME)
-images-eksDistroOpsProwPlugin: IMAGE_BUILD_ID=$(shell cat $PROJECT_DIRECTORY/EKS_DISTRO_PROW_PLUGIN_RELEASE)
+images-eksDistroOpsProwPlugin: IMAGE_BUILD_ID=$(shell cat $(PROJECT_DIRECTORY)/EKS_DISTRO_PROW_PLUGIN_RELEASE)
 images-eksDistroOpsProwPlugin: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_BUILD_ID)
 images-eksDistroOpsProwPlugin: BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
 images-eksDistroOpsProwPlugin:
