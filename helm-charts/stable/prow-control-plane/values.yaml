@@ -34,16 +34,6 @@ repositories:
     - issue_comment
     - pull_request
     endpoint: http://cherrypicker
-- org: "rcrozean"
-  name: "eks-distro-build-tooling"
-  extraPlugins: []
-  extraExternalPlugins:
-  - name: eksdistroopstool
-    events:
-    - issue_comment
-    - pull_request
-    - issue
-    endpoint: http://eksdistroopstool
 prow:
   domain: ''
   presubmitsBucketName: ''
@@ -202,7 +192,3 @@ plugins:
 cherrypicker:
   serviceName: cherrypicker
   image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
-
-eksdistroopstool:
-  serviceName: eksdistroopstool
-  image: public.ecr.aws/eks-distro-build-tooling/eks-distro-ops-tool:0 
