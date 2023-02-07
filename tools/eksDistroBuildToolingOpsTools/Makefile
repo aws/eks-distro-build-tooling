@@ -56,7 +56,7 @@ mocks: ## Generate mocks
 	${GOPATH}/bin/mockgen -destination=pkg/github/mocks/github.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github" GitClient,IssueClient,RepoClient,PullRequestClient
 
 .PHONY: local-images-eksDistroOpsProwPlugin
-local-images-eksDistroOpsProwPlugin: PUSH_IMAGE=false
+local-images-eksDistroOpsProwPlugin: PUSH_IMAGES=false
 local-images-eksDistroOpsProwPlugin: images-eksDistroOpsProwPlugin
 
 .PHONY: images-eksDistroOpsProwPlugin
