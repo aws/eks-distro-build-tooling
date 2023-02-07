@@ -64,4 +64,4 @@ spec:
           secretName: hmac-token
       - name: github-token
         secret:
-          secretName: pr-bot-github-token
+          secretName: github-token
