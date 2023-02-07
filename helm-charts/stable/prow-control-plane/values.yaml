@@ -192,7 +192,3 @@ plugins:
 cherrypicker:
   serviceName: cherrypicker
   image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
-
-eksdistroopstool:
-  serviceName: eksdistroopstool
-  image: 
