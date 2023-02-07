@@ -25,8 +25,8 @@ ifeq ($(ARCHITECTURE), ARM64)
 endif
 ARCH_LOWER=$(call TO_LOWER,$(ARCHITECTURE))
 
-ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
-NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
+ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/$(RPM_ARCH)/RPMS/$(RPM_ARCH)
+NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/$(RPM_ARCH)/RPMS/noarch
 ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
