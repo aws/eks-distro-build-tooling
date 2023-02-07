@@ -55,7 +55,7 @@ endif
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
-build: golang-build sync-artifacts-to-s3-dry-run remove-rpmbuild local-images
+build: golang-build sync-artifacts-to-s3-dry-run clean local-images
 build:
 	echo "test"
 
@@ -224,6 +224,7 @@ clean:
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/noarch
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/x86_64
 	rm -rf $(HOME)/rpmbuild
+	rm -rf /tmp/go-extracted
 
 .PHONY: install-deps
 install-deps:
