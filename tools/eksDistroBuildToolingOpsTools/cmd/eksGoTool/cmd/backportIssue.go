@@ -72,14 +72,14 @@ var backportIssueCmd = &cobra.Command{
 			// tracked at eks-distro-build-tooling/golang/go/MAINTAINED_EOL_VERSIONS
 			// set up Repo Content Creator handler
 			repoManagerOpts := &repoManager.Opts{
-				SourceOwner: constants.Aws,
-				SourceRepo:  constants.EksdBuildTooling,
+				SourceOwner: constants.AwsOrgName,
+				SourceRepo:  constants.EksdBuildToolingRepoName,
 			}
 			rm := repoManager.New(retrier, githubClient, repoManagerOpts)
 
 			gfOpts := &repoManager.GetFileOpts{
-				Owner: constants.Aws,
-				Repo:  constants.EksdBuildTooling,
+				Owner: constants.AwsOrgName,
+				Repo:  constants.EksdBuildToolingRepoName,
 				Path:  constants.EksGoSupportedVersionsPath,
 				Ref:   nil,
 			}
@@ -98,14 +98,14 @@ var backportIssueCmd = &cobra.Command{
 
 		// set up Issue Creator handler
 		issueManagerOpts := &issueManager.Opts{
-			SourceOwner: constants.Aws,
-			SourceRepo:  constants.EksdBuildTooling,
+			SourceOwner: constants.AwsOrgName,
+			SourceRepo:  constants.EksdBuildToolingRepoName,
 		}
 		im := issueManager.New(retrier, githubClient, issueManagerOpts)
 
 		giOpts := &issueManager.GetIssueOpts{
-			Owner: constants.Aws,
-			Repo:  constants.EksdBuildTooling,
+			Owner: constants.AwsOrgName,
+			Repo:  constants.EksdBuildToolingRepoName,
 			Issue: bpOptions.toplevelIssueId,
 		}
 
