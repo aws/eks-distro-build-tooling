@@ -1,14 +1,14 @@
-From 078b37dbc4223714440aa1593a5a8f0dfd58daea Mon Sep 17 00:00:00 2001
+From 7293851230d330152fde30d3263e94005795591f Mon Sep 17 00:00:00 2001
 From: Daniel Budris <budris@amazon.com>
 Date: Tue, 4 Oct 2022 16:31:07 -0400
 Subject: [PATCH] add method to skip privd tests if required
 
 ---
- src/syscall/exec_linux_test.go | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ src/syscall/exec_linux_test.go | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/src/syscall/exec_linux_test.go b/src/syscall/exec_linux_test.go
-index a6900f9033..aab3ec680d 100644
+index a6900f9033..09fc8322cf 100644
 --- a/src/syscall/exec_linux_test.go
 +++ b/src/syscall/exec_linux_test.go
 @@ -52,6 +52,12 @@ func skipInContainer(t *testing.T) {
@@ -40,6 +40,14 @@ index a6900f9033..aab3ec680d 100644
  	// Make sure we are running as root so we have permissions to use unshare
  	// and create a network namespace.
  	if os.Getuid() != 0 {
--- 
+@@ -634,6 +642,7 @@ func TestAmbientCapsHelper(*testing.T) {
+ }
+
+ func TestAmbientCaps(t *testing.T) {
++	skipPrivilegedTests(t)
+ 	// Make sure we are running as root so we have permissions to use unshare
+ 	// and create a network namespace.
+ 	if os.Getuid() != 0 {
+--
 2.39.1
 
