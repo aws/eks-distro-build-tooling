@@ -25,8 +25,8 @@ ifeq ($(ARCHITECTURE), ARM64)
 endif
 ARCH_LOWER=$(call TO_LOWER,$(ARCHITECTURE))
 
-ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/$(RPM_ARCH)
-NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/RPMS/noarch
+ARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/$(RPM_ARCH)/RPMS/$(RPM_ARCH)
+NOARCH_RPM_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/$(RPM_ARCH)/RPMS/noarch
 ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
@@ -55,7 +55,7 @@ endif
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
-build: golang-build sync-artifacts-to-s3-dry-run local-images
+build: golang-build sync-artifacts-to-s3-dry-run clean local-images
 build:
 	echo "test"
 
@@ -220,6 +220,7 @@ clean:
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/noarch
 	rm -rf $(VERSION_DIRECTORY)/rpmbuild/x86_64
 	rm -rf $(HOME)/rpmbuild
+	rm -rf /tmp/go-extracted
 
 .PHONY: install-deps
 install-deps:
