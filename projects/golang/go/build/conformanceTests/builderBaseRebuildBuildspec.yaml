@@ -20,10 +20,10 @@ env:
   variables:
     ARTIFACTS_BUCKET: "eks-d-postsubmit-artifacts"
     BUILDKIT_PLATFORMS: "linux/amd64"
-    IMAGE_NAME: "builder-base-development"
-    UPDATE_BASE_IMAGE: "false"
     EKS_D_BUILD_TOOLING_REMOTE_URL: "https://github.com/aws/eks-distro-build-tooling.git"
+    IMAGE_NAME: "builder-base-development"
     TARGET_BRANCH: "codebuildTest"
+    UPDATE_BASE_IMAGE: "false"
 
 phases:
   pre_build:
