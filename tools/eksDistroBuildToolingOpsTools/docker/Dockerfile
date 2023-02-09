@@ -9,4 +9,4 @@ ADD $BINARY_OUTPUT_PATH /usr/bin
 
 RUN chmod +x /usr/bin/$BINARY_NAME
 
-ENTRYPOINT echo $OPS_TOOL_BINARY
+ENTRYPOINT ["eksDistroOpsProwPlugin"]
