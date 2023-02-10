@@ -49,7 +49,7 @@ function build::go::symlink() {
     # Removing the last number as we only care about the major version of golang
     local -r majorversion=$(if [[ $(echo "$version"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
     mkdir -p ${GOPATH}/go${majorversion}/bin
-    if [ "$version" != "$majorversion"]; then
+    if [ "$version" != "$majorversion" ]; then
         for binary in go gofmt; do
             ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
         done
