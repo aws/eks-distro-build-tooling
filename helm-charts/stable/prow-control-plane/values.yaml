@@ -24,7 +24,13 @@ repositories:
 - org: "aws"
   name: "eks-distro-prow-jobs"
   extraPlugins: ["config-updater"]
-  extraExternalPlugins: []
+  extraExternalPlugins: 
+  - name: eksdistroopstool
+    events:
+    - issue_comment
+    - pull_request
+    - issues
+    endpoint: http://eksdistroopstool
 - org: "aws"
   name: "eks-anywhere"
   extraPlugins: []
@@ -192,3 +198,7 @@ plugins:
 cherrypicker:
   serviceName: cherrypicker
   image:  gcr.io/k8s-prow/cherrypicker:v20200924-369a496323 
+
+eksdistroopstool:
+  serviceName: eksdistroopstool
+  image:  public.ecr.aws/eks-distro-build-tooling/eks-distro-ops-tool:0
