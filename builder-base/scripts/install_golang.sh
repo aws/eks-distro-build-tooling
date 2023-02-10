@@ -39,8 +39,9 @@ function build::go::symlink() {
         for binary in go gofmt; do
             ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
         done
+    
+        ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
     fi
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
 }
 
 function build::go::install(){
