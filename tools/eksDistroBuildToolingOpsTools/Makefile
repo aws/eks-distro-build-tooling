@@ -16,12 +16,17 @@ GO_ARCH:=$(shell go env GOARCH)
 GO_OS:=$(shell go env GOOS)
 
 EKS_GO_TOOLS_BINARY_NAME=eksGoTools
+CONSUMER_UPDATER_BINARY_NAME=consumerUpdater
 EKS_PROW_PLUGIN_BINARY_NAME=eksDistroOpsProwPlugin
 EKS_DISTRO_PROW_PLUGIN_ECR_NAME=eks-distro-ops-tool
 
 .PHONY: build-eks-go-tools
 build-eks-go-tools: unit-test lint
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_GO_TOOLS_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksGoTool
+
+.PHONY: build-consumerUpdater
+build-consumerUpdater: unit-test lint
+	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(CONSUMER_UPDATER_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(CONSUMER_UPDATER_BINARY_NAME)
 
 .PHONY: build-binary-eksDistroOpsProwPlugin
 build-binary-eksDistroOpsProwPlugin: unit-test lint 
