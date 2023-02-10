@@ -224,7 +224,7 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}
-		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.AwsOrgName, constants.EksdBuildToolingRepoName, miNum))
+		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", "rcrozean", constants.EksdBuildToolingRepoName, miNum))
 	}
 	return nil
 }
