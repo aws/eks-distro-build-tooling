@@ -91,6 +91,12 @@ printf "\n\nExporting packages and files from  base-compiler-gcc final image\n\n
 if [ -f /override/root/../eks-distro-base-minimal-packages/2/compiler-gcc ]; then \
 		mv /override/root/../eks-distro-base-minimal-packages/2/compiler-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
 	fi
+tag from file for eks-distro-minimal-base-python-3.7: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-3.7 final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-3.7 --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-3.7 ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-3.7* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
 tag from file for eks-distro-minimal-base-python-3.9: some-previous-tag
 printf "\n\nExporting packages and files from  base-python-3.9 final image\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-3.9 --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
@@ -193,6 +199,24 @@ printf "\n\nExporting packages and files from  base-golang-compiler-1.19-gcc fin
 if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.19-gcc ]; then \
 		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.19-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
 	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.20-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.20-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.20-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-base ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-base* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.20-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.20-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.20-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-yum ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-yum* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.20-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.20-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.20-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-gcc ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
 printf "\n\nExporting packages and files from  base-nodejs-compiler-16-base final image\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
@@ -210,4 +234,40 @@ printf "\n\nExporting packages and files from  base-nodejs-compiler-16-gcc final
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
 if [ -f /override/root/../eks-distro-base-minimal-packages/2/nodejs-compiler-16-gcc ]; then \
 		mv /override/root/../eks-distro-base-minimal-packages/2/nodejs-compiler-16-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.7-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.7-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.7-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-base ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-base* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.9-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.9-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.9-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-base ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-base* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.7-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.7-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.7-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-yum ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-yum* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.9-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.9-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.9-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-yum ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-yum* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.7-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.7-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.7-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-gcc ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.7-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-python-compiler-3.9-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-python-compiler-3.9-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/python-builder:some-previous-tag --opt build-arg:EXPORT_NAME=python-compiler-3.9-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-gcc ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/python-compiler-3.9-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
 	fi

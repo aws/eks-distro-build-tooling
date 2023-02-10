@@ -45,6 +45,7 @@ fi
 mkdir -p /go/src/github.com/aws/eks-distro
 
 yum install -y \
+    bc \
     bind-utils \
     bzip2 \
     cpio \

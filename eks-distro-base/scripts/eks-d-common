@@ -392,6 +392,13 @@ function build::common::clean_install() {
     local -r force=${4:-}
     local -r extract_dir="${5:-$NEWROOT}"
     
+    if [ "$NEWROOT" != "/" ] && [ -f /etc/dnf/vars/releasever ] && [ ! -f $NEWROOT/etc/dnf/vars/releasever ]; then
+        # on al22 we set releasever to latest in the base image, but for images that also install
+        # yum, they seem to ignore the releasever file in the /etc dir, copy to newroot as well to fix this
+        mkdir -p $NEWROOT/etc/dnf/vars
+        cp /etc/dnf/vars/releasever $NEWROOT/etc/dnf/vars/
+    fi
+
     if [ $just_db ]; then
         just_db="--justdb"
     else

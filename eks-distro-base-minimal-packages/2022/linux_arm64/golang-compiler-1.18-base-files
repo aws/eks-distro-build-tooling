@@ -17,6 +17,7 @@
 -rw-r--r--      89B /etc/dnf/plugins/release-notification.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
+-rw-r--r--       7B /etc/dnf/vars/releasever
 -rw-r--r--       0B /etc/environment
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
@@ -81,8 +82,8 @@
 -rw-r--r--     216B /etc/profile.d/colorzgrep.csh
 -rw-r--r--     220B /etc/profile.d/colorzgrep.sh
 -rw-r--r--      80B /etc/profile.d/csh.local
--rw-r--r--     664B /etc/profile.d/debuginfod.csh
--rw-r--r--     586B /etc/profile.d/debuginfod.sh
+-rw-r--r--     674B /etc/profile.d/debuginfod.csh
+-rw-r--r--     596B /etc/profile.d/debuginfod.sh
 -rw-r--r--   1.1KiB /etc/profile.d/gawk.csh
 -rw-r--r--     757B /etc/profile.d/gawk.sh
 -rw-r--r--   3.4KiB /etc/profile.d/lang.csh
@@ -11945,13 +11946,13 @@
 -rwxr-xr-x      33B /usr/bin/alias
 -rwxr-xr-x    69KiB /usr/bin/ar
 -rwxr-xr-x    69KiB /usr/bin/arch
--rwxr-xr-x   461KiB /usr/bin/as
+-rwxr-xr-x   462KiB /usr/bin/as
 -rwxr-xr-x    69KiB /usr/bin/b2sum
 -rwxr-xr-x    69KiB /usr/bin/base32
 -rwxr-xr-x    69KiB /usr/bin/base64
 -rwxr-xr-x    69KiB /usr/bin/basename
 -rwxr-xr-x    69KiB /usr/bin/basenc
--rwxr-xr-x   1.4MiB /usr/bin/bash
+-rwxr-xr-x   1.5MiB /usr/bin/bash
 -rwxr-xr-x   7.1KiB /usr/bin/bashbug-64
 -rwxr-xr-x      30B /usr/bin/bg
 -rwxr-xr-x    68KiB /usr/bin/c++filt
@@ -11977,12 +11978,12 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   134KiB /usr/bin/cp
 -rwxr-xr-x   135KiB /usr/bin/csplit
--rwxr-xr-x   263KiB /usr/bin/curl
+-rwxr-xr-x   391KiB /usr/bin/curl
 -rwxr-xr-x    69KiB /usr/bin/cut
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   133KiB /usr/bin/date
 -rwxr-xr-x    69KiB /usr/bin/dd
--rwxr-xr-x    69KiB /usr/bin/debuginfod-find
+-rwxr-xr-x   197KiB /usr/bin/debuginfod-find
 -rwxr-xr-x   134KiB /usr/bin/df
 -rwxr-xr-x   135KiB /usr/bin/dir
 -rwxr-xr-x    69KiB /usr/bin/dircolors
@@ -12583,17 +12584,17 @@
 -rw-r--r--   109KiB /usr/lib64/guile/2.2/ccache/web/server/http.go
 -rw-r--r--   200KiB /usr/lib64/guile/2.2/ccache/web/uri.go
 -rwxr-xr-x    69KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
--rwxr-xr-x   133KiB /usr/lib64/krb5/plugins/preauth/spake.so
--rwxr-xr-x    68KiB /usr/lib64/krb5/plugins/tls/k5tls.so
+-rwxr-xr-x   197KiB /usr/lib64/krb5/plugins/preauth/spake.so
+-rwxr-xr-x   196KiB /usr/lib64/krb5/plugins/tls/k5tls.so
 -rwxr-xr-x    68KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    68KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    69KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x    68KiB /usr/lib64/libanl.so.1
--rwxr-xr-x    69KiB /usr/lib64/libasm-0.187.so
+-rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    69KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   133KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   198KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.38-20.amzn2022.0.3.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2022.0.3.so
 -rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    68KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -12611,15 +12612,15 @@
 -rwxr-xr-x   4.1MiB /usr/lib64/libcrypto.so.3.0.5
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   199KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   725KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
--rwxr-xr-x    68KiB /usr/lib64/libdebuginfod-0.187.so
+-rwxr-xr-x   197KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    68KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x    68KiB /usr/lib64/libdrop_ambient.so.0.0.0
--rwxr-xr-x   654KiB /usr/lib64/libdw-0.187.so
+-rwxr-xr-x   718KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x    69KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
--rwxr-xr-x   135KiB /usr/lib64/libelf-0.187.so
+-rwxr-xr-x   263KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x   199KiB /usr/lib64/libexpat.so.1.8.10
 -rwxr-xr-x   338KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    68KiB /usr/lib64/libffi.so.6.0.2
@@ -12632,17 +12633,18 @@
 -rwxr-xr-x    69KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x    68KiB /usr/lib64/libgdbm_compat.so.4.0.0
 -rwxr-xr-x   522KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   332KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   136KiB /usr/lib64/libgssrpc.so.4.2
+-rwxr-xr-x   396KiB /usr/lib64/libgssapi_krb5.so.2.2
+-rwxr-xr-x   264KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x   1.3MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x    69KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   133KiB /usr/lib64/libidn2.so.0.3.7
--rwxr-xr-x   134KiB /usr/lib64/libk5crypto.so.3.1
--rwxr-xr-x   134KiB /usr/lib64/libkdb5.so.10.0
+-rwxr-xr-x    69KiB /usr/lib64/libjansson.so.4.13.0
+-rwxr-xr-x   198KiB /usr/lib64/libk5crypto.so.3.1
+-rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x    69KiB /usr/lib64/libkeyutils.so.1.9
--rwxr-xr-x    69KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   919KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x    70KiB /usr/lib64/libkrb5support.so.0.1
+-rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
+-rwxr-xr-x   983KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x    70KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   394KiB /usr/lib64/libldap_r-2.4.so.2.11.5
 -rwxr-xr-x    69KiB /usr/lib64/libltdl.so.7.3.2
@@ -12662,7 +12664,7 @@
 -rwxr-xr-x   199KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   135KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   330KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.38-20.amzn2022.0.3.so
+-rwxr-xr-x   2.4MiB /usr/lib64/libopcodes-2.39-6.amzn2022.0.3.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    68KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    68KiB /usr/lib64/libpamc.so.0.82.1
@@ -12680,7 +12682,7 @@
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    68KiB /usr/lib64/librt.so.1
--rwxr-xr-x   135KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   268KiB /usr/lib64/libsemanage.so.2
 -rwxr-xr-x   721KiB /usr/lib64/libsepol.so.2
@@ -12704,8 +12706,8 @@
 -rwxr-xr-x   650KiB /usr/lib64/libzstd.so.1.5.2
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   134KiB /usr/lib64/ossl-modules/legacy.so
--rwxr-xr-x    69KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x    69KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    68KiB /usr/lib64/security/pam_chroot.so
@@ -12871,8 +12873,8 @@
 -rwxr-xr-x    69KiB /usr/sbin/rfkill
 -rwxr-xr-x    69KiB /usr/sbin/rtcwake
 -rwxr-xr-x    69KiB /usr/sbin/runuser
--rwxr-xr-x    69KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x    69KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x    68KiB /usr/sbin/setcap
 -rwxr-xr-x   133KiB /usr/sbin/sfdisk
 -rwxr-xr-x    69KiB /usr/sbin/sulogin
@@ -13524,9 +13526,9 @@
 -rw-r--r--    16KiB /usr/share/guile/2.2/web/server.scm
 -rw-r--r--   6.4KiB /usr/share/guile/2.2/web/server/http.scm
 -rw-r--r--    20KiB /usr/share/guile/2.2/web/uri.scm
--rw-r--r--   290KiB /usr/share/info/as.info.gz
+-rw-r--r--   291KiB /usr/share/info/as.info.gz
 -rw-r--r--   148KiB /usr/share/info/bash.info.gz
--rw-r--r--   131KiB /usr/share/info/bfd.info.gz
+-rw-r--r--   129KiB /usr/share/info/bfd.info.gz
 -rw-r--r--    70KiB /usr/share/info/binutils.info.gz
 -rw-r--r--   233KiB /usr/share/info/coreutils.info.gz
 -rw-r--r--    21KiB /usr/share/info/ctf-spec.info.gz
@@ -13600,6 +13602,7 @@
 -rw-r--r--     128B /usr/share/licenses/guile22/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/gzip/COPYING
 -rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
+-rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
 -rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/less/COPYING
@@ -13798,9 +13801,9 @@
 -rw-r--r--    83KiB /usr/share/locale/el/LC_MESSAGES/shadow.mo
 -rw-r--r--    15KiB /usr/share/locale/el/LC_MESSAGES/tar.mo
 -rw-r--r--   161KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
--rw-r--r--   154KiB /usr/share/locale/en@boldquot/LC_MESSAGES/elfutils.mo
+-rw-r--r--   155KiB /usr/share/locale/en@boldquot/LC_MESSAGES/elfutils.mo
 -rw-r--r--   160KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
--rw-r--r--   152KiB /usr/share/locale/en@quot/LC_MESSAGES/elfutils.mo
+-rw-r--r--   153KiB /usr/share/locale/en@quot/LC_MESSAGES/elfutils.mo
 -rw-r--r--     369B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--     494B /usr/share/locale/eo/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   159KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
@@ -13872,8 +13875,8 @@
 -rw-r--r--    80KiB /usr/share/locale/fi/LC_MESSAGES/util-linux.mo
 -rw-r--r--    11KiB /usr/share/locale/fr/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   186KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
--rw-r--r--   227KiB /usr/share/locale/fr/LC_MESSAGES/bfd.mo
--rw-r--r--   307KiB /usr/share/locale/fr/LC_MESSAGES/binutils.mo
+-rw-r--r--   230KiB /usr/share/locale/fr/LC_MESSAGES/bfd.mo
+-rw-r--r--   310KiB /usr/share/locale/fr/LC_MESSAGES/binutils.mo
 -rw-r--r--   379KiB /usr/share/locale/fr/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/fr/LC_MESSAGES/cracklib.mo
 -rw-r--r--    36KiB /usr/share/locale/fr/LC_MESSAGES/findutils.mo
@@ -13881,7 +13884,7 @@
 -rw-r--r--   649KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
 -rw-r--r--    12KiB /usr/share/locale/fr/LC_MESSAGES/gprof.mo
 -rw-r--r--    18KiB /usr/share/locale/fr/LC_MESSAGES/grep.mo
--rw-r--r--   150KiB /usr/share/locale/fr/LC_MESSAGES/ld.mo
+-rw-r--r--   154KiB /usr/share/locale/fr/LC_MESSAGES/ld.mo
 -rw-r--r--   6.6KiB /usr/share/locale/fr/LC_MESSAGES/libidn2.mo
 -rw-r--r--   6.3KiB /usr/share/locale/fr/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    44KiB /usr/share/locale/fr/LC_MESSAGES/make.mo
@@ -14013,6 +14016,7 @@
 -rw-r--r--    58KiB /usr/share/locale/ja/LC_MESSAGES/tar.mo
 -rw-r--r--   397KiB /usr/share/locale/ja/LC_MESSAGES/util-linux.mo
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
 -rw-r--r--    13KiB /usr/share/locale/kk/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
@@ -14106,7 +14110,7 @@
 -rw-r--r--   180KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
 -rw-r--r--   368KiB /usr/share/locale/pl/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/pl/LC_MESSAGES/cracklib.mo
--rw-r--r--   164KiB /usr/share/locale/pl/LC_MESSAGES/elfutils.mo
+-rw-r--r--   163KiB /usr/share/locale/pl/LC_MESSAGES/elfutils.mo
 -rw-r--r--    35KiB /usr/share/locale/pl/LC_MESSAGES/findutils.mo
 -rw-r--r--   600KiB /usr/share/locale/pl/LC_MESSAGES/git.mo
 -rw-r--r--    19KiB /usr/share/locale/pl/LC_MESSAGES/grep.mo
@@ -14168,9 +14172,9 @@
 -rw-r--r--   470KiB /usr/share/locale/ru/LC_MESSAGES/coreutils.mo
 -rw-r--r--   2.4KiB /usr/share/locale/ru/LC_MESSAGES/cracklib.mo
 -rw-r--r--    45KiB /usr/share/locale/ru/LC_MESSAGES/findutils.mo
--rw-r--r--   697KiB /usr/share/locale/ru/LC_MESSAGES/gas.mo
+-rw-r--r--   709KiB /usr/share/locale/ru/LC_MESSAGES/gas.mo
 -rw-r--r--   474KiB /usr/share/locale/ru/LC_MESSAGES/git.mo
--rw-r--r--    13KiB /usr/share/locale/ru/LC_MESSAGES/gprof.mo
+-rw-r--r--    11KiB /usr/share/locale/ru/LC_MESSAGES/gprof.mo
 -rw-r--r--    23KiB /usr/share/locale/ru/LC_MESSAGES/grep.mo
 -rw-r--r--   158KiB /usr/share/locale/ru/LC_MESSAGES/ld.mo
 -rw-r--r--   6.2KiB /usr/share/locale/ru/LC_MESSAGES/libidn2.mo
@@ -14212,17 +14216,17 @@
 -rw-r--r--   1.1KiB /usr/share/locale/sq/LC_MESSAGES/shadow.mo
 -rw-r--r--   8.9KiB /usr/share/locale/sr/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   228KiB /usr/share/locale/sr/LC_MESSAGES/bash.mo
--rw-r--r--   274KiB /usr/share/locale/sr/LC_MESSAGES/bfd.mo
--rw-r--r--   364KiB /usr/share/locale/sr/LC_MESSAGES/binutils.mo
+-rw-r--r--   278KiB /usr/share/locale/sr/LC_MESSAGES/bfd.mo
+-rw-r--r--   368KiB /usr/share/locale/sr/LC_MESSAGES/binutils.mo
 -rw-r--r--   394KiB /usr/share/locale/sr/LC_MESSAGES/coreutils.mo
 -rw-r--r--    45KiB /usr/share/locale/sr/LC_MESSAGES/findutils.mo
 -rw-r--r--    13KiB /usr/share/locale/sr/LC_MESSAGES/gprof.mo
 -rw-r--r--    21KiB /usr/share/locale/sr/LC_MESSAGES/grep.mo
--rw-r--r--   175KiB /usr/share/locale/sr/LC_MESSAGES/ld.mo
+-rw-r--r--   176KiB /usr/share/locale/sr/LC_MESSAGES/ld.mo
 -rw-r--r--   7.7KiB /usr/share/locale/sr/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.2KiB /usr/share/locale/sr/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    52KiB /usr/share/locale/sr/LC_MESSAGES/make.mo
--rw-r--r--    70KiB /usr/share/locale/sr/LC_MESSAGES/opcodes.mo
+-rw-r--r--    71KiB /usr/share/locale/sr/LC_MESSAGES/opcodes.mo
 -rw-r--r--    16KiB /usr/share/locale/sr/LC_MESSAGES/sed.mo
 -rw-r--r--    81KiB /usr/share/locale/sr/LC_MESSAGES/tar.mo
 -rw-r--r--   6.8KiB /usr/share/locale/sr@latin/LC_MESSAGES/Linux-PAM.mo
@@ -14230,7 +14234,7 @@
 -rw-r--r--   9.6KiB /usr/share/locale/sv/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   173KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
 -rw-r--r--   152KiB /usr/share/locale/sv/LC_MESSAGES/bfd.mo
--rw-r--r--   290KiB /usr/share/locale/sv/LC_MESSAGES/binutils.mo
+-rw-r--r--   293KiB /usr/share/locale/sv/LC_MESSAGES/binutils.mo
 -rw-r--r--   348KiB /usr/share/locale/sv/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.9KiB /usr/share/locale/sv/LC_MESSAGES/cracklib.mo
 -rw-r--r--    34KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
@@ -14279,16 +14283,16 @@
 -rw-r--r--   345KiB /usr/share/locale/tr/LC_MESSAGES/util-linux.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   232KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
--rw-r--r--   284KiB /usr/share/locale/uk/LC_MESSAGES/bfd.mo
--rw-r--r--   374KiB /usr/share/locale/uk/LC_MESSAGES/binutils.mo
+-rw-r--r--   288KiB /usr/share/locale/uk/LC_MESSAGES/bfd.mo
+-rw-r--r--   378KiB /usr/share/locale/uk/LC_MESSAGES/binutils.mo
 -rw-r--r--   462KiB /usr/share/locale/uk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   2.5KiB /usr/share/locale/uk/LC_MESSAGES/cracklib.mo
 -rw-r--r--   192KiB /usr/share/locale/uk/LC_MESSAGES/elfutils.mo
 -rw-r--r--    45KiB /usr/share/locale/uk/LC_MESSAGES/findutils.mo
--rw-r--r--   724KiB /usr/share/locale/uk/LC_MESSAGES/gas.mo
+-rw-r--r--   725KiB /usr/share/locale/uk/LC_MESSAGES/gas.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/gprof.mo
 -rw-r--r--    24KiB /usr/share/locale/uk/LC_MESSAGES/grep.mo
--rw-r--r--   181KiB /usr/share/locale/uk/LC_MESSAGES/ld.mo
+-rw-r--r--   185KiB /usr/share/locale/uk/LC_MESSAGES/ld.mo
 -rw-r--r--   8.1KiB /usr/share/locale/uk/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.8KiB /usr/share/locale/uk/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    55KiB /usr/share/locale/uk/LC_MESSAGES/make.mo
@@ -16308,7 +16312,7 @@
 -rw-r--r--      37B /var/lib/alternatives/ld
 -rw-r--r--   116KiB /var/lib/dnf/history.sqlite
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
--rw-r--r--   3.2MiB /var/lib/dnf/history.sqlite-wal
+-rw-r--r--   3.3MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   2.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -16382,7 +16386,7 @@ lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hm
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so guile-readline.so.0.0.0
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so.0 guile-readline.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
-lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.187.so
+lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
@@ -16405,12 +16409,12 @@ lrwxrwxrwx      15B /usr/lib64/libctf.so libctf.so.0.0.0
 lrwxrwxrwx      15B /usr/lib64/libctf.so.0 libctf.so.0.0.0
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
-lrwxrwxrwx      22B /usr/lib64/libdebuginfod.so.1 libdebuginfod-0.187.so
+lrwxrwxrwx      22B /usr/lib64/libdebuginfod.so.1 libdebuginfod-0.188.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
-lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.187.so
+lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
-lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.187.so
+lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
@@ -16428,6 +16432,7 @@ lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
 lrwxrwxrwx      21B /usr/lib64/libguile-2.2.so.1 libguile-2.2.so.1.4.2
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
 lrwxrwxrwx      16B /usr/lib64/libidn2.so.0 libidn2.so.0.3.7
+lrwxrwxrwx      20B /usr/lib64/libjansson.so.4 libjansson.so.4.13.0
 lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3 libk5crypto.so.3.1
 lrwxrwxrwx      15B /usr/lib64/libkdb5.so.10 libkdb5.so.10.0
 lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.9

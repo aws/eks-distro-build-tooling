@@ -601,7 +601,7 @@
 -rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
 -rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--   3.4KiB /usr/share/doc/nginx-1.22.0/UPGRADE-NOTES-1.6-to-1.10
+-rw-r--r--   3.4KiB /usr/share/doc/nginx-1.22.1/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -639,7 +639,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
--rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.22.0/LICENSE
+-rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.22.1/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1g/LICENSE
 -rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
