@@ -15,6 +15,7 @@ var (
 		Long:  "Tool for updating consumers of EKS Distro generated artifacts",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			var eksDReleases []*eksDistroRelease.Release
+			var eksDConsumers []consumerUpdater.Consumer
 			for _, v := range viper.GetStringSlice(eksDistroReleasesFlag) {
 				r, err := eksDistroRelease.NewEksDistroReleaseObject(v)
 				if err != nil {
@@ -22,12 +23,15 @@ var (
 				}
 				eksDReleases = append(eksDReleases, r)
 			}
-			bottlerocketUpdater := consumerUpdater.NewBottleRocketUpdater(eksDReleases)
+			eksDConsumers = append(eksDConsumers, consumerUpdater.NewBottleRocketUpdater(eksDReleases))
 			var err error
-			for _, u := range bottlerocketUpdater.Updaters() {
-				err = u.Update()
+			for _, c := range eksDConsumers {
+				err = c.UpdateAll()
+				if err != nil {
+					return err
+				}
 			}
-			return err
+			return nil
 		},
 	}
 )

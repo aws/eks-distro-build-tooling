@@ -9,7 +9,7 @@ const (
 	bottlerocketName = "Bottlerocket"
 )
 
-func NewBottleRocketUpdater(releases []*eksDistroRelease.Release) *BottlerocketUpdater {
+func NewBottleRocketUpdater(releases []*eksDistroRelease.Release) Consumer {
 	return &BottlerocketUpdater{
 		updaters:         bottlerocketUpdaters(releases),
 		notifiers:        bottlerocketNotifiers(),
@@ -27,13 +27,35 @@ func (b BottlerocketUpdater) Updaters() []Updater {
 	return b.updaters
 }
 
+func (b BottlerocketUpdater) UpdateAll() error {
+	for _, u := range b.Updaters() {
+		err := u.Update()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (b BottlerocketUpdater) Notifiers() []Notifier {
 	return b.notifiers
+}
+
+func (b BottlerocketUpdater) NotifyAll() error {
+	for _, u := range b.Notifiers() {
+		err := u.Notify()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (b BottlerocketUpdater) Info() ConsumerInfo {
 	return b.bottlerocketInfo
 }
+
+
 
 func bottlerocketConsumerInfo() ConsumerInfo {
 	return ConsumerInfo{
