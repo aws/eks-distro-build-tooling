@@ -136,7 +136,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		github.PrLogField:   num,
 	})
 
-	if auth != "eks-distro-bot" || !s.allowAll {
+	if auth != constants.EksDistroBotName || !s.allowAll {
 		ok, err := s.ghc.IsMember(org, auth)
 		if err != nil {
 			return err
@@ -220,7 +220,7 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 		if err != nil {
 			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
-		miNum, err := s.ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		miNum, err := s.ghc.CreateIssue("rcrozean", constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}
