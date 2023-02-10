@@ -21,7 +21,7 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 VERSION="$1"
 
-GOLANG_MAJOR_VERSION=${VERSION%.*}
+GOLANG_MAJOR_VERSION=$(if [[ $(echo "$VERSION"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${VERSION%.*}; else echo ${VERSION%-*}; fi)
 
 NEWROOT=/golang-${GOLANG_MAJOR_VERSION}
 
@@ -33,12 +33,16 @@ function build::go::symlink() {
     local -r version=$1
 
     # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
+    local -r majorversion=$(if [[ $(echo "$version"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
     mkdir -p ${GOPATH}/go${majorversion}/bin
+    
     for binary in go gofmt; do
         ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
     done
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+    
+    if [ "$version" != "$majorversion" ]; then
+        ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+    fi
 }
 
 function build::go::install(){

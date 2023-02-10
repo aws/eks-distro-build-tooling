@@ -19,7 +19,7 @@ set -o pipefail
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 VERSION=$(go version | grep -o "go[0-9].* ")
-GOLANG_MAJOR_VERSION=${VERSION%.*}
+GOLANG_MAJOR_VERSION=$(if [[ $(echo "$VERSION"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${VERSION%.*}; else echo ${VERSION%-*}; fi)
 
 NEWROOT=/go-licenses-${GOLANG_MAJOR_VERSION#go}
 
