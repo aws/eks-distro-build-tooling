@@ -40,13 +40,6 @@ function build::go::download(){
         fi
     done
 
-    if [ $arch == 'x86_64' ]; then
-        local filename="$outputDir/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
-        if [ ! -f $filename ]; then
-            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
-        fi
-    fi
-
     for artifact in golang-docs golang-misc golang-tests golang-src; do
         local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
         if [ ! -f $filename ]; then

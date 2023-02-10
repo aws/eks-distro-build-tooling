@@ -74,15 +74,11 @@ function build::go::install(){
     fi
 
     for artifact in golang golang-bin; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     done
 
-    if [ $TARGETARCH == 'amd64' ]; then 
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
-    fi
-
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
     done
 
     build::go::extract $version
