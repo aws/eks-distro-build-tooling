@@ -57,7 +57,7 @@ function build::go::download(){
 
         if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
             echo "Checksum doesn't match!"
-            #exit 1
+            exit 1
         fi
     done
 }
