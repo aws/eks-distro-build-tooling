@@ -125,7 +125,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	org := ie.Repo.Owner.Login
 	repo := ie.Repo.Name
 	num := ie.Issue.Number
-	auth := ie.Sender.Name
+	auth := ie.Sender.Login
 	title := ie.Issue.Title
 	body := ie.Issue.Body
 
@@ -220,11 +220,11 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 		if err != nil {
 			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
-		miNum, err := s.ghc.CreateIssue("rcrozean", constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		miNum, err := s.ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}
-		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", "rcrozean", constants.EksdBuildToolingRepoName, miNum))
+		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.AwsOrgName, constants.EksdBuildToolingRepoName, miNum))
 	}
 	return nil
 }
