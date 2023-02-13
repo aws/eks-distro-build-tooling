@@ -32,6 +32,8 @@ import (
 	"k8s.io/test-infra/prow/logrusutil"
 	"k8s.io/test-infra/prow/pjutil"
 	"k8s.io/test-infra/prow/pluginhelp/externalplugins"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksDistroOpsProwPlugin/lib/server"
 )
 
 type options struct {
@@ -127,7 +129,7 @@ func main() {
 		log.WithError(err).Fatal("Error listing bot repositories.")
 	}
 
-	server := &Server{
+	s := &server.Server{
 		tokenGenerator: secret.GetTokenGenerator(o.webhookSecretFile),
 		botUser:        botUser,
 		email:          email,
@@ -152,7 +154,7 @@ func main() {
 	health.ServeReady()
 
 	mux := http.NewServeMux()
-	mux.Handle("/", server)
+	mux.Handle("/", s)
 	externalplugins.ServeExternalPluginHelp(mux, log, HelpProvider)
 	httpServer := &http.Server{Addr: ":" + strconv.Itoa(o.port), Handler: mux}
 	defer interrupts.WaitForGracefulShutdown()
