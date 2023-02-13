@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -9,13 +10,13 @@ import (
 )
 
 var (
-	backportCmd = &cobra.Command{
+	updateConsumerCommand = &cobra.Command{
 		Use:   "update",
 		Short: "Update consumers of EKS Distro",
 		Long:  "Tool for updating consumers of EKS Distro generated artifacts",
 		RunE: func(cmd *cobra.Command, args []string) error {
+
 			var eksDReleases []*eksDistroRelease.Release
-			var eksDConsumers []consumerUpdater.Consumer
 			for _, v := range viper.GetStringSlice(eksDistroReleasesFlag) {
 				r, err := eksDistroRelease.NewEksDistroReleaseObject(v)
 				if err != nil {
@@ -23,12 +24,14 @@ var (
 				}
 				eksDReleases = append(eksDReleases, r)
 			}
-			eksDConsumers = append(eksDConsumers, consumerUpdater.NewBottleRocketUpdater(eksDReleases))
+
+			consumerFactory := consumerUpdater.NewFactory(eksDReleases)
+
 			var err error
-			for _, c := range eksDConsumers {
+			for _, c := range consumerFactory.ConsumerUpdaters() {
 				err = c.UpdateAll()
 				if err != nil {
-					return err
+					return fmt.Errorf("updating consumer %s: %v", c.Info().Name, err)
 				}
 			}
 			return nil
@@ -37,5 +40,5 @@ var (
 )
 
 func init() {
-	rootCmd.AddCommand(backportCmd)
+	rootCmd.AddCommand(updateConsumerCommand)
 }

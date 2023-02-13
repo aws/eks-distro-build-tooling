@@ -2,6 +2,7 @@ package consumerUpdater
 
 import (
 	"fmt"
+
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksDistroRelease"
 )
 

@@ -2,6 +2,7 @@ package eksDistroRelease
 
 import (
 	"fmt"
+	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
 	"strconv"
 	"strings"
 )
@@ -66,4 +67,24 @@ func (r Release) EksDistroReleaseFullVersion() string {
 
 func (r Release) KubernetesFullVersion() string {
 	return fmt.Sprintf("v%d.%d.%d", r.major, r.minor, r.patch)
+}
+
+func (r Release) Equals(release Release) bool {
+	if r.major != release.major {
+		logger.V(4).Info("major version not equal", "self major", r.major, "compare major", release.major)
+		return false
+	}
+	if r.minor != release.minor {
+		logger.V(4).Info("minor version not equal", "self minor", r.minor, "compare minor", release.minor)
+		return false
+	}
+	if r.patch != release.patch {
+		logger.V(4).Info("patch version not equal", "self patch", r.patch, "compare patch", release.patch)
+		return false
+	}
+	if r.release != release.release {
+		logger.V(4).Info("release version not equal", "self release", r.release, "compare release", release.release)
+		return false
+	}
+	return true
 }
