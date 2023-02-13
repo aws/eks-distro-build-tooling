@@ -13,10 +13,10 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
-IMAGE_NAMES=prow-deck prow-clonerefs prow-crier prow-entrypoint prow-ghproxy prow-hook \
+IMAGE_NAMES=prow-deck prow-cherrypicker prow-clonerefs prow-crier prow-entrypoint prow-ghproxy prow-hook \
 	prow-horologium prow-initupload prow-controller-manager prow-sidecar prow-sinker prow-statusreconciler prow-tide
 
-VALUES_YAML_PATHS=deck.image utility_images.clonerefs crier.image utility_images.entrypoint ghproxy.image hook.image \
+VALUES_YAML_PATHS=deck.image cherrypicker.image utility_images.clonerefs crier.image utility_images.entrypoint ghproxy.image hook.image \
 	horologium.image utility_images.initupload prowControllerManager.image utility_images.sidecar sinker.image statusreconciler.image tide.image
 
 LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/amd64)
