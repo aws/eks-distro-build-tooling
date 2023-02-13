@@ -20,7 +20,7 @@ type golangPatchReleaseRequest struct {
 // Currently handling Golang Patch Releases and Golang Minor Releases
 var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
 
-func (s *Server) handleGolangPatchRelease(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body, author string, num int) error {
+func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
@@ -36,8 +36,8 @@ func (s *Server) handleGolangPatchRelease(logger *logrus.Entry, requestor string
 	lock.Lock()
 	defer lock.Unlock()
 
-	if author != constants.EksDistroBotName || !s.allowAll {
-		ok, err := s.ghc.IsMember(org, author)
+	if requestor != constants.EksDistroBotName || !s.allowAll {
+		ok, err := s.ghc.IsMember(org, requestor)
 		if err != nil {
 			return err
 		}
@@ -51,7 +51,7 @@ func (s *Server) handleGolangPatchRelease(logger *logrus.Entry, requestor string
 	var golangVersionsRe = regexp.MustCompile(`(?m)(\d+.\d+.\d+)`)
 	var issNumRe = regexp.MustCompile(`(#\d+)`)
 	m := make(map[string]int)
-	for _, version := range golangVersionsRe.FindAllString(upIss.Title, -1) {
+	for _, version := range golangVersionsRe.FindAllString(issue.Title, -1) {
 		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
 		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
 		if err != nil {

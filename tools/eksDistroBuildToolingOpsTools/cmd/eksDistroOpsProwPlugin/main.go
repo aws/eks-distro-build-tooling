@@ -95,7 +95,7 @@ func main() {
 		logrus.WithError(err).Fatal("Failed to parse loglevel")
 	}
 	logrus.SetLevel(logLevel)
-	log := logrus.StandardLogger().WithField("plugin", pluginName)
+	log := logrus.StandardLogger().WithField("plugin", server.pluginName)
 
 	if err := secret.Add(o.webhookSecretFile); err != nil {
 		logrus.WithError(err).Fatal("Error starting secrets agent.")

@@ -18,7 +18,7 @@ type backportRequest struct {
 // Currently handling Golang Patch Releases and Golang Minor Releases
 var backportRe = regexp.MustCompile(`(?m)^(?:/backport)\s+(.+)$`)
 
-func (s *Server) handleBackportRequest(logger *logrus.Entry, requestor string, issue *github.Issue, backportMatches []string, org, repo string, num int) error {
+func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue *github.Issue, backportMatches [][]string, org, repo string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
@@ -36,7 +36,7 @@ func (s *Server) handleBackportRequest(logger *logrus.Entry, requestor string, i
 
 	//Only a org member should be able to request a issue backport
 	if !s.allowAll {
-		ok, err := s.ghc.IsMember(org, auth)
+		ok, err := s.ghc.IsMember(org, requestor)
 		if err != nil {
 			return err
 		}

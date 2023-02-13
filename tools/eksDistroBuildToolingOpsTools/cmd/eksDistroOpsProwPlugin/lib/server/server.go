@@ -102,7 +102,7 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 			}
 		}()
 	case "issue_comment":
-		var ic githubIssueCommentEvent
+		var ic github.IssueCommentEvent
 		if err := json.Unmarshal(payload, &ic); err != nil {
 			return err
 		}
@@ -139,7 +139,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
-		if err := s.handleGolangPatchRelease(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, author, num); err != nil {
+		if err := s.handleGolangPatchRelease(l, author, &ie.Issue, org, repo, title, body, num); err != nil {
 			return fmt.Errorf("handle GolangPatchrelease: %w", err)
 		}
 	}
