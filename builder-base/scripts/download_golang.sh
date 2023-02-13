@@ -30,11 +30,11 @@ function build::go::download(){
     # Set up specific go version by using go get, additional versions apart from default can be installed by calling
     # the function again with the specific parameter.
     local version=${1%-*}
-    local outputDir=$arch/${2}
+    local outputDir=${2}
     local arch=${3}
 
     for artifact in golang golang-bin; do
-        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+        local filename="$arch/$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
         if [ ! -f $filename ]; then
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
@@ -48,7 +48,7 @@ function build::go::download(){
     done
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
+        local filename="$arch/$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
         if [ ! -f $filename ]; then
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
         fi
