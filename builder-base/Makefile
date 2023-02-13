@@ -35,7 +35,7 @@ BUILDER_IMAGE_NAME?=eks-distro-minimal-base
 BUILDER_IMAGE?=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME)-builder:$(call BASE_TAG_FROM_TAG_FILE,$(BUILDER_IMAGE_NAME))
 UPADTE_BASE_IMAGE?=true
 
-IMPORT_CACHE_REPOS?=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
+IMPORT_CACHE_REPOS=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
 
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
 BUILDKIT_PLATFORMS?=linux/amd64,linux/arm64
