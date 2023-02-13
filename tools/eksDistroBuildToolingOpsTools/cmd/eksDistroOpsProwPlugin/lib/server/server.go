@@ -1,11 +1,9 @@
-package main
+package server
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"regexp"
-	"strconv"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -16,7 +14,7 @@ import (
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
 
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const pluginName = "eksdistroopstool"
@@ -54,15 +52,15 @@ type Server struct {
 
 	gc  git.ClientFactory
 	ghc githubClient
-	log *logrus.Entry
+	log *logger.Entry
 
-	// Labels to apply to the backported issue.
+	// Labels to apply.
 	labels []string
-	// Use prow to assign users to backported issue.
+	// Use prow to assign users issues.
 	prowAssignments bool
-	// Allow anybody to do backports.
+	// Allow anybody to request or trigger event.
 	allowAll bool
-	// Create an issue on upstreampick conflict.
+	// Create an issue on conflict.
 	issueOnConflict bool
 	// Set a custom label prefix.
 	labelPrefix string
@@ -72,10 +70,10 @@ type Server struct {
 
 	repos   []github.Repo
 	mapLock sync.Mutex
-	lockMap map[upstreamIssuePickRequest]*sync.Mutex
+	lockMap map[golangPatchReleaseRequest]*sync.Mutex
 }
 
-type upstreamIssuePickRequest struct {
+type backportRequest struct {
 	org    string
 	repo   string
 	issNum int
@@ -107,7 +105,17 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 		}
 		go func() {
 			if err := s.handleIssue(l, ie); err != nil {
-				s.log.WithError(err).WithFields(l.Data).Info("Issue creation failed.")
+				s.log.WithError(err).WithFields(l.Data).Info("Handle Issue Failed.")
+			}
+		}()
+	case "issue_comment":
+		var ic githubIssueCommentEvent
+		if err := json.Unmarshal(payload, &ic); err != nil {
+			return err
+		}
+		go func() {
+			if err := s.handleIssueComment(l, ic); err != nil {
+				s.log.WithError(err).WithFields(l.Data).Info("Handle Issue Comment Failed.")
 			}
 		}()
 	default:
@@ -136,24 +144,9 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		github.PrLogField:   num,
 	})
 
-	if auth != constants.EksDistroBotName || !s.allowAll {
-		ok, err := s.ghc.IsMember(org, auth)
-		if err != nil {
-			return err
-		}
-		if !ok {
-			resp := fmt.Sprintf("only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", org, org)
-			l.Info(resp)
-			return s.ghc.CreateComment(org, repo, num, resp)
-		}
-	}
-
-	//Currently handling Golang Patch Releases and Golang Minor Releases
-	var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
-
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
-		if err := s.handle(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, num); err != nil {
+		if err := s.handleGolangPatchRelease(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, num); err != nil {
 			return fmt.Errorf("handle GolangPatchrelease: %w", err)
 		}
 	}
@@ -164,24 +157,29 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	return nil
 }
 
-func (s *Server) handle(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body string, num int) error {
-	var lock *sync.Mutex
-	func() {
-		s.mapLock.Lock()
-		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[upstreamIssuePickRequest{org, repo, num}]; !ok {
-			if s.lockMap == nil {
-				s.lockMap = map[upstreamIssuePickRequest]*sync.Mutex{}
-			}
-			s.lockMap[upstreamIssuePickRequest{org, repo, num}] = &sync.Mutex{}
-		}
-		lock = s.lockMap[upstreamIssuePickRequest{org, repo, num}]
-	}()
-	lock.Lock()
-	defer lock.Unlock()
+func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent) error {
+	// Only consider newly opened issues.
+	if ic.Action != github.IssueCommentActionCreated {
+		return nil
+	}
 
-	if err := s.HandleGolangPatchRelease(logger, issue); err != nil {
-		return fmt.Errorf("failed to handle Golang Patch Release: %w", err)
+	org := ic.Repo.Owner.Login
+	repo := ic.Repo.Name
+	num := ic.Issue.Number
+	commentAuthor := ic.Comment.User.Login
+
+	// Do not create a new logger, its fields are re-used by the caller in case of errors
+	*l = *l.WithFields(logrus.Fields{
+		github.OrgLogField:  org,
+		github.RepoLogField: repo,
+		github.PrLogField:   num,
+	})
+
+	backportMatches := backportRe.FindAllStringSubmatch(ic.Comment.Body, -1)
+	if len(backportMatches) != 0 {
+		if err := s.handleBackportRequest(l, commentAuthor, &ic.Issue, backportMatches, org, repo, num); err != nil {
+			return fmt.Errorf("Handle backport request failure: %w", err)
+		}
 	}
 
 	return nil
@@ -190,43 +188,6 @@ func (s *Server) handle(logger *logrus.Entry, requestor string, issue *github.Is
 // Created based off plugins.FormatICResponse
 func FormatIEResponse(ie github.IssueEvent, s string) string {
 	return plugins.FormatResponseRaw(ie.Issue.Title, ie.Issue.HTMLURL, ie.Sender.Login, s)
-}
-
-func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) error {
-	var golangVersionsRe = regexp.MustCompile(`(?m)(\d+.\d+.\d+)`)
-	var issNumRe = regexp.MustCompile(`(#\d+)`)
-	m := make(map[string]int)
-	for _, version := range golangVersionsRe.FindAllString(upIss.Title, -1) {
-		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
-		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
-		if err != nil {
-			return fmt.Errorf("Find Golang Milestone: %v", err)
-		}
-		for _, i := range milestoneIssues {
-			for _, biMatch := range issNumRe.FindAllString(i.Body, -1) {
-				if m[biMatch] == 0 {
-					m[biMatch] = 1
-				}
-			}
-			return nil
-		}
-	}
-	for biNum := range m {
-		biInt, err := strconv.Atoi(biNum)
-		if err != nil {
-			return fmt.Errorf("Converting issue number to int: %w", err)
-		}
-		baseIssue, err := s.ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
-		if err != nil {
-			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
-		}
-		miNum, err := s.ghc.CreateIssue("rcrozean", constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
-		if err != nil {
-			return fmt.Errorf("Creating mirrored issue: %w", err)
-		}
-		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", "rcrozean", constants.EksdBuildToolingRepoName, miNum))
-	}
-	return nil
 }
 
 func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comment *github.IssueComment, resp string) error {
