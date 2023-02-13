@@ -14,7 +14,7 @@ require (
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.22.0
 	golang.org/x/oauth2 v0.0.0-20221014153046-6fdb5e3db783
-	k8s.io/test-infra v0.0.0-20230130144251-3bf935f41a45
+	k8s.io/test-infra v0.0.0-20230210210330-9aadff258d20
 )
 
 require (

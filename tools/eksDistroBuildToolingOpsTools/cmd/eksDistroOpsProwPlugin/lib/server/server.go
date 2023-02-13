@@ -13,8 +13,6 @@ import (
 	"k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
-
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const pluginName = "eksdistroopstool"
@@ -52,7 +50,7 @@ type Server struct {
 
 	gc  git.ClientFactory
 	ghc githubClient
-	log *logger.Entry
+	log *logrus.Entry
 
 	// Labels to apply.
 	labels []string
@@ -68,15 +66,10 @@ type Server struct {
 	bare     *http.Client
 	patchURL string
 
-	repos   []github.Repo
-	mapLock sync.Mutex
-	lockMap map[golangPatchReleaseRequest]*sync.Mutex
-}
-
-type backportRequest struct {
-	org    string
-	repo   string
-	issNum int
+	repos              []github.Repo
+	mapLock            sync.Mutex
+	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
+	lockBackportMap    map[backportRequest]*sync.Mutex
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
@@ -133,7 +126,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	org := ie.Repo.Owner.Login
 	repo := ie.Repo.Name
 	num := ie.Issue.Number
-	auth := ie.Sender.Name
+	author := ie.Sender.Login
 	title := ie.Issue.Title
 	body := ie.Issue.Body
 
@@ -146,7 +139,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
-		if err := s.handleGolangPatchRelease(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, num); err != nil {
+		if err := s.handleGolangPatchRelease(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, author, num); err != nil {
 			return fmt.Errorf("handle GolangPatchrelease: %w", err)
 		}
 	}

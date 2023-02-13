@@ -23,13 +23,13 @@ func (s *Server) handleBackportRequest(logger *logrus.Entry, requestor string, i
 	func() {
 		s.mapLock.Lock()
 		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[backportRequest{org, repo, num}]; !ok {
-			if s.lockMap == nil {
-				s.lockMap = map[backportRequest]*sync.Mutex{}
+		if _, ok := s.lockBackportMap[backportRequest{org, repo, num}]; !ok {
+			if s.lockBackportMap == nil {
+				s.lockBackportMap = map[backportRequest]*sync.Mutex{}
 			}
-			s.lockMap[backportRequest{org, repo, num}] = &sync.Mutex{}
+			s.lockBackportMap[backportRequest{org, repo, num}] = &sync.Mutex{}
 		}
-		lock = s.lockMap[backportRequest{org, repo, num}]
+		lock = s.lockBackportMap[backportRequest{org, repo, num}]
 	}()
 	lock.Lock()
 	defer lock.Unlock()

@@ -20,24 +20,24 @@ type golangPatchReleaseRequest struct {
 // Currently handling Golang Patch Releases and Golang Minor Releases
 var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
 
-func (s *Server) handleGolangPatchRelease(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body string, num int) error {
+func (s *Server) handleGolangPatchRelease(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body, author string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
 		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[golangPatchReleaseRequest{org, repo, num}]; !ok {
-			if s.lockMap == nil {
-				s.lockMap = map[golangPatchReleaseRequest]*sync.Mutex{}
+		if _, ok := s.lockGolangPatchMap[golangPatchReleaseRequest{org, repo, num}]; !ok {
+			if s.lockGolangPatchMap == nil {
+				s.lockGolangPatchMap = map[golangPatchReleaseRequest]*sync.Mutex{}
 			}
-			s.lockMap[golangPatchReleaseRequest{org, repo, num}] = &sync.Mutex{}
+			s.lockGolangPatchMap[golangPatchReleaseRequest{org, repo, num}] = &sync.Mutex{}
 		}
-		lock = s.lockMap[golangPatchReleaseRequest{org, repo, num}]
+		lock = s.lockGolangPatchMap[golangPatchReleaseRequest{org, repo, num}]
 	}()
 	lock.Lock()
 	defer lock.Unlock()
 
-	if auth != "eks-distro-bot" || !s.allowAll {
-		ok, err := s.ghc.IsMember(org, auth)
+	if author != constants.EksDistroBotName || !s.allowAll {
+		ok, err := s.ghc.IsMember(org, author)
 		if err != nil {
 			return err
 		}
