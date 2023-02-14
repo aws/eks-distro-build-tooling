@@ -16,6 +16,7 @@ EKS currently supports the following Golang versions:
 - [`v1.17`](./1.17/GIT_TAG)
 - [`v1.18`](./1.18/GIT_TAG)
 - [`v1.19`](./1.19/GIT_TAG)
+- [`v1.20`](./1.20/GIT_TAG)
 
 ## Upstream Patches
 EKS Golang Versions are distributed as RPMs built from upstream Golang source for the given version.  
@@ -47,7 +48,7 @@ EKS Go RPMs are available through the EKS Distro CDN at https://distro.eks.amazo
 
 Artifacts are available at URLs following the schema:
 
-`golang-go$MINOR_VERSION.$PATCH_VERSION/releases/$RELEASE/RPMS/$ARCHITECTURE/golang-$MINOR_VERSION.$PATCH_VERSION-$RELEASE.amzn2.eks.$ARCHITECTURE.rpm`
+`golang-go$MINOR_VERSION.$PATCH_VERSION/releases/$RELEASE/$ARCHITECTURE/RPMS/$ARCHITECTURE/golang-$MINOR_VERSION.$PATCH_VERSION-$RELEASE.amzn2.eks.$ARCHITECTURE.rpm`
 
 Where `$ARCHITECTURE` is one of:
 - `x86_64` for AMD64
@@ -92,12 +93,12 @@ mkdir /tmp/go$version
 
 # download architecture-specific RPMs
 for artifact in golang golang-bin golang-race; do
-    curl https://distro.eks.amazonaws.com/golang-go$version/releases/$release/RPMS/$arch/$artifact-$version-$release.amzn2.eks.$arch.rpm -o /tmp/go$version/$artifact-$version-$release.amzn2.eks.$arch.rpm
+    curl https://distro.eks.amazonaws.com/golang-go$version/releases/$release/$arch/RPMS/$arch/$artifact-$version-$release.amzn2.eks.$arch.rpm -o /tmp/go$version/$artifact-$version-$release.amzn2.eks.$arch.rpm
 done
 
 # download architecture independent RPMs
 for artifact in golang-docs golang-misc golang-tests golang-src; do
-    curl https://distro.eks.amazonaws.com/golang-go$version/releases/$release/RPMS/noarch/$artifact-$version-$release.amzn2.eks.noarch.rpm -o /tmp/go$version/$artifact-$version-$release.amzn2.eks.noarch.rpm
+    curl https://distro.eks.amazonaws.com/golang-go$version/releases/$release/$arch/RPMS/noarch/$artifact-$version-$release.amzn2.eks.noarch.rpm -o /tmp/go$version/$artifact-$version-$release.amzn2.eks.noarch.rpm
 done
 
 yum -y localinstall /tmp/go$version/golang*
