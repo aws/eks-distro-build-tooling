@@ -36,7 +36,7 @@ function build::go::download(){
     for artifact in golang golang-bin; do
         local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
         if [ ! -f $filename ]; then
-            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename --create-dirs
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
 
             if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
@@ -49,7 +49,7 @@ function build::go::download(){
     for artifact in golang-docs golang-misc golang-tests golang-src; do
         local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
         if [ ! -f $filename ]; then
-            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename --create-dirs
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
 
             if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
