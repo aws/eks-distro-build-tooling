@@ -57,8 +57,8 @@ function build::go::download(){
             curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
         fi
 
-        local shaCheckFilename="$outputDir/tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.noarchrpm"
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $shaCheckFilename
+        local shaCheckFilename="$outputDir/tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.noarch.rpm"
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $shaCheckFilename
         curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $shaCheckFilename.sha256
 
         if [[ $(sha256sum ${shaCheckFilename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${shaCheckFilename}.sha256") ]] ; then 
