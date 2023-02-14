@@ -6,4 +6,4 @@ ARG BINARY_NAME
 
 ADD $BINARY_OUTPUT_PATH /usr/bin
 
-ENTRYPOINT ["eksDistroOpsProwPlugin"]
+ENTRYPOINT ["eksDistroOpsProwPlugin", "--github-token-path=/etc/github/token", "--github-endpoint=http://ghproxy", "--github-endpoint=https://api.github.com", "--dry-run=false" ]
