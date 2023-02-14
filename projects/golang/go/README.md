@@ -43,7 +43,7 @@ Architecture Specific RPM sha256sums:
 - `golang-*version*.rpm.sha256`
 - `golang-bin-*version*.rpm.sha256`
 
-Architecture Independent RPMs:
+Architecture Independent RPM sha256sums:
 - `golang-docs-*version*.rpm.sha256`
 - `golang-misc-*version*.rpm.sha256`
 - `golang-tests-*version*.rpm.sha256`
