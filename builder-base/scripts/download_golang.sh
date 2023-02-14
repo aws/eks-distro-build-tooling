@@ -33,33 +33,41 @@ function build::go::download(){
     local outputDir=${2}
     local arch=${3}
 
+    mkdir $outputDir/tmp
+
     for artifact in golang golang-bin; do
-        local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
         if [ ! -f $filename ]; then
-            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename --create-dirs
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename
         fi
 
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
+        local shaCheckFilename="$outputDir/tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $shaCheckFilename
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $shaCheckFilename.sha256
 
-        if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
+        if [[ $(sha256sum ${shaCheckFilename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${shaCheckFilename}.sha256") ]] ; then 
             echo "Checksum doesn't match!"
             exit 1
         fi
     done
 
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
+        local filename="$outputDir/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
         if [ ! -f $filename ]; then
-            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename --create-dirs
+            curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename
         fi
 
-        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
+        local shaCheckFilename="$outputDir/tmp/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.$arch.rpm"
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $shaCheckFilename
+        curl -sSL --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $shaCheckFilename.sha256
 
-        if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
+        if [[ $(sha256sum ${shaCheckFilename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${shaCheckFilename}.sha256") ]] ; then 
             echo "Checksum doesn't match!"
             exit 1
         fi
     done
+
+    rm -rf $outputDir/tmp
 }
 
 build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
