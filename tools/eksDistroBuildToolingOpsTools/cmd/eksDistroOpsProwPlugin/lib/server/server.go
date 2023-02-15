@@ -69,7 +69,6 @@ type Server struct {
 	Repos              []github.Repo
 	mapLock            sync.Mutex
 	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
-	lockBackportMap    map[backportRequest]*sync.Mutex
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
@@ -99,16 +98,6 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 		go func() {
 			if err := s.handleIssue(l, ie); err != nil {
 				s.Log.WithError(err).WithFields(l.Data).Info("Handle Issue Failed.")
-			}
-		}()
-	case "issue_comment":
-		var ic github.IssueCommentEvent
-		if err := json.Unmarshal(payload, &ic); err != nil {
-			return err
-		}
-		go func() {
-			if err := s.handleIssueComment(l, ic); err != nil {
-				s.Log.WithError(err).WithFields(l.Data).Info("Handle Issue Comment Failed.")
 			}
 		}()
 	default:
@@ -146,34 +135,6 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	//TODO: add golangMinorMatches := golangMinorReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	//Regex for thisi is below.
 	//var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
-
-	return nil
-}
-
-func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent) error {
-	// Only consider newly opened issues.
-	if ic.Action != github.IssueCommentActionCreated {
-		return nil
-	}
-
-	org := ic.Repo.Owner.Login
-	repo := ic.Repo.Name
-	num := ic.Issue.Number
-	commentAuthor := ic.Comment.User.Login
-
-	// Do not create a new logger, its fields are re-used by the caller in case of errors
-	*l = *l.WithFields(logrus.Fields{
-		github.OrgLogField:  org,
-		github.RepoLogField: repo,
-		github.PrLogField:   num,
-	})
-
-	backportMatches := backportRe.FindAllString(ic.Comment.Body, -1)
-	if len(backportMatches) != 0 {
-		if err := s.handleBackportRequest(l, commentAuthor, &ic.Issue, backportMatches, org, repo, num); err != nil {
-			return fmt.Errorf("Handle backport request failure: %w", err)
-		}
-	}
 
 	return nil
 }
