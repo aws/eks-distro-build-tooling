@@ -35,15 +35,15 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue 
 	defer lock.Unlock()
 
 	//Only a org member should be able to request a issue backport
-	if !s.allowAll {
-		ok, err := s.ghc.IsMember(org, requestor)
+	if !s.AllowAll {
+		ok, err := s.Ghc.IsMember(org, requestor)
 		if err != nil {
 			return err
 		}
 		if !ok {
 			resp := fmt.Sprintf("only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", org, org)
 			l.Info(resp)
-			return s.ghc.CreateComment(org, repo, num, resp)
+			return s.Ghc.CreateComment(org, repo, num, resp)
 		}
 	}
 

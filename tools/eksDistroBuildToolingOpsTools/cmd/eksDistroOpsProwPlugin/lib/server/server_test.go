@@ -179,7 +179,7 @@ func TestUpstreamPickCreateIssue(t *testing.T) {
 		ghc := &fghc{}
 
 		s := &Server{
-			ghc: ghc,
+			Ghc: ghc,
 		}
 
 		if err := s.createIssue(logrus.WithField("test", t.Name()), tc.org, tc.repo, tc.title, tc.body, tc.prNum, nil, tc.labels, tc.assignees); err != nil {

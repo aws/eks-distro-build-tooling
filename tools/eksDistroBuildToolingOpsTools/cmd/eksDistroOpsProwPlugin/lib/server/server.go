@@ -15,7 +15,7 @@ import (
 	"k8s.io/test-infra/prow/pluginhelp"
 )
 
-const pluginName = "eksdistroopstool"
+const PluginName = "eksdistroopstool"
 
 type githubClient interface {
 	AssignIssue(org, repo string, number int, logins []string) error
@@ -44,29 +44,29 @@ func HelpProvider(_ []config.OrgRepo) (*pluginhelp.PluginHelp, error) {
 // Server implements http.Handler. It validates incoming GitHub webhooks and
 // then dispatches them to the appropriate plugins.
 type Server struct {
-	tokenGenerator func() []byte
-	botUser        *github.UserData
-	email          string
+	TokenGenerator func() []byte
+	BotUser        *github.UserData
+	Email          string
 
-	gc  git.ClientFactory
-	ghc githubClient
-	log *logrus.Entry
+	Gc  git.ClientFactory
+	Ghc githubClient
+	Log *logrus.Entry
 
 	// Labels to apply.
-	labels []string
+	Labels []string
 	// Use prow to assign users issues.
-	prowAssignments bool
+	ProwAssignments bool
 	// Allow anybody to request or trigger event.
-	allowAll bool
+	AllowAll bool
 	// Create an issue on conflict.
-	issueOnConflict bool
+	IssueOnConflict bool
 	// Set a custom label prefix.
-	labelPrefix string
+	LabelPrefix string
 
-	bare     *http.Client
-	patchURL string
+	Bare     *http.Client
+	PatchURL string
 
-	repos              []github.Repo
+	Repos              []github.Repo
 	mapLock            sync.Mutex
 	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
 	lockBackportMap    map[backportRequest]*sync.Mutex
@@ -74,7 +74,7 @@ type Server struct {
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	eventType, eventGUID, payload, ok, _ := github.ValidateWebhook(w, r, s.tokenGenerator)
+	eventType, eventGUID, payload, ok, _ := github.ValidateWebhook(w, r, s.TokenGenerator)
 	if !ok {
 		return
 	}
@@ -98,7 +98,7 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 		}
 		go func() {
 			if err := s.handleIssue(l, ie); err != nil {
-				s.log.WithError(err).WithFields(l.Data).Info("Handle Issue Failed.")
+				s.Log.WithError(err).WithFields(l.Data).Info("Handle Issue Failed.")
 			}
 		}()
 	case "issue_comment":
@@ -108,7 +108,7 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 		}
 		go func() {
 			if err := s.handleIssueComment(l, ic); err != nil {
-				s.log.WithError(err).WithFields(l.Data).Info("Handle Issue Comment Failed.")
+				s.Log.WithError(err).WithFields(l.Data).Info("Handle Issue Comment Failed.")
 			}
 		}()
 	default:
@@ -186,9 +186,9 @@ func FormatIEResponse(ie github.IssueEvent, s string) string {
 func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comment *github.IssueComment, resp string) error {
 	if err := func() error {
 		if comment != nil {
-			return s.ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
+			return s.Ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
 		}
-		return s.ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
+		return s.Ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
 	}(); err != nil {
 		l.WithError(err).Warn("failed to create comment")
 		return err
@@ -199,7 +199,7 @@ func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comme
 
 // createIssue creates an issue on GitHub.
 func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) error {
-	issueNum, err := s.ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
+	issueNum, err := s.Ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
 	if err != nil {
 		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for failed upstreampick: %v", err))
 	}

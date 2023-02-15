@@ -36,15 +36,15 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	lock.Lock()
 	defer lock.Unlock()
 
-	if requestor != constants.EksDistroBotName || !s.allowAll {
-		ok, err := s.ghc.IsMember(org, requestor)
+	if requestor != constants.EksDistroBotName || !s.AllowAll {
+		ok, err := s.Ghc.IsMember(org, requestor)
 		if err != nil {
 			return err
 		}
 		if !ok {
 			resp := fmt.Sprintf("only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", org, org)
 			l.Info(resp)
-			return s.ghc.CreateComment(org, repo, num, resp)
+			return s.Ghc.CreateComment(org, repo, num, resp)
 		}
 	}
 
@@ -53,7 +53,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	m := make(map[string]int)
 	for _, version := range golangVersionsRe.FindAllString(issue.Title, -1) {
 		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
-		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
+		milestoneIssues, err := s.Ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
 		if err != nil {
 			return fmt.Errorf("Find Golang Milestone: %v", err)
 		}
@@ -63,7 +63,6 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 					m[biMatch] = 1
 				}
 			}
-			return nil
 		}
 	}
 	for biNum := range m {
@@ -71,11 +70,11 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 		if err != nil {
 			return fmt.Errorf("Converting issue number to int: %w", err)
 		}
-		baseIssue, err := s.ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
+		baseIssue, err := s.Ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
 		if err != nil {
 			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
-		miNum, err := s.ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		miNum, err := s.Ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}
