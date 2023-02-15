@@ -63,7 +63,7 @@ function build::go::extract() {
     fi
 
     mkdir -p /tmp/go-extracted
-    for rpm in /tmp/golang-*.noarch.rpm /tmp/golang-*.$arch.rpm ; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idm && rm -f $rpm); done
+    for rpm in /tmp/$arch/golang-*.noarch.rpm /tmp/$arch/golang-*.$arch.rpm ; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idm && rm -f $rpm); done
 
     local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
 

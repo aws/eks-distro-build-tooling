@@ -29,13 +29,35 @@ For each supported version of Go, there are 6 RPMS: 3 architecture-specific and 
 Architecture Specific RPMs:
 - `golang`
 - `golang-bin`
-- `golang-race`
 
 Architecture Independent RPMs:
 - `golang-docs`
 - `golang-misc`
 - `golang-tests`
 - `golang-src`
+
+## EKS Go RPM Validation
+To ensure the Golang RPM files aren’t corrupted during the transit when the Go artifacts are uploaded and downloaded, sha256sum files are generated during the build against each EKS Go RPMs. Each sha256sum file contains a sha256sum value against corresponding Golang RPM that was generated during the build.
+
+Architecture Specific RPM sha256sums:
+- `golang-*version*.rpm.sha256`
+- `golang-bin-*version*.rpm.sha256`
+
+Architecture Independent RPM sha256sums:
+- `golang-docs-*version*.rpm.sha256`
+- `golang-misc-*version*.rpm.sha256`
+- `golang-tests-*version*.rpm.sha256`
+- `golang-src-*version*.rpm.sha256`
+
+The sha256sum files for architecture specific RPMs are available at URLs following the schema:
+
+`golang-go$MINOR_VERSION.$PATCH_VERSION/releases/$RELEASE/$ARCHITECTURE/RPMS/$ARCHITECTURE/golang-$MINOR_VERSION.$PATCH_VERSION-$RELEASE.amzn2.eks.$ARCHITECTURE.rpm.sha256`
+
+The sha256sum files for architecture independent RPMs are available at URLs following the schema:
+
+`golang-go$MINOR_VERSION.$PATCH_VERSION/releases/$RELEASE/$ARCHITECTURE/RPMS/$ARCHITECTURE/golang-$MINOR_VERSION.$PATCH_VERSION-$RELEASE.amzn2.eks.noarch.rpm.sha256`
+
+During Golang installation these sha256sum files containing checksum values are validated against the downloaded Golang RPMs to ensure Golang RPM integrity.
 
 ## EKS Go architectures
 EKS Go currently supports the following architectures:
