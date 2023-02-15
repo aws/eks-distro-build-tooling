@@ -166,6 +166,7 @@ Patch103:       0103-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch104:       0104-add-method-to-skip-privd-tests-if-required.patch
 Patch105:       0105-update-bundled-golang.org.patch
 Patch106:       0106-replace-all-usages-of-BytesOrPanic.patch
+Patch107:       0107-multipart-limit-memory-inode-consumption.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
