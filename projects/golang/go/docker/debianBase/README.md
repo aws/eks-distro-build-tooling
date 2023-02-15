@@ -17,5 +17,5 @@ Release for images of Go 1.19.5 and 1.18.10
 ### 5
 Release for images of 1.20
 
-### 5
+### 6
 Release for images of Go 1.19.6 and 1.20.1
