@@ -13,3 +13,9 @@ Take fixes for Go 1.16 CVE-2022-41716 patch; see https://github.com/aws/eks-dist
 
 ### 4
 Release for images of Go 1.19.5 and 1.18.10
+
+### 5
+Release for images of 1.20
+
+### 6
+Release for images of Go 1.19.6 and 1.20.1
