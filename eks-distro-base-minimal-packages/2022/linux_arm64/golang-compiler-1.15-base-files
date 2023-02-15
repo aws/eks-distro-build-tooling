@@ -2706,7 +2706,7 @@
 -rw-r--r--    1006B /root/sdk/go1.15.15/src/cmd/internal/objabi/symkind_string.go
 -rw-r--r--     647B /root/sdk/go1.15.15/src/cmd/internal/objabi/typekind.go
 -rw-r--r--   4.1KiB /root/sdk/go1.15.15/src/cmd/internal/objabi/util.go
--rw-r--r--     461B /root/sdk/go1.15.15/src/cmd/internal/objabi/zbootstrap.go
+-rw-r--r--     460B /root/sdk/go1.15.15/src/cmd/internal/objabi/zbootstrap.go
 -rw-r--r--    11KiB /root/sdk/go1.15.15/src/cmd/internal/objfile/disasm.go
 -rw-r--r--   2.7KiB /root/sdk/go1.15.15/src/cmd/internal/objfile/elf.go
 -rw-r--r--   5.3KiB /root/sdk/go1.15.15/src/cmd/internal/objfile/goobj.go

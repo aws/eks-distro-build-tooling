@@ -23,7 +23,7 @@ VERSION="$1"
 
 RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 
-GOLANG_MAJOR_VERSION=${VERSION%.*}
+GOLANG_MAJOR_VERSION=$(if [[ $(echo "$VERSION"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${VERSION%.*}; else echo ${VERSION%-*}; fi)
 
 NEWROOT=/golang-${GOLANG_MAJOR_VERSION}
 
@@ -47,12 +47,16 @@ function build::go::symlink() {
     local -r version=$1
 
     # Removing the last number as we only care about the major version of golang
-    local -r majorversion=${version%.*}
+    local -r majorversion=$(if [[ $(echo "$version"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
     mkdir -p ${GOPATH}/go${majorversion}/bin
+    
     for binary in go gofmt; do
         ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
     done
-    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+    
+    if [ "$version" != "$majorversion" ]; then
+        ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+    fi
 }
 
 function build::go::download_rpm(){
@@ -74,15 +78,11 @@ function build::go::install(){
     fi
 
     for artifact in golang golang-bin; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
     done
 
-    if [ $TARGETARCH == 'amd64' ]; then 
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/$arch/golang-race-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
-    fi
-
     for artifact in golang-docs golang-misc golang-tests golang-src; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
+        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
     done
 
     build::go::extract $version

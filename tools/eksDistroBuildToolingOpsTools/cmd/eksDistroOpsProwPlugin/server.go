@@ -125,7 +125,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	org := ie.Repo.Owner.Login
 	repo := ie.Repo.Name
 	num := ie.Issue.Number
-	auth := ie.Sender.Name
+	auth := ie.Sender.Login
 	title := ie.Issue.Title
 	body := ie.Issue.Body
 
@@ -136,7 +136,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		github.PrLogField:   num,
 	})
 
-	if auth != "eks-distro-bot" || !s.allowAll {
+	if auth != constants.EksDistroBotName || !s.allowAll {
 		ok, err := s.ghc.IsMember(org, auth)
 		if err != nil {
 			return err

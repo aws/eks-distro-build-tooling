@@ -6195,7 +6195,7 @@
 -rw-r--r--   3.3KiB /root/sdk/go1.19.5/src/internal/buildcfg/cfg.go
 -rw-r--r--     548B /root/sdk/go1.19.5/src/internal/buildcfg/cfg_test.go
 -rw-r--r--   5.5KiB /root/sdk/go1.19.5/src/internal/buildcfg/exp.go
--rw-r--r--     486B /root/sdk/go1.19.5/src/internal/buildcfg/zbootstrap.go
+-rw-r--r--     485B /root/sdk/go1.19.5/src/internal/buildcfg/zbootstrap.go
 -rw-r--r--   3.7KiB /root/sdk/go1.19.5/src/internal/bytealg/bytealg.go
 -rw-r--r--   2.7KiB /root/sdk/go1.19.5/src/internal/bytealg/compare_386.s
 -rw-r--r--   4.3KiB /root/sdk/go1.19.5/src/internal/bytealg/compare_amd64.s
