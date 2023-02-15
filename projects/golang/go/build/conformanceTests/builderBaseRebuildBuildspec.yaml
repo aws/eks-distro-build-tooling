@@ -34,13 +34,13 @@ phases:
   build:
     commands:
       - mkdir -p builder-base/tmp/golang-downloads/x86_64
-      - mkdir -p builder-base/tmp/golang-downloads/aarch64
-      - >- 
+      - >-
         for f in ${CODEBUILD_SRC_DIR_eks_go_amd64}/golang_*/eks_go_amd64/projects/golang/go/*/rpmbuild/*/golang-*.rpm; do
           fileName=$(basename ${f})
           cp ${f} "${CODEBUILD_SRC_DIR}/builder-base/tmp/golang-downloads/x86_64/${fileName}"
         done
       - make -C builder-base copy-generate-attribution
+      - make -C builder-base download-golang
       - make -C builder-base images
   post_build:
     commands:
