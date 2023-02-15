@@ -208,7 +208,6 @@ func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) 
 					m[biMatch] = 1
 				}
 			}
-			return nil
 		}
 	}
 	for biNum := range m {
