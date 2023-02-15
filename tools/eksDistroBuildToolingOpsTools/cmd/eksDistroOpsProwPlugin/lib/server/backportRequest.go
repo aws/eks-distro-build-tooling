@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"regexp"
+	"strings"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -18,7 +19,7 @@ type backportRequest struct {
 // Currently handling Golang Patch Releases and Golang Minor Releases
 var backportRe = regexp.MustCompile(`(?m)^(?:/backport)\s+(.+)$`)
 
-func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue *github.Issue, backportMatches [][]string, org, repo string, num int) error {
+func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue *github.Issue, backportMatches []string, org, repo string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
@@ -50,6 +51,20 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue 
 	// Handle "/backport all"
 
 	// Handle "/backport v1.15.15 ...
-
+	for _, version := range backportMatches {
+		_, err := s.Ghc.CreateIssue(org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), s.generateBackportIssueBody(issue, requestor), 0, nil, []string{requestor})
+		if err != nil {
+			return err
+		}
+	}
 	return nil
+}
+
+func (s *Server) generateBackportIssueBody(issue *github.Issue, requestor string) string {
+	b := strings.Builder{}
+
+	b.WriteString(fmt.Sprintf("A backport of issue %v was requested by @%v\n", issue.HTMLURL, requestor))
+	b.WriteString(fmt.Sprintf("%v", issue.Body))
+	bs := b.String()
+	return bs
 }

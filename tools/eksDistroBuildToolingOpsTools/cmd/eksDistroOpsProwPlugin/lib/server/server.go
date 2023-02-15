@@ -168,7 +168,7 @@ func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent
 		github.PrLogField:   num,
 	})
 
-	backportMatches := backportRe.FindAllStringSubmatch(ic.Comment.Body, -1)
+	backportMatches := backportRe.FindAllString(ic.Comment.Body, -1)
 	if len(backportMatches) != 0 {
 		if err := s.handleBackportRequest(l, commentAuthor, &ic.Issue, backportMatches, org, repo, num); err != nil {
 			return fmt.Errorf("Handle backport request failure: %w", err)
