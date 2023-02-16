@@ -66,7 +66,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 		}
 	}
 	for biNum := range m {
-		biInt, err := strconv.Atoi(biNum)
+		biInt, err := strconv.Atoi(biNum[1:])
 		if err != nil {
 			return fmt.Errorf("Converting issue number to int: %w", err)
 		}
