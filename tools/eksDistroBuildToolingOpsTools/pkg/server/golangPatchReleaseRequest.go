@@ -6,9 +6,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/sirupsen/logrus"
 	"k8s.io/test-infra/prow/github"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
 type golangPatchReleaseRequest struct {
