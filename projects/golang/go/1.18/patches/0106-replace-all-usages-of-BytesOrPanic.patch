@@ -5,6 +5,56 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/00b256e9e3c0fa02a278ec9dfc3e191e02ceaf80
 
+From 42f3eaf15b2bfffb956e348241ee96c138f47011 Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <roland@golang.org>
+Date: Wed, 14 Dec 2022 09:43:16 -0800
+Subject: [PATCH] cherry-pick from 1.19
+
+# Original Information
+
+Message marshalling makes use of BytesOrPanic a lot, under the
+assumption that it will never panic. This assumption was incorrect, and
+specifically crafted handshakes could trigger panics. Rather than just
+surgically replacing the usages of BytesOrPanic in paths that could
+panic, replace all usages of it with proper error returns in case there
+are other ways of triggering panics which we didn't find.
+
+In one specific case, the tree routed by expandLabel, we replace the
+usage of BytesOrPanic, but retain a panic. This function already
+explicitly panicked elsewhere, and returning an error from it becomes
+rather painful because it requires changing a large number of APIs.
+The marshalling is unlikely to ever panic, as the inputs are all either
+fixed length, or already limited to the sizes required. If it were to
+panic, it'd likely only be during development. A close inspection shows
+no paths for a user to cause a panic currently.
+
+This patches ends up being rather large, since it requires routing
+errors back through functions which previously had no error returns.
+Where possible I've tried to use helpers that reduce the verbosity
+of frequently repeated stanzas, and to make the diffs as minimal as
+possible.
+
+Thanks to Marten Seemann for reporting this issue.
+
+Updates #58001
+Fixes #58358
+Fixes CVE-2022-41724
+
+Change-Id: Ieb55867ef0a3e1e867b33f09421932510cb58851
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1679436
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+(cherry picked from commit 0f3a44ad7b41cc89efdfad25278953e17d9c1e04)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1728204
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/468117
+Auto-Submit: Michael Pratt <mpratt@google.com>
+Run-TryBot: Michael Pratt <mpratt@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Than McIntosh <thanm@google.com>
+
 ---
  src/crypto/tls/common.go                  |   2 +-
  src/crypto/tls/conn.go                    |  46 +-

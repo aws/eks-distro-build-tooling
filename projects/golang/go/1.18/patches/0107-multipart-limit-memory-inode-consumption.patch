@@ -5,6 +5,65 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c55ac9bf1e5f779220294c843526536605f42ab
 
+
+From c5286d6b58ae45a9d08ce1e3df45d64ce0c585b0 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Wed, 25 Jan 2023 09:27:01 -0800
+Subject: [PATCH] cherry-pick from 5c55ac9bf1
+
+# Original Information
+
+Reader.ReadForm is documented as storing "up to maxMemory bytes + 10MB"
+in memory. Parsed forms can consume substantially more memory than
+this limit, since ReadForm does not account for map entry overhead
+and MIME headers.
+
+In addition, while the amount of disk memory consumed by ReadForm can
+be constrained by limiting the size of the parsed input, ReadForm will
+create one temporary file per form part stored on disk, potentially
+consuming a large number of inodes.
+
+Update ReadForm's memory accounting to include part names,
+MIME headers, and map entry overhead.
+
+Update ReadForm to store all on-disk file parts in a single
+temporary file.
+
+Files returned by FileHeader.Open are documented as having a concrete
+type of *os.File when a file is stored on disk. The change to use a
+single temporary file for all parts means that this is no longer the
+case when a form contains more than a single file part stored on disk.
+
+The previous behavior of storing each file part in a separate disk
+file may be reenabled with GODEBUG=multipartfiles=distinct.
+
+Update Reader.NextPart and Reader.NextRawPart to set a 10MiB cap
+on the size of MIME headers.
+
+Thanks to Jakob Ackermann (@das7pad) for reporting this issue.
+
+Updates #58006
+Fixes #58362
+Fixes CVE-2022-41725
+
+Change-Id: Ibd780a6c4c83ac8bcfd3cbe344f042e9940f2eab
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1714276
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+(cherry picked from commit ed4664330edcd91b24914c9371c377c132dbce8c)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1728949
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/468116
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Than McIntosh <thanm@google.com>
+Run-TryBot: Michael Pratt <mpratt@google.com>
+Auto-Submit: Michael Pratt <mpratt@google.com>
+
+
 ---
  src/mime/multipart/formdata.go       | 132 ++++++++++++++++++++-----
  src/mime/multipart/formdata_test.go  | 140 ++++++++++++++++++++++++++-
