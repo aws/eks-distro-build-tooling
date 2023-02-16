@@ -32,6 +32,8 @@ import (
 	"k8s.io/test-infra/prow/logrusutil"
 	"k8s.io/test-infra/prow/pjutil"
 	"k8s.io/test-infra/prow/pluginhelp/externalplugins"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/server"
 )
 
 type options struct {
@@ -93,7 +95,7 @@ func main() {
 		logrus.WithError(err).Fatal("Failed to parse loglevel")
 	}
 	logrus.SetLevel(logLevel)
-	log := logrus.StandardLogger().WithField("plugin", pluginName)
+	log := logrus.StandardLogger().WithField("plugin", server.PluginName)
 
 	if err := secret.Add(o.webhookSecretFile); err != nil {
 		logrus.WithError(err).Fatal("Error starting secrets agent.")
@@ -127,33 +129,33 @@ func main() {
 		log.WithError(err).Fatal("Error listing bot repositories.")
 	}
 
-	server := &Server{
-		tokenGenerator: secret.GetTokenGenerator(o.webhookSecretFile),
-		botUser:        botUser,
-		email:          email,
+	s := &server.Server{
+		TokenGenerator: secret.GetTokenGenerator(o.webhookSecretFile),
+		BotUser:        botUser,
+		Email:          email,
 
-		gc:  gitClient,
-		ghc: githubClient,
-		log: log,
+		Gc:  gitClient,
+		Ghc: githubClient,
+		Log: log,
 
-		labels:          o.labels.Strings(),
-		prowAssignments: o.prowAssignments,
-		allowAll:        o.allowAll,
-		issueOnConflict: o.issueOnConflict,
-		labelPrefix:     o.labelPrefix,
+		Labels:          o.labels.Strings(),
+		ProwAssignments: o.prowAssignments,
+		AllowAll:        o.allowAll,
+		IssueOnConflict: o.issueOnConflict,
+		LabelPrefix:     o.labelPrefix,
 
-		bare:     &http.Client{},
-		patchURL: "https://patch-diff.githubusercontent.com",
+		Bare:     &http.Client{},
+		PatchURL: "https://patch-diff.githubusercontent.com",
 
-		repos: repos,
+		Repos: repos,
 	}
 
 	health := pjutil.NewHealthOnPort(o.instrumentationOptions.HealthPort)
 	health.ServeReady()
 
 	mux := http.NewServeMux()
-	mux.Handle("/", server)
-	externalplugins.ServeExternalPluginHelp(mux, log, HelpProvider)
+	mux.Handle("/", s)
+	externalplugins.ServeExternalPluginHelp(mux, log, server.HelpProvider)
 	httpServer := &http.Server{Addr: ":" + strconv.Itoa(o.port), Handler: mux}
 	defer interrupts.WaitForGracefulShutdown()
 	interrupts.ListenAndServe(httpServer, 5*time.Second)

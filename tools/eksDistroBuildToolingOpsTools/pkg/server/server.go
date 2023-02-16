@@ -1,11 +1,9 @@
-package main
+package server
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"regexp"
-	"strconv"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -15,11 +13,9 @@ import (
 	"k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
-
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
-const pluginName = "eksdistroopstool"
+const PluginName = "eksdistroopstool"
 
 type githubClient interface {
 	AssignIssue(org, repo string, number int, logins []string) error
@@ -48,42 +44,36 @@ func HelpProvider(_ []config.OrgRepo) (*pluginhelp.PluginHelp, error) {
 // Server implements http.Handler. It validates incoming GitHub webhooks and
 // then dispatches them to the appropriate plugins.
 type Server struct {
-	tokenGenerator func() []byte
-	botUser        *github.UserData
-	email          string
+	TokenGenerator func() []byte
+	BotUser        *github.UserData
+	Email          string
 
-	gc  git.ClientFactory
-	ghc githubClient
-	log *logrus.Entry
+	Gc  git.ClientFactory
+	Ghc githubClient
+	Log *logrus.Entry
 
-	// Labels to apply to the backported issue.
-	labels []string
-	// Use prow to assign users to backported issue.
-	prowAssignments bool
-	// Allow anybody to do backports.
-	allowAll bool
-	// Create an issue on upstreampick conflict.
-	issueOnConflict bool
+	// Labels to apply.
+	Labels []string
+	// Use prow to assign users issues.
+	ProwAssignments bool
+	// Allow anybody to request or trigger event.
+	AllowAll bool
+	// Create an issue on conflict.
+	IssueOnConflict bool
 	// Set a custom label prefix.
-	labelPrefix string
+	LabelPrefix string
 
-	bare     *http.Client
-	patchURL string
+	Bare     *http.Client
+	PatchURL string
 
-	repos   []github.Repo
-	mapLock sync.Mutex
-	lockMap map[upstreamIssuePickRequest]*sync.Mutex
-}
-
-type upstreamIssuePickRequest struct {
-	org    string
-	repo   string
-	issNum int
+	Repos              []github.Repo
+	mapLock            sync.Mutex
+	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	eventType, eventGUID, payload, ok, _ := github.ValidateWebhook(w, r, s.tokenGenerator)
+	eventType, eventGUID, payload, ok, _ := github.ValidateWebhook(w, r, s.TokenGenerator)
 	if !ok {
 		return
 	}
@@ -107,7 +97,7 @@ func (s *Server) handleEvent(eventType, eventGUID string, payload []byte) error 
 		}
 		go func() {
 			if err := s.handleIssue(l, ie); err != nil {
-				s.log.WithError(err).WithFields(l.Data).Info("Issue creation failed.")
+				s.Log.WithError(err).WithFields(l.Data).Info("Handle Issue Failed.")
 			}
 		}()
 	default:
@@ -125,7 +115,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	org := ie.Repo.Owner.Login
 	repo := ie.Repo.Name
 	num := ie.Issue.Number
-	auth := ie.Sender.Login
+	author := ie.Sender.Login
 	title := ie.Issue.Title
 	body := ie.Issue.Body
 
@@ -136,24 +126,9 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		github.PrLogField:   num,
 	})
 
-	if auth != constants.EksDistroBotName || !s.allowAll {
-		ok, err := s.ghc.IsMember(org, auth)
-		if err != nil {
-			return err
-		}
-		if !ok {
-			resp := fmt.Sprintf("only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", org, org)
-			l.Info(resp)
-			return s.ghc.CreateComment(org, repo, num, resp)
-		}
-	}
-
-	//Currently handling Golang Patch Releases and Golang Minor Releases
-	var golangPatchReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Patch Release:)\s+(.+)$`)
-
 	golangPatchMatches := golangPatchReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
 	if len(golangPatchMatches) != 0 {
-		if err := s.handle(l, ie.Issue.User.Login, &ie.Issue, org, repo, title, body, num); err != nil {
+		if err := s.handleGolangPatchRelease(l, author, &ie.Issue, org, repo, title, body, num); err != nil {
 			return fmt.Errorf("handle GolangPatchrelease: %w", err)
 		}
 	}
@@ -164,76 +139,17 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 	return nil
 }
 
-func (s *Server) handle(logger *logrus.Entry, requestor string, issue *github.Issue, org, repo, title, body string, num int) error {
-	var lock *sync.Mutex
-	func() {
-		s.mapLock.Lock()
-		defer s.mapLock.Unlock()
-		if _, ok := s.lockMap[upstreamIssuePickRequest{org, repo, num}]; !ok {
-			if s.lockMap == nil {
-				s.lockMap = map[upstreamIssuePickRequest]*sync.Mutex{}
-			}
-			s.lockMap[upstreamIssuePickRequest{org, repo, num}] = &sync.Mutex{}
-		}
-		lock = s.lockMap[upstreamIssuePickRequest{org, repo, num}]
-	}()
-	lock.Lock()
-	defer lock.Unlock()
-
-	if err := s.HandleGolangPatchRelease(logger, issue); err != nil {
-		return fmt.Errorf("failed to handle Golang Patch Release: %w", err)
-	}
-
-	return nil
-}
-
 // Created based off plugins.FormatICResponse
 func FormatIEResponse(ie github.IssueEvent, s string) string {
 	return plugins.FormatResponseRaw(ie.Issue.Title, ie.Issue.HTMLURL, ie.Sender.Login, s)
 }
 
-func (s *Server) HandleGolangPatchRelease(l *logrus.Entry, upIss *github.Issue) error {
-	var golangVersionsRe = regexp.MustCompile(`(?m)(\d+.\d+.\d+)`)
-	var issNumRe = regexp.MustCompile(`(#\d+)`)
-	m := make(map[string]int)
-	for _, version := range golangVersionsRe.FindAllString(upIss.Title, -1) {
-		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
-		milestoneIssues, err := s.ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
-		if err != nil {
-			return fmt.Errorf("Find Golang Milestone: %v", err)
-		}
-		for _, i := range milestoneIssues {
-			for _, biMatch := range issNumRe.FindAllString(i.Body, -1) {
-				if m[biMatch] == 0 {
-					m[biMatch] = 1
-				}
-			}
-		}
-	}
-	for biNum := range m {
-		biInt, err := strconv.Atoi(biNum)
-		if err != nil {
-			return fmt.Errorf("Converting issue number to int: %w", err)
-		}
-		baseIssue, err := s.ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
-		if err != nil {
-			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
-		}
-		miNum, err := s.ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
-		if err != nil {
-			return fmt.Errorf("Creating mirrored issue: %w", err)
-		}
-		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.AwsOrgName, constants.EksdBuildToolingRepoName, miNum))
-	}
-	return nil
-}
-
 func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comment *github.IssueComment, resp string) error {
 	if err := func() error {
 		if comment != nil {
-			return s.ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
+			return s.Ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
 		}
-		return s.ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
+		return s.Ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
 	}(); err != nil {
 		l.WithError(err).Warn("failed to create comment")
 		return err
@@ -244,7 +160,7 @@ func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comme
 
 // createIssue creates an issue on GitHub.
 func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) error {
-	issueNum, err := s.ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
+	issueNum, err := s.Ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
 	if err != nil {
 		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for failed upstreampick: %v", err))
 	}
