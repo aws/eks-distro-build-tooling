@@ -26,7 +26,7 @@ yq --version
 gh --version
 govc version
 helm version
-/root/.docker/cli-plugins/docker-buildx version
+/usr/local/lib/docker/cli-plugins/docker-buildx version
 buildctl --version
 aws --version
 bash --version

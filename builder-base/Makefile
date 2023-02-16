@@ -5,6 +5,7 @@ SHELL=bash
 .SUFFIXES:
 
 BASE_DIRECTORY=$(shell git rev-parse --show-toplevel)
+
 MAKE_ROOT=$(BASE_DIRECTORY)/builder-base
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
@@ -32,6 +33,7 @@ BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,
 # this build since it doesnt change too often, limiting churn/rebuilds
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base
 BUILDER_IMAGE?=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME)-builder:$(call BASE_TAG_FROM_TAG_FILE,$(BUILDER_IMAGE_NAME))
+UPADTE_BASE_IMAGE?=true
 
 IMPORT_CACHE_REPOS=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
 
@@ -81,7 +83,7 @@ images-minimal: FINAL_STAGE_BASE=minimal-copy-stage
 images-minimal: VARIANT=minimal
 
 .PHONY: images-%
-images-%: buildkit-check download-golang
+images-%:
 	$(eval $(subst #,$(NEWLINE),$(shell yq  e 'to_entries | .[] | [.key,.value] | join("=") ' versions.yaml | tr '\n' '#')))
 	$(eval IMAGE_BUILD_ARGS=$(shell yq  e 'to_entries | .[] | .key ' versions.yaml))
 	$(MAKE_ROOT)/../scripts/buildkit.sh \
@@ -102,7 +104,7 @@ images-%: buildkit-check download-golang
 		$(if $(wildcard $(HOME)/.netrc),$(NETRC),) \
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
-	if [ "$(AL_TAG)" = "2" ] && [ "$(VARIANT)" = "standard" ]; then \
+	if [ "$(AL_TAG)" = "2" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG); \
 	fi
 	
@@ -118,10 +120,10 @@ docker: copy-generate-attribution
 	$(MAKE) remove-generate-attribution
 
 .PHONY: build
-build: validate-shasums copy-generate-attribution local-images remove-generate-attribution
+build: validate-shasums copy-generate-attribution download-golang local-images remove-generate-attribution
 
 .PHONY: release
-release: validate-shasums copy-generate-attribution images remove-generate-attribution
+release: validate-shasums copy-generate-attribution download-golang images remove-generate-attribution
 
 .PHONY: all
 all: release

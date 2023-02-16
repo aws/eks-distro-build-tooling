@@ -5,6 +5,7 @@ IMAGE_BUILD_ID=$(shell cat ./docker/debianBase/RELEASE)
 export PATH:=/go/go$(GO_SOURCE_VERSION)/bin:$(PATH)
 
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
+
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/golang/go
 VERSION_DIRECTORY:=$(PROJECT_DIRECTORY)/$(GO_SOURCE_VERSION)
 CLONED_REPO_DIRECTORY:=$(VERSION_DIRECTORY)/go
@@ -31,7 +32,7 @@ ARCHIVES_OUT_PATH?=golang-$(GIT_TAG)/releases/$(BUILD_ID)/archives
 
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 
-# This image build is specifically focused on a debian base image for use with EKS build systems
+# This build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
 IMAGE_TAG?=$(GIT_TAG)-$(IMAGE_BUILD_ID)
@@ -51,13 +52,21 @@ ifeq ($(ARCHITECTURE), AMD64)
     RELEASE_TARGETS += images
 endif
 
+# This allows us to skip the image-build in the pre-prod build target if we want to
+# This is useful if you only want to test the RPM build and not worry about having buildkit set up on the host
+BUILD_PREPROD_IMAGES?=true
+
+BUILD_TARGETS = golang-build sync-artifacts-to-s3-dry-run
+ifeq ($(BUILD_PREPROD_IMAGES), true)
+	BUILD_TARGETS += clean
+	BUILD_TARGETS += local-images
+endif
+
 .PHONY: golang-build
 golang-build: check-env setup-rpm-tree fetch-golang-source-archive copy-sources-to-rpmbuild-tree copy-patches-to-rpmbuild-tree build-golang-rpm generate-golang-archive test generate-golang-checksum
 
 .PHONY: build
-build: golang-build sync-artifacts-to-s3-dry-run clean local-images
-build:
-	echo "test"
+build: $(BUILD_TARGETS)
 
 .PHONY: release
 release: $(RELEASE_TARGETS)

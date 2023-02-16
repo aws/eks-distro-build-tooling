@@ -32,9 +32,9 @@ function install_docker_buildx() {
         --progress dot:giga \
         $DOCKER_BUILDX_URL
     sha256sum -c $BASE_DIR/docker-buildx-$TARGETARCH-checksum
-    mkdir -p ${NEWROOT}/root/.docker/cli-plugins
-    mv buildx-$DOCKER_BUILDX_VERSION.linux-$TARGETARCH ${NEWROOT}/root/.docker/cli-plugins/docker-buildx
-    chmod a+x ${NEWROOT}/root/.docker/cli-plugins/docker-buildx
+    mkdir -p ${NEWROOT}/usr/local/lib/docker/cli-plugins
+    mv buildx-$DOCKER_BUILDX_VERSION.linux-$TARGETARCH ${NEWROOT}/usr/local/lib/docker/cli-plugins/docker-buildx
+    chmod a+x ${NEWROOT}/usr/local/lib/docker/cli-plugins/docker-buildx
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_docker_buildx
