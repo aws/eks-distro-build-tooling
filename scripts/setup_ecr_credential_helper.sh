@@ -8,4 +8,4 @@ if [ ! -d "/root/.docker" ]; then
     mkdir -p /root/.docker
 fi
 
-mv config/docker-ecr-config.json /root/.docker/config.json
+mv docker-config/docker-ecr-config.json /root/.docker/config.json
