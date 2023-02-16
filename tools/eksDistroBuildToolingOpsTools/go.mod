@@ -14,7 +14,7 @@ require (
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.22.0
 	golang.org/x/oauth2 v0.0.0-20221014153046-6fdb5e3db783
-	k8s.io/test-infra v0.0.0-20230130144251-3bf935f41a45
+	k8s.io/test-infra v0.0.0-20230210210330-9aadff258d20
 )
 
 require (
@@ -31,7 +31,7 @@ require (
 	github.com/Azure/go-autorest/autorest/date v0.3.0 // indirect
 	github.com/Azure/go-autorest/logger v0.2.1 // indirect
 	github.com/Azure/go-autorest/tracing v0.6.0 // indirect
-	github.com/GoogleCloudPlatform/testgrid v0.0.123 // indirect
+	github.com/GoogleCloudPlatform/testgrid v0.0.155 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/andygrunwald/go-jira v1.14.0 // indirect
