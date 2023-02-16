@@ -19,7 +19,7 @@ type MetricPublisher struct {
 	cloudwatchClient cloudwatch.CloudWatch
 }
 
-func (m *MetricPublisher) publishMetric(metric *cloudwatch.PutMetricDataInput) (*cloudwatch.PutMetricDataOutput, error) {
+func (m *MetricPublisher) PublishMetric(metric *cloudwatch.PutMetricDataInput) (*cloudwatch.PutMetricDataOutput, error) {
 	outputData, err := m.cloudwatchClient.PutMetricData(metric)
 	logger.V(9).Info("put metric data", "inputData", metric.MetricData, "outputData", outputData)
 	if err != nil {
