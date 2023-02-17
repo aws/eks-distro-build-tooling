@@ -4,9 +4,13 @@
 
 The standard eks-distro-base defined by [Dockerfile.base](./Dockerfile.base) is the upstream AL2 image with the latest package updates.  The upstream AL2
 image is not updated with every package change.  A daily periodic job runs [check_update.sh](./check_update.sh) which checks yum for new
-security updates by running `yum check-update --security`.  If security updates are found, a new image is built and pushed to 
-[ECR](https://gallery.ecr.aws/eks-distro-build-tooling/eks-distro-base).  PRs are automatically create to update the EKS_DISTRO_BASE_TAG_FILE 
-file in this repo as well as [eks-distro](https://github.com/aws/eks-distro) and [eks-anywhere-build-tooling](https://github.com/aws/eks-anywhere-build-tooling).
+security updates by running `yum check-update --security`.  
+
+If security updates are found, a new image is built and pushed to 
+[ECR](https://gallery.ecr.aws/eks-distro-build-tooling/eks-distro-base).  A PR is then automatically created to update the EKS_DISTRO_BASE_TAG_FILE 
+file in this repo, which is the source of truth of the latest base image versions for each of the listed images ([example](https://github.com/aws/eks-distro-build-tooling/pull/807/files)). 
+
+Once that PR merges, a postsubmit runs to update the dependent EKS_DISTRO_*_TAG_FILEs in [eks-distro](https://github.com/aws/eks-distro) and [eks-anywhere-build-tooling](https://github.com/aws/eks-anywhere-build-tooling) for each of the images that received a package update ([example](https://github.com/aws/eks-anywhere-build-tooling/pull/1820)).
 
 The standard variant is currently the base image for EKS-D versions 1.18-1.21, but is not intended to be the base for future EKS-D versions or new container images.  
 The minimal variants are now recommended where possible.
