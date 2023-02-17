@@ -156,9 +156,10 @@ Requires:       go-srpm-macros
 Patch1:		0001-go-1.17.13-eks-archive-tar-limit-size-of-head.patch
 Patch2:		0002-go-1.17.13-eks-net-http-httputil-avoid-query-parameter-smuggling.patch
 Patch3:		0003-go-1.17.13-eks-regexp-limit-size-of-parsed-regexps.patch
-Patch4:     0004-go-1.17.13-eks-syscall-os-exec-reject-environ.patch
-Patch5:     0005-go1.17.13-eks-os-net-http-avoid-escapes-from-os.DirF.patch
-Patch6:     0006-go-1.17.13-eks-net-http-update-bundled-golang.patch
+Patch4:   0004-go-1.17.13-eks-syscall-os-exec-reject-environ.patch
+Patch5:   0005-go1.17.13-eks-os-net-http-avoid-escapes-from-os.DirF.patch
+Patch6:   0006-go-1.17.13-eks-net-http-update-bundled-golang.patch
+Patch7:   0007-update-bundled-golang.org.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
