@@ -50,7 +50,7 @@ env:
     NODE_INSTANCE_PROFILE: "arn:aws:iam::125833916567:instance-profile/KopsNodesBuildRole"
     REBUILD_ALL: "true"
     SKIP_CHECKSUM_VALIDATION: "true"
-    TARGET_BRANCH: "codebuildTest"
+    TARGET_BRANCH: "main"
     TEST_ROLE_ARN: "arn:aws:iam::125833916567:role/TestBuildRole"
 
 phases:

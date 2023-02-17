@@ -22,7 +22,7 @@ env:
     BUILDKIT_PLATFORMS: "linux/amd64"
     EKS_D_BUILD_TOOLING_REMOTE_URL: "https://github.com/aws/eks-distro-build-tooling.git"
     IMAGE_NAME: "builder-base-development"
-    TARGET_BRANCH: "codebuildTest"
+    TARGET_BRANCH: "main"
     UPDATE_BASE_IMAGE: "false"
 
 phases:

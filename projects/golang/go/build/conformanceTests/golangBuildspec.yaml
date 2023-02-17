@@ -48,7 +48,7 @@ env:
     ARTIFACTS_BUCKET: "eks-d-postsubmit-artifacts"
     BUILD_PREPROD_IMAGES: "false"
     EKS_D_BUILD_TOOLING_REMOTE_URL: "https://github.com/aws/eks-distro-build-tooling.git"
-    TARGET_BRANCH: "codebuildTest"
+    TARGET_BRANCH: "main"
 
 phases:
   pre_build:
