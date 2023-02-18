@@ -161,6 +161,7 @@ Patch5:   0005-go1.17.13-eks-os-net-http-avoid-escapes-from-os.DirF.patch
 Patch6:   0006-go-1.17.13-eks-net-http-update-bundled-golang.patch
 Patch7:   0007-go-1.17.13-replace-all-usages-of-BytesOrPanic.patch
 Patch8:   0008-go-1.17.13-multipart-limit-memory-inode-consumption.patch
+Patch9:   0009-go-1.17.13-path-filepath-do-not-clean-relative-path.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
