@@ -178,6 +178,7 @@ Patch23:       0023-go-1.16.15-eks-path-filepath-do-not-remove-pr.patch
 Patch24:       0024-go-1.16.15-eks-os-net-http-avoid-escapes-from-os.Dir.patch
 Patch25:       0025-go-1.16.15-eks-net-http-update-bundled-golang.patch
 Patch26:       0026-go-1.16.15-update-bundled-golang-org.patch
+Patch27:       0027-go-1.16.15-path-filepath-do-not-clean-relative-path.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
