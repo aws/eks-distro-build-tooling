@@ -5,10 +5,10 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c3e11bd0b5c0a86e5beffcd4339b86a902b21c3
 
-From 5e7a46f8abd81c22d6c77e7db976aad9dea6f2b8 Mon Sep 17 00:00:00 2001
+From 0e8915b65039ce42d672ad74f790c322e8671b5f Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Mon, 6 Feb 2023 10:03:44 -0800
-Subject: [PATCH] cherry-pick-5c3e11bd0b
+Subject: [PATCH] cherry-pick-from-5c3e11b
 
 # Original Information
 
@@ -31,24 +31,11 @@ Run-TryBot: Michael Pratt <mpratt@google.com>
 Auto-Submit: Michael Pratt <mpratt@google.com>
 Reviewed-by: Than McIntosh <thanm@google.com>
 
----
- src/cmd/internal/moddeps/moddeps_test.go      |  2 +
- .../golang.org/x/net/http2/hpack/hpack.go     | 79 ++++++++++++-------
- 2 files changed, 51 insertions(+), 30 deletions(-)
 
-diff --git a/src/cmd/internal/moddeps/moddeps_test.go b/src/cmd/internal/moddeps/moddeps_test.go
-index 56c3b2585c..570bb862ad 100644
---- a/src/cmd/internal/moddeps/moddeps_test.go
-+++ b/src/cmd/internal/moddeps/moddeps_test.go
-@@ -34,6 +34,8 @@ import (
- // See issues 36852, 41409, and 43687.
- // (Also see golang.org/issue/27348.)
- func TestAllDependencies(t *testing.T) {
-+	t.Skip("TODO(#58355): 1.19.4 contains unreleased changes from vendored modules")
-+
- 	goBin := testenv.GoToolPath(t)
- 
- 	// Ensure that all packages imported within GOROOT
+---
+ .../golang.org/x/net/http2/hpack/hpack.go     | 79 ++++++++++++-------
+ 1 file changed, 49 insertions(+), 30 deletions(-)
+
 diff --git a/src/vendor/golang.org/x/net/http2/hpack/hpack.go b/src/vendor/golang.org/x/net/http2/hpack/hpack.go
 index 85f18a2b0a..02e80e30a4 100644
 --- a/src/vendor/golang.org/x/net/http2/hpack/hpack.go
