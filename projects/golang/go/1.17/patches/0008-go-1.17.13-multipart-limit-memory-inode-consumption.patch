@@ -1,17 +1,20 @@
 # AWS EKS
-Backported To: go-1.18.10-eks
-Backported On: Wed, 15 Feb 2023
+Backported To: go-1.17.13-eks
+Backported On: Wed, 17 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c55ac9bf1e5f779220294c843526536605f42ab
 
-From 0f106e1a686f4f6f78d649bc2f282d7961f9da6b Mon Sep 17 00:00:00 2001
+From f7ec47273cb633c955e83443ca557a07dec6ff7d Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 25 Jan 2023 09:27:01 -0800
-Subject: [PATCH] cherry-pick-from-5c55ac9
+Subject: [PATCH] cherry-pick-5c55ac9
 
-In this patch, go1.19.6 introduces GODEBUG=multipartfiles=distinct option for users, but in this patch we put multipartfiles=distinct as default option.
+In this patch, go1.19.6 introduces GODEBUG=multipartfiles=distinct option for users, but in this patch we put multipartfiles=distinct as default option. 
+For this reason, the test for `multipartfiles!=distinct` has commented out.
 Also, during the `src/mime/multipart/multipart.go` line 152 function populateHeaders(), all instances has changed to `bp` to be compatible with other functions of the file.
+In `src/net/textproto/reader.go` the merge conflict was resolved by not accepting the new changes for skipping initial spaces in value. 
+In `src/mime/multipart/multipart.go` in line 152 all the vars are passed as 'bp' to be consistent with rest of the file. 
 
 
 # Original Information
@@ -65,6 +68,7 @@ TryBot-Result: Gopher Robot <gobot@golang.org>
 Reviewed-by: Than McIntosh <thanm@google.com>
 Run-TryBot: Michael Pratt <mpratt@google.com>
 Auto-Submit: Michael Pratt <mpratt@google.com>
+
 
 ---
  src/mime/multipart/formdata.go       | 131 ++++++++++++++++++++-----
@@ -304,7 +308,7 @@ index fca5f9e15f..d6898c6ce1 100644
  	return nil
  }
 diff --git a/src/mime/multipart/formdata_test.go b/src/mime/multipart/formdata_test.go
-index e3a3a3eae8..978aefab2d 100644
+index e3a3a3eae8..43475c3cd7 100644
 --- a/src/mime/multipart/formdata_test.go
 +++ b/src/mime/multipart/formdata_test.go
 @@ -6,8 +6,10 @@ package multipart
@@ -390,21 +394,21 @@ index e3a3a3eae8..978aefab2d 100644
 +	}
 +}
 +
++/**
 +// TestReadForm_ManyFiles_Combined tests that a multipart form containing many files only
 +// results in a single on-disk file.
 +func TestReadForm_ManyFiles_Combined(t *testing.T) {
 +	const distinct = false
 +	testReadFormManyFiles(t, distinct)
-+}
++}**/
 +
-+/**
 +// TestReadForm_ManyFiles_Distinct tests that setting GODEBUG=multipartfiles=distinct
 +// results in every file in a multipart form being placed in a distinct on-disk file.
 +func TestReadForm_ManyFiles_Distinct(t *testing.T) {
-+	t.Setenv("GODEBUG", "multipartfiles=distinct")
++	//t.Setenv("GODEBUG", "multipartfiles=distinct")
 +	const distinct = true
 +	testReadFormManyFiles(t, distinct)
-+}**/
++}
 +
 +func testReadFormManyFiles(t *testing.T, distinct bool) {
 +	var buf bytes.Buffer
@@ -643,4 +647,5 @@ index 5c3084f8a7..83db3b21ea 100644
  			// Most headers aren't multi-valued.
 -- 
 2.39.1
+
 
