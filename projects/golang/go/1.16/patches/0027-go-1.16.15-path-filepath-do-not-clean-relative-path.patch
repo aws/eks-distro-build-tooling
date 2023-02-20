@@ -1,52 +1,7 @@
-# AWS EKS
-Backported To: go-1.16.15-eks
-Backported On: Wed, 18 Feb 2023
-Backported By: szafreen@amazon.com
-Backported From: release-branch.go1.19
-Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
-
-From c9678a25f63c39f8e8657df76dfd94f08e5e40d1 Mon Sep 17 00:00:00 2001
+From 1e1cd98f880e37ebcf0b37b7a58cb5dad606ce89 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 12 Dec 2022 16:43:37 -0800
 Subject: [PATCH] cherry-pick-from-3345ddc
-
-# Original Information
-
-Do not permit Clean to convert a relative path into one starting
-with a drive reference. This change causes Clean to insert a .
-path element at the start of a path when the original path does not
-start with a volume name, and the first path element would contain
-a colon.
-
-This may introduce a spurious but harmless . path element under
-some circumstances. For example, Clean("a/../b:/../c") becomes `.\c`.
-
-This reverts CL 401595, since the change here supersedes the one
-in that CL.
-
-Thanks to RyotaK (https://twitter.com/ryotkak) for reporting this issue.
-
-Updates #57274
-Fixes #57275
-Fixes CVE-2022-41722
-
-Change-Id: I837446285a03aa74c79d7642720e01f354c2ca17
-Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1675249
-Reviewed-by: Roland Shoemaker <bracewell@google.com>
-Run-TryBot: Damien Neil <dneil@google.com>
-Reviewed-by: Julie Qiu <julieqiu@google.com>
-TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
-(cherry picked from commit 780dfa043ff5192c37de0d6fd1053a66b2b9f378)
-Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1728206
-Reviewed-by: Damien Neil <dneil@google.com>
-Run-TryBot: Roland Shoemaker <bracewell@google.com>
-Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
-Reviewed-on: https://go-review.googlesource.com/c/go/+/468115
-Reviewed-by: Than McIntosh <thanm@google.com>
-Run-TryBot: Michael Pratt <mpratt@google.com>
-Auto-Submit: Michael Pratt <mpratt@google.com>
-TryBot-Bypass: Michael Pratt <mpratt@google.com>
-
 
 ---
  src/path/filepath/path.go              | 13 +++++++++++++
