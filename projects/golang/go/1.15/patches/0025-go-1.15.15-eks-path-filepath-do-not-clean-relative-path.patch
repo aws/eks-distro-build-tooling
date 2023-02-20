@@ -1,0 +1,144 @@
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Mon, 20 Feb 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
+
+From ad206b26267d93fec27fb594cca88fe0733ee2b4 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Mon, 12 Dec 2022 16:43:37 -0800
+Subject: [PATCH] cherry-pick-from-3345ddc
+
+#original information
+
+Do not permit Clean to convert a relative path into one starting
+with a drive reference. This change causes Clean to insert a .
+path element at the start of a path when the original path does not
+start with a volume name, and the first path element would contain
+a colon.
+
+This may introduce a spurious but harmless . path element under
+some circumstances. For example, Clean("a/../b:/../c") becomes `.\c`.
+
+This reverts CL 401595, since the change here supersedes the one
+in that CL.
+
+Thanks to RyotaK (https://twitter.com/ryotkak) for reporting this issue.
+
+Updates #57274
+Fixes #57275
+Fixes CVE-2022-41722
+
+Change-Id: I837446285a03aa74c79d7642720e01f354c2ca17
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1675249
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
+(cherry picked from commit 780dfa043ff5192c37de0d6fd1053a66b2b9f378)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1728206
+Reviewed-by: Damien Neil <dneil@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/468115
+Reviewed-by: Than McIntosh <thanm@google.com>
+Run-TryBot: Michael Pratt <mpratt@google.com>
+Auto-Submit: Michael Pratt <mpratt@google.com>
+TryBot-Bypass: Michael Pratt <mpratt@google.com>
+
+---
+ src/path/filepath/path.go              | 13 +++++++++++++
+ src/path/filepath/path_test.go         | 10 ++++++++++
+ src/path/filepath/path_windows_test.go | 26 ++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
+
+diff --git a/src/path/filepath/path.go b/src/path/filepath/path.go
+index 26f1833189..f0f095ee83 100644
+--- a/src/path/filepath/path.go
++++ b/src/path/filepath/path.go
+@@ -14,6 +14,7 @@ package filepath
+ import (
+ 	"errors"
+ 	"os"
++	"runtime"
+ 	"sort"
+ 	"strings"
+ )
+@@ -144,6 +145,18 @@ func Clean(path string) string {
+ 			if rooted && out.w != 1 || !rooted && out.w != 0 {
+ 				out.append(Separator)
+ 			}
++			// If a ':' appears in the path element at the start of a Windows path,
++			// insert a .\ at the beginning to avoid converting relative paths
++			// like a/../c: into c:.
++			if runtime.GOOS == "windows" && out.w == 0 && out.volLen == 0 && r != 0 {
++				for i := r; i < n && !os.IsPathSeparator(path[i]); i++ {
++					if path[i] == ':' {
++						out.append('.')
++						out.append(Separator)
++						break
++					}
++				}
++			}
+ 			// copy element
+ 			for ; r < n && !os.IsPathSeparator(path[r]); r++ {
+ 				out.append(path[r])
+diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
+index d6f680556c..f7586de63f 100644
+--- a/src/path/filepath/path_test.go
++++ b/src/path/filepath/path_test.go
+@@ -93,6 +93,16 @@ var wincleantests = []PathTest{
+ 	{`//host/share/foo/../baz`, `\\host\share\baz`},
+ 	{`\\a\b\..\c`, `\\a\b\c`},
+ 	{`\\a\b`, `\\a\b`},
++	{`.\c:`, `.\c:`},
++	{`.\c:\foo`, `.\c:\foo`},
++	{`.\c:foo`, `.\c:foo`},
++
++	// Don't allow cleaning to move an element with a colon to the start of the path.
++	{`a/../c:`, `.\c:`},
++	{`a\..\c:`, `.\c:`},
++	{`a/../c:/a`, `.\c:\a`},
++	{`a/../../c:`, `..\c:`},
++	{`foo:bar`, `foo:bar`},
+ }
+ 
+ func TestClean(t *testing.T) {
+diff --git a/src/path/filepath/path_windows_test.go b/src/path/filepath/path_windows_test.go
+index f7c454bf65..2a76c575f1 100644
+--- a/src/path/filepath/path_windows_test.go
++++ b/src/path/filepath/path_windows_test.go
+@@ -581,3 +581,29 @@ func TestNTNamespaceSymlink(t *testing.T) {
+ 		t.Errorf(`EvalSymlinks(%q): got %q, want %q`, filelink, got, want)
+ 	}
+ }
++
++func TestIssue52476(t *testing.T) {
++	tests := []struct {
++		lhs, rhs string
++		want     string
++	}{
++		{`..\.`, `C:`, `..\C:`},
++		{`..`, `C:`, `..\C:`},
++		{`.`, `:`, `.\:`},
++		{`.`, `C:`, `.\C:`},
++		{`.`, `C:/a/b/../c`, `.\C:\a\c`},
++		{`.`, `\C:`, `.\C:`},
++		{`C:\`, `.`, `C:\`},
++		{`C:\`, `C:\`, `C:\C:`},
++		{`C`, `:`, `C\:`},
++		{`\.`, `C:`, `\C:`},
++		{`\`, `C:`, `\C:`},
++	}
++
++	for _, test := range tests {
++		got := filepath.Join(test.lhs, test.rhs)
++		if got != test.want {
++			t.Errorf(`Join(%q, %q): got %q, want %q`, test.lhs, test.rhs, got, test.want)
++		}
++	}
++}
+-- 
+2.39.1
+

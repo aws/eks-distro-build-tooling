@@ -248,6 +248,7 @@ Patch21:       0021-add-method-to-skip-privd-tests-if-required.patch
 Patch22:       0022-go-1.15.15-eks-archive-tar-limit-size-of-head.patch
 Patch23:       0023-go-1.15.15-eks-os-net-http-avoid-escapes-from-os.Dir.patch
 Patch24:       0024-go-1.15.15-eks-net-http-update-bundled-golang.patch
+Patch25:       0025-go-1.15.15-eks-path-filepath-do-not-clean-relative-path.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
