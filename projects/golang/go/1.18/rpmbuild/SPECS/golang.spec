@@ -160,19 +160,16 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
-Patch1:       0001-go-1.18.10-update-bundled-golang.org.patch
-Patch2:       0002-go-1.18.10-replace-all-usages-of-BytesOrPanic.patch
-Patch3:       0003-go-1.18.10-multipart-limit-memory-inode-consumption.patch
-Patch4:       0004-go-1.18.10-path-filepath-do-not-Clean-relative-path..patch
+Patch1:       0001-go-1.18.10-eks-update-bundled-golang.org.patch
+Patch2:       0002-go-1.18.10-eks-replace-all-usages-of-BytesOrPanic.patch
+Patch3:       0003-go-1.18.10-eks-multipart-limit-memory-inode-consumption.patch
+Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch103:       0103-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch104:       0104-add-method-to-skip-privd-tests-if-required.patch
-Patch105:       0105-update-bundled-golang.org.patch
-Patch106:       0106-replace-all-usages-of-BytesOrPanic.patch
-Patch107:       0107-multipart-limit-memory-inode-consumption.patch
-Patch108:       0108-path-filepath-do-not-Clean-relative-path..patch
+
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
