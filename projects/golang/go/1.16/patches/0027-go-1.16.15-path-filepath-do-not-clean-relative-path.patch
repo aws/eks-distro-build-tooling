@@ -1,16 +1,58 @@
-From 1e1cd98f880e37ebcf0b37b7a58cb5dad606ce89 Mon Sep 17 00:00:00 2001
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Mon, 20 Feb 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
+
+From fa610a7212e7ae71e1fbc0e8a90bab3b890dd9c7 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 12 Dec 2022 16:43:37 -0800
-Subject: [PATCH] cherry-pick-from-3345ddc
+Subject: [PATCH] [release-branch.go1.19] path/filepath: do not
+ Clean("a/../c:/b") into c:\b on Windows
 
+Do not permit Clean to convert a relative path into one starting
+with a drive reference. This change causes Clean to insert a .
+path element at the start of a path when the original path does not
+start with a volume name, and the first path element would contain
+a colon.
+
+This may introduce a spurious but harmless . path element under
+some circumstances. For example, Clean("a/../b:/../c") becomes `.\c`.
+
+This reverts CL 401595, since the change here supersedes the one
+in that CL.
+
+Thanks to RyotaK (https://twitter.com/ryotkak) for reporting this issue.
+
+Updates #57274
+Fixes #57275
+Fixes CVE-2022-41722
+
+Change-Id: I837446285a03aa74c79d7642720e01f354c2ca17
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1675249
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
+(cherry picked from commit 780dfa043ff5192c37de0d6fd1053a66b2b9f378)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1728206
+Reviewed-by: Damien Neil <dneil@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/468115
+Reviewed-by: Than McIntosh <thanm@google.com>
+Run-TryBot: Michael Pratt <mpratt@google.com>
+Auto-Submit: Michael Pratt <mpratt@google.com>
+TryBot-Bypass: Michael Pratt <mpratt@google.com>
 ---
- src/path/filepath/path.go              | 13 +++++++++++++
- src/path/filepath/path_test.go         | 10 ++++++++++
- src/path/filepath/path_windows_test.go | 26 ++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
+ src/path/filepath/path.go              | 27 +++++++++++++-------------
+ src/path/filepath/path_test.go         |  7 +++++++
+ src/path/filepath/path_windows_test.go |  2 +-
+ 3 files changed, 22 insertions(+), 14 deletions(-)
 
 diff --git a/src/path/filepath/path.go b/src/path/filepath/path.go
-index 2e7b439355..9666afa5aa 100644
+index 3084550743..9666afa5aa 100644
 --- a/src/path/filepath/path.go
 +++ b/src/path/filepath/path.go
 @@ -15,6 +15,7 @@ import (
@@ -21,7 +63,30 @@ index 2e7b439355..9666afa5aa 100644
  	"sort"
  	"strings"
  )
-@@ -145,6 +146,18 @@ func Clean(path string) string {
+@@ -117,21 +118,9 @@ func Clean(path string) string {
+ 		case os.IsPathSeparator(path[r]):
+ 			// empty path element
+ 			r++
+-		case path[r] == '.' && r+1 == n:
++		case path[r] == '.' && (r+1 == n || os.IsPathSeparator(path[r+1])):
+ 			// . element
+ 			r++
+-		case path[r] == '.' && os.IsPathSeparator(path[r+1]):
+-			// ./ element
+-			r++
+-
+-			for r < len(path) && os.IsPathSeparator(path[r]) {
+-				r++
+-			}
+-			if out.w == 0 && volumeNameLen(path[r:]) > 0 {
+-				// When joining prefix "." and an absolute path on Windows,
+-				// the prefix should not be removed.
+-				out.append('.')
+-			}
+ 		case path[r] == '.' && path[r+1] == '.' && (r+2 == n || os.IsPathSeparator(path[r+2])):
+ 			// .. element: remove to last separator
+ 			r += 2
+@@ -157,6 +146,18 @@ func Clean(path string) string {
  			if rooted && out.w != 1 || !rooted && out.w != 0 {
  				out.append(Separator)
  			}
@@ -41,16 +106,13 @@ index 2e7b439355..9666afa5aa 100644
  			for ; r < n && !os.IsPathSeparator(path[r]); r++ {
  				out.append(path[r])
 diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
-index 8616256ac0..4916f784dd 100644
+index e3e9b193e2..4916f784dd 100644
 --- a/src/path/filepath/path_test.go
 +++ b/src/path/filepath/path_test.go
-@@ -93,6 +93,16 @@ var wincleantests = []PathTest{
- 	{`//host/share/foo/../baz`, `\\host\share\baz`},
- 	{`\\a\b\..\c`, `\\a\b\c`},
- 	{`\\a\b`, `\\a\b`},
-+	{`.\c:`, `.\c:`},
-+	{`.\c:\foo`, `.\c:\foo`},
-+	{`.\c:foo`, `.\c:foo`},
+@@ -96,6 +96,13 @@ var wincleantests = []PathTest{
+ 	{`.\c:`, `.\c:`},
+ 	{`.\c:\foo`, `.\c:\foo`},
+ 	{`.\c:foo`, `.\c:foo`},
 +
 +	// Don't allow cleaning to move an element with a colon to the start of the path.
 +	{`a/../c:`, `.\c:`},
@@ -62,39 +124,18 @@ index 8616256ac0..4916f784dd 100644
  
  func TestClean(t *testing.T) {
 diff --git a/src/path/filepath/path_windows_test.go b/src/path/filepath/path_windows_test.go
-index 1c3d84c62d..2855a1afb8 100644
+index d0e81e925a..2855a1afb8 100644
 --- a/src/path/filepath/path_windows_test.go
 +++ b/src/path/filepath/path_windows_test.go
-@@ -584,3 +584,29 @@ func TestNTNamespaceSymlink(t *testing.T) {
- 		t.Errorf(`EvalSymlinks(%q): got %q, want %q`, filelink, got, want)
- 	}
- }
-+
-+func TestIssue52476(t *testing.T) {
-+	tests := []struct {
-+		lhs, rhs string
-+		want     string
-+	}{
-+		{`..\.`, `C:`, `..\C:`},
-+		{`..`, `C:`, `..\C:`},
+@@ -592,7 +592,7 @@ func TestIssue52476(t *testing.T) {
+ 	}{
+ 		{`..\.`, `C:`, `..\C:`},
+ 		{`..`, `C:`, `..\C:`},
+-		{`.`, `:`, `:`},
 +		{`.`, `:`, `.\:`},
-+		{`.`, `C:`, `.\C:`},
-+		{`.`, `C:/a/b/../c`, `.\C:\a\c`},
-+		{`.`, `\C:`, `.\C:`},
-+		{`C:\`, `.`, `C:\`},
-+		{`C:\`, `C:\`, `C:\C:`},
-+		{`C`, `:`, `C\:`},
-+		{`\.`, `C:`, `\C:`},
-+		{`\`, `C:`, `\C:`},
-+	}
-+
-+	for _, test := range tests {
-+		got := filepath.Join(test.lhs, test.rhs)
-+		if got != test.want {
-+			t.Errorf(`Join(%q, %q): got %q, want %q`, test.lhs, test.rhs, got, test.want)
-+		}
-+	}
-+}
+ 		{`.`, `C:`, `.\C:`},
+ 		{`.`, `C:/a/b/../c`, `.\C:\a\c`},
+ 		{`.`, `\C:`, `.\C:`},
 -- 
 2.39.1
 
