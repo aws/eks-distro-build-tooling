@@ -1,6 +1,6 @@
 # AWS EKS
 Backported To: go-1.17.13-eks
-Backported On: Wed, 17 Feb 2023
+Backported On: Fri, 17 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff

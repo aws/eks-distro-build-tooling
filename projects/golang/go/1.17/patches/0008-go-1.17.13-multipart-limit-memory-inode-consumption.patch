@@ -1,6 +1,6 @@
 # AWS EKS
 Backported To: go-1.17.13-eks
-Backported On: Wed, 17 Feb 2023
+Backported On: Fri, 17 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c55ac9bf1e5f779220294c843526536605f42ab
@@ -14,7 +14,6 @@ In this patch, go1.19.6 introduces GODEBUG=multipartfiles=distinct option for us
 For this reason, the test for `multipartfiles!=distinct` has commented out.
 Also, during the `src/mime/multipart/multipart.go` line 152 function populateHeaders(), all instances has changed to `bp` to be compatible with other functions of the file.
 In `src/net/textproto/reader.go` the merge conflict was resolved by not accepting the new changes for skipping initial spaces in value. 
-In `src/mime/multipart/multipart.go` in line 152 all the vars are passed as 'bp' to be consistent with rest of the file. 
 
 
 # Original Information

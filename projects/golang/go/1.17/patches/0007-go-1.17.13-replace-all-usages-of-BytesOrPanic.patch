@@ -1,6 +1,6 @@
 # AWS EKS
 Backported To: go-1.17.13-eks
-Backported On: Wed, 17 Feb 2023
+Backported On: Fri, 17 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/00b256e9e3c0fa02a278ec9dfc3e191e02ceaf80
@@ -12,7 +12,8 @@ Date: Wed, 14 Dec 2022 09:43:16 -0800
 Subject: [PATCH] go1.17-cherry-pick-from-00b256e
 
 
-During merge conflict in src/crypto/tls/conn.go line 1025 function readHandshake was set to return an `interface{}`, not `any`.
+During merge conflict in src/crypto/tls/conn.go line 1025 function readHandshake was set to return an `interface{}`, not accepting `any`
+to be consistent with the rest of the file.
 
 
 # Original Information

@@ -542,6 +542,12 @@ fi
 %endif
 
 %changelog
+* Wed Feb 17 2023 Sajia Zafreen <szafreen@amazon.com> - 1.17.13-3
+- Includes security fix for CVE-2022-41722
+- Includes security fix for CVE-2022-41723
+- Includes security fix for CVE-2022-41724 
+- Includes security fix for CVE-2022-41725
+
 * Fri Dec 16 2022 Kirsten Schumy <ksschumy@amazon.com> - 1.17.13-1
 - Include backported patch for CVE-2022-41720
 - Fixes: CVE-2022-41720
