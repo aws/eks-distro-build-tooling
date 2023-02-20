@@ -10,6 +10,10 @@ From: Roland Shoemaker <roland@golang.org>
 Date: Wed, 14 Dec 2022 09:43:16 -0800
 Subject: [PATCH] cherry-pick from 1.19
 
+During merge conflict in src/crypto/tls/conn.go line 1025 function readHandshake was set to return an `interface{}`, 
+not aceepting `any` to be consistent with the rest of the file.
+
+
 # Original Information
 
 Message marshalling makes use of BytesOrPanic a lot, under the

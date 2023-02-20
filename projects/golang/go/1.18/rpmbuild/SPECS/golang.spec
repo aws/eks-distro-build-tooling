@@ -544,6 +544,12 @@ fi
 %endif
 
 %changelog
+* Wed Feb 15 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-2
+- Includes security fix for CVE-2022-41722
+- Includes security fix for CVE-2022-41723
+- Includes security fix for CVE-2022-41724 
+- Includes security fix for CVE-2022-41725
+
 * Wed Jan 11 2023 Daniel Budris <budris@amazon.com> - 1.18.10-1
 - Bump tracking patch version to 1.18.10 from 1.18.9
 

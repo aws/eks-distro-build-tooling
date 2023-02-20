@@ -11,6 +11,12 @@ From: Damien Neil <dneil@google.com>
 Date: Wed, 25 Jan 2023 09:27:01 -0800
 Subject: [PATCH] cherry-pick from 5c55ac9bf1
 
+
+Also, during resolving the merge conflict the `src/mime/multipart/multipart.go` line 152 function populateHeaders()'s
+all instances has changed to `bp` to be compatible with other functions of the file.
+
+
+
 # Original Information
 
 Reader.ReadForm is documented as storing "up to maxMemory bytes + 10MB"
