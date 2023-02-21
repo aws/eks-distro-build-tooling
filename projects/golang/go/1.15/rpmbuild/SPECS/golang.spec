@@ -251,6 +251,7 @@ Patch24:       0024-go-1.15.15-eks-net-http-update-bundled-golang.patch
 Patch25:       0025-go-1.15.15-eks-path-filepath-do-not-clean-relative-path.patch
 Patch26:       0026-go-1.15.15-eks-update-bundled-golang-org.patch
 Patch27:       0027-go-1.15.15-eks-replace-all-usages-of-BytesOrPanic.patch
+Patch28:       0028-go-1.15.15-eks-multipart-limit-memory-inode-consumption.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
@@ -675,6 +676,12 @@ fi
 %endif
 
 %changelog
+* Tuse Feb 21 2023 Sajia Zafreen <szafreen@amazon.com> - 1.15.15-3
+- Includes security fix for CVE-2022-41722
+- Includes security fix for CVE-2022-41723
+- Includes security fix for CVE-2022-41724 
+- Includes security fix for CVE-2022-41725
+
 * Fri Dec 16 2022 Kirsten Schumy <ksschumy@amazon.com> - 1.15.15-2
 - Include backported patch for CVE-2022-41720
 - Fixes: CVE-2022-41720
