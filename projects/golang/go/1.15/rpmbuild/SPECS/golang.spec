@@ -676,7 +676,7 @@ fi
 %endif
 
 %changelog
-* Tuse Feb 21 2023 Sajia Zafreen <szafreen@amazon.com> - 1.15.15-3
+* Tues Feb 21 2023 Sajia Zafreen <szafreen@amazon.com> - 1.15.15-3
 - Includes security fix for CVE-2022-41722
 - Includes security fix for CVE-2022-41723
 - Includes security fix for CVE-2022-41724 
