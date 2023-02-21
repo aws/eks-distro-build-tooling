@@ -75,6 +75,7 @@ release: $(RELEASE_TARGETS)
 prod-release: golang-build sync-artifacts-to-s3
 
 .PHONY: prod-release-images
+prod-release-images: export AWS_PROFILE=ecr-public-push
 prod-release-images: fetch-eks-go-archive images
 
 .PHONY: fetch-eks-go-archive
