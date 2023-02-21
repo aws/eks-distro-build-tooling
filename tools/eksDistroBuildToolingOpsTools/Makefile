@@ -60,6 +60,7 @@ mocks: ## Generate mocks
 	go get github.com/golang/mock/mockgen@v1.6.0
 	${GOPATH}/bin/mockgen -destination=pkg/github/mocks/github.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github" GitClient,IssueClient,RepoClient,PullRequestClient
 	${GOPATH}/bin/mockgen -destination=pkg/consumerUpdater/mocks/consumerUpdater.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/consumerUpdater" Consumer,Updater,Notifier
+	${GOPATH}/bin/mockgen -destination=pkg/consumerUpdater/mocks/dependencyUpdater.go -package=mocks "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/dependencyUpdater" Consumer,Updater
 
 .PHONY: local-images-eksDistroOpsProwPlugin
 local-images-eksDistroOpsProwPlugin: PUSH_IMAGES=false
