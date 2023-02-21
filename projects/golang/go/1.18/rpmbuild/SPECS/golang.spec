@@ -160,10 +160,16 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-srpm-macros
 
+Patch1:       0001-go-1.18.10-eks-update-bundled-golang.org.patch
+Patch2:       0002-go-1.18.10-eks-replace-all-usages-of-BytesOrPanic.patch
+Patch3:       0003-go-1.18.10-eks-multipart-limit-memory-inode-consumption.patch
+Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patch
+
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch103:       0103-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch104:       0104-add-method-to-skip-privd-tests-if-required.patch
+
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -540,6 +546,12 @@ fi
 %endif
 
 %changelog
+* Wed Feb 15 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-2
+- Includes security fix for CVE-2022-41722
+- Includes security fix for CVE-2022-41723
+- Includes security fix for CVE-2022-41724 
+- Includes security fix for CVE-2022-41725
+
 * Wed Jan 11 2023 Daniel Budris <budris@amazon.com> - 1.18.10-1
 - Bump tracking patch version to 1.18.10 from 1.18.9
 
