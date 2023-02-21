@@ -10,7 +10,7 @@ From: Damien Neil <dneil@google.com>
 Date: Mon, 12 Dec 2022 16:43:37 -0800
 Subject: [PATCH] cherry-pick-from-3345ddc
 
-#original information
+# Original information
 
 Do not permit Clean to convert a relative path into one starting
 with a drive reference. This change causes Clean to insert a .
