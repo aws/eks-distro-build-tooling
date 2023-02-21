@@ -1,5 +1,21 @@
 ## EKS Go Debian Base Image
-This Debian base image is inteneded for limited use as a base for upstream Kubernetes toolchain artifacts like `kube-cross`
+This Debian base image is intended for limited use as a base for upstream Kubernetes toolchain artifacts like `kube-cross`
+
+### Public ECR
+EKS Go Debian Base Images are available through the EKS Distribution Public ECR: https://gallery.ecr.aws/eks-distro-build-tooling/golang-debian
+
+### Image Tags
+EKS Go Debian Base Images are tagged with the following format:
+
+`$GOLANG_GIT_TAG-$EKS_GO_RELEASE-$EKS_GO_DEBIAN_DOCKERFILE_RELEASE`
+
+For example, the Golang 1.20 Debian base image would have a tag like the following: `1.20.1-5-6`.
+
+Where 
+- `$GOLANG_GIT_TAG` is the git tag of the tracked Golang version (e.g. [for Go 1.20](../../1.20/GIT_TAG))
+- `$EKS_GO_RELEASE` is the corresponding EKS Go release of the given Go version, as noted in the `RELEASE` file for the given version (e.g. [for Go 1.20](../../1.20/RELEASE)).
+- `$EKS_GO_DEBIAN_DOCKERFILE_RELEASE` is the corresponding version of the dockerfile used to build the image, from the [`RELEASE` file for the Debian base image](./RELEASE)
+
 
 ## Releases
 ### 1
