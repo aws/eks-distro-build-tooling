@@ -1,4 +1,11 @@
-## Golang 1.15.15 Build for EKS
+# EKS Golang 1.15.15
+
+Current Release: `3`
+
+Tracking Tag: `go1.15.15`
+
+Artifacts: https://distro.eks.amazonaws.com/golang-go1.15/releases/3/RPMS
+
 ### ARM64 Builds 
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1.15-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
