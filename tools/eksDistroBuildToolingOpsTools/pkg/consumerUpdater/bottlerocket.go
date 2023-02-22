@@ -3,18 +3,18 @@ package consumerUpdater
 import (
 	"bytes"
 	"fmt"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 	"os"
 	"path/filepath"
 	"regexp"
 
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksDistroRelease"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const (
 	bottlerocketName    = "Bottlerocket"
-	versionRegex        = `[0-9]+\.[0-9]+\.[0-9]+`
-	filePermission      = 0644
 )
 
 var (
@@ -146,7 +146,7 @@ func updateCargo(cargoPath string, eksD eksDistroRelease.Release) error {
 					// Example —> sha512 = "3033c434d02e6e0296a6659e36e64ce65f7d5408a5d6338dae04bd03225abc7b3a6691e6cce788ac624ba556602a0638b228c64af09e2c8ae19188286a21b5b5"
 					splitData[j] = append(shaLinePrefix, fmt.Sprintf("%q", eksD.KubernetesSourceArchive().Archive.SHA512)...)
 					logger.Info("updated cargo.toml file", "cargo.toml", cargoPath)
-					return os.WriteFile(cargoPath, bytes.Join(splitData, linebreak), filePermission)
+					return os.WriteFile(cargoPath, bytes.Join(splitData, linebreak), constants.OwnerWriteallReadOctal)
 				}
 			}
 		}
@@ -180,11 +180,11 @@ func updateSpec(specPath string, eksD eksDistroRelease.Release) error {
 			goverFound = true
 			for j := i + 1; j < len(splitData); j++ {
 				if bytes.HasPrefix(splitData[j], sourceLinePrefix) {
-					re := regexp.MustCompile(versionRegex)
+					re := regexp.MustCompile(constants.SemverRegex)
 					// Example —> Source0: https://distro.eks.amazonaws.com/kubernetes-1-23/releases/6/artifacts/kubernetes/v%{gover}/kubernetes-src.tar.gz
 					splitData[j] = append(sourceLinePrefix, re.ReplaceAll([]byte(eksD.KubernetesSourceArchive().Archive.URI), []byte("%{gover}"))...)
 					logger.Info("updated spec file", "spec", specPath)
-					return os.WriteFile(specPath, bytes.Join(splitData, linebreak), filePermission)
+					return os.WriteFile(specPath, bytes.Join(splitData, linebreak), constants.OwnerWriteallReadOctal)
 				}
 			}
 		}
