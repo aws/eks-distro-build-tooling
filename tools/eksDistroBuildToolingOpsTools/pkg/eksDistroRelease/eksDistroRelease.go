@@ -16,6 +16,8 @@ import (
 const (
 	expectedStatusCode = 200
 	eksDistroReleaseManifestUriTemplate = "https://distro.eks.amazonaws.com/kubernetes-%s/kubernetes-%s-eks-%d.yaml"
+	kubernetesComponentName = "kubernetes"
+	kubernetesSourceArchiveAsset = "kubernetes-src.tar.gz"
 )
 
 func NewEksDistroReleaseObject(versionString string) (*Release, error) {
@@ -48,20 +50,24 @@ func NewEksDistroReleaseObject(versionString string) (*Release, error) {
 	}
 
 	return &Release{
-		Major:    major,
-		Manifest: manifest,
-		Minor:    minor,
-		Patch:    patch,
-		Release:  release,
+		Major:      major,
+		Manifest:   manifest,
+		Minor:      minor,
+		Patch:      patch,
+		Release:    release,
+		components: map[string]v1alpha1.Component{},
+		assets:     map[string]v1alpha1.Asset{},
 	}, nil
 }
 
 type Release struct {
-	Major    int
-	Minor    int
-	Patch    int
-	Release  int
-	Manifest *v1alpha1.Release
+	Major      int
+	Minor      int
+	Patch      int
+	Release    int
+	Manifest   *v1alpha1.Release
+	components map[string]v1alpha1.Component
+	assets     map[string]v1alpha1.Asset
 }
 
 func (r Release) KubernetesReleaseBranch() string {
@@ -93,7 +99,38 @@ func (r Release) EksDistroReleaseFullVersion() string {
 }
 
 func (r Release) KubernetesFullVersion() string {
+	return fmt.Sprintf("%d.%d.%d", r.Major, r.Minor, r.Patch)
+}
+
+func (r Release) KubernetesSemver() string {
 	return fmt.Sprintf("v%d.%d.%d", r.Major, r.Minor, r.Patch)
+}
+
+func (r Release) KubernetesComponent() *v1alpha1.Component {
+	component, ok := r.components[kubernetesComponentName]; if ok {
+		return &component
+	}
+
+	for _, c := range r.ReleaseManifest().Status.Components {
+		if c.Name == kubernetesComponentName {
+			r.components[kubernetesComponentName] = c
+			return &c
+		}
+	}
+	return nil
+}
+
+func (r Release) KubernetesSourceArchive() *v1alpha1.Asset {
+	asset, ok := r.assets[kubernetesSourceArchiveAsset]; if ok {
+		return &asset
+	}
+	for _, a := range r.KubernetesComponent().Assets {
+		if a.Name == kubernetesSourceArchiveAsset {
+			r.assets[kubernetesSourceArchiveAsset] = a
+			return &a
+		}
+	}
+	return nil
 }
 
 func (r Release) Equals(release Release) bool {
