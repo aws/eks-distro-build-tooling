@@ -131,7 +131,21 @@ func (g *GogitClient) Remove(filename string) error {
 	return err
 }
 
-func (g *GogitClient) Commit(message string) error {
+type CommitOpt func(signature *object.Signature)
+
+func WithUser(user string) CommitOpt {
+	return func (o *object.Signature) {
+		o.Name = user
+	}
+}
+
+func WithEmail(email string) CommitOpt {
+	return func (o *object.Signature) {
+		o.Email = email
+	}
+}
+
+func (g *GogitClient) Commit(message string, opts ...CommitOpt) error {
 	logger.V(3).Info("Opening directory", "directory", g.RepoDirectory)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
@@ -147,9 +161,12 @@ func (g *GogitClient) Commit(message string) error {
 
 	logger.V(3).Info("Generating Commit object...")
 	commitSignature := &object.Signature{
-		Name: "EKS-A",
 		When: time.Now(),
 	}
+	for _, opt := range opts {
+		opt(commitSignature)
+	}
+
 	commit, err := g.Client.Commit(message, commitSignature, w)
 	if err != nil {
 		return err
