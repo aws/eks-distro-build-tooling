@@ -70,7 +70,7 @@ func WithRepositoryDirectory(repoDir string) Opt {
 }
 
 func (g *GogitClient) Clone(ctx context.Context) error {
-	if g.RepoDirectory != nil && g.InMemory == false {
+	if g.RepoDirectory != nil && !g.InMemory {
 		_, err := g.Client.Clone(ctx, *g.RepoDirectory, g.RepoUrl, g.Auth)
 		if err != nil && strings.Contains(err.Error(), emptyRepoError) {
 			return &RepositoryIsEmptyError{
