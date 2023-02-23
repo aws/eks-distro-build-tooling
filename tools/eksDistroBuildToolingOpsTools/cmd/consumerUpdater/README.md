@@ -1,4 +1,8 @@
 ## EKS Distro Consumer Updater Tool
+The EKS Distro Consumer Updater Tool is intended as a home for all automation used to update consumers of EKS Distro with new releases.
+It is intentionally flexible, allowing the tool to implement unique update logic for each Consumer, while simplifying the interface and making it easy to invoke.
+
+This tool also logically supports 'notifications' for consumers via the Notifier interface.
 
 ### Using the Tool
 use `consumerUpdater --help` for up-to-date usage
