@@ -33,7 +33,7 @@ BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,
 # this build since it doesnt change too often, limiting churn/rebuilds
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base
 BUILDER_IMAGE?=$(BASE_IMAGE_REPO)/$(BUILDER_IMAGE_NAME)-builder:$(call BASE_TAG_FROM_TAG_FILE,$(BUILDER_IMAGE_NAME))
-UPADTE_BASE_IMAGE?=true
+UPDATE_BASE_IMAGE?=true
 
 IMPORT_CACHE_REPOS=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
 
