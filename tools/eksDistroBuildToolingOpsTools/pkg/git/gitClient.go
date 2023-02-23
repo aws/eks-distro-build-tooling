@@ -6,7 +6,7 @@ type Client interface {
 	Add(filename string) error
 	Remove(filename string) error
 	Clone(ctx context.Context) error
-	Commit(message string) error
+	Commit(message string, opts ...CommitOpt) error
 	Push(ctx context.Context) error
 	Pull(ctx context.Context, branch string) error
 	Init() error

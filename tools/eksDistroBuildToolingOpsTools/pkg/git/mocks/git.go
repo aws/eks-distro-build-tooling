@@ -8,7 +8,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	git "github.com/go-git/go-git/v5"
+	git "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
+	git0 "github.com/go-git/go-git/v5"
 	config "github.com/go-git/go-git/v5/config"
 	plumbing "github.com/go-git/go-git/v5/plumbing"
 	object "github.com/go-git/go-git/v5/plumbing/object"
@@ -82,17 +83,22 @@ func (mr *MockClientMockRecorder) Clone(arg0 interface{}) *gomock.Call {
 }
 
 // Commit mocks base method.
-func (m *MockClient) Commit(arg0 string) error {
+func (m *MockClient) Commit(arg0 string, arg1 ...git.CommitOpt) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Commit", arg0)
+	varargs := []interface{}{arg0}
+	for _, a := range arg1 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Commit", varargs...)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Commit indicates an expected call of Commit.
-func (mr *MockClientMockRecorder) Commit(arg0 interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) Commit(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Commit", reflect.TypeOf((*MockClient)(nil).Commit), arg0)
+	varargs := append([]interface{}{arg0}, arg1...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Commit", reflect.TypeOf((*MockClient)(nil).Commit), varargs...)
 }
 
 // Init mocks base method.
@@ -189,7 +195,7 @@ func (m *MockGoGit) EXPECT() *MockGoGitMockRecorder {
 }
 
 // AddGlob mocks base method.
-func (m *MockGoGit) AddGlob(arg0 string, arg1 *git.Worktree) error {
+func (m *MockGoGit) AddGlob(arg0 string, arg1 *git0.Worktree) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddGlob", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -203,7 +209,7 @@ func (mr *MockGoGitMockRecorder) AddGlob(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // Checkout mocks base method.
-func (m *MockGoGit) Checkout(arg0 *git.Worktree, arg1 *git.CheckoutOptions) error {
+func (m *MockGoGit) Checkout(arg0 *git0.Worktree, arg1 *git0.CheckoutOptions) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Checkout", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -217,10 +223,10 @@ func (mr *MockGoGitMockRecorder) Checkout(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // Clone mocks base method.
-func (m *MockGoGit) Clone(arg0 context.Context, arg1, arg2 string, arg3 transport.AuthMethod) (*git.Repository, error) {
+func (m *MockGoGit) Clone(arg0 context.Context, arg1, arg2 string, arg3 transport.AuthMethod) (*git0.Repository, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Clone", arg0, arg1, arg2, arg3)
-	ret0, _ := ret[0].(*git.Repository)
+	ret0, _ := ret[0].(*git0.Repository)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -232,10 +238,10 @@ func (mr *MockGoGitMockRecorder) Clone(arg0, arg1, arg2, arg3 interface{}) *gomo
 }
 
 // CloneInMemory mocks base method.
-func (m *MockGoGit) CloneInMemory(arg0 context.Context, arg1 string, arg2 transport.AuthMethod) (*git.Repository, error) {
+func (m *MockGoGit) CloneInMemory(arg0 context.Context, arg1 string, arg2 transport.AuthMethod) (*git0.Repository, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CloneInMemory", arg0, arg1, arg2)
-	ret0, _ := ret[0].(*git.Repository)
+	ret0, _ := ret[0].(*git0.Repository)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -247,7 +253,7 @@ func (mr *MockGoGitMockRecorder) CloneInMemory(arg0, arg1, arg2 interface{}) *go
 }
 
 // Commit mocks base method.
-func (m *MockGoGit) Commit(arg0 string, arg1 *object.Signature, arg2 *git.Worktree) (plumbing.Hash, error) {
+func (m *MockGoGit) Commit(arg0 string, arg1 *object.Signature, arg2 *git0.Worktree) (plumbing.Hash, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Commit", arg0, arg1, arg2)
 	ret0, _ := ret[0].(plumbing.Hash)
@@ -262,7 +268,7 @@ func (mr *MockGoGitMockRecorder) Commit(arg0, arg1, arg2 interface{}) *gomock.Ca
 }
 
 // CommitObject mocks base method.
-func (m *MockGoGit) CommitObject(arg0 *git.Repository, arg1 plumbing.Hash) (*object.Commit, error) {
+func (m *MockGoGit) CommitObject(arg0 *git0.Repository, arg1 plumbing.Hash) (*object.Commit, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CommitObject", arg0, arg1)
 	ret0, _ := ret[0].(*object.Commit)
@@ -277,10 +283,10 @@ func (mr *MockGoGitMockRecorder) CommitObject(arg0, arg1 interface{}) *gomock.Ca
 }
 
 // Create mocks base method.
-func (m *MockGoGit) Create(arg0 *git.Repository, arg1 string) (*git.Remote, error) {
+func (m *MockGoGit) Create(arg0 *git0.Repository, arg1 string) (*git0.Remote, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", arg0, arg1)
-	ret0, _ := ret[0].(*git.Remote)
+	ret0, _ := ret[0].(*git0.Remote)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -292,7 +298,7 @@ func (mr *MockGoGitMockRecorder) Create(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // CreateBranch mocks base method.
-func (m *MockGoGit) CreateBranch(arg0 *git.Repository, arg1 *config.Branch) error {
+func (m *MockGoGit) CreateBranch(arg0 *git0.Repository, arg1 *config.Branch) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateBranch", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -306,7 +312,7 @@ func (mr *MockGoGitMockRecorder) CreateBranch(arg0, arg1 interface{}) *gomock.Ca
 }
 
 // Head mocks base method.
-func (m *MockGoGit) Head(arg0 *git.Repository) (*plumbing.Reference, error) {
+func (m *MockGoGit) Head(arg0 *git0.Repository) (*plumbing.Reference, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Head", arg0)
 	ret0, _ := ret[0].(*plumbing.Reference)
@@ -321,10 +327,10 @@ func (mr *MockGoGitMockRecorder) Head(arg0 interface{}) *gomock.Call {
 }
 
 // Init mocks base method.
-func (m *MockGoGit) Init(arg0 string) (*git.Repository, error) {
+func (m *MockGoGit) Init(arg0 string) (*git0.Repository, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Init", arg0)
-	ret0, _ := ret[0].(*git.Repository)
+	ret0, _ := ret[0].(*git0.Repository)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -336,7 +342,7 @@ func (mr *MockGoGitMockRecorder) Init(arg0 interface{}) *gomock.Call {
 }
 
 // ListRemotes mocks base method.
-func (m *MockGoGit) ListRemotes(arg0 *git.Repository, arg1 transport.AuthMethod) ([]*plumbing.Reference, error) {
+func (m *MockGoGit) ListRemotes(arg0 *git0.Repository, arg1 transport.AuthMethod) ([]*plumbing.Reference, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListRemotes", arg0, arg1)
 	ret0, _ := ret[0].([]*plumbing.Reference)
@@ -351,7 +357,7 @@ func (mr *MockGoGitMockRecorder) ListRemotes(arg0, arg1 interface{}) *gomock.Cal
 }
 
 // ListWithContext mocks base method.
-func (m *MockGoGit) ListWithContext(arg0 context.Context, arg1 *git.Remote, arg2 transport.AuthMethod) ([]*plumbing.Reference, error) {
+func (m *MockGoGit) ListWithContext(arg0 context.Context, arg1 *git0.Remote, arg2 transport.AuthMethod) ([]*plumbing.Reference, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListWithContext", arg0, arg1, arg2)
 	ret0, _ := ret[0].([]*plumbing.Reference)
@@ -366,10 +372,10 @@ func (mr *MockGoGitMockRecorder) ListWithContext(arg0, arg1, arg2 interface{}) *
 }
 
 // NewRemote mocks base method.
-func (m *MockGoGit) NewRemote(arg0, arg1 string) *git.Remote {
+func (m *MockGoGit) NewRemote(arg0, arg1 string) *git0.Remote {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "NewRemote", arg0, arg1)
-	ret0, _ := ret[0].(*git.Remote)
+	ret0, _ := ret[0].(*git0.Remote)
 	return ret0
 }
 
@@ -380,10 +386,10 @@ func (mr *MockGoGitMockRecorder) NewRemote(arg0, arg1 interface{}) *gomock.Call 
 }
 
 // OpenRepo mocks base method.
-func (m *MockGoGit) OpenRepo() (*git.Repository, error) {
+func (m *MockGoGit) OpenRepo() (*git0.Repository, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "OpenRepo")
-	ret0, _ := ret[0].(*git.Repository)
+	ret0, _ := ret[0].(*git0.Repository)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -395,10 +401,10 @@ func (mr *MockGoGitMockRecorder) OpenRepo() *gomock.Call {
 }
 
 // OpenWorktree mocks base method.
-func (m *MockGoGit) OpenWorktree(arg0 *git.Repository) (*git.Worktree, error) {
+func (m *MockGoGit) OpenWorktree(arg0 *git0.Repository) (*git0.Worktree, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "OpenWorktree", arg0)
-	ret0, _ := ret[0].(*git.Worktree)
+	ret0, _ := ret[0].(*git0.Worktree)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -410,7 +416,7 @@ func (mr *MockGoGitMockRecorder) OpenWorktree(arg0 interface{}) *gomock.Call {
 }
 
 // PullWithContext mocks base method.
-func (m *MockGoGit) PullWithContext(arg0 context.Context, arg1 *git.Worktree, arg2 transport.AuthMethod, arg3 plumbing.ReferenceName) error {
+func (m *MockGoGit) PullWithContext(arg0 context.Context, arg1 *git0.Worktree, arg2 transport.AuthMethod, arg3 plumbing.ReferenceName) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "PullWithContext", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(error)
@@ -424,7 +430,7 @@ func (mr *MockGoGitMockRecorder) PullWithContext(arg0, arg1, arg2, arg3 interfac
 }
 
 // PushWithContext mocks base method.
-func (m *MockGoGit) PushWithContext(arg0 context.Context, arg1 *git.Repository, arg2 transport.AuthMethod) error {
+func (m *MockGoGit) PushWithContext(arg0 context.Context, arg1 *git0.Repository, arg2 transport.AuthMethod) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "PushWithContext", arg0, arg1, arg2)
 	ret0, _ := ret[0].(error)
@@ -438,7 +444,7 @@ func (mr *MockGoGitMockRecorder) PushWithContext(arg0, arg1, arg2 interface{}) *
 }
 
 // Remove mocks base method.
-func (m *MockGoGit) Remove(arg0 string, arg1 *git.Worktree) (plumbing.Hash, error) {
+func (m *MockGoGit) Remove(arg0 string, arg1 *git0.Worktree) (plumbing.Hash, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Remove", arg0, arg1)
 	ret0, _ := ret[0].(plumbing.Hash)
@@ -453,7 +459,7 @@ func (mr *MockGoGitMockRecorder) Remove(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // SetRepositoryReference mocks base method.
-func (m *MockGoGit) SetRepositoryReference(arg0 *git.Repository, arg1 *plumbing.Reference) error {
+func (m *MockGoGit) SetRepositoryReference(arg0 *git0.Repository, arg1 *plumbing.Reference) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SetRepositoryReference", arg0, arg1)
 	ret0, _ := ret[0].(error)
