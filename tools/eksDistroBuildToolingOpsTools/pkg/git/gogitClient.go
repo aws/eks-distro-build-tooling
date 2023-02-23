@@ -69,6 +69,12 @@ func WithRepositoryDirectory(repoDir string) Opt {
 	}
 }
 
+func WithInMemoryFilesystem() Opt {
+	return func(c *GogitClient) {
+		c.InMemory = true
+	}
+}
+
 func (g *GogitClient) Clone(ctx context.Context) error {
 	if g.RepoDirectory != nil && !g.InMemory {
 		_, err := g.Client.Clone(ctx, *g.RepoDirectory, g.RepoUrl, g.Auth)
