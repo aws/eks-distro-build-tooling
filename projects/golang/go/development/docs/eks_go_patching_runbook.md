@@ -15,6 +15,8 @@ Any security fixes included in the release will be noted in the release announce
 When these security fixes are available, we need to update the supported Go versions git tag to track the newly released patch version if available. Next EKS Go must review the fixes, determine if they are applicable to EKS Go,
 and then backport the fixes to the Go versions we maintain that are out of support upstream. 
 
+To help track this work, for each new patch release we create our own top-level issue ([like this](https://github.com/aws/eks-distro-build-tooling/issues/677)) in eks-distro-build-tooling, as well as a ticket for each Go version we support ([like this](https://github.com/aws/eks-distro-build-tooling/issues/703)).
+
 1. [Update the supported Go versions git tag to track the newly released patch version](#new-patch-versions) if the security fixes are part of a patch release 
 
 1. Identify the commits that needs to be backported to EKS Go
@@ -42,6 +44,10 @@ and then backport the fixes to the Go versions we maintain that are out of suppo
       In some cases, the issue may not apply ot the EKS Go use case; in which case, we will not take the patch.
       The most common case is if the issue affects only `GOOS=js` and `GOARCH=wasm`. We neither build or support EKS Go on Web Assembly.
       However, unless it's obvious that it does not apply to us (e.g. `GOARCH=wasm`), we should take the patch.
+
+      If we decide not to take a patch for a particular version, the relevant Github issue ([like this](https://github.com/aws/eks-distro-build-tooling/issues/703)) for that version must be closed with a description of why we decided not to take it. This will be our source of truth of why we're skipping that patch for that version. 
+
+      
       
 1. __Generate the patch__
    1. __check out the appropriate upstream tag__
