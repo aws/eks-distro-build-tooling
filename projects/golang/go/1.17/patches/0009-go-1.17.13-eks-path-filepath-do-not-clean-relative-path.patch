@@ -1,3 +1,9 @@
+From d066343b27e05f91adfbc394fa3b5de2a00e21cf Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Mon, 12 Dec 2022 16:43:37 -0800
+Subject: [PATCH] [go-1.17.13-eks] path/filepath: do not
+ Clean("a/../c:/b") into c:\b on Windows
+
 # AWS EKS
 Backported To: go-1.17.13-eks
 Backported On: Fri, 17 Feb 2023
@@ -5,12 +11,7 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
 
-From d066343b27e05f91adfbc394fa3b5de2a00e21cf Mon Sep 17 00:00:00 2001
-From: Damien Neil <dneil@google.com>
-Date: Mon, 12 Dec 2022 16:43:37 -0800
-Subject: [PATCH] [release-branch.go1.19] path/filepath: do not
- Clean("a/../c:/b") into c:\b on Windows
-
+# Original Information
 Do not permit Clean to convert a relative path into one starting
 with a drive reference. This change causes Clean to insert a .
 path element at the start of a path when the original path does not
