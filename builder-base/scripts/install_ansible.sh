@@ -36,7 +36,7 @@ function instal_ansible() {
     fi
 
     ANSIBLE_VERSION="$ANSIBLE_VERSION"
-    pip3 install --user --no-cache-dir "ansible==$ANSIBLE_VERSION"
+    pip3 install --user --no-cache-dir "ansible-core==$ANSIBLE_VERSION"
 
     PYWINRM_VERSION="$PYWINRM_VERSION"
     pip3 install --user --no-cache-dir "pywinrm==$PYWINRM_VERSION"
