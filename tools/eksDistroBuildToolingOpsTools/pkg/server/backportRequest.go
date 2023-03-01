@@ -48,9 +48,7 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue 
 		}
 	}
 
-	// Handle "/backport all"
-
-	// Handle "/backport v1.15.15 ...
+	// Handle "/backport:<project> [versions] - ie /backport:golang v1.18.12 ...
 	for _, version := range backportMatches {
 		_, err := s.Ghc.CreateIssue(org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), s.generateBackportIssueBody(issue, requestor), 0, nil, []string{requestor})
 		if err != nil {
