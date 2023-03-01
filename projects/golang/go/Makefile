@@ -35,8 +35,9 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 # This build is specifically focused on a debian base image for use with EKS build systems
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=golang-debian
-IMAGE_TAG?=$(GIT_TAG)-$(IMAGE_BUILD_ID)
-IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
+IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
+LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(GIT_TAG)
+IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
 
 PUSH_IMAGES?=true
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
@@ -72,9 +73,10 @@ build: $(BUILD_TARGETS)
 release: $(RELEASE_TARGETS)
 
 .PHONY: prod-release
-prod-release: golang-build sync-artifacts-to-s3
+prod-release: golang-build sync-artifacts-to-s3 prod-release-images
 
 .PHONY: prod-release-images
+prod-release-images: export AWS_PROFILE=ecr-public-push
 prod-release-images: fetch-eks-go-archive images
 
 .PHONY: fetch-eks-go-archive
