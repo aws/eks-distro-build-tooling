@@ -2,8 +2,6 @@ package server
 
 import (
 	"fmt"
-	"regexp"
-	"strconv"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -12,7 +10,7 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
-func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment github.IssueComment, issue github.Issue, project, version, org, repo string, num int) error {
+func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment *github.IssueComment, issue *github.Issue, project string, versions []string, org, repo string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
@@ -34,28 +32,12 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 		return nil
 	}
 
+	for _, version := range versions {
+		err := s.createIssue(logger, org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), CreateGolangBackportBody(constants.GolangOrgName, constants.GoRepoName, issue.Number, requestor, ""), issue.Number, comment, nil, []string{requestor})
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
-}
-
-func CreateGolangBackportBody(num int, requestor, note string) string {
-	golangBackportBody := fmt.Sprintf("This is an automated backport of %s/%s#%d", constants.GolangOrgName, constants.GoRepoName, num)
-	if len(requestor) != 0 {
-		golangBackportBody = fmt.Sprintf("%s\n\n/assign %s", golangBackportBody, requestor)
-	}
-	if len(note) != 0 {
-		golangBackportBody = fmt.Sprintf("%s\n\n/assign %s", golangBackportBody, note)
-	}
-	return golangBackportBody
-}
-
-func (s *Server) getGolangIssueFromBody(body string) (github.Issue, error) {
-	var issNumRe = regexp.MustCompile(fmt.Sprintf(`(%s)`, constants.GithubIssueRegex))
-	goIssueNum := issNumRe.FindString(body)
-
-	i, err := strconv.Atoi(goIssueNum[1:])
-	if err != nil {
-		return nil, err
-	}
-
-	return s.Ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, i)
 }
