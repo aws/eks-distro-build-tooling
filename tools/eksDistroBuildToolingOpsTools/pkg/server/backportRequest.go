@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 	"regexp"
-	"strings"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -11,26 +10,27 @@ import (
 )
 
 type backportRequest struct {
-	org    string
-	repo   string
-	issNum int
+	project string
+	org     string
+	repo    string
+	issNum  int
 }
 
-// Currently handling Golang Patch Releases and Golang Minor Releases
-var backportRe = regexp.MustCompile(`(?m)^(?:/backport)\s+(.+)$`)
+// Follows the format `/backport:golang 1.2.2 ...
+var backportRe = regexp.MustCompile(`(?m)^(?:/backport:)([a-zA-z]+)\s+(.+)$`)
 
-func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue *github.Issue, backportMatches []string, org, repo string, num int) error {
+func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, comment *github.IssueComment, issue *github.Issue, project string, versions []string, org, repo string, num int) error {
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
 		defer s.mapLock.Unlock()
-		if _, ok := s.lockBackportMap[backportRequest{org, repo, num}]; !ok {
+		if _, ok := s.lockBackportMap[backportRequest{project, org, repo, num}]; !ok {
 			if s.lockBackportMap == nil {
 				s.lockBackportMap = map[backportRequest]*sync.Mutex{}
 			}
-			s.lockBackportMap[backportRequest{org, repo, num}] = &sync.Mutex{}
+			s.lockBackportMap[backportRequest{project, org, repo, num}] = &sync.Mutex{}
 		}
-		lock = s.lockBackportMap[backportRequest{org, repo, num}]
+		lock = s.lockBackportMap[backportRequest{project, org, repo, num}]
 	}()
 	lock.Lock()
 	defer lock.Unlock()
@@ -48,23 +48,29 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, issue 
 		}
 	}
 
-	// Handle "/backport all"
-
-	// Handle "/backport v1.15.15 ...
-	for _, version := range backportMatches {
-		_, err := s.Ghc.CreateIssue(org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), s.generateBackportIssueBody(issue, requestor), 0, nil, []string{requestor})
-		if err != nil {
+	// Handle "/backport:<project> [versions] - ie /backport:golang 1.18.12 ...
+	switch project {
+	case "golang":
+	case "go":
+		if err := s.backportGolang(l, requestor, comment, issue, project, versions, org, repo, num); err != nil {
+			return err
+		}
+	default:
+		if err := s.createComment(l, org, repo, issue.Number, comment, fmt.Sprintf("%s not a valid project for /backport: command", project)); err != nil {
 			return err
 		}
 	}
+
 	return nil
 }
 
-func (s *Server) generateBackportIssueBody(issue *github.Issue, requestor string) string {
-	b := strings.Builder{}
-
-	b.WriteString(fmt.Sprintf("A backport of issue %v was requested by @%v\n", issue.HTMLURL, requestor))
-	b.WriteString(fmt.Sprintf("%v", issue.Body))
-	bs := b.String()
-	return bs
+func CreateBackportBody(org, repo string, num int, requestor, note string) string {
+	backportBody := fmt.Sprintf("This is an automated backport of %s/%s#%d", org, repo, num)
+	if len(requestor) != 0 {
+		backportBody = fmt.Sprintf("%s\n\n This backport was requested by: %s\n/assign %s", backportBody, requestor, requestor)
+	}
+	if len(note) != 0 {
+		backportBody = fmt.Sprintf("%s\n\nNotes from backported issue:%s", backportBody, note)
+	}
+	return backportBody
 }

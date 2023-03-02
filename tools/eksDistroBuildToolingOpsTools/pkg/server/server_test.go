@@ -222,8 +222,8 @@ func TestUpstreamPickCreateIssue(t *testing.T) {
 			t.Fatalf(errMsg("labels"), tc.labels, actualLabels)
 		}
 
-		cpFormat := fmt.Sprintf(commentFormat, tc.org, tc.repo, tc.prNum, "In response to a upstreampick label: %s")
-		expectedComment := fmt.Sprintf(cpFormat, fmt.Sprintf("new issue created for failed upstreampick: #%d", ghIssue.Number))
+		cpFormat := fmt.Sprintf(commentFormat, tc.org, tc.repo, tc.prNum, "In response to: %s")
+		expectedComment := fmt.Sprintf(cpFormat, fmt.Sprintf("new issue created for: #%d", ghIssue.Number))
 		actualComment := ghc.comments[len(ghc.comments)-1]
 
 		if expectedComment != actualComment {

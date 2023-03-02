@@ -4,15 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"regexp"
 	"sync"
 
 	"github.com/sirupsen/logrus"
 	"k8s.io/test-infra/prow/config"
-	"k8s.io/test-infra/prow/plugins"
-
 	"k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
+	"k8s.io/test-infra/prow/plugins"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
 const PluginName = "eksdistroopstool"
@@ -25,6 +27,8 @@ type githubClient interface {
 	GetIssue(org, repo string, number int) (*github.Issue, error)
 	IsMember(org, user string) (bool, error)
 }
+
+var versionsRe = regexp.MustCompile(fmt.Sprintf(`(?m)(%s)`, constants.SemverRegex))
 
 // HelpProvider construct the pluginhelp.PluginHelp for this plugin.
 func HelpProvider(_ []config.OrgRepo) (*pluginhelp.PluginHelp, error) {
@@ -167,10 +171,14 @@ func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent
 		github.RepoLogField: repo,
 		github.PrLogField:   num,
 	})
-
-	backportMatches := backportRe.FindAllString(ic.Comment.Body, -1)
-	if len(backportMatches) != 0 {
-		if err := s.handleBackportRequest(l, commentAuthor, &ic.Issue, backportMatches, org, repo, num); err != nil {
+	// backportMatches should hold 3 values:
+	// backportMatches[0] holds the full comment body
+	// backportMatches[1] holds the project
+	// backportMatches[2] holds the versions to backport to unparsed. ("v1.2.2 ...")
+	backportMatches := backportRe.FindStringSubmatch(ic.Comment.Body)
+	versions := versionsRe.FindAllString(backportMatches[2], -1)
+	if len(backportMatches) != 0 && len(backportMatches) == 3 {
+		if err := s.handleBackportRequest(l, commentAuthor, &ic.Comment, &ic.Issue, backportMatches[1], versions, org, repo, num); err != nil {
 			return fmt.Errorf("Handle backport request failure: %w", err)
 		}
 	}
@@ -188,7 +196,7 @@ func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comme
 		if comment != nil {
 			return s.Ghc.CreateComment(org, repo, num, plugins.FormatICResponse(*comment, resp))
 		}
-		return s.Ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to a upstreampick label: %s", resp))
+		return s.Ghc.CreateComment(org, repo, num, fmt.Sprintf("In response to: %s", resp))
 	}(); err != nil {
 		l.WithError(err).Warn("failed to create comment")
 		return err
@@ -201,8 +209,8 @@ func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comme
 func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) error {
 	issueNum, err := s.Ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
 	if err != nil {
-		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for failed upstreampick: %v", err))
+		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for previous request: %v", err))
 	}
 
-	return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for failed upstreampick: #%d", issueNum))
+	return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for: #%d", issueNum))
 }
