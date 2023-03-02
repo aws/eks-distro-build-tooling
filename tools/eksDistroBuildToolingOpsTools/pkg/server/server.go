@@ -7,14 +7,14 @@ import (
 	"regexp"
 	"sync"
 
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/sirupsen/logrus"
 	"k8s.io/test-infra/prow/config"
-	"k8s.io/test-infra/prow/plugins"
-
 	"k8s.io/test-infra/prow/git/v2"
 	"k8s.io/test-infra/prow/github"
 	"k8s.io/test-infra/prow/pluginhelp"
+	"k8s.io/test-infra/prow/plugins"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
 const PluginName = "eksdistroopstool"
