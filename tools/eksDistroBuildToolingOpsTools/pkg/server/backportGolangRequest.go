@@ -33,7 +33,7 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 	}
 
 	for _, version := range versions {
-		err := s.createIssue(logger, org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), CreateGolangBackportBody(constants.GolangOrgName, constants.GoRepoName, issue.Number, requestor, ""), issue.Number, comment, nil, []string{requestor})
+		err := s.createIssue(logger, org, repo, fmt.Sprintf("[%s]%s", version, issue.Title), CreateBackportBody(constants.GolangOrgName, constants.GoRepoName, issue.Number, requestor, ""), issue.Number, comment, nil, []string{requestor})
 		if err != nil {
 			return err
 		}

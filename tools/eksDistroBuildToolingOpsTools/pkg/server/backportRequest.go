@@ -64,7 +64,7 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, commen
 	return nil
 }
 
-func CreateGolangBackportBody(org, repo string, num int, requestor, note string) string {
+func CreateBackportBody(org, repo string, num int, requestor, note string) string {
 	backportBody := fmt.Sprintf("This is an automated backport of %s/%s#%d", org, repo, num)
 	if len(requestor) != 0 {
 		backportBody = fmt.Sprintf("%s\n\n This backport was requested by: %s\n/assign %s", backportBody, requestor, requestor)
