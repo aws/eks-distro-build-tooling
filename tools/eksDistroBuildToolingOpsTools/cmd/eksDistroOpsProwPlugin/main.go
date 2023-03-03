@@ -33,7 +33,7 @@ import (
 	"k8s.io/test-infra/prow/pjutil"
 	"k8s.io/test-infra/prow/pluginhelp/externalplugins"
 
-	server "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prowserver"
+	opstool "github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/externalplugin"
 )
 
 type options struct {
@@ -95,7 +95,7 @@ func main() {
 		logrus.WithError(err).Fatal("Failed to parse loglevel")
 	}
 	logrus.SetLevel(logLevel)
-	log := logrus.StandardLogger().WithField("plugin", server.PluginName)
+	log := logrus.StandardLogger().WithField("plugin", opstool.PluginName)
 
 	if err := secret.Add(o.webhookSecretFile); err != nil {
 		logrus.WithError(err).Fatal("Error starting secrets agent.")
@@ -129,7 +129,7 @@ func main() {
 		log.WithError(err).Fatal("Error listing bot repositories.")
 	}
 
-	s := &server.Server{
+	s := &opstool.Server{
 		TokenGenerator: secret.GetTokenGenerator(o.webhookSecretFile),
 		BotUser:        botUser,
 		Email:          email,
@@ -155,7 +155,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.Handle("/", s)
-	externalplugins.ServeExternalPluginHelp(mux, log, server.HelpProvider)
+	externalplugins.ServeExternalPluginHelp(mux, log, opstool.HelpProvider)
 	httpServer := &http.Server{Addr: ":" + strconv.Itoa(o.port), Handler: mux}
 	defer interrupts.WaitForGracefulShutdown()
 	interrupts.ListenAndServe(httpServer, 5*time.Second)
