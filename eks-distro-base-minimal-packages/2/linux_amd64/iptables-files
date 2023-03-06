@@ -574,6 +574,7 @@
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig.x86_64
 -rwxr-xr-x    24KiB /usr/sbin/ipset
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
+-rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   885KiB /usr/sbin/ldconfig
 -rwxr-xr-x    24KiB /usr/sbin/nfct
 -rwxr-xr-x    61KiB /usr/sbin/sefcontext_compile
@@ -2537,7 +2538,7 @@
 -rw-r--r--     583B /var/lib/alternatives/arptables
 -rw-r--r--     276B /var/lib/alternatives/ebtables
 -rw-r--r--     299B /var/lib/alternatives/ip6tables
--rw-r--r--     582B /var/lib/alternatives/iptables
+-rw-r--r--     748B /var/lib/alternatives/iptables
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   328KiB /var/lib/rpm/Basenames
