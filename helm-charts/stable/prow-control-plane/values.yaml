@@ -130,6 +130,8 @@ utility_images:
   sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20221108-d3ce231cb9
 awsIamAuthenticator:
   image: public.ecr.aws/eks-distro/kubernetes-sigs/aws-iam-authenticator:v0.5.7-eks-1-21-12
+pushgateway:
+  image: public.ecr.aws/bitnami/pushgateway:1.5.1
 
 # Namespace on the control plane to look for prow jobs
 prowJobNamespace: "default"
