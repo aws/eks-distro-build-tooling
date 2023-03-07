@@ -10,6 +10,7 @@
 -rw-r--r--      89B /etc/dnf/plugins/release-notification.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
+-rw-r--r--       7B /etc/dnf/vars/releasever
 -rw-r--r--       0B /etc/environment
 -rw-r--r--   1.4KiB /etc/ethertypes
 -rw-r--r--       0B /etc/exports
@@ -361,6 +362,7 @@
 -rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    16KiB /usr/sbin/ipset
+-rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
 -rwxr-xr-x    33KiB /usr/sbin/nfct
 -rwxr-xr-x    16KiB /usr/sbin/setcap
@@ -2225,7 +2227,7 @@
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
 -rw-r--r--     299B /var/lib/alternatives/ip6tables
--rw-r--r--     583B /var/lib/alternatives/iptables
+-rw-r--r--     749B /var/lib/alternatives/iptables
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   1.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
