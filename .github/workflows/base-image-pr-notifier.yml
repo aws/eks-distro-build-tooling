@@ -1,0 +1,13 @@
+name: baseimage-pr-notifier
+on:
+  pull_request:
+    types: [opened]
+jobs:
+  baseimage-pr-notifier:
+    runs-on: ubuntu-latest
+    
+    if: ${{ contains(github.event.pull_request.title, 'Update base image') }}
+    steps:
+      - run: curl -X POST $SLACK_WEBHOOK
+        env:
+          SLACK_WEBHOOK : ${{ secrets.SLACK_WEBHOOK_URL }}
