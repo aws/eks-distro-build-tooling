@@ -200,4 +200,4 @@ cherrypicker:
   image: public.ecr.aws/eks-distro-build-tooling/prow-cherrypicker:v20221108-d3ce231cb9
 eksdistroopstool:
   serviceName: eksdistroopstool
-  image:  public.ecr.aws/eks-distro-build-tooling/eks-distro-ops-tool:4
+  image:  public.ecr.aws/eks-distro-build-tooling/eks-distro-ops-tool:5
