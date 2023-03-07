@@ -9789,7 +9789,7 @@
 -rwxr-xr-x      31B /usr/bin/command
 -rwxr-xr-x   143KiB /usr/bin/coredumpctl
 -rwxr-xr-x   144KiB /usr/bin/cp
--rwxr-xr-x   139KiB /usr/bin/cpio
+-rwxr-xr-x   143KiB /usr/bin/cpio
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
 -rwxr-xr-x   235KiB /usr/bin/curl
@@ -10915,7 +10915,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   167KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   638KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   314KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
@@ -11782,8 +11782,8 @@
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/hz.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/hz.pyo
 -rw-r--r--   8.3KiB /usr/lib64/python2.7/encodings/idna.py
--rw-r--r--   6.3KiB /usr/lib64/python2.7/encodings/idna.pyc
--rw-r--r--   6.3KiB /usr/lib64/python2.7/encodings/idna.pyo
+-rw-r--r--   6.5KiB /usr/lib64/python2.7/encodings/idna.pyc
+-rw-r--r--   6.5KiB /usr/lib64/python2.7/encodings/idna.pyo
 -rw-r--r--   1.1KiB /usr/lib64/python2.7/encodings/iso2022_jp.py
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/iso2022_jp.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/iso2022_jp.pyo
@@ -13656,7 +13656,6 @@
 -rw-r--r--    35KiB /usr/share/doc/bash-4.2.46/COPYING
 -rw-r--r--   1.9KiB /usr/share/doc/bzip2-libs-1.0.6/LICENSE
 -rw-r--r--    35KiB /usr/share/doc/coreutils-8.22/COPYING
--rw-r--r--    35KiB /usr/share/doc/cpio-2.11/COPYING
 -rw-r--r--    26KiB /usr/share/doc/cracklib-2.9.0/COPYING.LIB
 -rw-r--r--    14KiB /usr/share/doc/cracklib-2.9.0/README-LICENSE
 -rw-r--r--   1.9KiB /usr/share/doc/cyrus-sasl-lib-2.1.26/COPYING
@@ -13940,7 +13939,7 @@
 -rw-r--r--   121KiB /usr/share/info/bash.info.gz
 -rw-r--r--    61KiB /usr/share/info/binutils.info.gz
 -rw-r--r--   203KiB /usr/share/info/coreutils.info.gz
--rw-r--r--   6.8KiB /usr/share/info/cpio.info.gz
+-rw-r--r--   8.2KiB /usr/share/info/cpio.info.gz
 -rw-r--r--    60KiB /usr/share/info/diffutils.info.gz
 -rw-r--r--    13KiB /usr/share/info/dir
 -rw-r--r--    25KiB /usr/share/info/find-maint.info.gz
@@ -13972,6 +13971,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/binutils-2.29.1/COPYING3
 -rw-r--r--   7.5KiB /usr/share/licenses/binutils-2.29.1/COPYING3.LIB
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
+-rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
 -rw-r--r--    29KiB /usr/share/licenses/dbus-1.10.24/COPYING
@@ -13983,7 +13983,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
 -rw-r--r--    35KiB /usr/share/licenses/gdbm-1.13/COPYING
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glib2-2.56.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
@@ -13995,7 +13995,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -14144,7 +14144,7 @@
 -rw-r--r--    69KiB /usr/share/locale/da/LC_MESSAGES/binutils.mo
 -rw-r--r--   9.1KiB /usr/share/locale/da/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   285KiB /usr/share/locale/da/LC_MESSAGES/coreutils.mo
--rw-r--r--   3.5KiB /usr/share/locale/da/LC_MESSAGES/cpio.mo
+-rw-r--r--    29KiB /usr/share/locale/da/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.8KiB /usr/share/locale/da/LC_MESSAGES/cracklib.mo
 -rw-r--r--    45KiB /usr/share/locale/da/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    33KiB /usr/share/locale/da/LC_MESSAGES/diffutils.mo
@@ -14174,7 +14174,7 @@
 -rw-r--r--    45KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   349KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
--rw-r--r--   7.9KiB /usr/share/locale/de/LC_MESSAGES/cpio.mo
+-rw-r--r--    31KiB /usr/share/locale/de/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.0KiB /usr/share/locale/de/LC_MESSAGES/cracklib.mo
 -rw-r--r--    48KiB /usr/share/locale/de/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/diffutils.mo
@@ -14257,7 +14257,7 @@
 -rw-r--r--   196KiB /usr/share/locale/es/LC_MESSAGES/binutils.mo
 -rw-r--r--    11KiB /usr/share/locale/es/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   306KiB /usr/share/locale/es/LC_MESSAGES/coreutils.mo
--rw-r--r--    14KiB /usr/share/locale/es/LC_MESSAGES/cpio.mo
+-rw-r--r--    28KiB /usr/share/locale/es/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.9KiB /usr/share/locale/es/LC_MESSAGES/cracklib.mo
 -rw-r--r--    50KiB /usr/share/locale/es/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    35KiB /usr/share/locale/es/LC_MESSAGES/diffutils.mo
@@ -14317,7 +14317,7 @@
 -rw-r--r--   207KiB /usr/share/locale/fi/LC_MESSAGES/binutils.mo
 -rw-r--r--    11KiB /usr/share/locale/fi/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   115KiB /usr/share/locale/fi/LC_MESSAGES/coreutils.mo
--rw-r--r--    32KiB /usr/share/locale/fi/LC_MESSAGES/cpio.mo
+-rw-r--r--    31KiB /usr/share/locale/fi/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.7KiB /usr/share/locale/fi/LC_MESSAGES/cracklib.mo
 -rw-r--r--    44KiB /usr/share/locale/fi/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--   7.9KiB /usr/share/locale/fi/LC_MESSAGES/diffutils.mo
@@ -14402,7 +14402,7 @@
 -rw-r--r--   8.7KiB /usr/share/locale/gl/LC_MESSAGES/acl.mo
 -rw-r--r--   9.8KiB /usr/share/locale/gl/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    34KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
--rw-r--r--   3.8KiB /usr/share/locale/gl/LC_MESSAGES/cpio.mo
+-rw-r--r--    11KiB /usr/share/locale/gl/LC_MESSAGES/cpio.mo
 -rw-r--r--    12KiB /usr/share/locale/gl/LC_MESSAGES/diffutils.mo
 -rw-r--r--   2.4KiB /usr/share/locale/gl/LC_MESSAGES/findutils.mo
 -rw-r--r--   127KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
@@ -14440,6 +14440,7 @@
 -rw-r--r--    22KiB /usr/share/locale/hr/LC_MESSAGES/binutils.mo
 -rw-r--r--   8.1KiB /usr/share/locale/hr/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    16KiB /usr/share/locale/hr/LC_MESSAGES/coreutils.mo
+-rw-r--r--    30KiB /usr/share/locale/hr/LC_MESSAGES/cpio.mo
 -rw-r--r--    17KiB /usr/share/locale/hr/LC_MESSAGES/diffutils.mo
 -rw-r--r--    30KiB /usr/share/locale/hr/LC_MESSAGES/findutils.mo
 -rw-r--r--    19KiB /usr/share/locale/hr/LC_MESSAGES/glib20.mo
@@ -14454,7 +14455,7 @@
 -rw-r--r--   132KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
 -rw-r--r--    10KiB /usr/share/locale/hu/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   312KiB /usr/share/locale/hu/LC_MESSAGES/coreutils.mo
--rw-r--r--   3.7KiB /usr/share/locale/hu/LC_MESSAGES/cpio.mo
+-rw-r--r--    32KiB /usr/share/locale/hu/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.8KiB /usr/share/locale/hu/LC_MESSAGES/cracklib.mo
 -rw-r--r--   7.7KiB /usr/share/locale/hu/LC_MESSAGES/diffutils.mo
 -rw-r--r--    25KiB /usr/share/locale/hu/LC_MESSAGES/findutils.mo
@@ -14484,7 +14485,7 @@
 -rw-r--r--   150KiB /usr/share/locale/id/LC_MESSAGES/binutils.mo
 -rw-r--r--   9.5KiB /usr/share/locale/id/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   185KiB /usr/share/locale/id/LC_MESSAGES/coreutils.mo
--rw-r--r--    31KiB /usr/share/locale/id/LC_MESSAGES/cpio.mo
+-rw-r--r--    30KiB /usr/share/locale/id/LC_MESSAGES/cpio.mo
 -rw-r--r--    13KiB /usr/share/locale/id/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/diffutils.mo
 -rw-r--r--    24KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
@@ -14515,6 +14516,7 @@
 -rw-r--r--   189KiB /usr/share/locale/it/LC_MESSAGES/binutils.mo
 -rw-r--r--    10KiB /usr/share/locale/it/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   211KiB /usr/share/locale/it/LC_MESSAGES/coreutils.mo
+-rw-r--r--    31KiB /usr/share/locale/it/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.0KiB /usr/share/locale/it/LC_MESSAGES/cracklib.mo
 -rw-r--r--    48KiB /usr/share/locale/it/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    30KiB /usr/share/locale/it/LC_MESSAGES/diffutils.mo
@@ -14547,6 +14549,7 @@
 -rw-r--r--   201KiB /usr/share/locale/ja/LC_MESSAGES/binutils.mo
 -rw-r--r--    12KiB /usr/share/locale/ja/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   231KiB /usr/share/locale/ja/LC_MESSAGES/coreutils.mo
+-rw-r--r--    34KiB /usr/share/locale/ja/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.1KiB /usr/share/locale/ja/LC_MESSAGES/cracklib.mo
 -rw-r--r--    32KiB /usr/share/locale/ja/LC_MESSAGES/diffutils.mo
 -rw-r--r--    61KiB /usr/share/locale/ja/LC_MESSAGES/elfutils.mo
@@ -14687,7 +14690,7 @@
 -rw-r--r--   129KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
 -rw-r--r--   9.9KiB /usr/share/locale/nl/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   341KiB /usr/share/locale/nl/LC_MESSAGES/coreutils.mo
--rw-r--r--    27KiB /usr/share/locale/nl/LC_MESSAGES/cpio.mo
+-rw-r--r--    30KiB /usr/share/locale/nl/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.9KiB /usr/share/locale/nl/LC_MESSAGES/cracklib.mo
 -rw-r--r--    47KiB /usr/share/locale/nl/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    35KiB /usr/share/locale/nl/LC_MESSAGES/diffutils.mo
@@ -14732,7 +14735,7 @@
 -rw-r--r--    25KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
 -rw-r--r--    12KiB /usr/share/locale/pl/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   349KiB /usr/share/locale/pl/LC_MESSAGES/coreutils.mo
--rw-r--r--    31KiB /usr/share/locale/pl/LC_MESSAGES/cpio.mo
+-rw-r--r--    30KiB /usr/share/locale/pl/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.7KiB /usr/share/locale/pl/LC_MESSAGES/cracklib.mo
 -rw-r--r--    47KiB /usr/share/locale/pl/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    34KiB /usr/share/locale/pl/LC_MESSAGES/diffutils.mo
@@ -14778,7 +14781,7 @@
 -rw-r--r--   9.5KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
 -rw-r--r--   9.6KiB /usr/share/locale/pt_BR/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   171KiB /usr/share/locale/pt_BR/LC_MESSAGES/coreutils.mo
--rw-r--r--   3.7KiB /usr/share/locale/pt_BR/LC_MESSAGES/cpio.mo
+-rw-r--r--   3.8KiB /usr/share/locale/pt_BR/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.9KiB /usr/share/locale/pt_BR/LC_MESSAGES/cracklib.mo
 -rw-r--r--    48KiB /usr/share/locale/pt_BR/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--   6.6KiB /usr/share/locale/pt_BR/LC_MESSAGES/diffutils.mo
@@ -14808,7 +14811,7 @@
 -rw-r--r--    20KiB /usr/share/locale/ro/LC_MESSAGES/binutils.mo
 -rw-r--r--     504B /usr/share/locale/ro/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    51KiB /usr/share/locale/ro/LC_MESSAGES/coreutils.mo
--rw-r--r--   3.8KiB /usr/share/locale/ro/LC_MESSAGES/cpio.mo
+-rw-r--r--   3.9KiB /usr/share/locale/ro/LC_MESSAGES/cpio.mo
 -rw-r--r--   6.5KiB /usr/share/locale/ro/LC_MESSAGES/diffutils.mo
 -rw-r--r--   8.7KiB /usr/share/locale/ro/LC_MESSAGES/findutils.mo
 -rw-r--r--    51KiB /usr/share/locale/ro/LC_MESSAGES/glib20.mo
@@ -14829,7 +14832,7 @@
 -rw-r--r--   235KiB /usr/share/locale/ru/LC_MESSAGES/binutils.mo
 -rw-r--r--    12KiB /usr/share/locale/ru/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   445KiB /usr/share/locale/ru/LC_MESSAGES/coreutils.mo
--rw-r--r--    35KiB /usr/share/locale/ru/LC_MESSAGES/cpio.mo
+-rw-r--r--    40KiB /usr/share/locale/ru/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.3KiB /usr/share/locale/ru/LC_MESSAGES/cracklib.mo
 -rw-r--r--   7.8KiB /usr/share/locale/ru/LC_MESSAGES/diffutils.mo
 -rw-r--r--    39KiB /usr/share/locale/ru/LC_MESSAGES/findutils.mo
@@ -14900,6 +14903,7 @@
 -rw-r--r--   198KiB /usr/share/locale/sr/LC_MESSAGES/bfd.mo
 -rw-r--r--   253KiB /usr/share/locale/sr/LC_MESSAGES/binutils.mo
 -rw-r--r--    12KiB /usr/share/locale/sr/LC_MESSAGES/chkconfig.mo
+-rw-r--r--    39KiB /usr/share/locale/sr/LC_MESSAGES/cpio.mo
 -rw-r--r--    59KiB /usr/share/locale/sr/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--   9.4KiB /usr/share/locale/sr/LC_MESSAGES/diffutils.mo
 -rw-r--r--   5.8KiB /usr/share/locale/sr/LC_MESSAGES/findutils.mo
@@ -14928,7 +14932,7 @@
 -rw-r--r--   188KiB /usr/share/locale/sv/LC_MESSAGES/binutils.mo
 -rw-r--r--    11KiB /usr/share/locale/sv/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   332KiB /usr/share/locale/sv/LC_MESSAGES/coreutils.mo
--rw-r--r--    27KiB /usr/share/locale/sv/LC_MESSAGES/cpio.mo
+-rw-r--r--    30KiB /usr/share/locale/sv/LC_MESSAGES/cpio.mo
 -rw-r--r--    45KiB /usr/share/locale/sv/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    32KiB /usr/share/locale/sv/LC_MESSAGES/diffutils.mo
 -rw-r--r--    23KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
@@ -14980,7 +14984,7 @@
 -rw-r--r--   127KiB /usr/share/locale/tr/LC_MESSAGES/binutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/tr/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    98KiB /usr/share/locale/tr/LC_MESSAGES/coreutils.mo
--rw-r--r--    19KiB /usr/share/locale/tr/LC_MESSAGES/cpio.mo
+-rw-r--r--    31KiB /usr/share/locale/tr/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.0KiB /usr/share/locale/tr/LC_MESSAGES/cracklib.mo
 -rw-r--r--    34KiB /usr/share/locale/tr/LC_MESSAGES/diffutils.mo
 -rw-r--r--    20KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
@@ -15010,7 +15014,7 @@
 -rw-r--r--   318KiB /usr/share/locale/uk/LC_MESSAGES/binutils.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   438KiB /usr/share/locale/uk/LC_MESSAGES/coreutils.mo
--rw-r--r--    41KiB /usr/share/locale/uk/LC_MESSAGES/cpio.mo
+-rw-r--r--    40KiB /usr/share/locale/uk/LC_MESSAGES/cpio.mo
 -rw-r--r--   2.4KiB /usr/share/locale/uk/LC_MESSAGES/cracklib.mo
 -rw-r--r--    63KiB /usr/share/locale/uk/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    43KiB /usr/share/locale/uk/LC_MESSAGES/diffutils.mo
@@ -15047,7 +15051,7 @@
 -rw-r--r--   206KiB /usr/share/locale/vi/LC_MESSAGES/binutils.mo
 -rw-r--r--   7.2KiB /usr/share/locale/vi/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   372KiB /usr/share/locale/vi/LC_MESSAGES/coreutils.mo
--rw-r--r--    34KiB /usr/share/locale/vi/LC_MESSAGES/cpio.mo
+-rw-r--r--    33KiB /usr/share/locale/vi/LC_MESSAGES/cpio.mo
 -rw-r--r--    52KiB /usr/share/locale/vi/LC_MESSAGES/cryptsetup.mo
 -rw-r--r--    37KiB /usr/share/locale/vi/LC_MESSAGES/diffutils.mo
 -rw-r--r--    33KiB /usr/share/locale/vi/LC_MESSAGES/findutils.mo
@@ -15112,7 +15116,7 @@
 -rw-r--r--    79KiB /usr/share/locale/zh_TW/LC_MESSAGES/binutils.mo
 -rw-r--r--   9.7KiB /usr/share/locale/zh_TW/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    52KiB /usr/share/locale/zh_TW/LC_MESSAGES/coreutils.mo
--rw-r--r--    16KiB /usr/share/locale/zh_TW/LC_MESSAGES/cpio.mo
+-rw-r--r--    15KiB /usr/share/locale/zh_TW/LC_MESSAGES/cpio.mo
 -rw-r--r--   1.8KiB /usr/share/locale/zh_TW/LC_MESSAGES/cracklib.mo
 -rw-r--r--   7.6KiB /usr/share/locale/zh_TW/LC_MESSAGES/diffutils.mo
 -rw-r--r--   7.3KiB /usr/share/locale/zh_TW/LC_MESSAGES/findutils.mo
