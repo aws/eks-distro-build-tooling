@@ -825,7 +825,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
--rwxr-xr-x   666KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   733KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    73KiB /usr/lib64/libdl-2.26.so
@@ -1689,8 +1689,8 @@
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/hz.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/hz.pyo
 -rw-r--r--   8.3KiB /usr/lib64/python2.7/encodings/idna.py
--rw-r--r--   6.3KiB /usr/lib64/python2.7/encodings/idna.pyc
--rw-r--r--   6.3KiB /usr/lib64/python2.7/encodings/idna.pyo
+-rw-r--r--   6.5KiB /usr/lib64/python2.7/encodings/idna.pyc
+-rw-r--r--   6.5KiB /usr/lib64/python2.7/encodings/idna.pyo
 -rw-r--r--   1.1KiB /usr/lib64/python2.7/encodings/iso2022_jp.py
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/iso2022_jp.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/encodings/iso2022_jp.pyo
@@ -3624,7 +3624,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -6271,7 +6271,7 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   568KiB /var/lib/rpm/Basenames
+-rw-r--r--   564KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -6279,7 +6279,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   6.3MiB /var/lib/rpm/Packages
--rw-r--r--    68KiB /var/lib/rpm/Providename
+-rw-r--r--    64KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5

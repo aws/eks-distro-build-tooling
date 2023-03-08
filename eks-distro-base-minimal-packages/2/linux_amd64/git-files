@@ -509,7 +509,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
--rwxr-xr-x   638KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
 -rwxr-xr-x   230KiB /usr/lib64/libedit.so.0.0.42
 -rwxr-xr-x   194KiB /usr/lib64/libexpat.so.1.6.0
@@ -774,12 +774,12 @@
 -rw-r--r--   2.3KiB /usr/share/info/gnupg.info.gz
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    24KiB /usr/share/info/rluserman.info.gz
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.2/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc-7.3.1/COPYING.RUNTIME

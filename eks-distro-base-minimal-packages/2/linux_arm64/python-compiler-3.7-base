@@ -5,7 +5,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
 ca-certificates-2021.2.50-72.amzn2.0.5.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
-curl-7.87.0-2.amzn2.0.1.aarch64
+curl-7.88.1-1.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 elfutils-libelf-0.176-2.amzn2.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
@@ -28,9 +28,9 @@ libattr-2.4.46-12.amzn2.0.2.aarch64
 libcap-2.54-1.amzn2.0.1.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-62.amzn2.aarch64
-libcurl-7.87.0-2.amzn2.0.1.aarch64
-libdb-5.3.21-24.amzn2.0.3.aarch64
-libdb-utils-5.3.21-24.amzn2.0.3.aarch64
+libcurl-7.88.1-1.amzn2.0.1.aarch64
+libdb-5.3.21-24.amzn2.0.4.aarch64
+libdb-utils-5.3.21-24.amzn2.0.4.aarch64
 libffi-3.0.13-18.amzn2.0.2.aarch64
 libgcc-7.3.1-15.amzn2.aarch64
 libidn2-2.3.0-1.amzn2.aarch64

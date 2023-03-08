@@ -10766,7 +10766,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   203KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   666KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   733KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
@@ -11534,7 +11534,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-LGPLV3
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.2/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -11545,7 +11545,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.87.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
