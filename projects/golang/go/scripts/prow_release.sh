@@ -37,6 +37,11 @@ web_identity_token_file=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
 role_arn=$ARTIFACT_DEPLOYMENT_ROLE_ARN
 region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}
 source_profile=default
+
+[profile ecr-public-push]
+role_arn=$ECR_PUBLIC_PUSH_ROLE_ARN
+region=us-east-1
+source_profile=default
 EOF
 export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push

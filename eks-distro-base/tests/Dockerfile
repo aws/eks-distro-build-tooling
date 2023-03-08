@@ -1,5 +1,6 @@
 ARG BASE_IMAGE
 ARG AL_TAG
+ARG BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base:${AL_TAG}
 FROM ${BASE_IMAGE} as base
 
 FROM public.ecr.aws/eks-distro-build-tooling/golang:1.18-gcc-al${AL_TAG} as builder
@@ -33,6 +34,19 @@ FROM ${BASE_IMAGE} as check-iptables-nft
 
 RUN ["update-alternatives", "--set", "iptables", "/usr/sbin/iptables-nft"]
 RUN ["update-alternatives", "--set", "ip6tables", "/usr/sbin/ip6tables-nft"]
+
+CMD ["iptables"]
+
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.20-al${AL_TAG} as iptables-wrapper-tests-builder
+
+COPY iptables-wrappers /iptables-wrappers
+RUN cd /iptables-wrappers && \
+    make build-tests
+
+FROM ${BASE_IMAGE} as check-iptables-wrapper
+
+COPY --from=iptables-wrapper-tests-builder /iptables-wrappers/bin/tests /
+RUN ["update-alternatives", "--set", "iptables", "/usr/sbin/iptables-wrapper"]
 
 CMD ["iptables"]
 

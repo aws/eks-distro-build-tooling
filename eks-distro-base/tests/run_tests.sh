@@ -103,6 +103,17 @@ function check_base-glibc() {
     done
 }
 
+function cleanup-iptable-rules() {
+    local mode
+    local ip
+    for mode in legacy nft; do
+        # ensure they do not already exist
+        for ip in iptables ip6tables; do
+            docker run --privileged --rm --net host --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-$mode-latest $ip -t mangle -X KUBE-IPTABLES-HINT &> /dev/null || true            
+        done
+    done
+}
+
 function check_base-iptables() {
     $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
@@ -134,8 +145,37 @@ function check_base-iptables() {
         --import-cache type=registry,ref=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest \
         --output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest\",push=true
 
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+		--opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-iptables:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-iptables-wrapper \
+        --local dockerfile=./ \
+		--local context=$SCRIPT_ROOT/../ \
+        --export-cache type=inline \
+        --import-cache type=registry,ref=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest \
+        --output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest\",push=true
+
+    local platform
+    local mode
+    local ip
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest
+
+        # ensure defatult is set to legacy which was set in dockerfile
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-legacy'; then
+            echo "iptables legacy alternative issue!"
+            exit 1
+        fi
+        
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/ip6tables-legacy'; then
+            echo "ip6tables legacy alternative issue!"
+            exit 1
+        fi
 
         if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest iptables --version | grep -v 'legacy'; then
             echo "iptables legacy issue!"
@@ -146,6 +186,7 @@ function check_base-iptables() {
             echo "ip6tables legacy issue!"
             exit 1
         fi
+        
         if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest iptables-save; then
             echo "iptables-save legacy issue!"
             exit 1
@@ -163,20 +204,109 @@ function check_base-iptables() {
         
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest
 
+        # ensure defatult is set to nft which was set in dockerfile
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-nft'; then
+            echo "iptables nft alternative issue!"
+            exit 1
+        fi
+        
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/ip6tables-nft'; then
+            echo "ip6tables nft alternative issue!"
+            exit 1
+        fi
+
         if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest iptables --version | grep -v 'nf_tables'; then
             echo "iptables nft issue!"
             exit 1
         fi
+
         if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest ip6tables --version | grep -v 'nf_tables'; then
             echo "ip6tables nft issue!"
             exit 1
         fi
+
+        # these are included to match upstream, but default to nft and are not explictly set anywhere accross eks-d/a
         if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest ebtables --version; then
             echo "ebtables nft issue!"
             exit 1
         fi
+
         if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest arptables --version; then
             echo "arptables nft issue!"
+            exit 1
+        fi
+
+
+        build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest
+
+        # ensure defatult is set to wrapper which was set in dockerfile
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-wrapper'; then
+            echo "iptables wrapper alternative issue!"
+            exit 1
+        fi
+        
+        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/iptables-wrapper'; then
+            echo "ip6tables wrapper alternative issue!"
+            exit 1
+        fi
+        
+        # iptables-wrapper defaults to nft mode when none of the kubelet hint rules are set
+        if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest iptables --version | grep -v 'nf_tables'; then
+            echo "iptables wrapper issue!"
+            exit 1
+        fi
+
+        if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest ip6tables --version | grep -v 'nf_tables'; then
+            echo "ip6tables wrapper issue!"
+            exit 1
+        fi
+        
+        # create KUBE-IPTABLES-HINT and test that wrapper sets the correct mode        
+        for mode in nft legacy; do
+            local expected="$mode"
+            if [[ "$mode" == "nft" ]]; then
+                expected="nf_tables"
+            fi
+
+            # no matter which version of a given iptables mode is used to add the hint, it should trigger the wrapper to use that mode for both
+            # depending on how the hint rule is set, the resulting mode should be set
+            for ip in iptables ip6tables; do
+                cleanup-iptable-rules
+
+                docker run --privileged --rm --net host --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-$mode-latest $ip -t mangle -N KUBE-IPTABLES-HINT
+
+                if docker run --privileged --net host --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest iptables --version | grep -v "$expected"; then
+                    echo "iptables wrapper issue!"
+                    exit 1
+                fi
+                
+                if docker run --privileged --net host --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest ip6tables --version | grep -v "$expected"; then
+                    echo "iptables wrapper issue!"
+                    exit 1
+                fi
+            done
+        done
+        
+        cleanup-iptable-rules
+
+        # run upstream test binaries which tests a number of similiar cases as above
+        if ! docker run --privileged --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest /tests -test.v -test.run "^TestIPTablesWrapperLegacy$"; then
+            echo "iptables wrapper legacy issue!"
+            exit 1
+        fi
+        
+        if ! docker run --privileged --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest /tests -test.v -test.run "^TestIPTablesWrapperNFT$"; then
+            echo "iptables wrapper nft issue!"
+            exit 1
+        fi
+
+        if ! docker run --privileged --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest /tests -test.v -test.run "^TestIP6TablesWrapperLegacy$"; then
+            echo "iptables wrapper ipv6 legacy issue!"
+            exit 1
+        fi
+
+        if ! docker run --privileged --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest /tests -test.v -test.run "^TestIP6TablesWrapperNFT$"; then
+            echo "ip6tables wrapper ipv6 nft issue!"
             exit 1
         fi
     done

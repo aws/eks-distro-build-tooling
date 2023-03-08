@@ -16,6 +16,18 @@
 # *NOTE* we have to limit our number of layers heres because in presubmits there
 # is no overlay fs and we will run out of space quickly
 
+################# IPTABLES WRAPPER BUILDER #####################
+
+ARG BUILDER_IMAGE
+ARG BASE_IMAGE
+
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.20 as iptables-wrapper-builder
+
+ADD iptables-wrappers/ /iptables-wrappers
+RUN set -x && \
+    cd /iptables-wrappers && \
+    make build
+
 ################# BUILDER #####################
 ARG BASE_IMAGE=unused
 ARG BUILDER_IMAGE=unused
@@ -28,6 +40,8 @@ ARG OUTPUT_DEBUG_LOG
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
+COPY --from=iptables-wrapper-builder /iptables-wrappers/bin/iptables-wrapper /newroot/usr/sbin
+
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     if_al2 install_rpm chkconfig && \
@@ -38,15 +52,29 @@ RUN set -x && \
         iptables-nft && \
     if_al2 install_rpm iptables ebtables && \
     if_al2022 install_rpm iptables-legacy ebtables-legacy && \
-    # AL2 doesn't setup the ip6tables alternative the same as ubuntu/debian
-    # which is what the iptables-wrapper script provided by kubernetes expects
-    # since kind's entrypoint assumes this adding the alternative
-    # adding the alternative for ip6tabels here so the --set calls would work later on as expected
+    # The original iptables-wrapper.sh script assumed that there were both iptables and ip6tables 
+    # alternatives setup since the upstream image was based on debian which sets them up that way
+    # AL2 follows RHEL which uses a single alternaive setup for both iptables and ip6tables
+    # The wrapper script is currently only used by the eks-a kind image, since the other consumers of this base image
+    # do not include bash and have therefore relied on legacy as the default
+    # This adds the ip6tables alternative so that the `update-alternatives --set` calls which happen during the kind
+    # bootstraping process via the iptables-wrapper.sh will work successfully
     # https://github.com/kubernetes/release/blob/master/images/build/debian-iptables/buster/iptables-wrapper
     for m in nft legacy; do chroot $NEWROOT update-alternatives --install /usr/sbin/ip6tables ip6tables /usr/sbin/ip6tables-$m 10 \
             --slave /usr/sbin/ip6tables-restore ip6tables-restore /usr/sbin/ip6tables-$m-restore \
             --slave /usr/sbin/ip6tables-save ip6tables-save /usr/sbin/ip6tables-$m-save; done && \
-    # ensure iptables are in legacy mode
+    # The newer version of the iptables-wrapper.sh: https://github.com/kubernetes-sigs/iptables-wrappers/blob/master/iptables-wrapper-installer.sh
+    # And the in-progress golang version supports RHEL's configuration of alternatives, where iptables and ip6tables is managed via the same record
+    # We are now including the built golang based iptables-wrapper as a possible alternative for downstream consumers (eks-d kube-proxy, eks addon kube-proxy, eks-a kind image)
+    # Since this version supports a single alternative record, we are adding the iptables-wrapper as a single record which is different than the above which is left for backwards compat
+    # Not setting it as the default, but intend to in the future once all of our known consumers have decided to take this as their default mode
+    chroot $NEWROOT update-alternatives --install /usr/sbin/iptables iptables /usr/sbin/iptables-wrapper 100 \
+        --slave /usr/sbin/iptables-restore iptables-restore /usr/sbin/iptables-wrapper \
+        --slave /usr/sbin/iptables-save iptables-save /usr/sbin/iptables-wrapper \
+        --slave /usr/sbin/ip6tables ip6tables /usr/sbin/iptables-wrapper \
+        --slave /usr/sbin/ip6tables-restore ip6tables-restore /usr/sbin/iptables-wrapper \
+        --slave /usr/sbin/ip6tables-save ip6tables-save /usr/sbin/iptables-wrapper && \
+    # default to iptables in legacy mode
     for t in iptables ip6tables; do chroot $NEWROOT update-alternatives --set $t /usr/sbin/$t-legacy; done && \
     # Remove bad symlinks due to deleted man files
     find $NEWROOT/etc/alternatives -xtype l -name "*-man" -delete -print && \

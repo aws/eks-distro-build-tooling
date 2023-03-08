@@ -1,1 +1,9 @@
 
+cpio.x86_64
+curl.x86_64
+git-core.x86_64
+libcurl.x86_64
+libdb.x86_64
+libdb-utils.x86_64
+python.x86_64
+python-libs.x86_64

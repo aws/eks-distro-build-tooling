@@ -1,0 +1,63 @@
+From 5bc9106458fc07851ac324a4157132a91b1f3479 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Mon, 22 Aug 2022 16:21:02 -0700
+Subject: [PATCH] [go-1.17.13-eks] net/http: update bundled
+ golang.org/x/net/http2
+
+# AWS EKS
+Backported To: go-1.17.13-eks
+Backported On: Tuesday, 28 Feb 2023
+Backported By: budris@amazon.com
+Backported From: release-branch.go1.18
+Source Commit: https://github.com/golang/go/commit/5bc9106458fc07851ac324a4157132a91b1f3479
+
+# Original Information
+Disable cmd/internal/moddeps test, since this update includes PRIVATE
+track fixes.
+
+Fixes CVE-2022-27664
+Fixes #53977
+For #54658.
+
+Change-Id: I84b0b8f61e49e15ef55ef8d738730107a3cf849b
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1554415
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/428635
+Reviewed-by: Tatiana Bradley <tatiana@golang.org>
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Carlos Amedee <carlos@golang.org>
+---
+ src/net/http/h2_bundle.go | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/net/http/h2_bundle.go b/src/net/http/h2_bundle.go
+index c693574492..9d6abd833b 100644
+--- a/src/net/http/h2_bundle.go
++++ b/src/net/http/h2_bundle.go
+@@ -5004,6 +5004,9 @@ func (sc *http2serverConn) startGracefulShutdownInternal() {
+ func (sc *http2serverConn) goAway(code http2ErrCode) {
+ 	sc.serveG.check()
+ 	if sc.inGoAway {
++		if sc.goAwayCode == http2ErrCodeNo {
++			sc.goAwayCode = code
++		}
+ 		return
+ 	}
+ 	sc.inGoAway = true
+@@ -6216,8 +6219,9 @@ func (rws *http2responseWriterState) writeChunk(p []byte) (n int, err error) {
+ // prior to the headers being written. If the set of trailers is fixed
+ // or known before the header is written, the normal Go trailers mechanism
+ // is preferred:
+-//    https://golang.org/pkg/net/http/#ResponseWriter
+-//    https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
++//
++//	https://golang.org/pkg/net/http/#ResponseWriter
++//	https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
+ const http2TrailerPrefix = "Trailer:"
+ 
+ // promoteUndeclaredTrailers permits http.Handlers to set trailers
+-- 
+2.30.1 (Apple Git-130)
+
