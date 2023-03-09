@@ -16,8 +16,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prow
-  namespace: default
   annotations:
 {{ toYaml .Values.ingress.annotations| indent 4 }}
 spec:
