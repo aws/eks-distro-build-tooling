@@ -1,4 +1,4 @@
-From 5dc201e8d3e2ff034367d2304a71595a9fee40ac Mon Sep 17 00:00:00 2001
+From 41b650fa00fb0b9b59f3d9b51ad978ca0db13b20 Mon Sep 17 00:00:00 2001
 From: Abhay Krishna Arunachalam <arnchlm@amazon.com>
 Date: Mon, 15 Nov 2021 13:02:08 -0800
 Subject: [PATCH] Add SSL redirect and default service backend to Athens
@@ -9,39 +9,43 @@ service backend configured, so this patch adds it. We need this for the
 redirect ingress annotations to work.
 Signed-off-by: Abhay Krishna Arunachalam <arnchlm@amazon.com>
 ---
- charts/athens-proxy/templates/ingress.yaml | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ charts/athens-proxy/templates/ingress.yaml | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/charts/athens-proxy/templates/ingress.yaml b/charts/athens-proxy/templates/ingress.yaml
-index 07ddc9d..d330375 100644
+index eda575a8..6eb36b79 100644
 --- a/charts/athens-proxy/templates/ingress.yaml
 +++ b/charts/athens-proxy/templates/ingress.yaml
-@@ -19,11 +19,18 @@ metadata:
-       {{ $key }}: {{ $value | quote }}
-     {{- end }}
+@@ -26,6 +26,11 @@ metadata:
+     {{- toYaml . | nindent 4 }}
+   {{- end }}
  spec:
 +  backend:
-+    serviceName: {{ $serviceName }}
-+    servicePort: {{ $servicePort }}
++    service:
++      name: {{ $fullName }}
++      port:
++        number: {{ $svcPort }}
+   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+   ingressClassName: {{ .Values.ingress.className }}
+   {{- end }}
+@@ -40,10 +45,16 @@ spec:
+     {{- end }}
+   {{- end }}
    rules:
-     {{- range $host := .Values.ingress.hosts }}
-     - host: {{ $host }}
+-    {{- range .Values.ingress.hosts }}
++    {{- range $host := .Values.ingress.hosts }}
+     - host: {{ .host | quote }}
        http:
          paths:
 +          - path: /
 +            backend:
-+              serviceName: ssl-redirect
-+              servicePort: use-annotation
-           - path: /
-             backend:
-               serviceName: {{ $serviceName }}
-@@ -33,4 +40,4 @@ spec:
-   tls:
- {{ toYaml .Values.ingress.tls | indent 4 }}
-   {{- end -}}
--{{- end -}}
-+{{- end -}}
-\ No newline at end of file
++              service:
++                name: ssl-redirect
++                port:
++                  number: use-annotation
+           {{- range .paths }}
+           - path: {{ .path }}
+             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
 -- 
-2.33.0
+2.37.0
 
