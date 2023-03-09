@@ -1,151 +1,51 @@
-From 7fdb12073c867abb8341d0c2fdf1b2eed8cf08e4 Mon Sep 17 00:00:00 2001
-From: Cameron Rozean <rcrozean@amazon.com>
-Date: Tue, 19 Apr 2022 11:28:13 +0800
-Subject: [PATCH] Add SSL redirect and default service backen to Athens
- ingress template 
+From 41b650fa00fb0b9b59f3d9b51ad978ca0db13b20 Mon Sep 17 00:00:00 2001
+From: Abhay Krishna Arunachalam <arnchlm@amazon.com>
+Date: Mon, 15 Nov 2021 13:02:08 -0800
+Subject: [PATCH] Add SSL redirect and default service backend to Athens
+ ingress template
 
-The Upstream template does not have the SSL redirect rule and the default 
+The upstream template does not have the SSL redirect rule and the default
 service backend configured, so this patch adds it. We need this for the
 redirect ingress annotations to work.
-
+Signed-off-by: Abhay Krishna Arunachalam <arnchlm@amazon.com>
 ---
- charts/athens-proxy/Chart.yaml             |  4 +-
- charts/athens-proxy/templates/ingress.yaml | 76 +++++++++++++++++-----
- charts/athens-proxy/values.yaml            |  5 ++
- 3 files changed, 66 insertions(+), 19 deletions(-)
+ charts/athens-proxy/templates/ingress.yaml | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/charts/athens-proxy/Chart.yaml b/charts/athens-proxy/Chart.yaml
-index 7df2e024..c2b54b67 100644
---- a/charts/athens-proxy/Chart.yaml
-+++ b/charts/athens-proxy/Chart.yaml
-@@ -1,7 +1,7 @@
- apiVersion: v1
- name: athens-proxy
--version: 0.5.0
--appVersion: 0.11.0
-+version: 0.5.2
-+appVersion: 0.11.1
- description: The proxy server for Go modules
- icon: https://raw.githubusercontent.com/gomods/athens/main/docs/static/banner.png
- keywords:
 diff --git a/charts/athens-proxy/templates/ingress.yaml b/charts/athens-proxy/templates/ingress.yaml
-index 07ddc9d2..1fbd85cd 100644
+index eda575a8..6eb36b79 100644
 --- a/charts/athens-proxy/templates/ingress.yaml
 +++ b/charts/athens-proxy/templates/ingress.yaml
-@@ -1,36 +1,78 @@
- {{- if .Values.ingress.enabled -}}
--{{- $serviceName := include "fullname" . -}}
--{{- $servicePort := .Values.service.servicePort -}}
--{{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" -}}
-+{{- $fullName := include "fullname" . -}}
-+{{- $svcPort := .Values.service.servicePort -}}
-+{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-+  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-+  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
-+  {{- end }}
-+{{- end }}
-+{{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1" -}}
-+apiVersion: networking.k8s.io/v1
-+{{- else if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" -}}
- apiVersion: networking.k8s.io/v1beta1
- {{- else -}}
- apiVersion: extensions/v1beta1
- {{- end }}
- kind: Ingress
- metadata:
--  name: {{ template "fullname" . }}
-+  name: {{ $fullName }}
-   labels:
-     app: {{ template "fullname" . }}
-     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-     release: {{ .Release.Name }}
-     heritage: {{ .Release.Service }}
-+  {{- with .Values.ingress.annotations }}
-   annotations:
--    {{- range $key, $value := .Values.ingress.annotations }}
--      {{ $key }}: {{ $value | quote }}
--    {{- end }}
-+    {{- toYaml . | nindent 4 }}
-+  {{- end }}
+@@ -26,6 +26,11 @@ metadata:
+     {{- toYaml . | nindent 4 }}
+   {{- end }}
  spec:
-+  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-+  ingressClassName: {{ .Values.ingress.className }}
-+  {{- end }}
-+  {{- if .Values.ingress.tls }}
-+  tls:
-+    {{- range .Values.ingress.tls }}
-+    - hosts:
-+        {{- range .hosts }}
-+        - {{ . | quote }}
-+        {{- end }}
-+      secretName: {{ .secretName }}
-+    {{- end }}
-+  {{- end }}
++  backend:
++    service:
++      name: {{ $fullName }}
++      port:
++        number: {{ $svcPort }}
+   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+   ingressClassName: {{ .Values.ingress.className }}
+   {{- end }}
+@@ -40,10 +45,16 @@ spec:
+     {{- end }}
+   {{- end }}
    rules:
--    {{- range $host := .Values.ingress.hosts }}
--    - host: {{ $host }}
-+    {{- range .Values.ingress.hosts }}
-+    - host: {{ .host | quote }}
+-    {{- range .Values.ingress.hosts }}
++    {{- range $host := .Values.ingress.hosts }}
+     - host: {{ .host | quote }}
        http:
          paths:
-+          {{- range .paths }}
-+          - path: {{ .path }}
-+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-+            pathType: {{ .pathType }}
-+            {{- end }}
++          - path: /
 +            backend:
-+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-+              service:
-+                name: {{ $fullName }}
-+                port:
-+                  number: {{ $svcPort }}
-+              {{- else }}
-+              serviceName: {{ $fullName }}
-+              servicePort: {{ $svcPort }}
-+              {{- end }}
-+          {{- end }}
-           - path: /
-+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-+            pathType: {{ .pathType }}
-+            {{- end }}
-             backend:
--              serviceName: {{ $serviceName }}
--              servicePort: {{ $servicePort }}
--    {{- end -}}
--  {{- if .Values.ingress.tls }}
--  tls:
--{{ toYaml .Values.ingress.tls | indent 4 }}
--  {{- end -}}
--{{- end -}}
-+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
 +              service:
 +                name: ssl-redirect
 +                port:
 +                  number: use-annotation
-+              {{- else }}
-+              serviceName: ssl-redirect
-+              servicePort: use-annotation
-+              {{- end }}
-+    {{- end }}
-+{{- end }}
-diff --git a/charts/athens-proxy/values.yaml b/charts/athens-proxy/values.yaml
-index e4c20962..b60f213d 100644
---- a/charts/athens-proxy/values.yaml
-+++ b/charts/athens-proxy/values.yaml
-@@ -39,8 +39,13 @@ ingress:
-   enabled: false
-   # Provide key/value annotations
-   annotations:
-+  className: ""
-   # Provide an array of values for the ingress host mapping
-   hosts:
-+    # - host: athens-proxy.local
-+    # paths:
-+    #   - path: /
-+    #     pathType: ImplementationSpecific
-   # Provide a base64 encoded cert for TLS use
-   tls:
- 
+           {{- range .paths }}
+           - path: {{ .path }}
+             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
 -- 
-2.39.2
+2.37.0
 
