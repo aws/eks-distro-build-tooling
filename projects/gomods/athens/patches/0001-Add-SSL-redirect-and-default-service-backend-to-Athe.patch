@@ -1,6 +1,6 @@
-From 41b650fa00fb0b9b59f3d9b51ad978ca0db13b20 Mon Sep 17 00:00:00 2001
-From: Abhay Krishna Arunachalam <arnchlm@amazon.com>
-Date: Mon, 15 Nov 2021 13:02:08 -0800
+From 1764250fc2147ae69d739c26a1e50d502c635ed2 Mon Sep 17 00:00:00 2001
+From: Cameron Rozean <rcrozean@amazon.com>
+Date: Thu, 9 Mar 2023 14:24:07 -0800
 Subject: [PATCH] Add SSL redirect and default service backend to Athens
  ingress template
 
@@ -9,18 +9,18 @@ service backend configured, so this patch adds it. We need this for the
 redirect ingress annotations to work.
 Signed-off-by: Abhay Krishna Arunachalam <arnchlm@amazon.com>
 ---
- charts/athens-proxy/templates/ingress.yaml | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ charts/athens-proxy/templates/ingress.yaml | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/charts/athens-proxy/templates/ingress.yaml b/charts/athens-proxy/templates/ingress.yaml
-index eda575a8..6eb36b79 100644
+index eda575a8..b437b6fc 100644
 --- a/charts/athens-proxy/templates/ingress.yaml
 +++ b/charts/athens-proxy/templates/ingress.yaml
 @@ -26,6 +26,11 @@ metadata:
      {{- toYaml . | nindent 4 }}
    {{- end }}
  spec:
-+  backend:
++  defaultBackend:
 +    service:
 +      name: {{ $fullName }}
 +      port:
@@ -28,7 +28,7 @@ index eda575a8..6eb36b79 100644
    {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
    ingressClassName: {{ .Values.ingress.className }}
    {{- end }}
-@@ -40,10 +45,16 @@ spec:
+@@ -40,10 +45,17 @@ spec:
      {{- end }}
    {{- end }}
    rules:
@@ -38,6 +38,7 @@ index eda575a8..6eb36b79 100644
        http:
          paths:
 +          - path: /
++            pathType: ImplementationSpecific
 +            backend:
 +              service:
 +                name: ssl-redirect
@@ -47,5 +48,5 @@ index eda575a8..6eb36b79 100644
            - path: {{ .path }}
              {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
 -- 
-2.37.0
+2.39.2
 

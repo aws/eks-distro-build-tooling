@@ -19,7 +19,7 @@ metadata:
   annotations:
 {{ toYaml .Values.ingress.annotations| indent 4 }}
 spec:
-  backend:
+  defaultBackend:
     service:
       name: deck
       port:
@@ -34,16 +34,19 @@ spec:
               port:
                 number: use-annotation
         path: /
+        pathType: ImplementationSpecific
       - backend:
           service:
             name: deck
             port:
               number: 80
         path: /
+        pathType:
       - backend:
           service:
             name: hook
             port:
               number: 8888
         path: /hook
+        pathType: ImplementationSpecific
 {{ end }}
