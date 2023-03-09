@@ -1,4 +1,4 @@
-From 60d4917661c3fa9b9e5c1eb928270e9c832513ba Mon Sep 17 00:00:00 2001
+From 3dc9509f8592b9aba250da9117b2af183c9454e5 Mon Sep 17 00:00:00 2001
 From: Jeffery To <jeffery.to@gmail.com>
 Date: Tue, 23 Nov 2021 15:05:37 +0800
 Subject: [PATCH] cmd/link: use gold on ARM/ARM64 only if gold is available

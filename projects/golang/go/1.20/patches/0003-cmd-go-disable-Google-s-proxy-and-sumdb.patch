@@ -1,4 +1,4 @@
-From 37c45ddeb99891552a4c1ec4f14aaf7cbb106f08 Mon Sep 17 00:00:00 2001
+From 507d811737a9217dea51a80eed324b7618ccd070 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
 Date: Mon, 27 May 2019 15:12:53 +0200
 Subject: [PATCH] cmd/go: disable Google's proxy and sumdb
