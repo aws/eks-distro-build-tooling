@@ -19,7 +19,7 @@ metadata:
   annotations:
 {{ toYaml .Values.ingress.annotations| indent 4 }}
 spec:
-  backend:
+  defaultBackend:
     service:
       name: deck
       port:

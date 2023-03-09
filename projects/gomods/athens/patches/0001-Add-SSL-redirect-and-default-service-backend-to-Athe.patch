@@ -1,5 +1,5 @@
-From 41b650fa00fb0b9b59f3d9b51ad978ca0db13b20 Mon Sep 17 00:00:00 2001
-From: Abhay Krishna Arunachalam <arnchlm@amazon.com>
+From 451d15be1d52cdd4a56d693c39aa28eff97f0d43 Mon Sep 17 00:00:00 2001
+From: Cameron Rozean <rcrozean@amazon.com>
 Date: Mon, 15 Nov 2021 13:02:08 -0800
 Subject: [PATCH] Add SSL redirect and default service backend to Athens
  ingress template
@@ -13,14 +13,14 @@ Signed-off-by: Abhay Krishna Arunachalam <arnchlm@amazon.com>
  1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/charts/athens-proxy/templates/ingress.yaml b/charts/athens-proxy/templates/ingress.yaml
-index eda575a8..6eb36b79 100644
+index eda575a8..44789396 100644
 --- a/charts/athens-proxy/templates/ingress.yaml
 +++ b/charts/athens-proxy/templates/ingress.yaml
 @@ -26,6 +26,11 @@ metadata:
      {{- toYaml . | nindent 4 }}
    {{- end }}
  spec:
-+  backend:
++  defaultBackend:
 +    service:
 +      name: {{ $fullName }}
 +      port:
@@ -47,5 +47,5 @@ index eda575a8..6eb36b79 100644
            - path: {{ .path }}
              {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
 -- 
-2.37.0
+2.39.2
 
