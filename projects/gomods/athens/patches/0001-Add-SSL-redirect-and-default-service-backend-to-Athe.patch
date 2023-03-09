@@ -1,19 +1,18 @@
-From 29fef8ff70b2551961990bc23325f3269fc75246 Mon Sep 17 00:00:00 2001
-From: Qiu Yuzhou <qiuyuzhou@gmail.com>
+From 7fdb12073c867abb8341d0c2fdf1b2eed8cf08e4 Mon Sep 17 00:00:00 2001
+From: Cameron Rozean <rcrozean@amazon.com>
 Date: Tue, 19 Apr 2022 11:28:13 +0800
-Subject: [PATCH] chore(chart): update ingress to support apiVersion
- networking.k8s.io/v1 (#1769)
+Subject: [PATCH] Add SSL redirect and default service backen to Athens
+ ingress template 
 
-* chore(chart): update ingress to support apiVersion networking.k8s.io/v1
+The Upstream template does not have the SSL redirect rule and the default 
+service backend configured, so this patch adds it. We need this for the
+redirect ingress annotations to work.
 
-* refactor(chart): use API capabilities instead version comparisions in ingress
-
-Co-authored-by: Manu Gupta <manugupt1@gmail.com>
 ---
  charts/athens-proxy/Chart.yaml             |  4 +-
- charts/athens-proxy/templates/ingress.yaml | 79 ++++++++++++++++------
+ charts/athens-proxy/templates/ingress.yaml | 76 +++++++++++++++++-----
  charts/athens-proxy/values.yaml            |  5 ++
- 3 files changed, 64 insertions(+), 24 deletions(-)
+ 3 files changed, 66 insertions(+), 19 deletions(-)
 
 diff --git a/charts/athens-proxy/Chart.yaml b/charts/athens-proxy/Chart.yaml
 index 7df2e024..c2b54b67 100644
@@ -30,10 +29,10 @@ index 7df2e024..c2b54b67 100644
  icon: https://raw.githubusercontent.com/gomods/athens/main/docs/static/banner.png
  keywords:
 diff --git a/charts/athens-proxy/templates/ingress.yaml b/charts/athens-proxy/templates/ingress.yaml
-index d3303757..1fbd85cd 100644
+index 07ddc9d2..1fbd85cd 100644
 --- a/charts/athens-proxy/templates/ingress.yaml
 +++ b/charts/athens-proxy/templates/ingress.yaml
-@@ -1,43 +1,78 @@
+@@ -1,36 +1,78 @@
  {{- if .Values.ingress.enabled -}}
 -{{- $serviceName := include "fullname" . -}}
 -{{- $servicePort := .Values.service.servicePort -}}
@@ -69,9 +68,6 @@ index d3303757..1fbd85cd 100644
 +    {{- toYaml . | nindent 4 }}
 +  {{- end }}
  spec:
--  backend:
--    serviceName: {{ $serviceName }}
--    servicePort: {{ $servicePort }}
 +  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
 +  ingressClassName: {{ .Values.ingress.className }}
 +  {{- end }}
@@ -113,16 +109,6 @@ index d3303757..1fbd85cd 100644
 +            pathType: {{ .pathType }}
 +            {{- end }}
              backend:
-+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-+              service:
-+                name: ssl-redirect
-+                port:
-+                  number: use-annotation
-+              {{- else }}
-               serviceName: ssl-redirect
-               servicePort: use-annotation
--          - path: /
--            backend:
 -              serviceName: {{ $serviceName }}
 -              servicePort: {{ $servicePort }}
 -    {{- end -}}
@@ -131,7 +117,14 @@ index d3303757..1fbd85cd 100644
 -{{ toYaml .Values.ingress.tls | indent 4 }}
 -  {{- end -}}
 -{{- end -}}
-\ No newline at end of file
++              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
++              service:
++                name: ssl-redirect
++                port:
++                  number: use-annotation
++              {{- else }}
++              serviceName: ssl-redirect
++              servicePort: use-annotation
 +              {{- end }}
 +    {{- end }}
 +{{- end }}
