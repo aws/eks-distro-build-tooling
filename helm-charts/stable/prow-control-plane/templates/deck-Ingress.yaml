@@ -32,7 +32,7 @@ spec:
           service:
               name: ssl-redirect
               port:
-                number: use-annotation
+                name: use-annotation
         path: /
         pathType: ImplementationSpecific
       - backend:
@@ -41,7 +41,7 @@ spec:
             port:
               number: 80
         path: /
-        pathType:
+        pathType: ImplementationSpecific
       - backend:
           service:
             name: hook
