@@ -26,12 +26,8 @@ source "$PATCHING_TOOLS"
 # * GOLANG_DIR:   the absolute path to the root directory of the Golang repo, which must be cloned locally,
 #                 must be up-to-date with upstream, and must not be "dirty".
 #
-# * APPLY_CVE_PATCHES:  "true" if CVE patches should be applied. All other values are interpreted as "false".
-#                        Minor versions supported by upstream are not presumed to have any CVE patches. CVE
-#                        patch files must start with ####-go-1.XX.YY-eks-..., with 1.XX.YY the Go version.
+# * CHERRY_PICK_COMMIT:   upstream Golang commit hash
 #
-# * APPLY_OTHER_PATCHES:  "true" if non-CVE patches should be applied. All other values are interpreted as
-#                         "false". Other patch files must NOT include the Golang version at the start.
 VERSION_DIR=$(realpath "$1")
 GOLANG_DIR=$(realpath "$2")
 if [ "$3" == "" ]; then
