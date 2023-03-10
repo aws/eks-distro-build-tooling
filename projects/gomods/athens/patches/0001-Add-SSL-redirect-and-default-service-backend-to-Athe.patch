@@ -38,7 +38,7 @@ index eda575a8..a6fd7594 100644
 +              service:
 +                name: ssl-redirect
 +                port:
-+                  number: use-annotation
++                  name: use-annotation
            {{- range .paths }}
            - path: {{ .path }}
              {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
