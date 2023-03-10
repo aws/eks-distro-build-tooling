@@ -89,6 +89,17 @@ function apply_patches {
   popd
 }
 
+# Arg 1:  absolute path to the root directory of the locally cloned Golang repo
+# Arg 2:  upstream Go commit to cherry-pick
+function cherry_pick {
+  local golang_dir=$1
+  local cherry_pick_commit=$2
+
+  pushd "$golang_dir"
+  git cherry-pick "$cherry_pick_commit"
+  popd
+}
+
 # Arg 1:  absolute path to the Golang minor version directory under this repo's projects/golang/go
 # Arg 2:  should be "true" if the applied patches are CVE patches. All other values indicate that
 #         the patches are not CVE patches.
