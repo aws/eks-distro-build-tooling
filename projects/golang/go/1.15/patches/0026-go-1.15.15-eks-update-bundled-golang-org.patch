@@ -1,3 +1,8 @@
+From b56b743a8297dc079f5e2dcd9fc90cdaf5a4fae3 Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <bracewell@google.com>
+Date: Mon, 6 Feb 2023 10:03:44 -0800
+Subject: [PATCH] cherry-pick-from-5c3e11b
+
 # AWS EKS
 Backported To: go-1.15.15-eks
 Backported On: Mon, 20 Feb 2023
@@ -5,10 +10,6 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c3e11bd0b5c0a86e5beffcd4339b86a902b21c3
 
-From b56b743a8297dc079f5e2dcd9fc90cdaf5a4fae3 Mon Sep 17 00:00:00 2001
-From: Roland Shoemaker <bracewell@google.com>
-Date: Mon, 6 Feb 2023 10:03:44 -0800
-Subject: [PATCH] cherry-pick-from-5c3e11b
 
 # Original Information
 

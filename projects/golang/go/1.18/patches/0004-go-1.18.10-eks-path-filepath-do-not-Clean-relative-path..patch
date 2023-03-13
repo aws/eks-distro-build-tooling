@@ -1,15 +1,15 @@
+From 6a1ff86bc8e6870f55c0977bd3567472ebfba2c2 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Mon, 12 Dec 2022 16:43:37 -0800
+Subject: [PATCH] [release-branch.go1.19] path/filepath: do not
+ Clean("a/../c:/b") into c:\b on Windows
+
 # AWS EKS
 Backported To: go-1.18.10-eks
 Backported On: Wed, 15 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
-
-From 6a1ff86bc8e6870f55c0977bd3567472ebfba2c2 Mon Sep 17 00:00:00 2001
-From: Damien Neil <dneil@google.com>
-Date: Mon, 12 Dec 2022 16:43:37 -0800
-Subject: [PATCH] [release-branch.go1.19] path/filepath: do not
- Clean("a/../c:/b") into c:\b on Windows
 
 # Original Information
 

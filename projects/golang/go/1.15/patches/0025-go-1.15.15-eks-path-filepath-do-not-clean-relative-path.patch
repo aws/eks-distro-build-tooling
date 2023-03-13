@@ -1,3 +1,8 @@
+From ad206b26267d93fec27fb594cca88fe0733ee2b4 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Mon, 12 Dec 2022 16:43:37 -0800
+Subject: [PATCH] cherry-pick-from-3345ddc
+
 # AWS EKS
 Backported To: go-1.15.15-eks
 Backported On: Mon, 20 Feb 2023
@@ -5,10 +10,6 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/3345ddca41f00f9ed6fc3c1a36f6e2bede02d7ff
 
-From ad206b26267d93fec27fb594cca88fe0733ee2b4 Mon Sep 17 00:00:00 2001
-From: Damien Neil <dneil@google.com>
-Date: Mon, 12 Dec 2022 16:43:37 -0800
-Subject: [PATCH] cherry-pick-from-3345ddc
 
 # Original information
 
