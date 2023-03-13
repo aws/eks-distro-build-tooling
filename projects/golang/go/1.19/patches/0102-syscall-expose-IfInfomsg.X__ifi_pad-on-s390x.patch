@@ -1,4 +1,4 @@
-From 67a4711d09c6595c17f32470c15bf471c287777d Mon Sep 17 00:00:00 2001
+From 5e4e96e96d65a9270def17eddece91e5972ca72a Mon Sep 17 00:00:00 2001
 From: Michael Munday <munday@ca.ibm.com>
 Date: Tue, 17 Jan 2017 11:33:38 -0500
 Subject: [PATCH 2/3] syscall: expose IfInfomsg.X__ifi_pad on s390x
