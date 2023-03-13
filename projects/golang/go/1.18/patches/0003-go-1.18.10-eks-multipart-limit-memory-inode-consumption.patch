@@ -1,15 +1,14 @@
+From c5286d6b58ae45a9d08ce1e3df45d64ce0c585b0 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Wed, 25 Jan 2023 09:27:01 -0800
+Subject: [PATCH] cherry-pick from 5c55ac9bf1
+
 # AWS EKS
 Backported To: go-1.18.10-eks
 Backported On: Wed, 15 Feb 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/5c55ac9bf1e5f779220294c843526536605f42ab
-
-
-From c5286d6b58ae45a9d08ce1e3df45d64ce0c585b0 Mon Sep 17 00:00:00 2001
-From: Damien Neil <dneil@google.com>
-Date: Wed, 25 Jan 2023 09:27:01 -0800
-Subject: [PATCH] cherry-pick from 5c55ac9bf1
 
 
 Also, during resolving the merge conflict the `src/mime/multipart/multipart.go` line 152 function populateHeaders()'s

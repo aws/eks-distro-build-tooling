@@ -1,3 +1,8 @@
+From 82c6d2add1f51a5824847c434f860d08d532f0ce Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <roland@golang.org>
+Date: Wed, 14 Dec 2022 09:43:16 -0800
+Subject: [PATCH] cherry-pick-from-00b256e
+
 # AWS EKS
 Backported To: go-1.15.15-eks
 Backported On: Tue, 21 Feb 2023
@@ -5,10 +10,6 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/00b256e9e3c0fa02a278ec9dfc3e191e02ceaf80
 
-From 82c6d2add1f51a5824847c434f860d08d532f0ce Mon Sep 17 00:00:00 2001
-From: Roland Shoemaker <roland@golang.org>
-Date: Wed, 14 Dec 2022 09:43:16 -0800
-Subject: [PATCH] cherry-pick-from-00b256e
 
 During merge conflict in src/crypto/tls/conn.go line 1025 function readHandshake was set to return an `interface{}`, not accepting `any`
 to be consistent with the rest of the file. In `src/crypto/tls/ha_server.go` the merge conflict was resolved by not accepting `ctx context.Context` as the 
