@@ -26,7 +26,7 @@ source $SCRIPT_ROOT/common_vars.sh
 yum remove -y policycoreutils > /dev/null 2>&1
 
 # keep rpms around since we use them in every stage
-if [ "$IS_AL22" = "true" ]; then
+if [ "$IS_AL23" = "true" ]; then
     echo "keepcache=1" >> /etc/dnf/dnf.conf
     rm -rf /var/cache/dnf
     ln -s yum /var/cache/dnf
