@@ -45,7 +45,7 @@
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
 -rw-r--r--     900B /etc/openldap/ldap.conf
--rw-r--r--     161B /etc/os-release
+-rw-r--r--     327B /etc/os-release
 -rw-r--r--     232B /etc/pam.d/config-util
 -rw-r--r--     617B /etc/pam.d/fingerprint-auth
 -rw-r--r--     676B /etc/pam.d/login

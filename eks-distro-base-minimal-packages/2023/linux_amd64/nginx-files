@@ -43,7 +43,7 @@
 -rw-r--r--     664B /etc/nginx/uwsgi_params.default
 -rw-r--r--   3.6KiB /etc/nginx/win-utf
 -rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
+-rw-r--r--     327B /etc/os-release
 -rw-r--r--     211B /etc/passwd
 -rw-r--r--     149B /etc/passwd-
 -rw-r--r--     166B /etc/pki/ca-trust/README

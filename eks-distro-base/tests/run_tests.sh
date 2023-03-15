@@ -167,12 +167,12 @@ function check_base-iptables() {
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest
 
         # ensure defatult is set to legacy which was set in dockerfile
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-legacy'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'iptables' | xargs)" != "iptables manual /usr/sbin/iptables-legacy" ]]; then
             echo "iptables legacy alternative issue!"
             exit 1
         fi
         
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/ip6tables-legacy'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-legacy-latest update-alternatives --list | grep 'ip6tables' | xargs)" != "ip6tables manual /usr/sbin/ip6tables-legacy" ]]; then
             echo "ip6tables legacy alternative issue!"
             exit 1
         fi
@@ -205,12 +205,12 @@ function check_base-iptables() {
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest
 
         # ensure defatult is set to nft which was set in dockerfile
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-nft'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'iptables' | xargs)" != "iptables manual /usr/sbin/iptables-nft" ]]; then
             echo "iptables nft alternative issue!"
             exit 1
         fi
         
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/ip6tables-nft'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-nft-latest update-alternatives --list | grep 'ip6tables' | xargs)" != "ip6tables manual /usr/sbin/ip6tables-nft" ]]; then
             echo "ip6tables nft alternative issue!"
             exit 1
         fi
@@ -240,12 +240,12 @@ function check_base-iptables() {
         build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest
 
         # ensure defatult is set to wrapper which was set in dockerfile
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep 'iptables	manual	/usr/sbin/iptables-wrapper'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep '^iptables' | xargs)" != "iptables manual /usr/sbin/iptables-wrapper" ]]; then
             echo "iptables wrapper alternative issue!"
             exit 1
         fi
         
-        if ! docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep 'ip6tables	manual	/usr/sbin/iptables-wrapper'; then
+        if [[ "$(docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:iptables-wrapper-latest update-alternatives --list | grep 'ip6tables' | xargs)" != "ip6tables manual /usr/sbin/iptables-wrapper" ]]; then
             echo "ip6tables wrapper alternative issue!"
             exit 1
         fi
@@ -713,6 +713,18 @@ check_base-golang-compiler-1.19-yum() {
 
 check_base-golang-compiler-1.19-gcc() {
     check_base-golang-compiler 1.19 gcc
+}
+
+check_base-golang-compiler-1.20-base() {
+    check_base-golang-compiler 1.20 base
+}
+
+check_base-golang-compiler-1.20-yum() {
+    check_base-golang-compiler 1.20 yum
+}
+
+check_base-golang-compiler-1.20-gcc() {
+    check_base-golang-compiler 1.20 gcc
 }
 
 

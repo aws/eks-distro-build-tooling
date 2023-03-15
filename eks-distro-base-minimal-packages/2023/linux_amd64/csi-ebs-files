@@ -26,7 +26,7 @@
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--     161B /etc/os-release
+-rw-r--r--     327B /etc/os-release
 -rw-r--r--     676B /etc/pam.d/login
 -rw-r--r--     640B /etc/pam.d/remote
 -rw-r--r--     143B /etc/pam.d/runuser
