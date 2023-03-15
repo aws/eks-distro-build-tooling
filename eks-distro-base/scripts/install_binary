@@ -70,6 +70,7 @@ function build::install::binary() {
     # we need to remove the link before copying
     [ -L $final_bin ] && unlink $final_bin
 
+    mkdir -p $(dirname $final_bin)
     cp $extracted_bin $final_bin
 
     build::install::configs_and_licenses $extract_dir

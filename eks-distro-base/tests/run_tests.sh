@@ -27,8 +27,8 @@ LOCAL_REGISTRY=$6
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-if [ "$AL_TAG" = "2022" ]; then
-    AL_TAG="22"
+if [ "$AL_TAG" = "2023" ]; then
+    AL_TAG="23"
 fi
 
 function retry() {

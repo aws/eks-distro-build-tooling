@@ -39,6 +39,13 @@ RUN set -x && \
         findutils \
         shadow-utils \
         yum-utils && \
+    if grep -q "2023" "/etc/os-release"; then \
+        # by default al23 installs coreutils-single which uses a single binary
+        # where each individual util (ex: ln) is a bash script that calls the single binary
+        # this does not place nice with the way we handle preinstall scriptlet deps, such as ln
+        # force installing all the individual bins
+        yum install -y --allowerasing coreutils; \
+    fi && \ 
     # restorecon is needed for the filesystem scriptlet, but it comes from
     # policycoreutils which bloats the builder image, just pull the bin and the necessary libs instead
     install_binary /usr/sbin/restorecon && \
@@ -71,7 +78,7 @@ RUN set -x && \
         basesystem \
         tzdata \
         ca-certificates && \
-    if grep -q "2022" "/etc/os-release"; then \
+    if grep -q "2023" "/etc/os-release"; then \
         install_rpm amazon-linux-repo-cdn; \
         # to ensure all downstream yum commands always resolve using the latest releasever 
         # available at that time
@@ -81,6 +88,13 @@ RUN set -x && \
 
 COPY files/ $NEWROOT
 
+RUN set -x && \
+    if grep -q "2023" "/etc/os-release"; then \
+        mv $NEWROOT/etc/os-release-2023 $NEWROOT/etc/os-release; \
+    else \
+        rm $NEWROOT/etc/os-release-2023; \
+    fi
+    
 
 ################# BASE ########################
 FROM ${BUILT_BUILDER_IMAGE} as base-builder

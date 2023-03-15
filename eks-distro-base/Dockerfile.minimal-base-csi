@@ -36,17 +36,17 @@ RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     # manually "install" systemd to avoid installing the entire dep tree
     if_al2 clean_install systemd true true && \
-    # in al22 some of the exec depend on a common systemd lib which is included
+    # in al23 some of the exec depend on a common systemd lib which is included
     # in the systemd package. Installing systemd completely bloats the image
     # using install_binary to limit what is pulled from systemd and dependencies
-    if_al2022 install_binary /usr/lib/systemd/libsystemd-shared-250.so && \
+    if_al2023 install_binary "/usr/lib/systemd/libsystemd-shared-*.so" && \
     # libdb is needed by some of the libs pulled in above but not a direct dep
     # of any bins so its not pulled in automatically
-    if_al2022 install_rpm libdb && \
+    if_al2023 install_rpm libdb && \
     # some of the install scriptlets need coreutils but the dep ordering
     # doesnt reflect, install manually to make sure its first
     clean_install coreutils && \
-    if_al2022 clean_install pcre2 && \
+    if_al2023 clean_install pcre2 && \
     clean_install e2fsprogs \
         nfs-utils \
         util-linux \

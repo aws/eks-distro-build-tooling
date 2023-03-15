@@ -166,7 +166,7 @@ Building the eks-distro-base images locally requires `buildkitd` running and eit
     * `export SSH_KEY_FOLDER=<ssh_key_folder>`
     * `export PRIVATE_REPO=<private_repo>`
     * `IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-base-test -C eks-distro-base`
-1. To build AL22 based images pass `AL_TAG=2022` to the make call
+1. To build AL22 based images pass `AL_TAG=2023` to the make call
 1. To build a specific image based on an image published to [the EKS-D ECR](https://gallery.ecr.aws/eks-distro-build-tooling)
     * `BASE_IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-images-base-iptables -C eks-distro-base`   
 
