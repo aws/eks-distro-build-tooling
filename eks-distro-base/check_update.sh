@@ -43,7 +43,7 @@ COPY --from=base_image /var/lib/rpm /var/lib/rpm
 COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 
 RUN set -x && \
-    if grep -q "2022" "/etc/os-release"; then \
+    if grep -q "2023" "/etc/os-release"; then \
         yum check-update --security --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     else \
         yum check-update --security  > ./check_update_output; echo \$? > ./return_value; \    

@@ -61,7 +61,7 @@ COPY --from=run_validate /tmp/success .
 
 # the al2 version of symlinks does not support the -C chroot option
 # build a static verison so we can use it on al2 too
-FROM public.ecr.aws/amazonlinux/amazonlinux:2022 as al22
+FROM public.ecr.aws/amazonlinux/amazonlinux:2023 as al23
 
 ENV VERSION=1.7
 RUN set -x && \

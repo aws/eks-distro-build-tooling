@@ -16,7 +16,7 @@ ARG BASE_IMAGE=unused
 FROM ${BASE_IMAGE} as builder
 
 RUN set -x && \
-    if grep -q "2022" "/etc/os-release"; then \
+    if grep -q "2023" "/etc/os-release"; then \
         # to ensure all downstream yum commands always resolve using the latest releasever 
         # available at that time
         echo latest > /etc/dnf/vars/releasever; \

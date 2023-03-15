@@ -58,7 +58,7 @@ RUN set -x && \
     # ref: https://unix.stackexchange.com/questions/348941/rpmdb-checksum-is-invalid-trying-to-install-gcc-in-a-centos-7-2-docker-image    
     if_al2 clean_install yum-plugin-ovl && \        
     # not defined as a dep, but python hawkey is installed with the required libs
-    if_al2022 install_rpm python3-hawkey && \
+    if_al2023 install_rpm python3-hawkey && \
     cleanup "compiler-yum-builder"
 
 

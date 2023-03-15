@@ -78,8 +78,8 @@ function build::common::binary_to_libraries() {
 
     build::log::off
 
-    local ld_library_path="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib" 
-    for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib -mindepth 1 -maxdepth 1 -type d); do
+    local ld_library_path="$NEWROOT/lib64:$NEWROOT/usr/lib64:$NEWROOT/usr/lib:$NEWROOT/usr/libexec" 
+    for sub_dir in $(find $NEWROOT/usr/lib64 $NEWROOT/lib64 $NEWROOT/usr/lib $NEWROOT/usr/libexec -mindepth 1 -maxdepth 1 -type d 2>/dev/null); do
         ld_library_path="$sub_dir:$ld_library_path"
     done
 
@@ -215,7 +215,33 @@ function build::common::rpm_package_for_binary() {
     # some filenames have a digit prefix, ex: 14:libpcap-1.5.3-11.amzn2.i686 : A system-independent interface for user-level
     build::common::find_actual_file_for_provides "${file}" "__actual_file"
     build::common::yum_provides "${__actual_file}" "__provides"
-    eval $__resultvar="'$(echo "${__provides}" | grep "x86_64\|aarch64\|i686 :" | awk '{print $1}' | tail -n 1 | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')'"
+    
+    local -r package_names="$(echo "${__provides}" | grep "x86_64\|aarch64\|i686 :" | awk '{print $1}')"
+    
+    # if there are multiple packages returned, which there often is, the first in the list will usually
+    # be the one that is installed already, if that is the case
+    # loop the full list and favor ones that already installed in the newroot folder or in the builder root db
+    # if none are installed in either place, use the last in the list which was previously the default behavior
+    local package=""
+    local -r all_packages=(${package_names// / })
+    
+    for package_name in ${all_packages[@]}; do
+        if [ -z "${package}" ] && rpm --root $NEWROOT -q --quiet $package_name; then
+            package="$package_name"
+        fi
+    done
+    
+    for package_name in ${all_packages[@]}; do
+        if [ -z "${package}" ] && rpm -q --quiet $package_name; then
+            package="$package_name"
+        fi
+    done
+
+    if [ -z "${package}" ]; then
+        package="${all_packages[-1]}"
+    fi
+            
+    eval $__resultvar="'$(echo $package | tail -n 1 | sed -e 's/^[0-9]\+://' | sed -e 's/\-[0-9].*$//')'"
 }
 
 function build::common::filename_from_rpm() {

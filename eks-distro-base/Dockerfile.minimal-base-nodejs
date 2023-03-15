@@ -71,6 +71,11 @@ COPY --link --from=nodejs-download /node-compiler /newroot
 
 FROM nodejs-compiler-true as nodejs-compiler-false
 
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
+
 RUN set -x && \
     find $NEWROOT/usr/lib/node_modules -delete && \
     rm -rf $NEWROOT/usr/include/node $NEWROOT/usr/bin/{corepack,npm,npx} && \
@@ -78,7 +83,7 @@ RUN set -x && \
     # between the coreutils and coreutils-single packages
     # easiest thing to do is only install coreutils in runtime image
     # where we know it doesnt already exist
-    if_al2022 install_binary /usr/bin/coreutils && \
+    if_al2023 install_binary /usr/bin/coreutils && \
     cleanup "nodejs-runtime"
 
 ################# BASE WITH YUM PACKAGES ######################

@@ -98,10 +98,10 @@ FROM ${BUILDER_IMAGE} as builder-python-3.9-al2
 
 COPY --link --from=python-compile-3.9-al2 /newroot-python-compiled /newroot
 
-################# AL2022 ######################
+################# AL2023 ######################
 # python will installed via yum later on this stage exists to match al2 which
 # copies from the compile stage
-FROM ${BUILDER_IMAGE} as builder-python-3.9-al2022
+FROM ${BUILDER_IMAGE} as builder-python-3.9-al2023
 
 
 ################# BASE WITH YUM PACKAGES ######################
@@ -110,6 +110,11 @@ FROM ${BUILDER_IMAGE} as builder-python-3.9-al2022
 FROM builder-python-${COMPILER_VERSION}-al${AL_TAG} as builder-python-base
 
 ARG OUTPUT_DEBUG_LOG
+
+# Copy scripts in every variant since we do not rebuild the base
+# every time these scripts change. This ensures whenever a variant is
+# built it has the latest scripts in the builder
+COPY scripts/ /usr/bin
 
 # Google's Distroless has an experimental python3 version based on debian
 # The packages below are cross referenced based on the packages
@@ -142,7 +147,7 @@ RUN set -x && \
         libtirpc \
         gdbm \ 
         openssl-libs && \
-    if_al2022 install_rpm libxcrypt sqlite-libs && \
+    if_al2023 install_rpm libxcrypt sqlite-libs && \
     if_al2 install_rpm libcrypt && \
     # python depends on bash for shell execs
     install_rpm bash && \
@@ -180,24 +185,24 @@ RUN set -x && \
     chroot $NEWROOT python3 -m pip install --upgrade setuptools
 
 
-################# AL2022 ######################
+################# AL2023 ######################
 # install from yum which al22 provides
-FROM builder-python-base as builder-python-3.9-al2022-with-compiler-false
+FROM builder-python-base as builder-python-3.9-al2023-with-compiler-false
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     install_rpm python3 && \
-    cleanup "python3.9-al2022"
+    cleanup "python3.9-al2023"
 
 
-FROM builder-python-3.9-al2022-with-compiler-false as builder-python-3.9-al2022-with-compiler-true
+FROM builder-python-3.9-al2023-with-compiler-false as builder-python-3.9-al2023-with-compiler-true
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     install_rpm python3-setuptools python3-setuptools-wheel python3-pip python3-pip-wheel && \
     # To be symlinkd later
     rm $NEWROOT/usr/bin/pip && \
-    cleanup "python3.9-al2022-with-compiler"
+    cleanup "python3.9-al2023-with-compiler"
 
 
 ################# BUILDER ######################

@@ -153,11 +153,11 @@ LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
 # tag al2 build with latest.2 and latest for backward compat
-STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2022),latest-al22,latest latest.2 latest-al2),$(call ADD_VERSIONED_VARIANT,$(tag)))
+STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2023),latest-al23,latest latest.2 latest-al2),$(call ADD_VERSIONED_VARIANT,$(tag)))
 
 COMPILER_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_VERSION))
 COMPILER_FULL_VERSION_WITH_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION)-$(BASE_VERSIONED_VARIANT),$(COMPILER_FULL_VERSION))
-COMPILER_LATEST=$(if $(filter $(AL_TAG),2022),$(COMPILER_VERSION_WITH_VARIANT)-al22 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al22,$(COMPILER_VERSION_WITH_VARIANT) $(COMPILER_FULL_VERSION_WITH_VARIANT) $(COMPILER_VERSION_WITH_VARIANT)-al2 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al2)
+COMPILER_LATEST=$(if $(filter $(AL_TAG),2023),$(COMPILER_VERSION_WITH_VARIANT)-al23 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al23,$(COMPILER_VERSION_WITH_VARIANT) $(COMPILER_FULL_VERSION_WITH_VARIANT) $(COMPILER_VERSION_WITH_VARIANT)-al2 $(COMPILER_FULL_VERSION_WITH_VARIANT)-al2)
 
 # $1 - language short name (python/nodejs/golang/java)
 # $2 - no runtime image
@@ -183,7 +183,7 @@ BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
 
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
-BASE_PYTHON_VARIANT_VERSIONS=$(if $(filter $(AL_TAG),2022),,3.7) 3.9
+BASE_PYTHON_VARIANT_VERSIONS=$(if $(filter $(AL_TAG),2023),,3.7) 3.9
 PYTHON_3.7_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh)
 PYTHON_3.9_FULL_VERSION=3.9.14
 
@@ -285,10 +285,10 @@ ADD_BASE_VERSIONED_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(BASE_VERSIONED_VARIA
 # ************************************************************
 
 # ************** FINAL TARGETS *******************************
-# Only run windows builds during the AL 2 run so they arent run concurrently between al2 and al22
+# Only run windows builds during the AL 2 run so they arent run concurrently between al2 and al23
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
-UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) $(if $(filter 2022,$(AL_TAG)),,windows-update)
-CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) $(if $(filter 2022,$(AL_TAG)),,windows-create-pr)
+UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) $(if $(filter 2023,$(AL_TAG)),,windows-update)
+CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) $(if $(filter 2023,$(AL_TAG)),,windows-create-pr)
 # ************************************************************
 
 IMAGE_UPDATE_BRANCH=image-tag-update-al$(AL_TAG)

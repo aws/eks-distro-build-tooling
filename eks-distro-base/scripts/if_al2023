@@ -18,6 +18,6 @@ set -eE
 set -o nounset
 set -o pipefail
 
-if grep -q "2022" "/etc/os-release"; then 
+if grep -q "2023" "/etc/os-release"; then 
     "$@"
 fi
