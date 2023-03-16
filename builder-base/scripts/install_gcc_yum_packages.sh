@@ -27,6 +27,3 @@ yum install --setopt=install_weak_deps=False -y \
     make \
     pkgconfig
 
-if [ $IS_AL22 = 'true' ]; then
-    yum install --setopt=install_weak_deps=False -y amazon-rpm-config
-fi

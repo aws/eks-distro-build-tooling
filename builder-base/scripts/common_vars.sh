@@ -24,9 +24,9 @@ USR_LOCAL_BIN=${USR_LOCAL}/bin
 
 BASE_DIR=""
 
-IS_AL22=false
-if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2022" /etc/yum.repos.d/amazonlinux.repo; then 
-    IS_AL22=true
+IS_AL23=false
+if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2023" /etc/yum.repos.d/amazonlinux.repo; then 
+    IS_AL23=true
 fi
 
 [ ${SKIP_INSTALL:-false} != false ] || mkdir -p $USR_BIN $USR_LOCAL_BIN
