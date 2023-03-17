@@ -1,4 +1,4 @@
-From a805641e4d218a058cde42c742f7f980be17241e Mon Sep 17 00:00:00 2001
+From f0ec24162930717091418264af8bc254d76379cf Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
@@ -18,6 +18,7 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
  .../prow_controller_manager_deployment.yaml   |  84 +++++++------
  .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
+ .../prow/cluster/pushgateway_deployment.yaml  |   4 +-
  config/prow/cluster/sinker_deployment.yaml    |  78 ++++++------
  config/prow/cluster/sinker_rbac.yaml          |  39 ++----
  .../cluster/statusreconciler_deployment.yaml  |  29 +++--
@@ -25,7 +26,7 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  config/prow/cluster/tide_deployment.yaml      |  38 ++++--
  config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 350 insertions(+), 453 deletions(-)
+ 21 files changed, 352 insertions(+), 455 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index 4405f98e78..ecb49e4f79 100644
@@ -1137,6 +1138,28 @@ index 63e4f5ad56..6b33ac1032 100644
    name: "prow-controller-manager"
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
+diff --git a/config/prow/cluster/pushgateway_deployment.yaml b/config/prow/cluster/pushgateway_deployment.yaml
+index a015c408d4..228f82ae74 100644
+--- a/config/prow/cluster/pushgateway_deployment.yaml
++++ b/config/prow/cluster/pushgateway_deployment.yaml
+@@ -17,7 +17,7 @@ spec:
+     spec:
+       containers:
+       - name: pushgateway
+-        image: prom/pushgateway:v0.4.0
++        image: {{ .Values.pushgateway.image }}
+         ports:
+           - name: http
+             containerPort: 9091
+@@ -87,7 +87,7 @@ spec:
+         ports:
+           - name: http
+             containerPort: 8081
+-        image: nginx:1
++        image: {{ .Values.nginx.image }}
+         volumeMounts:
+         - name: config-volume
+           mountPath: /etc/nginx/
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
 index e0fe0b9cd6..d707f54b13 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
@@ -1574,5 +1597,5 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    protocol: TCP
 -  type: ClusterIP
 -- 
-2.37.0
+2.40.0
 

@@ -11,6 +11,7 @@ horologium_deployment.yaml
 horologium_rbac.yaml
 prow_controller_manager_deployment.yaml
 prow_controller_manager_rbac.yaml
+pushgateway_deployment.yaml
 sinker_deployment.yaml
 sinker_rbac.yaml
 statusreconciler_deployment.yaml
