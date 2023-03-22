@@ -81,6 +81,8 @@
 -rw-r--r--     743B /etc/pam.d/smartcard-auth
 -rw-r--r--     540B /etc/pam.d/su
 -rw-r--r--     137B /etc/pam.d/su-l
+-rw-r--r--     200B /etc/pam.d/sudo
+-rw-r--r--     178B /etc/pam.d/sudo-i
 -rw-r--r--     760B /etc/pam.d/system-auth
 -rw-r--r--     129B /etc/pam.d/systemd-user
 -rw-r--r--     384B /etc/passwd
@@ -151,6 +153,9 @@
 -rw-r--r--     231B /etc/skel/.bashrc
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
+-rw-r-----   3.2KiB /etc/sudo-ldap.conf
+-rw-r-----   1.8KiB /etc/sudo.conf
+-r--r-----   4.3KiB /etc/sudoers
 -rw-------   1.4KiB /etc/sysconfig/ebtables-config
 -rw-r--r--   1.5KiB /etc/sysconfig/nfs
 -rw-r--r--     395B /etc/sysconfig/rpc-rquotad
@@ -169,6 +174,7 @@
 -rwxr-xr-x     146B /etc/update-motd.d/30-banner
 -rwxr-xr-x      67B /etc/update-motd.d/50-amazon-linux-extras-news
 -rwxr-xr-x     454B /etc/update-motd.d/70-available-updates
+-rw-r--r--   1.2KiB /etc/virc
 -rw-r--r--     862B /etc/yum.conf
 -rw-r--r--    1003B /etc/yum.repos.d/amzn2-core.repo
 -rw-r--r--   1.1KiB /etc/yum.repos.d/amzn2-extras.repo
@@ -227,6 +233,7 @@
 -rwxr-xr-x    19MiB /usr/bin/ctr
 -rwxr-xr-x   263KiB /usr/bin/curl
 -rwxr-xr-x    69KiB /usr/bin/cut
+-rwxr-xr-x   270KiB /usr/bin/cvtsudoers
 -rwxr-xr-x    69KiB /usr/bin/date
 -rwxr-xr-x    68KiB /usr/bin/db_archive
 -rwxr-xr-x    68KiB /usr/bin/db_checkpoint
@@ -465,6 +472,8 @@
 -rwxr-xr-x    69KiB /usr/bin/stdbuf
 -rwxr-xr-x    69KiB /usr/bin/stty
 -rwsr-xr-x    68KiB /usr/bin/su
+---s--x--x   200KiB /usr/bin/sudo
+---x--x--x    69KiB /usr/bin/sudoreplay
 -rwxr-xr-x    69KiB /usr/bin/sum
 -rwxr-xr-x    69KiB /usr/bin/sync
 -rwxr-xr-x   722KiB /usr/bin/systemctl
@@ -529,6 +538,8 @@
 -rwxr-xr-x    68KiB /usr/bin/utmpdump
 -rwxr-xr-x    68KiB /usr/bin/uuidgen
 -rwxr-xr-x   135KiB /usr/bin/vdir
+-rwxr-xr-x     691B /usr/bin/vi
+-rwxr-xr-x     150B /usr/bin/view
 -rwxr-xr-x    68KiB /usr/bin/vmstat
 -rwxr-xr-x    68KiB /usr/bin/w
 -rwxr-xr-x      28B /usr/bin/wait
@@ -1010,6 +1021,7 @@
 -rw-r--r--      87B /usr/lib/tmpfiles.d/rpcbind.conf
 -rw-r--r--      22B /usr/lib/tmpfiles.d/rpm.conf
 -rw-r--r--     228B /usr/lib/tmpfiles.d/sap.conf
+-rw-r--r--     305B /usr/lib/tmpfiles.d/sudo.conf
 -rw-r--r--     496B /usr/lib/tmpfiles.d/systemd-nologin.conf
 -rw-r--r--   1.7KiB /usr/lib/tmpfiles.d/systemd.conf
 -rw-r--r--     638B /usr/lib/tmpfiles.d/tmp.conf
@@ -4005,8 +4017,15 @@
 -rwxr-xr-x    69KiB /usr/libexec/gpg2keys_ldap
 -rwxr-xr-x     253B /usr/libexec/grepconf.sh
 -rwxr-xr-x   1.3KiB /usr/libexec/openldap/create-certdb.sh
+-rw-r--r--    67KiB /usr/libexec/sudo/group_file.so
+-rw-r--r--   133KiB /usr/libexec/sudo/libsudo_util.so.0.0.0
+-rwxr-xr-x    67KiB /usr/libexec/sudo/sesh
+-rw-r--r--    67KiB /usr/libexec/sudo/sudo_noexec.so
+-rw-r--r--   465KiB /usr/libexec/sudo/sudoers.so
+-rw-r--r--    67KiB /usr/libexec/sudo/system_group.so
 -rwxr-xr-x   2.6KiB /usr/libexec/urlgrabber-ext-down
 -rwx--s--x    67KiB /usr/libexec/utempter/utempter
+-rwxr-xr-x   1.5MiB /usr/libexec/vi
 -rwxr-xr-x   3.1KiB /usr/sbin/addgnupghome
 -rwxr-xr-x    68KiB /usr/sbin/addpart
 -rwxr-xr-x    69KiB /usr/sbin/agetty
@@ -4164,6 +4183,7 @@
 -rwxr-x---   139KiB /usr/sbin/userdel
 -rwxr-x---   139KiB /usr/sbin/usermod
 -rwxr-xr-x    75KiB /usr/sbin/vipw
+-rwxr-xr-x   269KiB /usr/sbin/visudo
 -rwxr-xr-x    16KiB /usr/sbin/weak-modules
 -rwxr-xr-x    69KiB /usr/sbin/wipefs
 -rwxr-xr-x    66KiB /usr/sbin/xqmstats
@@ -4430,6 +4450,7 @@
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
 -rw-r--r--    18KiB /usr/share/doc/socat-1.7.3.2/COPYING
 -rw-r--r--   6.2KiB /usr/share/doc/socat-1.7.3.2/COPYING.OpenSSL
+-rw-r--r--   9.7KiB /usr/share/doc/sudo-1.8.23/LICENSE
 -rw-r--r--    18KiB /usr/share/doc/system-release/GPL
 -rw-r--r--    18KiB /usr/share/doc/systemd/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/doc/systemd/LICENSE.LGPL2.1
@@ -4580,6 +4601,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
 -rw-r--r--    26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
+-rw-r--r--    13KiB /usr/share/licenses/vim-data-9.0.1367/LICENSE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/af/LC_MESSAGES/glib20.mo
@@ -4652,6 +4674,8 @@
 -rw-r--r--    57KiB /usr/share/locale/ca/LC_MESSAGES/rpm.mo
 -rw-r--r--    10KiB /usr/share/locale/ca/LC_MESSAGES/sed.mo
 -rw-r--r--    68KiB /usr/share/locale/ca/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/ca/LC_MESSAGES/sudo.mo
+-rw-r--r--    43KiB /usr/share/locale/ca/LC_MESSAGES/sudoers.mo
 -rw-r--r--    59KiB /usr/share/locale/ca/LC_MESSAGES/tar.mo
 -rw-r--r--    38KiB /usr/share/locale/ca/LC_MESSAGES/util-linux.mo
 -rw-r--r--    39KiB /usr/share/locale/ca/LC_MESSAGES/yum.mo
@@ -4677,6 +4701,8 @@
 -rw-r--r--    51KiB /usr/share/locale/cs/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/cs/LC_MESSAGES/sed.mo
 -rw-r--r--    54KiB /usr/share/locale/cs/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/cs/LC_MESSAGES/sudo.mo
+-rw-r--r--    48KiB /usr/share/locale/cs/LC_MESSAGES/sudoers.mo
 -rw-r--r--    59KiB /usr/share/locale/cs/LC_MESSAGES/tar.mo
 -rw-r--r--   439KiB /usr/share/locale/cs/LC_MESSAGES/util-linux.mo
 -rw-r--r--    64KiB /usr/share/locale/cs/LC_MESSAGES/yum.mo
@@ -4704,6 +4730,8 @@
 -rw-r--r--    30KiB /usr/share/locale/da/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.6KiB /usr/share/locale/da/LC_MESSAGES/sed.mo
 -rw-r--r--    64KiB /usr/share/locale/da/LC_MESSAGES/shadow.mo
+-rw-r--r--    18KiB /usr/share/locale/da/LC_MESSAGES/sudo.mo
+-rw-r--r--    43KiB /usr/share/locale/da/LC_MESSAGES/sudoers.mo
 -rw-r--r--    55KiB /usr/share/locale/da/LC_MESSAGES/tar.mo
 -rw-r--r--   415KiB /usr/share/locale/da/LC_MESSAGES/util-linux.mo
 -rw-r--r--    59KiB /usr/share/locale/da/LC_MESSAGES/yum.mo
@@ -4735,6 +4763,8 @@
 -rw-r--r--    63KiB /usr/share/locale/de/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.5KiB /usr/share/locale/de/LC_MESSAGES/sed.mo
 -rw-r--r--    69KiB /usr/share/locale/de/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/de/LC_MESSAGES/sudo.mo
+-rw-r--r--    50KiB /usr/share/locale/de/LC_MESSAGES/sudoers.mo
 -rw-r--r--    13KiB /usr/share/locale/de/LC_MESSAGES/systemd.mo
 -rw-r--r--    59KiB /usr/share/locale/de/LC_MESSAGES/tar.mo
 -rw-r--r--   418KiB /usr/share/locale/de/LC_MESSAGES/util-linux.mo
@@ -4755,6 +4785,7 @@
 -rw-r--r--   2.3KiB /usr/share/locale/el/LC_MESSAGES/rpm.mo
 -rw-r--r--    14KiB /usr/share/locale/el/LC_MESSAGES/sed.mo
 -rw-r--r--    85KiB /usr/share/locale/el/LC_MESSAGES/shadow.mo
+-rw-r--r--    50KiB /usr/share/locale/el/LC_MESSAGES/sudoers.mo
 -rw-r--r--    16KiB /usr/share/locale/el/LC_MESSAGES/systemd.mo
 -rw-r--r--    15KiB /usr/share/locale/el/LC_MESSAGES/tar.mo
 -rw-r--r--   3.5KiB /usr/share/locale/el/LC_MESSAGES/yum.mo
@@ -4785,6 +4816,8 @@
 -rw-r--r--    16KiB /usr/share/locale/eo/LC_MESSAGES/psmisc.mo
 -rw-r--r--    68KiB /usr/share/locale/eo/LC_MESSAGES/rpm.mo
 -rw-r--r--   8.8KiB /usr/share/locale/eo/LC_MESSAGES/sed.mo
+-rw-r--r--    18KiB /usr/share/locale/eo/LC_MESSAGES/sudo.mo
+-rw-r--r--    42KiB /usr/share/locale/eo/LC_MESSAGES/sudoers.mo
 -rw-r--r--   195KiB /usr/share/locale/eo/LC_TIME/coreutils.mo
 -rw-r--r--    12KiB /usr/share/locale/es/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   8.7KiB /usr/share/locale/es/LC_MESSAGES/acl.mo
@@ -4808,6 +4841,7 @@
 -rw-r--r--    72KiB /usr/share/locale/es/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/es/LC_MESSAGES/sed.mo
 -rw-r--r--    61KiB /usr/share/locale/es/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/es/LC_MESSAGES/sudo.mo
 -rw-r--r--    25KiB /usr/share/locale/es/LC_MESSAGES/tar.mo
 -rw-r--r--   445KiB /usr/share/locale/es/LC_MESSAGES/util-linux.mo
 -rw-r--r--    69KiB /usr/share/locale/es/LC_MESSAGES/yum.mo
@@ -4833,6 +4867,8 @@
 -rw-r--r--    12KiB /usr/share/locale/eu/LC_MESSAGES/psmisc.mo
 -rw-r--r--   1.7KiB /usr/share/locale/eu/LC_MESSAGES/sed.mo
 -rw-r--r--    49KiB /usr/share/locale/eu/LC_MESSAGES/shadow.mo
+-rw-r--r--   6.7KiB /usr/share/locale/eu/LC_MESSAGES/sudo.mo
+-rw-r--r--   6.3KiB /usr/share/locale/eu/LC_MESSAGES/sudoers.mo
 -rw-r--r--    35KiB /usr/share/locale/eu/LC_MESSAGES/tar.mo
 -rw-r--r--    20KiB /usr/share/locale/eu/LC_MESSAGES/util-linux.mo
 -rw-r--r--    60KiB /usr/share/locale/eu/LC_MESSAGES/yum.mo
@@ -4860,6 +4896,8 @@
 -rw-r--r--    44KiB /usr/share/locale/fi/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/fi/LC_MESSAGES/sed.mo
 -rw-r--r--    20KiB /usr/share/locale/fi/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/fi/LC_MESSAGES/sudo.mo
+-rw-r--r--    45KiB /usr/share/locale/fi/LC_MESSAGES/sudoers.mo
 -rw-r--r--    34KiB /usr/share/locale/fi/LC_MESSAGES/tar.mo
 -rw-r--r--    79KiB /usr/share/locale/fi/LC_MESSAGES/util-linux.mo
 -rw-r--r--    50KiB /usr/share/locale/fi/LC_MESSAGES/yum.mo
@@ -4889,6 +4927,8 @@
 -rw-r--r--    73KiB /usr/share/locale/fr/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/fr/LC_MESSAGES/sed.mo
 -rw-r--r--    73KiB /usr/share/locale/fr/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/fr/LC_MESSAGES/sudo.mo
+-rw-r--r--    44KiB /usr/share/locale/fr/LC_MESSAGES/sudoers.mo
 -rw-r--r--    13KiB /usr/share/locale/fr/LC_MESSAGES/systemd.mo
 -rw-r--r--    61KiB /usr/share/locale/fr/LC_MESSAGES/tar.mo
 -rw-r--r--   421KiB /usr/share/locale/fr/LC_MESSAGES/util-linux.mo
@@ -4896,6 +4936,8 @@
 -rw-r--r--   360KiB /usr/share/locale/fr/LC_TIME/coreutils.mo
 -rw-r--r--    49KiB /usr/share/locale/fur/LC_MESSAGES/glib20.mo
 -rw-r--r--   4.5KiB /usr/share/locale/fur/LC_MESSAGES/libidn2.mo
+-rw-r--r--    18KiB /usr/share/locale/fur/LC_MESSAGES/sudo.mo
+-rw-r--r--   9.4KiB /usr/share/locale/fur/LC_MESSAGES/sudoers.mo
 -rw-r--r--    13KiB /usr/share/locale/ga/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    61KiB /usr/share/locale/ga/LC_MESSAGES/bash.mo
 -rw-r--r--   142KiB /usr/share/locale/ga/LC_MESSAGES/coreutils.mo
@@ -4922,6 +4964,7 @@
 -rw-r--r--   1.7KiB /usr/share/locale/gl/LC_MESSAGES/popt.mo
 -rw-r--r--    11KiB /usr/share/locale/gl/LC_MESSAGES/sed.mo
 -rw-r--r--    20KiB /usr/share/locale/gl/LC_MESSAGES/shadow.mo
+-rw-r--r--    18KiB /usr/share/locale/gl/LC_MESSAGES/sudo.mo
 -rw-r--r--    11KiB /usr/share/locale/gl/LC_MESSAGES/tar.mo
 -rw-r--r--    17KiB /usr/share/locale/gl/LC_MESSAGES/util-linux.mo
 -rw-r--r--    34KiB /usr/share/locale/gl/LC_TIME/coreutils.mo
@@ -4955,6 +4998,8 @@
 -rw-r--r--   1.1KiB /usr/share/locale/hr/LC_MESSAGES/libidn2.mo
 -rw-r--r--   3.6KiB /usr/share/locale/hr/LC_MESSAGES/psmisc.mo
 -rw-r--r--   9.9KiB /usr/share/locale/hr/LC_MESSAGES/sed.mo
+-rw-r--r--    19KiB /usr/share/locale/hr/LC_MESSAGES/sudo.mo
+-rw-r--r--    48KiB /usr/share/locale/hr/LC_MESSAGES/sudoers.mo
 -rw-r--r--    11KiB /usr/share/locale/hr/LC_MESSAGES/tar.mo
 -rw-r--r--    25KiB /usr/share/locale/hr/LC_MESSAGES/util-linux.mo
 -rw-r--r--    16KiB /usr/share/locale/hr/LC_TIME/coreutils.mo
@@ -4975,6 +5020,8 @@
 -rw-r--r--    17KiB /usr/share/locale/hu/LC_MESSAGES/psmisc.mo
 -rw-r--r--   7.8KiB /usr/share/locale/hu/LC_MESSAGES/sed.mo
 -rw-r--r--    20KiB /usr/share/locale/hu/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/hu/LC_MESSAGES/sudo.mo
+-rw-r--r--    26KiB /usr/share/locale/hu/LC_MESSAGES/sudoers.mo
 -rw-r--r--    12KiB /usr/share/locale/hu/LC_MESSAGES/systemd.mo
 -rw-r--r--    61KiB /usr/share/locale/hu/LC_MESSAGES/tar.mo
 -rw-r--r--    47KiB /usr/share/locale/hu/LC_MESSAGES/util-linux.mo
@@ -5030,6 +5077,8 @@
 -rw-r--r--    71KiB /usr/share/locale/it/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.1KiB /usr/share/locale/it/LC_MESSAGES/sed.mo
 -rw-r--r--    23KiB /usr/share/locale/it/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/it/LC_MESSAGES/sudo.mo
+-rw-r--r--    48KiB /usr/share/locale/it/LC_MESSAGES/sudoers.mo
 -rw-r--r--    12KiB /usr/share/locale/it/LC_MESSAGES/systemd.mo
 -rw-r--r--    58KiB /usr/share/locale/it/LC_MESSAGES/tar.mo
 -rw-r--r--    34KiB /usr/share/locale/it/LC_MESSAGES/util-linux.mo
@@ -5057,6 +5106,8 @@
 -rw-r--r--    80KiB /usr/share/locale/ja/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/ja/LC_MESSAGES/sed.mo
 -rw-r--r--    73KiB /usr/share/locale/ja/LC_MESSAGES/shadow.mo
+-rw-r--r--    22KiB /usr/share/locale/ja/LC_MESSAGES/sudo.mo
+-rw-r--r--    55KiB /usr/share/locale/ja/LC_MESSAGES/sudoers.mo
 -rw-r--r--    54KiB /usr/share/locale/ja/LC_MESSAGES/tar.mo
 -rw-r--r--   381KiB /usr/share/locale/ja/LC_MESSAGES/util-linux.mo
 -rw-r--r--    60KiB /usr/share/locale/ja/LC_MESSAGES/yum.mo
@@ -5092,6 +5143,8 @@
 -rw-r--r--    42KiB /usr/share/locale/ko/LC_MESSAGES/rpm.mo
 -rw-r--r--   1.3KiB /usr/share/locale/ko/LC_MESSAGES/sed.mo
 -rw-r--r--    33KiB /usr/share/locale/ko/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/ko/LC_MESSAGES/sudo.mo
+-rw-r--r--    45KiB /usr/share/locale/ko/LC_MESSAGES/sudoers.mo
 -rw-r--r--   4.1KiB /usr/share/locale/ko/LC_MESSAGES/tar.mo
 -rw-r--r--    30KiB /usr/share/locale/ko/LC_TIME/coreutils.mo
 -rw-r--r--     498B /usr/share/locale/ks/LC_MESSAGES/Linux-PAM.mo
@@ -5111,6 +5164,7 @@
 -rw-r--r--   7.4KiB /usr/share/locale/lt/LC_MESSAGES/findutils.mo
 -rw-r--r--   122KiB /usr/share/locale/lt/LC_MESSAGES/glib20.mo
 -rw-r--r--   3.5KiB /usr/share/locale/lt/LC_MESSAGES/grep.mo
+-rw-r--r--   2.0KiB /usr/share/locale/lt/LC_MESSAGES/sudoers.mo
 -rw-r--r--    32KiB /usr/share/locale/lt/LC_TIME/coreutils.mo
 -rw-r--r--    59KiB /usr/share/locale/lt_LT/LC_MESSAGES/yum.mo
 -rw-r--r--     532B /usr/share/locale/lv/LC_MESSAGES/Linux-PAM.mo
@@ -5161,6 +5215,8 @@
 -rw-r--r--    21KiB /usr/share/locale/nb/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.6KiB /usr/share/locale/nb/LC_MESSAGES/sed.mo
 -rw-r--r--    63KiB /usr/share/locale/nb/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/nb/LC_MESSAGES/sudo.mo
+-rw-r--r--    47KiB /usr/share/locale/nb/LC_MESSAGES/sudoers.mo
 -rw-r--r--   4.5KiB /usr/share/locale/nb/LC_MESSAGES/tar.mo
 -rw-r--r--    36KiB /usr/share/locale/nb/LC_MESSAGES/yum.mo
 -rw-r--r--    21KiB /usr/share/locale/nb/LC_TIME/coreutils.mo
@@ -5190,6 +5246,8 @@
 -rw-r--r--   4.6KiB /usr/share/locale/nl/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.8KiB /usr/share/locale/nl/LC_MESSAGES/sed.mo
 -rw-r--r--    21KiB /usr/share/locale/nl/LC_MESSAGES/shadow.mo
+-rw-r--r--    18KiB /usr/share/locale/nl/LC_MESSAGES/sudo.mo
+-rw-r--r--    39KiB /usr/share/locale/nl/LC_MESSAGES/sudoers.mo
 -rw-r--r--    58KiB /usr/share/locale/nl/LC_MESSAGES/tar.mo
 -rw-r--r--   370KiB /usr/share/locale/nl/LC_MESSAGES/util-linux.mo
 -rw-r--r--    66KiB /usr/share/locale/nl/LC_MESSAGES/yum.mo
@@ -5199,6 +5257,7 @@
 -rw-r--r--     689B /usr/share/locale/nn/LC_MESSAGES/chkconfig.mo
 -rw-r--r--    36KiB /usr/share/locale/nn/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/nn/LC_MESSAGES/shadow.mo
+-rw-r--r--   3.0KiB /usr/share/locale/nn/LC_MESSAGES/sudo.mo
 -rw-r--r--   122KiB /usr/share/locale/oc/LC_MESSAGES/glib20.mo
 -rw-r--r--    19KiB /usr/share/locale/or/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    14KiB /usr/share/locale/or/LC_MESSAGES/chkconfig.mo
@@ -5237,6 +5296,8 @@
 -rw-r--r--    72KiB /usr/share/locale/pl/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/pl/LC_MESSAGES/sed.mo
 -rw-r--r--    20KiB /usr/share/locale/pl/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/pl/LC_MESSAGES/sudo.mo
+-rw-r--r--    49KiB /usr/share/locale/pl/LC_MESSAGES/sudoers.mo
 -rw-r--r--    12KiB /usr/share/locale/pl/LC_MESSAGES/systemd.mo
 -rw-r--r--    59KiB /usr/share/locale/pl/LC_MESSAGES/tar.mo
 -rw-r--r--   435KiB /usr/share/locale/pl/LC_MESSAGES/util-linux.mo
@@ -5279,6 +5340,8 @@
 -rw-r--r--    59KiB /usr/share/locale/pt_BR/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/pt_BR/LC_MESSAGES/sed.mo
 -rw-r--r--    59KiB /usr/share/locale/pt_BR/LC_MESSAGES/shadow.mo
+-rw-r--r--    20KiB /usr/share/locale/pt_BR/LC_MESSAGES/sudo.mo
+-rw-r--r--    49KiB /usr/share/locale/pt_BR/LC_MESSAGES/sudoers.mo
 -rw-r--r--    12KiB /usr/share/locale/pt_BR/LC_MESSAGES/systemd.mo
 -rw-r--r--    11KiB /usr/share/locale/pt_BR/LC_MESSAGES/tar.mo
 -rw-r--r--   435KiB /usr/share/locale/pt_BR/LC_MESSAGES/util-linux.mo
@@ -5321,6 +5384,8 @@
 -rw-r--r--    56KiB /usr/share/locale/ru/LC_MESSAGES/rpm.mo
 -rw-r--r--    12KiB /usr/share/locale/ru/LC_MESSAGES/sed.mo
 -rw-r--r--    86KiB /usr/share/locale/ru/LC_MESSAGES/shadow.mo
+-rw-r--r--    24KiB /usr/share/locale/ru/LC_MESSAGES/sudo.mo
+-rw-r--r--    12KiB /usr/share/locale/ru/LC_MESSAGES/sudoers.mo
 -rw-r--r--    18KiB /usr/share/locale/ru/LC_MESSAGES/systemd.mo
 -rw-r--r--    76KiB /usr/share/locale/ru/LC_MESSAGES/tar.mo
 -rw-r--r--   216KiB /usr/share/locale/ru/LC_MESSAGES/util-linux.mo
@@ -5346,6 +5411,8 @@
 -rw-r--r--    67KiB /usr/share/locale/sk/LC_MESSAGES/rpm.mo
 -rw-r--r--    11KiB /usr/share/locale/sk/LC_MESSAGES/sed.mo
 -rw-r--r--    45KiB /usr/share/locale/sk/LC_MESSAGES/shadow.mo
+-rw-r--r--    16KiB /usr/share/locale/sk/LC_MESSAGES/sudo.mo
+-rw-r--r--   4.9KiB /usr/share/locale/sk/LC_MESSAGES/sudoers.mo
 -rw-r--r--    11KiB /usr/share/locale/sk/LC_MESSAGES/tar.mo
 -rw-r--r--    61KiB /usr/share/locale/sk/LC_MESSAGES/yum.mo
 -rw-r--r--    77KiB /usr/share/locale/sk/LC_TIME/coreutils.mo
@@ -5357,6 +5424,8 @@
 -rw-r--r--     557B /usr/share/locale/sl/LC_MESSAGES/popt.mo
 -rw-r--r--    14KiB /usr/share/locale/sl/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.9KiB /usr/share/locale/sl/LC_MESSAGES/sed.mo
+-rw-r--r--    17KiB /usr/share/locale/sl/LC_MESSAGES/sudo.mo
+-rw-r--r--    36KiB /usr/share/locale/sl/LC_MESSAGES/sudoers.mo
 -rw-r--r--    58KiB /usr/share/locale/sl/LC_MESSAGES/tar.mo
 -rw-r--r--    36KiB /usr/share/locale/sl/LC_MESSAGES/util-linux.mo
 -rw-r--r--   338KiB /usr/share/locale/sl/LC_TIME/coreutils.mo
@@ -5379,6 +5448,8 @@
 -rw-r--r--    17KiB /usr/share/locale/sr/LC_MESSAGES/psmisc.mo
 -rw-r--r--    67KiB /usr/share/locale/sr/LC_MESSAGES/rpm.mo
 -rw-r--r--    13KiB /usr/share/locale/sr/LC_MESSAGES/sed.mo
+-rw-r--r--    25KiB /usr/share/locale/sr/LC_MESSAGES/sudo.mo
+-rw-r--r--    57KiB /usr/share/locale/sr/LC_MESSAGES/sudoers.mo
 -rw-r--r--    44KiB /usr/share/locale/sr/LC_MESSAGES/yum.mo
 -rw-r--r--    16KiB /usr/share/locale/sr@ije/LC_MESSAGES/glib20.mo
 -rw-r--r--    12KiB /usr/share/locale/sr@latin/LC_MESSAGES/Linux-PAM.mo
@@ -5408,6 +5479,8 @@
 -rw-r--r--    64KiB /usr/share/locale/sv/LC_MESSAGES/rpm.mo
 -rw-r--r--   8.9KiB /usr/share/locale/sv/LC_MESSAGES/sed.mo
 -rw-r--r--    56KiB /usr/share/locale/sv/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/sv/LC_MESSAGES/sudo.mo
+-rw-r--r--    47KiB /usr/share/locale/sv/LC_MESSAGES/sudoers.mo
 -rw-r--r--    12KiB /usr/share/locale/sv/LC_MESSAGES/systemd.mo
 -rw-r--r--    56KiB /usr/share/locale/sv/LC_MESSAGES/tar.mo
 -rw-r--r--   423KiB /usr/share/locale/sv/LC_MESSAGES/util-linux.mo
@@ -5448,6 +5521,8 @@
 -rw-r--r--    37KiB /usr/share/locale/tr/LC_MESSAGES/rpm.mo
 -rw-r--r--   8.1KiB /usr/share/locale/tr/LC_MESSAGES/sed.mo
 -rw-r--r--    22KiB /usr/share/locale/tr/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/tr/LC_MESSAGES/sudo.mo
+-rw-r--r--    14KiB /usr/share/locale/tr/LC_MESSAGES/sudoers.mo
 -rw-r--r--    48KiB /usr/share/locale/tr/LC_MESSAGES/tar.mo
 -rw-r--r--   397KiB /usr/share/locale/tr/LC_MESSAGES/util-linux.mo
 -rw-r--r--    22KiB /usr/share/locale/tr/LC_MESSAGES/yum.mo
@@ -5476,6 +5551,8 @@
 -rw-r--r--    91KiB /usr/share/locale/uk/LC_MESSAGES/rpm.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/sed.mo
 -rw-r--r--    25KiB /usr/share/locale/uk/LC_MESSAGES/shadow.mo
+-rw-r--r--    26KiB /usr/share/locale/uk/LC_MESSAGES/sudo.mo
+-rw-r--r--    65KiB /usr/share/locale/uk/LC_MESSAGES/sudoers.mo
 -rw-r--r--    14KiB /usr/share/locale/uk/LC_MESSAGES/systemd.mo
 -rw-r--r--    75KiB /usr/share/locale/uk/LC_MESSAGES/tar.mo
 -rw-r--r--   562KiB /usr/share/locale/uk/LC_MESSAGES/util-linux.mo
@@ -5503,6 +5580,8 @@
 -rw-r--r--    18KiB /usr/share/locale/vi/LC_MESSAGES/psmisc.mo
 -rw-r--r--    11KiB /usr/share/locale/vi/LC_MESSAGES/sed.mo
 -rw-r--r--    57KiB /usr/share/locale/vi/LC_MESSAGES/shadow.mo
+-rw-r--r--    21KiB /usr/share/locale/vi/LC_MESSAGES/sudo.mo
+-rw-r--r--    53KiB /usr/share/locale/vi/LC_MESSAGES/sudoers.mo
 -rw-r--r--    62KiB /usr/share/locale/vi/LC_MESSAGES/tar.mo
 -rw-r--r--   369KiB /usr/share/locale/vi/LC_MESSAGES/util-linux.mo
 -rw-r--r--   372KiB /usr/share/locale/vi/LC_TIME/coreutils.mo
@@ -5531,6 +5610,8 @@
 -rw-r--r--    58KiB /usr/share/locale/zh_CN/LC_MESSAGES/rpm.mo
 -rw-r--r--   8.5KiB /usr/share/locale/zh_CN/LC_MESSAGES/sed.mo
 -rw-r--r--    60KiB /usr/share/locale/zh_CN/LC_MESSAGES/shadow.mo
+-rw-r--r--    17KiB /usr/share/locale/zh_CN/LC_MESSAGES/sudo.mo
+-rw-r--r--    44KiB /usr/share/locale/zh_CN/LC_MESSAGES/sudoers.mo
 -rw-r--r--    52KiB /usr/share/locale/zh_CN/LC_MESSAGES/tar.mo
 -rw-r--r--   366KiB /usr/share/locale/zh_CN/LC_MESSAGES/util-linux.mo
 -rw-r--r--    59KiB /usr/share/locale/zh_CN/LC_MESSAGES/yum.mo
@@ -5553,6 +5634,7 @@
 -rw-r--r--    51KiB /usr/share/locale/zh_TW/LC_MESSAGES/rpm.mo
 -rw-r--r--   8.0KiB /usr/share/locale/zh_TW/LC_MESSAGES/sed.mo
 -rw-r--r--    14KiB /usr/share/locale/zh_TW/LC_MESSAGES/shadow.mo
+-rw-r--r--    19KiB /usr/share/locale/zh_TW/LC_MESSAGES/sudo.mo
 -rw-r--r--    48KiB /usr/share/locale/zh_TW/LC_MESSAGES/tar.mo
 -rw-r--r--    55KiB /usr/share/locale/zh_TW/LC_MESSAGES/util-linux.mo
 -rw-r--r--     494B /usr/share/locale/zh_TW/LC_MESSAGES/yum.mo
@@ -6478,6 +6560,8 @@
 -rw-r--r--   2.2KiB /usr/share/terminfo/x/xterm-xfree86
 -rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xi
 -rw-r--r--   1.5KiB /usr/share/terminfo/x/xterms
+-rw-r--r--   4.5KiB /usr/share/vim/vim90/defaults.vim
+-rw-r--r--     444B /usr/share/vim/vimfiles/template.spec
 -rwxr-xr-x   9.2KiB /usr/share/yum-cli/callback.py
 -rw-r--r--   6.8KiB /usr/share/yum-cli/callback.pyc
 -rwxr-xr-x   105KiB /usr/share/yum-cli/cli.py
@@ -8324,16 +8408,16 @@
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   636KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   152KiB /var/lib/rpm/Dirnames
+-rw-r--r--   160KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--    16KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   7.5MiB /var/lib/rpm/Packages
--rw-r--r--    92KiB /var/lib/rpm/Providename
+-rw-r--r--   7.7MiB /var/lib/rpm/Packages
+-rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
--rw-r--r--    20KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
 -rw-------       0B /var/lib/systemd/random-seed
@@ -8396,6 +8480,7 @@ lrwxrwxrwx      10B /usr/bin/bashbug	bashbug-64
 lrwxrwxrwx       3B /usr/bin/captoinfo	tic
 lrwxrwxrwx       8B /usr/bin/dnsdomainname	hostname
 lrwxrwxrwx       8B /usr/bin/domainname	hostname
+lrwxrwxrwx      15B /usr/bin/ex	/usr/libexec/vi
 lrwxrwxrwx       4B /usr/bin/gpg	gpg2
 lrwxrwxrwx       5B /usr/bin/gpgv	gpgv2
 lrwxrwxrwx       3B /usr/bin/gtar	tar
@@ -8411,9 +8496,12 @@ lrwxrwxrwx       9B /usr/bin/python2	python2.7
 lrwxrwxrwx       4B /usr/bin/reset	tset
 lrwxrwxrwx      13B /usr/bin/rpmquery	../../bin/rpm
 lrwxrwxrwx      13B /usr/bin/rpmverify	../../bin/rpm
+lrwxrwxrwx      15B /usr/bin/rvi	/usr/libexec/vi
+lrwxrwxrwx      15B /usr/bin/rview	/usr/libexec/vi
 lrwxrwxrwx      19B /usr/bin/setup-nsssysinit	setup-nsssysinit.sh
 lrwxrwxrwx       6B /usr/bin/sg	newgrp
 lrwxrwxrwx       4B /usr/bin/sh	bash
+lrwxrwxrwx       4B /usr/bin/sudoedit	sudo
 lrwxrwxrwx      11B /usr/bin/systemd-coredumpctl	coredumpctl
 lrwxrwxrwx       8B /usr/bin/systemd-loginctl	loginctl
 lrwxrwxrwx       7B /usr/bin/uname26	setarch
@@ -8701,6 +8789,8 @@ lrwxrwxrwx      11B /usr/lib64/security/pam_unix_session.so	pam_unix.so
 lrwxrwxrwx      11B /usr/lib64/xtables/libxt_NOTRACK.so	libxt_CT.so
 lrwxrwxrwx      18B /usr/lib64/xtables/libxt_state.so	libxt_conntrack.so
 lrwxrwxrwx      34B /usr/libexec/arptables-helper	/etc/alternatives/arptables-helper
+lrwxrwxrwx      21B /usr/libexec/sudo/libsudo_util.so	libsudo_util.so.0.0.0
+lrwxrwxrwx      21B /usr/libexec/sudo/libsudo_util.so.0	libsudo_util.so.0.0.0
 lrwxrwxrwx       7B /usr/sbin/adduser	useradd
 lrwxrwxrwx      27B /usr/sbin/arptables	/etc/alternatives/arptables
 lrwxrwxrwx      17B /usr/sbin/arptables-nft	xtables-nft-multi

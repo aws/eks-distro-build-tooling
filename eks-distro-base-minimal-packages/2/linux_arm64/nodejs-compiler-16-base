@@ -44,12 +44,12 @@ ncurses-6.0-8.20170212.amzn2.1.4.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.4.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.4.aarch64
 nspr-4.34.0-3.1.amzn2.aarch64
-nss-3.79.0-4.amzn2.aarch64
+nss-3.79.0-4.amzn2.0.1.aarch64
 nss-pem-1.0.3-5.amzn2.aarch64
 nss-softokn-3.79.0-4.amzn2.aarch64
 nss-softokn-freebl-3.79.0-4.amzn2.aarch64
-nss-sysinit-3.79.0-4.amzn2.aarch64
-nss-tools-3.79.0-4.amzn2.aarch64
+nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
+nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
 openldap-2.4.44-23.amzn2.0.4.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.6.aarch64
@@ -62,7 +62,7 @@ sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
-tar-1.26-35.amzn2.aarch64
+tar-1.26-35.amzn2.0.1.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
