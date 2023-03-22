@@ -31,7 +31,7 @@ libunistring-0.9.3-9.amzn2.0.2.x86_64
 ncurses-base-6.0-8.20170212.amzn2.1.4.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.4.x86_64
 nspr-4.34.0-3.1.amzn2.x86_64
-nss-3.79.0-4.amzn2.x86_64
+nss-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
 openldap-2.4.44-23.amzn2.0.4.x86_64
 openssh-clients-7.4p1-22.amzn2.0.1.x86_64

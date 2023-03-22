@@ -78,7 +78,7 @@ libunistring-0.9.3-9.amzn2.0.2.aarch64
 libutempter-1.1.6-4.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.6.aarch64
+libxml2-2.9.1-6.amzn2.5.7.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 lz4-1.7.5-2.amzn2.0.1.aarch64
 make-3.82-24.amzn2.aarch64
@@ -86,12 +86,12 @@ ncurses-6.0-8.20170212.amzn2.1.4.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.4.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.4.aarch64
 nspr-4.34.0-3.1.amzn2.aarch64
-nss-3.79.0-4.amzn2.aarch64
+nss-3.79.0-4.amzn2.0.1.aarch64
 nss-pem-1.0.3-5.amzn2.aarch64
 nss-softokn-3.79.0-4.amzn2.aarch64
 nss-softokn-freebl-3.79.0-4.amzn2.aarch64
-nss-sysinit-3.79.0-4.amzn2.aarch64
-nss-tools-3.79.0-4.amzn2.aarch64
+nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
+nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
 openldap-2.4.44-23.amzn2.0.4.aarch64
 openssh-7.4p1-22.amzn2.0.1.aarch64
@@ -125,7 +125,7 @@ sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
 systemd-219-78.amzn2.0.21.aarch64
 systemd-libs-219-78.amzn2.0.21.aarch64
-tar-1.26-35.amzn2.aarch64
+tar-1.26-35.amzn2.0.1.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
 util-linux-2.30.2-2.amzn2.0.11.aarch64
