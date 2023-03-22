@@ -23,15 +23,10 @@ NEWROOT=/goss
 source $SCRIPT_ROOT/common_vars.sh
 
 GOSS_DOWNLOAD_URL="https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz"
-GOSS_CHECKSUM_URL="https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss-v${GOSS_VERSION}_SHA256SUMS"
+GOSS_CHECKSUM_URL="https://github.com/YaleUniversity/packer-provisioner-goss/releases/download/v${GOSS_VERSION}/packer-provisioner-goss_v${GOSS_VERSION}_SHA256SUMS"
 
 function install_goss() {
     mkdir -p /goss/home/imagebuilder/.packer.d/plugins
-
-    if [ $TARGETARCH == 'arm64' ]; then
-        # there is no build for arm
-        return
-    fi
 
     # Installing Goss for imagebuilder validation    
     wget \
