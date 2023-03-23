@@ -10,10 +10,10 @@ gpg-pubkey-afaa0026-6185c6ab
 gpg-pubkey-d832c631-63920d79
 libacl-2.3.1-2.amzn2023.0.2.aarch64
 libattr-2.5.1-3.amzn2023.0.2.aarch64
-libgcc-11.3.1-4.amzn2023.0.2.aarch64
+libgcc-11.3.1-4.amzn2023.0.3.aarch64
 libselinux-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
-libstdc++-11.3.1-4.amzn2023.0.2.aarch64
+libstdc++-11.3.1-4.amzn2023.0.3.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
 openssl-libs-3.0.8-1.amzn2023.0.1.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64

@@ -41,7 +41,7 @@ guile22-2.2.7-2.amzn2023.0.2.x86_64
 gzip-1.12-1.amzn2023.0.1.x86_64
 jansson-2.14-0.amzn2023.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-keyutils-libs-1.6.1-2.amzn2023.0.2.x86_64
+keyutils-libs-1.6.3-1.amzn2023.x86_64
 krb5-libs-1.20.1-8.amzn2023.0.2.x86_64
 less-608-2.amzn2023.0.1.x86_64
 libacl-2.3.1-2.amzn2023.0.2.x86_64
@@ -63,9 +63,9 @@ libedit-3.1-38.20210714cvs.amzn2023.0.2.x86_64
 libfdisk-2.37.4-1.amzn2023.0.3.x86_64
 libffi-3.1-28.amzn2023.0.2.x86_64
 libfido2-1.10.0-2.amzn2023.0.2.x86_64
-libgcc-11.3.1-4.amzn2023.0.2.x86_64
+libgcc-11.3.1-4.amzn2023.0.3.x86_64
 libgcrypt-1.10.1-7.amzn2023.0.1.x86_64
-libgomp-11.3.1-4.amzn2023.0.2.x86_64
+libgomp-11.3.1-4.amzn2023.0.3.x86_64
 libgpg-error-1.42-1.amzn2023.0.2.x86_64
 libidn2-2.3.2-1.amzn2023.0.2.x86_64
 libksba-1.6.3-1.amzn2023.0.2.x86_64
@@ -84,7 +84,7 @@ libsmartcols-2.37.4-1.amzn2023.0.3.x86_64
 libsolv-0.7.22-1.amzn2023.0.2.x86_64
 libssh-0.10.4-3.amzn2023.0.3.x86_64
 libssh-config-0.10.4-3.amzn2023.0.3.noarch
-libstdc++-11.3.1-4.amzn2023.0.2.x86_64
+libstdc++-11.3.1-4.amzn2023.0.3.x86_64
 libtasn1-4.19.0-1.amzn2023.0.1.x86_64
 libtool-ltdl-2.4.7-1.amzn2023.0.3.x86_64
 libunistring-0.9.10-10.amzn2023.0.2.x86_64

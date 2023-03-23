@@ -1221,7 +1221,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libjson-c.so.5.0.0
 -rwxr-xr-x   198KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
--rwxr-xr-x   197KiB /usr/lib64/libkeyutils.so.1.9
+-rwxr-xr-x   197KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
 -rwxr-xr-x   982KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
@@ -7738,7 +7738,7 @@ lrwxrwxrwx      20B /usr/lib64/libjansson.so.4 libjansson.so.4.14.0
 lrwxrwxrwx      18B /usr/lib64/libjson-c.so.5 libjson-c.so.5.0.0
 lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3 libk5crypto.so.3.1
 lrwxrwxrwx      15B /usr/lib64/libkdb5.so.10 libkdb5.so.10.0
-lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.9
+lrwxrwxrwx      19B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.10
 lrwxrwxrwx      14B /usr/lib64/libkrad.so.0 libkrad.so.0.0
 lrwxrwxrwx      14B /usr/lib64/libkrb5.so.3 libkrb5.so.3.3
 lrwxrwxrwx      21B /usr/lib64/libkrb5support.so.0 libkrb5support.so.0.1

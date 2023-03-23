@@ -33,7 +33,7 @@ grep-3.8-1.amzn2023.0.4.aarch64
 guile22-2.2.7-2.amzn2023.0.2.aarch64
 gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
-keyutils-libs-1.6.1-2.amzn2023.0.2.aarch64
+keyutils-libs-1.6.3-1.amzn2023.aarch64
 krb5-libs-1.20.1-8.amzn2023.0.2.aarch64
 less-608-2.amzn2023.0.1.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
@@ -51,7 +51,7 @@ libedit-3.1-38.20210714cvs.amzn2023.0.2.aarch64
 libfdisk-2.37.4-1.amzn2023.0.3.aarch64
 libffi-3.1-28.amzn2023.0.2.aarch64
 libfido2-1.10.0-2.amzn2023.0.2.aarch64
-libgcc-11.3.1-4.amzn2023.0.2.aarch64
+libgcc-11.3.1-4.amzn2023.0.3.aarch64
 libidn2-2.3.2-1.amzn2023.0.2.aarch64
 libmount-2.37.4-1.amzn2023.0.3.aarch64
 libnghttp2-1.51.0-1.amzn2023.aarch64
@@ -64,7 +64,7 @@ libsigsegv-2.13-2.amzn2023.0.2.aarch64
 libsmartcols-2.37.4-1.amzn2023.0.3.aarch64
 libssh-0.10.4-3.amzn2023.0.3.aarch64
 libssh-config-0.10.4-3.amzn2023.0.3.noarch
-libstdc++-11.3.1-4.amzn2023.0.2.aarch64
+libstdc++-11.3.1-4.amzn2023.0.3.aarch64
 libtool-ltdl-2.4.7-1.amzn2023.0.3.aarch64
 libunistring-0.9.10-10.amzn2023.0.2.aarch64
 libutempter-1.2.1-4.amzn2023.0.2.aarch64

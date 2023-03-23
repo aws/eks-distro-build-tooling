@@ -367,7 +367,7 @@
 -rwxr-xr-x    16KiB /usr/bin/isosize
 -rwxr-xr-x      32B /usr/bin/jobs
 -rwxr-xr-x    53KiB /usr/bin/join
--rwxr-xr-x    49KiB /usr/bin/keyctl
+-rwxr-xr-x    65KiB /usr/bin/keyctl
 -rwxr-xr-x    33KiB /usr/bin/kill
 -rwxr-xr-x   163KiB /usr/bin/kmod
 -rwxr-xr-x    37KiB /usr/bin/last
@@ -653,7 +653,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libinih.so.49
 -rwxr-xr-x    98KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    90KiB /usr/lib64/libkdb5.so.10.0
--rwxr-xr-x    25KiB /usr/lib64/libkeyutils.so.1.9
+-rwxr-xr-x    25KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   103KiB /usr/lib64/libkmod.so.2.3.7
 -rwxr-xr-x    45KiB /usr/lib64/libkrad.so.0.0
 -rwxr-xr-x   887KiB /usr/lib64/libkrb5.so.3.3
@@ -6517,7 +6517,7 @@ lrwxrwxrwx      22B /usr/lib64/libini_config.so.5 libini_config.so.5.2.1
 lrwxrwxrwx      13B /usr/lib64/libinih.so.0 libinih.so.49
 lrwxrwxrwx      18B /usr/lib64/libk5crypto.so.3 libk5crypto.so.3.1
 lrwxrwxrwx      15B /usr/lib64/libkdb5.so.10 libkdb5.so.10.0
-lrwxrwxrwx      18B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.9
+lrwxrwxrwx      19B /usr/lib64/libkeyutils.so.1 libkeyutils.so.1.10
 lrwxrwxrwx      16B /usr/lib64/libkmod.so.2 libkmod.so.2.3.7
 lrwxrwxrwx      14B /usr/lib64/libkrad.so.0 libkrad.so.0.0
 lrwxrwxrwx      14B /usr/lib64/libkrb5.so.3 libkrb5.so.3.3
