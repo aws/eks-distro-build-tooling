@@ -1,7 +1,7 @@
 
+cpp.x86_64
+gcc.x86_64
 kernel-headers.x86_64
-libxml2.x86_64
-nss.x86_64
-nss-sysinit.x86_64
-nss-tools.x86_64
-tar.x86_64
+libgcc.x86_64
+libgomp.x86_64
+libstdc++.x86_64

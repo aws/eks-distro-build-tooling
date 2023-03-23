@@ -325,7 +325,7 @@
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
 -rw-r--r--   3.0KiB /usr/share/locale/locale.alias
--rw-r--r--     343B /usr/share/man/man1/docker-manifest-annotate.1.gz
+-rw-r--r--     342B /usr/share/man/man1/docker-manifest-annotate.1.gz
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
@@ -2131,7 +2131,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.8KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--  1020KiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--  1012KiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
