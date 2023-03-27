@@ -66,15 +66,13 @@ for TARGETARCH in arm64 amd64; do
 
     # GOVC
     echo "$(curl -sSL --retry 5 -v  $GOVC_CHECKSUM_URL 2>&1 | grep $GOVC_FILENAME | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/govc-$TARGETARCH-checksum
+
+    # GOSS
+    echo "$(curl -sSL --retry 5 -v --silent $GOSS_CHECKSUM_URL 2>&1 | grep packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/goss-$TARGETARCH-checksum
 done
 
 # HUGO
 echo "$(curl -sSL --retry 5 -v --silent $HUGO_CHECKSUM_URL 2>&1 | grep $HUGO_FILENAME | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/hugo-$TARGETARCH-checksum
-
-# GOSS
-# TODO: Later versions push a sha256sum file to github so when we upgrade we can start using it instead
-sha256=$(curl -sSL --retry 5 $GOSS_DOWNLOAD_URL | sha256sum | awk '{print $1}')
-echo "$sha256  packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz" > $CHECKSUMS_ROOT/checksums/goss-$TARGETARCH-checksum
 
 # BASH
 sha256=$(curl -sSL --retry 5 $BASH_DOWNLOAD_URL | sha256sum | awk '{print $1}')
