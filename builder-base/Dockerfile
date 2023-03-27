@@ -163,7 +163,7 @@ WORKDIR /workdir
 ARG GOSS_VERSION
 ENV GOSS_VERSION=$GOSS_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_goss.sh ./checksums/goss-amd64-checksum /
+    ./scripts/install_goss.sh ./checksums/goss-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_goss.sh && \
