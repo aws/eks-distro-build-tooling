@@ -35,7 +35,7 @@ BASH_DOWNLOAD_URL="http://ftp.gnu.org/gnu/bash/bash-$OVERRIDE_BASH_VERSION.tar.g
 
 function install_bash() {
     # al22 already ships with 5.1
-    if [ "$IS_AL22" != "false" ]; then
+    if [ "$IS_AL23" != "false" ]; then
         return
     fi
 
