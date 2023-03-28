@@ -30,7 +30,7 @@ function instal_ansible() {
     # Install image-builder build dependencies - pip, Ansible, Packer
     # Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
     # Symlinking pip3 to pip, to have pip3 commands work successfully
-    if [ "$IS_AL22" = "false" ]; then 
+    if [ "$IS_AL23" = "false" ]; then 
         pip3 install --no-cache-dir -U pip setuptools
         ln -sf $USR_LOCAL_BIN/pip $USR_BIN/pip3
     fi
