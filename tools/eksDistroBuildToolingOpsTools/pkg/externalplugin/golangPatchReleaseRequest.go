@@ -37,7 +37,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	lock.Lock()
 	defer lock.Unlock()
 
-	if requestor != constants.EksDistroBotName || !s.AllowAll {
+	if requestor == constants.EksDistroBotName || !s.AllowAll {
 		ok, err := s.Ghc.IsMember(org, requestor)
 		if err != nil {
 			return err
