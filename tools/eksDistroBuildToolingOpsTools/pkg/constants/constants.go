@@ -10,4 +10,5 @@ const (
 	GoRepoName                 = "go"
 	OwnerWriteallReadOctal     = 0644
 	SemverRegex                = `[0-9]+\.[0-9]+\.[0-9]+`
+	AllowAllFailRespTemplate   = "%s only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually."
 )

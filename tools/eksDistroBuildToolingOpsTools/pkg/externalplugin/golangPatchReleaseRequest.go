@@ -43,7 +43,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 			return err
 		}
 		if !ok {
-			resp := fmt.Sprintf("%s only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", requestor, org, org)
+			resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
 			l.Info(resp)
 			return s.Ghc.CreateComment(org, repo, num, resp)
 		}
