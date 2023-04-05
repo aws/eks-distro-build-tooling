@@ -164,6 +164,7 @@ Patch1:       0001-go-1.18.10-eks-update-bundled-golang.org.patch
 Patch2:       0002-go-1.18.10-eks-replace-all-usages-of-BytesOrPanic.patch
 Patch3:       0003-go-1.18.10-eks-multipart-limit-memory-inode-consumption.patch
 Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patch
+Patch5:       0005-go-1.18.10-eks-go-scanner-reject-large-line-a.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
