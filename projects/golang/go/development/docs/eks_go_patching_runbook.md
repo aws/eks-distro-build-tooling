@@ -55,7 +55,7 @@ To help track this work, for each new patch release we create our own top-level 
       In a local fork of upstream Go, check out the git tag associated with the version you wish to update (e.g. [`go1.17.13`](https://github.com/golang/go/tree/go1.17.13)).
       This will be the same as the tag [in the `GIT_TAG` file in EKS Distro Build Tooling](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.18/GIT_TAG) for the given EKS Go version.
 
-   1.__apply previous patches__
+   1. __apply previous patches__
 
       Apply previous patches for 1.XX version you wish to update using : `git am ../eks-distro-build-tooling/projects/golang/go/1.XX/patch/*.patch`
       
