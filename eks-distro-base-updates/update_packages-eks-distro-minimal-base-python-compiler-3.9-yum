@@ -1,4 +1,2 @@
 
-libgcc.x86_64
-libgomp.x86_64
-libstdc++.x86_64
+tar.x86_64
