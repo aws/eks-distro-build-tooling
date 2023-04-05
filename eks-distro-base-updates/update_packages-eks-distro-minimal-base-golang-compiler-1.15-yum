@@ -1,4 +1,5 @@
 
-libgcc.x86_64
-libgomp.x86_64
-libstdc++.x86_64
+dbus.x86_64
+dbus-libs.x86_64
+systemd.x86_64
+systemd-libs.x86_64
