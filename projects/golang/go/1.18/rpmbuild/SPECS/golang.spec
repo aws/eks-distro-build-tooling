@@ -166,6 +166,7 @@ Patch3:       0003-go-1.18.10-eks-multipart-limit-memory-inode-consumption.patch
 Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patch
 Patch5:       0005-go-1.18.10-eks-go-scanner-reject-large-line-a.patch
 Patch6:       0006-go-1.18.10-eks-go-net-textproto-avoid-overpredic.patch
+Patch7:       0007-go-1.18.10-eks-mime-multipart-avoid-excessive.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -557,6 +558,7 @@ fi
 - Includes security fix for CVE-2022-41723
 - Includes security fix for CVE-2022-41724 
 - Includes security fix for CVE-2022-41725
+- Includes security fix for CVE-2023-24536
 
 * Wed Jan 11 2023 Daniel Budris <budris@amazon.com> - 1.18.10-1
 - Bump tracking patch version to 1.18.10 from 1.18.9
