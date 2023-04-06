@@ -167,6 +167,7 @@ Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patc
 Patch5:       0005-go-1.18.10-eks-go-scanner-reject-large-line-a.patch
 Patch6:       0006-go-1.18.10-eks-go-net-textproto-avoid-overpredic.patch
 Patch7:       0007-go-1.18.10-eks-mime-multipart-avoid-excessive.patch
+Patch8:       0008-go-1.18.10-eks-net-textproto-mime-multipart-i.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
