@@ -10972,7 +10972,7 @@
 -rwxr-xr-x    68KiB /usr/bin/isosize
 -rwxr-xr-x      28B /usr/bin/jobs
 -rwxr-xr-x    69KiB /usr/bin/join
--rwxr-xr-x   590KiB /usr/bin/journalctl
+-rwxr-xr-x   591KiB /usr/bin/journalctl
 -rwxr-xr-x   4.7KiB /usr/bin/kernel-install
 -rwxr-xr-x    69KiB /usr/bin/kill
 -rwxr-xr-x   200KiB /usr/bin/kmod
@@ -10987,7 +10987,7 @@
 -rwxr-xr-x    69KiB /usr/bin/link
 -rwxr-xr-x    70KiB /usr/bin/ln
 -rwxr-xr-x    84KiB /usr/bin/locale
--rwxr-xr-x   331KiB /usr/bin/localectl
+-rwxr-xr-x   395KiB /usr/bin/localectl
 -rwxr-xr-x   353KiB /usr/bin/localedef
 -rwxr-xr-x    70KiB /usr/bin/logger
 -rwxr-xr-x    69KiB /usr/bin/login
@@ -11006,7 +11006,7 @@
 -rwxr-xr-x   136KiB /usr/bin/luac
 -rwxr-xr-x   134KiB /usr/bin/lz4
 -rwxr-xr-x   134KiB /usr/bin/lz4c
--rwxr-xr-x   590KiB /usr/bin/machinectl
+-rwxr-xr-x   591KiB /usr/bin/machinectl
 -rwxr-xr-x   203KiB /usr/bin/make
 -rwxr-xr-x    75KiB /usr/bin/makedb
 -rwxr-xr-x    69KiB /usr/bin/mcookie
@@ -11125,7 +11125,7 @@
 -rwxr-xr-x   1.6MiB /usr/bin/systemd-analyze
 -rwxr-xr-x    69KiB /usr/bin/systemd-ask-password
 -rwxr-xr-x    68KiB /usr/bin/systemd-cat
--rwxr-xr-x   331KiB /usr/bin/systemd-cgls
+-rwxr-xr-x   395KiB /usr/bin/systemd-cgls
 -rwxr-xr-x   133KiB /usr/bin/systemd-cgtop
 -rwxr-xr-x   133KiB /usr/bin/systemd-delta
 -rwxr-xr-x    68KiB /usr/bin/systemd-detect-virt

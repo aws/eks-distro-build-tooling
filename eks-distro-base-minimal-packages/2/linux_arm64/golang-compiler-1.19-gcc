@@ -14,8 +14,8 @@ cracklib-dicts-2.9.0-11.amzn2.0.2.aarch64
 cryptsetup-libs-1.7.4-4.amzn2.aarch64
 curl-7.88.1-1.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
-dbus-1.10.24-7.amzn2.0.2.aarch64
-dbus-libs-1.10.24-7.amzn2.0.2.aarch64
+dbus-1.10.24-7.amzn2.0.3.aarch64
+dbus-libs-1.10.24-7.amzn2.0.3.aarch64
 device-mapper-1.02.170-6.amzn2.5.aarch64
 device-mapper-libs-1.02.170-6.amzn2.5.aarch64
 diffutils-3.3-5.amzn2.aarch64
@@ -135,8 +135,8 @@ shadow-utils-4.1.5.1-24.amzn2.0.2.aarch64
 shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
-systemd-219-78.amzn2.0.21.aarch64
-systemd-libs-219-78.amzn2.0.21.aarch64
+systemd-219-78.amzn2.0.22.aarch64
+systemd-libs-219-78.amzn2.0.22.aarch64
 tar-1.26-35.amzn2.0.1.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
