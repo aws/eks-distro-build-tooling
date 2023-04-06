@@ -79,7 +79,7 @@ setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-3.40.0-1.amzn2023.0.2.x86_64
 sqlite-libs-3.40.0-1.amzn2023.0.2.x86_64
 system-release-2023.0.20230315-1.amzn2023.noarch
-tar-1.34-1.amzn2023.0.2.x86_64
+tar-1.34-1.amzn2023.0.3.x86_64
 tzdata-2022g-1.amzn2023.0.1.noarch
 which-2.21-26.amzn2023.0.2.x86_64
 xz-libs-5.2.5-9.amzn2023.0.2.x86_64
