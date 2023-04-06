@@ -5,6 +5,7 @@ ARG GOLANG_ARCHIVE_PATH
 RUN mkdir -p /usr/local/go
 
 ADD $GOLANG_ARCHIVE_PATH /usr/local/go
+RUN cd /usr/local/go && ls
 
 ENV GOPATH /go
 ENV PATH /usr/local/go/bin:$GOPATH/bin:$PATH
