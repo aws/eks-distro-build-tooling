@@ -164,6 +164,11 @@ Patch1:       0001-go-1.18.10-eks-update-bundled-golang.org.patch
 Patch2:       0002-go-1.18.10-eks-replace-all-usages-of-BytesOrPanic.patch
 Patch3:       0003-go-1.18.10-eks-multipart-limit-memory-inode-consumption.patch
 Patch4:       0004-go-1.18.10-eks-path-filepath-do-not-Clean-relative-path..patch
+Patch5:       0005-go-1.18.10-eks-go-scanner-reject-large-line-a.patch
+Patch6:       0006-go-1.18.10-eks-go-net-textproto-avoid-overpredic.patch
+Patch7:       0007-go-1.18.10-eks-mime-multipart-avoid-excessive.patch
+Patch8:       0008-go-1.18.10-eks-net-textproto-mime-multipart-i.patch
+Patch9:       0009-go-1.18.10-eks-mime-multipart-limit-parsed-mi.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -546,11 +551,16 @@ fi
 %endif
 
 %changelog
+* Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.18.10-3
+- Includes security fix for CVE-2023-24537
+- Includes security fix for CVE-2023-24534
+
 * Wed Feb 15 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-2
 - Includes security fix for CVE-2022-41722
 - Includes security fix for CVE-2022-41723
 - Includes security fix for CVE-2022-41724 
 - Includes security fix for CVE-2022-41725
+- Includes security fix for CVE-2023-24536
 
 * Wed Jan 11 2023 Daniel Budris <budris@amazon.com> - 1.18.10-1
 - Bump tracking patch version to 1.18.10 from 1.18.9
