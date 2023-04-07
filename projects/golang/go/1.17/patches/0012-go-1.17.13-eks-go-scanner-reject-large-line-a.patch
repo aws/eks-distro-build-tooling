@@ -5,7 +5,7 @@ Subject: [PATCH] [release-branch.go1.19] go/scanner: reject large line and
  column numbers in //line directives
 
 # AWS EKS
-Backported To: go-1.18.10-eks
+Backported To: go-1.17.13-eks
 Backported On: Wed, 5 Apr 2023
 Backported By: kodurub@amazon.com
 Backported From: release-branch.go1.19
