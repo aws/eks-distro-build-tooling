@@ -3,7 +3,6 @@ FROM buildpack-deps:bullseye-scm
 ARG GOLANG_ARCHIVE_PATH
 
 RUN mkdir -p /usr/local/go
-RUN mkdir -p /usr/local/go1
 
 COPY $GOLANG_ARCHIVE_PATH /usr/local/go
 RUN cd /usr/local/go && tar -xf *.tar.gz && rm *.tar.gz
