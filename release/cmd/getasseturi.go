@@ -36,6 +36,7 @@ const (
 var requiredFlags = []string{componentFlagName, typeFlagName}
 
 // getAssetUriCmd represents the get-asset-uri command
+
 var getAssetUriCmd = &cobra.Command{
 	Use:   "get-asset-uri",
 	Short: "Get asset URI corresponding to an eks-distro release",
