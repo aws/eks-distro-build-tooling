@@ -167,6 +167,7 @@ Patch11:  0011-go-1.17.13-eks-net-http-update-bundled-golang.patch
 Patch12:  0012-go-1.17.13-eks-go-scanner-reject-large-line-a.patch
 Patch13:  0013-go-1.17.13-mime-multipart-avoid-excessive.patch
 Patch14:  0014-go-1.17.13-eks-net-textproto-mime-multipart-i.patch
+Patch15:  0015-go-1.17.13-eks-mime-multipart-limit-parsed-mi.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
