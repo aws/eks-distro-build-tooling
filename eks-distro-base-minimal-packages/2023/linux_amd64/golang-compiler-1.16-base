@@ -90,7 +90,7 @@ setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.2.x86_64
 system-release-2023.0.20230315-1.amzn2023.noarch
 systemd-libs-252.4-1161.amzn2023.0.3.x86_64
-tar-1.34-1.amzn2023.0.2.x86_64
+tar-1.34-1.amzn2023.0.3.x86_64
 tzdata-2022g-1.amzn2023.0.1.noarch
 util-linux-2.37.4-1.amzn2023.0.3.x86_64
 util-linux-core-2.37.4-1.amzn2023.0.3.x86_64
