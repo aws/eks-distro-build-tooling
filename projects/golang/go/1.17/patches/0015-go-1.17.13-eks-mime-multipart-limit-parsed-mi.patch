@@ -108,7 +108,7 @@ index 43475c3cd7..7d48c37b07 100644
 +		files            int
 +		extraKeysPerFile int
 +		wantErr          error
-+		godebug          string
++		//godebug          string
 +	}{
 +		{values: 1000},
 +		{values: 1001, wantErr: ErrMessageTooLarge},
