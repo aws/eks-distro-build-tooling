@@ -168,6 +168,7 @@ Patch12:  0012-go-1.17.13-eks-go-scanner-reject-large-line-a.patch
 Patch13:  0013-go-1.17.13-mime-multipart-avoid-excessive.patch
 Patch14:  0014-go-1.17.13-eks-net-textproto-mime-multipart-i.patch
 Patch15:  0015-go-1.17.13-eks-mime-multipart-limit-parsed-mi.patch
+Patch16:  0016-go-1.17.13-eks-net-textproto-avoid-overpredic.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -550,6 +551,7 @@ fi
 * Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.17.13-3
 - Includes security fix for CVE-2023-24537
 - Includes security fix for CVE-2023-24536
+- Includes security fix for CVE-2023-24534
 
 * Tue Feb 28 2023 Dan Budris <budris@amazon.com> - 1.17.13-3
 - Include backported patch for CVE-2022-27664

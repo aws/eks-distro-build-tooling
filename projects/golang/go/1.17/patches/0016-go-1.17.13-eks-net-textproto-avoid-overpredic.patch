@@ -1,0 +1,464 @@
+From 5bfe9f9592e543050b7741396184603c4097118d Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Fri, 10 Mar 2023 14:21:05 -0800
+Subject: [PATCH] [release-branch.go1.19] net/textproto: avoid overpredicting
+ the number of MIME header keys
+
+A parsed MIME header is a map[string][]string. In the common case,
+a header contains many one-element []string slices. To avoid
+allocating a separate slice for each key, ReadMIMEHeader looks
+ahead in the input to predict the number of keys that will be
+parsed, and allocates a single []string of that length.
+The individual slices are then allocated out of the larger one.
+
+The prediction of the number of header keys was done by counting
+newlines in the input buffer, which does not take into account
+header continuation lines (where a header key/value spans multiple
+lines) or the end of the header block and the start of the body.
+This could lead to a substantial amount of overallocation, for
+example when the body consists of nothing but a large block of
+newlines.
+
+Fix header key count prediction to take into account the end of
+the headers (indicated by a blank line) and continuation lines
+(starting with whitespace).
+
+Thanks to Jakob Ackermann (@das7pad) for reporting this issue.
+
+Fixes CVE-2023-24534
+For #58975
+Fixes #59267
+
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1802452
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Julie Qiu <julieqiu@google.com>
+(cherry picked from commit f739f080a72fd5b06d35c8e244165159645e2ed6)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1802393
+Reviewed-by: Damien Neil <dneil@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Change-Id: I675451438d619a9130360c56daf529559004903f
+Reviewed-on: https://go-review.googlesource.com/c/go/+/481982
+Run-TryBot: Michael Knyszek <mknyszek@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Matthew Dempsky <mdempsky@google.com>
+Auto-Submit: Michael Knyszek <mknyszek@google.com>
+---
+ src/bytes/bytes.go               |  13 +++
+ src/bytes/bytes_test.go          |  23 ++++++
+ src/bytes/example_test.go        | 138 ++++++++++++++++---------------
+ src/net/textproto/reader.go      |  30 ++++---
+ src/net/textproto/reader_test.go |  59 +++++++++++++
+ 5 files changed, 184 insertions(+), 79 deletions(-)
+
+diff --git a/src/bytes/bytes.go b/src/bytes/bytes.go
+index ce52649f13..ec9a2eb693 100644
+--- a/src/bytes/bytes.go
++++ b/src/bytes/bytes.go
+@@ -1174,3 +1174,16 @@ func Index(s, sep []byte) int {
+ 	}
+ 	return -1
+ }
++
++// Cut slices s around the first instance of sep,
++// returning the text before and after sep.
++// The found result reports whether sep appears in s.
++// If sep does not appear in s, cut returns s, "", false.
++//
++// Cut returns slices of the original slice s, not copies.
++func Cut(s, sep []byte) (before, after []byte, found bool) {
++	if i := Index(s, sep); i >= 0 {
++		return s[:i], s[i+len(sep):], true
++	}
++	return s, nil, false
++}
+diff --git a/src/bytes/bytes_test.go b/src/bytes/bytes_test.go
+index 544ee46f90..538e613c8e 100644
+--- a/src/bytes/bytes_test.go
++++ b/src/bytes/bytes_test.go
+@@ -1565,6 +1565,29 @@ func TestEqualFold(t *testing.T) {
+ 	}
+ }
+ 
++var cutTests = []struct {
++	s, sep        string
++	before, after string
++	found         bool
++}{
++	{"abc", "b", "a", "c", true},
++	{"abc", "a", "", "bc", true},
++	{"abc", "c", "ab", "", true},
++	{"abc", "abc", "", "", true},
++	{"abc", "", "", "abc", true},
++	{"abc", "d", "abc", "", false},
++	{"", "d", "", "", false},
++	{"", "", "", "", true},
++}
++
++func TestCut(t *testing.T) {
++	for _, tt := range cutTests {
++		if before, after, found := Cut([]byte(tt.s), []byte(tt.sep)); string(before) != tt.before || string(after) != tt.after || found != tt.found {
++			t.Errorf("Cut(%q, %q) = %q, %q, %v, want %q, %q, %v", tt.s, tt.sep, before, after, found, tt.before, tt.after, tt.found)
++		}
++	}
++}
++
+ func TestBufferGrowNegative(t *testing.T) {
+ 	defer func() {
+ 		if err := recover(); err == nil {
+diff --git a/src/bytes/example_test.go b/src/bytes/example_test.go
+index ae93202b57..a1a6c2d292 100644
+--- a/src/bytes/example_test.go
++++ b/src/bytes/example_test.go
+@@ -92,36 +92,6 @@ func ExampleCompare_search() {
+ 	}
+ }
+ 
+-func ExampleTrimSuffix() {
+-	var b = []byte("Hello, goodbye, etc!")
+-	b = bytes.TrimSuffix(b, []byte("goodbye, etc!"))
+-	b = bytes.TrimSuffix(b, []byte("gopher"))
+-	b = append(b, bytes.TrimSuffix([]byte("world!"), []byte("x!"))...)
+-	os.Stdout.Write(b)
+-	// Output: Hello, world!
+-}
+-
+-func ExampleTrimPrefix() {
+-	var b = []byte("Goodbye,, world!")
+-	b = bytes.TrimPrefix(b, []byte("Goodbye,"))
+-	b = bytes.TrimPrefix(b, []byte("See ya,"))
+-	fmt.Printf("Hello%s", b)
+-	// Output: Hello, world!
+-}
+-
+-func ExampleFields() {
+-	fmt.Printf("Fields are: %q", bytes.Fields([]byte("  foo bar  baz   ")))
+-	// Output: Fields are: ["foo" "bar" "baz"]
+-}
+-
+-func ExampleFieldsFunc() {
+-	f := func(c rune) bool {
+-		return !unicode.IsLetter(c) && !unicode.IsNumber(c)
+-	}
+-	fmt.Printf("Fields are: %q", bytes.FieldsFunc([]byte("  foo1;bar2,baz3..."), f))
+-	// Output: Fields are: ["foo1" "bar2" "baz3"]
+-}
+-
+ func ExampleContains() {
+ 	fmt.Println(bytes.Contains([]byte("seafood"), []byte("foo")))
+ 	fmt.Println(bytes.Contains([]byte("seafood"), []byte("bar")))
+@@ -168,6 +138,22 @@ func ExampleCount() {
+ 	// 5
+ }
+ 
++func ExampleCut() {
++	show := func(s, sep string) {
++		before, after, found := bytes.Cut([]byte(s), []byte(sep))
++		fmt.Printf("Cut(%q, %q) = %q, %q, %v\n", s, sep, before, after, found)
++	}
++	show("Gopher", "Go")
++	show("Gopher", "ph")
++	show("Gopher", "er")
++	show("Gopher", "Badger")
++	// Output:
++	// Cut("Gopher", "Go") = "", "pher", true
++	// Cut("Gopher", "ph") = "Go", "er", true
++	// Cut("Gopher", "er") = "Goph", "", true
++	// Cut("Gopher", "Badger") = "Gopher", "", false
++}
++
+ func ExampleEqual() {
+ 	fmt.Println(bytes.Equal([]byte("Go"), []byte("Go")))
+ 	fmt.Println(bytes.Equal([]byte("Go"), []byte("C++")))
+@@ -181,6 +167,19 @@ func ExampleEqualFold() {
+ 	// Output: true
+ }
+ 
++func ExampleFields() {
++	fmt.Printf("Fields are: %q", bytes.Fields([]byte("  foo bar  baz   ")))
++	// Output: Fields are: ["foo" "bar" "baz"]
++}
++
++func ExampleFieldsFunc() {
++	f := func(c rune) bool {
++		return !unicode.IsLetter(c) && !unicode.IsNumber(c)
++	}
++	fmt.Printf("Fields are: %q", bytes.FieldsFunc([]byte("  foo1;bar2,baz3..."), f))
++	// Output: Fields are: ["foo1" "bar2" "baz3"]
++}
++
+ func ExampleHasPrefix() {
+ 	fmt.Println(bytes.HasPrefix([]byte("Gopher"), []byte("Go")))
+ 	fmt.Println(bytes.HasPrefix([]byte("Gopher"), []byte("C")))
+@@ -246,6 +245,12 @@ func ExampleIndexRune() {
+ 	// -1
+ }
+ 
++func ExampleJoin() {
++	s := [][]byte{[]byte("foo"), []byte("bar"), []byte("baz")}
++	fmt.Printf("%s", bytes.Join(s, []byte(", ")))
++	// Output: foo, bar, baz
++}
++
+ func ExampleLastIndex() {
+ 	fmt.Println(bytes.Index([]byte("go gopher"), []byte("go")))
+ 	fmt.Println(bytes.LastIndex([]byte("go gopher"), []byte("go")))
+@@ -286,10 +291,12 @@ func ExampleLastIndexFunc() {
+ 	// -1
+ }
+ 
+-func ExampleJoin() {
+-	s := [][]byte{[]byte("foo"), []byte("bar"), []byte("baz")}
+-	fmt.Printf("%s", bytes.Join(s, []byte(", ")))
+-	// Output: foo, bar, baz
++func ExampleReader_Len() {
++	fmt.Println(bytes.NewReader([]byte("Hi!")).Len())
++	fmt.Println(bytes.NewReader([]byte("こんにちは!")).Len())
++	// Output:
++	// 3
++	// 16
+ }
+ 
+ func ExampleRepeat() {
+@@ -399,20 +406,6 @@ func ExampleTrimFunc() {
+ 	// go-gopher!
+ }
+ 
+-func ExampleMap() {
+-	rot13 := func(r rune) rune {
+-		switch {
+-		case r >= 'A' && r <= 'Z':
+-			return 'A' + (r-'A'+13)%26
+-		case r >= 'a' && r <= 'z':
+-			return 'a' + (r-'a'+13)%26
+-		}
+-		return r
+-	}
+-	fmt.Printf("%s", bytes.Map(rot13, []byte("'Twas brillig and the slithy gopher...")))
+-	// Output: 'Gjnf oevyyvt naq gur fyvgul tbcure...
+-}
+-
+ func ExampleTrimLeft() {
+ 	fmt.Print(string(bytes.TrimLeft([]byte("453gopher8257"), "0123456789")))
+ 	// Output:
+@@ -429,11 +422,28 @@ func ExampleTrimLeftFunc() {
+ 	// go-gopher!567
+ }
+ 
++func ExampleTrimPrefix() {
++	var b = []byte("Goodbye,, world!")
++	b = bytes.TrimPrefix(b, []byte("Goodbye,"))
++	b = bytes.TrimPrefix(b, []byte("See ya,"))
++	fmt.Printf("Hello%s", b)
++	// Output: Hello, world!
++}
++
+ func ExampleTrimSpace() {
+ 	fmt.Printf("%s", bytes.TrimSpace([]byte(" \t\n a lone gopher \n\t\r\n")))
+ 	// Output: a lone gopher
+ }
+ 
++func ExampleTrimSuffix() {
++	var b = []byte("Hello, goodbye, etc!")
++	b = bytes.TrimSuffix(b, []byte("goodbye, etc!"))
++	b = bytes.TrimSuffix(b, []byte("gopher"))
++	b = append(b, bytes.TrimSuffix([]byte("world!"), []byte("x!"))...)
++	os.Stdout.Write(b)
++	// Output: Hello, world!
++}
++
+ func ExampleTrimRight() {
+ 	fmt.Print(string(bytes.TrimRight([]byte("453gopher8257"), "0123456789")))
+ 	// Output:
+@@ -450,21 +460,6 @@ func ExampleTrimRightFunc() {
+ 	// 1234go-gopher!
+ }
+ 
+-func ExampleToUpper() {
+-	fmt.Printf("%s", bytes.ToUpper([]byte("Gopher")))
+-	// Output: GOPHER
+-}
+-
+-func ExampleToUpperSpecial() {
+-	str := []byte("ahoj vývojári golang")
+-	totitle := bytes.ToUpperSpecial(unicode.AzeriCase, str)
+-	fmt.Println("Original : " + string(str))
+-	fmt.Println("ToUpper : " + string(totitle))
+-	// Output:
+-	// Original : ahoj vývojári golang
+-	// ToUpper : AHOJ VÝVOJÁRİ GOLANG
+-}
+-
+ func ExampleToLower() {
+ 	fmt.Printf("%s", bytes.ToLower([]byte("Gopher")))
+ 	// Output: gopher
+@@ -480,10 +475,17 @@ func ExampleToLowerSpecial() {
+ 	// ToLower : ahoj vývojári golang
+ }
+ 
+-func ExampleReader_Len() {
+-	fmt.Println(bytes.NewReader([]byte("Hi!")).Len())
+-	fmt.Println(bytes.NewReader([]byte("こんにちは!")).Len())
++func ExampleToUpper() {
++	fmt.Printf("%s", bytes.ToUpper([]byte("Gopher")))
++	// Output: GOPHER
++}
++
++func ExampleToUpperSpecial() {
++	str := []byte("ahoj vývojári golang")
++	totitle := bytes.ToUpperSpecial(unicode.AzeriCase, str)
++	fmt.Println("Original : " + string(str))
++	fmt.Println("ToUpper : " + string(totitle))
+ 	// Output:
+-	// 3
+-	// 16
++	// Original : ahoj vývojári golang
++	// ToUpper : AHOJ VÝVOJÁRİ GOLANG
+ }
+diff --git a/src/net/textproto/reader.go b/src/net/textproto/reader.go
+index c5b76c29d5..4299608d5a 100644
+--- a/src/net/textproto/reader.go
++++ b/src/net/textproto/reader.go
+@@ -493,8 +493,11 @@ func readMIMEHeader(r *Reader, maxMemory, maxHeaders int64) (MIMEHeader, error)
+ 	// large one ahead of time which we'll cut up into smaller
+ 	// slices. If this isn't big enough later, we allocate small ones.
+ 	var strs []string
+-	hint := r.upcomingHeaderNewlines()
++	hint := r.upcomingHeaderKeys()
+ 	if hint > 0 {
++		if hint > 1000 {
++			hint = 1000 // set a cap to avoid overallocation
++		}
+ 		strs = make([]string, hint)
+ 	}
+ 
+@@ -590,9 +593,11 @@ func mustHaveFieldNameColon(line []byte) error {
+ 	return nil
+ }
+ 
+-// upcomingHeaderNewlines returns an approximation of the number of newlines
++var nl = []byte("\n")
++
++// upcomingHeaderKeys returns an approximation of the number of keys
+ // that will be in this header. If it gets confused, it returns 0.
+-func (r *Reader) upcomingHeaderNewlines() (n int) {
++func (r *Reader) upcomingHeaderKeys() (n int) {
+ 	// Try to determine the 'hint' size.
+ 	r.R.Peek(1) // force a buffer load if empty
+ 	s := r.R.Buffered()
+@@ -600,17 +605,20 @@ func (r *Reader) upcomingHeaderNewlines() (n int) {
+ 		return
+ 	}
+ 	peek, _ := r.R.Peek(s)
+-	for len(peek) > 0 {
+-		i := bytes.IndexByte(peek, '\n')
+-		if i < 3 {
+-			// Not present (-1) or found within the next few bytes,
+-			// implying we're at the end ("\r\n\r\n" or "\n\n")
+-			return
++	for len(peek) > 0 && n < 1000 {
++		var line []byte
++		line, peek, _ = bytes.Cut(peek, nl)
++		if len(line) == 0 || (len(line) == 1 && line[0] == '\r') {
++			// Blank line separating headers from the body.
++			break
++		}
++		if line[0] == ' ' || line[0] == '\t' {
++			// Folded continuation of the previous line.
++			continue
+ 		}
+ 		n++
+-		peek = peek[i+1:]
+ 	}
+-	return
++	return n
+ }
+ 
+ // CanonicalMIMEHeaderKey returns the canonical format of the
+diff --git a/src/net/textproto/reader_test.go b/src/net/textproto/reader_test.go
+index 3124d438fa..3ae0de1353 100644
+--- a/src/net/textproto/reader_test.go
++++ b/src/net/textproto/reader_test.go
+@@ -9,6 +9,7 @@ import (
+ 	"bytes"
+ 	"io"
+ 	"reflect"
++	"runtime"
+ 	"strings"
+ 	"testing"
+ )
+@@ -127,6 +128,42 @@ func TestReadMIMEHeaderSingle(t *testing.T) {
+ 	}
+ }
+ 
++// TestReaderUpcomingHeaderKeys is testing an internal function, but it's very
++// difficult to test well via the external API.
++func TestReaderUpcomingHeaderKeys(t *testing.T) {
++	for _, test := range []struct {
++		input string
++		want  int
++	}{{
++		input: "",
++		want:  0,
++	}, {
++		input: "A: v",
++		want:  1,
++	}, {
++		input: "A: v\r\nB: v\r\n",
++		want:  2,
++	}, {
++		input: "A: v\nB: v\n",
++		want:  2,
++	}, {
++		input: "A: v\r\n  continued\r\n  still continued\r\nB: v\r\n\r\n",
++		want:  2,
++	}, {
++		input: "A: v\r\n\r\nB: v\r\nC: v\r\n",
++		want:  1,
++	}, {
++		input: "A: v" + strings.Repeat("\n", 1000),
++		want:  1,
++	}} {
++		r := reader(test.input)
++		got := r.upcomingHeaderKeys()
++		if test.want != got {
++			t.Fatalf("upcomingHeaderKeys(%q): %v; want %v", test.input, got, test.want)
++		}
++	}
++}
++
+ func TestReadMIMEHeaderNoKey(t *testing.T) {
+ 	r := reader(": bar\ntest-1: 1\n\n")
+ 	m, err := r.ReadMIMEHeader()
+@@ -223,6 +260,28 @@ func TestReadMIMEHeaderTrimContinued(t *testing.T) {
+ 	}
+ }
+ 
++// Test that reading a header doesn't overallocate. Issue 58975.
++func TestReadMIMEHeaderAllocations(t *testing.T) {
++	var totalAlloc uint64
++	const count = 200
++	for i := 0; i < count; i++ {
++		r := reader("A: b\r\n\r\n" + strings.Repeat("\n", 4096))
++		var m1, m2 runtime.MemStats
++		runtime.ReadMemStats(&m1)
++		_, err := r.ReadMIMEHeader()
++		if err != nil {
++			t.Fatalf("ReadMIMEHeader: %v", err)
++		}
++		runtime.ReadMemStats(&m2)
++		totalAlloc += m2.TotalAlloc - m1.TotalAlloc
++	}
++	// 32k is large and we actually allocate substantially less,
++	// but prior to the fix for #58975 we allocated ~400k in this case.
++	if got, want := totalAlloc/count, uint64(32768); got > want {
++		t.Fatalf("ReadMIMEHeader allocated %v bytes, want < %v", got, want)
++	}
++}
++
+ type readResponseTest struct {
+ 	in       string
+ 	inCode   int
+-- 
+2.39.1
+
