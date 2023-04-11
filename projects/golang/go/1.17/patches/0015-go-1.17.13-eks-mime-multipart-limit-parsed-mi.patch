@@ -1,4 +1,4 @@
-From fd0deb77bbc6c0f55c6147acd4f368efc333bdf1 Mon Sep 17 00:00:00 2001
+From 1909db745e3668a9b8d13dcecba03a205519cfeb Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Mon, 20 Mar 2023 10:43:19 -0700
 Subject: [PATCH] [release-branch.go1.19] mime/multipart: limit parsed mime
@@ -43,44 +43,30 @@ Auto-Submit: Michael Knyszek <mknyszek@google.com>
 TryBot-Result: Gopher Robot <gobot@golang.org>
 Reviewed-by: Matthew Dempsky <mdempsky@google.com>
 ---
- src/mime/multipart/formdata.go       | 19 ++++++++-
- src/mime/multipart/formdata_test.go  | 61 ++++++++++++++++++++++++++++
- src/mime/multipart/multipart.go      | 35 +++++++++++-----
- src/mime/multipart/readmimeheader.go |  2 +-
- src/net/textproto/reader.go          | 19 +++++----
- 5 files changed, 117 insertions(+), 19 deletions(-)
+ src/mime/multipart/formdata.go       |  12 ++-
+ src/mime/multipart/formdata_test.go  | 110 +++++++++++++++++++++++++++
+ src/mime/multipart/multipart.go      |  34 ++++++---
+ src/mime/multipart/readmimeheader.go |   2 +-
+ src/net/textproto/reader.go          |  23 ++++--
+ 5 files changed, 163 insertions(+), 18 deletions(-)
 
 diff --git a/src/mime/multipart/formdata.go b/src/mime/multipart/formdata.go
-index a7231c71ac..451b82bd55 100644
+index d6898c6ce1..92b58d3e84 100644
 --- a/src/mime/multipart/formdata.go
 +++ b/src/mime/multipart/formdata.go
-@@ -11,6 +11,7 @@ import (
- 	"math"
- 	"net/textproto"
- 	"os"
-+	"strconv"
- )
- 
- // ErrMessageTooLarge is returned by ReadForm if the message form
-@@ -40,6 +41,15 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
+@@ -40,6 +40,9 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
  	numDiskFiles := 0
  	multipartFiles := "distinct"
  	combineFiles := multipartFiles != "distinct"
 +	maxParts := 1000
-+	multipartMaxParts := godebug.Get("multipartmaxparts")
-+	if multipartMaxParts != "" {
-+		if v, err := strconv.Atoi(multipartMaxParts); err == nil && v >= 0 {
-+			maxParts = v
-+		}
-+	}
 +	maxHeaders := maxMIMEHeaders()
 +
  	defer func() {
  		if file != nil {
  			if cerr := file.Close(); err == nil {
-@@ -85,13 +95,17 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
+@@ -84,13 +87,17 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
+ 		}
  	}
- 	var copyBuf []byte
  	for {
 -		p, err := r.nextPart(false, maxMemoryBytes)
 +		p, err := r.nextPart(false, maxMemoryBytes, maxHeaders)
@@ -97,7 +83,7 @@ index a7231c71ac..451b82bd55 100644
  
  		name := p.FormName()
  		if name == "" {
-@@ -135,6 +149,9 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
+@@ -130,6 +137,9 @@ func (r *Reader) readForm(maxMemory int64) (_ *Form, err error) {
  		if maxMemoryBytes < 0 {
  			return nil, ErrMessageTooLarge
  		}
@@ -108,13 +94,14 @@ index a7231c71ac..451b82bd55 100644
  			Filename: filename,
  			Header:   p.Header,
 diff --git a/src/mime/multipart/formdata_test.go b/src/mime/multipart/formdata_test.go
-index 5b6638ea6f..f233316df3 100644
+index 43475c3cd7..7d48c37b07 100644
 --- a/src/mime/multipart/formdata_test.go
 +++ b/src/mime/multipart/formdata_test.go
-@@ -361,6 +361,67 @@ func testReadFormManyFiles(t *testing.T, distinct bool) {
+@@ -369,3 +369,113 @@ func testReadFormManyFiles(t *testing.T, distinct bool) {
+ 		t.Fatalf("temp dir contains %v files; want 0", len(names))
  	}
  }
- 
++
 +func TestReadFormLimits(t *testing.T) {
 +	for _, test := range []struct {
 +		values           int
@@ -131,10 +118,10 @@ index 5b6638ea6f..f233316df3 100644
 +		{files: 1001, wantErr: ErrMessageTooLarge},
 +		{files: 1, extraKeysPerFile: 9998}, // plus Content-Disposition and Content-Type
 +		{files: 1, extraKeysPerFile: 10000, wantErr: ErrMessageTooLarge},
-+		{godebug: "multipartmaxparts=100", values: 100},
-+		{godebug: "multipartmaxparts=100", values: 101, wantErr: ErrMessageTooLarge},
-+		{godebug: "multipartmaxheaders=100", files: 2, extraKeysPerFile: 48},
-+		{godebug: "multipartmaxheaders=100", files: 2, extraKeysPerFile: 50, wantErr: ErrMessageTooLarge},
++// 		{godebug: "multipartmaxparts=100", values: 100},
++// 		{godebug: "multipartmaxparts=100", values: 101, wantErr: ErrMessageTooLarge},
++// 		{godebug: "multipartmaxheaders=100", files: 2, extraKeysPerFile: 48},
++// 		{godebug: "multipartmaxheaders=100", files: 2, extraKeysPerFile: 50, wantErr: ErrMessageTooLarge},
 +	} {
 +		name := fmt.Sprintf("values=%v/files=%v/extraKeysPerFile=%v", test.values, test.files, test.extraKeysPerFile)
 +		if test.godebug != "" {
@@ -176,20 +163,59 @@ index 5b6638ea6f..f233316df3 100644
 +	}
 +}
 +
- func BenchmarkReadForm(b *testing.B) {
- 	for _, test := range []struct {
- 		name string
++func BenchmarkReadForm(b *testing.B) {
++	for _, test := range []struct {
++		name string
++		form func(fw *Writer, count int)
++	}{{
++		name: "fields",
++		form: func(fw *Writer, count int) {
++			for i := 0; i < count; i++ {
++				w, _ := fw.CreateFormField(fmt.Sprintf("field%v", i))
++				fmt.Fprintf(w, "value %v", i)
++			}
++		},
++	}, {
++		name: "files",
++		form: func(fw *Writer, count int) {
++			for i := 0; i < count; i++ {
++				w, _ := fw.CreateFormFile(fmt.Sprintf("field%v", i), fmt.Sprintf("file%v", i))
++				fmt.Fprintf(w, "value %v", i)
++			}
++		},
++	}} {
++		b.Run(test.name, func(b *testing.B) {
++			for _, maxMemory := range []int64{
++				0,
++				1 << 20,
++			} {
++				var buf bytes.Buffer
++				fw := NewWriter(&buf)
++				test.form(fw, 10)
++				if err := fw.Close(); err != nil {
++					b.Fatal(err)
++				}
++				b.Run(fmt.Sprintf("maxMemory=%v", maxMemory), func(b *testing.B) {
++					b.ReportAllocs()
++					for i := 0; i < b.N; i++ {
++						fr := NewReader(bytes.NewReader(buf.Bytes()), fw.Boundary())
++						form, err := fr.ReadForm(maxMemory)
++						if err != nil {
++							b.Fatal(err)
++						}
++						form.RemoveAll()
++					}
++
++				})
++			}
++		})
++	}
++}
 diff --git a/src/mime/multipart/multipart.go b/src/mime/multipart/multipart.go
-index 19fe0ea019..bc5096f018 100644
+index 19fe0ea019..e29fbe33ec 100644
 --- a/src/mime/multipart/multipart.go
 +++ b/src/mime/multipart/multipart.go
-@@ -16,11 +16,13 @@ import (
- 	"bufio"
- 	"bytes"
- 	"fmt"
-+	"internal/godebug"
- 	"io"
- 	"mime"
+@@ -21,6 +21,7 @@ import (
  	"mime/quotedprintable"
  	"net/textproto"
  	"path/filepath"
@@ -197,7 +223,7 @@ index 19fe0ea019..bc5096f018 100644
  	"strings"
  )
  
-@@ -128,12 +130,12 @@ func (r *stickyErrorReader) Read(p []byte) (n int, _ error) {
+@@ -128,12 +129,12 @@ func (r *stickyErrorReader) Read(p []byte) (n int, _ error) {
  	return n, r.err
  }
  
@@ -212,7 +238,7 @@ index 19fe0ea019..bc5096f018 100644
  		return nil, err
  	}
  	bp.r = partReader{bp}
-@@ -149,11 +151,11 @@ func newPart(mr *Reader, rawPart bool, maxMIMEHeaderSize int64) (*Part, error) {
+@@ -149,11 +150,11 @@ func newPart(mr *Reader, rawPart bool, maxMIMEHeaderSize int64) (*Part, error) {
  	return bp, nil
  }
  
@@ -228,7 +254,7 @@ index 19fe0ea019..bc5096f018 100644
  	}
  	// TODO: Add a distinguishable error to net/textproto.
  	if err != nil && err.Error() == "message too large" {
-@@ -313,6 +315,19 @@ type Reader struct {
+@@ -313,6 +314,19 @@ type Reader struct {
  // including header keys, values, and map overhead.
  const maxMIMEHeaderSize = 10 << 20
  
@@ -236,7 +262,7 @@ index 19fe0ea019..bc5096f018 100644
 +	// multipartMaxHeaders is the maximum number of header entries NextPart will return,
 +	// as well as the maximum combined total of header entries Reader.ReadForm will return
 +	// in FileHeaders.
-+	multipartMaxHeaders := godebug.Get("multipartmaxheaders")
++	multipartMaxHeaders := "distinct"
 +	if multipartMaxHeaders != "" {
 +		if v, err := strconv.ParseInt(multipartMaxHeaders, 10, 64); err == nil && v >= 0 {
 +			return v
@@ -248,7 +274,7 @@ index 19fe0ea019..bc5096f018 100644
  // NextPart returns the next part in the multipart or an error.
  // When there are no more parts, the error io.EOF is returned.
  //
-@@ -320,7 +335,7 @@ const maxMIMEHeaderSize = 10 << 20
+@@ -320,7 +334,7 @@ const maxMIMEHeaderSize = 10 << 20
  // has a value of "quoted-printable", that header is instead
  // hidden and the body is transparently decoded during Read calls.
  func (r *Reader) NextPart() (*Part, error) {
@@ -257,7 +283,7 @@ index 19fe0ea019..bc5096f018 100644
  }
  
  // NextRawPart returns the next part in the multipart or an error.
-@@ -329,10 +344,10 @@ func (r *Reader) NextPart() (*Part, error) {
+@@ -329,10 +343,10 @@ func (r *Reader) NextPart() (*Part, error) {
  // Unlike NextPart, it does not have special handling for
  // "Content-Transfer-Encoding: quoted-printable".
  func (r *Reader) NextRawPart() (*Part, error) {
@@ -270,7 +296,7 @@ index 19fe0ea019..bc5096f018 100644
  	if r.currentPart != nil {
  		r.currentPart.Close()
  	}
-@@ -357,7 +372,7 @@ func (r *Reader) nextPart(rawPart bool, maxMIMEHeaderSize int64) (*Part, error)
+@@ -357,7 +371,7 @@ func (r *Reader) nextPart(rawPart bool, maxMIMEHeaderSize int64) (*Part, error)
  
  		if r.isBoundaryDelimiterLine(line) {
  			r.partsRead++
@@ -290,7 +316,7 @@ index 6836928c9e..25aa6e2092 100644
 -func readMIMEHeader(r *textproto.Reader, lim int64) (textproto.MIMEHeader, error)
 +func readMIMEHeader(r *textproto.Reader, maxMemory, maxHeaders int64) (textproto.MIMEHeader, error)
 diff --git a/src/net/textproto/reader.go b/src/net/textproto/reader.go
-index 0951a05c73..c5b76c29d5 100644
+index 83db3b21ea..c5b76c29d5 100644
 --- a/src/net/textproto/reader.go
 +++ b/src/net/textproto/reader.go
 @@ -483,12 +483,12 @@ func (r *Reader) ReadDotLines() ([]string, error) {
@@ -308,16 +334,20 @@ index 0951a05c73..c5b76c29d5 100644
  	// Avoid lots of small slice allocations later by allocating one
  	// large one ahead of time which we'll cut up into smaller
  	// slices. If this isn't big enough later, we allocate small ones.
-@@ -503,7 +503,7 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
- 	// Account for 400 bytes of overhead for the MIMEHeader, plus 200 bytes per entry.
- 	// Benchmarking map creation as of go1.20, a one-entry MIMEHeader is 416 bytes and large
- 	// MIMEHeaders average about 200 bytes per entry.
--	lim -= 400
-+	maxMemory -= 400
- 	const mapEntryOverhead = 200
+@@ -500,6 +500,12 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
  
+ 	m := make(MIMEHeader, hint)
+ 
++	// Account for 400 bytes of overhead for the MIMEHeader, plus 200 bytes per entry.
++	// Benchmarking map creation as of go1.20, a one-entry MIMEHeader is 416 bytes and large
++	// MIMEHeaders average about 200 bytes per entry.
++	maxMemory -= 400
++	const mapEntryOverhead = 200
++
  	// The first line cannot start with a leading space.
-@@ -535,6 +535,11 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
+ 	if buf, err := r.R.Peek(1); err == nil && (buf[0] == ' ' || buf[0] == '\t') {
+ 		line, err := r.readLineSlice()
+@@ -529,6 +535,11 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
  			continue
  		}
  
@@ -329,12 +359,12 @@ index 0951a05c73..c5b76c29d5 100644
  		// Skip initial spaces in value.
  		i++ // skip colon
  		for i < len(kv) && (kv[i] == ' ' || kv[i] == '\t') {
-@@ -544,11 +549,11 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
+@@ -538,11 +549,11 @@ func readMIMEHeader(r *Reader, lim int64) (MIMEHeader, error) {
  
  		vv := m[key]
  		if vv == nil {
 -			lim -= int64(len(key))
--			lim -= mapEntryOverhead
+-			lim -= 100 // map entry overhead
 +			maxMemory -= int64(len(key))
 +			maxMemory -= mapEntryOverhead
  		}
