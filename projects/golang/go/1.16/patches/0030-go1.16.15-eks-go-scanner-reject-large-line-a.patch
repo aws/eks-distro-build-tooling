@@ -1,4 +1,4 @@
-From 1dae376696b7bf07e52dc289223437b37c137745 Mon Sep 17 00:00:00 2001
+From 0483748c540114615432edda996416ab0a98324f Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 22 Mar 2023 09:33:22 -0700
 Subject: [PATCH] [release-branch.go1.19] go/scanner: reject large line and
@@ -27,15 +27,15 @@ TryBot-Result: Gopher Robot <gobot@golang.org>
 Run-TryBot: Michael Knyszek <mknyszek@google.com>
 Auto-Submit: Michael Knyszek <mknyszek@google.com>
 ---
- src/go/parser/parser_test.go | 17 +++++++++++++++++
+ src/go/parser/parser_test.go | 16 ++++++++++++++++
  src/go/scanner/scanner.go    |  7 +++++--
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ 2 files changed, 21 insertions(+), 2 deletions(-)
 
 diff --git a/src/go/parser/parser_test.go b/src/go/parser/parser_test.go
-index a4f882d368..46d6320d26 100644
+index a4f882d368..6f812b7d3e 100644
 --- a/src/go/parser/parser_test.go
 +++ b/src/go/parser/parser_test.go
-@@ -577,3 +577,20 @@ type x int // comment
+@@ -577,3 +577,19 @@ type x int // comment
  		t.Errorf("got %q, want %q", comment, "// comment")
  	}
  }
@@ -55,7 +55,6 @@ index a4f882d368..46d6320d26 100644
 +		}
 +	}
 +}
-+>>>>>>> 126a1d02da ([release-branch.go1.19] go/scanner: reject large line and column numbers in //line directives)
 diff --git a/src/go/scanner/scanner.go b/src/go/scanner/scanner.go
 index 00fe2dc0b1..d4de23db6a 100644
 --- a/src/go/scanner/scanner.go
