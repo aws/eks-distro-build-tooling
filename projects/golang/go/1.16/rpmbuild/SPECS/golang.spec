@@ -181,6 +181,7 @@ Patch26:       0026-go-1.16.15-eks-update-bundled-golang-org.patch
 Patch27:       0027-go-1.16.15-eks-path-filepath-do-not-clean-relative-path.patch
 Patch28:       0028-go-1.16.15-eks-multipart-limit-memory-inode-consumption.patch
 Patch29:       0029-go-1.16.15-eks-replace-all-usages-of-BytesOrPanic.patch
+Patch30:       0030-go1.16.15-eks-go-scanner-reject-large-line-a.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -562,6 +563,9 @@ fi
 %endif
 
 %changelog
+* Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.16.15-4
+- Includes security fix for CVE-2023-24537
+
 * Mon Feb 20 2023 Sajia Zafreen <szafreen@amazon.com> - 1.16.15-4
 - Includes security fix for CVE-2022-41722
 - Includes security fix for CVE-2022-41723
