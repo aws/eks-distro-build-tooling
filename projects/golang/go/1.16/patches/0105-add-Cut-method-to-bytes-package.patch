@@ -1,0 +1,278 @@
+From d0cbeeb0d559e8b99007a7d2a1b5a4e2769d2221 Mon Sep 17 00:00:00 2001
+From: Bhavitha <106284071+bhavi-koduru@users.noreply.github.com>
+Date: Wed, 12 Apr 2023 08:43:26 -0700
+Subject: [PATCH 1/2] add Cut method to bytes package
+
+---
+ src/bytes/bytes.go        |  13 ++++
+ src/bytes/bytes_test.go   |  23 +++++++
+ src/bytes/example_test.go | 138 +++++++++++++++++++-------------------
+ 3 files changed, 106 insertions(+), 68 deletions(-)
+
+diff --git a/src/bytes/bytes.go b/src/bytes/bytes.go
+index ce52649f13..ec9a2eb693 100644
+--- a/src/bytes/bytes.go
++++ b/src/bytes/bytes.go
+@@ -1174,3 +1174,16 @@ func Index(s, sep []byte) int {
+ 	}
+ 	return -1
+ }
++
++// Cut slices s around the first instance of sep,
++// returning the text before and after sep.
++// The found result reports whether sep appears in s.
++// If sep does not appear in s, cut returns s, "", false.
++//
++// Cut returns slices of the original slice s, not copies.
++func Cut(s, sep []byte) (before, after []byte, found bool) {
++	if i := Index(s, sep); i >= 0 {
++		return s[:i], s[i+len(sep):], true
++	}
++	return s, nil, false
++}
+diff --git a/src/bytes/bytes_test.go b/src/bytes/bytes_test.go
+index 544ee46f90..538e613c8e 100644
+--- a/src/bytes/bytes_test.go
++++ b/src/bytes/bytes_test.go
+@@ -1565,6 +1565,29 @@ func TestEqualFold(t *testing.T) {
+ 	}
+ }
+ 
++var cutTests = []struct {
++	s, sep        string
++	before, after string
++	found         bool
++}{
++	{"abc", "b", "a", "c", true},
++	{"abc", "a", "", "bc", true},
++	{"abc", "c", "ab", "", true},
++	{"abc", "abc", "", "", true},
++	{"abc", "", "", "abc", true},
++	{"abc", "d", "abc", "", false},
++	{"", "d", "", "", false},
++	{"", "", "", "", true},
++}
++
++func TestCut(t *testing.T) {
++	for _, tt := range cutTests {
++		if before, after, found := Cut([]byte(tt.s), []byte(tt.sep)); string(before) != tt.before || string(after) != tt.after || found != tt.found {
++			t.Errorf("Cut(%q, %q) = %q, %q, %v, want %q, %q, %v", tt.s, tt.sep, before, after, found, tt.before, tt.after, tt.found)
++		}
++	}
++}
++
+ func TestBufferGrowNegative(t *testing.T) {
+ 	defer func() {
+ 		if err := recover(); err == nil {
+diff --git a/src/bytes/example_test.go b/src/bytes/example_test.go
+index ae93202b57..a1a6c2d292 100644
+--- a/src/bytes/example_test.go
++++ b/src/bytes/example_test.go
+@@ -92,36 +92,6 @@ func ExampleCompare_search() {
+ 	}
+ }
+ 
+-func ExampleTrimSuffix() {
+-	var b = []byte("Hello, goodbye, etc!")
+-	b = bytes.TrimSuffix(b, []byte("goodbye, etc!"))
+-	b = bytes.TrimSuffix(b, []byte("gopher"))
+-	b = append(b, bytes.TrimSuffix([]byte("world!"), []byte("x!"))...)
+-	os.Stdout.Write(b)
+-	// Output: Hello, world!
+-}
+-
+-func ExampleTrimPrefix() {
+-	var b = []byte("Goodbye,, world!")
+-	b = bytes.TrimPrefix(b, []byte("Goodbye,"))
+-	b = bytes.TrimPrefix(b, []byte("See ya,"))
+-	fmt.Printf("Hello%s", b)
+-	// Output: Hello, world!
+-}
+-
+-func ExampleFields() {
+-	fmt.Printf("Fields are: %q", bytes.Fields([]byte("  foo bar  baz   ")))
+-	// Output: Fields are: ["foo" "bar" "baz"]
+-}
+-
+-func ExampleFieldsFunc() {
+-	f := func(c rune) bool {
+-		return !unicode.IsLetter(c) && !unicode.IsNumber(c)
+-	}
+-	fmt.Printf("Fields are: %q", bytes.FieldsFunc([]byte("  foo1;bar2,baz3..."), f))
+-	// Output: Fields are: ["foo1" "bar2" "baz3"]
+-}
+-
+ func ExampleContains() {
+ 	fmt.Println(bytes.Contains([]byte("seafood"), []byte("foo")))
+ 	fmt.Println(bytes.Contains([]byte("seafood"), []byte("bar")))
+@@ -168,6 +138,22 @@ func ExampleCount() {
+ 	// 5
+ }
+ 
++func ExampleCut() {
++	show := func(s, sep string) {
++		before, after, found := bytes.Cut([]byte(s), []byte(sep))
++		fmt.Printf("Cut(%q, %q) = %q, %q, %v\n", s, sep, before, after, found)
++	}
++	show("Gopher", "Go")
++	show("Gopher", "ph")
++	show("Gopher", "er")
++	show("Gopher", "Badger")
++	// Output:
++	// Cut("Gopher", "Go") = "", "pher", true
++	// Cut("Gopher", "ph") = "Go", "er", true
++	// Cut("Gopher", "er") = "Goph", "", true
++	// Cut("Gopher", "Badger") = "Gopher", "", false
++}
++
+ func ExampleEqual() {
+ 	fmt.Println(bytes.Equal([]byte("Go"), []byte("Go")))
+ 	fmt.Println(bytes.Equal([]byte("Go"), []byte("C++")))
+@@ -181,6 +167,19 @@ func ExampleEqualFold() {
+ 	// Output: true
+ }
+ 
++func ExampleFields() {
++	fmt.Printf("Fields are: %q", bytes.Fields([]byte("  foo bar  baz   ")))
++	// Output: Fields are: ["foo" "bar" "baz"]
++}
++
++func ExampleFieldsFunc() {
++	f := func(c rune) bool {
++		return !unicode.IsLetter(c) && !unicode.IsNumber(c)
++	}
++	fmt.Printf("Fields are: %q", bytes.FieldsFunc([]byte("  foo1;bar2,baz3..."), f))
++	// Output: Fields are: ["foo1" "bar2" "baz3"]
++}
++
+ func ExampleHasPrefix() {
+ 	fmt.Println(bytes.HasPrefix([]byte("Gopher"), []byte("Go")))
+ 	fmt.Println(bytes.HasPrefix([]byte("Gopher"), []byte("C")))
+@@ -246,6 +245,12 @@ func ExampleIndexRune() {
+ 	// -1
+ }
+ 
++func ExampleJoin() {
++	s := [][]byte{[]byte("foo"), []byte("bar"), []byte("baz")}
++	fmt.Printf("%s", bytes.Join(s, []byte(", ")))
++	// Output: foo, bar, baz
++}
++
+ func ExampleLastIndex() {
+ 	fmt.Println(bytes.Index([]byte("go gopher"), []byte("go")))
+ 	fmt.Println(bytes.LastIndex([]byte("go gopher"), []byte("go")))
+@@ -286,10 +291,12 @@ func ExampleLastIndexFunc() {
+ 	// -1
+ }
+ 
+-func ExampleJoin() {
+-	s := [][]byte{[]byte("foo"), []byte("bar"), []byte("baz")}
+-	fmt.Printf("%s", bytes.Join(s, []byte(", ")))
+-	// Output: foo, bar, baz
++func ExampleReader_Len() {
++	fmt.Println(bytes.NewReader([]byte("Hi!")).Len())
++	fmt.Println(bytes.NewReader([]byte("こんにちは!")).Len())
++	// Output:
++	// 3
++	// 16
+ }
+ 
+ func ExampleRepeat() {
+@@ -399,20 +406,6 @@ func ExampleTrimFunc() {
+ 	// go-gopher!
+ }
+ 
+-func ExampleMap() {
+-	rot13 := func(r rune) rune {
+-		switch {
+-		case r >= 'A' && r <= 'Z':
+-			return 'A' + (r-'A'+13)%26
+-		case r >= 'a' && r <= 'z':
+-			return 'a' + (r-'a'+13)%26
+-		}
+-		return r
+-	}
+-	fmt.Printf("%s", bytes.Map(rot13, []byte("'Twas brillig and the slithy gopher...")))
+-	// Output: 'Gjnf oevyyvt naq gur fyvgul tbcure...
+-}
+-
+ func ExampleTrimLeft() {
+ 	fmt.Print(string(bytes.TrimLeft([]byte("453gopher8257"), "0123456789")))
+ 	// Output:
+@@ -429,11 +422,28 @@ func ExampleTrimLeftFunc() {
+ 	// go-gopher!567
+ }
+ 
++func ExampleTrimPrefix() {
++	var b = []byte("Goodbye,, world!")
++	b = bytes.TrimPrefix(b, []byte("Goodbye,"))
++	b = bytes.TrimPrefix(b, []byte("See ya,"))
++	fmt.Printf("Hello%s", b)
++	// Output: Hello, world!
++}
++
+ func ExampleTrimSpace() {
+ 	fmt.Printf("%s", bytes.TrimSpace([]byte(" \t\n a lone gopher \n\t\r\n")))
+ 	// Output: a lone gopher
+ }
+ 
++func ExampleTrimSuffix() {
++	var b = []byte("Hello, goodbye, etc!")
++	b = bytes.TrimSuffix(b, []byte("goodbye, etc!"))
++	b = bytes.TrimSuffix(b, []byte("gopher"))
++	b = append(b, bytes.TrimSuffix([]byte("world!"), []byte("x!"))...)
++	os.Stdout.Write(b)
++	// Output: Hello, world!
++}
++
+ func ExampleTrimRight() {
+ 	fmt.Print(string(bytes.TrimRight([]byte("453gopher8257"), "0123456789")))
+ 	// Output:
+@@ -450,21 +460,6 @@ func ExampleTrimRightFunc() {
+ 	// 1234go-gopher!
+ }
+ 
+-func ExampleToUpper() {
+-	fmt.Printf("%s", bytes.ToUpper([]byte("Gopher")))
+-	// Output: GOPHER
+-}
+-
+-func ExampleToUpperSpecial() {
+-	str := []byte("ahoj vývojári golang")
+-	totitle := bytes.ToUpperSpecial(unicode.AzeriCase, str)
+-	fmt.Println("Original : " + string(str))
+-	fmt.Println("ToUpper : " + string(totitle))
+-	// Output:
+-	// Original : ahoj vývojári golang
+-	// ToUpper : AHOJ VÝVOJÁRİ GOLANG
+-}
+-
+ func ExampleToLower() {
+ 	fmt.Printf("%s", bytes.ToLower([]byte("Gopher")))
+ 	// Output: gopher
+@@ -480,10 +475,17 @@ func ExampleToLowerSpecial() {
+ 	// ToLower : ahoj vývojári golang
+ }
+ 
+-func ExampleReader_Len() {
+-	fmt.Println(bytes.NewReader([]byte("Hi!")).Len())
+-	fmt.Println(bytes.NewReader([]byte("こんにちは!")).Len())
++func ExampleToUpper() {
++	fmt.Printf("%s", bytes.ToUpper([]byte("Gopher")))
++	// Output: GOPHER
++}
++
++func ExampleToUpperSpecial() {
++	str := []byte("ahoj vývojári golang")
++	totitle := bytes.ToUpperSpecial(unicode.AzeriCase, str)
++	fmt.Println("Original : " + string(str))
++	fmt.Println("ToUpper : " + string(totitle))
+ 	// Output:
+-	// 3
+-	// 16
++	// Original : ahoj vývojári golang
++	// ToUpper : AHOJ VÝVOJÁRİ GOLANG
+ }
+-- 
+2.39.1
+

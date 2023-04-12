@@ -185,6 +185,8 @@ Patch30:       0030-go1.16.15-eks-go-scanner-reject-large-line-a.patch
 Patch31:       0031-go1.16.15-eks-mime-multipart-avoid-excessive.patch
 Patch32:       0032-go1.16.15-eks-net-textproto-mime-multipart-i.patch
 Patch33:       0033-go1.16.15-eks-mime-multipart-limit-parsed-mi.patch
+Patch105:      0105-add-Cut-method-to-bytes-package.patch
+Patch34:       0034-go1.16.15-eks-net-textproto-avoid-overpredic.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
