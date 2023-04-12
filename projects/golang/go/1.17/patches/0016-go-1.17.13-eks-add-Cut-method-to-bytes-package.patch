@@ -1,14 +1,21 @@
-From 52e08e20b761edc0121d1d94dad26d163c2e669c Mon Sep 17 00:00:00 2001
+From 83c928d95789d65a21ed964226a5018d8a113c8d Mon Sep 17 00:00:00 2001
 From: Bhavitha <106284071+bhavi-koduru@users.noreply.github.com>
-Date: Tue, 11 Apr 2023 15:50:38 -0700
-Subject: [PATCH 1/2] add Cut method to bytes package
+Date: Tue, 11 Apr 2023 18:56:11 -0700
+Subject: [PATCH] add Cut method to bytes package
 
 ---
+ api/next.txt              |   1 +
  src/bytes/bytes.go        |  13 ++++
  src/bytes/bytes_test.go   |  23 +++++++
  src/bytes/example_test.go | 138 +++++++++++++++++++-------------------
- 3 files changed, 106 insertions(+), 68 deletions(-)
+ 4 files changed, 107 insertions(+), 68 deletions(-)
 
+diff --git a/api/next.txt b/api/next.txt
+index e69de29bb2..05de001db6 100644
+--- a/api/next.txt
++++ b/api/next.txt
+@@ -0,0 +1 @@
++pkg bytes, func Cut([]uint8, []uint8) ([]uint8, []uint8, bool)
 diff --git a/src/bytes/bytes.go b/src/bytes/bytes.go
 index ce52649f13..ec9a2eb693 100644
 --- a/src/bytes/bytes.go
