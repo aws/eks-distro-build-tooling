@@ -4,6 +4,18 @@ Date: Mon, 20 Mar 2023 10:43:19 -0700
 Subject: [PATCH] [release-branch.go1.19] mime/multipart: limit parsed mime
  message sizes
 
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 5 Apr 2023
+Backported By: kodurub@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/7917b5f31204528ea72e0629f0b7d52b35b27538
+
+This fix uses godebug to fetch the value of `multipartMaxHeaders` in `maxMIMEHeaders` method. We set  this value to `default` since
+`GODEBUG` is not backported.
+In `src/mime/multipart/formdata_test.go`, `TestReadFormLimits` is also modified such that the usage of godebug is eliminated.
+Removed unused packages in these files accordingly.
+
 The parsed forms of MIME headers and multipart forms can consume
 substantially more memory than the size of the input data.
 A malicious input containing a very large number of headers or

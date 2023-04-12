@@ -570,6 +570,8 @@ fi
 %changelog
 * Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.16.15-4
 - Includes security fix for CVE-2023-24537
+- Includes security fix for CVE-2023-24534
+- Includes security fix for CVE-2023-24536
 
 * Mon Feb 20 2023 Sajia Zafreen <szafreen@amazon.com> - 1.16.15-4
 - Includes security fix for CVE-2022-41722

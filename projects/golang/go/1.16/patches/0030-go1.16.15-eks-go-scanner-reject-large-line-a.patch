@@ -4,6 +4,13 @@ Date: Wed, 22 Mar 2023 09:33:22 -0700
 Subject: [PATCH] [release-branch.go1.19] go/scanner: reject large line and
  column numbers in //line directives
 
+# AWS EKS
+Backported To: go-1.16.15-eks
+Backported On: Wed, 5 Apr 2023
+Backported By: kodurub@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/126a1d02da82f93ede7ce0bd8d3c51ef627f2104
+
 Setting a large line or column number using a //line directive can cause
 integer overflow even in small source files.
 
