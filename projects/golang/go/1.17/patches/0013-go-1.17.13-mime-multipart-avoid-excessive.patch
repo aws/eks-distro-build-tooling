@@ -4,6 +4,13 @@ Date: Thu, 16 Mar 2023 14:18:04 -0700
 Subject: [PATCH] [release-branch.go1.19] mime/multipart: avoid excessive copy
  buffer allocations in ReadForm
 
+# AWS EKS
+Backported To: go-1.17.13-eks
+Backported On: Wed, 5 Apr 2023
+Backported By: kodurub@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/ef41a4e2face45e580c5836eaebd51629fc23f15
+
 When copying form data to disk with io.Copy,
 allocate only one copy buffer and reuse it rather than
 creating two buffers per file (one from io.multiReader.WriteTo,
