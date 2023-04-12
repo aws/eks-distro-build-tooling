@@ -21,6 +21,7 @@ set -x
 REPO="$1"
 FILEPATH="$2"
 PR_BRANCH="${3:-image-tag-update}"
+EXTRA_PR_BODY="${4:-}"
 
 SED=sed
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -68,15 +69,11 @@ else
         cp $PR_BODY_FILE ${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
         PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/${REPO}_pr_body
         $SED -i "s,in .* with,in ${CHANGED_FILE} with," $PR_BODY_FILE
-        
-        for FILE in $(find ${SCRIPT_ROOT}/../eks-distro-base-updates -type f -name "update_packages*" ); do
-            UPDATE_PACKAGES="$(cat ${FILE})"
-            if [ "$UPDATE_PACKAGES" != "" ]; then
-                VARIANT=$(basename ${FILE} | sed 's/update_packages-//')
-                printf "\n${VARIANT}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n" >> $PR_BODY_FILE
-            fi
-        done
     fi
+fi
+
+if [ -n "${EXTRA_PR_BODY}" ]; then
+    PR_BODY+="${EXTRA_PR_BODY}"
 fi
 
 # Adding this here to include the "do-not-merge/hold" label. Trying to use the gh client with the --label arg will not succeed
