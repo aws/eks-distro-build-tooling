@@ -1,21 +1,27 @@
-From 83c928d95789d65a21ed964226a5018d8a113c8d Mon Sep 17 00:00:00 2001
+From 00bb431a9450af626edd4c2e2e2ed2f60b341069 Mon Sep 17 00:00:00 2001
 From: Bhavitha <106284071+bhavi-koduru@users.noreply.github.com>
-Date: Tue, 11 Apr 2023 18:56:11 -0700
+Date: Tue, 11 Apr 2023 19:19:56 -0700
 Subject: [PATCH] add Cut method to bytes package
 
 ---
- api/next.txt              |   1 +
+ api/go1.17.txt            |   1 +
  src/bytes/bytes.go        |  13 ++++
  src/bytes/bytes_test.go   |  23 +++++++
  src/bytes/example_test.go | 138 +++++++++++++++++++-------------------
  4 files changed, 107 insertions(+), 68 deletions(-)
 
-diff --git a/api/next.txt b/api/next.txt
-index e69de29bb2..05de001db6 100644
---- a/api/next.txt
-+++ b/api/next.txt
-@@ -0,0 +1 @@
+diff --git a/api/go1.17.txt b/api/go1.17.txt
+index 48505381f1..c35b16a5af 100644
+--- a/api/go1.17.txt
++++ b/api/go1.17.txt
+@@ -1,6 +1,7 @@
+ pkg archive/zip, method (*File) OpenRaw() (io.Reader, error)
+ pkg archive/zip, method (*Writer) Copy(*File) error
+ pkg archive/zip, method (*Writer) CreateRaw(*FileHeader) (io.Writer, error)
 +pkg bytes, func Cut([]uint8, []uint8) ([]uint8, []uint8, bool)
+ pkg compress/lzw, method (*Reader) Close() error
+ pkg compress/lzw, method (*Reader) Read([]uint8) (int, error)
+ pkg compress/lzw, method (*Reader) Reset(io.Reader, Order, int)
 diff --git a/src/bytes/bytes.go b/src/bytes/bytes.go
 index ce52649f13..ec9a2eb693 100644
 --- a/src/bytes/bytes.go
