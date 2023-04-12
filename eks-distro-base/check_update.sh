@@ -69,7 +69,6 @@ $SCRIPT_ROOT/../scripts/buildkit.sh build --frontend dockerfile.v0 \
         }
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
-cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/update_packages-${NAME_FOR_TAG_FILE}
 
 if [ "$JOB_TYPE" != "periodic" ]; then
     echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
@@ -77,6 +76,7 @@ if [ "$JOB_TYPE" != "periodic" ]; then
 fi
 
 if [ $RETURN_STATUS -eq 100 ]; then
+    cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/${AL_TAG}/update_packages-${NAME_FOR_TAG_FILE}
     echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 0 ]; then
     echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
