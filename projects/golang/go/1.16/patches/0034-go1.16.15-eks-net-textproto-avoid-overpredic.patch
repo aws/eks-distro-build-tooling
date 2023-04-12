@@ -1,8 +1,8 @@
-From 332e9cbae5f5578e244ae3708df3257a6ee6d640 Mon Sep 17 00:00:00 2001
+From d99b717255be173b46cbb1f48a411a013242883c Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Fri, 10 Mar 2023 14:21:05 -0800
-Subject: [PATCH] [release-branch.go1.19] net/textproto: avoid
- overpredicting the number of MIME header keys
+Subject: [PATCH] [release-branch.go1.19] net/textproto: avoid overpredicting
+ the number of MIME header keys
 
 # AWS EKS
 Backported To: go-1.16.15-eks
@@ -12,7 +12,6 @@ Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/d6759e7a059f4208f07aa781402841d7ddaaef96
 
 This fix requires `Cut` method in `src/net/textproto/reader.go`. Backported `Cut` method as a separate patch.
-
 
 A parsed MIME header is a map[string][]string. In the common case,
 a header contains many one-element []string slices. To avoid
@@ -54,22 +53,10 @@ TryBot-Result: Gopher Robot <gobot@golang.org>
 Reviewed-by: Matthew Dempsky <mdempsky@google.com>
 Auto-Submit: Michael Knyszek <mknyszek@google.com>
 ---
- api/go1.16.txt                   |  1 +
  src/net/textproto/reader.go      | 30 ++++++++++------
  src/net/textproto/reader_test.go | 59 ++++++++++++++++++++++++++++++++
- 3 files changed, 79 insertions(+), 11 deletions(-)
+ 2 files changed, 78 insertions(+), 11 deletions(-)
 
-diff --git a/api/go1.16.txt b/api/go1.16.txt
-index ce015fd6fb..72f0a80981 100644
---- a/api/go1.16.txt
-+++ b/api/go1.16.txt
-@@ -1,5 +1,6 @@
- pkg archive/zip, method (*ReadCloser) Open(string) (fs.File, error)
- pkg archive/zip, method (*Reader) Open(string) (fs.File, error)
-+pkg bytes, func Cut([]uint8, []uint8) ([]uint8, []uint8, bool)
- pkg crypto/x509, method (SystemRootsError) Unwrap() error
- pkg debug/elf, const DT_ADDRRNGHI = 1879047935
- pkg debug/elf, const DT_ADDRRNGHI DynTag
 diff --git a/src/net/textproto/reader.go b/src/net/textproto/reader.go
 index c5b76c29d5..4299608d5a 100644
 --- a/src/net/textproto/reader.go

@@ -1,14 +1,26 @@
-From d0cbeeb0d559e8b99007a7d2a1b5a4e2769d2221 Mon Sep 17 00:00:00 2001
+From db77255c8b86ff42c65a903eaf1f26c67749e6da Mon Sep 17 00:00:00 2001
 From: Bhavitha <106284071+bhavi-koduru@users.noreply.github.com>
-Date: Wed, 12 Apr 2023 08:43:26 -0700
+Date: Wed, 12 Apr 2023 11:58:42 -0700
 Subject: [PATCH] add Cut method to bytes package
 
 ---
+ api/go1.16.txt            |   1 +
  src/bytes/bytes.go        |  13 ++++
  src/bytes/bytes_test.go   |  23 +++++++
  src/bytes/example_test.go | 138 +++++++++++++++++++-------------------
- 3 files changed, 106 insertions(+), 68 deletions(-)
+ 4 files changed, 107 insertions(+), 68 deletions(-)
 
+diff --git a/api/go1.16.txt b/api/go1.16.txt
+index ce015fd6fb..72f0a80981 100644
+--- a/api/go1.16.txt
++++ b/api/go1.16.txt
+@@ -1,5 +1,6 @@
+ pkg archive/zip, method (*ReadCloser) Open(string) (fs.File, error)
+ pkg archive/zip, method (*Reader) Open(string) (fs.File, error)
++pkg bytes, func Cut([]uint8, []uint8) ([]uint8, []uint8, bool)
+ pkg crypto/x509, method (SystemRootsError) Unwrap() error
+ pkg debug/elf, const DT_ADDRRNGHI = 1879047935
+ pkg debug/elf, const DT_ADDRRNGHI DynTag
 diff --git a/src/bytes/bytes.go b/src/bytes/bytes.go
 index ce52649f13..ec9a2eb693 100644
 --- a/src/bytes/bytes.go
