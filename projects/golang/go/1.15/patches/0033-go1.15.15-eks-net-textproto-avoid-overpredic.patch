@@ -4,6 +4,15 @@ Date: Fri, 10 Mar 2023 14:21:05 -0800
 Subject: [PATCH] [release-branch.go1.19] net/textproto: avoid overpredicting
  the number of MIME header keys
 
+# AWS EKS
+Backported To: go-1.15.15-eks
+Backported On: Wed, 5 Apr 2023
+Backported By: kodurub@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/d6759e7a059f4208f07aa781402841d7ddaaef96
+
+This fix requires `Cut` method in `src/net/textproto/reader.go`. Backported `Cut` method as a separate patch.
+
 A parsed MIME header is a map[string][]string. In the common case,
 a header contains many one-element []string slices. To avoid
 allocating a separate slice for each key, ReadMIMEHeader looks
