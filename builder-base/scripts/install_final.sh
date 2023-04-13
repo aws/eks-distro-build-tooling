@@ -81,6 +81,17 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
         openssl-devel \
         pkgconfig \
         python3-pip
+
+    # for building containerd
+    yum install -y \
+        glibc-static \
+        libseccomp-static
+
+    # headers for btrfs do not exist in al23. well need to address this in the future
+    # if we want to build containerd with btrfs support on al23
+    if [ "$IS_AL23" = "false" ]; then 
+        yum install -y btrfs-progs-devel
+    fi  
 fi
 
 #################### CLEANUP ####################
