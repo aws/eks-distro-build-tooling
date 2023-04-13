@@ -253,6 +253,7 @@ Patch26:       0026-go-1.15.15-eks-update-bundled-golang-org.patch
 Patch27:       0027-go-1.15.15-eks-replace-all-usages-of-BytesOrPanic.patch
 Patch28:       0028-go-1.15.15-eks-multipart-limit-memory-inode-consumption.patch
 Patch29:       0029-go-1.15.15-eks-go-scanner-reject-large-line-a.patch
+Patch30:       0030-go1.15.15-eks-mime-multipart-avoid-excessive.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
@@ -414,6 +415,7 @@ Requires:       %{name} = %{version}-%{release}
 %patch27 -p1
 %patch28 -p1
 %patch29 -p1
+%patch30 -p1
 %patch101 -p1
 %patch102 -p1
 %patch103 -p1
@@ -684,6 +686,7 @@ fi
 %changelog
 * Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.15.15-3
 - Includes security fix for CVE-2023-24537
+- Includes security fix for CVE-2023-24536
 
 * Tue Feb 21 2023 Sajia Zafreen <szafreen@amazon.com> - 1.15.15-3
 - Includes security fix for CVE-2022-41722
