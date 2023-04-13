@@ -254,6 +254,7 @@ Patch27:       0027-go-1.15.15-eks-replace-all-usages-of-BytesOrPanic.patch
 Patch28:       0028-go-1.15.15-eks-multipart-limit-memory-inode-consumption.patch
 Patch29:       0029-go-1.15.15-eks-go-scanner-reject-large-line-a.patch
 Patch30:       0030-go1.15.15-eks-mime-multipart-avoid-excessive.patch
+Patch31:       0031-go1.15.15-eks-net-textproto-mime-multipart-i.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
@@ -416,6 +417,7 @@ Requires:       %{name} = %{version}-%{release}
 %patch28 -p1
 %patch29 -p1
 %patch30 -p1
+%patch31 -p1
 %patch101 -p1
 %patch102 -p1
 %patch103 -p1
