@@ -5,7 +5,6 @@ RUN tar -xvzf /go-untar/*.tar.gz
 
 FROM buildpack-deps:bullseye-scm
 RUN mkdir -p /usr/local/go
-COPY $GOLANG_ARCHIVE_PATH /usr/local/go
 COPY --link --from=go-untar /go-untar/ /usr/local/go
 RUN rm -rf /go-untar/
 
