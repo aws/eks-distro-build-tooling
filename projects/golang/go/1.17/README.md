@@ -1,6 +1,6 @@
 # EKS Golang 1.17
 
-Current Release: `3`
+Current Release: `5`
 
 Tracking Tag: `go1.17.13`
 
