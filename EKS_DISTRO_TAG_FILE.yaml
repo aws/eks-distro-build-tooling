@@ -18,24 +18,24 @@ al2:
   eks-distro-minimal-base-compiler-base: 2023-03-22-1679511650.2
   eks-distro-minimal-base-compiler-yum: yum-2023-03-22-1679511650.2
   eks-distro-minimal-base-compiler-gcc: gcc-2023-03-22-1679511650.2
-  eks-distro-minimal-base-golang-compiler-1.15-base: 1.15-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.15-yum: 1.15-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.15-gcc: 1.15-gcc-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.16-base: 1.16-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.16-yum: 1.16-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.16-gcc: 1.16-gcc-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.17-base: 1.17-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.17-yum: 1.17-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.17-gcc: 1.17-gcc-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.18-base: 1.18-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.18-yum: 1.18-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.18-gcc: 1.18-gcc-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2023-04-05-1680721256.2
-  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2023-04-05-1680721256.2
+  eks-distro-minimal-base-golang-compiler-1.15-base: null
+  eks-distro-minimal-base-golang-compiler-1.15-yum: null
+  eks-distro-minimal-base-golang-compiler-1.15-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.16-base: null
+  eks-distro-minimal-base-golang-compiler-1.16-yum: null
+  eks-distro-minimal-base-golang-compiler-1.16-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.17-base: null
+  eks-distro-minimal-base-golang-compiler-1.17-yum: null
+  eks-distro-minimal-base-golang-compiler-1.17-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.18-base: null
+  eks-distro-minimal-base-golang-compiler-1.18-yum: null
+  eks-distro-minimal-base-golang-compiler-1.18-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.19-base: null
+  eks-distro-minimal-base-golang-compiler-1.19-yum: null
+  eks-distro-minimal-base-golang-compiler-1.19-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.20-base: null
+  eks-distro-minimal-base-golang-compiler-1.20-yum: null
+  eks-distro-minimal-base-golang-compiler-1.20-gcc: null
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2023-03-22-1679511650.2
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2023-03-22-1679511650.2
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2023-03-22-1679511650.2
@@ -65,24 +65,24 @@ al2023:
   eks-distro-minimal-base-compiler-base: 2023-04-05-1680721253.2023
   eks-distro-minimal-base-compiler-yum: yum-2023-04-05-1680721253.2023
   eks-distro-minimal-base-compiler-gcc: gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.15-base: 1.15-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.15-yum: 1.15-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.15-gcc: 1.15-gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.16-base: 1.16-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.16-yum: 1.16-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.16-gcc: 1.16-gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.17-base: 1.17-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.17-yum: 1.17-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.17-gcc: 1.17-gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.18-base: 1.18-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.18-yum: 1.18-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.18-gcc: 1.18-gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2023-04-05-1680721253.2023
-  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2023-04-05-1680721253.2023
+  eks-distro-minimal-base-golang-compiler-1.15-base: null
+  eks-distro-minimal-base-golang-compiler-1.15-yum: null
+  eks-distro-minimal-base-golang-compiler-1.15-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.16-base: null
+  eks-distro-minimal-base-golang-compiler-1.16-yum: null
+  eks-distro-minimal-base-golang-compiler-1.16-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.17-base: null
+  eks-distro-minimal-base-golang-compiler-1.17-yum: null
+  eks-distro-minimal-base-golang-compiler-1.17-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.18-base: null
+  eks-distro-minimal-base-golang-compiler-1.18-yum: null
+  eks-distro-minimal-base-golang-compiler-1.18-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.19-base: null
+  eks-distro-minimal-base-golang-compiler-1.19-yum: null
+  eks-distro-minimal-base-golang-compiler-1.19-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.20-base: null
+  eks-distro-minimal-base-golang-compiler-1.20-yum: null
+  eks-distro-minimal-base-golang-compiler-1.20-gcc: null
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2023-04-05-1680721253.2023
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2023-04-05-1680721253.2023
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2023-04-05-1680721253.2023
