@@ -49,7 +49,7 @@ move-nodeup-binaries:
 
 .PHONY: move-kops-binaries
 move-kops-binaries:
-	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && move_nodeup_binaries
+	source $(PROJECT_DIRECTORY)/kops_artifacts_management_tools.sh && move_kops_binaries
 
 .PHONY: sync-artifacts-to-s3-dry-run
 sync-artifacts-to-s3-dry-run: check-env
