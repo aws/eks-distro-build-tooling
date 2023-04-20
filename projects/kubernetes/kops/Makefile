@@ -33,7 +33,7 @@ build-nodeup:
 
 .PHONY: build-kops
 build-kops:
-	(cd $(CLONED_REPO_DIRECTORY) && make crossbuild-kops)
+	(cd $(CLONED_REPO_DIRECTORY) && make crossbuild)
 
 .PHONY: pull-binaries
 pull-binaries:
