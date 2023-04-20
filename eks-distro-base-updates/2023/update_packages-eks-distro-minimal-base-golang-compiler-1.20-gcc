@@ -1,1 +1,6 @@
 
+kernel-headers.x86_64
+libpkgconf.x86_64
+pkgconf.x86_64
+pkgconf-m4.noarch
+pkgconf-pkg-config.x86_64
