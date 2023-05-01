@@ -1,0 +1,22 @@
+name: Docker Check
+on:
+  pull_request:
+    paths: 
+      - 'Docker*'
+      - '**/*/Docker*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      add_test: $(grep --include=\Docker* -rnw * -e 'ADD ' | wc -l)
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Check ADD 
+        run: |
+          if [ "${{ env.add_test }}" != "0" ]; then
+            echo ${{ env.add_test }}
+            echo "Dockerfile contains ADD, use COPY instead"
+            exit 1
+          fi
+        shell: bash

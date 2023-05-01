@@ -23,7 +23,7 @@ ARG BASE_IMAGE
 
 FROM public.ecr.aws/eks-distro-build-tooling/golang:1.20 as iptables-wrapper-builder
 
-ADD iptables-wrappers/ /iptables-wrappers
+COPY iptables-wrappers/ /iptables-wrappers
 RUN set -x && \
     cd /iptables-wrappers && \
     make build
