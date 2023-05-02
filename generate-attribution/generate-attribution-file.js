@@ -280,7 +280,7 @@ async function populateVersionAndModuleFromDep(dependencies) {
         if (!goListDep.Module) return false;
         return dep.module === goListDep.Module.Path ||
             dep.module === goListDep.ImportPath ||
-            dep.module.startsWith(`${goListDep.Module.Path}/pkg`) ||
+            (allowPrefixMatch && dep.module.startsWith(`${goListDep.Module.Path}/pkg`)) ||
             (allowPrefixMatch && dep.module.startsWith(goListDep.Module.Path))
     }
 

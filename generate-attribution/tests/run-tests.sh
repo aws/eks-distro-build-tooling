@@ -22,6 +22,7 @@ SRC_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 declare -A cases["coredns/coredns"]='github.com/coredns/coredns' 
     cases['containernetworking/plugins']='github.com/containernetworking/plugins'
     cases['etcd-io/etcd']='go.etcd.io/etcd'
+    cases['fluxcd/source-controller']='github.com/fluxcd/source-controller'
     cases['kubernetes/release']='k8s.io/release/images/build/go-runner'
     cases['kubernetes-csi/external-attacher']='github.com/kubernetes-csi/external-attacher'
     cases['kubernetes-csi/external-provisioner']='github.com/kubernetes-csi/external-provisioner'
