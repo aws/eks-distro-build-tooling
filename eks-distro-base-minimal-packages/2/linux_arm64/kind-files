@@ -1396,7 +1396,7 @@
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
 -rwxr-xr-x   133KiB /usr/lib64/gssproxy/proxymech.so
 -rwxr-xr-x    68KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    69KiB /usr/lib64/libacl.so.1.1.0
@@ -8417,7 +8417,7 @@
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
--rw-r--r--    20KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
 -rw-------       0B /var/lib/systemd/random-seed

@@ -3458,14 +3458,14 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   372KiB /var/lib/rpm/Basenames
+-rw-r--r--   376KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   128KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   3.8MiB /var/lib/rpm/Packages
+-rw-r--r--   4.0MiB /var/lib/rpm/Packages
 -rw-r--r--    48KiB /var/lib/rpm/Providename
 -rw-r--r--    36KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header

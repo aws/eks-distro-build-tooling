@@ -1,1 +1,4 @@
 
+kernel-headers.x86_64
+libxml2.x86_64
+openldap.x86_64

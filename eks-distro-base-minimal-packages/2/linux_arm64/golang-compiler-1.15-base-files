@@ -10746,7 +10746,7 @@
 -rwxr-xr-x   133KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x    69KiB /usr/lib64/gconv/libKSC.so
 -rwxr-xr-x    68KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   162KiB /usr/lib64/ld-2.26.so
+-rwxr-xr-x   226KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    71KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    69KiB /usr/lib64/libacl.so.1.1.0
@@ -14456,9 +14456,9 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   464KiB /var/lib/rpm/Basenames
+-rw-r--r--   472KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   136KiB /var/lib/rpm/Dirnames
+-rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name

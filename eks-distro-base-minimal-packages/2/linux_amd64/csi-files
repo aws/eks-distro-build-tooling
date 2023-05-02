@@ -1,6 +1,6 @@
 ****************** Regular Files ******************
 
--rw-rw-rw-      40B /dev/null
+-rw-r--r--      40B /dev/null
 -rw-------       0B /etc/.pwd.lock
 -rw-r--r--   5.0KiB /etc/DIR_COLORS
 -rw-r--r--   5.6KiB /etc/DIR_COLORS.256color
@@ -6272,21 +6272,21 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   564KiB /var/lib/rpm/Basenames
+-rw-r--r--   576KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   144KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   6.3MiB /var/lib/rpm/Packages
+-rw-r--r--   6.5MiB /var/lib/rpm/Packages
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    60KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--       0B /var/log/lastlog
--rw-------       0B /var/log/tallylog
+-rw-------      62B /var/log/tallylog
 -rw-------       0B /var/spool/mail/rpc
 
 ****************** Symlinks ******************

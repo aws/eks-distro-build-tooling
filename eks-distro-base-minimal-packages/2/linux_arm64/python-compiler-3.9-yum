@@ -17,9 +17,9 @@ findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
 glib2-2.56.1-9.amzn2.0.2.aarch64
-glibc-2.26-62.amzn2.aarch64
-glibc-common-2.26-62.amzn2.aarch64
-glibc-minimal-langpack-2.26-62.amzn2.aarch64
+glibc-2.26-63.amzn2.aarch64
+glibc-common-2.26-63.amzn2.aarch64
+glibc-minimal-langpack-2.26-63.amzn2.aarch64
 gmp-6.0.0-15.amzn2.0.2.aarch64
 gnupg2-2.0.22-5.amzn2.0.5.aarch64
 gpg-pubkey-c87f5b1a-593863f8
@@ -35,7 +35,7 @@ libattr-2.4.46-12.amzn2.0.2.aarch64
 libblkid-2.30.2-2.amzn2.0.11.aarch64
 libcap-2.54-1.amzn2.0.1.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
-libcrypt-2.26-62.amzn2.aarch64
+libcrypt-2.26-63.amzn2.aarch64
 libcurl-7.88.1-1.amzn2.0.1.aarch64
 libdb-5.3.21-24.amzn2.0.4.aarch64
 libdb-utils-5.3.21-24.amzn2.0.4.aarch64
@@ -54,7 +54,7 @@ libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.7.aarch64
+libxml2-2.9.1-6.amzn2.5.8.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 make-3.82-24.amzn2.aarch64
 ncurses-6.0-8.20170212.amzn2.1.4.aarch64
@@ -68,7 +68,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.aarch64
 nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
 nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
-openldap-2.4.44-23.amzn2.0.4.aarch64
+openldap-2.4.44-25.amzn2.0.5.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.6.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64
@@ -81,12 +81,12 @@ python-iniparse-0.4-9.amzn2.noarch
 python-libs-2.7.18-1.amzn2.0.6.aarch64
 python-pycurl-7.19.0-19.amzn2.0.2.aarch64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
-python2-rpm-4.11.3-48.amzn2.0.2.aarch64
+python2-rpm-4.11.3-48.amzn2.0.3.aarch64
 pyxattr-0.5.1-5.amzn2.0.2.aarch64
 readline-6.2-10.amzn2.0.2.aarch64
-rpm-4.11.3-48.amzn2.0.2.aarch64
-rpm-build-libs-4.11.3-48.amzn2.0.2.aarch64
-rpm-libs-4.11.3-48.amzn2.0.2.aarch64
+rpm-4.11.3-48.amzn2.0.3.aarch64
+rpm-build-libs-4.11.3-48.amzn2.0.3.aarch64
+rpm-libs-4.11.3-48.amzn2.0.3.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 shared-mime-info-1.8-4.amzn2.aarch64
