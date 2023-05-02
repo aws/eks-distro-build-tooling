@@ -37,15 +37,19 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	lock.Lock()
 	defer lock.Unlock()
 
-	if requestor == constants.EksDistroBotName || !s.AllowAll {
-		ok, err := s.Ghc.IsMember(org, requestor)
-		if err != nil {
-			return err
-		}
-		if !ok {
-			resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
-			l.Info(resp)
-			return s.Ghc.CreateComment(org, repo, num, resp)
+	// This check is to all only AWS org members to trigger the automation.
+	if !s.AllowAll {
+		// eks-distro-bot is not part of the AWS org so we add exception for the bot account.
+		if requestor != constants.EksDistroBotName {
+			ok, err := s.Ghc.IsMember(org, requestor)
+			if err != nil {
+				return err
+			}
+			if !ok {
+				resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
+				l.Info(resp)
+				return s.Ghc.CreateComment(org, repo, num, resp)
+			}
 		}
 	}
 
