@@ -86,6 +86,20 @@ move_nodeup_binaries() {
   done
 }
 
+move_kops_binaries() {
+  for ARCH in "${SUPPORTED_ARCHS[@]}"
+  do
+    for PLATFORM in "${SUPPORTED_PLATFORMS[@]}"
+    do
+      local binary_path="$PROJECT_DIRECTORY/kops/.build/dist/$PLATFORM/$ARCH/kops"
+      local binary_upload_path="$OUTPUT_DIR/$KOPS_VERSION_TAG/$PLATFORM/$ARCH/kops"
+      cp "$binary_path" "$binary_upload_path"
+      # While we're in here, we generate the checksums for the kops binaries and output them to the output dir
+      sha256sum "$binary_path" | cut -d " " -f 1 >> "${binary_upload_path}${SHA_SUFFIX}"
+    done
+  done
+}
+
 sync_artifacts_to_s3() {
   local artifact_bucket=$1
   local src_dir=$2

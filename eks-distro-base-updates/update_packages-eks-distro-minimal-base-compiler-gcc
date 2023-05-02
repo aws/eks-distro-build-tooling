@@ -1,7 +1,0 @@
-
-cpp.x86_64
-gcc.x86_64
-kernel-headers.x86_64
-libgcc.x86_64
-libgomp.x86_64
-libstdc++.x86_64

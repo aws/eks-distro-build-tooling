@@ -54,15 +54,20 @@ To help track this work, for each new patch release we create our own top-level 
       
       In a local fork of upstream Go, check out the git tag associated with the version you wish to update (e.g. [`go1.17.13`](https://github.com/golang/go/tree/go1.17.13)).
       This will be the same as the tag [in the `GIT_TAG` file in EKS Distro Build Tooling](https://github.com/aws/eks-distro-build-tooling/blob/main/projects/golang/go/1.18/GIT_TAG) for the given EKS Go version.
+
+   1. __apply previous patches__
+
+      Apply previous patches for 1.XX version you wish to update using : `git am ../eks-distro-build-tooling/projects/golang/go/1.XX/patch/*.patch`
       
    1. __cherry-pick and fix conflicts__
       
       Cherry-pick the commit to your fork of Go: `git cherry-pick $COMMIT_HASH`
    
-      In some cases there will be merge conflicts. 
-      In these cases, it is important to carefully review the blame for the source file at both our tag and the upstream release branch
-      to determine if there are other patches we need to take or modifications that need to be made. 
-      Any changes that are made to the upstream commit need to be carefully documented and included in the header file of the patch we'll generate below
+      After the cherry-pick check carefully - 
+      * If the commit applies cleanly, make sure those changes are not including any new features which were introduced in later GO versions. A good indication for that would be more file changes compared to the CVE. 
+      * In some cases there will be merge conflicts. In these cases, it is important to carefully review the blame for the source file at both our tag and the upstream release branch
+      to determine if there are other patches we need to take or modifications that need to be made. If the modification has to be done, make sure these modifications are suitable for the the version you are updating. The focus would be keeping the functionality of the CVE without introducing new feature which were introduced in later GO versions. 
+      * Any changes that are made to the upstream commit need to be carefully documented and included in the header file of the patch we'll generate below. This should include any modification or merge conflict you resolved. Also, after those changes inlcude the CVE information as well. 
 
    1. __Compile Golang and run tests with the commit applied to the standard library__
       
@@ -74,7 +79,7 @@ To help track this work, for each new patch release we create our own top-level 
 
       Once the tests have passed and the language has compiled, we have can generate a patch file from the commit.      
       `git format-patch -1 $COMMIT_HASH` 
-      
+
       This will generate a patch file which we can then format to match EKS Go conventions and test in pre-submits.
 
    1. __Format the patch with EKS Go conventions__

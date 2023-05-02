@@ -1,0 +1,67 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Peter Rifel <pgrifel@gmail.com>
+Date: Tue, 7 Mar 2023 20:32:09 -0600
+Subject: [PATCH] Don't set CSIMigrationAWS for k8s >=1.27
+
+Cherry-pick of https://github.com/kubernetes/kops/commit/3ce30fff48a37cb3224fec96169ee1efb283d791
+
+This patch can be removed when this commit is part of a kOps release.
+---
+ pkg/model/components/apiserver.go             | 2 +-
+ pkg/model/components/kubecontrollermanager.go | 2 +-
+ pkg/model/components/kubelet.go               | 2 +-
+ pkg/model/components/kubescheduler.go         | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/pkg/model/components/apiserver.go b/pkg/model/components/apiserver.go
+index a43591fc97..f29028569c 100644
+--- a/pkg/model/components/apiserver.go
++++ b/pkg/model/components/apiserver.go
+@@ -187,7 +187,7 @@ func (b *KubeAPIServerOptionsBuilder) BuildOptions(o interface{}) error {
+ 			c.FeatureGates["InTreePluginAWSUnregister"] = "true"
+ 		}
+ 
+-		if _, found := c.FeatureGates["CSIMigrationAWS"]; !found {
++		if _, found := c.FeatureGates["CSIMigrationAWS"]; !found && b.IsKubernetesLT("1.27") {
+ 			c.FeatureGates["CSIMigrationAWS"] = "true"
+ 		}
+ 	}
+diff --git a/pkg/model/components/kubecontrollermanager.go b/pkg/model/components/kubecontrollermanager.go
+index c8ddb84bcf..df6034ff1a 100644
+--- a/pkg/model/components/kubecontrollermanager.go
++++ b/pkg/model/components/kubecontrollermanager.go
+@@ -196,7 +196,7 @@ func (b *KubeControllerManagerOptionsBuilder) BuildOptions(o interface{}) error
+ 			kcm.FeatureGates["InTreePluginAWSUnregister"] = "true"
+ 		}
+ 
+-		if _, found := kcm.FeatureGates["CSIMigrationAWS"]; !found {
++		if _, found := kcm.FeatureGates["CSIMigrationAWS"]; !found && b.IsKubernetesLT("1.27") {
+ 			kcm.FeatureGates["CSIMigrationAWS"] = "true"
+ 		}
+ 	}
+diff --git a/pkg/model/components/kubelet.go b/pkg/model/components/kubelet.go
+index be7a7000da..369fe864a1 100644
+--- a/pkg/model/components/kubelet.go
++++ b/pkg/model/components/kubelet.go
+@@ -189,7 +189,7 @@ func (b *KubeletOptionsBuilder) BuildOptions(o interface{}) error {
+ 	}
+ 
+ 	if clusterSpec.CloudProvider.AWS != nil && clusterSpec.CloudProvider.AWS.EBSCSIDriver != nil && fi.ValueOf(clusterSpec.CloudProvider.AWS.EBSCSIDriver.Enabled) {
+-		if _, found := clusterSpec.Kubelet.FeatureGates["CSIMigrationAWS"]; !found {
++		if _, found := clusterSpec.Kubelet.FeatureGates["CSIMigrationAWS"]; !found && b.IsKubernetesLT("1.27") {
+ 			clusterSpec.Kubelet.FeatureGates["CSIMigrationAWS"] = "true"
+ 		}
+ 
+diff --git a/pkg/model/components/kubescheduler.go b/pkg/model/components/kubescheduler.go
+index 4a939c2c24..33c05d2878 100644
+--- a/pkg/model/components/kubescheduler.go
++++ b/pkg/model/components/kubescheduler.go
+@@ -67,7 +67,7 @@ func (b *KubeSchedulerOptionsBuilder) BuildOptions(o interface{}) error {
+ 			config.FeatureGates["InTreePluginAWSUnregister"] = "true"
+ 		}
+ 
+-		if _, found := config.FeatureGates["CSIMigrationAWS"]; !found {
++		if _, found := config.FeatureGates["CSIMigrationAWS"]; !found && b.IsKubernetesLT("1.27") {
+ 			config.FeatureGates["CSIMigrationAWS"] = "true"
+ 		}
+ 	}

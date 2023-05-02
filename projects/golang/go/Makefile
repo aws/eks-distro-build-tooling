@@ -73,7 +73,7 @@ build: $(BUILD_TARGETS)
 release: $(RELEASE_TARGETS)
 
 .PHONY: prod-release
-prod-release: golang-build sync-artifacts-to-s3 prod-release-images
+prod-release: golang-build sync-artifacts-to-s3
 
 .PHONY: prod-release-images
 prod-release-images: export AWS_PROFILE=ecr-public-push

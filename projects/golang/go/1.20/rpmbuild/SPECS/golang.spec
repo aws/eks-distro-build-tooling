@@ -105,7 +105,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.20
 #global go_prerelease rc3
-%global go_patch 2
+%global go_patch 4
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -534,6 +534,9 @@ fi
 %endif
 
 %changelog
+* Tue Apr 04 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.20.3-1
+- Bump tracking patch version to 1.20.3 from 1.20.2
+
 * Wed Mar 08 2023 Kirsten Schumy <ksschumy@amazon.com> - 1.20.2-1
 - Bump tracking patch version to 1.20.2 from 1.20.1
 
