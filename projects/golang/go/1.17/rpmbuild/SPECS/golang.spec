@@ -172,6 +172,7 @@ Patch105:  0105-go-1.17.13-eks-add-Cut-method-to-bytes-package.patch
 Patch16:  0016-go-1.17.13-eks-net-textproto-avoid-overpredic.patch
 Patch17:  0017-go-1.17.13-eks-html-template-emit-filterFails.patch
 Patch18:  0018-go-1.17.13-eks-html-template-handle-all-JS-wh.patch
+Patch19:  0019-go-1.17.13-eks-html-template-disallow-angle-b.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
