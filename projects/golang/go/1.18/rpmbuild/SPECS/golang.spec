@@ -554,7 +554,7 @@ fi
 %endif
 
 %changelog
-* Wed May 3 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-3
+* Wed May 3 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-4
 - Includes security fix for CVE-2023-29400
 - Includes security fix for CVE-2023-24540
 - Includes security fix for CVE-2023-24539
