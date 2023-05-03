@@ -169,6 +169,7 @@ Patch6:       0006-go-1.18.10-eks-go-net-textproto-avoid-overpredic.patch
 Patch7:       0007-go-1.18.10-eks-mime-multipart-avoid-excessive.patch
 Patch8:       0008-go-1.18.10-eks-net-textproto-mime-multipart-i.patch
 Patch9:       0009-go-1.18.10-eks-mime-multipart-limit-parsed-mi.patch
+Patch10:      0010-release-branch.go1.19-html-template-emit-filterFails.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -551,6 +552,9 @@ fi
 %endif
 
 %changelog
+* Wed May 3 2023 Sajia Zafreen <szafreen@amazon.com> - 1.18.10-3
+- Includes security fix for CVE-2023-29400
+
 * Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.18.10-3
 - Includes security fix for CVE-2023-24537
 - Includes security fix for CVE-2023-24534
