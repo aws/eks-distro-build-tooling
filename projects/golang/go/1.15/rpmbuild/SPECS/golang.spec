@@ -260,6 +260,7 @@ Patch105:      0105-add-Cut-method-to-bytes-package.patch
 Patch33:       0033-go1.15.15-eks-net-textproto-avoid-overpredic.patch
 Patch34:       0034-go1.15.15-eks-html-template-emit-filterFails.patch
 Patch35:       0035-go1.15.15-eks-html-template-handle-all-JS-wh.patch
+Patch36:       0036-go1.15.15-eks-html-template-disallow-angle-b.patch
 
 Patch101:       0101-Don-t-use-the-bundled-tzdata-at-runtime-except-for-t.patch
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
