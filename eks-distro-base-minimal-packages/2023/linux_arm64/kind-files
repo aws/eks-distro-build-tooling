@@ -1549,7 +1549,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x   196KiB /usr/lib64/libverto-libev.so.1.0.0
 -rwxr-xr-x   197KiB /usr/lib64/libverto.so.1.0.0
--rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.3
+-rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.4
 -rwxr-xr-x   197KiB /usr/lib64/libxtables.so.12.6.0
 -rwxr-xr-x   197KiB /usr/lib64/libxxhash.so.0.8.0
 -rwxr-xr-x   261KiB /usr/lib64/libyaml-0.so.2.0.9
@@ -8694,7 +8694,7 @@ lrwxrwxrwx      20B /usr/lib64/libutempter.so.0 libutempter.so.1.2.1
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      23B /usr/lib64/libverto-libev.so.1 libverto-libev.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
-lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.3
+lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.4
 lrwxrwxrwx      20B /usr/lib64/libxtables.so.12 libxtables.so.12.6.0
 lrwxrwxrwx      18B /usr/lib64/libxxhash.so.0 libxxhash.so.0.8.0
 lrwxrwxrwx      18B /usr/lib64/libyaml-0.so.2 libyaml-0.so.2.0.9

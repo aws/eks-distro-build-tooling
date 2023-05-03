@@ -734,7 +734,7 @@
 -rwxr-xr-x    33KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    16KiB /usr/lib64/libverto-libev.so.1.0.0
 -rwxr-xr-x    28KiB /usr/lib64/libverto.so.1.0.0
--rwxr-xr-x   1.5MiB /usr/lib64/libxml2.so.2.10.3
+-rwxr-xr-x   1.5MiB /usr/lib64/libxml2.so.2.10.4
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
@@ -6574,7 +6574,7 @@ lrwxrwxrwx      20B /usr/lib64/libutempter.so.0 libutempter.so.1.2.1
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      23B /usr/lib64/libverto-libev.so.1 libverto-libev.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
-lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.3
+lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.4
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
 lrwxrwxrwx      15B /usr/lib64/p11-kit-proxy.so libp11-kit.so.0
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so libanonymous.so.3.0.0

@@ -43,7 +43,7 @@ glibc-headers-x86-2.34-52.amzn2023.0.2.noarch
 glibc-minimal-langpack-2.34-52.amzn2023.0.2.x86_64
 gmp-6.2.1-2.amzn2023.0.2.x86_64
 gnupg2-2.3.7-1.amzn2023.0.3.x86_64
-gnutls-3.7.8-359.amzn2023.0.3.x86_64
+gnutls-3.7.8-360.amzn2023.0.4.x86_64
 go-srpm-macros-3.1.0-32.amzn2023.0.2.noarch
 gpg-pubkey-afaa0026-6185c6ab
 gpg-pubkey-d832c631-63920d79
@@ -53,7 +53,7 @@ guile22-2.2.7-2.amzn2023.0.2.x86_64
 gzip-1.12-1.amzn2023.0.1.x86_64
 jansson-2.14-0.amzn2023.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-kernel-headers-6.1.23-36.46.amzn2023.x86_64
+kernel-headers-6.1.25-37.47.amzn2023.x86_64
 kernel-srpm-macros-1.0-14.amzn2023.0.2.noarch
 keyutils-libs-1.6.3-1.amzn2023.x86_64
 krb5-libs-1.20.1-8.amzn2023.0.2.x86_64
@@ -99,7 +99,7 @@ libuuid-2.37.4-1.amzn2023.0.3.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
 libxcrypt-devel-4.4.33-7.amzn2023.x86_64
-libxml2-2.10.3-2.amzn2023.0.1.x86_64
+libxml2-2.10.4-1.amzn2023.0.1.x86_64
 libyaml-0.2.5-5.amzn2023.0.2.x86_64
 libzstd-1.5.2-1.amzn2023.0.2.x86_64
 lua-libs-5.4.4-3.amzn2023.0.2.x86_64
@@ -113,7 +113,7 @@ nettle-3.8-1.amzn2023.0.2.x86_64
 npth-1.6-6.amzn2023.0.2.x86_64
 ocaml-srpm-macros-6-6.amzn2023.0.2.noarch
 openblas-srpm-macros-2-9.amzn2023.0.2.noarch
-openldap-2.4.57-6.amzn2023.0.3.x86_64
+openldap-2.4.57-6.amzn2023.0.4.x86_64
 openssl-libs-3.0.8-1.amzn2023.0.1.x86_64
 p11-kit-0.24.1-2.amzn2023.0.2.x86_64
 p11-kit-trust-0.24.1-2.amzn2023.0.2.x86_64
@@ -135,13 +135,13 @@ python3-libcomps-0.1.18-1.amzn2023.0.2.x86_64
 python3-libdnf-0.67.0-1.amzn2023.0.5.x86_64
 python3-libs-3.9.16-1.amzn2023.0.3.x86_64
 python3-pip-wheel-21.3.1-2.amzn2023.0.5.noarch
-python3-rpm-4.16.1.3-12.amzn2023.0.5.x86_64
+python3-rpm-4.16.1.3-12.amzn2023.0.6.x86_64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.3.noarch
 readline-8.1-2.amzn2023.0.2.x86_64
-rpm-4.16.1.3-12.amzn2023.0.5.x86_64
-rpm-build-libs-4.16.1.3-12.amzn2023.0.5.x86_64
-rpm-libs-4.16.1.3-12.amzn2023.0.5.x86_64
-rpm-sign-libs-4.16.1.3-12.amzn2023.0.5.x86_64
+rpm-4.16.1.3-12.amzn2023.0.6.x86_64
+rpm-build-libs-4.16.1.3-12.amzn2023.0.6.x86_64
+rpm-libs-4.16.1.3-12.amzn2023.0.6.x86_64
+rpm-sign-libs-4.16.1.3-12.amzn2023.0.6.x86_64
 rust-srpm-macros-21-42.amzn2023.0.2.noarch
 sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch

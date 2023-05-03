@@ -1,6 +1,5 @@
 
+gnutls.x86_64
 kernel-headers.x86_64
-libpkgconf.x86_64
-pkgconf.x86_64
-pkgconf-m4.noarch
-pkgconf-pkg-config.x86_64
+libxml2.x86_64
+openldap.x86_64
