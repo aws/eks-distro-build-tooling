@@ -57,7 +57,7 @@ make-4.3-5.amzn2023.0.2.aarch64
 mpfr-4.1.0-7.amzn2023.0.2.aarch64
 ncurses-base-6.2-4.20200222.amzn2023.0.3.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.3.aarch64
-openldap-2.4.57-6.amzn2023.0.3.aarch64
+openldap-2.4.57-6.amzn2023.0.4.aarch64
 openssl-libs-3.0.8-1.amzn2023.0.1.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.2.aarch64
