@@ -187,6 +187,9 @@ Patch32:       0032-go1.16.15-eks-net-textproto-mime-multipart-i.patch
 Patch33:       0033-go1.16.15-eks-mime-multipart-limit-parsed-mi.patch
 Patch105:      0105-add-Cut-method-to-bytes-package.patch
 Patch34:       0034-go1.16.15-eks-net-textproto-avoid-overpredic.patch
+Patch35:       0035-go1.16.15-eks-html-template-emit-filterFails.patch
+Patch36:       0036-go1.16.15-eks-html-template-handle-all-JS-wh.patch
+Patch37:       0037-go1.16.15-eks-html-template-disallow-angle-b.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -568,6 +571,12 @@ fi
 %endif
 
 %changelog
+* Wed May 3 2023 Sajia Zafreen <szafreen@amazon.com> - 1.16.15-6
+- Includes security fix for CVE-2023-29400
+- Includes security fix for CVE-2023-24540
+- Includes security fix for CVE-2023-24539
+
+
 * Wed Apr 5 2023 Bhavitha Koduru <kodurub@amazon.com> - 1.16.15-4
 - Includes security fix for CVE-2023-24537
 - Includes security fix for CVE-2023-24534
