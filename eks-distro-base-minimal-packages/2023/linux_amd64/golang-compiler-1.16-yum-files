@@ -936,7 +936,7 @@
 -rw-r--r--   135KiB /root/sdk/go1.16.15/pkg/linux_amd64/hash/fnv.a
 -rw-r--r--    46KiB /root/sdk/go1.16.15/pkg/linux_amd64/hash/maphash.a
 -rw-r--r--   290KiB /root/sdk/go1.16.15/pkg/linux_amd64/html.a
--rw-r--r--   870KiB /root/sdk/go1.16.15/pkg/linux_amd64/html/template.a
+-rw-r--r--   871KiB /root/sdk/go1.16.15/pkg/linux_amd64/html/template.a
 -rw-r--r--   595KiB /root/sdk/go1.16.15/pkg/linux_amd64/image.a
 -rw-r--r--   144KiB /root/sdk/go1.16.15/pkg/linux_amd64/image/color.a
 -rw-r--r--    77KiB /root/sdk/go1.16.15/pkg/linux_amd64/image/color/palette.a
@@ -4761,7 +4761,7 @@
 -rw-r--r--   7.4KiB /root/sdk/go1.16.15/src/html/template/html.go
 -rw-r--r--   2.9KiB /root/sdk/go1.16.15/src/html/template/html_test.go
 -rw-r--r--    13KiB /root/sdk/go1.16.15/src/html/template/js.go
--rw-r--r--    12KiB /root/sdk/go1.16.15/src/html/template/js_test.go
+-rw-r--r--    13KiB /root/sdk/go1.16.15/src/html/template/js_test.go
 -rw-r--r--     387B /root/sdk/go1.16.15/src/html/template/jsctx_string.go
 -rw-r--r--   8.0KiB /root/sdk/go1.16.15/src/html/template/multi_test.go
 -rw-r--r--     755B /root/sdk/go1.16.15/src/html/template/state_string.go
