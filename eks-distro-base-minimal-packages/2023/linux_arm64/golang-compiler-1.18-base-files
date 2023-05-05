@@ -5845,12 +5845,12 @@
 -rw-r--r--   7.7KiB /root/sdk/go1.18.10/src/html/template/doc.go
 -rw-r--r--     445B /root/sdk/go1.18.10/src/html/template/element_string.go
 -rw-r--r--   8.9KiB /root/sdk/go1.18.10/src/html/template/error.go
--rw-r--r--    32KiB /root/sdk/go1.18.10/src/html/template/escape.go
--rw-r--r--    51KiB /root/sdk/go1.18.10/src/html/template/escape_test.go
+-rw-r--r--    31KiB /root/sdk/go1.18.10/src/html/template/escape.go
+-rw-r--r--    52KiB /root/sdk/go1.18.10/src/html/template/escape_test.go
 -rw-r--r--   4.0KiB /root/sdk/go1.18.10/src/html/template/example_test.go
 -rw-r--r--   7.5KiB /root/sdk/go1.18.10/src/html/template/examplefiles_test.go
 -rw-r--r--    57KiB /root/sdk/go1.18.10/src/html/template/exec_test.go
--rw-r--r--   7.3KiB /root/sdk/go1.18.10/src/html/template/html.go
+-rw-r--r--   7.4KiB /root/sdk/go1.18.10/src/html/template/html.go
 -rw-r--r--   2.9KiB /root/sdk/go1.18.10/src/html/template/html_test.go
 -rw-r--r--    13KiB /root/sdk/go1.18.10/src/html/template/js.go
 -rw-r--r--    12KiB /root/sdk/go1.18.10/src/html/template/js_test.go
