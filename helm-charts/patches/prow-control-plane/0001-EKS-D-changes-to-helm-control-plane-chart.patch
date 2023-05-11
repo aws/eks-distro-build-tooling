@@ -1,34 +1,34 @@
-From a805641e4d218a058cde42c742f7f980be17241e Mon Sep 17 00:00:00 2001
+From a1dee6dcc0f4e03b57ad1b702a91dd1f87370ddb Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
 
 Signed-off-by: Jackson West <jgw@amazon.com>
 ---
- config/prow/cluster/crier_deployment.yaml     |  93 +++++++-------
- config/prow/cluster/crier_rbac.yaml           |  44 +------
- config/prow/cluster/deck_deployment.yaml      | 114 +++++++++---------
- config/prow/cluster/deck_rbac.yaml            |  38 +-----
+ config/prow/cluster/crier_deployment.yaml     | 118 ++++++---------
+ config/prow/cluster/crier_rbac.yaml           |  58 ++------
+ config/prow/cluster/deck_deployment.yaml      | 135 +++++++-----------
+ config/prow/cluster/deck_rbac.yaml            |  38 +----
  config/prow/cluster/deck_service.yaml         |  11 +-
- config/prow/cluster/ghproxy.yaml              |  35 +++---
- config/prow/cluster/hook_deployment.yaml      |  89 ++++++--------
+ config/prow/cluster/ghproxy.yaml              |  35 +++--
+ config/prow/cluster/hook_deployment.yaml      | 116 +++++----------
  config/prow/cluster/hook_rbac.yaml            |   6 +-
  config/prow/cluster/hook_service.yaml         |  12 +-
- .../prow/cluster/horologium_deployment.yaml   |  21 +++-
+ .../prow/cluster/horologium_deployment.yaml   |  21 ++-
  config/prow/cluster/horologium_rbac.yaml      |   6 +-
- .../prow_controller_manager_deployment.yaml   |  84 +++++++------
- .../cluster/prow_controller_manager_rbac.yaml |  41 ++-----
- config/prow/cluster/sinker_deployment.yaml    |  78 ++++++------
- config/prow/cluster/sinker_rbac.yaml          |  39 ++----
- .../cluster/statusreconciler_deployment.yaml  |  29 +++--
- .../prow/cluster/statusreconciler_rbac.yaml   |   6 +-
- config/prow/cluster/tide_deployment.yaml      |  38 ++++--
- config/prow/cluster/tide_rbac.yaml            |   8 +-
+ .../prow_controller_manager_deployment.yaml   | 109 ++++++--------
+ .../cluster/prow_controller_manager_rbac.yaml |  31 +---
+ config/prow/cluster/sinker_deployment.yaml    | 115 ++++++---------
+ config/prow/cluster/sinker_rbac.yaml          |  29 +---
+ .../cluster/statusreconciler_deployment.yaml  |  29 ++--
+ .../prow/cluster/statusreconciler_rbac.yaml   |   7 +-
+ config/prow/cluster/tide_deployment.yaml      |  38 +++--
+ config/prow/cluster/tide_rbac.yaml            |   7 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 350 insertions(+), 453 deletions(-)
+ 20 files changed, 346 insertions(+), 586 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
-index 4405f98e78..ecb49e4f79 100644
+index d53ff40e9b..ecb49e4f79 100644
 --- a/config/prow/cluster/crier_deployment.yaml
 +++ b/config/prow/cluster/crier_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -52,11 +52,11 @@ index 4405f98e78..ecb49e4f79 100644
        labels:
          app: crier
      spec:
-@@ -33,50 +38,56 @@ spec:
+@@ -33,64 +38,56 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: crier
--        image: gcr.io/k8s-prow/crier:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/crier:v20230322-fad14aa00d
 +        image: {{ .Values.crier.image }}
          args:
 -        - --blob-storage-workers=1
@@ -78,7 +78,14 @@ index 4405f98e78..ecb49e4f79 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig"
+-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: AWS_ROLE_ARN
+-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
+-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
+-        - name: AWS_REGION
+-          value: us-east-2
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -101,6 +108,9 @@ index 4405f98e78..ecb49e4f79 100644
 -        - mountPath: /etc/kubeconfig-build-rules-k8s
 -          name: kubeconfig-build-rules-k8s
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+-          name: kubeconfig-eks-prow-build-cluster
+-          readOnly: true
          - name: config
            mountPath: /etc/config
            readOnly: true
@@ -115,7 +125,10 @@ index 4405f98e78..ecb49e4f79 100644
 -          mountPath: /etc/slack
 +        - name: s3-credentials
 +          mountPath: /etc/s3-credentials
-+          readOnly: true
+           readOnly: true
+-        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: aws-iam-token
+-          mountPath: /var/run/secrets/aws-iam-token/serviceaccount
 +        - name: kubeconfig
 +          mountPath: /etc/kubeconfig
            readOnly: true
@@ -137,7 +150,7 @@ index 4405f98e78..ecb49e4f79 100644
        volumes:
        - name: config
          configMap:
-@@ -84,25 +95,15 @@ spec:
+@@ -98,38 +95,15 @@ spec:
        - name: job-config
          configMap:
            name: job-config
@@ -170,8 +183,21 @@ index 4405f98e78..ecb49e4f79 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-rules-k8s
+-      - name: kubeconfig-eks-prow-build-cluster
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-eks-prow-build-cluster
+-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-      - name: aws-iam-token
+-        projected:
+-          defaultMode: 420
+-          sources:
+-          - serviceAccountToken:
+-              audience: sts.amazonaws.com
+-              expirationSeconds: 86400
+-              path: token
 diff --git a/config/prow/cluster/crier_rbac.yaml b/config/prow/cluster/crier_rbac.yaml
-index 53f4471080..57393297a9 100644
+index 53f4471080..0dd7018f55 100644
 --- a/config/prow/cluster/crier_rbac.yaml
 +++ b/config/prow/cluster/crier_rbac.yaml
 @@ -13,18 +13,16 @@
@@ -195,7 +221,7 @@ index 53f4471080..57393297a9 100644
    name: crier
  rules:
  - apiGroups:
-@@ -37,46 +35,10 @@ rules:
+@@ -37,51 +35,15 @@ rules:
      - "list"
      - "patch"
  ---
@@ -231,7 +257,7 @@ index 53f4471080..57393297a9 100644
 -  name: crier
 -subjects:
 -- kind: ServiceAccount
-   name: crier
+-  name: crier
 -  namespace: default
 ----
 -kind: RoleBinding
@@ -239,17 +265,24 @@ index 53f4471080..57393297a9 100644
 -metadata:
 -  name: crier-namespaced
 -  namespace: test-pods
- roleRef:
-   apiGroup: rbac.authorization.k8s.io
-   kind: Role
-@@ -84,4 +46,4 @@ roleRef:
- subjects:
- - kind: ServiceAccount
+-roleRef:
+-  apiGroup: rbac.authorization.k8s.io
+-  kind: Role
+-  name: crier
+-subjects:
+-- kind: ServiceAccount
    name: crier
 -  namespace: default
-+  namespace: {{ .Release.Namespace }}
++  roleRef:
++    apiGroup: rbac.authorization.k8s.io
++    kind: Role
++    name: crier
++  subjects:
++  - kind: ServiceAccount
++    name: crier
++    namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
-index a37074bbb8..e829c32a53 100644
+index 50e7cb6966..abd0103817 100644
 --- a/config/prow/cluster/deck_deployment.yaml
 +++ b/config/prow/cluster/deck_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -279,20 +312,18 @@ index a37074bbb8..e829c32a53 100644
        labels:
          app: deck
      spec:
-@@ -38,63 +43,52 @@ spec:
+@@ -38,77 +43,52 @@ spec:
        terminationGracePeriodSeconds: 30
        containers:
        - name: deck
--        image: gcr.io/k8s-prow/deck:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/deck:v20230322-fad14aa00d
 +        image: {{ .Values.deck.image }}
          imagePullPolicy: Always
          ports:
--        - name: http
--          containerPort: 8080
+         - name: http
+           containerPort: 8080
 -        - name: metrics
 -          containerPort: 9090
-+          - name: http
-+            containerPort: 8080
          args:
 +        - --kubeconfig=/etc/kubeconfig/config
          - --tide-url=http://tide/
@@ -315,7 +346,14 @@ index a37074bbb8..e829c32a53 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig"
+-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: AWS_ROLE_ARN
+-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
+-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
+-        - name: AWS_REGION
+-          value: us-east-2
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
 +        - name: AWS_ROLE_SESSION_NAME
@@ -341,6 +379,9 @@ index a37074bbb8..e829c32a53 100644
 -        - mountPath: /etc/kubeconfig-build-rules-k8s
 -          name: kubeconfig-build-rules-k8s
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+-          name: kubeconfig-eks-prow-build-cluster
+-          readOnly: true
          - name: config
            mountPath: /etc/config
            readOnly: true
@@ -354,9 +395,12 @@ index a37074bbb8..e829c32a53 100644
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
+-        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: aws-iam-token
+-          mountPath: /var/run/secrets/aws-iam-token/serviceaccount
 +        - name: s3-credentials
 +          mountPath: /etc/s3-credentials
-+          readOnly: true
+           readOnly: true
 +        - name: kubeconfig
 +          mountPath: /etc/kubeconfig
 +          readOnly: true
@@ -365,7 +409,7 @@ index a37074bbb8..e829c32a53 100644
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -108,32 +102,20 @@ spec:
+@@ -122,36 +102,20 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -408,13 +452,26 @@ index a37074bbb8..e829c32a53 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-rules-k8s
+-      - name: kubeconfig-eks-prow-build-cluster
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-eks-prow-build-cluster
        - name: config
          configMap:
            name: config
-@@ -143,3 +125,15 @@ spec:
+@@ -161,12 +125,15 @@ spec:
        - name: plugins
          configMap:
            name: plugins
+-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-      - name: aws-iam-token
+-        projected:
+-          defaultMode: 420
+-          sources:
+-          - serviceAccountToken:
+-              audience: sts.amazonaws.com
+-              expirationSeconds: 86400
+-              path: token
 +      - name: github-token
 +        secret:
 +          secretName: github-token
@@ -428,7 +485,7 @@ index a37074bbb8..e829c32a53 100644
 +          defaultMode: 0644
 +          secretName: kubeconfig
 diff --git a/config/prow/cluster/deck_rbac.yaml b/config/prow/cluster/deck_rbac.yaml
-index 6c7456d47b..d1a8489a38 100644
+index 500d79d8dd..d1a8489a38 100644
 --- a/config/prow/cluster/deck_rbac.yaml
 +++ b/config/prow/cluster/deck_rbac.yaml
 @@ -1,15 +1,13 @@
@@ -449,13 +506,15 @@ index 6c7456d47b..d1a8489a38 100644
    name: deck
  rules:
  - apiGroups:
-@@ -20,39 +18,11 @@ rules:
+@@ -20,41 +18,11 @@ rules:
    - get
    - list
    - watch
 -  # Required when deck runs with `--rerun-creates-job=true`
 -  - create
-----
+-  # Required to abort jobs
+   - patch
+ ---
 -kind: Role
 -apiVersion: rbac.authorization.k8s.io/v1
 -metadata:
@@ -481,8 +540,7 @@ index 6c7456d47b..d1a8489a38 100644
 -subjects:
 -- kind: ServiceAccount
 -  name: deck
-+  - patch
- ---
+----
  kind: RoleBinding
  apiVersion: rbac.authorization.k8s.io/v1
  metadata:
@@ -490,7 +548,7 @@ index 6c7456d47b..d1a8489a38 100644
    name: deck
  roleRef:
    apiGroup: rbac.authorization.k8s.io
-@@ -61,4 +31,4 @@ roleRef:
+@@ -63,4 +31,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: deck
@@ -522,7 +580,7 @@ index e65a50ebcb..8a418f3b6c 100644
 -    protocol: TCP
 -  type: NodePort
 diff --git a/config/prow/cluster/ghproxy.yaml b/config/prow/cluster/ghproxy.yaml
-index 61cc8368a4..b8cbbc4ea6 100644
+index f3a882a478..855bf5652f 100644
 --- a/config/prow/cluster/ghproxy.yaml
 +++ b/config/prow/cluster/ghproxy.yaml
 @@ -15,7 +15,6 @@
@@ -547,7 +605,7 @@ index 61cc8368a4..b8cbbc4ea6 100644
    # 3) If you are using GKE you can use the gce-ssd-retain storage class. It can be
    #    created with: `kubectl create -f config/prow/cluster/gce-ssd-retain_storageclass.yaml
 -  storageClassName: gce-ssd-retain
-+#  storageClassName: gce-ssd-retain
++  #  storageClassName: gce-ssd-retain
  ---
  apiVersion: apps/v1
  kind: Deployment
@@ -577,7 +635,7 @@ index 61cc8368a4..b8cbbc4ea6 100644
      spec:
        containers:
        - name: ghproxy
--        image: gcr.io/k8s-prow/ghproxy:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/ghproxy:v20230322-fad14aa00d
 +        image: {{ .Values.ghproxy.image }}
          args:
          - --cache-dir=/cache
@@ -618,7 +676,7 @@ index 61cc8368a4..b8cbbc4ea6 100644
  spec:
    ports:
 diff --git a/config/prow/cluster/hook_deployment.yaml b/config/prow/cluster/hook_deployment.yaml
-index 3884d90bce..8333694b39 100644
+index 61732fe7c8..8333694b39 100644
 --- a/config/prow/cluster/hook_deployment.yaml
 +++ b/config/prow/cluster/hook_deployment.yaml
 @@ -15,12 +15,11 @@
@@ -648,11 +706,11 @@ index 3884d90bce..8333694b39 100644
        labels:
          app: hook
      spec:
-@@ -38,32 +43,33 @@ spec:
+@@ -38,39 +43,33 @@ spec:
        terminationGracePeriodSeconds: 180
        containers:
        - name: hook
--        image: gcr.io/k8s-prow/hook:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/hook:v20230322-fad14aa00d
 +        image: {{ .Values.hook.image }}
          imagePullPolicy: Always
          args:
@@ -669,7 +727,14 @@ index 3884d90bce..8333694b39 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig"
+-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: AWS_ROLE_ARN
+-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
+-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
+-        - name: AWS_REGION
+-          value: us-east-2
 +        - name: AWS_STS_REGIONAL_ENDPOINTS
 +          value: regional
 +        - name: AWS_ROLE_SESSION_NAME
@@ -692,7 +757,7 @@ index 3884d90bce..8333694b39 100644
            mountPath: /etc/github
            readOnly: true
          - name: config
-@@ -75,24 +81,11 @@ spec:
+@@ -82,31 +81,11 @@ spec:
          - name: plugins
            mountPath: /etc/plugins
            readOnly: true
@@ -714,12 +779,19 @@ index 3884d90bce..8333694b39 100644
 -        - mountPath: /etc/kubeconfig-build-rules-k8s
 -          name: kubeconfig-build-rules-k8s
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+-          name: kubeconfig-eks-prow-build-cluster
+-          readOnly: true
+-        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-        - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+-          name: aws-iam-token
+-          readOnly: true
 +        - name: shared-bins
 +          mountPath: /shared-bins
          livenessProbe:
            httpGet:
              path: /healthz
-@@ -106,16 +99,26 @@ spec:
+@@ -120,16 +99,26 @@ spec:
            initialDelaySeconds: 10
            periodSeconds: 3
            timeoutSeconds: 600
@@ -751,7 +823,7 @@ index 3884d90bce..8333694b39 100644
        - name: config
          configMap:
            name: config
-@@ -125,25 +128,9 @@ spec:
+@@ -139,38 +128,9 @@ spec:
        - name: plugins
          configMap:
            name: plugins
@@ -780,6 +852,19 @@ index 3884d90bce..8333694b39 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-rules-k8s
+-      - name: kubeconfig-eks-prow-build-cluster
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-eks-prow-build-cluster
+-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-      - name: aws-iam-token
+-        projected:
+-          defaultMode: 420
+-          sources:
+-          - serviceAccountToken:
+-              audience: sts.amazonaws.com
+-              expirationSeconds: 86400
+-              path: token
 diff --git a/config/prow/cluster/hook_rbac.yaml b/config/prow/cluster/hook_rbac.yaml
 index 81a9e28df1..9c07a0fafc 100644
 --- a/config/prow/cluster/hook_rbac.yaml
@@ -839,7 +924,7 @@ index f83355a9a7..a636b60490 100644
 +  - port: 8888
 +  type: {{ .Values.hook.service.type }}
 diff --git a/config/prow/cluster/horologium_deployment.yaml b/config/prow/cluster/horologium_deployment.yaml
-index afcc87aa92..a15c7c30cd 100644
+index 62a88142a1..a15c7c30cd 100644
 --- a/config/prow/cluster/horologium_deployment.yaml
 +++ b/config/prow/cluster/horologium_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -867,7 +952,7 @@ index afcc87aa92..a15c7c30cd 100644
        terminationGracePeriodSeconds: 30
        containers:
        - name: horologium
--        image: gcr.io/k8s-prow/horologium:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/horologium:v20230322-fad14aa00d
 +        image: {{ .Values.horologium.image }}
          args:
          - --config-path=/etc/config/config.yaml
@@ -921,7 +1006,7 @@ index 27c3ce2228..bc61184280 100644
    name: "horologium"
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/prow_controller_manager_deployment.yaml b/config/prow/cluster/prow_controller_manager_deployment.yaml
-index a1ec26df3a..0399c1882e 100644
+index dad378dda5..0399c1882e 100644
 --- a/config/prow/cluster/prow_controller_manager_deployment.yaml
 +++ b/config/prow/cluster/prow_controller_manager_deployment.yaml
 @@ -15,12 +15,10 @@
@@ -937,7 +1022,7 @@ index a1ec26df3a..0399c1882e 100644
    replicas: 1
    strategy:
      type: RollingUpdate
-@@ -33,44 +31,50 @@ spec:
+@@ -33,58 +31,50 @@ spec:
        app: prow-controller-manager
    template:
      metadata:
@@ -953,7 +1038,7 @@ index a1ec26df3a..0399c1882e 100644
        serviceAccountName: prow-controller-manager
        containers:
        - name: prow-controller-manager
--        image: gcr.io/k8s-prow/prow-controller-manager:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/prow-controller-manager:v20230322-fad14aa00d
 +        image: {{ .Values.prowControllerManager.image }}
          args:
          - --config-path=/etc/config/config.yaml
@@ -968,7 +1053,14 @@ index a1ec26df3a..0399c1882e 100644
          env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig"
+-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: AWS_ROLE_ARN
+-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
+-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
+-        - name: AWS_REGION
+-          value: us-east-2
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -991,15 +1083,21 @@ index a1ec26df3a..0399c1882e 100644
 -        - mountPath: /etc/kubeconfig-build-rules-k8s
 -          name: kubeconfig-build-rules-k8s
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+-          name: kubeconfig-eks-prow-build-cluster
+-          readOnly: true
          - name: config
            mountPath: /etc/config
            readOnly: true
          - name: job-config
            mountPath: /etc/job-config
            readOnly: true
+-        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: aws-iam-token
+-          mountPath: /var/run/secrets/aws-iam-token/serviceaccount
 +        - name: github-token
 +          mountPath: /etc/github
-+          readOnly: true
+           readOnly: true
 +        - name: kubeconfig
 +          mountPath: /etc/kubeconfig
 +          readOnly: true
@@ -1008,7 +1106,7 @@ index a1ec26df3a..0399c1882e 100644
          livenessProbe: # Pod is killed if this fails 3 times.
            httpGet:
              path: /healthz
-@@ -83,26 +87,32 @@ spec:
+@@ -97,39 +87,32 @@ spec:
              port: 8081
            initialDelaySeconds: 10
            periodSeconds: 3
@@ -1027,7 +1125,8 @@ index a1ec26df3a..0399c1882e 100644
 +          mountPath: /shared-bins
        volumes:
 -      - name: kubeconfig
--        secret:
++      - name: github-token
+         secret:
 -          defaultMode: 420
 -          secretName: kubeconfig
 -      - name: kubeconfig-build-test-infra-trusted
@@ -1035,14 +1134,17 @@ index a1ec26df3a..0399c1882e 100644
 -          defaultMode: 420
 -          secretName: kubeconfig-build-test-infra-trusted
 -      - name: kubeconfig-build-k8s-prow-builds
-+      - name: github-token
-         secret:
+-        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-k8s-prow-builds
 -      - name: kubeconfig-build-rules-k8s
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-rules-k8s
+-      - name: kubeconfig-eks-prow-build-cluster
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-eks-prow-build-cluster
 +          secretName: github-token
        - name: config
          configMap:
@@ -1050,6 +1152,15 @@ index a1ec26df3a..0399c1882e 100644
        - name: job-config
          configMap:
            name: job-config
+-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-      - name: aws-iam-token
+-        projected:
+-          defaultMode: 420
+-          sources:
+-          - serviceAccountToken:
+-              audience: sts.amazonaws.com
+-              expirationSeconds: 86400
+-              path: token
 +      - name: shared-bins
 +        emptyDir: {}
 +      - name: kubeconfig
@@ -1057,7 +1168,7 @@ index a1ec26df3a..0399c1882e 100644
 +          defaultMode: 0644
 +          secretName: kubeconfig
 diff --git a/config/prow/cluster/prow_controller_manager_rbac.yaml b/config/prow/cluster/prow_controller_manager_rbac.yaml
-index 63e4f5ad56..6b33ac1032 100644
+index 63e4f5ad56..b95e6f000b 100644
 --- a/config/prow/cluster/prow_controller_manager_rbac.yaml
 +++ b/config/prow/cluster/prow_controller_manager_rbac.yaml
 @@ -12,16 +12,16 @@
@@ -1095,17 +1206,15 @@ index 63e4f5ad56..6b33ac1032 100644
 -  name: "prow-controller-manager"
 -rules:
  - apiGroups:
--   - ""
-+    - ""
+    - ""
    resources:
--  - pods
-+    - pods
+   - pods
    verbs:
 -  - create
 -  - delete
--  - list
--  - watch
--  - get
+   - list
+   - watch
+   - get
 -  - patch
 ----
 -kind: RoleBinding
@@ -1120,9 +1229,6 @@ index 63e4f5ad56..6b33ac1032 100644
 -subjects:
 -- kind: ServiceAccount
 -  name: "prow-controller-manager"
-+    - get
-+    - list
-+    - watch
  ---
  kind: RoleBinding
  apiVersion: rbac.authorization.k8s.io/v1
@@ -1138,7 +1244,7 @@ index 63e4f5ad56..6b33ac1032 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/sinker_deployment.yaml b/config/prow/cluster/sinker_deployment.yaml
-index e0fe0b9cd6..d707f54b13 100644
+index dcda551ef1..0829914b88 100644
 --- a/config/prow/cluster/sinker_deployment.yaml
 +++ b/config/prow/cluster/sinker_deployment.yaml
 @@ -1,7 +1,6 @@
@@ -1149,7 +1255,7 @@ index e0fe0b9cd6..d707f54b13 100644
    name: sinker
    labels:
      app: sinker
-@@ -12,63 +11,66 @@ spec:
+@@ -12,90 +11,66 @@ spec:
        app: sinker
    template:
      metadata:
@@ -1177,11 +1283,18 @@ index e0fe0b9cd6..d707f54b13 100644
          - --config-path=/etc/config/config.yaml
          - --job-config-path=/etc/job-config
 -        - --dry-run=false
--        image: gcr.io/k8s-prow/sinker:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/sinker:v20230322-fad14aa00d
 -        env:
 -        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
 -        - name: KUBECONFIG
--          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig"
+-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig"
+-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: AWS_ROLE_ARN
+-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
+-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
+-        - name: AWS_REGION
+-          value: us-east-2
 -        ports:
 -        - name: metrics
 -          containerPort: 9090
@@ -1200,15 +1313,21 @@ index e0fe0b9cd6..d707f54b13 100644
 -        - mountPath: /etc/kubeconfig-build-rules-k8s
 -          name: kubeconfig-build-rules-k8s
 -          readOnly: true
+-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+-          name: kubeconfig-eks-prow-build-cluster
+-          readOnly: true
          - name: config
            mountPath: /etc/config
            readOnly: true
          - name: job-config
            mountPath: /etc/job-config
            readOnly: true
+-        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-        - name: aws-iam-token
+-          mountPath: /var/run/secrets/aws-iam-token/serviceaccount
 +        - name: kubeconfig
 +          mountPath: /etc/kubeconfig
-+          readOnly: true
+           readOnly: true
 +        - name: shared-bins
 +          mountPath: /shared-bins
 +      initContainers:
@@ -1241,20 +1360,39 @@ index e0fe0b9cd6..d707f54b13 100644
 -        secret:
 -          defaultMode: 420
 -          secretName: kubeconfig-build-rules-k8s
-       - name: config
-         configMap:
-           name: config
-       - name: job-config
-         configMap:
-           name: job-config
-+      - name: shared-bins
-+        emptyDir: {}
-+      - name: kubeconfig
-+        secret:
-+          defaultMode: 0644
-+          secretName: kubeconfig
+-      - name: kubeconfig-eks-prow-build-cluster
+-        secret:
+-          defaultMode: 420
+-          secretName: kubeconfig-eks-prow-build-cluster
+-      - name: config
+-        configMap:
+-          name: config
+-      - name: job-config
+-        configMap:
+-          name: job-config
+-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+-      - name: aws-iam-token
+-        projected:
+-          defaultMode: 420
+-          sources:
+-          - serviceAccountToken:
+-              audience: sts.amazonaws.com
+-              expirationSeconds: 86400
+-              path: token
++        - name: config
++          configMap:
++            name: config
++        - name: job-config
++          configMap:
++            name: job-config
++        - name: shared-bins
++          emptyDir: {}
++        - name: kubeconfig
++          secret:
++            defaultMode: 0644
++            secretName: kubeconfig
 diff --git a/config/prow/cluster/sinker_rbac.yaml b/config/prow/cluster/sinker_rbac.yaml
-index 70eb9b52bc..87f30fe1d2 100644
+index 70eb9b52bc..c5792a22e0 100644
 --- a/config/prow/cluster/sinker_rbac.yaml
 +++ b/config/prow/cluster/sinker_rbac.yaml
 @@ -1,13 +1,13 @@
@@ -1285,16 +1423,14 @@ index 70eb9b52bc..87f30fe1d2 100644
 -  name: "sinker"
 -rules:
    - apiGroups:
--      - ""
-+    - ""
+       - ""
      resources:
--      - pods
-+    - pods
+       - pods
      verbs:
 -      - delete
--      - list
--      - watch
--      - get
+       - list
+       - watch
+       - get
 -      - patch
 ----
 -kind: RoleBinding
@@ -1309,9 +1445,6 @@ index 70eb9b52bc..87f30fe1d2 100644
 -subjects:
 -- kind: ServiceAccount
 -  name: "sinker"
-+    - get
-+    - list
-+    - watch
  ---
  kind: RoleBinding
  apiVersion: rbac.authorization.k8s.io/v1
@@ -1327,7 +1460,7 @@ index 70eb9b52bc..87f30fe1d2 100644
 -  namespace: default
 +  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/statusreconciler_deployment.yaml b/config/prow/cluster/statusreconciler_deployment.yaml
-index ddc6d45531..6dccad51d6 100644
+index 16b35ca976..6dccad51d6 100644
 --- a/config/prow/cluster/statusreconciler_deployment.yaml
 +++ b/config/prow/cluster/statusreconciler_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1342,7 +1475,7 @@ index ddc6d45531..6dccad51d6 100644
        terminationGracePeriodSeconds: 180
        containers:
        - name: statusreconciler
--        image: gcr.io/k8s-prow/status-reconciler:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/status-reconciler:v20230322-fad14aa00d
 +        image: {{ .Values.statusreconciler.image }}
          imagePullPolicy: Always
          args:
@@ -1396,7 +1529,7 @@ index ddc6d45531..6dccad51d6 100644
 +        secret:
 +          secretName: s3-credentials
 diff --git a/config/prow/cluster/statusreconciler_rbac.yaml b/config/prow/cluster/statusreconciler_rbac.yaml
-index 847cfb47c1..1def1c63f7 100644
+index 847cfb47c1..2f0bbdedcb 100644
 --- a/config/prow/cluster/statusreconciler_rbac.yaml
 +++ b/config/prow/cluster/statusreconciler_rbac.yaml
 @@ -1,13 +1,13 @@
@@ -1423,13 +1556,14 @@ index 847cfb47c1..1def1c63f7 100644
    name: statusreconciler
  roleRef:
    apiGroup: rbac.authorization.k8s.io
-@@ -29,3 +28,4 @@ roleRef:
+@@ -28,4 +27,4 @@ roleRef:
+   name: statusreconciler
  subjects:
  - kind: ServiceAccount
-   name: statusreconciler
-+  namespace: {{ .Release.Namespace }}
+-  name: statusreconciler
++  name: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/tide_deployment.yaml b/config/prow/cluster/tide_deployment.yaml
-index 54134c3eda..3f9d26f8f4 100644
+index 3b26a7e2dd..3f9d26f8f4 100644
 --- a/config/prow/cluster/tide_deployment.yaml
 +++ b/config/prow/cluster/tide_deployment.yaml
 @@ -15,7 +15,6 @@
@@ -1456,7 +1590,7 @@ index 54134c3eda..3f9d26f8f4 100644
        serviceAccountName: tide
        containers:
        - name: tide
--        image: gcr.io/k8s-prow/tide:v20221104-4497ace285
+-        image: gcr.io/k8s-prow/tide:v20230322-fad14aa00d
 +        image: {{ .Values.tide.image }}
          args:
 -        - --dry-run=false
@@ -1514,7 +1648,7 @@ index 54134c3eda..3f9d26f8f4 100644
 +        secret:
 +          secretName: s3-credentials
 diff --git a/config/prow/cluster/tide_rbac.yaml b/config/prow/cluster/tide_rbac.yaml
-index 65ce3f5704..4c294156ac 100644
+index 65ce3f5704..0505d674cc 100644
 --- a/config/prow/cluster/tide_rbac.yaml
 +++ b/config/prow/cluster/tide_rbac.yaml
 @@ -1,15 +1,13 @@
@@ -1535,15 +1669,7 @@ index 65ce3f5704..4c294156ac 100644
    name: tide
  rules:
    - apiGroups:
-@@ -25,7 +23,6 @@ rules:
- kind: RoleBinding
- apiVersion: rbac.authorization.k8s.io/v1
- metadata:
--  namespace: default
-   name: tide
- roleRef:
-   apiGroup: rbac.authorization.k8s.io
-@@ -34,3 +31,4 @@ roleRef:
+@@ -34,3 +32,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: tide
@@ -1574,5 +1700,5 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    protocol: TCP
 -  type: ClusterIP
 -- 
-2.37.0
+2.40.0
 
