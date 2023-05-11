@@ -33,11 +33,14 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
 
 CHANGED_FILE="tag file(s)"
+CHANGED_COMPONENT="base image"
 if [[ $REPO =~ "prow-jobs" ]]; then
     CHANGED_FILE="Prowjobs"
+    CHANGED_COMPONENT="builder-base image tag"
 fi
 if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
-    CHANGED_FILE="Prow controlplane Helm chart values"
+    CHANGED_FILE="Prow controlplane Helm chart"
+    CHANGED_COMPONENT="Prow component images"
 fi
 
 if [ $REPO_OWNER = "aws" ]; then
@@ -46,21 +49,14 @@ else
     ORIGIN_ORG=$REPO_OWNER
 fi
 
-COMMIT_MESSAGE="[PR BOT] Update base image tag file(s)"
-if [[ $REPO =~ "prow-jobs" ]]; then
-    COMMIT_MESSAGE="[PR BOT] Update builder-base image tag in Prow jobs"
-fi
-if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
-    COMMIT_MESSAGE="[PR BOT] Update deck image in Prow controlplane Helm chart values"
-fi
+PR_TITLE="Update ${CHANGED_COMPONENT} in ${CHANGED_FILE}"
+COMMIT_MESSAGE="[PR BOT] ${PR_TITLE}"
 
-PR_TITLE="Update base image tag in ${CHANGED_FILE}"
 if [[ $REPO =~ "prow-jobs" ]]; then
     PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/builder_base_pr_body
 else
     if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
-        PR_TITLE="Update deck image tag in ${CHANGED_FILE}"
-        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/prow_deck_pr_body
+        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/prow_cp_pr_body
     else
         PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_other_repo_pr_body
         if [ $REPO = "eks-distro-build-tooling" ]; then

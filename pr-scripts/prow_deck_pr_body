@@ -1,1 +1,0 @@
-This PR updates the Prow deck image URI in the Prow controlplane Helm chart values file with tag from the latest build.
