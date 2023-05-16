@@ -16,7 +16,7 @@ filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
-glib2-2.56.1-9.amzn2.0.2.aarch64
+glib2-2.56.1-9.amzn2.0.3.aarch64
 glibc-2.26-63.amzn2.aarch64
 glibc-common-2.26-63.amzn2.aarch64
 glibc-minimal-langpack-2.26-63.amzn2.aarch64
@@ -48,7 +48,7 @@ libmount-2.30.2-2.amzn2.0.11.aarch64
 libnghttp2-1.41.0-1.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
-libssh2-1.4.3-12.amzn2.2.3.aarch64
+libssh2-1.4.3-12.amzn2.2.4.aarch64
 libstdc++-7.3.1-15.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64

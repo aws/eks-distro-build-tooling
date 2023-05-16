@@ -13,7 +13,7 @@ gpg-pubkey-c87f5b1a-593863f8
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
 libcap-2.54-1.amzn2.0.1.aarch64
-libcrypt-2.26-62.amzn2.aarch64
+libcrypt-2.26-63.amzn2.aarch64
 libgcc-7.3.1-15.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
@@ -24,7 +24,7 @@ nginx-1.22.1-1.amzn2.0.2.aarch64
 nginx-core-1.22.1-1.amzn2.0.2.aarch64
 nginx-filesystem-1.22.1-1.amzn2.0.2.noarch
 openssl-libs-1.0.2k-24.amzn2.0.6.aarch64
-openssl11-libs-1.1.1g-12.amzn2.0.13.aarch64
+openssl11-libs-1.1.1g-12.amzn2.0.14.aarch64
 pcre-8.32-17.amzn2.0.2.aarch64
 pcre2-10.23-11.amzn2.0.1.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
