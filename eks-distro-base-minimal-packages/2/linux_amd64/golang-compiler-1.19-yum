@@ -30,7 +30,7 @@ fipscheck-lib-1.4.1-6.amzn2.0.2.x86_64
 gawk-4.0.2-4.amzn2.1.2.x86_64
 gdbm-1.13-6.amzn2.0.2.x86_64
 git-core-2.39.2-1.amzn2.0.1.x86_64
-glib2-2.56.1-9.amzn2.0.2.x86_64
+glib2-2.56.1-9.amzn2.0.3.x86_64
 glibc-2.26-63.amzn2.x86_64
 glibc-common-2.26-63.amzn2.x86_64
 glibc-minimal-langpack-2.26-63.amzn2.x86_64
@@ -72,7 +72,7 @@ libselinux-2.5-12.amzn2.0.2.x86_64
 libsemanage-2.5-11.amzn2.x86_64
 libsepol-2.5-8.1.amzn2.0.2.x86_64
 libsmartcols-2.30.2-2.amzn2.0.11.x86_64
-libssh2-1.4.3-12.amzn2.2.3.x86_64
+libssh2-1.4.3-12.amzn2.2.4.x86_64
 libstdc++-7.3.1-15.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
 libutempter-1.1.6-4.amzn2.0.2.x86_64
