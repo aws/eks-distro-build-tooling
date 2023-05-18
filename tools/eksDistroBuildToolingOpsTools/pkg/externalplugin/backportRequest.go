@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"sync"
 
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/sirupsen/logrus"
 	"k8s.io/test-infra/prow/github"
 )
@@ -42,7 +43,7 @@ func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, commen
 			return err
 		}
 		if !ok {
-			resp := fmt.Sprintf("only [%s](https://github.com/orgs/%s/people) org members may request may trigger automated issues. You can still create the issue manually.", org, org)
+			resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
 			l.Info(resp)
 			return s.Ghc.CreateComment(org, repo, num, resp)
 		}
