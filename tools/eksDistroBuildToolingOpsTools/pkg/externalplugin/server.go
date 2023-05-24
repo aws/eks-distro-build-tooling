@@ -26,6 +26,7 @@ type githubClient interface {
 	FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error)
 	GetIssue(org, repo string, number int) (*github.Issue, error)
 	IsMember(org, user string) (bool, error)
+	EnsureFork(forkingUser, org, repo string) (string, error)
 }
 
 var versionsRe = regexp.MustCompile(fmt.Sprintf(`(?m)(%s)`, constants.SemverRegex))
@@ -71,9 +72,16 @@ type Server struct {
 	PatchURL string
 
 	Repos              []github.Repo
-	mapLock            sync.Mutex
+	mapLock            sync.Mutex // why mapLock?
 	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
 	lockBackportMap    map[backportRequest]*sync.Mutex
+}
+
+type backportGolangRequest struct {
+	org          string
+	repo         string
+	pr           int
+	targetBranch string
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
@@ -213,4 +221,20 @@ func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num
 	}
 
 	return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for: #%d", issueNum))
+}
+
+// ensureForkExists ensures a fork of org/repo exists for the bot.
+func (s *Server) ensureForkExists(org, repo string) (string, error) {
+	fork := s.BotUser.Login + "/" + repo
+
+	// fork repo if it doesn't exist
+	repo, err := s.Ghc.EnsureFork(s.BotUser.Login, org, repo)
+	if err != nil {
+		return repo, err
+	}
+
+	s.mapLock.Lock()
+	defer s.mapLock.Unlock()
+	s.Repos = append(s.Repos, github.Repo{FullName: fork, Fork: true})
+	return repo, nil
 }
