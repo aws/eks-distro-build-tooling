@@ -4098,8 +4098,8 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.1MiB /usr/lib64/systemd/libsystemd-core-252.4-1161.amzn2023.0.3.so
--rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.4-1161.amzn2023.0.3.so
+-rwxr-xr-x   2.1MiB /usr/lib64/systemd/libsystemd-core-252.4-1161.amzn2023.0.4.so
+-rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.4-1161.amzn2023.0.4.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_among.so
