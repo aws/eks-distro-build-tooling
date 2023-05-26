@@ -21,6 +21,8 @@ type backportRequest struct {
 var backportRe = regexp.MustCompile(`(?m)^(?:/backport:)([a-zA-z]+)\s+(.+)$`)
 
 func (s *Server) handleBackportRequest(l *logrus.Entry, requestor string, comment *github.IssueComment, issue *github.Issue, project string, versions []string, org, repo string, num int) error {
+
+	//lock repo
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()

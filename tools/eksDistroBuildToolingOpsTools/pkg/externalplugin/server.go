@@ -26,6 +26,7 @@ type githubClient interface {
 	FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error)
 	GetIssue(org, repo string, number int) (*github.Issue, error)
 	IsMember(org, user string) (bool, error)
+	CreateFork(org, repo string) (string, error)
 	EnsureFork(forkingUser, org, repo string) (string, error)
 }
 
@@ -34,7 +35,9 @@ var versionsRe = regexp.MustCompile(fmt.Sprintf(`(?m)(%s)`, constants.SemverRege
 // HelpProvider construct the pluginhelp.PluginHelp for this plugin.
 func HelpProvider(_ []config.OrgRepo) (*pluginhelp.PluginHelp, error) {
 	pluginHelp := &pluginhelp.PluginHelp{
-		Description: `The golang patch release plugin is used for EKS-Distro automation creating issues of upstream Golang security fixes for EKS supported versions. For every successful golang patch release trigger, a new issue is created that mirrors upstream security issues and assigned to the requestor.`,
+		Description: `The golang patch release plugin is used for EKS-Distro automation creating issues of upstream 
+		Golang security fixes for EKS supported versions. For every successful golang patch release trigger, a new 
+		issue is created that mirrors upstream security issues and assigned to the requestor.`,
 	}
 	pluginHelp.AddCommand(pluginhelp.Command{
 		Usage:       "Triggered off issues with |Golang Patch Release: | in title",
@@ -72,16 +75,9 @@ type Server struct {
 	PatchURL string
 
 	Repos              []github.Repo
-	mapLock            sync.Mutex // why mapLock?
+	mapLock            sync.Mutex
 	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
 	lockBackportMap    map[backportRequest]*sync.Mutex
-}
-
-type backportGolangRequest struct {
-	org          string
-	repo         string
-	pr           int
-	targetBranch string
 }
 
 // ServeHTTP validates an incoming webhook and puts it into the event channel.
@@ -156,7 +152,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 		}
 	}
 	//TODO: add golangMinorMatches := golangMinorReleaseRe.FindAllStringSubmatch(ie.Issue.Title, -1)
-	//Regex for thisi is below.
+	//Regex for this is below.
 	//var golangMinorReleaseRe = regexp.MustCompile(`(?m)^(?:Golang Minor Release:)\s+(.+)$`)
 
 	return nil
@@ -180,8 +176,8 @@ func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent
 		github.PrLogField:   num,
 	})
 	// backportMatches should hold 3 values:
-	// backportMatches[0] holds the full comment body
-	// backportMatches[1] holds the project
+	// backportMatches[0] holds the full comment body ("/backport:")
+	// backportMatches[1] holds the project ("golang")
 	// backportMatches[2] holds the versions to backport to unparsed. ("v1.2.2 ...")
 	backportMatches := backportRe.FindStringSubmatch(ic.Comment.Body)
 	versions := versionsRe.FindAllString(backportMatches[2], -1)
@@ -227,7 +223,7 @@ func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num
 func (s *Server) ensureForkExists(org, repo string) (string, error) {
 	fork := s.BotUser.Login + "/" + repo
 
-	// fork repo if it doesn't exist
+	// fork repo if it doesn't exist using github-client
 	repo, err := s.Ghc.EnsureFork(s.BotUser.Login, org, repo)
 	if err != nil {
 		return repo, err

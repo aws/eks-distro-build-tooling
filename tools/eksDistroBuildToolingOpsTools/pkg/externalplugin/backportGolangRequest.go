@@ -11,7 +11,10 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 )
 
-func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment *github.IssueComment, issue *github.Issue, targetBranch string, project string, versions []string, org, repo string, num int) error {
+func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment *github.IssueComment,
+	issue *github.Issue, project string, versions []string, org, repo string, num int) error {
+
+	//lock repo
 	var lock *sync.Mutex
 	func() {
 		s.mapLock.Lock()
@@ -40,6 +43,7 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 		}
 	}
 
+	// ensure fork exists and if not create a fork
 	forkName, err := s.ensureForkExists(org, repo)
 	if err != nil {
 		logger.WithError(err).Warn("failed to ensure fork exists")
@@ -47,23 +51,35 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 		return s.createComment(logger, org, repo, num, comment, resp)
 	}
 
-	// Clone the repo, checkout the target branch.
-	startClone := time.Now()
-	r, err := s.Gc.ClientFor(org, repo)
+	// ensure fork exists and if not create a fork for golang/go
+	forkNameGo, err := s.ensureForkExists(constants.GolangOrgName, constants.GoRepoName)
 	if err != nil {
-		return fmt.Errorf("failed to get git client for %s/%s: %w", org, forkName, err)
-	}
-	defer func() {
-		if err := r.Clean(); err != nil {
-			logger.WithError(err).Error("Error cleaning up repo.")
-		}
-	}()
-	if err := r.Checkout(targetBranch); err != nil {
-		logger.WithError(err).Warn("failed to checkout target branch")
-		resp := fmt.Sprintf("cannot checkout `%s`: %v", targetBranch, err)
+		logger.WithError(err).Warn("failed to ensure fork exists")
+		resp := fmt.Sprintf("cannot fork %s/%s: %v", constants.GolangOrgName, constants.GoRepoName, err)
 		return s.createComment(logger, org, repo, num, comment, resp)
 	}
-	logger.WithField("duration", time.Since(startClone)).Info("Cloned and checked out target branch.")
+
+	for _, version := range versions {
+		// Clone the golang repo and checkout the golang version
+		startClone := time.Now()
+		r, err := s.Gc.ClientFor(constants.GolangOrgName, constants.GoRepoName)
+		if err != nil {
+			return fmt.Errorf("failed to get git client for %s/%s: %w", constants.GolangOrgName, forkNameGo, err)
+		}
+		defer func() {
+			if err := r.Clean(); err != nil {
+				logger.WithError(err).Error("Error cleaning up repo.")
+			}
+		}()
+		if err := r.Checkout(version); err != nil {
+			logger.WithError(err).Warn("failed to checkout Golang version")
+			resp := fmt.Sprintf("cannot checkout %f: %v", version, err)
+			return s.createComment(logger, org, repo, num, comment, resp)
+		}
+		logger.WithFields(logrus.Fields{"version": version, "duration": time.Since(startClone)}).Info("Cloned and checked out Golang ")
+
+		//
+	}
 
 	return nil
 }
