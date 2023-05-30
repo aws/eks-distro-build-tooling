@@ -64,7 +64,7 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 		startClone := time.Now()
 		r, err := s.Gc.ClientFor(constants.GolangOrgName, constants.GoRepoName)
 		if err != nil {
-			return fmt.Errorf("failed to get git client for %s/%s: %w", constants.GolangOrgName, forkNameGo, err)
+			return fmt.Errorf("failed to get git client for %s/%s: %v", constants.GolangOrgName, forkNameGo, err)
 		}
 		defer func() {
 			if err := r.Clean(); err != nil {
@@ -78,7 +78,17 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 		}
 		logger.WithFields(logrus.Fields{"version": version, "duration": time.Since(startClone)}).Info("Cloned and checked out Golang ")
 
-		//
+		// use github-client-getDirectory method to get patch content
+		dirPath := "projects/golang/go/" + version + "/patches"
+
+		patchDirectoryContent, err := s.Ghc.GetDirectory(constants.AwsOrgName, constants.EksdBuildToolingRepoName, dirPath, "")
+
+		if err != nil {
+			return fmt.Errorf("Find patch directory content for version %f: %v", version, err)
+		}
+
+		// apply patch directory content
+
 	}
 
 	return nil

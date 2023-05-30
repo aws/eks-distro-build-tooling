@@ -24,6 +24,7 @@ type githubClient interface {
 	CreateComment(org, repo string, number int, comment string) error
 	CreateIssue(org, repo, title, body string, milestone int, labels, assignees []string) (int, error)
 	FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error)
+	GetDirectory(org, repo, dirpath string, commit string) ([]github.DirectoryContent, error)
 	GetIssue(org, repo string, number int) (*github.Issue, error)
 	IsMember(org, user string) (bool, error)
 	CreateFork(org, repo string) (string, error)
