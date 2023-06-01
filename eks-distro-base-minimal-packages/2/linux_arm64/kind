@@ -32,7 +32,7 @@ filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
-glib2-2.56.1-9.amzn2.0.3.aarch64
+glib2-2.56.1-9.amzn2.0.5.aarch64
 glibc-2.26-63.amzn2.aarch64
 glibc-common-2.26-63.amzn2.aarch64
 glibc-minimal-langpack-2.26-63.amzn2.aarch64
@@ -150,7 +150,7 @@ rpm-4.11.3-48.amzn2.0.3.aarch64
 rpm-build-libs-4.11.3-48.amzn2.0.3.aarch64
 rpm-libs-4.11.3-48.amzn2.0.3.aarch64
 rsync-3.1.2-11.amzn2.0.1.aarch64
-runc-1.1.4-1.amzn2.0.1.aarch64
+runc-1.1.5-1.amzn2.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.2.aarch64
@@ -162,7 +162,7 @@ system-release-2-14.amzn2.aarch64
 systemd-219-78.amzn2.0.22.aarch64
 systemd-libs-219-78.amzn2.0.22.aarch64
 systemd-sysv-219-78.amzn2.0.22.aarch64
-tar-1.26-35.amzn2.0.1.aarch64
+tar-1.26-35.amzn2.0.2.aarch64
 tcp_wrappers-7.6-77.amzn2.0.2.aarch64
 tcp_wrappers-libs-7.6-77.amzn2.0.2.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch

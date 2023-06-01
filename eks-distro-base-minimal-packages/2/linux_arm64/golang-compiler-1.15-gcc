@@ -32,7 +32,7 @@ gawk-4.0.2-4.amzn2.1.2.aarch64
 gcc-7.3.1-15.amzn2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
 git-core-2.39.2-1.amzn2.0.1.aarch64
-glib2-2.56.1-9.amzn2.0.3.aarch64
+glib2-2.56.1-9.amzn2.0.5.aarch64
 glibc-2.26-63.amzn2.aarch64
 glibc-common-2.26-63.amzn2.aarch64
 glibc-devel-2.26-63.amzn2.aarch64
@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.aarch64
 groff-base-1.22.2-8.amzn2.0.2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 info-5.1-5.amzn2.aarch64
-kernel-headers-4.14.314-237.533.amzn2.aarch64
+kernel-headers-4.14.314-238.539.amzn2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
@@ -137,7 +137,7 @@ sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
 systemd-219-78.amzn2.0.22.aarch64
 systemd-libs-219-78.amzn2.0.22.aarch64
-tar-1.26-35.amzn2.0.1.aarch64
+tar-1.26-35.amzn2.0.2.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
 util-linux-2.30.2-2.amzn2.0.11.aarch64
