@@ -16,7 +16,7 @@ filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
-glib2-2.56.1-9.amzn2.0.3.aarch64
+glib2-2.56.1-9.amzn2.0.5.aarch64
 glibc-2.26-63.amzn2.aarch64
 glibc-common-2.26-63.amzn2.aarch64
 glibc-minimal-langpack-2.26-63.amzn2.aarch64
@@ -92,7 +92,7 @@ setup-2.8.71-10.amzn2.0.1.noarch
 shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
-tar-1.26-35.amzn2.0.1.aarch64
+tar-1.26-35.amzn2.0.2.aarch64
 tzdata-2022g-1.amzn2.0.2.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64

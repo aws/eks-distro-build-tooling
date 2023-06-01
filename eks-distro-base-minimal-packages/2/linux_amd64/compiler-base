@@ -62,7 +62,7 @@ sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 sqlite-3.7.17-8.amzn2.1.2.x86_64
 system-release-2-14.amzn2.x86_64
-tar-1.26-35.amzn2.0.1.x86_64
+tar-1.26-35.amzn2.0.2.x86_64
 tzdata-2022g-1.amzn2.0.2.noarch
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
