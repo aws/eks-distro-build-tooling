@@ -175,6 +175,7 @@ Patch18:  0018-go-1.17.13-eks-html-template-handle-all-JS-wh.patch
 Patch19:  0019-go-1.17.13-eks-html-template-disallow-angle-b.patch
 Patch20:  0020-go-1.17.13-eks-cmd-go-cgo-in-_cgo_flags-use-one-line-per-flag.patch
 Patch21:  0021-go-1.17.13-eks-cmd-go-enforce-flags-with-non-optional-arguments.patch
+Patch22:  0022-go-1.17.13-eks-cmd-go-disallow-package-directories-containing-newlines.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
