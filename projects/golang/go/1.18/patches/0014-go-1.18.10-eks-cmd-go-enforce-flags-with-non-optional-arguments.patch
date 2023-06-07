@@ -4,6 +4,15 @@ Date: Fri, 5 May 2023 13:10:34 -0700
 Subject: [PATCH] [release-branch.go1.19] cmd/go: enforce flags with
  non-optional arguments
 
+# AWS EKS
+Backported To: go-1.18.10-eks
+Backported On: Wed, 7 Jun 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/bf3c8ce03e175e870763901a3850bca01381a828
+
+# Original Information
+
 Enforce that linker flags which expect arguments get them, otherwise it
 may be possible to smuggle unexpected flags through as the linker can
 consume what looks like a flag as an argument to a preceding flag (i.e.
