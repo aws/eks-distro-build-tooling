@@ -1,0 +1,90 @@
+From bf3c8ce03e175e870763901a3850bca01381a828 Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <bracewell@google.com>
+Date: Fri, 5 May 2023 13:10:34 -0700
+Subject: [PATCH] [release-branch.go1.19] cmd/go: enforce flags with
+ non-optional arguments
+
+# AWS EKS
+Backported To: go-1.17.13-eks
+Backported On: Wed, 7 Jun 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/bf3c8ce03e175e870763901a3850bca01381a828
+
+# Original Information
+
+Enforce that linker flags which expect arguments get them, otherwise it
+may be possible to smuggle unexpected flags through as the linker can
+consume what looks like a flag as an argument to a preceding flag (i.e.
+"-Wl,-O -Wl,-R,-bad-flag" is interpreted as "-O=-R -bad-flag"). Also be
+somewhat more restrictive in the general format of some flags.
+
+Thanks to Juho Nurminen of Mattermost for reporting this issue.
+
+Updates #60305
+Fixes #60511
+Fixes CVE-2023-29404
+
+Change-Id: Icdffef2c0f644da50261cace6f43742783931cff
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1876275
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+(cherry picked from commit 896779503cf754cbdac24b61d4cc953b50fe2dde)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1902225
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1904342
+Reviewed-by: Michael Knyszek <mknyszek@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/501217
+Auto-Submit: Michael Knyszek <mknyszek@google.com>
+Run-TryBot: David Chase <drchase@google.com>
+TryBot-Bypass: Michael Knyszek <mknyszek@google.com>
+---
+ src/cmd/go/internal/work/security.go      | 6 +++---
+ src/cmd/go/internal/work/security_test.go | 5 +++++
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/src/cmd/go/internal/work/security.go b/src/cmd/go/internal/work/security.go
+index f4f1880c84..270a34e9c7 100644
+--- a/src/cmd/go/internal/work/security.go
++++ b/src/cmd/go/internal/work/security.go
+@@ -180,10 +180,10 @@ var validLinkerFlags = []*lazyregexp.Regexp{
+ 	re(`-Wl,-berok`),
+ 	re(`-Wl,-Bstatic`),
+ 	re(`-Wl,-Bsymbolic-functions`),
+-	re(`-Wl,-O([^@,\-][^,]*)?`),
++	re(`-Wl,-O[0-9]+`),
+ 	re(`-Wl,-d[ny]`),
+ 	re(`-Wl,--disable-new-dtags`),
+-	re(`-Wl,-e[=,][a-zA-Z0-9]*`),
++	re(`-Wl,-e[=,][a-zA-Z0-9]+`),
+ 	re(`-Wl,--enable-new-dtags`),
+ 	re(`-Wl,--end-group`),
+ 	re(`-Wl,--(no-)?export-dynamic`),
+@@ -192,7 +192,7 @@ var validLinkerFlags = []*lazyregexp.Regexp{
+ 	re(`-Wl,--hash-style=(sysv|gnu|both)`),
+ 	re(`-Wl,-headerpad_max_install_names`),
+ 	re(`-Wl,--no-undefined`),
+-	re(`-Wl,-R([^@\-][^,@]*$)`),
++	re(`-Wl,-R,?([^@\-,][^,@]*$)`),
+ 	re(`-Wl,--just-symbols[=,]([^,@\-][^,@]+)`),
+ 	re(`-Wl,-rpath(-link)?[=,]([^,@\-][^,]+)`),
+ 	re(`-Wl,-s`),
+diff --git a/src/cmd/go/internal/work/security_test.go b/src/cmd/go/internal/work/security_test.go
+index 8cecc74eae..c05ba7b9a4 100644
+--- a/src/cmd/go/internal/work/security_test.go
++++ b/src/cmd/go/internal/work/security_test.go
+@@ -230,6 +230,11 @@ var badLinkerFlags = [][]string{
+ 	{"-Wl,-R,@foo"},
+ 	{"-Wl,--just-symbols,@foo"},
+ 	{"../x.o"},
++	{"-Wl,-R,"},
++	{"-Wl,-O"},
++	{"-Wl,-e="},
++	{"-Wl,-e,"},
++	{"-Wl,-R,-flag"},
+ }
+ 
+ func TestCheckLinkerFlags(t *testing.T) {
+-- 
+2.39.2
+
