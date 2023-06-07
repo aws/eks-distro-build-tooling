@@ -481,7 +481,7 @@
 -rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
--rwxr-xr-x   1.3MiB /usr/sbin/nginx
+-rwxr-xr-x   1.4MiB /usr/sbin/nginx
 -rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwxr-xr-x    61KiB /usr/sbin/zic
 -rw-r--r--    35KiB /usr/share/doc/gettext/COPYING
@@ -726,7 +726,7 @@
 -rw-r--r--     198B /usr/share/vim/vimfiles/ftdetect/nginx.vim
 -rw-r--r--      29B /usr/share/vim/vimfiles/ftplugin/nginx.vim
 -rw-r--r--     250B /usr/share/vim/vimfiles/indent/nginx.vim
--rw-r--r--   137KiB /usr/share/vim/vimfiles/syntax/nginx.vim
+-rw-r--r--   113KiB /usr/share/vim/vimfiles/syntax/nginx.vim
 -rw-r--r--     148B /usr/share/zoneinfo/Africa/Abidjan
 -rw-r--r--     148B /usr/share/zoneinfo/Africa/Accra
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Addis_Ababa

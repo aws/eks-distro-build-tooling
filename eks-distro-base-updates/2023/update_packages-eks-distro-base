@@ -1,2 +1,4 @@
 
-openssl-libs.x86_64
+curl-minimal.x86_64
+libcap.x86_64
+libcurl-minimal.x86_64
