@@ -173,6 +173,7 @@ Patch10:      0010-go-1.18.10-eks-html-template-emit-filterFails.patch
 Patch11:      0011-go-1.18.10-eks-html-template-handle-all-JS-wh.patch
 Patch12:      0012-go-1.18.10-eks-html-template-disallow-angle-b.patch
 Patch13:      0013-go-1.18.10-eks-cmd-go-cmd-cgo-in-_cgo_flags-u.patch
+Patch14:      0014-go-1.18.10-eks
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
