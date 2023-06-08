@@ -1,7 +1,50 @@
 From c75c44832a1e0d228035ba8b0878ffa9c9298829 Mon Sep 17 00:00:00 2001
 From: "Bryan C. Mills" <bcmills@google.com>
 Date: Fri, 12 May 2023 14:15:16 -0400
-Subject: [PATCH] disallow package directories containi
+Subject: [PATCH] disallow package directories containining newlines
+
+# AWS EKS
+Backported To: go-1.18.10-eks
+Backported On: Wed, 7 Jun 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/c160b49b6d328c86bd76ca2fff9009a71347333f
+
+To resolve the merge conflict in script_test.go, both changes are accepted. 
+
+# Original Information
+
+Directory or file paths containing newlines may cause tools (such as
+cmd/cgo) that emit "//line" or "#line" -directives to write part of
+the path into non-comment lines in generated source code. If those
+lines contain valid Go code, it may be injected into the resulting
+binary.
+
+(Note that Go import paths and file paths within module zip files
+already could not contain newlines.)
+
+Thanks to Juho Nurminen of Mattermost for reporting this issue.
+
+Updates #60167.
+Fixes #60515.
+Fixes CVE-2023-29402.
+
+Change-Id: If55d0400c02beb7a5da5eceac60f1abeac99f064
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1882606
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Russ Cox <rsc@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+(cherry picked from commit 41f9046495564fc728d6f98384ab7276450ac7e2)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1902229
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1904343
+Reviewed-by: Michael Knyszek <mknyszek@google.com>
+Reviewed-by: Bryan Mills <bcmills@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/501218
+Run-TryBot: David Chase <drchase@google.com>
+Auto-Submit: Michael Knyszek <mknyszek@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+
 
 ---
  src/cmd/go/internal/load/pkg.go               |   4 +
