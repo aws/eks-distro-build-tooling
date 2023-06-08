@@ -172,9 +172,9 @@ Patch9:       0009-go-1.18.10-eks-mime-multipart-limit-parsed-mi.patch
 Patch10:      0010-go-1.18.10-eks-html-template-emit-filterFails.patch
 Patch11:      0011-go-1.18.10-eks-html-template-handle-all-JS-wh.patch
 Patch12:      0012-go-1.18.10-eks-html-template-disallow-angle-b.patch
-Patch13:      0013-go-1.18.10-eks-cmd-go-cgo-in-_cgo_flags-use-one-line-per-flag.patch
-Patch14:      0014-go-1.18.10-eks-cmd-go-enforce-flags-with-non-optional-arguments.patch
-Patch15:      0015-go-1.18.10-eks-cmd-go-disallow-package-direction-containing-newlines.patch
+Patch13:      0013-go-1.18.10-eks-cmd-go-disallow-package-directories-containing-newlines.patch
+Patch14:      0014-go-1.18.10-eks-cmd-go-cgo-in-_cgo_flags-use-one-line-per-flag.patch
+Patch15:      0015-go-1.18.10-eks-cmd-go-enforce-flags-with-non-optional-arguments.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
