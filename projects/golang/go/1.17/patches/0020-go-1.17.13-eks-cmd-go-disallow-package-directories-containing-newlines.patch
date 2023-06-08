@@ -5,7 +5,7 @@ Subject: [PATCH] [release-branch.go1.19] cmd/go: disallow package directories
  containing newlines
 
 # AWS EKS
-Backported To: go-1.18.10-eks
+Backported To: go-1.17.13-eks
 Backported On: Wed, 7 Jun 2023
 Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
