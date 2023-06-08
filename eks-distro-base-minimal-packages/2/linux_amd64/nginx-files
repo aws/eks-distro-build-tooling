@@ -540,11 +540,11 @@
 -rwxr-xr-x    15KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    15KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
--rwxr-xr-x   401KiB /usr/lib64/libpcre.so.1.2.0
--rwxr-xr-x   365KiB /usr/lib64/libpcre16.so.0.2.0
+-rwxr-xr-x   393KiB /usr/lib64/libpcre.so.1.2.0
+-rwxr-xr-x   357KiB /usr/lib64/libpcre16.so.0.2.0
 -rwxr-xr-x   478KiB /usr/lib64/libpcre2-8.so.0.5.0
 -rwxr-xr-x    11KiB /usr/lib64/libpcre2-posix.so.1.0.1
--rwxr-xr-x   349KiB /usr/lib64/libpcre32.so.0.0.0
+-rwxr-xr-x   341KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    36KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libpcreposix.so.0.0.1
 -rwxr-xr-x    61KiB /usr/lib64/libprofiler.so.0.4.14

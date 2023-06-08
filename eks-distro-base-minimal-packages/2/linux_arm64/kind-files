@@ -4564,7 +4564,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -4593,7 +4593,7 @@
 -rw-r--r--   1.4KiB /usr/share/licenses/oniguruma-5.9.6/COPYING
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.1.5/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.1.7/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1
