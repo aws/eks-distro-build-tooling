@@ -13,7 +13,7 @@ cpio-2.12-11.amzn2.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
 cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
 cryptsetup-libs-1.7.4-4.amzn2.x86_64
-curl-7.88.1-1.amzn2.0.1.x86_64
+curl-8.0.1-1.amzn2.0.1.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
 dbus-1.10.24-7.amzn2.0.3.x86_64
 dbus-libs-1.10.24-7.amzn2.0.3.x86_64
@@ -67,7 +67,7 @@ libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcollection-0.7.0-29.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.x86_64
-libcurl-7.88.1-1.amzn2.0.1.x86_64
+libcurl-8.0.1-1.amzn2.0.1.x86_64
 libdb-5.3.21-24.amzn2.0.4.x86_64
 libdb-utils-5.3.21-24.amzn2.0.4.x86_64
 libevent-2.0.21-4.amzn2.0.3.x86_64
@@ -123,9 +123,9 @@ nss-tools-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
 oniguruma-5.9.6-1.amzn2.0.4.x86_64
 openldap-2.4.44-25.amzn2.0.5.x86_64
-openssl-libs-1.0.2k-24.amzn2.0.6.x86_64
+openssl-libs-1.0.2k-24.amzn2.0.7.x86_64
 pam-1.1.8-23.amzn2.0.1.x86_64
-pcre-8.32-17.amzn2.0.2.x86_64
+pcre-8.32-17.amzn2.0.3.x86_64
 pigz-2.3.4-1.amzn2.0.1.x86_64
 pinentry-0.8.1-17.amzn2.0.2.x86_64
 popt-1.13-16.amzn2.0.2.x86_64
@@ -149,8 +149,8 @@ rpcbind-0.2.0-44.amzn2.x86_64
 rpm-4.11.3-48.amzn2.0.3.x86_64
 rpm-build-libs-4.11.3-48.amzn2.0.3.x86_64
 rpm-libs-4.11.3-48.amzn2.0.3.x86_64
-rsync-3.1.2-11.amzn2.0.1.x86_64
-runc-1.1.5-1.amzn2.x86_64
+rsync-3.1.2-11.amzn2.0.2.x86_64
+runc-1.1.7-1.amzn2.x86_64
 sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.2.x86_64

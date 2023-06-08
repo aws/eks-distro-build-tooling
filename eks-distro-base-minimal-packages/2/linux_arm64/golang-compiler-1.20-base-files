@@ -12272,8 +12272,8 @@
 -rwxr-xr-x    69KiB /usr/bin/getfacl
 -rwxr-xr-x    68KiB /usr/bin/getopt
 -rwxr-xr-x      31B /usr/bin/getopts
--rwxr-xr-x   3.6MiB /usr/bin/git
--rwxr-xr-x   2.1MiB /usr/bin/git-shell
+-rwxr-xr-x   3.7MiB /usr/bin/git
+-rwxr-xr-x   2.2MiB /usr/bin/git-shell
 -rwsr-xr-x   137KiB /usr/bin/gpasswd
 -rwxr-xr-x    68KiB /usr/bin/gpg-error
 -rwxr-xr-x   135KiB /usr/bin/gprof
@@ -12402,7 +12402,7 @@
 -rwxr-xr-x    68KiB /usr/bin/rpmdb
 -rwxr-xr-x    68KiB /usr/bin/rpmkeys
 -rwxr-xr-x    69KiB /usr/bin/runcon
--rwxr-xr-x   2.2MiB /usr/bin/scalar
+-rwxr-xr-x   2.3MiB /usr/bin/scalar
 -rwxr-xr-x   134KiB /usr/bin/scp
 -rwxr-xr-x    68KiB /usr/bin/script
 -rwxr-xr-x    68KiB /usr/bin/scriptreplay
@@ -13393,21 +13393,20 @@
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/XBS5_LP64_OFF64
--rwxr-xr-x   1.6KiB /usr/libexec/git-core/git-bisect
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-http-backend
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-fetch
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-push
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-imap-send
+-rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-fetch
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-push
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-imap-send
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-merge-octopus
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-merge-one-file
 -rwxr-xr-x   1.2KiB /usr/libexec/git-core/git-merge-resolve
 -rwxr-xr-x    12KiB /usr/libexec/git-core/git-mergetool
 -rw-r--r--   9.7KiB /usr/libexec/git-core/git-mergetool--lib
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-remote-http
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.3KiB /usr/libexec/git-core/git-web--browse
@@ -13586,7 +13585,7 @@
 -rw-r--r--     524B /usr/share/bash-completion/completions/fsfreeze
 -rw-r--r--     677B /usr/share/bash-completion/completions/fstrim
 -rw-r--r--     815B /usr/share/bash-completion/completions/getopt
--rw-r--r--    78KiB /usr/share/bash-completion/completions/git
+-rw-r--r--    79KiB /usr/share/bash-completion/completions/git
 -rw-r--r--    1007B /usr/share/bash-completion/completions/hexdump
 -rw-r--r--   2.2KiB /usr/share/bash-completion/completions/hostnamectl
 -rw-r--r--     928B /usr/share/bash-completion/completions/hwclock
@@ -13954,7 +13953,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libelf-0.176/COPYING-LGPLV3
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.2/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.40.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES
@@ -13965,7 +13964,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -14029,7 +14028,7 @@
 -rw-r--r--    12KiB /usr/share/locale/bg/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   155KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    26KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   879KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
+-rw-r--r--   871KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
 -rw-r--r--    13KiB /usr/share/locale/bg/LC_MESSAGES/gprof.mo
 -rw-r--r--   1.8KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
 -rw-r--r--    76KiB /usr/share/locale/bg/LC_MESSAGES/ld.mo
@@ -14054,7 +14053,7 @@
 -rw-r--r--   318KiB /usr/share/locale/ca/LC_MESSAGES/coreutils.mo
 -rw-r--r--   7.9KiB /usr/share/locale/ca/LC_MESSAGES/diffutils.mo
 -rw-r--r--    11KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   650KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
+-rw-r--r--   643KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
 -rw-r--r--    17KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
 -rw-r--r--     920B /usr/share/locale/ca/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    57KiB /usr/share/locale/ca/LC_MESSAGES/rpm.mo
@@ -14119,7 +14118,7 @@
 -rw-r--r--    18KiB /usr/share/locale/de/LC_MESSAGES/elfutils.mo
 -rw-r--r--    24KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
 -rw-r--r--    49KiB /usr/share/locale/de/LC_MESSAGES/gawk.mo
--rw-r--r--   655KiB /usr/share/locale/de/LC_MESSAGES/git.mo
+-rw-r--r--   648KiB /usr/share/locale/de/LC_MESSAGES/git.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
 -rw-r--r--    19KiB /usr/share/locale/de/LC_MESSAGES/grep.mo
 -rw-r--r--    29KiB /usr/share/locale/de/LC_MESSAGES/ld.mo
@@ -14262,7 +14261,7 @@
 -rw-r--r--    31KiB /usr/share/locale/fr/LC_MESSAGES/findutils.mo
 -rw-r--r--   520KiB /usr/share/locale/fr/LC_MESSAGES/gas.mo
 -rw-r--r--    50KiB /usr/share/locale/fr/LC_MESSAGES/gawk.mo
--rw-r--r--   655KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
+-rw-r--r--   648KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
 -rw-r--r--    85KiB /usr/share/locale/fr/LC_MESSAGES/gold.mo
 -rw-r--r--    12KiB /usr/share/locale/fr/LC_MESSAGES/gprof.mo
 -rw-r--r--    18KiB /usr/share/locale/fr/LC_MESSAGES/grep.mo
@@ -14372,7 +14371,7 @@
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/diffutils.mo
 -rw-r--r--    24KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
 -rw-r--r--   409KiB /usr/share/locale/id/LC_MESSAGES/gas.mo
--rw-r--r--   612KiB /usr/share/locale/id/LC_MESSAGES/git.mo
+-rw-r--r--   615KiB /usr/share/locale/id/LC_MESSAGES/git.mo
 -rw-r--r--    48KiB /usr/share/locale/id/LC_MESSAGES/gold.mo
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/gprof.mo
 -rw-r--r--   9.7KiB /usr/share/locale/id/LC_MESSAGES/grep.mo
@@ -14737,7 +14736,7 @@
 -rw-r--r--    23KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
 -rw-r--r--   463KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--    46KiB /usr/share/locale/sv/LC_MESSAGES/gawk.mo
--rw-r--r--   618KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
+-rw-r--r--   612KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
 -rw-r--r--   5.3KiB /usr/share/locale/sv/LC_MESSAGES/gold.mo
 -rw-r--r--    11KiB /usr/share/locale/sv/LC_MESSAGES/gprof.mo
 -rw-r--r--    13KiB /usr/share/locale/sv/LC_MESSAGES/grep.mo
@@ -14779,7 +14778,7 @@
 -rw-r--r--    34KiB /usr/share/locale/tr/LC_MESSAGES/diffutils.mo
 -rw-r--r--    20KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
 -rw-r--r--   249KiB /usr/share/locale/tr/LC_MESSAGES/gas.mo
--rw-r--r--   637KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
+-rw-r--r--   631KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
 -rw-r--r--    11KiB /usr/share/locale/tr/LC_MESSAGES/gprof.mo
 -rw-r--r--   1.5KiB /usr/share/locale/tr/LC_MESSAGES/grep.mo
 -rw-r--r--    41KiB /usr/share/locale/tr/LC_MESSAGES/ld.mo
@@ -14862,7 +14861,7 @@
 -rw-r--r--   7.4KiB /usr/share/locale/zh_CN/LC_MESSAGES/diffutils.mo
 -rw-r--r--    28KiB /usr/share/locale/zh_CN/LC_MESSAGES/findutils.mo
 -rw-r--r--   3.8KiB /usr/share/locale/zh_CN/LC_MESSAGES/gas.mo
--rw-r--r--   586KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
+-rw-r--r--   581KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
 -rw-r--r--   8.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/gold.mo
 -rw-r--r--    13KiB /usr/share/locale/zh_CN/LC_MESSAGES/grep.mo
 -rw-r--r--    54KiB /usr/share/locale/zh_CN/LC_MESSAGES/ld.mo
@@ -17199,7 +17198,7 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-am	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-annotate	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-apply	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-archive	../../bin/git
-lrwxrwxrwx      13B /usr/libexec/git-core/git-bisect--helper	../../bin/git
+lrwxrwxrwx      13B /usr/libexec/git-core/git-bisect	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-blame	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-branch	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-bugreport	../../bin/git
@@ -17233,7 +17232,6 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-files	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-index	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-tree	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-difftool	../../bin/git
-lrwxrwxrwx      13B /usr/libexec/git-core/git-env--helper	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fast-export	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fast-import	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fetch	../../bin/git

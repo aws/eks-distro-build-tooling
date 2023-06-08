@@ -2435,9 +2435,9 @@
 -rwxr-xr-x    15KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    15KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
--rwxr-xr-x   401KiB /usr/lib64/libpcre.so.1.2.0
--rwxr-xr-x   365KiB /usr/lib64/libpcre16.so.0.2.0
--rwxr-xr-x   349KiB /usr/lib64/libpcre32.so.0.0.0
+-rwxr-xr-x   393KiB /usr/lib64/libpcre.so.1.2.0
+-rwxr-xr-x   357KiB /usr/lib64/libpcre16.so.0.2.0
+-rwxr-xr-x   341KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    36KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libpcreposix.so.0.0.1
 -rwxr-xr-x    20KiB /usr/lib64/libplc4.so
@@ -7453,7 +7453,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc-7.3.1/COPYING.RUNTIME

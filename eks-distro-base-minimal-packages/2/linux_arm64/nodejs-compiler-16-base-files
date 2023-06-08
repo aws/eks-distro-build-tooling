@@ -3332,7 +3332,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc-7.3.1/COPYING.RUNTIME

@@ -12,7 +12,7 @@ cpp-7.3.1-15.amzn2.aarch64
 cracklib-2.9.0-11.amzn2.0.2.aarch64
 cracklib-dicts-2.9.0-11.amzn2.0.2.aarch64
 cryptsetup-libs-1.7.4-4.amzn2.aarch64
-curl-7.88.1-1.amzn2.0.1.aarch64
+curl-8.0.1-1.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 dbus-1.10.24-7.amzn2.0.3.aarch64
 dbus-libs-1.10.24-7.amzn2.0.3.aarch64
@@ -31,7 +31,7 @@ fipscheck-lib-1.4.1-6.amzn2.0.2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
 gcc-7.3.1-15.amzn2.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
-git-core-2.39.2-1.amzn2.0.1.aarch64
+git-core-2.40.1-1.amzn2.0.1.aarch64
 glib2-2.56.1-9.amzn2.0.5.aarch64
 glibc-2.26-63.amzn2.aarch64
 glibc-common-2.26-63.amzn2.aarch64
@@ -61,7 +61,7 @@ libcap-2.54-1.amzn2.0.1.aarch64
 libcap-ng-0.7.5-4.amzn2.0.4.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-63.amzn2.aarch64
-libcurl-7.88.1-1.amzn2.0.1.aarch64
+libcurl-8.0.1-1.amzn2.0.1.aarch64
 libdb-5.3.21-24.amzn2.0.4.aarch64
 libdb-utils-5.3.21-24.amzn2.0.4.aarch64
 libedit-3.0-12.20121213cvs.amzn2.0.2.aarch64
@@ -105,11 +105,11 @@ nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
 nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.5.aarch64
-openssh-7.4p1-22.amzn2.0.1.aarch64
-openssh-clients-7.4p1-22.amzn2.0.1.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.6.aarch64
+openssh-7.4p1-22.amzn2.0.2.aarch64
+openssh-clients-7.4p1-22.amzn2.0.2.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.7.aarch64
 pam-1.1.8-23.amzn2.0.1.aarch64
-pcre-8.32-17.amzn2.0.2.aarch64
+pcre-8.32-17.amzn2.0.3.aarch64
 pcre2-10.23-11.amzn2.0.1.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64
 pkgconfig-0.27.1-4.amzn2.0.2.aarch64
