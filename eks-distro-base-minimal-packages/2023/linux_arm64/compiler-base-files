@@ -856,7 +856,7 @@
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   263KiB /usr/lib64/libslapi-2.4.so.2.11.5
--rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.4
+-rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.5
 -rwxr-xr-x   734KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.3MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
@@ -4298,9 +4298,9 @@ lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3 libsasl2.so.3.0.0
 lrwxrwxrwx      19B /usr/lib64/libsigsegv.so.2 libsigsegv.so.2.0.6
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.4 libssh.so.4.9.4
+lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.5 libssh.so.4.9.5
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
