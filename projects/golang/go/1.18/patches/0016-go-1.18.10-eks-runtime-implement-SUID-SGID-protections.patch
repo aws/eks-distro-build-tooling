@@ -1,4 +1,4 @@
-From 6cc794d7fa8094118d9c14e54d47a3f96b88e148 Mon Sep 17 00:00:00 2001
+From 069cc89d9f1c7b072f109e30f243fd623ce25ce0 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
 Subject: [PATCH] runtime: implement SUID/SGID protections
@@ -74,7 +74,7 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/os_netbsd.go              |   2 +
  src/runtime/os_openbsd_syscall2.go    |   2 +
  src/runtime/os_solaris.go             |   4 +
- src/runtime/panic.go                  |   4 +
+ src/runtime/panic.go                  |   6 ++
  src/runtime/proc.go                   |   1 +
  src/runtime/security_aix.go           |  17 +++
  src/runtime/security_issetugid.go     |  19 ++++
@@ -95,7 +95,7 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/sys_netbsd_amd64.s        |   9 ++
  src/runtime/sys_netbsd_arm.s          |   7 ++
  src/runtime/sys_netbsd_arm64.s        |   5 +
- src/runtime/sys_openbsd2.go           |   9 ++
+ src/runtime/sys_openbsd2.go           |  11 ++
  src/runtime/sys_openbsd_386.s         |   9 ++
  src/runtime/sys_openbsd_amd64.s       |   6 ++
  src/runtime/sys_openbsd_arm.s         |   9 ++
@@ -104,7 +104,7 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/syscall2_solaris.go       |   2 +
  src/runtime/syscall_solaris.go        |   1 +
  src/runtime/testdata/testsuid/main.go |  25 +++++
- 39 files changed, 536 insertions(+)
+ 39 files changed, 540 insertions(+)
  create mode 100644 src/runtime/security_aix.go
  create mode 100644 src/runtime/security_issetugid.go
  create mode 100644 src/runtime/security_linux.go
@@ -322,14 +322,30 @@ index 8ac1b08f69..d56d45ef46 100644
 +	return int32(sysvicall0(&libc_issetugid))
 +}
 diff --git a/src/runtime/panic.go b/src/runtime/panic.go
-index 6600410cb6..387cc42bd3 100644
+index 6600410cb6..cf5dca83f3 100644
 --- a/src/runtime/panic.go
 +++ b/src/runtime/panic.go
-@@ -1042,6 +1042,10 @@ func fatalthrow() {
+@@ -944,6 +944,7 @@ func gopanic(e any) {
+ 
+ // getargp returns the location where the caller
+ // writes outgoing function call arguments.
++//
+ //go:nosplit
+ //go:noinline
+ func getargp() uintptr {
+@@ -956,6 +957,7 @@ func getargp() uintptr {
+ //
+ // TODO(rsc): Once we commit to CopyStackAlways,
+ // this doesn't need to be nosplit.
++//
+ //go:nosplit
+ func gorecover(argp uintptr) any {
+ 	// Must be in a function running as part of a deferred call during the panic.
+@@ -1042,6 +1044,10 @@ func fatalthrow() {
  	// Switch to the system stack to avoid any stack growth, which
  	// may make things worse if the runtime is in a bad state.
  	systemstack(func() {
-+		if isSecureMode() {
++		if GOOS != "windows" && isSecureMode() {
 +			exit(2)
 +		}
 +
@@ -914,10 +930,26 @@ index 6d2c31631d..8302bfe60a 100644
 +	MOVW	R0, ret+0(FP)
  	RET
 diff --git a/src/runtime/sys_openbsd2.go b/src/runtime/sys_openbsd2.go
-index cba35cfee3..b91bddae9a 100644
+index cba35cfee3..ee2c51d10a 100644
 --- a/src/runtime/sys_openbsd2.go
 +++ b/src/runtime/sys_openbsd2.go
-@@ -265,6 +265,13 @@ func setNonblock(fd int32) {
+@@ -13,6 +13,7 @@ import (
+ )
+ 
+ // This is exported via linkname to assembly in runtime/cgo.
++//
+ //go:linkname exit
+ //go:nosplit
+ //go:cgo_unsafe_args
+@@ -46,6 +47,7 @@ func thrkill_trampoline()
+ // mmap is used to do low-level memory allocation via mmap. Don't allow stack
+ // splits, since this function (used by sysAlloc) is called in a lot of low-level
+ // parts of the runtime and callers often assume it won't acquire any locks.
++//
+ //go:nosplit
+ func mmap(addr unsafe.Pointer, n uintptr, prot, flags, fd int32, off uint32) (unsafe.Pointer, int) {
+ 	args := struct {
+@@ -265,6 +267,13 @@ func setNonblock(fd int32) {
  	fcntl(fd, _F_SETFL, flags|_O_NONBLOCK)
  }
  
@@ -931,7 +963,7 @@ index cba35cfee3..b91bddae9a 100644
  // Tell the linker that the libc_* functions are to be found
  // in a system library, with the libc_ prefix missing.
  
-@@ -297,4 +304,6 @@ func setNonblock(fd int32) {
+@@ -297,4 +306,6 @@ func setNonblock(fd int32) {
  //go:cgo_import_dynamic libc_sigaction sigaction "libc.so"
  //go:cgo_import_dynamic libc_sigaltstack sigaltstack "libc.so"
  
