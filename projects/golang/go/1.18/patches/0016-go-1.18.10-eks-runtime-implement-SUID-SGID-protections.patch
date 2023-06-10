@@ -1,68 +1,7 @@
-From 069cc89d9f1c7b072f109e30f243fd623ce25ce0 Mon Sep 17 00:00:00 2001
+From a3d8cbc9a3a69442d0454b2eb5322ac2e19b0700 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
 Subject: [PATCH] runtime: implement SUID/SGID protections
-
-# AWS EKS
-Backported To: go-1.18.10-eks
-Backported On: Wed, 7 Jun 2023
-Backported By: szafreen@amazon.com
-Backported From: release-branch.go1.19
-Source Commit: https://github.com/golang/go/commit/a7b1cd452ddc69a6606c2f35ac5786dc892e62cb
-
-In this feature a new instance `isSecureMode()` is introduced. As in older versions of go, the global variables are visible in package wide, the `isSecureMode()` in runtime/securit_linux.go
-and runtime/security_nonunix.go has the same instance declared. Thus, the compiler complains this variable as `redeclared`. To avoid this issue, `isSecureModeNon()` is introduced in
-runtime/security_nonunix.go instead of `isSecureMode()` and returns a `true` bool value for which is represents the value for a non-unix OS. In security_unix.go, during testing if the OS 
-is unix or non-unix this varible `isSecureModeNon()` retruns true which doesn't implement the protections this CVE implements. 
-
-# Original Information
-
-On Unix platforms, the runtime previously did nothing special when a
-program was run with either the SUID or SGID bits set. This can be
-dangerous in certain cases, such as when dumping memory state, or
-assuming the status of standard i/o file descriptors.
-
-Taking cues from glibc, this change implements a set of protections when
-a binary is run with SUID or SGID bits set (or is SUID/SGID-like). On
-Linux, whether to enable these protections is determined by whether the
-AT_SECURE flag is passed in the auxiliary vector. On platforms which
-have the issetugid syscall (the BSDs, darwin, and Solaris/Illumos), that
-is used. On the remaining platforms (currently only AIX) we check
-!(getuid() == geteuid() && getgid == getegid()).
-
-Currently when we determine a binary is "tainted" (using the glibc
-terminology), we implement two specific protections:
-  1. we check if the file descriptors 0, 1, and 2 are open, and if they
-     are not, we open them, pointing at /dev/null (or fail).
-  2. we force GOTRACKBACK=none, and generally prevent dumping of
-     trackbacks and registers when a program panics/aborts.
-
-In the future we may add additional protections.
-
-This change requires implementing issetugid on the platforms which
-support it, and implementing getuid, geteuid, getgid, and getegid on
-AIX.
-
-Thanks to Vincent Dehors from Synacktiv for reporting this issue.
-
-Updates #60272
-Fixes #60517
-Fixes CVE-2023-29403
-
-Change-Id: I057fa7153d29cf26515e7f49fed86e4f8bedd0f0
-Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1878434
-Reviewed-by: Damien Neil <dneil@google.com>
-Reviewed-by: Ian Lance Taylor <iant@google.com>
-Run-TryBot: Roland Shoemaker <bracewell@google.com>
-Reviewed-by: Russ Cox <rsc@google.com>
-(cherry picked from commit 87065663ea6d89cd54f65a515d8f2ed0ef285c19)
-Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1902231
-Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1904340
-Reviewed-by: Michael Knyszek <mknyszek@google.com>
-Reviewed-on: https://go-review.googlesource.com/c/go/+/501228
-Auto-Submit: Michael Knyszek <mknyszek@google.com>
-TryBot-Result: Gopher Robot <gobot@golang.org>
-Run-TryBot: David Chase <drchase@google.com>
 
 ---
  src/runtime/extern.go                 |  19 ++++
@@ -74,12 +13,12 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/os_netbsd.go              |   2 +
  src/runtime/os_openbsd_syscall2.go    |   2 +
  src/runtime/os_solaris.go             |   4 +
- src/runtime/panic.go                  |   6 ++
+ src/runtime/panic.go                  |  12 +++
  src/runtime/proc.go                   |   1 +
  src/runtime/security_aix.go           |  17 +++
  src/runtime/security_issetugid.go     |  19 ++++
  src/runtime/security_linux.go         |  15 +++
- src/runtime/security_nonunix.go       |  13 +++
+ src/runtime/security_nonunix.go       |  19 ++++
  src/runtime/security_test.go          | 143 ++++++++++++++++++++++++++
  src/runtime/security_unix.go          |  72 +++++++++++++
  src/runtime/signal_unix.go            |   4 +
@@ -104,7 +43,7 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/syscall2_solaris.go       |   2 +
  src/runtime/syscall_solaris.go        |   1 +
  src/runtime/testdata/testsuid/main.go |  25 +++++
- 39 files changed, 540 insertions(+)
+ 39 files changed, 552 insertions(+)
  create mode 100644 src/runtime/security_aix.go
  create mode 100644 src/runtime/security_issetugid.go
  create mode 100644 src/runtime/security_linux.go
@@ -322,7 +261,7 @@ index 8ac1b08f69..d56d45ef46 100644
 +	return int32(sysvicall0(&libc_issetugid))
 +}
 diff --git a/src/runtime/panic.go b/src/runtime/panic.go
-index 6600410cb6..cf5dca83f3 100644
+index 6600410cb6..929952d37d 100644
 --- a/src/runtime/panic.go
 +++ b/src/runtime/panic.go
 @@ -944,6 +944,7 @@ func gopanic(e any) {
@@ -341,12 +280,18 @@ index 6600410cb6..cf5dca83f3 100644
  //go:nosplit
  func gorecover(argp uintptr) any {
  	// Must be in a function running as part of a deferred call during the panic.
-@@ -1042,6 +1044,10 @@ func fatalthrow() {
+@@ -1042,6 +1044,16 @@ func fatalthrow() {
  	// Switch to the system stack to avoid any stack growth, which
  	// may make things worse if the runtime is in a bad state.
  	systemstack(func() {
-+		if GOOS != "windows" && isSecureMode() {
-+			exit(2)
++		if GOOS == "windows" {
++			if !isSecureModeNon() {
++				exit(2)
++			}
++		} else {
++			if isSecureMode() {
++				exit(2)
++			}
 +		}
 +
  		startpanic_m()
@@ -435,10 +380,10 @@ index 0000000000..181f3a184e
 +}
 diff --git a/src/runtime/security_nonunix.go b/src/runtime/security_nonunix.go
 new file mode 100644
-index 0000000000..c200e521bf
+index 0000000000..ee1aff8967
 --- /dev/null
 +++ b/src/runtime/security_nonunix.go
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,19 @@
 +// Copyright 2023 The Go Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -447,8 +392,14 @@ index 0000000000..c200e521bf
 +
 +package runtime
 +
++var secureModeNon bool
++
++func initSecureModeNon() {
++	secureModeNon = true
++}
++
 +func isSecureModeNon() bool {
-+	return true
++	return secureModeNon
 +}
 +
 +func secure() {}
