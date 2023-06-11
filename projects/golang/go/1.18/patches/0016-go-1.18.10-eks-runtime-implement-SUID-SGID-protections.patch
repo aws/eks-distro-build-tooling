@@ -1,7 +1,7 @@
-From 3691a3363c3d0a8fec4533be25cc6914e8929ae8 Mon Sep 17 00:00:00 2001
+From ed7b659e322293882675518f8cb8cac8dd56f142 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
-Subject: [PATCH] runtime-implement-SUID-SGID-protections
+Subject: [PATCH] [release-branch.go1.19] runtime-implement-SUID-SGID-protections.patch
 
 # AWS EKS
 Backported To: go-1.18.10-eks
@@ -74,7 +74,9 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/os_netbsd.go              |   2 +
  src/runtime/os_openbsd_syscall2.go    |   2 +
  src/runtime/os_solaris.go             |   4 +
- src/runtime/panic.go                  |   6 ++
+ src/runtime/os_windows_arm.go         |   2 +
+ src/runtime/os_windows_arm64.go       |   2 +
+ src/runtime/panic.go                  |   4 +
  src/runtime/proc.go                   |   1 +
  src/runtime/security_aix.go           |  17 +++
  src/runtime/security_issetugid.go     |  19 ++++
@@ -104,7 +106,7 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/syscall2_solaris.go       |   2 +
  src/runtime/syscall_solaris.go        |   1 +
  src/runtime/testdata/testsuid/main.go |  25 +++++
- 39 files changed, 538 insertions(+)
+ 41 files changed, 540 insertions(+)
  create mode 100644 src/runtime/security_aix.go
  create mode 100644 src/runtime/security_issetugid.go
  create mode 100644 src/runtime/security_linux.go
@@ -321,31 +323,41 @@ index 8ac1b08f69..d56d45ef46 100644
 +func issetugid() int32 {
 +	return int32(sysvicall0(&libc_issetugid))
 +}
+diff --git a/src/runtime/os_windows_arm.go b/src/runtime/os_windows_arm.go
+index 10aff75e31..0315699d16 100644
+--- a/src/runtime/os_windows_arm.go
++++ b/src/runtime/os_windows_arm.go
+@@ -6,6 +6,8 @@ package runtime
+ 
+ import "unsafe"
+ 
++var secureMode bool
++
+ //go:nosplit
+ func cputicks() int64 {
+ 	var counter int64
+diff --git a/src/runtime/os_windows_arm64.go b/src/runtime/os_windows_arm64.go
+index 7e413445ba..d36665ce5e 100644
+--- a/src/runtime/os_windows_arm64.go
++++ b/src/runtime/os_windows_arm64.go
+@@ -6,6 +6,8 @@ package runtime
+ 
+ import "unsafe"
+ 
++var secureMode bool
++
+ //go:nosplit
+ func cputicks() int64 {
+ 	var counter int64
 diff --git a/src/runtime/panic.go b/src/runtime/panic.go
-index 6600410cb6..41c8857283 100644
+index 6600410cb6..387cc42bd3 100644
 --- a/src/runtime/panic.go
 +++ b/src/runtime/panic.go
-@@ -944,6 +944,7 @@ func gopanic(e any) {
- 
- // getargp returns the location where the caller
- // writes outgoing function call arguments.
-+//
- //go:nosplit
- //go:noinline
- func getargp() uintptr {
-@@ -956,6 +957,7 @@ func getargp() uintptr {
- //
- // TODO(rsc): Once we commit to CopyStackAlways,
- // this doesn't need to be nosplit.
-+//
- //go:nosplit
- func gorecover(argp uintptr) any {
- 	// Must be in a function running as part of a deferred call during the panic.
-@@ -1042,6 +1044,10 @@ func fatalthrow() {
+@@ -1042,6 +1042,10 @@ func fatalthrow() {
  	// Switch to the system stack to avoid any stack growth, which
  	// may make things worse if the runtime is in a bad state.
  	systemstack(func() {
-+		if secureMode == true {
++		if isSecureMode() {
 +			exit(2)
 +		}
 +
