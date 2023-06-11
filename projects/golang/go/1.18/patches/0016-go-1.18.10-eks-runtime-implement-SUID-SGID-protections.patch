@@ -1,7 +1,7 @@
-From 0ea17a5f50b5a2e76b2417cc87a7571e945ad61c Mon Sep 17 00:00:00 2001
+From 3691a3363c3d0a8fec4533be25cc6914e8929ae8 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
-Subject: [PATCH] runtime-implement-SUID-SGID-protections.patch
+Subject: [PATCH] runtime-implement-SUID-SGID-protections
 
 # AWS EKS
 Backported To: go-1.18.10-eks
@@ -74,12 +74,12 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/os_netbsd.go              |   2 +
  src/runtime/os_openbsd_syscall2.go    |   2 +
  src/runtime/os_solaris.go             |   4 +
- src/runtime/panic.go                  |   4 +
+ src/runtime/panic.go                  |   6 ++
  src/runtime/proc.go                   |   1 +
  src/runtime/security_aix.go           |  17 +++
  src/runtime/security_issetugid.go     |  19 ++++
  src/runtime/security_linux.go         |  15 +++
- src/runtime/security_nonunix.go       |  13 +++
+ src/runtime/security_nonunix.go       |  11 ++
  src/runtime/security_test.go          | 143 ++++++++++++++++++++++++++
  src/runtime/security_unix.go          |  72 +++++++++++++
  src/runtime/signal_unix.go            |   4 +
@@ -322,14 +322,30 @@ index 8ac1b08f69..d56d45ef46 100644
 +	return int32(sysvicall0(&libc_issetugid))
 +}
 diff --git a/src/runtime/panic.go b/src/runtime/panic.go
-index 6600410cb6..387cc42bd3 100644
+index 6600410cb6..41c8857283 100644
 --- a/src/runtime/panic.go
 +++ b/src/runtime/panic.go
-@@ -1042,6 +1042,10 @@ func fatalthrow() {
+@@ -944,6 +944,7 @@ func gopanic(e any) {
+ 
+ // getargp returns the location where the caller
+ // writes outgoing function call arguments.
++//
+ //go:nosplit
+ //go:noinline
+ func getargp() uintptr {
+@@ -956,6 +957,7 @@ func getargp() uintptr {
+ //
+ // TODO(rsc): Once we commit to CopyStackAlways,
+ // this doesn't need to be nosplit.
++//
+ //go:nosplit
+ func gorecover(argp uintptr) any {
+ 	// Must be in a function running as part of a deferred call during the panic.
+@@ -1042,6 +1044,10 @@ func fatalthrow() {
  	// Switch to the system stack to avoid any stack growth, which
  	// may make things worse if the runtime is in a bad state.
  	systemstack(func() {
-+		if isSecureMode() {
++		if secureMode == true {
 +			exit(2)
 +		}
 +
@@ -419,10 +435,10 @@ index 0000000000..181f3a184e
 +}
 diff --git a/src/runtime/security_nonunix.go b/src/runtime/security_nonunix.go
 new file mode 100644
-index 0000000000..fc9571cfcf
+index 0000000000..7be66df40e
 --- /dev/null
 +++ b/src/runtime/security_nonunix.go
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,11 @@
 +// Copyright 2023 The Go Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -431,11 +447,9 @@ index 0000000000..fc9571cfcf
 +
 +package runtime
 +
-+func isSecureMode() bool {
-+	return false
++func secure() {
++	secureMode = false
 +}
-+
-+func secure() {}
 diff --git a/src/runtime/security_test.go b/src/runtime/security_test.go
 new file mode 100644
 index 0000000000..1d304113d6
