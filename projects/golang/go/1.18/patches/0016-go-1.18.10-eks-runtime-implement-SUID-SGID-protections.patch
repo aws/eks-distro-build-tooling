@@ -1,7 +1,7 @@
-From 0cf0654895b351bb62a523781bf1cb2fa3a3de3a Mon Sep 17 00:00:00 2001
+From 5dbee07dbd2e6fe407e7600a2cc3da4861d82958 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
-Subject: [PATCH] [release-branch.go1.19] runtime-implement-SUID-SGID-protections.patch
+Subject: [PATCH] runtime-implement-SUID-SGID-protections.patch
 
 # AWS EKS
 Backported To: go-1.18.10-eks
@@ -74,39 +74,37 @@ Run-TryBot: David Chase <drchase@google.com>
  src/runtime/os_netbsd.go              |   2 +
  src/runtime/os_openbsd_syscall2.go    |   2 +
  src/runtime/os_solaris.go             |   4 +
- src/runtime/os_windows_arm.go         |   2 +
- src/runtime/os_windows_arm64.go       |   2 +
  src/runtime/panic.go                  |   6 ++
  src/runtime/proc.go                   |   1 +
  src/runtime/security_aix.go           |  17 +++
  src/runtime/security_issetugid.go     |  19 ++++
  src/runtime/security_linux.go         |  15 +++
- src/runtime/security_nonunix.go       |  11 ++
+ src/runtime/security_nonunix.go       |  13 +++
  src/runtime/security_test.go          | 143 ++++++++++++++++++++++++++
  src/runtime/security_unix.go          |  72 +++++++++++++
  src/runtime/signal_unix.go            |   4 +
  src/runtime/sys_darwin.go             |   7 ++
  src/runtime/sys_darwin_amd64.s        |   7 ++
  src/runtime/sys_darwin_arm64.s        |   4 +
- src/runtime/sys_dragonfly_amd64.s     |  11 ++
+ src/runtime/sys_dragonfly_amd64.s     |   8 ++
  src/runtime/sys_freebsd_386.s         |   7 ++
  src/runtime/sys_freebsd_amd64.s       |  10 ++
  src/runtime/sys_freebsd_arm.s         |   8 ++
  src/runtime/sys_freebsd_arm64.s       |   8 ++
- src/runtime/sys_netbsd_386.s          |   9 ++
- src/runtime/sys_netbsd_amd64.s        |  12 +++
+ src/runtime/sys_netbsd_386.s          |   6 ++
+ src/runtime/sys_netbsd_amd64.s        |   9 ++
  src/runtime/sys_netbsd_arm.s          |   7 ++
- src/runtime/sys_netbsd_arm64.s        |   8 ++
+ src/runtime/sys_netbsd_arm64.s        |   5 +
  src/runtime/sys_openbsd2.go           |  11 ++
  src/runtime/sys_openbsd_386.s         |   9 ++
  src/runtime/sys_openbsd_amd64.s       |   6 ++
  src/runtime/sys_openbsd_arm.s         |   9 ++
  src/runtime/sys_openbsd_arm64.s       |   6 ++
- src/runtime/sys_openbsd_mips64.s      |   8 ++
+ src/runtime/sys_openbsd_mips64.s      |   5 +
  src/runtime/syscall2_solaris.go       |   2 +
  src/runtime/syscall_solaris.go        |   1 +
  src/runtime/testdata/testsuid/main.go |  25 +++++
- 41 files changed, 569 insertions(+)
+ 39 files changed, 552 insertions(+)
  create mode 100644 src/runtime/security_aix.go
  create mode 100644 src/runtime/security_issetugid.go
  create mode 100644 src/runtime/security_linux.go
@@ -257,7 +255,7 @@ index d908a80cd1..efd1ae7066 100644
  const (
  	_CTL_HW      = 6
 diff --git a/src/runtime/os_linux.go b/src/runtime/os_linux.go
-index eb8aa076e9..b75140049b 100644
+index eb8aa076e9..43f6b2303b 100644
 --- a/src/runtime/os_linux.go
 +++ b/src/runtime/os_linux.go
 @@ -52,9 +52,12 @@ const (
@@ -310,7 +308,7 @@ index eb8aa076e9..b75140049b 100644
  var startupRandomData []byte
  
 +// secureMode holds the value of AT_SECURE passed in the auxiliary vector.
-+var secureMode bool
++//var secureMode bool
 +
  func sysauxv(auxv []uintptr) int {
  	var i int
@@ -408,32 +406,6 @@ index 8ac1b08f69..d56d45ef46 100644
 +func issetugid() int32 {
 +	return int32(sysvicall0(&libc_issetugid))
 +}
-diff --git a/src/runtime/os_windows_arm.go b/src/runtime/os_windows_arm.go
-index 10aff75e31..0315699d16 100644
---- a/src/runtime/os_windows_arm.go
-+++ b/src/runtime/os_windows_arm.go
-@@ -6,6 +6,8 @@ package runtime
- 
- import "unsafe"
- 
-+var secureMode bool
-+
- //go:nosplit
- func cputicks() int64 {
- 	var counter int64
-diff --git a/src/runtime/os_windows_arm64.go b/src/runtime/os_windows_arm64.go
-index 7e413445ba..d36665ce5e 100644
---- a/src/runtime/os_windows_arm64.go
-+++ b/src/runtime/os_windows_arm64.go
-@@ -6,6 +6,8 @@ package runtime
- 
- import "unsafe"
- 
-+var secureMode bool
-+
- //go:nosplit
- func cputicks() int64 {
- 	var counter int64
 diff --git a/src/runtime/panic.go b/src/runtime/panic.go
 index 6600410cb6..41c8857283 100644
 --- a/src/runtime/panic.go
@@ -502,7 +474,7 @@ index 0000000000..c11b9c3f01
 +}
 diff --git a/src/runtime/security_issetugid.go b/src/runtime/security_issetugid.go
 new file mode 100644
-index 0000000000..5048632c3a
+index 0000000000..19ab60bf2e
 --- /dev/null
 +++ b/src/runtime/security_issetugid.go
 @@ -0,0 +1,19 @@
@@ -516,7 +488,7 @@ index 0000000000..5048632c3a
 +
 +// secureMode is only ever mutated in schedinit, so we don't need to worry about
 +// synchronization primitives.
-+var secureMode bool
++//var secureMode bool
 +
 +func initSecureMode() {
 +	secureMode = issetugid() == 1
@@ -527,7 +499,7 @@ index 0000000000..5048632c3a
 +}
 diff --git a/src/runtime/security_linux.go b/src/runtime/security_linux.go
 new file mode 100644
-index 0000000000..181f3a184e
+index 0000000000..e079f12886
 --- /dev/null
 +++ b/src/runtime/security_linux.go
 @@ -0,0 +1,15 @@
@@ -540,7 +512,7 @@ index 0000000000..181f3a184e
 +import _ "unsafe"
 +
 +func initSecureMode() {
-+	// We have already initialized the secureMode bool in sysauxv.
++	secureMode = true
 +}
 +
 +func isSecureMode() bool {
@@ -548,10 +520,10 @@ index 0000000000..181f3a184e
 +}
 diff --git a/src/runtime/security_nonunix.go b/src/runtime/security_nonunix.go
 new file mode 100644
-index 0000000000..7be66df40e
+index 0000000000..5789caafdb
 --- /dev/null
 +++ b/src/runtime/security_nonunix.go
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,13 @@
 +// Copyright 2023 The Go Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -559,6 +531,8 @@ index 0000000000..7be66df40e
 +//go:build !unix
 +
 +package runtime
++
++var secureMode bool
 +
 +func secure() {
 +	secureMode = false
@@ -855,22 +829,13 @@ index e57ac53e10..2ef37eda8c 100644
 +	BL	libc_issetugid(SB)
 +	RET
 diff --git a/src/runtime/sys_dragonfly_amd64.s b/src/runtime/sys_dragonfly_amd64.s
-index 3af0928828..db0167b870 100644
+index 3af0928828..50605727ba 100644
 --- a/src/runtime/sys_dragonfly_amd64.s
 +++ b/src/runtime/sys_dragonfly_amd64.s
-@@ -403,6 +403,7 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$0
- 	SYSCALL
- 	RET
- 
-+<<<<<<< HEAD
- // func runtime·setNonblock(int32 fd)
- TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
- 	MOVL    fd+0(FP), DI  // fd
-@@ -416,4 +417,14 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
+@@ -416,4 +416,12 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
  	ORL	AX, DX
  	MOVL	$92, AX // fcntl
  	SYSCALL
-+=======
 +// func issetugid() int32
 +TEXT runtime·issetugid(SB),NOSPLIT,$0
 +	MOVQ	$0, DI
@@ -879,7 +844,6 @@ index 3af0928828..db0167b870 100644
 +	MOVL	$253, AX
 +	SYSCALL
 +	MOVL	AX, ret+0(FP)
-+>>>>>>> a7b1cd452d ([release-branch.go1.19] runtime: implement SUID/SGID protections)
  	RET
 diff --git a/src/runtime/sys_freebsd_386.s b/src/runtime/sys_freebsd_386.s
 index d4c4cc7fdb..fc22abfdda 100644
@@ -961,7 +925,7 @@ index 7dab3028de..bb32de8b01 100644
 +	MOVW	R0, ret+0(FP)
 +	RET
 diff --git a/src/runtime/sys_netbsd_386.s b/src/runtime/sys_netbsd_386.s
-index 6c5386bcf1..fe034626e8 100644
+index 6c5386bcf1..ba4c75a275 100644
 --- a/src/runtime/sys_netbsd_386.s
 +++ b/src/runtime/sys_netbsd_386.s
 @@ -29,6 +29,7 @@
@@ -972,28 +936,18 @@ index 6c5386bcf1..fe034626e8 100644
  #define SYS_getcontext			307
  #define SYS_setcontext			308
  #define SYS__lwp_create			309
-@@ -485,6 +486,7 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$32
- 	NEGL	AX
- 	RET
- 
-+<<<<<<< HEAD
- // func runtime·setNonblock(fd int32)
- TEXT runtime·setNonblock(SB),NOSPLIT,$16-4
- 	MOVL	$92, AX // fcntl
-@@ -500,4 +502,11 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$16-4
+@@ -500,4 +501,9 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$16-4
  	MOVL	AX, 12(SP)
  	MOVL	$92, AX // fcntl
  	INT	$0x80
-+=======
 +// func issetugid() int32
 +TEXT runtime·issetugid(SB),NOSPLIT,$0
 +	MOVL	$SYS_issetugid, AX
 +	INT	$0x80
 +	MOVL	AX, ret+0(FP)
-+>>>>>>> a7b1cd452d ([release-branch.go1.19] runtime: implement SUID/SGID protections)
  	RET
 diff --git a/src/runtime/sys_netbsd_amd64.s b/src/runtime/sys_netbsd_amd64.s
-index c1cd95df14..684efdd7c3 100644
+index c1cd95df14..28fe9ad940 100644
 --- a/src/runtime/sys_netbsd_amd64.s
 +++ b/src/runtime/sys_netbsd_amd64.s
 @@ -30,6 +30,7 @@
@@ -1004,19 +958,10 @@ index c1cd95df14..684efdd7c3 100644
  #define SYS_getcontext			307
  #define SYS_setcontext			308
  #define SYS__lwp_create			309
-@@ -450,6 +451,7 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$0
- 	SYSCALL
- 	RET
- 
-+<<<<<<< HEAD
- // func runtime·setNonblock(int32 fd)
- TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
- 	MOVL    fd+0(FP), DI  // fd
-@@ -463,4 +465,14 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
+@@ -463,4 +464,12 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
  	ORL	AX, DX
  	MOVL	$92, AX // fcntl
  	SYSCALL
-+=======
 +// func issetugid() int32
 +TEXT runtime·issetugid(SB),NOSPLIT,$0
 +	MOVQ	$0, DI
@@ -1025,7 +970,6 @@ index c1cd95df14..684efdd7c3 100644
 +	MOVL	$SYS_issetugid, AX
 +	SYSCALL
 +	MOVL	AX, ret+0(FP)
-+>>>>>>> a7b1cd452d ([release-branch.go1.19] runtime: implement SUID/SGID protections)
  	RET
 diff --git a/src/runtime/sys_netbsd_arm.s b/src/runtime/sys_netbsd_arm.s
 index 2422b0282e..0fb2da59c7 100644
@@ -1050,7 +994,7 @@ index 2422b0282e..0fb2da59c7 100644
 +	MOVW	R0, ret+0(FP)
 +	RET
 diff --git a/src/runtime/sys_netbsd_arm64.s b/src/runtime/sys_netbsd_arm64.s
-index 6d2c31631d..f5a5d27b1a 100644
+index 6d2c31631d..8302bfe60a 100644
 --- a/src/runtime/sys_netbsd_arm64.s
 +++ b/src/runtime/sys_netbsd_arm64.s
 @@ -32,6 +32,7 @@
@@ -1061,24 +1005,14 @@ index 6d2c31631d..f5a5d27b1a 100644
  #define SYS_getcontext			307
  #define SYS_setcontext			308
  #define SYS__lwp_create			309
-@@ -467,6 +468,7 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$0
- 	SVC	$SYS_fcntl
- 	RET
- 
-+<<<<<<< HEAD
- // func runtime·setNonblock(int32 fd)
- TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
- 	MOVW	fd+0(FP), R0		// arg 1 - fd
-@@ -478,4 +480,10 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
+@@ -478,4 +479,8 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
  	MOVW	fd+0(FP), R0		// arg 1 - fd
  	MOVD	$F_SETFL, R1		// arg 2 - cmd
  	SVC	$SYS_fcntl
-+=======
 +// func issetugid() int32
 +TEXT runtime·issetugid(SB),NOSPLIT|NOFRAME,$0
 +	SVC $SYS_issetugid
 +	MOVW	R0, ret+0(FP)
-+>>>>>>> a7b1cd452d ([release-branch.go1.19] runtime: implement SUID/SGID protections)
  	RET
 diff --git a/src/runtime/sys_openbsd2.go b/src/runtime/sys_openbsd2.go
 index cba35cfee3..ee2c51d10a 100644
@@ -1184,28 +1118,18 @@ index 3fa7e1ede2..0dfcc82bf9 100644
 +	MOVW	R0, 0(R19)		// return value
 +	RET
 diff --git a/src/runtime/sys_openbsd_mips64.s b/src/runtime/sys_openbsd_mips64.s
-index bc392e4c54..a743298ba9 100644
+index bc392e4c54..da9e3ec655 100644
 --- a/src/runtime/sys_openbsd_mips64.s
 +++ b/src/runtime/sys_openbsd_mips64.s
-@@ -384,6 +384,7 @@ TEXT runtime·closeonexec(SB),NOSPLIT,$0
- 	SYSCALL
- 	RET
- 
-+<<<<<<< HEAD
- // func runtime·setNonblock(int32 fd)
- TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
- 	MOVW	fd+0(FP), R4		// arg 1 - fd
-@@ -397,4 +398,11 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
+@@ -397,4 +397,9 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
  	MOVV	$4, R5			// arg 2 - cmd (F_SETFL)
  	MOVV	$92, R2			// sys_fcntl
  	SYSCALL
-+=======
 +// func issetugid() int32
 +TEXT runtime·issetugid(SB),NOSPLIT,$0
 +	MOVV	$253, R2	// sys_issetugid
 +	SYSCALL
 +	MOVW	R2, ret+0(FP)
-+>>>>>>> a7b1cd452d ([release-branch.go1.19] runtime: implement SUID/SGID protections)
  	RET
 diff --git a/src/runtime/syscall2_solaris.go b/src/runtime/syscall2_solaris.go
 index 3310489202..0b5ebfda02 100644
