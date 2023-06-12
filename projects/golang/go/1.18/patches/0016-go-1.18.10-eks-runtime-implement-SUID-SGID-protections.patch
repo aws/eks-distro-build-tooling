@@ -1,7 +1,7 @@
 From 5dbee07dbd2e6fe407e7600a2cc3da4861d82958 Mon Sep 17 00:00:00 2001
 From: Roland Shoemaker <bracewell@google.com>
 Date: Tue, 9 May 2023 11:47:57 -0700
-Subject: [PATCH] runtime-implement-SUID-SGID-protections.patch
+Subject: [PATCH] [release-branch.go1.19] runtime-implement-SUID-SGID-protections.patch
 
 # AWS EKS
 Backported To: go-1.18.10-eks
@@ -10,10 +10,24 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/a7b1cd452ddc69a6606c2f35ac5786dc892e62cb
 
-In this feature a new instance `isSecureMode()` is introduced. As in older versions of go, the global variables are visible in package wide, the `isSecureMode()` in runtime/securit_linux.go
-and runtime/security_nonunix.go has the same instance declared. Thus, the compiler complains this variable as `redeclared`. To avoid this issue, `isSecureModeNon()` is introduced in
-runtime/security_nonunix.go instead of `isSecureMode()` and returns a `true` bool value for which is represents the value for a non-unix OS. In security_unix.go, during testing if the OS 
-is unix or non-unix this varible `isSecureModeNon()` retruns true which doesn't implement the protections this CVE implements. 
+
+Merge conflicts are resolved by keeping both changes in files sys_dragonfly_amd64.s, sys_netbsd_386.s, sys_netbsd_amd64.s, sys_netbsd_arm64.s, sys_openbsd2.go, sys_openbsd_mips64.s. 
+
+During go build the compiler flags the `isSecureMode()` as `redeclared` in security_linux.go and security_nonunix.go because these methods are in the same `runtime` package. In golang, 
+the same method/global variable cannot be declared under same package in different files. In these two files, the `isSecureMode()` method is necessary as they modify the value of 
+`secureMode` (true for unix and false for nonunix) which will be later used implement the protective feature for unix OS systems. 
+If we change the `isSecureMode()` method to different name in security_nonunix.go to resolve this issue but keep the method operations the same (changing the value of `secureMode` 
+varibale to false), the go build passes as the protecting features in this CVE are only implemented for unix systems. Thus, security_nonunix.go is not called/used. However, during EKS-D 
+presubmit test, when we test for windows the panic.go file cannot locate the `isSecureMode()` call or the `secureMode` variable as in security_nonunix.go the method name has been 
+modified and no other unix files with `secureMode` variable is initialized. 
+To resolve this issue for go1.18.10 , one solution could be creating a new interface with a particular type of OS systems for which during unix builds the `secureMode` will be true 
+and during nonunix build `secureMode` will be false. And, in the interface a common function `isSecureMode()` can be decalred where the type of struct can be passed as a parameter. 
+However, this approach is not viable either as this will add more code to the CVE and will modify `isSecureMode()` method's signature in all other files. 
+
+To keep the CVE functionality intact and avoid any compiler errors, only one global variable `secureMode` is declared in security_nonunix.go and the `secure()` method in this file 
+will change the value to false. And in security_linux.go the `secureMode` value is modified to true in the `initSecureMode()` method. And this value be returned in `isSecureMode()` 
+method. In panic.go the if statement will only test the `secureMode` variable's value as this variable is global for all files in the `runtime` package.
+
 
 # Original Information
 
