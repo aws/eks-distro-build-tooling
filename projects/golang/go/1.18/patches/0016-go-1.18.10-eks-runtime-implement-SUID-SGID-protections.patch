@@ -26,7 +26,8 @@ However, this approach is not viable either as this will add more code to the CV
 
 To keep the CVE functionality intact and avoid any compiler errors, only one global variable `secureMode` is declared in security_nonunix.go and the `secure()` method in this file 
 will change the value to false. And in security_linux.go the `secureMode` value is modified to true in the `initSecureMode()` method. And this value be returned in `isSecureMode()` 
-method. In panic.go the if statement will only test the `secureMode` variable's value as this variable is global for all files in the `runtime` package.
+method. In panic.go the if statement will only test the `secureMode` variable's value as this variable is global for all files in the `runtime` package. In security_issetugid.go and 
+in os_linux.go the `secureMode` variable declaration has been commented out. 
 
 
 # Original Information
