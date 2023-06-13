@@ -54,7 +54,7 @@ guile22-2.2.7-2.amzn2023.0.2.aarch64
 gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
-kernel-headers-6.1.29-47.49.amzn2023.aarch64
+kernel-headers-6.1.29-50.88.amzn2023.aarch64
 kernel-srpm-macros-1.0-14.amzn2023.0.2.noarch
 keyutils-libs-1.6.3-1.amzn2023.aarch64
 krb5-libs-1.20.1-8.amzn2023.0.2.aarch64
