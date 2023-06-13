@@ -1,7 +1,2 @@
 
-curl.x86_64
 kernel-headers.x86_64
-libcap.x86_64
-libcurl.x86_64
-libssh.x86_64
-libssh-config.noarch
