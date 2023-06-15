@@ -725,7 +725,7 @@
 -rw-r--r--     198B /usr/share/vim/vimfiles/ftdetect/nginx.vim
 -rw-r--r--      29B /usr/share/vim/vimfiles/ftplugin/nginx.vim
 -rw-r--r--     250B /usr/share/vim/vimfiles/indent/nginx.vim
--rw-r--r--   137KiB /usr/share/vim/vimfiles/syntax/nginx.vim
+-rw-r--r--   113KiB /usr/share/vim/vimfiles/syntax/nginx.vim
 -rw-r--r--     148B /usr/share/zoneinfo/Africa/Abidjan
 -rw-r--r--     148B /usr/share/zoneinfo/Africa/Accra
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Addis_Ababa

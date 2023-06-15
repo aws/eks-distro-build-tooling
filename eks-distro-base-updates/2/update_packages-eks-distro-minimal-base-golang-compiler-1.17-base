@@ -1,2 +1,6 @@
 
-tar.x86_64
+curl.x86_64
+git-core.x86_64
+libcurl.x86_64
+openssl-libs.x86_64
+pcre.x86_64

@@ -13,7 +13,7 @@ coreutils-8.32-30.amzn2023.0.3.aarch64
 coreutils-common-8.32-30.amzn2023.0.3.aarch64
 cpp-11.3.1-4.amzn2023.0.3.aarch64
 crypto-policies-20220428-1.gitdfb10ea.amzn2023.0.2.noarch
-curl-7.88.1-1.amzn2023.0.1.aarch64
+curl-8.0.1-1.amzn2023.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 dnf-4.12.0-2.amzn2023.0.4.noarch
 dnf-data-4.12.0-2.amzn2023.0.4.noarch
@@ -53,7 +53,7 @@ guile22-2.2.7-2.amzn2023.0.2.aarch64
 gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
-kernel-headers-6.1.27-43.48.amzn2023.aarch64
+kernel-headers-6.1.29-50.88.amzn2023.aarch64
 kernel-srpm-macros-1.0-14.amzn2023.0.2.noarch
 keyutils-libs-1.6.3-1.amzn2023.aarch64
 krb5-libs-1.20.1-8.amzn2023.0.2.aarch64
@@ -65,11 +65,11 @@ libatomic-11.3.1-4.amzn2023.0.3.aarch64
 libattr-2.5.1-3.amzn2023.0.2.aarch64
 libblkid-2.37.4-1.amzn2023.0.3.aarch64
 libbrotli-1.0.9-4.amzn2023.0.2.aarch64
-libcap-2.48-2.amzn2023.0.2.aarch64
+libcap-2.48-2.amzn2023.0.3.aarch64
 libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
 libcomps-0.1.18-1.amzn2023.0.2.aarch64
-libcurl-7.88.1-1.amzn2023.0.1.aarch64
+libcurl-8.0.1-1.amzn2023.aarch64
 libdb-5.3.28-49.amzn2023.0.2.aarch64
 libdnf-0.67.0-1.amzn2023.0.5.aarch64
 libffi-3.1-28.amzn2023.0.2.aarch64
@@ -92,8 +92,8 @@ libsepol-3.4-3.amzn2023.0.3.aarch64
 libsigsegv-2.13-2.amzn2023.0.2.aarch64
 libsmartcols-2.37.4-1.amzn2023.0.3.aarch64
 libsolv-0.7.22-1.amzn2023.0.2.aarch64
-libssh-0.10.4-3.amzn2023.0.3.aarch64
-libssh-config-0.10.4-3.amzn2023.0.3.noarch
+libssh-0.10.5-1.amzn2023.0.1.aarch64
+libssh-config-0.10.5-1.amzn2023.0.1.noarch
 libstdc++-11.3.1-4.amzn2023.0.3.aarch64
 libtasn1-4.19.0-1.amzn2023.0.1.aarch64
 libtirpc-1.3.3-0.amzn2023.aarch64

@@ -2,10 +2,10 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 binutils-2.29.1-31.amzn2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2021.2.50-72.amzn2.0.5.noarch
+ca-certificates-2021.2.50-72.amzn2.0.7.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
-curl-7.88.1-1.amzn2.0.1.aarch64
+curl-8.0.1-1.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 elfutils-libelf-0.176-2.amzn2.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
@@ -28,7 +28,7 @@ libattr-2.4.46-12.amzn2.0.2.aarch64
 libcap-2.54-1.amzn2.0.1.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-63.amzn2.aarch64
-libcurl-7.88.1-1.amzn2.0.1.aarch64
+libcurl-8.0.1-1.amzn2.0.1.aarch64
 libdb-5.3.21-24.amzn2.0.4.aarch64
 libdb-utils-5.3.21-24.amzn2.0.4.aarch64
 libffi-3.0.13-18.amzn2.0.2.aarch64
@@ -57,8 +57,8 @@ nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
 nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.5.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.6.aarch64
-pcre-8.32-17.amzn2.0.2.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.7.aarch64
+pcre-8.32-17.amzn2.0.3.aarch64
 popt-1.13-16.amzn2.0.2.aarch64
 python3-3.7.16-1.amzn2.0.2.aarch64
 python3-libs-3.7.16-1.amzn2.0.2.aarch64
@@ -72,7 +72,7 @@ setup-2.8.71-10.amzn2.0.1.noarch
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
 tar-1.26-35.amzn2.0.2.aarch64
-tzdata-2022g-1.amzn2.0.2.noarch
+tzdata-2023c-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 zlib-1.2.7-19.amzn2.0.2.aarch64

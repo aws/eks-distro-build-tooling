@@ -71,14 +71,15 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   139KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   135KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   229KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   230KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
--r--r--r--   149KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   144KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   191KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   185KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
+-rw-r--r--   5.1KiB /etc/pki/ca-trust/source/blacklist/TrustCor_CA.pem
 -rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
 -rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
 -rw-r--r--   9.0KiB /etc/pki/nssdb/cert9.db
@@ -9878,8 +9879,8 @@
 -rwxr-xr-x      31B /usr/bin/getopts
 -rwxr-xr-x   134KiB /usr/bin/gio
 -rwxr-xr-x    68KiB /usr/bin/gio-querymodules-64
--rwxr-xr-x   3.6MiB /usr/bin/git
--rwxr-xr-x   2.1MiB /usr/bin/git-shell
+-rwxr-xr-x   3.7MiB /usr/bin/git
+-rwxr-xr-x   2.2MiB /usr/bin/git-shell
 -rwxr-xr-x    69KiB /usr/bin/glib-compile-schemas
 -rwsr-xr-x   137KiB /usr/bin/gpasswd
 -rwxr-xr-x   334KiB /usr/bin/gpg-agent
@@ -10023,7 +10024,7 @@
 -rwxr-xr-x    68KiB /usr/bin/rpmdb
 -rwxr-xr-x    68KiB /usr/bin/rpmkeys
 -rwxr-xr-x    69KiB /usr/bin/runcon
--rwxr-xr-x   2.2MiB /usr/bin/scalar
+-rwxr-xr-x   2.3MiB /usr/bin/scalar
 -rwxr-xr-x   134KiB /usr/bin/scp
 -rwxr-xr-x    68KiB /usr/bin/script
 -rwxr-xr-x    68KiB /usr/bin/scriptreplay
@@ -14736,21 +14737,20 @@
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/XBS5_LP64_OFF64
--rwxr-xr-x   1.6KiB /usr/libexec/git-core/git-bisect
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-http-backend
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-fetch
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-push
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-imap-send
+-rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-fetch
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-push
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-imap-send
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-merge-octopus
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-merge-one-file
 -rwxr-xr-x   1.2KiB /usr/libexec/git-core/git-merge-resolve
 -rwxr-xr-x    12KiB /usr/libexec/git-core/git-mergetool
 -rw-r--r--   9.7KiB /usr/libexec/git-core/git-mergetool--lib
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-remote-http
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.3KiB /usr/libexec/git-core/git-web--browse
@@ -14945,7 +14945,7 @@
 -rw-r--r--   1.4KiB /usr/share/bash-completion/completions/gapplication
 -rw-r--r--     935B /usr/share/bash-completion/completions/gdbus
 -rw-r--r--     815B /usr/share/bash-completion/completions/getopt
--rw-r--r--    78KiB /usr/share/bash-completion/completions/git
+-rw-r--r--    79KiB /usr/share/bash-completion/completions/git
 -rw-r--r--   2.8KiB /usr/share/bash-completion/completions/gsettings
 -rw-r--r--    1007B /usr/share/bash-completion/completions/hexdump
 -rw-r--r--   2.2KiB /usr/share/bash-completion/completions/hostnamectl
@@ -15410,7 +15410,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/gcc-7.3.1/COPYING3.LIB
 -rw-r--r--   4.5KiB /usr/share/licenses/gcc-7.3.1/LICENSE.TXT
 -rw-r--r--    35KiB /usr/share/licenses/gdbm-1.13/COPYING
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.39.2/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.40.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glib2-2.56.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
@@ -15422,7 +15422,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-7.88.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -15501,7 +15501,7 @@
 -rw-r--r--    12KiB /usr/share/locale/bg/LC_MESSAGES/chkconfig.mo
 -rw-r--r--   155KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    26KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   879KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
+-rw-r--r--   871KiB /usr/share/locale/bg/LC_MESSAGES/git.mo
 -rw-r--r--   131KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/bg/LC_MESSAGES/gprof.mo
 -rw-r--r--   1.8KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
@@ -15533,7 +15533,7 @@
 -rw-r--r--    17KiB /usr/share/locale/ca/LC_MESSAGES/cpplib.mo
 -rw-r--r--   7.9KiB /usr/share/locale/ca/LC_MESSAGES/diffutils.mo
 -rw-r--r--    11KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   650KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
+-rw-r--r--   643KiB /usr/share/locale/ca/LC_MESSAGES/git.mo
 -rw-r--r--   128KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
 -rw-r--r--    56KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    17KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
@@ -15617,7 +15617,7 @@
 -rw-r--r--    49KiB /usr/share/locale/de/LC_MESSAGES/gawk.mo
 -rw-r--r--   1.6MiB /usr/share/locale/de/LC_MESSAGES/gcc.mo
 -rw-r--r--    13KiB /usr/share/locale/de/LC_MESSAGES/gdbm.mo
--rw-r--r--   655KiB /usr/share/locale/de/LC_MESSAGES/git.mo
+-rw-r--r--   648KiB /usr/share/locale/de/LC_MESSAGES/git.mo
 -rw-r--r--   127KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   186KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
@@ -15801,7 +15801,7 @@
 -rw-r--r--    50KiB /usr/share/locale/fr/LC_MESSAGES/gawk.mo
 -rw-r--r--   1.7MiB /usr/share/locale/fr/LC_MESSAGES/gcc.mo
 -rw-r--r--    17KiB /usr/share/locale/fr/LC_MESSAGES/gdbm.mo
--rw-r--r--   655KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
+-rw-r--r--   648KiB /usr/share/locale/fr/LC_MESSAGES/git.mo
 -rw-r--r--   133KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
 -rw-r--r--   191KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    85KiB /usr/share/locale/fr/LC_MESSAGES/gold.mo
@@ -15937,7 +15937,7 @@
 -rw-r--r--    24KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
 -rw-r--r--   409KiB /usr/share/locale/id/LC_MESSAGES/gas.mo
 -rw-r--r--   389KiB /usr/share/locale/id/LC_MESSAGES/gcc.mo
--rw-r--r--   612KiB /usr/share/locale/id/LC_MESSAGES/git.mo
+-rw-r--r--   615KiB /usr/share/locale/id/LC_MESSAGES/git.mo
 -rw-r--r--   119KiB /usr/share/locale/id/LC_MESSAGES/glib20.mo
 -rw-r--r--    54KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    48KiB /usr/share/locale/id/LC_MESSAGES/gold.mo
@@ -16396,7 +16396,7 @@
 -rw-r--r--   463KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--    46KiB /usr/share/locale/sv/LC_MESSAGES/gawk.mo
 -rw-r--r--   1.5MiB /usr/share/locale/sv/LC_MESSAGES/gcc.mo
--rw-r--r--   618KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
+-rw-r--r--   612KiB /usr/share/locale/sv/LC_MESSAGES/git.mo
 -rw-r--r--   121KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   176KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   5.3KiB /usr/share/locale/sv/LC_MESSAGES/gold.mo
@@ -16449,7 +16449,7 @@
 -rw-r--r--    20KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
 -rw-r--r--   249KiB /usr/share/locale/tr/LC_MESSAGES/gas.mo
 -rw-r--r--   293KiB /usr/share/locale/tr/LC_MESSAGES/gcc.mo
--rw-r--r--   637KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
+-rw-r--r--   631KiB /usr/share/locale/tr/LC_MESSAGES/git.mo
 -rw-r--r--   123KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
 -rw-r--r--   173KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/tr/LC_MESSAGES/gprof.mo
@@ -16556,7 +16556,7 @@
 -rw-r--r--    28KiB /usr/share/locale/zh_CN/LC_MESSAGES/findutils.mo
 -rw-r--r--   3.8KiB /usr/share/locale/zh_CN/LC_MESSAGES/gas.mo
 -rw-r--r--   521KiB /usr/share/locale/zh_CN/LC_MESSAGES/gcc.mo
--rw-r--r--   586KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
+-rw-r--r--   581KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
 -rw-r--r--   105KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
 -rw-r--r--   109KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
 -rw-r--r--   8.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/gold.mo
@@ -17551,7 +17551,7 @@
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Blantyre
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
--rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Cairo
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
@@ -17654,7 +17654,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Fort_Wayne
 -rw-r--r--     742B /usr/share/zoneinfo/America/Fortaleza
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Glace_Bay
--rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Godthab
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Godthab
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/America/Goose_Bay
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Grand_Turk
 -rw-r--r--     255B /usr/share/zoneinfo/America/Grenada
@@ -17714,7 +17714,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/Beulah
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/Center
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/New_Salem
--rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Nuuk
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Nuuk
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Ojinaga
 -rw-r--r--     203B /usr/share/zoneinfo/America/Panama
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Pangnirtung
@@ -17759,7 +17759,7 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yakutat
--rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Yellowknife
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yellowknife
 -rw-r--r--     398B /usr/share/zoneinfo/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/Antarctica/DumontDUrville
@@ -17803,9 +17803,9 @@
 -rw-r--r--     187B /usr/share/zoneinfo/Asia/Dubai
 -rw-r--r--     621B /usr/share/zoneinfo/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Asia/Famagusta
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Asia/Gaza
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/Asia/Harbin
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Asia/Hebron
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/Asia/Hovd
@@ -17927,7 +17927,7 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/EET
 -rw-r--r--     127B /usr/share/zoneinfo/EST
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/EST5EDT
--rw-r--r--   2.0KiB /usr/share/zoneinfo/Egypt
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Eire
 -rw-r--r--     127B /usr/share/zoneinfo/Etc/GMT
 -rw-r--r--     127B /usr/share/zoneinfo/Etc/GMT+0
@@ -18149,7 +18149,7 @@
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Blantyre
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
--rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Cairo
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
@@ -18252,7 +18252,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Fort_Wayne
 -rw-r--r--     742B /usr/share/zoneinfo/posix/America/Fortaleza
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Glace_Bay
--rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Godthab
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Godthab
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/posix/America/Goose_Bay
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Grand_Turk
 -rw-r--r--     255B /usr/share/zoneinfo/posix/America/Grenada
@@ -18312,7 +18312,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/Beulah
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/Center
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/New_Salem
--rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Nuuk
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Nuuk
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Ojinaga
 -rw-r--r--     203B /usr/share/zoneinfo/posix/America/Panama
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Pangnirtung
@@ -18357,7 +18357,7 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yakutat
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Yellowknife
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yellowknife
 -rw-r--r--     398B /usr/share/zoneinfo/posix/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/posix/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/posix/Antarctica/DumontDUrville
@@ -18401,9 +18401,9 @@
 -rw-r--r--     187B /usr/share/zoneinfo/posix/Asia/Dubai
 -rw-r--r--     621B /usr/share/zoneinfo/posix/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Asia/Famagusta
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Asia/Gaza
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/posix/Asia/Harbin
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Asia/Hebron
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/posix/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/posix/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/posix/Asia/Hovd
@@ -18525,7 +18525,7 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/EET
 -rw-r--r--     127B /usr/share/zoneinfo/posix/EST
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/EST5EDT
--rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Egypt
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Eire
 -rw-r--r--     127B /usr/share/zoneinfo/posix/Etc/GMT
 -rw-r--r--     127B /usr/share/zoneinfo/posix/Etc/GMT+0
@@ -18746,7 +18746,7 @@
 -rw-r--r--     711B /usr/share/zoneinfo/right/Africa/Blantyre
 -rw-r--r--     805B /usr/share/zoneinfo/right/Africa/Brazzaville
 -rw-r--r--     711B /usr/share/zoneinfo/right/Africa/Bujumbura
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Africa/Cairo
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Africa/Cairo
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Africa/Casablanca
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Africa/Ceuta
 -rw-r--r--     710B /usr/share/zoneinfo/right/Africa/Conakry
@@ -18849,7 +18849,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Fort_Wayne
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Fortaleza
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Glace_Bay
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Godthab
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Godthab
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Goose_Bay
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     795B /usr/share/zoneinfo/right/America/Grenada
@@ -18909,7 +18909,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Beulah
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Center
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/New_Salem
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Nuuk
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Nuuk
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Ojinaga
 -rw-r--r--     743B /usr/share/zoneinfo/right/America/Panama
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Pangnirtung
@@ -18954,7 +18954,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Whitehorse
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/right/America/Winnipeg
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/America/Yakutat
--rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Yellowknife
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Yellowknife
 -rw-r--r--     933B /usr/share/zoneinfo/right/Antarctica/Casey
 -rw-r--r--     846B /usr/share/zoneinfo/right/Antarctica/Davis
 -rw-r--r--     723B /usr/share/zoneinfo/right/Antarctica/DumontDUrville
@@ -18998,9 +18998,9 @@
 -rw-r--r--     722B /usr/share/zoneinfo/right/Asia/Dubai
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Asia/Dushanbe
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Famagusta
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Asia/Gaza
+-rw-r--r--   4.3KiB /usr/share/zoneinfo/right/Asia/Gaza
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Harbin
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Asia/Hebron
+-rw-r--r--   4.4KiB /usr/share/zoneinfo/right/Asia/Hebron
 -rw-r--r--     924B /usr/share/zoneinfo/right/Asia/Ho_Chi_Minh
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Hong_Kong
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Hovd
@@ -19122,7 +19122,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/EET
 -rw-r--r--     667B /usr/share/zoneinfo/right/EST
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/EST5EDT
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Egypt
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Egypt
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Eire
 -rw-r--r--     667B /usr/share/zoneinfo/right/Etc/GMT
 -rw-r--r--     667B /usr/share/zoneinfo/right/Etc/GMT+0
@@ -19218,7 +19218,7 @@
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Vilnius
--rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
+-rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
@@ -19329,7 +19329,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     667B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   105KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--     721B /usr/share/zsh/site-functions/_bootctl
@@ -19360,7 +19360,7 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   660KiB /var/lib/rpm/Basenames
+-rw-r--r--   672KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   152KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -19369,7 +19369,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.5MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
--rw-r--r--    76KiB /var/lib/rpm/Requirename
+-rw-r--r--    72KiB /var/lib/rpm/Requirename
 -rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -19732,7 +19732,7 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-am	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-annotate	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-apply	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-archive	../../bin/git
-lrwxrwxrwx      13B /usr/libexec/git-core/git-bisect--helper	../../bin/git
+lrwxrwxrwx      13B /usr/libexec/git-core/git-bisect	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-blame	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-branch	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-bugreport	../../bin/git
@@ -19766,7 +19766,6 @@ lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-files	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-index	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-diff-tree	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-difftool	../../bin/git
-lrwxrwxrwx      13B /usr/libexec/git-core/git-env--helper	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fast-export	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fast-import	../../bin/git
 lrwxrwxrwx      13B /usr/libexec/git-core/git-fetch	../../bin/git

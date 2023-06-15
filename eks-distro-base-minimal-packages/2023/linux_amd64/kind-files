@@ -1301,8 +1301,8 @@
 -r--r--r--   7.1KiB /usr/lib/udev/rules.d/10-dm.rules
 -r--r--r--   2.0KiB /usr/lib/udev/rules.d/13-dm-disk.rules
 -r--r--r--     483B /usr/lib/udev/rules.d/95-dm-notify.rules
--rw-r--r--     500B /usr/lib64/.gnutls.hmac
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
+-rw-r--r--     525B /usr/lib64/.libgnutls.so.30.35.0.hmac
 -rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
 -rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
@@ -1374,7 +1374,7 @@
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
--rwxr-xr-x   699KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   703KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -1407,7 +1407,7 @@
 -rwxr-xr-x   1.3MiB /usr/lib64/libglib-2.0.so.0.7302.0
 -rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.7302.0
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.34.2
+-rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.35.0
 -rwxr-xr-x   393KiB /usr/lib64/libgobject-2.0.so.0.7302.0
 -rwxr-xr-x   280KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
@@ -1534,7 +1534,7 @@
 -rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   466KiB /usr/lib64/libssh.so.4.9.4
+-rwxr-xr-x   470KiB /usr/lib64/libssh.so.4.9.5
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   892KiB /usr/lib64/libsystemd.so.0.35.0
@@ -5556,6 +5556,7 @@
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   8.2KiB /usr/share/locale/ka/LC_MESSAGES/dnf.mo
 -rw-r--r--    58KiB /usr/share/locale/ka/LC_MESSAGES/glib20.mo
+-rw-r--r--    51KiB /usr/share/locale/ka/LC_MESSAGES/gnutls.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
 -rw-r--r--   4.3KiB /usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    40KiB /usr/share/locale/ka/LC_MESSAGES/sudo.mo
@@ -5647,7 +5648,7 @@
 -rw-r--r--   3.4KiB /usr/share/locale/ms/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.5KiB /usr/share/locale/ms/LC_MESSAGES/findutils.mo
 -rw-r--r--   124KiB /usr/share/locale/ms/LC_MESSAGES/glib20.mo
--rw-r--r--    26KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
+-rw-r--r--    28KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.0KiB /usr/share/locale/ms/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.5KiB /usr/share/locale/ms/LC_MESSAGES/tar.mo
@@ -5802,6 +5803,7 @@
 -rw-r--r--   6.5KiB /usr/share/locale/ro/LC_MESSAGES/findutils.mo
 -rw-r--r--   139KiB /usr/share/locale/ro/LC_MESSAGES/glib20.mo
 -rw-r--r--    81KiB /usr/share/locale/ro/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    35KiB /usr/share/locale/ro/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/ro/LC_MESSAGES/grep.mo
 -rw-r--r--    15KiB /usr/share/locale/ro/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   5.0KiB /usr/share/locale/ro/LC_MESSAGES/libidn2.mo
@@ -8431,6 +8433,7 @@ lrwxrwxrwx      49B /etc/ssl/cert.pem /etc/pki/ca-trust/extracted/pem/tls-ca-bun
 lrwxrwxrwx      46B /etc/ssl/certs /etc/pki/ca-trust/extracted/pem/directory-hash
 lrwxrwxrwx      25B /etc/system-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
+lrwxrwxrwx      45B /etc/systemd/system/basic.target.wants/rpmdb-rebuild.service /usr/lib/systemd/system/rpmdb-rebuild.service
 lrwxrwxrwx      37B /etc/systemd/system/ctrl-alt-del.target /usr/lib/systemd/system/reboot.target
 lrwxrwxrwx      43B /etc/systemd/system/dbus.service /usr/lib/systemd/system/dbus-broker.service
 lrwxrwxrwx      38B /etc/systemd/system/getty.target.wants/getty@tty1.service /usr/lib/systemd/system/getty@.service
@@ -8536,6 +8539,7 @@ lrwxrwxrwx      30B /usr/lib/systemd/system/sysinit.target.wants/systemd-update-
 lrwxrwxrwx      31B /usr/lib/systemd/system/timers.target.wants/systemd-tmpfiles-clean.timer ../systemd-tmpfiles-clean.timer
 lrwxrwxrwx      41B /usr/lib/systemd/systemd-sysroot-fstab-check system-generators/systemd-fstab-generator
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
+lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.35.0.hmac
 lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
 lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
@@ -8589,7 +8593,7 @@ lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7302.0
 lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.7302.0
 lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.7302.0
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
-lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.34.2
+lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
 lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.7302.0
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
@@ -8681,9 +8685,9 @@ lrwxrwxrwx      19B /usr/lib64/libsigsegv.so.2 libsigsegv.so.2.0.6
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.4 libssh.so.4.9.4
+lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.5 libssh.so.4.9.5
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
