@@ -18,14 +18,6 @@ version: 0.2
 batch:
   fast-fail: true
   build-graph:
-    - identifier: golang_115
-      env:
-        variables:
-          GO_SOURCE_VERSION: 1.15
-    - identifier: golang_116
-      env:
-        variables:
-          GO_SOURCE_VERSION: 1.16
     - identifier: golang_117
       env:
         variables:
