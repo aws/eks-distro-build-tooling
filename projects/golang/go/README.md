@@ -21,7 +21,7 @@ EKS currently supports the following Golang versions:
 - [`v1.15`](./1.15/GIT_TAG)
 - [`v1.16`](./1.16/GIT_TAG)
 
-EKS Distro has discontinued support of `EKS-Go v1.15 - v1.16`. There are no plans for removing `1.15` and `1.16` artifacts from the public ECR. But EKS-Distro 
+EKS Distro has discontinued support of `EKS-Go v1.15 - v1.16`. There are no plans for removing `1.15` and `1.16` artifacts from the public ECR. EKS-Distro 
 won’t be backporting any upcoming golang security fixes for these versions.
 
 **Due to the increased security risk this poses, it is HIGHLY recommended that users of `EKS-GO v1.15 - v1.16` update to a supported version of EKS-Go (v1.17+) as soon as possible.**
