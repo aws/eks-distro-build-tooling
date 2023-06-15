@@ -419,8 +419,8 @@ FROM minimal-copy-stage as full-copy-stage
 COPY --link --from=packer /packer /
 COPY --link --from=ansible /ansible /
 COPY --link --from=nodejs /nodejs /
-COPY --link --from=linuxkit /linuxkit /
 COPY --link --from=golang-1.16 /golang-1.16 /
+COPY --link --from=linuxkit /linuxkit /
 COPY --link --from=golang-1.17 /golang-1.17 /
 COPY --link --from=go-licenses-1.17 /go-licenses-1.17 /
 COPY --link --from=golang-1.19 /golang-1.19 /
