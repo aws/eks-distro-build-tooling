@@ -208,38 +208,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_ansible.sh && \
     /remove_yum_packages.sh
 
-FROM ${BUILDER_IMAGE} as golang-1.15
-ARG TARGETARCH
-ARG GOLANG_VERSION_115
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.15*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.15*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_115 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.16
-ARG TARGETARCH
-ARG GOLANG_VERSION_116
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.16*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.16*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_116 && \
-    /remove_yum_packages.sh
-
 FROM ${BUILDER_IMAGE} as golang-1.17
 ARG TARGETARCH
 ARG GOLANG_VERSION_117
@@ -303,54 +271,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_120 && \
     /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as skopeo
-ARG TARGETARCH
-ARG GOPROXY
-ARG SKOPEO_VERSION
-ENV SKOPEO_VERSION=$SKOPEO_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_skopeo.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_gcc_yum_packages.sh && \
-    /install_skopeo.sh && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as linuxkit
-ARG TARGETARCH
-ARG GOPROXY
-ARG LINUXKIT_VERSION
-ENV LINUXKIT_VERSION=$LINUXKIT_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_linuxkit.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \    
-    /install_linuxkit.sh    
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.16
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
 
 FROM ${BUILDER_IMAGE} as go-licenses-1.17
 ARG TARGETARCH
@@ -435,8 +355,6 @@ FROM minimal-copy-stage as full-copy-stage
 COPY --link --from=packer /packer /
 COPY --link --from=ansible /ansible /
 COPY --link --from=nodejs /nodejs /
-COPY --link --from=golang-1.15 /golang-1.15 /
-COPY --link --from=golang-1.16 /golang-1.16 /
 COPY --link --from=linuxkit /linuxkit /
 COPY --link --from=golang-1.17 /golang-1.17 /
 COPY --link --from=go-licenses-1.17 /go-licenses-1.17 /
@@ -448,7 +366,6 @@ COPY --link --from=go-licenses-1.20 /go-licenses-1.20 /
 # takes precendent
 COPY --link --from=golang-1.18 /golang-1.18 /
 COPY --link --from=go-licenses-1.18 /go-licenses-1.18 /
-COPY --link --from=go-licenses-1.16 /go-licenses-1.16 /
 
 FROM ${FINAL_STAGE_BASE} as final
 
