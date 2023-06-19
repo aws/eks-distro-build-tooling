@@ -314,7 +314,7 @@ ENV LINUXKIT_VERSION=$LINUXKIT_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
+COPY --link --from=golang-1.19 /golang-1.19 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_linuxkit.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
