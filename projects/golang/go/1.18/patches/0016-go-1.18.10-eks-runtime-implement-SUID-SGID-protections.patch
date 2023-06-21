@@ -15,7 +15,7 @@ Merge conflicts are resolved by keeping both changes in files sys_dragonfly_amd6
 
 During go build the compiler flags the `isSecureMode()` as `redeclared` in security_linux.go and security_nonunix.go because these methods are in the same `runtime` package. In golang, 
 the same method/global variable cannot be declared under same package in different files. In these two files, the `isSecureMode()` method is necessary as they modify the value of 
-`secureMode` (true for unix and false for nonunix) which will be later used implement the protective feature for unix OS systems. 
+`secureMode` (true for unix and false for nonunix) which will be later used to implement the protective feature for unix OS systems. 
 If we change the `isSecureMode()` method to different name in security_nonunix.go to resolve this issue but keep the method operations the same (changing the value of `secureMode` 
 varibale to false), the go build passes as the protecting features in this CVE are only implemented for unix systems. Thus, security_nonunix.go is not called/used. However, during EKS-D 
 presubmit test, when we test for windows the panic.go file cannot locate the `isSecureMode()` call or the `secureMode` variable as in security_nonunix.go the method name has been 

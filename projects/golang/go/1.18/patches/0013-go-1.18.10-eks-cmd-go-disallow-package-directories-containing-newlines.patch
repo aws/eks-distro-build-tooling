@@ -10,7 +10,9 @@ Backported By: szafreen@amazon.com
 Backported From: release-branch.go1.19
 Source Commit: https://github.com/golang/go/commit/c160b49b6d328c86bd76ca2fff9009a71347333f
 
-To resolve the merge conflict in script_test.go, both changes are accepted. 
+There was a merge conflict in src/cmd/go/script_test.go file where the new changes deleted the setup() method's 
+":=" and "/=" references and replaced it with new testenv.Builder() if-statement. As the ":=" and "/=" references 
+are used later in the test, both these changes were accpeted. 
 
 # Original Information
 
