@@ -1,6 +1,6 @@
 # EKS Golang 1.18
 
-Current Release: `4`
+Current Release: `6`
 
 Tracking Tag: `go1.18.10`
 
