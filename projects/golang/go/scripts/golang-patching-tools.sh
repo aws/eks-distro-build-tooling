@@ -9,7 +9,7 @@ GO_REPO_URL="https://github.com/golang/go.git"
 
 GO_REPO="$(dirname "$BASE_DIRECTORY")/go"
 
-GO_VERSIONS=('1.17.13' '1.18.10' '1.19.10' '1.20.5')
+GO_VERSIONS=('1.18.10' '1.19.10' '1.20.5')
 
 function build::go::clone() {
 	if [[ ! -e $GO_REPO ]]; then
