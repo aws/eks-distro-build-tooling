@@ -25,9 +25,6 @@ minimal-images-base-compiler-gcc: ## Build, export packages, validate and run te
 minimal-images-base-python-3.7: ## Build, export packages, validate and run tests for minimal variant `base-python-3.7`
 minimal-images-base-python-3.9: ## Build, export packages, validate and run tests for minimal variant `base-python-3.9`
 minimal-images-base-nodejs-16: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-16`
-minimal-images-base-golang-compiler-1.17-base: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.17-base`
-minimal-images-base-golang-compiler-1.17-yum: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.17-yum`
-minimal-images-base-golang-compiler-1.17-gcc: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.17-gcc`
 minimal-images-base-golang-compiler-1.18-base: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.18-base`
 minimal-images-base-golang-compiler-1.18-yum: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.18-yum`
 minimal-images-base-golang-compiler-1.18-gcc: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.18-gcc`
@@ -63,9 +60,6 @@ packages-export-minimal-images-base-compiler-gcc: ## Export packages for minimal
 packages-export-minimal-images-base-python-3.7: ## Export packages for minimal variant `base-python-3.7`
 packages-export-minimal-images-base-python-3.9: ## Export packages for minimal variant `base-python-3.9`
 packages-export-minimal-images-base-nodejs-16: ## Export packages for minimal variant `base-nodejs-16`
-packages-export-minimal-images-base-golang-compiler-1.17-base: ## Export packages for minimal variant `base-golang-compiler-1.17-base`
-packages-export-minimal-images-base-golang-compiler-1.17-yum: ## Export packages for minimal variant `base-golang-compiler-1.17-yum`
-packages-export-minimal-images-base-golang-compiler-1.17-gcc: ## Export packages for minimal variant `base-golang-compiler-1.17-gcc`
 packages-export-minimal-images-base-golang-compiler-1.18-base: ## Export packages for minimal variant `base-golang-compiler-1.18-base`
 packages-export-minimal-images-base-golang-compiler-1.18-yum: ## Export packages for minimal variant `base-golang-compiler-1.18-yum`
 packages-export-minimal-images-base-golang-compiler-1.18-gcc: ## Export packages for minimal variant `base-golang-compiler-1.18-gcc`
@@ -101,9 +95,6 @@ validate-minimal-images-base-compiler-gcc: ## Validate for minimal variant `base
 validate-minimal-images-base-python-3.7: ## Validate for minimal variant `base-python-3.7`
 validate-minimal-images-base-python-3.9: ## Validate for minimal variant `base-python-3.9`
 validate-minimal-images-base-nodejs-16: ## Validate for minimal variant `base-nodejs-16`
-validate-minimal-images-base-golang-compiler-1.17-base: ## Validate for minimal variant `base-golang-compiler-1.17-base`
-validate-minimal-images-base-golang-compiler-1.17-yum: ## Validate for minimal variant `base-golang-compiler-1.17-yum`
-validate-minimal-images-base-golang-compiler-1.17-gcc: ## Validate for minimal variant `base-golang-compiler-1.17-gcc`
 validate-minimal-images-base-golang-compiler-1.18-base: ## Validate for minimal variant `base-golang-compiler-1.18-base`
 validate-minimal-images-base-golang-compiler-1.18-yum: ## Validate for minimal variant `base-golang-compiler-1.18-yum`
 validate-minimal-images-base-golang-compiler-1.18-gcc: ## Validate for minimal variant `base-golang-compiler-1.18-gcc`
@@ -139,9 +130,6 @@ test-minimal-images-base-compiler-gcc: ## Run tests for minimal variant `base-co
 test-minimal-images-base-python-3.7: ## Run tests for minimal variant `base-python-3.7`
 test-minimal-images-base-python-3.9: ## Run tests for minimal variant `base-python-3.9`
 test-minimal-images-base-nodejs-16: ## Run tests for minimal variant `base-nodejs-16`
-test-minimal-images-base-golang-compiler-1.17-base: ## Run tests for minimal variant `base-golang-compiler-1.17-base`
-test-minimal-images-base-golang-compiler-1.17-yum: ## Run tests for minimal variant `base-golang-compiler-1.17-yum`
-test-minimal-images-base-golang-compiler-1.17-gcc: ## Run tests for minimal variant `base-golang-compiler-1.17-gcc`
 test-minimal-images-base-golang-compiler-1.18-base: ## Run tests for minimal variant `base-golang-compiler-1.18-base`
 test-minimal-images-base-golang-compiler-1.18-yum: ## Run tests for minimal variant `base-golang-compiler-1.18-yum`
 test-minimal-images-base-golang-compiler-1.18-gcc: ## Run tests for minimal variant `base-golang-compiler-1.18-gcc`
@@ -177,9 +165,6 @@ minimal-update-base-compiler-gcc: ## Run update logic for minimal variant `base-
 minimal-update-base-python-3.7: ## Run update logic for minimal variant `base-python-3.7`
 minimal-update-base-python-3.9: ## Run update logic for minimal variant `base-python-3.9`
 minimal-update-base-nodejs-16: ## Run update logic for minimal variant `base-nodejs-16`
-minimal-update-base-golang-compiler-1.17-base: ## Run update logic for minimal variant `base-golang-compiler-1.17-base`
-minimal-update-base-golang-compiler-1.17-yum: ## Run update logic for minimal variant `base-golang-compiler-1.17-yum`
-minimal-update-base-golang-compiler-1.17-gcc: ## Run update logic for minimal variant `base-golang-compiler-1.17-gcc`
 minimal-update-base-golang-compiler-1.18-base: ## Run update logic for minimal variant `base-golang-compiler-1.18-base`
 minimal-update-base-golang-compiler-1.18-yum: ## Run update logic for minimal variant `base-golang-compiler-1.18-yum`
 minimal-update-base-golang-compiler-1.18-gcc: ## Run update logic for minimal variant `base-golang-compiler-1.18-gcc`
@@ -215,9 +200,6 @@ minimal-create-pr-base-compiler-gcc: ## Run create pr logic for minimal variant 
 minimal-create-pr-base-python-3.7: ## Run create pr logic for minimal variant `base-python-3.7`
 minimal-create-pr-base-python-3.9: ## Run create pr logic for minimal variant `base-python-3.9`
 minimal-create-pr-base-nodejs-16: ## Run create pr logic for minimal variant `base-nodejs-16`
-minimal-create-pr-base-golang-compiler-1.17-base: ## Run create pr logic for minimal variant `base-golang-compiler-1.17-base`
-minimal-create-pr-base-golang-compiler-1.17-yum: ## Run create pr logic for minimal variant `base-golang-compiler-1.17-yum`
-minimal-create-pr-base-golang-compiler-1.17-gcc: ## Run create pr logic for minimal variant `base-golang-compiler-1.17-gcc`
 minimal-create-pr-base-golang-compiler-1.18-base: ## Run create pr logic for minimal variant `base-golang-compiler-1.18-base`
 minimal-create-pr-base-golang-compiler-1.18-yum: ## Run create pr logic for minimal variant `base-golang-compiler-1.18-yum`
 minimal-create-pr-base-golang-compiler-1.18-gcc: ## Run create pr logic for minimal variant `base-golang-compiler-1.18-gcc`
@@ -236,7 +218,6 @@ minimal-create-pr-base-python-compiler-3.9-gcc: ## Run create pr logic for minim
 
 ##@ Compiler Images Targets
 golang-compiler-images: ## Build compiler images for all versions of golang
-golang-1.17-compiler-images: ## Build compiler images for golang-1.17
 golang-1.18-compiler-images: ## Build compiler images for golang-1.18
 golang-1.19-compiler-images: ## Build compiler images for golang-1.19
 nodejs-compiler-images: ## Build compiler images for all versions of nodejs

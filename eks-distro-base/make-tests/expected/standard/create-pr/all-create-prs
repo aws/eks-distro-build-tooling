@@ -58,15 +58,6 @@ echo Updated base image tag file for eks-distro-minimal-base-python-3.9
 checking pushed file: /override/root/eks-distro-minimal-base-nodejs-16-pushed - true
 update_base_image.sh 16-test-tag eks-distro-minimal-base-nodejs-16 2 image-tag-update-al2
 echo Updated base image tag file for eks-distro-minimal-base-nodejs-16
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.17-base-pushed - true
-update_base_image.sh 1.17-test-tag eks-distro-minimal-base-golang-compiler-1.17-base 2 image-tag-update-al2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-base
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.17-yum-pushed - true
-update_base_image.sh 1.17-yum-test-tag eks-distro-minimal-base-golang-compiler-1.17-yum 2 image-tag-update-al2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-yum
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.17-gcc-pushed - true
-update_base_image.sh 1.17-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.17-gcc 2 image-tag-update-al2
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.17-gcc
 checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.18-base-pushed - true
 update_base_image.sh 1.18-test-tag eks-distro-minimal-base-golang-compiler-1.18-base 2 image-tag-update-al2
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.18-base
