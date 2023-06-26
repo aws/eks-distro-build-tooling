@@ -654,18 +654,6 @@ check_base-golang-compiler() {
     done
 }
 
-check_base-golang-compiler-1.17-base() {
-    check_base-golang-compiler 1.17 base
-}
-
-check_base-golang-compiler-1.17-yum() {
-    check_base-golang-compiler 1.17 yum
-}
-
-check_base-golang-compiler-1.17-gcc() {
-    check_base-golang-compiler 1.17 gcc
-}
-
 check_base-golang-compiler-1.18-base() {
     check_base-golang-compiler 1.18 base
 }
