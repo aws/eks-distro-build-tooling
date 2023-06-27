@@ -1,3 +1,4 @@
 
-openssl-libs.x86_64
-pcre.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64
+openssl11-libs.x86_64

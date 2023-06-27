@@ -13014,7 +13014,7 @@
 -rw-r--r--     360B /usr/include/linux/coda_psdev.h
 -rw-r--r--    13KiB /usr/include/linux/coff.h
 -rw-r--r--   2.3KiB /usr/include/linux/connector.h
--rw-r--r--     993B /usr/include/linux/const.h
+-rw-r--r--     997B /usr/include/linux/const.h
 -rw-r--r--     706B /usr/include/linux/coresight-stm.h
 -rw-r--r--   2.8KiB /usr/include/linux/cramfs_fs.h
 -rw-r--r--   3.4KiB /usr/include/linux/cryptouser.h
@@ -21959,7 +21959,7 @@
 -rw-r--r--   7.7MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
--rw-r--r--    20KiB /var/lib/rpm/Sha1header
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
