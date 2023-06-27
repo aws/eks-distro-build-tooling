@@ -1,1 +1,7 @@
 
+glib2.x86_64
+kernel-headers.x86_64
+ncurses.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64
+openldap.x86_64

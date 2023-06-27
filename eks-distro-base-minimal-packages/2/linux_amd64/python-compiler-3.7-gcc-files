@@ -800,7 +800,7 @@
 -rw-r--r--     360B /usr/include/linux/coda_psdev.h
 -rw-r--r--    13KiB /usr/include/linux/coff.h
 -rw-r--r--   2.3KiB /usr/include/linux/connector.h
--rw-r--r--     993B /usr/include/linux/const.h
+-rw-r--r--     997B /usr/include/linux/const.h
 -rw-r--r--     706B /usr/include/linux/coresight-stm.h
 -rw-r--r--   2.8KiB /usr/include/linux/cramfs_fs.h
 -rw-r--r--   3.4KiB /usr/include/linux/cryptouser.h

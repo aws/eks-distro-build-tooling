@@ -32,7 +32,7 @@ gawk-4.0.2-4.amzn2.1.2.x86_64
 gcc-7.3.1-15.amzn2.x86_64
 gdbm-1.13-6.amzn2.0.2.x86_64
 git-core-2.40.1-1.amzn2.0.1.x86_64
-glib2-2.56.1-9.amzn2.0.5.x86_64
+glib2-2.56.1-9.amzn2.0.6.x86_64
 glibc-2.26-63.amzn2.x86_64
 glibc-common-2.26-63.amzn2.x86_64
 glibc-devel-2.26-63.amzn2.x86_64
@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.314-238.539.amzn2.x86_64
+kernel-headers-4.14.318-240.529.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -96,9 +96,9 @@ lua-5.1.4-15.amzn2.0.2.x86_64
 lz4-1.7.5-2.amzn2.0.1.x86_64
 make-3.82-24.amzn2.x86_64
 mpfr-3.1.1-4.amzn2.0.2.x86_64
-ncurses-6.0-8.20170212.amzn2.1.4.x86_64
-ncurses-base-6.0-8.20170212.amzn2.1.4.noarch
-ncurses-libs-6.0-8.20170212.amzn2.1.4.x86_64
+ncurses-6.0-8.20170212.amzn2.1.5.x86_64
+ncurses-base-6.0-8.20170212.amzn2.1.5.noarch
+ncurses-libs-6.0-8.20170212.amzn2.1.5.x86_64
 nspr-4.34.0-3.1.amzn2.x86_64
 nss-3.79.0-4.amzn2.0.1.x86_64
 nss-pem-1.0.3-5.amzn2.x86_64
@@ -107,7 +107,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.x86_64
 nss-sysinit-3.79.0-4.amzn2.0.1.x86_64
 nss-tools-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
-openldap-2.4.44-25.amzn2.0.5.x86_64
+openldap-2.4.44-25.amzn2.0.6.x86_64
 openssh-7.4p1-22.amzn2.0.2.x86_64
 openssh-clients-7.4p1-22.amzn2.0.2.x86_64
 openssl-libs-1.0.2k-24.amzn2.0.7.x86_64

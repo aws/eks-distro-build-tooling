@@ -21,7 +21,7 @@ libsepol-2.5-8.1.amzn2.0.2.x86_64
 libsmartcols-2.30.2-2.amzn2.0.11.x86_64
 libstdc++-7.3.1-15.amzn2.x86_64
 libuuid-2.30.2-2.amzn2.0.11.x86_64
-ncurses-libs-6.0-8.20170212.amzn2.1.4.x86_64
+ncurses-libs-6.0-8.20170212.amzn2.1.5.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 readline-6.2-10.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
