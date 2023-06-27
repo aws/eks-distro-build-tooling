@@ -2425,7 +2425,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.5.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.6.so
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -2482,7 +2482,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.5.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.6.so
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcprofile.so
