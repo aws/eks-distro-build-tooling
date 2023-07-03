@@ -2371,7 +2371,7 @@
 -rw-------   3.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
--rw-r--r--     299B /var/lib/alternatives/ip6tables
+-rw-r--r--     297B /var/lib/alternatives/ip6tables
 -rw-r--r--     749B /var/lib/alternatives/iptables
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   1.5MiB /var/lib/rpm/rpmdb.sqlite
@@ -2388,12 +2388,12 @@ lrwxrwxrwx      28B /etc/alternatives/arptables-save /usr/sbin/arptables-nft-sav
 lrwxrwxrwx      22B /etc/alternatives/ebtables /usr/sbin/ebtables-nft
 lrwxrwxrwx      30B /etc/alternatives/ebtables-restore /usr/sbin/ebtables-nft-restore
 lrwxrwxrwx      27B /etc/alternatives/ebtables-save /usr/sbin/ebtables-nft-save
-lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/ip6tables-legacy
-lrwxrwxrwx      34B /etc/alternatives/ip6tables-restore /usr/sbin/ip6tables-legacy-restore
-lrwxrwxrwx      31B /etc/alternatives/ip6tables-save /usr/sbin/ip6tables-legacy-save
-lrwxrwxrwx      25B /etc/alternatives/iptables /usr/sbin/iptables-legacy
-lrwxrwxrwx      33B /etc/alternatives/iptables-restore /usr/sbin/iptables-legacy-restore
-lrwxrwxrwx      30B /etc/alternatives/iptables-save /usr/sbin/iptables-legacy-save
+lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-save /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-save /usr/sbin/iptables-wrapper
 lrwxrwxrwx      25B /etc/amazon-linux-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/amazon-linux-release-cpe ../usr/lib/system-release-cpe
 lrwxrwxrwx      16B /etc/issue ../usr/lib/issue
