@@ -1,4 +1,4 @@
-From a1dee6dcc0f4e03b57ad1b702a91dd1f87370ddb Mon Sep 17 00:00:00 2001
+From b192cf162dc776d2c9d40f5f9979589fc079b0a4 Mon Sep 17 00:00:00 2001
 From: Jackson West <jgw@amazon.com>
 Date: Fri, 25 Feb 2022 12:37:01 -0600
 Subject: [PATCH] EKS-D changes to helm control plane chart
@@ -6,7 +6,7 @@ Subject: [PATCH] EKS-D changes to helm control plane chart
 Signed-off-by: Jackson West <jgw@amazon.com>
 ---
  config/prow/cluster/crier_deployment.yaml     | 118 ++++++---------
- config/prow/cluster/crier_rbac.yaml           |  58 ++------
+ config/prow/cluster/crier_rbac.yaml           |  44 +-----
  config/prow/cluster/deck_deployment.yaml      | 135 +++++++-----------
  config/prow/cluster/deck_rbac.yaml            |  38 +----
  config/prow/cluster/deck_service.yaml         |  11 +-
@@ -23,9 +23,9 @@ Signed-off-by: Jackson West <jgw@amazon.com>
  .../cluster/statusreconciler_deployment.yaml  |  29 ++--
  .../prow/cluster/statusreconciler_rbac.yaml   |   7 +-
  config/prow/cluster/tide_deployment.yaml      |  38 +++--
- config/prow/cluster/tide_rbac.yaml            |   7 +-
+ config/prow/cluster/tide_rbac.yaml            |   8 +-
  config/prow/cluster/tide_service.yaml         |  11 +-
- 20 files changed, 346 insertions(+), 586 deletions(-)
+ 20 files changed, 339 insertions(+), 580 deletions(-)
 
 diff --git a/config/prow/cluster/crier_deployment.yaml b/config/prow/cluster/crier_deployment.yaml
 index d53ff40e9b..ecb49e4f79 100644
@@ -197,7 +197,7 @@ index d53ff40e9b..ecb49e4f79 100644
 -              expirationSeconds: 86400
 -              path: token
 diff --git a/config/prow/cluster/crier_rbac.yaml b/config/prow/cluster/crier_rbac.yaml
-index 53f4471080..0dd7018f55 100644
+index 53f4471080..57393297a9 100644
 --- a/config/prow/cluster/crier_rbac.yaml
 +++ b/config/prow/cluster/crier_rbac.yaml
 @@ -13,18 +13,16 @@
@@ -221,7 +221,7 @@ index 53f4471080..0dd7018f55 100644
    name: crier
  rules:
  - apiGroups:
-@@ -37,51 +35,15 @@ rules:
+@@ -37,46 +35,10 @@ rules:
      - "list"
      - "patch"
  ---
@@ -257,7 +257,7 @@ index 53f4471080..0dd7018f55 100644
 -  name: crier
 -subjects:
 -- kind: ServiceAccount
--  name: crier
+   name: crier
 -  namespace: default
 ----
 -kind: RoleBinding
@@ -265,22 +265,15 @@ index 53f4471080..0dd7018f55 100644
 -metadata:
 -  name: crier-namespaced
 -  namespace: test-pods
--roleRef:
--  apiGroup: rbac.authorization.k8s.io
--  kind: Role
--  name: crier
--subjects:
--- kind: ServiceAccount
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+   kind: Role
+@@ -84,4 +46,4 @@ roleRef:
+ subjects:
+ - kind: ServiceAccount
    name: crier
 -  namespace: default
-+  roleRef:
-+    apiGroup: rbac.authorization.k8s.io
-+    kind: Role
-+    name: crier
-+  subjects:
-+  - kind: ServiceAccount
-+    name: crier
-+    namespace: {{ .Release.Namespace }}
++  namespace: {{ .Release.Namespace }}
 diff --git a/config/prow/cluster/deck_deployment.yaml b/config/prow/cluster/deck_deployment.yaml
 index 50e7cb6966..abd0103817 100644
 --- a/config/prow/cluster/deck_deployment.yaml
@@ -1648,7 +1641,7 @@ index 3b26a7e2dd..3f9d26f8f4 100644
 +        secret:
 +          secretName: s3-credentials
 diff --git a/config/prow/cluster/tide_rbac.yaml b/config/prow/cluster/tide_rbac.yaml
-index 65ce3f5704..0505d674cc 100644
+index 65ce3f5704..4c294156ac 100644
 --- a/config/prow/cluster/tide_rbac.yaml
 +++ b/config/prow/cluster/tide_rbac.yaml
 @@ -1,15 +1,13 @@
@@ -1669,7 +1662,15 @@ index 65ce3f5704..0505d674cc 100644
    name: tide
  rules:
    - apiGroups:
-@@ -34,3 +32,4 @@ roleRef:
+@@ -25,7 +23,6 @@ rules:
+ kind: RoleBinding
+ apiVersion: rbac.authorization.k8s.io/v1
+ metadata:
+-  namespace: default
+   name: tide
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+@@ -34,3 +31,4 @@ roleRef:
  subjects:
  - kind: ServiceAccount
    name: tide
@@ -1700,5 +1701,5 @@ index 00ba9ae5c0..1195cb16c4 100644
 -    protocol: TCP
 -  type: ClusterIP
 -- 
-2.40.0
+2.38.5
 
