@@ -31,7 +31,7 @@ EXTRA_PR_BODY=""
 
 REPOS=(eks-distro eks-anywhere-build-tooling eks-anywhere)
 for repo in "${REPOS[@]}"; do
-    ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh "$repo"    
+    ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh "$repo"
 done
 while IFS=, read -r key
 do
@@ -55,7 +55,12 @@ do
             ${SCRIPT_ROOT}/../pr-scripts/update_image_tag.sh "$repo" '.*' $IMAGE_TAG $BASE_IMAGE_TAG_FILE
 
             if [ "$(git -C ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${repo} status --porcelain -- $BASE_IMAGE_TAG_FILE | wc -l)" -gt 0 ]; then
-                UPDATE_PACKAGES="$(cat ${SCRIPT_ROOT}/../eks-distro-base-updates/${key#al}/update_packages-${image})"
+                update_packages_path="${SCRIPT_ROOT}/../eks-distro-base-updates/${key#al}/update_packages-${image}"
+                if [ ! -f "$update_packages_path" ]; then
+                  echo "File for update packages does not exist: ${update_packages_path}"
+                  exit 1
+                fi
+                UPDATE_PACKAGES="$(cat "${update_packages_path}")"
                 if [ "$UPDATE_PACKAGES" != "" ]; then
                     EXTRA_PR_BODY+="\n${BASE_IMAGE_TAG_FILE}\nThe following yum packages were updated:\n\`\`\`bash\n${UPDATE_PACKAGES}\n\`\`\`\n"
                 fi
