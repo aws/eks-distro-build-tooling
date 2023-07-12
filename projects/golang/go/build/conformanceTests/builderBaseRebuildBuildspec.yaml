@@ -31,6 +31,7 @@ phases:
       - echo Running pre-build setup and initialization...
       - scripts/sync_uninitialized_git_repository.sh . $EKS_D_BUILD_TOOLING_REMOTE_URL $TARGET_BRANCH
       - scripts/setup_ecr_credential_helper.sh
+      - projects/golang/go/scripts/replace_builder_base_go_versions.sh
   build:
     commands:
       - mkdir -p builder-base/tmp/golang-downloads/x86_64
