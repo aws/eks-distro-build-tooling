@@ -1,8 +1,1 @@
 
-binutils.x86_64
-glib2.x86_64
-libeconf.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
-openldap.x86_64
-openssl-libs.x86_64
