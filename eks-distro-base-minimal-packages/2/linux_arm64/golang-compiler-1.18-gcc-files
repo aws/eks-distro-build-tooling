@@ -6732,7 +6732,7 @@
 -rw-r--r--   7.9KiB /root/sdk/go1.18.10/src/net/http/header.go
 -rw-r--r--   6.1KiB /root/sdk/go1.18.10/src/net/http/header_test.go
 -rw-r--r--   5.1KiB /root/sdk/go1.18.10/src/net/http/http.go
--rw-r--r--   5.9KiB /root/sdk/go1.18.10/src/net/http/http_test.go
+-rw-r--r--   5.0KiB /root/sdk/go1.18.10/src/net/http/http_test.go
 -rw-r--r--   2.0KiB /root/sdk/go1.18.10/src/net/http/httptest/example_test.go
 -rw-r--r--   2.4KiB /root/sdk/go1.18.10/src/net/http/httptest/httptest.go
 -rw-r--r--   4.1KiB /root/sdk/go1.18.10/src/net/http/httptest/httptest_test.go
@@ -6764,7 +6764,7 @@
 -rw-r--r--   1.2KiB /root/sdk/go1.18.10/src/net/http/proxy_test.go
 -rw-r--r--   2.4KiB /root/sdk/go1.18.10/src/net/http/range_test.go
 -rw-r--r--   9.7KiB /root/sdk/go1.18.10/src/net/http/readrequest_test.go
--rw-r--r--    46KiB /root/sdk/go1.18.10/src/net/http/request.go
+-rw-r--r--    45KiB /root/sdk/go1.18.10/src/net/http/request.go
 -rw-r--r--    38KiB /root/sdk/go1.18.10/src/net/http/request_test.go
 -rw-r--r--    24KiB /root/sdk/go1.18.10/src/net/http/requestwrite_test.go
 -rw-r--r--    12KiB /root/sdk/go1.18.10/src/net/http/response.go
