@@ -1,7 +1,7 @@
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/kubernetes/kops
 CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/kops
-CLONED_REPO_PATCHES_DIRECTORY=$(wildcard $(CLONED_REPO_DIRECTORY)/patches)
+CLONED_REPO_PATCHES_DIRECTORY:=$(CLONED_REPO_DIRECTORY)/patches
 
 KOPS_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
