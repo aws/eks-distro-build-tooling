@@ -61,10 +61,10 @@ function build::go::download(){
     done
 }
 
-if [[ $ARCHITECTURE == "linux/amd64" ]] ; then 
+if [[ $( echo $ARCHITECTURE | cut -d ',' -f1 ) == "linux/amd64" ]] ; then 
     build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
 fi
 
-if [[ $ARCHITECTURE == "linux/arm64" ]] ; then 
+if [[ $( echo $ARCHITECTURE | cut -d ',' -f2 ) == "linux/arm64" ]] ; then 
     build::go::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
 fi
