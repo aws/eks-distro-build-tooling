@@ -146,5 +146,5 @@ clean-golang-download:
 .PHONY: download-golang-%
 download-golang-%:
 	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
-	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR}
+	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR} ${BUILDKIT_PLATFORMS}
 

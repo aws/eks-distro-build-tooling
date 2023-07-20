@@ -21,6 +21,7 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 VERSION="$1"
 OUTPUT_DIR="$2"
+ARCHITECTURE="$3"
 
 RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 
@@ -60,5 +61,10 @@ function build::go::download(){
     done
 }
 
-build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
-build::go::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
+if [[ $ARCHITECTURE =~ "linux/amd64" ]] ; then 
+    build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
+fi
+
+if [[ $ARCHITECTURE =~ "linux/arm64" ]] ; then 
+    build::go::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
+fi
