@@ -3,7 +3,7 @@ amazon-linux-repo-cdn-2023.0.20230315-1.amzn2023.noarch
 audit-libs-3.0.6-1.amzn2023.0.2.x86_64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.x86_64
-binutils-2.39-6.amzn2023.0.6.x86_64
+binutils-2.39-6.amzn2023.0.7.x86_64
 bzip2-libs-1.0.8-6.amzn2023.0.2.x86_64
 ca-certificates-2023.2.60-1.0.amzn2023.0.1.noarch
 coreutils-8.32-30.amzn2023.0.3.x86_64
@@ -31,7 +31,7 @@ glibc-common-2.34-52.amzn2023.0.2.x86_64
 glibc-minimal-langpack-2.34-52.amzn2023.0.2.x86_64
 gmp-6.2.1-2.amzn2023.0.2.x86_64
 gnupg2-2.3.7-1.amzn2023.0.4.x86_64
-gnutls-3.8.0-375.amzn2023.0.1.x86_64
+gnutls-3.8.0-376.amzn2023.0.2.x86_64
 gpg-pubkey-afaa0026-6185c6ab
 gpg-pubkey-d832c631-63920d79
 gpgme-1.15.1-6.amzn2023.0.3.x86_64
@@ -43,7 +43,7 @@ json-c-0.14-8.amzn2023.0.2.x86_64
 keyutils-libs-1.6.3-1.amzn2023.x86_64
 krb5-libs-1.20.1-8.amzn2023.0.2.x86_64
 libacl-2.3.1-2.amzn2023.0.2.x86_64
-libarchive-3.5.3-2.amzn2023.0.2.x86_64
+libarchive-3.5.3-2.amzn2023.0.3.x86_64
 libassuan-2.5.5-1.amzn2023.0.2.x86_64
 libattr-2.5.1-3.amzn2023.0.2.x86_64
 libblkid-2.37.4-1.amzn2023.0.3.x86_64
@@ -85,7 +85,7 @@ libverto-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
 libxml2-2.10.4-1.amzn2023.0.1.x86_64
 libyaml-0.2.5-5.amzn2023.0.2.x86_64
-libzstd-1.5.2-1.amzn2023.0.2.x86_64
+libzstd-1.5.2-1.amzn2023.0.3.x86_64
 lua-libs-5.4.4-3.amzn2023.0.2.x86_64
 lz4-libs-1.9.4-1.amzn2023.0.2.x86_64
 make-4.3-5.amzn2023.0.2.x86_64
@@ -112,8 +112,8 @@ python3-libs-3.9.16-1.amzn2023.0.3.x86_64
 python3-pip-21.3.1-2.amzn2023.0.5.noarch
 python3-pip-wheel-21.3.1-2.amzn2023.0.5.noarch
 python3-rpm-4.16.1.3-12.amzn2023.0.6.x86_64
-python3-setuptools-59.6.0-2.amzn2023.0.3.noarch
-python3-setuptools-wheel-59.6.0-2.amzn2023.0.3.noarch
+python3-setuptools-59.6.0-2.amzn2023.0.4.noarch
+python3-setuptools-wheel-59.6.0-2.amzn2023.0.4.noarch
 readline-8.1-2.amzn2023.0.2.x86_64
 rpm-4.16.1.3-12.amzn2023.0.6.x86_64
 rpm-build-libs-4.16.1.3-12.amzn2023.0.6.x86_64

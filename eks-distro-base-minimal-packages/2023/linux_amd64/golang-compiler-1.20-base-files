@@ -12942,7 +12942,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.6.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -13013,7 +13013,7 @@
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   351KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.6.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1
