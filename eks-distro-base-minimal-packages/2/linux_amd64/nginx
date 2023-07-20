@@ -12,7 +12,7 @@ gperftools-libs-2.6.1-1.amzn2.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 libacl-2.2.51-14.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
-libcap-2.54-1.amzn2.0.1.x86_64
+libcap-2.54-1.amzn2.0.2.x86_64
 libcrypt-2.26-63.amzn2.x86_64
 libgcc-7.3.1-15.amzn2.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64

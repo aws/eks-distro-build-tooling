@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.318-241.531.amzn2.x86_64
+kernel-headers-4.14.320-242.534.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -57,7 +57,7 @@ libassuan-2.1.0-3.amzn2.0.2.x86_64
 libatomic-7.3.1-15.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
 libblkid-2.30.2-2.amzn2.0.11.x86_64
-libcap-2.54-1.amzn2.0.1.x86_64
+libcap-2.54-1.amzn2.0.2.x86_64
 libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcilkrts-7.3.1-15.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
