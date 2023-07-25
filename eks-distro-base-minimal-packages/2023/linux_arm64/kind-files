@@ -359,13 +359,13 @@
 -rwxr-xr-x   197KiB /usr/bin/column
 -rwxr-xr-x   197KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    39MiB /usr/bin/containerd
--rwxr-xr-x   7.9MiB /usr/bin/containerd-shim
--rwxr-xr-x    11MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    11MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    41MiB /usr/bin/containerd
+-rwxr-xr-x   7.1MiB /usr/bin/containerd-shim
+-rwxr-xr-x   9.0MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x    13MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   263KiB /usr/bin/csplit
--rwxr-xr-x    20MiB /usr/bin/ctr
+-rwxr-xr-x    21MiB /usr/bin/ctr
 -rwxr-xr-x   390KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
 -rwxr-xr-x   400KiB /usr/bin/cvtsudoers
@@ -1074,7 +1074,7 @@
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/console-getty.service
 -rw-r--r--   1.3KiB /usr/lib/systemd/system/container-getty@.service
--rw-r--r--   1.3KiB /usr/lib/systemd/system/containerd.service
+-rw-r--r--   1.4KiB /usr/lib/systemd/system/containerd.service
 -rw-r--r--     547B /usr/lib/systemd/system/dbus-broker.service
 -rw-r--r--     137B /usr/lib/systemd/system/dbus.socket
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/debug-shell.service
@@ -8093,7 +8093,7 @@
 -rw-------    12KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
--rw-r--r--     299B /var/lib/alternatives/ip6tables
+-rw-r--r--     297B /var/lib/alternatives/ip6tables
 -rw-r--r--     749B /var/lib/alternatives/iptables
 -rw-r--r--      69B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--   132KiB /var/lib/dnf/history.sqlite
@@ -8119,12 +8119,12 @@ lrwxrwxrwx      28B /etc/alternatives/arptables-save /usr/sbin/arptables-nft-sav
 lrwxrwxrwx      22B /etc/alternatives/ebtables /usr/sbin/ebtables-nft
 lrwxrwxrwx      30B /etc/alternatives/ebtables-restore /usr/sbin/ebtables-nft-restore
 lrwxrwxrwx      27B /etc/alternatives/ebtables-save /usr/sbin/ebtables-nft-save
-lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/ip6tables-legacy
-lrwxrwxrwx      34B /etc/alternatives/ip6tables-restore /usr/sbin/ip6tables-legacy-restore
-lrwxrwxrwx      31B /etc/alternatives/ip6tables-save /usr/sbin/ip6tables-legacy-save
-lrwxrwxrwx      25B /etc/alternatives/iptables /usr/sbin/iptables-legacy
-lrwxrwxrwx      33B /etc/alternatives/iptables-restore /usr/sbin/iptables-legacy-restore
-lrwxrwxrwx      30B /etc/alternatives/iptables-save /usr/sbin/iptables-legacy-save
+lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-save /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-save /usr/sbin/iptables-wrapper
 lrwxrwxrwx      34B /etc/alternatives/libnssckbi.so /usr/lib64/pkcs11/p11-kit-trust.so
 lrwxrwxrwx      25B /etc/amazon-linux-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/amazon-linux-release-cpe ../usr/lib/system-release-cpe

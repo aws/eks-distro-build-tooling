@@ -81,7 +81,7 @@ popt-1.18-6.amzn2023.0.2.aarch64
 python3-3.9.16-1.amzn2023.0.3.aarch64
 python3-libs-3.9.16-1.amzn2023.0.3.aarch64
 python3-pip-wheel-21.3.1-2.amzn2023.0.5.noarch
-python3-setuptools-wheel-59.6.0-2.amzn2023.0.3.noarch
+python3-setuptools-wheel-59.6.0-2.amzn2023.0.4.noarch
 quota-4.06-4.amzn2023.0.2.aarch64
 quota-nls-4.06-4.amzn2023.0.2.noarch
 readline-8.1-2.amzn2023.0.2.aarch64

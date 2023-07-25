@@ -2,7 +2,7 @@ alternatives-1.15-2.amzn2023.0.2.aarch64
 amazon-linux-repo-cdn-2023.0.20230315-1.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
-binutils-2.39-6.amzn2023.0.6.aarch64
+binutils-2.39-6.amzn2023.0.7.aarch64
 bzip2-libs-1.0.8-6.amzn2023.0.2.aarch64
 ca-certificates-2023.2.60-1.0.amzn2023.0.1.noarch
 coreutils-8.32-30.amzn2023.0.3.aarch64
@@ -52,7 +52,7 @@ libtool-ltdl-2.4.7-1.amzn2023.0.3.aarch64
 libunistring-0.9.10-10.amzn2023.0.2.aarch64
 libverto-0.3.2-1.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-libzstd-1.5.2-1.amzn2023.0.2.aarch64
+libzstd-1.5.2-1.amzn2023.0.3.aarch64
 make-4.3-5.amzn2023.0.2.aarch64
 mpfr-4.1.0-7.amzn2023.0.2.aarch64
 ncurses-base-6.2-4.20200222.amzn2023.0.4.noarch
