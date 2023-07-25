@@ -94,7 +94,7 @@
 -rw-r--r--       5B /etc/yum/vars/product
 -rw-r--r--       7B /etc/yum/vars/target
 -rw-r--r--     444B /etc/yum/version-groups.conf
--rw-------   260KiB /tmp/tmpy1je3n0acacert.pem
+-rw-------   260KiB /tmp/tmpl_vq5gq6cacert.pem
 -rwxr-xr-x    69KiB /usr/bin/[
 -rwxr-xr-x   1.1MiB /usr/bin/aarch64-redhat-linux-gcc
 -rwxr-xr-x   1.1MiB /usr/bin/aarch64-redhat-linux-gcc-7
@@ -789,7 +789,6 @@
 -rw-r--r--    11KiB /usr/include/linux/dm-ioctl.h
 -rw-r--r--    15KiB /usr/include/linux/dm-log-userspace.h
 -rw-r--r--   1.4KiB /usr/include/linux/dma-buf.h
--rw-r--r--   4.6KiB /usr/include/linux/dn.h
 -rw-r--r--   8.8KiB /usr/include/linux/dqblk_xfs.h
 -rw-r--r--   4.9KiB /usr/include/linux/dvb/audio.h
 -rw-r--r--   4.2KiB /usr/include/linux/dvb/ca.h
@@ -1105,7 +1104,6 @@
 -rw-r--r--   1.1KiB /usr/include/linux/netfilter_bridge/ebt_stp.h
 -rw-r--r--     719B /usr/include/linux/netfilter_bridge/ebt_vlan.h
 -rw-r--r--   8.9KiB /usr/include/linux/netfilter_bridge/ebtables.h
--rw-r--r--   1.9KiB /usr/include/linux/netfilter_decnet.h
 -rw-r--r--   2.1KiB /usr/include/linux/netfilter_ipv4.h
 -rw-r--r--   6.5KiB /usr/include/linux/netfilter_ipv4/ip_tables.h
 -rw-r--r--     821B /usr/include/linux/netfilter_ipv4/ipt_CLUSTERIP.h

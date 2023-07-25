@@ -1,5 +1,2 @@
 
-ncurses.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
-openldap.x86_64
+libcap.x86_64
