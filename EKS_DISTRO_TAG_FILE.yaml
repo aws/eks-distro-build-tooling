@@ -3,7 +3,7 @@ al2:
   eks-distro-minimal-base: 2023-06-06-1686078098.2
   eks-distro-minimal-base-nonroot: 2023-06-06-1686078098.2
   eks-distro-minimal-base-glibc: 2023-06-08-1686250870.2
-  eks-distro-minimal-base-iptables: 2023-07-19-1689793262.2
+  eks-distro-minimal-base-iptables: null
   eks-distro-minimal-base-docker-client: 2023-06-08-1686250870.2
   eks-distro-minimal-base-csi: 2023-07-20-1689879648.2
   eks-distro-minimal-base-csi-ebs: 2023-07-20-1689879648.2
