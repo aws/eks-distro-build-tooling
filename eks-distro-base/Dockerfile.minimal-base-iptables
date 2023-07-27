@@ -74,8 +74,8 @@ RUN set -x && \
         --slave /usr/sbin/ip6tables ip6tables /usr/sbin/iptables-wrapper \
         --slave /usr/sbin/ip6tables-restore ip6tables-restore /usr/sbin/iptables-wrapper \
         --slave /usr/sbin/ip6tables-save ip6tables-save /usr/sbin/iptables-wrapper && \
-    # default to iptables in legacy mode
-    for t in iptables ip6tables; do chroot $NEWROOT update-alternatives --set $t /usr/sbin/$t-legacy; done && \
+    # default to iptables to use golang wrapper
+    chroot $NEWROOT update-alternatives --set iptables /usr/sbin/iptables-wrapper && \
     # Remove bad symlinks due to deleted man files
     find $NEWROOT/etc/alternatives -xtype l -name "*-man" -delete -print && \
     cleanup "iptables"

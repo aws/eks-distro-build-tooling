@@ -208,22 +208,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_ansible.sh && \
     /remove_yum_packages.sh
 
-FROM ${BUILDER_IMAGE} as golang-1.15
-ARG TARGETARCH
-ARG GOLANG_VERSION_115
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.15*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.15*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_115 && \
-    /remove_yum_packages.sh
-
 FROM ${BUILDER_IMAGE} as golang-1.16
 ARG TARGETARCH
 ARG GOLANG_VERSION_116
@@ -330,12 +314,12 @@ ENV LINUXKIT_VERSION=$LINUXKIT_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
+COPY --link --from=golang-1.19 /golang-1.19 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_linuxkit.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \    
-    /install_linuxkit.sh    
+    /install_linuxkit.sh
 
 FROM ${BUILDER_IMAGE} as go-licenses-1.16
 ARG TARGETARCH
@@ -435,7 +419,6 @@ FROM minimal-copy-stage as full-copy-stage
 COPY --link --from=packer /packer /
 COPY --link --from=ansible /ansible /
 COPY --link --from=nodejs /nodejs /
-COPY --link --from=golang-1.15 /golang-1.15 /
 COPY --link --from=golang-1.16 /golang-1.16 /
 COPY --link --from=linuxkit /linuxkit /
 COPY --link --from=golang-1.17 /golang-1.17 /

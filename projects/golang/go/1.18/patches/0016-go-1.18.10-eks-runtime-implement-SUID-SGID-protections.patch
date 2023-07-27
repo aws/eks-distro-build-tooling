@@ -1,0 +1,1211 @@
+From 5dbee07dbd2e6fe407e7600a2cc3da4861d82958 Mon Sep 17 00:00:00 2001
+From: Roland Shoemaker <bracewell@google.com>
+Date: Tue, 9 May 2023 11:47:57 -0700
+Subject: [PATCH] [release-branch.go1.19] runtime-implement-SUID-SGID-protections.patch
+
+# AWS EKS
+Backported To: go-1.18.10-eks
+Backported On: Wed, 7 Jun 2023
+Backported By: szafreen@amazon.com
+Backported From: release-branch.go1.19
+Source Commit: https://github.com/golang/go/commit/a7b1cd452ddc69a6606c2f35ac5786dc892e62cb
+
+
+Merge conflicts are resolved by keeping both changes in files sys_dragonfly_amd64.s, sys_netbsd_386.s, sys_netbsd_amd64.s, sys_netbsd_arm64.s, sys_openbsd2.go, sys_openbsd_mips64.s. 
+
+During go build the compiler flags the `isSecureMode()` as `redeclared` in security_linux.go and security_nonunix.go because these methods are in the same `runtime` package. In golang, 
+the same method/global variable cannot be declared under same package in different files. In these two files, the `isSecureMode()` method is necessary as they modify the value of 
+`secureMode` (true for unix and false for nonunix) which will be later used to implement the protective feature for unix OS systems. 
+If we change the `isSecureMode()` method to different name in security_nonunix.go to resolve this issue but keep the method operations the same (changing the value of `secureMode` 
+varibale to false), the go build passes as the protecting features in this CVE are only implemented for unix systems. Thus, security_nonunix.go is not called/used. However, during EKS-D 
+presubmit test, when we test for windows the panic.go file cannot locate the `isSecureMode()` call or the `secureMode` variable as in security_nonunix.go the method name has been 
+modified and no other unix files with `secureMode` variable is initialized. 
+To resolve this issue for go1.18.10 , one solution could be creating a new interface with a particular type of OS systems for which during unix builds the `secureMode` will be true 
+and during nonunix build `secureMode` will be false. And, in the interface a common function `isSecureMode()` can be decalred where the type of struct can be passed as a parameter. 
+However, this approach is not viable either as this will add more code to the CVE and will modify `isSecureMode()` method's signature in all other files. 
+
+To keep the CVE functionality intact and avoid any compiler errors, only one global variable `secureMode` is declared in security_nonunix.go and the `secure()` method in this file 
+will change the value to false. And in security_linux.go the `secureMode` value is modified to true in the `initSecureMode()` method. And this value be returned in `isSecureMode()` 
+method. In panic.go the if statement will only test the `secureMode` variable's value as this variable is global for all files in the `runtime` package. In security_issetugid.go and 
+in os_linux.go the `secureMode` variable declaration has been commented out. 
+
+
+# Original Information
+
+On Unix platforms, the runtime previously did nothing special when a
+program was run with either the SUID or SGID bits set. This can be
+dangerous in certain cases, such as when dumping memory state, or
+assuming the status of standard i/o file descriptors.
+
+Taking cues from glibc, this change implements a set of protections when
+a binary is run with SUID or SGID bits set (or is SUID/SGID-like). On
+Linux, whether to enable these protections is determined by whether the
+AT_SECURE flag is passed in the auxiliary vector. On platforms which
+have the issetugid syscall (the BSDs, darwin, and Solaris/Illumos), that
+is used. On the remaining platforms (currently only AIX) we check
+!(getuid() == geteuid() && getgid == getegid()).
+
+Currently when we determine a binary is "tainted" (using the glibc
+terminology), we implement two specific protections:
+  1. we check if the file descriptors 0, 1, and 2 are open, and if they
+     are not, we open them, pointing at /dev/null (or fail).
+  2. we force GOTRACKBACK=none, and generally prevent dumping of
+     trackbacks and registers when a program panics/aborts.
+
+In the future we may add additional protections.
+
+This change requires implementing issetugid on the platforms which
+support it, and implementing getuid, geteuid, getgid, and getegid on
+AIX.
+
+Thanks to Vincent Dehors from Synacktiv for reporting this issue.
+
+Updates #60272
+Fixes #60517
+Fixes CVE-2023-29403
+
+Change-Id: I057fa7153d29cf26515e7f49fed86e4f8bedd0f0
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1878434
+Reviewed-by: Damien Neil <dneil@google.com>
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Run-TryBot: Roland Shoemaker <bracewell@google.com>
+Reviewed-by: Russ Cox <rsc@google.com>
+(cherry picked from commit 87065663ea6d89cd54f65a515d8f2ed0ef285c19)
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1902231
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/1904340
+Reviewed-by: Michael Knyszek <mknyszek@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/501228
+Auto-Submit: Michael Knyszek <mknyszek@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Run-TryBot: David Chase <drchase@google.com>
+
+---
+ src/runtime/extern.go                 |  19 ++++
+ src/runtime/os2_aix.go                |  12 +++
+ src/runtime/os_aix.go                 |  40 +++++++
+ src/runtime/os_dragonfly.go           |   2 +
+ src/runtime/os_freebsd.go             |   2 +
+ src/runtime/os_linux.go               |  19 ++++
+ src/runtime/os_netbsd.go              |   2 +
+ src/runtime/os_openbsd_syscall2.go    |   2 +
+ src/runtime/os_solaris.go             |   4 +
+ src/runtime/panic.go                  |   6 ++
+ src/runtime/proc.go                   |   1 +
+ src/runtime/security_aix.go           |  17 +++
+ src/runtime/security_issetugid.go     |  19 ++++
+ src/runtime/security_linux.go         |  15 +++
+ src/runtime/security_nonunix.go       |  13 +++
+ src/runtime/security_test.go          | 143 ++++++++++++++++++++++++++
+ src/runtime/security_unix.go          |  72 +++++++++++++
+ src/runtime/signal_unix.go            |   4 +
+ src/runtime/sys_darwin.go             |   7 ++
+ src/runtime/sys_darwin_amd64.s        |   7 ++
+ src/runtime/sys_darwin_arm64.s        |   4 +
+ src/runtime/sys_dragonfly_amd64.s     |   8 ++
+ src/runtime/sys_freebsd_386.s         |   7 ++
+ src/runtime/sys_freebsd_amd64.s       |  10 ++
+ src/runtime/sys_freebsd_arm.s         |   8 ++
+ src/runtime/sys_freebsd_arm64.s       |   8 ++
+ src/runtime/sys_netbsd_386.s          |   6 ++
+ src/runtime/sys_netbsd_amd64.s        |   9 ++
+ src/runtime/sys_netbsd_arm.s          |   7 ++
+ src/runtime/sys_netbsd_arm64.s        |   5 +
+ src/runtime/sys_openbsd2.go           |  11 ++
+ src/runtime/sys_openbsd_386.s         |   9 ++
+ src/runtime/sys_openbsd_amd64.s       |   6 ++
+ src/runtime/sys_openbsd_arm.s         |   9 ++
+ src/runtime/sys_openbsd_arm64.s       |   6 ++
+ src/runtime/sys_openbsd_mips64.s      |   5 +
+ src/runtime/syscall2_solaris.go       |   2 +
+ src/runtime/syscall_solaris.go        |   1 +
+ src/runtime/testdata/testsuid/main.go |  25 +++++
+ 39 files changed, 552 insertions(+)
+ create mode 100644 src/runtime/security_aix.go
+ create mode 100644 src/runtime/security_issetugid.go
+ create mode 100644 src/runtime/security_linux.go
+ create mode 100644 src/runtime/security_nonunix.go
+ create mode 100644 src/runtime/security_test.go
+ create mode 100644 src/runtime/security_unix.go
+ create mode 100644 src/runtime/testdata/testsuid/main.go
+
+diff --git a/src/runtime/extern.go b/src/runtime/extern.go
+index f1f6ea5123..b64fbcbab5 100644
+--- a/src/runtime/extern.go
++++ b/src/runtime/extern.go
+@@ -188,6 +188,25 @@ the set of Go environment variables. They influence the building of Go programs
+ GOARCH, GOOS, and GOROOT are recorded at compile time and made available by
+ constants or functions in this package, but they do not influence the execution
+ of the run-time system.
++
++# Security
++
++On Unix platforms, Go's runtime system behaves slightly differently when a
++binary is setuid/setgid or executed with setuid/setgid-like properties, in order
++to prevent dangerous behaviors. On Linux this is determined by checking for the
++AT_SECURE flag in the auxiliary vector, on the BSDs and Solaris/Illumos it is
++determined by checking the issetugid syscall, and on AIX it is determined by
++checking if the uid/gid match the effective uid/gid.
++
++When the runtime determines the binary is setuid/setgid-like, it does three main
++things:
++  - The standard input/output file descriptors (0, 1, 2) are checked to be open.
++    If any of them are closed, they are opened pointing at /dev/null.
++  - The value of the GOTRACEBACK environment variable is set to 'none'.
++  - When a signal is received that terminates the program, or the program
++    encounters an unrecoverable panic that would otherwise override the value
++    of GOTRACEBACK, the goroutine stack, registers, and other memory related
++    information are omitted.
+ */
+ package runtime
+ 
+diff --git a/src/runtime/os2_aix.go b/src/runtime/os2_aix.go
+index 4d77f0de6d..08de0cc54f 100644
+--- a/src/runtime/os2_aix.go
++++ b/src/runtime/os2_aix.go
+@@ -55,6 +55,10 @@ var (
+ //go:cgo_import_dynamic libc_sysconf sysconf "libc.a/shr_64.o"
+ //go:cgo_import_dynamic libc_usleep usleep "libc.a/shr_64.o"
+ //go:cgo_import_dynamic libc_write write "libc.a/shr_64.o"
++//go:cgo_import_dynamic libc_getuid getuid "libc.a/shr_64.o"
++//go:cgo_import_dynamic libc_geteuid geteuid "libc.a/shr_64.o"
++//go:cgo_import_dynamic libc_getgid getgid "libc.a/shr_64.o"
++//go:cgo_import_dynamic libc_getegid getegid "libc.a/shr_64.o"
+ 
+ //go:cgo_import_dynamic libpthread___pth_init __pth_init "libpthread.a/shr_xpg5_64.o"
+ //go:cgo_import_dynamic libpthread_attr_destroy pthread_attr_destroy "libpthread.a/shr_xpg5_64.o"
+@@ -95,6 +99,10 @@ var (
+ //go:linkname libc_sysconf libc_sysconf
+ //go:linkname libc_usleep libc_usleep
+ //go:linkname libc_write libc_write
++//go:linkname libc_getuid libc_getuid
++//go:linkname libc_geteuid libc_geteuid
++//go:linkname libc_getgid libc_getgid
++//go:linkname libc_getegid libc_getegid
+ 
+ //go:linkname libpthread___pth_init libpthread___pth_init
+ //go:linkname libpthread_attr_destroy libpthread_attr_destroy
+@@ -137,6 +145,10 @@ var (
+ 	libc_sysconf,
+ 	libc_usleep,
+ 	libc_write,
++	libc_getuid,
++	libc_geteuid,
++	libc_getgid,
++	libc_getegid,
+ 	//libpthread
+ 	libpthread___pth_init,
+ 	libpthread_attr_destroy,
+diff --git a/src/runtime/os_aix.go b/src/runtime/os_aix.go
+index 41352b3a5a..13a84e933a 100644
+--- a/src/runtime/os_aix.go
++++ b/src/runtime/os_aix.go
+@@ -383,3 +383,43 @@ const sigPerThreadSyscall = 1 << 31
+ func runPerThreadSyscall() {
+ 	throw("runPerThreadSyscall only valid on linux")
+ }
++
++//go:nosplit
++func getuid() int32 {
++	r, errno := syscall0(&libc_getuid)
++	if errno != 0 {
++		print("getuid failed ", errno)
++		throw("getuid")
++	}
++	return int32(r)
++}
++
++//go:nosplit
++func geteuid() int32 {
++	r, errno := syscall0(&libc_geteuid)
++	if errno != 0 {
++		print("geteuid failed ", errno)
++		throw("geteuid")
++	}
++	return int32(r)
++}
++
++//go:nosplit
++func getgid() int32 {
++	r, errno := syscall0(&libc_getgid)
++	if errno != 0 {
++		print("getgid failed ", errno)
++		throw("getgid")
++	}
++	return int32(r)
++}
++
++//go:nosplit
++func getegid() int32 {
++	r, errno := syscall0(&libc_getegid)
++	if errno != 0 {
++		print("getegid failed ", errno)
++		throw("getegid")
++	}
++	return int32(r)
++}
+diff --git a/src/runtime/os_dragonfly.go b/src/runtime/os_dragonfly.go
+index 152d94cf43..5d43114407 100644
+--- a/src/runtime/os_dragonfly.go
++++ b/src/runtime/os_dragonfly.go
+@@ -67,6 +67,8 @@ func pipe2(flags int32) (r, w int32, errno int32)
+ func closeonexec(fd int32)
+ func setNonblock(fd int32)
+ 
++func issetugid() int32
++
+ // From DragonFly's <sys/sysctl.h>
+ const (
+ 	_CTL_HW      = 6
+diff --git a/src/runtime/os_freebsd.go b/src/runtime/os_freebsd.go
+index d908a80cd1..efd1ae7066 100644
+--- a/src/runtime/os_freebsd.go
++++ b/src/runtime/os_freebsd.go
+@@ -52,6 +52,8 @@ func pipe2(flags int32) (r, w int32, errno int32)
+ func closeonexec(fd int32)
+ func setNonblock(fd int32)
+ 
++func issetugid() int32
++
+ // From FreeBSD's <sys/sysctl.h>
+ const (
+ 	_CTL_HW      = 6
+diff --git a/src/runtime/os_linux.go b/src/runtime/os_linux.go
+index eb8aa076e9..43f6b2303b 100644
+--- a/src/runtime/os_linux.go
++++ b/src/runtime/os_linux.go
+@@ -52,9 +52,12 @@ const (
+ )
+ 
+ // Atomically,
++//
+ //	if(*addr == val) sleep
++//
+ // Might be woken up spuriously; that's allowed.
+ // Don't sleep longer than ns; ns < 0 means forever.
++//
+ //go:nosplit
+ func futexsleep(addr *uint32, val uint32, ns int64) {
+ 	// Some Linux kernels have a bug where futex of
+@@ -73,6 +76,7 @@ func futexsleep(addr *uint32, val uint32, ns int64) {
+ }
+ 
+ // If any procs are sleeping on addr, wake up at most cnt.
++//
+ //go:nosplit
+ func futexwakeup(addr *uint32, cnt uint32) {
+ 	ret := futex(unsafe.Pointer(addr), _FUTEX_WAKE_PRIVATE, cnt, nil, nil, 0)
+@@ -157,6 +161,7 @@ const (
+ func clone(flags int32, stk, mp, gp, fn unsafe.Pointer) int32
+ 
+ // May run with m.p==nil, so write barriers are not allowed.
++//
+ //go:nowritebarrier
+ func newosproc(mp *m) {
+ 	stk := unsafe.Pointer(mp.g0.stack.hi)
+@@ -184,6 +189,7 @@ func newosproc(mp *m) {
+ }
+ 
+ // Version of newosproc that doesn't require a valid G.
++//
+ //go:nosplit
+ func newosproc0(stacksize uintptr, fn unsafe.Pointer) {
+ 	stack := sysAlloc(stacksize, &memstats.stacks_sys)
+@@ -205,6 +211,7 @@ const (
+ 	_AT_NULL   = 0  // End of vector
+ 	_AT_PAGESZ = 6  // System physical page size
+ 	_AT_HWCAP  = 16 // hardware capability bit vector
++	_AT_SECURE = 23 // secure mode boolean
+ 	_AT_RANDOM = 25 // introduced in 2.6.29
+ 	_AT_HWCAP2 = 26 // hardware capability bit vector 2
+ )
+@@ -274,6 +281,9 @@ func sysargs(argc int32, argv **byte) {
+ // the ELF AT_RANDOM auxiliary vector.
+ var startupRandomData []byte
+ 
++// secureMode holds the value of AT_SECURE passed in the auxiliary vector.
++//var secureMode bool
++
+ func sysauxv(auxv []uintptr) int {
+ 	var i int
+ 	for ; auxv[i] != _AT_NULL; i += 2 {
+@@ -286,6 +296,9 @@ func sysauxv(auxv []uintptr) int {
+ 
+ 		case _AT_PAGESZ:
+ 			physPageSize = val
++
++		case _AT_SECURE:
++			secureMode = val == 1
+ 		}
+ 
+ 		archauxv(tag, val)
+@@ -365,6 +378,7 @@ func goenvs() {
+ // Called to do synchronous initialization of Go code built with
+ // -buildmode=c-archive or -buildmode=c-shared.
+ // None of the Go runtime is initialized.
++//
+ //go:nosplit
+ //go:nowritebarrierrec
+ func libpreinit() {
+@@ -392,6 +406,7 @@ func minit() {
+ }
+ 
+ // Called from dropm to undo the effect of an minit.
++//
+ //go:nosplit
+ func unminit() {
+ 	unminitSignals()
+@@ -499,6 +514,7 @@ func getsig(i uint32) uintptr {
+ }
+ 
+ // setSignaltstackSP sets the ss_sp field of a stackt.
++//
+ //go:nosplit
+ func setSignalstackSP(s *stackt, sp uintptr) {
+ 	*(*uintptr)(unsafe.Pointer(&s.ss_sp)) = sp
+@@ -509,6 +525,7 @@ func (c *sigctxt) fixsigcode(sig uint32) {
+ }
+ 
+ // sysSigaction calls the rt_sigaction system call.
++//
+ //go:nosplit
+ func sysSigaction(sig uint32, new, old *sigactiont) {
+ 	if rt_sigaction(uintptr(sig), new, old, unsafe.Sizeof(sigactiont{}.sa_mask)) != 0 {
+@@ -533,6 +550,7 @@ func sysSigaction(sig uint32, new, old *sigactiont) {
+ }
+ 
+ // rt_sigaction is implemented in assembly.
++//
+ //go:noescape
+ func rt_sigaction(sig uintptr, new, old *sigactiont, size uintptr) int32
+ 
+@@ -855,6 +873,7 @@ func syscall_runtime_doAllThreadsSyscall(trap, a1, a2, a3, a4, a5, a6 uintptr) (
+ //
+ // This function throws if the system call returns with anything other than the
+ // expected values.
++//
+ //go:nosplit
+ func runPerThreadSyscall() {
+ 	gp := getg()
+diff --git a/src/runtime/os_netbsd.go b/src/runtime/os_netbsd.go
+index c4e69fb189..d3982e8df4 100644
+--- a/src/runtime/os_netbsd.go
++++ b/src/runtime/os_netbsd.go
+@@ -83,6 +83,8 @@ func pipe2(flags int32) (r, w int32, errno int32)
+ func closeonexec(fd int32)
+ func setNonblock(fd int32)
+ 
++func issetugid() int32
++
+ const (
+ 	_ESRCH     = 3
+ 	_ETIMEDOUT = 60
+diff --git a/src/runtime/os_openbsd_syscall2.go b/src/runtime/os_openbsd_syscall2.go
+index 810d599508..fc50c7f911 100644
+--- a/src/runtime/os_openbsd_syscall2.go
++++ b/src/runtime/os_openbsd_syscall2.go
+@@ -99,3 +99,5 @@ func closeonexec(fd int32)
+ func setNonblock(fd int32)
+ 
+ func walltime() (sec int64, nsec int32)
++
++func issetugid() int32
+diff --git a/src/runtime/os_solaris.go b/src/runtime/os_solaris.go
+index 8ac1b08f69..d56d45ef46 100644
+--- a/src/runtime/os_solaris.go
++++ b/src/runtime/os_solaris.go
+@@ -267,3 +267,7 @@ func sysvicall6(fn *libcFunc, a1, a2, a3, a4, a5, a6 uintptr) uintptr {
+ 	}
+ 	return libcall.r1
+ }
++
++func issetugid() int32 {
++	return int32(sysvicall0(&libc_issetugid))
++}
+diff --git a/src/runtime/panic.go b/src/runtime/panic.go
+index 6600410cb6..41c8857283 100644
+--- a/src/runtime/panic.go
++++ b/src/runtime/panic.go
+@@ -944,6 +944,7 @@ func gopanic(e any) {
+ 
+ // getargp returns the location where the caller
+ // writes outgoing function call arguments.
++//
+ //go:nosplit
+ //go:noinline
+ func getargp() uintptr {
+@@ -956,6 +957,7 @@ func getargp() uintptr {
+ //
+ // TODO(rsc): Once we commit to CopyStackAlways,
+ // this doesn't need to be nosplit.
++//
+ //go:nosplit
+ func gorecover(argp uintptr) any {
+ 	// Must be in a function running as part of a deferred call during the panic.
+@@ -1042,6 +1044,10 @@ func fatalthrow() {
+ 	// Switch to the system stack to avoid any stack growth, which
+ 	// may make things worse if the runtime is in a bad state.
+ 	systemstack(func() {
++		if secureMode == true {
++			exit(2)
++		}
++
+ 		startpanic_m()
+ 
+ 		if dopanic_m(gp, pc, sp) {
+diff --git a/src/runtime/proc.go b/src/runtime/proc.go
+index cae15bc8e2..26b83c536f 100644
+--- a/src/runtime/proc.go
++++ b/src/runtime/proc.go
+@@ -708,6 +708,7 @@ func schedinit() {
+ 
+ 	goargs()
+ 	goenvs()
++	secure()
+ 	parsedebugvars()
+ 	gcinit()
+ 
+diff --git a/src/runtime/security_aix.go b/src/runtime/security_aix.go
+new file mode 100644
+index 0000000000..c11b9c3f01
+--- /dev/null
++++ b/src/runtime/security_aix.go
+@@ -0,0 +1,17 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package runtime
++
++// secureMode is only ever mutated in schedinit, so we don't need to worry about
++// synchronization primitives.
++var secureMode bool
++
++func initSecureMode() {
++	secureMode = !(getuid() == geteuid() && getgid() == getegid())
++}
++
++func isSecureMode() bool {
++	return secureMode
++}
+diff --git a/src/runtime/security_issetugid.go b/src/runtime/security_issetugid.go
+new file mode 100644
+index 0000000000..19ab60bf2e
+--- /dev/null
++++ b/src/runtime/security_issetugid.go
+@@ -0,0 +1,19 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build darwin || dragonfly || freebsd || illumos || netbsd || openbsd || solaris
++
++package runtime
++
++// secureMode is only ever mutated in schedinit, so we don't need to worry about
++// synchronization primitives.
++//var secureMode bool
++
++func initSecureMode() {
++	secureMode = issetugid() == 1
++}
++
++func isSecureMode() bool {
++	return secureMode
++}
+diff --git a/src/runtime/security_linux.go b/src/runtime/security_linux.go
+new file mode 100644
+index 0000000000..e079f12886
+--- /dev/null
++++ b/src/runtime/security_linux.go
+@@ -0,0 +1,15 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package runtime
++
++import _ "unsafe"
++
++func initSecureMode() {
++	secureMode = true
++}
++
++func isSecureMode() bool {
++	return secureMode
++}
+diff --git a/src/runtime/security_nonunix.go b/src/runtime/security_nonunix.go
+new file mode 100644
+index 0000000000..5789caafdb
+--- /dev/null
++++ b/src/runtime/security_nonunix.go
+@@ -0,0 +1,13 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build !unix
++
++package runtime
++
++var secureMode bool
++
++func secure() {
++	secureMode = false
++}
+diff --git a/src/runtime/security_test.go b/src/runtime/security_test.go
+new file mode 100644
+index 0000000000..1d304113d6
+--- /dev/null
++++ b/src/runtime/security_test.go
+@@ -0,0 +1,143 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build unix
++
++package runtime_test
++
++import (
++	"bytes"
++	"context"
++	"fmt"
++	"internal/testenv"
++	"io"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"runtime"
++	"strings"
++	"testing"
++	"time"
++)
++
++func privesc(command string, args ...string) error {
++	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
++	defer cancel()
++	var cmd *exec.Cmd
++	if runtime.GOOS == "darwin" {
++		cmd = exec.CommandContext(ctx, "sudo", append([]string{"-n", command}, args...)...)
++	} else {
++		cmd = exec.CommandContext(ctx, "su", highPrivUser, "-c", fmt.Sprintf("%s %s", command, strings.Join(args, " ")))
++	}
++	_, err := cmd.CombinedOutput()
++	return err
++}
++
++const highPrivUser = "root"
++
++func setSetuid(t *testing.T, user, bin string) {
++	t.Helper()
++	// We escalate privileges here even if we are root, because for some reason on some builders
++	// (at least freebsd-amd64-13_0) the default PATH doesn't include /usr/sbin, which is where
++	// chown lives, but using 'su root -c' gives us the correct PATH.
++
++	// buildTestProg uses os.MkdirTemp which creates directories with 0700, which prevents
++	// setuid binaries from executing because of the missing g+rx, so we need to set the parent
++	// directory to better permissions before anything else. We created this directory, so we
++	// shouldn't need to do any privilege trickery.
++	if err := privesc("chmod", "0777", filepath.Dir(bin)); err != nil {
++		t.Skipf("unable to set permissions on %q, likely no passwordless sudo/su: %s", filepath.Dir(bin), err)
++	}
++
++	if err := privesc("chown", user, bin); err != nil {
++		t.Skipf("unable to set permissions on test binary, likely no passwordless sudo/su: %s", err)
++	}
++	if err := privesc("chmod", "u+s", bin); err != nil {
++		t.Skipf("unable to set permissions on test binary, likely no passwordless sudo/su: %s", err)
++	}
++}
++
++func TestSUID(t *testing.T) {
++	// This test is relatively simple, we build a test program which opens a
++	// file passed via the TEST_OUTPUT envvar, prints the value of the
++	// GOTRACEBACK envvar to stdout, and prints "hello" to stderr. We then chown
++	// the program to "nobody" and set u+s on it. We execute the program, only
++	// passing it two files, for stdin and stdout, and passing
++	// GOTRACEBACK=system in the env.
++	//
++	// We expect that the program will trigger the SUID protections, resetting
++	// the value of GOTRACEBACK, and opening the missing stderr descriptor, such
++	// that the program prints "GOTRACEBACK=none" to stdout, and nothing gets
++	// written to the file pointed at by TEST_OUTPUT.
++
++	if *flagQuick {
++		t.Skip("-quick")
++	}
++
++	testenv.MustHaveGoBuild(t)
++
++	helloBin, err := buildTestProg(t, "testsuid")
++	if err != nil {
++		t.Fatal(err)
++	}
++
++	f, err := os.CreateTemp(t.TempDir(), "suid-output")
++	if err != nil {
++		t.Fatal(err)
++	}
++	tempfilePath := f.Name()
++	f.Close()
++
++	lowPrivUser := "nobody"
++	setSetuid(t, lowPrivUser, helloBin)
++
++	b := bytes.NewBuffer(nil)
++	pr, pw, err := os.Pipe()
++	if err != nil {
++		t.Fatal(err)
++	}
++
++	proc, err := os.StartProcess(helloBin, []string{helloBin}, &os.ProcAttr{
++		Env:   []string{"GOTRACEBACK=system", "TEST_OUTPUT=" + tempfilePath},
++		Files: []*os.File{os.Stdin, pw},
++	})
++	if err != nil {
++		if os.IsPermission(err) {
++			t.Skip("don't have execute permission on setuid binary, possibly directory permission issue?")
++		}
++		t.Fatal(err)
++	}
++	done := make(chan bool, 1)
++	go func() {
++		io.Copy(b, pr)
++		pr.Close()
++		done <- true
++	}()
++	ps, err := proc.Wait()
++	if err != nil {
++		t.Fatal(err)
++	}
++	pw.Close()
++	<-done
++	output := b.String()
++
++	if ps.ExitCode() == 99 {
++		t.Skip("binary wasn't setuid (uid == euid), unable to effectively test")
++	}
++
++	expected := "GOTRACEBACK=none\n"
++	if output != expected {
++		t.Errorf("unexpected output, got: %q, want %q", output, expected)
++	}
++
++	fc, err := os.ReadFile(tempfilePath)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if string(fc) != "" {
++		t.Errorf("unexpected file content, got: %q", string(fc))
++	}
++
++	// TODO: check the registers aren't leaked?
++}
+diff --git a/src/runtime/security_unix.go b/src/runtime/security_unix.go
+new file mode 100644
+index 0000000000..16fc87eece
+--- /dev/null
++++ b/src/runtime/security_unix.go
+@@ -0,0 +1,72 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build unix
++
++package runtime
++
++func secure() {
++	initSecureMode()
++
++	if !isSecureMode() {
++		return
++	}
++
++	// When secure mode is enabled, we do two things:
++	//   1. ensure the file descriptors 0, 1, and 2 are open, and if not open them,
++	//      pointing at /dev/null (or fail)
++	//   2. enforce specific environment variable values (currently we only force
++	//		GOTRACEBACK=none)
++	//
++	// Other packages may also disable specific functionality when secure mode
++	// is enabled (determined by using linkname to call isSecureMode).
++	//
++	// NOTE: we may eventually want to enforce (1) regardless of whether secure
++	// mode is enabled or not.
++
++	secureFDs()
++	secureEnv()
++}
++
++func secureEnv() {
++	var hasTraceback bool
++	for i := 0; i < len(envs); i++ {
++		if hasPrefix(envs[i], "GOTRACEBACK=") {
++			hasTraceback = true
++			envs[i] = "GOTRACEBACK=none"
++		}
++	}
++	if !hasTraceback {
++		envs = append(envs, "GOTRACEBACK=none")
++	}
++}
++
++func secureFDs() {
++	const (
++		// F_GETFD and EBADF are standard across all unixes, define
++		// them here rather than in each of the OS specific files
++		F_GETFD = 0x01
++		EBADF   = 0x09
++	)
++
++	devNull := []byte("/dev/null\x00")
++	for i := 0; i < 3; i++ {
++		ret, errno := fcntl(int32(i), F_GETFD, 0)
++		if ret >= 0 {
++			continue
++		}
++		if errno != EBADF {
++			print("runtime: unexpected error while checking standard file descriptor ", i, ", errno=", errno, "\n")
++			throw("cannot secure fds")
++		}
++
++		if ret := open(&devNull[0], 2 /* O_RDWR */, 0); ret < 0 {
++			print("runtime: standard file descriptor ", i, " closed, unable to open /dev/null, errno=", errno, "\n")
++			throw("cannot secure fds")
++		} else if ret != int32(i) {
++			print("runtime: opened unexpected file descriptor ", ret, " when attempting to open ", i, "\n")
++			throw("cannot secure fds")
++		}
++	}
++}
+diff --git a/src/runtime/signal_unix.go b/src/runtime/signal_unix.go
+index 5cb51d10ba..64bea67b91 100644
+--- a/src/runtime/signal_unix.go
++++ b/src/runtime/signal_unix.go
+@@ -707,6 +707,10 @@ func sighandler(sig uint32, info *siginfo, ctxt unsafe.Pointer, gp *g) {
+ 		print("Signal ", sig, "\n")
+ 	}
+ 
++	if isSecureMode() {
++		exit(2)
++	}
++
+ 	print("PC=", hex(c.sigpc()), " m=", _g_.m.id, " sigcode=", c.sigcode(), "\n")
+ 	if _g_.m.incgo && gp == _g_.m.g0 && _g_.m.curg != nil {
+ 		print("signal arrived during cgo execution\n")
+diff --git a/src/runtime/sys_darwin.go b/src/runtime/sys_darwin.go
+index c90cc78968..6aecfc43a2 100644
+--- a/src/runtime/sys_darwin.go
++++ b/src/runtime/sys_darwin.go
+@@ -488,6 +488,11 @@ func setNonblock(fd int32) {
+ 	fcntl(fd, _F_SETFL, flags|_O_NONBLOCK)
+ }
+ 
++func issetugid() int32 {
++	return libcCall(unsafe.Pointer(abi.FuncPCABI0(issetugid_trampoline)), nil)
++}
++func issetugid_trampoline()
++
+ // Tell the linker that the libc_* functions are to be found
+ // in a system library, with the libc_ prefix missing.
+ 
+@@ -535,3 +540,5 @@ func setNonblock(fd int32) {
+ //go:cgo_import_dynamic libc_pthread_cond_wait pthread_cond_wait "/usr/lib/libSystem.B.dylib"
+ //go:cgo_import_dynamic libc_pthread_cond_timedwait_relative_np pthread_cond_timedwait_relative_np "/usr/lib/libSystem.B.dylib"
+ //go:cgo_import_dynamic libc_pthread_cond_signal pthread_cond_signal "/usr/lib/libSystem.B.dylib"
++
++//go:cgo_import_dynamic libc_issetugid issetugid "/usr/lib/libSystem.B.dylib"
+diff --git a/src/runtime/sys_darwin_amd64.s b/src/runtime/sys_darwin_amd64.s
+index db4715d2b7..cd0f9320d0 100644
+--- a/src/runtime/sys_darwin_amd64.s
++++ b/src/runtime/sys_darwin_amd64.s
+@@ -857,3 +857,10 @@ TEXT runtime·syscall_x509(SB),NOSPLIT,$0
+ 	MOVQ	BP, SP
+ 	POPQ	BP
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	PUSHQ	BP
++	MOVQ	SP, BP
++	CALL	libc_issetugid(SB)
++	POPQ	BP
++	RET
+diff --git a/src/runtime/sys_darwin_arm64.s b/src/runtime/sys_darwin_arm64.s
+index e57ac53e10..2ef37eda8c 100644
+--- a/src/runtime/sys_darwin_arm64.s
++++ b/src/runtime/sys_darwin_arm64.s
+@@ -756,3 +756,7 @@ TEXT runtime·syscall_x509(SB),NOSPLIT,$0
+ 	ADD	$16, RSP
+ 	MOVD	R0, 56(R2)	// save r1
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	BL	libc_issetugid(SB)
++	RET
+diff --git a/src/runtime/sys_dragonfly_amd64.s b/src/runtime/sys_dragonfly_amd64.s
+index 3af0928828..50605727ba 100644
+--- a/src/runtime/sys_dragonfly_amd64.s
++++ b/src/runtime/sys_dragonfly_amd64.s
+@@ -416,4 +416,12 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
+ 	ORL	AX, DX
+ 	MOVL	$92, AX // fcntl
+ 	SYSCALL
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVQ	$0, DI
++	MOVQ	$0, SI
++	MOVQ	$0, DX
++	MOVL	$253, AX
++	SYSCALL
++	MOVL	AX, ret+0(FP)
+ 	RET
+diff --git a/src/runtime/sys_freebsd_386.s b/src/runtime/sys_freebsd_386.s
+index d4c4cc7fdb..fc22abfdda 100644
+--- a/src/runtime/sys_freebsd_386.s
++++ b/src/runtime/sys_freebsd_386.s
+@@ -470,3 +470,10 @@ TEXT runtime·cpuset_getaffinity(SB), NOSPLIT, $0-28
+ 	RET
+ 
+ GLOBL runtime·tlsoffset(SB),NOPTR,$4
++
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVL	$253, AX
++	INT	$0x80
++	MOVL	AX, ret+0(FP)
++	RET
+diff --git a/src/runtime/sys_freebsd_amd64.s b/src/runtime/sys_freebsd_amd64.s
+index 57ae0399a5..5d092a9b79 100644
+--- a/src/runtime/sys_freebsd_amd64.s
++++ b/src/runtime/sys_freebsd_amd64.s
+@@ -519,3 +519,13 @@ TEXT runtime·cpuset_getaffinity(SB), NOSPLIT, $0-44
+ 	NEGQ	AX
+ 	MOVL	AX, ret+40(FP)
+ 	RET
++
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVQ	$0, DI
++	MOVQ	$0, SI
++	MOVQ	$0, DX
++	MOVL	$253, AX
++	SYSCALL
++	MOVL	AX, ret+0(FP)
++	RET
+diff --git a/src/runtime/sys_freebsd_arm.s b/src/runtime/sys_freebsd_arm.s
+index 8546eba805..55fb0a9a28 100644
+--- a/src/runtime/sys_freebsd_arm.s
++++ b/src/runtime/sys_freebsd_arm.s
+@@ -28,6 +28,7 @@
+ #define SYS_fcntl (SYS_BASE + 92)
+ #define SYS___sysctl (SYS_BASE + 202)
+ #define SYS_nanosleep (SYS_BASE + 240)
++#define SYS_issetugid (SYS_BASE + 253)
+ #define SYS_clock_gettime (SYS_BASE + 232)
+ #define SYS_sched_yield (SYS_BASE + 331)
+ #define SYS_sigprocmask (SYS_BASE + 340)
+@@ -473,3 +474,10 @@ TEXT runtime·getCntxct(SB),NOSPLIT|NOFRAME,$0-8
+ 
+ 	MOVW	R0, ret+4(FP)
+ 	RET
++
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVW $SYS_issetugid, R7
++	SWI $0
++	MOVW	R0, ret+0(FP)
++	RET
+diff --git a/src/runtime/sys_freebsd_arm64.s b/src/runtime/sys_freebsd_arm64.s
+index 7dab3028de..bb32de8b01 100644
+--- a/src/runtime/sys_freebsd_arm64.s
++++ b/src/runtime/sys_freebsd_arm64.s
+@@ -33,6 +33,7 @@
+ #define SYS_fcntl		92
+ #define SYS___sysctl		202
+ #define SYS_nanosleep		240
++#define SYS_issetugid		253
+ #define SYS_clock_gettime	232
+ #define SYS_sched_yield		331
+ #define SYS_sigprocmask		340
+@@ -521,3 +522,10 @@ TEXT runtime·getCntxct(SB),NOSPLIT,$0
+ 
+ 	MOVW	R0, ret+8(FP)
+ 	RET
++
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT|NOFRAME,$0
++	MOVD $SYS_issetugid, R8
++	SVC
++	MOVW	R0, ret+0(FP)
++	RET
+diff --git a/src/runtime/sys_netbsd_386.s b/src/runtime/sys_netbsd_386.s
+index 6c5386bcf1..ba4c75a275 100644
+--- a/src/runtime/sys_netbsd_386.s
++++ b/src/runtime/sys_netbsd_386.s
+@@ -29,6 +29,7 @@
+ #define SYS___sysctl			202
+ #define SYS___sigaltstack14		281
+ #define SYS___sigprocmask14		293
++#define SYS_issetugid			305
+ #define SYS_getcontext			307
+ #define SYS_setcontext			308
+ #define SYS__lwp_create			309
+@@ -500,4 +501,9 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$16-4
+ 	MOVL	AX, 12(SP)
+ 	MOVL	$92, AX // fcntl
+ 	INT	$0x80
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVL	$SYS_issetugid, AX
++	INT	$0x80
++	MOVL	AX, ret+0(FP)
+ 	RET
+diff --git a/src/runtime/sys_netbsd_amd64.s b/src/runtime/sys_netbsd_amd64.s
+index c1cd95df14..28fe9ad940 100644
+--- a/src/runtime/sys_netbsd_amd64.s
++++ b/src/runtime/sys_netbsd_amd64.s
+@@ -30,6 +30,7 @@
+ #define SYS___sysctl			202
+ #define SYS___sigaltstack14		281
+ #define SYS___sigprocmask14		293
++#define SYS_issetugid			305
+ #define SYS_getcontext			307
+ #define SYS_setcontext			308
+ #define SYS__lwp_create			309
+@@ -463,4 +464,12 @@ TEXT runtime·setNonblock(SB),NOSPLIT,$0-4
+ 	ORL	AX, DX
+ 	MOVL	$92, AX // fcntl
+ 	SYSCALL
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVQ	$0, DI
++	MOVQ	$0, SI
++	MOVQ	$0, DX
++	MOVL	$SYS_issetugid, AX
++	SYSCALL
++	MOVL	AX, ret+0(FP)
+ 	RET
+diff --git a/src/runtime/sys_netbsd_arm.s b/src/runtime/sys_netbsd_arm.s
+index 2422b0282e..0fb2da59c7 100644
+--- a/src/runtime/sys_netbsd_arm.s
++++ b/src/runtime/sys_netbsd_arm.s
+@@ -30,6 +30,7 @@
+ #define SYS___sysctl			SWI_OS_NETBSD | 202
+ #define SYS___sigaltstack14		SWI_OS_NETBSD | 281
+ #define SYS___sigprocmask14		SWI_OS_NETBSD | 293
++#define SYS_issetugid			SWI_OS_NETBSD | 305
+ #define SYS_getcontext			SWI_OS_NETBSD | 307
+ #define SYS_setcontext			SWI_OS_NETBSD | 308
+ #define SYS__lwp_create			SWI_OS_NETBSD | 309
+@@ -443,3 +444,9 @@ TEXT runtime·read_tls_fallback(SB),NOSPLIT|NOFRAME,$0
+ 	SWI $SYS__lwp_getprivate
+ 	MOVM.IAW    (R13), [R1, R2, R3, R12]
+ 	RET
++
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	SWI $SYS_issetugid
++	MOVW	R0, ret+0(FP)
++	RET
+diff --git a/src/runtime/sys_netbsd_arm64.s b/src/runtime/sys_netbsd_arm64.s
+index 6d2c31631d..8302bfe60a 100644
+--- a/src/runtime/sys_netbsd_arm64.s
++++ b/src/runtime/sys_netbsd_arm64.s
+@@ -32,6 +32,7 @@
+ #define SYS___sysctl			202
+ #define SYS___sigaltstack14		281
+ #define SYS___sigprocmask14		293
++#define SYS_issetugid			305
+ #define SYS_getcontext			307
+ #define SYS_setcontext			308
+ #define SYS__lwp_create			309
+@@ -478,4 +479,8 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
+ 	MOVW	fd+0(FP), R0		// arg 1 - fd
+ 	MOVD	$F_SETFL, R1		// arg 2 - cmd
+ 	SVC	$SYS_fcntl
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT|NOFRAME,$0
++	SVC $SYS_issetugid
++	MOVW	R0, ret+0(FP)
+ 	RET
+diff --git a/src/runtime/sys_openbsd2.go b/src/runtime/sys_openbsd2.go
+index cba35cfee3..ee2c51d10a 100644
+--- a/src/runtime/sys_openbsd2.go
++++ b/src/runtime/sys_openbsd2.go
+@@ -13,6 +13,7 @@ import (
+ )
+ 
+ // This is exported via linkname to assembly in runtime/cgo.
++//
+ //go:linkname exit
+ //go:nosplit
+ //go:cgo_unsafe_args
+@@ -46,6 +47,7 @@ func thrkill_trampoline()
+ // mmap is used to do low-level memory allocation via mmap. Don't allow stack
+ // splits, since this function (used by sysAlloc) is called in a lot of low-level
+ // parts of the runtime and callers often assume it won't acquire any locks.
++//
+ //go:nosplit
+ func mmap(addr unsafe.Pointer, n uintptr, prot, flags, fd int32, off uint32) (unsafe.Pointer, int) {
+ 	args := struct {
+@@ -265,6 +267,13 @@ func setNonblock(fd int32) {
+ 	fcntl(fd, _F_SETFL, flags|_O_NONBLOCK)
+ }
+ 
++//go:cgo_unsafe_args
++func issetugid() (ret int32) {
++	libcCall(unsafe.Pointer(abi.FuncPCABI0(issetugid_trampoline)), unsafe.Pointer(&ret))
++	return
++}
++func issetugid_trampoline()
++
+ // Tell the linker that the libc_* functions are to be found
+ // in a system library, with the libc_ prefix missing.
+ 
+@@ -297,4 +306,6 @@ func setNonblock(fd int32) {
+ //go:cgo_import_dynamic libc_sigaction sigaction "libc.so"
+ //go:cgo_import_dynamic libc_sigaltstack sigaltstack "libc.so"
+ 
++//go:cgo_import_dynamic libc_issetugid issetugid "libc.so"
++
+ //go:cgo_import_dynamic _ _ "libc.so"
+diff --git a/src/runtime/sys_openbsd_386.s b/src/runtime/sys_openbsd_386.s
+index 890b96b673..3113e7ed29 100644
+--- a/src/runtime/sys_openbsd_386.s
++++ b/src/runtime/sys_openbsd_386.s
+@@ -969,3 +969,12 @@ ok:
+ 	MOVL	BP, SP
+ 	POPL	BP
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	PUSHL	BP
++	CALL	libc_issetugid(SB)
++	NOP	SP			// tell vet SP changed - stop checking offsets
++	MOVL	8(SP), DX		// pointer to return value
++	MOVL	AX, 0(DX)
++	POPL	BP
++	RET
+diff --git a/src/runtime/sys_openbsd_amd64.s b/src/runtime/sys_openbsd_amd64.s
+index fc6d5dc387..19025b2906 100644
+--- a/src/runtime/sys_openbsd_amd64.s
++++ b/src/runtime/sys_openbsd_amd64.s
+@@ -766,3 +766,9 @@ ok:
+ 	MOVQ	BP, SP
+ 	POPQ	BP
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	MOVQ	DI, BX			// BX is caller-save
++	CALL	libc_issetugid(SB)
++	MOVL	AX, 0(BX)		// return value
++	RET
+diff --git a/src/runtime/sys_openbsd_arm.s b/src/runtime/sys_openbsd_arm.s
+index a9cb1fbafe..dd2712b531 100644
+--- a/src/runtime/sys_openbsd_arm.s
++++ b/src/runtime/sys_openbsd_arm.s
+@@ -806,3 +806,12 @@ ok:
+ 	MOVW	$0, R0		// no error (it's ignored anyway)
+ 	MOVW	R9, R13
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	MOVW	R13, R9
++	MOVW	R0, R8
++	BIC     $0x7, R13		// align for ELF ABI
++	BL	libc_issetugid(SB)
++	MOVW	R0, 0(R8)
++	MOVW	R9, R13
++	RET
+diff --git a/src/runtime/sys_openbsd_arm64.s b/src/runtime/sys_openbsd_arm64.s
+index 3fa7e1ede2..0dfcc82bf9 100644
+--- a/src/runtime/sys_openbsd_arm64.s
++++ b/src/runtime/sys_openbsd_arm64.s
+@@ -700,3 +700,9 @@ TEXT runtime·syscall10X(SB),NOSPLIT,$0
+ 
+ ok:
+ 	RET
++
++TEXT runtime·issetugid_trampoline(SB),NOSPLIT,$0
++	MOVD	R0, R19			// pointer to args
++	CALL	libc_issetugid(SB)
++	MOVW	R0, 0(R19)		// return value
++	RET
+diff --git a/src/runtime/sys_openbsd_mips64.s b/src/runtime/sys_openbsd_mips64.s
+index bc392e4c54..da9e3ec655 100644
+--- a/src/runtime/sys_openbsd_mips64.s
++++ b/src/runtime/sys_openbsd_mips64.s
+@@ -397,4 +397,9 @@ TEXT runtime·setNonblock(SB),NOSPLIT|NOFRAME,$0-4
+ 	MOVV	$4, R5			// arg 2 - cmd (F_SETFL)
+ 	MOVV	$92, R2			// sys_fcntl
+ 	SYSCALL
++// func issetugid() int32
++TEXT runtime·issetugid(SB),NOSPLIT,$0
++	MOVV	$253, R2	// sys_issetugid
++	SYSCALL
++	MOVW	R2, ret+0(FP)
+ 	RET
+diff --git a/src/runtime/syscall2_solaris.go b/src/runtime/syscall2_solaris.go
+index 3310489202..0b5ebfda02 100644
+--- a/src/runtime/syscall2_solaris.go
++++ b/src/runtime/syscall2_solaris.go
+@@ -22,6 +22,7 @@ import _ "unsafe" // for go:linkname
+ //go:cgo_import_dynamic libc_setpgid setpgid "libc.so"
+ //go:cgo_import_dynamic libc_syscall syscall "libc.so"
+ //go:cgo_import_dynamic libc_wait4 wait4 "libc.so"
++//go:cgo_import_dynamic libc_issetugid issetugid "libc.so"
+ 
+ //go:linkname libc_chdir libc_chdir
+ //go:linkname libc_chroot libc_chroot
+@@ -39,3 +40,4 @@ import _ "unsafe" // for go:linkname
+ //go:linkname libc_setpgid libc_setpgid
+ //go:linkname libc_syscall libc_syscall
+ //go:linkname libc_wait4 libc_wait4
++//go:linkname libc_issetugid libc_issetugid
+diff --git a/src/runtime/syscall_solaris.go b/src/runtime/syscall_solaris.go
+index e270e271c0..7fd4e4fe15 100644
+--- a/src/runtime/syscall_solaris.go
++++ b/src/runtime/syscall_solaris.go
+@@ -22,6 +22,7 @@ var (
+ 	libc_setuid,
+ 	libc_setpgid,
+ 	libc_syscall,
++	libc_issetugid,
+ 	libc_wait4 libcFunc
+ )
+ 
+diff --git a/src/runtime/testdata/testsuid/main.go b/src/runtime/testdata/testsuid/main.go
+new file mode 100644
+index 0000000000..1949d2d666
+--- /dev/null
++++ b/src/runtime/testdata/testsuid/main.go
+@@ -0,0 +1,25 @@
++// Copyright 2023 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package main
++
++import (
++	"fmt"
++	"log"
++	"os"
++)
++
++func main() {
++	if os.Geteuid() == os.Getuid() {
++		os.Exit(99)
++	}
++
++	fmt.Fprintf(os.Stdout, "GOTRACEBACK=%s\n", os.Getenv("GOTRACEBACK"))
++	f, err := os.OpenFile(os.Getenv("TEST_OUTPUT"), os.O_CREATE|os.O_RDWR, 0600)
++	if err != nil {
++		log.Fatalf("os.Open failed: %s", err)
++	}
++	defer f.Close()
++	fmt.Fprintf(os.Stderr, "hello\n")
++}
+-- 
+2.40.1
+

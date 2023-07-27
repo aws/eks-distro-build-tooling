@@ -18,6 +18,23 @@ set -e
 set -o pipefail
 set -x
 
+function retry() {
+    local n=1
+    local -r -i max="$1"; shift
+    local delay=5
+    while true; do
+        "$@" && break || {
+            if [[ $n -lt $max ]]; then
+            ((n++))
+            >&2 echo "Command failed. Attempt $n/$max:"
+            sleep $delay;
+            else
+            fail "The command has failed after $n attempts."
+            fi
+        }
+    done
+}
+
 REPO="$1"
 PR_BRANCH="${2:-image-tag-update}"
 
@@ -51,7 +68,7 @@ if [ $(git branch --show-current) != $PR_BRANCH ]; then
         git fetch upstream pull/$PULL_NUMBER/head:image-update-branch
         git checkout $PR_BRANCH
     else
-        git fetch upstream
+        retry 2 git fetch upstream
         git checkout upstream/main -b $PR_BRANCH
     fi
 fi

@@ -3198,7 +3198,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.5.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -3253,7 +3253,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.5.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcprofile.so
@@ -3272,7 +3272,7 @@
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   263KiB /usr/lib64/libslapi-2.4.so.2.11.5
--rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.4
+-rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.5
 -rwxr-xr-x   734KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.3MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
@@ -6718,9 +6718,9 @@ lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3 libsasl2.so.3.0.0
 lrwxrwxrwx      19B /usr/lib64/libsigsegv.so.2 libsigsegv.so.2.0.6
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.4 libssh.so.4.9.4
+lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.5 libssh.so.4.9.5
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2

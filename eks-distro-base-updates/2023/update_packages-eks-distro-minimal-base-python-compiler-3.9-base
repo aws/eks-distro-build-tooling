@@ -1,2 +1,4 @@
 
-openldap.x86_64
+libzstd.x86_64
+python3-setuptools.noarch
+python3-setuptools-wheel.noarch

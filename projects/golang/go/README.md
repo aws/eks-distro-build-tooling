@@ -3,7 +3,7 @@ EKS supports a [larger set](#supported-versions) of Golang version than upstream
 
 These versions are used to build Kubernetes and other Kubernetes ecosystem components used by EKS. 
 Relevant upstream security fixes are backported to these Go versions. 
-These patched versions are then built into RPMs and tested by building the relevant version of EKS Distro (e.g. Go 1.16 and Kubernetes 1.21) 
+These patched versions are then built into RPMs and tested by building the relevant version of EKS Distro (e.g. Go 1.19 and Kubernetes 1.25) 
 and executing the Kubernetes conformance tests.
 
 EKS Go RPMs are publicly available; see [Access EKS Go Artifacts](#access-eks-go-artifacts). 
@@ -11,17 +11,26 @@ EKS Go RPMs are publicly available; see [Access EKS Go Artifacts](#access-eks-go
 
 ## Supported Versions
 EKS currently supports the following Golang versions:
-- [`v1.15`](./1.15/GIT_TAG)
-- [`v1.16`](./1.16/GIT_TAG)
-- [`v1.17`](./1.17/GIT_TAG)
 - [`v1.18`](./1.18/GIT_TAG)
 - [`v1.19`](./1.19/GIT_TAG)
 - [`v1.20`](./1.20/GIT_TAG)
 
+
+## Deprecated Versions
+- [`v1.15`](./1.15/GIT_TAG)
+- [`v1.16`](./1.16/GIT_TAG)
+- [`v1.17`](./1.16/GIT_TAG)
+
+EKS Distro has discontinued support of `EKS-Go v1.15 - v1.17`. There are no plans for removing `1.15` ,`1.16`and `1.17` artifacts from the public ECR. EKS-Distro 
+won’t be backporting any upcoming golang security fixes for these versions.
+
+**Due to the increased security risk this poses, it is HIGHLY recommended that users of `EKS-GO v1.15 - v1.17` update to a supported version of EKS-Go (v1.18+) as soon as possible.**
+
+
 ## Upstream Patches
 EKS Golang Versions are distributed as RPMs built from upstream Golang source for the given version.  
 Relevant security and utility patches, and their tests, are backported and applied as patches during the RPM build.
-The patches applied to a given version of Golang are stored in the [EKS Distro Build Tooling Github repository](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go), alongside the build system for EKS Golang. For example, you can see the patches associated with EKS Go v1.16 [here](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/1.16/patches).
+The patches applied to a given version of Golang are stored in the [EKS Distro Build Tooling Github repository](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go), alongside the build system for EKS Golang. For example, you can see the patches associated with EKS Go v1.19 [here](https://github.com/aws/eks-distro-build-tooling/tree/main/projects/golang/go/1.19/patches).
 
 ## EKS Go RPMs
 For each supported version of Go, there are 6 RPMS: 3 architecture-specific and 4 architecture-independent.
@@ -81,9 +90,9 @@ Where `$RELEASE` is the release number of the given EKS Go version.
 You can find the latest release of a given EKS Go version in the `RELEASE` tag file for the given Go version. 
 For example, [the latest EKS release of Go `1.19` can be found here](./1.19/RELEASE). 
 
-For example, the first release of the Golang `1.16.15` RPM is available at the following URL:
+For example, the sixth release of the Golang `1.19.9` RPM is available at the following URL:
 
-https://distro.eks.amazonaws.com/golang-go1.16.15/releases/1/RPMS/x86_64/golang-1.16.15-1.amzn2.eks.x86_64.rpm
+https://distro.eks.amazonaws.com/golang-go1.19.9/releases/6/RPMS/x86_64/golang-1.19.9-6.amzn2.eks.x86_64.rpm
 
 ### EKS Go Debian Base Image
 EKS Go maintains a Debian-based image containing EKS Go for use with the upstream Kubernetes toolchahin.
@@ -93,7 +102,7 @@ You can find the Dockerfile and more information [here](https://github.com/aws/e
 ## Getting Started
 ### Installing EKS Golang on x86_64 Amazon Linux
 
-This example demonstrates how to install the entire EKS Golang 1.16.15 system on a `x86_64` architecture Amazon Linux machine using `yum localinstall`.
+This example demonstrates how to install the entire EKS Golang 1.19.9 system on a `x86_64` architecture Amazon Linux machine using `yum localinstall`.
 
 Each artifact is avilable through the EKS Distro CDN, available at https://distro.eks.amazonaws.com. 
 In this example, we download the objects using `curl`, storing them in a temporary directory, 
@@ -103,10 +112,10 @@ To install a different EKS supported Go version, modify the `version`, `arch`, o
 
 ```bash
 # EKS Golang version
-version='1.16.15'
+version='1.19.9'
 
 # EK Go Release
-release='1'
+release='6'
 
 # either x86_64 or aarch64
 arch='x86_64'

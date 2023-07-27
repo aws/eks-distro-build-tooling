@@ -31,14 +31,15 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   139KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   135KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   229KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   230KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
--r--r--r--   149KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   144KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   191KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   185KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
+-rw-r--r--   5.1KiB /etc/pki/ca-trust/source/blacklist/TrustCor_CA.pem
 -rw-r--r--   2.7KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2
 -rw-r--r--     233B /etc/printcap
 -rw-r--r--   1.8KiB /etc/profile
@@ -415,9 +416,9 @@
 -rwxr-xr-x    70KiB /usr/lib64/libnss_files-2.26.so
 -rwxr-xr-x   261KiB /usr/lib64/libpcap.so.1.5.3
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
--rwxr-xr-x   401KiB /usr/lib64/libpcre.so.1.2.0
--rwxr-xr-x   365KiB /usr/lib64/libpcre16.so.0.2.0
--rwxr-xr-x   349KiB /usr/lib64/libpcre32.so.0.0.0
+-rwxr-xr-x   393KiB /usr/lib64/libpcre.so.1.2.0
+-rwxr-xr-x   357KiB /usr/lib64/libpcre16.so.0.2.0
+-rwxr-xr-x   341KiB /usr/lib64/libpcre32.so.0.0.0
 -rwxr-xr-x    36KiB /usr/lib64/libpcrecpp.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libpcreposix.so.0.0.1
 -rwxr-xr-x    41KiB /usr/lib64/libpopt.so.0.0.0
@@ -753,7 +754,7 @@
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Blantyre
 -rw-r--r--     265B /usr/share/zoneinfo/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/Africa/Bujumbura
--rw-r--r--   2.0KiB /usr/share/zoneinfo/Africa/Cairo
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Africa/Cairo
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Conakry
@@ -856,7 +857,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Fort_Wayne
 -rw-r--r--     742B /usr/share/zoneinfo/America/Fortaleza
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Glace_Bay
--rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Godthab
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Godthab
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/America/Goose_Bay
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Grand_Turk
 -rw-r--r--     255B /usr/share/zoneinfo/America/Grenada
@@ -916,7 +917,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/Beulah
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/Center
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/North_Dakota/New_Salem
--rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Nuuk
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Nuuk
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Ojinaga
 -rw-r--r--     203B /usr/share/zoneinfo/America/Panama
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Pangnirtung
@@ -961,7 +962,7 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yakutat
--rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Yellowknife
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yellowknife
 -rw-r--r--     398B /usr/share/zoneinfo/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/Antarctica/DumontDUrville
@@ -1005,9 +1006,9 @@
 -rw-r--r--     187B /usr/share/zoneinfo/Asia/Dubai
 -rw-r--r--     621B /usr/share/zoneinfo/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Asia/Famagusta
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Asia/Gaza
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/Asia/Harbin
--rw-r--r--   2.5KiB /usr/share/zoneinfo/Asia/Hebron
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/Asia/Hovd
@@ -1129,7 +1130,7 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/EET
 -rw-r--r--     127B /usr/share/zoneinfo/EST
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/EST5EDT
--rw-r--r--   2.0KiB /usr/share/zoneinfo/Egypt
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Eire
 -rw-r--r--     127B /usr/share/zoneinfo/Etc/GMT
 -rw-r--r--     127B /usr/share/zoneinfo/Etc/GMT+0
@@ -1351,7 +1352,7 @@
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Blantyre
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Brazzaville
 -rw-r--r--     171B /usr/share/zoneinfo/posix/Africa/Bujumbura
--rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Africa/Cairo
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Africa/Cairo
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Africa/Casablanca
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/Africa/Ceuta
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Conakry
@@ -1454,7 +1455,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Fort_Wayne
 -rw-r--r--     742B /usr/share/zoneinfo/posix/America/Fortaleza
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Glace_Bay
--rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Godthab
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Godthab
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/posix/America/Goose_Bay
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Grand_Turk
 -rw-r--r--     255B /usr/share/zoneinfo/posix/America/Grenada
@@ -1514,7 +1515,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/Beulah
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/Center
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/North_Dakota/New_Salem
--rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Nuuk
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Nuuk
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Ojinaga
 -rw-r--r--     203B /usr/share/zoneinfo/posix/America/Panama
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Pangnirtung
@@ -1559,7 +1560,7 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yakutat
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Yellowknife
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yellowknife
 -rw-r--r--     398B /usr/share/zoneinfo/posix/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/posix/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/posix/Antarctica/DumontDUrville
@@ -1603,9 +1604,9 @@
 -rw-r--r--     187B /usr/share/zoneinfo/posix/Asia/Dubai
 -rw-r--r--     621B /usr/share/zoneinfo/posix/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Asia/Famagusta
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Asia/Gaza
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/posix/Asia/Harbin
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Asia/Hebron
+-rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/posix/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/posix/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/posix/Asia/Hovd
@@ -1727,7 +1728,7 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/EET
 -rw-r--r--     127B /usr/share/zoneinfo/posix/EST
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/EST5EDT
--rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Egypt
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Eire
 -rw-r--r--     127B /usr/share/zoneinfo/posix/Etc/GMT
 -rw-r--r--     127B /usr/share/zoneinfo/posix/Etc/GMT+0
@@ -1948,7 +1949,7 @@
 -rw-r--r--     711B /usr/share/zoneinfo/right/Africa/Blantyre
 -rw-r--r--     805B /usr/share/zoneinfo/right/Africa/Brazzaville
 -rw-r--r--     711B /usr/share/zoneinfo/right/Africa/Bujumbura
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Africa/Cairo
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Africa/Cairo
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Africa/Casablanca
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Africa/Ceuta
 -rw-r--r--     710B /usr/share/zoneinfo/right/Africa/Conakry
@@ -2051,7 +2052,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Fort_Wayne
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Fortaleza
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Glace_Bay
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Godthab
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Godthab
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Goose_Bay
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     795B /usr/share/zoneinfo/right/America/Grenada
@@ -2111,7 +2112,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Beulah
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Center
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/New_Salem
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Nuuk
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Nuuk
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Ojinaga
 -rw-r--r--     743B /usr/share/zoneinfo/right/America/Panama
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Pangnirtung
@@ -2156,7 +2157,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Whitehorse
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/right/America/Winnipeg
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/America/Yakutat
--rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Yellowknife
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Yellowknife
 -rw-r--r--     933B /usr/share/zoneinfo/right/Antarctica/Casey
 -rw-r--r--     846B /usr/share/zoneinfo/right/Antarctica/Davis
 -rw-r--r--     723B /usr/share/zoneinfo/right/Antarctica/DumontDUrville
@@ -2200,9 +2201,9 @@
 -rw-r--r--     722B /usr/share/zoneinfo/right/Asia/Dubai
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Asia/Dushanbe
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Famagusta
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Asia/Gaza
+-rw-r--r--   4.3KiB /usr/share/zoneinfo/right/Asia/Gaza
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Harbin
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Asia/Hebron
+-rw-r--r--   4.4KiB /usr/share/zoneinfo/right/Asia/Hebron
 -rw-r--r--     924B /usr/share/zoneinfo/right/Asia/Ho_Chi_Minh
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Hong_Kong
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Hovd
@@ -2324,7 +2325,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/EET
 -rw-r--r--     667B /usr/share/zoneinfo/right/EST
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/EST5EDT
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Egypt
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Egypt
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/Eire
 -rw-r--r--     667B /usr/share/zoneinfo/right/Etc/GMT
 -rw-r--r--     667B /usr/share/zoneinfo/right/Etc/GMT+0
@@ -2420,7 +2421,7 @@
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Vatican
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Vienna
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Vilnius
--rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Volgograd
+-rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Volgograd
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Zagreb
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
@@ -2531,13 +2532,13 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     667B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   105KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-------   2.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     583B /var/lib/alternatives/arptables
 -rw-r--r--     276B /var/lib/alternatives/ebtables
--rw-r--r--     299B /var/lib/alternatives/ip6tables
+-rw-r--r--     297B /var/lib/alternatives/ip6tables
 -rw-r--r--     748B /var/lib/alternatives/iptables
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
@@ -2565,12 +2566,12 @@ lrwxrwxrwx      28B /etc/alternatives/arptables-save	/usr/sbin/arptables-nft-sav
 lrwxrwxrwx      22B /etc/alternatives/ebtables	/usr/sbin/ebtables-nft
 lrwxrwxrwx      30B /etc/alternatives/ebtables-restore	/usr/sbin/ebtables-nft-restore
 lrwxrwxrwx      27B /etc/alternatives/ebtables-save	/usr/sbin/ebtables-nft-save
-lrwxrwxrwx      26B /etc/alternatives/ip6tables	/usr/sbin/ip6tables-legacy
-lrwxrwxrwx      34B /etc/alternatives/ip6tables-restore	/usr/sbin/ip6tables-legacy-restore
-lrwxrwxrwx      31B /etc/alternatives/ip6tables-save	/usr/sbin/ip6tables-legacy-save
-lrwxrwxrwx      25B /etc/alternatives/iptables	/usr/sbin/iptables-legacy
-lrwxrwxrwx      33B /etc/alternatives/iptables-restore	/usr/sbin/iptables-legacy-restore
-lrwxrwxrwx      30B /etc/alternatives/iptables-save	/usr/sbin/iptables-legacy-save
+lrwxrwxrwx      26B /etc/alternatives/ip6tables	/usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-restore	/usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-save	/usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables	/usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-restore	/usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-save	/usr/sbin/iptables-wrapper
 lrwxrwxrwx      11B /etc/init.d	rc.d/init.d
 lrwxrwxrwx      59B /etc/pki/ca-trust/source/ca-bundle.legacy.crt	/usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 lrwxrwxrwx      40B /etc/pki/java/cacerts	/etc/pki/ca-trust/extracted/java/cacerts

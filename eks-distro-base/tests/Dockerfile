@@ -28,6 +28,9 @@ CMD ["/bin/check-cgo"]
 
 FROM ${BASE_IMAGE} as check-iptables-legacy
 
+RUN ["update-alternatives", "--set", "iptables", "/usr/sbin/iptables-legacy"]
+RUN ["update-alternatives", "--set", "ip6tables", "/usr/sbin/ip6tables-legacy"]
+
 CMD ["iptables"]
 
 FROM ${BASE_IMAGE} as check-iptables-nft
@@ -46,7 +49,6 @@ RUN cd /iptables-wrappers && \
 FROM ${BASE_IMAGE} as check-iptables-wrapper
 
 COPY --from=iptables-wrapper-tests-builder /iptables-wrappers/bin/tests /
-RUN ["update-alternatives", "--set", "iptables", "/usr/sbin/iptables-wrapper"]
 
 CMD ["iptables"]
 

@@ -359,13 +359,13 @@
 -rwxr-xr-x    37KiB /usr/bin/column
 -rwxr-xr-x    37KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    54MiB /usr/bin/containerd
--rwxr-xr-x   8.1MiB /usr/bin/containerd-shim
--rwxr-xr-x    15MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    15MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    57MiB /usr/bin/containerd
+-rwxr-xr-x   7.2MiB /usr/bin/containerd-shim
+-rwxr-xr-x    14MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x    19MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x    28MiB /usr/bin/ctr
+-rwxr-xr-x    29MiB /usr/bin/ctr
 -rwxr-xr-x   274KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   308KiB /usr/bin/cvtsudoers
@@ -1073,7 +1073,7 @@
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/console-getty.service
 -rw-r--r--   1.3KiB /usr/lib/systemd/system/container-getty@.service
--rw-r--r--   1.3KiB /usr/lib/systemd/system/containerd.service
+-rw-r--r--   1.4KiB /usr/lib/systemd/system/containerd.service
 -rw-r--r--     547B /usr/lib/systemd/system/dbus-broker.service
 -rw-r--r--     137B /usr/lib/systemd/system/dbus.socket
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/debug-shell.service
@@ -1301,8 +1301,8 @@
 -r--r--r--   7.1KiB /usr/lib/udev/rules.d/10-dm.rules
 -r--r--r--   2.0KiB /usr/lib/udev/rules.d/13-dm-disk.rules
 -r--r--r--     483B /usr/lib/udev/rules.d/95-dm-notify.rules
--rw-r--r--     500B /usr/lib64/.gnutls.hmac
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
+-rw-r--r--     525B /usr/lib64/.libgnutls.so.30.35.0.hmac
 -rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
 -rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
@@ -1374,7 +1374,7 @@
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
--rwxr-xr-x   699KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   703KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -1403,18 +1403,18 @@
 -rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.1
 -rwxr-xr-x    65KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libgdbm_compat.so.4.0.0
--rwxr-xr-x   2.0MiB /usr/lib64/libgio-2.0.so.0.7302.0
--rwxr-xr-x   1.3MiB /usr/lib64/libglib-2.0.so.0.7302.0
--rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.7302.0
+-rwxr-xr-x   2.0MiB /usr/lib64/libgio-2.0.so.0.7400.7
+-rwxr-xr-x   1.3MiB /usr/lib64/libglib-2.0.so.0.7400.7
+-rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.7400.7
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.34.2
--rwxr-xr-x   393KiB /usr/lib64/libgobject-2.0.so.0.7302.0
+-rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.35.0
+-rwxr-xr-x   397KiB /usr/lib64/libgobject-2.0.so.0.7400.7
 -rwxr-xr-x   280KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   347KiB /usr/lib64/libgpgme.so.11.24.1
 -rwxr-xr-x   352KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   140KiB /usr/lib64/libgssrpc.so.4.2
--rwxr-xr-x    16KiB /usr/lib64/libgthread-2.0.so.0.7302.0
+-rwxr-xr-x    16KiB /usr/lib64/libgthread-2.0.so.0.7400.7
 -rwxr-xr-x    53KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   268KiB /usr/lib64/libhogweed.so.6.5
 -rwxr-xr-x   140KiB /usr/lib64/libibverbs.so.1.14.37.0
@@ -1534,7 +1534,7 @@
 -rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   466KiB /usr/lib64/libssh.so.4.9.4
+-rwxr-xr-x   470KiB /usr/lib64/libssh.so.4.9.5
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   892KiB /usr/lib64/libsystemd.so.0.35.0
@@ -4099,8 +4099,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.1MiB /usr/lib64/systemd/libsystemd-core-252.4-1161.amzn2023.0.3.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.4-1161.amzn2023.0.3.so
+-rwxr-xr-x   2.1MiB /usr/lib64/systemd/libsystemd-core-252.4-1161.amzn2023.0.4.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.4-1161.amzn2023.0.4.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_among.so
@@ -4230,6 +4230,7 @@
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/XBS5_LP64_OFF64
+-rwxr-xr-x    16KiB /usr/libexec/gio-launch-desktop
 -rwxr-xr-x    61KiB /usr/libexec/gpg-check-pattern
 -rwxr-xr-x    66KiB /usr/libexec/gpg-pair-tool
 -rwxr-xr-x    37KiB /usr/libexec/gpg-preset-passphrase
@@ -5037,6 +5038,7 @@
 -rw-r--r--   2.2KiB /usr/share/licenses/xxhash-libs/LICENSE
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
+-rw-r--r--    13KiB /usr/share/locale/ab/LC_MESSAGES/glib20.mo
 -rw-r--r--     494B /usr/share/locale/af/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    28KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
@@ -5071,7 +5073,7 @@
 -rw-r--r--    59KiB /usr/share/locale/be/LC_MESSAGES/coreutils.mo
 -rw-r--r--   2.3KiB /usr/share/locale/be/LC_MESSAGES/cracklib.mo
 -rw-r--r--   2.3KiB /usr/share/locale/be/LC_MESSAGES/findutils.mo
--rw-r--r--   122KiB /usr/share/locale/be/LC_MESSAGES/glib20.mo
+-rw-r--r--   102KiB /usr/share/locale/be/LC_MESSAGES/glib20.mo
 -rw-r--r--    23KiB /usr/share/locale/be/LC_MESSAGES/grep.mo
 -rw-r--r--    35KiB /usr/share/locale/be/LC_MESSAGES/systemd.mo
 -rw-r--r--    37KiB /usr/share/locale/be@latin/LC_MESSAGES/glib20.mo
@@ -5081,7 +5083,7 @@
 -rw-r--r--   476KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    49KiB /usr/share/locale/bg/LC_MESSAGES/dnf.mo
 -rw-r--r--    47KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   177KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
+-rw-r--r--   176KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
 -rw-r--r--    24KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
 -rw-r--r--     814B /usr/share/locale/bg/LC_MESSAGES/libdnf.mo
 -rw-r--r--   7.3KiB /usr/share/locale/bg/LC_MESSAGES/libpwquality.mo
@@ -5110,7 +5112,7 @@
 -rw-r--r--   2.0KiB /usr/share/locale/ca/LC_MESSAGES/cracklib.mo
 -rw-r--r--    50KiB /usr/share/locale/ca/LC_MESSAGES/dnf.mo
 -rw-r--r--   7.8KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   141KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
+-rw-r--r--   140KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    12KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
 -rw-r--r--   2.3KiB /usr/share/locale/ca/LC_MESSAGES/libdnf.mo
@@ -5134,7 +5136,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/cs/LC_MESSAGES/cracklib.mo
 -rw-r--r--    50KiB /usr/share/locale/cs/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/cs/LC_MESSAGES/findutils.mo
--rw-r--r--   136KiB /usr/share/locale/cs/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/cs/LC_MESSAGES/glib20.mo
 -rw-r--r--   221KiB /usr/share/locale/cs/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/cs/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/cs/LC_MESSAGES/grep.mo
@@ -5163,7 +5165,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/da/LC_MESSAGES/cracklib.mo
 -rw-r--r--    82KiB /usr/share/locale/da/LC_MESSAGES/dnf.mo
 -rw-r--r--    34KiB /usr/share/locale/da/LC_MESSAGES/findutils.mo
--rw-r--r--   132KiB /usr/share/locale/da/LC_MESSAGES/glib20.mo
+-rw-r--r--   131KiB /usr/share/locale/da/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/da/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/da/LC_MESSAGES/grep.mo
 -rw-r--r--   2.7KiB /usr/share/locale/da/LC_MESSAGES/libdnf.mo
@@ -5188,7 +5190,7 @@
 -rw-r--r--    78KiB /usr/share/locale/de/LC_MESSAGES/dnf.mo
 -rw-r--r--    18KiB /usr/share/locale/de/LC_MESSAGES/elfutils.mo
 -rw-r--r--    36KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
--rw-r--r--   139KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
+-rw-r--r--   138KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/de/LC_MESSAGES/grep.mo
@@ -5239,7 +5241,7 @@
 -rw-r--r--    69KiB /usr/share/locale/en@shaw/LC_MESSAGES/glib20.mo
 -rw-r--r--    79KiB /usr/share/locale/en_CA/LC_MESSAGES/glib20.mo
 -rw-r--r--    26KiB /usr/share/locale/en_GB/LC_MESSAGES/dnf.mo
--rw-r--r--   128KiB /usr/share/locale/en_GB/LC_MESSAGES/glib20.mo
+-rw-r--r--   127KiB /usr/share/locale/en_GB/LC_MESSAGES/glib20.mo
 -rw-r--r--   7.5KiB /usr/share/locale/en_GB/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     369B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--     494B /usr/share/locale/eo/LC_MESSAGES/Linux-PAM.mo
@@ -5268,7 +5270,7 @@
 -rw-r--r--    83KiB /usr/share/locale/es/LC_MESSAGES/dnf.mo
 -rw-r--r--   105KiB /usr/share/locale/es/LC_MESSAGES/elfutils.mo
 -rw-r--r--    25KiB /usr/share/locale/es/LC_MESSAGES/findutils.mo
--rw-r--r--   138KiB /usr/share/locale/es/LC_MESSAGES/glib20.mo
+-rw-r--r--   137KiB /usr/share/locale/es/LC_MESSAGES/glib20.mo
 -rw-r--r--   211KiB /usr/share/locale/es/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/es/LC_MESSAGES/gnutls.mo
 -rw-r--r--    17KiB /usr/share/locale/es/LC_MESSAGES/grep.mo
@@ -5303,7 +5305,7 @@
 -rw-r--r--    27KiB /usr/share/locale/eu/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.3KiB /usr/share/locale/eu/LC_MESSAGES/cracklib.mo
 -rw-r--r--    22KiB /usr/share/locale/eu/LC_MESSAGES/dnf.mo
--rw-r--r--   137KiB /usr/share/locale/eu/LC_MESSAGES/glib20.mo
+-rw-r--r--   136KiB /usr/share/locale/eu/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.3KiB /usr/share/locale/eu/LC_MESSAGES/grep.mo
 -rw-r--r--     417B /usr/share/locale/eu/LC_MESSAGES/libdnf.mo
 -rw-r--r--   2.1KiB /usr/share/locale/eu/LC_MESSAGES/libpwquality.mo
@@ -5317,7 +5319,7 @@
 -rw-r--r--    20KiB /usr/share/locale/eu/LC_MESSAGES/util-linux.mo
 -rw-r--r--     485B /usr/share/locale/fa/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   7.3KiB /usr/share/locale/fa/LC_MESSAGES/dnf.mo
--rw-r--r--    38KiB /usr/share/locale/fa/LC_MESSAGES/glib20.mo
+-rw-r--r--   101KiB /usr/share/locale/fa/LC_MESSAGES/glib20.mo
 -rw-r--r--     469B /usr/share/locale/fa/LC_MESSAGES/libdnf.mo
 -rw-r--r--     360B /usr/share/locale/fa/LC_MESSAGES/libpwquality.mo
 -rw-r--r--     477B /usr/share/locale/fa/LC_MESSAGES/p11-kit.mo
@@ -5328,7 +5330,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/fi/LC_MESSAGES/cracklib.mo
 -rw-r--r--    88KiB /usr/share/locale/fi/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/fi/LC_MESSAGES/findutils.mo
--rw-r--r--    55KiB /usr/share/locale/fi/LC_MESSAGES/glib20.mo
+-rw-r--r--    54KiB /usr/share/locale/fi/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/fi/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/fi/LC_MESSAGES/gnutls.mo
 -rw-r--r--    18KiB /usr/share/locale/fi/LC_MESSAGES/grep.mo
@@ -5355,7 +5357,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/fr/LC_MESSAGES/cracklib.mo
 -rw-r--r--    92KiB /usr/share/locale/fr/LC_MESSAGES/dnf.mo
 -rw-r--r--    36KiB /usr/share/locale/fr/LC_MESSAGES/findutils.mo
--rw-r--r--   145KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
+-rw-r--r--   144KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
 -rw-r--r--   197KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/fr/LC_MESSAGES/gnutls.mo
 -rw-r--r--    18KiB /usr/share/locale/fr/LC_MESSAGES/grep.mo
@@ -5376,7 +5378,7 @@
 -rw-r--r--    66KiB /usr/share/locale/fr/LC_MESSAGES/tar.mo
 -rw-r--r--   501KiB /usr/share/locale/fr/LC_MESSAGES/util-linux.mo
 -rw-r--r--    87KiB /usr/share/locale/fur/LC_MESSAGES/dnf.mo
--rw-r--r--    86KiB /usr/share/locale/fur/LC_MESSAGES/glib20.mo
+-rw-r--r--   118KiB /usr/share/locale/fur/LC_MESSAGES/glib20.mo
 -rw-r--r--    20KiB /usr/share/locale/fur/LC_MESSAGES/libdnf.mo
 -rw-r--r--   4.5KiB /usr/share/locale/fur/LC_MESSAGES/libidn2.mo
 -rw-r--r--   5.9KiB /usr/share/locale/fur/LC_MESSAGES/libpwquality.mo
@@ -5399,7 +5401,7 @@
 -rw-r--r--    53KiB /usr/share/locale/gl/LC_MESSAGES/bash.mo
 -rw-r--r--    28KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    24KiB /usr/share/locale/gl/LC_MESSAGES/findutils.mo
--rw-r--r--   138KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
+-rw-r--r--   137KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/gl/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/gl/LC_MESSAGES/grep.mo
 -rw-r--r--   8.1KiB /usr/share/locale/gl/LC_MESSAGES/p11-kit.mo
@@ -5420,7 +5422,7 @@
 -rw-r--r--    11KiB /usr/share/locale/he/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.5KiB /usr/share/locale/he/LC_MESSAGES/cracklib.mo
 -rw-r--r--   3.3KiB /usr/share/locale/he/LC_MESSAGES/dnf.mo
--rw-r--r--   129KiB /usr/share/locale/he/LC_MESSAGES/glib20.mo
+-rw-r--r--   128KiB /usr/share/locale/he/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.2KiB /usr/share/locale/he/LC_MESSAGES/grep.mo
 -rw-r--r--   6.2KiB /usr/share/locale/he/LC_MESSAGES/libpwquality.mo
 -rw-r--r--     479B /usr/share/locale/he/LC_MESSAGES/p11-kit.mo
@@ -5438,7 +5440,7 @@
 -rw-r--r--   357KiB /usr/share/locale/hr/LC_MESSAGES/coreutils.mo
 -rw-r--r--     436B /usr/share/locale/hr/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/hr/LC_MESSAGES/findutils.mo
--rw-r--r--   134KiB /usr/share/locale/hr/LC_MESSAGES/glib20.mo
+-rw-r--r--   133KiB /usr/share/locale/hr/LC_MESSAGES/glib20.mo
 -rw-r--r--    18KiB /usr/share/locale/hr/LC_MESSAGES/grep.mo
 -rw-r--r--   1.1KiB /usr/share/locale/hr/LC_MESSAGES/libidn2.mo
 -rw-r--r--   7.6KiB /usr/share/locale/hr/LC_MESSAGES/p11-kit.mo
@@ -5498,6 +5500,7 @@
 -rw-r--r--    25KiB /usr/share/locale/id/LC_MESSAGES/systemd.mo
 -rw-r--r--    57KiB /usr/share/locale/id/LC_MESSAGES/tar.mo
 -rw-r--r--    43KiB /usr/share/locale/id/LC_MESSAGES/util-linux.mo
+-rw-r--r--   4.2KiB /usr/share/locale/ie/LC_MESSAGES/glib20.mo
 -rw-r--r--     494B /usr/share/locale/is/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    15KiB /usr/share/locale/is/LC_MESSAGES/glib20.mo
 -rw-r--r--     476B /usr/share/locale/is/LC_MESSAGES/libdnf.mo
@@ -5555,7 +5558,8 @@
 -rw-r--r--   397KiB /usr/share/locale/ja/LC_MESSAGES/util-linux.mo
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   8.2KiB /usr/share/locale/ka/LC_MESSAGES/dnf.mo
--rw-r--r--    58KiB /usr/share/locale/ka/LC_MESSAGES/glib20.mo
+-rw-r--r--    65KiB /usr/share/locale/ka/LC_MESSAGES/glib20.mo
+-rw-r--r--    51KiB /usr/share/locale/ka/LC_MESSAGES/gnutls.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
 -rw-r--r--   4.3KiB /usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    40KiB /usr/share/locale/ka/LC_MESSAGES/sudo.mo
@@ -5585,7 +5589,7 @@
 -rw-r--r--   2.1KiB /usr/share/locale/ko/LC_MESSAGES/cracklib.mo
 -rw-r--r--    90KiB /usr/share/locale/ko/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.9KiB /usr/share/locale/ko/LC_MESSAGES/findutils.mo
--rw-r--r--   144KiB /usr/share/locale/ko/LC_MESSAGES/glib20.mo
+-rw-r--r--   143KiB /usr/share/locale/ko/LC_MESSAGES/glib20.mo
 -rw-r--r--    19KiB /usr/share/locale/ko/LC_MESSAGES/grep.mo
 -rw-r--r--    27KiB /usr/share/locale/ko/LC_MESSAGES/libdnf.mo
 -rw-r--r--   6.3KiB /usr/share/locale/ko/LC_MESSAGES/libpwquality.mo
@@ -5612,7 +5616,7 @@
 -rw-r--r--   2.0KiB /usr/share/locale/lt/LC_MESSAGES/cracklib.mo
 -rw-r--r--    31KiB /usr/share/locale/lt/LC_MESSAGES/dnf.mo
 -rw-r--r--   6.2KiB /usr/share/locale/lt/LC_MESSAGES/findutils.mo
--rw-r--r--   134KiB /usr/share/locale/lt/LC_MESSAGES/glib20.mo
+-rw-r--r--   132KiB /usr/share/locale/lt/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.4KiB /usr/share/locale/lt/LC_MESSAGES/grep.mo
 -rw-r--r--     546B /usr/share/locale/lt/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   2.0KiB /usr/share/locale/lt/LC_MESSAGES/sudoers.mo
@@ -5647,7 +5651,7 @@
 -rw-r--r--   3.4KiB /usr/share/locale/ms/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.5KiB /usr/share/locale/ms/LC_MESSAGES/findutils.mo
 -rw-r--r--   124KiB /usr/share/locale/ms/LC_MESSAGES/glib20.mo
--rw-r--r--    26KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
+-rw-r--r--    28KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.0KiB /usr/share/locale/ms/LC_MESSAGES/rpm.mo
 -rw-r--r--   9.5KiB /usr/share/locale/ms/LC_MESSAGES/tar.mo
@@ -5705,7 +5709,7 @@
 -rw-r--r--     490B /usr/share/locale/nn/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    13KiB /usr/share/locale/nn/LC_MESSAGES/shadow.mo
 -rw-r--r--   3.0KiB /usr/share/locale/nn/LC_MESSAGES/sudo.mo
--rw-r--r--    85KiB /usr/share/locale/oc/LC_MESSAGES/glib20.mo
+-rw-r--r--   107KiB /usr/share/locale/oc/LC_MESSAGES/glib20.mo
 -rw-r--r--   7.9KiB /usr/share/locale/oc/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    16KiB /usr/share/locale/or/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   2.9KiB /usr/share/locale/or/LC_MESSAGES/cracklib.mo
@@ -5730,7 +5734,7 @@
 -rw-r--r--    92KiB /usr/share/locale/pl/LC_MESSAGES/dnf.mo
 -rw-r--r--   163KiB /usr/share/locale/pl/LC_MESSAGES/elfutils.mo
 -rw-r--r--    35KiB /usr/share/locale/pl/LC_MESSAGES/findutils.mo
--rw-r--r--   140KiB /usr/share/locale/pl/LC_MESSAGES/glib20.mo
+-rw-r--r--   139KiB /usr/share/locale/pl/LC_MESSAGES/glib20.mo
 -rw-r--r--   224KiB /usr/share/locale/pl/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/pl/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/pl/LC_MESSAGES/grep.mo
@@ -5757,7 +5761,7 @@
 -rw-r--r--   2.0KiB /usr/share/locale/pt/LC_MESSAGES/cracklib.mo
 -rw-r--r--    35KiB /usr/share/locale/pt/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/pt/LC_MESSAGES/findutils.mo
--rw-r--r--   137KiB /usr/share/locale/pt/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/pt/LC_MESSAGES/glib20.mo
 -rw-r--r--    36KiB /usr/share/locale/pt/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/pt/LC_MESSAGES/grep.mo
 -rw-r--r--   1.4KiB /usr/share/locale/pt/LC_MESSAGES/libdnf.mo
@@ -5780,7 +5784,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/pt_BR/LC_MESSAGES/cracklib.mo
 -rw-r--r--    86KiB /usr/share/locale/pt_BR/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/pt_BR/LC_MESSAGES/findutils.mo
--rw-r--r--   136KiB /usr/share/locale/pt_BR/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/pt_BR/LC_MESSAGES/glib20.mo
 -rw-r--r--    34KiB /usr/share/locale/pt_BR/LC_MESSAGES/gnutls.mo
 -rw-r--r--    16KiB /usr/share/locale/pt_BR/LC_MESSAGES/grep.mo
 -rw-r--r--    19KiB /usr/share/locale/pt_BR/LC_MESSAGES/libdnf.mo
@@ -5802,6 +5806,7 @@
 -rw-r--r--   6.5KiB /usr/share/locale/ro/LC_MESSAGES/findutils.mo
 -rw-r--r--   139KiB /usr/share/locale/ro/LC_MESSAGES/glib20.mo
 -rw-r--r--    81KiB /usr/share/locale/ro/LC_MESSAGES/gnupg2.mo
+-rw-r--r--    35KiB /usr/share/locale/ro/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/ro/LC_MESSAGES/grep.mo
 -rw-r--r--    15KiB /usr/share/locale/ro/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--   5.0KiB /usr/share/locale/ro/LC_MESSAGES/libidn2.mo
@@ -5820,7 +5825,7 @@
 -rw-r--r--   2.4KiB /usr/share/locale/ru/LC_MESSAGES/cracklib.mo
 -rw-r--r--   114KiB /usr/share/locale/ru/LC_MESSAGES/dnf.mo
 -rw-r--r--    45KiB /usr/share/locale/ru/LC_MESSAGES/findutils.mo
--rw-r--r--   176KiB /usr/share/locale/ru/LC_MESSAGES/glib20.mo
+-rw-r--r--   174KiB /usr/share/locale/ru/LC_MESSAGES/glib20.mo
 -rw-r--r--   284KiB /usr/share/locale/ru/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    23KiB /usr/share/locale/ru/LC_MESSAGES/grep.mo
 -rw-r--r--    34KiB /usr/share/locale/ru/LC_MESSAGES/libdnf.mo
@@ -5869,7 +5874,7 @@
 -rw-r--r--    79KiB /usr/share/locale/sl/LC_MESSAGES/bash.mo
 -rw-r--r--   303KiB /usr/share/locale/sl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    34KiB /usr/share/locale/sl/LC_MESSAGES/findutils.mo
--rw-r--r--   133KiB /usr/share/locale/sl/LC_MESSAGES/glib20.mo
+-rw-r--r--   132KiB /usr/share/locale/sl/LC_MESSAGES/glib20.mo
 -rw-r--r--   9.8KiB /usr/share/locale/sl/LC_MESSAGES/grep.mo
 -rw-r--r--   7.6KiB /usr/share/locale/sl/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     533B /usr/share/locale/sl/LC_MESSAGES/popt.mo
@@ -5894,7 +5899,7 @@
 -rw-r--r--   394KiB /usr/share/locale/sr/LC_MESSAGES/coreutils.mo
 -rw-r--r--    41KiB /usr/share/locale/sr/LC_MESSAGES/dnf.mo
 -rw-r--r--    45KiB /usr/share/locale/sr/LC_MESSAGES/findutils.mo
--rw-r--r--   172KiB /usr/share/locale/sr/LC_MESSAGES/glib20.mo
+-rw-r--r--   171KiB /usr/share/locale/sr/LC_MESSAGES/glib20.mo
 -rw-r--r--    41KiB /usr/share/locale/sr/LC_MESSAGES/gnutls.mo
 -rw-r--r--    21KiB /usr/share/locale/sr/LC_MESSAGES/grep.mo
 -rw-r--r--     537B /usr/share/locale/sr/LC_MESSAGES/libdnf.mo
@@ -5923,7 +5928,7 @@
 -rw-r--r--   1.9KiB /usr/share/locale/sv/LC_MESSAGES/cracklib.mo
 -rw-r--r--    86KiB /usr/share/locale/sv/LC_MESSAGES/dnf.mo
 -rw-r--r--    34KiB /usr/share/locale/sv/LC_MESSAGES/findutils.mo
--rw-r--r--   132KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
+-rw-r--r--   131KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
 -rw-r--r--    18KiB /usr/share/locale/sv/LC_MESSAGES/grep.mo
@@ -5973,7 +5978,7 @@
 -rw-r--r--   2.0KiB /usr/share/locale/tr/LC_MESSAGES/cracklib.mo
 -rw-r--r--    89KiB /usr/share/locale/tr/LC_MESSAGES/dnf.mo
 -rw-r--r--    33KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
--rw-r--r--   134KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
+-rw-r--r--   133KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
 -rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    17KiB /usr/share/locale/tr/LC_MESSAGES/grep.mo
 -rw-r--r--    26KiB /usr/share/locale/tr/LC_MESSAGES/libdnf.mo
@@ -5997,7 +6002,7 @@
 -rw-r--r--   117KiB /usr/share/locale/uk/LC_MESSAGES/dnf.mo
 -rw-r--r--   192KiB /usr/share/locale/uk/LC_MESSAGES/elfutils.mo
 -rw-r--r--    45KiB /usr/share/locale/uk/LC_MESSAGES/findutils.mo
--rw-r--r--   174KiB /usr/share/locale/uk/LC_MESSAGES/glib20.mo
+-rw-r--r--   175KiB /usr/share/locale/uk/LC_MESSAGES/glib20.mo
 -rw-r--r--   289KiB /usr/share/locale/uk/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    43KiB /usr/share/locale/uk/LC_MESSAGES/gnutls.mo
 -rw-r--r--    24KiB /usr/share/locale/uk/LC_MESSAGES/grep.mo
@@ -8089,7 +8094,7 @@
 -rw-------    13KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
--rw-r--r--     299B /var/lib/alternatives/ip6tables
+-rw-r--r--     297B /var/lib/alternatives/ip6tables
 -rw-r--r--     749B /var/lib/alternatives/iptables
 -rw-r--r--      69B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--   132KiB /var/lib/dnf/history.sqlite
@@ -8115,12 +8120,12 @@ lrwxrwxrwx      28B /etc/alternatives/arptables-save /usr/sbin/arptables-nft-sav
 lrwxrwxrwx      22B /etc/alternatives/ebtables /usr/sbin/ebtables-nft
 lrwxrwxrwx      30B /etc/alternatives/ebtables-restore /usr/sbin/ebtables-nft-restore
 lrwxrwxrwx      27B /etc/alternatives/ebtables-save /usr/sbin/ebtables-nft-save
-lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/ip6tables-legacy
-lrwxrwxrwx      34B /etc/alternatives/ip6tables-restore /usr/sbin/ip6tables-legacy-restore
-lrwxrwxrwx      31B /etc/alternatives/ip6tables-save /usr/sbin/ip6tables-legacy-save
-lrwxrwxrwx      25B /etc/alternatives/iptables /usr/sbin/iptables-legacy
-lrwxrwxrwx      33B /etc/alternatives/iptables-restore /usr/sbin/iptables-legacy-restore
-lrwxrwxrwx      30B /etc/alternatives/iptables-save /usr/sbin/iptables-legacy-save
+lrwxrwxrwx      26B /etc/alternatives/ip6tables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/ip6tables-save /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-restore /usr/sbin/iptables-wrapper
+lrwxrwxrwx      26B /etc/alternatives/iptables-save /usr/sbin/iptables-wrapper
 lrwxrwxrwx      34B /etc/alternatives/libnssckbi.so.x86_64 /usr/lib64/pkcs11/p11-kit-trust.so
 lrwxrwxrwx      25B /etc/amazon-linux-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/amazon-linux-release-cpe ../usr/lib/system-release-cpe
@@ -8536,6 +8541,7 @@ lrwxrwxrwx      30B /usr/lib/systemd/system/sysinit.target.wants/systemd-update-
 lrwxrwxrwx      31B /usr/lib/systemd/system/timers.target.wants/systemd-tmpfiles-clean.timer ../systemd-tmpfiles-clean.timer
 lrwxrwxrwx      41B /usr/lib/systemd/systemd-sysroot-fstab-check system-generators/systemd-fstab-generator
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
+lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.35.0.hmac
 lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
 lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
@@ -8585,18 +8591,18 @@ lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.1
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
 lrwxrwxrwx      23B /usr/lib64/libgdbm_compat.so.4 libgdbm_compat.so.4.0.0
-lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7302.0
-lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.7302.0
-lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.7302.0
+lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7400.7
+lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.7400.7
+lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.7400.7
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
-lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.34.2
-lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.7302.0
+lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
+lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.7400.7
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
 lrwxrwxrwx      19B /usr/lib64/libgpgme.so.11 libgpgme.so.11.24.1
 lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2 libgssapi_krb5.so.2.2
 lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
-lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.7302.0
+lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.7400.7
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.5
 lrwxrwxrwx      23B /usr/lib64/libibverbs.so.1 libibverbs.so.1.14.37.0
@@ -8681,9 +8687,9 @@ lrwxrwxrwx      19B /usr/lib64/libsigsegv.so.2 libsigsegv.so.2.0.6
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.4
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.4 libssh.so.4.9.4
+lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.5 libssh.so.4.9.5
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0

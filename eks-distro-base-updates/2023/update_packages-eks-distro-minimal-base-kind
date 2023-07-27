@@ -1,4 +1,4 @@
 
-gnutls.x86_64
-libxml2.x86_64
-openldap.x86_64
+libarchive.x86_64
+libzstd.x86_64
+python3-setuptools-wheel.noarch

@@ -17,7 +17,7 @@ iptables-legacy-libs-1.8.8-3.amzn2023.0.2.aarch64
 iptables-libs-1.8.8-3.amzn2023.0.2.aarch64
 iptables-nft-1.8.8-3.amzn2023.0.2.aarch64
 kmod-29-2.amzn2023.0.5.aarch64
-libcap-2.48-2.amzn2023.0.2.aarch64
+libcap-2.48-2.amzn2023.0.3.aarch64
 libgcc-11.3.1-4.amzn2023.0.3.aarch64
 libibverbs-37.0-1.amzn2023.0.3.aarch64
 libmnl-1.0.4-13.amzn2023.0.2.aarch64
@@ -32,12 +32,12 @@ libpcap-1.10.1-1.amzn2023.0.2.aarch64
 libselinux-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
 libstdc++-11.3.1-4.amzn2023.0.3.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.1.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.3.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 system-release-2023.0.20230315-1.amzn2023.noarch
-systemd-libs-252.4-1161.amzn2023.0.3.aarch64
+systemd-libs-252.4-1161.amzn2023.0.4.aarch64
 tzdata-2022g-1.amzn2023.0.1.noarch
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
 zlib-1.2.11-33.amzn2023.0.4.aarch64

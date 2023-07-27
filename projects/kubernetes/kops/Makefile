@@ -1,6 +1,7 @@
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/kubernetes/kops
 CLONED_REPO_DIRECTORY:=$(PROJECT_DIRECTORY)/kops
+CLONED_REPO_PATCHES_DIRECTORY:=$(CLONED_REPO_DIRECTORY)/patches
 
 KOPS_VERSION_TAG?=$(shell cat $(PROJECT_DIRECTORY)/GIT_TAG)
 KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
@@ -25,7 +26,7 @@ patch-kops:
 	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
 	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
-	git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(PROJECT_DIRECTORY)/patches/*
+	if [ "$(ls -A $CLONED_REPO_PATCHES_DIRECTORY)" ]; then git -C $(REPO) am --committer-date-is-author-date $(CLONED_REPO_PATCHES_DIRECTORY)/*; fi
 
 .PHONY: build-nodeup
 build-nodeup:

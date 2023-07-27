@@ -18,14 +18,14 @@ set -e
 set -o pipefail
 set -x
 
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
 OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
 if [ $REPO_OWNER = "aws" ]; then
     ORIGIN_ORG="eks-distro-pr-bot"
 else
     ORIGIN_ORG=$REPO_OWNER
 fi
-
-SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 EXTRA_PR_BODY=""
 
