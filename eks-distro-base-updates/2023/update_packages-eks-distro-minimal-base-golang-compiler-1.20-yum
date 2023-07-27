@@ -1,4 +1,4 @@
 
-libarchive.x86_64
-libzstd.x86_64
-python3-setuptools-wheel.noarch
+curl.x86_64
+libcurl.x86_64
+sqlite-libs.x86_64

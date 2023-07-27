@@ -11,7 +11,7 @@ coreutils-8.32-30.amzn2023.0.3.x86_64
 coreutils-common-8.32-30.amzn2023.0.3.x86_64
 cracklib-2.9.6-27.amzn2023.0.2.x86_64
 crypto-policies-20220428-1.gitdfb10ea.amzn2023.0.2.noarch
-curl-8.0.1-1.amzn2023.x86_64
+curl-8.0.1-1.amzn2023.0.1.x86_64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.x86_64
 dbus-1.12.28-1.amzn2023.0.1.x86_64
 dbus-broker-32-1.amzn2023.0.2.x86_64
@@ -72,7 +72,7 @@ libcap-ng-0.8.2-4.amzn2023.0.2.x86_64
 libcollection-0.7.0-47.amzn2023.0.2.x86_64
 libcom_err-1.46.5-2.amzn2023.0.2.x86_64
 libcomps-0.1.18-1.amzn2023.0.2.x86_64
-libcurl-8.0.1-1.amzn2023.x86_64
+libcurl-8.0.1-1.amzn2023.0.1.x86_64
 libdb-5.3.28-49.amzn2023.0.2.x86_64
 libdnf-0.67.0-1.amzn2023.0.5.x86_64
 libeconf-0.4.0-1.amzn2023.0.3.x86_64
@@ -174,7 +174,7 @@ sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.2.x86_64
 socat-1.7.4.2-1.amzn2023.0.2.x86_64
-sqlite-libs-3.40.0-1.amzn2023.0.2.x86_64
+sqlite-libs-3.40.0-1.amzn2023.0.3.x86_64
 sudo-1.9.13-1.p2.amzn2023.0.1.x86_64
 system-release-2023.0.20230315-1.amzn2023.noarch
 systemd-252.4-1161.amzn2023.0.4.x86_64
