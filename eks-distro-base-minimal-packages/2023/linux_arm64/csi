@@ -89,7 +89,7 @@ rpcbind-1.2.6-0.amzn2023.0.2.aarch64
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.2.aarch64
-sqlite-libs-3.40.0-1.amzn2023.0.2.aarch64
+sqlite-libs-3.40.0-1.amzn2023.0.3.aarch64
 system-release-2023.0.20230315-1.amzn2023.noarch
 systemd-252.4-1161.amzn2023.0.4.aarch64
 systemd-libs-252.4-1161.amzn2023.0.4.aarch64
