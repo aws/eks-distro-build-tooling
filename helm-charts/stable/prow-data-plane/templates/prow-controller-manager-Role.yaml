@@ -27,3 +27,4 @@ rules:
       - watch
       - create
       - patch
+      - get
