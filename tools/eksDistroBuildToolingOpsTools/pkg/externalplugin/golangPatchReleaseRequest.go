@@ -37,40 +37,44 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	lock.Lock()
 	defer lock.Unlock()
 
-	// This check is to all only AWS org members to trigger the automation.
-	if !s.AllowAll {
-		// eks-distro-bot is not part of the AWS org so we add exception for the bot account.
-		if requestor != constants.EksDistroBotName {
-			ok, err := s.Ghc.IsMember(org, requestor)
-			if err != nil {
-				return err
-			}
-			if !ok {
-				resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
-				l.Info(resp)
-				return s.Ghc.CreateComment(org, repo, num, resp)
-			}
-		}
+	// This check to see if the requestor is an AWS org member. We restrict the ability to trigger the automation.
+	// to AWS org memebers or the EksDistroPrBot
+	ok, err := s.Ghc.IsMember(org, requestor)
+	if !ok && requestor != constants.EksDistroPrBotName {
+		resp := fmt.Sprintf(constants.AllowAllFailRespTemplate, requestor, org, org)
+		l.Info(resp)
+		return s.Ghc.CreateComment(org, repo, num, resp)
+	}
+	if err != nil {
+		return err
 	}
 
-	var golangVersionsRe = regexp.MustCompile(`(?m)(\d+.\d+.\d+)`)
+	semvarRegex := fmt.Sprintf(`(?m)(%s)`, constants.SemverRegex)
+	var golangVersionsRe = regexp.MustCompile(semvarRegex)
 	var issNumRe = regexp.MustCompile(`(#\d+)`)
 	m := make(map[string]int)
+	// Using regex remove the versions of golang listed in the release announcement. Then generate a query to look through their milestones
+	// for closed issues attached to the corresponding milestones tagged "Security". In these issues there is a base issue tagged, we want this issue
+	// and create a map to ensure we don't create duplicate issues.
 	for _, version := range golangVersionsRe.FindAllString(issue.Title, -1) {
 		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
 		milestoneIssues, err := s.Ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
 		if err != nil {
 			return fmt.Errorf("Find Golang Milestone: %v", err)
 		}
+		// for each of the issues(i) in milestoneIssues[] we want to pull the base issueNumber from the body all backports have the base issue listed in the body
 		for _, i := range milestoneIssues {
 			for _, biMatch := range issNumRe.FindAllString(i.Body, -1) {
 				if m[biMatch] == 0 {
-					m[biMatch] = 1
+					//List the backport issue as the
+					m[biMatch] = i.Number
 				}
 			}
 		}
 	}
-	for biNum := range m {
+	// For each of these base issue numbers retrieve the issue, and mirror the title and body + a tag to the upstream issue to be used later when auto backporting
+	for biNum, bpINum := range m {
+		// remove the # from the issue number and convert to string
 		biInt, err := strconv.Atoi(biNum[1:])
 		if err != nil {
 			return fmt.Errorf("Converting issue number to int: %w", err)
@@ -79,7 +83,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 		if err != nil {
 			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
-		miNum, err := s.Ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
+		miNum, err := s.Ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, mirrorIssueBody(baseIssue.Body, constants.GolangOrgName, constants.GoRepoName, bpINum), 0, nil, nil)
 		if err != nil {
 			return fmt.Errorf("Creating mirrored issue: %w", err)
 		}

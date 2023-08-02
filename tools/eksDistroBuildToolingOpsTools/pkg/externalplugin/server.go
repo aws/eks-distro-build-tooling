@@ -23,8 +23,16 @@ type githubClient interface {
 	AssignIssue(org, repo string, number int, logins []string) error
 	CreateComment(org, repo string, number int, comment string) error
 	CreateIssue(org, repo, title, body string, milestone int, labels, assignees []string) (int, error)
+	CreatePullRequest(org, repo, title, body, head, base string, canModify bool) (int, error)
+	EnsureFork(forkingUser, org, repo string) (string, error)
 	FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error)
+	GetSingleCommit(org, repo, SHA string) (github.RepositoryCommit, error)
 	GetIssue(org, repo string, number int) (*github.Issue, error)
+	GetPullRequest(org, repo string, number int) (*github.PullRequest, error)
+	GetPullRequestPatch(org, repo string, number int) ([]byte, error)
+	GetPullRequests(org, repo string) ([]github.PullRequest, error)
+	GetRepo(owner, name string) (github.FullRepo, error)
+	ListIssueComments(org, repo string, number int) ([]github.IssueComment, error)
 	IsMember(org, user string) (bool, error)
 }
 
@@ -52,9 +60,10 @@ type Server struct {
 	BotUser        *github.UserData
 	Email          string
 
-	Gc  git.ClientFactory
-	Ghc githubClient
-	Log *logrus.Entry
+	Push func(forkName, newBranch string, force bool) error
+	Gc   git.ClientFactory
+	Ghc  githubClient
+	Log  *logrus.Entry
 
 	// Labels to apply.
 	Labels []string
@@ -70,6 +79,7 @@ type Server struct {
 	Bare     *http.Client
 	PatchURL string
 
+	RepoLock           sync.Mutex
 	Repos              []github.Repo
 	mapLock            sync.Mutex
 	lockGolangPatchMap map[golangPatchReleaseRequest]*sync.Mutex
@@ -155,7 +165,7 @@ func (s *Server) handleIssue(l *logrus.Entry, ie github.IssueEvent) error {
 }
 
 func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent) error {
-	// Only consider newly opened issues.
+	// Only consider newly created comments.
 	if ic.Action != github.IssueCommentActionCreated {
 		return nil
 	}
@@ -206,11 +216,32 @@ func (s *Server) createComment(l *logrus.Entry, org, repo string, num int, comme
 }
 
 // createIssue creates an issue on GitHub.
-func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) error {
+func (s *Server) createIssue(l *logrus.Entry, org, repo, title, body string, num int, comment *github.IssueComment, labels, assignees []string) (int, error) {
 	issueNum, err := s.Ghc.CreateIssue(org, repo, title, body, 0, labels, assignees)
 	if err != nil {
-		return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for previous request: %v", err))
+		// Return -1 and attempt to create a comment. -1 will never be a valid issue number
+		return -1, s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue could not be created for previous request: %v", err))
 	}
 
-	return s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for: #%d", issueNum))
+	return issueNum, s.createComment(l, org, repo, num, comment, fmt.Sprintf("new issue created for: #%d", issueNum))
+}
+
+func mirrorIssueBody(body, mirrorOrg, mirrorRepo string, issue int) string {
+	return fmt.Sprintf("%s\n\n Mirrored Issue:%s/%s#%d", body, mirrorOrg, mirrorRepo, issue)
+}
+
+// ensureForkExists ensures a fork of org/repo exists for the bot.
+func (s *Server) ensureForkExists(org, repo string) (string, error) {
+	fork := s.BotUser.Login + "/" + repo
+
+	// fork repo if it doesn't exist
+	repo, err := s.Ghc.EnsureFork(s.BotUser.Login, org, repo)
+	if err != nil {
+		return repo, err
+	}
+
+	s.RepoLock.Lock()
+	defer s.RepoLock.Unlock()
+	s.Repos = append(s.Repos, github.Repo{FullName: fork, Fork: true})
+	return repo, nil
 }

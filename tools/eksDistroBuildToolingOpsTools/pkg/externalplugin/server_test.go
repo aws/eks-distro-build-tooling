@@ -1,6 +1,7 @@
 package externalplugin
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"sync"
@@ -15,8 +16,14 @@ var commentFormat = "%s/%s#%d %s"
 type fghc struct {
 	sync.Mutex
 	iss      *github.Issue
+	pr       *github.PullRequest
+	commit   github.RepositoryCommit
 	isMember bool
 
+	diff       []byte
+	patch      []byte
+	prs        []github.PullRequest
+	prComments []github.IssueComment
 	comments   []string
 	iComments  []github.IssueComment
 	iLabels    []github.Label
@@ -56,6 +63,12 @@ func (f *fghc) CreateComment(org, repo string, number int, comment string) error
 	defer f.Unlock()
 	f.comments = append(f.comments, fmt.Sprintf(commentFormat, org, repo, number, comment))
 	return nil
+}
+
+func (f *fghc) GetSingleCommit(org, repo, sha string) (github.RepositoryCommit, error) {
+	f.Lock()
+	defer f.Unlock()
+	return f.commit, nil
 }
 
 func (f *fghc) IsMember(org, user string) (bool, error) {
@@ -98,6 +111,30 @@ func (f *fghc) CreateIssue(org, repo, title, body string, milestone int, labels,
 	return num, nil
 }
 
+func (f *fghc) EnsureFork(forkingUser, org, repo string) (string, error) {
+	if repo == "changeme" {
+		return "changed", nil
+	}
+	if repo == "error" {
+		return repo, errors.New("errors")
+	}
+	return repo, nil
+}
+
+func (f *fghc) CreatePullRequest(org, repo, title, body, head, base string, canModify bool) (int, error) {
+	f.Lock()
+	defer f.Unlock()
+	num := len(f.prs) + 1
+	f.prs = append(f.prs, github.PullRequest{
+		Title:  title,
+		Body:   body,
+		Number: num,
+		Head:   github.PullRequestBranch{Ref: head},
+		Base:   github.PullRequestBranch{Ref: base},
+	})
+	return num, nil
+}
+
 func (f *fghc) ListIssueComments(org, repo string, number int) ([]github.IssueComment, error) {
 	f.Lock()
 	defer f.Unlock()
@@ -123,6 +160,24 @@ func (f *fghc) GetIssue(org, repo string, number int) (*github.Issue, error) {
 	f.Lock()
 	defer f.Unlock()
 	return f.iss, nil
+}
+
+func (f *fghc) GetPullRequest(org, repo string, num int) (*github.PullRequest, error) {
+	f.Lock()
+	defer f.Unlock()
+	return f.pr, nil
+}
+
+func (f *fghc) GetPullRequests(org, repo string) ([]github.PullRequest, error) {
+	f.Lock()
+	defer f.Unlock()
+	return f.prs, nil
+}
+
+func (f *fghc) GetPullRequestPatch(org, repo string, number int) ([]byte, error) {
+	f.Lock()
+	defer f.Unlock()
+	return f.patch, nil
 }
 
 func (f *fghc) FindIssuesWithOrg(org, query, sort string, asc bool) ([]github.Issue, error) {
@@ -182,7 +237,7 @@ func TestUpstreamPickCreateIssue(t *testing.T) {
 			Ghc: ghc,
 		}
 
-		if err := s.createIssue(logrus.WithField("test", t.Name()), tc.org, tc.repo, tc.title, tc.body, tc.prNum, nil, tc.labels, tc.assignees); err != nil {
+		if _, err := s.createIssue(logrus.WithField("test", t.Name()), tc.org, tc.repo, tc.title, tc.body, tc.prNum, nil, tc.labels, tc.assignees); err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
 
