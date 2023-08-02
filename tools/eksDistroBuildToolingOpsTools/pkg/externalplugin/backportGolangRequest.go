@@ -225,8 +225,7 @@ func (s *Server) backportGolang(logger *logrus.Entry, requestor string, comment 
 
 		// Open a PR in GitHub.
 		title := fmt.Sprintf("[%s]%s - EKSGo", version, issue.Title)
-		var backportPrBody string
-		backportPrBody = createBackportPrBody(bpi, requestor)
+		backportPrBody := createBackportPrBody(bpi, requestor)
 
 		head := fmt.Sprintf("%s:%s", s.BotUser.Login, eksdbBranch)
 		createdNum, err := s.Ghc.CreatePullRequest(constants.AwsOrgName, constants.EksdBuildToolingRepoName, title, backportPrBody, head, eksdbBranch, true)

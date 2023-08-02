@@ -20,10 +20,8 @@ type fghc struct {
 	commit   github.RepositoryCommit
 	isMember bool
 
-	diff       []byte
 	patch      []byte
 	prs        []github.PullRequest
-	prComments []github.IssueComment
 	comments   []string
 	iComments  []github.IssueComment
 	iLabels    []github.Label
