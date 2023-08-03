@@ -16,6 +16,7 @@ package pkg
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -55,13 +56,16 @@ func newKubeGitVersionFile(buildSource, releaseBranch string) (*kubeGitVersionFi
 func parseKubeGitVersionContent(input io.Reader) (*kubeGitVersionFile, error) {
 	resp := &kubeGitVersionFile{}
 	scanner := bufio.NewScanner(input)
+	fmt.Println("Scanning kubeGitVersionFile")
 	for scanner.Scan() {
 		line := scanner.Text()
+		fmt.Printf("%s\n", line)
 		parts := strings.SplitN(line, "=", 2)
 		if len(parts) != 2 {
 			return nil, errors.Errorf("no equal sign in line: %s", line)
 		}
 		value := strings.Trim(parts[1], `'`)
+		fmt.Printf("value: %s\n", value)
 		switch parts[0] {
 		case "KUBE_GIT_COMMIT":
 			resp.KubeGitCommit = value
@@ -74,6 +78,7 @@ func parseKubeGitVersionContent(input io.Reader) (*kubeGitVersionFile, error) {
 			}
 			resp.KubeGitMajor = val
 		case "KUBE_GIT_MINOR":
+			strings.ReplaceAll(value, "+", "")
 			val, err := strconv.Atoi(value)
 			if err != nil {
 				return nil, errors.Wrapf(err, "Could not parse '%s'", value)
