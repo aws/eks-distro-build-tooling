@@ -178,3 +178,9 @@ There are additional flows that are run in prow.
 1. To test automated PR creation workflow
     * `REPO_OWNER=<github_user> JOB_TYPE="presubmit" make create-pr -C eks-distro-base`
     * Note: this requires up additional setup locally.
+
+## Notes on builder image 
+
+The minimal image variants are built using a separate builder image. Example: public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-python-builder
+
+These *-builder images exist in the same registry but these should not be used as a base for any image. The actual minimal base images are rebuilt every day if there is an upstream security update for the RPMs they contain. We only rebuild the *-builder image when we build entirely new base images. 
