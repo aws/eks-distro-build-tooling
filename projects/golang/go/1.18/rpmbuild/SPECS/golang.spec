@@ -177,6 +177,7 @@ Patch14:      0014-go-1.18.10-eks-cmd-go-cgo-in-_cgo_flags-use-one-line-per-flag
 Patch15:      0015-go-1.18.10-eks-cmd-go-enforce-flags-with-non-optional-arguments.patch
 Patch16:      0016-go-1.18.10-eks-runtime-implement-SUID-SGID-protections.patch
 Patch17:      0017-go-1.18.10-eks-net-http-validate-Host-header.patch
+Patch18:      0018-go-1.18.10-eks-crypto-tls-restrict-RSA-keys-i.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -559,6 +560,8 @@ fi
 %endif
 
 %changelog
+* Wed Aug 04 2023 Daniel Budris <budris@amazon.com> - 1.18.10-8
+- Includes security fix for CVE-2023-29409
 
 * Tue Jul 11 2023 Matthew Wong <mattwon@amazon.com> - 1.18.10-7
 - Includes security fix for CVE-2023-29406
