@@ -776,6 +776,9 @@ update-base-image-other-repos:
 .PHONY: all
 all: release
 
+.PHONY: rebuild-minimal-images
+rebuild-minimal-images:
+	./minimal-image-rebuilder.sh
 
 ##@ Local Targets
 

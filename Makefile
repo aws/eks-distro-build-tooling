@@ -8,7 +8,3 @@ run-buildkit-and-registry:
 stop-buildkit-and-registry:
 	docker rm -v --force buildkitd
 	docker rm -v --force registry
-
-.PHONY: rebuild-minimal-images
-rebuild-minimal-images:
-	scripts/minimal-image-rebuilder.sh
