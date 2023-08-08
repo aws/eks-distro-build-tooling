@@ -766,6 +766,10 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
+.PHONY: create-rebuild-pr
+create-pr: 
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO_TAG_FILE' $(IMAGE_REBUILD_BRANCH)
+
 .PHONY: update
 update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 
