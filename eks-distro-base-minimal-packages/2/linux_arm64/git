@@ -23,7 +23,7 @@ libgcc-7.3.1-15.amzn2.aarch64
 libgcrypt-1.5.3-14.amzn2.0.3.aarch64
 libgpg-error-1.12-3.amzn2.0.3.aarch64
 libidn2-2.3.0-1.amzn2.aarch64
-libnghttp2-1.41.0-1.amzn2.aarch64
+libnghttp2-1.41.0-1.amzn2.0.1.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
 libstdc++-7.3.1-15.amzn2.aarch64
@@ -33,8 +33,8 @@ ncurses-libs-6.0-8.20170212.amzn2.1.5.aarch64
 nspr-4.34.0-3.1.amzn2.aarch64
 nss-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
-openldap-2.4.44-25.amzn2.0.6.aarch64
-openssh-clients-7.4p1-22.amzn2.0.2.aarch64
+openldap-2.4.44-25.amzn2.0.7.aarch64
+openssh-clients-7.4p1-22.amzn2.0.3.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.7.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pcre2-10.23-11.amzn2.0.1.aarch64

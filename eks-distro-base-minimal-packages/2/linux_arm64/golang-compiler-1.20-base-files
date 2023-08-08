@@ -12427,7 +12427,7 @@
 -rwxr-xr-x    68KiB /usr/bin/setsid
 -rwxr-xr-x    69KiB /usr/bin/setterm
 -rwxr-xr-x   1.6KiB /usr/bin/setup-nsssysinit.sh
--rwxr-xr-x   198KiB /usr/bin/sftp
+-rwxr-xr-x   199KiB /usr/bin/sftp
 -rwxr-xr-x    69KiB /usr/bin/sha1sum
 -rwxr-xr-x    69KiB /usr/bin/sha224sum
 -rwxr-xr-x    69KiB /usr/bin/sha256sum

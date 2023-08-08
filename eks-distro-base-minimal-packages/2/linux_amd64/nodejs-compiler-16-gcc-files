@@ -4760,7 +4760,7 @@
 -rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x    98KiB /usr/lib64/libelf-0.176.so
+-rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   194KiB /usr/lib64/libexpat.so.1.6.0
 -rwxr-xr-x    32KiB /usr/lib64/libffi.so.6.0.1
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0

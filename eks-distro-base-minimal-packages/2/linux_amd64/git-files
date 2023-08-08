@@ -120,9 +120,9 @@
 -rwxr-xr-x    29KiB /usr/bin/sprof
 -rwxr-xr-x   737KiB /usr/bin/ssh
 -rwxr-xr-x   341KiB /usr/bin/ssh-add
----x--s--x   362KiB /usr/bin/ssh-agent
+---x--s--x   366KiB /usr/bin/ssh-agent
 -rwxr-xr-x    11KiB /usr/bin/ssh-copy-id
--rwxr-xr-x   419KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   423KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x    16KiB /usr/bin/tzselect
 -rwxr-xr-x      29B /usr/bin/umask
 -rwxr-xr-x      31B /usr/bin/unalias

@@ -546,7 +546,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_sh-0.176.so
 -rwxr-xr-x    24KiB /usr/lib64/elfutils/libebl_sparc-0.176.so
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_tilegx-0.176.so
--rwxr-xr-x    64KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
+-rwxr-xr-x    60KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
 -rwxr-xr-x    25KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    13KiB /usr/lib64/gconv/ARMSCII-8.so
@@ -830,9 +830,9 @@
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   323KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    33KiB /usr/lib64/libe2p.so.2.3
--rwxr-xr-x    98KiB /usr/lib64/libelf-0.176.so
+-rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   287KiB /usr/lib64/libevent-2.0.so.5.1.9
 -rwxr-xr-x   172KiB /usr/lib64/libevent_core-2.0.so.5.1.9
 -rwxr-xr-x   127KiB /usr/lib64/libevent_extra-2.0.so.5.1.9
