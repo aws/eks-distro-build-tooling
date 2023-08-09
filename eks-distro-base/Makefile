@@ -766,6 +766,7 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
+# Used in the quarterly minimal image rebuild prowjob. It adapted the existing create_pr script.
 .PHONY: create-rebuild-pr
 create-rebuild-pr: 
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO_TAG_FILE' $(IMAGE_REBUILD_BRANCH)
@@ -780,6 +781,7 @@ update-base-image-other-repos:
 .PHONY: all
 all: release
 
+# Updates all tags in the EKS_DISTRO_TAG_FILE to null. If merged will rebuild all Minimal Images
 .PHONY: rebuild-minimal-images
 rebuild-minimal-images:
 	./minimal-image-rebuilder.sh
