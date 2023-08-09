@@ -768,6 +768,7 @@ create-pr: $(CREATE_PR_TARGETS)
 
 # Used in the quarterly minimal image rebuild prowjob. It adapted the existing create_pr script.
 .PHONY: create-rebuild-pr
+create-rebuild-pr: IMAGE_REBUILD_BRANCH=rebuild-all-minimal-images
 create-rebuild-pr: 
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO_TAG_FILE' $(IMAGE_REBUILD_BRANCH)
 
