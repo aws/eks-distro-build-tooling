@@ -12484,10 +12484,10 @@
 -rwxr-xr-x    55KiB /usr/bin/sqlite3
 -rwxr-xr-x   737KiB /usr/bin/ssh
 -rwxr-xr-x   341KiB /usr/bin/ssh-add
----x--s--x   362KiB /usr/bin/ssh-agent
+---x--s--x   366KiB /usr/bin/ssh-agent
 -rwxr-xr-x    11KiB /usr/bin/ssh-copy-id
 -rwxr-xr-x   402KiB /usr/bin/ssh-keygen
--rwxr-xr-x   419KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   423KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x   119KiB /usr/bin/ssltap
 -rwxr-xr-x    74KiB /usr/bin/stat
 -rwxr-xr-x    61KiB /usr/bin/stdbuf
@@ -14583,7 +14583,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_sh-0.176.so
 -rwxr-xr-x    24KiB /usr/lib64/elfutils/libebl_sparc-0.176.so
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_tilegx-0.176.so
--rwxr-xr-x    64KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
+-rwxr-xr-x    60KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
 -rw-r--r--      65B /usr/lib64/fipscheck/fipscheck.hmac
 -rw-r--r--      65B /usr/lib64/fipscheck/libfipscheck.so.1.2.1.hmac
 -rw-r--r--      65B /usr/lib64/fipscheck/libgmp.so.10.2.0.hmac
@@ -14877,9 +14877,9 @@
 -rwxr-xr-x   314KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   323KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x   230KiB /usr/lib64/libedit.so.0.0.42
--rwxr-xr-x    98KiB /usr/lib64/libelf-0.176.so
+-rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   194KiB /usr/lib64/libexpat.so.1.6.0
 -rwxr-xr-x   395KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    32KiB /usr/lib64/libffi.so.6.0.1
@@ -17376,7 +17376,7 @@
 -rwxr-xr-x    61KiB /usr/libexec/gpg2keys_ldap
 -rwxr-xr-x     253B /usr/libexec/grepconf.sh
 -rwxr-xr-x   1.3KiB /usr/libexec/openldap/create-certdb.sh
--rwxr-xr-x    74KiB /usr/libexec/openssh/ctr-cavstest
+-rwxr-xr-x    78KiB /usr/libexec/openssh/ctr-cavstest
 ---x--s--x   443KiB /usr/libexec/openssh/ssh-keysign
 -rwxr-xr-x   353KiB /usr/libexec/openssh/ssh-pkcs11-helper
 -rwxr-xr-x   2.6KiB /usr/libexec/urlgrabber-ext-down
@@ -21962,7 +21962,7 @@
 -rw-r--r--   7.7MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

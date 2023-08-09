@@ -7,7 +7,7 @@ chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 curl-8.0.1-1.amzn2.0.1.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
-elfutils-libelf-0.176-2.amzn2.x86_64
+elfutils-libelf-0.176-2.amzn2.0.1.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 findutils-4.5.11-6.amzn2.x86_64
 gawk-4.0.2-4.amzn2.1.2.x86_64
@@ -31,7 +31,7 @@ libdb-5.3.21-24.amzn2.0.4.x86_64
 libdb-utils-5.3.21-24.amzn2.0.4.x86_64
 libgcc-7.3.1-15.amzn2.x86_64
 libidn2-2.3.0-1.amzn2.x86_64
-libnghttp2-1.41.0-1.amzn2.x86_64
+libnghttp2-1.41.0-1.amzn2.0.1.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
 libsepol-2.5-8.1.amzn2.0.2.x86_64
 libssh2-1.4.3-12.amzn2.2.4.x86_64
@@ -51,7 +51,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.x86_64
 nss-sysinit-3.79.0-4.amzn2.0.1.x86_64
 nss-tools-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
-openldap-2.4.44-25.amzn2.0.6.x86_64
+openldap-2.4.44-25.amzn2.0.7.x86_64
 openssl-libs-1.0.2k-24.amzn2.0.7.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 popt-1.13-16.amzn2.0.2.x86_64

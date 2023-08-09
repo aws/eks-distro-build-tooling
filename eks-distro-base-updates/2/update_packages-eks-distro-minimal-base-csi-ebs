@@ -1,2 +1,3 @@
 
-libcap.x86_64
+elfutils-libelf.x86_64
+elfutils-libs.x86_64

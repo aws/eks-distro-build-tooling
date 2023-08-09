@@ -12258,7 +12258,7 @@
 -rwxr-xr-x    68KiB /usr/bin/setsid
 -rwxr-xr-x    69KiB /usr/bin/setterm
 -rwxr-xr-x   1.6KiB /usr/bin/setup-nsssysinit.sh
--rwxr-xr-x   198KiB /usr/bin/sftp
+-rwxr-xr-x   199KiB /usr/bin/sftp
 -rwxr-xr-x    69KiB /usr/bin/sha1sum
 -rwxr-xr-x    69KiB /usr/bin/sha224sum
 -rwxr-xr-x    69KiB /usr/bin/sha256sum
@@ -20136,7 +20136,7 @@
 -rw-r--r--   6.9MiB /var/lib/rpm/Packages
 -rw-r--r--    72KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

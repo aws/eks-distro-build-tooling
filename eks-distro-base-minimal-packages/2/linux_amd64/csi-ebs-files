@@ -121,7 +121,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_sh-0.176.so
 -rwxr-xr-x    24KiB /usr/lib64/elfutils/libebl_sparc-0.176.so
 -rwxr-xr-x    16KiB /usr/lib64/elfutils/libebl_tilegx-0.176.so
--rwxr-xr-x    64KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
+-rwxr-xr-x    60KiB /usr/lib64/elfutils/libebl_x86_64-0.176.so
 -rwxr-xr-x    25KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    13KiB /usr/lib64/gconv/ARMSCII-8.so
 -rwxr-xr-x    13KiB /usr/lib64/gconv/ASMO_449.so
@@ -390,9 +390,9 @@
 -rwxr-xr-x    16KiB /usr/lib64/libcom_err.so.2.1
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   323KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    33KiB /usr/lib64/libe2p.so.2.3
--rwxr-xr-x    98KiB /usr/lib64/libelf-0.176.so
+-rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   267KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0

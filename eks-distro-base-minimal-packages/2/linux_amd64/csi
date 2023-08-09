@@ -13,9 +13,9 @@ device-mapper-1.02.170-6.amzn2.5.x86_64
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 e2fsprogs-1.42.9-19.amzn2.0.1.x86_64
 e2fsprogs-libs-1.42.9-19.amzn2.0.1.x86_64
-elfutils-default-yama-scope-0.176-2.amzn2.noarch
-elfutils-libelf-0.176-2.amzn2.x86_64
-elfutils-libs-0.176-2.amzn2.x86_64
+elfutils-default-yama-scope-0.176-2.amzn2.0.1.noarch
+elfutils-libelf-0.176-2.amzn2.0.1.x86_64
+elfutils-libs-0.176-2.amzn2.0.1.x86_64
 expat-2.1.0-15.amzn2.0.2.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 findutils-4.5.11-6.amzn2.x86_64
@@ -56,7 +56,7 @@ libidn2-2.3.0-1.amzn2.x86_64
 libini_config-1.3.1-29.amzn2.x86_64
 libmount-2.30.2-2.amzn2.0.11.x86_64
 libnfsidmap-0.25-19.amzn2.x86_64
-libnghttp2-1.41.0-1.amzn2.x86_64
+libnghttp2-1.41.0-1.amzn2.0.1.x86_64
 libpath_utils-0.2.1-29.amzn2.x86_64
 libpwquality-1.2.3-5.amzn2.x86_64
 libref_array-0.1.5-29.amzn2.x86_64
@@ -87,7 +87,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.x86_64
 nss-sysinit-3.79.0-4.amzn2.0.1.x86_64
 nss-tools-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
-openldap-2.4.44-25.amzn2.0.6.x86_64
+openldap-2.4.44-25.amzn2.0.7.x86_64
 openssl-libs-1.0.2k-24.amzn2.0.7.x86_64
 pam-1.1.8-23.amzn2.0.1.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64

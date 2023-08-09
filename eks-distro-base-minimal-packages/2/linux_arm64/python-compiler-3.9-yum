@@ -9,7 +9,7 @@ cpio-2.12-11.amzn2.aarch64
 curl-8.0.1-1.amzn2.0.1.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 diffutils-3.3-5.amzn2.aarch64
-elfutils-libelf-0.176-2.amzn2.aarch64
+elfutils-libelf-0.176-2.amzn2.0.1.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
 file-libs-5.11-36.amzn2.0.1.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
@@ -45,7 +45,7 @@ libgcrypt-1.5.3-14.amzn2.0.3.aarch64
 libgpg-error-1.12-3.amzn2.0.3.aarch64
 libidn2-2.3.0-1.amzn2.aarch64
 libmount-2.30.2-2.amzn2.0.11.aarch64
-libnghttp2-1.41.0-1.amzn2.aarch64
+libnghttp2-1.41.0-1.amzn2.0.1.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
 libssh2-1.4.3-12.amzn2.2.4.aarch64
@@ -68,7 +68,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.aarch64
 nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
 nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
-openldap-2.4.44-25.amzn2.0.6.aarch64
+openldap-2.4.44-25.amzn2.0.7.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.7.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64
