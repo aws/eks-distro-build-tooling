@@ -1,6 +1,0 @@
-golang:
-  tracking_tag: go1.19.12
-latest_eks_golang_release:
-  number: 9
-  date: 2023-08-04
-  artifacts: https://distro.eks.amazonaws.com/golang-go1.19/releases/9/RPMS
