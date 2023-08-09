@@ -13,31 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ "$SNS_TOPIC_ARN" == "" ]; then
-    echo "Empty SNS_TOPIC_ARN"
-    exit 1
-fi
+notification_subject="$1"
+notification_message_path="$2"
+sns_topic_arn="$3"
 
-if [ "$GO_SOURCE_VERSION" == "" ]; then
-    echo "Empty GO_SOURCE_VERSION"
-    exit 1
-fi
-
-notification_subject="New Release of EKS Golang v$GO_SOURCE_VERSION"
-notification_message="A version of EKS Golang v$GO_SOURCE_VERSION is available."
+base_directory=$(git rev-parse --show-toplevel)
+notification_message="$(cat $base_directory/$notification_message_path)"
 
 sns_message_id=$(
   aws sns publish \
-    --topic-arn "$SNS_TOPIC_ARN" \
+    --topic-arn "$sns_topic_arn" \
     --subject "$notification_subject" \
     --message "$notification_message" \
     --query "MessageId" --output text
 )
 
-if [ "$SNS_MESSAGE_ID" ]; then
-  echo -e "\nGolang release notification published with SNS MessageId $sns_message_id"
+if [ "$sns_message_id" ]; then
+  echo -e "\nRelease notification published with SNS MessageId $sns_message_id"
 else
-  echo -e "Received unexpected response while publishing to Golang release SNS topic $SNS_TOPIC_ARN. \
+  echo -e "Received unexpected response while publishing to release SNS topic $SNS_TOPIC_ARN. \
 An error may have occurred, and the notification may not have been published"
   exit 1
 fi
