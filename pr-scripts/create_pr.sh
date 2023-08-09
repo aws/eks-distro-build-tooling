@@ -32,6 +32,8 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
 
+MINIMAL_IMAGE_REBUILD_PJ_NAME="quarterly-minimal-image-rebuild"
+
 CHANGED_FILE="tag file(s)"
 CHANGED_COMPONENT="base image"
 if [[ $REPO =~ "prow-jobs" ]]; then
@@ -41,6 +43,10 @@ fi
 if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
     CHANGED_FILE="Prow controlplane Helm chart"
     CHANGED_COMPONENT="Prow component images"
+fi
+if [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
+    CHANGED_FILE="EKS_DISTRO_TAG_FILE"
+    CHANGED_COMPONENT="image tags"
 fi
 
 if [ $REPO_OWNER = "aws" ]; then
@@ -57,6 +63,8 @@ if [[ $REPO =~ "prow-jobs" ]]; then
 else
     if [[ $JOB_NAME =~ "prow-deck-tooling" ]]; then
         PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/prow_cp_pr_body
+    elif [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
+        PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/rebuild-minimal-images-pr-body
     else
         PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_other_repo_pr_body
         if [ $REPO = "eks-distro-build-tooling" ]; then
@@ -102,6 +110,9 @@ if [ $REPO = "eks-distro-build-tooling" ]; then
 fi
 if [[ $REPO =~ "prow-jobs" ]]; then
     git add ./BUILDER_BASE_TAG_FILE
+fi
+if [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
+ git add ../EKS_DISTRO_TAG_FILE.yaml
 fi
 
 FILES_ADDED=$(git diff --staged --name-only)

@@ -1,0 +1,1 @@
+This PR updates all tags in EKS_DISTRO_TAG_FILE to `null`. Merging this PR will cause all minimal images to be rebuilt. Before approving this PR, check when the last rebuild occurred by checking the history of [EKS_DISTRO_TAG_FILE](https://github.com/aws/eks-distro-build-tooling/EKS_DISTRO_TAG_FILE.yaml) \n\n /meow 
