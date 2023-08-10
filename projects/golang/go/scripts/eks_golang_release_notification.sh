@@ -23,7 +23,27 @@ if [ "$GO_SOURCE_VERSION" == "" ]; then
     exit 1
 fi
 
-NOTIFICATION_MESSAGE_PATH="projects/golang/go/$GO_SOURCE_VERSION/latest_release.yaml"
-NOTIFICATION_SUBJECT="New Release of EKS Golang v$GO_SOURCE_VERSION"
+base_directory=$(git rev-parse --show-toplevel)
 
-./release_notification.sh "$NOTIFICATION_SUBJECT" "$NOTIFICATION_MESSAGE_PATH" "$SNS_TOPIC_ARN"
+golang_tracking_tag="$(cat $base_directory/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
+
+sns_message="eks_golang_release: "$(cat $base_directory/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
+golang_tracking_tag: $golang_tracking_tag
+golang_tracking_version: "${golang_tracking_tag:2}"" # removes "go" at front
+
+
+sns_message_id=$(
+  aws sns publish \
+    --topic-arn "$SNS_TOPIC_ARN" \
+    --subject "New Release of EKS Golang v$GO_SOURCE_VERSION" \
+    --message "$sns_message"\
+    --query "MessageId" --output text
+)
+
+if [ "$sns_message_id" ]; then
+  echo -e "\nEKS Golang release notification published with SNS MessageId $sns_message_id"
+else
+  echo -e "Received unexpected response while publishing to EKS Golang release SNS topic $SNS_TOPIC_ARN. \
+An error may have occurred, and the notification may not have been published"
+  exit 1
+fi
