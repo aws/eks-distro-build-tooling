@@ -23,30 +23,31 @@ if [ "$GO_SOURCE_VERSION" == "" ]; then
     exit 1
 fi
 
-base_directory=$(git rev-parse --show-toplevel)
+BASE_DIRECTORY=$(git rev-parse --show-toplevel)
 
-golang_tracking_tag="$(cat $base_directory/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
-eks_golang_release_number="$(cat $base_directory/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
-debian_base_release_number="$(cat $base_directory/projects/golang/go/docker/debianBase/RELEASE)"
-debian_base_release_image_tag="$golang_tracking_tag-$eks_golang_release_number-$debian_base_release_number"
-sns_message="golang:
-  tracking_tag: $golang_tracking_tag
-  eks_golang_number: $eks_golang_release_number
+GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
+EKS_GOLANG_RELEASE_NUMBER="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
+DEBIAN_BASE_RELEASE_NUMBER="$(cat $BASE_DIRECTORY/projects/golang/go/docker/debianBase/RELEASE)"
+DEBIAN_BASE_RELEASE_IMAGE_TAG="$GOLANG_TRACKING_TAG-$EKS_GOLANG_RELEASE_NUMBER-$DEBIAN_BASE_RELEASE_NUMBER"
+
+SNS_MESSAGE="golang:
+  tracking_tag: $GOLANG_TRACKING_TAG
+  eks_golang_number: $EKS_GOLANG_RELEASE_NUMBER
 debian_base_release:
-  number: $debian_base_release_number
-  image_tag: $debian_base_release_image_tag
-  image_uri: public.ecr.aws/eks-distro-build-tooling/golang-debian:$debian_base_release_image_tag"
+  number: $DEBIAN_BASE_RELEASE_NUMBER
+  image_tag: $DEBIAN_BASE_RELEASE_IMAGE_TAG
+  image_uri: public.ecr.aws/eks-distro-build-tooling/golang-debian:$DEBIAN_BASE_RELEASE_IMAGE_TAG"
 
-sns_message_id=$(
+SNS_MESSAGE_ID=$(
   aws sns publish \
     --topic-arn "$SNS_TOPIC_ARN" \
     --subject "New Debian Base Image for v$GO_SOURCE_VERSION" \
-    --message "$sns_message"\
+    --message "$SNS_MESSAGE"\
     --query "MessageId" --output text
 )
 
-if [ "$sns_message_id" ]; then
-  echo -e "\nDebian base image release notification published with SNS MessageId $sns_message_id"
+if [ "$SNS_MESSAGE_ID" ]; then
+  echo -e "\nDebian base image release notification published with SNS MessageId $SNS_MESSAGE_ID"
 else
   echo -e "Received unexpected response while publishing to Debian base image release SNS topic $SNS_TOPIC_ARN. \
 An error may have occurred, and the notification may not have been published"
