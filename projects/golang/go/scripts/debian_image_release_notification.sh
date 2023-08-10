@@ -37,7 +37,6 @@ debian_base_release:
   image_tag: $debian_base_release_image_tag
   image_uri: public.ecr.aws/eks-distro-build-tooling/golang-debian:$debian_base_release_image_tag"
 
-
 sns_message_id=$(
   aws sns publish \
     --topic-arn "$SNS_TOPIC_ARN" \
@@ -53,10 +52,3 @@ else
 An error may have occurred, and the notification may not have been published"
   exit 1
 fi
-
-
-
-NOTIFICATION_MESSAGE_PATH="projects/golang/go/docker/debianBase/$GO_SOURCE_VERSION.yaml"
-NOTIFICATION_SUBJECT=
-
-./release_notification.sh "$NOTIFICATION_SUBJECT" "$NOTIFICATION_MESSAGE_PATH" "$SNS_TOPIC_ARN"
