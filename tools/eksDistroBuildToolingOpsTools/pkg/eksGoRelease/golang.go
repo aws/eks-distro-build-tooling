@@ -1,11 +1,9 @@
-package eksGoRelease
+package projectUpdater
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strconv"
-	"strings"
 
 	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
 )
@@ -20,38 +18,70 @@ const (
 	golangRPMPath     = "%s/%s/"
 )
 
-func NewEksGolangReleaseObject(versionString string) (*Release, error) {
-	splitVersion := strings.Split(versionString, ".")
-	patchAndRelease := strings.Split(splitVersion[2], "-")
-	major, err := strconv.Atoi(splitVersion[0])
-	if err != nil {
-		return nil, err
+func NewGolangUpdater() Project {
+	return &GolangUpdater{
+		updaters:   golangUpdaters(),
+		golangInfo: golangProjectInfo(),
 	}
+}
 
-	minor, err := strconv.Atoi(splitVersion[1])
-	if err != nil {
-		return nil, err
+type GolangUpdater struct {
+	updaters   []Updater
+	golangInfo ProjectInfo
+}
+
+func (g GolangUpdater) Updaters() []Updater {
+	return g.updaters
+}
+
+func (g GolangUpdater) UpdateAll() error {
+	for _, u := range g.Updaters() {
+		err := u.Update()
+		if err != nil {
+			return err
+		}
 	}
+	return nil
+}
 
-	patch, err := strconv.Atoi(patchAndRelease[0])
-	if err != nil {
-		return nil, err
+func (g GolangUpdater) Info() ProjectInfo {
+	return g.golangInfo
+}
+
+func golangProjectInfo() ProjectInfo {
+	return ProjectInfo{
+		Name: golangName,
+		Org:  golangOrg,
+		Repo: golangRepo,
+		Path: golangProjectPath,
 	}
+}
 
-	release, err := strconv.Atoi(patchAndRelease[1])
-	if err != nil {
-		return nil, err
+func golangUpdaters() []Updater {
+	var updaters []Updater
+	updaters = append(updaters, golangGithubUpdaters()...)
+	return updaters
+}
+
+func golangGithubUpdaters() []Updater {
+	var updaters []Updater
+	for _, r := range releases {
+		updaters = append(updaters, &golangGithubUpdater{})
 	}
+	return updaters
+}
 
-	releaseBranch := fmt.Sprintf("%d-%d", major, minor)
+type golangGithubUpdater struct {
+}
 
-	return &Release{
-		Major:    major,
-		Manifest: manifest,
-		Minor:    minor,
-		Patch:    patch,
-		Release:  release,
-	}, nil
+func (g *golangGithubUpdater) Update() error {
+	//implement updater here
+	fmt.Printf("Golang project update invoked for EKS Go release \n Major: %d\n Minor: %d\n Patch: %d\n Release: %d\n",
+		g.GolangMajorVersion(),
+		g.GolangMinorVersion(),
+		g.GolangPatchVersion(),
+		g.ReleaseNumber())
+	return nil
 }
 
 type Release struct {

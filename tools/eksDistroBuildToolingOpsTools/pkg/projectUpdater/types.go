@@ -14,4 +14,5 @@ type ProjectInfo struct {
 	Name string
 	Org  string
 	Repo string
+	Path string
 }
