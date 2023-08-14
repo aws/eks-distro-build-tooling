@@ -1,4 +1,4 @@
-From 34168586ca0af835b5e836b6fe458e2ff23a9820 Mon Sep 17 00:00:00 2001
+From 4eb4a895d688bea8fe56c94d61e7e6f3ff0ae589 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Alejandro=20S=C3=A1ez?= <asm@redhat.com>
 Date: Tue, 4 Jul 2023 18:12:14 +0200
 Subject: [PATCH] Disable Google's proxy, sumdb and toolchain
@@ -26,25 +26,25 @@ index 6ff2b921d4..087208cd7c 100644
 -GOTOOLCHAIN=auto
 +GOTOOLCHAIN=local
 diff --git a/src/cmd/go/testdata/script/mod_sumdb_golang.txt b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
-index 8698412f78..78e8e87700 100644
+index 067e2e3b31..99e087780e 100644
 --- a/src/cmd/go/testdata/script/mod_sumdb_golang.txt
 +++ b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
 @@ -2,12 +2,12 @@
- env GOPROXY=
- env GOSUMDB=
- go env GOPROXY
--stdout '^https://proxy.golang.org,direct$'
-+stdout '^direct$'
- go env GOSUMDB
--stdout '^sum.golang.org$'
-+stdout '^off$'
- env GOPROXY=https://proxy.golang.org
- go env GOSUMDB
--stdout '^sum.golang.org$'
-+stdout '^off$'
+ [go-builder] env GOPROXY=
+ [go-builder] env GOSUMDB=
+ [go-builder] go env GOPROXY
+-[go-builder] stdout '^https://proxy.golang.org,direct$'
++[go-builder] stdout '^direct$'
+ [go-builder] go env GOSUMDB
+-[go-builder] stdout '^sum.golang.org$'
++[go-builder] stdout '^off$'
+ [go-builder] env GOPROXY=https://proxy.golang.org
+ [go-builder] go env GOSUMDB
+-[go-builder] stdout '^sum.golang.org$'
++[go-builder] stdout '^off$'
  
  # Download direct from github.
  
 -- 
-2.40.1
+2.41.0
 
