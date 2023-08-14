@@ -23,6 +23,7 @@ const (
 	patchesPathFmt        = "%s/%s/patches/%s"
 	rpmSourcePathFmt      = "%s/%s/rpmbuild/SOURCE/%s"
 	specPathFmt           = "%s/%s/rpmbuild/SPEC/%s"
+	ArtifactPathFmt       = "https://distro.eks.amazonaws.com/golang-go%d.%d/release/%d/RPMS"
 	readme                = "README.md"
 	gitTag                = "GIT_TAG"
 	ghRelease             = "RELEASE"
@@ -54,18 +55,20 @@ func NewEksGoReleaseObject(versionString string) (*Release, error) {
 	}
 
 	return &Release{
-		Major:   major,
-		Minor:   minor,
-		Patch:   patch,
-		Release: -1, // TODO: Figure out if we need this for the EKSGo Releases or if this is just best generated on the fly when cloning the EKS DISTRO BUILD TOOLING repo
+		Major:        major,
+		Minor:        minor,
+		Patch:        patch,
+		Release:      -1, // TODO: Figure out if we need this for the EKSGo Releases or if this is just best generated on the fly when cloning the EKS DISTRO BUILD TOOLING repo
+		ArtifactPath: fmt.Sprintf(ArtifactPathFmt, major, minor, release),
 	}, nil
 }
 
 type Release struct {
-	Major   int
-	Minor   int
-	Patch   int
-	Release int
+	Major        int
+	Minor        int
+	Patch        int
+	Release      int
+	ArtifactPath string
 }
 
 func (r Release) GoReleaseBranch() string {
@@ -86,6 +89,10 @@ func (r Release) GoPatchVersion() int {
 
 func (r Release) ReleaseNumber() int {
 	return r.Release
+}
+
+func (r Release) EksGoArtifacts() string {
+	return r.ArtifactPath
 }
 
 func (r Release) EksGoReleaseFullVersion() string {
