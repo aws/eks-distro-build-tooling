@@ -250,7 +250,7 @@ clean:
 
 .PHONY: install-deps
 install-deps:
-	yum install -y yum-plugin-ovl && yum install -y rpmdevtools go-srpm-macros rpm-build glibc-static
+	yum install -y yum-plugin-ovl && yum install -y rpmdevtools go-srpm-macros rpm-build glibc-static pcre2-devel
 
 .PHONY: check-env-release
 check-env-release:
