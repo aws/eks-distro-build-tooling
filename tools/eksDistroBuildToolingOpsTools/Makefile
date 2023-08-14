@@ -34,8 +34,8 @@ build-consumerUpdater: unit-test lint
 build-binary-eksDistroOpsProwPlugin:  
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_PROW_PLUGIN_BINARY_NAME}
 
-.PHONY: build-goReleaseTool
-build-goReleaseTool: unit-test
+.PHONY: build-eksGoRelease
+build-eksGoRelease: unit-test
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(GOLANG_RELEASE_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(GOLANG_RELEASE_BINARY_NAME)
 
 .PHONY: build-eksDistroOpsProwPlugin
