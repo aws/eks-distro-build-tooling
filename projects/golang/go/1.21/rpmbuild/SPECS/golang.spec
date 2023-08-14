@@ -119,8 +119,6 @@ Source1:        fedora.go
 # The compiler is written in Go. Needs go(1.4+) compiler for build.
 %if !%{golang_bootstrap}
 BuildRequires:  gcc-go >= 5
-%else
-BuildRequires:  golang > 1.4
 %endif
 %if 0%{?rhel} > 6 || 0%{?fedora} > 0
 BuildRequires:  hostname
@@ -528,6 +526,9 @@ fi
 %endif
 
 %changelog
+* Mon Aug 14 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.0-0
+- Added go1.21.0 to eks-distro-build-tooling
+
 * Tue Aug 08 2023 Packit <hello@packit.dev> - 1.21.0-1
 New release ${PACKIT_PROJECT_VERSION}
 
