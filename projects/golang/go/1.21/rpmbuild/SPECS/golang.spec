@@ -107,7 +107,7 @@
  
 Name:           golang
 Version:        1.21.0
-Release:        1%{?dist}
+Release:        %{?_buildid}%{?dist}.eks
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
 License:        BSD and Public Domain
@@ -283,7 +283,7 @@ Requires:       %{name} = %{version}-%{release}
 %endif
 
 %prep
-%autosetup -p1 -n go
+%autosetup -p1 -n go-go%{go_version}
 
 cp %{SOURCE1} ./src/runtime/
 
