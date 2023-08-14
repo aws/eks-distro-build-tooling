@@ -20,6 +20,7 @@ EKS_GO_TOOLS_BINARY_NAME=eksGoTools
 CONSUMER_UPDATER_BINARY_NAME=consumerUpdater
 EKS_PROW_PLUGIN_BINARY_NAME=eksDistroOpsProwPlugin
 EKS_DISTRO_PROW_PLUGIN_ECR_NAME=eks-distro-ops-tool
+GOLANG_RELEASE_BINARY_NAME=eksGoRelease
 
 .PHONY: build-eks-go-tools
 build-eks-go-tools: 
@@ -32,6 +33,10 @@ build-consumerUpdater: unit-test lint
 .PHONY: build-binary-eksDistroOpsProwPlugin
 build-binary-eksDistroOpsProwPlugin:  
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_PROW_PLUGIN_BINARY_NAME}
+
+.PHONY: build-goReleaseTool
+build-goReleaseTool: unit-test
+	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(GOLANG_RELEASE_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(GOLANG_RELEASE_BINARY_NAME)
 
 .PHONY: build-eksDistroOpsProwPlugin
 build-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin local-images-eksDistroOpsProwPlugin

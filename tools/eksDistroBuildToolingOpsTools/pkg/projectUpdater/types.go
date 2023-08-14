@@ -11,8 +11,9 @@ type Updater interface {
 }
 
 type ProjectInfo struct {
-	Name string
-	Org  string
-	Repo string
-	Path string
+	Name            string
+	Org             string
+	Repo            string
+	GHReleaseBranch string
+	LocalPath       string
 }

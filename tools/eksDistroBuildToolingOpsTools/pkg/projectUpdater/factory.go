@@ -2,7 +2,7 @@ package projectUpdater
 
 func NewFactory() *Factory {
 	var projects []Project
-	projects = append(projects, NewEtcdProjectUpdater(releases))
+	projects = append(projects)
 
 	return &Factory{
 		projectUpdaters: projects,

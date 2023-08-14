@@ -3,18 +3,16 @@ package eksGoRelease_test
 import (
 	"testing"
 
-	"github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
-
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksDistroRelease"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease"
 )
 
 func TestIssueManagerCreateIssueSuccess(t *testing.T) {
-	releaseObject, err := eksDistroRelease.NewEksDistroReleaseObject("1.25.5-5")
+	releaseObject, err := eksGoRelease.NewEksGoReleaseObject("1.25.5")
 	if err != nil {
 		t.Errorf("NewEksDistroReleaseObject error = %v, want nil", err)
 	}
 
-	testReleaseObject := newTestEksDistroRelease(t)
+	testReleaseObject := newTestEksGoRelease(t)
 
 	releasesAreEqual := releaseObject.Equals(testReleaseObject)
 	if !releasesAreEqual {
@@ -22,12 +20,12 @@ func TestIssueManagerCreateIssueSuccess(t *testing.T) {
 	}
 }
 
-func newTestEksDistroRelease(t *testing.T) eksDistroRelease.Release {
-	return eksDistroRelease.Release{
-		Major:    1,
-		Minor:    25,
-		Patch:    5,
-		Release:  5,
-		Manifest: &v1alpha1.Release{},
+func newTestEksGoRelease(t *testing.T) eksGoRelease.Release {
+	//TODO: Update the release value from -1 once we validate needing it and move to a better test value or remove.
+	return eksGoRelease.Release{
+		Major:   1,
+		Minor:   25,
+		Patch:   5,
+		Release: -1,
 	}
 }

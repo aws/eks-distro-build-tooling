@@ -1,4 +1,4 @@
-package prmanager_test
+package prManager_test
 
 import (
 	"context"
@@ -39,7 +39,7 @@ var (
 	testDestFileGitPath   = "test.txt"
 	testBaseBranch        = "main"
 	testCommitBranch      = "testCommitBranch"
-	)
+)
 
 func TestPrManagerCreatePRSuccess(t *testing.T) {
 	ctx := context.Background()
@@ -59,8 +59,8 @@ func TestPrManagerCreatePRSuccess(t *testing.T) {
 	}
 
 	initialGitTree := &gogithub.Tree{
-		SHA: &treeRootSha,
-		Entries: nil,
+		SHA:       &treeRootSha,
+		Entries:   nil,
 		Truncated: gogithub.Bool(false),
 	}
 
@@ -98,7 +98,6 @@ func TestPrManagerCreatePRSuccess(t *testing.T) {
 	}
 }
 
-
 func TestPrManagerCreatePRSuccessAlternatePath(t *testing.T) {
 	ctx := context.Background()
 	pr := newTestPrManager(t)
@@ -117,8 +116,8 @@ func TestPrManagerCreatePRSuccessAlternatePath(t *testing.T) {
 	}
 
 	initialGitTree := &gogithub.Tree{
-		SHA: &treeRootSha,
-		Entries: nil,
+		SHA:       &treeRootSha,
+		Entries:   nil,
 		Truncated: gogithub.Bool(false),
 	}
 
@@ -191,9 +190,9 @@ func givenRetrier() *retrier.Retrier {
 }
 
 type testPrManager struct {
-	prManager *prmanager.PrCreator
-	prClient *githubMocks.MockPullRequestClient
-	gitClient *githubMocks.MockGitClient
+	prManager  *prmanager.PrCreator
+	prClient   *githubMocks.MockPullRequestClient
+	gitClient  *githubMocks.MockGitClient
 	repoClient *githubMocks.MockRepoClient
 }
 
@@ -204,7 +203,7 @@ func newTestPrManager(t *testing.T) testPrManager {
 	repoClient := githubMocks.NewMockRepoClient(mockCtrl)
 	githubClient := &github.Client{
 		PullRequests: prClient,
-		Git: gitClient,
+		Git:          gitClient,
 		Repositories: repoClient,
 	}
 
@@ -216,18 +215,18 @@ func newTestPrManager(t *testing.T) testPrManager {
 	}
 
 	return testPrManager{
-		prClient: prClient,
-		gitClient: gitClient,
+		prClient:   prClient,
+		gitClient:  gitClient,
 		repoClient: repoClient,
-		prManager: prmanager.New(givenRetrier(), githubClient, o),
+		prManager:  prmanager.New(givenRetrier(), githubClient, o),
 	}
 }
 
 func getCommitExpectedCommit() *gogithub.RepositoryCommit {
 	commit := &gogithub.Commit{
-		Author: commitAuthor(),
+		Author:  commitAuthor(),
 		Message: &testCommitMessage,
-		Tree: nil,
+		Tree:    nil,
 		Parents: []*gogithub.Commit{
 			{
 				SHA: &baseBranchSha,
@@ -236,26 +235,26 @@ func getCommitExpectedCommit() *gogithub.RepositoryCommit {
 	}
 
 	return &gogithub.RepositoryCommit{
-		SHA:         gogithub.String(parentCommitSha),
-		Commit:      commit,
+		SHA:    gogithub.String(parentCommitSha),
+		Commit: commit,
 	}
 }
 
 func commitAuthor() *gogithub.CommitAuthor {
 	date := time.Now()
 	return &gogithub.CommitAuthor{
-		Date: &date,
-		Name: &testCommitAuthor,
+		Date:  &date,
+		Name:  &testCommitAuthor,
 		Email: &testCommitAuthorEmail,
 	}
 }
 
 func newCommit() *gogithub.Commit {
 	return &gogithub.Commit{
-		Author: commitAuthor(),
+		Author:  commitAuthor(),
 		Message: &testCommitMessage,
-		Tree: nil,
-		SHA: gogithub.String(testNewCommitSha),
+		Tree:    nil,
+		SHA:     gogithub.String(testNewCommitSha),
 		Parents: []*gogithub.Commit{
 			{
 				SHA: &baseBranchSha,

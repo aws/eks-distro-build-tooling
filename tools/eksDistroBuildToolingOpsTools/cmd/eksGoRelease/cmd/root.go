@@ -26,8 +26,7 @@ var (
 
 func init() {
 	rootCmd.PersistentFlags().IntP("verbosity", "v", 0, "Set the log level verbosity")
-	rootCmd.PersistentFlags().Bool(allConsumersFlag, true, "Rebuild all consumers")
-	rootCmd.PersistentFlags().StringSlice(eksDistroReleasesFlag, []string{}, "EKS Distro releases to update consumers for")
+	rootCmd.PersistentFlags().StringSlice(eksGoReleasesFlag, []string{}, "EKS Go releases to update")
 
 	// Bind config flags to viper
 	if err := viper.BindPFlags(rootCmd.PersistentFlags()); err != nil {
