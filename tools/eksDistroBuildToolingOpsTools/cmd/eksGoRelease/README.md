@@ -3,7 +3,7 @@ The EKS Go Release Tool is intended as a home for all automation used to release
 It is intended to eventually replace eksGoTool.
 
 ### Using the Tool
-use `eksGoRelese --help` for up-to-date usage
+use `eksGoRelease --help` for up-to-date usage
 
 The tool has an `release` command which creates new minor version release structure and files.
 The tool has an `update` command which updates upstream supported versions for new patch releases.
