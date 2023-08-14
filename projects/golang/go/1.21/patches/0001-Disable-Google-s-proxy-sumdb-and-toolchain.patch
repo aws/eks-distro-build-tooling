@@ -1,0 +1,50 @@
+From 34168586ca0af835b5e836b6fe458e2ff23a9820 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Alejandro=20S=C3=A1ez?= <asm@redhat.com>
+Date: Tue, 4 Jul 2023 18:12:14 +0200
+Subject: [PATCH] Disable Google's proxy, sumdb and toolchain
+
+---
+ go.env                                          | 6 +++---
+ src/cmd/go/testdata/script/mod_sumdb_golang.txt | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/go.env b/go.env
+index 6ff2b921d4..087208cd7c 100644
+--- a/go.env
++++ b/go.env
+@@ -4,9 +4,9 @@
+ 
+ # Use the Go module mirror and checksum database by default.
+ # See https://proxy.golang.org for details.
+-GOPROXY=https://proxy.golang.org,direct
+-GOSUMDB=sum.golang.org
++GOPROXY=direct
++GOSUMDB=off
+ 
+ # Automatically download newer toolchains as directed by go.mod files.
+ # See https://go.dev/doc/toolchain for details.
+-GOTOOLCHAIN=auto
++GOTOOLCHAIN=local
+diff --git a/src/cmd/go/testdata/script/mod_sumdb_golang.txt b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
+index 8698412f78..78e8e87700 100644
+--- a/src/cmd/go/testdata/script/mod_sumdb_golang.txt
++++ b/src/cmd/go/testdata/script/mod_sumdb_golang.txt
+@@ -2,12 +2,12 @@
+ env GOPROXY=
+ env GOSUMDB=
+ go env GOPROXY
+-stdout '^https://proxy.golang.org,direct$'
++stdout '^direct$'
+ go env GOSUMDB
+-stdout '^sum.golang.org$'
++stdout '^off$'
+ env GOPROXY=https://proxy.golang.org
+ go env GOSUMDB
+-stdout '^sum.golang.org$'
++stdout '^off$'
+ 
+ # Download direct from github.
+ 
+-- 
+2.40.1
+
