@@ -13,6 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+if [ "$AWS_ROLE_ARN" == "" ]; then
+    echo "Empty AWS_ROLE_ARN"
+    exit 1
+fi
+
+if [ "$ARTIFACT_DEPLOYMENT_ROLE_ARN" == "" ]; then
+    echo "Empty ARTIFACT_DEPLOYMENT_ROLE_ARN"
+    exit 1
+fi
+
 if [ "$SNS_TOPIC_ARN" == "" ]; then
     echo "Empty SNS_TOPIC_ARN"
     exit 1
@@ -22,6 +32,22 @@ if [ "$GO_SOURCE_VERSION" == "" ]; then
     echo "Empty GO_SOURCE_VERSION"
     exit 1
 fi
+
+cat << EOF > awscliconfig
+[default]
+output=json
+region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-west-2}}
+role_arn=$AWS_ROLE_ARN
+web_identity_token_file=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
+
+[profile artifacts-push]
+role_arn=$ARTIFACT_DEPLOYMENT_ROLE_ARN
+region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}
+source_profile=default
+EOF
+export AWS_CONFIG_FILE=$(pwd)/awscliconfig
+export AWS_PROFILE=artifacts-push
+unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
 BASE_DIRECTORY=$(git rev-parse --show-toplevel)
 

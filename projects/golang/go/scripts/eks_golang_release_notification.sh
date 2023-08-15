@@ -13,6 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+if [ "$AWS_ROLE_ARN" == "" ]; then
+    echo "Empty AWS_ROLE_ARN"
+    exit 1
+fi
+
+if [ "$ARTIFACT_DEPLOYMENT_ROLE_ARN" == "" ]; then
+    echo "Empty ARTIFACT_DEPLOYMENT_ROLE_ARN"
+    exit 1
+fi
+
 if [ "$SNS_TOPIC_ARN" == "" ]; then
     echo "Empty SNS_TOPIC_ARN"
     exit 1
@@ -27,10 +38,25 @@ BASE_DIRECTORY=$(git rev-parse --show-toplevel)
 
 GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
 
+cat << EOF > awscliconfig
+[default]
+output=json
+region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-west-2}}
+role_arn=$AWS_ROLE_ARN
+web_identity_token_file=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
+
+[profile artifacts-push]
+role_arn=$ARTIFACT_DEPLOYMENT_ROLE_ARN
+region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}
+source_profile=default
+EOF
+export AWS_CONFIG_FILE=$(pwd)/awscliconfig
+export AWS_PROFILE=artifacts-push
+unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
+
 SNS_MESSAGE="eks_golang_release: "$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
 golang_tracking_tag: $GOLANG_TRACKING_TAG
 golang_tracking_version: "${GOLANG_TRACKING_TAG:2}"" # removes "go" at front
-
 
 SNS_MESSAGE_ID=$(
   aws sns publish \
