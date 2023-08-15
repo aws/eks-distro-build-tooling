@@ -35,8 +35,7 @@ if [ "$GO_SOURCE_VERSION" == "" ]; then
 fi
 
 BASE_DIRECTORY=$(git rev-parse --show-toplevel)
-
-GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
+cd $BASE_DIRECTORY || exit
 
 cat << EOF > awscliconfig
 [default]
@@ -54,9 +53,10 @@ export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
-SNS_MESSAGE="eks_golang_release: "$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
+GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
+SNS_MESSAGE="eks_golang_release: $(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)
 golang_tracking_tag: $GOLANG_TRACKING_TAG
-golang_tracking_version: "${GOLANG_TRACKING_TAG:2}"" # removes "go" at front
+golang_tracking_version: ${GOLANG_TRACKING_TAG:2}" # removes "go" at front
 
 SNS_MESSAGE_ID=$(
   aws sns publish \
