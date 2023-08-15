@@ -134,13 +134,13 @@ func (g *GogitClient) Remove(filename string) error {
 type CommitOpt func(signature *object.Signature)
 
 func WithUser(user string) CommitOpt {
-	return func (o *object.Signature) {
+	return func(o *object.Signature) {
 		o.Name = user
 	}
 }
 
 func WithEmail(email string) CommitOpt {
-	return func (o *object.Signature) {
+	return func(o *object.Signature) {
 		o.Email = email
 	}
 }
@@ -306,6 +306,11 @@ func (g *GogitClient) Branch(name string) error {
 	return nil
 }
 
+func (g *GogitClient) OpenRepo() (*gogit.Repository, error) {
+	logger.V(3).Info("Opening Repo", "repo", g.RepoUrl)
+	return g.Client.OpenRepo()
+}
+
 func (g *GogitClient) ValidateRemoteExists(ctx context.Context) error {
 	logger.V(3).Info("Validating git setup", "repoUrl", g.RepoUrl)
 	remote := g.Client.NewRemote(g.RepoUrl, gogit.DefaultRemoteName)
@@ -375,8 +380,8 @@ type GoGit interface {
 	WithRepositoryDirectory(dir string)
 }
 
-type goGit struct{
-	storer             *memory.Storage
+type goGit struct {
+	storer              *memory.Storage
 	worktreeFilesystem  billy.Filesystem
 	repositoryDirectory string
 }

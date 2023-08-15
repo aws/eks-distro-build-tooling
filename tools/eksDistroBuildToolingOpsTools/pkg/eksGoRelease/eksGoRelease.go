@@ -8,10 +8,12 @@ import (
 	"time"
 
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
 	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
+	"github.com/go-git/go-git/v5/plumbing/object"
 )
 
 const (
@@ -59,7 +61,7 @@ func NewEksGoReleaseObject(versionString string) (*Release, error) {
 		Minor:        minor,
 		Patch:        patch,
 		Release:      -1, // TODO: Figure out if we need this for the EKSGo Releases or if this is just best generated on the fly when cloning the EKS DISTRO BUILD TOOLING repo
-		ArtifactPath: fmt.Sprintf(ArtifactPathFmt, major, minor, release),
+		ArtifactPath: fmt.Sprintf(ArtifactPathFmt, major, minor, -1),
 	}, nil
 }
 
@@ -144,6 +146,34 @@ func (r Release) NewRelease(ctx context.Context) error {
 	githubClient, err := github.NewClient(ctx, token)
 	if err != nil {
 		return fmt.Errorf("setting up Github client: %v", err)
+	}
+
+	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(fmt.Sprintf(githubRepoUrl, sOwner)))
+	repo, err := gClient.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	ref, err := repo.Head()
+	if err != nil {
+		logger.Error(err, "Repo head lost")
+		return err
+	}
+
+	cIter, err := repo.Log(&git.LogOptions{From: ref.Hash()})
+	if err != nil {
+		logger.Error(err, "Hash")
+		return err
+	}
+
+	err = cIter.ForEach(func(c *object.Commit) error {
+		fmt.Println(c)
+		return nil
+	})
+	if err != nil {
+		logger.Error(err, "Commits lost")
+		return err
 	}
 
 	// Add files paths for new Go Minor Version

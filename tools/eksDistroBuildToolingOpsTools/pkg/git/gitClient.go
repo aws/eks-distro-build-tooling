@@ -1,6 +1,10 @@
 package git
 
-import "context"
+import (
+	"context"
+
+	gogit "github.com/go-git/go-git/v5"
+)
 
 type Client interface {
 	Add(filename string) error
@@ -10,6 +14,7 @@ type Client interface {
 	Push(ctx context.Context) error
 	Pull(ctx context.Context, branch string) error
 	Init() error
+	OpenRepo() (*gogit.Repository, error)
 	Branch(name string) error
 	ValidateRemoteExists(ctx context.Context) error
 }
