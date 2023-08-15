@@ -33,6 +33,9 @@ if [ "$GO_SOURCE_VERSION" == "" ]; then
     exit 1
 fi
 
+BASE_DIRECTORY=$(git rev-parse --show-toplevel)
+cd $BASE_DIRECTORY || exit
+
 cat << EOF > awscliconfig
 [default]
 output=json
@@ -48,8 +51,6 @@ EOF
 export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
-
-BASE_DIRECTORY=$(git rev-parse --show-toplevel)
 
 GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
 EKS_GOLANG_RELEASE_NUMBER="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
