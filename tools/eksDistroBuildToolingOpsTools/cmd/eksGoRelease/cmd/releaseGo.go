@@ -15,7 +15,6 @@ var (
 		Short: "Release a new version of EKS Go",
 		Long:  "Tool to release new versions of EKS Go",
 		RunE: func(cmd *cobra.Command, args []string) error {
-
 			var eksGoReleases []*eksGoRelease.Release
 			for _, v := range viper.GetStringSlice(eksGoReleasesFlag) {
 				r, err := eksGoRelease.NewEksGoReleaseObject(v)
@@ -26,7 +25,7 @@ var (
 			}
 
 			for _, r := range eksGoReleases {
-				err := r.NewRelease(cmd.Context())
+				err := r.NewMinorRelease(cmd.Context())
 				if err != nil {
 					return fmt.Errorf("You have failed this automation: %w", err)
 				}
