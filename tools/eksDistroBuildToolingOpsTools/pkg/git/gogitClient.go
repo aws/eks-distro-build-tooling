@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 
 	"os"
 	"strings"
@@ -306,11 +307,6 @@ func (g *GogitClient) Branch(name string) error {
 	return nil
 }
 
-func (g *GogitClient) OpenRepo() (*gogit.Repository, error) {
-	logger.V(3).Info("Opening Repo", "repo", g.RepoUrl)
-	return g.Client.OpenRepo()
-}
-
 func (g *GogitClient) ValidateRemoteExists(ctx context.Context) error {
 	logger.V(3).Info("Validating git setup", "repoUrl", g.RepoUrl)
 	remote := g.Client.NewRemote(g.RepoUrl, gogit.DefaultRemoteName)
@@ -319,6 +315,28 @@ func (g *GogitClient) ValidateRemoteExists(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("connecting with remote %v for repository: %v", gogit.DefaultRemoteName, err)
 	}
+	return nil
+}
+
+func (g *GogitClient) Status() error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	s, err := wt.Status()
+	if err != nil {
+		logger.Error(err, "git status")
+		return err
+	}
+	logger.V(3).Info("git status", "status", s)
 	return nil
 }
 
@@ -355,6 +373,182 @@ func (g *GogitClient) remoteBranchExists(r *gogit.Repository, localBranchRef plu
 		}
 	}
 	return false, nil
+}
+
+func (g *GogitClient) CreateFile(filename string, contents []byte) error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	file, err := wt.Filesystem.Create(filename)
+	if err != nil {
+		logger.Error(err, "file creation", filename)
+	}
+
+	_, err = file.Write(contents)
+	if err != nil {
+		logger.Error(err, "writing to file", filename, "contents", contents)
+		return err
+	}
+
+	if err := file.Close(); err != nil {
+		return err
+	}
+	logger.V(4).Info("New file created", "file", filename)
+	return nil
+}
+
+func (g *GogitClient) MoveFile(curPath, dstPath string) error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	if err := wt.Filesystem.Rename(curPath, dstPath); err != nil {
+		logger.Error(err, "moving file", "current", curPath, "destination", dstPath)
+		return err
+	}
+
+	logger.V(4).Info("File moved", "file", dstPath)
+	return nil
+}
+
+func (g *GogitClient) CopyFile(curPath, dstPath string) error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	curFile, err := wt.Filesystem.Open(curPath)
+	if err != nil {
+		logger.Error(err, "Opening file", curPath)
+		return err
+	}
+
+	dstFile, err := wt.Filesystem.Create(dstPath)
+	if err != nil {
+		logger.Error(err, "creating file", dstFile)
+		return err
+	}
+
+	if _, err = io.Copy(curFile, dstFile); err != nil {
+		logger.Error(err, "copying file", "original", curFile, "destination", dstFile)
+		return err
+	}
+
+	if err := curFile.Close(); err != nil {
+		return err
+	}
+	if err := dstFile.Close(); err != nil {
+		return err
+	}
+
+	logger.V(4).Info("File copied", "destination file", dstFile)
+	return nil
+}
+
+func (g *GogitClient) DeleteFile(filename string) error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	file, err := wt.Filesystem.Create(filename)
+	if err != nil {
+		logger.Error(err, "file creation", filename)
+	}
+
+	if err := file.Close(); err != nil {
+		return err
+	}
+	logger.V(4).Info("New file created", "file", filename)
+	return nil
+}
+
+func (g *GogitClient) ModifyFile(filename string, contents []byte, overwrite bool) error {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return err
+	}
+
+	file, err := wt.Filesystem.Open(filename)
+	if err != nil {
+		logger.Error(err, "opening file", filename)
+	}
+
+	_, err = file.Write(contents)
+	if err != nil {
+		logger.Error(err, "writing to file", filename, "contents", contents)
+		return err
+	}
+
+	if err := file.Close(); err != nil {
+		return err
+	}
+	logger.V(4).Info("New file modified", "file", filename, "contents", contents, "file was overwritten", overwrite)
+	return nil
+}
+
+func (g *GogitClient) ReadFile(filename string) ([]byte, error) {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return nil, err
+	}
+
+	wt, err := repo.Worktree()
+	if err != nil {
+		logger.Error(err, "Accessing worktree")
+		return nil, err
+	}
+
+	file, err := wt.Filesystem.Open(filename)
+	if err != nil {
+		logger.Error(err, "opening file", filename)
+		return nil, err
+	}
+
+	if err := file.Close(); err != nil {
+		return nil, err
+	}
+	logger.V(4).Info("New file created", "file", filename)
+	return nil, nil
 }
 
 type GoGit interface {
@@ -398,7 +592,7 @@ func (gg *goGit) CloneInMemory(ctx context.Context, repourl string, auth transpo
 		gg.storer = memory.NewStorage()
 	}
 
-	return gogit.CloneContext(ctx, gg.storer, nil, &gogit.CloneOptions{
+	return gogit.CloneContext(ctx, gg.storer, gg.worktreeFilesystem, &gogit.CloneOptions{
 		Auth:     auth,
 		URL:      repourl,
 		Progress: os.Stdout,

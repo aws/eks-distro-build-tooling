@@ -2,8 +2,6 @@ package git
 
 import (
 	"context"
-
-	gogit "github.com/go-git/go-git/v5"
 )
 
 type Client interface {
@@ -13,8 +11,16 @@ type Client interface {
 	Commit(message string, opts ...CommitOpt) error
 	Push(ctx context.Context) error
 	Pull(ctx context.Context, branch string) error
+	Status() error
 	Init() error
-	OpenRepo() (*gogit.Repository, error)
 	Branch(name string) error
 	ValidateRemoteExists(ctx context.Context) error
+	// filename for all the functions should be the full path from the repo base
+	// ie "project/golang/go/1.21/README.md
+	CreateFile(filename string, contents []byte) error
+	CopyFile(curFile, dstFile string) error
+	MoveFile(curFile, dstFile string) error
+	DeleteFile(filename string) error
+	ModifyFile(filename string, contents []byte, replace bool) error
+	ReadFile(filename string) ([]byte, error)
 }
