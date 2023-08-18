@@ -195,63 +195,6 @@ func (p *PrCreator) createPR(ctx context.Context, opts *CreatePrOpts) (pr *gogit
 	return pullRequest, nil
 }
 
-func (p *PrCreator) createMultiCommitPR(ctx context.Context, opts *CreateMultiCommitPrOpts) (pr *gogithub.PullRequest, err error) {
-	if opts.PrSubject == "" {
-		return nil, fmt.Errorf("PR subject is required")
-	}
-
-	if p.prRepoOwner != "" && p.prRepoOwner != p.sourceOwner {
-		opts.CommitBranch = fmt.Sprintf("%s:%s", p.sourceOwner, opts.CommitBranch)
-	} else {
-		p.prRepoOwner = p.sourceOwner
-	}
-
-	if p.prRepo == "" {
-		p.prRepo = p.sourceRepo
-	}
-
-	newPR := &gogithub.NewPullRequest{
-		Title:               &opts.PrSubject,
-		Head:                &opts.CommitBranch,
-		Base:                &opts.PrBranch,
-		Body:                &opts.PrDescription,
-		MaintainerCanModify: gogithub.Bool(true),
-	}
-
-	var pullRequest *gogithub.PullRequest
-	var resp *gogithub.Response
-	err = p.retrier.Retry(func() error {
-		pullRequest, resp, err = p.client.PullRequests.Create(ctx, p.prRepoOwner, p.prRepo, newPR)
-		if resp.StatusCode == github.SecondaryRateLimitStatusCode {
-			if strings.Contains(err.Error(), github.SecondaryRateLimitResponse) {
-				return fmt.Errorf("rate limited while attempting to create github pull request: %v", err)
-			}
-		}
-		if err != nil && strings.Contains(err.Error(), github.PullRequestAlreadyExistsForBranchError) {
-			// there can only be one PR per branch; if there's already an existing PR for the branch, we won't create one, but continue
-			logger.V(1).Info("A Pull Request already exists for the given branch", "branch", opts.CommitBranch)
-			getPrOpts := &GetPrOpts{
-				CommitBranch: opts.CommitBranch,
-				BaseBranch:   "main",
-			}
-			pullRequest, err = p.getPr(ctx, getPrOpts)
-			if err != nil {
-				return err
-			}
-			return nil
-		}
-		if err != nil {
-			return fmt.Errorf("creating Github pull request: %v; resp: %v", err, resp)
-		}
-		logger.V(1).Info("Github Pull Request Created", "Pull Request URL", pullRequest.GetHTMLURL())
-		return nil
-	})
-	if err != nil {
-		return nil, fmt.Errorf("creating github pull request: %v", err)
-	}
-	return pullRequest, nil
-}
-
 type CreatePrOpts struct {
 	CommitBranch    string
 	BaseBranch      string
@@ -266,46 +209,11 @@ type CreatePrOpts struct {
 }
 
 func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, error) {
-	ref, err := p.getRef(ctx, opts.CommitBranch, opts.BaseBranch)
-	if err != nil {
-		return "", fmt.Errorf("creating pull request: get/create the commit reference: %s\n", err)
-	}
-	if ref == nil {
-		return "", fmt.Errorf("creating pull request: the reference is nil")
-	}
-
-	tree, err := p.getTree(ctx, ref, opts.SourceFileBody, opts.DestFileGitPath)
-	if err != nil {
-		return "", fmt.Errorf("creating the tree based on the provided files: %s\n", err)
-	}
-
-	if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, opts.CommitMessage); err != nil {
-		return "", fmt.Errorf("creating the commit: %s\n", err)
-	}
-
-	pr, err := p.createPR(ctx, opts)
-	if err != nil {
-		return "", fmt.Errorf("creating pull request: %s", err)
-	}
-	return pr.GetHTMLURL(), nil
-}
-
-type CreateMultiCommitPrOpts struct {
-	CommitBranch    string
-	BaseBranch      string
-	AuthorName      string
-	AuthorEmail     string
-	CommitMessage   string
-	PrSubject       string
-	PrBranch        string
-	PrDescription   string
-	DestFileGitPath []string
-	SourceFileBody  [][]byte
-}
-
-func (p *PrCreator) CreateMultiCommitPr(ctx context.Context, opts *CreateMultiCommitPrOpts) (string, error) {
-	fmt.Printf("files: %v", opts.DestFileGitPath)
-	for i, file := range opts.DestFileGitPath {
+	// If opts.CommitMessage is not empty then create the required refs and other objects to create the commit
+	// otherwise this will try and create a pr from the repos referenced. This requires the branch to exist.
+	// Checkout the goGithub repo's Create function
+	// https://github.com/google/go-github/blob/a0e8f35c5cefc688733d566ec3701e86972df056/github/pulls.go#L258
+	if opts.CommitMessage != "" {
 		ref, err := p.getRef(ctx, opts.CommitBranch, opts.BaseBranch)
 		if err != nil {
 			return "", fmt.Errorf("creating pull request: get/create the commit reference: %s\n", err)
@@ -314,17 +222,17 @@ func (p *PrCreator) CreateMultiCommitPr(ctx context.Context, opts *CreateMultiCo
 			return "", fmt.Errorf("creating pull request: the reference is nil")
 		}
 
-		tree, err := p.getTree(ctx, ref, opts.SourceFileBody[i], file)
+		tree, err := p.getTree(ctx, ref, opts.SourceFileBody, opts.DestFileGitPath)
 		if err != nil {
 			return "", fmt.Errorf("creating the tree based on the provided files: %s\n", err)
 		}
 
-		if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, fmt.Sprintf(opts.CommitMessage, file)); err != nil {
+		if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, opts.CommitMessage); err != nil {
 			return "", fmt.Errorf("creating the commit: %s\n", err)
 		}
 	}
 
-	pr, err := p.createMultiCommitPR(ctx, opts)
+	pr, err := p.createPR(ctx, opts)
 	if err != nil {
 		return "", fmt.Errorf("creating pull request: %s", err)
 	}
