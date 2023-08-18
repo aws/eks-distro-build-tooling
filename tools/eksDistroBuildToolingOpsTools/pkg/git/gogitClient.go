@@ -494,61 +494,37 @@ func (g *GogitClient) DeleteFile(filename string) error {
 	return nil
 }
 
-func (g *GogitClient) ModifyFile(filename string, contents []byte, overwrite bool) error {
-	repo, err := g.Client.OpenRepo()
-	if err != nil {
-		logger.Error(err, "Opening repo")
-		return err
-	}
-
-	wt, err := repo.Worktree()
-	if err != nil {
-		logger.Error(err, "Accessing worktree")
-		return err
-	}
-
-	file, err := wt.Filesystem.Open(filename)
-	if err != nil {
-		logger.Error(err, "opening file", filename)
-	}
-
-	_, err = file.Write(contents)
-	if err != nil {
-		logger.Error(err, "writing to file", filename, "contents", contents)
-		return err
-	}
-
-	if err := file.Close(); err != nil {
-		return err
-	}
-	logger.V(4).Info("New file modified", "file", filename, "contents", contents, "file was overwritten", overwrite)
-	return nil
+func (g *GogitClient) ModifyFile(filename string, contents []byte) error {
+	return g.CreateFile(filename, contents)
 }
 
-func (g *GogitClient) ReadFile(filename string) ([]byte, error) {
+func (g *GogitClient) ReadFile(filename string) (string, error) {
 	repo, err := g.Client.OpenRepo()
 	if err != nil {
 		logger.Error(err, "Opening repo")
-		return nil, err
+		return "", err
 	}
 
-	wt, err := repo.Worktree()
+	ref, err := g.Client.Head(repo)
 	if err != nil {
-		logger.Error(err, "Accessing worktree")
-		return nil, err
+		return "", err
 	}
-
-	file, err := wt.Filesystem.Open(filename)
+	commit, err := repo.CommitObject(ref.Hash())
 	if err != nil {
-		logger.Error(err, "opening file", filename)
-		return nil, err
+		return "", err
 	}
 
-	if err := file.Close(); err != nil {
-		return nil, err
+	tree, err := repo.TreeObject(commit.TreeHash)
+	if err != nil {
+		return "", err
 	}
-	logger.V(4).Info("New file created", "file", filename)
-	return nil, nil
+
+	file, err := tree.File(filename)
+	if err != nil {
+		return "", err
+	}
+
+	return file.Contents()
 }
 
 type GoGit interface {

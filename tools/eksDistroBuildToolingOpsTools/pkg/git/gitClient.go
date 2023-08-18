@@ -21,6 +21,6 @@ type Client interface {
 	CopyFile(curFile, dstFile string) error
 	MoveFile(curFile, dstFile string) error
 	DeleteFile(filename string) error
-	ModifyFile(filename string, contents []byte, replace bool) error
-	ReadFile(filename string) ([]byte, error)
+	ModifyFile(filename string, contents []byte) error
+	ReadFile(filename string) (string, error)
 }
