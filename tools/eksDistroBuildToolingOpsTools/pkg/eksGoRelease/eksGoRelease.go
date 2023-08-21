@@ -376,18 +376,20 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		SourceOwner: sOwner,
 		SourceRepo:  constants.EksdBuildToolingRepoName,
 		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: sOwner,
+		PrRepoOwner: constants.AwsOrgName,
 	}
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
+	updatePRSubject := fmt.Sprintf("Files for new patch release of Golang: %s", r.GoSemver())
+	updatePRDescription := fmt.Sprintf("Update EKS Go Patch Version: %s", r.EksGoReleaseFullVersion())
 	cprOpts := &prManager.CreatePrOpts{
 		CommitBranch:  r.EksGoReleaseFullVersion(),
 		BaseBranch:    "main",
-		AuthorName:    "rcrozean",
-		AuthorEmail:   "rcrozean@amazon.com",
-		PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
+		AuthorName:    sOwner,
+		AuthorEmail:   email,
+		PrSubject:     updatePRSubject,
 		PrBranch:      "main",
-		PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
+		PrDescription: updatePRDescription,
 	}
 
 	prUrl, err := prm.CreatePr(ctx, cprOpts)
@@ -395,6 +397,7 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		// This shouldn't be an breaking error at this point the PR is not open but the changes
 		// have been pushed and can be created manually.
 		logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
+		prUrl = ""
 	}
 
 	logger.V(3).Info("Update EKS Go Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
