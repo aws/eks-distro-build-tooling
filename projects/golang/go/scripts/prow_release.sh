@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+set -o pipefail
+set -x
+
 if [ "$AWS_ROLE_ARN" == "" ]; then
     echo "Empty AWS_ROLE_ARN"
     exit 1
@@ -46,5 +50,7 @@ EOF
 export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
+
+echo $(env)
 
 make -C ${BASE_DIRECTORY}/projects/golang/go prod-release
