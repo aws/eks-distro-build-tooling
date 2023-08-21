@@ -18,9 +18,9 @@ set -x
 
 echo "Running uninstall.sh in $(pwd)"
 
-KUBECTL_VERSION=v1.20.7
-EKS_D_RELEASE_BRANCH=1-20
-EKS_D_RELEASE_NUMBER=8
+KUBECTL_VERSION=v1.24.16
+EKS_D_RELEASE_BRANCH=1-24
+EKS_D_RELEASE_NUMBER=24
 curl -sSL "https://distro.eks.amazonaws.com/kubernetes-${EKS_D_RELEASE_BRANCH}/releases/${EKS_D_RELEASE_NUMBER}/artifacts/kubernetes/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o /bin/kubectl
 chmod +x /bin/kubectl
 
