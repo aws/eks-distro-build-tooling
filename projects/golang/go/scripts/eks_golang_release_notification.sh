@@ -60,6 +60,7 @@ golang_tracking_version: ${GOLANG_TRACKING_TAG:2}" # removes "go" at front
 
 SNS_MESSAGE_ID=$(
   aws sns publish \
+    --profile "artifacts-push"
     --topic-arn "$SNS_TOPIC_ARN" \
     --subject "New Release of EKS Golang v$GO_SOURCE_VERSION" \
     --message "$SNS_MESSAGE"\
