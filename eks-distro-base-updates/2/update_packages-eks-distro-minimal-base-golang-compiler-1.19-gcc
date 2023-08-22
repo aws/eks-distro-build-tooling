@@ -1,8 +1,2 @@
 
-elfutils-default-yama-scope.noarch
-elfutils-libelf.x86_64
-elfutils-libs.x86_64
 kernel-headers.x86_64
-libnghttp2.x86_64
-openssh.x86_64
-openssh-clients.x86_64
