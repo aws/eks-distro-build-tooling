@@ -12,8 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-set -e
-set -x
+
 
 if [ "$AWS_ROLE_ARN" == "" ]; then
     echo "Empty AWS_ROLE_ARN"
@@ -52,8 +51,7 @@ source_profile=default
 EOF
 export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push
-cat awscliconfig
-# unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
+unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
 GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
 SNS_MESSAGE="eks_golang_release: $(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)
