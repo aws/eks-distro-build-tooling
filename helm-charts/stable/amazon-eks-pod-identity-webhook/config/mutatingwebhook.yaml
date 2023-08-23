@@ -19,7 +19,7 @@ metadata:
   namespace: ${NAMESPACE}
 webhooks:
 - name: ${WEBHOOK_NAME}.amazonaws.com
-  failurePolicy: Fail
+  failurePolicy: Ignore
   sideEffects: None
   clientConfig:
     service:
