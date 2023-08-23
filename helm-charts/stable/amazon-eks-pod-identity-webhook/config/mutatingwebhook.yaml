@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: ${MWC_NAME}
   namespace: ${NAMESPACE}
 webhooks:
 - name: ${WEBHOOK_NAME}.amazonaws.com
-  failurePolicy: Ignore
+  failurePolicy: Fail
   sideEffects: None
   clientConfig:
     service:
