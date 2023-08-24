@@ -1,3 +1,4 @@
 
 ca-certificates.noarch
-pcre2.x86_64
+gawk.x86_64
+openssl-libs.x86_64
