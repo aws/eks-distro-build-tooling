@@ -1,5 +1,4 @@
 
 ca-certificates.noarch
-kernel-headers.x86_64
-libnghttp2.x86_64
-pcre2.x86_64
+gawk.x86_64
+openssl-libs.x86_64

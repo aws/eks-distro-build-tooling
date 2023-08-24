@@ -1,4 +1,4 @@
 
-libnghttp2.x86_64
-pcre2.x86_64
-pcre2-syntax.noarch
+ca-certificates.noarch
+gawk.x86_64
+openssl-libs.x86_64

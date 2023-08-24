@@ -1,6 +1,4 @@
 
 ca-certificates.noarch
-libnghttp2.x86_64
-openssh.x86_64
-openssh-clients.x86_64
-pcre2.x86_64
+gawk.x86_64
+openssl-libs.x86_64
