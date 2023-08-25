@@ -40,6 +40,7 @@ release-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin images-eksDi
 	
 .PHONY: unit-test
 unit-test:
+	go version
 	go test -v ./... --cover
 
 .PHONY: lint
