@@ -44,7 +44,7 @@ spec:
         imagePullPolicy: Always
         command:
         - /webhook
-        - --in-cluster
+        - --in-cluster=false
         - --namespace={{ .Release.Namespace }}
         - --service-name={{ include "amazon-eks-pod-identity-webhook.fullname" . }}
         - --tls-secret={{ include "amazon-eks-pod-identity-webhook.fullname" . }}
@@ -57,13 +57,41 @@ spec:
         - --port={{ .Values.webhook.port }}
         - --logtostderr
         volumeMounts:
-        - name: webhook-certs
-          mountPath: /var/run/app/certs
-          readOnly: false
+        - name: cert
+          mountPath: /etc/webhook/certs
+          readOnly: true
       volumes:
-      - name: webhook-certs
-        emptyDir: {}
+      - name: cert
+        secret:
+          secretName: {{ include "amazon-eks-pod-identity-webhook.secretName" . }}
     {{- with .Values.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
     {{- end }} 
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: {{ include "amazon-eks-pod-idenity-webhook.secretName" . }} 
+  commonName: "pod-identity-webhook.default.svc"
+  dnsNames:
+  {{- include "amazon-eks-pod-identity-webhook.fullname" . }} 
+  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default" 
+  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default.svc"
+  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default.svc.local"
+  isCA: true
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer

@@ -17,18 +17,20 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: ${MWC_NAME}
   namespace: ${NAMESPACE}
+  annotations:
+    cert-manager.io/inject-ca-from: ${NAMESPACE}/${WEBHOOK_NAME} 
 webhooks:
 - name: ${WEBHOOK_NAME}.amazonaws.com
   failurePolicy: Ignore
-  sideEffects: None
   clientConfig:
     service:
       name: ${WEBHOOK_NAME}
       namespace: ${NAMESPACE}
       path: "/mutate"
-    caBundle: ${CA_BUNDLE}
   rules:
   - operations: [ "CREATE" ]
     apiGroups: [""]
     apiVersions: ["v1"]
     resources: ["pods"]
+  sideEffects: None
+  admissionReviewVersions: ["v1beta1"]
