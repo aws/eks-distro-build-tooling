@@ -82,7 +82,7 @@ metadata:
   name: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
-  secretName: {{ include "amazon-eks-pod-idenity-webhook.secretName" . }} 
+  secretName: {{ include "amazon-eks-pod-identity-webhook.secretName" . }} 
   commonName: "pod-identity-webhook.default.svc"
   dnsNames:
   {{- include "amazon-eks-pod-identity-webhook.fullname" . }} 
