@@ -4,41 +4,42 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"sigs.k8s.io/yaml"
 	"strconv"
 	"strings"
 
+	"sigs.k8s.io/yaml"
+
 	"github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
 
-	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const (
-	expectedStatusCode = 200
+	expectedStatusCode                  = 200
 	eksDistroReleaseManifestUriTemplate = "https://distro.eks.amazonaws.com/kubernetes-%s/kubernetes-%s-eks-%d.yaml"
-	kubernetesComponentName = "kubernetes"
-	kubernetesSourceArchiveAsset = "kubernetes-src.tar.gz"
+	kubernetesComponentName             = "kubernetes"
+	kubernetesSourceArchiveAsset        = "kubernetes-src.tar.gz"
 )
 
 func NewEksDistroReleaseObject(versionString string) (*Release, error) {
 	splitVersion := strings.Split(versionString, ".")
 	patchAndRelease := strings.Split(splitVersion[2], "-")
-	major, err :=  strconv.Atoi(splitVersion[0])
+	major, err := strconv.Atoi(splitVersion[0])
 	if err != nil {
 		return nil, err
 	}
 
-	minor, err :=  strconv.Atoi(splitVersion[1])
+	minor, err := strconv.Atoi(splitVersion[1])
 	if err != nil {
 		return nil, err
 	}
 
-	patch, err :=  strconv.Atoi(patchAndRelease[0])
+	patch, err := strconv.Atoi(patchAndRelease[0])
 	if err != nil {
 		return nil, err
 	}
 
-	release, err :=  strconv.Atoi(patchAndRelease[1])
+	release, err := strconv.Atoi(patchAndRelease[1])
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +108,8 @@ func (r Release) KubernetesSemver() string {
 }
 
 func (r Release) KubernetesComponent() *v1alpha1.Component {
-	component, ok := r.components[kubernetesComponentName]; if ok {
+	component, ok := r.components[kubernetesComponentName]
+	if ok {
 		return &component
 	}
 
@@ -121,7 +123,8 @@ func (r Release) KubernetesComponent() *v1alpha1.Component {
 }
 
 func (r Release) KubernetesSourceArchive() *v1alpha1.Asset {
-	asset, ok := r.assets[kubernetesSourceArchiveAsset]; if ok {
+	asset, ok := r.assets[kubernetesSourceArchiveAsset]
+	if ok {
 		return &asset
 	}
 	for _, a := range r.KubernetesComponent().Assets {
