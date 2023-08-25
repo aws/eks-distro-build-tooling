@@ -47,7 +47,7 @@ lint: bin/golangci-lint ## Run golangci-lint
 	bin/golangci-lint run
 
 bin/golangci-lint: ## Download golangci-lint
-bin/golangci-lint: GOLANGCI_LINT_VERSION?=v1.50.1
+bin/golangci-lint: GOLANGCI_LINT_VERSION?=v1.54.2
 bin/golangci-lint:
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s $(GOLANGCI_LINT_VERSION)
 
