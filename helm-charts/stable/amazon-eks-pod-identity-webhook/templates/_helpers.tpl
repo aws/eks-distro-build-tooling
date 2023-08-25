@@ -34,7 +34,7 @@ Create chart name and version as used by the chart label.
 Create cert secret name
 */}}
 {{- define "amazon-eks-pod-identity-webhook.secretName" -}}
-{{- printf "%s" .Values.secretName | trunc 63 | trimSuffic "-" }}
+{{- printf "%s" .Values.secretName | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
