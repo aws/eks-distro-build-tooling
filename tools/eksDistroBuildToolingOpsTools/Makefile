@@ -23,18 +23,18 @@ EKS_DISTRO_PROW_PLUGIN_ECR_NAME=eks-distro-ops-tool
 
 .PHONY: build-eks-go-tools
 build-eks-go-tools: unit-test lint
-	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_GO_TOOLS_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/eksGoTool
+	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_GO_TOOLS_BINARY_NAME}
 
 .PHONY: build-consumerUpdater
 build-consumerUpdater: unit-test lint
-	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(CONSUMER_UPDATER_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(CONSUMER_UPDATER_BINARY_NAME)
+	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${CONSUMER_UPDATER_BINARY_NAME}
 
 .PHONY: build-binary-eksDistroOpsProwPlugin
 build-binary-eksDistroOpsProwPlugin: unit-test lint 
-	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(EKS_PROW_PLUGIN_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/$(EKS_PROW_PLUGIN_BINARY_NAME)
+	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_PROW_PLUGIN_BINARY_NAME}
 
 .PHONY: build-eksDistroOpsProwPlugin
-build-eksDistroOpsProwPlugin: get-go-version build-binary-eksDistroOpsProwPlugin local-images-eksDistroOpsProwPlugin
+build-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin local-images-eksDistroOpsProwPlugin
 
 .PHONY: release-eksDistroOpsProwPlugin
 release-eksDistroOpsProwPlugin: build-binary-eksDistroOpsProwPlugin images-eksDistroOpsProwPlugin
@@ -53,10 +53,6 @@ bin/golangci-lint: ## Download golangci-lint
 bin/golangci-lint: GOLANGCI_LINT_VERSION?=v1.54.2
 bin/golangci-lint:
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s $(GOLANGCI_LINT_VERSION)
-
-.PHONY: get-go-version
-get-go-version:
-	./scripts/gobuildversion.sh use_go_version ${GOLANG_VERSION}
 
 .PHONY: clean
 clean:
