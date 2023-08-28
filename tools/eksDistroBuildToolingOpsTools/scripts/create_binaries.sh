@@ -26,6 +26,8 @@ GO_ARCH="$3"
 GIT_VERSION="$4"
 BINARY_NAME="$5"
 
+echo ${MAKE_ROOT}
+
 source "${MAKE_ROOT}/scripts/gobuildversion.sh"
 
 build::common::use_go_version $GOLANG_VERSION
