@@ -13,10 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-if [ -n "${OUTPUT_DEBUG_LOG:-}" ]; then
-    set -x
-fi
+set -x
 
 function build::common::get_go_path() {
   local -r version=$1
