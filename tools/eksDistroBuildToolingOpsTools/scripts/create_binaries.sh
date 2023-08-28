@@ -32,4 +32,5 @@ source "${MAKE_ROOT}/scripts/gobuildversion.sh"
 
 build::common::use_go_version $GOLANG_VERSION
 
+go test -v ./... --cover
 go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/version.gitVersion=${GIT_VERSION} -s -w -extldflags -static" -o bin/${GO_OS}/${GO_ARCH}/${BINARY_NAME} github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/cmd/${BINARY_NAME}

@@ -30,7 +30,7 @@ build-consumerUpdater: unit-test lint
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${CONSUMER_UPDATER_BINARY_NAME}
 
 .PHONY: build-binary-eksDistroOpsProwPlugin
-build-binary-eksDistroOpsProwPlugin: unit-test lint 
+build-binary-eksDistroOpsProwPlugin: lint 
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_PROW_PLUGIN_BINARY_NAME}
 
 .PHONY: build-eksDistroOpsProwPlugin
