@@ -55,8 +55,7 @@ bin/golangci-lint:
 
 .PHONY: get-go-version
 get-go-version:
-	source "$(PROJECT_DIRECTORY)/scripts/gobuildversion.sh"
-	build::common::use_go_version ${GOLANG_VERSION}
+	./scripts/gobuildversion.sh use_go_version ${GOLANG_VERSION}
 
 .PHONY: clean
 clean:
