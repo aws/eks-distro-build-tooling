@@ -58,10 +58,3 @@ function build::common::set_go_cache() {
   local -r git_tag=$2
   export GOCACHE=$(go env GOCACHE)/$project/$git_tag
 }
-
-case "$1" in
-	"") ;;
-	get_go_path) "build::common::$@"; exit;;
-	use_go_version) "build::common::$@"; exit;;
-	*) "$1"
-esac
