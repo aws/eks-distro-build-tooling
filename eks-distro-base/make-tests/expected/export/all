@@ -163,6 +163,24 @@ printf "\n\nExporting packages and files from  base-golang-compiler-1.20-gcc fin
 if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-gcc ]; then \
 		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.20-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
 	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.21-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.21-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.21-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-base ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-base* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.21-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.21-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.21-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-yum ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-yum* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.21-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-golang-compiler-1.21-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/golang-builder:some-previous-tag --opt build-arg:EXPORT_NAME=golang-compiler-1.21-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
+if [ -f /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-gcc ]; then \
+		mv /override/root/../eks-distro-base-minimal-packages/2/golang-compiler-1.21-gcc* /override/root/../eks-distro-base-minimal-packages/2/linux_amd64/; \
+	fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
 printf "\n\nExporting packages and files from  base-nodejs-compiler-16-base final image\n\n"
 /override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2
