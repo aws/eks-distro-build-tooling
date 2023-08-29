@@ -17,16 +17,16 @@ kind: Deployment
 metadata:
   name: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
   labels:
-{{- include "amazon-eks-pod-identity-webhook.labels" . | nindent 8 }}
+    {{- include "amazon-eks-pod-identity-webhook.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-{{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 12 }}
+      {{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-{{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 16 }}
+        {{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
       {{- if .Values.fargate }}
@@ -85,10 +85,10 @@ spec:
   secretName: {{ include "amazon-eks-pod-identity-webhook.secretName" . }} 
   commonName: "pod-identity-webhook.default.svc"
   dnsNames:
-  {{- include "amazon-eks-pod-identity-webhook.fullname" . }} 
-  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default" 
-  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default.svc"
-  {{- include "amazon-eks-pod-identity-webhook.fullname" . }}".default.svc.local"
+    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}
+    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default
+    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default.svc
+    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default.svc.local
   isCA: true
   duration: 2160h # 90d
   renewBefore: 360h # 15d
