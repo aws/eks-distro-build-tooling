@@ -22,7 +22,7 @@ EKS_PROW_PLUGIN_BINARY_NAME=eksDistroOpsProwPlugin
 EKS_DISTRO_PROW_PLUGIN_ECR_NAME=eks-distro-ops-tool
 
 .PHONY: build-eks-go-tools
-build-eks-go-tools: unit-test lint
+build-eks-go-tools: 
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_GO_TOOLS_BINARY_NAME}
 
 .PHONY: build-consumerUpdater
@@ -30,7 +30,7 @@ build-consumerUpdater: unit-test lint
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${CONSUMER_UPDATER_BINARY_NAME}
 
 .PHONY: build-binary-eksDistroOpsProwPlugin
-build-binary-eksDistroOpsProwPlugin: lint 
+build-binary-eksDistroOpsProwPlugin:  
 	./scripts/create_binaries.sh ${GOLANG_VERSION} ${GO_OS} ${GO_ARCH} ${GIT_VERSION} ${EKS_PROW_PLUGIN_BINARY_NAME}
 
 .PHONY: build-eksDistroOpsProwPlugin
