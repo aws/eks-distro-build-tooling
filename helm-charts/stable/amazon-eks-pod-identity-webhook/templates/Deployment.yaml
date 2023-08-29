@@ -17,16 +17,16 @@ kind: Deployment
 metadata:
   name: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
   labels:
-    {{- include "amazon-eks-pod-identity-webhook.labels" . | nindent 4 }}
+{{- include "amazon-eks-pod-identity-webhook.labels" . | nindent 8 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 6 }}
+{{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 12 }}
   template:
     metadata:
       labels:
-        {{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 8 }}
+{{- include "amazon-eks-pod-identity-webhook.selectorLabels" . | nindent 16 }}
     spec:
       serviceAccountName: {{ include "amazon-eks-pod-identity-webhook.fullname" . }}
       {{- if .Values.fargate }}
