@@ -288,6 +288,22 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_golang.sh $GOLANG_VERSION_120 && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as golang-1.21
+ARG TARGETARCH
+ARG GOLANG_VERSION_121
+ARG GOLANG_RPM_SOURCE_DIR
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_golang.sh /
+COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.21*.rpm /tmp/x86_64/
+COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.21*.rpm /tmp/aarch64/
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_golang.sh $GOLANG_VERSION_120 && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
@@ -396,6 +412,21 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_licenses.sh
 
+FROM ${BUILDER_IMAGE} as go-licenses-1.21
+ARG TARGETARCH
+ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY --link --from=golang-1.21 /golang-1.21 /
+COPY ./scripts/common_vars.sh \
+    ./scripts/install_go_licenses.sh /
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+    --mount=type=secret,id=netrc,target=/root/.netrc \
+    /install_go_licenses.sh
+
 
 FROM ${BASE_IMAGE} as minimal-copy-stage
 
@@ -427,6 +458,8 @@ COPY --link --from=golang-1.19 /golang-1.19 /
 COPY --link --from=go-licenses-1.19 /go-licenses-1.19 /
 COPY --link --from=golang-1.20 /golang-1.20 /
 COPY --link --from=go-licenses-1.20 /go-licenses-1.20 /
+COPY --link --from=golang-1.21 /golang-1.21 /
+COPY --link --from=go-licenses-1.21 /go-licenses-1.21 /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
 COPY --link --from=golang-1.18 /golang-1.18 /
