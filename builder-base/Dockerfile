@@ -301,7 +301,7 @@ COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.21*.rpm /tmp/x86_64/
 COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.21*.rpm /tmp/aarch64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_120 && \
+    /install_golang.sh $GOLANG_VERSION_121 && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as skopeo
