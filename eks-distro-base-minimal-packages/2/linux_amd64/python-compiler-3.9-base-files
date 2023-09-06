@@ -37,13 +37,13 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   135KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   134KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   230KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   227KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
 -r--r--r--   144KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   185KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   183KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--   5.1KiB /etc/pki/ca-trust/source/blacklist/TrustCor_CA.pem
 -rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
@@ -89,7 +89,7 @@
 -rw-r--r--       8B /etc/yum/vars/awsregion
 -rw-r--r--       5B /etc/yum/vars/product
 -rw-r--r--       7B /etc/yum/vars/target
--rw-------   260KiB /tmp/tmplibepm5acacert.pem
+-rw-------   260KiB /tmp/tmpto6buo1tcacert.pem
 -rwxr-xr-x    37KiB /usr/bin/[
 -rwxr-xr-x    29KiB /usr/bin/addr2line
 -rwxr-xr-x      29B /usr/bin/alias
@@ -119,7 +119,7 @@
 -rwxr-xr-x   144KiB /usr/bin/cp
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
--rwxr-xr-x   235KiB /usr/bin/curl
+-rwxr-xr-x   239KiB /usr/bin/curl
 -rwxr-xr-x    41KiB /usr/bin/cut
 -rwxr-xr-x    61KiB /usr/bin/date
 -rwxr-xr-x    12KiB /usr/bin/db_archive
@@ -4776,7 +4776,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
--rwxr-xr-x   661KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   694KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
 -rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
@@ -5044,7 +5044,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gmp-6.0.0/COPYINGv3
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.2.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc-7.3.1/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc-7.3.1/COPYING.RUNTIME
@@ -5662,7 +5662,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   858KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--   849KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100
