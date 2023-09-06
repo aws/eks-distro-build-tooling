@@ -11,6 +11,8 @@ Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.20
 Source Commit: https://github.com/golang/go/commit/023b542edf38e2a1f87fcefb9f75ff2f99401b4c
 
+# Original Information
+
 Per Appendix B.1.1 of the ECMAScript specification, support HTML-like
 comments in script contexts. Also per section 12.5, support hashbang
 comments. This brings our parsing in-line with how browsers treat these
