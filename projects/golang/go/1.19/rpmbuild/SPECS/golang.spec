@@ -159,9 +159,10 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
 Patch1:	      0001-release-branch.go1.20-html-template-properly-handle-.patch
-Patch2:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch3:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
-Patch4:       0104-add-method-to-skip-privd-tests-if-required.patch
+Patch2:	      0002-release-branch.go1.20-html-template-support-HTML-lik.patch
+Patch3:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
+Patch4:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch5:       0104-add-method-to-skip-privd-tests-if-required.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -537,6 +538,9 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.12-2
+- Includes security fix for CVE-2023-39318
+
 * Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.12-2
 - Includes security fix for CVE-2023-39319
 
