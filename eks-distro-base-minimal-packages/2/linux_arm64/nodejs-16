@@ -1,5 +1,5 @@
 basesystem-10.0-7.amzn2.0.1.noarch
-ca-certificates-2021.2.50-72.amzn2.0.7.noarch
+ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 coreutils-8.22-24.amzn2.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 glibc-2.26-63.amzn2.aarch64

@@ -1,6 +1,6 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
-ca-certificates-2021.2.50-72.amzn2.0.7.noarch
+ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 coreutils-8.22-24.amzn2.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 gettext-0.19.8.1-3.amzn2.aarch64
@@ -24,7 +24,7 @@ nginx-1.22.1-1.amzn2.0.2.aarch64
 nginx-core-1.22.1-1.amzn2.0.2.aarch64
 nginx-filesystem-1.22.1-1.amzn2.0.2.noarch
 openssl-libs-1.0.2k-24.amzn2.0.7.aarch64
-openssl11-libs-1.1.1g-12.amzn2.0.15.aarch64
+openssl11-libs-1.1.1g-12.amzn2.0.16.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pcre2-10.23-11.amzn2.0.1.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch

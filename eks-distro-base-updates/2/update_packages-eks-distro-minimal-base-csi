@@ -1,5 +1,5 @@
 
-elfutils-default-yama-scope.noarch
-elfutils-libelf.x86_64
-elfutils-libs.x86_64
-libnghttp2.x86_64
+ca-certificates.noarch
+curl.x86_64
+krb5-libs.x86_64
+libcurl.x86_64

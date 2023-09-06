@@ -1,3 +1,4 @@
 
-libnghttp2.x86_64
-openssh-clients.x86_64
+ca-certificates.noarch
+krb5-libs.x86_64
+libcurl.x86_64
