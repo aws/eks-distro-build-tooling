@@ -158,6 +158,7 @@ Provides: bundled(golang(golang.org/x/tools)) = 0.1.11.0.20220516163903.1e55371d
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
+Patch1:	      0001-go-1.19.12-eks-html-template-support-HTML-lik.patch
 Patch2:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch3:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch4:       0104-add-method-to-skip-privd-tests-if-required.patch
@@ -536,6 +537,9 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.12-2
+- Includes security fix for CVE-2023-39318
+
 * Wed Aug 02 2023 Daniel Budris <budris@amazon.com> - 1.19.12-1
 - Bump tracking patch version to 1.19.12 from 1.19.11
 
