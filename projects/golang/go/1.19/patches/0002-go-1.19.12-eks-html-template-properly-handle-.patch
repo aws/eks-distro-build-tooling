@@ -5,13 +5,14 @@ Subject: [PATCH] [release-branch.go1.20] html/template: properly handle
  special tags within the script context
 
 # AWS EKS
+
 Backported To: go-1.19.12-eks
 Backported On: Wed, 06 Sep 2023
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.20
 Source Commit: https://github.com/golang/go/commit/2070531d2f53df88e312edace6c8dfc9686ab2f5
 
-# Original
+# Original Information
 
 The HTML specification has incredibly complex rules for how to handle
 "<!--", "<script", and "</script" when they appear within literals in
