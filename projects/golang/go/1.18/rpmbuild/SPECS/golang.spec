@@ -561,6 +561,9 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.18.10-9
+- Includes security fix for CVE-2023-29409
+
 * Wed Aug 04 2023 Daniel Budris <budris@amazon.com> - 1.18.10-8
 - Includes security fix for CVE-2023-29409
 
