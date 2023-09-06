@@ -20,7 +20,7 @@ import (
 const (
 	githubRepoUrl               = "https://github.com/%s/eks-distro-build-tooling.git"
 	sOwner                      = "rcrozean"
-	email = "rcrozean@gmail.com"
+	email                       = "rcrozean@amazon.com"
 	prOwner                     = "aws"
 	projectPath                 = "projects/golang/go"
 	basePathFmt                 = "%s/%s/%s"
