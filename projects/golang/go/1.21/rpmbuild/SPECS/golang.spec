@@ -526,6 +526,9 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.1-1
+- Bump to go1.21.1 to include security patches for eks go
+
 * Mon Aug 14 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.0-0
 - Added go1.21.0 to eks-distro-build-tooling
 
