@@ -158,7 +158,7 @@ Provides: bundled(golang(golang.org/x/tools)) = 0.1.11.0.20220516163903.1e55371d
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
-Patch1:	      0001-release-branch.go1.20-html-template-support-HTML-lik.patch
+Patch1:	      0001-go-1.19.12-eks-html-template-support-HTML-lik.patch
 Patch2:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch3:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch4:       0104-add-method-to-skip-privd-tests-if-required.patch
