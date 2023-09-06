@@ -1,4 +1,5 @@
 
-containerd.x86_64
-oniguruma.x86_64
-runc.x86_64
+ca-certificates.noarch
+curl.x86_64
+krb5-libs.x86_64
+libcurl.x86_64
