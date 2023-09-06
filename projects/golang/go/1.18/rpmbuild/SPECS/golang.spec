@@ -178,7 +178,8 @@ Patch15:      0015-go-1.18.10-eks-cmd-go-enforce-flags-with-non-optional-argumen
 Patch16:      0016-go-1.18.10-eks-runtime-implement-SUID-SGID-protections.patch
 Patch17:      0017-go-1.18.10-eks-net-http-validate-Host-header.patch
 Patch18:      0018-go-1.18.10-eks-crypto-tls-restrict-RSA-keys-i.patch
-Patch18:      0019-go-1.18.10-eks-html-template-support-HTML-lik.patch
+Patch19:      0019-go-1.18.10-eks-html-template-support-HTML-lik.patch
+Patch20:      0020-go-1.18.10-eks-html-template-properly-handle-.patch
 
 Patch101:       0101-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch102:       0102-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -561,8 +562,11 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.18.10-10
+- Includes security fix for CVE-2023-39319
+
 * Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.18.10-9
-- Includes security fix for CVE-2023-29409
+- Includes security fix for CVE-2023-39318
 
 * Wed Aug 04 2023 Daniel Budris <budris@amazon.com> - 1.18.10-8
 - Includes security fix for CVE-2023-29409
