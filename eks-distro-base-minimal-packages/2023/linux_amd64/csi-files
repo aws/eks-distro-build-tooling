@@ -1144,9 +1144,9 @@
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.opt-1.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.opt-2.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.pyc
--rw-r--r--    44KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-1.pyc
--rw-r--r--    33KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-2.pyc
--rw-r--r--    44KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.pyc
+-rw-r--r--    45KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-1.pyc
+-rw-r--r--    34KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-2.pyc
+-rw-r--r--    45KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.opt-1.pyc
 -rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.opt-2.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.pyc
@@ -2274,7 +2274,7 @@
 -rw-r--r--   1.1KiB /usr/lib64/python3.9/keyword.py
 -rwxr-xr-x    64KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    17KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x    50KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x    46KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    30KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   157KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   160KiB /usr/lib64/python3.9/lib-dynload/_codecs_hk.cpython-39-x86_64-linux-gnu.so
@@ -2290,7 +2290,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   106KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   278KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   274KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    78KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    30KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    69KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -2809,7 +2809,7 @@
 -rw-r--r--    28KiB /usr/lib64/python3.9/sre_compile.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/sre_constants.py
 -rw-r--r--    40KiB /usr/lib64/python3.9/sre_parse.py
--rw-r--r--    50KiB /usr/lib64/python3.9/ssl.py
+-rw-r--r--    52KiB /usr/lib64/python3.9/ssl.py
 -rw-r--r--   5.4KiB /usr/lib64/python3.9/stat.py
 -rw-r--r--    38KiB /usr/lib64/python3.9/statistics.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/string.py
@@ -3571,7 +3571,7 @@
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--    35KiB /usr/share/doc/libbasicobjects/COPYING
 -rw-r--r--   7.5KiB /usr/share/doc/libbasicobjects/COPYING.LESSER
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
@@ -3642,7 +3642,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
 -rw-r--r--    18KiB /usr/share/licenses/keyutils/LICENCE.GPL
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs/COPYING
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libcap-ng/COPYING.LIB
 -rw-r--r--    20KiB /usr/share/licenses/libcap/License
 -rw-r--r--    44KiB /usr/share/licenses/libcom_err/NOTICE
@@ -3938,6 +3938,7 @@
 -rw-r--r--   397KiB /usr/share/locale/ja/LC_MESSAGES/util-linux.mo
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   4.3KiB /usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    13KiB /usr/share/locale/kk/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
@@ -6127,7 +6128,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.6MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog

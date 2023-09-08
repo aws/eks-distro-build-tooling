@@ -1,6 +1,5 @@
 
-ca-certificates.noarch
-containerd.x86_64
-gawk.x86_64
-openssl-libs.x86_64
-runc.x86_64
+file-libs.x86_64
+krb5-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
