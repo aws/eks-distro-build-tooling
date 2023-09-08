@@ -1015,7 +1015,7 @@
 -rw-r--r--   147KiB /root/sdk/go1.19.12/pkg/linux_amd64/hash/fnv.a
 -rw-r--r--    58KiB /root/sdk/go1.19.12/pkg/linux_amd64/hash/maphash.a
 -rw-r--r--   295KiB /root/sdk/go1.19.12/pkg/linux_amd64/html.a
--rw-r--r--   945KiB /root/sdk/go1.19.12/pkg/linux_amd64/html/template.a
+-rw-r--r--   960KiB /root/sdk/go1.19.12/pkg/linux_amd64/html/template.a
 -rw-r--r--   770KiB /root/sdk/go1.19.12/pkg/linux_amd64/image.a
 -rw-r--r--   157KiB /root/sdk/go1.19.12/pkg/linux_amd64/image/color.a
 -rw-r--r--   154KiB /root/sdk/go1.19.12/pkg/linux_amd64/image/color/palette.a
@@ -1166,7 +1166,7 @@
 -rwxr-xr-x   2.4MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/buildid
 -rwxr-xr-x   4.4MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cgo
 -rwxr-xr-x    23MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/compile
--rwxr-xr-x   4.5MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cover
+-rwxr-xr-x   4.8MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cover
 -rwxr-xr-x   3.2MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/dist
 -rwxr-xr-x   3.8MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/doc
 -rwxr-xr-x   3.2MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/fix
@@ -6118,15 +6118,17 @@
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/clone_test.go
 -rw-r--r--   6.3KiB /root/sdk/go1.19.12/src/html/template/content.go
 -rw-r--r--    14KiB /root/sdk/go1.19.12/src/html/template/content_test.go
--rw-r--r--   8.5KiB /root/sdk/go1.19.12/src/html/template/context.go
+-rw-r--r--   9.2KiB /root/sdk/go1.19.12/src/html/template/context.go
+-rw-r--r--   8.7KiB /root/sdk/go1.19.12/src/html/template/context.go.orig
 -rw-r--r--   7.0KiB /root/sdk/go1.19.12/src/html/template/css.go
 -rw-r--r--   7.0KiB /root/sdk/go1.19.12/src/html/template/css_test.go
 -rw-r--r--     416B /root/sdk/go1.19.12/src/html/template/delim_string.go
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/doc.go
 -rw-r--r--     445B /root/sdk/go1.19.12/src/html/template/element_string.go
 -rw-r--r--   9.4KiB /root/sdk/go1.19.12/src/html/template/error.go
--rw-r--r--    32KiB /root/sdk/go1.19.12/src/html/template/escape.go
--rw-r--r--    52KiB /root/sdk/go1.19.12/src/html/template/escape_test.go
+-rw-r--r--    33KiB /root/sdk/go1.19.12/src/html/template/escape.go
+-rw-r--r--    32KiB /root/sdk/go1.19.12/src/html/template/escape.go.orig
+-rw-r--r--    54KiB /root/sdk/go1.19.12/src/html/template/escape_test.go
 -rw-r--r--   4.0KiB /root/sdk/go1.19.12/src/html/template/example_test.go
 -rw-r--r--   7.5KiB /root/sdk/go1.19.12/src/html/template/examplefiles_test.go
 -rw-r--r--    58KiB /root/sdk/go1.19.12/src/html/template/exec_test.go
@@ -6136,7 +6138,7 @@
 -rw-r--r--    12KiB /root/sdk/go1.19.12/src/html/template/js_test.go
 -rw-r--r--     635B /root/sdk/go1.19.12/src/html/template/jsctx_string.go
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/multi_test.go
--rw-r--r--   1.6KiB /root/sdk/go1.19.12/src/html/template/state_string.go
+-rw-r--r--   1.7KiB /root/sdk/go1.19.12/src/html/template/state_string.go
 -rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/template.go
 -rw-r--r--   6.2KiB /root/sdk/go1.19.12/src/html/template/template_test.go
 -rw-r--r--      57B /root/sdk/go1.19.12/src/html/template/testdata/file1.tmpl
@@ -6144,7 +6146,8 @@
 -rw-r--r--     406B /root/sdk/go1.19.12/src/html/template/testdata/fs.zip
 -rw-r--r--      50B /root/sdk/go1.19.12/src/html/template/testdata/tmpl1.tmpl
 -rw-r--r--      50B /root/sdk/go1.19.12/src/html/template/testdata/tmpl2.tmpl
--rw-r--r--    16KiB /root/sdk/go1.19.12/src/html/template/transition.go
+-rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/transition.go
+-rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/transition.go.orig
 -rw-r--r--   1.8KiB /root/sdk/go1.19.12/src/html/template/transition_test.go
 -rw-r--r--   6.6KiB /root/sdk/go1.19.12/src/html/template/url.go
 -rw-r--r--   3.9KiB /root/sdk/go1.19.12/src/html/template/url_test.go
@@ -12569,7 +12572,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   274KiB /usr/bin/curl
+-rwxr-xr-x   278KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -12683,7 +12686,7 @@
 -rwxr-xr-x    29KiB /usr/bin/nsenter
 -rwxr-xr-x    57KiB /usr/bin/numfmt
 -rwxr-xr-x   191KiB /usr/bin/objcopy
--rwxr-xr-x   447KiB /usr/bin/objdump
+-rwxr-xr-x   451KiB /usr/bin/objdump
 -rwxr-xr-x    65KiB /usr/bin/od
 -rwxr-xr-x    37KiB /usr/bin/paste
 -rwxr-xr-x    37KiB /usr/bin/pathchk
@@ -13186,7 +13189,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -13204,7 +13207,7 @@
 -rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   703KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -13257,7 +13260,7 @@
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   351KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1
@@ -13762,7 +13765,7 @@
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
 -rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--   5.4KiB /usr/share/doc/openssh/CREDITS
@@ -14196,7 +14199,7 @@
 -rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
 -rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/less/COPYING
 -rw-r--r--   1.3KiB /usr/share/licenses/less/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libbrotli/LICENSE
@@ -14610,6 +14613,7 @@
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--    13KiB /usr/share/locale/kk/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--     691B /usr/share/locale/kk/LC_MESSAGES/cracklib.mo
