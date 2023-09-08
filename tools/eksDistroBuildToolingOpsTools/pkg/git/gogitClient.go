@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	gitTimeout     = 60 * time.Second
+	gitTimeout     = 300 * time.Second
 	maxRetries     = 5
 	backOffPeriod  = 5 * time.Second
 	emptyRepoError = "remote repository is empty"

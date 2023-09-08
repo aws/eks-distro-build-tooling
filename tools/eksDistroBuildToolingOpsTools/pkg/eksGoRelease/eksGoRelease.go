@@ -315,6 +315,7 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		logger.Error(err, "Converting current release to int")
 		return err
 	}
+	// Increment release
 	r.Release = cr + 1
 
 	// Create new branch
@@ -335,7 +336,7 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		return err
 	}
 
-	// Add RELEASE
+	// update RELEASE
 	releaseContent := []byte(fmt.Sprintf("%d", r.ReleaseNumber()))
 	logger.V(4).Info("Update RELEASE", "path", releasePath, "content", releaseContent)
 	if err := gClient.ModifyFile(releasePath, releaseContent); err != nil {
@@ -346,7 +347,19 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		return err
 	}
 
-	// Add GIT_TAG
+	// update GIT_TAG
+	gittagPath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), gitTag)
+	gittagContent := []byte(fmt.Sprintf("go%s", r.GoFullVersion()))
+	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
+	if err := gClient.CreateFile(gittagPath, gittagContent); err != nil {
+		return err
+	}
+	if err := gClient.Add(gittagPath); err != nil {
+		logger.Error(err, "git add", "file", gittagPath)
+		return err
+	}
+
+	// update golang.spec
 	gittagPath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), gitTag)
 	gittagContent := []byte(fmt.Sprintf("go%s", r.GoFullVersion()))
 	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
@@ -377,7 +390,7 @@ func (r Release) UpdatePatchVersion(ctx context.Context) error {
 		SourceOwner: sOwner,
 		SourceRepo:  constants.EksdBuildToolingRepoName,
 		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: constants.AwsOrgName,
+		PrRepoOwner: sOwner,
 	}
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
