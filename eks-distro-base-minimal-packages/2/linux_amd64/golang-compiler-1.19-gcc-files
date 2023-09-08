@@ -914,7 +914,7 @@
 -rw-r--r--   147KiB /root/sdk/go1.19.12/pkg/linux_amd64/hash/fnv.a
 -rw-r--r--    58KiB /root/sdk/go1.19.12/pkg/linux_amd64/hash/maphash.a
 -rw-r--r--   295KiB /root/sdk/go1.19.12/pkg/linux_amd64/html.a
--rw-r--r--   945KiB /root/sdk/go1.19.12/pkg/linux_amd64/html/template.a
+-rw-r--r--   960KiB /root/sdk/go1.19.12/pkg/linux_amd64/html/template.a
 -rw-r--r--   770KiB /root/sdk/go1.19.12/pkg/linux_amd64/image.a
 -rw-r--r--   157KiB /root/sdk/go1.19.12/pkg/linux_amd64/image/color.a
 -rw-r--r--   154KiB /root/sdk/go1.19.12/pkg/linux_amd64/image/color/palette.a
@@ -1065,7 +1065,7 @@
 -rwxr-xr-x   2.4MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/buildid
 -rwxr-xr-x   4.4MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cgo
 -rwxr-xr-x    23MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/compile
--rwxr-xr-x   4.5MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cover
+-rwxr-xr-x   4.8MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/cover
 -rwxr-xr-x   3.2MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/dist
 -rwxr-xr-x   3.8MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/doc
 -rwxr-xr-x   3.2MiB /root/sdk/go1.19.12/pkg/tool/linux_amd64/fix
@@ -6017,15 +6017,17 @@
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/clone_test.go
 -rw-r--r--   6.3KiB /root/sdk/go1.19.12/src/html/template/content.go
 -rw-r--r--    14KiB /root/sdk/go1.19.12/src/html/template/content_test.go
--rw-r--r--   8.5KiB /root/sdk/go1.19.12/src/html/template/context.go
+-rw-r--r--   9.2KiB /root/sdk/go1.19.12/src/html/template/context.go
+-rw-r--r--   8.7KiB /root/sdk/go1.19.12/src/html/template/context.go.orig
 -rw-r--r--   7.0KiB /root/sdk/go1.19.12/src/html/template/css.go
 -rw-r--r--   7.0KiB /root/sdk/go1.19.12/src/html/template/css_test.go
 -rw-r--r--     416B /root/sdk/go1.19.12/src/html/template/delim_string.go
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/doc.go
 -rw-r--r--     445B /root/sdk/go1.19.12/src/html/template/element_string.go
 -rw-r--r--   9.4KiB /root/sdk/go1.19.12/src/html/template/error.go
--rw-r--r--    32KiB /root/sdk/go1.19.12/src/html/template/escape.go
--rw-r--r--    52KiB /root/sdk/go1.19.12/src/html/template/escape_test.go
+-rw-r--r--    33KiB /root/sdk/go1.19.12/src/html/template/escape.go
+-rw-r--r--    32KiB /root/sdk/go1.19.12/src/html/template/escape.go.orig
+-rw-r--r--    54KiB /root/sdk/go1.19.12/src/html/template/escape_test.go
 -rw-r--r--   4.0KiB /root/sdk/go1.19.12/src/html/template/example_test.go
 -rw-r--r--   7.5KiB /root/sdk/go1.19.12/src/html/template/examplefiles_test.go
 -rw-r--r--    58KiB /root/sdk/go1.19.12/src/html/template/exec_test.go
@@ -6035,7 +6037,7 @@
 -rw-r--r--    12KiB /root/sdk/go1.19.12/src/html/template/js_test.go
 -rw-r--r--     635B /root/sdk/go1.19.12/src/html/template/jsctx_string.go
 -rw-r--r--   8.0KiB /root/sdk/go1.19.12/src/html/template/multi_test.go
--rw-r--r--   1.6KiB /root/sdk/go1.19.12/src/html/template/state_string.go
+-rw-r--r--   1.7KiB /root/sdk/go1.19.12/src/html/template/state_string.go
 -rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/template.go
 -rw-r--r--   6.2KiB /root/sdk/go1.19.12/src/html/template/template_test.go
 -rw-r--r--      57B /root/sdk/go1.19.12/src/html/template/testdata/file1.tmpl
@@ -6043,7 +6045,8 @@
 -rw-r--r--     406B /root/sdk/go1.19.12/src/html/template/testdata/fs.zip
 -rw-r--r--      50B /root/sdk/go1.19.12/src/html/template/testdata/tmpl1.tmpl
 -rw-r--r--      50B /root/sdk/go1.19.12/src/html/template/testdata/tmpl2.tmpl
--rw-r--r--    16KiB /root/sdk/go1.19.12/src/html/template/transition.go
+-rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/transition.go
+-rw-r--r--    17KiB /root/sdk/go1.19.12/src/html/template/transition.go.orig
 -rw-r--r--   1.8KiB /root/sdk/go1.19.12/src/html/template/transition_test.go
 -rw-r--r--   6.6KiB /root/sdk/go1.19.12/src/html/template/url.go
 -rw-r--r--   3.9KiB /root/sdk/go1.19.12/src/html/template/url_test.go
