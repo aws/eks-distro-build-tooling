@@ -125,7 +125,7 @@
 -rwxr-xr-x      31B /usr/bin/command
 -rwxr-xr-x   144KiB /usr/bin/cp
 -rwxr-xr-x   143KiB /usr/bin/cpio
--rwxr-xr-x  1015KiB /usr/bin/cpp
+-rwxr-xr-x  1007KiB /usr/bin/cpp
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
 -rwxr-xr-x   239KiB /usr/bin/curl
@@ -173,13 +173,13 @@
 -rwxr-xr-x    33KiB /usr/bin/fold
 -rwxr-xr-x    20KiB /usr/bin/gapplication
 -rwxr-xr-x   423KiB /usr/bin/gawk
--rwxr-xr-x  1011KiB /usr/bin/gcc
+-rwxr-xr-x  1003KiB /usr/bin/gcc
 -rwxr-xr-x    35KiB /usr/bin/gcc-ar
 -rwxr-xr-x    35KiB /usr/bin/gcc-nm
 -rwxr-xr-x    35KiB /usr/bin/gcc-ranlib
--rwxr-xr-x   613KiB /usr/bin/gcov
--rwxr-xr-x   496KiB /usr/bin/gcov-dump
--rwxr-xr-x   536KiB /usr/bin/gcov-tool
+-rwxr-xr-x   605KiB /usr/bin/gcov
+-rwxr-xr-x   488KiB /usr/bin/gcov-dump
+-rwxr-xr-x   528KiB /usr/bin/gcov-tool
 -rwxr-xr-x    20KiB /usr/bin/gdbm_dump
 -rwxr-xr-x    25KiB /usr/bin/gdbm_load
 -rwxr-xr-x    99KiB /usr/bin/gdbmtool
@@ -346,8 +346,8 @@
 -rwxr-xr-x    24KiB /usr/bin/which
 -rwxr-xr-x    49KiB /usr/bin/who
 -rwxr-xr-x    29KiB /usr/bin/whoami
--rwxr-xr-x  1011KiB /usr/bin/x86_64-redhat-linux-gcc
--rwxr-xr-x  1011KiB /usr/bin/x86_64-redhat-linux-gcc-7
+-rwxr-xr-x  1003KiB /usr/bin/x86_64-redhat-linux-gcc
+-rwxr-xr-x  1003KiB /usr/bin/x86_64-redhat-linux-gcc-7
 -rwxr-xr-x    61KiB /usr/bin/xargs
 -rwxr-xr-x    16KiB /usr/bin/xmlcatalog
 -rwxr-xr-x    62KiB /usr/bin/xmllint
@@ -8776,9 +8776,9 @@
 -rwxr-xr-x   6.9KiB /usr/libexec/awk/pwcat
 -rwxr-xr-x   6.8KiB /usr/libexec/coreutils/libstdbuf.so
 -rwxr-xr-x    23MiB /usr/libexec/gcc/x86_64-redhat-linux/7/cc1
--rwxr-xr-x   569KiB /usr/libexec/gcc/x86_64-redhat-linux/7/collect2
+-rwxr-xr-x   561KiB /usr/libexec/gcc/x86_64-redhat-linux/7/collect2
 -rwxr-xr-x    71KiB /usr/libexec/gcc/x86_64-redhat-linux/7/liblto_plugin.so.0.0.0
--rwxr-xr-x   885KiB /usr/libexec/gcc/x86_64-redhat-linux/7/lto-wrapper
+-rwxr-xr-x   873KiB /usr/libexec/gcc/x86_64-redhat-linux/7/lto-wrapper
 -rwxr-xr-x    22MiB /usr/libexec/gcc/x86_64-redhat-linux/7/lto1
 -rwxr-xr-x    26KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    26KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -12674,7 +12674,7 @@
 -rw-r--r--   6.5MiB /var/lib/rpm/Packages
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    48KiB /var/lib/rpm/Requirename
--rw-r--r--    16KiB /var/lib/rpm/Sha1header
+-rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 

@@ -115,7 +115,7 @@
 -rwxr-xr-x   144KiB /usr/bin/rpcgen
 -rwxr-xr-x   2.3MiB /usr/bin/scalar
 -rwxr-xr-x   134KiB /usr/bin/scp
--rwxr-xr-x   199KiB /usr/bin/sftp
+-rwxr-xr-x   198KiB /usr/bin/sftp
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    74KiB /usr/bin/sprof
 -rwxr-xr-x   785KiB /usr/bin/ssh
