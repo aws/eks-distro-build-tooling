@@ -4,12 +4,13 @@ Current Release: `%d`
 
 Tracking Tag: `%s`
 
-Artifacts: https://distro.eks.amazonaws.com/golang-go%s/releases/%d/RPMS
+Artifacts: %s 
 
 ### ARM64 Builds
-[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-%s-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)
+[![Build status](%s)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)
 
-### AMD64 Builds\n[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-%s-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)
+### AMD64 Builds
+[![Build status](%s)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
 The patches in `./patches` include relevant utility fixes for go `%s`.
