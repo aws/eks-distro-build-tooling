@@ -549,7 +549,7 @@ func (g *GogitClient) ReadFiles(foldername string) (map[string]string, error) {
 	}
 
   files := make(map[string]string)
-  tree.Files().ForEach(func(f *object.File) error {
+  err = tree.Files().ForEach(func(f *object.File) error {
     if(strings.Contains(f.Name, foldername)) {
       p, err := f.Contents()
       if err != nil {
@@ -559,6 +559,9 @@ func (g *GogitClient) ReadFiles(foldername string) (map[string]string, error) {
     }
     return nil
   })
+  if err != nil {
+    return nil, fmt.Errorf("reading files from folder: %s, %v", foldername, err)
+  }
 
   return files, nil
 }
