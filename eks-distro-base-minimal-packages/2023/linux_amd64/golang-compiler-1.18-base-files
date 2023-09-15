@@ -4738,11 +4738,13 @@
 -rw-r--r--   7.9KiB /root/sdk/go1.18.10/src/crypto/tls/example_test.go
 -rw-r--r--   4.9KiB /root/sdk/go1.18.10/src/crypto/tls/generate_cert.go
 -rw-r--r--    31KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client.go
--rw-r--r--    78KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_test.go
+-rw-r--r--    31KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client.go.orig
+-rw-r--r--    82KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_test.go
 -rw-r--r--    21KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_tls13.go
 -rw-r--r--    47KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_messages.go
 -rw-r--r--    13KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_messages_test.go
--rw-r--r--    25KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go
+-rw-r--r--    26KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go
+-rw-r--r--    25KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go.orig
 -rw-r--r--    63KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server_test.go
 -rw-r--r--    26KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server_tls13.go
 -rw-r--r--    24KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_test.go
@@ -12124,7 +12126,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   274KiB /usr/bin/curl
+-rwxr-xr-x   278KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -12238,7 +12240,7 @@
 -rwxr-xr-x    29KiB /usr/bin/nsenter
 -rwxr-xr-x    57KiB /usr/bin/numfmt
 -rwxr-xr-x   191KiB /usr/bin/objcopy
--rwxr-xr-x   447KiB /usr/bin/objdump
+-rwxr-xr-x   451KiB /usr/bin/objdump
 -rwxr-xr-x    65KiB /usr/bin/od
 -rwxr-xr-x    37KiB /usr/bin/paste
 -rwxr-xr-x    37KiB /usr/bin/pathchk
@@ -12741,7 +12743,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -12759,7 +12761,7 @@
 -rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   703KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -12812,7 +12814,7 @@
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   351KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1
@@ -13317,7 +13319,7 @@
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
 -rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--   5.4KiB /usr/share/doc/openssh/CREDITS
@@ -13751,7 +13753,7 @@
 -rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
 -rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/less/COPYING
 -rw-r--r--   1.3KiB /usr/share/licenses/less/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libbrotli/LICENSE
@@ -14165,6 +14167,7 @@
 -rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--    13KiB /usr/share/locale/kk/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--     691B /usr/share/locale/kk/LC_MESSAGES/cracklib.mo

@@ -71,13 +71,13 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   135KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   134KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   230KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   227KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
 -r--r--r--   144KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   185KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   183KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--   5.1KiB /etc/pki/ca-trust/source/blacklist/TrustCor_CA.pem
 -rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
@@ -4637,11 +4637,13 @@
 -rw-r--r--   7.9KiB /root/sdk/go1.18.10/src/crypto/tls/example_test.go
 -rw-r--r--   4.9KiB /root/sdk/go1.18.10/src/crypto/tls/generate_cert.go
 -rw-r--r--    31KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client.go
--rw-r--r--    78KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_test.go
+-rw-r--r--    31KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client.go.orig
+-rw-r--r--    82KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_test.go
 -rw-r--r--    21KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_client_tls13.go
 -rw-r--r--    47KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_messages.go
 -rw-r--r--    13KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_messages_test.go
--rw-r--r--    25KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go
+-rw-r--r--    26KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go
+-rw-r--r--    25KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server.go.orig
 -rw-r--r--    63KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server_test.go
 -rw-r--r--    26KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_server_tls13.go
 -rw-r--r--    24KiB /root/sdk/go1.18.10/src/crypto/tls/handshake_test.go
@@ -12258,7 +12260,7 @@
 -rwxr-xr-x    68KiB /usr/bin/setsid
 -rwxr-xr-x    69KiB /usr/bin/setterm
 -rwxr-xr-x   1.6KiB /usr/bin/setup-nsssysinit.sh
--rwxr-xr-x   199KiB /usr/bin/sftp
+-rwxr-xr-x   198KiB /usr/bin/sftp
 -rwxr-xr-x    69KiB /usr/bin/sha1sum
 -rwxr-xr-x    69KiB /usr/bin/sha224sum
 -rwxr-xr-x    69KiB /usr/bin/sha256sum
@@ -13151,7 +13153,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   203KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   733KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   734KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
@@ -16229,7 +16231,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.0.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.2.1/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -18142,7 +18144,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   858KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--   849KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--   9.4KiB /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
 -rw-r--r--   2.0KiB /usr/share/polkit-1/actions/org.freedesktop.import1.policy
 -rw-r--r--   6.2KiB /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
@@ -20133,7 +20135,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   6.9MiB /var/lib/rpm/Packages
+-rw-r--r--   6.8MiB /var/lib/rpm/Packages
 -rw-r--r--    72KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    20KiB /var/lib/rpm/Sha1header

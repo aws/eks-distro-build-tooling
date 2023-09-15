@@ -97,7 +97,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.21
 #global go_prerelease rc3
-%global go_patch 0
+%global go_patch 1
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -526,6 +526,9 @@ fi
 %endif
 
 %changelog
+* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.1-1
+- Bump to go1.21.1 to include security patches for eks go
+
 * Mon Aug 14 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.0-0
 - Added go1.21.0 to eks-distro-build-tooling
 

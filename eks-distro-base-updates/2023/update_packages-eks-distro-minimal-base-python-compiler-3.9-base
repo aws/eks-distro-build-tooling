@@ -1,4 +1,5 @@
 
-ca-certificates.noarch
-gawk.x86_64
-openssl-libs.x86_64
+binutils.x86_64
+krb5-libs.x86_64
+python3.x86_64
+python3-libs.x86_64

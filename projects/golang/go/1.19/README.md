@@ -1,8 +1,8 @@
 # EKS Golang 1.19
 
-Current Release: `5`
+Current Release: `10`
 
-Tracking Tag: `go1.19.10`
+Tracking Tag: `go1.19.12`
 
 Artifacts: https://distro.eks.amazonaws.com/golang-go1.19/releases/3/RPMS
 

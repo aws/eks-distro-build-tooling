@@ -3193,7 +3193,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -3207,7 +3207,7 @@
 -rwxr-xr-x   4.2MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   727KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   856KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   197KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   718KiB /usr/lib64/libdw-0.188.so
@@ -3231,7 +3231,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x   197KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   982KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   983KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   198KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   458KiB /usr/lib64/libldap_r-2.4.so.2.11.5
@@ -3248,7 +3248,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcprofile.so
@@ -3479,7 +3479,7 @@
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -3890,7 +3890,7 @@
 -rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
 -rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libbrotli/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap/License
 -rw-r--r--    44KiB /usr/share/licenses/libcom_err/NOTICE
@@ -4153,6 +4153,7 @@
 -rw-r--r--    58KiB /usr/share/locale/ja/LC_MESSAGES/tar.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   182KiB /usr/share/locale/ko/LC_MESSAGES/bash.mo
 -rw-r--r--    25KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo

@@ -249,7 +249,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   274KiB /usr/bin/curl
+-rwxr-xr-x   278KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -317,7 +317,7 @@
 -rwxr-xr-x    37KiB /usr/bin/nproc
 -rwxr-xr-x    57KiB /usr/bin/numfmt
 -rwxr-xr-x   191KiB /usr/bin/objcopy
--rwxr-xr-x   447KiB /usr/bin/objdump
+-rwxr-xr-x   451KiB /usr/bin/objdump
 -rwxr-xr-x    65KiB /usr/bin/od
 -rwxr-xr-x    37KiB /usr/bin/paste
 -rwxr-xr-x    37KiB /usr/bin/pathchk
@@ -777,7 +777,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x    37KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -791,7 +791,7 @@
 -rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   703KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   610KiB /usr/lib64/libdw-0.188.so
@@ -833,7 +833,7 @@
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
@@ -1064,7 +1064,7 @@
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -1475,7 +1475,7 @@
 -rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
 -rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libbrotli/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap/License
 -rw-r--r--    44KiB /usr/share/licenses/libcom_err/NOTICE
@@ -1738,6 +1738,7 @@
 -rw-r--r--    58KiB /usr/share/locale/ja/LC_MESSAGES/tar.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   182KiB /usr/share/locale/ko/LC_MESSAGES/bash.mo
 -rw-r--r--    25KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo
@@ -3896,7 +3897,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   2.2MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   2.2MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   2.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

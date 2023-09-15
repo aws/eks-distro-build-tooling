@@ -1,10 +1,10 @@
 # EKS Golang 1.20
 
-Current Release: `4`
+Current Release: `9`
 
-Tracking Tag: `go1.20.5`
+Tracking Tag: `go1.20.8`
 
-Artifacts: https://distro.eks.amazonaws.com/golang-go1.20/releases/2/RPMS
+Artifacts: https://distro.eks.amazonaws.com/golang-go1.20/releases/9/RPMS
 
 ### ARM64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1.20-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)

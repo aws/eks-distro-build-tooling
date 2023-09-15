@@ -5378,7 +5378,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -5397,7 +5397,7 @@
 -rwxr-xr-x   4.2MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   727KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   856KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   197KiB /usr/lib64/libdebuginfod-0.188.so
 -rw-r--r--       8B /usr/lib64/libdl.a
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
@@ -5439,7 +5439,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x   197KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   982KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   983KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   391KiB /usr/lib64/libksba.so.8.14.3
 -rwxr-xr-x   198KiB /usr/lib64/liblber-2.4.so.2.11.5
@@ -5467,7 +5467,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.7.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
 -rwxr-xr-x   1.4MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
@@ -5934,9 +5934,9 @@
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.opt-1.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.opt-2.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/sre_parse.cpython-39.pyc
--rw-r--r--    44KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-1.pyc
--rw-r--r--    33KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-2.pyc
--rw-r--r--    44KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.pyc
+-rw-r--r--    45KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-1.pyc
+-rw-r--r--    34KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.opt-2.pyc
+-rw-r--r--    45KiB /usr/lib64/python3.9/__pycache__/ssl.cpython-39.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.opt-1.pyc
 -rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.opt-2.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.9/__pycache__/stat.cpython-39.pyc
@@ -7745,7 +7745,7 @@
 -rw-r--r--    28KiB /usr/lib64/python3.9/sre_compile.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/sre_constants.py
 -rw-r--r--    40KiB /usr/lib64/python3.9/sre_parse.py
--rw-r--r--    50KiB /usr/lib64/python3.9/ssl.py
+-rw-r--r--    52KiB /usr/lib64/python3.9/ssl.py
 -rw-r--r--   5.4KiB /usr/lib64/python3.9/stat.py
 -rw-r--r--    38KiB /usr/lib64/python3.9/statistics.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/string.py
@@ -8238,7 +8238,7 @@
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--   9.2KiB /usr/share/doc/annobin-plugin/annotation.proposal.txt
--rw-r--r--    62KiB /usr/share/doc/krb5-libs/NOTICE
+-rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
 -rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--   1.3KiB /usr/share/doc/lz4-libs/LICENSE
@@ -8723,7 +8723,7 @@
 -rw-r--r--   1.1KiB /usr/share/licenses/json-c/AUTHORS
 -rw-r--r--   2.2KiB /usr/share/licenses/json-c/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/keyutils-libs/LICENCE.LGPL
--rw-r--r--    62KiB /usr/share/licenses/krb5-libs/LICENSE
+-rw-r--r--    63KiB /usr/share/licenses/krb5-libs/LICENSE
 -rw-r--r--   3.1KiB /usr/share/licenses/libarchive/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/libassuan/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libassuan/COPYING.LIB
@@ -9246,6 +9246,7 @@
 -rw-r--r--    51KiB /usr/share/locale/ka/LC_MESSAGES/gnutls.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
+-rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   4.3KiB /usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/kk/LC_MESSAGES/dnf.mo
