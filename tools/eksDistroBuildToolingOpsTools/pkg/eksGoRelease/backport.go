@@ -22,7 +22,7 @@ const (
 )
 
 // BackportPatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions no longer maintained by upstream.
-func (r Release) BackportPatchVersion(ctx context.Context, dryrun bool, cve, commit, email, user string) error {
+func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit, email, user string) error {
 	// Setup Github Client
 	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
 

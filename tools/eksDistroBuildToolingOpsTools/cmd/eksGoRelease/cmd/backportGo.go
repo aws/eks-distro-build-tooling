@@ -26,7 +26,7 @@ var (
 			}
 
 			for _, r := range eksGoReleases {
-				err := r.BackportPatchVersion(cmd.Context(), viper.GetBool(dryrunFlag), "CVE", "HASH", viper.GetString(emailFlag), viper.GetString(userFlag))
+				err := r.BackportToRelease(cmd.Context(), viper.GetBool(dryrunFlag), "CVE", "HASH", viper.GetString(emailFlag), viper.GetString(userFlag))
 				if err != nil {
 					return fmt.Errorf("You have failed this automation: %w", err)
 				}

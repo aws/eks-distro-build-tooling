@@ -25,7 +25,7 @@ var (
 			}
 
 			for _, r := range eksGoReleases {
-				err := r.UpdatePatchVersion(cmd.Context(), viper.GetBool(dryrunFlag), viper.GetString(emailFlag), viper.GetString(userFlag))
+				err := r.UpdateVersion(cmd.Context(), viper.GetBool(dryrunFlag), viper.GetString(emailFlag), viper.GetString(userFlag))
 				if err != nil {
 					return fmt.Errorf("You have failed this automation: %w", err)
 				}
