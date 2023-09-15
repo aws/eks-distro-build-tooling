@@ -167,7 +167,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
         SourceOwner: user,
         SourceRepo:  constants.EksdBuildToolingRepoName,
         PrRepo:      constants.EksdBuildToolingRepoName,
-        PrRepoOwner: user,
+        PrRepoOwner: constants.AwsOrgName,
       }
       prm := prManager.New(retrier, githubClient, prmOpts)
 

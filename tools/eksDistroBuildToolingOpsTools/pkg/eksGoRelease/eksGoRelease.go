@@ -293,7 +293,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 			SourceOwner: user,
 			SourceRepo:  constants.EksdBuildToolingRepoName,
 			PrRepo:      constants.EksdBuildToolingRepoName,
-			PrRepoOwner: user,
+			PrRepoOwner: constants.AwsOrgName,
 		}
 		prm := prManager.New(retrier, githubClient, prmOpts)
 

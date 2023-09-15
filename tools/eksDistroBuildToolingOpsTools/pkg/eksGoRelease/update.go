@@ -149,7 +149,7 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
       SourceOwner: user,
       SourceRepo:  constants.EksdBuildToolingRepoName,
       PrRepo:      constants.EksdBuildToolingRepoName,
-      PrRepoOwner: user,
+      PrRepoOwner: constants.AwsOrgName,
     }
     prm := prManager.New(retrier, githubClient, prmOpts)
 
