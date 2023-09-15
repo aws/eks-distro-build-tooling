@@ -9,14 +9,14 @@ import (
 func TestIssueManagerCreateIssueSuccess(t *testing.T) {
 	releaseObject, err := eksGoRelease.NewEksGoReleaseObject("1.25.5")
 	if err != nil {
-		t.Errorf("NewEksDistroReleaseObject error = %v, want nil", err)
+		t.Errorf("NewEksGoReleaseObject error = %v, want nil", err)
 	}
 
 	testReleaseObject := newTestEksGoRelease(t)
 
 	releasesAreEqual := releaseObject.Equals(testReleaseObject)
 	if !releasesAreEqual {
-		t.Errorf("EKS Distro Release object is not equal to the test Release object! Release object: %v, testReleaseObject: %v", releaseObject, testReleaseObject)
+		t.Errorf("EKS Go Release object is not equal to the test Release object! Release object: %v, testReleaseObject: %v", releaseObject, testReleaseObject)
 	}
 }
 
@@ -26,6 +26,6 @@ func newTestEksGoRelease(t *testing.T) eksGoRelease.Release {
 		Major:   1,
 		Minor:   25,
 		Patch:   5,
-		Release: -1,
+		Release: 0,
 	}
 }

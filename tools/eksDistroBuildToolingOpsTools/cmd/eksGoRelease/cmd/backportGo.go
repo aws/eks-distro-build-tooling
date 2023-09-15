@@ -1,3 +1,4 @@
+
 package cmd
 
 import (
@@ -10,8 +11,8 @@ import (
 )
 
 var (
-	updateGoCommand = &cobra.Command{
-		Use:   "update",
+	backportGoCommand = &cobra.Command{
+		Use:   "backport",
 		Short: "Update new patch versions of EKS Go",
 		Long:  "Tool to create PR for updaing EKS Go versions supported by upstream when a patch version is released",
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -25,7 +26,7 @@ var (
 			}
 
 			for _, r := range eksGoReleases {
-				err := r.UpdatePatchVersion(cmd.Context(), viper.GetBool(dryrunFlag), viper.GetString(emailFlag), viper.GetString(userFlag))
+				err := r.BackportPatchVersion(cmd.Context(), viper.GetBool(dryrunFlag), "CVE", "HASH", viper.GetString(emailFlag), viper.GetString(userFlag))
 				if err != nil {
 					return fmt.Errorf("You have failed this automation: %w", err)
 				}
@@ -36,5 +37,5 @@ var (
 )
 
 func init() {
-	rootCmd.AddCommand(updateGoCommand)
+	rootCmd.AddCommand(backportGoCommand)
 }

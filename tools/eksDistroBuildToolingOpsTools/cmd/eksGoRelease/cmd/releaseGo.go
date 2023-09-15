@@ -25,7 +25,7 @@ var (
 			}
 
 			for _, r := range eksGoReleases {
-				err := r.NewMinorRelease(cmd.Context())
+				err := r.NewMinorRelease(cmd.Context(), viper.GetBool(dryrunFlag), viper.GetString(emailFlag), viper.GetString(userFlag))
 				if err != nil {
 					return fmt.Errorf("You have failed this automation: %w", err)
 				}

@@ -23,4 +23,5 @@ type Client interface {
 	DeleteFile(filename string) error
 	ModifyFile(filename string, contents []byte) error
 	ReadFile(filename string) (string, error)
+	ReadFiles(foldername string) (map[string]string, error)
 }

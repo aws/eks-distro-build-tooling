@@ -8,11 +8,14 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const (
 	eksGoReleasesFlag = "eksGoReleases"
+  dryrunFlag        = "dryrun"
+  userFlag          = "user"
+  emailFlag         = "email"
 )
 
 var (
@@ -27,6 +30,9 @@ var (
 func init() {
 	rootCmd.PersistentFlags().IntP("verbosity", "v", 0, "Set the log level verbosity")
 	rootCmd.PersistentFlags().StringSlice(eksGoReleasesFlag, []string{}, "EKS Go releases to update")
+  rootCmd.PersistentFlags().BoolP(dryrunFlag, "d", false, "run without creating PR")
+  rootCmd.PersistentFlags().StringP(emailFlag, "e", "", "github email for git functions")
+  rootCmd.PersistentFlags().StringP(userFlag, "u", "", "github username for git functions")
 
 	// Bind config flags to viper
 	if err := viper.BindPFlags(rootCmd.PersistentFlags()); err != nil {

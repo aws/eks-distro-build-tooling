@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	gitTimeout     = 300 * time.Second
+	gitTimeout     = 600 * time.Second
 	maxRetries     = 5
 	backOffPeriod  = 5 * time.Second
 	emptyRepoError = "remote repository is empty"
@@ -97,37 +97,37 @@ func (g *GogitClient) Clone(ctx context.Context) error {
 }
 
 func (g *GogitClient) Add(filename string) error {
-	logger.V(3).Info("Opening directory", "directory", g.RepoDirectory)
+	logger.V(4).Info("Opening directory", "directory", g.RepoDirectory)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
 		return err
 	}
 
-	logger.V(3).Info("Opening working tree")
+	logger.V(4).Info("Opening working tree")
 	w, err := g.Client.OpenWorktree(r)
 	if err != nil {
 		return err
 	}
 
-	logger.V(3).Info("Tracking specified files", "file", filename)
+	logger.V(4).Info("Tracking specified files", "file", filename)
 	err = g.Client.AddGlob(filename, w)
 	return err
 }
 
 func (g *GogitClient) Remove(filename string) error {
-	logger.V(3).Info("Opening directory", "directory", g.RepoDirectory)
+	logger.V(4).Info("Opening directory", "directory", g.RepoDirectory)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
 		return err
 	}
 
-	logger.V(3).Info("Opening working tree")
+	logger.V(4).Info("Opening working tree")
 	w, err := g.Client.OpenWorktree(r)
 	if err != nil {
 		return err
 	}
 
-	logger.V(3).Info("Removing specified files", "file", filename)
+	logger.V(4).Info("Removing specified files", "file", filename)
 	_, err = g.Client.Remove(filename, w)
 	return err
 }
@@ -147,20 +147,20 @@ func WithEmail(email string) CommitOpt {
 }
 
 func (g *GogitClient) Commit(message string, opts ...CommitOpt) error {
-	logger.V(3).Info("Opening directory", "directory", g.RepoDirectory)
+	logger.V(4).Info("Opening directory", "directory", g.RepoDirectory)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
 		logger.Info("Failed while attempting to open repo")
 		return err
 	}
 
-	logger.V(3).Info("Opening working tree")
+	logger.V(4).Info("Opening working tree")
 	w, err := g.Client.OpenWorktree(r)
 	if err != nil {
 		return err
 	}
 
-	logger.V(3).Info("Generating Commit object...")
+	logger.V(4).Info("Generating Commit object...")
 	commitSignature := &object.Signature{
 		When: time.Now(),
 	}
@@ -173,7 +173,7 @@ func (g *GogitClient) Commit(message string, opts ...CommitOpt) error {
 		return err
 	}
 
-	logger.V(3).Info("Committing Object to local repo", "repo", g.RepoDirectory)
+	logger.V(4).Info("Committing Object to local repo", "repo", g.RepoDirectory)
 	finalizedCommit, err := g.Client.CommitObject(r, commit)
 	if err != nil {
 		return err
@@ -184,7 +184,7 @@ func (g *GogitClient) Commit(message string, opts ...CommitOpt) error {
 }
 
 func (g *GogitClient) Push(ctx context.Context) error {
-	logger.V(3).Info("Pushing to remote", "repo", g.RepoDirectory)
+	logger.V(4).Info("Pushing to remote", "repo", g.RepoDirectory)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
 		return fmt.Errorf("err pushing: %v", err)
@@ -198,7 +198,7 @@ func (g *GogitClient) Push(ctx context.Context) error {
 }
 
 func (g *GogitClient) Pull(ctx context.Context, branch string) error {
-	logger.V(3).Info("Pulling from remote", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName)
+	logger.V(4).Info("Pulling from remote", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName)
 	r, err := g.Client.OpenRepo()
 	if err != nil {
 		return fmt.Errorf("pulling from remote: %v", err)
@@ -214,7 +214,7 @@ func (g *GogitClient) Pull(ctx context.Context, branch string) error {
 	err = g.Client.PullWithContext(ctx, w, g.Auth, branchRef)
 
 	if errors.Is(err, gogit.NoErrAlreadyUpToDate) {
-		logger.V(3).Info("Local repo already up-to-date", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName)
+		logger.V(4).Info("Local repo already up-to-date", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName)
 		return &RepositoryUpToDateError{}
 	}
 
@@ -231,7 +231,7 @@ func (g *GogitClient) Pull(ctx context.Context, branch string) error {
 	if err != nil {
 		return fmt.Errorf("accessing latest commit after pulling from remote: %v", err)
 	}
-	logger.V(3).Info("Successfully pulled from remote", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName, "latest commit", commit.Hash)
+	logger.V(4).Info("Successfully pulled from remote", "repo", g.RepoDirectory, "remote", gogit.DefaultRemoteName, "latest commit", commit.Hash)
 	return nil
 }
 
@@ -270,11 +270,11 @@ func (g *GogitClient) Branch(name string) error {
 	}
 
 	if branchExistsLocally {
-		logger.V(3).Info("Branch already exists locally", "branch", name)
+		logger.V(4).Info("Branch already exists locally", "branch", name)
 	}
 
 	if !branchExistsLocally {
-		logger.V(3).Info("Branch does not exist locally", "branch", name)
+		logger.V(4).Info("Branch does not exist locally", "branch", name)
 		headref, err := g.Client.Head(r)
 		if err != nil {
 			return fmt.Errorf("creating branch %s: %v", name, err)
@@ -308,7 +308,7 @@ func (g *GogitClient) Branch(name string) error {
 }
 
 func (g *GogitClient) ValidateRemoteExists(ctx context.Context) error {
-	logger.V(3).Info("Validating git setup", "repoUrl", g.RepoUrl)
+	logger.V(4).Info("Validating git setup", "repoUrl", g.RepoUrl)
 	remote := g.Client.NewRemote(g.RepoUrl, gogit.DefaultRemoteName)
 	// Check if we are able to make a connection to the remote by attempting to list refs
 	_, err := g.Client.ListWithContext(ctx, remote, g.Auth)
@@ -336,7 +336,7 @@ func (g *GogitClient) Status() error {
 		logger.Error(err, "git status")
 		return err
 	}
-	logger.V(3).Info("git status", "status", s)
+	logger.V(4).Info("git status", "status", s)
 	return nil
 }
 
@@ -525,6 +525,42 @@ func (g *GogitClient) ReadFile(filename string) (string, error) {
 	}
 
 	return file.Contents()
+}
+
+func (g *GogitClient) ReadFiles(foldername string) (map[string]string, error) {
+	repo, err := g.Client.OpenRepo()
+	if err != nil {
+		logger.Error(err, "Opening repo")
+		return nil, err
+	}
+
+	ref, err := g.Client.Head(repo)
+	if err != nil {
+		return nil, err
+	}
+	commit, err := repo.CommitObject(ref.Hash())
+	if err != nil {
+		return nil, err
+	}
+
+	tree, err := repo.TreeObject(commit.TreeHash)
+	if err != nil {
+		return nil, err
+	}
+
+  files := make(map[string]string)
+  tree.Files().ForEach(func(f *object.File) error {
+    if(strings.Contains(f.Name, foldername)) {
+      p, err := f.Contents()
+      if err != nil {
+        return err
+      }
+      files[f.Name] = p
+    }
+    return nil
+  })
+
+  return files, nil
 }
 
 type GoGit interface {

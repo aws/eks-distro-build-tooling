@@ -12,29 +12,21 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
-	"github.com/aws/eks-distro-build-tooling/tools/pkg/logger"
 )
 
 const (
-	githubRepoUrl               = "https://github.com/%s/eks-distro-build-tooling.git"
-	sOwner                      = "rcrozean"
-	email                       = "rcrozean@amazon.com"
-	prOwner                     = "aws"
-	projectPath                 = "projects/golang/go"
 	basePathFmt                 = "%s/%s/%s"
 	patchesPathFmt              = "%s/%s/patches/%s"
 	rpmSourcePathFmt            = "%s/%s/rpmbuild/SOURCES/%s"
 	specPathFmt                 = "%s/%s/rpmbuild/SPECS/%s"
-	ArtifactPathFmt             = "https://distro.eks.amazonaws.com/golang-go%d.%d/release/%d/RPMS"
-	readme                      = "README.md"
-	readmeFmt                   = "# EKS Golang %s\n\nCurrent Release: `%d`\n\nTracking Tag: `%s`\n\nArtifacts: https://distro.eks.amazonaws.com/golang-go%s/releases/%d/RPMS\n\n### ARM64 Builds\n[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-%s-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)\n\n### AMD64 Builds\n[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-%s-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%%2Feks-distro-build-tooling&type=postsubmit)\n\n### Patches\nThe patches in `./patches` include relevant utility fixes for go `%s`.\n\n### Spec\nThe RPM spec file in `./rpmbuild/SPECS` is sourced from the go %s SRPM available on Fedora, and modified to include the relevant patches and build the `%s` source.\n"
-	gitTag                      = "GIT_TAG"
-	ghRelease                   = "RELEASE"
-	fedora                      = "fedora.go"
-	gdbinit                     = "golang-gdbinit"
-	goSpec                      = "golang.spec"
+	readmeFmtPath               = "tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/readmeFmt.txt"
+	newReleaseFile              = "tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/newRelease.txt"
+	fedoraFile                  = "fedora.go"
+	gdbinitFile                 = "golang-gdbinit"
+	goSpecFile                  = "golang.spec"
 	minorReleaseBranchFmt       = "eks-%s"
 	newMinorVersionCommitMsgFmt = "Init new Go Minor Version %s files."
 )
@@ -43,34 +35,31 @@ func NewEksGoReleaseObject(versionString string) (*Release, error) {
 	splitVersion := strings.Split(versionString, ".")
 	major, err := strconv.Atoi(splitVersion[0])
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing major version: %v", err)
 	}
 
 	minor, err := strconv.Atoi(splitVersion[1])
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing minor version: %v", err)
 	}
 
 	patch, err := strconv.Atoi(splitVersion[2])
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing patch version: %v", err)
 	}
 
 	return &Release{
-		Major:        major,
-		Minor:        minor,
-		Patch:        patch,
-		Release:      -1, // TODO: Figure out if we need this for the EKSGo Releases or if this is just best generated on the fly when cloning the EKS DISTRO BUILD TOOLING repo
-		ArtifactPath: fmt.Sprintf(ArtifactPathFmt, major, minor, -1),
+		Major: major,
+		Minor: minor,
+		Patch: patch,
 	}, nil
 }
 
 type Release struct {
-	Major        int
-	Minor        int
-	Patch        int
-	Release      int
-	ArtifactPath string
+	Major   int
+	Minor   int
+	Patch   int
+	Release int
 }
 
 func (r Release) GoReleaseBranch() string {
@@ -93,8 +82,32 @@ func (r Release) ReleaseNumber() int {
 	return r.Release
 }
 
-func (r Release) EksGoArtifacts() string {
-	return r.ArtifactPath
+// "https://distro.eks.amazonaws.com/golang-go%d.%d.%d/release/%d/%s/%s/%s"
+func (r Release) EksGoArtifacts(arch string) (string, string, string) {
+	var artifact string // artifact = "golang-%d.%d.%d-%d.amzn2.eks.%s.rpm"
+	var urlFmt string   // artifact = "golang-%d.%d.%d-%d.amzn2.eks.%s.rpm"
+
+	switch arch {
+	case "x86_64", "aarch64":
+		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.Major, r.Minor, r.Patch, r.Release, arch)
+		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, arch, "RPMS", arch)
+  case "noarch":
+		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.Major, r.Minor, r.Patch, r.Release, arch)
+		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, "x86_64", "RPMS", arch)
+	case "amd64", "arm64":
+		artifact = fmt.Sprintf(constants.EksGoTargzArtifactFmt, r.Major, r.Minor, r.Patch, arch)
+		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, "archives", "linux", arch)
+	}
+
+	return artifact, fmt.Sprintf("%s.sha256", artifact), urlFmt
+}
+
+func (r Release) EksGoAmdBuild() string {
+	return fmt.Sprintf(constants.EksGoAmdBuildUrl, r.Major, r.Minor)
+}
+
+func (r Release) EksGoArmBuild() string {
+	return fmt.Sprintf(constants.EksGoArmBuildUrl, r.Major, r.Minor)
 }
 
 func (r Release) EksGoReleaseFullVersion() string {
@@ -134,8 +147,7 @@ func (r Release) Equals(release Release) bool {
 }
 
 // Releasing new versions of Golang that don't exist in EKS Distro Build Tooling(https://github.com/aws/eks-distro-build-tooling/projects/golang/go)
-func (r Release) NewMinorRelease(ctx context.Context) error {
-	r.Release = 0
+func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user string) error {
 	// Setup Github Client
 	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
 
@@ -151,8 +163,8 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 	}
 
 	// Creating git client in memory and clone 'eks-distro-build-tooling
-	forkUrl := fmt.Sprintf(githubRepoUrl, sOwner)
-	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(forkUrl), git.WithAuth(&http.BasicAuth{Username: sOwner, Password: token}))
+	forkUrl := fmt.Sprintf(constants.EksGoRepoUrl, user)
+	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(forkUrl), git.WithAuth(&http.BasicAuth{Username: user, Password: token}))
 	if err := gClient.Clone(ctx); err != nil {
 		logger.Error(err, "Cloning repo")
 		return err
@@ -165,9 +177,21 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 
 	// Add files for new minor versions of golang.
 	// Add README.md
-	readmePath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), readme)
-	readmeContent := []byte(generateReadme(r.GoMinorReleaseVersion(), r.GoFullVersion(), r.GoSemver(), r.ReleaseNumber()))
-	if err := gClient.CreateFile(readmePath, readmeContent); err != nil {
+	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.Readme)
+	readmeFmt, err := gClient.ReadFile(readmeFmtPath)
+	if err != nil {
+		logger.Error(err, "Reading README fmt file")
+		return err
+	}
+
+	readmeContent := GenerateReadme(readmeFmt, r)
+	if err != nil {
+		logger.Error(err, "Generate README.md")
+		return err
+	}
+
+	logger.V(4).Info("Create README.md", "path", readmePath, "content", readmeContent)
+	if err := gClient.CreateFile(readmePath, []byte(readmeContent)); err != nil {
 		logger.Error(err, "Adding README.md", "path", readmePath, "content", readmeContent)
 		return err
 	}
@@ -177,9 +201,9 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 	}
 
 	// Add RELEASE
-	releasePath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), ghRelease)
-	releaseContent := []byte(fmt.Sprintf("%d", r.ReleaseNumber()))
-	if err := gClient.CreateFile(releasePath, releaseContent); err != nil {
+	releasePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.ReleaseTag)
+	releaseContent := fmt.Sprintf("%d", r.ReleaseNumber())
+	if err := gClient.CreateFile(releasePath, []byte(releaseContent)); err != nil {
 		logger.Error(err, "Adding RELEASE", "path", releasePath, "content", releaseContent)
 		return err
 	}
@@ -189,9 +213,9 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 	}
 
 	// Add GIT_TAG
-	gittagPath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), gitTag)
-	gittagContent := []byte(fmt.Sprintf("go%s", r.GoFullVersion()))
-	if err := gClient.CreateFile(gittagPath, gittagContent); err != nil {
+	gittagPath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.GitTag)
+	gittagContent := fmt.Sprintf("go%s", r.GoFullVersion())
+	if err := gClient.CreateFile(gittagPath, []byte(gittagContent)); err != nil {
 		logger.Error(err, "Adding GIT_TAG", "path", gittagPath, "content", gittagContent)
 		return err
 	}
@@ -200,21 +224,26 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 		return err
 	}
 
-	// Add fedora.go
-	fedoraFilePath := fmt.Sprintf(rpmSourcePathFmt, projectPath, r.GoMinorReleaseVersion(), fedora)
-	fedoraContent := []byte("temp")
-	if err := gClient.CreateFile(fedoraFilePath, fedoraContent); err != nil {
-		logger.Error(err, "Adding fedora file", "path", fedoraFilePath)
+	// Add golang.spec
+	specFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), goSpecFile)
+	rf, err := gClient.ReadFile(newReleaseFile)
+	if err != nil {
+		logger.Error(err, "Reading newRelease.txt file")
+		return err
 	}
-	if err := gClient.Add(fedoraFilePath); err != nil {
-		logger.Error(err, "git add", "file", fedoraFilePath)
+
+	newReleaseContent := rf
+	if err := gClient.CreateFile(specFilePath, []byte(newReleaseContent)); err != nil {
+		logger.Error(err, "Adding fedora file", "path", specFilePath)
+	}
+	if err := gClient.Add(specFilePath); err != nil {
+		logger.Error(err, "git add", "file", specFilePath)
 		return err
 	}
 
 	// Add golang-gdbinit
-	gdbinitFilePath := fmt.Sprintf(rpmSourcePathFmt, projectPath, r.GoMinorReleaseVersion(), gdbinit)
-	gdbinitContent := []byte("temp")
-	if err := gClient.CreateFile(gdbinitFilePath, gdbinitContent); err != nil {
+	gdbinitFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), gdbinitFile)
+	if err := gClient.CreateFile(gdbinitFilePath, []byte(newReleaseContent)); err != nil {
 		logger.Error(err, "Adding fedora file", "path", gdbinitFilePath)
 	}
 	if err := gClient.Add(gdbinitFilePath); err != nil {
@@ -222,9 +251,20 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 		return err
 	}
 
+	// Add fedora.go
+	fedoraFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), fedoraFile)
+	if err := gClient.CreateFile(fedoraFilePath, []byte(newReleaseContent)); err != nil {
+		logger.Error(err, "Adding fedora file", "path", fedoraFilePath)
+	}
+	if err := gClient.Add(fedoraFilePath); err != nil {
+		logger.Error(err, "git add", "file", fedoraFilePath)
+		return err
+	}
+
+
 	// Add temp file in <version>/patches/
-	patchesFilePath := fmt.Sprintf(patchesPathFmt, projectPath, r.GoMinorReleaseVersion(), "temp")
-	patchesContent := []byte("temp")
+	patchesFilePath := fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), "temp")
+	patchesContent := []byte("Copy")
 	if err := gClient.CreateFile(patchesFilePath, patchesContent); err != nil {
 		logger.Error(err, "Adding patches folder path", "path", patchesFilePath)
 	}
@@ -234,190 +274,116 @@ func (r Release) NewMinorRelease(ctx context.Context) error {
 	}
 
 	// Commit files
-	commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
-	if err := gClient.Commit(commitMsg); err != nil {
-		logger.Error(err, "git commit", "message", commitMsg)
-		return err
+	if !dryrun {
+		commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
+		if err := gClient.Commit(commitMsg); err != nil {
+			logger.Error(err, "git commit", "message", commitMsg)
+			return err
+		}
+
+		// Push to forked repository
+		if err := gClient.Push(ctx); err != nil {
+			logger.Error(err, "git push")
+			return err
+		}
+
+		// Add files paths for new Go Minor Version
+		// set up PR Creator handler
+		prmOpts := &prManager.Opts{
+			SourceOwner: user,
+			SourceRepo:  constants.EksdBuildToolingRepoName,
+			PrRepo:      constants.EksdBuildToolingRepoName,
+			PrRepoOwner: user,
+		}
+		prm := prManager.New(retrier, githubClient, prmOpts)
+
+		cprOpts := &prManager.CreatePrOpts{
+			CommitBranch:  r.EksGoReleaseFullVersion(),
+			BaseBranch:    "main",
+			AuthorName:    user,
+			AuthorEmail:   email,
+			PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
+			PrBranch:      "main",
+			PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
+		}
+
+		prUrl, err := prm.CreatePr(ctx, cprOpts)
+		if err != nil {
+			// This shouldn't be an breaking error at this point the PR is not open but the changes
+			// have been pushed and can be created manually.
+			logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
+		}
+
+		logger.V(3).Info("Release EKS Go Minor Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
 	}
 
-	// Push to forked repository
-	if err := gClient.Push(ctx); err != nil {
-		logger.Error(err, "git push")
-		return err
-	}
-
-	// Add files paths for new Go Minor Version
-	// set up PR Creator handler
-	prmOpts := &prManager.Opts{
-		SourceOwner: sOwner,
-		SourceRepo:  constants.EksdBuildToolingRepoName,
-		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: sOwner,
-	}
-	prm := prManager.New(retrier, githubClient, prmOpts)
-
-	cprOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseFullVersion(),
-		BaseBranch:    "main",
-		AuthorName:    "rcrozean",
-		AuthorEmail:   "rcrozean@amazon.com",
-		PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
-		PrBranch:      "main",
-		PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
-	}
-
-	prUrl, err := prm.CreatePr(ctx, cprOpts)
-	if err != nil {
-		// This shouldn't be an breaking error at this point the PR is not open but the changes
-		// have been pushed and can be created manually.
-		logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
-	}
-
-	logger.V(3).Info("Release EKS Go Minor Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
-	return nil
-}
-func (r Release) UpdatePatchVersion(ctx context.Context) error {
-	// Setup Github Client
-	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
-
-	token, err := github.GetGithubToken()
-	if err != nil {
-		logger.V(4).Error(err, "no github token found")
-		return fmt.Errorf("getting Github PAT from environment at variable %s: %v", github.PersonalAccessTokenEnvVar, err)
-	}
-
-	githubClient, err := github.NewClient(ctx, token)
-	if err != nil {
-		return fmt.Errorf("setting up Github client: %v", err)
-	}
-
-	// Creating git client in memory and clone 'eks-distro-build-tooling
-	forkUrl := fmt.Sprintf(githubRepoUrl, sOwner)
-	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(forkUrl), git.WithAuth(&http.BasicAuth{Username: sOwner, Password: token}))
-	if err := gClient.Clone(ctx); err != nil {
-		logger.Error(err, "Cloning repo")
-		return err
-	}
-
-	// Get Current EKS Go Release Version from repo and increment
-	releasePath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), ghRelease)
-	content, err := gClient.ReadFile(releasePath)
-	if err != nil {
-		logger.Error(err, "Reading file", "file", releasePath)
-		return err
-	}
-	// We need to check there isn't a \n character if there is we only take the first value
-	if len(content) > 1 {
-		content = content[0:1]
-	}
-	cr, err := strconv.Atoi(content)
-	if err != nil {
-		logger.Error(err, "Converting current release to int")
-		return err
-	}
-	// Increment release
-	r.Release = cr + 1
-
-	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseFullVersion()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.EksGoReleaseFullVersion(), "repo", forkUrl, "client", gClient)
-		return err
-	}
-
-	// Update files for new patch versions of golang
-	// Update README.md
-	readmePath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), readme)
-	readmeContent := []byte(generateReadme(r.GoMinorReleaseVersion(), r.GoFullVersion(), r.GoSemver(), r.ReleaseNumber()))
-	logger.V(4).Info("Update README.md", "path", readmePath, "content", readmeContent)
-	if err := gClient.ModifyFile(readmePath, readmeContent); err != nil {
-		return err
-	}
-	if err := gClient.Add(readmePath); err != nil {
-		return err
-	}
-
-	// update RELEASE
-	releaseContent := []byte(fmt.Sprintf("%d", r.ReleaseNumber()))
-	logger.V(4).Info("Update RELEASE", "path", releasePath, "content", releaseContent)
-	if err := gClient.ModifyFile(releasePath, releaseContent); err != nil {
-		return err
-	}
-	if err := gClient.Add(releasePath); err != nil {
-		logger.Error(err, "git add", "file", releasePath)
-		return err
-	}
-
-	// update GIT_TAG
-	gittagPath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), gitTag)
-	gittagContent := []byte(fmt.Sprintf("go%s", r.GoFullVersion()))
-	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
-	if err := gClient.CreateFile(gittagPath, gittagContent); err != nil {
-		return err
-	}
-	if err := gClient.Add(gittagPath); err != nil {
-		logger.Error(err, "git add", "file", gittagPath)
-		return err
-	}
-
-	// update golang.spec
-	gittagPath := fmt.Sprintf(basePathFmt, projectPath, r.GoMinorReleaseVersion(), gitTag)
-	gittagContent := []byte(fmt.Sprintf("go%s", r.GoFullVersion()))
-	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
-	if err := gClient.CreateFile(gittagPath, gittagContent); err != nil {
-		return err
-	}
-	if err := gClient.Add(gittagPath); err != nil {
-		logger.Error(err, "git add", "file", gittagPath)
-		return err
-	}
-
-	// Commit files
-	commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
-	if err := gClient.Commit(commitMsg); err != nil {
-		logger.Error(err, "git commit", "message", commitMsg)
-		return err
-	}
-
-	// Push to forked repository
-	if err := gClient.Push(ctx); err != nil {
-		logger.Error(err, "git push")
-		return err
-	}
-
-	// Add files paths for new Go Minor Version
-	// set up PR Creator handler
-	prmOpts := &prManager.Opts{
-		SourceOwner: sOwner,
-		SourceRepo:  constants.EksdBuildToolingRepoName,
-		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: sOwner,
-	}
-	prm := prManager.New(retrier, githubClient, prmOpts)
-
-	updatePRSubject := fmt.Sprintf("Files for new patch release of Golang: %s", r.GoSemver())
-	updatePRDescription := fmt.Sprintf("Update EKS Go Patch Version: %s", r.EksGoReleaseFullVersion())
-	cprOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseFullVersion(),
-		BaseBranch:    "main",
-		AuthorName:    sOwner,
-		AuthorEmail:   email,
-		PrSubject:     updatePRSubject,
-		PrBranch:      "main",
-		PrDescription: updatePRDescription,
-	}
-
-	prUrl, err := prm.CreatePr(ctx, cprOpts)
-	if err != nil {
-		// This shouldn't be an breaking error at this point the PR is not open but the changes
-		// have been pushed and can be created manually.
-		logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
-		prUrl = ""
-	}
-
-	logger.V(3).Info("Update EKS Go Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
 	return nil
 }
 
-func generateReadme(goMinorVersion, goFullVersion, gitTag string, release int) string {
-	return fmt.Sprintf(readmeFmt, goMinorVersion, release, goFullVersion, goMinorVersion, release, goMinorVersion, goMinorVersion, goMinorVersion, goMinorVersion, gitTag)
+func GenerateReadme(readmeFmt string, r Release) string {
+	/* Format generated for the readme follows:
+	 *  ----------------------------------------
+	 *  # EKS Golang <title>
+	 *
+	 *  Current Release: `<curRelease>`
+	 *
+	 *  Tracking Tag: `<trackTag>`
+	 *
+	 *  ### Artifacts:
+	 *  |Arch|Artifact|sha|
+	 *  |:---:|:---:|:---:|
+	 *  |noarch|[%s](%s)|[%s](%s)|
+	 *  |x86_64|[%s](%s)|[%s](%s)|
+	 *  |aarch64|[%s](%s)|[%s](%s)|
+	 *  |arm64.tar.gz|[%s](%s)|[%s](%s)|
+	 *  |amd64.tar.gz|[%s](%s)|[%s](%s)|
+	 *
+	 *  ### ARM64 Builds
+	 *  [![Build status](<armBuild>)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
+	 *
+	 *  ### AMD64 Builds
+	 *  [![Build status](<amdBuild>)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
+	 *
+	 *  ### Patches
+	 *  The patches in `./patches` include relevant utility fixes for go `<patch>`.
+	 *
+	 *  ### Spec
+	 *  The RPM spec file in `./rpmbuild/SPECS` is sourced from the go <fSpec> SRPM available on Fedora, and modified to include the relevant patches and build the `go<sSpec>` source.
+	 *
+	 */
+	eksGoArches := [...]string{"noarch", "x86_64", "aarch64", "arm64", "amd64"}
+	artifactTable := ""
+	for _, a := range eksGoArches {
+		artifact, sha, url := r.EksGoArtifacts(a)
+		artifactTable = artifactTable + fmt.Sprintf("|%s|[%s](%s)|[%s](%s)|\n", a, artifact, fmt.Sprintf("%s/%s", url, artifact), sha, fmt.Sprintf("%s/%s", url, sha))
+	}
+
+	fmt.Println(readmeFmt)
+	title := r.GoMinorReleaseVersion()
+	curRelease := r.ReleaseNumber()
+	trackTag := r.GoFullVersion()
+	armBuild := r.EksGoArmBuild()
+	amdBuild := r.EksGoAmdBuild()
+	patch := r.GoMinorReleaseVersion()
+	fSpec := r.GoMinorReleaseVersion()
+	sSpec := r.GoMinorReleaseVersion()
+	return fmt.Sprintf(readmeFmt, title, curRelease, trackTag, artifactTable, armBuild, amdBuild, patch, fSpec, sSpec)
+}
+
+func generateGoSpec() error {
+	return nil
+}
+
+func updateGoSpec(fc *string, r Release) string {
+  gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
+  gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
+
+  return strings.Replace(*fc, gpO, gpN, 1)
+}
+
+func addPatchGoSpec(fc *string, r Release, patch string) string {
+  gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
+  gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
+
+  return strings.Replace(*fc, gpO, gpN, 1)
 }
