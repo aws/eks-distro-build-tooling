@@ -370,18 +370,7 @@ func GenerateReadme(readmeFmt string, r Release) string {
 	return fmt.Sprintf(readmeFmt, title, curRelease, trackTag, artifactTable, armBuild, amdBuild, patch, fSpec, sSpec)
 }
 
-func generateGoSpec() error {
-	return nil
-}
-
 func updateGoSpec(fc *string, r Release) string {
-  gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
-  gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
-
-  return strings.Replace(*fc, gpO, gpN, 1)
-}
-
-func addPatchGoSpec(fc *string, r Release, patch string) string {
   gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
   gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
 
