@@ -30,6 +30,10 @@ batch:
       env:
         variables:
           GO_SOURCE_VERSION: 1.20
+    - identifier: golang_121
+      env:
+        variables:
+          GO_SOURCE_VERSION: 1.21
 
 env:
   variables:
