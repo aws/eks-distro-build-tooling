@@ -1,5 +1,5 @@
 documentation: 
-- 'docs/**/*'
+- '**/*.md'
 
 builder-base:
 - 'builder-base/**/*'
