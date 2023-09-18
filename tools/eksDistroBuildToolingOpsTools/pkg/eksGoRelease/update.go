@@ -119,7 +119,7 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
     logger.Error(err, "Reading spec.golang", "file", goSpecPath)
     return err
   }
-  goSpecContent = updateGoSpec(&goSpecContent, r)
+  goSpecContent = updateGoSpecPatchVersion(&goSpecContent, r)
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		return err

@@ -91,7 +91,7 @@ func (r Release) EksGoArtifacts(arch string) (string, string, string) {
 	case "x86_64", "aarch64":
 		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.Major, r.Minor, r.Patch, r.Release, arch)
 		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, arch, "RPMS", arch)
-  case "noarch":
+	case "noarch":
 		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.Major, r.Minor, r.Patch, r.Release, arch)
 		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, "x86_64", "RPMS", arch)
 	case "amd64", "arm64":
@@ -261,7 +261,6 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 		return err
 	}
 
-
 	// Add temp file in <version>/patches/
 	patchesFilePath := fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), "temp")
 	patchesContent := []byte("Copy")
@@ -370,9 +369,13 @@ func GenerateReadme(readmeFmt string, r Release) string {
 	return fmt.Sprintf(readmeFmt, title, curRelease, trackTag, artifactTable, armBuild, amdBuild, patch, fSpec, sSpec)
 }
 
-func updateGoSpec(fc *string, r Release) string {
-  gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
-  gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
+func updateGoSpecPatchVersion(fc *string, r Release) string {
+	gpO := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion()-1)
+	gpN := fmt.Sprintf("%%global go_patch %d", r.GoPatchVersion())
 
-  return strings.Replace(*fc, gpO, gpN, 1)
+	return strings.Replace(*fc, gpO, gpN, 1)
+}
+
+func addPatchGoSpec(fc *string, r Release, patch string) string {
+	return ""
 }
