@@ -1,0 +1,49 @@
+documentation: 
+- '**/*.md'
+
+builder-base:
+- 'builder-base/**/*'
+
+minimal-image:
+- 'eks-distro-base/**/*'
+- 'eks-distro-minimal-images/**/*'
+- 'eks-distro-base-updates/**/*'
+
+al2023:
+- '**/2023/*'
+
+al2:
+- '**/2/*'
+
+projects:
+- 'projects/**/*'
+
+helm-charts:
+- 'helm-charts/**/*'
+
+prow:
+- 'helm-charts/Prow.mk'
+- 'helm-charts/patches/**/*'
+- 'helm-charts/stable/**/*'
+- 'helm-charts/projects/kubernetes/test-infra/**/*'
+
+kubernetes:
+- 'projects/kubernetes/**/*'
+
+kops:
+- 'projects/kubernetes/kops/**/*'
+
+golang:
+- 'projects/golang/**/*'
+
+go:
+- 'projects/golang/go/**/*'
+
+go1.19:
+- 'projects/golang/go/1.19/**/*'
+
+go1.20:
+- 'projects/golang/go/1.20/**/*'
+
+go1.21:
+- 'projects/golang/go/1.21/**/*'
