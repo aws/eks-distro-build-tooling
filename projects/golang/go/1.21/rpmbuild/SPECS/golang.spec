@@ -342,7 +342,7 @@ mkdir -p $RPM_BUILD_ROOT%{goroot}
 
 # install everything into libdir (until symlink problems are fixed)
 # https://code.google.com/p/go/issues/detail?id=5830
-cp -apv api bin doc lib pkg src misc test VERSION \
+cp -apv api bin doc lib pkg src misc test go.env VERSION \
    $RPM_BUILD_ROOT%{goroot}
 echo "== 2 =="
 # bz1099206
@@ -516,6 +516,7 @@ fi
 %{_bindir}/gofmt
 %{goroot}/bin/linux_%{gohostarch}/go
 %{goroot}/bin/linux_%{gohostarch}/gofmt
+%{goroot}/go.env
 
 %if %{shared}
 %files shared -f go-shared.list
