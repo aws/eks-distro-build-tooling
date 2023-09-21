@@ -56,7 +56,7 @@ al2023:
   eks-distro-minimal-base-nginx: 2023-08-24-1692903666.2023
   eks-distro-minimal-base-git: 2023-09-08-1694199666.2023
   eks-distro-minimal-base-nsenter: 2023-08-24-1692903666.2023
-  eks-distro-minimal-base-python-3.7: null
+  eks-distro-minimal-base-python-3.7: null 
   eks-distro-minimal-base-python-3.9: 3.9-2023-09-08-1694199666.2023
   eks-distro-minimal-base-nodejs-16: 16-2023-08-24-1692903666.2023
   eks-distro-minimal-base-compiler-base: 2023-09-08-1694199666.2023
