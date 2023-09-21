@@ -1,4 +1,6 @@
 
-libgcc.x86_64
-libstdc++.x86_64
-openssl-libs.x86_64
+elfutils-default-yama-scope.noarch
+elfutils-libelf.x86_64
+elfutils-libs.x86_64
+libssh2.x86_64
+shadow-utils.x86_64
