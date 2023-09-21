@@ -93,7 +93,7 @@ COPY scripts/ /usr/bin
 # cyrus-sasl-lib is installed for the libs, but it also includes these bins sasldblistusers2 saslpasswd2 libsasldb cyrusbdb2current
 # which are not needed
 # /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
-ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 /usr/lib64/sasl2/libsasldb* /usr/bin/cyrusbdb2current /usr/lib64/libkrad* /etc/krb5.conf.d/crypto-policies /usr/lib64/libsystemd.so.*gs"
+ENV CLEANUP_UNNECESSARY_FILES="/usr/sbin/sasldblistusers2 /usr/sbin/saslpasswd2 /usr/lib64/sasl2/libsasldb* /usr/bin/cyrusbdb2current /usr/lib64/libkrad* /etc/krb5.conf.d/crypto-policies /usr/lib64/libsystemd.so.* /etc/pki/tls/fips_local.cnf"
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
