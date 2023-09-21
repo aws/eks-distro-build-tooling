@@ -219,7 +219,7 @@ RUN set -x && \
     # /etc/krb5.conf.d/crypto-policies is a broken symlink which is not needed
     # libkrad installed with rpm with required deps but not needed by haproxy and missing deps
     if [ "${IS_COMPILER}" = "false" ]; then \
-        export CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies /usr/lib64/libkrad*"; \
+        export CLEANUP_UNNECESSARY_FILES="/etc/krb5.conf.d/crypto-policies /usr/lib64/libkrad* /etc/pki/tls/fips_local.cnf"; \
     else \
         if [ ! -L $NEWROOT/usr/bin/pip ]; then \
             ln -s pip3 $NEWROOT/usr/bin/pip; \
