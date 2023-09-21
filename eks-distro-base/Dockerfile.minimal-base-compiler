@@ -29,6 +29,9 @@ COPY scripts/ /usr/bin
 # but we can add other packages if usage would be high
 # if not critical to include, we should push the use of the compiler-yum
 # variant where users can install the packages they need at build time
+
+ENV CLEANUP_UNNECESSARY_FILES="/etc/pki/tls/fips_local.cnf"
+
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     clean_install bash \
