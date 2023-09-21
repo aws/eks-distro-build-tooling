@@ -22,9 +22,9 @@ device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 diffutils-3.3-5.amzn2.x86_64
 e2fsprogs-libs-1.42.9-19.amzn2.0.1.x86_64
 ebtables-2.0.10-16.amzn2.0.1.x86_64
-elfutils-default-yama-scope-0.176-2.amzn2.0.1.noarch
-elfutils-libelf-0.176-2.amzn2.0.1.x86_64
-elfutils-libs-0.176-2.amzn2.0.1.x86_64
+elfutils-default-yama-scope-0.176-2.amzn2.0.2.noarch
+elfutils-libelf-0.176-2.amzn2.0.2.x86_64
+elfutils-libs-0.176-2.amzn2.0.2.x86_64
 ethtool-4.8-10.amzn2.x86_64
 expat-2.1.0-15.amzn2.0.2.x86_64
 file-libs-5.11-36.amzn2.0.1.x86_64
@@ -97,7 +97,7 @@ libselinux-2.5-12.amzn2.0.2.x86_64
 libsemanage-2.5-11.amzn2.x86_64
 libsepol-2.5-8.1.amzn2.0.2.x86_64
 libsmartcols-2.30.2-2.amzn2.0.11.x86_64
-libssh2-1.4.3-12.amzn2.2.5.x86_64
+libssh2-1.4.3-12.amzn2.2.6.x86_64
 libstdc++-7.3.1-17.amzn2.x86_64
 libtirpc-0.2.4-0.16.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
@@ -153,7 +153,7 @@ rsync-3.1.2-11.amzn2.0.2.x86_64
 runc-1.1.7-3.amzn2.x86_64
 sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
-shadow-utils-4.1.5.1-24.amzn2.0.2.x86_64
+shadow-utils-4.1.5.1-24.amzn2.0.3.x86_64
 shared-mime-info-1.8-4.amzn2.x86_64
 socat-1.7.3.2-2.amzn2.0.1.x86_64
 sqlite-3.7.17-8.amzn2.1.2.x86_64

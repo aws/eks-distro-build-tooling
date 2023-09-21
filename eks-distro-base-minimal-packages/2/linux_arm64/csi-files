@@ -830,7 +830,7 @@
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    73KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   395KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    69KiB /usr/lib64/libe2p.so.2.3
 -rwxr-xr-x   134KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   331KiB /usr/lib64/libevent-2.0.so.5.1.9
@@ -3301,7 +3301,7 @@
 -rwxr-xr-x   134KiB /usr/sbin/mkswap
 -rwsr-xr-x   131KiB /usr/sbin/mount.nfs
 -rwxr-xr-x    35KiB /usr/sbin/mountstats
--rwxr-xr-x    75KiB /usr/sbin/newusers
+-rwxr-xr-x   139KiB /usr/sbin/newusers
 -rwxr-xr-x    68KiB /usr/sbin/nfsdcltrack
 -rwxr-xr-x    68KiB /usr/sbin/nfsidmap
 -rwxr-xr-x    24KiB /usr/sbin/nfsiostat

@@ -1,13 +1,3 @@
 
-cpp.x86_64
-gcc.x86_64
-libatomic.x86_64
-libcilkrts.x86_64
-libgcc.x86_64
-libgomp.x86_64
-libitm.x86_64
-libmpx.x86_64
-libquadmath.x86_64
-libsanitizer.x86_64
-libstdc++.x86_64
-openssl-libs.x86_64
+elfutils-libelf.x86_64
+libssh2.x86_64

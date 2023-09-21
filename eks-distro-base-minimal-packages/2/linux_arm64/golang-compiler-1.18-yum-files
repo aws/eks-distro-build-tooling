@@ -13158,7 +13158,7 @@
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    73KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   395KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x   266KiB /usr/lib64/libedit.so.0.0.42
 -rwxr-xr-x   134KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.6.0
@@ -15696,7 +15696,7 @@
 -rwxr-xr-x   134KiB /usr/sbin/mkfs.minix
 -rwxr-xr-x    75KiB /usr/sbin/mkhomedir_helper
 -rwxr-xr-x   134KiB /usr/sbin/mkswap
--rwxr-xr-x    75KiB /usr/sbin/newusers
+-rwxr-xr-x   139KiB /usr/sbin/newusers
 -rwxr-xr-x    68KiB /usr/sbin/nologin
 -rwxr-xr-x    72KiB /usr/sbin/pam_console_apply
 -rwxr-xr-x    67KiB /usr/sbin/pam_tally2

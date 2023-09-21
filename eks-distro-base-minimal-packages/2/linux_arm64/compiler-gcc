@@ -10,7 +10,7 @@ cpp-7.3.1-17.amzn2.aarch64
 curl-8.2.1-1.amzn2.0.3.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 diffutils-3.3-5.amzn2.aarch64
-elfutils-libelf-0.176-2.amzn2.0.1.aarch64
+elfutils-libelf-0.176-2.amzn2.0.2.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
 file-libs-5.11-36.amzn2.0.1.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
@@ -58,7 +58,7 @@ libnghttp2-1.41.0-1.amzn2.0.3.aarch64
 libsanitizer-7.3.1-17.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
-libssh2-1.4.3-12.amzn2.2.5.aarch64
+libssh2-1.4.3-12.amzn2.2.6.aarch64
 libstdc++-7.3.1-17.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64

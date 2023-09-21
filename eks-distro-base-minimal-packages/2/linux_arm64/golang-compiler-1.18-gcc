@@ -19,9 +19,9 @@ dbus-libs-1.10.24-7.amzn2.0.3.aarch64
 device-mapper-1.02.170-6.amzn2.5.aarch64
 device-mapper-libs-1.02.170-6.amzn2.5.aarch64
 diffutils-3.3-5.amzn2.aarch64
-elfutils-default-yama-scope-0.176-2.amzn2.0.1.noarch
-elfutils-libelf-0.176-2.amzn2.0.1.aarch64
-elfutils-libs-0.176-2.amzn2.0.1.aarch64
+elfutils-default-yama-scope-0.176-2.amzn2.0.2.noarch
+elfutils-libelf-0.176-2.amzn2.0.2.aarch64
+elfutils-libs-0.176-2.amzn2.0.2.aarch64
 expat-2.1.0-15.amzn2.0.2.aarch64
 file-libs-5.11-36.amzn2.0.1.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
@@ -82,7 +82,7 @@ libselinux-2.5-12.amzn2.0.2.aarch64
 libsemanage-2.5-11.amzn2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
 libsmartcols-2.30.2-2.amzn2.0.11.aarch64
-libssh2-1.4.3-12.amzn2.2.5.aarch64
+libssh2-1.4.3-12.amzn2.2.6.aarch64
 libstdc++-7.3.1-17.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libutempter-1.1.6-4.amzn2.0.2.aarch64
@@ -131,7 +131,7 @@ rpm-build-libs-4.11.3-48.amzn2.0.3.aarch64
 rpm-libs-4.11.3-48.amzn2.0.3.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
-shadow-utils-4.1.5.1-24.amzn2.0.2.aarch64
+shadow-utils-4.1.5.1-24.amzn2.0.3.aarch64
 shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 system-release-2-14.amzn2.aarch64
