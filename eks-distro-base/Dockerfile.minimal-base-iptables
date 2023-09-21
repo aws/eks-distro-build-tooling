@@ -42,6 +42,8 @@ COPY scripts/ /usr/bin
 
 COPY --from=iptables-wrapper-builder /iptables-wrappers/bin/iptables-wrapper /newroot/usr/sbin
 
+ENV CLEANUP_UNNECESSARY_FILES="/etc/pki/tls/fips_local.cnf"
+
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     if_al2 install_rpm chkconfig && \

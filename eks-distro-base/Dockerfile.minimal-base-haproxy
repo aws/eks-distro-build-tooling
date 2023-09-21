@@ -51,7 +51,7 @@ RUN set -x && \
 COPY scripts/ /usr/bin
 
 # libkrad installed with rpm with required deps but not needed by haproxy and missing deps
-ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libkrad*"
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/libkrad* /etc/pki/tls/fips_local.cnf"
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
