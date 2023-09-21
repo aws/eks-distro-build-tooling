@@ -7,7 +7,7 @@ chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 curl-8.2.1-1.amzn2.0.3.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
-elfutils-libelf-0.176-2.amzn2.0.1.aarch64
+elfutils-libelf-0.176-2.amzn2.0.2.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.2.aarch64
@@ -34,7 +34,7 @@ libidn2-2.3.0-1.amzn2.0.3.aarch64
 libnghttp2-1.41.0-1.amzn2.0.3.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
-libssh2-1.4.3-12.amzn2.2.5.aarch64
+libssh2-1.4.3-12.amzn2.2.6.aarch64
 libstdc++-7.3.1-17.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64

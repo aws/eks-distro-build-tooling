@@ -12881,7 +12881,7 @@
 -rwxr-xr-x   124KiB /usr/bin/mv
 -rwxr-xr-x    28KiB /usr/bin/namei
 -rwxr-xr-x     271B /usr/bin/neqn
--rwsr-xr-x    41KiB /usr/bin/newgrp
+-rwsr-xr-x    37KiB /usr/bin/newgrp
 -rwxr-xr-x    33KiB /usr/bin/nice
 -rwxr-xr-x    37KiB /usr/bin/nl
 -rwxr-xr-x    42KiB /usr/bin/nm
@@ -14010,7 +14010,7 @@
 -rwxr-x---    71KiB /usr/sbin/groupmod
 -rwxr-xr-x    56KiB /usr/sbin/grpck
 -rwxr-xr-x    52KiB /usr/sbin/grpconv
--rwxr-xr-x    52KiB /usr/sbin/grpunconv
+-rwxr-xr-x    48KiB /usr/sbin/grpunconv
 -rwxr-xr-x    53KiB /usr/sbin/hwclock
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig.x86_64
@@ -14023,15 +14023,15 @@
 -rwxr-xr-x    78KiB /usr/sbin/mkfs.minix
 -rwxr-xr-x    19KiB /usr/sbin/mkhomedir_helper
 -rwxr-xr-x    78KiB /usr/sbin/mkswap
--rwxr-xr-x    75KiB /usr/sbin/newusers
+-rwxr-xr-x    71KiB /usr/sbin/newusers
 -rwxr-xr-x    12KiB /usr/sbin/nologin
 -rwxr-xr-x    40KiB /usr/sbin/pam_console_apply
 -rwxr-xr-x    15KiB /usr/sbin/pam_tally2
 -rwsr-xr-x    11KiB /usr/sbin/pam_timestamp_check
 -rwxr-xr-x    83KiB /usr/sbin/partx
 -rwxr-xr-x    12KiB /usr/sbin/pivot_root
--rwxr-xr-x    52KiB /usr/sbin/pwck
--rwxr-xr-x    48KiB /usr/sbin/pwconv
+-rwxr-xr-x    48KiB /usr/sbin/pwck
+-rwxr-xr-x    44KiB /usr/sbin/pwconv
 -rwxr-xr-x    16KiB /usr/sbin/pwhistory_helper
 -rwxr-xr-x    39KiB /usr/sbin/pwunconv
 -rwxr-xr-x    16KiB /usr/sbin/readprofile
@@ -14051,7 +14051,7 @@
 -rwxr-xr-x    16KiB /usr/sbin/switch_root
 -rwsr-xr-x    36KiB /usr/sbin/unix_chkpwd
 -rwx------    36KiB /usr/sbin/unix_update
--rwxr-x---   116KiB /usr/sbin/useradd
+-rwxr-x---   112KiB /usr/sbin/useradd
 -rwxr-x---    75KiB /usr/sbin/userdel
 -rwxr-x---   112KiB /usr/sbin/usermod
 -rwxr-xr-x    59KiB /usr/sbin/vipw

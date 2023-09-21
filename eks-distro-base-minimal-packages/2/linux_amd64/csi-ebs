@@ -4,8 +4,8 @@ ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 e2fsprogs-1.42.9-19.amzn2.0.1.x86_64
 e2fsprogs-libs-1.42.9-19.amzn2.0.1.x86_64
-elfutils-libelf-0.176-2.amzn2.0.1.x86_64
-elfutils-libs-0.176-2.amzn2.0.1.x86_64
+elfutils-libelf-0.176-2.amzn2.0.2.x86_64
+elfutils-libs-0.176-2.amzn2.0.2.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 glibc-2.26-63.amzn2.0.1.x86_64
 glibc-common-2.26-63.amzn2.0.1.x86_64

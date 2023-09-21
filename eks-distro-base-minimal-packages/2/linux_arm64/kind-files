@@ -1425,7 +1425,7 @@
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    73KiB /usr/lib64/libdl-2.26.so
--rwxr-xr-x   331KiB /usr/lib64/libdw-0.176.so
+-rwxr-xr-x   395KiB /usr/lib64/libdw-0.176.so
 -rwxr-xr-x    69KiB /usr/lib64/libe2p.so.2.3
 -rwxr-xr-x   133KiB /usr/lib64/libebtc.so
 -rwxr-xr-x   134KiB /usr/lib64/libelf-0.176.so
@@ -4112,7 +4112,7 @@
 -rwxr-xr-x   134KiB /usr/sbin/mkswap
 -rwsr-xr-x   131KiB /usr/sbin/mount.nfs
 -rwxr-xr-x    35KiB /usr/sbin/mountstats
--rwxr-xr-x    75KiB /usr/sbin/newusers
+-rwxr-xr-x   139KiB /usr/sbin/newusers
 -rwxr-xr-x    68KiB /usr/sbin/nfct
 -rwxr-xr-x    68KiB /usr/sbin/nfsdcltrack
 -rwxr-xr-x    68KiB /usr/sbin/nfsidmap
@@ -8417,7 +8417,7 @@
 -rw-r--r--   7.6MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    28KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
