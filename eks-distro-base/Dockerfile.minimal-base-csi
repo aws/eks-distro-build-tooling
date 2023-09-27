@@ -32,6 +32,8 @@ ARG OUTPUT_DEBUG_LOG
 # built it has the latest scripts in the builder
 COPY scripts/ /usr/bin
 
+ENV CLEANUP_UNNECESSARY_FILES="/etc/pki/tls/fips_local.cnf"
+
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     # manually "install" systemd to avoid installing the entire dep tree

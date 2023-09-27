@@ -350,43 +350,19 @@ function check_base-csi() {
         netrc="--secret id=netrc,src=$HOME/.netrc"
     fi
 
-    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
-        build \
-        --frontend dockerfile.v0 \
-        --opt filename=./tests/Dockerfile \
-		--opt platform=$PLATFORMS \
-        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG \
-        --opt build-arg:AL_TAG=$AL_TAG \
-        --opt build-arg:GOPROXY=${GOPROXY:-direct} \
-        --progress plain \
-        --opt target=check-git \
-        --local dockerfile=./ \
-		--local context=./tests $netrc \
-        --export-cache type=inline \
-        --import-cache type=registry,ref=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest \
-        --output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest\",push=true
-
     for platform in ${PLATFORMS//,/ }; do
         # use git cli to clone private and public repo
-        build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest
+        build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG
         docker run --rm --platform=$platform -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
             -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
             -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-            $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest git clone $PRIVATE_REPO
+            $IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG git clone $PRIVATE_REPO
 
         docker run --rm --platform=$platform -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
             -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
             -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-            $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest git clone https://github.com/aws/eks-distro.git
+            $IMAGE_REPO/eks-distro-minimal-base-git:$IMAGE_TAG git clone https://github.com/aws/eks-distro.git
 
-        # use lib git to clone private and public repo
-        if docker run --rm --platform=$platform -v $SSH_KEY_FOLDER/id_rsa:/root/.ssh/id_rsa \
-            -v $SSH_KEY_FOLDER/id_rsa.pub:/root/.ssh/id_rsa.pub \
-            -v $SSH_KEY_FOLDER/known_hosts:/root/.ssh/known_hosts \
-            -e PRIVATE_REPO=$PRIVATE_REPO $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:git-latest check-git | grep -v 'Successfully cloned!'; then
-            echo "git issue!"
-            exit 1
-        fi
     done
 
  }
