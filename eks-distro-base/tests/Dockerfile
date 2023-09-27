@@ -52,23 +52,3 @@ COPY --from=iptables-wrapper-tests-builder /iptables-wrappers/bin/tests /
 
 CMD ["iptables"]
 
-FROM builder as git-builder
-
-ARG GOPROXY
-ENV GOPROXY=$GOPROXY
-
-COPY --from=base /usr/lib64/pkgconfig/*.pc /usr/lib64/pkgconfig/
-COPY --from=base /usr/include/git2.h /usr/include
-COPY --from=base /usr/include/git2 /usr/include/git2
-COPY --from=base /usr/lib64/libgit2* /usr/lib64
-COPY --from=base /usr/lib64/libssh2* /usr/lib64
-RUN ldd /usr/lib64/libgit2.so
-RUN --mount=type=secret,id=netrc,target=/root/.netrc \
-    go get github.com/libgit2/git2go/v33
-RUN --mount=type=secret,id=netrc,target=/root/.netrc \
-    CGO_ENABLED=1 go build -o check-git ./check_git.go 
-
-FROM ${BASE_IMAGE} as check-git
-COPY --from=git-builder /var/app/check-git /bin
-
-CMD ["/bin/check-git"]
