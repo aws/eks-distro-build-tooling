@@ -361,7 +361,7 @@
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   263KiB /usr/bin/csplit
 -rwxr-xr-x    21MiB /usr/bin/ctr
--rwxr-xr-x   390KiB /usr/bin/curl
+-rwxr-xr-x   391KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
 -rwxr-xr-x   400KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
@@ -1029,12 +1029,17 @@
 -rw-r--r--    11KiB /usr/lib/systemd/catalog/systemd.be@latin.catalog
 -rw-r--r--    30KiB /usr/lib/systemd/catalog/systemd.bg.catalog
 -rw-r--r--    22KiB /usr/lib/systemd/catalog/systemd.catalog
+-rw-r--r--   8.4KiB /usr/lib/systemd/catalog/systemd.da.catalog
 -rw-r--r--     748B /usr/lib/systemd/catalog/systemd.de.catalog
 -rw-r--r--    14KiB /usr/lib/systemd/catalog/systemd.fr.catalog
+-rw-r--r--    11KiB /usr/lib/systemd/catalog/systemd.hr.catalog
+-rw-r--r--   8.7KiB /usr/lib/systemd/catalog/systemd.hu.catalog
 -rw-r--r--    17KiB /usr/lib/systemd/catalog/systemd.it.catalog
+-rw-r--r--    12KiB /usr/lib/systemd/catalog/systemd.ko.catalog
 -rw-r--r--    23KiB /usr/lib/systemd/catalog/systemd.pl.catalog
 -rw-r--r--   8.8KiB /usr/lib/systemd/catalog/systemd.pt_BR.catalog
 -rw-r--r--    21KiB /usr/lib/systemd/catalog/systemd.ru.catalog
+-rw-r--r--    11KiB /usr/lib/systemd/catalog/systemd.sr.catalog
 -rw-r--r--   7.8KiB /usr/lib/systemd/catalog/systemd.zh_CN.catalog
 -rw-r--r--   7.7KiB /usr/lib/systemd/catalog/systemd.zh_TW.catalog
 -rw-r--r--     110B /usr/lib/systemd/libsystemd-shared.abignore
@@ -1085,8 +1090,8 @@
 -rw-r--r--     461B /usr/lib/systemd/system/first-boot-complete.target
 -rw-r--r--     481B /usr/lib/systemd/system/fstrim.service
 -rw-r--r--     270B /usr/lib/systemd/system/fstrim.timer
--rw-r--r--     517B /usr/lib/systemd/system/getty-pre.target
--rw-r--r--     508B /usr/lib/systemd/system/getty.target
+-rw-r--r--     518B /usr/lib/systemd/system/getty-pre.target
+-rw-r--r--     509B /usr/lib/systemd/system/getty.target
 -rw-r--r--   2.0KiB /usr/lib/systemd/system/getty@.service
 -rw-r--r--     606B /usr/lib/systemd/system/graphical.target
 -rw-r--r--     462B /usr/lib/systemd/system/gssproxy.service
@@ -1173,7 +1178,7 @@
 -rw-r--r--     748B /usr/lib/systemd/system/systemd-machine-id-commit.service
 -rw-r--r--     792B /usr/lib/systemd/system/systemd-network-generator.service
 -rw-r--r--   1.7KiB /usr/lib/systemd/system/systemd-oomd.service
--rw-r--r--     602B /usr/lib/systemd/system/systemd-oomd.socket
+-rw-r--r--     837B /usr/lib/systemd/system/systemd-oomd.socket
 -rw-r--r--     575B /usr/lib/systemd/system/systemd-poweroff.service
 -rw-r--r--     568B /usr/lib/systemd/system/systemd-reboot.service
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/systemd-sysext.service
@@ -1202,7 +1207,7 @@
 -rw-r--r--     458B /usr/lib/systemd/system/user-.slice.d/10-defaults.conf
 -rw-r--r--     674B /usr/lib/systemd/system/user-runtime-dir@.service
 -rw-r--r--     440B /usr/lib/systemd/system/user.slice
--rw-r--r--     753B /usr/lib/systemd/system/user@.service
+-rw-r--r--     774B /usr/lib/systemd/system/user@.service
 -rw-r--r--     605B /usr/lib/systemd/system/user@.service.d/10-login-barrier.conf
 -rw-r--r--     548B /usr/lib/systemd/system/user@0.service.d/10-login-barrier.conf
 -rw-r--r--     191B /usr/lib/systemd/system/var-lib-nfs-rpc_pipefs.mount
@@ -1215,7 +1220,7 @@
 -rwxr-xr-x   197KiB /usr/lib/systemd/systemd-initctl
 -rwxr-xr-x   262KiB /usr/lib/systemd/systemd-journald
 -rwxr-xr-x   197KiB /usr/lib/systemd/systemd-localed
--rwxr-xr-x   393KiB /usr/lib/systemd/systemd-logind
+-rwxr-xr-x   392KiB /usr/lib/systemd/systemd-logind
 -rwxr-xr-x   197KiB /usr/lib/systemd/systemd-network-generator
 -rwxr-xr-x   197KiB /usr/lib/systemd/systemd-oomd
 -rwxr-xr-x   196KiB /usr/lib/systemd/systemd-reply-password
@@ -1288,7 +1293,7 @@
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--     763B /usr/lib/tmpfiles.d/static-nodes-permissions.conf
 -rw-r--r--     305B /usr/lib/tmpfiles.d/sudo.conf
--rw-r--r--     597B /usr/lib/tmpfiles.d/systemd-nologin.conf
+-rw-r--r--     537B /usr/lib/tmpfiles.d/systemd-nologin.conf
 -rw-r--r--     823B /usr/lib/tmpfiles.d/systemd-tmp.conf
 -rw-r--r--   2.0KiB /usr/lib/tmpfiles.d/systemd.conf
 -rw-r--r--     449B /usr/lib/tmpfiles.d/tmp.conf
@@ -1391,14 +1396,14 @@
 -rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
 -rwxr-xr-x   523KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   402KiB /usr/lib64/libfdisk.so.1.1.0
--rwxr-xr-x   196KiB /usr/lib64/libffi.so.6.0.2
+-rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
--rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20221121.so.1
--rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.1
+-rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20230605.so.1
+-rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libgdbm_compat.so.4.0.0
--rwxr-xr-x   2.1MiB /usr/lib64/libgio-2.0.so.0.7400.7
+-rwxr-xr-x   2.2MiB /usr/lib64/libgio-2.0.so.0.7400.7
 -rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.7400.7
 -rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.7400.7
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
@@ -4081,8 +4086,8 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_shells.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_stress.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_succeed_if.so
--rwxr-xr-x   528KiB /usr/lib64/security/pam_systemd.so
--rwxr-xr-x   463KiB /usr/lib64/security/pam_systemd_home.so
+-rwxr-xr-x   592KiB /usr/lib64/security/pam_systemd.so
+-rwxr-xr-x   527KiB /usr/lib64/security/pam_systemd_home.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_time.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_timestamp.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_tty_audit.so
@@ -4093,8 +4098,8 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.1MiB /usr/lib64/systemd/libsystemd-core-252.4-1161.amzn2023.0.4.so
--rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.4-1161.amzn2023.0.4.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.16-1.amzn2023.0.1.so
+-rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.16-1.amzn2023.0.1.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_among.so
@@ -4508,7 +4513,7 @@
 -rw-r--r--     520B /usr/share/bash-completion/completions/p11-kit
 -rw-r--r--   1.3KiB /usr/share/bash-completion/completions/partx
 -rw-r--r--     387B /usr/share/bash-completion/completions/pivot_root
--rw-r--r--   3.4KiB /usr/share/bash-completion/completions/portablectl
+-rw-r--r--   3.6KiB /usr/share/bash-completion/completions/portablectl
 -rw-r--r--   1.3KiB /usr/share/bash-completion/completions/prlimit
 -rw-r--r--     679B /usr/share/bash-completion/completions/readprofile
 -rw-r--r--     669B /usr/share/bash-completion/completions/rename
@@ -4537,9 +4542,11 @@
 -rw-r--r--   2.2KiB /usr/share/bash-completion/completions/systemd-cgtop
 -rw-r--r--   1.8KiB /usr/share/bash-completion/completions/systemd-delta
 -rw-r--r--   1.3KiB /usr/share/bash-completion/completions/systemd-detect-virt
+-rw-r--r--   3.2KiB /usr/share/bash-completion/completions/systemd-dissect
 -rw-r--r--   2.1KiB /usr/share/bash-completion/completions/systemd-id128
 -rw-r--r--   1.8KiB /usr/share/bash-completion/completions/systemd-path
 -rw-r--r--   5.4KiB /usr/share/bash-completion/completions/systemd-run
+-rw-r--r--   2.4KiB /usr/share/bash-completion/completions/systemd-sysext
 -rw-r--r--   1.2KiB /usr/share/bash-completion/completions/taskset
 -rw-r--r--   3.0KiB /usr/share/bash-completion/completions/timedatectl
 -rw-r--r--   2.0KiB /usr/share/bash-completion/completions/trust
@@ -4721,7 +4728,7 @@
 -rw-r--r--    35KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Manager.xml
 -rw-r--r--    58KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Mount.xml
 -rw-r--r--    18KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Path.xml
--rw-r--r--    30KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Scope.xml
+-rw-r--r--    31KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Scope.xml
 -rw-r--r--    64KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Service.xml
 -rw-r--r--    29KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Slice.xml
 -rw-r--r--    64KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Socket.xml
@@ -4784,11 +4791,11 @@
 -rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
@@ -6114,7 +6121,7 @@
 -rw-r--r--   4.1KiB /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
 -rw-r--r--   1.9KiB /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
 -rw-r--r--    25KiB /usr/share/polkit-1/actions/org.freedesktop.login1.policy
--rw-r--r--   3.8KiB /usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
+-rw-r--r--   4.3KiB /usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
 -rw-r--r--   3.1KiB /usr/share/polkit-1/actions/org.freedesktop.timedate1.policy
 -rw-r--r--    53KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
@@ -8062,7 +8069,7 @@
 -rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-r--r--   9.4KiB /usr/share/zsh/site-functions/_busctl
+-rw-r--r--   9.5KiB /usr/share/zsh/site-functions/_busctl
 -rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--   2.8KiB /usr/share/zsh/site-functions/_hostnamectl
 -rw-r--r--   7.1KiB /usr/share/zsh/site-functions/_journalctl
@@ -8074,7 +8081,7 @@
 -rw-r--r--     505B /usr/share/zsh/site-functions/_sd_machines
 -rw-r--r--     318B /usr/share/zsh/site-functions/_sd_outputmodes
 -rw-r--r--     263B /usr/share/zsh/site-functions/_sd_unit_files
--rw-r--r--    20KiB /usr/share/zsh/site-functions/_systemctl
+-rw-r--r--    21KiB /usr/share/zsh/site-functions/_systemctl
 -rw-r--r--   3.8KiB /usr/share/zsh/site-functions/_systemd
 -rw-r--r--   5.1KiB /usr/share/zsh/site-functions/_systemd-analyze
 -rw-r--r--     633B /usr/share/zsh/site-functions/_systemd-delta
@@ -8082,7 +8089,7 @@
 -rw-r--r--     330B /usr/share/zsh/site-functions/_systemd-path
 -rw-r--r--   4.3KiB /usr/share/zsh/site-functions/_systemd-run
 -rw-r--r--     744B /usr/share/zsh/site-functions/_systemd-tmpfiles
--rw-r--r--   2.1KiB /usr/share/zsh/site-functions/_timedatectl
+-rw-r--r--   2.2KiB /usr/share/zsh/site-functions/_timedatectl
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
@@ -8101,7 +8108,7 @@
 -rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
--rw-r--r--   181KiB /var/lib/systemd/catalog/database
+-rw-r--r--   232KiB /var/lib/systemd/catalog/database
 -rw-r--r--       0B /var/log/lastlog
 -rw-------       0B /var/spool/mail/rpc
 
@@ -8565,11 +8572,11 @@ lrwxrwxrwx      30B /usr/lib64/libevent_pthreads-2.1.so.7 libevent_pthreads-2.1.
 lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
-lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
+lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
-lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
+lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
 lrwxrwxrwx      23B /usr/lib64/libgdbm_compat.so.4 libgdbm_compat.so.4.0.0
 lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7400.7

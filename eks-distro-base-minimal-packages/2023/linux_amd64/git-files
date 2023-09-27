@@ -20,7 +20,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   4.1KiB /etc/ld.so.cache
+-rw-r--r--   3.9KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
@@ -263,97 +263,6 @@
 -rwxr-xr-x    24KiB /usr/bin/watchgnupg
 -rwxr-xr-x    41KiB /usr/bin/xmlwf
 -rwxr-xr-x    28KiB /usr/bin/zdump
--rw-r--r--   1.8KiB /usr/include/git2.h
--rw-r--r--   3.8KiB /usr/include/git2/annotated_commit.h
--rw-r--r--   4.1KiB /usr/include/git2/apply.h
--rw-r--r--    13KiB /usr/include/git2/attr.h
--rw-r--r--   7.7KiB /usr/include/git2/blame.h
--rw-r--r--   9.0KiB /usr/include/git2/blob.h
--rw-r--r--    11KiB /usr/include/git2/branch.h
--rw-r--r--   4.2KiB /usr/include/git2/buffer.h
--rw-r--r--   4.2KiB /usr/include/git2/cert.h
--rw-r--r--    15KiB /usr/include/git2/checkout.h
--rw-r--r--   2.8KiB /usr/include/git2/cherrypick.h
--rw-r--r--   5.9KiB /usr/include/git2/clone.h
--rw-r--r--    18KiB /usr/include/git2/commit.h
--rw-r--r--    16KiB /usr/include/git2/common.h
--rw-r--r--    26KiB /usr/include/git2/config.h
--rw-r--r--     407B /usr/include/git2/cred_helpers.h
--rw-r--r--   9.7KiB /usr/include/git2/credential.h
--rw-r--r--   1.6KiB /usr/include/git2/credential_helpers.h
--rw-r--r--    29KiB /usr/include/git2/deprecated.h
--rw-r--r--   5.2KiB /usr/include/git2/describe.h
--rw-r--r--    51KiB /usr/include/git2/diff.h
--rw-r--r--   3.4KiB /usr/include/git2/email.h
--rw-r--r--   5.7KiB /usr/include/git2/errors.h
--rw-r--r--   7.9KiB /usr/include/git2/filter.h
--rw-r--r--   1.2KiB /usr/include/git2/global.h
--rw-r--r--   2.4KiB /usr/include/git2/graph.h
--rw-r--r--   2.6KiB /usr/include/git2/ignore.h
--rw-r--r--    27KiB /usr/include/git2/index.h
--rw-r--r--   4.1KiB /usr/include/git2/indexer.h
--rw-r--r--   3.6KiB /usr/include/git2/mailmap.h
--rw-r--r--    19KiB /usr/include/git2/merge.h
--rw-r--r--   2.4KiB /usr/include/git2/message.h
--rw-r--r--   1.1KiB /usr/include/git2/net.h
--rw-r--r--   8.3KiB /usr/include/git2/notes.h
--rw-r--r--   6.9KiB /usr/include/git2/object.h
--rw-r--r--    19KiB /usr/include/git2/odb.h
--rw-r--r--   3.8KiB /usr/include/git2/odb_backend.h
--rw-r--r--   8.3KiB /usr/include/git2/oid.h
--rw-r--r--     914B /usr/include/git2/oidarray.h
--rw-r--r--   7.2KiB /usr/include/git2/pack.h
--rw-r--r--   9.6KiB /usr/include/git2/patch.h
--rw-r--r--   9.5KiB /usr/include/git2/pathspec.h
--rw-r--r--   2.3KiB /usr/include/git2/proxy.h
--rw-r--r--    13KiB /usr/include/git2/rebase.h
--rw-r--r--   1.8KiB /usr/include/git2/refdb.h
--rw-r--r--   4.6KiB /usr/include/git2/reflog.h
--rw-r--r--    28KiB /usr/include/git2/refs.h
--rw-r--r--   3.3KiB /usr/include/git2/refspec.h
--rw-r--r--    30KiB /usr/include/git2/remote.h
--rw-r--r--    31KiB /usr/include/git2/repository.h
--rw-r--r--   3.4KiB /usr/include/git2/reset.h
--rw-r--r--   2.6KiB /usr/include/git2/revert.h
--rw-r--r--   3.5KiB /usr/include/git2/revparse.h
--rw-r--r--   8.6KiB /usr/include/git2/revwalk.h
--rw-r--r--   3.2KiB /usr/include/git2/signature.h
--rw-r--r--   7.6KiB /usr/include/git2/stash.h
--rw-r--r--    15KiB /usr/include/git2/status.h
--rw-r--r--   7.5KiB /usr/include/git2/stdint.h
--rw-r--r--   1.4KiB /usr/include/git2/strarray.h
--rw-r--r--    25KiB /usr/include/git2/submodule.h
--rw-r--r--   3.4KiB /usr/include/git2/sys/alloc.h
--rw-r--r--   2.4KiB /usr/include/git2/sys/commit.h
--rw-r--r--   5.0KiB /usr/include/git2/sys/commit_graph.h
--rw-r--r--   4.2KiB /usr/include/git2/sys/config.h
--rw-r--r--     395B /usr/include/git2/sys/cred.h
--rw-r--r--   2.5KiB /usr/include/git2/sys/credential.h
--rw-r--r--   2.9KiB /usr/include/git2/sys/diff.h
--rw-r--r--   1.3KiB /usr/include/git2/sys/email.h
--rw-r--r--    13KiB /usr/include/git2/sys/filter.h
--rw-r--r--   2.9KiB /usr/include/git2/sys/hashsig.h
--rw-r--r--   5.2KiB /usr/include/git2/sys/index.h
--rw-r--r--   2.8KiB /usr/include/git2/sys/mempack.h
--rw-r--r--   6.4KiB /usr/include/git2/sys/merge.h
--rw-r--r--   1.8KiB /usr/include/git2/sys/midx.h
--rw-r--r--   5.8KiB /usr/include/git2/sys/odb_backend.h
--rw-r--r--   1.1KiB /usr/include/git2/sys/openssl.h
--rw-r--r--   1.9KiB /usr/include/git2/sys/path.h
--rw-r--r--    13KiB /usr/include/git2/sys/refdb_backend.h
--rw-r--r--     524B /usr/include/git2/sys/reflog.h
--rw-r--r--   1.2KiB /usr/include/git2/sys/refs.h
--rw-r--r--   5.9KiB /usr/include/git2/sys/repository.h
--rw-r--r--   4.0KiB /usr/include/git2/sys/stream.h
--rw-r--r--    14KiB /usr/include/git2/sys/transport.h
--rw-r--r--    11KiB /usr/include/git2/tag.h
--rw-r--r--   1.8KiB /usr/include/git2/trace.h
--rw-r--r--   3.8KiB /usr/include/git2/transaction.h
--rw-r--r--   1.1KiB /usr/include/git2/transport.h
--rw-r--r--    15KiB /usr/include/git2/tree.h
--rw-r--r--    12KiB /usr/include/git2/types.h
--rw-r--r--     468B /usr/include/git2/version.h
--rw-r--r--   7.7KiB /usr/include/git2/worktree.h
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
@@ -426,18 +335,17 @@
 -rwxr-xr-x    70KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
+-rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   562KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   239KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.8.10
--rwxr-xr-x    40KiB /usr/lib64/libffi.so.6.0.2
+-rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   219KiB /usr/lib64/libfido2.so.1.10.0
 -rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
--rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20221121.so.1
--rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.1
--rwxr-xr-x   1.5MiB /usr/lib64/libgit2.so.1.3.2
+-rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20230605.so.1
+-rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
 -rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.35.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
@@ -469,7 +377,6 @@
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   351KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   1.3MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.2
@@ -487,28 +394,18 @@
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x     951B /usr/lib64/libssh2.la
--rwxr-xr-x   953KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
--rwxr-xr-x   197KiB /usr/lib64/libudev.so.1.7.5
+-rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
--rw-r--r--     369B /usr/lib64/pkgconfig/libcrypt.pc
--rw-r--r--     322B /usr/lib64/pkgconfig/libcrypto.pc
--rw-r--r--     252B /usr/lib64/pkgconfig/libgit2.pc
--rw-r--r--     480B /usr/lib64/pkgconfig/libssh2.pc
--rw-r--r--     265B /usr/lib64/pkgconfig/libssl.pc
--rw-r--r--     369B /usr/lib64/pkgconfig/libxcrypt.pc
--rw-r--r--     219B /usr/lib64/pkgconfig/openssl.pc
--rw-r--r--     240B /usr/lib64/pkgconfig/zlib.pc
 -rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    41KiB /usr/libexec/dirmngr_ldap
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
@@ -572,19 +469,17 @@
 -rw-r--r--    79KiB /usr/share/bash-completion/completions/git
 -rw-r--r--     520B /usr/share/bash-completion/completions/p11-kit
 -rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
--rw-r--r--    57KiB /usr/share/doc/libgit2-1.3.2/COPYING
--rw-r--r--   2.0KiB /usr/share/doc/libssh2-1.10.0/COPYING
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
@@ -2880,7 +2775,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   5.3KiB /var/cache/ldconfig/aux-cache
+-rw-------   5.2KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   1.7MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -3201,14 +3096,12 @@ lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
-lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
+lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
-lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.1
-lrwxrwxrwx      14B /usr/lib64/libgit2.so libgit2.so.1.3
-lrwxrwxrwx      16B /usr/lib64/libgit2.so.1.3 libgit2.so.1.3.2
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
+lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
 lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
@@ -3243,8 +3136,6 @@ lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3 libsasl2.so.3.0.0
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      16B /usr/lib64/libssh2.so libssh2.so.1.0.1
-lrwxrwxrwx      16B /usr/lib64/libssh2.so.1 libssh2.so.1.0.1
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3

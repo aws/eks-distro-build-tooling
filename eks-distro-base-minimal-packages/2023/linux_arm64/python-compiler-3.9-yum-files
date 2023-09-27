@@ -256,7 +256,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   263KiB /usr/bin/csplit
--rwxr-xr-x   390KiB /usr/bin/curl
+-rwxr-xr-x   391KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   197KiB /usr/bin/date
@@ -2827,16 +2827,16 @@
 -rwxr-xr-x   718KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x   263KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
--rwxr-xr-x   196KiB /usr/lib64/libffi.so.6.0.2
+-rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
 -rwxr-xr-x   265KiB /usr/lib64/libgc.so.1.4.3
--rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20221121.so.1
+-rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20230605.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libgccpp.so.1.4.0
--rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.1
+-rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libgdbm_compat.so.4.0.0
--rwxr-xr-x   2.1MiB /usr/lib64/libgio-2.0.so.0.7400.7
+-rwxr-xr-x   2.2MiB /usr/lib64/libgio-2.0.so.0.7400.7
 -rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.7400.7
 -rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.7400.7
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
@@ -5655,11 +5655,11 @@
 -rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
@@ -9364,13 +9364,13 @@ lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
-lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
+lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
 lrwxrwxrwx      14B /usr/lib64/libgc.so.1 libgc.so.1.4.3
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
 lrwxrwxrwx      17B /usr/lib64/libgccpp.so.1 libgccpp.so.1.4.0
-lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.1
+lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
 lrwxrwxrwx      23B /usr/lib64/libgdbm_compat.so.4 libgdbm_compat.so.4.0.0
 lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7400.7
