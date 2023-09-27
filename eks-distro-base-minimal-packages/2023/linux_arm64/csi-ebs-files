@@ -276,7 +276,7 @@
 -rwxr-xr-x   523KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
--rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20221121.so.1
+-rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20230605.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libinih.so.49
 -rwxr-xr-x   655KiB /usr/lib64/libm.so.6
 -rwxr-xr-x   197KiB /usr/lib64/libmemusage.so
@@ -344,11 +344,11 @@
 -rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
@@ -2195,7 +2195,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   3.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   1.4MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   1.3MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -2500,7 +2500,7 @@ lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
 lrwxrwxrwx      13B /usr/lib64/libinih.so.0 libinih.so.49
 lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.2

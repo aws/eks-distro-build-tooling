@@ -256,7 +256,7 @@
 -rwxr-xr-x    37KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
--rwxr-xr-x   1.2MiB /usr/bin/cpp
+-rwxr-xr-x   1.3MiB /usr/bin/cpp
 -rwxr-xr-x   110KiB /usr/bin/csplit
 -rwxr-xr-x   278KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
@@ -292,7 +292,7 @@
 -rwxr-xr-x   112KiB /usr/bin/g13
 -rwxr-xr-x    24KiB /usr/bin/gapplication
 -rwxr-xr-x   703KiB /usr/bin/gawk
--rwxr-xr-x   1.2MiB /usr/bin/gcc
+-rwxr-xr-x   1.3MiB /usr/bin/gcc
 -rwxr-xr-x    41KiB /usr/bin/gcc-ar
 -rwxr-xr-x    41KiB /usr/bin/gcc-nm
 -rwxr-xr-x    41KiB /usr/bin/gcc-ranlib
@@ -445,8 +445,8 @@
 -rwxr-xr-x    29KiB /usr/bin/which
 -rwxr-xr-x    53KiB /usr/bin/who
 -rwxr-xr-x    33KiB /usr/bin/whoami
--rwxr-xr-x   1.2MiB /usr/bin/x86_64-amazon-linux-gcc
--rwxr-xr-x   1.2MiB /usr/bin/x86_64-amazon-linux-gcc-11
+-rwxr-xr-x   1.3MiB /usr/bin/x86_64-amazon-linux-gcc
+-rwxr-xr-x   1.3MiB /usr/bin/x86_64-amazon-linux-gcc-11
 -rwxr-xr-x     615B /usr/bin/x86_64-amazon-linux-gnu-pkg-config
 -rwxr-xr-x    65KiB /usr/bin/xargs
 -rwxr-xr-x    24KiB /usr/bin/xmlcatalog
@@ -2357,7 +2357,7 @@
 -rw-r--r--     268B /usr/lib/rpm/fileattrs/libsymlink.attr
 -rwxr-xr-x   1.7KiB /usr/lib/rpm/generate-rpm-note.sh
 -rw-r--r--   9.5KiB /usr/lib/rpm/lua/fedora/common.lua
--rw-r--r--   8.6KiB /usr/lib/rpm/lua/fedora/srpm/fonts.lua
+-rw-r--r--   8.7KiB /usr/lib/rpm/lua/fedora/srpm/fonts.lua
 -rw-r--r--    16KiB /usr/lib/rpm/lua/fedora/srpm/forge.lua
 -rw-r--r--    16KiB /usr/lib/rpm/lua/fedora/srpm/go.lua
 -rw-r--r--   2.4KiB /usr/lib/rpm/lua/fedora/srpm/python.lua
@@ -3131,7 +3131,7 @@
 -rwxr-xr-x   189KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x    41KiB /usr/lib64/libcord.so.1.4.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.3MiB /usr/lib64/libcrypto.so.3.0.8
+-rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
@@ -3144,14 +3144,14 @@
 -rwxr-xr-x   610KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x   111KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.8.10
--rwxr-xr-x    40KiB /usr/lib64/libffi.so.6.0.2
+-rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
 -rw-r--r--   7.2KiB /usr/lib64/libg.a
 -rwxr-xr-x   185KiB /usr/lib64/libgc.so.1.4.3
--rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20221121.so.1
+-rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20230605.so.1
 -rwxr-xr-x    16KiB /usr/lib64/libgccpp.so.1.4.0
--rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.1
+-rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x    65KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libgdbm_compat.so.4.0.0
 -rwxr-xr-x   2.0MiB /usr/lib64/libgio-2.0.so.0.7400.7
@@ -4818,7 +4818,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   106KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   274KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   278KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    78KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    30KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    69KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -5759,7 +5759,7 @@
 -rwxr-xr-x    26MiB /usr/libexec/gcc/x86_64-amazon-linux/11/cc1
 -rwxr-xr-x   603KiB /usr/libexec/gcc/x86_64-amazon-linux/11/collect2
 -rwxr-xr-x    90KiB /usr/libexec/gcc/x86_64-amazon-linux/11/liblto_plugin.so
--rwxr-xr-x   1.1MiB /usr/libexec/gcc/x86_64-amazon-linux/11/lto-wrapper
+-rwxr-xr-x   1.2MiB /usr/libexec/gcc/x86_64-amazon-linux/11/lto-wrapper
 -rwxr-xr-x    25MiB /usr/libexec/gcc/x86_64-amazon-linux/11/lto1
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -5987,11 +5987,11 @@
 -rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    66KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
 -rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    81KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
+-rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
 -rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
@@ -9761,13 +9761,13 @@ lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
-lrwxrwxrwx      15B /usr/lib64/libffi.so.6 libffi.so.6.0.2
+lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
 lrwxrwxrwx      14B /usr/lib64/libgc.so.1 libgc.so.1.4.3
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20221121.so.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
 lrwxrwxrwx      17B /usr/lib64/libgccpp.so.1 libgccpp.so.1.4.0
-lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.1
+lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
 lrwxrwxrwx      23B /usr/lib64/libgdbm_compat.so.4 libgdbm_compat.so.4.0.0
 lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7400.7
