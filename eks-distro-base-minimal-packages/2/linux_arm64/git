@@ -26,6 +26,7 @@ libidn2-2.3.0-1.amzn2.0.3.aarch64
 libnghttp2-1.41.0-1.amzn2.0.3.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
+libssh2-1.4.3-12.amzn2.2.6.aarch64
 libstdc++-7.3.1-17.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.5.noarch
