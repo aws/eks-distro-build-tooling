@@ -21,7 +21,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--   6.1KiB /etc/ld.so.cache
+-rw-r--r--   5.9KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--     229B /etc/nsswitch.conf
@@ -130,97 +130,6 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    68KiB /usr/bin/watchgnupg
 -rwxr-xr-x    68KiB /usr/bin/xmlwf
--rw-r--r--   1.8KiB /usr/include/git2.h
--rw-r--r--   3.8KiB /usr/include/git2/annotated_commit.h
--rw-r--r--   4.1KiB /usr/include/git2/apply.h
--rw-r--r--    13KiB /usr/include/git2/attr.h
--rw-r--r--   7.7KiB /usr/include/git2/blame.h
--rw-r--r--   9.0KiB /usr/include/git2/blob.h
--rw-r--r--    11KiB /usr/include/git2/branch.h
--rw-r--r--   4.2KiB /usr/include/git2/buffer.h
--rw-r--r--   4.2KiB /usr/include/git2/cert.h
--rw-r--r--    15KiB /usr/include/git2/checkout.h
--rw-r--r--   2.8KiB /usr/include/git2/cherrypick.h
--rw-r--r--   5.9KiB /usr/include/git2/clone.h
--rw-r--r--    18KiB /usr/include/git2/commit.h
--rw-r--r--    16KiB /usr/include/git2/common.h
--rw-r--r--    26KiB /usr/include/git2/config.h
--rw-r--r--     407B /usr/include/git2/cred_helpers.h
--rw-r--r--   9.7KiB /usr/include/git2/credential.h
--rw-r--r--   1.6KiB /usr/include/git2/credential_helpers.h
--rw-r--r--    29KiB /usr/include/git2/deprecated.h
--rw-r--r--   5.2KiB /usr/include/git2/describe.h
--rw-r--r--    51KiB /usr/include/git2/diff.h
--rw-r--r--   3.4KiB /usr/include/git2/email.h
--rw-r--r--   5.7KiB /usr/include/git2/errors.h
--rw-r--r--   7.9KiB /usr/include/git2/filter.h
--rw-r--r--   1.2KiB /usr/include/git2/global.h
--rw-r--r--   2.4KiB /usr/include/git2/graph.h
--rw-r--r--   2.6KiB /usr/include/git2/ignore.h
--rw-r--r--    27KiB /usr/include/git2/index.h
--rw-r--r--   4.1KiB /usr/include/git2/indexer.h
--rw-r--r--   3.6KiB /usr/include/git2/mailmap.h
--rw-r--r--    19KiB /usr/include/git2/merge.h
--rw-r--r--   2.4KiB /usr/include/git2/message.h
--rw-r--r--   1.1KiB /usr/include/git2/net.h
--rw-r--r--   8.3KiB /usr/include/git2/notes.h
--rw-r--r--   6.9KiB /usr/include/git2/object.h
--rw-r--r--    19KiB /usr/include/git2/odb.h
--rw-r--r--   3.8KiB /usr/include/git2/odb_backend.h
--rw-r--r--   8.3KiB /usr/include/git2/oid.h
--rw-r--r--     914B /usr/include/git2/oidarray.h
--rw-r--r--   7.2KiB /usr/include/git2/pack.h
--rw-r--r--   9.6KiB /usr/include/git2/patch.h
--rw-r--r--   9.5KiB /usr/include/git2/pathspec.h
--rw-r--r--   2.3KiB /usr/include/git2/proxy.h
--rw-r--r--    13KiB /usr/include/git2/rebase.h
--rw-r--r--   1.8KiB /usr/include/git2/refdb.h
--rw-r--r--   4.6KiB /usr/include/git2/reflog.h
--rw-r--r--    28KiB /usr/include/git2/refs.h
--rw-r--r--   3.3KiB /usr/include/git2/refspec.h
--rw-r--r--    30KiB /usr/include/git2/remote.h
--rw-r--r--    31KiB /usr/include/git2/repository.h
--rw-r--r--   3.4KiB /usr/include/git2/reset.h
--rw-r--r--   2.6KiB /usr/include/git2/revert.h
--rw-r--r--   3.5KiB /usr/include/git2/revparse.h
--rw-r--r--   8.6KiB /usr/include/git2/revwalk.h
--rw-r--r--   3.2KiB /usr/include/git2/signature.h
--rw-r--r--   7.6KiB /usr/include/git2/stash.h
--rw-r--r--    15KiB /usr/include/git2/status.h
--rw-r--r--   7.5KiB /usr/include/git2/stdint.h
--rw-r--r--   1.4KiB /usr/include/git2/strarray.h
--rw-r--r--    25KiB /usr/include/git2/submodule.h
--rw-r--r--   3.4KiB /usr/include/git2/sys/alloc.h
--rw-r--r--   2.4KiB /usr/include/git2/sys/commit.h
--rw-r--r--   5.0KiB /usr/include/git2/sys/commit_graph.h
--rw-r--r--   4.2KiB /usr/include/git2/sys/config.h
--rw-r--r--     395B /usr/include/git2/sys/cred.h
--rw-r--r--   2.5KiB /usr/include/git2/sys/credential.h
--rw-r--r--   2.9KiB /usr/include/git2/sys/diff.h
--rw-r--r--   1.3KiB /usr/include/git2/sys/email.h
--rw-r--r--    13KiB /usr/include/git2/sys/filter.h
--rw-r--r--   2.9KiB /usr/include/git2/sys/hashsig.h
--rw-r--r--   5.2KiB /usr/include/git2/sys/index.h
--rw-r--r--   2.8KiB /usr/include/git2/sys/mempack.h
--rw-r--r--   6.4KiB /usr/include/git2/sys/merge.h
--rw-r--r--   1.8KiB /usr/include/git2/sys/midx.h
--rw-r--r--   5.8KiB /usr/include/git2/sys/odb_backend.h
--rw-r--r--   1.1KiB /usr/include/git2/sys/openssl.h
--rw-r--r--   1.9KiB /usr/include/git2/sys/path.h
--rw-r--r--    13KiB /usr/include/git2/sys/refdb_backend.h
--rw-r--r--     524B /usr/include/git2/sys/reflog.h
--rw-r--r--   1.2KiB /usr/include/git2/sys/refs.h
--rw-r--r--   5.9KiB /usr/include/git2/sys/repository.h
--rw-r--r--   4.0KiB /usr/include/git2/sys/stream.h
--rw-r--r--    14KiB /usr/include/git2/sys/transport.h
--rw-r--r--    11KiB /usr/include/git2/tag.h
--rw-r--r--   1.8KiB /usr/include/git2/trace.h
--rw-r--r--   3.8KiB /usr/include/git2/transaction.h
--rw-r--r--   1.1KiB /usr/include/git2/transport.h
--rw-r--r--    15KiB /usr/include/git2/tree.h
--rw-r--r--    12KiB /usr/include/git2/types.h
--rw-r--r--     468B /usr/include/git2/version.h
--rw-r--r--   7.7KiB /usr/include/git2/worktree.h
 -rw-r--r--     131B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.5MiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   323KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -519,7 +428,6 @@
 -rwxr-xr-x   135KiB /usr/lib64/libformw.so.6.0
 -rwxr-xr-x   131KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x   534KiB /usr/lib64/libgcrypt.so.11.8.2
--rwxr-xr-x   1.5MiB /usr/lib64/libgit2.so.1.3.2
 -rwxr-xr-x    67KiB /usr/lib64/libgpg-error.so.0.10.0
 -rwxr-xr-x   333KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   135KiB /usr/lib64/libgssrpc.so.4.2
@@ -569,8 +477,7 @@
 -rwxr-xr-x   725KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libslapi-2.4.so.2.10.7
 -rwxr-xr-x   201KiB /usr/lib64/libsmime3.so
--rwxr-xr-x     951B /usr/lib64/libssh2.la
--rwxr-xr-x   1.1MiB /usr/lib64/libssh2.so.1.0.1
+-rwxr-xr-x   199KiB /usr/lib64/libssh2.so.1.0.1
 -rwxr-xr-x   479KiB /usr/lib64/libssl.so.1.0.2k
 -rwxr-xr-x   464KiB /usr/lib64/libssl3.so
 -rwxr-xr-x   1.7MiB /usr/lib64/libstdc++.so.6.0.24
@@ -592,29 +499,6 @@
 -rwxr-xr-x    67KiB /usr/lib64/openssl/engines/libpadlock.so
 -rwxr-xr-x    69KiB /usr/lib64/openssl/engines/libsureware.so
 -rwxr-xr-x    69KiB /usr/lib64/openssl/engines/libubsec.so
--rw-r--r--     253B /usr/lib64/pkgconfig/com_err.pc
--rw-r--r--     236B /usr/lib64/pkgconfig/gssrpc.pc
--rw-r--r--     257B /usr/lib64/pkgconfig/kadm-client.pc
--rw-r--r--     253B /usr/lib64/pkgconfig/kadm-server.pc
--rw-r--r--     288B /usr/lib64/pkgconfig/kdb.pc
--rw-r--r--     194B /usr/lib64/pkgconfig/krb5-gssapi.pc
--rw-r--r--     324B /usr/lib64/pkgconfig/krb5.pc
--rw-r--r--     297B /usr/lib64/pkgconfig/libcrypto.pc
--rw-r--r--     270B /usr/lib64/pkgconfig/libgit2.pc
--rw-r--r--     299B /usr/lib64/pkgconfig/libpcre.pc
--rw-r--r--     304B /usr/lib64/pkgconfig/libpcre16.pc
--rw-r--r--     304B /usr/lib64/pkgconfig/libpcre32.pc
--rw-r--r--     245B /usr/lib64/pkgconfig/libpcrecpp.pc
--rw-r--r--     287B /usr/lib64/pkgconfig/libpcreposix.pc
--rw-r--r--     283B /usr/lib64/pkgconfig/libselinux.pc
--rw-r--r--     241B /usr/lib64/pkgconfig/libsepol.pc
--rw-r--r--     480B /usr/lib64/pkgconfig/libssh2.pc
--rw-r--r--     338B /usr/lib64/pkgconfig/libssl.pc
--rw-r--r--     219B /usr/lib64/pkgconfig/libverto.pc
--rw-r--r--     244B /usr/lib64/pkgconfig/mit-krb5-gssapi.pc
--rw-r--r--     396B /usr/lib64/pkgconfig/mit-krb5.pc
--rw-r--r--     220B /usr/lib64/pkgconfig/openssl.pc
--rw-r--r--     239B /usr/lib64/pkgconfig/zlib.pc
 -rwxr-xr-x    68KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
@@ -693,10 +577,9 @@
 -rw-r--r--    44KiB /usr/share/doc/libcom_err-1.42.9/COPYING
 -rw-r--r--   1.6KiB /usr/share/doc/libedit-3.0/COPYING
 -rw-r--r--    26KiB /usr/share/doc/libgcrypt-1.5.3/COPYING.LIB
--rw-r--r--    57KiB /usr/share/doc/libgit2-1.3.2/COPYING
 -rw-r--r--    18KiB /usr/share/doc/libgpg-error-1.12/COPYING
 -rw-r--r--    26KiB /usr/share/doc/libgpg-error-1.12/COPYING.LIB
--rw-r--r--   2.0KiB /usr/share/doc/libssh2-1.10.0/COPYING
+-rw-r--r--   1.9KiB /usr/share/doc/libssh2-1.4.3/COPYING
 -rw-r--r--   2.3KiB /usr/share/doc/openldap-2.4.44/COPYRIGHT
 -rw-r--r--   2.2KiB /usr/share/doc/openldap-2.4.44/LICENSE
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
@@ -2848,7 +2731,7 @@
 -rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   5.1KiB /var/cache/ldconfig/aux-cache
+-rw-------   5.0KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   356KiB /var/lib/rpm/Basenames
@@ -2912,8 +2795,6 @@ lrwxrwxrwx      14B /usr/lib64/libform.so.6	libform.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6	libformw.so.6.0
 lrwxrwxrwx      24B /usr/lib64/libgcc_s.so.1	libgcc_s-7-20180712.so.1
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.11	libgcrypt.so.11.8.2
-lrwxrwxrwx      14B /usr/lib64/libgit2.so	libgit2.so.1.3
-lrwxrwxrwx      16B /usr/lib64/libgit2.so.1.3	libgit2.so.1.3.2
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0	libgpg-error.so.0.10.0
 lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2	libgssapi_krb5.so.2.2
 lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4	libgssrpc.so.4.2
@@ -2953,7 +2834,6 @@ lrwxrwxrwx      17B /usr/lib64/libresolv.so.2	libresolv-2.26.so
 lrwxrwxrwx      13B /usr/lib64/librt.so.1	librt-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3	libsasl2.so.3.0.0
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2	libslapi-2.4.so.2.10.7
-lrwxrwxrwx      16B /usr/lib64/libssh2.so	libssh2.so.1.0.1
 lrwxrwxrwx      16B /usr/lib64/libssh2.so.1	libssh2.so.1.0.1
 lrwxrwxrwx      16B /usr/lib64/libssl.so.10	libssl.so.1.0.2k
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
