@@ -12580,7 +12580,7 @@
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   1.3MiB /usr/bin/cpp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   278KiB /usr/bin/curl
+-rwxr-xr-x   286KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -15511,7 +15511,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   825KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   826KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
@@ -15544,7 +15544,7 @@
 -rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   777KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rw-r--r--       8B /usr/lib64/libdl.a

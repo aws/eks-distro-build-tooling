@@ -17,9 +17,9 @@ filesystem-3.14-5.amzn2023.0.3.x86_64
 fuse-libs-2.9.9-13.amzn2023.0.2.x86_64
 gawk-5.1.0-3.amzn2023.0.3.x86_64
 gdbm-libs-1.19-2.amzn2023.0.2.x86_64
-glibc-2.34-52.amzn2023.0.5.x86_64
-glibc-common-2.34-52.amzn2023.0.5.x86_64
-glibc-minimal-langpack-2.34-52.amzn2023.0.5.x86_64
+glibc-2.34-52.amzn2023.0.6.x86_64
+glibc-common-2.34-52.amzn2023.0.6.x86_64
+glibc-minimal-langpack-2.34-52.amzn2023.0.6.x86_64
 gmp-6.2.1-2.amzn2023.0.2.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702

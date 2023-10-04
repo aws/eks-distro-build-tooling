@@ -361,7 +361,7 @@
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
 -rwxr-xr-x    29MiB /usr/bin/ctr
--rwxr-xr-x   278KiB /usr/bin/curl
+-rwxr-xr-x   286KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   308KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
@@ -1347,7 +1347,7 @@
 -rwxr-xr-x   126KiB /usr/lib64/gssproxy/proxymech.so
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   825KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   826KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
@@ -1374,7 +1374,7 @@
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
--rwxr-xr-x   728KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   777KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -8427,7 +8427,6 @@ lrwxrwxrwx      49B /etc/ssl/cert.pem /etc/pki/ca-trust/extracted/pem/tls-ca-bun
 lrwxrwxrwx      46B /etc/ssl/certs /etc/pki/ca-trust/extracted/pem/directory-hash
 lrwxrwxrwx      25B /etc/system-release ../usr/lib/system-release
 lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
-lrwxrwxrwx      45B /etc/systemd/system/basic.target.wants/rpmdb-rebuild.service /usr/lib/systemd/system/rpmdb-rebuild.service
 lrwxrwxrwx      37B /etc/systemd/system/ctrl-alt-del.target /usr/lib/systemd/system/reboot.target
 lrwxrwxrwx      43B /etc/systemd/system/dbus.service /usr/lib/systemd/system/dbus-broker.service
 lrwxrwxrwx      38B /etc/systemd/system/getty.target.wants/getty@tty1.service /usr/lib/systemd/system/getty@.service
