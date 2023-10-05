@@ -33,10 +33,10 @@ const (
 type GogitClient struct {
 	Auth          transport.AuthMethod
 	Client        GoGit
-	RepoUrl       string
-	RepoDirectory *string
 	InMemory      bool
 	Retrier       *retrier.Retrier
+	RepoUrl       string
+	RepoDirectory *string
 }
 
 type Opt func(*GogitClient)
@@ -548,22 +548,22 @@ func (g *GogitClient) ReadFiles(foldername string) (map[string]string, error) {
 		return nil, err
 	}
 
-  files := make(map[string]string)
-  err = tree.Files().ForEach(func(f *object.File) error {
-    if(strings.Contains(f.Name, foldername)) {
-      p, err := f.Contents()
-      if err != nil {
-        return err
-      }
-      files[f.Name] = p
-    }
-    return nil
-  })
-  if err != nil {
-    return nil, fmt.Errorf("reading files from folder: %s, %v", foldername, err)
-  }
+	files := make(map[string]string)
+	err = tree.Files().ForEach(func(f *object.File) error {
+		if strings.Contains(f.Name, foldername) {
+			p, err := f.Contents()
+			if err != nil {
+				return err
+			}
+			files[f.Name] = p
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, fmt.Errorf("reading files from folder: %s, %v", foldername, err)
+	}
 
-  return files, nil
+	return files, nil
 }
 
 type GoGit interface {

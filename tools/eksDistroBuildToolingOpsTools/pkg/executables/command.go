@@ -10,11 +10,11 @@ type commandRunner interface {
 }
 
 type Command struct {
+	args          []string
 	commandRunner commandRunner
 	ctx           context.Context
-	args          []string
-	stdIn         []byte
 	envVars       map[string]string
+	stdIn         []byte
 }
 
 func NewCommand(ctx context.Context, commandRunner commandRunner, args ...string) *Command {

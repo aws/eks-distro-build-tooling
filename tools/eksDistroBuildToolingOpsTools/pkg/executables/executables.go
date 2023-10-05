@@ -9,10 +9,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/aws/eks-anywhere/pkg/config"
-	"github.com/aws/eks-anywhere/pkg/constants"
-	"github.com/aws/eks-anywhere/pkg/logger"
-	"github.com/aws/eks-anywhere/pkg/providers/cloudstack/decoder"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const (
@@ -20,23 +17,8 @@ const (
 )
 
 var redactedEnvKeys = []string{
-	constants.VSphereUsernameKey,
-	constants.VSpherePasswordKey,
-	constants.GovcUsernameKey,
-	constants.GovcPasswordKey,
-	decoder.CloudStackCloudConfigB64SecretKey,
-	eksaGithubTokenEnv,
-	githubTokenEnv,
-	config.EksaAccessKeyIdEnv,
-	config.EksaSecretAccessKeyEnv,
-	config.AwsAccessKeyIdEnv,
-	config.AwsSecretAccessKeyEnv,
-	constants.SnowCredentialsKey,
-	constants.SnowCertsKey,
-	constants.NutanixUsernameKey,
-	constants.NutanixPasswordKey,
-	constants.RegistryUsername,
-	constants.RegistryPassword,
+	"PASSWORD",
+	"USERNAME",
 }
 
 type executable struct {
@@ -45,8 +27,6 @@ type executable struct {
 
 type Executable interface {
 	Execute(ctx context.Context, args ...string) (stdout bytes.Buffer, err error)
-	ExecuteWithEnv(ctx context.Context, envs map[string]string, args ...string) (stdout bytes.Buffer, err error) // TODO: remove this from interface in favor of Command
-	ExecuteWithStdin(ctx context.Context, in []byte, args ...string) (stdout bytes.Buffer, err error)            // TODO: remove this from interface in favor of Command
 	Command(ctx context.Context, args ...string) *Command
 	Run(cmd *Command) (stdout bytes.Buffer, err error)
 }
@@ -60,14 +40,6 @@ func NewExecutable(cli string) Executable {
 
 func (e *executable) Execute(ctx context.Context, args ...string) (stdout bytes.Buffer, err error) {
 	return e.Command(ctx, args...).Run()
-}
-
-func (e *executable) ExecuteWithStdin(ctx context.Context, in []byte, args ...string) (stdout bytes.Buffer, err error) {
-	return e.Command(ctx, args...).WithStdIn(in).Run()
-}
-
-func (e *executable) ExecuteWithEnv(ctx context.Context, envs map[string]string, args ...string) (stdout bytes.Buffer, err error) {
-	return e.Command(ctx, args...).WithEnvVars(envs).Run()
 }
 
 func (e *executable) Command(ctx context.Context, args ...string) *Command {
@@ -115,7 +87,7 @@ func execute(ctx context.Context, cli string, in []byte, envVars map[string]stri
 	if err != nil {
 		if stderr.Len() > 0 {
 			if logger.MaxLogging() {
-				logger.V(logger.MaxLogLevel).Info(cli, "stderr", stderr.String())
+				logger.V(logger.MaxLoggingLevel()).Info(cli, "stderr", stderr.String())
 			}
 			return stdout, errors.New(stderr.String())
 		} else {

@@ -4,16 +4,15 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aws/eks-anywhere/pkg/constants"
-	"github.com/aws/eks-anywhere/pkg/executables"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/executables"
 )
 
 func TestRedactCreds(t *testing.T) {
 	str := "My username is username123. My password is password456"
-	t.Setenv(constants.VSphereUsernameKey, "username123")
-	os.Unsetenv(constants.VSpherePasswordKey)
+	t.Setenv("USERNAME", "username123")
+	os.Unsetenv("PASSWORD")
 	os.Unsetenv("var")
-	envMap := map[string]string{"var": "value", constants.VSpherePasswordKey: "password456"}
+	envMap := map[string]string{"var": "value", "PASSWORD": "password456"}
 
 	expected := "My username is *****. My password is *****"
 

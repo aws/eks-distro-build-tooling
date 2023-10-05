@@ -184,11 +184,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 		return err
 	}
 
-	readmeContent := GenerateReadme(readmeFmt, r)
-	if err != nil {
-		logger.Error(err, "Generate README.md")
-		return err
-	}
+	readmeContent := generateReadme(readmeFmt, r)
 
 	logger.V(4).Info("Create README.md", "path", readmePath, "content", readmeContent)
 	if err := gClient.CreateFile(readmePath, []byte(readmeContent)); err != nil {
@@ -235,6 +231,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 	newReleaseContent := rf
 	if err := gClient.CreateFile(specFilePath, []byte(newReleaseContent)); err != nil {
 		logger.Error(err, "Adding fedora file", "path", specFilePath)
+		return err
 	}
 	if err := gClient.Add(specFilePath); err != nil {
 		logger.Error(err, "git add", "file", specFilePath)
@@ -245,6 +242,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 	gdbinitFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), gdbinitFile)
 	if err := gClient.CreateFile(gdbinitFilePath, []byte(newReleaseContent)); err != nil {
 		logger.Error(err, "Adding fedora file", "path", gdbinitFilePath)
+		return err
 	}
 	if err := gClient.Add(gdbinitFilePath); err != nil {
 		logger.Error(err, "git add", "file", gdbinitFilePath)
@@ -255,6 +253,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 	fedoraFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), fedoraFile)
 	if err := gClient.CreateFile(fedoraFilePath, []byte(newReleaseContent)); err != nil {
 		logger.Error(err, "Adding fedora file", "path", fedoraFilePath)
+		return err
 	}
 	if err := gClient.Add(fedoraFilePath); err != nil {
 		logger.Error(err, "git add", "file", fedoraFilePath)
@@ -266,6 +265,7 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 	patchesContent := []byte("Copy")
 	if err := gClient.CreateFile(patchesFilePath, patchesContent); err != nil {
 		logger.Error(err, "Adding patches folder path", "path", patchesFilePath)
+		return err
 	}
 	if err := gClient.Add(patchesFilePath); err != nil {
 		logger.Error(err, "git add", "file", patchesFilePath)
@@ -273,53 +273,32 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 	}
 
 	// Commit files
-	if !dryrun {
-		commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
-		if err := gClient.Commit(commitMsg); err != nil {
-			logger.Error(err, "git commit", "message", commitMsg)
-			return err
-		}
-
-		// Push to forked repository
-		if err := gClient.Push(ctx); err != nil {
-			logger.Error(err, "git push")
-			return err
-		}
-
-		// Add files paths for new Go Minor Version
-		// set up PR Creator handler
-		prmOpts := &prManager.Opts{
-			SourceOwner: user,
-			SourceRepo:  constants.EksdBuildToolingRepoName,
-			PrRepo:      constants.EksdBuildToolingRepoName,
-			PrRepoOwner: constants.AwsOrgName,
-		}
-		prm := prManager.New(retrier, githubClient, prmOpts)
-
-		cprOpts := &prManager.CreatePrOpts{
-			CommitBranch:  r.EksGoReleaseFullVersion(),
-			BaseBranch:    "main",
-			AuthorName:    user,
-			AuthorEmail:   email,
-			PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
-			PrBranch:      "main",
-			PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
-		}
-
-		prUrl, err := prm.CreatePr(ctx, cprOpts)
-		if err != nil {
-			// This shouldn't be an breaking error at this point the PR is not open but the changes
-			// have been pushed and can be created manually.
-			logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
-		}
-
-		logger.V(3).Info("Release EKS Go Minor Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
+	// Add files paths for new Go Minor Version
+	// set up PR Creator handler
+	prmOpts := &prManager.Opts{
+		SourceOwner: user,
+		SourceRepo:  constants.EksdBuildToolingRepoName,
+		PrRepo:      constants.EksdBuildToolingRepoName,
+		PrRepoOwner: constants.AwsOrgName,
 	}
+	prm := prManager.New(retrier, githubClient, prmOpts)
+
+	prOpts := &prManager.CreatePrOpts{
+		CommitBranch:  r.EksGoReleaseFullVersion(),
+		BaseBranch:    "main",
+		AuthorName:    user,
+		AuthorEmail:   email,
+		PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
+		PrBranch:      "main",
+		PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
+	}
+
+	createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
 
 	return nil
 }
 
-func GenerateReadme(readmeFmt string, r Release) string {
+func generateReadme(readmeFmt string, r Release) string {
 	/* Format generated for the readme follows:
 	 *  ----------------------------------------
 	 *  # EKS Golang <title>
@@ -378,4 +357,31 @@ func updateGoSpecPatchVersion(fc *string, r Release) string {
 
 func addPatchGoSpec(fc *string, r Release, patch string) string {
 	return ""
+}
+
+func createReleasePR(ctx context.Context, r Release, gClient git.Client, dryrun bool, prm *prManager.PrCreator, prOpts *prManager.CreatePrOpts) error {
+	if !dryrun {
+		commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
+		if err := gClient.Commit(commitMsg); err != nil {
+			logger.Error(err, "git commit", "message", commitMsg)
+			return err
+		}
+
+		// Push to forked repository
+		if err := gClient.Push(ctx); err != nil {
+			logger.Error(err, "git push")
+			return err
+		}
+
+		prUrl, err := prm.CreatePr(ctx, prOpts)
+		if err != nil {
+			// This shouldn't be an breaking error at this point the PR is not open but the changes
+			// have been pushed and can be created manually.
+			logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", prOpts)
+			prUrl = ""
+		}
+
+		logger.V(3).Info("Update EKS Go Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
+	}
+	return nil
 }

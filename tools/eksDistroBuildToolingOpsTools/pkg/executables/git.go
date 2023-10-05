@@ -11,7 +11,7 @@ type Git struct {
 }
 
 const (
-	gitPath             = "git"
+	gitPath = "git"
 )
 
 // NewGit returns a new instance of Git client.
@@ -22,9 +22,8 @@ func NewGit(executable Executable) *Git {
 }
 
 // Am runs 'git am ' using Git.
-func (g *Git) Am(ctx context.Context, , , string, command ...string) (string, error) {
-	params := []string{
-	}
+func (g *Git) Am(ctx context.Context, patches, repo string, command ...string) (string, error) {
+	params := []string{}
 	params = append(params, command...)
 
 	out, err := g.Executable.Execute(ctx, params...)

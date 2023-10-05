@@ -11,14 +11,14 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
 )
 
 const (
- updatePRDescriptionFmt = "Update EKS Go Patch Version: %s\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Bump tracking patch version to 1.20.8 from 1.20.7\n```"
- updatePRSubjectFmt = "Files for new patch release of Golang: %s"
+	updatePRDescriptionFmt = "Update EKS Go Patch Version: %s\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Bump tracking patch version to 1.20.8 from 1.20.7\n```"
+	updatePRSubjectFmt     = "Files for new patch release of Golang: %s"
 )
 
 // UpdatePatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions still maintained by upstream.
@@ -42,7 +42,7 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
 	forkUrl := fmt.Sprintf(constants.EksGoRepoUrl, user)
 	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(forkUrl), git.WithAuth(&http.BasicAuth{Username: user, Password: token}))
 	if err := gClient.Clone(ctx); err != nil {
-		logger.Error(err, "Cloning repo")
+		logger.Error(err, "Cloning repo", "user", user)
 		return err
 	}
 
@@ -74,13 +74,13 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
 	// Update files for new patch versions of golang
 	// Update README.md
 	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.Readme)
-  readmeFmt, err := gClient.ReadFile(readmeFmtPath)
-  if err != nil {
-    logger.Error(err, "Reading README fmt file")
-    return err
-  }
+	readmeFmt, err := gClient.ReadFile(readmeFmtPath)
+	if err != nil {
+		logger.Error(err, "Reading README fmt file")
+		return err
+	}
 
-  readmeContent := GenerateReadme(readmeFmt, r)
+	readmeContent := generateReadme(readmeFmt, r)
 	logger.V(4).Info("Update README.md", "path", readmePath, "content", readmeContent)
 	if err := gClient.ModifyFile(readmePath, []byte(readmeContent)); err != nil {
 		return err
@@ -114,12 +114,12 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
 
 	// update golang.spec
 	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), goSpecFile)
-  goSpecContent, err := gClient.ReadFile(goSpecPath)
-  if err != nil {
-    logger.Error(err, "Reading spec.golang", "file", goSpecPath)
-    return err
-  }
-  goSpecContent = updateGoSpecPatchVersion(&goSpecContent, r)
+	goSpecContent, err := gClient.ReadFile(goSpecPath)
+	if err != nil {
+		logger.Error(err, "Reading spec.golang", "file", goSpecPath)
+		return err
+	}
+	goSpecContent = updateGoSpecPatchVersion(&goSpecContent, r)
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		return err
@@ -130,48 +130,26 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
 	}
 
 	// Commit files
-  if (!dryrun) {
-    commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoMinorReleaseVersion())
-    if err := gClient.Commit(commitMsg); err != nil {
-      logger.Error(err, "git commit", "message", commitMsg)
-      return err
-    }
+	// set up PR Creator handler
+	prmOpts := &prManager.Opts{
+		SourceOwner: user,
+		SourceRepo:  constants.EksdBuildToolingRepoName,
+		PrRepo:      constants.EksdBuildToolingRepoName,
+		PrRepoOwner: constants.AwsOrgName,
+	}
+	prm := prManager.New(retrier, githubClient, prmOpts)
 
-    // Push to forked repository
-    if err := gClient.Push(ctx); err != nil {
-      logger.Error(err, "git push")
-      return err
-    }
+	prOpts := &prManager.CreatePrOpts{
+		CommitBranch:  r.EksGoReleaseFullVersion(),
+		BaseBranch:    "main",
+		AuthorName:    user,
+		AuthorEmail:   email,
+		PrSubject:     fmt.Sprintf(updatePRSubjectFmt, r.GoSemver()),
+		PrBranch:      "main",
+		PrDescription: fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseFullVersion()),
+	}
 
-    // Add files paths for new Go Minor Version
-    // set up PR Creator handler
-    prmOpts := &prManager.Opts{
-      SourceOwner: user,
-      SourceRepo:  constants.EksdBuildToolingRepoName,
-      PrRepo:      constants.EksdBuildToolingRepoName,
-      PrRepoOwner: constants.AwsOrgName,
-    }
-    prm := prManager.New(retrier, githubClient, prmOpts)
+	createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
 
-    cprOpts := &prManager.CreatePrOpts{
-      CommitBranch:  r.EksGoReleaseFullVersion(),
-      BaseBranch:    "main",
-      AuthorName:    user,
-      AuthorEmail:   email,
-      PrSubject:     fmt.Sprintf(updatePRSubjectFmt, r.GoSemver()),
-      PrBranch:      "main",
-      PrDescription: fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseFullVersion()),
-    }
-
-    prUrl, err := prm.CreatePr(ctx, cprOpts)
-    if err != nil {
-      // This shouldn't be an breaking error at this point the PR is not open but the changes
-      // have been pushed and can be created manually.
-      logger.Error(err, "github client create pr failed. Create PR manually from github webclient", "create pr opts", cprOpts)
-      prUrl = ""
-    }
-
-    logger.V(3).Info("Update EKS Go Version", "EKS Go Version", r.EksGoReleaseFullVersion(), "PR", prUrl)
-  }
 	return nil
 }
