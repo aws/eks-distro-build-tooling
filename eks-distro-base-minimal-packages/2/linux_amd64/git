@@ -3,7 +3,7 @@ bash-4.2.46-34.amzn2.x86_64
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
 ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
-expat-2.1.0-15.amzn2.0.2.x86_64
+expat-2.1.0-15.amzn2.0.3.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 fipscheck-lib-1.4.1-6.amzn2.0.2.x86_64
 git-core-2.40.1-1.amzn2.0.1.x86_64
@@ -17,7 +17,7 @@ krb5-libs-1.15.1-55.amzn2.2.6.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.0.1.x86_64
-libcurl-8.2.1-1.amzn2.0.3.x86_64
+libcurl-8.3.0-1.amzn2.0.2.x86_64
 libedit-3.0-12.20121213cvs.amzn2.0.2.x86_64
 libgcc-7.3.1-17.amzn2.x86_64
 libgcrypt-1.5.3-14.amzn2.0.3.x86_64
