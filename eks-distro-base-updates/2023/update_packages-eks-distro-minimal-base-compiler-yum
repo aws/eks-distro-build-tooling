@@ -1,5 +1,6 @@
 
-libgcc.x86_64
-libgomp.x86_64
-libstdc++.x86_64
-libxml2.x86_64
+curl.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libcurl.x86_64

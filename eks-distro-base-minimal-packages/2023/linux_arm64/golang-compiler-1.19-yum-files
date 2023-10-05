@@ -12576,7 +12576,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   263KiB /usr/bin/csplit
--rwxr-xr-x   391KiB /usr/bin/curl
+-rwxr-xr-x   390KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   197KiB /usr/bin/date

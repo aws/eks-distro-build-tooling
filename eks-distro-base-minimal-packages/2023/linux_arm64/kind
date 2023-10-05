@@ -11,7 +11,7 @@ coreutils-8.32-30.amzn2023.0.3.aarch64
 coreutils-common-8.32-30.amzn2023.0.3.aarch64
 cracklib-2.9.6-27.amzn2023.0.2.aarch64
 crypto-policies-20220428-1.gitdfb10ea.amzn2023.0.2.noarch
-curl-8.2.1-1.amzn2023.0.3.aarch64
+curl-8.3.0-1.amzn2023.0.1.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 dbus-1.12.28-1.amzn2023.0.1.aarch64
 dbus-broker-32-1.amzn2023.0.2.aarch64
@@ -33,9 +33,9 @@ findutils-4.8.0-2.amzn2023.0.2.aarch64
 gawk-5.1.0-3.amzn2023.0.3.aarch64
 gdbm-libs-1.19-2.amzn2023.0.2.aarch64
 glib2-2.74.7-689.amzn2023.0.2.aarch64
-glibc-2.34-52.amzn2023.0.5.aarch64
-glibc-common-2.34-52.amzn2023.0.5.aarch64
-glibc-minimal-langpack-2.34-52.amzn2023.0.5.aarch64
+glibc-2.34-52.amzn2023.0.6.aarch64
+glibc-common-2.34-52.amzn2023.0.6.aarch64
+glibc-minimal-langpack-2.34-52.amzn2023.0.6.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gnupg2-2.3.7-1.amzn2023.0.4.aarch64
 gnutls-3.8.0-376.amzn2023.0.2.aarch64
@@ -72,7 +72,7 @@ libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcollection-0.7.0-47.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
 libcomps-0.1.18-1.amzn2023.0.2.aarch64
-libcurl-8.2.1-1.amzn2023.0.3.aarch64
+libcurl-8.3.0-1.amzn2023.0.1.aarch64
 libdb-5.3.28-49.amzn2023.0.2.aarch64
 libdnf-0.67.0-1.amzn2023.0.5.aarch64
 libeconf-0.4.0-1.amzn2023.0.3.aarch64
