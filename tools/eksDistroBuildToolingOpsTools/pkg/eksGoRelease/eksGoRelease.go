@@ -293,7 +293,9 @@ func (r Release) NewMinorRelease(ctx context.Context, dryrun bool, email, user s
 		PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorReleaseVersion()),
 	}
 
-	createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		logger.Error(err, "Create Release PR")
+	}
 
 	return nil
 }

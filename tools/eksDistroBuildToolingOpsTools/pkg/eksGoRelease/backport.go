@@ -152,7 +152,9 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err != nil {
 		logger.Error(err, "Get existing patches")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 	fmt.Println(len(patches))
 	// Attempt patch generation if it fails, skip updating gospec with new patch number
@@ -161,13 +163,17 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err := goRepo.Clone(ctx); err != nil {
 		logger.Error(err, "Cloning go repo")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 
 	if err := goRepo.Branch(r.GoReleaseBranch()); err != nil {
 		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", goRepo)
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 
 	patch := ""
@@ -175,14 +181,20 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		logger.Error(err, "modify file", "file", goSpecPath)
-		createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 	if err := gClient.Add(goSpecPath); err != nil {
 		logger.Error(err, "git add", "file", goSpecPath)
-		createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 
-	createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		logger.Error(err, "Create Release PR")
+	}
 
 	return nil
 }

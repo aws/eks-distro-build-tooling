@@ -18,7 +18,7 @@ import (
 
 const (
 	updatePRDescriptionFmt = "Update EKS Go Patch Version: %s\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Bump tracking patch version to 1.20.8 from 1.20.7\n```"
-	updatePRSubjectFmt     = "Files for new patch release of Golang: %s"
+	updatePRSubjectFmt     = "New patch release of Golang: %s"
 )
 
 // UpdatePatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions still maintained by upstream.
@@ -149,7 +149,9 @@ func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user str
 		PrDescription: fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseFullVersion()),
 	}
 
-	createReleasePR(ctx, r, gClient, dryrun, prm, prOpts)
+	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		logger.Error(err, "Create Release PR")
+	}
 
 	return nil
 }
