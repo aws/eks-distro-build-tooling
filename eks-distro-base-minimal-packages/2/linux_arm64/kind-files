@@ -587,10 +587,10 @@
 -rw-r--r--      34B /usr/lib/locale/C.utf8/LC_PAPER
 -rw-r--r--      47B /usr/lib/locale/C.utf8/LC_TELEPHONE
 -rw-r--r--   2.5KiB /usr/lib/locale/C.utf8/LC_TIME
--rw-r--r--     209B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.1-py2.7.egg-info/PKG-INFO
--rw-r--r--     559B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.1-py2.7.egg-info/SOURCES.txt
--rw-r--r--       1B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.1-py2.7.egg-info/dependency_links.txt
--rw-r--r--      20B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.1-py2.7.egg-info/top_level.txt
+-rw-r--r--     209B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.3-py2.7.egg-info/PKG-INFO
+-rw-r--r--     559B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.3-py2.7.egg-info/SOURCES.txt
+-rw-r--r--       1B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.3-py2.7.egg-info/dependency_links.txt
+-rw-r--r--      20B /usr/lib/python2.7/site-packages/amazon_linux_extras-2.0.3-py2.7.egg-info/top_level.txt
 -rw-r--r--     687B /usr/lib/python2.7/site-packages/amazon_linux_extras/__init__.py
 -rw-r--r--     151B /usr/lib/python2.7/site-packages/amazon_linux_extras/__init__.pyc
 -rw-r--r--     151B /usr/lib/python2.7/site-packages/amazon_linux_extras/__init__.pyo
@@ -1420,7 +1420,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.1MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   203KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   734KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   798KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   398KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   404KiB /usr/lib64/libdevmapper.so.1.02
@@ -4564,7 +4564,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.2.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.3.0/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
@@ -4602,7 +4602,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
 -rw-r--r--    26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
--rw-r--r--    13KiB /usr/share/licenses/vim-data-9.0.1592/LICENSE
+-rw-r--r--    13KiB /usr/share/licenses/vim-data-9.0.1882/LICENSE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/af/LC_MESSAGES/glib20.mo
@@ -6561,7 +6561,7 @@
 -rw-r--r--   2.2KiB /usr/share/terminfo/x/xterm-xfree86
 -rw-r--r--   2.0KiB /usr/share/terminfo/x/xterm-xi
 -rw-r--r--   1.5KiB /usr/share/terminfo/x/xterms
--rw-r--r--   4.5KiB /usr/share/vim/vim90/defaults.vim
+-rw-r--r--   4.8KiB /usr/share/vim/vim90/defaults.vim
 -rw-r--r--     444B /usr/share/vim/vimfiles/template.spec
 -rwxr-xr-x   9.2KiB /usr/share/yum-cli/callback.py
 -rw-r--r--   6.8KiB /usr/share/yum-cli/callback.pyc
@@ -8417,8 +8417,8 @@
 -rw-r--r--   7.6MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    80KiB /var/lib/rpm/Requirename
--rw-r--r--    28KiB /var/lib/rpm/Sha1header
--rw-r--r--    16KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    20KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
 -rw-------       0B /var/lib/systemd/random-seed

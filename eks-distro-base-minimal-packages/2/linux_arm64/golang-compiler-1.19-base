@@ -10,7 +10,7 @@ coreutils-8.22-24.amzn2.aarch64
 cracklib-2.9.0-11.amzn2.0.2.aarch64
 cracklib-dicts-2.9.0-11.amzn2.0.2.aarch64
 cryptsetup-libs-1.7.4-4.amzn2.aarch64
-curl-8.2.1-1.amzn2.0.3.aarch64
+curl-8.3.0-1.amzn2.0.2.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 dbus-1.10.24-7.amzn2.0.3.aarch64
 dbus-libs-1.10.24-7.amzn2.0.3.aarch64
@@ -20,7 +20,7 @@ diffutils-3.3-5.amzn2.aarch64
 elfutils-default-yama-scope-0.176-2.amzn2.0.2.noarch
 elfutils-libelf-0.176-2.amzn2.0.2.aarch64
 elfutils-libs-0.176-2.amzn2.0.2.aarch64
-expat-2.1.0-15.amzn2.0.2.aarch64
+expat-2.1.0-15.amzn2.0.3.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 fipscheck-1.4.1-6.amzn2.0.2.aarch64
@@ -48,7 +48,7 @@ libcap-2.54-1.amzn2.0.2.aarch64
 libcap-ng-0.7.5-4.amzn2.0.4.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-63.amzn2.0.1.aarch64
-libcurl-8.2.1-1.amzn2.0.3.aarch64
+libcurl-8.3.0-1.amzn2.0.2.aarch64
 libdb-5.3.21-24.amzn2.0.4.aarch64
 libdb-utils-5.3.21-24.amzn2.0.4.aarch64
 libedit-3.0-12.20121213cvs.amzn2.0.2.aarch64

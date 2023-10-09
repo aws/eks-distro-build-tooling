@@ -12476,7 +12476,7 @@
 -rwxr-xr-x   143KiB /usr/bin/cpio
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
--rwxr-xr-x   239KiB /usr/bin/curl
+-rwxr-xr-x   247KiB /usr/bin/curl
 -rwxr-xr-x    41KiB /usr/bin/cut
 -rwxr-xr-x    61KiB /usr/bin/date
 -rwxr-xr-x    12KiB /usr/bin/db_archive
@@ -13599,7 +13599,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
 -rwxr-xr-x   167KiB /usr/lib64/libcryptsetup.so.4.7.0
--rwxr-xr-x   694KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   738KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   314KiB /usr/lib64/libdbus-1.so.3.14.14
 -r-xr-xr-x   344KiB /usr/lib64/libdevmapper.so.1.02
@@ -16678,7 +16678,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/kmod-libs-25/COPYING
 -rw-r--r--    60KiB /usr/share/licenses/krb5-libs-1.15.1/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap-2.54/License
--rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.2.1/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libcurl-8.3.0/COPYING
 -rw-r--r--     352B /usr/share/licenses/libfdisk-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libfdisk-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--    18KiB /usr/share/licenses/libgcc-7.3.1/COPYING
