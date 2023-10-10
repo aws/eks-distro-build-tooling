@@ -527,6 +527,9 @@ fi
 %endif
 
 %changelog
+* Tue Oct 10 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.2-1
+- Bump tracking patch version to 1.21.2 from 1.21.1
+
 * Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.1-1
 - Bump to go1.21.1 to include security patches for eks go
 
