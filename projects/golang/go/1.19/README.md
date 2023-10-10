@@ -24,4 +24,4 @@ Tracking Tag: `go1.19.13`
 The patches in `./patches` include relevant utility fixes for go `1.19`.
 
 ### Spec
-The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.19 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.19.13` source."
+The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.19 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.19.13` source.
