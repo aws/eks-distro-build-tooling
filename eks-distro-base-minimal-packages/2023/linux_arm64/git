@@ -20,7 +20,7 @@ krb5-libs-1.21-3.amzn2023.0.3.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
-libcurl-minimal-8.3.0-1.amzn2023.0.1.aarch64
+libcurl-minimal-8.3.0-1.amzn2023.0.2.aarch64
 libedit-3.1-38.20210714cvs.amzn2023.0.2.aarch64
 libffi-3.4.4-1.amzn2023.0.1.aarch64
 libfido2-1.10.0-2.amzn2023.0.2.aarch64
