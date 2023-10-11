@@ -6,7 +6,7 @@ ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cpio-2.12-11.amzn2.x86_64
-curl-8.3.0-1.amzn2.0.2.x86_64
+curl-8.3.0-1.amzn2.0.4.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
 diffutils-3.3-5.amzn2.x86_64
 elfutils-libelf-0.176-2.amzn2.0.2.x86_64
@@ -36,7 +36,7 @@ libblkid-2.30.2-2.amzn2.0.11.x86_64
 libcap-2.54-1.amzn2.0.2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.0.1.x86_64
-libcurl-8.3.0-1.amzn2.0.2.x86_64
+libcurl-8.3.0-1.amzn2.0.4.x86_64
 libdb-5.3.21-24.amzn2.0.4.x86_64
 libdb-utils-5.3.21-24.amzn2.0.4.x86_64
 libffi-3.0.13-18.amzn2.0.2.x86_64
