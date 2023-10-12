@@ -155,10 +155,10 @@ Provides: bundled(golang(golang.org/x/tools)) = 0.3.1.0.20230118190848.070db2996
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
-Patch2:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch3:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
-Patch4:       0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
-Patch5:       0105-add-method-to-skip-privd-tests-if-required.patch
+Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
+Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch104:       0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
+Patch105:       0105-add-method-to-skip-privd-tests-if-required.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
