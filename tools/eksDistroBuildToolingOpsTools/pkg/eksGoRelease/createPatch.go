@@ -46,7 +46,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	}
 
 	// Get Current EKS Go Release Version from repo and increment
-	releasePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.ReleaseTag)
+	releasePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.ReleaseTag)
 	content, err := gClient.ReadFile(releasePath)
 	if err != nil {
 		logger.Error(err, "Reading file", "file", releasePath)
@@ -65,14 +65,14 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	r.Release = cr + 1
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseFullVersion()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.EksGoReleaseFullVersion(), "repo", forkUrl, "client", gClient)
+	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
+		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
 
 	// Update files for new patch versions of golang
 	// Update README.md
-	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.Readme)
+	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.Readme)
 	readmeFmt, err := gClient.ReadFile(readmeFmtPath)
 	if err != nil {
 		logger.Error(err, "Reading README fmt file")
@@ -100,7 +100,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	}
 
 	// update GIT_TAG
-	gittagPath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.GitTag)
+	gittagPath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.GitTag)
 	gittagContent := fmt.Sprintf("go%s", r.GoFullVersion())
 	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
 	if err := gClient.ModifyFile(gittagPath, []byte(gittagContent)); err != nil {
@@ -112,7 +112,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	}
 
 	// update golang.spec
-	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), goSpecFile)
+	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
 	goSpecContent, err := gClient.ReadFile(goSpecPath)
 	if err != nil {
 		logger.Error(err, "Reading spec.golang", "file", goSpecPath)
@@ -138,21 +138,21 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
 	prOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseFullVersion(),
+		CommitBranch:  r.EksGoReleaseVersion(),
 		BaseBranch:    "main",
 		AuthorName:    user,
 		AuthorEmail:   email,
 		PrSubject:     fmt.Sprintf(backportPRSubjectFmt, cve, r.GoSemver()),
 		PrBranch:      "main",
-		PrDescription: fmt.Sprintf(backportPRDescriptionFmt, cve, r.EksGoReleaseFullVersion()),
+		PrDescription: fmt.Sprintf(backportPRDescriptionFmt, cve, r.EksGoReleaseVersion()),
 	}
 
 	// Get previous patches from gclient
-	patches, err := gClient.ReadFiles(fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), "00"))
+	patches, err := gClient.ReadFiles(fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), "00"))
 	if err != nil {
 		logger.Error(err, "Get existing patches")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -163,7 +163,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err := goRepo.Clone(ctx); err != nil {
 		logger.Error(err, "Cloning go repo")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -171,7 +171,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err := goRepo.Branch(r.GoReleaseBranch()); err != nil {
 		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", goRepo)
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -181,18 +181,18 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		logger.Error(err, "modify file", "file", goSpecPath)
-		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
 	if err := gClient.Add(goSpecPath); err != nil {
 		logger.Error(err, "git add", "file", goSpecPath)
-		if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
 
-	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
+	if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
 		logger.Error(err, "Create Release PR")
 	}
 

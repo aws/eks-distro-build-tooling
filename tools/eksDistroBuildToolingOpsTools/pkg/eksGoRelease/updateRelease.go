@@ -47,7 +47,7 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// Get Current EKS Go Release Version from repo and increment
-	releasePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.ReleaseTag)
+	releasePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.ReleaseTag)
 	content, err := gClient.ReadFile(releasePath)
 	if err != nil {
 		logger.Error(err, "Reading file", "file", releasePath)
@@ -66,21 +66,21 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	r.Release = cr + 1
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseFullVersion()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.EksGoReleaseFullVersion(), "repo", forkUrl, "client", gClient)
+	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
+		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
 
 	// Update files for new patch versions of golang
 	// Update README.md
-	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.Readme)
+	readmePath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.Readme)
 	readmeFmt, err := gClient.ReadFile(readmeFmtPath)
 	if err != nil {
 		logger.Error(err, "Reading README fmt file")
 		return err
 	}
 
-	readmeContent := generateReadme(readmeFmt, r)
+	readmeContent := generateReadme(readmeFmt, *r)
 	logger.V(4).Info("Update README.md", "path", readmePath, "content", readmeContent)
 	if err := gClient.ModifyFile(readmePath, []byte(readmeContent)); err != nil {
 		return err
@@ -101,7 +101,7 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// update GIT_TAG
-	gittagPath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), constants.GitTag)
+	gittagPath := fmt.Sprintf(basePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), constants.GitTag)
 	gittagContent := fmt.Sprintf("go%s", r.GoFullVersion())
 	logger.V(4).Info("Update GIT_TAG", "path", gittagPath, "content", gittagContent)
 	if err := gClient.ModifyFile(gittagPath, []byte(gittagContent)); err != nil {
@@ -113,13 +113,13 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// update golang.spec
-	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorReleaseVersion(), goSpecFile)
+	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
 	goSpecContent, err := gClient.ReadFile(goSpecPath)
 	if err != nil {
 		logger.Error(err, "Reading spec.golang", "file", goSpecPath)
 		return err
 	}
-	goSpecContent = updateGoSpecPatchVersion(&goSpecContent, r)
+	goSpecContent = updateGoSpecPatchVersion(&goSpecContent, *r)
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		return err
@@ -140,13 +140,13 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
 	prOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseFullVersion(),
+		CommitBranch:  r.EksGoReleaseVersion(),
 		BaseBranch:    "main",
 		AuthorName:    user,
 		AuthorEmail:   email,
 		PrSubject:     fmt.Sprintf(updatePRSubjectFmt, r.GoSemver()),
 		PrBranch:      "main",
-		PrDescription: fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseFullVersion()),
+		PrDescription: fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseVersion()),
 	}
 
 	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {

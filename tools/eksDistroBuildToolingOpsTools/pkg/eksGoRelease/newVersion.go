@@ -1,5 +1,20 @@
 package eksGoRelease
 
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/go-git/go-git/v5/plumbing/transport/http"
+
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
+	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
+)
+
 const (
 	newMinorVersionCommitMsgFmt     = "Init new Go Minor Version %s files."
 	newMinorVersionPRSubjectFmt     = "New minor release of Golang: %s"
@@ -44,7 +59,7 @@ func NewMinorRelease(ctx context.Context, r *Release, dryrun bool, email, user s
 		return err
 	}
 
-	readmeContent := generateReadme(readmeFmt, r)
+	readmeContent := generateReadme(readmeFmt, *r)
 
 	logger.V(4).Info("Create README.md", "path", readmePath, "content", readmeContent)
 	if err := gClient.CreateFile(readmePath, []byte(readmeContent)); err != nil {
