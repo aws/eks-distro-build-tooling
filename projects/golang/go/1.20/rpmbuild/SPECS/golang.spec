@@ -105,7 +105,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.20
 #global go_prerelease rc3
-%global go_patch 9
+%global go_patch 10
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -155,10 +155,10 @@ Provides: bundled(golang(golang.org/x/tools)) = 0.3.1.0.20230118190848.070db2996
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
-Patch2:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
-Patch3:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
-Patch4:       0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
-Patch5:       0105-add-method-to-skip-privd-tests-if-required.patch
+Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
+Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
+Patch104:       0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
+Patch105:       0105-add-method-to-skip-privd-tests-if-required.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -534,6 +534,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 12 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.10-1
+- Bump tracking patch version to 1.20.10 from 1.20.9
+
 * Tue Oct 10 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.9-1
 - Bump tracking patch version to 1.20.9 from 1.20.8
 
