@@ -97,7 +97,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.21
 #global go_prerelease rc3
-%global go_patch 2
+%global go_patch 3
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -148,8 +148,8 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-filesystem
 
-Patch1:         0101-Disable-Google-s-proxy-sumdb-and-toolchain.patch
-Patch4:         0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
+Patch101:         0101-Disable-Google-s-proxy-sumdb-and-toolchain.patch
+Patch104:         0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -527,6 +527,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 12 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.3-1
+- Bump tracking patch version to 1.21.3 from 1.21.2
+
 * Tue Oct 10 2023 Cameron Rozean <rcrozean@amazon.com> - 1.21.2-1
 - Bump tracking patch version to 1.21.2 from 1.21.1
 
