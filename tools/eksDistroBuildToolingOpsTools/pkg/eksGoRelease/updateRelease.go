@@ -23,7 +23,7 @@ const (
 
 // UpdatePatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions still maintained by upstream.
 // For EKS Go versions that aren't maintained by upstream, the function is
-func (r Release) UpdateVersion(ctx context.Context, dryrun bool, email, user string) error {
+func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user string) error {
 	// Setup Github Client
 	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
 
