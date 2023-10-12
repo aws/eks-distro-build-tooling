@@ -148,8 +148,8 @@ Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 Requires:       go-filesystem
 
-Patch1:         0101-Disable-Google-s-proxy-sumdb-and-toolchain.patch
-Patch4:         0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
+Patch101:         0101-Disable-Google-s-proxy-sumdb-and-toolchain.patch
+Patch104:         0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
