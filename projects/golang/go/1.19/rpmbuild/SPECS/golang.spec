@@ -541,6 +541,9 @@ fi
 %endif
 
 %changelog
+* Thu Oct 12 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.13-5
+- Includes security fix for CVE-2023-39325
+
 * Tue Oct 10 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.13-4
 - Includes security fix for CVE-2023-39323
 
