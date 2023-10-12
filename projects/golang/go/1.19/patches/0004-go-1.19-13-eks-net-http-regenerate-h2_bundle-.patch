@@ -1,0 +1,203 @@
+From c07a3aaf582aca3f362fbfffa110c17b6b0e0b1d Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Fri, 6 Oct 2023 14:16:27 -0700
+Subject: [PATCH] [release-branch.go1.20] net/http: regenerate h2_bundle.go
+
+# AWS EKS
+
+Backported To: go-1.19.13-eks
+Backported On: Thu, 12 Oct 2023
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.20
+Source Commit: https://github.com/golang/go/commit/e175f27f58aa7b9cd4d79607ae65d2cd5baaee68
+
+# Original Information
+
+Pull in a security fix from x/net/http2:
+http2: limit maximum handler goroutines to MaxConcurrentStreamso
+
+For #63417
+Fixes #63426
+Fixes CVE-2023-39325
+
+Change-Id: I6e32397323cd9b4114c990fcc9d19557a7f5f619
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/2047401
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+TryBot-Result: Security TryBots <security-trybots@go-security-trybots.iam.gserviceaccount.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Ian Cottrell <iancottrell@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/534255
+Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+TryBot-Bypass: Dmitri Shuralyov <dmitshur@google.com>
+Reviewed-by: Michael Pratt <mpratt@google.com>
+Auto-Submit: Dmitri Shuralyov <dmitshur@google.com>
+---
+ src/cmd/internal/moddeps/moddeps_test.go |  2 +
+ src/net/http/h2_bundle.go                | 94 ++++++++++++++++++++++--
+ 2 files changed, 91 insertions(+), 5 deletions(-)
+
+diff --git a/src/cmd/internal/moddeps/moddeps_test.go b/src/cmd/internal/moddeps/moddeps_test.go
+index 053cb8f548..b05a143c79 100644
+--- a/src/cmd/internal/moddeps/moddeps_test.go
++++ b/src/cmd/internal/moddeps/moddeps_test.go
+@@ -33,6 +33,8 @@ import (
+ // See issues 36852, 41409, and 43687.
+ // (Also see golang.org/issue/27348.)
+ func TestAllDependencies(t *testing.T) {
++	t.Skip("TODO(#63427): 1.21.3 contains unreleased changes from vendored modules")
++
+ 	goBin := testenv.GoToolPath(t)
+ 
+ 	// Ensure that all packages imported within GOROOT
+diff --git a/src/net/http/h2_bundle.go b/src/net/http/h2_bundle.go
+index 2e5ef078e5..d6a9335c8f 100644
+--- a/src/net/http/h2_bundle.go
++++ b/src/net/http/h2_bundle.go
+@@ -4239,9 +4239,11 @@ type http2serverConn struct {
+ 	advMaxStreams               uint32 // our SETTINGS_MAX_CONCURRENT_STREAMS advertised the client
+ 	curClientStreams            uint32 // number of open streams initiated by the client
+ 	curPushedStreams            uint32 // number of open streams initiated by server push
++	curHandlers                 uint32 // number of running handler goroutines
+ 	maxClientStreamID           uint32 // max ever seen from client (odd), or 0 if there have been no client requests
+ 	maxPushPromiseID            uint32 // ID of the last push promise (even), or 0 if there have been no pushes
+ 	streams                     map[uint32]*http2stream
++	unstartedHandlers           []http2unstartedHandler
+ 	initialStreamSendWindowSize int32
+ 	maxFrameSize                int32
+ 	headerTableSize             uint32
+@@ -4635,6 +4637,8 @@ func (sc *http2serverConn) serve() {
+ 					return
+ 				case http2gracefulShutdownMsg:
+ 					sc.startGracefulShutdownInternal()
++				case http2handlerDoneMsg:
++					sc.handlerDone()
+ 				default:
+ 					panic("unknown timer")
+ 				}
+@@ -4680,6 +4684,7 @@ var (
+ 	http2idleTimerMsg        = new(http2serverMessage)
+ 	http2shutdownTimerMsg    = new(http2serverMessage)
+ 	http2gracefulShutdownMsg = new(http2serverMessage)
++	http2handlerDoneMsg      = new(http2serverMessage)
+ )
+ 
+ func (sc *http2serverConn) onSettingsTimer() { sc.sendServeMsg(http2settingsTimerMsg) }
+@@ -5642,8 +5647,31 @@ func (sc *http2serverConn) processHeaders(f *http2MetaHeadersFrame) error {
+ 		sc.conn.SetReadDeadline(time.Time{})
+ 	}
+ 
+-	go sc.runHandler(rw, req, handler)
+-	return nil
++	return sc.scheduleHandler(id, rw, req, handler)
++}
++
++func (sc *http2serverConn) upgradeRequest(req *Request) {
++	sc.serveG.check()
++	id := uint32(1)
++	sc.maxClientStreamID = id
++	st := sc.newStream(id, 0, http2stateHalfClosedRemote)
++	st.reqTrailer = req.Trailer
++	if st.reqTrailer != nil {
++		st.trailer = make(Header)
++	}
++	rw := sc.newResponseWriter(st, req)
++
++	// Disable any read deadline set by the net/http package
++	// prior to the upgrade.
++	if sc.hs.ReadTimeout != 0 {
++		sc.conn.SetReadDeadline(time.Time{})
++	}
++
++	// This is the first request on the connection,
++	// so start the handler directly rather than going
++	// through scheduleHandler.
++	sc.curHandlers++
++	go sc.runHandler(rw, req, sc.handler.ServeHTTP)
+ }
+ 
+ func (st *http2stream) processTrailerHeaders(f *http2MetaHeadersFrame) error {
+@@ -5871,6 +5899,11 @@ func (sc *http2serverConn) newWriterAndRequestNoBody(st *http2stream, rp http2re
+ 	}
+ 	req = req.WithContext(st.ctx)
+ 
++  rw := sc.newResponseWriter(st, req)
++	return rw, req, nil
++}
++
++func (sc *http2serverConn) newResponseWriter(st *http2stream, req *Request) *http2responseWriter {
+ 	rws := http2responseWriterStatePool.Get().(*http2responseWriterState)
+ 	bwSave := rws.bw
+ 	*rws = http2responseWriterState{} // zero all the fields
+@@ -5879,14 +5912,65 @@ func (sc *http2serverConn) newWriterAndRequestNoBody(st *http2stream, rp http2re
+ 	rws.bw.Reset(http2chunkWriter{rws})
+ 	rws.stream = st
+ 	rws.req = req
+-	rws.body = body
++	return &http2responseWriter{rws: rws}
++}
+ 
+-	rw := &http2responseWriter{rws: rws}
+-	return rw, req, nil
++type http2unstartedHandler struct {
++	streamID uint32
++	rw       *http2responseWriter
++	req      *Request
++	handler  func(ResponseWriter, *Request)
++}
++
++// scheduleHandler starts a handler goroutine,
++// or schedules one to start as soon as an existing handler finishes.
++func (sc *http2serverConn) scheduleHandler(streamID uint32, rw *http2responseWriter, req *Request, handler func(ResponseWriter, *Request)) error {
++	sc.serveG.check()
++	maxHandlers := sc.advMaxStreams
++	if sc.curHandlers < maxHandlers {
++		sc.curHandlers++
++		go sc.runHandler(rw, req, handler)
++		return nil
++	}
++	if len(sc.unstartedHandlers) > int(4*sc.advMaxStreams) {
++		return sc.countError("too_many_early_resets", http2ConnectionError(http2ErrCodeEnhanceYourCalm))
++	}
++	sc.unstartedHandlers = append(sc.unstartedHandlers, http2unstartedHandler{
++		streamID: streamID,
++		rw:       rw,
++		req:      req,
++		handler:  handler,
++	})
++	return nil
++}
++
++func (sc *http2serverConn) handlerDone() {
++	sc.serveG.check()
++	sc.curHandlers--
++	i := 0
++	maxHandlers := sc.advMaxStreams
++	for ; i < len(sc.unstartedHandlers); i++ {
++		u := sc.unstartedHandlers[i]
++		if sc.streams[u.streamID] == nil {
++			// This stream was reset before its goroutine had a chance to start.
++			continue
++		}
++		if sc.curHandlers >= maxHandlers {
++			break
++		}
++		sc.curHandlers++
++		go sc.runHandler(u.rw, u.req, u.handler)
++		sc.unstartedHandlers[i] = http2unstartedHandler{} // don't retain references
++	}
++	sc.unstartedHandlers = sc.unstartedHandlers[i:]
++	if len(sc.unstartedHandlers) == 0 {
++		sc.unstartedHandlers = nil
++	}
+ }
+ 
+ // Run on its own goroutine.
+ func (sc *http2serverConn) runHandler(rw *http2responseWriter, req *Request, handler func(ResponseWriter, *Request)) {
++	defer sc.sendServeMsg(http2handlerDoneMsg)
+ 	didPanic := true
+ 	defer func() {
+ 		rw.rws.stream.cancelCtx()
+-- 
+2.42.0
+
