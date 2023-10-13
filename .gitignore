@@ -10,3 +10,5 @@ eks-distro-base/check-update/
 eks-distro-base/*-pushed
 eks-distro-base/make-tests/actual/
 builder-base/tmp/
+tools/eksDistroBuildToolingOpsTools/bin
+
