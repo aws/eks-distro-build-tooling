@@ -28,7 +28,8 @@ LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base-kind
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-
+PYTHON_IMAGE_NAME?=eks-distro-minimal-base-python
+PYTHON_IMAGE?=$(BASE_IMAGE_REPO)/$(PYTHON_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(PYTHON_IMAGE_NAME)-3.9)
 # using the minimal-base-builder as the base for the download/gcc stages of
 # this build since it doesnt change too often, limiting churn/rebuilds
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base
@@ -46,13 +47,15 @@ IGNORE_NO_CACHE?=false
 NETRC=--secret id=netrc,src=$(HOME)/.netrc
 
 define BASE_TAG_FROM_TAG_FILE
-$(shell yq e ".al$(AL_TAG).$(1)" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
+$(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
 endef
 
 define NEWLINE
 
 
 endef
+
+REALPATH=TZ=utc $(shell if [ "$$(uname -s)" = "Darwin" ] && command -v grealpath &> /dev/null; then echo grealpath; else echo realpath; fi)
 
 GOLANG_RPM_OUTPUT_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
 # Resolves to the download-golang-% targets for each golang version present in ./versions.yaml
@@ -91,10 +94,12 @@ images-%:
 		--frontend dockerfile.v0 \
 		--opt platform=$(BUILDKIT_PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:PYTHON_IMAGE=$(PYTHON_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:GOPROXY=$(GOPROXY) \
+		--opt build-arg:AL_TAG=al$(AL_TAG) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
-		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell realpath --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
+		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell $(REALPATH) --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
 		$(foreach BUILD_ARG,$(IMAGE_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
 		--export-cache type=inline \
 		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \

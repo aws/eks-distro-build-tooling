@@ -33,6 +33,10 @@ function install_packer() {
         $PACKER_DOWNLOAD_URL
     sha256sum -c $BASE_DIR/packer-$TARGETARCH-checksum
     unzip -o packer_${PACKER_VERSION}_linux_$TARGETARCH.zip -d $USR_LOCAL_BIN
+
+    mkdir -p /packer/home/imagebuilder
+
+    PACKER_CONFIG_DIR=/packer/home/imagebuilder $USR_LOCAL_BIN/packer plugins install github.com/hashicorp/ansible ${PACKER_ANSIBLE_PLUGIN}
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_packer
