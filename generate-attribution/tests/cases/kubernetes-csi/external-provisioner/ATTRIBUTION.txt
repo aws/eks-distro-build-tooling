@@ -574,7 +574,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ------
 
 ** github.com/imdario/mergo; version v0.3.9 --
-https://github.com/imdario/mergo
+https://github.com/darccio/mergo
 
 Copyright (c) 2013 Dario Castañé. All rights reserved.
 Copyright (c) 2012 The Go Authors. All rights reserved.
@@ -717,22 +717,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 https://github.com/golang/go
 
 ** golang.org/x/crypto; version v0.0.0-20200622213623-75b288015ac9 --
-https://go.googlesource.com/crypto
+https://golang.org/x/crypto
 
 ** golang.org/x/net; version v0.0.0-20200707034311-ab3426394381 --
-https://go.googlesource.com/net
+https://golang.org/x/net
 
 ** golang.org/x/oauth2; version v0.0.0-20200107190931-bf48bf16ab8d --
-https://go.googlesource.com/oauth2
+https://golang.org/x/oauth2
 
 ** golang.org/x/sys; version v0.0.0-20200622214017-ed371f2e16b4 --
-https://go.googlesource.com/sys
+https://golang.org/x/sys
 
 ** golang.org/x/text; version v0.3.3 --
-https://go.googlesource.com/text
+https://golang.org/x/text
 
 ** golang.org/x/time/rate; version v0.0.0-20200416051211-89c76fbcd5d1 --
-https://go.googlesource.com/time
+https://golang.org/x/time
 
 Copyright (c) 2009 The Go Authors. All rights reserved.
 
