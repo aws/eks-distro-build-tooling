@@ -28,18 +28,14 @@ usermod --shell /bin/bash root
 
 # user for goss/imagebuilder
 # to make sure the home dir is created correctly, tmp move the goss plugin
-# on arm goss does not exist
-if [ -f /home/imagebuilder/.packer.d/plugins/packer-provisioner-goss ]; then
-    mv /home/imagebuilder/.packer.d/plugins/packer-provisioner-goss /tmp
-fi
+mv /home/imagebuilder/.packer.d /tmp
 
 rm -rf /home/imagebuilder
 useradd -ms /bin/bash -u 1100 imagebuilder
 
-if [ -f /tmp/packer-provisioner-goss ]; then
-    mkdir -p /home/imagebuilder/.packer.d/plugins/
-    mv /tmp/packer-provisioner-goss /home/imagebuilder/.packer.d/plugins/
-fi
+mv /tmp/.packer.d /home/imagebuilder/
+
+chown -R imagebuilder:imagebuilder /home/imagebuilder
 
 # directory setup
 mkdir -p /go/src/github.com/aws/eks-distro
@@ -79,8 +75,7 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     yum install -y \
         gcc \
         openssl-devel \
-        pkgconfig \
-        python3-pip
+        pkgconfig 
 
     # for building containerd
     yum install -y \
