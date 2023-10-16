@@ -1,12 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 const fsPromises = fs.promises;
-const csvParse = require('csv-parse/lib/sync')
+const {parse} = require('csv-parse/sync')
 const HTMLParser = require('node-html-parser');
-const { https, http } = require('follow-redirects');
+const { https } = require('follow-redirects');
+const { promisify } = require('util');
 const retry = require('async-retry')
 const glob = require("glob-promise")
 const homedir = require('os').homedir();
+const {setImmediate} = require("timers/promises");
 
 // https://github.com/google/licenseclassifier/blob/842c0d70d7027215932deb13801890992c9ba364/license_type.go#L323
 const RECIPROCAL_LICENSE_TYPES = ["APSL-1.0", "APSL-1.1", "APSL-1.2", "APSL-2.0", "CDDL-1.0", "CDDL-1.1", "CPL-1.0", "EPL-1.0", "FreeImage", "IPL-1.0", "MPL-1.0", "MPL-1.1", "MPL-2.0", "Ruby"];
@@ -16,6 +18,16 @@ const sortByModule = (a, b) => a.module.localeCompare(b.module);
 
 const cacheFile = path.join(homedir, ".generate-attribution", '.cache');
 let httpCache = {};
+
+https.get[promisify.custom] = function getAsync(options) {
+    return new Promise((resolve, reject) => {
+        https.get(options, (response) => {
+            response.end = new Promise((resolve) => response.on('end', resolve));
+            resolve(response);
+        }).on('error', reject);
+    });
+};
+const get = promisify(https.get);
 
 const doesRequireSourceLink = (licenseType) => {
     return RECIPROCAL_LICENSE_TYPES.findIndex((type) => licenseType.startsWith(type)) !== -1;
@@ -67,6 +79,16 @@ const extractCopyRights = (license) => {
     license = license.replace(/^ +/gm, '').trim();
     return { licenseContent: license, copyrights: matches };
 }
+
+const throttledConcurrencyPromiseAll = async (arr, f, n) => {
+    const results = Array(arr.length);
+    const entries = arr.entries();
+    const worker = async () => {
+        for (const [key, val] of entries) results[key] = await f(val);
+    };
+    await Promise.all(Array.from({ length: Math.min(arr.length, n) }, worker));
+    return results;
+};
 
 const parseRepoURL = (repo, stripHttps = false) => {
     const parts = repo.split(' ');
@@ -155,76 +177,80 @@ async function addGoLicense(dependencies) {
     return dependencies;
 }
 
-async function cacheHttp(url, prom) {
-    return new Promise((resolve, reject) => {
-        if (Object.hasOwn(httpCache, url)) {
-            return resolve(httpCache[url]);
-        }
-        prom.then((res) => {
-            httpCache[url] = res;
-            resolve(res);
-        }).catch(reject);
-    });
+async function cacheHttp(url, fn) {
+    if (!Object.hasOwn(httpCache, url)) {
+        res = await retry(fn, {
+            retries: 5, onRetry: (err, num) => {
+                console.log(`NOTICE: retry attempt ${num} for ${url} due to ${err}`);
+            }
+        });
+        httpCache[url] = res;
+    }
+
+    await setImmediate();
+    return httpCache[url];
 }
 
 async function readLicenseFromUpstream(upstreamUrl) {
     let finalDoc = '';
     const options = await generateAuthorizationHeader()
     options.timeout = 15 * 1000
-    return cacheHttp(upstreamUrl, new Promise((resolve, reject) => {
-        const req = https.get(upstreamUrl, options, res => {
-            res.on('data', d => {
-                finalDoc += d;
-            })
-            res.on('end', () => {
-                resolve(finalDoc);
-            });
-        });
-
-        req.on('error', (err) => {
-            reject(err);
-        });
-        req.end();
-    }));
+    return cacheHttp(upstreamUrl, async () => {
+        const res = await get(upstreamUrl, options);
+        res.on('data', d => {
+            finalDoc += d;
+        })
+        await res.end;
+        return finalDoc;
+    });
 }
 
 
 async function getPackageRepo(package) {
     let finalDoc = '';
-    const url = `https://${package}?go-get=1`
+    let url = `https://${package}?go-get=1`
     const options = await generateAuthorizationHeader()
     options.timeout = 15 * 1000
-    return cacheHttp(url, new Promise((resolve, reject) => {
-        const req = https.get(url, options, res => {
-            if (res.statusCode !== 200) {
-                if (package.startsWith('github.com')) {
-                    // This is probably happening because github doesnt seem to return the go-import for sub packages
-                    return resolve(parseRepoURL(`https://${package}`));
-                }
-                console.log('NOTICE: request to get package url return invalid response', res.statusCode, url);
-                resolve(`https://${package}`)
+    return cacheHttp(url, async (bail, num) => {
+        try {
+            // Github doesnt seem to return the go-import for sub packages, only request for root packages
+            if (package.startsWith('github.com') && package.split("/").length > 3) {
+                return parseRepoURL(`https://${package}`);
             }
+            const res = await get(url, options);
             res.on('data', d => {
                 finalDoc += d;
-            })
-            res.on('end', () => {
-                const htmlDoc = HTMLParser.parse(finalDoc);
-                const metaTag = htmlDoc.querySelector('head meta[name=go-import]')
-                if (metaTag) {
-                    resolve(parseRepoURL(metaTag.getAttribute('content')));
-                }
-                else {
-                    resolve(`https://${package}`)
-                }
-
             });
-        })
 
-        req.on('error', (err) => {
-            reject(err);
-        });
-        req.end();
-    }));
+            await res.end;
+
+            if (res.statusCode === 429) {
+                throw new Error("Rate limited");
+            }
+            if (res.statusCode === 404) {
+                console.log('NOTICE: request to get package url return invalid response', res.statusCode, url);
+                return `https://${package}`;
+            }
+            if (res.statusCode !== 200) {
+                throw new Error("invalid response", res.statusCode);
+            }
+
+            const htmlDoc = HTMLParser.parse(finalDoc);
+            const metaTag = htmlDoc.querySelector('head meta[name=go-import]')
+            if (metaTag) {
+                return parseRepoURL(metaTag.getAttribute('content'));
+            }
+            else {
+                return `https://${package}`;
+            }
+        } catch (err) {
+            // if the domain is not resolved, only retry 3 times
+            if (err.code === 'ENOTFOUND' && num > 2) {
+                return bail(err);
+            }
+            throw err
+        }
+    });
 }
 
 async function readLicenseContent(dep, depLicensesDirPath) {
@@ -265,7 +291,7 @@ async function readNoticeFile(depLicensesDirPath) {
 async function parseCSV() {
     const csvFilePath = path.join(projectAttributionDirectory, 'go-license.csv');
     const csvContent = await fsPromises.readFile(csvFilePath, 'utf8');
-    const dependencies = csvParse(csvContent, {
+    const dependencies = parse(csvContent, {
         columns: ['module', 'licensePath', 'licenseType']
     });
     return dependencies;
@@ -431,15 +457,14 @@ async function populateLicenseAndNoticeContent(dependencies) {
 }
 
 async function populateRepoURLs(dependencies) {
-    for (let i = 0; i < dependencies.length; i++) {
-        const dep = dependencies[i];
+    await throttledConcurrencyPromiseAll(dependencies, async (dep) => {
         try {
-            dep.repository = await retry(getPackageRepo.bind(null, dep.modulePath), { retries: 5 });
+            dep.repository = await getPackageRepo(dep.modulePath)
         } catch (e) {
             console.log('NOTICE: error pulling package repo double check result for', dep.modulePath, e);
             dep.repository = `https://${dep.modulePath}`;
         }
-    }
+    }, 10);
     return dependencies
 }
 
