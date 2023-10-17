@@ -66,7 +66,7 @@ libgcrypt-1.5.3-14.amzn2.0.3.x86_64
 libgpg-error-1.12-3.amzn2.0.3.x86_64
 libidn2-2.3.0-1.amzn2.0.3.x86_64
 libmount-2.30.2-2.amzn2.0.11.x86_64
-libnghttp2-1.41.0-1.amzn2.0.3.x86_64
+libnghttp2-1.41.0-1.amzn2.0.4.x86_64
 libpwquality-1.2.3-5.amzn2.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
 libsemanage-2.5-11.amzn2.x86_64

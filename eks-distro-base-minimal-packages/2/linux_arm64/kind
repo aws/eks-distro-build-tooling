@@ -87,7 +87,7 @@ libnetfilter_queue-1.0.2-2.amzn2.0.2.aarch64
 libnfnetlink-1.0.1-4.amzn2.0.2.aarch64
 libnfsidmap-0.25-19.amzn2.aarch64
 libnftnl-1.1.5-4.amzn2.aarch64
-libnghttp2-1.41.0-1.amzn2.0.3.aarch64
+libnghttp2-1.41.0-1.amzn2.0.4.aarch64
 libpath_utils-0.2.1-29.amzn2.aarch64
 libpcap-1.5.3-11.amzn2.aarch64
 libpwquality-1.2.3-5.amzn2.aarch64

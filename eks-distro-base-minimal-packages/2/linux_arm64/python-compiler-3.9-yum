@@ -45,7 +45,7 @@ libgcrypt-1.5.3-14.amzn2.0.3.aarch64
 libgpg-error-1.12-3.amzn2.0.3.aarch64
 libidn2-2.3.0-1.amzn2.0.3.aarch64
 libmount-2.30.2-2.amzn2.0.11.aarch64
-libnghttp2-1.41.0-1.amzn2.0.3.aarch64
+libnghttp2-1.41.0-1.amzn2.0.4.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-8.1.amzn2.0.2.aarch64
 libssh2-1.4.3-12.amzn2.2.6.aarch64
