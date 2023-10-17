@@ -29,7 +29,7 @@ libgcrypt-1.10.2-1.amzn2023.0.1.aarch64
 libgpg-error-1.42-1.amzn2023.0.2.aarch64
 libidn2-2.3.2-1.amzn2023.0.5.aarch64
 libksba-1.6.3-1.amzn2023.0.2.aarch64
-libnghttp2-1.55.1-1.amzn2023.0.4.aarch64
+libnghttp2-1.57.0-1.amzn2023.0.1.aarch64
 libselinux-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
 libstdc++-11.4.1-2.amzn2023.0.2.aarch64

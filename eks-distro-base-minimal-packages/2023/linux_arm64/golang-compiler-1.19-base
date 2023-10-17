@@ -54,7 +54,7 @@ libfido2-1.10.0-2.amzn2023.0.2.aarch64
 libgcc-11.4.1-2.amzn2023.0.2.aarch64
 libidn2-2.3.2-1.amzn2023.0.5.aarch64
 libmount-2.37.4-1.amzn2023.0.3.aarch64
-libnghttp2-1.55.1-1.amzn2023.0.4.aarch64
+libnghttp2-1.57.0-1.amzn2023.0.1.aarch64
 libpsl-0.21.1-3.amzn2023.0.2.aarch64
 libpwquality-1.4.4-6.amzn2023.0.2.aarch64
 libselinux-3.4-5.amzn2023.0.2.aarch64
