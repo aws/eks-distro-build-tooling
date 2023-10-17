@@ -1478,7 +1478,7 @@
 -rwxr-xr-x    32KiB /usr/lib64/libnfsidmap/static.so
 -rwxr-xr-x    49KiB /usr/lib64/libnfsidmap/umich_ldap.so
 -rwxr-xr-x   215KiB /usr/lib64/libnftnl.so.11.6.0
--rwxr-xr-x   166KiB /usr/lib64/libnghttp2.so.14.24.3
+-rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.25.0
 -rwxr-xr-x   144KiB /usr/lib64/libnl-3.so.200.26.0
 -rwxr-xr-x    38KiB /usr/lib64/libnl-genl-3.so.200.26.0
 -rwxr-xr-x    46KiB /usr/lib64/libnl-idiag-3.so.200.26.0
@@ -8639,7 +8639,7 @@ lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.5
 lrwxrwxrwx      21B /usr/lib64/libnfnetlink.so.0 libnfnetlink.so.0.2.0
 lrwxrwxrwx      20B /usr/lib64/libnfsidmap.so.1 libnfsidmap.so.1.0.0
 lrwxrwxrwx      18B /usr/lib64/libnftnl.so.11 libnftnl.so.11.6.0
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.24.3
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.25.0
 lrwxrwxrwx      19B /usr/lib64/libnl-3.so.200 libnl-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-genl-3.so.200 libnl-genl-3.so.200.26.0
 lrwxrwxrwx      25B /usr/lib64/libnl-idiag-3.so.200 libnl-idiag-3.so.200.26.0

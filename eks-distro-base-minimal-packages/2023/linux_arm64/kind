@@ -98,7 +98,7 @@ libnetfilter_queue-1.0.5-2.amzn2023.0.2.aarch64
 libnfnetlink-1.0.1-19.amzn2023.0.2.aarch64
 libnfsidmap-2.5.4-2.rc3.amzn2023.0.3.aarch64
 libnftnl-1.2.2-2.amzn2023.0.2.aarch64
-libnghttp2-1.55.1-1.amzn2023.0.4.aarch64
+libnghttp2-1.57.0-1.amzn2023.0.1.aarch64
 libnl3-3.5.0-6.amzn2023.0.2.aarch64
 libpath_utils-0.2.1-47.amzn2023.0.2.aarch64
 libpcap-1.10.1-1.amzn2023.0.2.aarch64

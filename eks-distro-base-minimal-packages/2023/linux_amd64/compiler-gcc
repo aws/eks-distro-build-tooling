@@ -79,7 +79,7 @@ libksba-1.6.3-1.amzn2023.0.2.x86_64
 libmodulemd-2.13.0-2.amzn2023.0.2.x86_64
 libmount-2.37.4-1.amzn2023.0.3.x86_64
 libmpc-1.2.1-2.amzn2023.0.2.x86_64
-libnghttp2-1.55.1-1.amzn2023.0.4.x86_64
+libnghttp2-1.57.0-1.amzn2023.0.1.x86_64
 libpkgconf-1.8.0-4.amzn2023.0.2.x86_64
 libpsl-0.21.1-3.amzn2023.0.2.x86_64
 librepo-1.14.2-1.amzn2023.0.4.x86_64
