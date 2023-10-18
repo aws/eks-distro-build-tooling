@@ -26,17 +26,6 @@ source $SCRIPT_ROOT/common_vars.sh
 # certain commands specifically as root.  We need the shell to be bash.
 usermod --shell /bin/bash root
 
-# user for goss/imagebuilder
-# to make sure the home dir is created correctly, tmp move the goss plugin
-mv /home/imagebuilder/.packer.d /tmp
-
-rm -rf /home/imagebuilder
-useradd -ms /bin/bash -u 1100 imagebuilder
-
-mv /tmp/.packer.d /home/imagebuilder/
-
-chown -R imagebuilder:imagebuilder /home/imagebuilder
-
 # directory setup
 mkdir -p /go/src/github.com/aws/eks-distro
 
@@ -52,6 +41,7 @@ yum install -y \
     jq \
     less \
     make \
+    net-tools \
     openssh-clients \
     openssl \
     patch \
@@ -86,7 +76,29 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     # if we want to build containerd with btrfs support on al23
     if [ "$IS_AL23" = "false" ]; then 
         yum install -y btrfs-progs-devel
-    fi  
+    fi
+
+    ############ IMAGE BUILDER ###################
+
+    # user for goss/imagebuilder
+    # to make sure the home dir is created correctly, tmp move the goss plugin
+    mv /home/imagebuilder/.packer.d /tmp
+
+    rm -rf /home/imagebuilder
+    useradd -ms /bin/bash -u 1100 imagebuilder
+
+    mv /tmp/.packer.d /home/imagebuilder/
+
+    # https://github.com/kubernetes-sigs/image-builder/blob/main/images/capi/hack/ensure-ansible.sh
+
+    ansible-galaxy collection install -p /home/imagebuilder/.ansible/collections \
+        community.general \
+        ansible.posix \
+        'ansible.windows:>=1.7.0' \
+        community.windows
+
+    chown -R imagebuilder:imagebuilder /home/imagebuilder
+    ##############################################
 fi
 
 #################### CLEANUP ####################

@@ -464,7 +464,6 @@ COPY --link --from=ecr-cred-helper /ecr-cred-helper /
 COPY --link --from=yq /yq /
 COPY --link --from=gh_cli /gh-cli /
 COPY --link --from=hugo /hugo /
-COPY --link --from=goss /goss /
 COPY --link --from=govc /govc /
 COPY --link --from=helm /helm /
 COPY --link --from=tuftool /tuftool /
@@ -474,6 +473,7 @@ COPY --link --from=skopeo /skopeo /
 
 FROM minimal-copy-stage as full-copy-stage
 
+COPY --link --from=goss /goss /
 COPY --link --from=packer /packer /
 COPY --link --from=ansible /ansible /
 COPY --link --from=nodejs /nodejs /
