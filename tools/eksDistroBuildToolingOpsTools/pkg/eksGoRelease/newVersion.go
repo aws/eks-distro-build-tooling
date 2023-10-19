@@ -3,7 +3,6 @@ package eksGoRelease
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/go-git/go-git/v5/plumbing/transport/http"
 
@@ -11,8 +10,6 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
 )
 
 const (
@@ -23,19 +20,13 @@ const (
 
 // Releasing new versions of Golang that don't exist in EKS Distro Build Tooling(https://github.com/aws/eks-distro-build-tooling/projects/golang/go)
 func NewMinorRelease(ctx context.Context, r *Release, dryrun bool, email, user string) error {
-	// Setup Github Client
-	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
-
 	token, err := github.GetGithubToken()
 	if err != nil {
 		logger.V(4).Error(err, "no github token found")
 		return fmt.Errorf("getting Github PAT from environment at variable %s: %v", github.PersonalAccessTokenEnvVar, err)
 	}
 
-	githubClient, err := github.NewClient(ctx, token)
-	if err != nil {
-		return fmt.Errorf("setting up Github client: %v", err)
-	}
+	ghUser := github.NewGitHubUser(user, email, token)
 
 	// Creating git client in memory and clone 'eks-distro-build-tooling
 	forkUrl := fmt.Sprintf(constants.EksGoRepoUrl, user)
@@ -149,28 +140,10 @@ func NewMinorRelease(ctx context.Context, r *Release, dryrun bool, email, user s
 
 	// Commit files
 	// Add files paths for new Go Minor Version
-	// set up PR Creator handler
-	prmOpts := &prManager.Opts{
-		SourceOwner: user,
-		SourceRepo:  constants.EksdBuildToolingRepoName,
-		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: constants.AwsOrgName,
+	if !dryrun {
+		if err := createReleasePR(ctx, r, ghUser, gClient); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
-	prm := prManager.New(retrier, githubClient, prmOpts)
-
-	prOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseVersion(),
-		BaseBranch:    "main",
-		AuthorName:    user,
-		AuthorEmail:   email,
-		PrSubject:     fmt.Sprintf("Add path for new release of Golang: %s", r.GoSemver()),
-		PrBranch:      "main",
-		PrDescription: fmt.Sprintf("Init Go Minor Version: %s", r.GoMinorVersion()),
-	}
-
-	if err := createReleasePR(ctx, r, gClient, dryrun, prm, prOpts); err != nil {
-		logger.Error(err, "Create Release PR")
-	}
-
 	return nil
 }

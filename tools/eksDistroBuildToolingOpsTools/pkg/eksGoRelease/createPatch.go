@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/go-git/go-git/v5/plumbing/transport/http"
 
@@ -12,8 +11,6 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/prManager"
-	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/retrier"
 )
 
 const (
@@ -23,19 +20,13 @@ const (
 
 // BackportPatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions no longer maintained by upstream.
 func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit, email, user string) error {
-	// Setup Github Client
-	retrier := retrier.New(time.Second*380, retrier.WithBackoffFactor(1.5), retrier.WithMaxRetries(15, time.Second*30))
-
+	// Get github token for interacting with repos
 	token, err := github.GetGithubToken()
 	if err != nil {
 		logger.V(4).Error(err, "no github token found")
 		return fmt.Errorf("getting Github PAT from environment at variable %s: %v", github.PersonalAccessTokenEnvVar, err)
 	}
-
-	githubClient, err := github.NewClient(ctx, token)
-	if err != nil {
-		return fmt.Errorf("setting up Github client: %v", err)
-	}
+	ghUser := github.NewGitHubUser(user, email, token)
 
 	// Creating git client in memory and clone 'eks-distro-build-tooling
 	forkUrl := fmt.Sprintf(constants.EksGoRepoUrl, user)
@@ -128,31 +119,12 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	 * Begin applying previous patches and attempting to cherry-pick the new commit. Any errors from here on out should result in cutting a pr without a new patch,
 	 * but shouldn't fail the automation because the patch can be generated manually
 	----- */
-	// set up PR Creator handler from fork to aws org
-	prmOpts := &prManager.Opts{
-		SourceOwner: user,
-		SourceRepo:  constants.EksdBuildToolingRepoName,
-		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: constants.AwsOrgName,
-	}
-	prm := prManager.New(retrier, githubClient, prmOpts)
-
-	prOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseVersion(),
-		BaseBranch:    "main",
-		AuthorName:    user,
-		AuthorEmail:   email,
-		PrSubject:     fmt.Sprintf(backportPRSubjectFmt, cve, r.GoSemver()),
-		PrBranch:      "main",
-		PrDescription: fmt.Sprintf(backportPRDescriptionFmt, cve, r.EksGoReleaseVersion()),
-	}
-
 	// Get previous patches from gclient
 	patches, err := gClient.ReadFiles(fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), "00"))
 	if err != nil {
 		logger.Error(err, "Get existing patches")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -163,7 +135,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err := goRepo.Clone(ctx); err != nil {
 		logger.Error(err, "Cloning go repo")
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -171,7 +143,7 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	if err := goRepo.Branch(r.GoReleaseBranch()); err != nil {
 		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", goRepo)
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
+		if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}
@@ -181,19 +153,25 @@ func (r Release) BackportToRelease(ctx context.Context, dryrun bool, cve, commit
 	logger.V(4).Info("Update golang.spec", "path", goSpecPath, "content", goSpecContent)
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		logger.Error(err, "modify file", "file", goSpecPath)
-		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
-			logger.Error(err, "Create Release PR")
+		if !dryrun {
+			if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
+				logger.Error(err, "Create Release PR")
+			}
 		}
 	}
 	if err := gClient.Add(goSpecPath); err != nil {
 		logger.Error(err, "git add", "file", goSpecPath)
-		if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
-			logger.Error(err, "Create Release PR")
+		if !dryrun {
+			if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
+				logger.Error(err, "Create Release PR")
+			}
 		}
 	}
 
-	if err := createReleasePR(ctx, &r, gClient, dryrun, prm, prOpts); err != nil {
-		logger.Error(err, "Create Release PR")
+	if !dryrun {
+		if err := createReleasePR(ctx, &r, ghUser, gClient); err != nil {
+			logger.Error(err, "Create Release PR")
+		}
 	}
 
 	return nil

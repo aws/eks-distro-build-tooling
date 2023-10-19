@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-
 	"os"
 	"strings"
 	"time"
@@ -507,20 +506,25 @@ func (g *GogitClient) ReadFile(filename string) (string, error) {
 
 	ref, err := g.Client.Head(repo)
 	if err != nil {
+		logger.Error(err, "repo ref")
 		return "", err
 	}
+
 	commit, err := repo.CommitObject(ref.Hash())
 	if err != nil {
+		logger.Error(err, "commit")
 		return "", err
 	}
 
 	tree, err := repo.TreeObject(commit.TreeHash)
 	if err != nil {
+		logger.Error(err, "tree")
 		return "", err
 	}
 
 	file, err := tree.File(filename)
 	if err != nil {
+		logger.Error(err, "finding filename", "filename", filename)
 		return "", err
 	}
 
@@ -613,6 +617,7 @@ func (gg *goGit) CloneInMemory(ctx context.Context, repourl string, auth transpo
 		Progress: os.Stdout,
 	})
 }
+
 func (gg *goGit) Clone(ctx context.Context, dir string, repourl string, auth transport.AuthMethod) (*gogit.Repository, error) {
 	ctx, cancel := context.WithTimeout(ctx, gitTimeout)
 	defer cancel()
