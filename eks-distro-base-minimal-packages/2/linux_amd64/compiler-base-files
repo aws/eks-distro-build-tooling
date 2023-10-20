@@ -727,7 +727,7 @@
 -rwxr-xr-x    43KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   115KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   153KiB /usr/lib64/libselinux.so.1
--rwxr-xr-x   637KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   125KiB /usr/lib64/libslapi-2.4.so.2.10.7
 -rwxr-xr-x   157KiB /usr/lib64/libsmime3.so
 -rw-r--r--     899B /usr/lib64/libsoftokn3.chk

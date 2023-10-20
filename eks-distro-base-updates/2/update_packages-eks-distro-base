@@ -1,2 +1,5 @@
 
-libnghttp2.x86_64
+libsepol.x86_64
+vim-data.noarch
+vim-minimal.x86_64
+yum.noarch

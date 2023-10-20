@@ -7,7 +7,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
 ca-certificates-2021.2.50-72.amzn2.0.8.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 conntrack-tools-1.4.4-5.amzn2.2.aarch64
-containerd-1.6.19-1.amzn2.0.3.aarch64
+containerd-1.6.19-1.amzn2.0.5.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.aarch64
 cracklib-2.9.0-11.amzn2.0.2.aarch64
@@ -95,7 +95,7 @@ libref_array-0.1.5-29.amzn2.aarch64
 libseccomp-2.4.1-1.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsemanage-2.5-11.amzn2.aarch64
-libsepol-2.5-8.1.amzn2.0.2.aarch64
+libsepol-2.5-10.amzn2.0.1.aarch64
 libsmartcols-2.30.2-2.amzn2.0.11.aarch64
 libssh2-1.4.3-12.amzn2.2.6.aarch64
 libstdc++-7.3.1-17.amzn2.aarch64
@@ -121,7 +121,7 @@ nss-softokn-freebl-3.79.0-4.amzn2.aarch64
 nss-sysinit-3.79.0-4.amzn2.0.1.aarch64
 nss-tools-3.79.0-4.amzn2.0.1.aarch64
 nss-util-3.79.0-1.amzn2.aarch64
-oniguruma-5.9.6-1.amzn2.0.5.aarch64
+oniguruma-5.9.6-1.amzn2.0.7.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.9.aarch64
 pam-1.1.8-23.amzn2.0.1.aarch64
@@ -150,14 +150,14 @@ rpm-4.11.3-48.amzn2.0.3.aarch64
 rpm-build-libs-4.11.3-48.amzn2.0.3.aarch64
 rpm-libs-4.11.3-48.amzn2.0.3.aarch64
 rsync-3.1.2-11.amzn2.0.2.aarch64
-runc-1.1.7-3.amzn2.aarch64
+runc-1.1.7-4.amzn2.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.3.aarch64
 shared-mime-info-1.8-4.amzn2.aarch64
 socat-1.7.3.2-2.amzn2.0.1.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
-sudo-1.8.23-10.amzn2.3.4.aarch64
+sudo-1.8.23-10.amzn2.3.5.aarch64
 system-release-2-14.amzn2.aarch64
 systemd-219-78.amzn2.0.22.aarch64
 systemd-libs-219-78.amzn2.0.22.aarch64
@@ -168,10 +168,10 @@ tcp_wrappers-libs-7.6-77.amzn2.0.2.aarch64
 tzdata-2023c-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
 util-linux-2.30.2-2.amzn2.0.11.aarch64
-vim-data-9.0.1882-1.amzn2.0.1.noarch
-vim-minimal-9.0.1882-1.amzn2.0.1.aarch64
+vim-data-9.0.1882-1.amzn2.0.2.noarch
+vim-minimal-9.0.1882-1.amzn2.0.2.aarch64
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
-yum-3.4.3-158.amzn2.0.6.noarch
+yum-3.4.3-158.amzn2.0.7.noarch
 yum-metadata-parser-1.1.4-10.amzn2.0.2.aarch64
 zlib-1.2.7-19.amzn2.0.2.aarch64

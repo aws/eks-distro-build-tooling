@@ -36,7 +36,7 @@ libgcc-7.3.1-17.amzn2.x86_64
 libidn2-2.3.0-1.amzn2.0.3.x86_64
 libnghttp2-1.41.0-1.amzn2.0.4.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
-libsepol-2.5-8.1.amzn2.0.2.x86_64
+libsepol-2.5-10.amzn2.0.1.x86_64
 libssh2-1.4.3-12.amzn2.2.6.x86_64
 libstdc++-7.3.1-17.amzn2.x86_64
 libtirpc-0.2.4-0.16.amzn2.x86_64

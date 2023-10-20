@@ -1,3 +1,3 @@
 
-libgcc.x86_64
-libstdc++.x86_64
+docker.x86_64
+libsepol.x86_64

@@ -13706,7 +13706,7 @@
 -rwxr-xr-x   115KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   153KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsemanage.so.1
--rwxr-xr-x   637KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   125KiB /usr/lib64/libslapi-2.4.so.2.10.7
 -rwxr-xr-x   185KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   157KiB /usr/lib64/libsmime3.so
