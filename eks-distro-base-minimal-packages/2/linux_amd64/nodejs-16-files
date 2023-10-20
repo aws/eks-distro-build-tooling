@@ -383,7 +383,7 @@
 -rwxr-xr-x    92KiB /usr/lib64/libresolv-2.26.so
 -rwxr-xr-x    43KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   153KiB /usr/lib64/libselinux.so.1
--rwxr-xr-x   637KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db-1.0.so
 -rwxr-xr-x    14KiB /usr/lib64/libutil-2.26.so

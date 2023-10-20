@@ -1551,7 +1551,7 @@
 -rwxr-xr-x   325KiB /usr/lib64/libseccomp.so.2.4.1
 -rwxr-xr-x   201KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   270KiB /usr/lib64/libsemanage.so.1
--rwxr-xr-x   725KiB /usr/lib64/libsepol.so.1
+-rwxr-xr-x   661KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libslapi-2.4.so.2.10.7
 -rwxr-xr-x   201KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   201KiB /usr/lib64/libsmime3.so

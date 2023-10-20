@@ -14,7 +14,7 @@ libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.0.1.x86_64
 libgcc-7.3.1-17.amzn2.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
-libsepol-2.5-8.1.amzn2.0.2.x86_64
+libsepol-2.5-10.amzn2.0.1.x86_64
 libstdc++-7.3.1-17.amzn2.x86_64
 openssl-libs-1.0.2k-24.amzn2.0.9.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
