@@ -9,10 +9,10 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease"
 )
 
-var backportGoCommand = &cobra.Command{
-	Use:   "backport",
-	Short: "Update new patch versions of EKS Go",
-	Long:  "Tool to create PR for updaing EKS Go versions supported by upstream when a patch version is released",
+var backportCmd = &cobra.Command{
+	Use:   "patch",
+	Short: "Cherrypick a patch to versions of EKS Go",
+	Long:  "Tool to create PR for updaing EKS Go versions that require a patch applied",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var eksGoReleases []*eksGoRelease.Release
 		for _, v := range viper.GetStringSlice(eksGoReleasesFlag) {
@@ -24,7 +24,7 @@ var backportGoCommand = &cobra.Command{
 		}
 
 		for _, r := range eksGoReleases {
-			err := r.BackportToRelease(cmd.Context(), viper.GetBool(dryrunFlag), "CVE", "HASH", viper.GetString(emailFlag), viper.GetString(userFlag))
+			err := eksGoRelease.BackportToRelease(cmd.Context(), r, viper.GetBool(dryrunFlag), "CVE", "HASH", viper.GetString(emailFlag), viper.GetString(userFlag))
 			if err != nil {
 				return fmt.Errorf("you have failed this automation: %w", err)
 			}
@@ -34,5 +34,5 @@ var backportGoCommand = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(backportGoCommand)
+	rootCmd.AddCommand(backportCmd)
 }

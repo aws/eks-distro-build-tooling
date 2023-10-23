@@ -13,6 +13,7 @@ import (
 )
 
 const (
+	updatePRCommitFmt      = "Update EKS Go files for version: %s"
 	updatePRDescriptionFmt = "Update EKS Go Patch Version: %s\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Bump tracking patch version to 1.20.8 from 1.20.7\n```"
 	updatePRSubjectFmt     = "New patch release of Golang: %s"
 )
@@ -28,7 +29,6 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	ghUser := github.NewGitHubUser(user, email, token)
-	logger.V(5).Info("github user", "user", ghUser.User(), "email", ghUser.Email(), "token", ghUser.Token())
 	// Creating git client in memory and clone 'eks-distro-build-tooling
 	forkUrl := fmt.Sprintf(constants.EksGoRepoUrl, ghUser.User())
 	gClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(forkUrl), git.WithAuth(&http.BasicAuth{Username: ghUser.User(), Password: ghUser.Token()}))
@@ -50,21 +50,31 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// Update files for new patch versions of golang
-	if err := updateReadme(gClient, r); err != nil {
+	if err := updateVersionReadme(gClient, r); err != nil {
 		logger.Error(err, "Update Readme")
 		return err
 	}
 
-	if err := updateGoSpec(gClient, r); err != nil {
+	// Since this doesn't require a backport set and pass false
+	bi := BackportInfo{
+		createPatch: false,
+	}
+	if err := updateGoSpec(gClient, r, bi); err != nil {
 		logger.Error(err, "Update Readme")
 		return err
 	}
 
-	// Create PR if not dryrun
-	if !dryrun {
-		if err := createReleasePR(ctx, r, ghUser, gClient); err != nil {
-			logger.Error(err, "Create Release PR")
-		}
+	if err := updateGitTag(gClient, r); err != nil {
+		logger.Error(err, "Update GitTag")
+		return err
+	}
+
+	// Commit files and create PR
+	prSubject := fmt.Sprintf(updatePRSubjectFmt, r.GoSemver())
+	prDescription := fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseVersion())
+	commitMsg := fmt.Sprintf(updatePRCommitFmt, r.GoSemver())
+	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+		logger.Error(err, "Create Release PR")
 	}
 	return nil
 }

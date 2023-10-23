@@ -60,6 +60,22 @@ func (r Release) ReleaseNumber() int {
 	return r.Release
 }
 
+func (r Release) EksGoReleaseVersion() string {
+	return fmt.Sprintf("v%d.%d.%d-%d", r.Major, r.Minor, r.Patch, r.Release)
+}
+
+func (r Release) GoFullVersion() string {
+	return fmt.Sprintf("%d.%d.%d", r.Major, r.Minor, r.Patch)
+}
+
+func (r Release) GoMinorVersion() string {
+	return fmt.Sprintf("%d.%d", r.Major, r.Minor)
+}
+
+func (r Release) GoSemver() string {
+	return fmt.Sprintf("v%d.%d.%d", r.Major, r.Minor, r.Patch)
+}
+
 // "https://distro.eks.amazonaws.com/golang-go%d.%d.%d/release/%d/%s/%s/%s"
 func (r Release) EksGoArtifacts(arch string) (string, string, string) {
 	var artifact string // artifact = "golang-%d.%d.%d-%d.amzn2.eks.%s.rpm"
@@ -86,22 +102,6 @@ func (r Release) EksGoAmdBuild() string {
 
 func (r Release) EksGoArmBuild() string {
 	return fmt.Sprintf(constants.EksGoArmBuildUrl, r.Major, r.Minor)
-}
-
-func (r Release) EksGoReleaseVersion() string {
-	return fmt.Sprintf("v%d.%d.%d-%d", r.Major, r.Minor, r.Patch, r.Release)
-}
-
-func (r Release) GoFullVersion() string {
-	return fmt.Sprintf("%d.%d.%d", r.Major, r.Minor, r.Patch)
-}
-
-func (r Release) GoMinorVersion() string {
-	return fmt.Sprintf("%d.%d", r.Major, r.Minor)
-}
-
-func (r Release) GoSemver() string {
-	return fmt.Sprintf("v%d.%d.%d", r.Major, r.Minor, r.Patch)
 }
 
 func (r Release) Equals(release Release) bool {

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease"
 )
 
-var updateGoCommand = &cobra.Command{
+var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update new patch versions of EKS Go",
 	Long:  "Tool to create PR for updaing EKS Go versions supported by upstream when a patch version is released",
@@ -34,5 +34,5 @@ var updateGoCommand = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(updateGoCommand)
+	rootCmd.AddCommand(updateCmd)
 }

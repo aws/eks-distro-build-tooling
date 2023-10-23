@@ -9,10 +9,10 @@ import (
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease"
 )
 
-var releaseGoCommand = &cobra.Command{
-	Use:   "release",
-	Short: "Release a new version of EKS Go",
-	Long:  "Tool to release new versions of EKS Go",
+var newCmd = &cobra.Command{
+	Use:   "new",
+	Short: "Release a new minor version of EKS Go",
+	Long:  "Tool to release a new minor version of EKS Go",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var eksGoReleases []*eksGoRelease.Release
 		for _, v := range viper.GetStringSlice(eksGoReleasesFlag) {
@@ -34,5 +34,5 @@ var releaseGoCommand = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(releaseGoCommand)
+	rootCmd.AddCommand(newCmd)
 }
