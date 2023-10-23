@@ -213,12 +213,6 @@ func updateGitTag(gClient git.Client, r *Release) error {
 	return nil
 }
 
-type BackportInfo struct {
-	golangClient git.Client
-	commitHash   string
-	createPatch  bool
-}
-
 func updateGoSpecPatchVersion(fc *string, r *Release) string {
 	gpO := fmt.Sprintf("%%global go_patch %d", r.PatchVersion()-1)
 	gpN := fmt.Sprintf("%%global go_patch %d", r.PatchVersion())
@@ -230,37 +224,49 @@ func addPatchGoSpec(fc *string, r *Release, patch string) string {
 	return ""
 }
 
-func applyPreviousPatches(r *Release, gClient git.Client, bi BackportInfo) error {
-	patches, err := gClient.ReadFiles(fmt.Sprintf(patchesPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), "00"))
-	if err != nil {
-		logger.Error(err, "Get existing patches")
-		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		return fmt.Errorf("CONTINUE: apply previous patches: %v", err)
+func createPatchFile(ctx context.Context, r *Release, gClient git.Client, golangClient git.Client, commit string) error {
+	// Attempt patch generation if it fails, skip updating gospec with new patch number
+	// Clone https://github.com/golang/go
+	if err := golangClient.Clone(ctx); err != nil {
+		logger.Error(err, "git clone", "repo", constants.GoRepoUrl)
+		return err
 	}
-	fmt.Println(len(patches))
 
-	if err := bi.golangClient.Branch(r.GoReleaseBranch()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", bi.golangClient)
-		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		return fmt.Errorf("CONTINUE: checking out upstream golang: %v", err)
+	if err := golangClient.Branch(r.GoReleaseBranch()); err != nil {
+		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", golangClient)
+		return err
 	}
-	// TODO: Apply patches
+
+	// Apply patches current patches in <Version>/patches/
+	if err := golangClient.AmExternal(gClient); err != nil {
+		logger.Error(err, "git am")
+		return err
+	}
+
+	if err := golangClient.Cherrypick(commit); err != nil {
+		logger.Error(err, "git cherry-pick", "commit", commit)
+		return err
+	}
+
+	// Format-patch the last commit which will be the chrrypick commit
+	if err := golangClient.FormatPatch(); err != nil {
+		logger.Error(err, "git format-patch")
+		return err
+	}
+
+	if err := addPatchFileToEKSGo(gClient, golangClient); err != nil {
+		logger.Error(err, "Copy patch file to new repo")
+		return err
+	}
+
 	return nil
 }
 
-type Patch struct {
-	Name    string
-	Content string
+func addPatchFileToEKSGo(gClient git.Client, golangClient git.Client) error {
+	return nil
 }
 
-func createPatchFile(r *Release, gClient git.Client, bi BackportInfo) (Patch, error) {
-	// Attempt patch generation if it fails, skip updating gospec with new patch number
-	// Clone https://github.com/golang/go
-
-	return Patch{}, nil
-}
-
-func updateGoSpec(gClient git.Client, r *Release, bi BackportInfo) error {
+func updateGoSpec(gClient git.Client, r *Release) error {
 	// update golang.spec
 	goSpecPath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
 	goSpecContent, err := gClient.ReadFile(goSpecPath)
@@ -273,19 +279,10 @@ func updateGoSpec(gClient git.Client, r *Release, bi BackportInfo) error {
 	if err := gClient.ModifyFile(goSpecPath, []byte(goSpecContent)); err != nil {
 		return err
 	}
+
 	if err := gClient.Add(goSpecPath); err != nil {
 		logger.Error(err, "git add", "file", goSpecPath)
 		return err
-	}
-
-	if bi.createPatch {
-		patch, err := createPatchFile(r, gClient, bi)
-		if err != nil {
-			logger.Error(err, "create patch")
-			return fmt.Errorf("create patch failed due to %v", err)
-		}
-
-		addPatchGoSpec(&goSpecContent, r, patch.Name)
 	}
 
 	return nil

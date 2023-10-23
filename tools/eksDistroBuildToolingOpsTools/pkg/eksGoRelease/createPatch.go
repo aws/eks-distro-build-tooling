@@ -13,9 +13,10 @@ import (
 )
 
 const (
-	backportCommitMsgFmt     = "%s"
-	backportPRDescriptionFmt = "This PR attempted to patch %s EKS Go Patch Version: %s\n\n/hold\n\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Patch CVE in EKS Go version 1.20.8\n```"
-	backportPRSubjectFmt     = "Patch %s to EKS Go %s"
+	backportCommitMsgFmt            = "Update EKS Go version %s files"
+	backportPRDescriptionFailureFmt = "This PR failed create a patch for %s to EKS Go Patch Version: %s\n The patch will need to be manually created from commit: %s\n\n/hold\n\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Patch CVE-<cve#> in EKS Go version 1.20.8\n```"
+	backportPRDescriptionSuccessFmt = "This PR created a patch for %s from %s to EKS Go Patch Version: %s\n\n/hold\n\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Patch CVE-<cve#> in EKS Go version 1.20.8\n```"
+	backportPRSubjectFmt            = "Patch %s to EKS Go %s"
 )
 
 // BackportPatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions no longer maintained by upstream.
@@ -59,40 +60,19 @@ func BackportToRelease(ctx context.Context, r *Release, dryrun bool, cve, commit
 		return err
 	}
 
-	bi := BackportInfo{
-		createPatch: true,
-		commitHash:  commit,
-	}
-	if err := updateGoSpec(gClient, r, bi); err != nil {
-		logger.Error(err, "Update Readme")
-		return err
-	}
-	// TODO: Clean this up
 	/* -----
 	 * Begin applying previous patches and attempting to cherry-pick the new commit. Any errors from here on out should result in cutting a pr without a new patch,
 	 * but shouldn't fail the automation because the patch can be generated manually
 	----- */
-	// TODO: correct the prSubject, prDescription, commitMsg
-	prSubject := fmt.Sprintf(backportPRSubjectFmt, r.EksGoReleaseVersion(), "")
-	prDescription := fmt.Sprintf(backportPRDescriptionFmt, r.EksGoReleaseVersion(), "")
-	commitMsg := ""
-	// Get previous patches from gclient
-	// Commit files and create PR if not dryrun
-	goRepo := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(constants.GoRepoUrl), git.WithAuth(&http.BasicAuth{Username: user, Password: token}))
-	if err := goRepo.Clone(ctx); err != nil {
-		logger.Error(err, "Cloning go repo")
+	prSubject := fmt.Sprintf(backportPRSubjectFmt, r.EksGoReleaseVersion(), cve)
+	commitMsg := fmt.Sprintf(backportCommitMsgFmt, r.EksGoReleaseVersion())
+	golangClient := git.NewClient(git.WithInMemoryFilesystem(), git.WithRepositoryUrl(constants.GoRepoUrl), git.WithAuth(&http.BasicAuth{Username: user, Password: token}))
+	if err := createPatchFile(ctx, r, gClient, golangClient, commit); err != nil {
 		logger.V(3).Info("Generate Patch failed, continuing with PR")
-		if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
-			logger.Error(err, "Create Release PR")
-			return err
-		}
-	}
-	// Checkout upstream version to apply patches too
-	if err := bi.golangClient.Branch(r.GoReleaseBranch()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.GoReleaseBranch(), "repo", constants.GoRepoUrl, "client", bi.golangClient)
-		logger.V(3).Info("Generate Patch failed, continuing with PR")
+		// no longer update gospec with patch file since no patch was created
 		if !dryrun {
-			if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+			prFailureDescription := fmt.Sprintf(backportPRDescriptionFailureFmt, cve, r.EksGoReleaseVersion(), commit)
+			if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prFailureDescription, commitMsg); err != nil {
 				logger.Error(err, "Create Release PR")
 				return err
 			}
@@ -100,10 +80,8 @@ func BackportToRelease(ctx context.Context, r *Release, dryrun bool, cve, commit
 	}
 
 	if !dryrun {
-		prSubject := fmt.Sprintf(updatePRSubjectFmt, r.GoSemver())
-		prDescription := fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseVersion())
-		commitMsg := fmt.Sprintf(updatePRCommitFmt, r.GoSemver())
-		if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+		prSuccessDescription := fmt.Sprintf(backportPRDescriptionSuccessFmt, cve, commit, r.EksGoReleaseVersion())
+		if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prSuccessDescription, commitMsg); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}

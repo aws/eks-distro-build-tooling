@@ -56,10 +56,7 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// Since this doesn't require a backport set and pass false
-	bi := BackportInfo{
-		createPatch: false,
-	}
-	if err := updateGoSpec(gClient, r, bi); err != nil {
+	if err := updateGoSpec(gClient, r); err != nil {
 		logger.Error(err, "Update Readme")
 		return err
 	}

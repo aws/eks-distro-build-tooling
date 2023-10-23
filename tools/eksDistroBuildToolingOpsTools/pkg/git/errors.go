@@ -3,9 +3,9 @@ package git
 import "fmt"
 
 type RepositoryDoesNotExistError struct {
+	Err        error
 	repository string
 	owner      string
-	Err        error
 }
 
 func (e *RepositoryDoesNotExistError) Error() string {
