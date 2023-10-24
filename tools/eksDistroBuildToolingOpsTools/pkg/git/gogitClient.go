@@ -570,26 +570,6 @@ func (g *GogitClient) ReadFiles(foldername string) (map[string]string, error) {
 	return files, nil
 }
 
-func (g *GogitClient) AmExternal(extClient Client) error {
-	repo, err := g.Client.OpenRepo()
-	if err != nil {
-		logger.Error(err, "Opening repo")
-		return err
-	}
-
-	logger.V(1).Info("Client info", "client", g, "repo", repo, "extClient", extClient)
-
-	return nil
-}
-
-func (g *GogitClient) Cherrypick(commit string) error {
-	return nil
-}
-
-func (g *GogitClient) FormatPatch() error {
-	return nil
-}
-
 type GoGit interface {
 	AddGlob(f string, w *gogit.Worktree) error
 	Checkout(w *gogit.Worktree, opts *gogit.CheckoutOptions) error

@@ -224,6 +224,7 @@ func addPatchGoSpec(fc *string, r *Release, patch string) string {
 	return ""
 }
 
+// TODO: Fix logic to apply previous patches, cherry pick fix, and create patch file
 func createPatchFile(ctx context.Context, r *Release, gClient git.Client, golangClient git.Client, commit string) error {
 	// Attempt patch generation if it fails, skip updating gospec with new patch number
 	// Clone https://github.com/golang/go
@@ -237,32 +238,14 @@ func createPatchFile(ctx context.Context, r *Release, gClient git.Client, golang
 		return err
 	}
 
-	// Apply patches current patches in <Version>/patches/
-	if err := golangClient.AmExternal(gClient); err != nil {
-		logger.Error(err, "git am")
-		return err
-	}
+	// TODO: Apply patches current patches in <Version>/patches/
 
-	if err := golangClient.Cherrypick(commit); err != nil {
-		logger.Error(err, "git cherry-pick", "commit", commit)
-		return err
-	}
+	// TODO: cherry pick commit string
 
-	// Format-patch the last commit which will be the chrrypick commit
-	if err := golangClient.FormatPatch(); err != nil {
-		logger.Error(err, "git format-patch")
-		return err
-	}
+	// TODO: Format-patch the last commit which will be the chrrypick commit
 
-	if err := addPatchFileToEKSGo(gClient, golangClient); err != nil {
-		logger.Error(err, "Copy patch file to new repo")
-		return err
-	}
+	// TODO: Copy patch file to EKS Go patch folder
 
-	return nil
-}
-
-func addPatchFileToEKSGo(gClient git.Client, golangClient git.Client) error {
 	return nil
 }
 

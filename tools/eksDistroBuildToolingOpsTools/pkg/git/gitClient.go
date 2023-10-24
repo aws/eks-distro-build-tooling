@@ -15,9 +15,6 @@ type Client interface {
 	Init() error
 	Branch(name string) error
 	ValidateRemoteExists(ctx context.Context) error
-	AmExternal(externalRepo Client) error
-	Cherrypick(commit string) error
-	FormatPatch() error
 	// filename for all the functions should be the full path from the repo base
 	CreateFile(filename string, contents []byte) error
 	CopyFile(curFile, dstFile string) error

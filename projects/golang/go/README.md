@@ -8,24 +8,43 @@ and executing the Kubernetes conformance tests.
 
 EKS Go RPMs are publicly available; see [Access EKS Go Artifacts](#access-eks-go-artifacts). 
 
+## New Minor Releases and Patch Releases 
+### Adding Minor Version
+1. Build the CLI tool by opening [eksDistroBuildToolingOpsTools](/tools/eksDistroBuildToolingOpsTools/) and run `make build-eksGoRelease`
+2. Run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease new -u <github user> -e <github email> --eksGoReleases=<new minor version of golang>`
+    1. example `bin/darwing/amd64/eksGoRelease new -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.22.0`
+3. Check the PRs and update changelogs before requesting approval.
+
+### Updating Upstream Supported Patch Versions
+1. Build the CLI tool by opening [eksDistroBuildToolingOpsTools](/tools/eksDistroBuildToolingOpsTools/) and run `make build-eksGoRelease`
+2. Run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease update -u <github user> -e <github email> --eksGoReleases=<new minor version of golang>`
+    1. example `bin/darwing/amd64/eksGoRelease update -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.20.11,1.21.4`
+3. Check the PRs and update changelogs before requesting approval.
+
+### Updating Upstream Unsupported Patch Versions
+Follow [Updating Upstream Supported Patch Versions](#updating-upstream-supported-patch-versions) steps. There is a WIP cli command located at [patchEksGo.go](../../../tools/eksDistroBuildToolingOpsTools/cmd/eksGoRelease/cmd/patchEksGo.go) and the tooling for the command [createPatch.go](../../../tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/createPatch.go).
+
+TODO for WIP: 
+- Add `git cherry-pick`, `git am`, and `git format-patch` to [eksDistroBuildToolingOpsTools/pkg/git](/tools/eksDistroBuildToolingOpsTools/pkg/git) or to [go-git](https://github.com/go-git/go-git/blob/master/COMPATIBILITY.md)
+- Add logic to apply patches, cherry pick [upstream's](https://github.com/golang/go) fix, and format patch to [createPatch.go](/tools/eksDistroBuildToolingOpsTools/pkg/eksGoReleases/createPatch.go)
 
 ## Supported Versions
 EKS currently supports the following Golang versions:
-- [`v1.19`](./1.19/GIT_TAG)
-- [`v1.20`](./1.20/GIT_TAG)
 - [`v1.21`](./1.21/GIT_TAG)
+- [`v1.20`](./1.20/GIT_TAG)
+- [`v1.19`](./1.19/GIT_TAG)
 
 
 ## Deprecated Versions
-- [`v1.15`](./1.15/GIT_TAG)
-- [`v1.16`](./1.16/GIT_TAG)
-- [`v1.17`](./1.16/GIT_TAG)
 - [`v1.18`](./1.18/GIT_TAG)
+- [`v1.17`](./1.16/GIT_TAG)
+- [`v1.16`](./1.16/GIT_TAG)
+- [`v1.15`](./1.15/GIT_TAG)
 
 For versions of `EKS-Go` EKS Distro has [discontinued support](#deprecated-versions) for, there are no plans for removing artifacts from the public ECR. EKS-Distro 
 won’t be backporting any upcoming golang security fixes for these versions.
 
-**Due to the increased security risk this poses, it is HIGHLY recommended that users of `EKS-GO v1.15 - v1.17` update to a supported version of EKS-Go (v1.18+) as soon as possible.**
+**Due to the increased security risk this poses, it is HIGHLY recommended that users of `EKS-GO v1.15 - v1.18` update to a supported version of EKS-Go (v1.19+) as soon as possible.**
 
 
 ## Upstream Patches
