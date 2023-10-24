@@ -86,7 +86,7 @@ func (r Release) EksGoArtifacts(arch string) (string, string, string) {
 		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.Major, r.Minor, r.Patch, r.Release, arch)
 		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, arch, "RPMS", arch)
 	case "noarch":
-		artifact = fmt.Sprintf(constants.EksGoRpmArtifactFmt, r.MajorVersion(), r.MinorVersion(), r.PatchVersion(), r.ReleaseNumber(), arch)
+		artifact = fmt.Sprintf(constants.EksGoNoarchRpmArtifactFmt, r.MajorVersion(), r.MinorVersion(), r.PatchVersion(), r.ReleaseNumber(), arch)
 		urlFmt = fmt.Sprintf(constants.EksGoArtifactUrl, r.Major, r.Minor, r.Patch, r.Release, "x86_64", "RPMS", arch)
 	case "amd64", "arm64":
 		artifact = fmt.Sprintf(constants.EksGoTargzArtifactFmt, r.Major, r.Minor, r.Patch, arch)

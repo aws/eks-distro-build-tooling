@@ -21,7 +21,7 @@ const (
 	patchesPathFmt        = "%s/%s/patches/%s"
 	rpmSourcePathFmt      = "%s/%s/rpmbuild/SOURCES/%s"
 	specPathFmt           = "%s/%s/rpmbuild/SPECS/%s"
-	readmeFmtPath         = "tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/readmeFmt.txt"
+	readmeFmtPath         = "tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/versionReadmeFmt.txt"
 	newReleaseFile        = "tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/newRelease.txt"
 	fedoraFile            = "fedora.go"
 	gdbinitFile           = "golang-gdbinit"
