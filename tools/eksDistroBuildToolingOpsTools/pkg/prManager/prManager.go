@@ -1,4 +1,4 @@
-package prmanager
+package prManager
 
 import (
 	"context"
@@ -209,21 +209,27 @@ type CreatePrOpts struct {
 }
 
 func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, error) {
-	ref, err := p.getRef(ctx, opts.CommitBranch, opts.BaseBranch)
-	if err != nil {
-		return "", fmt.Errorf("creating pull request: get/create the commit reference: %s\n", err)
-	}
-	if ref == nil {
-		return "", fmt.Errorf("creating pull request: the reference is nil")
-	}
+	// If opts.CommitMessage is not empty then create the required refs and other objects to create the commit
+	// otherwise this will try and create a pr from the repos referenced. This requires the branch to exist.
+	// Checkout the goGithub repo's Create function
+	// https://github.com/google/go-github/blob/a0e8f35c5cefc688733d566ec3701e86972df056/github/pulls.go#L258
+	if opts.CommitMessage != "" {
+		ref, err := p.getRef(ctx, opts.CommitBranch, opts.BaseBranch)
+		if err != nil {
+			return "", fmt.Errorf("creating pull request: get/create the commit reference: %s\n", err)
+		}
+		if ref == nil {
+			return "", fmt.Errorf("creating pull request: the reference is nil")
+		}
 
-	tree, err := p.getTree(ctx, ref, opts.SourceFileBody, opts.DestFileGitPath)
-	if err != nil {
-		return "", fmt.Errorf("creating the tree based on the provided files: %s\n", err)
-	}
+		tree, err := p.getTree(ctx, ref, opts.SourceFileBody, opts.DestFileGitPath)
+		if err != nil {
+			return "", fmt.Errorf("creating the tree based on the provided files: %s\n", err)
+		}
 
-	if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, opts.CommitMessage); err != nil {
-		return "", fmt.Errorf("creating the commit: %s\n", err)
+		if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, opts.CommitMessage); err != nil {
+			return "", fmt.Errorf("creating the commit: %s\n", err)
+		}
 	}
 
 	pr, err := p.createPR(ctx, opts)
