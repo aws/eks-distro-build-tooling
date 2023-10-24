@@ -220,10 +220,6 @@ func updateGoSpecPatchVersion(fc *string, r *Release) string {
 	return strings.Replace(*fc, gpO, gpN, 1)
 }
 
-func addPatchGoSpec(fc *string, r *Release, patch string) string {
-	return ""
-}
-
 // TODO: Fix logic to apply previous patches, cherry pick fix, and create patch file
 func createPatchFile(ctx context.Context, r *Release, gClient git.Client, golangClient git.Client, commit string) error {
 	// Attempt patch generation if it fails, skip updating gospec with new patch number

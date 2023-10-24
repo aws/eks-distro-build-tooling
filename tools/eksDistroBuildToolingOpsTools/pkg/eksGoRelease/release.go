@@ -4,23 +4,22 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-git/go-git/v5/plumbing/transport/http"
-
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/constants"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/git"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/github"
 	"github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools/pkg/logger"
+	"github.com/go-git/go-git/v5/plumbing/transport/http"
 )
 
 const (
-	updatePRCommitFmt      = "Update EKS Go files for version %s"
-	updatePRDescriptionFmt = "Update EKS Go Patch Version: %s\nSPEC FILE STILL NEEDS THE '%%changelog' UPDATED\nPLEASE UPDATE WITH THE FOLLOWING FORMAT\n```\n* Wed Sep 06 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.8-1\n- Bump tracking patch version to 1.20.8 from 1.20.7\n```"
-	updatePRSubjectFmt     = "New patch release of Golang: %s"
+	releasePRCommitFmt      = "Release EKS Go version %s"
+	releasePRDescriptionFmt = "Increment release file to publish new EKS Go artifacts for %s"
+	releasePRSubjectFmt     = "Release EKS Go: %s"
 )
 
 // UpdatePatchVersion is for updating the files in https://github.com/aws/eks-distro-build-tooling/golang/go for golang versions still maintained by upstream.
 // For EKS Go versions that aren't maintained by upstream, the function is
-func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user string) error {
+func ReleaseArtifacts(ctx context.Context, r *Release, dryrun bool, email, user string) error {
 	// Setup Git Clients
 	token, err := github.GetGithubToken()
 	if err != nil {
@@ -44,32 +43,21 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
-		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
+	if err := gClient.Branch(fmt.Sprintf("release-%s", r.GoMinorVersion())); err != nil {
+		logger.Error(err, "git branch", "branch name", r.GoMinorVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
 
-	// Update files for new patch versions of golang
-	if err := updateVersionReadme(gClient, r); err != nil {
-		logger.Error(err, "Update Readme")
-		return err
-	}
-
-	// Since this doesn't require a backport set and pass false
-	if err := updateGoSpec(gClient, r); err != nil {
-		logger.Error(err, "Update Readme")
-		return err
-	}
-
-	if err := updateGitTag(gClient, r); err != nil {
-		logger.Error(err, "Update GitTag")
+	// Increment release files
+	if err := updateRelease(gClient, r); err != nil {
+		logger.Error(err, "updating release file", "release", r.EksGoReleaseVersion())
 		return err
 	}
 
 	// Commit files and create PR
-	prSubject := fmt.Sprintf(updatePRSubjectFmt, r.GoSemver())
-	prDescription := fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseVersion())
-	commitMsg := fmt.Sprintf(updatePRCommitFmt, r.GoSemver())
+	prSubject := fmt.Sprintf(releasePRSubjectFmt, r.EksGoReleaseVersion())
+	prDescription := fmt.Sprintf(releasePRDescriptionFmt, r.EksGoReleaseVersion())
+	commitMsg := fmt.Sprintf(releasePRCommitFmt, r.EksGoReleaseVersion())
 	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
 		logger.Error(err, "Create Release PR")
 	}
