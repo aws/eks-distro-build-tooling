@@ -14,12 +14,16 @@ EKS Go RPMs are publicly available; see [Access EKS Go Artifacts](#access-eks-go
 2. Run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease new -u <github user> -e <github email> --eksGoReleases=<new minor version of golang>`
     1. example `bin/darwing/amd64/eksGoRelease new -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.22.0`
 3. Check the PRs and update changelogs before requesting approval.
+4. Once the PRs have been merged and post-submits finish and pass run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease release -u <github user> -e <github email> --eksGoReleases=<version of EKS Go just updated>` to bump the release files and publish the new artifacts
+    1. example `bin/darwing/amd64/eksGoRelease release -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.20.11,1.21.4`
 
 ### Updating Upstream Supported Patch Versions
 1. Build the CLI tool by opening [eksDistroBuildToolingOpsTools](/tools/eksDistroBuildToolingOpsTools/) and run `make build-eksGoRelease`
 2. Run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease update -u <github user> -e <github email> --eksGoReleases=<new minor version of golang>`
     1. example `bin/darwing/amd64/eksGoRelease update -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.20.11,1.21.4`
 3. Check the PRs and update changelogs before requesting approval.
+4. Once the PRs have been merged and post-submits finish and pass run `bin/$(GO_OS)/$(GO_ARCH)/eksGoRelease release -u <github user> -e <github email> --eksGoReleases=<version of EKS Go just updated>` to bump the release files and publish the new artifacts
+    1. example `bin/darwing/amd64/eksGoRelease release -u rcrozean -e rcrozean@amazon.com --eksGoReleases=1.20.11,1.21.4`
 
 ### Updating Upstream Unsupported Patch Versions
 Follow [Updating Upstream Supported Patch Versions](#updating-upstream-supported-patch-versions) steps. There is a WIP cli command located at [patchEksGo.go](../../../tools/eksDistroBuildToolingOpsTools/cmd/eksGoRelease/cmd/patchEksGo.go) and the tooling for the command [createPatch.go](../../../tools/eksDistroBuildToolingOpsTools/pkg/eksGoRelease/createPatch.go).
