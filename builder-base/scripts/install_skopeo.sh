@@ -23,6 +23,9 @@ NEWROOT=/skopeo
 source $SCRIPT_ROOT/common_vars.sh
 
 function install_skopeo() {
+    if [ "$IS_AL23" = "true" ]; then
+        SKOPEO_VERSION=$SKOPEO_VERSION_AL23
+    fi
     local -r deps="device-mapper-devel libassuan-devel gpgme-devel"
     yum install -y $deps
 
