@@ -335,11 +335,13 @@ FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
 ARG SKOPEO_VERSION
+ARG SKOPEO_VERSION_AL23
 ENV SKOPEO_VERSION=$SKOPEO_VERSION
+ENV SKOPEO_VERSION_AL23=$SKOPEO_VERSION_AL23
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
-COPY --link --from=golang-1.16 /golang-1.16 /
+COPY --link --from=golang-1.20 /golang-1.20 /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_skopeo.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
