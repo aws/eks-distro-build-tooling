@@ -199,27 +199,11 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 
 # for al2 builds we pull python3.9 from the minimal image build since al2
 # does not ship 3.9
-FROM ${PYTHON_IMAGE} as python-3.9
-ARG ANSIBLE_VERSION
-ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
-ARG PYWINRM_VERSION
-ENV PYWINRM_VERSION=$PYWINRM_VERSION
-RUN python3 -m ensurepip --upgrade && \
-    pip3 install --no-cache-dir ansible-core==$ANSIBLE_VERSION && \
-    pip3 install --no-cache-dir pywinrm==$PYWINRM_VERSION
-
-FROM ${BUILDER_IMAGE} as ansible-al2
-
-COPY --link --from=python-3.9 / /ansible
-# we want python2 to be the version symlinkd to python
-# we also do not want to overwrite the rpm db
-# this will leave the packages pulled in from the python image in
-# a slightly odd state in that they are installed yet not in the rpm db
-RUN set -x && \
-    unlink /ansible/usr/bin/python && \
-    rm -rf /var/lib/
+FROM ${PYTHON_IMAGE} as ansible-al2
 
 FROM ${BUILDER_IMAGE} as ansible-al2023
+
+FROM ansible-${AL_TAG} as ansible
 ARG TARGETARCH
 WORKDIR /workdir
 ARG ANSIBLE_VERSION
@@ -229,11 +213,7 @@ ENV PYWINRM_VERSION=$PYWINRM_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_ansible.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_ansible.sh && \
-    /remove_yum_packages.sh
-
-FROM ansible-${AL_TAG} as ansible
+    /install_ansible.sh
 
 FROM ${BUILDER_IMAGE} as golang-1.16
 ARG TARGETARCH

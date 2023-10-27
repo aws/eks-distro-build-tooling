@@ -65,16 +65,17 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     yum install -y \
         gcc \
         openssl-devel \
-        pkgconfig 
+        pkgconfig
 
     # for building containerd
     yum install -y \
         glibc-static \
         libseccomp-static
 
-    # headers for btrfs do not exist in al23. well need to address this in the future
-    # if we want to build containerd with btrfs support on al23
-    if [ "$IS_AL23" = "false" ]; then 
+
+    if [ "$IS_AL23" = "false" ]; then
+        # headers for btrfs do not exist in al23. well need to address this in the future
+        # if we want to build containerd with btrfs support on al23
         yum install -y btrfs-progs-devel
     fi
 
@@ -98,6 +99,13 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
         community.windows
 
     chown -R imagebuilder:imagebuilder /home/imagebuilder
+
+    if [ "$IS_AL23" = "true" ]; then
+        yum install -y python3-pip python
+    else
+        # we built python3.9 from source, ensure libs are all installed
+        yum install -y zlib bzip2 readline sqlite openssl11 tk libffi xz
+    fi
     ##############################################
 fi
 
