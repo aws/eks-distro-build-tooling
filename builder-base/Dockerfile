@@ -456,6 +456,20 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_licenses.sh
 
+FROM ${BUILDER_IMAGE} as go-vuln-check
+ARG TARGETARCH
+ARG GOPROXY
+ARG GO_VULN_CHECK_VERSION
+ENV GO_VULN_CHECK_VERSION=$GO_VULN_CHECK_VERSION
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY --link --from=golang-1.21 /golang-1.21 /
+COPY ./scripts/common_vars.sh \
+    ./scripts/install_go_vuln_check.sh /
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+    --mount=type=secret,id=netrc,target=/root/.netrc \
+    /install_go_vuln_check.sh
 
 FROM ${BASE_IMAGE} as minimal-copy-stage
 
@@ -489,6 +503,7 @@ COPY --link --from=golang-1.20 /golang-1.20 /
 COPY --link --from=go-licenses-1.20 /go-licenses-1.20 /
 COPY --link --from=golang-1.21 /golang-1.21 /
 COPY --link --from=go-licenses-1.21 /go-licenses-1.21 /
+COPY --link --from=go-vuln-check /go-vuln-check /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
 COPY --link --from=golang-1.18 /golang-1.18 /
