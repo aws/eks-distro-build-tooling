@@ -28,8 +28,8 @@ LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base-kind
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-PYTHON_IMAGE_NAME?=eks-distro-minimal-base-python
-PYTHON_IMAGE?=$(BASE_IMAGE_REPO)/$(PYTHON_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(PYTHON_IMAGE_NAME)-3.9)
+PYTHON_IMAGE_NAME?=python
+PYTHON_IMAGE?=$(BASE_IMAGE_REPO)/$(PYTHON_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-python-compiler-3.9-yum)
 # using the minimal-base-builder as the base for the download/gcc stages of
 # this build since it doesnt change too often, limiting churn/rebuilds
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base

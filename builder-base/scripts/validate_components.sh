@@ -42,6 +42,9 @@ skopeo --version
 
 # node + go + gcc are only included in the standard image
 if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
+    python --version
+    python3 --version
+    pip3 --version
     packer --version
     ansible --version
 

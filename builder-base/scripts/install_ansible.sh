@@ -23,16 +23,11 @@ NEWROOT=/ansible
 source $SCRIPT_ROOT/common_vars.sh
 
 function instal_ansible() {
-    local -r deps="python3-pip"
-    yum install -y $deps
-
-    #################### IMAGE BUILDER ####################
-    # Install image-builder build dependencies - pip, Ansible, Packer
-    # Post upgrade, pip3 got renamed to pip and moved locations. It works completely with python3
-    # Symlinking pip3 to pip, to have pip3 commands work successfully
-    if [ "$IS_AL23" = "false" ]; then 
+    if [ "$IS_AL23" = "true" ]; then 
+        local -r deps="python3-pip"
+        yum install -y $deps
+    else
         pip3 install --no-cache-dir -U pip setuptools
-        ln -sf $USR_LOCAL_BIN/pip $USR_BIN/pip3
     fi
 
     ANSIBLE_VERSION="$ANSIBLE_VERSION"
@@ -43,6 +38,17 @@ function instal_ansible() {
     
     rm -rf ${NEWROOT}/usr/*
     mv /root/.local/* ${NEWROOT}/usr
+
+    if [ "$IS_AL23" = "false" ]; then 
+        # pulling only the python folders/bin we need
+        # follows list from minimal image Dockerfile.minimal-base-python
+        mkdir -p $NEWROOT/usr/lib/pkgconfig ${NEWROOT}/usr/{bin,include}
+        cp /usr/bin/{pip3,pip3.9,pydoc3.9,python3,python3.9,python3.9-config} ${NEWROOT}/usr/bin
+        cp -rf /usr/include/python3.9 ${NEWROOT}/usr/include
+        cp /usr/lib/pkgconfig/python-3.9*.pc ${NEWROOT}/usr/lib/pkgconfig
+        cp -rf /usr/lib/python3.9 ${NEWROOT}/usr/lib
+        cp --preserve=links /usr/lib/libpython3* ${NEWROOT}/usr/lib
+    fi
 
     rm -rf /root/.cache
 }
