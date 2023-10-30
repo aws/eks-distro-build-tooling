@@ -54,8 +54,6 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     go version
     go-licenses --help
     
-    /go/bin/go1.16 version
-    /go/go1.16/bin/go-licenses --help
     linuxkit version
     /go/bin/go1.17 version
     /go/go1.17/bin/go-licenses --help
@@ -63,6 +61,10 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     /go/go1.18/bin/go-licenses --help
     /go/bin/go1.19 version
     /go/go1.19/bin/go-licenses --help
+    /go/bin/go1.20 version
+    /go/go1.20/bin/go-licenses --help
+    /go/bin/go1.21 version
+    /go/go1.21/bin/go-licenses --help
 
     gcc --version
 fi
