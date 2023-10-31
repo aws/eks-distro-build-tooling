@@ -47,6 +47,10 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     pip3 --version
     packer --version
     ansible --version
+    su - imagebuilder -c "ansible --version"
+    su - imagebuilder -c "ansible-galaxy collection list"
+    su - imagebuilder -c "packer --version"
+    su - imagebuilder -c "packer plugins installed"
 
     node --version
 

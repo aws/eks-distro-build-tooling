@@ -50,6 +50,8 @@ function instal_ansible() {
         cp --preserve=links /usr/lib/libpython3* ${NEWROOT}/usr/lib
     fi
 
+    chmod 755 ${NEWROOT}/usr/lib/python3.9/site-packages 
+
     rm -rf /root/.cache
 }
 
