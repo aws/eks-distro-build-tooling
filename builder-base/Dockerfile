@@ -69,18 +69,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_gh_cli.sh && \
     /remove_yum_packages.sh
 
-FROM ${BUILDER_IMAGE} as docker_buildx
-ARG TARGETARCH
-WORKDIR /workdir
-ARG DOCKER_BUILDX_VERSION
-ENV DOCKER_BUILDX_VERSION=$DOCKER_BUILDX_VERSION
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_docker_buildx.sh ./checksums/docker-buildx-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_docker_buildx.sh && \
-    /remove_yum_packages.sh
-
 FROM ${BUILDER_IMAGE} as yq
 ARG TARGETARCH
 WORKDIR /workdir
@@ -433,7 +421,6 @@ COPY --link --from=hugo /hugo /
 COPY --link --from=govc /govc /
 COPY --link --from=helm /helm /
 COPY --link --from=tuftool /tuftool /
-COPY --link --from=docker_buildx /docker_buildx /
 COPY --link --from=buildkit /buildkit /
 COPY --link --from=skopeo /skopeo /
 

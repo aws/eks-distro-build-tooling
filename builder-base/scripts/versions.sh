@@ -19,7 +19,6 @@ export SKIP_INSTALL="true"
 
 source $SCRIPT_ROOT/install_aws_cli.sh
 source $SCRIPT_ROOT/install_buildkit.sh
-source $SCRIPT_ROOT/install_docker_buildx.sh
 source $SCRIPT_ROOT/install_ecr_cred_helper.sh
 source $SCRIPT_ROOT/install_gh_cli.sh
 source $SCRIPT_ROOT/install_yq.sh

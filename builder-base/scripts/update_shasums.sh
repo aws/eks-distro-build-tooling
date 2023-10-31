@@ -48,9 +48,6 @@ for TARGETARCH in arm64 amd64; do
     sha256=$(curl -sSL --retry 5 $BUILDKIT_DOWNLOAD_URL | sha256sum | awk '{print $1}')
     echo "$sha256  buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz" > $CHECKSUMS_ROOT/checksums/buildkit-$TARGETARCH-checksum
 
-    # DOCKER_BUILDX
-    echo "$(curl -sSL --retry 5 -v --silent $DOCKER_BUILDX_CHECKSUM_URL 2>&1 | grep buildx-${DOCKER_BUILDX_VERSION}.linux-$TARGETARCH | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/docker-buildx-$TARGETARCH-checksum
-
     # GITHUB CLI
     echo "$(curl -sSL --retry 5 -v --silent $GITHUB_CLI_CHECKSUM_URL 2>&1 | grep  gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/github-cli-$TARGETARCH-checksum
 
