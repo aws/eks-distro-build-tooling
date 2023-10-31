@@ -35,6 +35,7 @@ yum install -y \
     bzip2 \
     cpio \
     curl \
+    diffutils \
     docker \
     gettext \
     git-core \
