@@ -30,14 +30,9 @@ function install_go_licenses() {
     # installing go-licenses has to happen after we have set the main go
     # to symlink to the one in /root/sdk to ensure go-licenses gets built
     # with GOROOT pointed to /root/sdk/go... instead of /usr/local/go so it
-    # is able to properly packages from the standard Go library
-    # We currently  use 1.19, 1.17 or 1.16, so installing for all
-    if [ "${GOLANG_MAJOR_VERSION}" = "go1.16" ]; then
-        GO111MODULE=on GOBIN=${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin go install github.com/jaxesn/go-licenses@4497a2a38565e4e6ad095ea8117c25ecd622d0cc
-    else
-        GO111MODULE=on GOBIN=${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin go install github.com/jaxesn/go-licenses@6800d77c11d0ef8628e7eda908b1d1149383ca48
-    fi
-
+    # is able to properly packages from the standard Go library    
+    CGO_ENABLED=0 GO111MODULE=on GOBIN=${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin go install github.com/jaxesn/go-licenses@6800d77c11d0ef8628e7eda908b1d1149383ca48
+    
     # symlink to go/bin and depending on which go-licenses vs is added last to
     # the final image, will take precedent and be the default
     # similiar to the strategy with golang
@@ -45,6 +40,8 @@ function install_go_licenses() {
     ln -s ${GOPATH}/${GOLANG_MAJOR_VERSION}/bin/go-licenses ${NEWROOT}/${GOPATH}/bin/go-licenses
     
     rm -rf ${GOPATH}
+
+    time upx --best --no-lzma ${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin/go-licenses
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_go_licenses

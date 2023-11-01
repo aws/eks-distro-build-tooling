@@ -79,6 +79,10 @@ function build::go::extract() {
     version=$(echo "$golang_version" | grep -o "[0-9].*")
     ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
 
+    # newer versions of golang stopped shipping the compiled .a lib files
+    # removing from old versions since we do not need these during our builds
+    find /root/sdk/go${version}/pkg -type f -name "*.a" -delete
+
     rm -rf /tmp/go-extracted /tmp/golang-*.rpm
 }
 
@@ -93,3 +97,5 @@ done
 mkdir -p ${NEWROOT}/root
 mv /root/sdk ${NEWROOT}/root
 mv ${GOPATH} ${NEWROOT}/${GOPATH}
+
+time upx --best --no-lzma ${NEWROOT}/root/sdk/go${VERSION%-*}/bin/go ${NEWROOT}/root/sdk/go${VERSION%-*}/pkg/tool/linux_$TARGETARCH/{addr2line,asm,cgo,compile,cover,doc,link,objdump,pprof,trace,vet}

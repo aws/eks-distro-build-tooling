@@ -18,27 +18,18 @@ set -o pipefail
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-NEWROOT=/tuftool
+NEWROOT=/upx
 
 source $SCRIPT_ROOT/common_vars.sh
 
-RUSTUP_DOWNLOAD_URL="https://sh.rustup.rs"
+UPX_DOWNLOAD_URL="https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-${TARGETARCH}_linux.tar.xz"
 
-
-function install_tuftool() {
-    local -r deps="openssl openssl-devel"
-    yum install -y $deps
-
-    # Installing Tuftool for Bottlerocket downloads
-    curl -fsS $RUSTUP_DOWNLOAD_URL | CARGO_HOME=$CARGO_HOME RUSTUP_HOME=$RUSTUP_HOME sh -s -- -y
-    find $CARGO_HOME/bin -type f -not -name "cargo" -not -name "rustc" -not -name "rustup" -delete
-    $CARGO_HOME/bin/rustup default stable
-    CARGO_NET_GIT_FETCH_WITH_CLI=true $CARGO_HOME/bin/cargo install --force -v --root $CARGO_HOME tuftool 
-    cp $CARGO_HOME/bin/tuftool $USR_BIN/tuftool
-
-    rm -rf $RUSTUP_HOME $CARGO_HOME
-
-    time upx --best --no-lzma $USR_BIN/tuftool
+function install_upx() {
+    wget --progress dot:giga $UPX_DOWNLOAD_URL
+    sha256sum -c $BASE_DIR/upx-$TARGETARCH-checksum
+    tar -xf upx-${UPX_VERSION}-${TARGETARCH}_linux.tar.xz
+    mv upx-${UPX_VERSION}-${TARGETARCH}_linux/upx ${NEWROOT}/usr/local/bin
+    rm -rf upx-${UPX_VERSION}-${TARGETARCH}_linux.tar.xz upx-${UPX_VERSION}-${TARGETARCH}_linux/upx
 }
 
-[ ${SKIP_INSTALL:-false} != false ] || install_tuftool
+[ ${SKIP_INSTALL:-false} != false ] || install_upx

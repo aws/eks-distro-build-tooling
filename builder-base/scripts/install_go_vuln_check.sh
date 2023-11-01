@@ -26,6 +26,8 @@ function install_go_vuln_check() {
     GO111MODULE=on GOBIN=${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin go install golang.org/x/vuln/cmd/govulncheck@$GO_VULN_CHECK_VERSION
 
     rm -rf ${GOPATH}
+
+    time upx --best --no-lzma ${NEWROOT}/${GOPATH}/${GOLANG_MAJOR_VERSION}/bin/govulncheck
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_go_vuln_check

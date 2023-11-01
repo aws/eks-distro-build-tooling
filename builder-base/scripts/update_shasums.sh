@@ -66,6 +66,10 @@ for TARGETARCH in arm64 amd64; do
 
     # GOSS
     echo "$(curl -sSL --retry 5 -v --silent $GOSS_CHECKSUM_URL 2>&1 | grep packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/goss-$TARGETARCH-checksum
+
+    # UPX
+    sha256=$(curl -sSL --retry 5 $UPX_DOWNLOAD_URL | sha256sum | awk '{print $1}')
+    echo "$sha256  upx-${UPX_VERSION}-${TARGETARCH}_linux.tar.xz" > $CHECKSUMS_ROOT/checksums/upx-$TARGETARCH-checksum
 done
 
 # HUGO

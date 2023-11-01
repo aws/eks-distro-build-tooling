@@ -51,6 +51,8 @@ function install_generate_attribution() {
 
     ln -s /$USR_BIN/node /usr/bin/node
     $USR_BIN/npm install
+
+    time upx --best --no-lzma $USR_BIN/node
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && install_generate_attribution)

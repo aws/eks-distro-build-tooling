@@ -36,6 +36,8 @@ function install_helm() {
     mv linux-$TARGETARCH/helm $USR_BIN/helm
     chmod +x $USR_BIN/helm
     rm -f helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz
+
+    time upx --best --no-lzma $USR_BIN/helm
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_helm
