@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.aarch64
 groff-base-1.22.2-8.amzn2.0.2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 info-5.1-5.amzn2.aarch64
-kernel-headers-4.14.326-245.539.amzn2.aarch64
+kernel-headers-4.14.327-246.539.amzn2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
@@ -88,7 +88,7 @@ libunistring-0.9.3-9.amzn2.0.2.aarch64
 libutempter-1.1.6-4.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.12.aarch64
+libxml2-2.9.1-6.amzn2.5.13.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 lz4-1.7.5-2.amzn2.0.1.aarch64
 make-3.82-24.amzn2.aarch64
@@ -107,7 +107,7 @@ nss-util-3.79.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
 openssh-7.4p1-22.amzn2.0.5.aarch64
 openssh-clients-7.4p1-22.amzn2.0.5.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.9.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.10.aarch64
 pam-1.1.8-23.amzn2.0.1.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pcre2-10.23-11.amzn2.0.1.aarch64
@@ -117,9 +117,9 @@ popt-1.13-16.amzn2.0.2.aarch64
 pth-2.0.7-23.amzn2.0.2.aarch64
 pygpgme-0.3-9.amzn2.0.3.aarch64
 pyliblzma-0.5.3-25.amzn2.aarch64
-python-2.7.18-1.amzn2.0.6.aarch64
+python-2.7.18-1.amzn2.0.7.aarch64
 python-iniparse-0.4-9.amzn2.noarch
-python-libs-2.7.18-1.amzn2.0.6.aarch64
+python-libs-2.7.18-1.amzn2.0.7.aarch64
 python-pycurl-7.19.0-19.amzn2.0.2.aarch64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.3.aarch64
@@ -146,4 +146,4 @@ xz-libs-5.2.2-1.amzn2.0.3.aarch64
 yum-3.4.3-158.amzn2.0.7.noarch
 yum-metadata-parser-1.1.4-10.amzn2.0.2.aarch64
 yum-plugin-ovl-1.1.31-46.amzn2.0.1.noarch
-zlib-1.2.7-19.amzn2.0.2.aarch64
+zlib-1.2.7-19.amzn2.0.3.aarch64

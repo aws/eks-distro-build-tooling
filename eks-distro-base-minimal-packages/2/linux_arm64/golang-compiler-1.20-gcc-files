@@ -16222,7 +16222,7 @@
 -rwxr-xr-x    72KiB /usr/lib64/python2.7/lib-dynload/_multibytecodecmodule.so
 -rwxr-xr-x    70KiB /usr/lib64/python2.7/lib-dynload/_multiprocessing.so
 -rwxr-xr-x    68KiB /usr/lib64/python2.7/lib-dynload/_randommodule.so
--rwxr-xr-x    86KiB /usr/lib64/python2.7/lib-dynload/_socketmodule.so
+-rwxr-xr-x   150KiB /usr/lib64/python2.7/lib-dynload/_socketmodule.so
 -rwxr-xr-x   139KiB /usr/lib64/python2.7/lib-dynload/_sqlite3.so
 -rwxr-xr-x   146KiB /usr/lib64/python2.7/lib-dynload/_ssl.so
 -rwxr-xr-x    74KiB /usr/lib64/python2.7/lib-dynload/_struct.so
@@ -16640,9 +16640,9 @@
 -rwxr-xr-x    52KiB /usr/lib64/python2.7/platform.py
 -rw-r--r--    38KiB /usr/lib64/python2.7/platform.pyc
 -rw-r--r--    38KiB /usr/lib64/python2.7/platform.pyo
--rw-r--r--    15KiB /usr/lib64/python2.7/plistlib.py
--rw-r--r--    19KiB /usr/lib64/python2.7/plistlib.pyc
--rw-r--r--    19KiB /usr/lib64/python2.7/plistlib.pyo
+-rw-r--r--    16KiB /usr/lib64/python2.7/plistlib.py
+-rw-r--r--    20KiB /usr/lib64/python2.7/plistlib.pyc
+-rw-r--r--    20KiB /usr/lib64/python2.7/plistlib.pyo
 -rw-r--r--   8.3KiB /usr/lib64/python2.7/popen2.py
 -rw-r--r--   8.9KiB /usr/lib64/python2.7/popen2.pyc
 -rw-r--r--   8.8KiB /usr/lib64/python2.7/popen2.pyo
@@ -21801,7 +21801,7 @@
 -rw-r--r--   7.5MiB /var/lib/rpm/Packages
 -rw-r--r--    80KiB /var/lib/rpm/Providename
 -rw-r--r--    72KiB /var/lib/rpm/Requirename
--rw-r--r--    20KiB /var/lib/rpm/Sha1header
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
