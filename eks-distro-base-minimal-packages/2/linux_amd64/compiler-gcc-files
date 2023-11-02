@@ -25,7 +25,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--    11KiB /etc/ld.so.cache
+-rw-r--r--   9.5KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     100B /etc/logrotate.d/yum
 -rw-r--r--       0B /etc/motd
@@ -424,7 +424,7 @@
 -rw-r--r--      32B /usr/include/asm/ipcbuf.h
 -rw-r--r--     854B /usr/include/asm/ist.h
 -rw-r--r--   7.0KiB /usr/include/asm/kvm.h
--rw-r--r--   3.1KiB /usr/include/asm/kvm_para.h
+-rw-r--r--   3.5KiB /usr/include/asm/kvm_para.h
 -rw-r--r--     388B /usr/include/asm/kvm_perf.h
 -rw-r--r--   1.3KiB /usr/include/asm/ldt.h
 -rw-r--r--   1.3KiB /usr/include/asm/mce.h
@@ -4240,9 +4240,9 @@
 -rwxr-xr-x    52KiB /usr/lib64/python2.7/platform.py
 -rw-r--r--    38KiB /usr/lib64/python2.7/platform.pyc
 -rw-r--r--    38KiB /usr/lib64/python2.7/platform.pyo
--rw-r--r--    15KiB /usr/lib64/python2.7/plistlib.py
--rw-r--r--    19KiB /usr/lib64/python2.7/plistlib.pyc
--rw-r--r--    19KiB /usr/lib64/python2.7/plistlib.pyo
+-rw-r--r--    16KiB /usr/lib64/python2.7/plistlib.py
+-rw-r--r--    20KiB /usr/lib64/python2.7/plistlib.pyc
+-rw-r--r--    20KiB /usr/lib64/python2.7/plistlib.pyo
 -rw-r--r--   8.3KiB /usr/lib64/python2.7/popen2.py
 -rw-r--r--   8.9KiB /usr/lib64/python2.7/popen2.pyc
 -rw-r--r--   8.8KiB /usr/lib64/python2.7/popen2.pyo
@@ -8603,7 +8603,7 @@
 -rw-r--r--   5.7MiB /var/lib/rpm/Packages
 -rw-r--r--    64KiB /var/lib/rpm/Providename
 -rw-r--r--    48KiB /var/lib/rpm/Requirename
--rw-r--r--    20KiB /var/lib/rpm/Sha1header
+-rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 

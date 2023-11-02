@@ -1,9 +1,7 @@
 
-containerd.x86_64
-libsepol.x86_64
-oniguruma.x86_64
-runc.x86_64
-sudo.x86_64
+libxml2.x86_64
+python.x86_64
+python-libs.x86_64
 vim-data.noarch
 vim-minimal.x86_64
-yum.noarch
+zlib.x86_64

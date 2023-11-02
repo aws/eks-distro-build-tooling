@@ -1,3 +1,5 @@
 
-libsepol.x86_64
-yum.noarch
+libxml2.x86_64
+python.x86_64
+python-libs.x86_64
+zlib.x86_64

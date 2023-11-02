@@ -57,7 +57,7 @@ nss-sysinit-3.79.0-4.amzn2.0.1.x86_64
 nss-tools-3.79.0-4.amzn2.0.1.x86_64
 nss-util-3.79.0-1.amzn2.x86_64
 openldap-2.4.44-25.amzn2.0.7.x86_64
-openssl-libs-1.0.2k-24.amzn2.0.9.x86_64
+openssl-libs-1.0.2k-24.amzn2.0.10.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 popt-1.13-16.amzn2.0.2.x86_64
 readline-6.2-10.amzn2.0.2.x86_64
@@ -71,4 +71,4 @@ tar-1.26-35.amzn2.0.2.x86_64
 tzdata-2023c-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
-zlib-1.2.7-19.amzn2.0.2.x86_64
+zlib-1.2.7-19.amzn2.0.3.x86_64
