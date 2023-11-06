@@ -77,7 +77,7 @@ else
 fi
 
 if [ -n "${EXTRA_PR_BODY}" ]; then
-    PR_BODY+="${EXTRA_PR_BODY}"
+    printf "${EXTRA_PR_BODY}" >> $PR_BODY_FILE
 fi
 
 # Adding this here to include the "do-not-merge/hold" label. Trying to use the gh client with the --label arg will not succeed
