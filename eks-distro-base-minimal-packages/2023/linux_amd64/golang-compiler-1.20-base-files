@@ -12940,7 +12940,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.10.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -13011,7 +13011,7 @@
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   355KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.10.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1
@@ -13050,7 +13050,7 @@
 -rwxr-xr-x    33KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    28KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
--rwxr-xr-x   726KiB /usr/lib64/libzstd.so.1.5.2
+-rwxr-xr-x   762KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
@@ -13999,7 +13999,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
 -rw-r--r--   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
 -rw-r--r--    18KiB /usr/share/licenses/libzstd/COPYING
--rw-r--r--   1.5KiB /usr/share/licenses/libzstd/LICENSE
+-rw-r--r--   1.6KiB /usr/share/licenses/libzstd/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/make/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/mpfr/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/mpfr/COPYING.LESSER
@@ -17103,7 +17103,7 @@ lrwxrwxrwx      20B /usr/lib64/libutempter.so.0 libutempter.so.1.2.1
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
-lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.2
+lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.5
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so libanonymous.so.3.0.0
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so.3 libanonymous.so.3.0.0
 lrwxrwxrwx      18B /usr/lib64/sasl2/libsasldb.so libsasldb.so.3.0.0

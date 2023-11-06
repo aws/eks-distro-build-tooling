@@ -917,7 +917,7 @@
 -rw-r--r--     904B /usr/include/linux/blkpg.h
 -rw-r--r--   4.6KiB /usr/include/linux/blktrace_api.h
 -rw-r--r--   6.4KiB /usr/include/linux/blkzoned.h
--rw-r--r--   254KiB /usr/include/linux/bpf.h
+-rw-r--r--   255KiB /usr/include/linux/bpf.h
 -rw-r--r--   1.4KiB /usr/include/linux/bpf_common.h
 -rw-r--r--     529B /usr/include/linux/bpf_perf_event.h
 -rw-r--r--     465B /usr/include/linux/bpfilter.h
@@ -1116,7 +1116,7 @@
 -rw-r--r--     488B /usr/include/linux/ipmi_bmc.h
 -rw-r--r--   3.4KiB /usr/include/linux/ipmi_msgdefs.h
 -rw-r--r--     947B /usr/include/linux/ipsec.h
--rw-r--r--   4.2KiB /usr/include/linux/ipv6.h
+-rw-r--r--   4.3KiB /usr/include/linux/ipv6.h
 -rw-r--r--   1.9KiB /usr/include/linux/ipv6_route.h
 -rw-r--r--     104B /usr/include/linux/irqnr.h
 -rw-r--r--   4.7KiB /usr/include/linux/isdn/capicmd.h
@@ -2962,7 +2962,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.9.so
+-rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.10.so
 -rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -3051,7 +3051,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.9.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.10.so
 -rwxr-xr-x   1.4MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
@@ -3102,7 +3102,7 @@
 -rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.4
 -rwxr-xr-x   261KiB /usr/lib64/libyaml-0.so.2.0.9
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
--rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.2
+-rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   1.2MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   328KiB /usr/lib64/pkcs11/p11-kit-trust.so
@@ -6364,7 +6364,7 @@
 -rw-r--r--   1.3KiB /usr/share/licenses/libxml2/Copyright
 -rw-r--r--   1.1KiB /usr/share/licenses/libyaml/License
 -rw-r--r--    18KiB /usr/share/licenses/libzstd/COPYING
--rw-r--r--   1.5KiB /usr/share/licenses/libzstd/LICENSE
+-rw-r--r--   1.6KiB /usr/share/licenses/libzstd/LICENSE
 -rw-rw-r--   1.1KiB /usr/share/licenses/lua-srpm-macros/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/make/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/mpfr/COPYING
@@ -9226,7 +9226,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.6MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -9697,7 +9697,7 @@ lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.4
 lrwxrwxrwx      18B /usr/lib64/libyaml-0.so.2 libyaml-0.so.2.0.9
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
-lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.2
+lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.5
 lrwxrwxrwx      15B /usr/lib64/p11-kit-proxy.so libp11-kit.so.0
 lrwxrwxrwx      12B /usr/lib64/pkgconfig/libcrypt.pc libxcrypt.pc
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so libanonymous.so.3.0.0

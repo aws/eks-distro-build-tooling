@@ -3,9 +3,9 @@ basesystem-11-11.amzn2023.0.2.noarch
 ca-certificates-2023.2.60-1.0.amzn2023.0.3.noarch
 coreutils-single-8.32-30.amzn2023.0.3.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
-glibc-2.34-52.amzn2023.0.6.aarch64
-glibc-common-2.34-52.amzn2023.0.6.aarch64
-glibc-minimal-langpack-2.34-52.amzn2023.0.6.aarch64
+glibc-2.34-52.amzn2023.0.7.aarch64
+glibc-common-2.34-52.amzn2023.0.7.aarch64
+glibc-minimal-langpack-2.34-52.amzn2023.0.7.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702
 libacl-2.3.1-2.amzn2023.0.2.aarch64

@@ -17,9 +17,9 @@ filesystem-3.14-5.amzn2023.0.3.aarch64
 fuse-libs-2.9.9-13.amzn2023.0.2.aarch64
 gawk-5.1.0-3.amzn2023.0.3.aarch64
 gdbm-libs-1.19-2.amzn2023.0.2.aarch64
-glibc-2.34-52.amzn2023.0.6.aarch64
-glibc-common-2.34-52.amzn2023.0.6.aarch64
-glibc-minimal-langpack-2.34-52.amzn2023.0.6.aarch64
+glibc-2.34-52.amzn2023.0.7.aarch64
+glibc-common-2.34-52.amzn2023.0.7.aarch64
+glibc-minimal-langpack-2.34-52.amzn2023.0.7.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702
@@ -66,13 +66,13 @@ libuuid-2.37.4-1.amzn2023.0.3.aarch64
 libverto-0.3.2-1.amzn2023.0.2.aarch64
 libverto-libev-0.3.2-1.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-libxml2-2.10.4-1.amzn2023.0.5.aarch64
+libxml2-2.10.4-1.amzn2023.0.6.aarch64
 mpfr-4.1.0-7.amzn2023.0.2.aarch64
 ncurses-base-6.2-4.20200222.amzn2023.0.4.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.4.aarch64
 nfs-utils-2.5.4-2.rc3.amzn2023.0.3.aarch64
 openldap-2.4.57-6.amzn2023.0.6.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.7.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.9.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
 pam-1.5.1-8.amzn2023.0.3.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
@@ -99,4 +99,4 @@ util-linux-2.37.4-1.amzn2023.0.3.aarch64
 util-linux-core-2.37.4-1.amzn2023.0.3.aarch64
 xfsprogs-5.18.0-1.amzn2023.0.3.aarch64
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
-zlib-1.2.11-33.amzn2023.0.4.aarch64
+zlib-1.2.11-33.amzn2023.0.5.aarch64
