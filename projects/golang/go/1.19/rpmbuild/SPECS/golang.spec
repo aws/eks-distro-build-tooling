@@ -161,7 +161,7 @@ Requires:       %{name}-src = %{version}-%{release}
 Patch1:       0001-go-1.19.12-eks-html-template-support-HTML-lik.patch
 Patch2:       0002-go-1.19.12-eks-html-template-properly-handle-.patch
 Patch3:       0003-go-1.19.13-eks-cmd-compile-use-absolute-file-.patch
-Patch4:       0004-go-1.19-13-eks-net-http-regenerate-h2_bundle-.patch
+Patch4:       0004-go-1.19.13-eks-net-http-regenerate-h2_bundle-.patch
 Patch5:       0005-go-1.19.13-eks-path-filepath-fix-various-issu.patch
 
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
