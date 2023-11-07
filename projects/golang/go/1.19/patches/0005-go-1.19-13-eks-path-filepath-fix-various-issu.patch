@@ -4,6 +4,17 @@ Date: Fri, 1 Sep 2023 11:17:19 -0700
 Subject: [PATCH] [release-branch.go1.20] path/filepath: fix various issues in
  parsing Windows paths
 
+# AWS EKS
+
+Backported To: go-1.19.13-eks
+Backported On: Tue, 07 Nov 2023
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.20
+Source Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae
+
+# Original Information
+
+
 On Windows, A root local device path is a path which begins with
 \\?\ or \??\.  A root local device path accesses the DosDevices
 object directory, and permits access to any file or device on the
