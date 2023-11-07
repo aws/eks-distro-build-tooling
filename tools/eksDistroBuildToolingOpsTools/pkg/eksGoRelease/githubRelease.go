@@ -164,9 +164,9 @@ func bumpRelease(gClient git.Client, r *Release) error {
 		logger.Error(err, "Reading file", "file", releasePath)
 		return err
 	}
-	// We need to check there isn't a \n character if there is we only take the first value
-	if len(content) > 1 {
-		content = content[0:1]
+	// Check if there is a new line character at the end of the file, if so take all but the newline
+	if content[len(content)-1:] == "\n" {
+		content = content[0 : len(content)-1]
 	}
 	cr, err := strconv.Atoi(content)
 	if err != nil {
@@ -329,7 +329,7 @@ func createReleasePR(ctx context.Context, dryrun bool, r *Release, ghUser github
 		SourceOwner: ghUser.User(),
 		SourceRepo:  constants.EksdBuildToolingRepoName,
 		PrRepo:      constants.EksdBuildToolingRepoName,
-		PrRepoOwner: ghUser.User(),
+		PrRepoOwner: constants.AwsOrgName,
 	}
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
