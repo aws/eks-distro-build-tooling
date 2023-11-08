@@ -105,7 +105,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.20
 #global go_prerelease rc3
-%global go_patch 10
+%global go_patch 11
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -534,6 +534,9 @@ fi
 %endif
 
 %changelog
+* Tue Nov 07 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.11-1
+- Bump tracking patch version to 1.20.11 from 1.20.10
+
 * Thu Oct 12 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.10-1
 - Bump tracking patch version to 1.20.10 from 1.20.9
 
