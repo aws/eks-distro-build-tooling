@@ -1,13 +1,12 @@
-From 36ee9a5d9eeff5b6bcc395653bf2c20bcadaaa7f Mon Sep 17 00:00:00 2001
+From cfa56c91c12c547eba21b516180d02350181132c Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
-Date: Fri, 1 Sep 2023 11:17:19 -0700
-Subject: [PATCH] [release-branch.go1.20] path/filepath: fix various issues in
- parsing Windows paths
+Date: Wed, 9 Nov 2022 17:49:44 -0800
+Subject: [PATCH] path/filepath: fix various issues in parsing Windows paths
 
 # AWS EKS
 
 Backported To: go-1.19.13-eks
-Backported On: Tue, 07 Nov 2023
+Backported On: Thu, 00 Nov 2023
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.20
 Source Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae \
@@ -20,6 +19,8 @@ tests I added the line to api/go1.19.txt which is used for checking the
 function calls exist as expected.
 
 # Original Information
+
+Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae
 
 On Windows, A root local device path is a path which begins with
 \\?\ or \??\.  A root local device path accesses the DosDevices
@@ -68,16 +69,54 @@ Reviewed-by: Cherry Mui <cherryyz@google.com>
 Reviewed-on: https://go-review.googlesource.com/c/go/+/539276
 Auto-Submit: Heschi Kreinick <heschi@google.com>
 LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>
+
+-----
+
+Commit: https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
+
+path/filepath: add IsLocal
+
+IsLocal reports whether a path lexically refers to a location
+contained within the directory in which it is evaluated.
+It identifies paths that are absolute, escape a directory
+with ".." elements, and (on Windows) paths that reference
+reserved device names.
+
+For #56219.
+
+Change-Id: I35edfa3ce77b40b8e66f1fc8e0ff73cfd06f2313
+Reviewed-on: https://go-review.googlesource.com/c/go/+/449239
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Joseph Tsai <joetsai@digital-static.net>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Ian Lance Taylor <iant@google.com>
+Reviewed-by: Ian Lance Taylor <iant@golang.org>
+Reviewed-by: Joedian Reid <joedian@golang.org>
 ---
+ api/go1.19.txt                            |   1 +
  src/go/build/deps_test.go                 |   2 +-
  src/internal/safefilepath/path_windows.go |  98 ++++++---
- src/path/filepath/path.go                 |   1 +
+ src/path/filepath/path.go                 |  41 ++++
  src/path/filepath/path_nonwindows.go      |   9 +
- src/path/filepath/path_test.go            |  83 +++++++-
- src/path/filepath/path_windows.go         | 233 ++++++++++++++++------
- 6 files changed, 330 insertions(+), 96 deletions(-)
+ src/path/filepath/path_plan9.go           |   4 +
+ src/path/filepath/path_test.go            | 135 ++++++++++++-
+ src/path/filepath/path_unix.go            |   4 +
+ src/path/filepath/path_windows.go         | 229 ++++++++++++++++++----
+ 9 files changed, 453 insertions(+), 70 deletions(-)
  create mode 100644 src/path/filepath/path_nonwindows.go
 
+diff --git a/api/go1.19.txt b/api/go1.19.txt
+index 523f752d70..fe9aee3050 100644
+--- a/api/go1.19.txt
++++ b/api/go1.19.txt
+@@ -244,6 +244,7 @@ pkg net/url, type URL struct, OmitHost bool #46059
+ pkg os/exec, method (*Cmd) Environ() []string #50599
+ pkg os/exec, type Cmd struct, Err error #43724
+ pkg os/exec, var ErrDot error #43724
++pkg path/filepath, func IsLocal(string) bool #56219
+ pkg regexp/syntax, const ErrNestingDepth = "expression nests too deeply" #51684
+ pkg regexp/syntax, const ErrNestingDepth ErrorCode #51684
+ pkg runtime/debug, func SetMemoryLimit(int64) int64 #48409
 diff --git a/src/go/build/deps_test.go b/src/go/build/deps_test.go
 index 69ba8b7f52..83da402bb4 100644
 --- a/src/go/build/deps_test.go
@@ -231,10 +270,10 @@ index 909c150edc..7cfd6ce2ea 100644
  	if 'a' <= c && c <= 'z' {
  		return c - ('a' - 'A')
 diff --git a/src/path/filepath/path.go b/src/path/filepath/path.go
-index ffb7c7794a..1c0d18531e 100644
+index 9b1f5ed7c0..1c0d18531e 100644
 --- a/src/path/filepath/path.go
 +++ b/src/path/filepath/path.go
-@@ -170,6 +170,7 @@ func Clean(path string) string {
+@@ -170,9 +170,50 @@ func Clean(path string) string {
  		out.append('.')
  	}
  
@@ -242,6 +281,49 @@ index ffb7c7794a..1c0d18531e 100644
  	return FromSlash(out.string())
  }
  
++// IsLocal reports whether path, using lexical analysis only, has all of these properties:
++//
++//   - is within the subtree rooted at the directory in which path is evaluated
++//   - is not an absolute path
++//   - is not empty
++//   - on Windows, is not a reserved name such as "NUL"
++//
++// If IsLocal(path) returns true, then
++// Join(base, path) will always produce a path contained within base and
++// Clean(path) will always produce an unrooted path with no ".." path elements.
++//
++// IsLocal is a purely lexical operation.
++// In particular, it does not account for the effect of any symbolic links
++// that may exist in the filesystem.
++func IsLocal(path string) bool {
++	return isLocal(path)
++}
++
++func unixIsLocal(path string) bool {
++	if IsAbs(path) || path == "" {
++		return false
++	}
++	hasDots := false
++	for p := path; p != ""; {
++		var part string
++		part, p, _ = strings.Cut(p, "/")
++		if part == "." || part == ".." {
++			hasDots = true
++			break
++		}
++	}
++	if hasDots {
++		path = Clean(path)
++	}
++	if path == ".." || strings.HasPrefix(path, "../") {
++		return false
++	}
++	return true
++}
++
+ // ToSlash returns the result of replacing each separator character
+ // in path with a slash ('/') character. Multiple separators are
+ // replaced by multiple slashes.
 diff --git a/src/path/filepath/path_nonwindows.go b/src/path/filepath/path_nonwindows.go
 new file mode 100644
 index 0000000000..db69f0228b
@@ -257,8 +339,23 @@ index 0000000000..db69f0228b
 +package filepath
 +
 +func postClean(out *lazybuf) {}
+diff --git a/src/path/filepath/path_plan9.go b/src/path/filepath/path_plan9.go
+index ec792fc831..453206aee3 100644
+--- a/src/path/filepath/path_plan9.go
++++ b/src/path/filepath/path_plan9.go
+@@ -6,6 +6,10 @@ package filepath
+ 
+ import "strings"
+ 
++func isLocal(path string) bool {
++	return unixIsLocal(path)
++}
++
+ // IsAbs reports whether the path is absolute.
+ func IsAbs(path string) bool {
+ 	return strings.HasPrefix(path, "/") || strings.HasPrefix(path, "#")
 diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
-index 8c19a6c641..b472a228a0 100644
+index 9a57920dd7..b472a228a0 100644
 --- a/src/path/filepath/path_test.go
 +++ b/src/path/filepath/path_test.go
 @@ -7,7 +7,6 @@ package filepath_test
@@ -288,17 +385,39 @@ index 8c19a6c641..b472a228a0 100644
  }
  
  func TestClean(t *testing.T) {
-@@ -161,9 +165,28 @@ var islocaltests = []IsLocalTest{
- var winislocaltests = []IsLocalTest{
- 	{"NUL", false},
- 	{"nul", false},
+@@ -138,6 +142,79 @@ func TestClean(t *testing.T) {
+ 	}
+ }
+ 
++type IsLocalTest struct {
++	path    string
++	isLocal bool
++}
++
++var islocaltests = []IsLocalTest{
++	{"", false},
++	{".", true},
++	{"..", false},
++	{"../a", false},
++	{"/", false},
++	{"/a", false},
++	{"/a/../..", false},
++	{"a", true},
++	{"a/../a", true},
++	{"a/", true},
++	{"a/.", true},
++	{"a/./b/./c", true},
++}
++
++var winislocaltests = []IsLocalTest{
++	{"NUL", false},
++	{"nul", false},
 +	{"nul ", false},
- 	{"nul.", false},
--	{"nul.txt", false},
++	{"nul.", false},
 +	{"a/nul:", false},
 +	{"a/nul : a", false},
 +	{"com0", true},
- 	{"com1", false},
++	{"com1", false},
 +	{"com2", false},
 +	{"com3", false},
 +	{"com4", false},
@@ -315,10 +434,38 @@ index 8c19a6c641..b472a228a0 100644
 +	{"lpt1", false},
 +	{"LPT1", false},
 +	{"lpt³", false},
- 	{"./nul", false},
- 	{"a/nul.txt/b", false},
- 	{`\`, false},
-@@ -353,8 +376,11 @@ var winjointests = []JoinTest{
++	{"./nul", false},
++	{"a/nul.txt/b", false},
++	{`\`, false},
++	{`\a`, false},
++	{`C:`, false},
++	{`C:\a`, false},
++	{`..\a`, false},
++}
++
++var plan9islocaltests = []IsLocalTest{
++	{"#a", false},
++}
++
++func TestIsLocal(t *testing.T) {
++	tests := islocaltests
++	if runtime.GOOS == "windows" {
++		tests = append(tests, winislocaltests...)
++	}
++	if runtime.GOOS == "plan9" {
++		tests = append(tests, plan9islocaltests...)
++	}
++	for _, test := range tests {
++		if got := filepath.IsLocal(test.path); got != test.isLocal {
++			t.Errorf("IsLocal(%q) = %v, want %v", test.path, got, test.isLocal)
++		}
++	}
++}
++
+ const sep = filepath.Separator
+ 
+ var slashtests = []PathTest{
+@@ -299,8 +376,11 @@ var winjointests = []JoinTest{
  	{[]string{`\`, `a`, `b`}, `\a\b`},
  	{[]string{`\\`, `a`, `b`}, `\a\b`},
  	{[]string{`\`, `\\a\b`, `c`}, `\a\b\c`},
@@ -332,7 +479,7 @@ index 8c19a6c641..b472a228a0 100644
  }
  
  func TestJoin(t *testing.T) {
-@@ -859,6 +885,8 @@ var winisabstests = []IsAbsTest{
+@@ -805,6 +885,8 @@ var winisabstests = []IsAbsTest{
  	{`\\host\share\`, true},
  	{`\\host\share\foo`, true},
  	{`//host/share/foo/bar`, true},
@@ -341,7 +488,7 @@ index 8c19a6c641..b472a228a0 100644
  }
  
  func TestIsAbs(t *testing.T) {
-@@ -1333,7 +1361,8 @@ type VolumeNameTest struct {
+@@ -1279,7 +1361,8 @@ type VolumeNameTest struct {
  var volumenametests = []VolumeNameTest{
  	{`c:/foo/bar`, `c:`},
  	{`c:`, `c:`},
@@ -351,7 +498,7 @@ index 8c19a6c641..b472a228a0 100644
  	{``, ``},
  	{`\\\host`, ``},
  	{`\\\host\`, ``},
-@@ -1352,7 +1381,24 @@ var volumenametests = []VolumeNameTest{
+@@ -1298,7 +1381,24 @@ var volumenametests = []VolumeNameTest{
  	{`\\host\share\\foo\\\bar\\\\baz`, `\\host\share`},
  	{`//host/share//foo///bar////baz`, `//host/share`},
  	{`\\host\share\foo\..\bar`, `\\host\share`},
@@ -377,7 +524,7 @@ index 8c19a6c641..b472a228a0 100644
  }
  
  func TestVolumeName(t *testing.T) {
-@@ -1625,3 +1671,28 @@ func TestIssue51617(t *testing.T) {
+@@ -1571,3 +1671,28 @@ func TestIssue51617(t *testing.T) {
  		t.Errorf("got directories %v, want %v", saw, want)
  	}
  }
@@ -406,11 +553,26 @@ index 8c19a6c641..b472a228a0 100644
 +		}
 +	}
 +}
+diff --git a/src/path/filepath/path_unix.go b/src/path/filepath/path_unix.go
+index 93fdfdd8a0..ab1d08d356 100644
+--- a/src/path/filepath/path_unix.go
++++ b/src/path/filepath/path_unix.go
+@@ -8,6 +8,10 @@ package filepath
+ 
+ import "strings"
+ 
++func isLocal(path string) bool {
++	return unixIsLocal(path)
++}
++
+ // IsAbs reports whether the path is absolute.
+ func IsAbs(path string) bool {
+ 	return strings.HasPrefix(path, "/")
 diff --git a/src/path/filepath/path_windows.go b/src/path/filepath/path_windows.go
-index 2865dd2659..d074a87a92 100644
+index b4d8ac3301..8c5513737d 100644
 --- a/src/path/filepath/path_windows.go
 +++ b/src/path/filepath/path_windows.go
-@@ -5,29 +5,22 @@
+@@ -5,8 +5,11 @@
  package filepath
  
  import (
@@ -422,60 +584,53 @@ index 2865dd2659..d074a87a92 100644
  )
  
  func isSlash(c uint8) bool {
- 	return c == '\\' || c == '/'
+@@ -22,18 +25,37 @@ var reservedNames = []string{
+ 	"LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
  }
  
--// isReservedName reports if name is a Windows reserved device name.
--// It does not detect names with an extension, which are also reserved on some Windows versions.
--//
--// For details, search for PRN in
--// https://docs.microsoft.com/en-us/windows/desktop/fileio/naming-a-file.
--func isReservedName(name string) bool {
--	if 3 <= len(name) && len(name) <= 4 {
--		switch string([]byte{toUpper(name[0]), toUpper(name[1]), toUpper(name[2])}) {
--		case "CON", "PRN", "AUX", "NUL":
--			return len(name) == 3
--		case "COM", "LPT":
--			return len(name) == 4 && '1' <= name[3] && name[3] <= '9'
--		}
-+func toUpper(c byte) byte {
-+	if 'a' <= c && c <= 'z' {
-+		return c - ('a' - 'A')
+-// isReservedName returns true, if path is Windows reserved name.
+-// See reservedNames for the full list.
+-func isReservedName(path string) bool {
+-	if len(path) == 0 {
++func isLocal(path string) bool {
++	if path == "" {
++		return false
++	}
++	if isSlash(path[0]) {
++		// Path rooted in the current drive.
++		return false
++	}
++	if strings.IndexByte(path, ':') >= 0 {
++		// Colons are only valid when marking a drive letter ("C:foo").
++		// Rejecting any path with a colon is conservative but safe.
+ 		return false
  	}
--	return false
-+	return c
- }
- 
- func isLocal(path string) bool {
-@@ -50,25 +43,8 @@ func isLocal(path string) bool {
- 		if part == "." || part == ".." {
- 			hasDots = true
+-	for _, reserved := range reservedNames {
+-		if strings.EqualFold(path, reserved) {
+-			return true
++	hasDots := false // contains . or .. path elements
++	for p := path; p != ""; {
++		var part string
++		part, p, _ = cutPath(p)
++		if part == "." || part == ".." {
++			hasDots = true
  		}
--		// Trim the extension and look for a reserved name.
--		base, _, hasExt := strings.Cut(part, ".")
--		if isReservedName(base) {
--			if !hasExt {
--				return false
--			}
--			// The path element is a reserved name with an extension. Some Windows
--			// versions consider this a reserved name, while others do not. Use
--			// FullPath to see if the name is reserved.
--			//
--			// FullPath will convert references to reserved device names to their
--			// canonical form: \\.\${DEVICE_NAME}
--			//
--			// FullPath does not perform this conversion for paths which contain
--			// a reserved device name anywhere other than in the last element,
--			// so check the part rather than the full path.
--			if p, _ := syscall.FullPath(part); len(p) >= 4 && p[:4] == `\\.\` {
--				return false
--			}
 +		if safefilepath.IsReservedName(part) {
 +			return false
- 		}
++		}
++	}
++	if hasDots {
++		path = Clean(path)
++	}
++	if path == ".." || strings.HasPrefix(path, `..\`) {
++		return false
  	}
- 	if hasDots {
-@@ -102,40 +78,110 @@ func IsAbs(path string) (b bool) {
+-	return false
++	return true
+ }
+ 
+ // IsAbs reports whether the path is absolute.
+@@ -58,40 +80,110 @@ func IsAbs(path string) (b bool) {
  
  // volumeNameLen returns length of the leading volume name on Windows.
  // It returns 0 elsewhere.
@@ -613,7 +768,7 @@ index 2865dd2659..d074a87a92 100644
  }
  
  // HasPrefix exists for historical compatibility and should not be used.
-@@ -195,9 +241,44 @@ func abs(path string) (string, error) {
+@@ -151,9 +243,44 @@ func abs(path string) (string, error) {
  }
  
  func join(elem []string) string {
@@ -661,7 +816,7 @@ index 2865dd2659..d074a87a92 100644
  		}
  	}
  	return ""
-@@ -246,3 +327,29 @@ func isUNC(path string) bool {
+@@ -202,3 +329,29 @@ func isUNC(path string) bool {
  func sameWord(a, b string) bool {
  	return strings.EqualFold(a, b)
  }
@@ -692,5 +847,5 @@ index 2865dd2659..d074a87a92 100644
 +	}
 +}
 -- 
-2.42.0
+2.42.1
 
