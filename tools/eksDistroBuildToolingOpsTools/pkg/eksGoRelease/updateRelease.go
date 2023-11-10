@@ -44,7 +44,8 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	}
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
+	commitBranch := r.EksGoReleaseVersion()
+	if err := gClient.Branch(commitBranch); err != nil {
 		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
@@ -70,7 +71,7 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 	prSubject := fmt.Sprintf(updatePRSubjectFmt, r.GoSemver())
 	prDescription := fmt.Sprintf(updatePRDescriptionFmt, r.EksGoReleaseVersion())
 	commitMsg := fmt.Sprintf(updatePRCommitFmt, r.GoSemver())
-	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg, commitBranch); err != nil {
 		logger.Error(err, "Create Release PR")
 	}
 	return nil

@@ -37,7 +37,8 @@ func NewMinorRelease(ctx context.Context, r *Release, dryrun bool, email, user s
 	}
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
+	commitBranch := r.EksGoReleaseVersion()
+	if err := gClient.Branch(commitBranch); err != nil {
 		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
@@ -67,7 +68,7 @@ func NewMinorRelease(ctx context.Context, r *Release, dryrun bool, email, user s
 	prSubject := fmt.Sprintf(newMinorVersionPRSubjectFmt, r.GoSemver())
 	prDescription := fmt.Sprintf(newMinorVersionPRDescriptionFmt, r.EksGoReleaseVersion())
 	commitMsg := fmt.Sprintf(newMinorVersionCommitMsgFmt, r.GoSemver())
-	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg, commitBranch); err != nil {
 		logger.Error(err, "Create Release PR")
 	}
 	return nil

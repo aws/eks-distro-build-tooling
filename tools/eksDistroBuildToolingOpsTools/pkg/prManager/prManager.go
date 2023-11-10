@@ -216,7 +216,7 @@ func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, e
 	if opts.CommitMessage != "" {
 		ref, err := p.getRef(ctx, opts.CommitBranch, opts.BaseBranch)
 		if err != nil {
-			return "", fmt.Errorf("creating pull request: get/create the commit reference: %s\n", err)
+			return "", fmt.Errorf("creating pull request: get/create the commit reference: %s", err)
 		}
 		if ref == nil {
 			return "", fmt.Errorf("creating pull request: the reference is nil")
@@ -224,11 +224,11 @@ func (p *PrCreator) CreatePr(ctx context.Context, opts *CreatePrOpts) (string, e
 
 		tree, err := p.getTree(ctx, ref, opts.SourceFileBody, opts.DestFileGitPath)
 		if err != nil {
-			return "", fmt.Errorf("creating the tree based on the provided files: %s\n", err)
+			return "", fmt.Errorf("creating the tree based on the provided files: %s", err)
 		}
 
 		if err := p.pushCommit(ctx, ref, tree, opts.AuthorName, opts.AuthorEmail, opts.CommitMessage); err != nil {
-			return "", fmt.Errorf("creating the commit: %s\n", err)
+			return "", fmt.Errorf("creating the commit: %s", err)
 		}
 	}
 

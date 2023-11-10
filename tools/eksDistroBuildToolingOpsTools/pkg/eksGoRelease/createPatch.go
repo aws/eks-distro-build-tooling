@@ -44,7 +44,8 @@ func BackportToRelease(ctx context.Context, r *Release, dryrun bool, cve, commit
 	}
 
 	// Create new branch
-	if err := gClient.Branch(r.EksGoReleaseVersion()); err != nil {
+	commitBranch := r.EksGoReleaseVersion()
+	if err := gClient.Branch(commitBranch); err != nil {
 		logger.Error(err, "git branch", "branch name", r.EksGoReleaseVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
@@ -72,7 +73,7 @@ func BackportToRelease(ctx context.Context, r *Release, dryrun bool, cve, commit
 		// no longer update gospec with patch file since no patch was created
 		if !dryrun {
 			prFailureDescription := fmt.Sprintf(backportPRDescriptionFailureFmt, cve, r.EksGoReleaseVersion(), commit)
-			if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prFailureDescription, commitMsg); err != nil {
+			if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prFailureDescription, commitMsg, commitBranch); err != nil {
 				logger.Error(err, "Create Release PR")
 				return err
 			}
@@ -81,7 +82,7 @@ func BackportToRelease(ctx context.Context, r *Release, dryrun bool, cve, commit
 
 	if !dryrun {
 		prSuccessDescription := fmt.Sprintf(backportPRDescriptionSuccessFmt, cve, commit, r.EksGoReleaseVersion())
-		if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prSuccessDescription, commitMsg); err != nil {
+		if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prSuccessDescription, commitMsg, commitBranch); err != nil {
 			logger.Error(err, "Create Release PR")
 		}
 	}

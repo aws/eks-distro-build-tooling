@@ -43,7 +43,8 @@ func ReleaseArtifacts(ctx context.Context, r *Release, dryrun bool, email, user 
 	}
 
 	// Create new branch
-	if err := gClient.Branch(fmt.Sprintf("release-%s", r.GoMinorVersion())); err != nil {
+	commitBranch := fmt.Sprintf("release-%s", r.GoMinorVersion())
+	if err := gClient.Branch(commitBranch); err != nil {
 		logger.Error(err, "git branch", "branch name", r.GoMinorVersion(), "repo", forkUrl, "client", gClient)
 		return err
 	}
@@ -58,7 +59,7 @@ func ReleaseArtifacts(ctx context.Context, r *Release, dryrun bool, email, user 
 	prSubject := fmt.Sprintf(releasePRSubjectFmt, r.EksGoReleaseVersion())
 	prDescription := fmt.Sprintf(releasePRDescriptionFmt, r.EksGoReleaseVersion())
 	commitMsg := fmt.Sprintf(releasePRCommitFmt, r.EksGoReleaseVersion())
-	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg); err != nil {
+	if err := createReleasePR(ctx, dryrun, r, ghUser, gClient, prSubject, prDescription, commitMsg, commitBranch); err != nil {
 		logger.Error(err, "Create Release PR")
 	}
 	return nil
