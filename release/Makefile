@@ -8,7 +8,7 @@ else
 GOBIN=$(shell go env GOBIN)
 endif
 
-export PATH:=/go/go1.18/bin:$(PATH)
+export PATH:=/go/go1.19/bin:$(PATH)
 
 all: build
 
