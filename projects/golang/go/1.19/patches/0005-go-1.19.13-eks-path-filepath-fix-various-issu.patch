@@ -1,7 +1,8 @@
-From c253019adf35b956a3a8975aec95f7c53987bd33 Mon Sep 17 00:00:00 2001
+From f268c1ac845737c230189e44663213ffc8af0fef Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 9 Nov 2022 17:49:44 -0800
-Subject: [PATCH] path/filepath: fix various issues in parsing Windows paths
+Subject: [PATCH] path/filepath: fix various issues in
+ parsing Windows paths
 
 # AWS EKS
 
@@ -14,9 +15,11 @@ Source Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb
   https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
 
 In addition to the CVE fix https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae,
-https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1 was cherry-picked to include expected functions and
-tests expected in the CVE fix commit. Additionally, for the purpose of
-tests I added the line to api/go1.19.txt which is used for checking the
+
+https://github.com/golang/go/commit/45b98bfb793923c539f9a959c3047d2e5fe2ebf0 & 
+https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1 were
+cherry-picked to include expected functions and tests expected in the CVE fix commit.
+Additionally, for the purpose of tests I added the line to api/go1.19.txt which is used for checking the
 function calls exist as expected.
 
 # Original Information
@@ -69,9 +72,7 @@ Reviewed-on: https://go-review.googlesource.com/c/go/+/539276
 Auto-Submit: Heschi Kreinick <heschi@google.com>
 LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>
 
------
-
-Commit: https://github.com/golang/go/commit/45b98bfb793923c539f9a959c3047d2e5fe2ebf0
+commit: https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
 
 [release-branch.go1.21] path/filepath: don't drop .. elements when cleaning invalid Windows paths
 
@@ -97,10 +98,7 @@ Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
 LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>
 Run-TryBot: Dmitri Shuralyov <dmitshur@golang.org>
 
------
-
-Commit: https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
-
+commit: https://github.com/golang/go/commit/45b98bfb793923c539f9a959c3047d2e5fe2ebf0
 
 path/filepath: add IsLocal
 
@@ -129,8 +127,8 @@ Reviewed-by: Joedian Reid <joedian@golang.org>
  src/path/filepath/path_plan9.go           |   4 +
  src/path/filepath/path_test.go            | 138 ++++++++++++-
  src/path/filepath/path_unix.go            |   4 +
- src/path/filepath/path_windows.go         | 229 ++++++++++++++++++----
- 9 files changed, 461 insertions(+), 83 deletions(-)
+ src/path/filepath/path_windows.go         | 239 ++++++++++++++++++----
+ 9 files changed, 468 insertions(+), 86 deletions(-)
  create mode 100644 src/path/filepath/path_nonwindows.go
 
 diff --git a/api/go1.19.txt b/api/go1.19.txt
@@ -653,10 +651,10 @@ index 93fdfdd8a0..ab1d08d356 100644
  func IsAbs(path string) bool {
  	return strings.HasPrefix(path, "/")
 diff --git a/src/path/filepath/path_windows.go b/src/path/filepath/path_windows.go
-index b4d8ac3301..8c5513737d 100644
+index b4d8ac3301..134114a39d 100644
 --- a/src/path/filepath/path_windows.go
 +++ b/src/path/filepath/path_windows.go
-@@ -5,8 +5,11 @@
+@@ -5,14 +5,24 @@
  package filepath
  
  import (
@@ -668,7 +666,20 @@ index b4d8ac3301..8c5513737d 100644
  )
  
  func isSlash(c uint8) bool {
-@@ -22,18 +25,37 @@ var reservedNames = []string{
+ 	return c == '\\' || c == '/'
+ }
+ 
++func toUpper(c byte) byte {
++	if 'a' <= c && c <= 'z' {
++		return c - ('a' - 'A')
++	}
++	return c
++}
++
+ // reservedNames lists reserved Windows names. Search for PRN in
+ // https://docs.microsoft.com/en-us/windows/desktop/fileio/naming-a-file
+ // for details.
+@@ -22,25 +32,41 @@ var reservedNames = []string{
  	"LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
  }
  
@@ -682,39 +693,46 @@ index b4d8ac3301..8c5513737d 100644
 +	}
 +	if isSlash(path[0]) {
 +		// Path rooted in the current drive.
-+		return false
-+	}
-+	if strings.IndexByte(path, ':') >= 0 {
-+		// Colons are only valid when marking a drive letter ("C:foo").
-+		// Rejecting any path with a colon is conservative but safe.
  		return false
  	}
 -	for _, reserved := range reservedNames {
 -		if strings.EqualFold(path, reserved) {
 -			return true
++	if strings.IndexByte(path, ':') >= 0 {
++		// Colons are only valid when marking a drive letter ("C:foo").
++		// Rejecting any path with a colon is conservative but safe.
++		return false
++	}
 +	hasDots := false // contains . or .. path elements
 +	for p := path; p != ""; {
 +		var part string
 +		part, p, _ = cutPath(p)
 +		if part == "." || part == ".." {
 +			hasDots = true
- 		}
++		}
 +		if safefilepath.IsReservedName(part) {
 +			return false
-+		}
-+	}
+ 		}
+ 	}
+-	return false
 +	if hasDots {
 +		path = Clean(path)
 +	}
 +	if path == ".." || strings.HasPrefix(path, `..\`) {
 +		return false
- 	}
--	return false
++	}
 +	return true
  }
  
  // IsAbs reports whether the path is absolute.
-@@ -58,40 +80,110 @@ func IsAbs(path string) (b bool) {
+ func IsAbs(path string) (b bool) {
+-	if isReservedName(path) {
+-		return true
+-	}
+ 	l := volumeNameLen(path)
+ 	if l == 0 {
+ 		return false
+@@ -58,40 +84,110 @@ func IsAbs(path string) (b bool) {
  
  // volumeNameLen returns length of the leading volume name on Windows.
  // It returns 0 elsewhere.
@@ -852,7 +870,7 @@ index b4d8ac3301..8c5513737d 100644
  }
  
  // HasPrefix exists for historical compatibility and should not be used.
-@@ -151,9 +243,44 @@ func abs(path string) (string, error) {
+@@ -151,9 +247,44 @@ func abs(path string) (string, error) {
  }
  
  func join(elem []string) string {
@@ -900,7 +918,7 @@ index b4d8ac3301..8c5513737d 100644
  		}
  	}
  	return ""
-@@ -202,3 +329,29 @@ func isUNC(path string) bool {
+@@ -202,3 +333,29 @@ func isUNC(path string) bool {
  func sameWord(a, b string) bool {
  	return strings.EqualFold(a, b)
  }
