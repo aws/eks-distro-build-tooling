@@ -8,6 +8,8 @@ else
 GOBIN=$(shell go env GOBIN)
 endif
 
+export PATH:=/go/go1.19/bin:$(PATH)
+
 all: build
 
 # Run tests
