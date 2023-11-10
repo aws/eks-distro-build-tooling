@@ -1,4 +1,4 @@
-From cfa56c91c12c547eba21b516180d02350181132c Mon Sep 17 00:00:00 2001
+From c253019adf35b956a3a8975aec95f7c53987bd33 Mon Sep 17 00:00:00 2001
 From: Damien Neil <dneil@google.com>
 Date: Wed, 9 Nov 2022 17:49:44 -0800
 Subject: [PATCH] path/filepath: fix various issues in parsing Windows paths
@@ -6,10 +6,11 @@ Subject: [PATCH] path/filepath: fix various issues in parsing Windows paths
 # AWS EKS
 
 Backported To: go-1.19.13-eks
-Backported On: Thu, 00 Nov 2023
+Backported On: Tue, 07 Nov 2023
 Backported By: rcrozean@amazon.com
 Backported From: release-branch.go1.20
 Source Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae \
+  https://github.com/golang/go/commit/45b98bfb793923c539f9a959c3047d2e5fe2ebf0 \
   https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
 
 In addition to the CVE fix https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae,
@@ -19,8 +20,6 @@ tests I added the line to api/go1.19.txt which is used for checking the
 function calls exist as expected.
 
 # Original Information
-
-Commit: https://github.com/golang/go/commit/46fb78168596f7ce8834f528bb0eb9555c08bcae
 
 On Windows, A root local device path is a path which begins with
 \\?\ or \??\.  A root local device path accesses the DosDevices
@@ -72,7 +71,36 @@ LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceacc
 
 -----
 
+Commit: https://github.com/golang/go/commit/45b98bfb793923c539f9a959c3047d2e5fe2ebf0
+
+[release-branch.go1.21] path/filepath: don't drop .. elements when cleaning invalid Windows paths
+
+Fix a bug where Clean could improperly drop .. elements from a
+path on Windows, when the path contains elements containing a ':'.
+
+For example, Clean("a/../b:/../../c") now correctly returns "..\c"
+rather than "c".
+
+For #61866.
+Fixes #61868.
+
+Change-Id: I97b0238953c183b2ce19ca89c14f26700008ea72
+Reviewed-on: https://go-review.googlesource.com/c/go/+/517216
+Run-TryBot: Damien Neil <dneil@google.com>
+Reviewed-by: Bryan Mills <bcmills@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Quim Muntal <quimmuntal@gmail.com>
+(cherry picked from commit 6e43407931ee4acc204620a9fae59c7903164901)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/519655
+Reviewed-by: Damien Neil <dneil@google.com>
+Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
+LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>
+Run-TryBot: Dmitri Shuralyov <dmitshur@golang.org>
+
+-----
+
 Commit: https://github.com/golang/go/commit/6d0bf438e302afcb0db5422ea2da59d1995e08c1
+
 
 path/filepath: add IsLocal
 
@@ -96,13 +124,13 @@ Reviewed-by: Joedian Reid <joedian@golang.org>
  api/go1.19.txt                            |   1 +
  src/go/build/deps_test.go                 |   2 +-
  src/internal/safefilepath/path_windows.go |  98 ++++++---
- src/path/filepath/path.go                 |  41 ++++
+ src/path/filepath/path.go                 |  59 ++++--
  src/path/filepath/path_nonwindows.go      |   9 +
  src/path/filepath/path_plan9.go           |   4 +
- src/path/filepath/path_test.go            | 135 ++++++++++++-
+ src/path/filepath/path_test.go            | 138 ++++++++++++-
  src/path/filepath/path_unix.go            |   4 +
  src/path/filepath/path_windows.go         | 229 ++++++++++++++++++----
- 9 files changed, 453 insertions(+), 70 deletions(-)
+ 9 files changed, 461 insertions(+), 83 deletions(-)
  create mode 100644 src/path/filepath/path_nonwindows.go
 
 diff --git a/api/go1.19.txt b/api/go1.19.txt
@@ -270,10 +298,49 @@ index 909c150edc..7cfd6ce2ea 100644
  	if 'a' <= c && c <= 'z' {
  		return c - ('a' - 'A')
 diff --git a/src/path/filepath/path.go b/src/path/filepath/path.go
-index 9b1f5ed7c0..1c0d18531e 100644
+index 9b1f5ed7c0..eb1628b9a0 100644
 --- a/src/path/filepath/path.go
 +++ b/src/path/filepath/path.go
-@@ -170,9 +170,50 @@ func Clean(path string) string {
+@@ -15,7 +15,6 @@ import (
+ 	"errors"
+ 	"io/fs"
+ 	"os"
+-	"runtime"
+ 	"sort"
+ 	"strings"
+ )
+@@ -52,6 +51,11 @@ func (b *lazybuf) append(c byte) {
+ 	b.w++
+ }
+ 
++func (b *lazybuf) prepend(prefix ...byte) {
++	b.buf = append(prefix, b.buf...)
++	b.w += len(prefix)
++}
++
+ func (b *lazybuf) string() string {
+ 	if b.buf == nil {
+ 		return b.volAndPath[:b.volLen+b.w]
+@@ -146,18 +150,6 @@ func Clean(path string) string {
+ 			if rooted && out.w != 1 || !rooted && out.w != 0 {
+ 				out.append(Separator)
+ 			}
+-			// If a ':' appears in the path element at the start of a Windows path,
+-			// insert a .\ at the beginning to avoid converting relative paths
+-			// like a/../c: into c:.
+-			if runtime.GOOS == "windows" && out.w == 0 && out.volLen == 0 && r != 0 {
+-				for i := r; i < n && !os.IsPathSeparator(path[i]); i++ {
+-					if path[i] == ':' {
+-						out.append('.')
+-						out.append(Separator)
+-						break
+-					}
+-				}
+-			}
+ 			// copy element
+ 			for ; r < n && !os.IsPathSeparator(path[r]); r++ {
+ 				out.append(path[r])
+@@ -170,9 +162,50 @@ func Clean(path string) string {
  		out.append('.')
  	}
  
@@ -355,7 +422,7 @@ index ec792fc831..453206aee3 100644
  func IsAbs(path string) bool {
  	return strings.HasPrefix(path, "/") || strings.HasPrefix(path, "#")
 diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
-index 9a57920dd7..b472a228a0 100644
+index 9a57920dd7..204b3bb5c8 100644
 --- a/src/path/filepath/path_test.go
 +++ b/src/path/filepath/path_test.go
 @@ -7,7 +7,6 @@ package filepath_test
@@ -375,7 +442,23 @@ index 9a57920dd7..b472a228a0 100644
  )
  
  type PathTest struct {
-@@ -103,6 +104,9 @@ var wincleantests = []PathTest{
+@@ -69,6 +70,7 @@ var cleantests = []PathTest{
+ 	{"/abc/def/../../..", "/"},
+ 	{"abc/def/../../../ghi/jkl/../../../mno", "../../mno"},
+ 	{"/../abc", "/abc"},
++	{"a/../b:/../../c", `../c`},
+ 
+ 	// Combinations
+ 	{"abc/./../def", "def"},
+@@ -84,6 +86,7 @@ var wincleantests = []PathTest{
+ 	{`c:\abc\def\..\..`, `c:\`},
+ 	{`c:\..\abc`, `c:\abc`},
+ 	{`c:..\abc`, `c:..\abc`},
++	{`c:\b:\..\..\..\d`, `c:\d`},
+ 	{`\`, `\`},
+ 	{`/`, `\`},
+ 	{`\\i\..\c$`, `\c$`},
+@@ -103,6 +106,9 @@ var wincleantests = []PathTest{
  	{`a/../c:/a`, `.\c:\a`},
  	{`a/../../c:`, `..\c:`},
  	{`foo:bar`, `foo:bar`},
@@ -385,7 +468,7 @@ index 9a57920dd7..b472a228a0 100644
  }
  
  func TestClean(t *testing.T) {
-@@ -138,6 +142,79 @@ func TestClean(t *testing.T) {
+@@ -138,6 +144,80 @@ func TestClean(t *testing.T) {
  	}
  }
  
@@ -407,6 +490,7 @@ index 9a57920dd7..b472a228a0 100644
 +	{"a/", true},
 +	{"a/.", true},
 +	{"a/./b/./c", true},
++	{`a/../b:/../../c`, false},
 +}
 +
 +var winislocaltests = []IsLocalTest{
@@ -465,7 +549,7 @@ index 9a57920dd7..b472a228a0 100644
  const sep = filepath.Separator
  
  var slashtests = []PathTest{
-@@ -299,8 +376,11 @@ var winjointests = []JoinTest{
+@@ -299,8 +379,11 @@ var winjointests = []JoinTest{
  	{[]string{`\`, `a`, `b`}, `\a\b`},
  	{[]string{`\\`, `a`, `b`}, `\a\b`},
  	{[]string{`\`, `\\a\b`, `c`}, `\a\b\c`},
@@ -479,7 +563,7 @@ index 9a57920dd7..b472a228a0 100644
  }
  
  func TestJoin(t *testing.T) {
-@@ -805,6 +885,8 @@ var winisabstests = []IsAbsTest{
+@@ -805,6 +888,8 @@ var winisabstests = []IsAbsTest{
  	{`\\host\share\`, true},
  	{`\\host\share\foo`, true},
  	{`//host/share/foo/bar`, true},
@@ -488,7 +572,7 @@ index 9a57920dd7..b472a228a0 100644
  }
  
  func TestIsAbs(t *testing.T) {
-@@ -1279,7 +1361,8 @@ type VolumeNameTest struct {
+@@ -1279,7 +1364,8 @@ type VolumeNameTest struct {
  var volumenametests = []VolumeNameTest{
  	{`c:/foo/bar`, `c:`},
  	{`c:`, `c:`},
@@ -498,7 +582,7 @@ index 9a57920dd7..b472a228a0 100644
  	{``, ``},
  	{`\\\host`, ``},
  	{`\\\host\`, ``},
-@@ -1298,7 +1381,24 @@ var volumenametests = []VolumeNameTest{
+@@ -1298,7 +1384,24 @@ var volumenametests = []VolumeNameTest{
  	{`\\host\share\\foo\\\bar\\\\baz`, `\\host\share`},
  	{`//host/share//foo///bar////baz`, `//host/share`},
  	{`\\host\share\foo\..\bar`, `\\host\share`},
@@ -524,7 +608,7 @@ index 9a57920dd7..b472a228a0 100644
  }
  
  func TestVolumeName(t *testing.T) {
-@@ -1571,3 +1671,28 @@ func TestIssue51617(t *testing.T) {
+@@ -1571,3 +1674,28 @@ func TestIssue51617(t *testing.T) {
  		t.Errorf("got directories %v, want %v", saw, want)
  	}
  }
