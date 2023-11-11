@@ -35,6 +35,8 @@ function install_goss() {
     sha256sum -c $BASE_DIR/goss-$TARGETARCH-checksum
     tar -C ${NEWROOT}/home/imagebuilder/.packer.d/plugins -xzf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
     rm -rf packer-provisioner-goss-v${GOSS_VERSION}-linux-$TARGETARCH.tar.gz
+
+    time upx --best --no-lzma ${NEWROOT}/home/imagebuilder/.packer.d/plugins/packer-provisioner-goss
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_goss

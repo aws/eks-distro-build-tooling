@@ -47,7 +47,16 @@ function instal_ansible() {
         cp -rf /usr/include/python3.9 ${NEWROOT}/usr/include
         cp /usr/lib/pkgconfig/python-3.9*.pc ${NEWROOT}/usr/lib/pkgconfig
         cp -rf /usr/lib/python3.9 ${NEWROOT}/usr/lib
-        cp --preserve=links /usr/lib/libpython3* ${NEWROOT}/usr/lib
+
+        # for some reason the /usr/lib/libpython3.9.so file should be a symlink libpython3.9.so.1.0
+        # but this got lost somewhere, probably during minimal image build, so its a full copy
+        # manually recreating the symlink to avoid having a duplicated file
+        cp /usr/lib/libpython3.so /usr/lib/libpython3.9.so.1.0 ${NEWROOT}/usr/lib
+        ln -s ./libpython3.9.so.1.0 ${NEWROOT}/usr/lib/libpython3.9.so
+
+        # the static lib of python is not needed in our use case and it is quite big
+        # this file only exists on the arm build for some reason
+        rm -f ${NEWROOT}/usr/lib/python3.9/config-3.9-*-linux-gnu/libpython3.9.a
     fi
 
     chmod 755 ${NEWROOT}/usr/lib/python3.9/site-packages 

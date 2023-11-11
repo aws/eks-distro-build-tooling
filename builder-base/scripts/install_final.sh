@@ -55,6 +55,8 @@ yum install -y \
     which \
     yum-utils
 
+time upx --best --no-lzma /usr/libexec/docker/cli-plugins/docker-buildx /usr/bin/{containerd,ctr,docker,dockerd}
+
 # We see issues in fargate when installing on top of these images
 # including this plugin appears to fix it
 # ref: https://unix.stackexchange.com/questions/348941/rpmdb-checksum-is-invalid-trying-to-install-gcc-in-a-centos-7-2-docker-image    

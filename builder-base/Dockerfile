@@ -23,6 +23,19 @@ ARG PYTHON_IMAGE
 ARG FINAL_STAGE_BASE
 ARG AL_TAG
 
+FROM ${BUILDER_IMAGE} as upx
+ARG TARGETARCH
+ARG UPX_VERSION
+ENV UPX_VERSION=$UPX_VERSION
+
+WORKDIR /workdir
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh ./scripts/install_upx.sh \
+    ./checksums/upx-${TARGETARCH}-checksum /
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_upx.sh && \    
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as aws-cli
 ARG TARGETARCH
 WORKDIR /workdir
@@ -38,6 +51,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG BUILDKIT_VERSION
 ENV BUILDKIT_VERSION=$BUILDKIT_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_buildkit.sh ./checksums/buildkit-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -62,6 +77,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG GITHUB_CLI_VERSION
 ENV GITHUB_CLI_VERSION=$GITHUB_CLI_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_gh_cli.sh ./checksums/github-cli-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -88,6 +105,8 @@ ARG PACKER_VERSION
 ENV PACKER_VERSION=$PACKER_VERSION
 ARG PACKER_ANSIBLE_PLUGIN
 ENV PACKER_ANSIBLE_PLUGIN=$PACKER_ANSIBLE_PLUGIN
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_packer.sh ./checksums/packer-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -100,6 +119,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG HELM_VERSION
 ENV HELM_VERSION=$HELM_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_helm.sh ./checksums/helm-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -112,6 +133,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG NODEJS_VERSION
 ENV NODEJS_VERSION=$NODEJS_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_nodejs.sh \
     generate-attribution/package*.json  \
@@ -141,6 +164,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG GOVC_VERSION
 ENV GOVC_VERSION=$GOVC_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_govc.sh ./checksums/govc-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -153,6 +178,8 @@ ARG TARGETARCH
 WORKDIR /workdir
 ARG GOSS_VERSION
 ENV GOSS_VERSION=$GOSS_VERSION
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_goss.sh ./checksums/goss-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -166,6 +193,8 @@ WORKDIR /workdir
 ENV CARGO_HOME /root/.cargo
 ENV RUSTUP_HOME /root/.rustup
 ENV PATH="/root/.cargo/bin:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_tuftool.sh /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -211,6 +240,8 @@ ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.17*.rpm /tmp/x86_64/
@@ -227,6 +258,8 @@ ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.18*.rpm /tmp/x86_64/
@@ -243,6 +276,8 @@ ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.19*.rpm /tmp/x86_64/
@@ -259,6 +294,8 @@ ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.20*.rpm /tmp/x86_64/
@@ -275,6 +312,8 @@ ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.21*.rpm /tmp/x86_64/
@@ -294,6 +333,8 @@ ENV SKOPEO_VERSION_AL23=$SKOPEO_VERSION_AL23
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.20 /golang-1.20 /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_skopeo.sh /
@@ -312,11 +353,13 @@ ENV LINUXKIT_VERSION=$LINUXKIT_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.19 /golang-1.19 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_linuxkit.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \    
+    --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_linuxkit.sh
 
 FROM ${BUILDER_IMAGE} as go-licenses-1.17
@@ -327,6 +370,8 @@ ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.17 /golang-1.17 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
@@ -342,6 +387,7 @@ ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.18 /golang-1.18 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
@@ -357,6 +403,7 @@ ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.19 /golang-1.19 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
@@ -372,6 +419,7 @@ ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.20 /golang-1.20 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
@@ -387,6 +435,7 @@ ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.21 /golang-1.21 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
@@ -402,6 +451,7 @@ ENV GO_VULN_CHECK_VERSION=$GO_VULN_CHECK_VERSION
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.21 /golang-1.21 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_vuln_check.sh /
@@ -423,6 +473,7 @@ COPY --link --from=helm /helm /
 COPY --link --from=tuftool /tuftool /
 COPY --link --from=buildkit /buildkit /
 COPY --link --from=skopeo /skopeo /
+COPY --link --from=upx  /upx /
 
 FROM minimal-copy-stage as full-copy-stage
 

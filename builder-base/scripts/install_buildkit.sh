@@ -41,6 +41,8 @@ function install_buildkit() {
     sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
     tar -C $USR -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
     rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+
+    time upx --best --no-lzma $USR_BIN/{buildkit-runc,buildctl,buildkitd}
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_buildkit

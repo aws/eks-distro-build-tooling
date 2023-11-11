@@ -31,6 +31,8 @@ function install_gh_cli() {
     tar -xzf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz
     mv gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH/bin/gh $USR_BIN
     rm -rf gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH.tar.gz gh_${GITHUB_CLI_VERSION}_linux_$TARGETARCH
+
+    time upx --best --no-lzma $USR_BIN/gh
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_gh_cli

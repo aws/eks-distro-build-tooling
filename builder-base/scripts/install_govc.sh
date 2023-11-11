@@ -41,6 +41,8 @@ function install_govc() {
     tar -xf govc_Linux_$ARCH.tar.gz
     mv govc $USR_BIN/govc
     chmod +x $USR_BIN/govc
+
+    time upx --best --no-lzma $USR_BIN/govc
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_govc

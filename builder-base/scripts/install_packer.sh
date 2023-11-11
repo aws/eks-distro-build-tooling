@@ -37,6 +37,8 @@ function install_packer() {
     mkdir -p /packer/home/imagebuilder
 
     PACKER_CONFIG_DIR=/packer/home/imagebuilder $USR_LOCAL_BIN/packer plugins install github.com/hashicorp/ansible ${PACKER_ANSIBLE_PLUGIN}
+
+    time upx --best --no-lzma $USR_LOCAL_BIN/packer /packer/home/imagebuilder/.packer.d/plugins/github.com/hashicorp/ansible/packer-plugin-ansible*_linux_${TARGETARCH}
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_packer

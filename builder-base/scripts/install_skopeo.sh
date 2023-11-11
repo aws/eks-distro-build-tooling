@@ -38,6 +38,8 @@ function install_skopeo() {
 
     cd ..
     rm -rf ${GOPATH} skopeo
+
+    time upx --best --no-lzma $USR_BIN/skopeo
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_skopeo

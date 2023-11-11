@@ -40,7 +40,8 @@ yum install --setopt=install_weak_deps=False -y \
     gzip \
     tar \
     unzip \
-    wget
+    wget \
+    xz
 
 chmod -R 777 /newroot
 rm -rf /newroot
