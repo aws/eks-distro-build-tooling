@@ -997,7 +997,7 @@
 -rw-r--r--   106KiB /root/sdk/go1.19.13/pkg/linux_amd64/os/signal/internal/pty.a
 -rw-r--r--   256KiB /root/sdk/go1.19.13/pkg/linux_amd64/os/user.a
 -rw-r--r--    60KiB /root/sdk/go1.19.13/pkg/linux_amd64/path.a
--rw-r--r--   191KiB /root/sdk/go1.19.13/pkg/linux_amd64/path/filepath.a
+-rw-r--r--   203KiB /root/sdk/go1.19.13/pkg/linux_amd64/path/filepath.a
 -rw-r--r--    97KiB /root/sdk/go1.19.13/pkg/linux_amd64/plugin.a
 -rw-r--r--   3.0MiB /root/sdk/go1.19.13/pkg/linux_amd64/reflect.a
 -rw-r--r--   2.7KiB /root/sdk/go1.19.13/pkg/linux_amd64/reflect/internal/example1.a
@@ -6545,7 +6545,7 @@
 -rw-r--r--     630B /root/sdk/go1.19.13/src/internal/safefilepath/path.go
 -rw-r--r--     470B /root/sdk/go1.19.13/src/internal/safefilepath/path_other.go
 -rw-r--r--   2.1KiB /root/sdk/go1.19.13/src/internal/safefilepath/path_test.go
--rw-r--r--   2.2KiB /root/sdk/go1.19.13/src/internal/safefilepath/path_windows.go
+-rw-r--r--   3.4KiB /root/sdk/go1.19.13/src/internal/safefilepath/path_windows.go
 -rw-r--r--   3.2KiB /root/sdk/go1.19.13/src/internal/singleflight/singleflight.go
 -rw-r--r--   1.9KiB /root/sdk/go1.19.13/src/internal/singleflight/singleflight_test.go
 -rw-r--r--     489B /root/sdk/go1.19.13/src/internal/syscall/execenv/execenv_default.go
@@ -7496,11 +7496,12 @@
 -rw-r--r--     226B /root/sdk/go1.19.13/src/path/filepath/export_windows_test.go
 -rw-r--r--   8.7KiB /root/sdk/go1.19.13/src/path/filepath/match.go
 -rw-r--r--   8.8KiB /root/sdk/go1.19.13/src/path/filepath/match_test.go
--rw-r--r--    18KiB /root/sdk/go1.19.13/src/path/filepath/path.go
--rw-r--r--   1.2KiB /root/sdk/go1.19.13/src/path/filepath/path_plan9.go
--rw-r--r--    38KiB /root/sdk/go1.19.13/src/path/filepath/path_test.go
--rw-r--r--   1.2KiB /root/sdk/go1.19.13/src/path/filepath/path_unix.go
--rw-r--r--   5.1KiB /root/sdk/go1.19.13/src/path/filepath/path_windows.go
+-rw-r--r--    19KiB /root/sdk/go1.19.13/src/path/filepath/path.go
+-rw-r--r--     231B /root/sdk/go1.19.13/src/path/filepath/path_nonwindows.go
+-rw-r--r--   1.3KiB /root/sdk/go1.19.13/src/path/filepath/path_plan9.go
+-rw-r--r--    40KiB /root/sdk/go1.19.13/src/path/filepath/path_test.go
+-rw-r--r--   1.3KiB /root/sdk/go1.19.13/src/path/filepath/path_unix.go
+-rw-r--r--   9.8KiB /root/sdk/go1.19.13/src/path/filepath/path_windows.go
 -rw-r--r--    16KiB /root/sdk/go1.19.13/src/path/filepath/path_windows_test.go
 -rw-r--r--   3.2KiB /root/sdk/go1.19.13/src/path/filepath/symlink.go
 -rw-r--r--     635B /root/sdk/go1.19.13/src/path/filepath/symlink_plan9.go
