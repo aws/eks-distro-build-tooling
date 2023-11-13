@@ -311,7 +311,7 @@ func addTempFilesForNewMinorVersion(gClient git.Client, r *Release) error {
 	return nil
 }
 
-func createReleasePR(ctx context.Context, dryrun bool, r *Release, ghUser github.GitHubUser, gClient git.Client, prSubject, prDescription, commitMsg string) error {
+func createReleasePR(ctx context.Context, dryrun bool, r *Release, ghUser github.GitHubUser, gClient git.Client, prSubject, prDescription, commitMsg, commitBranch string) error {
 	if dryrun {
 		logger.V(3).Info("running in dryrun mode no pr created")
 		return nil
@@ -334,7 +334,7 @@ func createReleasePR(ctx context.Context, dryrun bool, r *Release, ghUser github
 	prm := prManager.New(retrier, githubClient, prmOpts)
 
 	prOpts := &prManager.CreatePrOpts{
-		CommitBranch:  r.EksGoReleaseVersion(),
+		CommitBranch:  commitBranch,
 		BaseBranch:    "main",
 		AuthorName:    ghUser.User(),
 		AuthorEmail:   ghUser.Email(),
