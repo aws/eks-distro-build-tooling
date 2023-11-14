@@ -30,3 +30,4 @@ source $SCRIPT_ROOT/install_govc.sh
 source $SCRIPT_ROOT/install_hugo.sh
 source $SCRIPT_ROOT/install_bash.sh
 source $SCRIPT_ROOT/install_upx.sh
+source $SCRIPT_ROOT/install_notation.sh
