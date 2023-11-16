@@ -98,4 +98,12 @@ mkdir -p ${NEWROOT}/root
 mv /root/sdk ${NEWROOT}/root
 mv ${GOPATH} ${NEWROOT}/${GOPATH}
 
-time upx --best --no-lzma ${NEWROOT}/root/sdk/go${VERSION%-*}/bin/go ${NEWROOT}/root/sdk/go${VERSION%-*}/pkg/tool/linux_$TARGETARCH/{addr2line,asm,cgo,compile,cover,doc,link,objdump,pprof,trace,vet}
+# not upx'ing link + compile since they are often times running conncurrently
+# accoriding to the upx docs, this can increase memory usage, ref:
+# Currently, executables compressed by UPX do not share RAM at runtime
+#   in the way that executables mapped from a file system do.  As a
+#   result, if the same program is run simultaneously by more than one
+#   process, then using the compressed version will require more RAM and/or
+#   swap space.  So, shell programs (bash, csh, etc.)  and ``make''
+#   might not be good candidates for compression.
+time upx --best --no-lzma ${NEWROOT}/root/sdk/go${VERSION%-*}/bin/go ${NEWROOT}/root/sdk/go${VERSION%-*}/pkg/tool/linux_$TARGETARCH/{addr2line,asm,cgo,cover,doc,objdump,pprof,trace,vet}
