@@ -128,6 +128,20 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_helm.sh && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as notation
+ARG TARGETARCH
+WORKDIR /workdir
+ARG NOTATION_VERSION
+ENV NOTATION_VERSION=$NOTATION_VERSION
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_notation.sh ./checksums/notation-${TARGETARCH}-checksum /
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_notation.sh && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as nodejs
 ARG TARGETARCH
 WORKDIR /workdir
@@ -474,6 +488,7 @@ COPY --link --from=tuftool /tuftool /
 COPY --link --from=buildkit /buildkit /
 COPY --link --from=skopeo /skopeo /
 COPY --link --from=upx  /upx /
+COPY --link --from=notation /notation /
 
 FROM minimal-copy-stage as full-copy-stage
 
