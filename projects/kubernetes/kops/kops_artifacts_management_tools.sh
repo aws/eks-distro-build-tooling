@@ -36,7 +36,8 @@ KOPS_UTILS_CP="kops-utils-cp"
 KOPS_IMAGES=("$DNS_CONTROLLER" "$KOPS_CONTROLLER" "$KUBE_APISERVER_HEALTHCHECK" "$KOPS_UTILS_CP")
 
 SUPPORTED_ARCHS=("arm64" "amd64")
-SUPPORTED_PLATFORMS=("linux")
+KOPS_SUPPORTED_PLATFORMS=("linux" "darwin")
+NODEUP_SUPPORTED_PLATFORMS=("linux")
 
 SHA_SUFFIX=".sha256"
 TARBALL_SUFFIX=".tar.gz"
@@ -46,7 +47,7 @@ fetch_kops_binaries() {
   do
     for ARCH in "${SUPPORTED_ARCHS[@]}"
     do
-      for PLATFORM in "${SUPPORTED_PLATFORMS[@]}"
+      for PLATFORM in "${KOPS_SUPPORTED_PLATFORMS[@]}"
       do
           local kops_artifacts_output_dir="$OUTPUT_DIR/$KOPS_VERSION_TAG/$PLATFORM/$ARCH"
           local release_artifact_url="$KOPS_BINARIES_BASE_URL/$KOPS_VERSION_TAG/$PLATFORM/$ARCH/$BINARY"
@@ -76,7 +77,7 @@ fetch_kops_images() {
 move_nodeup_binaries() {
   for ARCH in "${SUPPORTED_ARCHS[@]}"
   do
-    for PLATFORM in "${SUPPORTED_PLATFORMS[@]}"
+    for PLATFORM in "${NODEUP_SUPPORTED_PLATFORMS[@]}"
     do
       local binary_path="$PROJECT_DIRECTORY/kops/.build/dist/$PLATFORM/$ARCH/nodeup"
       local binary_upload_path="$OUTPUT_DIR/$KOPS_VERSION_TAG/$PLATFORM/$ARCH/nodeup"
@@ -90,7 +91,7 @@ move_nodeup_binaries() {
 move_kops_binaries() {
   for ARCH in "${SUPPORTED_ARCHS[@]}"
   do
-    for PLATFORM in "${SUPPORTED_PLATFORMS[@]}"
+    for PLATFORM in "${KOPS_SUPPORTED_PLATFORMS[@]}"
     do
       local binary_path="$PROJECT_DIRECTORY/kops/.build/dist/$PLATFORM/$ARCH/kops"
       local binary_upload_path="$OUTPUT_DIR/$KOPS_VERSION_TAG/$PLATFORM/$ARCH/kops"
