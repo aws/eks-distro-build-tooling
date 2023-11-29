@@ -68,13 +68,13 @@ func parseKubeGitVersionContent(input io.Reader) (*kubeGitVersionFile, error) {
 		case "KUBE_GIT_VERSION":
 			resp.KubeGitVersion = value
 		case "KUBE_GIT_MAJOR":
-			value = strings.ReplaceAll(value, "+", "")
 			val, err := strconv.Atoi(value)
 			if err != nil {
 				return nil, errors.Wrapf(err, "Could not parse '%s'", value)
 			}
 			resp.KubeGitMajor = val
 		case "KUBE_GIT_MINOR":
+			value = strings.ReplaceAll(value, "+", "")
 			val, err := strconv.Atoi(value)
 			if err != nil {
 				return nil, errors.Wrapf(err, "Could not parse '%s'", value)
