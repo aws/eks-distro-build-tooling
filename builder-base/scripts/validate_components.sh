@@ -71,4 +71,6 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     /go/go1.21/bin/go-licenses --help
 
     gcc --version
+
+    notation plugin list
 fi
