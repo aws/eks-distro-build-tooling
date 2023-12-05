@@ -534,7 +534,7 @@ fi
 %endif
 
 %changelog
-* Tue Dec 05 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.11-1
+* Tue Dec 05 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.12-1
 - Bump tracking patch version to 1.20.12 from 1.20.11
 
 * Tue Nov 07 2023 Cameron Rozean <rcrozean@amazon.com> - 1.20.11-1
