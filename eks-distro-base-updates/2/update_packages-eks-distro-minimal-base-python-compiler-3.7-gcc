@@ -1,2 +1,6 @@
 
+gawk.x86_64
+gmp.x86_64
 kernel-headers.x86_64
+openssl-libs.x86_64
+python3-pip.noarch

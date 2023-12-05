@@ -1,5 +1,5 @@
 
-libxml2.x86_64
-python.x86_64
-python-libs.x86_64
-zlib.x86_64
+gawk.x86_64
+gmp.x86_64
+openssl-libs.x86_64
+python3-pip.noarch
