@@ -524,7 +524,7 @@
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
 -rwxr-xr-x    87KiB /usr/lib64/libgcc_s-7-20180712.so.1
--rwxr-xr-x   484KiB /usr/lib64/libgmp.so.10.2.0
+-rwxr-xr-x   468KiB /usr/lib64/libgmp.so.10.2.0
 -rwxr-xr-x    27KiB /usr/lib64/libgmpxx.so.4.4.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libm-2.26.so
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so

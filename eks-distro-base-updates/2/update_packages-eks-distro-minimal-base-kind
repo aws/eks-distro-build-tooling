@@ -1,3 +1,6 @@
 
+gawk.x86_64
+gmp.x86_64
+openssl-libs.x86_64
 vim-data.noarch
 vim-minimal.x86_64
