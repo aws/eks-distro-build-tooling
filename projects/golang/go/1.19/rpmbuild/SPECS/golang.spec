@@ -163,6 +163,9 @@ Patch2:       0002-go-1.19.12-eks-html-template-properly-handle-.patch
 Patch3:       0003-go-1.19.13-eks-cmd-compile-use-absolute-file-.patch
 Patch4:       0004-go-1.19.13-eks-net-http-regenerate-h2_bundle-.patch
 Patch5:       0005-go-1.19.13-eks-path-filepath-fix-various-issu.patch
+Patch6:       0006-go-1.19.13-eks-net-http-limit-chunked-data-ov.patch
+Patch7:       0007-go-1.19.13-eks-cmd-go-internal-vcs-error-out-.patch
+Patch8:       0008-go-1.19.13-eks-path-filepath-consider-c-as-a-.patch
 
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
@@ -542,6 +545,9 @@ fi
 %endif
 
 %changelog
+* Tue Dec 05 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.13-7
+- Includes security fix for CVE-2023-39326, CVE-2023-45285, and CVE-2023-45283
+
 * Tue Nov 07 2023 Cameron Rozean <rcrozean@amazon.com> - 1.19.13-6
 - Includes security fix for CVE-2023-45283 and CVE-2023-45284
 

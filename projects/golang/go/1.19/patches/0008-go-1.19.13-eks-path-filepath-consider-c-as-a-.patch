@@ -1,0 +1,130 @@
+From 80586d21b0e85749ebae802d07e78af6fb26e7be Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Thu, 9 Nov 2023 09:53:44 -0800
+Subject: [PATCH] path/filepath: consider \\?\c: as
+ a volume on Windows
+
+# AWS EKS
+
+Backported To: go-1.19.13-eks
+Backported On: Tue, 05 Dec 2023
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.20
+Source Commit: https://github.com/golang/go/commit/1b59b017db1ac4a63ed08173c00d7f08d47530be
+
+# Original Information
+
+While fixing several bugs in path handling on Windows,
+beginning with \\?\.
+
+Prior to #540277, VolumeName considered the first path component
+after the \\?\ prefix to be part of the volume name.
+After, it considered only the \\? prefix to be the volume name.
+
+Restore the previous behavior.
+
+For #64028.
+Fixes #64040.
+
+Change-Id: I6523789e61776342800bd607fb3f29d496257e68
+Reviewed-on: https://go-review.googlesource.com/c/go/+/541175
+LUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>
+Reviewed-by: Roland Shoemaker <roland@golang.org>
+(cherry picked from commit eda42f7c60adab26ed1a340414c726c4bf46b1f7)
+Reviewed-on: https://go-review.googlesource.com/c/go/+/541520
+Auto-Submit: Dmitri Shuralyov <dmitshur@google.com>
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Run-TryBot: Dmitri Shuralyov <dmitshur@golang.org>
+Reviewed-by: Damien Neil <dneil@google.com>
+Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
+---
+ src/path/filepath/path_test.go    | 18 +++++++++++++-----
+ src/path/filepath/path_windows.go | 20 +++++++-------------
+ 2 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/src/path/filepath/path_test.go b/src/path/filepath/path_test.go
+index 204b3bb5c8..679c3fa883 100644
+--- a/src/path/filepath/path_test.go
++++ b/src/path/filepath/path_test.go
+@@ -99,6 +99,11 @@ var wincleantests = []PathTest{
+ 	{`.\c:`, `.\c:`},
+ 	{`.\c:\foo`, `.\c:\foo`},
+ 	{`.\c:foo`, `.\c:foo`},
++	{`//abc`, `\\abc`},
++	{`///abc`, `\\\abc`},
++	{`//abc//`, `\\abc\\`},
++	{`\\?\C:\`, `\\?\C:\`},
++	{`\\?\C:\a`, `\\?\C:\a`},
+ 
+ 	// Don't allow cleaning to move an element with a colon to the start of the path.
+ 	{`a/../c:`, `.\c:`},
+@@ -1388,10 +1393,13 @@ var volumenametests = []VolumeNameTest{
+ 	{`//.`, `\\.`},
+ 	{`//./`, `\\.\`},
+ 	{`//./NUL`, `\\.\NUL`},
+-	{`//?/`, `\\?`},
++	{`//?`, `\\?`},
++	{`//?/`, `\\?\`},
++	{`//?/NUL`, `\\?\NUL`},
++	{`/??`, `\??`},
++	{`/??/`, `\??\`},
++	{`/??/NUL`, `\??\NUL`},
+ 	{`//./a/b`, `\\.\a`},
+-	{`//?/`, `\\?`},
+-	{`//?/`, `\\?`},
+ 	{`//./C:`, `\\.\C:`},
+ 	{`//./C:/`, `\\.\C:`},
+ 	{`//./C:/a/b/c`, `\\.\C:`},
+@@ -1400,8 +1408,8 @@ var volumenametests = []VolumeNameTest{
+ 	{`//./UNC/host\`, `\\.\UNC\host\`},
+ 	{`//./UNC`, `\\.\UNC`},
+ 	{`//./UNC/`, `\\.\UNC\`},
+-	{`\\?\x`, `\\?`},
+-	{`\??\x`, `\??`},
++	{`\\?\x`, `\\?\x`},
++	{`\??\x`, `\??\x`},
+ }
+ 
+ func TestVolumeName(t *testing.T) {
+diff --git a/src/path/filepath/path_windows.go b/src/path/filepath/path_windows.go
+index 134114a39d..4c7daad325 100644
+--- a/src/path/filepath/path_windows.go
++++ b/src/path/filepath/path_windows.go
+@@ -112,12 +112,14 @@ func volumeNameLen(path string) int {
+ 		// \\.\unc\a\b\..\c into \\.\unc\a\c.
+ 		return uncLen(path, len(`\\.\UNC\`))
+ 
+-	case pathHasPrefixFold(path, `\\.`):
+-		// Path starts with \\., and is a Local Device path.
++	case pathHasPrefixFold(path, `\\.`) ||
++		pathHasPrefixFold(path, `\\?`) || pathHasPrefixFold(path, `\??`):
++		// Path starts with \\.\, and is a Local Device path; or
++		// path starts with \\?\ or \??\ and is a Root Local Device path.
+ 		//
+-		// We currently treat the next component after the \\.\ prefix
+-		// as part of the volume name, although there doesn't seem to be
+-		// a principled reason to do this.
++		// We treat the next component after the \\.\ prefix as
++		// part of the volume name, which means Clean(`\\?\c:\`)
++		// won't remove the trailing \. (See #64028.)
+ 		if len(path) == 3 {
+ 			return 3 // exactly \\.
+ 		}
+@@ -127,14 +129,6 @@ func volumeNameLen(path string) int {
+ 		}
+ 		return len(path) - len(rest) - 1
+ 
+-	case pathHasPrefixFold(path, `\\?`) || pathHasPrefixFold(path, `\??`):
+-		// Path starts with \\?\ or \??\, and is a Root Local Device path.
+-		//
+-		// While Windows usually treats / and \ as equivalent,
+-		// /??/ does not seem to be recognized as a Root Local Device path.
+-		// We treat it as one anyway here to be safe.
+-		return 3
+-
+ 	case len(path) >= 2 && isSlash(path[1]):
+ 		// Path starts with \\, and is a UNC path.
+ 		return uncLen(path, 2)
+-- 
+2.43.0
+
