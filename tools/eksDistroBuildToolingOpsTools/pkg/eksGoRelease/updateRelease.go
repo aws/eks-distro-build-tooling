@@ -50,13 +50,6 @@ func UpdateVersion(ctx context.Context, r *Release, dryrun bool, email, user str
 		return err
 	}
 
-	// Update files for new patch versions of golang
-	if err := updateVersionReadme(gClient, r); err != nil {
-		logger.Error(err, "Update Readme")
-		return err
-	}
-
-	// Since this doesn't require a backport set and pass false
 	if err := updateGoSpec(gClient, r); err != nil {
 		logger.Error(err, "Update Readme")
 		return err
