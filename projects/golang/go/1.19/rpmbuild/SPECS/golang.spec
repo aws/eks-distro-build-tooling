@@ -165,6 +165,7 @@ Patch4:       0004-go-1.19.13-eks-net-http-regenerate-h2_bundle-.patch
 Patch5:       0005-go-1.19.13-eks-path-filepath-fix-various-issu.patch
 Patch6:       0006-go-1.19.13-eks-net-http-limit-chunked-data-ov.patch
 Patch7:       0007-go-1.19.13-eks-path-filepath-consider-c-as-a-.patch
+Patch8:       0008-go-1.19.13-eks-cmd-go-internal-vcs-error-out-.patch
 
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
