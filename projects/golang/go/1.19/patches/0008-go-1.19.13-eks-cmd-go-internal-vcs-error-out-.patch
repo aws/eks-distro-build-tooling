@@ -1,4 +1,4 @@
-From 2043cf7583cd0a055d57af7b62f16ac80147fda0 Mon Sep 17 00:00:00 2001
+From 13a6e63e72b6dfec2fc966be981b24598abdd2cb Mon Sep 17 00:00:00 2001
 From: "Bryan C. Mills" <bcmills@google.com>
 Date: Thu, 2 Nov 2023 15:06:35 -0400
 Subject: [PATCH] cmd/go/internal/vcs: error out if
@@ -14,9 +14,10 @@ Source Commit: https://github.com/golang/go/commit/46bc33819ac86a9596b8059235842
 
 The original commit doesn't apply cleanly. To get the commit to apply and the fix to work,
 the following was changed: 
-add vars VCSTestRepoURL string, VCSTestHosts []string, VCSTestIsLocalHost func(*urlpkg.URL) bool
-add func interceptVCSTest(repo string, vcs *Cmd, security web.SecurityMode) (repoURL string, ok bool)
-move repoURL = scheme + "://" + repo inside the if statement
+ignore changes relating to vars VCSTestRepoURL string, VCSTestHosts []string, VCSTestIsLocalHost func(*urlpkg.URL) bool, 
+and func interceptVCSTest(repo string, vcs *Cmd, security web.SecurityMode) (repoURL string, ok bool) these were changes 
+to try to reduce the dependency of tests on vcs-test.golang.org  and allow to run the vcs server locally
+see: https://github.com/golang/go/issues/27494
 
 # Original Information
 
@@ -34,13 +35,13 @@ Reviewed-on: https://go-review.googlesource.com/c/go/+/540335
 Auto-Submit: Dmitri Shuralyov <dmitshur@google.com>
 Reviewed-by: Dmitri Shuralyov <dmitshur@google.com>
 ---
- src/cmd/go/internal/vcs/vcs.go                | 110 +++++++++++++++---
- .../script/mod_insecure_issue63845.txt        |  28 +++++
- 2 files changed, 122 insertions(+), 16 deletions(-)
+ src/cmd/go/internal/vcs/vcs.go                | 37 +++++++++++++------
+ .../script/mod_insecure_issue63845.txt        | 28 ++++++++++++++
+ 2 files changed, 53 insertions(+), 12 deletions(-)
  create mode 100644 src/cmd/go/testdata/script/mod_insecure_issue63845.txt
 
 diff --git a/src/cmd/go/internal/vcs/vcs.go b/src/cmd/go/internal/vcs/vcs.go
-index 4f16bef90c..6b6c2dcfb0 100644
+index 4f16bef90c..66ef1fd70d 100644
 --- a/src/cmd/go/internal/vcs/vcs.go
 +++ b/src/cmd/go/internal/vcs/vcs.go
 @@ -6,10 +6,12 @@ package vcs
@@ -71,30 +72,7 @@ index 4f16bef90c..6b6c2dcfb0 100644
  
  	"golang.org/x/mod/module"
  )
-@@ -60,6 +60,22 @@ type Status struct {
- 	Uncommitted bool      // Required.
- }
- 
-+var (
-+	// VCSTestRepoURL is the URL of the HTTP server that serves the repos for
-+	// vcs-test.golang.org.
-+	//
-+	// In tests, this is set to the URL of an httptest.Server hosting a
-+	// cmd/go/internal/vcweb.Server.
-+	VCSTestRepoURL string
-+
-+	// VCSTestHosts is the set of hosts supported by the vcs-test server.
-+	VCSTestHosts []string
-+
-+	// VCSTestIsLocalHost reports whether the given URL refers to a local
-+	// (loopback) host, such as "localhost" or "127.0.0.1:8080".
-+	VCSTestIsLocalHost func(*urlpkg.URL) bool
-+)
-+
- var defaultSecureScheme = map[string]bool{
- 	"https":   true,
- 	"git+ssh": true,
-@@ -1151,21 +1167,38 @@ func repoRootFromVCSPaths(importPath string, security web.SecurityMode, vcsPaths
+@@ -1151,19 +1151,32 @@ func repoRootFromVCSPaths(importPath string, security web.SecurityMode, vcsPaths
  		if !srv.schemelessRepo {
  			repoURL = match["repo"]
  		} else {
@@ -102,99 +80,37 @@ index 4f16bef90c..6b6c2dcfb0 100644
  			repo := match["repo"]
 -			if vcs.PingCmd != "" {
 -				// If we know how to test schemes, scan to find one.
--				for _, s := range vcs.Scheme {
--					if security == web.SecureOnly && !vcs.isSecureScheme(s) {
--						continue
-+			var ok bool
-+			repoURL, ok = interceptVCSTest(repo, vcs, security)
-+			if !ok {
-+				scheme, err := func() (string, error) {
-+					for _, s := range vcs.Scheme {
-+						if security == web.SecureOnly && !vcs.isSecureScheme(s) {
-+							continue
-+						}
-+
-+						// If we know how to ping URL schemes for this VCS,
-+						// check that this repo works.
-+						// Otherwise, default to the first scheme
-+						// that meets the requested security level.
-+						if vcs.PingCmd == "" {
-+							return s, nil
-+						}
-+						if err := vcs.Ping(s, repo); err == nil {
-+							return s, nil
-+						}
++			scheme, err := func() (string, error) {
+ 				for _, s := range vcs.Scheme {
+ 					if security == web.SecureOnly && !vcs.isSecureScheme(s) {
+ 						continue
  					}
 -					if vcs.Ping(s, repo) == nil {
 -						scheme = s
 -						break
-+					securityFrag := ""
-+					if security == web.SecureOnly {
-+						securityFrag = "secure "
++
++					// If we know how to ping URL schemes for this VCS,
++					// check that this repo works.
++					// Otherwise, default to the first scheme
++					// that meets the requested security level.
++					if vcs.PingCmd == "" {
++						return s, nil
++					}
++					if err := vcs.Ping(s, repo); err == nil {
++						return s, nil
  					}
-+					return "", fmt.Errorf("no %sprotocol found for repository", securityFrag)
-+				}()
-+				if err != nil {
-+					return nil, err
  				}
-+				repoURL = scheme + "://" + repo
- 			}
--			repoURL = scheme + "://" + repo
- 		}
- 		rr := &RepoRoot{
- 			Repo: repoURL,
-@@ -1177,6 +1210,51 @@ func repoRootFromVCSPaths(importPath string, security web.SecurityMode, vcsPaths
- 	return nil, errUnknownSite
- }
- 
-+func interceptVCSTest(repo string, vcs *Cmd, security web.SecurityMode) (repoURL string, ok bool) {
-+	if VCSTestRepoURL == "" {
-+		return "", false
-+	}
-+	if vcs == vcsMod {
-+		// Since the "mod" protocol is implemented internally,
-+		// requests will be intercepted at a lower level (in cmd/go/internal/web).
-+		return "", false
-+	}
-+
-+	if scheme, path, ok := strings.Cut(repo, "://"); ok {
-+		if security == web.SecureOnly && !vcs.isSecureScheme(scheme) {
-+			return "", false // Let the caller reject the original URL.
-+		}
-+		repo = path // Remove leading URL scheme if present.
-+	}
-+	for _, host := range VCSTestHosts {
-+		if !str.HasPathPrefix(repo, host) {
-+			continue
-+		}
-+
-+		httpURL := VCSTestRepoURL + strings.TrimPrefix(repo, host)
-+
-+		if vcs == vcsSvn {
-+			// Ping the vcweb HTTP server to tell it to initialize the SVN repository
-+			// and get the SVN server URL.
-+			u, err := urlpkg.Parse(httpURL + "?vcwebsvn=1")
++				securityFrag := ""
++				if security == web.SecureOnly {
++					securityFrag = "secure "
++				}
++				return "", fmt.Errorf("no %sprotocol found for repository", securityFrag)
++			}()
 +			if err != nil {
-+				panic(fmt.Sprintf("invalid vcs-test repo URL: %v", err))
-+			}
-+			svnURL, err := web.GetBytes(u)
-+			svnURL = bytes.TrimSpace(svnURL)
-+			if err == nil && len(svnURL) > 0 {
-+				return string(svnURL) + strings.TrimPrefix(repo, host), true
-+			}
-+
-+			// vcs-test doesn't have a svn handler for the given path,
-+			// so resolve the repo to HTTPS instead.
-+		}
-+
-+		return httpURL, true
-+	}
-+	return "", false
-+}
-+
- // urlForImportPath returns a partially-populated URL for the given Go import path.
- //
- // The URL leaves the Scheme field blank so that web.Get will try any scheme
++				return nil, err
+ 			}
+ 			repoURL = scheme + "://" + repo
+ 		}
 diff --git a/src/cmd/go/testdata/script/mod_insecure_issue63845.txt b/src/cmd/go/testdata/script/mod_insecure_issue63845.txt
 new file mode 100644
 index 0000000000..5fa6a4f12b
