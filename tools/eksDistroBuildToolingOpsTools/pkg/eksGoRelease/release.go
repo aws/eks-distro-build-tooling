@@ -43,9 +43,15 @@ func ReleaseArtifacts(ctx context.Context, r *Release, dryrun bool, email, user 
 	}
 
 	// Create new branch
-	commitBranch := fmt.Sprintf("release-%s", r.GoMinorVersion())
+	commitBranch := fmt.Sprintf("release-%s", r.EksGoReleaseVersion())
 	if err := gClient.Branch(commitBranch); err != nil {
-		logger.Error(err, "git branch", "branch name", r.GoMinorVersion(), "repo", forkUrl, "client", gClient)
+		logger.Error(err, "git branch", "branch name", commitBranch, "repo", forkUrl, "client", gClient)
+		return err
+	}
+
+	// Update Readme for new patch versions of golang
+	if err := updateVersionReadme(gClient, r); err != nil {
+		logger.Error(err, "Update Readme")
 		return err
 	}
 
@@ -54,7 +60,6 @@ func ReleaseArtifacts(ctx context.Context, r *Release, dryrun bool, email, user 
 		logger.Error(err, "updating release file", "release", r.EksGoReleaseVersion())
 		return err
 	}
-
 	// Commit files and create PR
 	prSubject := fmt.Sprintf(releasePRSubjectFmt, r.EksGoReleaseVersion())
 	prDescription := fmt.Sprintf(releasePRDescriptionFmt, r.EksGoReleaseVersion())
