@@ -19,29 +19,32 @@ set -o pipefail
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source $SCRIPT_ROOT/common_vars.sh
 
+BASE_DIRECTORY="$(git rev-parse --show-toplevel)"
+SED=$(source $BASE_DIRECTORY/scripts/common.sh && build::find::gnu_variant_on_mac sed)
+
 # since we are using the minimal-base-builder
 # policycoreutils is only half installed and the rpm db
 # is technically in an invalid state
 # removing it to avoid issues in future rpm transactions
-yum remove -y policycoreutils > /dev/null 2>&1
+yum remove -y policycoreutils >/dev/null 2>&1
 
 # keep rpms around since we use them in every stage
 if [ "$IS_AL23" = "true" ]; then
-    echo "keepcache=1" >> /etc/dnf/dnf.conf
-    rm -rf /var/cache/dnf
-    ln -s yum /var/cache/dnf
-    rm -f /var/lib/dnf/history.*
+	echo "keepcache=1" >>/etc/dnf/dnf.conf
+	rm -rf /var/cache/dnf
+	ln -s yum /var/cache/dnf
+	rm -f /var/lib/dnf/history.*
 else
-    sed -i 's/keepcache=0/keepcache=1/g' /etc/yum.conf
-    yum history new
+	$SED -i 's/keepcache=0/keepcache=1/g' /etc/yum.conf
+	yum history new
 fi
 
 yum install --setopt=install_weak_deps=False -y \
-    gzip \
-    tar \
-    unzip \
-    wget \
-    xz
+	gzip \
+	tar \
+	unzip \
+	wget \
+	xz
 
 chmod -R 777 /newroot
 rm -rf /newroot
