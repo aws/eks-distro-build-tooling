@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 set -e
 set -o pipefail
 set -x
@@ -24,19 +23,17 @@ NEW_TAG="$3"
 FILEPATH="$4"
 USE_YQ="$5"
 
-SED=sed
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    SED=gsed
-fi
+BASE_DIRECTORY="$(git rev-parse --show-toplevel)"
+SED=$(source $BASE_DIRECTORY/scripts/common.sh && build::find::gnu_variant_on_mac sed)
 
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
 
 if [ $REPO_OWNER = "aws" ]; then
-    ORIGIN_ORG="eks-distro-pr-bot"
+	ORIGIN_ORG="eks-distro-pr-bot"
 else
-    ORIGIN_ORG=$REPO_OWNER
+	ORIGIN_ORG=$REPO_OWNER
 fi
 
 REPO_PATH=${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
@@ -46,9 +43,9 @@ cd $REPO_PATH
 pwd
 
 if [ "$USE_YQ" = "true" ]; then
-    yq -i e "$NEW_TAG" EKS_DISTRO_TAG_FILE.yaml   
+	yq -i e "$NEW_TAG" EKS_DISTRO_TAG_FILE.yaml
 else
-    for FILE in $(find ./ -type f -name "$FILEPATH"); do
-        $SED -i -E "s,${OLD_TAG},${NEW_TAG}," $FILE
-    done
+	for FILE in $(find ./ -type f -name "$FILEPATH"); do
+		$SED -i -E "s,${OLD_TAG},${NEW_TAG}," $FILE
+	done
 fi

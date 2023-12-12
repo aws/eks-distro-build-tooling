@@ -26,21 +26,18 @@ FOOTER="########### END GENERATED ###########################"
 MAKEFILE=$MAKE_ROOT/Makefile
 HELPFILE=$MAKE_ROOT/Help.mk
 
-SED=sed
-if [ "$(uname -s)" = "Darwin" ]; then
-    SED=gsed
-fi
+BASE_DIRECTORY="$(git rev-parse --show-toplevel)"
+SED=$(source $BASE_DIRECTORY/scripts/common.sh && build::find::gnu_variant_on_mac sed)
 
 $SED -i "/$HEADER/,/$FOOTER/d" $MAKEFILE
 # remove trailing newlines
-printf %s "$(< $MAKEFILE)" > $MAKEFILE
+printf %s "$(<$MAKEFILE)" >$MAKEFILE
 
 touch $HELPFILE
 
 $SED -i "/$HEADER/,/$FOOTER/d" $HELPFILE
 # remove trailing newlines
-printf %s "$(< $HELPFILE)" > $HELPFILE
-
+printf %s "$(<$HELPFILE)" >$HELPFILE
 
 VARIANTS=$(make --no-print-directory -C $MAKE_ROOT var-value-MINIMAL_VARIANTS)
 VARIANTS=(${VARIANTS// / })
@@ -53,27 +50,27 @@ UPDATE_MINIMAL_TARGETS="${NL}${NL}##@ Update Minimal Targets"
 CREATE_PR_MINIMAL_TARGETS="${NL}${NL}##@ Create PR Minimal Targets"
 
 for variant in "${VARIANTS[@]}"; do
-    MAIN_MINIMAL_TARGETS+="${NL}minimal-images-${variant}: ## Build, export packages, validate and run tests for minimal variant \`${variant}\`"
-    EXPORT_MINIMAL_TARGETS+="${NL}packages-export-minimal-images-${variant}: ## Export packages for minimal variant \`${variant}\`"
-    VALIDATE_MINIMAL_TARGETS+="${NL}validate-minimal-images-${variant}: ## Validate for minimal variant \`${variant}\`"
-    TEST_MINIMAL_TARGETS+="${NL}test-minimal-images-${variant}: ## Run tests for minimal variant \`${variant}\`"
-    UPDATE_MINIMAL_TARGETS+="${NL}minimal-update-${variant}: ## Run update logic for minimal variant \`${variant}\`"
-    CREATE_PR_MINIMAL_TARGETS+="${NL}minimal-create-pr-${variant}: ## Run create pr logic for minimal variant \`${variant}\`"
+	MAIN_MINIMAL_TARGETS+="${NL}minimal-images-${variant}: ## Build, export packages, validate and run tests for minimal variant \`${variant}\`"
+	EXPORT_MINIMAL_TARGETS+="${NL}packages-export-minimal-images-${variant}: ## Export packages for minimal variant \`${variant}\`"
+	VALIDATE_MINIMAL_TARGETS+="${NL}validate-minimal-images-${variant}: ## Validate for minimal variant \`${variant}\`"
+	TEST_MINIMAL_TARGETS+="${NL}test-minimal-images-${variant}: ## Run tests for minimal variant \`${variant}\`"
+	UPDATE_MINIMAL_TARGETS+="${NL}minimal-update-${variant}: ## Run update logic for minimal variant \`${variant}\`"
+	CREATE_PR_MINIMAL_TARGETS+="${NL}minimal-create-pr-${variant}: ## Run create pr logic for minimal variant \`${variant}\`"
 done
 
 COMPILERS_TARGETS="${NL}${NL}##@ Compiler Images Targets"
 COMPILERS=$(make --no-print-directory -C $MAKE_ROOT var-value-COMPILERS)
 COMPILERS=(${COMPILERS// / })
 for compiler in "${COMPILERS[@]}"; do
-    COMPILERS_TARGETS+="${NL}${compiler}-compiler-images: ## Build compiler images for all versions of ${compiler}"
-    VERSIONS=$(make --no-print-directory -C $MAKE_ROOT var-value-BASE_${compiler^^}_VARIANT_VERSIONS)
-    VERSIONS=(${VERSIONS// / })
-    for version in "${VERSIONS[@]}"; do
-        COMPILERS_TARGETS+="${NL}${compiler}-${version}-compiler-images: ## Build compiler images for ${compiler}-${version}"
-    done
+	COMPILERS_TARGETS+="${NL}${compiler}-compiler-images: ## Build compiler images for all versions of ${compiler}"
+	VERSIONS=$(make --no-print-directory -C $MAKE_ROOT var-value-BASE_${compiler^^}_VARIANT_VERSIONS)
+	VERSIONS=(${VERSIONS// / })
+	for version in "${VERSIONS[@]}"; do
+		COMPILERS_TARGETS+="${NL}${compiler}-${version}-compiler-images: ## Build compiler images for ${compiler}-${version}"
+	done
 done
 
-cat >> $HELPFILE << EOF
+cat >>$HELPFILE <<EOF
 ${NL}${NL}${NL}${HEADER}
 # To update call: make add-generated-help-block
 # This is added to help document dynamic targets and support shell autocompletion
@@ -82,7 +79,7 @@ ${MAIN_MINIMAL_TARGETS}${EXPORT_MINIMAL_TARGETS}${VALIDATE_MINIMAL_TARGETS}${TES
 ${FOOTER}
 EOF
 
-cat >> $MAKEFILE << EOF
+cat >>$MAKEFILE <<EOF
 ${NL}${NL}${NL}${HEADER}
 # To update call: make add-generated-help-block
 # This is added to help document dynamic targets and support shell autocompletion
