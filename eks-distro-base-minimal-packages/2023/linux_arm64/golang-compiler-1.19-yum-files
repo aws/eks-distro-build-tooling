@@ -800,7 +800,7 @@
 -rw-r--r--    40KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/test/internal/genflags.a
 -rw-r--r--    64KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/tool.a
 -rw-r--r--    91KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/trace.a
--rw-r--r--   494KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/vcs.a
+-rw-r--r--   497KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/vcs.a
 -rw-r--r--    62KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/version.a
 -rw-r--r--   111KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/vet.a
 -rw-r--r--   160KiB /root/sdk/go1.19.13/pkg/linux_arm64/cmd/go/internal/web.a
@@ -1088,7 +1088,7 @@
 -rw-r--r--   311KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/httptest.a
 -rw-r--r--    94KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/httptrace.a
 -rw-r--r--   589KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/httputil.a
--rw-r--r--   120KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/internal.a
+-rw-r--r--   121KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/internal.a
 -rw-r--r--    13KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/internal/ascii.a
 -rw-r--r--    11KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/internal/testcert.a
 -rw-r--r--   190KiB /root/sdk/go1.19.13/pkg/linux_arm64/net/http/pprof.a
@@ -3110,6 +3110,7 @@
 -rw-r--r--   5.5KiB /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_init_invalid_major.txt
 -rw-r--r--     248B /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_init_path.txt
 -rw-r--r--     955B /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_init_tidy.txt
+-rw-r--r--     897B /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_insecure_issue63845.txt
 -rw-r--r--     239B /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_install_hint.txt
 -rw-r--r--   8.0KiB /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_install_pkg_version.txt
 -rw-r--r--     258B /root/sdk/go1.19.13/src/cmd/go/testdata/script/mod_install_versioned.txt
@@ -7184,8 +7185,8 @@
 -rw-r--r--    47KiB /root/sdk/go1.19.13/src/net/http/httputil/reverseproxy_test.go
 -rw-r--r--   1.3KiB /root/sdk/go1.19.13/src/net/http/internal/ascii/print.go
 -rw-r--r--   1.8KiB /root/sdk/go1.19.13/src/net/http/internal/ascii/print_test.go
--rw-r--r--   6.7KiB /root/sdk/go1.19.13/src/net/http/internal/chunked.go
--rw-r--r--   6.7KiB /root/sdk/go1.19.13/src/net/http/internal/chunked_test.go
+-rw-r--r--   7.7KiB /root/sdk/go1.19.13/src/net/http/internal/chunked.go
+-rw-r--r--   8.0KiB /root/sdk/go1.19.13/src/net/http/internal/chunked_test.go
 -rw-r--r--   3.6KiB /root/sdk/go1.19.13/src/net/http/internal/testcert/testcert.go
 -rw-r--r--     900B /root/sdk/go1.19.13/src/net/http/jar.go
 -rw-r--r--   4.4KiB /root/sdk/go1.19.13/src/net/http/main_test.go
@@ -7611,7 +7612,7 @@
 -rw-r--r--   1.3KiB /root/sdk/go1.19.13/src/path/filepath/path_plan9.go
 -rw-r--r--    40KiB /root/sdk/go1.19.13/src/path/filepath/path_test.go
 -rw-r--r--   1.3KiB /root/sdk/go1.19.13/src/path/filepath/path_unix.go
--rw-r--r--   9.8KiB /root/sdk/go1.19.13/src/path/filepath/path_windows.go
+-rw-r--r--   9.6KiB /root/sdk/go1.19.13/src/path/filepath/path_windows.go
 -rw-r--r--    16KiB /root/sdk/go1.19.13/src/path/filepath/path_windows_test.go
 -rw-r--r--   3.2KiB /root/sdk/go1.19.13/src/path/filepath/symlink.go
 -rw-r--r--     635B /root/sdk/go1.19.13/src/path/filepath/symlink_plan9.go
