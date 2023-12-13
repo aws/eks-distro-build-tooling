@@ -58,7 +58,7 @@ CHECK_UPDATE?=$(if $(MOCK_CHECK_UPDATE), \
 	$(info check-update$(if $(filter windows,$(2)),-windows,) $(1) $(2) $(3) $(SECURITY))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3),$(SECURITY))), \
 	$(shell ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3) $(SECURITY)) \
 )
-CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3) $(4); fi)
+CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3) $(SECURITY); fi)
 
 # $1 - versioned image tag
 # $2 - image name
@@ -772,7 +772,7 @@ create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
 .PHONY: update
-update: SECURITY=--security
+update: SECURITY?=--security
 update: buildkit-check open-pr-check $(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
