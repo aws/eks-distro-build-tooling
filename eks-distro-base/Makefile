@@ -642,6 +642,7 @@ windows-update-%: VERSIONED_VARIANT=$*
 windows-update-%: IMAGE_COMPONENT=eks-distro-windows-base
 windows-update-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 windows-update-%: UPDATE_TARGET=windows-images-$(VERSIONED_VARIANT)
+windows-update-%: SECURITY?=
 windows-update-%:
 	$(call UPDATE_TARGET_BODY,windows)
 
