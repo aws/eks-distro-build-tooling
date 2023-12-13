@@ -600,6 +600,7 @@ standard-images: BUILDCTL_NO_CACHE=
 standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 standard-images: IMAGE_METADATA_FILE=
 standard-images: PLATFORMS?=linux/amd64,linux/arm64
+standard-images: SECURITY?=
 # tag al2 build with latest.2 and latest for backward compat
 standard-images: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
@@ -675,6 +676,7 @@ $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS):
 
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images-%=%)
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
+$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): SECURITY?=
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "\n\nBuilding $(VARIANT_SHORT_NAME) final stage\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
