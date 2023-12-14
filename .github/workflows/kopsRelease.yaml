@@ -1,0 +1,23 @@
+name: kOps Release Check
+on:
+  schedule:
+  # Every day
+  - cron: '0 0 * * *'
+
+jobs:
+  kops_release:
+    name: kOps Release Check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check for release
+      id: release-check
+      run: |
+        echo wasRelease=$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | jq -r '.published_at|fromdateiso8601 > now-86400') >> $GITHUB_OUTPUT
+    - name: Create issue
+      if: ${{ steps.release-check.outputs.wasRelease == 'true' }}
+      uses: imjohnbo/issue-bot@v3
+      with:
+        labels: "external"
+        title: "Notice of kOps Release"
+        body: |-
+          A kOps release was detected as having occurred in the last 24h. The kOps project needs updating
