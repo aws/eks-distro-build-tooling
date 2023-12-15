@@ -1399,7 +1399,7 @@
 -rw-r--r--   9.8KiB /usr/include/linux/prctl.h
 -rw-r--r--   2.3KiB /usr/include/linux/psample.h
 -rw-r--r--   5.1KiB /usr/include/linux/psci.h
--rw-r--r--   4.1KiB /usr/include/linux/psp-sev.h
+-rw-r--r--   4.4KiB /usr/include/linux/psp-sev.h
 -rw-r--r--   7.3KiB /usr/include/linux/ptp_clock.h
 -rw-r--r--   4.3KiB /usr/include/linux/ptrace.h
 -rw-r--r--   2.5KiB /usr/include/linux/qemu_fw_cfg.h
@@ -1452,7 +1452,7 @@
 -rw-r--r--   6.0KiB /usr/include/linux/serial_core.h
 -rw-r--r--    16KiB /usr/include/linux/serial_reg.h
 -rw-r--r--   2.1KiB /usr/include/linux/serio.h
--rw-r--r--   1.9KiB /usr/include/linux/sev-guest.h
+-rw-r--r--   2.3KiB /usr/include/linux/sev-guest.h
 -rw-r--r--   3.8KiB /usr/include/linux/shm.h
 -rw-r--r--     388B /usr/include/linux/signal.h
 -rw-r--r--   1.3KiB /usr/include/linux/signalfd.h
@@ -1470,7 +1470,7 @@
 -rw-r--r--   1.8KiB /usr/include/linux/spi/spi.h
 -rw-r--r--   4.6KiB /usr/include/linux/spi/spidev.h
 -rw-r--r--   6.8KiB /usr/include/linux/stat.h
--rw-r--r--   1.5KiB /usr/include/linux/stddef.h
+-rw-r--r--   1.6KiB /usr/include/linux/stddef.h
 -rw-r--r--   1.3KiB /usr/include/linux/stm.h
 -rw-r--r--     238B /usr/include/linux/string.h
 -rw-r--r--   1.2KiB /usr/include/linux/sunrpc/debug.h
@@ -1609,7 +1609,7 @@
 -rw-r--r--   9.1KiB /usr/include/linux/virtio_snd.h
 -rw-r--r--   2.2KiB /usr/include/linux/virtio_types.h
 -rw-r--r--   3.3KiB /usr/include/linux/virtio_vsock.h
--rw-r--r--   6.7KiB /usr/include/linux/vm_sockets.h
+-rw-r--r--   7.2KiB /usr/include/linux/vm_sockets.h
 -rw-r--r--     963B /usr/include/linux/vm_sockets_diag.h
 -rw-r--r--     455B /usr/include/linux/vmcore.h
 -rw-r--r--   1.9KiB /usr/include/linux/vsockmon.h
@@ -3103,7 +3103,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libyaml-0.so.2.0.9
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
--rwxr-xr-x   1.2MiB /usr/lib64/ossl-modules/fips.so
+-rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   328KiB /usr/lib64/pkcs11/p11-kit-trust.so
 -rw-r--r--     369B /usr/lib64/pkgconfig/libxcrypt.pc
@@ -9226,7 +9226,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.5MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.6MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

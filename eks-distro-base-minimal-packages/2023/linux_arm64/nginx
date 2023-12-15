@@ -9,7 +9,7 @@ glibc-2.34-52.amzn2023.0.7.aarch64
 glibc-common-2.34-52.amzn2023.0.7.aarch64
 glibc-minimal-langpack-2.34-52.amzn2023.0.7.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
-gperftools-libs-2.9.1-1.amzn2023.0.2.aarch64
+gperftools-libs-2.9.1-1.amzn2023.0.3.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702
 libacl-2.3.1-2.amzn2023.0.2.aarch64
@@ -27,7 +27,7 @@ nginx-1.24.0-1.amzn2023.0.2.aarch64
 nginx-core-1.24.0-1.amzn2023.0.2.aarch64
 nginx-filesystem-1.24.0-1.amzn2023.0.2.noarch
 nginx-mimetypes-2.1.49-3.amzn2023.0.3.noarch
-openssl-libs-3.0.8-1.amzn2023.0.9.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.10.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
