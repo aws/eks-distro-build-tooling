@@ -13303,7 +13303,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
--rwxr-xr-x   1.2MiB /usr/lib64/ossl-modules/fips.so
+-rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0

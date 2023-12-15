@@ -14125,7 +14125,7 @@
 -rw-r--r--   9.8KiB /usr/include/linux/prctl.h
 -rw-r--r--   2.3KiB /usr/include/linux/psample.h
 -rw-r--r--   5.1KiB /usr/include/linux/psci.h
--rw-r--r--   4.1KiB /usr/include/linux/psp-sev.h
+-rw-r--r--   4.4KiB /usr/include/linux/psp-sev.h
 -rw-r--r--   7.3KiB /usr/include/linux/ptp_clock.h
 -rw-r--r--   4.3KiB /usr/include/linux/ptrace.h
 -rw-r--r--   2.5KiB /usr/include/linux/qemu_fw_cfg.h
@@ -14178,7 +14178,7 @@
 -rw-r--r--   6.0KiB /usr/include/linux/serial_core.h
 -rw-r--r--    16KiB /usr/include/linux/serial_reg.h
 -rw-r--r--   2.1KiB /usr/include/linux/serio.h
--rw-r--r--   1.9KiB /usr/include/linux/sev-guest.h
+-rw-r--r--   2.3KiB /usr/include/linux/sev-guest.h
 -rw-r--r--   3.8KiB /usr/include/linux/shm.h
 -rw-r--r--     388B /usr/include/linux/signal.h
 -rw-r--r--   1.3KiB /usr/include/linux/signalfd.h
@@ -14196,7 +14196,7 @@
 -rw-r--r--   1.8KiB /usr/include/linux/spi/spi.h
 -rw-r--r--   4.6KiB /usr/include/linux/spi/spidev.h
 -rw-r--r--   6.8KiB /usr/include/linux/stat.h
--rw-r--r--   1.5KiB /usr/include/linux/stddef.h
+-rw-r--r--   1.6KiB /usr/include/linux/stddef.h
 -rw-r--r--   1.3KiB /usr/include/linux/stm.h
 -rw-r--r--     238B /usr/include/linux/string.h
 -rw-r--r--   1.2KiB /usr/include/linux/sunrpc/debug.h
@@ -14335,7 +14335,7 @@
 -rw-r--r--   9.1KiB /usr/include/linux/virtio_snd.h
 -rw-r--r--   2.2KiB /usr/include/linux/virtio_types.h
 -rw-r--r--   3.3KiB /usr/include/linux/virtio_vsock.h
--rw-r--r--   6.7KiB /usr/include/linux/vm_sockets.h
+-rw-r--r--   7.2KiB /usr/include/linux/vm_sockets.h
 -rw-r--r--     963B /usr/include/linux/vm_sockets_diag.h
 -rw-r--r--     455B /usr/include/linux/vmcore.h
 -rw-r--r--   1.9KiB /usr/include/linux/vsockmon.h

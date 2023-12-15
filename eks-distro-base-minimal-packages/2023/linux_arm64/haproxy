@@ -15,7 +15,7 @@ libselinux-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
 libstdc++-11.4.1-2.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.9.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.10.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch

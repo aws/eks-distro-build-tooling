@@ -32,7 +32,7 @@ libpcap-1.10.1-1.amzn2023.0.2.x86_64
 libselinux-3.4-5.amzn2023.0.2.x86_64
 libsepol-3.4-3.amzn2023.0.3.x86_64
 libstdc++-11.4.1-2.amzn2023.0.2.x86_64
-openssl-libs-3.0.8-1.amzn2023.0.9.x86_64
+openssl-libs-3.0.8-1.amzn2023.0.10.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
