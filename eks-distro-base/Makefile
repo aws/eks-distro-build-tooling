@@ -600,9 +600,9 @@ standard-images: BUILDCTL_NO_CACHE=
 standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
 standard-images: IMAGE_METADATA_FILE=
 standard-images: PLATFORMS?=linux/amd64,linux/arm64
-standard-images: SECURITY?=
 # tag al2 build with latest.2 and latest for backward compat
 standard-images: LATEST=$(call STANDARD_LATEST)
+standard-images: var-value-SECURITY
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
@@ -628,7 +628,6 @@ $(WINDOWS_IMAGE_TARGETS): PLATFORMS=windows/amd64
 $(WINDOWS_IMAGE_TARGETS): LATEST=$(VERSIONED_VARIANT)
 $(WINDOWS_IMAGE_TARGETS): IMAGE_METADATA_FILE=/tmp/$(IMAGE_NAME)-metadata.json
 $(WINDOWS_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE_REPO)/$(IMAGE_COMPONENT)\"
-$(WINDOWS_IMAGE_TARGETS): SECURITY?=
 
 windows-images-%: VERSIONED_VARIANT=$*
 windows-images-%: buildkit-check
@@ -642,7 +641,6 @@ windows-update-%: VERSIONED_VARIANT=$*
 windows-update-%: IMAGE_COMPONENT=eks-distro-windows-base
 windows-update-%: IMAGE_NAME=$(IMAGE_COMPONENT)-$(VERSIONED_VARIANT)
 windows-update-%: UPDATE_TARGET=windows-images-$(VERSIONED_VARIANT)
-windows-update-%: SECURITY?=
 windows-update-%:
 	$(call UPDATE_TARGET_BODY,windows)
 
@@ -678,7 +676,6 @@ $(ALL_BUILDER_MINIMAL_IMAGES_TARGETS):
 
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images-%=%)
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
-$(ALL_FINAL_MINIMAL_IMAGES_TARGETS): SECURITY?=
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "\n\nBuilding $(VARIANT_SHORT_NAME) final stage\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
@@ -717,7 +714,6 @@ $(ALL_TEST_MINIMAL_IMAGES_TARGETS):
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:minimal-update-%=%)
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): UPDATE_TARGET=minimal-images-$(VARIANT_SHORT_NAME)
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): VARIANT=minimal-$(VARIANT_SHORT_NAME)
-$(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): SECURITY?=
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS): IMAGE_NAME=eks-distro-$(VARIANT)
 $(ALL_UPDATE_MINIMAL_IMAGES_TARGETS):
 	$(call UPDATE_TARGET_BODY,$(AL_TAG))
@@ -752,7 +748,6 @@ test-all-minimal-images: $(addprefix test-minimal-images-, $(MINIMAL_VARIANTS))
 standard-update: UPDATE_TARGET=standard-images
 standard-update: IMAGE_NAME=eks-distro-base
 standard-update: IMAGE_COMPONENT=$(IMAGE_NAME)
-standard-update: SECURITY?=
 standard-update:
 	$(call UPDATE_TARGET_BODY,$(AL_TAG))
 
@@ -777,9 +772,15 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
+.PHONY: echo
+echo:
+
 .PHONY: update
 update: SECURITY?=--security
-update: buildkit-check open-pr-check $(UPDATE_TARGETS)
+update: var-value-SECURITY \
+	buildkit-check \
+	open-pr-check \
+	$(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
 update-base-image-other-repos:
@@ -791,7 +792,10 @@ all: release
 ##@ Update targets without --security flag, for quarterly rebuilding of minimal image
 .PHONY: quarterly-update
 quarterly-update: SECURITY?=
-quarterly-update: buildkit-check open-pr-check $(UPDATE_TARGETS)
+quarterly-update: var-value-SECURITY \
+	buildkit-check \
+	open-pr-check \
+	$(UPDATE_TARGETS)
 
 ##@ Local Targets
 
