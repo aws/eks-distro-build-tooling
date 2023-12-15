@@ -25,7 +25,7 @@ source $SCRIPT_ROOT/common_vars.sh
 if [ $TARGETARCH == 'amd64' ]; then 
     HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
 else
-    HUGO_FILENAME="nhugo_extended_${HUGO_VERSION}_Linux-ARM64.tar.gz"
+    HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_Linux-ARM64.tar.gz"
 fi
 HUGO_DOWNLOAD_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/$HUGO_FILENAME"
 HUGO_CHECKSUM_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
