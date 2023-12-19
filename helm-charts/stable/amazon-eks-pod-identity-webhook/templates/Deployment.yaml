@@ -85,10 +85,10 @@ spec:
   secretName: {{ include "amazon-eks-pod-identity-webhook.secretName" . }} 
   commonName: "pod-identity-webhook.default.svc"
   dnsNames:
-    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}
-    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default
-    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default.svc
-    {{- include "amazon-eks-pod-identity-webhook.fullname" . | nindent 4 }}.default.svc.local
+    - "eks-distro-pod-identity-webhook"
+    - "eks-distro-pod-identity-webhook.default"
+    - "eks-distro-pod-identity-webhook.default.svc"
+    - "eks-distro-pod-identity-webhook.default.svc.local"
   isCA: true
   duration: 2160h # 90d
   renewBefore: 360h # 15d
