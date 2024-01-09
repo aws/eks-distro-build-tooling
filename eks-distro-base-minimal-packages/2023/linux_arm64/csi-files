@@ -662,7 +662,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libmenuw.so.6.2
 -rwxr-xr-x   330KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   585KiB /usr/lib64/libmpfr.so.6.1.0
--rwxr-xr-x   265KiB /usr/lib64/libncurses.so.6.2
+-rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
 -rwxr-xr-x   197KiB /usr/lib64/libnfsidmap.so.1.0.0
 -rwxr-xr-x   197KiB /usr/lib64/libnfsidmap/nsswitch.so

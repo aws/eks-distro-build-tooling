@@ -323,7 +323,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x   197KiB /usr/lib64/libmenu.so.6.2
 -rwxr-xr-x   197KiB /usr/lib64/libmenuw.so.6.2
--rwxr-xr-x   265KiB /usr/lib64/libncurses.so.6.2
+-rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2

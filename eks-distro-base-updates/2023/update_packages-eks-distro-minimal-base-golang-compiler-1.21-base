@@ -1,3 +1,8 @@
 
-openssh.x86_64
-openssh-clients.x86_64
+curl.x86_64
+libcurl.x86_64
+libssh.x86_64
+libssh-config.noarch
+ncurses-base.noarch
+ncurses-libs.x86_64
+tar.x86_64

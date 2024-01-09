@@ -1,3 +1,5 @@
 
-openssl-libs.x86_64
-python3-pip-wheel.noarch
+curl-minimal.x86_64
+libcurl-minimal.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64

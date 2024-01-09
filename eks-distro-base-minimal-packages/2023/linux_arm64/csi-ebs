@@ -20,7 +20,7 @@ libsepol-3.4-3.amzn2023.0.3.aarch64
 libsmartcols-2.37.4-1.amzn2023.0.3.aarch64
 libstdc++-11.4.1-2.amzn2023.0.2.aarch64
 libuuid-2.37.4-1.amzn2023.0.3.aarch64
-ncurses-libs-6.2-4.20200222.amzn2023.0.4.aarch64
+ncurses-libs-6.2-4.20200222.amzn2023.0.5.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch

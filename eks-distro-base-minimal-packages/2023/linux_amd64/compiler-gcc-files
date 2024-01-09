@@ -258,7 +258,7 @@
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   1.3MiB /usr/bin/cpp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   286KiB /usr/bin/curl
+-rwxr-xr-x   290KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -3134,7 +3134,7 @@
 -rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   777KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   785KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rw-r--r--       8B /usr/lib64/libdl.a
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -3241,7 +3241,7 @@
 -rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   470KiB /usr/lib64/libssh.so.4.9.5
+-rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
@@ -9836,9 +9836,9 @@ lrwxrwxrwx      19B /usr/lib64/libsigsegv.so.2 libsigsegv.so.2.0.6
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.5
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.5
-lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.5 libssh.so.4.9.5
+lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
+lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3
