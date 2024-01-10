@@ -15403,7 +15403,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libattr.so.1.1.0
 -rwxr-xr-x   125KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   122KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.29.1-31.amzn2.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
@@ -15502,7 +15502,7 @@
 -rwxr-xr-x   172KiB /usr/lib64/libnsspem.so
 -rwxr-xr-x    12KiB /usr/lib64/libnsssysinit.so
 -rwxr-xr-x   195KiB /usr/lib64/libnssutil3.so
--rwxr-xr-x   1.6MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.so
+-rwxr-xr-x   1.6MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x    57KiB /usr/lib64/libpam.so.0.83.1
 -rwxr-xr-x    16KiB /usr/lib64/libpam_misc.so.0.82.0
 -rwxr-xr-x    16KiB /usr/lib64/libpamc.so.0.82.1

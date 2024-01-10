@@ -25,7 +25,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--   8.6KiB /etc/ld.so.cache
+-rw-r--r--   8.7KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     100B /etc/logrotate.d/yum
 -rw-r--r--       0B /etc/motd
@@ -3223,7 +3223,7 @@
 -rwxr-xr-x    73KiB /usr/lib64/libanl-2.26.so
 -rwxr-xr-x   134KiB /usr/lib64/libassuan.so.0.4.0
 -rwxr-xr-x    68KiB /usr/lib64/libattr.so.1.1.0
--rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.so
+-rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x   332KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    71KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   1.8MiB /usr/lib64/libc-2.26.so
@@ -3293,7 +3293,7 @@
 -rwxr-xr-x   204KiB /usr/lib64/libnsspem.so
 -rwxr-xr-x    68KiB /usr/lib64/libnsssysinit.so
 -rwxr-xr-x   263KiB /usr/lib64/libnssutil3.so
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x    67KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    67KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x    70KiB /usr/lib64/libpcprofile.so
@@ -9375,7 +9375,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
--rw-------   7.3KiB /var/cache/ldconfig/aux-cache
+-rw-------   7.4KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--      57B /var/lib/alternatives/ld
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock

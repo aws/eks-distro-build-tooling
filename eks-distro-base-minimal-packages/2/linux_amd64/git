@@ -17,7 +17,7 @@ krb5-libs-1.15.1-55.amzn2.2.6.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.0.1.x86_64
-libcurl-8.3.0-1.amzn2.0.4.x86_64
+libcurl-8.3.0-1.amzn2.0.5.x86_64
 libedit-3.0-12.20121213cvs.amzn2.0.2.x86_64
 libgcc-7.3.1-17.amzn2.x86_64
 libgcrypt-1.5.3-14.amzn2.0.3.x86_64
@@ -29,8 +29,8 @@ libsepol-2.5-10.amzn2.0.1.x86_64
 libssh2-1.4.3-12.amzn2.2.6.x86_64
 libstdc++-7.3.1-17.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
-ncurses-base-6.0-8.20170212.amzn2.1.5.noarch
-ncurses-libs-6.0-8.20170212.amzn2.1.5.x86_64
+ncurses-base-6.0-8.20170212.amzn2.1.7.noarch
+ncurses-libs-6.0-8.20170212.amzn2.1.7.x86_64
 nspr-4.35.0-1.amzn2.x86_64
 nss-3.90.0-2.amzn2.0.1.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
