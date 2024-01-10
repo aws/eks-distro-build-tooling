@@ -3,6 +3,7 @@ The EKS Go Release Tool is intended as a home for all automation used to release
 It is intended to eventually replace eksGoTool.
 
 ### Using the Tool
+`make build-eksGoRelease` generates the binary
 `eksGoRelease --help` for up-to-date usage
 ```
 Tools for updating and releasing EKS Go
