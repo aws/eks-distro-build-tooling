@@ -14708,7 +14708,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libattr.so.1.1.0
 -rwxr-xr-x   133KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   134KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.so
+-rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x   332KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    71KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   1.8MiB /usr/lib64/libc-2.26.so
@@ -14801,7 +14801,7 @@
 -rwxr-xr-x   204KiB /usr/lib64/libnsspem.so
 -rwxr-xr-x    68KiB /usr/lib64/libnsssysinit.so
 -rwxr-xr-x   263KiB /usr/lib64/libnssutil3.so
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.0.1.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.83.1
 -rwxr-xr-x    68KiB /usr/lib64/libpam_misc.so.0.82.0
 -rwxr-xr-x    68KiB /usr/lib64/libpamc.so.0.82.1
@@ -21804,7 +21804,7 @@
 -rw-r--r--   7.5MiB /var/lib/rpm/Packages
 -rw-r--r--    80KiB /var/lib/rpm/Providename
 -rw-r--r--    72KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    28KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

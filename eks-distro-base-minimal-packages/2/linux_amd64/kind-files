@@ -4604,7 +4604,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/util-linux-2.30.2/COPYING.GPLv2
 -rw-r--r--    26KiB /usr/share/licenses/util-linux-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--   1.8KiB /usr/share/licenses/util-linux-2.30.2/COPYING.UCB
--rw-r--r--    13KiB /usr/share/licenses/vim-data-9.0.2120/LICENSE
+-rw-r--r--    13KiB /usr/share/licenses/vim-data-9.0.2153/LICENSE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/af/LC_MESSAGES/glib20.mo
@@ -8419,7 +8419,7 @@
 -rw-r--r--   7.6MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    92KiB /var/lib/rpm/Requirename
--rw-r--r--    28KiB /var/lib/rpm/Sha1header
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
