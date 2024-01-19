@@ -73,6 +73,9 @@ for TARGETARCH in arm64 amd64; do
 
     # Notation
     echo "$(curl -sSL --retry 5 -v $NOTATION_CHECKSUM_URL 2>&1 | grep $NOTATION_FILENAME | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/notation-$TARGETARCH-checksum
+
+    # Oras
+    echo "$(curl -sSL --retry 5 -v $ORAS_CHECKSUM_URL 2>&1 | grep $ORAS_FILENAME | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/oras-$TARGETARCH-checksum
 done
 
 # HUGO

@@ -142,6 +142,21 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_notation.sh && \
     /remove_yum_packages.sh
 
+
+FROM ${BUILDER_IMAGE} as oras
+ARG TARGETARCH
+WORKDIR /workdir
+ARG ORAS_VERSION
+ENV ORAS_VERSION=$ORAS_VERSION
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_oras.sh ./checksums/oras-${TARGETARCH}-checksum /
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_oras.sh && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as nodejs
 ARG TARGETARCH
 WORKDIR /workdir
@@ -489,6 +504,7 @@ COPY --link --from=buildkit /buildkit /
 COPY --link --from=skopeo /skopeo /
 COPY --link --from=upx  /upx /
 COPY --link --from=notation /notation /
+COPY --link --from=oras /oras /
 
 FROM minimal-copy-stage as full-copy-stage
 
