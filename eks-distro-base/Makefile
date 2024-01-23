@@ -773,6 +773,7 @@ create-pr: $(CREATE_PR_TARGETS)
 
 .PHONY: update
 update: SECURITY?=--security
+update:
 	buildkit-check \
 	open-pr-check \
 	$(UPDATE_TARGETS)
@@ -787,6 +788,7 @@ all: release
 ##@ Update targets without --security flag, for quarterly rebuilding of minimal image
 .PHONY: quarterly-update
 quarterly-update: SECURITY?=
+quarterly-update:
 	buildkit-check \
 	open-pr-check \
 	$(UPDATE_TARGETS)
