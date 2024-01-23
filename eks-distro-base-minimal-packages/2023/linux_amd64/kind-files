@@ -355,9 +355,9 @@
 -rwxr-xr-x    37KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x    57MiB /usr/bin/containerd
--rwxr-xr-x   7.3MiB /usr/bin/containerd-shim
--rwxr-xr-x    14MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    19MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x   7.8MiB /usr/bin/containerd-shim
+-rwxr-xr-x    15MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x    20MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
 -rwxr-xr-x    29MiB /usr/bin/ctr
