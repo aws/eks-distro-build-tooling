@@ -52,12 +52,13 @@ CHECK_UPDATE_FILE_PATH=$(MAKE_ROOT)/check-update/$(1)
 # $1 - image component
 # $2 - AL_TAG
 # $3 - image name
+# $4 - --security flag, absent on quarterly-update
 MOCK_CHECK_UPDATE?=
 CHECK_UPDATE?=$(if $(MOCK_CHECK_UPDATE), \
-	$(info check-update$(if $(filter windows,$(2)),-windows,) $(1) $(2) $(3))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3))), \
-	$(shell ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3)) \
+	$(info check-update$(if $(filter windows,$(2)),-windows,) $(1) $(2) $(3) $(SECURITY))$(shell mkdir -p $(MAKE_ROOT)/check-update && echo $(MOCK_CHECK_UPDATE) > $(call CHECK_UPDATE_FILE_PATH,$(3),$(SECURITY))), \
+	$(shell ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3) $(SECURITY)) \
 )
-CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3); fi)
+CHECK_UPDATE_IF_PROW?=$(shell if [ "$(JOB_TYPE)" = "presubmit" ] || [ "$(JOB_TYPE)" = "postsubmit" ]; then $(if $(MOCK_CHECK_UPDATE),echo,) ./check_update$(if $(filter windows,$(2)),_windows,).sh $(1) $(2) $(3) $(SECURITY); fi)
 
 # $1 - versioned image tag
 # $2 - image name
@@ -318,7 +319,7 @@ endef
 # $1 - AL_TAG (may be windows)
 define UPDATE_TARGET_BODY	
 	@echo false > $(MAKE_ROOT)/$(IMAGE_NAME)-pushed
-	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(1),$(IMAGE_NAME))
+	$(call CHECK_UPDATE,$(IMAGE_COMPONENT),$(1),$(IMAGE_NAME),$(SECURITY))
 	$(eval CHECK_UPDATE_RESULT:=$(shell cat $(call CHECK_UPDATE_FILE_PATH,$(IMAGE_NAME))))
 	$(if $(filter error,$(CHECK_UPDATE_RESULT)),@exit 1,)
 	$(if $(filter none,$(CHECK_UPDATE_RESULT)),@echo No updates for $(@),)
@@ -603,7 +604,7 @@ standard-images: PLATFORMS?=linux/amd64,linux/arm64
 standard-images: LATEST=$(call STANDARD_LATEST)
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
-	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME))
+	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
 	$(call BUILDCTL)
 	$(call PUSHED_FILE_TRUE)
 
@@ -676,7 +677,7 @@ $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:final-minimal-images
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): IMAGE_TARGET=final
 $(ALL_FINAL_MINIMAL_IMAGES_TARGETS): builder-minimal-images-$$(VARIANT_SHORT_NAME)
 	@printf "\n\nBuilding $(VARIANT_SHORT_NAME) final stage\n\n"
-	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME))
+	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
 	$(call BUILDCTL)
 
 $(ALL_PACKAGES_EXPORT_MINIMAL_IMAGES_TARGETS): VARIANT_SHORT_NAME=$(@:packages-export-minimal-images-%=%)
@@ -770,14 +771,12 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
-# Used in the quarterly minimal image rebuild prowjob. It adapted the existing create_pr script.
-.PHONY: create-rebuild-pr
-create-rebuild-pr: IMAGE_REBUILD_BRANCH=rebuild-all-minimal-images
-create-rebuild-pr: 
-	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO_TAG_FILE' $(IMAGE_REBUILD_BRANCH)
-
 .PHONY: update
-update: buildkit-check open-pr-check $(UPDATE_TARGETS)
+update: SECURITY?=--security
+update:
+	buildkit-check \
+	open-pr-check \
+	$(UPDATE_TARGETS)
 
 .PHONY: update-base-image-other-repos
 update-base-image-other-repos:
@@ -786,10 +785,13 @@ update-base-image-other-repos:
 .PHONY: all
 all: release
 
-# Updates all tags in the EKS_DISTRO_TAG_FILE to null. If merged will rebuild all Minimal Images
-.PHONY: rebuild-minimal-images
-rebuild-minimal-images:
-	./minimal-image-rebuilder.sh
+##@ Update targets without --security flag, for quarterly rebuilding of minimal image
+.PHONY: quarterly-update
+quarterly-update: SECURITY?=
+quarterly-update:
+	buildkit-check \
+	open-pr-check \
+	$(UPDATE_TARGETS)
 
 ##@ Local Targets
 

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 set -e
 set -o pipefail
 set -x
@@ -23,17 +22,18 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 IMAGE_NAME="$1"
 AL_TAG="$2"
 NAME_FOR_TAG_FILE="$3"
+SECURITY="${4:-}"
 
 if [[ $IMAGE_NAME == *-builder ]]; then
-    # ignore checking builder images
-    exit 0
+	# ignore checking builder images
+	exit 0
 fi
 
 BASE_IMAGE_TAG="$(yq e ".al$AL_TAG.\"$NAME_FOR_TAG_FILE\"" $SCRIPT_ROOT/../EKS_DISTRO_TAG_FILE.yaml)"
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME:$BASE_IMAGE_TAG
 mkdir -p check-update
 
-cat << EOF > check-update/Dockerfile
+cat <<EOF >check-update/Dockerfile
 FROM $BASE_IMAGE AS base_image
 
 FROM public.ecr.aws/amazonlinux/amazonlinux:$AL_TAG as builder
@@ -44,9 +44,9 @@ COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 
 RUN set -x && \
     if grep -q "2023" "/etc/os-release"; then \
-        yum check-update --security --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
+        yum check-update $SECURITY --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     else \
-        yum check-update --security  > ./check_update_output; echo \$? > ./return_value; \    
+        yum check-update $SECURITY  > ./check_update_output; echo \$? > ./return_value; \    
     fi && \
     cat ./check_update_output | awk '/^$/,0' | awk '{print \$1}' > ./update_packages
 
@@ -57,29 +57,29 @@ COPY --from=builder ./update_packages ./update_packages
 EOF
 
 $SCRIPT_ROOT/../scripts/buildkit.sh build --frontend dockerfile.v0 \
-         --opt platform=linux/amd64 \
-         --opt filename=./check-update/Dockerfile \
-         --local context=. \
-         --progress plain \
-         --output type=local,dest=/tmp/${IMAGE_NAME} \
-    || {
-            mkdir -p /tmp/${IMAGE_NAME}
-            echo "100" > /tmp/${IMAGE_NAME}/return_value
-            echo "" > /tmp/${IMAGE_NAME}/update_packages
-        }
+	--opt platform=linux/amd64 \
+	--opt filename=./check-update/Dockerfile \
+	--local context=. \
+	--progress plain \
+	--output type=local,dest=/tmp/${IMAGE_NAME} ||
+	{
+		mkdir -p /tmp/${IMAGE_NAME}
+		echo "100" >/tmp/${IMAGE_NAME}/return_value
+		echo "" >/tmp/${IMAGE_NAME}/update_packages
+	}
 
 RETURN_STATUS=$(cat /tmp/${IMAGE_NAME}/return_value)
 
 if [ "$JOB_TYPE" != "periodic" ]; then
-    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
-    exit 0
+	echo "none" >./check-update/${NAME_FOR_TAG_FILE}
+	exit 0
 fi
 
 if [ $RETURN_STATUS -eq 100 ]; then
-    cat /tmp/${IMAGE_NAME}/update_packages > ${SCRIPT_ROOT}/../eks-distro-base-updates/${AL_TAG}/update_packages-${NAME_FOR_TAG_FILE}
-    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
+	cat /tmp/${IMAGE_NAME}/update_packages >${SCRIPT_ROOT}/../eks-distro-base-updates/${AL_TAG}/update_packages-${NAME_FOR_TAG_FILE}
+	echo "updates" >./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 0 ]; then
-    echo "none" > ./check-update/${NAME_FOR_TAG_FILE}
+	echo "none" >./check-update/${NAME_FOR_TAG_FILE}
 elif [ $RETURN_STATUS -eq 1 ]; then
-    echo "error" > ./check-update/${NAME_FOR_TAG_FILE}
+	echo "error" >./check-update/${NAME_FOR_TAG_FILE}
 fi

@@ -3,6 +3,6 @@
 
 /override/root/../scripts/buildkit_check.sh
 printf "Building standard eks-distro-base\n\n"
-./check_update.sh eks-distro-base 2 eks-distro-base
-/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.base --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 --progress plain --local dockerfile=./ --local context=. --opt target=final --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-base:test-tag,localhost:5000/eks-distro-base:latest,localhost:5000/eks-distro-base:latest.2,localhost:5000/eks-distro-base:latest-al2\",push=true
+./check_update.sh eks-distro-base 2 eks-distro-base --security
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.base --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BASE_IMAGE=public.ecr.aws/amazonlinux/amazonlinux:2 --progress plain --local dockerfile=./ --local context=. --opt target=final  --export-cache type=inline   --output type=image,oci-mediatypes=true,\"name=localhost:5000/eks-distro-base:test-tag,localhost:5000/eks-distro-base:latest,localhost:5000/eks-distro-base:latest.2,localhost:5000/eks-distro-base:latest-al2\",push=true
 echo true > /override/root/eks-distro-base-pushed
