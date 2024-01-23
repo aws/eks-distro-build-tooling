@@ -602,7 +602,6 @@ standard-images: IMAGE_METADATA_FILE=
 standard-images: PLATFORMS?=linux/amd64,linux/arm64
 # tag al2 build with latest.2 and latest for backward compat
 standard-images: LATEST=$(call STANDARD_LATEST)
-standard-images: var-value-SECURITY
 standard-images: buildkit-check
 	@printf "Building standard eks-distro-base\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_NAME),$(AL_TAG),$(IMAGE_NAME),$(SECURITY))
@@ -772,12 +771,8 @@ release: buildkit-check $(IMAGE_TARGETS)
 create-pr: $(CREATE_PR_TARGETS)
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
-.PHONY: echo
-echo:
-
 .PHONY: update
 update: SECURITY?=--security
-update: var-value-SECURITY \
 	buildkit-check \
 	open-pr-check \
 	$(UPDATE_TARGETS)
@@ -792,7 +787,6 @@ all: release
 ##@ Update targets without --security flag, for quarterly rebuilding of minimal image
 .PHONY: quarterly-update
 quarterly-update: SECURITY?=
-quarterly-update: var-value-SECURITY \
 	buildkit-check \
 	open-pr-check \
 	$(UPDATE_TARGETS)
