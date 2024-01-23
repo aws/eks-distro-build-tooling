@@ -12043,7 +12043,7 @@
 -rwxr-xr-x    68KiB /usr/bin/db_upgrade
 -rwxr-xr-x    68KiB /usr/bin/db_verify
 -rwxr-xr-x    67KiB /usr/bin/dbus-cleanup-sockets
--rwxr-xr-x   266KiB /usr/bin/dbus-daemon
+-rwxr-xr-x   267KiB /usr/bin/dbus-daemon
 -rwxr-xr-x    68KiB /usr/bin/dbus-monitor
 -rwxr-xr-x    67KiB /usr/bin/dbus-run-session
 -rwxr-xr-x    67KiB /usr/bin/dbus-send

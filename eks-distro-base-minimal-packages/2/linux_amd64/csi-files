@@ -847,7 +847,7 @@
 -rw-r--r--      84B /usr/lib64/libfreebl3.chk
 -rwxr-xr-x    12KiB /usr/lib64/libfreebl3.so
 -rw-r--r--      84B /usr/lib64/libfreeblpriv3.chk
--rwxr-xr-x   724KiB /usr/lib64/libfreeblpriv3.so
+-rwxr-xr-x   728KiB /usr/lib64/libfreeblpriv3.so
 -rwxr-xr-x    87KiB /usr/lib64/libgcc_s-7-20180712.so.1
 -rwxr-xr-x   510KiB /usr/lib64/libgcrypt.so.11.8.2
 -rwxr-xr-x    53KiB /usr/lib64/libgdbm.so.4.0.0
@@ -6275,7 +6275,7 @@
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   568KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   140KiB /var/lib/rpm/Dirnames
+-rw-r--r--   144KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name

@@ -1,8 +1,3 @@
 
-curl.x86_64
-libcurl.x86_64
-ncurses.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
-python.x86_64
-python-libs.x86_64
+nss-softokn.x86_64
+nss-softokn-freebl.x86_64

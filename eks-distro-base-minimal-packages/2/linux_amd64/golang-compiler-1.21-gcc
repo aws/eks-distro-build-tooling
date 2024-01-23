@@ -14,8 +14,8 @@ cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
 cryptsetup-libs-1.7.4-4.amzn2.x86_64
 curl-8.3.0-1.amzn2.0.5.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
-dbus-1.10.24-7.amzn2.0.3.x86_64
-dbus-libs-1.10.24-7.amzn2.0.3.x86_64
+dbus-1.10.24-7.amzn2.0.4.x86_64
+dbus-libs-1.10.24-7.amzn2.0.4.x86_64
 device-mapper-1.02.170-6.amzn2.5.x86_64
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 diffutils-3.3-5.amzn2.x86_64
@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.334-252.552.amzn2.x86_64
+kernel-headers-4.14.336-253.554.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -102,8 +102,8 @@ ncurses-libs-6.0-8.20170212.amzn2.1.7.x86_64
 nspr-4.35.0-1.amzn2.x86_64
 nss-3.90.0-2.amzn2.0.1.x86_64
 nss-pem-1.0.3-5.amzn2.x86_64
-nss-softokn-3.90.0-6.amzn2.x86_64
-nss-softokn-freebl-3.90.0-6.amzn2.x86_64
+nss-softokn-3.90.0-6.amzn2.0.1.x86_64
+nss-softokn-freebl-3.90.0-6.amzn2.0.1.x86_64
 nss-sysinit-3.90.0-2.amzn2.0.1.x86_64
 nss-tools-3.90.0-2.amzn2.0.1.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
