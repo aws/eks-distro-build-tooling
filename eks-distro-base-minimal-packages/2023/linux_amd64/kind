@@ -6,7 +6,7 @@ bash-5.2.15-1.amzn2023.0.2.x86_64
 bzip2-libs-1.0.8-6.amzn2023.0.2.x86_64
 ca-certificates-2023.2.60-1.0.amzn2023.0.3.noarch
 conntrack-tools-1.4.6-2.amzn2023.0.2.x86_64
-containerd-1.7.2-1.amzn2023.0.4.x86_64
+containerd-1.7.11-1.amzn2023.0.1.x86_64
 coreutils-8.32-30.amzn2023.0.3.x86_64
 coreutils-common-8.32-30.amzn2023.0.3.x86_64
 cracklib-2.9.6-27.amzn2023.0.2.x86_64
@@ -55,8 +55,8 @@ iptables-libs-1.8.8-3.amzn2023.0.2.x86_64
 iptables-nft-1.8.8-3.amzn2023.0.2.x86_64
 jq-1.6-10.amzn2023.0.2.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-keyutils-1.6.3-1.amzn2023.x86_64
-keyutils-libs-1.6.3-1.amzn2023.x86_64
+keyutils-1.6.3-1.amzn2023.0.1.x86_64
+keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
 kmod-libs-29-2.amzn2023.0.5.x86_64
 krb5-libs-1.21-3.amzn2023.0.3.x86_64
@@ -174,7 +174,7 @@ sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.4.x86_64
 socat-1.7.4.2-1.amzn2023.0.2.x86_64
-sqlite-libs-3.40.0-1.amzn2023.0.3.x86_64
+sqlite-libs-3.40.0-1.amzn2023.0.4.x86_64
 sudo-1.9.13-1.p2.amzn2023.0.4.x86_64
 system-release-2023.1.20230823-0.amzn2023.noarch
 systemd-252.16-1.amzn2023.0.1.x86_64

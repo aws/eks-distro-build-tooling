@@ -15,7 +15,7 @@ gnupg2-2.3.7-1.amzn2023.0.4.x86_64
 gnutls-3.8.0-377.amzn2023.0.3.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702
-keyutils-libs-1.6.3-1.amzn2023.x86_64
+keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
 krb5-libs-1.21-3.amzn2023.0.3.x86_64
 libassuan-2.5.5-1.amzn2023.0.2.x86_64
 libcbor-0.7.0-3.amzn2023.0.2.x86_64
@@ -48,7 +48,7 @@ pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 readline-8.1-2.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
-sqlite-libs-3.40.0-1.amzn2023.0.3.x86_64
+sqlite-libs-3.40.0-1.amzn2023.0.4.x86_64
 system-release-2023.1.20230823-0.amzn2023.noarch
 systemd-libs-252.16-1.amzn2023.0.1.x86_64
 tzdata-2023c-1.amzn2023.0.1.noarch

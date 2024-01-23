@@ -1,5 +1,2 @@
 
-gnutls.x86_64
-libcurl-minimal.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
+sqlite-libs.x86_64
