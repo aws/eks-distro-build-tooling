@@ -8,7 +8,7 @@ al2:
   eks-distro-minimal-base-csi: 2024-01-23-1706031419.2
   eks-distro-minimal-base-csi-ebs: 2024-01-10-1704902662.2
   eks-distro-minimal-base-haproxy: 2023-12-05-1701789420.2
-  eks-distro-minimal-base-kind: 2024-01-23-1706031419.2
+  eks-distro-minimal-base-kind: 2024-02-01-1706770899.2
   eks-distro-minimal-base-nginx: 2024-01-10-1704902662.2
   eks-distro-minimal-base-git: 2024-01-10-1704902662.2
   eks-distro-minimal-base-nsenter: 2023-10-20-1697820183.2
