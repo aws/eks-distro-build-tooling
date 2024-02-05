@@ -484,6 +484,14 @@ check_base-python-3.9() {
     fi
 }
 
+check_base-python-3.11() {
+    check_base-python3 3.11
+    if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
+        echo "pip should not exist!"
+        exit 1
+    fi
+}
+
 check_base-python-compiler() {
     local -r version="$1"
     local -r variant="$2"
@@ -521,6 +529,18 @@ check_base-python-compiler-3.9-yum() {
 
 check_base-python-compiler-3.9-gcc() {
     check_base-python-compiler 3.9 gcc
+}
+
+check_base-python-compiler-3.11-base() {
+    check_base-python-compiler 3.11 base
+}
+
+check_base-python-compiler-3.11-yum() {
+    check_base-python-compiler 3.11 yum
+}
+
+check_base-python-compiler-3.11-gcc() {
+    check_base-python-compiler 3.11 gcc
 }
 
 check_base-nodejs() {

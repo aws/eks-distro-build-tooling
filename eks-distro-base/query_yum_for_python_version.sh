@@ -18,8 +18,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-MIRROR=$(curl -s http://amazonlinux.default.amazonaws.com/2/core/latest/debuginfo/x86_64/mirror.list)
-VERSION=$(curl -s $MIRROR/repodata/primary.xml.gz | gunzip | sed -rn 's/^.*python3-debuginfo-(.*)\-[0-9].amzn.*$/\1/p' | sed '/-/!{s/$/_/}' | sort -V | sed 's/_$//' | tail -1)
+PYTHON_VERSION="$1"
+AL_TAG="$2"
+
+
+if [ "$AL_TAG" = "2023" ]; then
+    MIRROR=$(curl -s https://cdn.amazonlinux.com/al2023/core/mirrors/latest/debuginfo/x86_64/mirror.list)
+    VERSION=$(curl -s ${MIRROR}repodata/primary.xml.gz | gunzip | sed -rn "s/^.*python${PYTHON_VERSION}-debuginfo-(.*)\-[0-9].amzn.*$/\1/p" | sed '/-/!{s/$/_/}' | sort -V | sed 's/_$//' | tail -1)
+else
+    MIRROR=$(curl -s http://amazonlinux.default.amazonaws.com/2/core/latest/debuginfo/x86_64/mirror.list)
+    VERSION=$(curl -s $MIRROR/repodata/primary.xml.gz | gunzip | sed -rn "s/^.*python3-debuginfo-(.*)\-[0-9].amzn.*$/\1/p" | sed '/-/!{s/$/_/}' | sort -V | sed 's/_$//' | tail -1)
+fi
 
 if [ -f /etc/os-release ] && grep "Amazon Linux 2" /etc/os-release; then
     if [ "$(yum info python3  | grep "^Version" | cut -d: -f2 | xargs)" != "$VERSION" ]; then
