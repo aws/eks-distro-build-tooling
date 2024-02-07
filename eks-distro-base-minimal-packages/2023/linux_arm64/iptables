@@ -37,7 +37,7 @@ pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 system-release-2023.1.20230823-0.amzn2023.noarch
-systemd-libs-252.16-1.amzn2023.0.1.aarch64
+systemd-libs-252.16-1.amzn2023.0.2.aarch64
 tzdata-2023c-1.amzn2023.0.1.noarch
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
 zlib-1.2.11-33.amzn2023.0.5.aarch64

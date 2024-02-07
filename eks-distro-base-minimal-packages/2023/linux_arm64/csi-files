@@ -3124,7 +3124,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.16-1.amzn2023.0.1.so
+-rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.16-1.amzn2023.0.2.so
 -rwxr-xr-x   196KiB /usr/libexec/awk/grcat
 -rwxr-xr-x   196KiB /usr/libexec/awk/pwcat
 -rwxr-xr-x   196KiB /usr/libexec/coreutils/libstdbuf.so
