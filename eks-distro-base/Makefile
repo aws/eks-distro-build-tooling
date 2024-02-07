@@ -187,9 +187,10 @@ BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
 
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
-BASE_PYTHON_VARIANT_VERSIONS=$(if $(filter $(AL_TAG),2023),,3.7) 3.9
-PYTHON_3.7_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh)
-PYTHON_3.9_FULL_VERSION=3.9.14
+BASE_PYTHON_VARIANT_VERSIONS=$(if $(filter $(AL_TAG),2023),,3.7) 3.9 $(if $(filter $(AL_TAG),2023),3.11,)
+PYTHON_3.7_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.7" "$(AL_TAG)")
+PYTHON_3.9_FULL_VERSION?=$(if $(filter $(AL_TAG),2023),$(shell ./query_yum_for_python_version.sh "3.9" "$(AL_TAG)"),3.9.14)
+PYTHON_3.11_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.11" "$(AL_TAG)")
 
 BASE_PYTHON_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_COMPILER_VARIANT_VERSIONS),$(addsuffix -$(ver),$(BASE_PYTHON_VARIANT_VERSIONS)))
 # ************************************************************
@@ -828,13 +829,6 @@ update-make-tests-expected:
 .PHONY: var-value-%
 var-value-%:
 	@echo $($*)
-
-# Temp until merge and we change prow job
-.PHONY: minimal-images-base-python3.9
-minimal-images-base-python3.9: minimal-images-base-python-3.9
-
-.PHONY: python-3.9-compiler-images
-python-3.9-compiler-images: minimal-images-base-python-3.9
 
 
 ########### DO NOT EDIT #############################

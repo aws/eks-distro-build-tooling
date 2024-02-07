@@ -1,7 +1,7 @@
 
 .PHONY: run-buildkit-and-registry
 run-buildkit-and-registry:
-	docker run -d --name buildkitd --net host --privileged moby/buildkit:v0.10.6-rootless
+	docker run -d --name buildkitd --net host --privileged moby/buildkit:v0.12.5-rootless
 	docker run -d --name registry  --net host registry:2
 
 .PHONY: stop-buildkit-and-registry

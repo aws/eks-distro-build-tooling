@@ -103,6 +103,9 @@ COPY --link --from=python-compile-3.9-al2 /newroot-python-compiled /newroot
 # copies from the compile stage
 FROM ${BUILDER_IMAGE} as builder-python-3.9-al2023
 
+# python will installed via yum later on this stage exists to match al2 which
+# copies from the compile stage
+FROM ${BUILDER_IMAGE} as builder-python-3.11-al2023
 
 ################# BASE WITH YUM PACKAGES ######################
 # Install the base packages needed for python from yum
@@ -204,6 +207,36 @@ RUN set -x && \
     rm $NEWROOT/usr/bin/pip && \
     cleanup "python3.9-al2023-with-compiler"
 
+FROM builder-python-base as builder-python-3.11-al2023-with-compiler-false
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    install_rpm \
+        # there is cpython lib in 3.11 which dynmaically links to mpdecimal, including for completeness
+        mpdecimal \
+        python3.11 && \
+    # for the yum/gcc base image we cant change the default to python3 since it breaks yum
+    if [ ! -L $NEWROOT/usr/bin/python3 ]; then \
+        ln -s python3.11 $NEWROOT/usr/bin/python3; \
+    fi && \
+    cleanup "python3.11-al2023"
+
+
+FROM builder-python-3.11-al2023-with-compiler-false as builder-python-3.11-al2023-with-compiler-true
+
+RUN set -x && \
+    export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
+    install_rpm python3.11-setuptools python3.11-setuptools-wheel python3.11-pip python3.11-pip-wheel && \
+    # for the yum/gcc base image we cant change the default to python3 since it breaks yum
+    if [ ! -L $NEWROOT/usr/bin/pip3 ]; then \        
+        cp $NEWROOT/usr/bin/pip3.11 $NEWROOT/usr/bin/pip3; \
+        ln -s ./pip3.11 $NEWROOT/usr/bin/pip-3; \
+    fi && \
+    if [ ! -L $NEWROOT/usr/bin/pydoc3 ]; then \        
+        ln -s pydoc3.11 $NEWROOT/usr/bin/pydoc3; \
+        ln -s ./pydoc3 $NEWROOT/usr/bin/pydoc; \
+    fi && \
+    cleanup "python3.11-al2023-with-compiler"
 
 ################# BUILDER ######################
 FROM builder-python-${COMPILER_VERSION}-al${AL_TAG}-with-compiler-${IS_COMPILER} as builder
