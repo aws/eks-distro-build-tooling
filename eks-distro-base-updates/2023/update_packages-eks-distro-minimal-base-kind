@@ -1,2 +1,6 @@
 
-runc.x86_64
+pam.x86_64
+sudo.x86_64
+systemd.x86_64
+systemd-libs.x86_64
+systemd-pam.x86_64
