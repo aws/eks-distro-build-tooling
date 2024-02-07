@@ -61,12 +61,12 @@ ncurses-6.0-8.20170212.amzn2.1.7.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.7.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.7.aarch64
 nspr-4.35.0-1.amzn2.aarch64
-nss-3.90.0-2.amzn2.0.1.aarch64
+nss-3.90.0-2.amzn2.0.2.aarch64
 nss-pem-1.0.3-5.amzn2.aarch64
 nss-softokn-3.90.0-6.amzn2.0.1.aarch64
 nss-softokn-freebl-3.90.0-6.amzn2.0.1.aarch64
-nss-sysinit-3.90.0-2.amzn2.0.1.aarch64
-nss-tools-3.90.0-2.amzn2.0.1.aarch64
+nss-sysinit-3.90.0-2.amzn2.0.2.aarch64
+nss-tools-3.90.0-2.amzn2.0.2.aarch64
 nss-util-3.90.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.11.aarch64

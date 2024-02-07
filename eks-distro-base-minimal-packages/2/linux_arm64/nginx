@@ -26,7 +26,7 @@ nginx-filesystem-1.22.1-1.amzn2.0.3.noarch
 openssl-libs-1.0.2k-24.amzn2.0.11.aarch64
 openssl11-libs-1.1.1g-12.amzn2.0.19.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
-pcre2-10.23-11.amzn2.0.1.aarch64
+pcre2-10.23-11.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-14.amzn2.aarch64
 tzdata-2023c-1.amzn2.0.1.noarch

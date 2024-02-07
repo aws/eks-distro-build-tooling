@@ -1,6 +1,7 @@
 
-dbus.x86_64
-dbus-libs.x86_64
 kernel-headers.x86_64
-nss-softokn.x86_64
-nss-softokn-freebl.x86_64
+nss.x86_64
+nss-sysinit.x86_64
+nss-tools.x86_64
+pam.x86_64
+pcre2.x86_64

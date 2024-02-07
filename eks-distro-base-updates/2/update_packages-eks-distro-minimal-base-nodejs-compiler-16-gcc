@@ -1,4 +1,5 @@
 
 kernel-headers.x86_64
-nss-softokn.x86_64
-nss-softokn-freebl.x86_64
+nss.x86_64
+nss-sysinit.x86_64
+nss-tools.x86_64

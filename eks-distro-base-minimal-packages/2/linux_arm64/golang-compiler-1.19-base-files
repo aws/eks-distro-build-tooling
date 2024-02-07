@@ -12715,7 +12715,7 @@
 -rwsr-xr-x    68KiB /usr/bin/su
 -rwxr-xr-x    69KiB /usr/bin/sum
 -rwxr-xr-x    69KiB /usr/bin/sync
--rwxr-xr-x   722KiB /usr/bin/systemctl
+-rwxr-xr-x   786KiB /usr/bin/systemctl
 -rwxr-xr-x   1.6MiB /usr/bin/systemd-analyze
 -rwxr-xr-x    69KiB /usr/bin/systemd-ask-password
 -rwxr-xr-x    68KiB /usr/bin/systemd-cat

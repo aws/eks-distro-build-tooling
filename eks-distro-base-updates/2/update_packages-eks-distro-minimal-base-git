@@ -1,4 +1,3 @@
 
-libcurl.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
+nss.x86_64
+pcre2.x86_64
