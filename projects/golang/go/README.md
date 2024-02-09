@@ -34,12 +34,14 @@ TODO for WIP:
 
 ## Supported Versions
 EKS currently supports the following Golang versions:
+- [`v1.22`](./1.22/GIT_TAG)
 - [`v1.21`](./1.21/GIT_TAG)
 - [`v1.20`](./1.20/GIT_TAG)
-- [`v1.19`](./1.19/GIT_TAG)
+
 
 
 ## Deprecated Versions
+- [`v1.19`](./1.19/GIT_TAG)
 - [`v1.18`](./1.18/GIT_TAG)
 - [`v1.17`](./1.16/GIT_TAG)
 - [`v1.16`](./1.16/GIT_TAG)
