@@ -1,0 +1,35 @@
+From 7506da0af38aa307f45664f0c787b5767cc7a87f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Alejandro=20S=C3=A1ez?= <asm@redhat.com>
+Date: Thu, 22 Jun 2023 17:19:00 +0200
+Subject: [PATCH] Force gold in aarch64 until binutils 2.41 is on Fedora
+
+---
+ src/cmd/link/internal/ld/lib.go | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/src/cmd/link/internal/ld/lib.go b/src/cmd/link/internal/ld/lib.go
+index 91e2d5149c..99c305530b 100644
+--- a/src/cmd/link/internal/ld/lib.go
++++ b/src/cmd/link/internal/ld/lib.go
+@@ -1605,15 +1605,13 @@ func (ctxt *Link) hostlink() {
+ 			// https://go.dev/issue/22040
+ 			altLinker = "gold"
+ 
+-			// If gold is not installed, gcc will silently switch
+-			// back to ld.bfd. So we parse the version information
+-			// and provide a useful error if gold is missing.
++			// In both cases, switch to gold if gold is available.
+ 			name, args := flagExtld[0], flagExtld[1:]
+ 			args = append(args, "-fuse-ld=gold", "-Wl,--version")
+ 			cmd := exec.Command(name, args...)
+ 			if out, err := cmd.CombinedOutput(); err == nil {
+-				if !bytes.Contains(out, []byte("GNU gold")) {
+-					log.Fatalf("ARM64 external linker must be gold (issue #15696, 22040), but is not: %s", out)
++				if bytes.Contains(out, []byte("GNU gold")) {
++					altLinker = "gold"
+ 				}
+ 			}
+ 		}
+-- 
+2.40.1
+
