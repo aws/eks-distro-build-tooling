@@ -352,6 +352,24 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_golang.sh $GOLANG_VERSION_121 && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as golang-1.22
+ARG TARGETARCH
+ARG GOLANG_VERSION_121
+ARG GOLANG_RPM_SOURCE_DIR
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_golang.sh /
+COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.22*.rpm /tmp/x86_64/
+COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.22*.rpm /tmp/aarch64/
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_golang.sh $GOLANG_VERSION_122 && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
