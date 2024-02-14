@@ -1,13 +1,3 @@
-## START: Set by rpmautospec
-## (rpmautospec version 0.5.1)
-## RPMAUTOSPEC: autorelease, autochangelog
-%define autorelease(e:s:pb:n) %{?-p:0.}%{lua:
-    release_number = 1;
-    base_release_number = tonumber(rpm.expand("%{?-b*}%{!?-b:1}"));
-    print(release_number + base_release_number - 1);
-}%{?-e:.%{-e*}}%{?-s:.%{-s*}}%{!?-n:%{?dist}}
-## END: Set by rpmautospec
-
 %bcond_with bootstrap
 # build ids are not currently generated:
 # https://code.google.com/p/go/issues/detail?id=5238
@@ -114,10 +104,10 @@
  
 Name:           golang
 Version:        %{go_version}
-Release:        %autorelease
+Release:        %{?_buildid}%{?dist}.eks
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
-License:        BSD-3-Clause AND LicenseRef-Fedora-Public-Domain
+License:        BSD and Public Domain
 URL:            https://go.dev
 Source0:        https://go.dev/dl/go%{go_source}.src.tar.gz
 # make possible to override default traceback level at build time by setting build tag rpm_crashtraceback
