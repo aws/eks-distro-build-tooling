@@ -161,20 +161,24 @@ func bumpRelease(gClient git.Client, r *Release) error {
 
 	content, err := gClient.ReadFile(releasePath)
 	if err != nil {
-		logger.Error(err, "Reading file", "file", releasePath)
-		return err
+		if !strings.Contains(err.Error(), "file not found") {
+			logger.Error(err, "Reading file", "file", releasePath)
+			return err
+		}
+		r.Release = 0
+	} else {
+		// Check if there is a new line character at the end of the file, if so take all but the newline
+		if content[len(content)-1:] == "\n" {
+			content = content[0 : len(content)-1]
+		}
+		cr, err := strconv.Atoi(content)
+		if err != nil {
+			logger.Error(err, "Converting current release to int")
+			return err
+		}
+		// Increment release
+		r.Release = cr + 1
 	}
-	// Check if there is a new line character at the end of the file, if so take all but the newline
-	if content[len(content)-1:] == "\n" {
-		content = content[0 : len(content)-1]
-	}
-	cr, err := strconv.Atoi(content)
-	if err != nil {
-		logger.Error(err, "Converting current release to int")
-		return err
-	}
-	// Increment release
-	r.Release = cr + 1
 	logger.V(4).Info("release bumped to", "release", r.Release)
 
 	return nil
@@ -187,7 +191,13 @@ func updateRelease(gClient git.Client, r *Release) error {
 	releaseContent := fmt.Sprintf("%d", r.ReleaseNumber())
 	logger.V(4).Info("Update RELEASE", "path", releasePath, "content", releaseContent)
 	if err := gClient.ModifyFile(releasePath, []byte(releaseContent)); err != nil {
-		return err
+		if !strings.Contains(err.Error(), "file not found") {
+			return err
+		}
+		releaseContent = fmt.Sprintf("%d", 0)
+		if err := gClient.CreateFile(releasePath, []byte(releaseContent)); err != nil {
+			return err
+		}
 	}
 	if err := gClient.Add(releasePath); err != nil {
 		logger.Error(err, "git add", "file", releasePath)
@@ -269,7 +279,7 @@ func updateGoSpec(gClient git.Client, r *Release) error {
 
 func addTempFilesForNewMinorVersion(gClient git.Client, r *Release) error {
 	// Add golang.spec
-	specFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
+	specFilePath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
 	rf, err := gClient.ReadFile(newReleaseFile)
 	if err != nil {
 		logger.Error(err, "Reading newRelease.txt file")
