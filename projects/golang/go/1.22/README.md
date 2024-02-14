@@ -1,17 +1,17 @@
 # EKS Golang 1.22
 
-Current Release: `1`
+Current Release: `0`
 
 Tracking Tag: `go1.22.0`
 
 ### Artifacts:  
 |Arch|Artifact|sha|
 |:---:|:---:|:---:|
-|noarch|[golang-src-1.22.0-1.amzn2.eks.noarch.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/x86_64/RPMS/noarch/golang-src-1.22.0-1.amzn2.eks.noarch.rpm)|[golang-src-1.22.0-1.amzn2.eks.noarch.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/x86_64/RPMS/noarch/golang-src-1.22.0-1.amzn2.eks.noarch.rpm.sha256)|
-|x86_64|[golang-1.22.0-1.amzn2.eks.x86_64.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/x86_64/RPMS/x86_64/golang-1.22.0-1.amzn2.eks.x86_64.rpm)|[golang-1.22.0-1.amzn2.eks.x86_64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/x86_64/RPMS/x86_64/golang-1.22.0-1.amzn2.eks.x86_64.rpm.sha256)|
-|aarch64|[golang-1.22.0-1.amzn2.eks.aarch64.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/aarch64/RPMS/aarch64/golang-1.22.0-1.amzn2.eks.aarch64.rpm)|[golang-1.22.0-1.amzn2.eks.aarch64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/aarch64/RPMS/aarch64/golang-1.22.0-1.amzn2.eks.aarch64.rpm.sha256)|
-|arm64|[go1.22.0.linux-arm64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/archives/linux/arm64/go1.22.0.linux-arm64.tar.gz)|[go1.22.0.linux-arm64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/archives/linux/arm64/go1.22.0.linux-arm64.tar.gz.sha256)|
-|amd64|[go1.22.0.linux-amd64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/archives/linux/amd64/go1.22.0.linux-amd64.tar.gz)|[go1.22.0.linux-amd64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/1/archives/linux/amd64/go1.22.0.linux-amd64.tar.gz.sha256)|
+|noarch|[golang-src-1.22.0-0.amzn2.eks.noarch.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/x86_64/RPMS/noarch/golang-src-1.22.0-0.amzn2.eks.noarch.rpm)|[golang-src-1.22.0-0.amzn2.eks.noarch.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/x86_64/RPMS/noarch/golang-src-1.22.0-0.amzn2.eks.noarch.rpm.sha256)|
+|x86_64|[golang-1.22.0-0.amzn2.eks.x86_64.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/x86_64/RPMS/x86_64/golang-1.22.0-0.amzn2.eks.x86_64.rpm)|[golang-1.22.0-0.amzn2.eks.x86_64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/x86_64/RPMS/x86_64/golang-1.22.0-0.amzn2.eks.x86_64.rpm.sha256)|
+|aarch64|[golang-1.22.0-0.amzn2.eks.aarch64.rpm](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/aarch64/RPMS/aarch64/golang-1.22.0-0.amzn2.eks.aarch64.rpm)|[golang-1.22.0-0.amzn2.eks.aarch64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/aarch64/RPMS/aarch64/golang-1.22.0-0.amzn2.eks.aarch64.rpm.sha256)|
+|arm64|[go1.22.0.linux-arm64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/archives/linux/arm64/go1.22.0.linux-arm64.tar.gz)|[go1.22.0.linux-arm64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/archives/linux/arm64/go1.22.0.linux-arm64.tar.gz.sha256)|
+|amd64|[go1.22.0.linux-amd64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/archives/linux/amd64/go1.22.0.linux-amd64.tar.gz)|[go1.22.0.linux-amd64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.22.0/releases/0/archives/linux/amd64/go1.22.0.linux-amd64.tar.gz.sha256)|
 
 
 ### ARM64 Builds
