@@ -1,0 +1,30 @@
+From 52d9cfec8124a9c7382bed5284246d9b18a21eb4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Alejandro=20S=C3=A1ez?= <asm@redhat.com>
+Date: Wed, 16 Aug 2023 07:06:38 +0200
+Subject: [PATCH] Modify go.env
+
+Change GOPROXY, GOSUMDB, and GOTOOLCHAIN
+---
+ go.env | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/go.env b/go.env
+index 6ff2b921d4..087208cd7c 100644
+--- a/go.env
++++ b/go.env
+@@ -4,9 +4,9 @@
+ 
+ # Use the Go module mirror and checksum database by default.
+ # See https://proxy.golang.org for details.
+-GOPROXY=https://proxy.golang.org,direct
+-GOSUMDB=sum.golang.org
++GOPROXY=direct
++GOSUMDB=off
+ 
+ # Automatically download newer toolchains as directed by go.mod files.
+ # See https://go.dev/doc/toolchain for details.
+-GOTOOLCHAIN=auto
++GOTOOLCHAIN=local
+-- 
+2.41.0
+
