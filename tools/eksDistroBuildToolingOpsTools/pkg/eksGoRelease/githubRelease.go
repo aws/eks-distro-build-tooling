@@ -279,7 +279,7 @@ func updateGoSpec(gClient git.Client, r *Release) error {
 
 func addTempFilesForNewMinorVersion(gClient git.Client, r *Release) error {
 	// Add golang.spec
-	specFilePath := fmt.Sprintf(rpmSourcePathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
+	specFilePath := fmt.Sprintf(specPathFmt, constants.EksGoProjectPath, r.GoMinorVersion(), goSpecFile)
 	rf, err := gClient.ReadFile(newReleaseFile)
 	if err != nil {
 		logger.Error(err, "Reading newRelease.txt file")
