@@ -354,7 +354,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 
 FROM ${BUILDER_IMAGE} as golang-1.22
 ARG TARGETARCH
-ARG GOLANG_VERSION_121
+ARG GOLANG_VERSION_122
 ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
