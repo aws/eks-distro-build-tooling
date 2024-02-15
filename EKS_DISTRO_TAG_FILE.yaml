@@ -25,12 +25,15 @@ al2:
   eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2024-02-07-1707321026.2
   eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2024-02-07-1707321026.2
   eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.21-base: 1.21-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.21-yum: 1.21-yum-2024-02-07-1707321026.2
-  eks-distro-minimal-base-golang-compiler-1.21-gcc: 1.21-gcc-2024-02-07-1707321026.2
+  eks-distro-minimal-base-golang-compiler-1.20-base: null
+  eks-distro-minimal-base-golang-compiler-1.20-yum: null
+  eks-distro-minimal-base-golang-compiler-1.20-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.21-base: null
+  eks-distro-minimal-base-golang-compiler-1.21-yum: null
+  eks-distro-minimal-base-golang-compiler-1.21-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.22-base: null
+  eks-distro-minimal-base-golang-compiler-1.22-yum: null
+  eks-distro-minimal-base-golang-compiler-1.22-gcc: null
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2024-02-07-1707321026.2
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2024-02-07-1707321026.2
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2024-02-07-1707321026.2
@@ -70,12 +73,15 @@ al2023:
   eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2024-02-07-1707321052.2023
   eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2024-02-07-1707321052.2023
   eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.21-base: 1.21-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.21-yum: 1.21-yum-2024-02-07-1707321052.2023
-  eks-distro-minimal-base-golang-compiler-1.21-gcc: 1.21-gcc-2024-02-07-1707321052.2023
+  eks-distro-minimal-base-golang-compiler-1.20-base: null
+  eks-distro-minimal-base-golang-compiler-1.20-yum: null
+  eks-distro-minimal-base-golang-compiler-1.20-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.21-base: null
+  eks-distro-minimal-base-golang-compiler-1.21-yum: null
+  eks-distro-minimal-base-golang-compiler-1.21-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.22-base: null
+  eks-distro-minimal-base-golang-compiler-1.22-yum: null
+  eks-distro-minimal-base-golang-compiler-1.22-gcc: null
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2024-01-09-1704783668.2023
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2024-01-23-1706036560.2023
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2024-02-07-1707321052.2023
