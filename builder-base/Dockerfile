@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Intentionally redo-ing yum installs in all layers to keep all
-# layers independent, reducing rebuilds and better using 
+# layers independent, reducing rebuilds and better using
 # image and buildkitd cache
 
 ARG BUILDER_IMAGE
@@ -33,7 +33,7 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./checksums/upx-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
-    /install_upx.sh && \    
+    /install_upx.sh && \
     /remove_yum_packages.sh
 
 FROM ${BUILDER_IMAGE} as aws-cli
@@ -168,7 +168,7 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_nodejs.sh \
     generate-attribution/package*.json  \
     generate-attribution/generate-attribution  \
-    generate-attribution/generate-attribution-file.js \ 
+    generate-attribution/generate-attribution-file.js \
     generate-attribution/LICENSE-2.0.txt \
     ./checksums/nodejs-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -354,7 +354,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 
 FROM ${BUILDER_IMAGE} as golang-1.22
 ARG TARGETARCH
-ARG GOLANG_VERSION_121
+ARG GOLANG_VERSION_122
 ARG GOLANG_RPM_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
@@ -490,6 +490,22 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_licenses.sh
 
+FROM ${BUILDER_IMAGE} as go-licenses-1.22
+ARG TARGETARCH
+ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
+COPY --link --from=golang-1.22 /golang-1.22 /
+COPY ./scripts/common_vars.sh \
+    ./scripts/install_go_licenses.sh /
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+    --mount=type=secret,id=netrc,target=/root/.netrc \
+    /install_go_licenses.sh
+
 FROM ${BUILDER_IMAGE} as go-vuln-check
 ARG TARGETARCH
 ARG GOPROXY
@@ -539,6 +555,8 @@ COPY --link --from=golang-1.19 /golang-1.19 /
 COPY --link --from=go-licenses-1.19 /go-licenses-1.19 /
 COPY --link --from=golang-1.21 /golang-1.21 /
 COPY --link --from=go-licenses-1.21 /go-licenses-1.21 /
+COPY --link --from=golang-1.22 /golang-1.22 /
+COPY --link --from=go-licenses-1.22 /go-licenses-1.22 /
 COPY --link --from=go-vuln-check /go-vuln-check /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
