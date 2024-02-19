@@ -63,8 +63,8 @@ ncurses-libs-6.0-8.20170212.amzn2.1.7.x86_64
 nspr-4.35.0-1.amzn2.x86_64
 nss-3.90.0-2.amzn2.0.2.x86_64
 nss-pem-1.0.3-5.amzn2.x86_64
-nss-softokn-3.90.0-6.amzn2.0.1.x86_64
-nss-softokn-freebl-3.90.0-6.amzn2.0.1.x86_64
+nss-softokn-3.90.0-6.amzn2.0.2.x86_64
+nss-softokn-freebl-3.90.0-6.amzn2.0.2.x86_64
 nss-sysinit-3.90.0-2.amzn2.0.2.x86_64
 nss-tools-3.90.0-2.amzn2.0.2.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
