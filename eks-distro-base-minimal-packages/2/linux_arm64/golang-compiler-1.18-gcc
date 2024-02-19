@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.aarch64
 groff-base-1.22.2-8.amzn2.0.2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 info-5.1-5.amzn2.aarch64
-kernel-headers-4.14.336-255.557.amzn2.aarch64
+kernel-headers-4.14.336-256.559.amzn2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
@@ -99,8 +99,8 @@ ncurses-libs-6.0-8.20170212.amzn2.1.7.aarch64
 nspr-4.35.0-1.amzn2.aarch64
 nss-3.90.0-2.amzn2.0.2.aarch64
 nss-pem-1.0.3-5.amzn2.aarch64
-nss-softokn-3.90.0-6.amzn2.0.1.aarch64
-nss-softokn-freebl-3.90.0-6.amzn2.0.1.aarch64
+nss-softokn-3.90.0-6.amzn2.0.2.aarch64
+nss-softokn-freebl-3.90.0-6.amzn2.0.2.aarch64
 nss-sysinit-3.90.0-2.amzn2.0.2.aarch64
 nss-tools-3.90.0-2.amzn2.0.2.aarch64
 nss-util-3.90.0-1.amzn2.aarch64

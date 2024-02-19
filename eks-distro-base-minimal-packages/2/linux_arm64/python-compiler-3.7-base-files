@@ -2314,7 +2314,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/nss/unsupported-tools/btoa
 -rwxr-xr-x   133KiB /usr/lib64/nss/unsupported-tools/dbtool
 -rwxr-xr-x   134KiB /usr/lib64/nss/unsupported-tools/derdump
--rwxr-xr-x   471KiB /usr/lib64/nss/unsupported-tools/fipstest
+-rwxr-xr-x   470KiB /usr/lib64/nss/unsupported-tools/fipstest
 -rwxr-xr-x   134KiB /usr/lib64/nss/unsupported-tools/listsuites
 -rwxr-xr-x   135KiB /usr/lib64/nss/unsupported-tools/ocspclnt
 -rwxr-xr-x   134KiB /usr/lib64/nss/unsupported-tools/pp
