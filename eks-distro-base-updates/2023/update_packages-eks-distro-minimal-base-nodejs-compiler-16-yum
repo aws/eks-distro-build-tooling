@@ -1,2 +1,4 @@
 
-sqlite-libs.x86_64
+expat.x86_64
+gnutls.x86_64
+openssl-libs.x86_64

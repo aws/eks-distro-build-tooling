@@ -12,7 +12,7 @@ device-mapper-1.02.185-1.amzn2023.0.4.x86_64
 device-mapper-libs-1.02.185-1.amzn2023.0.4.x86_64
 e2fsprogs-1.46.5-2.amzn2023.0.2.x86_64
 e2fsprogs-libs-1.46.5-2.amzn2023.0.2.x86_64
-expat-2.5.0-1.amzn2023.0.2.x86_64
+expat-2.5.0-1.amzn2023.0.3.x86_64
 filesystem-3.14-5.amzn2023.0.3.x86_64
 fuse-libs-2.9.9-13.amzn2023.0.2.x86_64
 gawk-5.1.0-3.amzn2023.0.3.x86_64
@@ -72,7 +72,7 @@ ncurses-base-6.2-4.20200222.amzn2023.0.5.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.5.x86_64
 nfs-utils-2.5.4-2.rc3.amzn2023.0.3.x86_64
 openldap-2.4.57-6.amzn2023.0.6.x86_64
-openssl-libs-3.0.8-1.amzn2023.0.10.x86_64
+openssl-libs-3.0.8-1.amzn2023.0.11.x86_64
 p11-kit-0.24.1-2.amzn2023.0.3.x86_64
 pam-1.5.1-8.amzn2023.0.4.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64
