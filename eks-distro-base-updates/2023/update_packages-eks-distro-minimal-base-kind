@@ -1,6 +1,4 @@
 
-pam.x86_64
-sudo.x86_64
-systemd.x86_64
-systemd-libs.x86_64
-systemd-pam.x86_64
+expat.x86_64
+gnutls.x86_64
+openssl-libs.x86_64

@@ -24,7 +24,7 @@ elfutils-debuginfod-client-0.188-3.amzn2023.0.2.aarch64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
 elfutils-libelf-0.188-3.amzn2023.0.2.aarch64
 elfutils-libs-0.188-3.amzn2023.0.2.aarch64
-expat-2.5.0-1.amzn2023.0.2.aarch64
+expat-2.5.0-1.amzn2023.0.3.aarch64
 file-5.39-7.amzn2023.0.4.aarch64
 file-libs-5.39-7.amzn2023.0.4.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
@@ -44,7 +44,7 @@ glibc-gconv-extra-2.34-52.amzn2023.0.7.aarch64
 glibc-minimal-langpack-2.34-52.amzn2023.0.7.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gnupg2-2.3.7-1.amzn2023.0.4.aarch64
-gnutls-3.8.0-377.amzn2023.0.3.aarch64
+gnutls-3.8.0-378.amzn2023.0.4.aarch64
 go-srpm-macros-3.2.0-37.amzn2023.noarch
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-63977702
@@ -54,9 +54,9 @@ guile22-2.2.7-2.amzn2023.0.3.aarch64
 gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
-kernel-headers-6.1.75-99.163.amzn2023.aarch64
+kernel-headers-6.1.77-99.164.amzn2023.aarch64
 kernel-srpm-macros-1.0-14.amzn2023.0.2.noarch
-keyutils-libs-1.6.3-1.amzn2023.aarch64
+keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
 krb5-libs-1.21-3.amzn2023.0.3.aarch64
 less-608-2.amzn2023.0.1.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
@@ -130,7 +130,7 @@ openblas-srpm-macros-2-9.amzn2023.0.2.noarch
 openldap-2.4.57-6.amzn2023.0.6.aarch64
 openssh-8.7p1-8.amzn2023.0.9.aarch64
 openssh-clients-8.7p1-8.amzn2023.0.9.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.10.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.11.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.aarch64
 package-notes-srpm-macros-0.4-18.amzn2023.0.5.noarch
