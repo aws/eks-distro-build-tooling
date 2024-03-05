@@ -1,48 +1,48 @@
 al2:
-  eks-distro-base: 2024-02-19-1708369260.2
+  eks-distro-base: 2024-03-05-1709647626.2
   eks-distro-minimal-base: 2023-09-06-1694026927.2
   eks-distro-minimal-base-nonroot: 2023-09-06-1694026927.2
   eks-distro-minimal-base-glibc: 2023-10-20-1697820183.2
   eks-distro-minimal-base-iptables: 2023-11-02-1698930336.2
   eks-distro-minimal-base-docker-client: 2023-10-20-1697820183.2
-  eks-distro-minimal-base-csi: 2024-02-19-1708369260.2
-  eks-distro-minimal-base-csi-ebs: 2024-01-10-1704902662.2
-  eks-distro-minimal-base-haproxy: 2023-12-05-1701789420.2
-  eks-distro-minimal-base-kind: 2024-02-26-1708930875.2
-  eks-distro-minimal-base-nginx: 2024-02-07-1707321026.2
-  eks-distro-minimal-base-git: 2024-02-07-1707321026.2
+  eks-distro-minimal-base-csi: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-csi-ebs: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-haproxy: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-kind: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-nginx: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-git: 2024-03-05-1709647626.2
   eks-distro-minimal-base-nsenter: 2023-10-20-1697820183.2
-  eks-distro-minimal-base-python-3.7: 3.7-2024-01-10-1704902662.2
-  eks-distro-minimal-base-python-3.9: 3.9-2024-01-10-1704902662.2
+  eks-distro-minimal-base-python-3.7: 3.7-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-3.9: 3.9-2024-03-05-1709647626.2
   eks-distro-minimal-base-python-3.11: null
   eks-distro-minimal-base-nodejs-16: 16-2023-10-20-1697820183.2
-  eks-distro-minimal-base-compiler-base: 2024-02-19-1708369260.2
-  eks-distro-minimal-base-compiler-yum: yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-compiler-gcc: gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.18-base: 1.18-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.18-yum: 1.18-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.18-gcc: 1.18-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.21-base: 1.21-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.21-yum: 1.21-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.21-gcc: 1.21-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.22-base: 1.22-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.22-yum: 1.22-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-golang-compiler-1.22-gcc: 1.22-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-nodejs-compiler-16-base: 16-2024-02-19-1708369260.2
-  eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.7-base: 3.7-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.7-yum: 3.7-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.7-gcc: 3.7-gcc-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.9-base: 3.9-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.9-yum: 3.9-yum-2024-02-19-1708369260.2
-  eks-distro-minimal-base-python-compiler-3.9-gcc: 3.9-gcc-2024-02-19-1708369260.2
+  eks-distro-minimal-base-compiler-base: 2024-03-05-1709647626.2
+  eks-distro-minimal-base-compiler-yum: yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-compiler-gcc: gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.18-base: 1.18-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.18-yum: 1.18-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.18-gcc: 1.18-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.19-base: 1.19-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.19-yum: 1.19-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.19-gcc: 1.19-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.20-base: 1.20-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.20-yum: 1.20-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.20-gcc: 1.20-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.21-base: 1.21-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.21-yum: 1.21-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.21-gcc: 1.21-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.22-base: 1.22-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.22-yum: 1.22-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-golang-compiler-1.22-gcc: 1.22-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-nodejs-compiler-16-base: 16-2024-03-05-1709647626.2
+  eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.7-base: 3.7-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.7-yum: 3.7-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.7-gcc: 3.7-gcc-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.9-base: 3.9-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.9-yum: 3.9-yum-2024-03-05-1709647626.2
+  eks-distro-minimal-base-python-compiler-3.9-gcc: 3.9-gcc-2024-03-05-1709647626.2
   eks-distro-minimal-base-python-compiler-3.11-base: null
   eks-distro-minimal-base-python-compiler-3.11-yum: null
   eks-distro-minimal-base-python-compiler-3.11-gcc: null

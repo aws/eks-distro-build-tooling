@@ -25,7 +25,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--   6.9KiB /etc/ld.so.cache
+-rw-r--r--   7.0KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--     229B /etc/nsswitch.conf
@@ -718,6 +718,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libplc4.so
 -rwxr-xr-x    16KiB /usr/lib64/libplds4.so
 -rwxr-xr-x    41KiB /usr/lib64/libpopt.so.0.0.0
+-rwxr-xr-x    72KiB /usr/lib64/libpsl.so.5.3.5
 -rwxr-xr-x    16KiB /usr/lib64/libpsx.so.2.54
 -rwxr-xr-x   146KiB /usr/lib64/libpthread-2.26.so
 -rwxr-xr-x   279KiB /usr/lib64/libreadline.so.6.2
@@ -928,10 +929,12 @@
 -rw-r--r--   8.6KiB /usr/share/licenses/libidn2-2.3.0/COPYING.unicode
 -rw-r--r--    18KiB /usr/share/licenses/libidn2-2.3.0/COPYINGv2
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.41.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libpsl-0.21.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/nss-pem-1.0.3/COPYING
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
+-rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    30KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--   1.4KiB /usr/share/locale/af/LC_MESSAGES/grep.mo
@@ -1523,6 +1526,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   849KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100
@@ -3459,14 +3463,14 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   372KiB /var/lib/rpm/Basenames
+-rw-r--r--   376KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   128KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   3.7MiB /var/lib/rpm/Packages
+-rw-r--r--   3.8MiB /var/lib/rpm/Packages
 -rw-r--r--    48KiB /var/lib/rpm/Providename
 -rw-r--r--    36KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
@@ -3576,6 +3580,7 @@ lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1
 lrwxrwxrwx      16B /usr/lib64/libpopt.so.0	libpopt.so.0.0.0
+lrwxrwxrwx      15B /usr/lib64/libpsl.so.5	libpsl.so.5.3.5
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2	libpsx.so.2.54
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.6	libreadline.so.6.2
