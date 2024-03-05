@@ -155,6 +155,12 @@ Provides: bundled(golang(golang.org/x/tools)) = 0.3.1.0.20230118190848.070db2996
 Requires:       %{name}-bin = %{version}-%{release}
 Requires:       %{name}-src = %{version}-%{release}
 
+Patch1:       0001-go-1.20.14-eks-crypto-x509-make-sure-pub-key-.patch
+Patch2:       0002-go-1.20.14-eks-net-textproto-mime-multipart-a.patch
+Patch3:       0003-go-1.20.14-eks-net-http-net-http-cookiejar-av.patch
+Patch4:       0004-go-1.20.14-eks-html-template-escape-additiona.patch
+Patch5:       0005-go-1.20.14-eks-net-mail-properly-handle-speci.patch
+
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
 Patch104:       0104-cmd-link-use-gold-on-ARM-ARM64-only-if-gold-is-avail.patch
@@ -534,6 +540,10 @@ fi
 %endif
 
 %changelog
+* Tue Mar 05 2024 Cameron Rozean <rcrozean@amazon.com> - 1.20.14-16
+- Includes security fixes for CVE-2024-24783, CVE-2023-45290, CVE-2023-45289
+- CVE-2024-24784, and CVE-2024-24785
+
 * Thu Jan 11 2024 Justin Ngo <justngo@amazon.com> - 1.20.13-1
 - Bump tracking patch version to 1.20.13 from 1.20.12
 
