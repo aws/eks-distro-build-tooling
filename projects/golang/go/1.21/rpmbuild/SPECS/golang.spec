@@ -527,6 +527,9 @@ fi
 %endif
 
 %changelog
+* Tue Mar 05 2024 Cameron Rozean <rcrozean@amazon.com> - 1.21.8-9
+- Bump tracking patch version to 1.21.8 from 1.21.7
+
 * Thu Jan 11 2024 Justin Ngo <justngo@amazon.com> - 1.21.6-1
 - Bump tracking patch version to 1.21.6 from 1.21.5
 
