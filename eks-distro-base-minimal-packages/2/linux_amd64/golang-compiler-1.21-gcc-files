@@ -12908,7 +12908,7 @@
 -rwxr-xr-x   1.2MiB /usr/bin/ld.bfd
 -rwxr-xr-x   2.9MiB /usr/bin/ld.gold
 -rwxr-xr-x   5.4KiB /usr/bin/ldd
--rwxr-xr-x   159KiB /usr/bin/less
+-rwxr-xr-x   151KiB /usr/bin/less
 -rwxr-xr-x    12KiB /usr/bin/lessecho
 -rwxr-xr-x    17KiB /usr/bin/lesskey
 -rwxr-xr-x   2.3KiB /usr/bin/lesspipe.sh
@@ -14243,6 +14243,7 @@
 -rw-r--r--   2.6KiB /usr/include/rdma/bnxt_re-abi.h
 -rw-r--r--   2.4KiB /usr/include/rdma/cxgb3-abi.h
 -rw-r--r--   2.6KiB /usr/include/rdma/cxgb4-abi.h
+-rw-r--r--   2.9KiB /usr/include/rdma/efa-abi.h
 -rw-r--r--   6.4KiB /usr/include/rdma/hfi/hfi1_ioctl.h
 -rw-r--r--   8.9KiB /usr/include/rdma/hfi/hfi1_user.h
 -rw-r--r--   1.9KiB /usr/include/rdma/hns-abi.h
@@ -15525,6 +15526,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libplc4.so
 -rwxr-xr-x    16KiB /usr/lib64/libplds4.so
 -rwxr-xr-x    41KiB /usr/lib64/libpopt.so.0.0.0
+-rwxr-xr-x    72KiB /usr/lib64/libpsl.so.5.3.5
 -rwxr-xr-x    16KiB /usr/lib64/libpsx.so.2.54
 -rwxr-xr-x    78KiB /usr/lib64/libpth.so.20.0.27
 -rwxr-xr-x   146KiB /usr/lib64/libpthread-2.26.so
@@ -18580,6 +18582,7 @@
 -rw-r--r--     352B /usr/share/licenses/libmount-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libmount-2.30.2/COPYING.LGPLv2.1
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.41.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libpsl-0.21.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libquadmath-7.3.1/COPYING.LIB.libquadmath
 -rw-r--r--   4.5KiB /usr/share/licenses/libsanitizer-7.3.1/LICENSE.TXT
 -rw-r--r--    26KiB /usr/share/licenses/libsemanage-2.5/COPYING
@@ -18596,6 +18599,7 @@
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
 -rw-r--r--   2.9KiB /usr/share/licenses/pcre2-10.23/LICENCE
+-rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
@@ -20528,6 +20532,7 @@
 -rw-r--r--   2.4KiB /usr/share/polkit-1/actions/org.freedesktop.machine1.policy
 -rw-r--r--    11KiB /usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
 -rw-r--r--    13KiB /usr/share/polkit-1/actions/org.freedesktop.timedate1.policy
+-rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--   3.5KiB /usr/share/systemd/kbd-model-map
 -rw-r--r--     146B /usr/share/systemd/language-fallback-map
 -rw-r--r--     522B /usr/share/systemtap/tapset/libpython2.7-64.stp
@@ -22513,7 +22518,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.6MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
--rw-r--r--    80KiB /var/lib/rpm/Requirename
+-rw-r--r--    84KiB /var/lib/rpm/Requirename
 -rw-r--r--    20KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
@@ -22830,6 +22835,7 @@ lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1
 lrwxrwxrwx      16B /usr/lib64/libpopt.so.0	libpopt.so.0.0.0
+lrwxrwxrwx      15B /usr/lib64/libpsl.so.5	libpsl.so.5.3.5
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2	libpsx.so.2.54
 lrwxrwxrwx      17B /usr/lib64/libpth.so.20	libpth.so.20.0.27
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so

@@ -467,6 +467,7 @@
 -rwxr-xr-x    67KiB /usr/lib64/libpcreposix.so.0.0.1
 -rwxr-xr-x    68KiB /usr/lib64/libplc4.so
 -rwxr-xr-x    68KiB /usr/lib64/libplds4.so
+-rwxr-xr-x   132KiB /usr/lib64/libpsl.so.5.3.5
 -rwxr-xr-x   134KiB /usr/lib64/libpth.so.20.0.27
 -rwxr-xr-x   186KiB /usr/lib64/libpthread-2.26.so
 -rwxr-xr-x   351KiB /usr/lib64/libreadline.so.6.2
@@ -672,6 +673,7 @@
 -rw-r--r--   8.6KiB /usr/share/licenses/libidn2-2.3.0/COPYING.unicode
 -rw-r--r--    18KiB /usr/share/licenses/libidn2-2.3.0/COPYINGv2
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.41.0/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libpsl-0.21.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
@@ -2731,7 +2733,7 @@
 -rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-------   5.0KiB /var/cache/ldconfig/aux-cache
+-rw-------   5.1KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   356KiB /var/lib/rpm/Basenames
@@ -2827,6 +2829,7 @@ lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.1	libpcre2-posix.so.1.0.1
 lrwxrwxrwx      18B /usr/lib64/libpcre32.so.0	libpcre32.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libpcrecpp.so.0	libpcrecpp.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0	libpcreposix.so.0.0.1
+lrwxrwxrwx      15B /usr/lib64/libpsl.so.5	libpsl.so.5.3.5
 lrwxrwxrwx      17B /usr/lib64/libpth.so.20	libpth.so.20.0.27
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.6	libreadline.so.6.2
