@@ -525,6 +525,9 @@ fi
 %endif
 
 %changelog
+* Tue Mar 05 2024 Cameron Rozean <rcrozean@amazon.com> - 1.22.1-1
+- Bump tracking patch version to 1.21.1 from 1.21.0
+
 * Mon Feb 12 2024 Cameron Rozean <rcrozean@amazon.com> - 1.22.0-0
 - Initial EKS Go 1.22.0 release 
 
