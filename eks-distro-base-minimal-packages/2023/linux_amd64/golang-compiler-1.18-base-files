@@ -12845,7 +12845,7 @@
 -rwxr-xr-x   892KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutempter.so.1.2.1
@@ -14515,7 +14515,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   2.3MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
--rw-r--r--    53KiB /usr/share/publicsuffix/public_suffix_list.dafsa
+-rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100

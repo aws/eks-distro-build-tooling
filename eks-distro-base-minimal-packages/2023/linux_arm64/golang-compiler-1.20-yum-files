@@ -18129,7 +18129,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   2.3MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
--rw-r--r--    53KiB /usr/share/publicsuffix/public_suffix_list.dafsa
+-rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
 -rwxr-xr-x   586KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rw-r--r--     135B /usr/share/tabset/std

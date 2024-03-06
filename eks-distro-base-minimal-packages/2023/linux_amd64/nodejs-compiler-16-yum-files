@@ -3699,7 +3699,7 @@
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x    33KiB /usr/lib64/libuuid.so.1.3.0
@@ -7798,7 +7798,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   2.3MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
--rw-r--r--    53KiB /usr/share/publicsuffix/public_suffix_list.dafsa
+-rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
 -rwxr-xr-x   586KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rw-r--r--     135B /usr/share/tabset/std
