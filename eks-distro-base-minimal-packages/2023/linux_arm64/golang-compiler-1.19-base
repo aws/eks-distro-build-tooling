@@ -10,7 +10,7 @@ coreutils-8.32-30.amzn2023.0.3.aarch64
 coreutils-common-8.32-30.amzn2023.0.3.aarch64
 cracklib-2.9.6-27.amzn2023.0.2.aarch64
 crypto-policies-20220428-1.gitdfb10ea.amzn2023.0.2.noarch
-curl-8.5.0-1.amzn2023.0.1.aarch64
+curl-8.5.0-1.amzn2023.0.2.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 elfutils-debuginfod-client-0.188-3.amzn2023.0.2.aarch64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
@@ -44,7 +44,7 @@ libcap-2.48-2.amzn2023.0.3.aarch64
 libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
-libcurl-8.5.0-1.amzn2023.0.1.aarch64
+libcurl-8.5.0-1.amzn2023.0.2.aarch64
 libdb-5.3.28-49.amzn2023.0.2.aarch64
 libeconf-0.4.0-1.amzn2023.0.3.aarch64
 libedit-3.1-38.20210714cvs.amzn2023.0.2.aarch64
@@ -74,8 +74,8 @@ libxcrypt-4.4.33-7.amzn2023.aarch64
 libzstd-1.5.5-1.amzn2023.0.1.aarch64
 make-4.3-5.amzn2023.0.2.aarch64
 mpfr-4.1.0-7.amzn2023.0.2.aarch64
-ncurses-base-6.2-4.20200222.amzn2023.0.5.noarch
-ncurses-libs-6.2-4.20200222.amzn2023.0.5.aarch64
+ncurses-base-6.2-4.20200222.amzn2023.0.6.noarch
+ncurses-libs-6.2-4.20200222.amzn2023.0.6.aarch64
 openldap-2.4.57-6.amzn2023.0.6.aarch64
 openssh-8.7p1-8.amzn2023.0.9.aarch64
 openssh-clients-8.7p1-8.amzn2023.0.9.aarch64
@@ -83,7 +83,7 @@ openssl-libs-3.0.8-1.amzn2023.0.11.aarch64
 pam-1.5.1-8.amzn2023.0.4.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
-publicsuffix-list-dafsa-20221208-60.amzn2023.noarch
+publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
 readline-8.1-2.amzn2023.0.2.aarch64
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch

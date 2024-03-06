@@ -712,7 +712,7 @@
 -rwxr-xr-x   892KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   193KiB /usr/lib64/libtirpc.so.3.0.0
 -rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x    16KiB /usr/lib64/libulockmgr.so.1.0.1

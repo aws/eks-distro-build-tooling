@@ -457,7 +457,7 @@
 -rwxr-xr-x   202KiB /usr/lib64/libtcmalloc_minimal_debug.so.4.5.9
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   188KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x    20KiB /usr/lib64/libunwind-coredump.so.0.0.0
 -rwxr-xr-x    69KiB /usr/lib64/libunwind-x86_64.so.8.0.1
 -rwxr-xr-x    61KiB /usr/lib64/libunwind.so.8.0.1
