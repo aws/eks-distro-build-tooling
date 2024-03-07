@@ -1,0 +1,158 @@
+From 990bb1319400b5ddc2540a6ab6a72e77c11343de Mon Sep 17 00:00:00 2001
+From: Gustavo Falco <comfortablynumb84@gmail.com>
+Date: Sun, 11 Dec 2022 02:39:20 +0000
+Subject: [PATCH] net/http: keep sensitive headers on redirects to the same
+ host
+
+# AWS EKS
+This patch is added to be included with 0003-go-1.20.14-eks-net-http-net-http-cookiejar-av.patch. 
+The updated test included in the 0003 patch fails due to checking for ":". This patch changes how
+the addresses are preserved. Specifically, canonicalAddr added the ports
+to the end of the initial Url, which no longer is valid with the updated
+test.
+
+Backported To: go-1.20.14-eks
+Backported On: Thu, 07 Mar 2024
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.21
+Source Commit: https://github.com/golang/go/commit/451106921fbcbbae37769db582aea52bf8f728e6
+
+# Original Information
+
+Preserve sensitive headers on a redirect to a different port of the same host.
+
+Fixes #35104
+
+Change-Id: I5ab57c414ce92a70e688ee684b9ff02fb062b3c6
+GitHub-Last-Rev: 8d53e71e2243c141d70d27a503d0f7e6dee64c3c
+GitHub-Pull-Request: golang/go#54539
+Reviewed-on: https://go-review.googlesource.com/c/go/+/424935
+TryBot-Result: Gopher Robot <gobot@golang.org>
+Reviewed-by: Cherry Mui <cherryyz@google.com>
+Reviewed-by: Damien Neil <dneil@google.com>
+Run-TryBot: Damien Neil <dneil@google.com>
+---
+ src/net/http/client.go      |  4 ++--
+ src/net/http/client_test.go | 29 ++++++++++++++++++++++++-----
+ src/net/http/transport.go   | 10 +++++++---
+ 3 files changed, 33 insertions(+), 10 deletions(-)
+
+diff --git a/src/net/http/client.go b/src/net/http/client.go
+index 33bbbc3381..b2525eec4b 100644
+--- a/src/net/http/client.go
++++ b/src/net/http/client.go
+@@ -990,8 +990,8 @@ func shouldCopyHeaderOnRedirect(headerKey string, initial, dest *url.URL) bool {
+ 		// directly, we don't know their scope, so we assume
+ 		// it's for *.domain.com.
+ 
+-		ihost := canonicalAddr(initial)
+-		dhost := canonicalAddr(dest)
++		ihost := idnaASCIIFromURL(initial)
++		dhost := idnaASCIIFromURL(dest)
+ 		return isDomainOrSubdomain(dhost, ihost)
+ 	}
+ 	// All other headers are copied:
+diff --git a/src/net/http/client_test.go b/src/net/http/client_test.go
+index f6d9a0e655..9ad0a6d4f8 100644
+--- a/src/net/http/client_test.go
++++ b/src/net/http/client_test.go
+@@ -1470,6 +1470,9 @@ func TestClientRedirectResponseWithoutRequest(t *testing.T) {
+ }
+ 
+ // Issue 4800: copy (some) headers when Client follows a redirect.
++// Issue 35104: Since both URLs have the same host (localhost)
++// but different ports, sensitive headers like Cookie and Authorization
++// are preserved.
+ func TestClientCopyHeadersOnRedirect(t *testing.T) { run(t, testClientCopyHeadersOnRedirect) }
+ func testClientCopyHeadersOnRedirect(t *testing.T, mode testMode) {
+ 	const (
+@@ -1483,6 +1486,8 @@ func testClientCopyHeadersOnRedirect(t *testing.T, mode testMode) {
+ 			"X-Foo":           []string{xfoo},
+ 			"Referer":         []string{ts2URL},
+ 			"Accept-Encoding": []string{"gzip"},
++			"Cookie":          []string{"foo=bar"},
++			"Authorization":   []string{"secretpassword"},
+ 		}
+ 		if !reflect.DeepEqual(r.Header, want) {
+ 			t.Errorf("Request.Header = %#v; want %#v", r.Header, want)
+@@ -1501,9 +1506,11 @@ func testClientCopyHeadersOnRedirect(t *testing.T, mode testMode) {
+ 	c := ts1.Client()
+ 	c.CheckRedirect = func(r *Request, via []*Request) error {
+ 		want := Header{
+-			"User-Agent": []string{ua},
+-			"X-Foo":      []string{xfoo},
+-			"Referer":    []string{ts2URL},
++			"User-Agent":    []string{ua},
++			"X-Foo":         []string{xfoo},
++			"Referer":       []string{ts2URL},
++			"Cookie":        []string{"foo=bar"},
++			"Authorization": []string{"secretpassword"},
+ 		}
+ 		if !reflect.DeepEqual(r.Header, want) {
+ 			t.Errorf("CheckRedirect Request.Header = %#v; want %#v", r.Header, want)
+@@ -1707,6 +1714,8 @@ func TestShouldCopyHeaderOnRedirect(t *testing.T) {
+ 		{"cookie", "http://foo.com/", "http://bar.com/", false},
+ 		{"cookie2", "http://foo.com/", "http://bar.com/", false},
+ 		{"authorization", "http://foo.com/", "http://bar.com/", false},
++		{"authorization", "http://foo.com/", "https://foo.com/", true},
++		{"authorization", "http://foo.com:1234/", "http://foo.com:4321/", true},
+ 		{"www-authenticate", "http://foo.com/", "http://bar.com/", false},
+ 		{"authorization", "http://foo.com/", "http://[::1%25.foo.com]/", false},
+ 
+@@ -1714,12 +1723,22 @@ func TestShouldCopyHeaderOnRedirect(t *testing.T) {
+ 		{"www-authenticate", "http://foo.com/", "http://foo.com/", true},
+ 		{"www-authenticate", "http://foo.com/", "http://sub.foo.com/", true},
+ 		{"www-authenticate", "http://foo.com/", "http://notfoo.com/", false},
+-		{"www-authenticate", "http://foo.com/", "https://foo.com/", false},
++		{"www-authenticate", "http://foo.com/", "https://foo.com/", true},
+ 		{"www-authenticate", "http://foo.com:80/", "http://foo.com/", true},
+ 		{"www-authenticate", "http://foo.com:80/", "http://sub.foo.com/", true},
+ 		{"www-authenticate", "http://foo.com:443/", "https://foo.com/", true},
+ 		{"www-authenticate", "http://foo.com:443/", "https://sub.foo.com/", true},
+-		{"www-authenticate", "http://foo.com:1234/", "http://foo.com/", false},
++		{"www-authenticate", "http://foo.com:1234/", "http://foo.com/", true},
++
++		{"authorization", "http://foo.com/", "http://foo.com/", true},
++		{"authorization", "http://foo.com/", "http://sub.foo.com/", true},
++		{"authorization", "http://foo.com/", "http://notfoo.com/", false},
++		{"authorization", "http://foo.com/", "https://foo.com/", true},
++		{"authorization", "http://foo.com:80/", "http://foo.com/", true},
++		{"authorization", "http://foo.com:80/", "http://sub.foo.com/", true},
++		{"authorization", "http://foo.com:443/", "https://foo.com/", true},
++		{"authorization", "http://foo.com:443/", "https://sub.foo.com/", true},
++		{"authorization", "http://foo.com:1234/", "http://foo.com/", true},
+ 	}
+ 	for i, tt := range tests {
+ 		u0, err := url.Parse(tt.initialURL)
+diff --git a/src/net/http/transport.go b/src/net/http/transport.go
+index ddcb64815c..c403968349 100644
+--- a/src/net/http/transport.go
++++ b/src/net/http/transport.go
+@@ -2743,17 +2743,21 @@ var portMap = map[string]string{
+ 	"socks5": "1080",
+ }
+ 
+-// canonicalAddr returns url.Host but always with a ":port" suffix.
+-func canonicalAddr(url *url.URL) string {
++func idnaASCIIFromURL(url *url.URL) string {
+ 	addr := url.Hostname()
+ 	if v, err := idnaASCII(addr); err == nil {
+ 		addr = v
+ 	}
++	return addr
++}
++
++// canonicalAddr returns url.Host but always with a ":port" suffix.
++func canonicalAddr(url *url.URL) string {
+ 	port := url.Port()
+ 	if port == "" {
+ 		port = portMap[url.Scheme]
+ 	}
+-	return net.JoinHostPort(addr, port)
++	return net.JoinHostPort(idnaASCIIFromURL(url), port)
+ }
+ 
+ // bodyEOFSignal is used by the HTTP/1 transport when reading response
+-- 
+2.44.0
+
