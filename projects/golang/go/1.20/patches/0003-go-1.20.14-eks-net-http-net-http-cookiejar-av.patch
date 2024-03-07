@@ -1,0 +1,127 @@
+From 9771706c615d110589c62fe4c2aa2394d39b1b11 Mon Sep 17 00:00:00 2001
+From: Damien Neil <dneil@google.com>
+Date: Thu, 11 Jan 2024 11:31:57 -0800
+Subject: [PATCH] net/http, net/http/cookiejar: avoid
+ subdomain matches on IPv6 zones
+
+# AWS EKS
+
+Backported To: go-1.20.14-eks
+Backported On: Tue, 05 Mar 2024
+Backported By: rcrozean@amazon.com
+Backported From: release-branch.go1.21
+Source Commit: https://github.com/golang/go/commit/20586c0dbe03d144f914155f879fa5ee287591a1
+
+# Original Information
+
+When deciding whether to forward cookies or sensitive headers
+across a redirect, do not attempt to interpret an IPv6 address
+as a domain name.
+
+Avoids a case where a maliciously-crafted redirect to an
+IPv6 address with a scoped addressing zone could be
+misinterpreted as a within-domain redirect. For example,
+we could interpret "::1%.www.example.com" as a subdomain
+of "www.example.com".
+
+Thanks to Juho Nurminen of Mattermost for reporting this issue.
+
+Fixes CVE-2023-45289
+Fixes #65385
+For #65065
+
+Change-Id: I8f463f59f0e700c8a18733d2b264a8bcb3a19599
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/2131938
+Reviewed-by: Tatiana Bradley <tatianabradley@google.com>
+Reviewed-by: Roland Shoemaker <bracewell@google.com>
+Reviewed-on: https://team-review.git.corp.google.com/c/golang/go-private/+/2173775
+Reviewed-by: Carlos Amedee <amedee@google.com>
+Reviewed-on: https://go-review.googlesource.com/c/go/+/569239
+Reviewed-by: Carlos Amedee <carlos@golang.org>
+Auto-Submit: Michael Knyszek <mknyszek@google.com>
+TryBot-Bypass: Michael Knyszek <mknyszek@google.com>
+---
+ src/net/http/client.go             |  6 ++++++
+ src/net/http/client_test.go        |  1 +
+ src/net/http/cookiejar/jar.go      |  7 +++++++
+ src/net/http/cookiejar/jar_test.go | 10 ++++++++++
+ 4 files changed, 24 insertions(+)
+
+diff --git a/src/net/http/client.go b/src/net/http/client.go
+index 122e8d030d..33bbbc3381 100644
+--- a/src/net/http/client.go
++++ b/src/net/http/client.go
+@@ -1006,6 +1006,12 @@ func isDomainOrSubdomain(sub, parent string) bool {
+ 	if sub == parent {
+ 		return true
+ 	}
++	// If sub contains a :, it's probably an IPv6 address (and is definitely not a hostname).
++	// Don't check the suffix in this case, to avoid matching the contents of a IPv6 zone.
++	// For example, "::1%.www.example.com" is not a subdomain of "www.example.com".
++	if strings.ContainsAny(sub, ":%") {
++		return false
++	}
+ 	// If sub is "foo.example.com" and parent is "example.com",
+ 	// that means sub must end in "."+parent.
+ 	// Do it without allocating.
+diff --git a/src/net/http/client_test.go b/src/net/http/client_test.go
+index 8b53c41687..f6d9a0e655 100644
+--- a/src/net/http/client_test.go
++++ b/src/net/http/client_test.go
+@@ -1708,6 +1708,7 @@ func TestShouldCopyHeaderOnRedirect(t *testing.T) {
+ 		{"cookie2", "http://foo.com/", "http://bar.com/", false},
+ 		{"authorization", "http://foo.com/", "http://bar.com/", false},
+ 		{"www-authenticate", "http://foo.com/", "http://bar.com/", false},
++		{"authorization", "http://foo.com/", "http://[::1%25.foo.com]/", false},
+ 
+ 		// But subdomains should work:
+ 		{"www-authenticate", "http://foo.com/", "http://foo.com/", true},
+diff --git a/src/net/http/cookiejar/jar.go b/src/net/http/cookiejar/jar.go
+index 3d0ad19af0..b9a113172d 100644
+--- a/src/net/http/cookiejar/jar.go
++++ b/src/net/http/cookiejar/jar.go
+@@ -362,6 +362,13 @@ func jarKey(host string, psl PublicSuffixList) string {
+ 
+ // isIP reports whether host is an IP address.
+ func isIP(host string) bool {
++	if strings.ContainsAny(host, ":%") {
++		// Probable IPv6 address.
++		// Hostnames can't contain : or %, so this is definitely not a valid host.
++		// Treating it as an IP is the more conservative option, and avoids the risk
++		// of interpeting ::1%.www.example.com as a subtomain of www.example.com.
++		return true
++	}
+ 	return net.ParseIP(host) != nil
+ }
+ 
+diff --git a/src/net/http/cookiejar/jar_test.go b/src/net/http/cookiejar/jar_test.go
+index 13d994aa39..a1202f43d2 100644
+--- a/src/net/http/cookiejar/jar_test.go
++++ b/src/net/http/cookiejar/jar_test.go
+@@ -252,6 +252,7 @@ var isIPTests = map[string]bool{
+ 	"127.0.0.1":            true,
+ 	"1.2.3.4":              true,
+ 	"2001:4860:0:2001::68": true,
++	"::1%zone":             true,
+ 	"example.com":          false,
+ 	"1.1.1.300":            false,
+ 	"www.foo.bar.net":      false,
+@@ -629,6 +630,15 @@ var basicsTests = [...]jarTest{
+ 			{"http://www.host.test:1234/", "a=1"},
+ 		},
+ 	},
++	{
++		"IPv6 zone is not treated as a host.",
++		"https://example.com/",
++		[]string{"a=1"},
++		"a=1",
++		[]query{
++			{"https://[::1%25.example.com]:80/", ""},
++		},
++	},
+ }
+ 
+ func TestBasics(t *testing.T) {
+-- 
+2.43.0
+
