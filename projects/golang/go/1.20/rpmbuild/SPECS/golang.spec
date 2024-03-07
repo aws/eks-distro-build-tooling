@@ -158,8 +158,9 @@ Requires:       %{name}-src = %{version}-%{release}
 Patch1:       0001-go-1.20.14-eks-crypto-x509-make-sure-pub-key-.patch
 Patch2:       0002-go-1.20.14-eks-net-textproto-mime-multipart-a.patch
 Patch3:       0003-go-1.20.14-eks-net-http-net-http-cookiejar-av.patch
-Patch4:       0004-go-1.20.14-eks-html-template-escape-additiona.patch
-Patch5:       0005-go-1.20.14-eks-net-mail-properly-handle-speci.patch
+Patch4:       0004-go-1.20.14-eks-net-http-keep-sensitive-headers-on-redirects-to-the-.patch
+Patch5:       0005-go-1.20.14-eks-html-template-escape-additiona.patch
+Patch6:       0006-go-1.20.14-eks-net-mail-properly-handle-speci.patch
 
 Patch102:       0102-syscall-expose-IfInfomsg.X__ifi_pad-on-s390x.patch
 Patch103:       0103-cmd-go-disable-Google-s-proxy-and-sumdb.patch
