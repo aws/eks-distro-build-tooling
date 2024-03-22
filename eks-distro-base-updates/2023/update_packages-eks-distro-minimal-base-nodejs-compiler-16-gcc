@@ -1,7 +1,6 @@
 
-curl.x86_64
-gnutls.x86_64
-kernel-headers.x86_64
-libcurl.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
+python3-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+rpm-sign-libs.x86_64
