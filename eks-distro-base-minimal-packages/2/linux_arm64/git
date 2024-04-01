@@ -1,7 +1,7 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2021.2.50-72.amzn2.0.8.noarch
+ca-certificates-2023.2.64-1.amzn2.0.1.noarch
 cyrus-sasl-lib-2.1.26-24.amzn2.aarch64
 expat-2.1.0-15.amzn2.0.3.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
@@ -43,6 +43,6 @@ pcre2-10.23-11.amzn2.0.2.aarch64
 pth-2.0.7-23.amzn2.0.2.aarch64
 readline-6.2-10.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
-system-release-2-14.amzn2.aarch64
-tzdata-2023c-1.amzn2.0.1.noarch
+system-release-2-16.amzn2.aarch64
+tzdata-2024a-1.amzn2.0.1.noarch
 zlib-1.2.7-19.amzn2.0.3.aarch64

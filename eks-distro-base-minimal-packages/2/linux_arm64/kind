@@ -4,7 +4,7 @@ audit-libs-2.8.1-3.amzn2.1.aarch64
 basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2021.2.50-72.amzn2.0.8.noarch
+ca-certificates-2023.2.64-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 conntrack-tools-1.4.4-5.amzn2.2.aarch64
 containerd-1.7.11-1.amzn2.0.1.aarch64
@@ -160,14 +160,14 @@ shared-mime-info-1.8-4.amzn2.aarch64
 socat-1.7.3.2-2.amzn2.0.1.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 sudo-1.8.23-10.amzn2.3.7.aarch64
-system-release-2-14.amzn2.aarch64
+system-release-2-16.amzn2.aarch64
 systemd-219-78.amzn2.0.23.aarch64
 systemd-libs-219-78.amzn2.0.23.aarch64
 systemd-sysv-219-78.amzn2.0.23.aarch64
 tar-1.26-35.amzn2.0.3.aarch64
 tcp_wrappers-7.6-77.amzn2.0.2.aarch64
 tcp_wrappers-libs-7.6-77.amzn2.0.2.aarch64
-tzdata-2023c-1.amzn2.0.1.noarch
+tzdata-2024a-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
 util-linux-2.30.2-2.amzn2.0.11.aarch64
 vim-data-9.0.2153-1.amzn2.0.1.noarch

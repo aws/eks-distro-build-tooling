@@ -1,6 +1,6 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2021.2.50-72.amzn2.0.8.noarch
+ca-certificates-2023.2.64-1.amzn2.0.1.noarch
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 e2fsprogs-1.42.9-19.amzn2.0.1.x86_64
 e2fsprogs-libs-1.42.9-19.amzn2.0.1.x86_64
@@ -25,9 +25,9 @@ ncurses-libs-6.0-8.20170212.amzn2.1.8.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 readline-6.2-10.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
-system-release-2-14.amzn2.x86_64
+system-release-2-16.amzn2.x86_64
 systemd-libs-219-78.amzn2.0.23.x86_64
-tzdata-2023c-1.amzn2.0.1.noarch
+tzdata-2024a-1.amzn2.0.1.noarch
 util-linux-2.30.2-2.amzn2.0.11.x86_64
 xfsprogs-5.0.0-10.amzn2.0.1.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64

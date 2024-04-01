@@ -1,11 +1,5 @@
 
-cpio.x86_64
-curl.x86_64
-glib2.x86_64
+ca-certificates.noarch
 kernel-headers.x86_64
-less.x86_64
-libcurl.x86_64
-ncurses.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
-openssl-libs.x86_64
+system-release.x86_64
+tzdata.noarch

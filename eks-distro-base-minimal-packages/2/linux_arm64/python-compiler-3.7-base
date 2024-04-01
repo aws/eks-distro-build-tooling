@@ -2,7 +2,7 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 binutils-2.29.1-31.amzn2.0.1.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2021.2.50-72.amzn2.0.8.noarch
+ca-certificates-2023.2.64-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 curl-8.3.0-1.amzn2.0.6.aarch64
@@ -72,9 +72,9 @@ rpm-libs-4.11.3-48.amzn2.0.3.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 sqlite-3.7.17-8.amzn2.1.2.aarch64
-system-release-2-14.amzn2.aarch64
+system-release-2-16.amzn2.aarch64
 tar-1.26-35.amzn2.0.3.aarch64
-tzdata-2023c-1.amzn2.0.1.noarch
+tzdata-2024a-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 zlib-1.2.7-19.amzn2.0.3.aarch64
