@@ -1,3 +1,5 @@
 
+ca-certificates.noarch
 docker.x86_64
-libsepol.x86_64
+system-release.x86_64
+tzdata.noarch

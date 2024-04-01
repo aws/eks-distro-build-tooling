@@ -32,15 +32,14 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   134KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   159KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   227KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   261KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
--r--r--r--   144KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   157KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   183KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   218KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
--rw-r--r--   5.1KiB /etc/pki/ca-trust/source/blacklist/TrustCor_CA.pem
 -rw-r--r--   2.7KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2
 -rw-r--r--    11KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
@@ -61,7 +60,7 @@
 -rw-r--r--       0B /etc/subuid
 -rw-r--r--      31B /etc/system-release
 -rw-r--r--      32B /etc/system-release-cpe
--rwxr-xr-x     146B /etc/update-motd.d/30-banner
+-rwxr-xr-x   1.8KiB /etc/update-motd.d/30-banner
 -rwxr-xr-x     454B /etc/update-motd.d/70-available-updates
 -rw-r--r--    1003B /etc/yum.repos.d/amzn2-core.repo
 -rw-r--r--      12B /etc/yum/vars/amazonlinux
@@ -3083,7 +3082,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   849KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--   987KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100
@@ -3420,7 +3419,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Santiago
 -rw-r--r--     491B /usr/share/zoneinfo/America/Santo_Domingo
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Sao_Paulo
--rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Scoresbysund
+-rw-r--r--   2.0KiB /usr/share/zoneinfo/America/Scoresbysund
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Shiprock
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Sitka
 -rw-r--r--     255B /usr/share/zoneinfo/America/St_Barthelemy
@@ -3442,7 +3441,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yakutat
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yellowknife
--rw-r--r--     398B /usr/share/zoneinfo/Antarctica/Casey
+-rw-r--r--     451B /usr/share/zoneinfo/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/Antarctica/DumontDUrville
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/Antarctica/Macquarie
@@ -3453,7 +3452,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Antarctica/South_Pole
 -rw-r--r--     187B /usr/share/zoneinfo/Antarctica/Syowa
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Antarctica/Troll
--rw-r--r--     187B /usr/share/zoneinfo/Antarctica/Vostok
+-rw-r--r--     253B /usr/share/zoneinfo/Antarctica/Vostok
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/Arctic/Longyearbyen
 -rw-r--r--     187B /usr/share/zoneinfo/Asia/Aden
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/Asia/Almaty
@@ -3487,7 +3486,7 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Asia/Famagusta
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/Asia/Harbin
--rw-r--r--   3.8KiB /usr/share/zoneinfo/Asia/Hebron
+-rw-r--r--   3.9KiB /usr/share/zoneinfo/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/Asia/Hovd
@@ -3816,8 +3815,8 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/W-SU
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/WET
 -rw-r--r--     127B /usr/share/zoneinfo/Zulu
--rw-r--r--   4.4KiB /usr/share/zoneinfo/iso3166.tab
--rw-r--r--   3.4KiB /usr/share/zoneinfo/leapseconds
+-rw-r--r--   4.7KiB /usr/share/zoneinfo/iso3166.tab
+-rw-r--r--   3.2KiB /usr/share/zoneinfo/leapseconds
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Abidjan
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Accra
 -rw-r--r--     299B /usr/share/zoneinfo/posix/Africa/Addis_Ababa
@@ -4018,7 +4017,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Santiago
 -rw-r--r--     491B /usr/share/zoneinfo/posix/America/Santo_Domingo
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Sao_Paulo
--rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Scoresbysund
+-rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/America/Scoresbysund
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Shiprock
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Sitka
 -rw-r--r--     255B /usr/share/zoneinfo/posix/America/St_Barthelemy
@@ -4040,7 +4039,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yakutat
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yellowknife
--rw-r--r--     398B /usr/share/zoneinfo/posix/Antarctica/Casey
+-rw-r--r--     451B /usr/share/zoneinfo/posix/Antarctica/Casey
 -rw-r--r--     311B /usr/share/zoneinfo/posix/Antarctica/Davis
 -rw-r--r--     206B /usr/share/zoneinfo/posix/Antarctica/DumontDUrville
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/Antarctica/Macquarie
@@ -4051,7 +4050,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Antarctica/South_Pole
 -rw-r--r--     187B /usr/share/zoneinfo/posix/Antarctica/Syowa
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Antarctica/Troll
--rw-r--r--     187B /usr/share/zoneinfo/posix/Antarctica/Vostok
+-rw-r--r--     253B /usr/share/zoneinfo/posix/Antarctica/Vostok
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/Arctic/Longyearbyen
 -rw-r--r--     187B /usr/share/zoneinfo/posix/Asia/Aden
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/Asia/Almaty
@@ -4085,7 +4084,7 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Asia/Famagusta
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Gaza
 -rw-r--r--     582B /usr/share/zoneinfo/posix/Asia/Harbin
--rw-r--r--   3.8KiB /usr/share/zoneinfo/posix/Asia/Hebron
+-rw-r--r--   3.9KiB /usr/share/zoneinfo/posix/Asia/Hebron
 -rw-r--r--     389B /usr/share/zoneinfo/posix/Asia/Ho_Chi_Minh
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/posix/Asia/Hong_Kong
 -rw-r--r--     921B /usr/share/zoneinfo/posix/Asia/Hovd
@@ -4531,7 +4530,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Fort_Wayne
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Fortaleza
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Glace_Bay
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Godthab
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Godthab
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Goose_Bay
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     795B /usr/share/zoneinfo/right/America/Grenada
@@ -4591,7 +4590,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Beulah
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/Center
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/North_Dakota/New_Salem
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Nuuk
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Nuuk
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Ojinaga
 -rw-r--r--     743B /usr/share/zoneinfo/right/America/Panama
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Pangnirtung
@@ -4637,7 +4636,7 @@
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/right/America/Winnipeg
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/America/Yakutat
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Yellowknife
--rw-r--r--     933B /usr/share/zoneinfo/right/Antarctica/Casey
+-rw-r--r--     986B /usr/share/zoneinfo/right/Antarctica/Casey
 -rw-r--r--     846B /usr/share/zoneinfo/right/Antarctica/Davis
 -rw-r--r--     723B /usr/share/zoneinfo/right/Antarctica/DumontDUrville
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Antarctica/Macquarie
@@ -4648,7 +4647,7 @@
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Antarctica/South_Pole
 -rw-r--r--     722B /usr/share/zoneinfo/right/Antarctica/Syowa
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Antarctica/Troll
--rw-r--r--     722B /usr/share/zoneinfo/right/Antarctica/Vostok
+-rw-r--r--     788B /usr/share/zoneinfo/right/Antarctica/Vostok
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Arctic/Longyearbyen
 -rw-r--r--     722B /usr/share/zoneinfo/right/Asia/Aden
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Asia/Almaty
@@ -4680,7 +4679,7 @@
 -rw-r--r--     722B /usr/share/zoneinfo/right/Asia/Dubai
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Asia/Dushanbe
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Famagusta
--rw-r--r--   4.3KiB /usr/share/zoneinfo/right/Asia/Gaza
+-rw-r--r--   4.4KiB /usr/share/zoneinfo/right/Asia/Gaza
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Harbin
 -rw-r--r--   4.4KiB /usr/share/zoneinfo/right/Asia/Hebron
 -rw-r--r--     924B /usr/share/zoneinfo/right/Asia/Ho_Chi_Minh

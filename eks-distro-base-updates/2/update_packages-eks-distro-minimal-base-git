@@ -1,5 +1,4 @@
 
-libcurl.x86_64
-ncurses-base.noarch
-ncurses-libs.x86_64
-openssl-libs.x86_64
+ca-certificates.noarch
+system-release.x86_64
+tzdata.noarch
