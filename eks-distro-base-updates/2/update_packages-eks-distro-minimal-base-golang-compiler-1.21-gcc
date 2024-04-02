@@ -1,5 +1,3 @@
 
-ca-certificates.noarch
-kernel-headers.x86_64
-system-release.x86_64
-tzdata.noarch
+openssh.x86_64
+openssh-clients.x86_64
