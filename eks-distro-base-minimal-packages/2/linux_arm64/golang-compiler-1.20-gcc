@@ -106,8 +106,8 @@ nss-sysinit-3.90.0-2.amzn2.0.2.aarch64
 nss-tools-3.90.0-2.amzn2.0.2.aarch64
 nss-util-3.90.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
-openssh-7.4p1-22.amzn2.0.6.aarch64
-openssh-clients-7.4p1-22.amzn2.0.6.aarch64
+openssh-7.4p1-22.amzn2.0.7.aarch64
+openssh-clients-7.4p1-22.amzn2.0.7.aarch64
 openssl-libs-1.0.2k-24.amzn2.0.12.aarch64
 pam-1.1.8-23.amzn2.0.2.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
