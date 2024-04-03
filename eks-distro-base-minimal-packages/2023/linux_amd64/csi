@@ -12,7 +12,7 @@ device-mapper-1.02.185-1.amzn2023.0.4.x86_64
 device-mapper-libs-1.02.185-1.amzn2023.0.4.x86_64
 e2fsprogs-1.46.5-2.amzn2023.0.2.x86_64
 e2fsprogs-libs-1.46.5-2.amzn2023.0.2.x86_64
-expat-2.5.0-1.amzn2023.0.3.x86_64
+expat-2.5.0-1.amzn2023.0.4.x86_64
 filesystem-3.14-5.amzn2023.0.3.x86_64
 fuse-libs-2.9.9-13.amzn2023.0.2.x86_64
 gawk-5.1.0-3.amzn2023.0.3.x86_64
@@ -34,7 +34,7 @@ krb5-libs-1.21-3.amzn2023.0.3.x86_64
 libacl-2.3.1-2.amzn2023.0.2.x86_64
 libattr-2.5.1-3.amzn2023.0.2.x86_64
 libbasicobjects-0.1.1-47.amzn2023.0.2.x86_64
-libblkid-2.37.4-1.amzn2023.0.3.x86_64
+libblkid-2.37.4-1.amzn2023.0.4.x86_64
 libcap-2.48-2.amzn2023.0.3.x86_64
 libcap-ng-0.8.2-4.amzn2023.0.2.x86_64
 libcollection-0.7.0-47.amzn2023.0.2.x86_64
@@ -44,11 +44,11 @@ libeconf-0.4.0-1.amzn2023.0.3.x86_64
 libedit-3.1-38.20210714cvs.amzn2023.0.2.x86_64
 libev-4.33-3.amzn2023.0.2.x86_64
 libevent-2.1.12-3.amzn2023.0.3.x86_64
-libfdisk-2.37.4-1.amzn2023.0.3.x86_64
+libfdisk-2.37.4-1.amzn2023.0.4.x86_64
 libffi-3.4.4-1.amzn2023.0.1.x86_64
 libgcc-11.4.1-2.amzn2023.0.2.x86_64
 libini_config-1.3.1-47.amzn2023.0.2.x86_64
-libmount-2.37.4-1.amzn2023.0.3.x86_64
+libmount-2.37.4-1.amzn2023.0.4.x86_64
 libnfsidmap-2.5.4-2.rc3.amzn2023.0.3.x86_64
 libpath_utils-0.2.1-47.amzn2023.0.2.x86_64
 libref_array-0.1.5-47.amzn2023.0.2.x86_64
@@ -57,12 +57,12 @@ libselinux-3.4-5.amzn2023.0.2.x86_64
 libsemanage-3.4-5.amzn2023.0.2.x86_64
 libsepol-3.4-3.amzn2023.0.3.x86_64
 libsigsegv-2.13-2.amzn2023.0.2.x86_64
-libsmartcols-2.37.4-1.amzn2023.0.3.x86_64
+libsmartcols-2.37.4-1.amzn2023.0.4.x86_64
 libss-1.46.5-2.amzn2023.0.2.x86_64
 libstdc++-11.4.1-2.amzn2023.0.2.x86_64
 libtirpc-1.3.3-0.amzn2023.x86_64
 libutempter-1.2.1-4.amzn2023.0.2.x86_64
-libuuid-2.37.4-1.amzn2023.0.3.x86_64
+libuuid-2.37.4-1.amzn2023.0.4.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
 libverto-libev-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
@@ -95,8 +95,8 @@ systemd-252.16-1.amzn2023.0.2.x86_64
 systemd-libs-252.16-1.amzn2023.0.2.x86_64
 tzdata-2024a-1.amzn2023.0.1.noarch
 userspace-rcu-0.12.1-3.amzn2023.0.4.x86_64
-util-linux-2.37.4-1.amzn2023.0.3.x86_64
-util-linux-core-2.37.4-1.amzn2023.0.3.x86_64
+util-linux-2.37.4-1.amzn2023.0.4.x86_64
+util-linux-core-2.37.4-1.amzn2023.0.4.x86_64
 xfsprogs-5.18.0-1.amzn2023.0.3.x86_64
 xz-libs-5.2.5-9.amzn2023.0.2.x86_64
 zlib-1.2.11-33.amzn2023.0.5.x86_64

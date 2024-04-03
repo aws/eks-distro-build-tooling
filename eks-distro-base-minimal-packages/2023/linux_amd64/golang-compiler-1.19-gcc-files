@@ -44,6 +44,7 @@
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
+-rw-r--r--   2.1KiB /etc/nsswitch.conf.rpmnew
 -rw-r--r--     900B /etc/openldap/ldap.conf
 -rw-r--r--     327B /etc/os-release
 -rw-r--r--     232B /etc/pam.d/config-util
@@ -13363,7 +13364,7 @@
 -rw-r--r--     904B /usr/include/linux/blkpg.h
 -rw-r--r--   4.6KiB /usr/include/linux/blktrace_api.h
 -rw-r--r--   6.4KiB /usr/include/linux/blkzoned.h
--rw-r--r--   255KiB /usr/include/linux/bpf.h
+-rw-r--r--   256KiB /usr/include/linux/bpf.h
 -rw-r--r--   1.4KiB /usr/include/linux/bpf_common.h
 -rw-r--r--     529B /usr/include/linux/bpf_perf_event.h
 -rw-r--r--     465B /usr/include/linux/bpfilter.h

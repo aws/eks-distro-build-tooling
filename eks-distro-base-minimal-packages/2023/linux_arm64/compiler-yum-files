@@ -1172,7 +1172,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.10.so
--rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
