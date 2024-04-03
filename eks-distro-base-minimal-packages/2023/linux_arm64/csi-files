@@ -473,7 +473,7 @@
 -rwxr-xr-x   197KiB /usr/bin/sync
 -rwxr-xr-x   262KiB /usr/bin/tac
 -rwxr-xr-x   197KiB /usr/bin/tail
--rwxr-xr-x   196KiB /usr/bin/taskset
+-rwxr-xr-x   197KiB /usr/bin/taskset
 -rwxr-xr-x   197KiB /usr/bin/tee
 -rwxr-xr-x   197KiB /usr/bin/test
 -rwxr-xr-x   197KiB /usr/bin/timeout
@@ -616,7 +616,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libbasicobjects.so.0.1.0
--rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   200KiB /usr/lib64/libbz2.so.1.0.8
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0

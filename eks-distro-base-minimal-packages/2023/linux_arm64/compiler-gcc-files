@@ -38,6 +38,7 @@
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
+-rw-r--r--   2.1KiB /etc/nsswitch.conf.rpmnew
 -rw-r--r--     900B /etc/openldap/ldap.conf
 -rw-r--r--     327B /etc/os-release
 -rw-r--r--     149B /etc/passwd
@@ -927,7 +928,7 @@
 -rw-r--r--     904B /usr/include/linux/blkpg.h
 -rw-r--r--   4.6KiB /usr/include/linux/blktrace_api.h
 -rw-r--r--   6.4KiB /usr/include/linux/blkzoned.h
--rw-r--r--   255KiB /usr/include/linux/bpf.h
+-rw-r--r--   256KiB /usr/include/linux/bpf.h
 -rw-r--r--   1.4KiB /usr/include/linux/bpf_common.h
 -rw-r--r--     529B /usr/include/linux/bpf_perf_event.h
 -rw-r--r--     465B /usr/include/linux/bpfilter.h
@@ -2973,7 +2974,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libbfd-2.39-6.amzn2023.0.10.so
--rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -9237,7 +9238,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.5MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.7MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

@@ -1,5 +1,4 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-system-release.noarch
-tzdata.noarch
+curl.x86_64
+expat.x86_64
+libcurl.x86_64
