@@ -525,6 +525,9 @@ fi
 %endif
 
 %changelog
+* Thu Apr 04 2024 Cameron Rozean <rcrozean@amazon.com> - 1.22.2-2
+- Bump tracking patch version to 1.22.2 from 1.22.1
+
 * Tue Mar 05 2024 Cameron Rozean <rcrozean@amazon.com> - 1.22.1-1
 - Bump tracking patch version to 1.21.1 from 1.21.0
 
