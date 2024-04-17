@@ -16,7 +16,7 @@ gnutls-3.8.0-379.amzn2023.0.5.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
-krb5-libs-1.21-3.amzn2023.0.3.aarch64
+krb5-libs-1.21-3.amzn2023.0.4.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64

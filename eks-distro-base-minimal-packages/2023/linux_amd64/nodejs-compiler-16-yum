@@ -40,7 +40,7 @@ gzip-1.12-1.amzn2023.0.1.x86_64
 jansson-2.14-0.amzn2023.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
 keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
-krb5-libs-1.21-3.amzn2023.0.3.x86_64
+krb5-libs-1.21-3.amzn2023.0.4.x86_64
 libacl-2.3.1-2.amzn2023.0.2.x86_64
 libarchive-3.5.3-2.amzn2023.0.3.x86_64
 libassuan-2.5.5-1.amzn2023.0.2.x86_64
