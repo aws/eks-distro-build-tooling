@@ -41,7 +41,7 @@ gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
-krb5-libs-1.21-3.amzn2023.0.3.aarch64
+krb5-libs-1.21-3.amzn2023.0.4.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
 libarchive-3.5.3-2.amzn2023.0.3.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64

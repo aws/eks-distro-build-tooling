@@ -1752,7 +1752,7 @@
 -rw-r--r--   8.4KiB /usr/include/rdma/ib_user_mad.h
 -rw-r--r--   2.3KiB /usr/include/rdma/ib_user_sa.h
 -rw-r--r--    28KiB /usr/include/rdma/ib_user_verbs.h
--rw-r--r--   2.2KiB /usr/include/rdma/irdma-abi.h
+-rw-r--r--   2.3KiB /usr/include/rdma/irdma-abi.h
 -rw-r--r--   5.0KiB /usr/include/rdma/mlx4-abi.h
 -rw-r--r--    14KiB /usr/include/rdma/mlx5-abi.h
 -rw-r--r--    11KiB /usr/include/rdma/mlx5_user_ioctl_cmds.h
