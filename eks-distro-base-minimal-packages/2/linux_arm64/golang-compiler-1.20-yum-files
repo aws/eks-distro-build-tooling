@@ -13384,7 +13384,7 @@
 -rwxr-xr-x   267KiB /usr/lib64/libgpgme-pthread.so.11.8.1
 -rwxr-xr-x   267KiB /usr/lib64/libgpgme.so.11.8.1
 -rwxr-xr-x   333KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   135KiB /usr/lib64/libgssrpc.so.4.2
+-rwxr-xr-x   199KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x    67KiB /usr/lib64/libgthread-2.0.so.0.5600.1
 -rwxr-xr-x    68KiB /usr/lib64/libhistory.so.6.2
 -rwxr-xr-x   325KiB /usr/lib64/libidn2.so.0.3.7
@@ -13393,7 +13393,7 @@
 -rwxr-xr-x    68KiB /usr/lib64/libkeyutils.so.1.5
 -rwxr-xr-x   134KiB /usr/lib64/libkmod.so.2.3.3
 -rwxr-xr-x    68KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   985KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   1.1MiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x    70KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x    69KiB /usr/lib64/liblber-2.4.so.2.10.7
 -rwxr-xr-x   393KiB /usr/lib64/libldap-2.4.so.2.10.7

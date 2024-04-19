@@ -1,5 +1,5 @@
 
-ca-certificates.noarch
-kernel-headers.x86_64
-system-release.x86_64
-tzdata.noarch
+glib2.x86_64
+krb5-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
