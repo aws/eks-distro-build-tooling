@@ -13,7 +13,7 @@ glibc-minimal-langpack-2.26-63.amzn2.0.1.x86_64
 gnupg2-2.0.22-5.amzn2.0.5.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-55.amzn2.2.6.x86_64
+krb5-libs-1.15.1-55.amzn2.2.7.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-63.amzn2.0.1.x86_64

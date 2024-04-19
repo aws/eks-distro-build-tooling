@@ -33,7 +33,7 @@ info-5.1-5.amzn2.x86_64
 keyutils-1.5.8-3.amzn2.0.2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-55.amzn2.2.6.x86_64
+krb5-libs-1.15.1-55.amzn2.2.7.x86_64
 libacl-2.2.51-14.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
 libbasicobjects-0.1.1-29.amzn2.x86_64
