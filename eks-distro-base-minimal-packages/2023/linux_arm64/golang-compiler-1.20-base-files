@@ -13016,7 +13016,7 @@
 -rwxr-xr-x   585KiB /usr/lib64/libmpfr.so.6.1.0
 -rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
--rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.25.0
+-rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
@@ -13124,7 +13124,7 @@
 -rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x   196KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   727KiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   791KiB /usr/libexec/git-core/git-http-backend
 -rwxr-xr-x   793KiB /usr/libexec/git-core/git-http-fetch
 -rwxr-xr-x   1.1MiB /usr/libexec/git-core/git-http-push
 -rwxr-xr-x   793KiB /usr/libexec/git-core/git-imap-send
@@ -17103,7 +17103,7 @@ lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.25.0
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
 lrwxrwxrwx      16B /usr/lib64/libpam.so.0 libpam.so.0.85.1
 lrwxrwxrwx      21B /usr/lib64/libpam_misc.so.0 libpam_misc.so.0.82.1
 lrwxrwxrwx      17B /usr/lib64/libpamc.so.0 libpamc.so.0.82.1

@@ -881,9 +881,9 @@
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.opt-1.pyc
 -rw-r--r--   4.7KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.opt-2.pyc
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.pyc
--rw-r--r--    58KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-1.pyc
+-rw-r--r--    59KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-2.pyc
--rw-r--r--    58KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.pyc
+-rw-r--r--    59KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.opt-1.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.opt-2.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.pyc
@@ -2688,7 +2688,7 @@
 -rw-r--r--    49KiB /usr/lib64/python3.9/xmlrpc/client.py
 -rw-r--r--    36KiB /usr/lib64/python3.9/xmlrpc/server.py
 -rw-r--r--   7.4KiB /usr/lib64/python3.9/zipapp.py
--rw-r--r--    86KiB /usr/lib64/python3.9/zipfile.py
+-rw-r--r--    87KiB /usr/lib64/python3.9/zipfile.py
 -rw-r--r--    31KiB /usr/lib64/python3.9/zipimport.py
 -rw-r--r--     703B /usr/lib64/python3.9/zoneinfo/__init__.py
 -rw-r--r--     811B /usr/lib64/python3.9/zoneinfo/__pycache__/__init__.cpython-39.opt-1.pyc

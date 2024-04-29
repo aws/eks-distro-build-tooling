@@ -6,13 +6,13 @@ ca-certificates-2023.2.64-1.0.amzn2023.0.1.noarch
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.x86_64
 expat-2.5.0-1.amzn2023.0.4.x86_64
 filesystem-3.14-5.amzn2023.0.3.x86_64
-git-core-2.40.1-1.amzn2023.0.1.x86_64
-glibc-2.34-52.amzn2023.0.8.x86_64
-glibc-common-2.34-52.amzn2023.0.8.x86_64
-glibc-minimal-langpack-2.34-52.amzn2023.0.8.x86_64
+git-core-2.40.1-1.amzn2023.0.2.x86_64
+glibc-2.34-52.amzn2023.0.10.x86_64
+glibc-common-2.34-52.amzn2023.0.10.x86_64
+glibc-minimal-langpack-2.34-52.amzn2023.0.10.x86_64
 gmp-6.2.1-2.amzn2023.0.2.x86_64
 gnupg2-2.3.7-1.amzn2023.0.4.x86_64
-gnutls-3.8.0-379.amzn2023.0.5.x86_64
+gnutls-3.8.0-380.amzn2023.0.6.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
@@ -20,7 +20,7 @@ krb5-libs-1.21-3.amzn2023.0.4.x86_64
 libassuan-2.5.5-1.amzn2023.0.2.x86_64
 libcbor-0.7.0-3.amzn2023.0.2.x86_64
 libcom_err-1.46.5-2.amzn2023.0.2.x86_64
-libcurl-minimal-8.5.0-1.amzn2023.0.3.x86_64
+libcurl-minimal-8.5.0-1.amzn2023.0.4.x86_64
 libedit-3.1-38.20210714cvs.amzn2023.0.2.x86_64
 libffi-3.4.4-1.amzn2023.0.1.x86_64
 libfido2-1.10.0-2.amzn2023.0.2.x86_64
@@ -29,7 +29,7 @@ libgcrypt-1.10.2-1.amzn2023.0.1.x86_64
 libgpg-error-1.42-1.amzn2023.0.2.x86_64
 libidn2-2.3.2-1.amzn2023.0.5.x86_64
 libksba-1.6.3-1.amzn2023.0.2.x86_64
-libnghttp2-1.57.0-1.amzn2023.0.1.x86_64
+libnghttp2-1.59.0-3.amzn2023.0.1.x86_64
 libpsl-0.21.1-3.amzn2023.0.2.x86_64
 libselinux-3.4-5.amzn2023.0.2.x86_64
 libsepol-3.4-3.amzn2023.0.3.x86_64

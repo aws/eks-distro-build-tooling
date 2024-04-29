@@ -13017,7 +13017,7 @@
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x   185KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
--rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.25.0
+-rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
@@ -17106,7 +17106,7 @@ lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.25.0
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
 lrwxrwxrwx      16B /usr/lib64/libpam.so.0 libpam.so.0.85.1
 lrwxrwxrwx      21B /usr/lib64/libpam_misc.so.0 libpam_misc.so.0.82.1
 lrwxrwxrwx      17B /usr/lib64/libpamc.so.0 libpamc.so.0.82.1
