@@ -1,8 +1,4 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
 glibc.x86_64
 glibc-common.x86_64
 glibc-minimal-langpack.x86_64
-system-release.noarch
-tzdata.noarch

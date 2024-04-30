@@ -40,7 +40,6 @@
 -rw-r--r--     767B /etc/netconfig
 -rw-r--r--      58B /etc/networks
 -rw-r--r--     229B /etc/nsswitch.conf
--rw-r--r--   2.1KiB /etc/nsswitch.conf.rpmnew
 -rw-r--r--     900B /etc/openldap/ldap.conf
 -rw-r--r--     327B /etc/os-release
 -rw-r--r--     149B /etc/passwd
@@ -1419,7 +1418,7 @@
 -rw-r--r--   1.1KiB /usr/include/linux/pr.h
 -rw-r--r--   9.8KiB /usr/include/linux/prctl.h
 -rw-r--r--   2.3KiB /usr/include/linux/psample.h
--rw-r--r--   5.1KiB /usr/include/linux/psci.h
+-rw-r--r--   5.9KiB /usr/include/linux/psci.h
 -rw-r--r--   4.4KiB /usr/include/linux/psp-sev.h
 -rw-r--r--   7.3KiB /usr/include/linux/ptp_clock.h
 -rw-r--r--   4.3KiB /usr/include/linux/ptrace.h
@@ -4510,7 +4509,7 @@
 -rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
 -rwxr-xr-x   394KiB /usr/lib64/libnettle.so.8.5
--rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.25.0
+-rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   196KiB /usr/lib64/libnpth.so.0.1.2
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
@@ -7519,9 +7518,9 @@
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.opt-1.pyc
 -rw-r--r--   4.7KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.opt-2.pyc
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/__pycache__/zipapp.cpython-39.pyc
--rw-r--r--    58KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-1.pyc
+-rw-r--r--    59KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.opt-2.pyc
--rw-r--r--    58KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.pyc
+-rw-r--r--    59KiB /usr/lib64/python3.9/__pycache__/zipfile.cpython-39.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.opt-1.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.opt-2.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/zipimport.cpython-39.pyc
@@ -9471,7 +9470,7 @@
 -rw-r--r--    49KiB /usr/lib64/python3.9/xmlrpc/client.py
 -rw-r--r--    36KiB /usr/lib64/python3.9/xmlrpc/server.py
 -rw-r--r--   7.4KiB /usr/lib64/python3.9/zipapp.py
--rw-r--r--    86KiB /usr/lib64/python3.9/zipfile.py
+-rw-r--r--    87KiB /usr/lib64/python3.9/zipfile.py
 -rw-r--r--    31KiB /usr/lib64/python3.9/zipimport.py
 -rw-r--r--     703B /usr/lib64/python3.9/zoneinfo/__init__.py
 -rw-r--r--     811B /usr/lib64/python3.9/zoneinfo/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -13147,7 +13146,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.7MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.6MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -13606,7 +13605,7 @@ lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.5
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.25.0
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
 lrwxrwxrwx      16B /usr/lib64/libnpth.so.0 libnpth.so.0.1.2
 lrwxrwxrwx      31B /usr/lib64/libnssckbi.so /etc/alternatives/libnssckbi.so
 lrwxrwxrwx      19B /usr/lib64/libp11-kit.so.0 libp11-kit.so.0.3.0

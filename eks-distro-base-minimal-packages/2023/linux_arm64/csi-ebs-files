@@ -276,7 +276,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
--rwxr-xr-x   266KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
