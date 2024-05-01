@@ -1,5 +1,4 @@
 
-ca-certificates.noarch
-docker.x86_64
-system-release.x86_64
-tzdata.noarch
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
