@@ -13153,7 +13153,7 @@
 -rwxr-xr-x      31B /usr/bin/getopts
 -rwxr-xr-x   134KiB /usr/bin/gio
 -rwxr-xr-x    68KiB /usr/bin/gio-querymodules-64
--rwxr-xr-x   3.7MiB /usr/bin/git
+-rwxr-xr-x   3.8MiB /usr/bin/git
 -rwxr-xr-x   2.2MiB /usr/bin/git-shell
 -rwxr-xr-x    69KiB /usr/bin/glib-compile-schemas
 -rwsr-xr-x   137KiB /usr/bin/gpasswd
@@ -16636,7 +16636,7 @@
 -rwxr-xr-x    71KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    71KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-backend
 -rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-fetch
 -rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-http-push
 -rwxr-xr-x   2.3MiB /usr/libexec/git-core/git-imap-send
