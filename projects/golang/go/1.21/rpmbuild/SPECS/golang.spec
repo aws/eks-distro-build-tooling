@@ -97,7 +97,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.21
 #global go_prerelease rc3
-%global go_patch 9
+%global go_patch 10
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -527,6 +527,9 @@ fi
 %endif
 
 %changelog
+* Fri May 10 2024 Sajia Zafreen <szafreen@amazon.com> - 1.21.10-10
+- Bump tracking patch version to 1.21.10 from 1.21.9
+
 * Thu Apr 04 2024 Cameron Rozean <rcrozean@amazon.com> - 1.21.9-10
 - Bump tracking patch version to 1.21.9 from 1.21.8
 
