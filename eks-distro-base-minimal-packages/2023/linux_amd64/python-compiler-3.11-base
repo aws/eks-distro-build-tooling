@@ -68,8 +68,8 @@ openssl-libs-3.0.8-1.amzn2023.0.11.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
-python3.11-3.11.6-1.amzn2023.0.2.x86_64
-python3.11-libs-3.11.6-1.amzn2023.0.2.x86_64
+python3.11-3.11.6-1.amzn2023.0.3.x86_64
+python3.11-libs-3.11.6-1.amzn2023.0.3.x86_64
 python3.11-pip-22.3.1-2.amzn2023.0.2.noarch
 python3.11-pip-wheel-22.3.1-2.amzn2023.0.2.noarch
 python3.11-setuptools-65.5.1-2.amzn2023.0.4.noarch

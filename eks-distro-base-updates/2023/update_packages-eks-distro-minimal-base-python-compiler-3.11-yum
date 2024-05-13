@@ -1,10 +1,5 @@
 
-curl.x86_64
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
-gnutls.x86_64
-libcurl.x86_64
-libnghttp2.x86_64
 python3.x86_64
 python3-libs.x86_64
+python3.11.x86_64
+python3.11-libs.x86_64
