@@ -93,7 +93,7 @@
 -rw-r--r--       5B /etc/yum/vars/product
 -rw-r--r--       7B /etc/yum/vars/target
 -rw-r--r--     444B /etc/yum/version-groups.conf
--rw-------   260KiB /tmp/tmpf3aki5kucacert.pem
+-rw-------   260KiB /tmp/tmpg00d_1jacacert.pem
 -rwxr-xr-x    69KiB /usr/bin/[
 -rwxr-xr-x   1.1MiB /usr/bin/aarch64-redhat-linux-gcc
 -rwxr-xr-x   1.1MiB /usr/bin/aarch64-redhat-linux-gcc-7
@@ -12557,14 +12557,14 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   552KiB /var/lib/rpm/Basenames
+-rw-r--r--   556KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   5.6MiB /var/lib/rpm/Packages
+-rw-r--r--   5.9MiB /var/lib/rpm/Packages
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
