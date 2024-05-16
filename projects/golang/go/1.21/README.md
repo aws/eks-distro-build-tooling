@@ -1,17 +1,17 @@
 # EKS Golang 1.21
 
-Current Release: `10`
+Current Release: `11`
 
-Tracking Tag: `go1.21.9`
+Tracking Tag: `go1.21.10`
 
 ### Artifacts:  
 |Arch|Artifact|sha|
 |:---:|:---:|:---:|
-|noarch|[golang-src-1.21.9-10.amzn2.eks.noarch.rpm](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/x86_64/RPMS/noarch/golang-src-1.21.9-10.amzn2.eks.noarch.rpm)|[golang-src-1.21.9-10.amzn2.eks.noarch.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/x86_64/RPMS/noarch/golang-src-1.21.9-10.amzn2.eks.noarch.rpm.sha256)|
-|x86_64|[golang-1.21.9-10.amzn2.eks.x86_64.rpm](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/x86_64/RPMS/x86_64/golang-1.21.9-10.amzn2.eks.x86_64.rpm)|[golang-1.21.9-10.amzn2.eks.x86_64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/x86_64/RPMS/x86_64/golang-1.21.9-10.amzn2.eks.x86_64.rpm.sha256)|
-|aarch64|[golang-1.21.9-10.amzn2.eks.aarch64.rpm](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/aarch64/RPMS/aarch64/golang-1.21.9-10.amzn2.eks.aarch64.rpm)|[golang-1.21.9-10.amzn2.eks.aarch64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/aarch64/RPMS/aarch64/golang-1.21.9-10.amzn2.eks.aarch64.rpm.sha256)|
-|arm64|[go1.21.9.linux-arm64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/archives/linux/arm64/go1.21.9.linux-arm64.tar.gz)|[go1.21.9.linux-arm64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/archives/linux/arm64/go1.21.9.linux-arm64.tar.gz.sha256)|
-|amd64|[go1.21.9.linux-amd64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/archives/linux/amd64/go1.21.9.linux-amd64.tar.gz)|[go1.21.9.linux-amd64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.21.9/releases/10/archives/linux/amd64/go1.21.9.linux-amd64.tar.gz.sha256)|
+|noarch|[golang-src-1.21.10-11.amzn2.eks.noarch.rpm](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/x86_64/RPMS/noarch/golang-src-1.21.10-11.amzn2.eks.noarch.rpm)|[golang-src-1.21.10-11.amzn2.eks.noarch.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/x86_64/RPMS/noarch/golang-src-1.21.10-11.amzn2.eks.noarch.rpm.sha256)|
+|x86_64|[golang-1.21.10-11.amzn2.eks.x86_64.rpm](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/x86_64/RPMS/x86_64/golang-1.21.10-11.amzn2.eks.x86_64.rpm)|[golang-1.21.10-11.amzn2.eks.x86_64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/x86_64/RPMS/x86_64/golang-1.21.10-11.amzn2.eks.x86_64.rpm.sha256)|
+|aarch64|[golang-1.21.10-11.amzn2.eks.aarch64.rpm](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/aarch64/RPMS/aarch64/golang-1.21.10-11.amzn2.eks.aarch64.rpm)|[golang-1.21.10-11.amzn2.eks.aarch64.rpm.sha256](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/aarch64/RPMS/aarch64/golang-1.21.10-11.amzn2.eks.aarch64.rpm.sha256)|
+|arm64|[go1.21.10.linux-arm64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/archives/linux/arm64/go1.21.10.linux-arm64.tar.gz)|[go1.21.10.linux-arm64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/archives/linux/arm64/go1.21.10.linux-arm64.tar.gz.sha256)|
+|amd64|[go1.21.10.linux-amd64.tar.gz](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/archives/linux/amd64/go1.21.10.linux-amd64.tar.gz)|[go1.21.10.linux-amd64.tar.gz.sha256](https://distro.eks.amazonaws.com/golang-go1.21.10/releases/11/archives/linux/amd64/go1.21.10.linux-amd64.tar.gz.sha256)|
 
 
 ### ARM64 Builds
@@ -24,4 +24,4 @@ Tracking Tag: `go1.21.9`
 The patches in `./patches` include relevant utility fixes for go `1.21`.
 
 ### Spec
-The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.21 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.21.9` source.
+The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.21 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.21.10` source.
