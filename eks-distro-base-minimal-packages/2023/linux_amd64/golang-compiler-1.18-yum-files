@@ -15832,7 +15832,7 @@
 -rwxr-xr-x    36KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x    16KiB /usr/libexec/gio-launch-desktop
 -rwxr-xr-x   2.5KiB /usr/libexec/git-core/git-difftool--helper
--rwxr-xr-x   651KiB /usr/libexec/git-core/git-http-backend
+-rwxr-xr-x   652KiB /usr/libexec/git-core/git-http-backend
 -rwxr-xr-x   722KiB /usr/libexec/git-core/git-http-fetch
 -rwxr-xr-x   1.1MiB /usr/libexec/git-core/git-http-push
 -rwxr-xr-x   709KiB /usr/libexec/git-core/git-imap-send
