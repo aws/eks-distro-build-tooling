@@ -527,7 +527,7 @@ fi
 %endif
 
 %changelog
-* Fri Jun 05 2024 Saurabh Parekh <sjparekh@amazon.com> - 1.21.11-12
+* Wed Jun 05 2024 Saurabh Parekh <sjparekh@amazon.com> - 1.21.11-12
 - Bump tracking patch version to 1.21.11 from 1.21.10
 
 * Fri May 10 2024 Sajia Zafreen <szafreen@amazon.com> - 1.21.10-11
