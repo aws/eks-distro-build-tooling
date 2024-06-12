@@ -30,7 +30,7 @@ docker buildx version
 buildctl --version
 aws --version
 bash --version
-
+7zz
 
 if [ $TARGETARCH == 'amd64' ]; then 
     hugo version

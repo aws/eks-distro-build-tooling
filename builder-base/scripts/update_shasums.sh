@@ -76,6 +76,10 @@ for TARGETARCH in arm64 amd64; do
 
     # Oras
     echo "$(curl -sSL --retry 5 -v $ORAS_CHECKSUM_URL 2>&1 | grep $ORAS_FILENAME | cut -d ":" -f 2)" > $CHECKSUMS_ROOT/checksums/oras-$TARGETARCH-checksum
+
+    # 7zip
+    sha256=$(curl -sSL --retry 5 $SEVENZIP_DOWNLOAD_URL | sha256sum | awk '{print $1}')
+    echo "$sha256  7z${SEVENZIP_VERSION//.}-linux-${ARCH}.tar.xz" > $CHECKSUMS_ROOT/checksums/7zip-$TARGETARCH-checksum
 done
 
 # HUGO

@@ -13,23 +13,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+set -o pipefail
+
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-export SKIP_INSTALL="true"
+NEWROOT=/7zip
 
-source $SCRIPT_ROOT/install_aws_cli.sh
-source $SCRIPT_ROOT/install_buildkit.sh
-source $SCRIPT_ROOT/install_ecr_cred_helper.sh
-source $SCRIPT_ROOT/install_gh_cli.sh
-source $SCRIPT_ROOT/install_yq.sh
-source $SCRIPT_ROOT/install_packer.sh
-source $SCRIPT_ROOT/install_nodejs.sh
-source $SCRIPT_ROOT/install_helm.sh
-source $SCRIPT_ROOT/install_goss.sh
-source $SCRIPT_ROOT/install_govc.sh
-source $SCRIPT_ROOT/install_hugo.sh
-source $SCRIPT_ROOT/install_bash.sh
-source $SCRIPT_ROOT/install_upx.sh
-source $SCRIPT_ROOT/install_notation.sh
-source $SCRIPT_ROOT/install_oras.sh
-source $SCRIPT_ROOT/install_7zip.sh
+source $SCRIPT_ROOT/common_vars.sh
+
+if [ $TARGETARCH == 'amd64' ]; then 
+    ARCH='x64'
+else 
+    ARCH='arm64'
+fi
+
+SEVENZIP_DOWNLOAD_URL="https://github.com/ip7z/7zip/releases/download/${SEVENZIP_VERSION}/7z${SEVENZIP_VERSION//.}-linux-${ARCH}.tar.xz"
+
+function install_7zip() {
+    wget \
+        --progress dot:giga \
+        $SEVENZIP_DOWNLOAD_URL
+    sha256sum -c $BASE_DIR/7zip-$TARGETARCH-checksum
+    tar -C $USR_BIN -xJf 7z${SEVENZIP_VERSION//.}-linux-${ARCH}.tar.xz 7zz License.txt
+
+    time upx --best --no-lzma $USR_BIN/7zz
+}
+
+[ ${SKIP_INSTALL:-false} != false ] || install_7zip
