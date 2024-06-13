@@ -98,6 +98,20 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_yq.sh && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as sevenzip
+ARG TARGETARCH
+WORKDIR /workdir
+ARG SEVENZIP_VERSION
+ENV SEVENZIP_VERSION=$SEVENZIP_VERSION
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_7zip.sh ./checksums/7zip-${TARGETARCH}-checksum /
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_7zip.sh && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as packer
 ARG TARGETARCH
 WORKDIR /workdir
@@ -539,6 +553,7 @@ COPY --link --from=skopeo /skopeo /
 COPY --link --from=upx  /upx /
 COPY --link --from=notation /notation /
 COPY --link --from=oras /oras /
+COPY --link --from=sevenzip /7zip /
 
 FROM minimal-copy-stage as full-copy-stage
 
