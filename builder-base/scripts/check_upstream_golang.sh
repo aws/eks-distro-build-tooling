@@ -20,6 +20,7 @@ set -x
 GO_PREFIX="go"
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 VERSIONS_YAML="${SCRIPT_ROOT}/../versions.yaml"
+TAG_FILE="${SCRIPT_ROOT}/../../EKS_DISTRO_TAG_FILE.yaml"
 
 function update::go::version {
   local -r version=$1
@@ -28,6 +29,19 @@ function update::go::version {
   local -r cur_builder_base_version=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${majorversion//./}")
 
   sed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}/g" "${VERSIONS_YAML}"
+}
+
+function update::go::minimal_image {
+  local -r version=$1
+  local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+
+  local -r golang_minimal_images=$(cat "${TAG_FILE}" | grep -E "eks-distro-minimal-base-golang-compiler-${majorversion}-[a-z]+:\s")
+
+  for image in ${golang_minimal_images}; do
+    if [[ $image =~ ^[0-9].* ]]; then
+      sed -i "s/${image}/null/g" "${TAG_FILE}"
+    fi
+  done
 }
 
 # curl go.dev for the supported versions of go
@@ -41,5 +55,6 @@ for v in ${ACTIVE_VERSIONS}; do
   # if the version doesn't exist in the builder base update the versions yaml.
   if [[ ! $BUILDER_BASE_GO_VERSION =~ $v ]]; then
     update::go::version $v
+    update::go::minimal_image $v
   fi
 done
