@@ -14173,7 +14173,7 @@
 -rw-r--r--     721B /usr/include/linux/netfilter/xt_multiport.h
 -rw-r--r--     421B /usr/include/linux/netfilter/xt_nfacct.h
 -rw-r--r--   3.4KiB /usr/include/linux/netfilter/xt_osf.h
--rw-r--r--     369B /usr/include/linux/netfilter/xt_owner.h
+-rw-r--r--     420B /usr/include/linux/netfilter/xt_owner.h
 -rw-r--r--     553B /usr/include/linux/netfilter/xt_physdev.h
 -rw-r--r--     188B /usr/include/linux/netfilter/xt_pkttype.h
 -rw-r--r--    1022B /usr/include/linux/netfilter/xt_policy.h
