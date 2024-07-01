@@ -4,9 +4,9 @@ ca-certificates-2023.2.64-1.amzn2.0.1.noarch
 coreutils-8.22-24.amzn2.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 gettext-0.19.8.1-3.amzn2.x86_64
-glibc-2.26-64.amzn2.0.1.x86_64
-glibc-common-2.26-64.amzn2.0.1.x86_64
-glibc-minimal-langpack-2.26-64.amzn2.0.1.x86_64
+glibc-2.26-64.amzn2.0.2.x86_64
+glibc-common-2.26-64.amzn2.0.2.x86_64
+glibc-minimal-langpack-2.26-64.amzn2.0.2.x86_64
 gmp-6.0.0-15.amzn2.0.3.x86_64
 gperftools-libs-2.6.1-1.amzn2.x86_64
 gpg-pubkey-c87f5b1a-593863f8

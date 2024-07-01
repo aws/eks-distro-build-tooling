@@ -7,9 +7,9 @@ expat-2.1.0-15.amzn2.0.3.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 fipscheck-lib-1.4.1-6.amzn2.0.2.x86_64
 git-core-2.40.1-1.amzn2.0.3.x86_64
-glibc-2.26-64.amzn2.0.1.x86_64
-glibc-common-2.26-64.amzn2.0.1.x86_64
-glibc-minimal-langpack-2.26-64.amzn2.0.1.x86_64
+glibc-2.26-64.amzn2.0.2.x86_64
+glibc-common-2.26-64.amzn2.0.2.x86_64
+glibc-minimal-langpack-2.26-64.amzn2.0.2.x86_64
 gnupg2-2.0.22-5.amzn2.0.5.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
