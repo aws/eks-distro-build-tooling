@@ -1,2 +1,6 @@
 
-openssl-libs.x86_64
+amazon-linux-repo-cdn.noarch
+system-release.noarch
+systemd.x86_64
+systemd-libs.x86_64
+systemd-pam.x86_64

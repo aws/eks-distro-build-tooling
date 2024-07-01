@@ -27,6 +27,8 @@
 -rw-r--r--      21B /etc/dnf/protected.d/systemd.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
+-rw-r--r--      11B /etc/dnf/vars/dualstack
+-rw-r--r--      12B /etc/dnf/vars/mirrorlist
 -rw-r--r--       7B /etc/dnf/vars/releasever
 -rw-r--r--       0B /etc/environment
 -rw-r--r--   1.4KiB /etc/ethertypes
@@ -597,7 +599,7 @@
 -rwxr-xr-x    37KiB /usr/bin/sum
 -rwxr-xr-x    37KiB /usr/bin/sync
 -rwxr-xr-x   296KiB /usr/bin/systemctl
--rwxr-xr-x   203KiB /usr/bin/systemd-analyze
+-rwxr-xr-x   207KiB /usr/bin/systemd-analyze
 -rwxr-xr-x    21KiB /usr/bin/systemd-ask-password
 -rwxr-xr-x    20KiB /usr/bin/systemd-cat
 -rwxr-xr-x    25KiB /usr/bin/systemd-cgls
@@ -608,7 +610,7 @@
 -rwxr-xr-x    49KiB /usr/bin/systemd-dissect
 -rwxr-xr-x    24KiB /usr/bin/systemd-escape
 -rwxr-xr-x    57KiB /usr/bin/systemd-firstboot
--rwxr-xr-x    29KiB /usr/bin/systemd-id128
+-rwxr-xr-x    33KiB /usr/bin/systemd-id128
 -rwxr-xr-x    24KiB /usr/bin/systemd-inhibit
 -rwxr-xr-x    21KiB /usr/bin/systemd-machine-id-setup
 -rwxr-xr-x    61KiB /usr/bin/systemd-mount
@@ -1232,13 +1234,13 @@
 -rwxr-xr-x   183KiB /usr/lib/systemd/systemd-journald
 -rwxr-xr-x    53KiB /usr/lib/systemd/systemd-localed
 -rwxr-xr-x   301KiB /usr/lib/systemd/systemd-logind
--rwxr-xr-x    41KiB /usr/lib/systemd/systemd-network-generator
+-rwxr-xr-x    45KiB /usr/lib/systemd/systemd-network-generator
 -rwxr-xr-x    65KiB /usr/lib/systemd/systemd-oomd
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-reply-password
 -rwxr-xr-x    53KiB /usr/lib/systemd/systemd-shutdown
 -rwxr-xr-x    33KiB /usr/lib/systemd/systemd-socket-proxyd
 -rwxr-xr-x    17KiB /usr/lib/systemd/systemd-sulogin-shell
--rwxr-xr-x   130KiB /usr/lib/systemd/systemd-sysupdate
+-rwxr-xr-x   126KiB /usr/lib/systemd/systemd-sysupdate
 -rwxr-xr-x    21KiB /usr/lib/systemd/systemd-time-wait-sync
 -rwxr-xr-x    49KiB /usr/lib/systemd/systemd-timedated
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-update-done
@@ -1304,7 +1306,7 @@
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--     763B /usr/lib/tmpfiles.d/static-nodes-permissions.conf
 -rw-r--r--     305B /usr/lib/tmpfiles.d/sudo.conf
--rw-r--r--     537B /usr/lib/tmpfiles.d/systemd-nologin.conf
+-rw-r--r--     538B /usr/lib/tmpfiles.d/systemd-nologin.conf
 -rw-r--r--     823B /usr/lib/tmpfiles.d/systemd-tmp.conf
 -rw-r--r--   2.0KiB /usr/lib/tmpfiles.d/systemd.conf
 -rw-r--r--     449B /usr/lib/tmpfiles.d/tmp.conf
@@ -1551,7 +1553,7 @@
 -rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   892KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   896KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
@@ -4112,8 +4114,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.16-1.amzn2023.0.2.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.16-1.amzn2023.0.2.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-2.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-2.amzn2023.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_among.so
@@ -4549,8 +4551,8 @@
 -rw-r--r--     635B /usr/share/bash-completion/completions/swaplabel
 -rw-r--r--     743B /usr/share/bash-completion/completions/swapoff
 -rw-r--r--   2.0KiB /usr/share/bash-completion/completions/swapon
--rw-r--r--    14KiB /usr/share/bash-completion/completions/systemctl
--rw-r--r--   6.9KiB /usr/share/bash-completion/completions/systemd-analyze
+-rw-r--r--    16KiB /usr/share/bash-completion/completions/systemctl
+-rw-r--r--   7.0KiB /usr/share/bash-completion/completions/systemd-analyze
 -rw-r--r--   1.7KiB /usr/share/bash-completion/completions/systemd-cat
 -rw-r--r--   2.2KiB /usr/share/bash-completion/completions/systemd-cgls
 -rw-r--r--   2.2KiB /usr/share/bash-completion/completions/systemd-cgtop
@@ -4733,7 +4735,7 @@
 -rw-r--r--   2.6KiB /usr/share/dbus-1/interfaces/org.freedesktop.locale1.xml
 -rw-r--r--    17KiB /usr/share/dbus-1/interfaces/org.freedesktop.login1.Manager.xml
 -rw-r--r--   2.5KiB /usr/share/dbus-1/interfaces/org.freedesktop.login1.Seat.xml
--rw-r--r--   6.3KiB /usr/share/dbus-1/interfaces/org.freedesktop.login1.Session.xml
+-rw-r--r--   6.2KiB /usr/share/dbus-1/interfaces/org.freedesktop.login1.Session.xml
 -rw-r--r--   3.4KiB /usr/share/dbus-1/interfaces/org.freedesktop.login1.User.xml
 -rw-r--r--   1.6KiB /usr/share/dbus-1/interfaces/org.freedesktop.oom1.Manager.xml
 -rw-r--r--    18KiB /usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Automount.xml
@@ -4798,7 +4800,7 @@
 -rw-r--r--      81B /usr/share/factory/etc/locale.conf
 -rw-r--r--     391B /usr/share/factory/etc/nsswitch.conf
 -rw-r--r--     149B /usr/share/factory/etc/pam.d/other
--rw-r--r--     767B /usr/share/factory/etc/pam.d/system-auth
+-rw-r--r--     755B /usr/share/factory/etc/pam.d/system-auth
 -rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.pyc

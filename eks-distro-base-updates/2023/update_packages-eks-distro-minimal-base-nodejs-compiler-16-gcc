@@ -1,2 +1,4 @@
 
-openssl-libs.x86_64
+amazon-linux-repo-cdn.noarch
+kernel-headers.x86_64
+system-release.noarch

@@ -10,6 +10,8 @@
 -rw-r--r--      89B /etc/dnf/plugins/release-notification.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
+-rw-r--r--      11B /etc/dnf/vars/dualstack
+-rw-r--r--      12B /etc/dnf/vars/mirrorlist
 -rw-r--r--       7B /etc/dnf/vars/releasever
 -rw-r--r--       0B /etc/environment
 -rw-r--r--   1.4KiB /etc/ethertypes
@@ -4773,7 +4775,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   4.0KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   1.9MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   1.8MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
