@@ -23,7 +23,7 @@ VERSION="$1"
 
 RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 
-GOLANG_MAJOR_VERSION=$(if [[ $(echo "$VERSION"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${VERSION%.*}; else echo ${VERSION%-*}; fi)
+GOLANG_MAJOR_VERSION=$(if [[ $(echo "$VERSION" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${VERSION%.*}; else echo ${VERSION%-*}; fi)
 
 NEWROOT=/golang-${GOLANG_MAJOR_VERSION}
 
@@ -37,94 +37,133 @@ USR_LOCAL_BIN=${USR_LOCAL}/bin
 BASE_DIR=""
 
 IS_AL23=false
-if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2023" /etc/yum.repos.d/amazonlinux.repo; then 
-    IS_AL23=true
+if [ -f /etc/yum.repos.d/amazonlinux.repo ] && grep -q "2023" /etc/yum.repos.d/amazonlinux.repo; then
+  IS_AL23=true
 fi
 
 mkdir -p $USR_BIN $USR_LOCAL_BIN $GOPATH/{bin,pkg,src}
 
 function build::go::symlink() {
-    local -r version=$1
+  local -r version=$1
 
-    # Removing the last number as we only care about the major version of golang
-    local -r majorversion=$(if [[ $(echo "$version"|awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-    mkdir -p ${GOPATH}/go${majorversion}/bin
-    
-    for binary in go gofmt; do
-        ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
-    done
-    
-    if [ "$version" != "$majorversion" ]; then
-        ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+  # Removing the last number as we only care about the major version of golang
+  local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+  mkdir -p ${GOPATH}/go${majorversion}/bin
+
+  for binary in go gofmt; do
+    ln -s /root/sdk/go${version}/bin/${binary} ${GOPATH}/go${majorversion}/bin/${binary}
+  done
+
+  if [ "$version" != "$majorversion" ]; then
+    ln -s ${GOPATH}/bin/go${version} ${GOPATH}/bin/go${majorversion}
+  fi
+}
+
+function build::eksgo::download_rpm() {
+  local -r url="$1"
+  local filename="$(basename $url)"
+
+  curl -sSL --retry 5 $url -o /tmp/$filename
+}
+
+function build::go::install {
+  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+  # the function again with the specific parameter.
+  local version=${1%-*}
+  local url="https://go.dev/dl/go$version.linux-${TARGETARCH/\//-}.tar.gz"
+
+  local filename="/tmp/linux/$TARGETARCH/$(basename $url)"
+  curl -sSLf --retry 5 $url -o $filename --create-dirs
+
+  build::go::extract $version
+  build::go::symlink $version
+}
+
+function build::go::extract {
+  local version=$1
+
+  mkdir -p /tmp/go-extracted
+  cd /tmp/go-extracted
+  tar -xzf /tmp/linux/$TARGETARCH/go$version.linux-$TARGETARCH.tar.gz
+
+  local -r golang_version=$(/tmp/go-extracted/go/bin/go version | grep -o "go[0-9].* " | xargs)
+
+  mkdir -p /root/sdk/$golang_version
+  mv /tmp/go-extracted/go/* /root/sdk/$golang_version
+
+  version=$(echo "$golang_version" | grep -o "[0-9].*")
+  ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
+
+  # This is only for 1.21+ and is causing failures.
+  # newer versions of golang stopped shipping the compiled .a lib files
+  # removing from old versions since we do not need these during our builds
+  # find /root/sdk/go${version}/pkg -type f -name "*.a" -delete
+
+  rm -rf /tmp/go-extracted /tmp/linux/$TARGETARCH/go*.tar.gz
+}
+
+function build::eksgo::install() {
+  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+  # the function again with the specific parameter.
+  local version=${1%-*}
+
+  if [ $TARGETARCH == 'amd64' ]; then
+    local arch='x86_64'
+  else
+    local arch='aarch64'
+  fi
+
+  for artifact in golang golang-bin; do
+    build::eksgo::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
+  done
+
+  for artifact in golang-docs golang-misc golang-tests golang-src; do
+    build::eksgo::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
+  done
+
+  build::eksgo::extract $version
+  build::go::symlink $version
+}
+
+function build::eksgo::extract() {
+  local version=$1
+  mkdir -p /tmp/go-extracted
+  for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idm && rm -f $rpm); done
+
+  local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
+
+  mkdir -p /root/sdk/$golang_version
+  mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
+
+  for license_dir in "/usr/share/licenses/golang" "/usr/share/doc/golang-$VERSION"; do
+    if [ -d /tmp/go-extracted/$license_dir ]; then
+      mv /tmp/go-extracted/$license_dir/* /root/sdk/$golang_version
     fi
-}
+  done
 
-function build::go::download_rpm(){
-    local -r url="$1"
-    local filename="$(basename $url)"
+  version=$(echo "$golang_version" | grep -o "[0-9].*")
+  ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
 
-    curl -sSL --retry 5 $url -o /tmp/$filename
-}
+  rm -rf /tmp/go-extracted /tmp/golang-*.rpm
 
-function build::go::install(){
-    # Set up specific go version by using go get, additional versions apart from default can be installed by calling
-    # the function again with the specific parameter.
-    local version=${1%-*}
-
-    if [ $TARGETARCH == 'amd64' ]; then 
-        local arch='x86_64'
-    else 
-        local arch='aarch64'
+  # fix symlinks installed via rpm
+  for bin in go gofmt; do
+    if [ -L /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin ]; then
+      unlink /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin
+      ln -s ../$bin /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin
     fi
-
-    for artifact in golang golang-bin; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm
-    done
-
-    for artifact in golang-docs golang-misc golang-tests golang-src; do
-        build::go::download_rpm https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm
-    done
-
-    build::go::extract $version
-    build::go::symlink $version
+  done
 }
 
-function build::go::extract() {
-    local version=$1
-    mkdir -p /tmp/go-extracted
-    for rpm in /tmp/golang-*.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idm && rm -f $rpm); done
-
-    local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
-
-    mkdir -p /root/sdk/$golang_version
-    mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
-
-    for license_dir in "/usr/share/licenses/golang" "/usr/share/doc/golang-$VERSION"; do
-        if [ -d /tmp/go-extracted/$license_dir ]; then
-            mv /tmp/go-extracted/$license_dir/* /root/sdk/$golang_version
-        fi
-    done
-
-    version=$(echo "$golang_version" | grep -o "[0-9].*")
-    ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
-
-    rm -rf /tmp/go-extracted /tmp/golang-*.rpm
-
-    # fix symlinks installed via rpm
-    for bin in go gofmt; do
-        if [ -L /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin ]; then
-            unlink /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin
-            ln -s ../$bin /root/sdk/$golang_version/bin/linux_$TARGETARCH/$bin
-        fi        
-    done
-}
-
-
-build::go::install "${VERSION}"
+if [[ ${VERSION:2:2} -ge "21" ]]; then
+  build::go::install "${VERSION}"
+else
+  build::eksgo::install "${VERSION}"
+fi
 
 # symlink default golang install to newroot bin
 for binary in go gofmt; do
-    ln -s ${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin/${binary} ${USR_BIN}/${binary}
+  ln -s ${GOPATH}/go${GOLANG_MAJOR_VERSION}/bin/${binary} ${USR_BIN}/${binary}
 done
 
 mkdir -p ${NEWROOT}/root
