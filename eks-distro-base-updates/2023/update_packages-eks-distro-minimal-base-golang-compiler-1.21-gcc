@@ -1,1 +1,5 @@
 
+amazon-linux-repo-cdn.noarch
+kernel-headers.x86_64
+system-release.noarch
+systemd-libs.x86_64
