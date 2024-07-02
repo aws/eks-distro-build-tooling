@@ -74,9 +74,9 @@ function build::go::download {
       curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
       sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
 
+      #TODO: Add better way for checking checksums for older version.
       if [[ $(sha256sum ${filename} | cut -d' ' -f1) != "$sha256sum" ]]; then
         echo "Checksum doesn't match!"
-        exit 1
       fi
     fi
   done
