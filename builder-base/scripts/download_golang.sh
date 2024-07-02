@@ -72,11 +72,17 @@ function build::go::download {
     local filename="$outputDir/${arch}/go$version.${arch/\//-}.tar.gz"
     if [ ! -f $filename ]; then
       curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
+      sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
+
+      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != "$sha256sum" ]]; then
+        echo "Checksum doesn't match!"
+        exit 1
+      fi
     fi
   done
 }
 
-if [ $ARCHITECTURE =~ amd64 ]; then
+if [[ $ARCHITECTURE =~ amd64 ]]; then
   ARCH='x86_64'
 else
   ARCH='arm64'
