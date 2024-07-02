@@ -76,14 +76,14 @@ function build::go::download {
   done
 }
 
+if [ $ARCHITECTURE =~ amd64 ]; then
+  ARCH='x86_64'
+else
+  ARCH='arm64'
+fi
+
 if [[ ${VERSION:2:2} -ge "21" ]]; then
   build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
 else
-  if [[ $ARCHITECTURE =~ "linux/amd64" ]]; then
-    build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
-  fi
-
-  if [[ $ARCHITECTURE =~ "linux/arm64" ]]; then
-    build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
-  fi
+  build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "$ARCH"
 fi

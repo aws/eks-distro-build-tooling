@@ -94,11 +94,6 @@ function build::go::extract {
   version=$(echo "$golang_version" | grep -o "[0-9].*")
   ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
 
-  # This is only for 1.21+ and is causing failures.
-  # newer versions of golang stopped shipping the compiled .a lib files
-  # removing from old versions since we do not need these during our builds
-  # find /root/sdk/go${version}/pkg -type f -name "*.a" -delete
-
   rm -rf /tmp/go-extracted /tmp/linux/$TARGETARCH/go*.tar.gz
 }
 
