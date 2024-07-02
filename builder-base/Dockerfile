@@ -358,7 +358,7 @@ ENV PATH="/go/bin/:$PATH"
 
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
+    ./scripts/install_golang.sh ./checksums/go-go1.21-${TARGETARCH}-checksum /
 COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.21*.tar.gz /tmp/linux/arm64/
 COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.21*.tar.gz /tmp/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -376,7 +376,7 @@ ENV PATH="/go/bin/:$PATH"
 
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
+    ./scripts/install_golang.sh ./checksums/go-go1.22-${TARGETARCH}-checksum /
 COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.22*.tar.gz /tmp/linux/arm64/
 COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.22*.tar.gz /tmp/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
