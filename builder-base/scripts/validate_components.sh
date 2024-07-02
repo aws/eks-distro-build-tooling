@@ -32,9 +32,9 @@ aws --version
 bash --version
 7zz
 
-if [ $TARGETARCH == 'amd64' ]; then 
-    hugo version
-    # goss
+if [ $TARGETARCH == 'amd64' ]; then
+  hugo version
+  # goss
 fi
 
 tuftool --help
@@ -42,35 +42,37 @@ skopeo --version
 
 # node + go + gcc are only included in the standard image
 if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
-    python --version
-    python3 --version
-    pip3 --version
-    packer --version
-    ansible --version
-    su - imagebuilder -c "ansible --version"
-    su - imagebuilder -c "ansible-galaxy collection list"
-    su - imagebuilder -c "packer --version"
-    su - imagebuilder -c "packer plugins installed"
+  python --version
+  python3 --version
+  pip3 --version
+  packer --version
+  ansible --version
+  su - imagebuilder -c "ansible --version"
+  su - imagebuilder -c "ansible-galaxy collection list"
+  su - imagebuilder -c "packer --version"
+  su - imagebuilder -c "packer plugins installed"
 
-    node --version
+  node --version
 
-    # validate default symlinks are correctly setup
-    go version
-    go-licenses --help
-    
-    linuxkit version
-    /go/bin/go1.17 version
-    /go/go1.17/bin/go-licenses --help
-    /go/bin/go1.18 version
-    /go/go1.18/bin/go-licenses --help
-    /go/bin/go1.19 version
-    /go/go1.19/bin/go-licenses --help
-    /go/bin/go1.20 version
-    /go/go1.20/bin/go-licenses --help
-    /go/bin/go1.21 version
-    /go/go1.21/bin/go-licenses --help
+  # validate default symlinks are correctly setup
+  go version
+  go-licenses --help
 
-    gcc --version
+  linuxkit version
+  /go/bin/go1.17 version
+  /go/go1.17/bin/go-licenses --help
+  /go/bin/go1.18 version
+  /go/go1.18/bin/go-licenses --help
+  /go/bin/go1.19 version
+  /go/go1.19/bin/go-licenses --help
+  /go/bin/go1.20 version
+  /go/go1.20/bin/go-licenses --help
+  /go/bin/go1.21 version
+  /go/go1.21/bin/go-licenses --help
+  /go/bin/go1.22 version
+  /go/go1.22/bin/go-licenses --help
 
-    notation plugin list
+  gcc --version
+
+  notation plugin list
 fi

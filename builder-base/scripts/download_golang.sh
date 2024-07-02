@@ -75,21 +75,24 @@ function build::go::download {
       sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
 
       #TODO: Add better way for checking checksums for older version.
-      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != "$sha256sum" ]]; then
-        echo "Checksum doesn't match!"
-      fi
+      go_major_version=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+      sha256sum -c $BASE_DIR/go-go$version-${arch##*/}-checksum
     fi
   done
 }
 
-if [[ $ARCHITECTURE =~ amd64 ]]; then
-  ARCH='x86_64'
-else
-  ARCH='aarch64'
-fi
+function download_golang {
+  if [[ $ARCHITECTURE =~ amd64 ]]; then
+    ARCH='x86_64'
+  else
+    ARCH='aarch64'
+  fi
 
-if [[ ${VERSION:2:2} -ge "21" ]]; then
-  build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
-else
-  build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "$ARCH"
-fi
+  if [[ ${VERSION:2:2} -ge "21" ]]; then
+    build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
+  else
+    build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "$ARCH"
+  fi
+}
+
+[ ${SKIP_INSTALL:-false} != false ] || download_golang
