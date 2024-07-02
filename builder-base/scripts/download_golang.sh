@@ -76,7 +76,7 @@ function build::go::download {
 
       #TODO: Add better way for checking checksums for older version.
       go_major_version=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-      sha256sum -c $BASE_DIR/go-go$go_major_version-${arch##*/}-checksum
+      sha256sum -c $SCRIPT_ROOT/../checksums/go-go$go_major_version-${arch##*/}-checksum
     fi
   done
 }
