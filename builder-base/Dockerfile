@@ -359,8 +359,8 @@ ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.21*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.21*.rpm /tmp/aarch64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.21*.tar.gz /tmp/linux/arm64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.21*.tar.gz /tmp/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_121 && \
@@ -377,8 +377,8 @@ ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.22*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.22*.rpm /tmp/aarch64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.22*.tar.gz /tmp/linux/arm64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.22*.tar.gz /tmp/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_VERSION_122 && \
