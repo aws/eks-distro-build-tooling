@@ -62,12 +62,12 @@ for TARGETARCH in arm64 amd64; do
   echo "$sha256  helm-v${HELM_VERSION}-linux-$TARGETARCH.tar.gz" >$CHECKSUMS_ROOT/checksums/helm-$TARGETARCH-checksum
 
   # GOLANG
-  go_active_version=$(curl https://go.dev/dl/?mode=json | jq -r '.[].version' | sed -e "s/^$GO_PREFIX//" | sort)
-  for v in $go_active_version; do
-    go_major_version=$(if [[ $(echo "$v" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${v%.*}; else echo ${v%-*}; fi)
-    sha256=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.linux-${TARGETARCH/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
-    echo "$sha256" >"$CHECKSUMS_ROOT/checksums/go-$go_major_version-$TARGETARCH-checksum"
-  done
+  #go_active_version=$(curl https://go.dev/dl/?mode=json | jq -r '.[].version' | sed -e "s/^$GO_PREFIX//" | sort)
+  #for v in $go_active_version; do
+  #  go_major_version=$(if [[ $(echo "$v" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${v%.*}; else echo ${v%-*}; fi)
+  #  sha256=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.linux-${TARGETARCH/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
+  #  echo "$sha256" >"$CHECKSUMS_ROOT/checksums/go-$go_major_version-$TARGETARCH-checksum"
+  #done
 
   # GOVC
   echo "$(curl -sSL --retry 5 -v $GOVC_CHECKSUM_URL 2>&1 | grep $GOVC_FILENAME | cut -d ":" -f 2)" >$CHECKSUMS_ROOT/checksums/govc-$TARGETARCH-checksum
