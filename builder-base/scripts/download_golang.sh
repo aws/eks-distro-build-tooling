@@ -85,7 +85,7 @@ function build::go::download {
 if [[ $ARCHITECTURE =~ amd64 ]]; then
   ARCH='x86_64'
 else
-  ARCH='arm64'
+  ARCH='aarch64'
 fi
 
 if [[ ${VERSION:2:2} -ge "21" ]]; then
