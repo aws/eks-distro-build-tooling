@@ -82,16 +82,16 @@ function build::go::download {
 }
 
 function download_golang {
-  if [[ $ARCHITECTURE =~ amd64 ]]; then
-    ARCH='x86_64'
-  else
-    ARCH='aarch64'
-  fi
-
   if [[ ${VERSION:2:2} -ge "21" ]]; then
     build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
   else
-    build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "$ARCH"
+    if [[ $ARCHITECTURE =~ amd64 ]]; then
+      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
+    fi
+
+    if [[ $ARCHITECTURE =~ arm64 ]]; then
+      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
+    fi
   fi
 }
 
