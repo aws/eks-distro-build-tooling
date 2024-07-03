@@ -27,44 +27,72 @@ RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
 
 source $SCRIPT_ROOT/common_vars.sh
 
-function build::go::download(){
-    # Set up specific go version by using go get, additional versions apart from default can be installed by calling
-    # the function again with the specific parameter.
-    local version=${1%-*}
-    local outputDir=${2}
-    local arch=${3}
+function build::eksgo::download() {
+  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+  # the function again with the specific parameter.
+  local version=${1%-*}
+  local outputDir=${2}
+  local arch=${3}
 
-    for artifact in golang golang-bin; do
-        local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
-        if [ ! -f $filename ]; then
-            curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename --create-dirs
-            curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
+  for artifact in golang golang-bin; do
+    local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
+    if [ ! -f $filename ]; then
+      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename --create-dirs
+      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
 
-            if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
-                echo "Checksum doesn't match!"
-                exit 1
-            fi
-        fi
-    done
+      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]]; then
+        echo "Checksum doesn't match!"
+        exit 1
+      fi
+    fi
+  done
 
-    for artifact in golang-docs golang-misc golang-tests golang-src; do
-        local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
-        if [ ! -f $filename ]; then
-            curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename --create-dirs
-            curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
+  for artifact in golang-docs golang-misc golang-tests golang-src; do
+    local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
+    if [ ! -f $filename ]; then
+      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename --create-dirs
+      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
 
-            if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]] ; then 
-                echo "Checksum doesn't match!"
-                exit 1
-            fi
-        fi
-    done
+      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]]; then
+        echo "Checksum doesn't match!"
+        exit 1
+      fi
+    fi
+  done
 }
 
-if [[ $ARCHITECTURE =~ "linux/amd64" ]] ; then 
-    build::go::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
-fi
+function build::go::download {
+  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
+  # the function again with the specific parameter.
+  local version=${1%-*}
+  local outputDir=${2}
+  local archs=${3}
 
-if [[ $ARCHITECTURE =~ "linux/arm64" ]] ; then 
-    build::go::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
-fi
+  for arch in ${archs/,/ }; do
+    local filename="$outputDir/${arch}/go$version.${arch/\//-}.tar.gz"
+    if [ ! -f $filename ]; then
+      curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
+      sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
+
+      #TODO: Add better way for checking checksums for older version.
+      go_major_version=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+      sha256sum -c $SCRIPT_ROOT/../checksums/go-go$go_major_version-${arch##*/}-checksum
+    fi
+  done
+}
+
+function download_golang {
+  if [[ ${VERSION:2:2} -ge "21" ]]; then
+    build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
+  else
+    if [[ $ARCHITECTURE =~ amd64 ]]; then
+      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
+    fi
+
+    if [[ $ARCHITECTURE =~ arm64 ]]; then
+      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
+    fi
+  fi
+}
+
+[ ${SKIP_INSTALL:-false} != false ] || download_golang

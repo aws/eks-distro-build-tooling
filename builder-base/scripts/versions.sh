@@ -25,6 +25,7 @@ source $SCRIPT_ROOT/install_yq.sh
 source $SCRIPT_ROOT/install_packer.sh
 source $SCRIPT_ROOT/install_nodejs.sh
 source $SCRIPT_ROOT/install_helm.sh
+source $SCRIPT_ROOT/download_golang.sh
 source $SCRIPT_ROOT/install_goss.sh
 source $SCRIPT_ROOT/install_govc.sh
 source $SCRIPT_ROOT/install_hugo.sh
