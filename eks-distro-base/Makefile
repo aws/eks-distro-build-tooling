@@ -208,11 +208,11 @@ GOLANG_VARIANT_NAME=eks-distro-minimal-base-golang-compiler
 # This recreates the list of golang versions separated with ' ' from the golang_versions.yaml using xargs to strip the trailing whitespace.
 BASE_GOLANG_VARIANT_VERSIONS=$(shell yq '.golang.variants | to_entries | .[] | .value' golang_versions.yaml | tr '\n' ' ' | xargs)
 
-GOLANG_1.18_FULL_VERSION: 1.18.10-8
-GOLANG_1.19_FULL_VERSION: 1.19.13-14
-GOLANG_1.20_FULL_VERSION: 1.20.14-16
-GOLANG_1.21_FULL_VERSION: 1.21.12-0
-GOLANG_1.22_FULL_VERSION: 1.22.5-0
+GOLANG_1.18_FULL_VERSION=1.18.10-8
+GOLANG_1.19_FULL_VERSION=1.19.13-14
+GOLANG_1.20_FULL_VERSION=1.20.14-16
+GOLANG_1.21_FULL_VERSION=1.21.12-0
+GOLANG_1.22_FULL_VERSION=1.22.5-0
 
 BASE_GOLANG_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(addprefix $(ver)-,$(BASE_COMPILER_VARIANT_VERSIONS)))
 # ************************************************************
