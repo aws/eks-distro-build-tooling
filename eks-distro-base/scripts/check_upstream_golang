@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -e
+set -o pipefail
+set -x
+
+GO_PREFIX="go"
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+VERSIONS_YAML="${SCRIPT_ROOT}/../golang_versions.yaml"
+
+# Using YQ allows us to modify the existing tag or add the correct tag if it doesn't exist
+function update::go::version {
+  local -r version=$1
+  local -r minorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+
+  # Check if minor verion exists, if not add.
+  if [[ -z $(MINORVERSION=$minorversion yq 'eval(.golang.variants[] | select(. == env(MINORVERSION)))' $VERSIONS_YAML) ]]; then
+    MINORVERSION=$minorversion yq '.golang.variants += env(MINORVERSION)' -i $VERSIONS_YAML
+  fi
+
+  # Patch Version update if needed
+  UPDATE=".golang.versions.[\"GOLANG_${minorversion}_FULL_VERSION\"]" VERSION="$version-0" yq 'eval(strenv(UPDATE)) = strenv(VERSION)' -i $VERSIONS_YAML
+}
+
+# curl go.dev for the supported versions of go
+ACTIVE_VERSIONS=$(curl https://go.dev/dl/?mode=json | jq -r '.[].version' | sed -e "s/^$GO_PREFIX//" | sort)
+
+for version in ${ACTIVE_VERSIONS}; do
+  # pull golang versions in the versions.yaml
+  MAJORVERSION=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
+  MINIMAL_GO_VERSION=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_${MAJORVERSION}_FULL_VERSION") || ""
+  # check builder-base versions for the upstream version of golang
+  # if the version doesn't exist in the builder base update the versions yaml.
+  if [[ ! $MINIMAL_GO_VERSION =~ $version ]]; then
+    update::go::version $version
+  fi
+done
