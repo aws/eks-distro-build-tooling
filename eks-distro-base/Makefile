@@ -211,7 +211,7 @@ BASE_GOLANG_VARIANT_VERSIONS=$(shell yq '.golang.variants | to_entries | .[] | .
 BASE_GOLANG_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(addprefix $(ver)-,$(BASE_COMPILER_VARIANT_VERSIONS)))
 
 define SET_GOLANG_FULL_VERSIONS
-	$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(eval $(eval GOLANG_$(ver)_FULL_VERSION=$(shell yq ".golang.versions.[\"GOLANG_$(ver)_FULL_VERSION\"]" ~/test/golang_versions.yaml))))
+	$(foreach ver,$(BASE_GOLANG_VARIANT_VERSIONS),$(eval $(eval GOLANG_$(ver)_FULL_VERSION=$(shell yq ".golang.versions.[\"GOLANG_$(ver)_FULL_VERSION\"]" $(MAKE_ROOT)/golang_versions.yaml))))
 endef
 # ************************************************************
 
