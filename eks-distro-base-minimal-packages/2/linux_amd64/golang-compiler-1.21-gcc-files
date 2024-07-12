@@ -22521,7 +22521,7 @@
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   676KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   152KiB /var/lib/rpm/Dirnames
+-rw-r--r--   148KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--    16KiB /var/lib/rpm/Name
