@@ -835,6 +835,10 @@ var-value-%:
 check-golang-release:
 	${MAKE_ROOT}/scripts/check_upstream_golang
 
+.PHONY: create-golang-release-pr
+check-golang-release:
+	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' 'golang-image-release'
+
 
 ########### DO NOT EDIT #############################
 # To update call: make add-generated-help-block
