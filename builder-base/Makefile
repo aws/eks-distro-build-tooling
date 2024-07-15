@@ -153,3 +153,6 @@ download-golang-%:
 	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
 	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR} ${BUILDKIT_PLATFORMS}
 
+.PHONY: check-golang-release
+check-golang-release:
+	${MAKE_ROOT}/scripts/check_upstream_golang.sh

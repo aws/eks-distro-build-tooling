@@ -831,6 +831,10 @@ update-make-tests-expected:
 var-value-%:
 	@echo $($*)
 
+.PHONY: check-golang-release
+check-golang-release:
+	${MAKE_ROOT}/scripts/check_upstream_golang
+
 
 ########### DO NOT EDIT #############################
 # To update call: make add-generated-help-block
