@@ -41,7 +41,7 @@ ACTIVE_VERSIONS=$(curl https://go.dev/dl/?mode=json | jq -r '.[].version' | sed 
 for version in ${ACTIVE_VERSIONS}; do
   # pull golang versions in the versions.yaml
   MAJORVERSION=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-  MINIMAL_GO_VERSION=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_${MAJORVERSION}_FULL_VERSION") || ""
+  MINIMAL_GO_VERSION=$(yq ".golang.versions[\"GOLANG_${MAJORVERSION}_FULL_VERSION\"]" "$VERSIONS_YAML" || echo "")
   # check builder-base versions for the upstream version of golang
   # if the version doesn't exist in the builder base update the versions yaml.
   if [[ ! $MINIMAL_GO_VERSION =~ $version ]]; then
