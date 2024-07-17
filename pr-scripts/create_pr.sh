@@ -33,7 +33,7 @@ OTHER_CLONE_ROOT=${OTHER_CLONE_ROOT:-${SCRIPT_ROOT}/../../..}
 
 MINIMAL_IMAGE_REBUILD_PJ_NAME="quarterly-minimal-image-rebuild"
 
-GOLANG_RELEASE_PERIODIC="check-golang-upstream-release"
+GOLANG_RELEASE_PERIODIC="check-upstream-golang-release"
 
 CHANGED_FILE="tag file(s)"
 CHANGED_COMPONENT="base image"
