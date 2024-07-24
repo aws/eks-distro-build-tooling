@@ -56,7 +56,7 @@ keyutils-1.5.8-3.amzn2.0.2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
-krb5-libs-1.15.1-55.amzn2.2.7.aarch64
+krb5-libs-1.15.1-55.amzn2.2.8.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libassuan-2.1.0-3.amzn2.0.2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
