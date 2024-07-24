@@ -97,7 +97,7 @@
 # Comment out go_prerelease and go_patch as needed
 %global go_api 1.22
 #global go_prerelease rc2
-%global go_patch 4
+%global go_patch 5
 
 %global go_version %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease:~%{go_prerelease}}
 %global go_source %{go_api}%{?go_patch:.%{go_patch}}%{?go_prerelease}
@@ -525,6 +525,9 @@ fi
 %endif
 
 %changelog
+* Wed Jul 24 2024 Cameron Rozean <rcrozean@amazon.com> - 1.22.5-5
+- Bump tracking patch version to 1.22.4 from 1.22.5
+
 * Wed Jun 05 2024 Saurabh Parekh <sjparekh@amazon.com> - 1.22.4-4
 - Bump tracking patch version to 1.22.4 from 1.22.3
 
