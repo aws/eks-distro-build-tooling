@@ -50,7 +50,7 @@ kernel-headers-4.14.348-265.565.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-55.amzn2.2.7.x86_64
+krb5-libs-1.15.1-55.amzn2.2.8.x86_64
 less-458-9.amzn2.0.4.x86_64
 libacl-2.2.51-14.amzn2.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
