@@ -3363,7 +3363,7 @@
 -rw-r--r--     249B /usr/lib/python3.11/site-packages/setuptools/_vendor/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--    22KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/__pycache__/ordered_set.cpython-311.pyc
 -rw-r--r--   106KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/__pycache__/typing_extensions.cpython-311.pyc
--rw-r--r--    16KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/__pycache__/zipp.cpython-311.pyc
+-rw-r--r--    19KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/__pycache__/zipp.cpython-311.pyc
 -rw-r--r--    30KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata/__init__.py
 -rw-r--r--    57KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--   3.9KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata/__pycache__/_adapters.cpython-311.pyc
@@ -3466,7 +3466,7 @@
 -rw-r--r--   2.9KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/tomli/_re.py
 -rw-r--r--     254B /usr/lib/python3.11/site-packages/setuptools/_vendor/tomli/_types.py
 -rw-r--r--    86KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions.py
--rw-r--r--   8.3KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/zipp.py
+-rw-r--r--    11KiB /usr/lib/python3.11/site-packages/setuptools/_vendor/zipp.py
 -rw-r--r--   7.2KiB /usr/lib/python3.11/site-packages/setuptools/archive_util.py
 -rw-r--r--    20KiB /usr/lib/python3.11/site-packages/setuptools/build_meta.py
 -rw-r--r--     396B /usr/lib/python3.11/site-packages/setuptools/command/__init__.py

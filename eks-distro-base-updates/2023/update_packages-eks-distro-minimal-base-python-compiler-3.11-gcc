@@ -1,4 +1,4 @@
 
-amazon-linux-repo-cdn.noarch
 kernel-headers.x86_64
-system-release.noarch
+python3.11-setuptools.noarch
+python3.11-setuptools-wheel.noarch
