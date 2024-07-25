@@ -38,6 +38,11 @@ IMAGE_NAME?=golang-debian
 IMAGE_TAG?=$(GIT_TAG)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
 LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(GIT_TAG)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
+# Variables used in the using upstream binarys in the golang-debian image
+BUILDER_BASE_VERSIONS_YAML=$(BASE_DIRECTORY)/builder-base/versions.yaml
+BUILDER_BASE_GO_VERSION=$(shell grep -E "^GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION))" $(BUILDER_BASE_VERSIONS_YAML))
+GO_BIN_VERSION_WITH_RELEASE=$(subst GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION)): ,,$(BUILDER_BASE_GO_VERSION))
+GO_BIN_VERSION_WITHOUT_RELEASE=$(shell [[ $(GO_BIN_VERSION_WITH_RELEASE) =~ [0-9]+.[0-9]+.[0-9]+ ]] && echo $${BASH_REMATCH[0]})
 
 PUSH_IMAGES?=true
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
@@ -98,6 +103,10 @@ validate-go-archive-checksum:
 		fi ; \
 	done
 
+.PHONY: prod-release-images-upstream-bins
+prod-release-images-upstream-bins: export AWS_PROFILE=ecr-public-push
+prod-release-images-upstream-bins: images-upstream-bins
+
 .PHONY: fetch-golang-source-archive
 fetch-golang-source-archive:
 	curl -L -o $(HOME)/rpmbuild/SOURCES/$(GIT_TAG).src.tar.gz https://github.com/golang/go/archive/refs/tags/$(GIT_TAG).tar.gz --create-dirs 
@@ -139,6 +148,33 @@ images:
 		--frontend dockerfile.v0 \
 		--opt platform=$(GOOS)/$(ARCH_LOWER) \
 		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/$(GIT_TAG).$(GOOS)-$(ARCH_LOWER).tar.gz \
+		--local dockerfile=$(PROJECT_DIRECTORY)/docker/debianBase \
+		--local context=$(VERSION_DIRECTORY)/archives \
+		--progress plain \
+		--output $(BUILDKIT_OUTPUT)
+
+.PHONY: fetch-golang-upstream-bins
+fetch-golang-upstream-bins:
+	$(PROJECT_DIRECTORY)/scripts/get_upstream_golang.sh $(VERSION_DIRECTORY)/archives/ $(GO_BIN_VERSION_WITHOUT_RELEASE)
+
+.PHONY: local-images-upstream-bins
+local-images-upstream-bins: PUSH_IMAGES=false
+local-images-upstream-bins: export BUILDKIT_HOST=docker-container://buildkitd
+local-images-upstream-bins: images-upstream-bins
+
+.PHONY: images-upstream-bins
+images-upstream-bins: IMAGE_REPO=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+images-upstream-bins: IMAGE_NAME=golang-debian
+images-upstream-bins: IMAGE_TAG=$(GO_BIN_VERSION_WITHOUT_RELEASE)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
+images-upstream-bins: LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(GO_BIN_VERSION_WITHOUT_RELEASE)
+images-upstream-bins: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
+images-upstream-bins: fetch-golang-upstream-bins buildkit-check
+images-upstream-bins:
+	$(BASE_DIRECTORY)/scripts/buildkit.sh \
+		build \
+		--frontend dockerfile.v0 \
+		--opt platform=$(GOOS)/$(ARCH_LOWER) \
+		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/go$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz \
 		--local dockerfile=$(PROJECT_DIRECTORY)/docker/debianBase \
 		--local context=$(VERSION_DIRECTORY)/archives \
 		--progress plain \

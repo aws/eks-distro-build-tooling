@@ -11,7 +11,7 @@ COPY --from=go-untar /usr/local/go/ /usr/local/go/
 
 
 ENV GOPATH /go
-ENV PATH /usr/local/go/bin:$GOPATH/bin:$PATH
+ENV PATH /usr/local/go/go/bin:$GOPATH/bin:$PATH
 
 RUN set -eux; \
 	apt-get update; \
