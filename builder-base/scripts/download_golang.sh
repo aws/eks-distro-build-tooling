@@ -72,9 +72,8 @@ function build::go::download {
     local filename="$outputDir/${arch}/go$version.${arch/\//-}.tar.gz"
     if [ ! -f $filename ]; then
       curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
-      sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
+      ${SCRIPT_ROOT}/update_shasums.sh
 
-      #TODO: Add better way for checking checksums for older version.
       go_major_version=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
       sha256sum -c $SCRIPT_ROOT/../checksums/go-go$go_major_version-${arch##*/}-checksum
     fi
