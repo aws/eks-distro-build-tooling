@@ -14,24 +14,24 @@
 # limitations under the License.
 
 if [ "$ARCHITECTURE" == "ARM64" ]; then
-    echo "Won't perform image release for ARM64 arch"
-    exit 0
+  echo "Won't perform image release for ARM64 arch"
+  exit 0
 fi
 
 if [ "$AWS_ROLE_ARN" == "" ]; then
-    echo "Empty AWS_ROLE_ARN"
-    exit 1
+  echo "Empty AWS_ROLE_ARN"
+  exit 1
 fi
 
 if [ "$ECR_PUBLIC_PUSH_ROLE_ARN" == "" ]; then
-    echo "Empty ECR_PUBLIC_PUSH_ROLE_ARN"
-    exit 1
+  echo "Empty ECR_PUBLIC_PUSH_ROLE_ARN"
+  exit 1
 fi
 
 BASE_DIRECTORY=$(git rev-parse --show-toplevel)
 cd ${BASE_DIRECTORY} || exit
 
-cat << EOF > awscliconfig
+cat <<EOF >awscliconfig
 [default]
 output=json
 region=${AWS_REGION:-${AWS_DEFAULT_REGION:-us-west-2}}
@@ -47,4 +47,4 @@ export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=ecr-public-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
-make -C ${BASE_DIRECTORY}/projects/golang/go prod-release-images
+make -C ${BASE_DIRECTORY}/projects/golang/go "prod-release-images-upstream-bins"
