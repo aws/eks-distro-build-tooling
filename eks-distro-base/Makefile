@@ -837,7 +837,7 @@ check-golang-release:
 
 .PHONY: create-golang-release-pr
 create-golang-release-pr: IMAGE_UPDATE_BRANCH="golang-image-release"
-create-golang-release-pr: open-pr-check
+create-golang-release-pr: update-make-tests-expected open-pr-check
 create-golang-release-pr:
 	$(MAKE_ROOT)/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' $(IMAGE_UPDATE_BRANCH)
 
