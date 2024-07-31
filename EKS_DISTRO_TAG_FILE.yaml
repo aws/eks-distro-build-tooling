@@ -4,7 +4,7 @@ al2:
   eks-distro-minimal-base-nonroot: 2024-04-01-1711929684.2
   eks-distro-minimal-base-glibc: 2024-07-01-1719792056.2
   eks-distro-minimal-base-iptables: 2024-07-01-1719792056.2
-  eks-distro-minimal-base-docker-client: 2024-07-01-1719792056.2
+  eks-distro-minimal-base-docker-client: 2024-07-31-1722409313.2
   eks-distro-minimal-base-csi: 2024-07-24-1721846394.2
   eks-distro-minimal-base-csi-ebs: 2024-07-01-1719792056.2
   eks-distro-minimal-base-haproxy: 2024-07-24-1721846394.2
