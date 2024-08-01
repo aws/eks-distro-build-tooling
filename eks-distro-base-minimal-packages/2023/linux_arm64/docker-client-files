@@ -211,7 +211,7 @@
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
--rwxr-xr-x    25MiB /usr/bin/docker
+-rwxr-xr-x    26MiB /usr/bin/docker
 -rwxr-xr-x   197KiB /usr/bin/gencat
 -rwxr-xr-x   196KiB /usr/bin/getconf
 -rwxr-xr-x   197KiB /usr/bin/getent
