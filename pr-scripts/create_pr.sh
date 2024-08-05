@@ -123,7 +123,7 @@ if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
   git add ./eks-distro-base/golang_versions.yaml
   git add ./builder-base/versions.yaml
   git add ./builder-base/checksums/go*
-  git add ./make-tests/expected/*golang*
+  git add ./eks-distro-base/make-tests/expected/*golang*
 fi
 
 FILES_ADDED=$(git diff --staged --name-only)
