@@ -29,10 +29,13 @@ function update::go::version {
   # Check if minor verion exists, if not add.
   if [[ -z $(MINORVERSION=$minorversion yq 'eval(.golang.variants[] | select(. == env(MINORVERSION)))' $VERSIONS_YAML) ]]; then
     MINORVERSION=$minorversion yq '.golang.variants += env(MINORVERSION)' -i $VERSIONS_YAML
+    # Update make-tests GO_VERSION_OVERRIDES
+    sed -i -E "s/(GO_VERSION_OVERRIDES=.*$)/$(grep 'GO_VERSION_OVERRIDES=' ${SCRIPT_ROOT}/../make-tests/make-dry-run | sed -E "s/\"$/  GOLANG_${MINORVERSION}_FULL_VERSION=${MINORVERSION}-mock\"/")/g" ${SCRIPT_ROOT}/make-tests/make-dry-run
   fi
 
   # Patch Version update if needed
   UPDATE=".golang.versions.[\"GOLANG_${minorversion}_FULL_VERSION\"]" VERSION="$version-0" yq 'eval(strenv(UPDATE)) = strenv(VERSION)' -i $VERSIONS_YAML
+
 }
 
 # curl go.dev for the supported versions of go
