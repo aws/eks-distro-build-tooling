@@ -72,7 +72,6 @@ function build::go::download {
     local filename="$outputDir/${arch}/go$version.${arch/\//-}.tar.gz"
     if [ ! -f $filename ]; then
       curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
-      ${SCRIPT_ROOT}/update_shasums.sh
 
       go_major_version=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
       sha256sum -c $SCRIPT_ROOT/../checksums/go-go$go_major_version-${arch##*/}-checksum

@@ -28,7 +28,7 @@ function update::go::version {
 
   local -r cur_builder_base_version=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${majorversion//./}")
 
-  sed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}-0/g" "${VERSIONS_YAML}"
+  gsed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}-0/g" "${VERSIONS_YAML}"
 }
 
 function add::go::version {
@@ -71,3 +71,5 @@ for version in ${ACTIVE_VERSIONS}; do
     modify::go::minimal_image $version
   fi
 done
+
+${SCRIPT_ROOT}/update_shasums.sh
