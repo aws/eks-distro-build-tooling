@@ -28,7 +28,7 @@ function update::go::version {
 
   local -r cur_builder_base_version=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${majorversion//./}")
 
-  gsed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}-0/g" "${VERSIONS_YAML}"
+  sed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}-0/g" "${VERSIONS_YAML}"
 }
 
 function add::go::version {
