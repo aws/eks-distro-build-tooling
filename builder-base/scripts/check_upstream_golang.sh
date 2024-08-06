@@ -71,3 +71,5 @@ for version in ${ACTIVE_VERSIONS}; do
     modify::go::minimal_image $version
   fi
 done
+
+${SCRIPT_ROOT}/update_shasums.sh
