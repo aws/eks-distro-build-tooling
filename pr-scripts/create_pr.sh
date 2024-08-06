@@ -119,11 +119,16 @@ if [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
   git add ../EKS_DISTRO_TAG_FILE.yaml
 fi
 if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
-  git diff --name-only
+  # sync expected files changed during the previous make calls in aws/eks-distro-build-tooling to pr-bot fork
+  cp -f ${SCRIPT_ROOT}/../EKS_DISTRO_TAG_FILE.yaml ./EKS_DISTRO_TAG_FILE.yaml
+  cp -f ${SCRIPT_ROOT}/../eks-distro-base/golang_versions.yaml ./eks-distro-base/golang_versions.yaml
+  cp -f ${SCRIPT_ROOT}/../builder-base/versions.yaml ./builder-base/versions.yaml
+  cp -rf ${SCRIPT_ROOT}/../builder-base/checksums ./builder-base/checksums
+  cp -rf ${SCRIPT_ROOT}/../eks-distro-base/make-tests/expected ./eks-distro-base/make-tests/expected/
   git add ./EKS_DISTRO_TAG_FILE.yaml
   git add ./eks-distro-base/golang_versions.yaml
   git add ./builder-base/versions.yaml
-  git add ./builder-base/checksums/go*
+  git add ./builder-base/checksums/go-*
   git add ./eks-distro-base/make-tests/expected/*golang*
 fi
 
