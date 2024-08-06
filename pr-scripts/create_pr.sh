@@ -119,6 +119,7 @@ if [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
   git add ../EKS_DISTRO_TAG_FILE.yaml
 fi
 if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
+  git diff --name-only
   git add ./EKS_DISTRO_TAG_FILE.yaml
   git add ./eks-distro-base/golang_versions.yaml
   git add ./builder-base/versions.yaml
