@@ -1,10 +1,10 @@
-amazon-linux-repo-cdn-2023.5.20240624-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.5.20240805-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
-ca-certificates-2023.2.64-1.0.amzn2023.0.1.noarch
+ca-certificates-2023.2.68-1.0.amzn2023.0.1.noarch
 filesystem-3.14-5.amzn2023.0.3.aarch64
-glibc-2.34-52.amzn2023.0.10.aarch64
-glibc-common-2.34-52.amzn2023.0.10.aarch64
-glibc-minimal-langpack-2.34-52.amzn2023.0.10.aarch64
+glibc-2.34-52.amzn2023.0.11.aarch64
+glibc-common-2.34-52.amzn2023.0.11.aarch64
+glibc-minimal-langpack-2.34-52.amzn2023.0.11.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 libgcc-11.4.1-2.amzn2023.0.2.aarch64
@@ -14,6 +14,6 @@ libstdc++-11.4.1-2.amzn2023.0.2.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
-system-release-2023.5.20240624-0.amzn2023.noarch
+system-release-2023.5.20240805-0.amzn2023.noarch
 tzdata-2024a-1.amzn2023.0.1.noarch
 util-linux-core-2.37.4-1.amzn2023.0.4.aarch64

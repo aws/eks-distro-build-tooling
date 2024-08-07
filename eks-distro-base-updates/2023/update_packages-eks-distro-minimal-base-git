@@ -1,2 +1,4 @@
 
-openssh-clients.x86_64
+ca-certificates.noarch
+krb5-libs.x86_64
+openssl-libs.x86_64

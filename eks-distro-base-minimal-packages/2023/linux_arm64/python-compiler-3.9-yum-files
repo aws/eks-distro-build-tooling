@@ -48,11 +48,11 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     566B /etc/pki/ca-trust/extracted/edk2/README
--r--r--r--   158KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
+-r--r--r--   160KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   159KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   160KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   515KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   521KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
 -r--r--r--   2.8KiB /etc/pki/ca-trust/extracted/pem/directory-hash/ACCVRAIZ1.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/AC_RAIZ_FNMT-RCM.pem
@@ -113,8 +113,8 @@
 -r--r--r--   1.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_EC1.pem
 -r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_G2.pem
 -r--r--r--   2.2KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_G4.pem
+-r--r--r--     920B /etc/pki/ca-trust/extracted/pem/directory-hash/FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GDCA_TrustAUTH_R5_ROOT.pem
--r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GLOBALTRUST_2020.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GTS_Root_R1.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GTS_Root_R2.pem
 -r--r--r--     765B /etc/pki/ca-trust/extracted/pem/directory-hash/GTS_Root_R3.pem
@@ -176,6 +176,8 @@
 -r--r--r--   1.6KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TWCA_Global_Root_CA.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TWCA_Root_Certification_Authority.pem
+-r--r--r--     843B /etc/pki/ca-trust/extracted/pem/directory-hash/Telekom_Security_TLS_ECC_Root_2020.pem
+-r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Telekom_Security_TLS_RSA_Root_2023.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TeliaSonera_Root_CA_v1.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Telia_Root_CA_v2.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TrustAsia_Global_Root_CA_G3.pem
@@ -199,9 +201,9 @@
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_Root_CA_-_G1.pem
 -r--r--r--     774B /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_ECC_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_Root_CA.pem
--r--r--r--   157KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
--r--r--r--   387KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   218KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   160KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   383KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
+-r--r--r--   220KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
@@ -1992,7 +1994,7 @@
 -rw-r--r--   2.8KiB /usr/lib/python3.9/site-packages/pkg_resources/extern/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--       4B /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/INSTALLER
 -rw-r--r--   1.1KiB /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/LICENSE
--rw-r--r--   4.4KiB /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/METADATA
+-rw-r--r--   4.5KiB /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/METADATA
 -rw-r--r--      92B /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/WHEEL
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/entry_points.txt
 -rw-r--r--      60B /usr/lib/python3.9/site-packages/setuptools-59.6.0.dist-info/top_level.txt
@@ -2031,8 +2033,8 @@
 -rw-r--r--    42KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/msvc.cpython-39.pyc
 -rw-r--r--   3.5KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/namespaces.cpython-39.opt-1.pyc
 -rw-r--r--   3.5KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/namespaces.cpython-39.pyc
--rw-r--r--    33KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/package_index.cpython-39.opt-1.pyc
--rw-r--r--    33KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/package_index.cpython-39.pyc
+-rw-r--r--    34KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/package_index.cpython-39.opt-1.pyc
+-rw-r--r--    34KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/package_index.cpython-39.pyc
 -rw-r--r--     446B /usr/lib/python3.9/site-packages/setuptools/__pycache__/py34compat.cpython-39.opt-1.pyc
 -rw-r--r--     446B /usr/lib/python3.9/site-packages/setuptools/__pycache__/py34compat.cpython-39.pyc
 -rw-r--r--    16KiB /usr/lib/python3.9/site-packages/setuptools/__pycache__/sandbox.cpython-39.opt-1.pyc
@@ -2350,7 +2352,7 @@
 -rw-r--r--   5.1KiB /usr/lib/python3.9/site-packages/setuptools/monkey.py
 -rw-r--r--    50KiB /usr/lib/python3.9/site-packages/setuptools/msvc.py
 -rw-r--r--   3.1KiB /usr/lib/python3.9/site-packages/setuptools/namespaces.py
--rw-r--r--    40KiB /usr/lib/python3.9/site-packages/setuptools/package_index.py
+-rw-r--r--    41KiB /usr/lib/python3.9/site-packages/setuptools/package_index.py
 -rw-r--r--     245B /usr/lib/python3.9/site-packages/setuptools/py34compat.py
 -rw-r--r--    15KiB /usr/lib/python3.9/site-packages/setuptools/sandbox.py
 -rw-r--r--     218B /usr/lib/python3.9/site-packages/setuptools/script (dev).tmpl
@@ -2870,7 +2872,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x   197KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   983KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   982KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   391KiB /usr/lib64/libksba.so.8.14.3
 -rwxr-xr-x   198KiB /usr/lib64/liblber-2.4.so.2.11.5
@@ -7055,7 +7057,7 @@
 -rw-r--r--   2.0MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
--rwxr-xr-x   586KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
+-rwxr-xr-x   587KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100
@@ -9008,7 +9010,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.0MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -9041,6 +9043,7 @@ lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/02265526.0 En
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/04f60c28.0 USERTrust_ECC_Certification_Authority.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/062cdee6.0 GlobalSign_Root_CA_-_R3.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/064e0aa9.0 QuoVadis_Root_CA_2_G3.pem
+lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/068570d1.0 FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
 lrwxrwxrwx      50B /etc/pki/ca-trust/extracted/pem/directory-hash/06dc52d5.0 SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/073bfcc5.0 TrustAsia_Global_Root_CA_G4.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/08063a00.0 Security_Communication_RootCA3.pem
@@ -9067,7 +9070,6 @@ lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/1e08bfd1.0 Id
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/1e09d511.0 T-TeleSec_GlobalRoot_Class_2.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/1e1eab7c.0 T-TeleSec_GlobalRoot_Class_3.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/1e8e7201.0 GlobalSign_Root_CA_-_R3.pem
-lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/1ec40989.0 GLOBALTRUST_2020.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/1f58a078.0 QuoVadis_Root_CA_2_G3.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/219d9499.0 Go_Daddy_Class_2_CA.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/228f89db.0 CommScope_Public_Trust_ECC_Root-01.pem
@@ -9142,6 +9144,7 @@ lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/653b494a.0 Ba
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/68dd7389.0 Hongkong_Post_Root_CA_3.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/69105f4f.0 DigiCert_Assured_ID_Root_CA.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/6b03dec0.0 GTS_Root_R3.pem
+lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/6b483515.0 Telekom_Security_TLS_ECC_Root_2020.pem
 lrwxrwxrwx      40B /etc/pki/ca-trust/extracted/pem/directory-hash/6b99d060.0 Entrust_Root_Certification_Authority.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/6d41d539.0 Amazon_Root_CA_2.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/6f7454b3.0 Security_Communication_RootCA3.pem
@@ -9161,6 +9164,7 @@ lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/7a7c655d.0 Am
 lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/7a819ef2.0 QuoVadis_Root_CA_2.pem
 lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/7e067d03.0 BJCA_Global_Root_CA2.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/7f3d5d1d.0 DigiCert_Assured_ID_Root_G3.pem
+lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/7fa05551.0 Telekom_Security_TLS_RSA_Root_2023.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/8160b96c.0 Microsec_e-Szigno_Root_CA_2009.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/81b9768f.0 DigiCert_High_Assurance_EV_Root_CA.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/81f2d2b1.0 CommScope_Public_Trust_ECC_Root-02.pem
@@ -9234,6 +9238,7 @@ lrwxrwxrwx      39B /etc/pki/ca-trust/extracted/pem/directory-hash/b81b93f0.0 AC
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/b872f2b4.0 Atos_TrustedRoot_2011.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/b92fd57f.0 HARICA_TLS_RSA_Root_CA_2021.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/b936d1c6.0 AC_RAIZ_FNMT-RCM.pem
+lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/ba8887ce.0 FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/bc3f2570.0 Go_Daddy_Root_Certificate_Authority_-_G2.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/bd43e1dd.0 Hongkong_Post_Root_CA_3.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/bdacca6f.0 Secure_Global_CA.pem
@@ -9279,6 +9284,7 @@ lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/dbff3a01.0 em
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/dc4d6a89.0 GlobalSign_Root_CA_-_R6.pem
 lrwxrwxrwx      59B /etc/pki/ca-trust/extracted/pem/directory-hash/dc99f41e.0 Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/dd8e9d41.0 DigiCert_Global_Root_G3.pem
+lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/ddcda989.0 Telekom_Security_TLS_ECC_Root_2020.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/de6d66f3.0 Amazon_Root_CA_4.pem
 lrwxrwxrwx      35B /etc/pki/ca-trust/extracted/pem/directory-hash/dfc0fe80.0 OISTE_WISeKey_Global_Root_GB_CA.pem
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/e071171e.0 Sectigo_Public_Server_Authentication_Root_R46.pem
@@ -9299,6 +9305,7 @@ lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/ecccd8db.0 HA
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/ed39abd0.0 DigiCert_Global_Root_G3.pem
 lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/ed858448.0 vTrus_ECC_Root_CA.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/edcbddb5.0 Trustwave_Global_Certification_Authority.pem
+lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/ee37c333.0 Telekom_Security_TLS_RSA_Root_2023.pem
 lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/ee532fd5.0 vTrus_ECC_Root_CA.pem
 lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/ee64a828.0 Comodo_AAA_Services_root.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/eed8c118.0 COMODO_ECC_Certification_Authority.pem
@@ -9315,7 +9322,6 @@ lrwxrwxrwx      18B /etc/pki/ca-trust/extracted/pem/directory-hash/f39fc864.0 Se
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/f459871d.0 emSign_Root_CA_-_G1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/f51bb24c.0 Certigna_Root_CA.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/f8fc53da.0 Certum_Trusted_Root_CA.pem
-lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/fa5da96b.0 GLOBALTRUST_2020.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/fb5fa911.0 Amazon_Root_CA_2.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/fb717492.0 Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/fc5a8f99.0 USERTrust_RSA_Certification_Authority.pem
