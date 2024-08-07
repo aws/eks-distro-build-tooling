@@ -42,7 +42,7 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
 BUILDER_BASE_VERSIONS_YAML=$(BASE_DIRECTORY)/builder-base/versions.yaml
 BUILDER_BASE_GO_VERSION=$(shell grep -E "^GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION))" $(BUILDER_BASE_VERSIONS_YAML))
 GO_BIN_VERSION_WITH_RELEASE=$(subst GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION)): ,,$(BUILDER_BASE_GO_VERSION))
-GO_BIN_VERSION_WITHOUT_RELEASE=$(shell [[ $(GO_BIN_VERSION_WITH_RELEASE) =~ [0-9]+.[0-9]+.[0-9]+ ]] && echo $${BASH_REMATCH[0]})
+GO_BIN_VERSION_WITHOUT_RELEASE=go$(shell [[ $(GO_BIN_VERSION_WITH_RELEASE) =~ [0-9]+.[0-9]+.[0-9]+ ]] && echo $${BASH_REMATCH[0]})
 
 PUSH_IMAGES?=true
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
@@ -172,7 +172,7 @@ images-upstream-bins:
 		build \
 		--frontend dockerfile.v0 \
 		--opt platform=$(GOOS)/$(ARCH_LOWER) \
-		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/go$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz \
+		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz \
 		--local dockerfile=$(PROJECT_DIRECTORY)/docker/debianBase \
 		--local context=$(VERSION_DIRECTORY)/archives \
 		--progress plain \

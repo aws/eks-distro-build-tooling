@@ -36,10 +36,10 @@ function build::go::download {
   local archs=${3}
 
   for arch in ${archs/,/ }; do
-    local filename="$outputDir/${arch}/go$version.${arch/\//-}.tar.gz"
+    local filename="$outputDir/${arch}/$version.${arch/\//-}.tar.gz"
     if [ ! -f $filename ]; then
-      curl -sSLf --retry 5 "https://go.dev/dl/go$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
-      sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "go$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
+      curl -sSLf --retry 5 "https://go.dev/dl/$version.${arch/\//-}.tar.gz" -o $filename --create-dirs
+      sha256sum=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "$version.${arch/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
 
       if [[ $(sha256sum ${filename} | cut -d ' ' -f1) != "${sha256sum}" ]]; then
         echo "CHECKSUMs don't match"
