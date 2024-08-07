@@ -163,6 +163,9 @@ local-images-upstream-bins: export BUILDKIT_HOST=docker-container://buildkitd
 local-images-upstream-bins: images-upstream-bins
 
 .PHONY: images-upstream-bins
+images-upstream-bins: IMAGE_TAG=$(GO_BIN_VERSION_WITHOUT_RELEASE)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
+images-upstream-bins: LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(GO_BIN_VERSION_WITHOUT_RELEASE)
+images-upstream-bins: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
 images-upstream-bins: fetch-golang-upstream-bins buildkit-check
 images-upstream-bins:
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
