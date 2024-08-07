@@ -172,7 +172,7 @@ images-upstream-bins:
 		build \
 		--frontend dockerfile.v0 \
 		--opt platform=$(GOOS)/$(ARCH_LOWER) \
-		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/go$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz \
+		--opt build-arg:GOLANG_ARCHIVE_PATH=$(GOOS)/$(ARCH_LOWER)/$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz \
 		--local dockerfile=$(PROJECT_DIRECTORY)/docker/debianBase \
 		--local context=$(VERSION_DIRECTORY)/archives \
 		--progress plain \
