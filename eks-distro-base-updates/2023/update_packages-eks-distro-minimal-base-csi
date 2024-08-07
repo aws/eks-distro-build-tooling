@@ -1,5 +1,7 @@
 
-amazon-linux-repo-cdn.noarch
-system-release.noarch
-systemd.x86_64
-systemd-libs.x86_64
+ca-certificates.noarch
+krb5-libs.x86_64
+openssl-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+python3-setuptools-wheel.noarch

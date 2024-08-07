@@ -1,3 +1,7 @@
 
-python3.11-setuptools.noarch
-python3.11-setuptools-wheel.noarch
+ca-certificates.noarch
+krb5-libs.x86_64
+openssl-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+python3-setuptools-wheel.noarch
