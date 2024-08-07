@@ -42,7 +42,7 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
 BUILDER_BASE_VERSIONS_YAML=$(BASE_DIRECTORY)/builder-base/versions.yaml
 BUILDER_BASE_GO_VERSION=$(shell grep -E "^GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION))" $(BUILDER_BASE_VERSIONS_YAML))
 GO_BIN_VERSION_WITH_RELEASE=$(subst GOLANG_VERSION_$(subst .,,$(GO_SOURCE_VERSION)): ,,$(BUILDER_BASE_GO_VERSION))
-GO_BIN_VERSION_WITHOUT_RELEASE=$(shell [[ $(GO_BIN_VERSION_WITH_RELEASE) =~ [0-9]+.[0-9]+.[0-9]+ ]] && echo $${BASH_REMATCH[0]})
+GO_BIN_VERSION_WITHOUT_RELEASE=go$(shell [[ $(GO_BIN_VERSION_WITH_RELEASE) =~ [0-9]+.[0-9]+.[0-9]+ ]] && echo $${BASH_REMATCH[0]})
 
 PUSH_IMAGES?=true
 BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=$(PUSH_IMAGES)
@@ -163,7 +163,7 @@ local-images-upstream-bins: export BUILDKIT_HOST=docker-container://buildkitd
 local-images-upstream-bins: images-upstream-bins
 
 .PHONY: images-upstream-bins
-images-upstream-bins: IMAGE_TAG=go$(GO_BIN_VERSION_WITHOUT_RELEASE)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
+images-upstream-bins: IMAGE_TAG=$(GO_BIN_VERSION_WITHOUT_RELEASE)-$(BUILD_ID)-$(IMAGE_BUILD_ID)
 images-upstream-bins: LATEST_IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(GO_BIN_VERSION_WITHOUT_RELEASE)
 images-upstream-bins: IMAGE=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG),$(LATEST_IMAGE)
 images-upstream-bins: fetch-golang-upstream-bins buildkit-check
