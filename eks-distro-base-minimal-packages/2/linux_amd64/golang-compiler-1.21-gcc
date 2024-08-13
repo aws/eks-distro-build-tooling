@@ -4,7 +4,7 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.x86_64
 binutils-2.29.1-31.amzn2.0.1.x86_64
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2023.2.64-1.amzn2.0.1.noarch
+ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cpio-2.12-11.amzn2.0.1.x86_64
@@ -13,7 +13,7 @@ cracklib-2.9.0-11.amzn2.0.2.x86_64
 cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
 cryptsetup-libs-1.7.4-4.amzn2.x86_64
 curl-8.3.0-1.amzn2.0.7.x86_64
-cyrus-sasl-lib-2.1.26-24.amzn2.x86_64
+cyrus-sasl-lib-2.1.26-24.amzn2.0.1.x86_64
 dbus-1.10.24-7.amzn2.0.4.x86_64
 dbus-libs-1.10.24-7.amzn2.0.4.x86_64
 device-mapper-1.02.170-6.amzn2.5.x86_64
@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.348-265.565.amzn2.x86_64
+kernel-headers-4.14.349-266.564.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -111,7 +111,7 @@ nss-util-3.90.0-1.amzn2.x86_64
 openldap-2.4.44-25.amzn2.0.7.x86_64
 openssh-7.4p1-22.amzn2.0.7.x86_64
 openssh-clients-7.4p1-22.amzn2.0.7.x86_64
-openssl-libs-1.0.2k-24.amzn2.0.12.x86_64
+openssl-libs-1.0.2k-24.amzn2.0.13.x86_64
 pam-1.1.8-23.amzn2.0.2.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 pcre2-10.23-11.amzn2.0.2.x86_64
@@ -142,7 +142,7 @@ sqlite-3.7.17-8.amzn2.1.2.x86_64
 system-release-2-16.amzn2.x86_64
 systemd-219-78.amzn2.0.23.x86_64
 systemd-libs-219-78.amzn2.0.23.x86_64
-tar-1.26-35.amzn2.0.3.x86_64
+tar-1.26-35.amzn2.0.4.x86_64
 tzdata-2024a-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.11.x86_64

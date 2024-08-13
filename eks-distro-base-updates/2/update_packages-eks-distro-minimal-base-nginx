@@ -1,4 +1,4 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
+ca-certificates.noarch
+openssl-libs.x86_64
+openssl11-libs.x86_64

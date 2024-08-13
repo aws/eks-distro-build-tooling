@@ -1,6 +1,6 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2023.2.64-1.amzn2.0.1.noarch
+ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
 e2fsprogs-1.42.9-19.amzn2.0.1.x86_64
 e2fsprogs-libs-1.42.9-19.amzn2.0.1.x86_64

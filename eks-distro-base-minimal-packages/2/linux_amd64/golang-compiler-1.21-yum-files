@@ -71,13 +71,13 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   159KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   160KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   261KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   269KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
--r--r--r--   157KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   160KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   218KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   220KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
 -rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
@@ -13072,7 +13072,7 @@
 -rwxr-xr-x    16KiB /usr/bin/tabs
 -rwxr-xr-x    33KiB /usr/bin/tac
 -rwxr-xr-x    62KiB /usr/bin/tail
--rwxr-xr-x   334KiB /usr/bin/tar
+-rwxr-xr-x   335KiB /usr/bin/tar
 -rwxr-xr-x    33KiB /usr/bin/taskset
 -rwxr-xr-x   113KiB /usr/bin/tbl
 -rwxr-xr-x    29KiB /usr/bin/tee
@@ -18905,7 +18905,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   987KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--  1017KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--   9.4KiB /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
 -rw-r--r--   2.0KiB /usr/share/polkit-1/actions/org.freedesktop.import1.policy
 -rw-r--r--   6.2KiB /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
