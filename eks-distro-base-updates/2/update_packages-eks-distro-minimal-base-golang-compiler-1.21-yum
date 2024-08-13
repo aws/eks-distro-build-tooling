@@ -1,1 +1,3 @@
 
+ca-certificates.noarch
+openssl-libs.x86_64
