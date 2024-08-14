@@ -384,6 +384,24 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_golang.sh $GOLANG_VERSION_122 && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as golang-1.23
+ARG TARGETARCH
+ARG GOLANG_VERSION_123
+ARG GOLANG_RPM_SOURCE_DIR
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_golang.sh /
+COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.23*.tar.gz /tmp/linux/arm64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.23*.tar.gz /tmp/linux/amd64/
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_golang.sh $GOLANG_VERSION_123 && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
@@ -514,6 +532,22 @@ ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
 COPY --link --from=golang-1.22 /golang-1.22 /
+COPY ./scripts/common_vars.sh \
+    ./scripts/install_go_licenses.sh /
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+    --mount=type=secret,id=netrc,target=/root/.netrc \
+    /install_go_licenses.sh
+
+FROM ${BUILDER_IMAGE} as go-licenses-1.23
+ARG TARGETARCH
+ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
+COPY --link --from=golang-1.23 /golang-1.23 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
