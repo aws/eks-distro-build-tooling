@@ -46,9 +46,9 @@ al2:
   eks-distro-minimal-base-python-compiler-3.11-base: null
   eks-distro-minimal-base-python-compiler-3.11-yum: null
   eks-distro-minimal-base-python-compiler-3.11-gcc: null
-  eks-distro-minimal-base-golang-compiler-1.23-base: null
-  eks-distro-minimal-base-golang-compiler-1.23-yum: null
-  eks-distro-minimal-base-golang-compiler-1.23-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.23-base: 1.23-2024-08-16-1723834919.2
+  eks-distro-minimal-base-golang-compiler-1.23-yum: 1.23-yum-2024-08-16-1723834919.2
+  eks-distro-minimal-base-golang-compiler-1.23-gcc: 1.23-gcc-2024-08-16-1723834919.2
 al2023:
   eks-distro-base: 2024-08-07-1723043238.2023
   eks-distro-minimal-base: 2024-08-07-1723043238.2023
