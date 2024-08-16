@@ -131,6 +131,9 @@ if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
   git add ./builder-base/versions.yaml
   git add ./builder-base/checksums/go-*
   git add ./eks-distro-base/make-tests/expected/*golang*
+  git add ./eks-distro-base/make-tests/expected/export/all
+  git add ./eks-distro-base/make-tests/expected/standard/create-pr/all-create-prs
+  git add ./eks-distro-base/make-tests/expected/test/all
   git add ./eks-distro-base/make-tests/make-dry-run
   # TODO: remove after verifying what changes are unstaged
   git diff --name-only
