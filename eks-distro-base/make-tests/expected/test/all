@@ -133,6 +133,18 @@ tag from file for eks-distro-minimal-base-golang-compiler-1.22-gcc: some-previou
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.22-gcc localhost:5000; \
 fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.23-base: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.23-base localhost:5000; \
+fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.23-yum: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.23-yum localhost:5000; \
+fi
+tag from file for eks-distro-minimal-base-golang-compiler-1.23-gcc: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.23-gcc localhost:5000; \
+fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
 	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-base localhost:5000; \
