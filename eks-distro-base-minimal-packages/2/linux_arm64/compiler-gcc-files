@@ -374,7 +374,7 @@
 -rw-r--r--   1.6KiB /usr/include/asm-generic/errno-base.h
 -rw-r--r--   5.6KiB /usr/include/asm-generic/errno.h
 -rw-r--r--   5.3KiB /usr/include/asm-generic/fcntl.h
--rw-r--r--   1.6KiB /usr/include/asm-generic/hugetlb_encode.h
+-rw-r--r--   1.8KiB /usr/include/asm-generic/hugetlb_encode.h
 -rw-r--r--     718B /usr/include/asm-generic/int-l64.h
 -rw-r--r--     864B /usr/include/asm-generic/int-ll64.h
 -rw-r--r--   3.4KiB /usr/include/asm-generic/ioctl.h
@@ -948,14 +948,14 @@
 -rw-r--r--    13KiB /usr/include/linux/media.h
 -rw-r--r--   4.8KiB /usr/include/linux/mei.h
 -rw-r--r--   4.2KiB /usr/include/linux/membarrier.h
--rw-r--r--   1.2KiB /usr/include/linux/memfd.h
+-rw-r--r--   1.3KiB /usr/include/linux/memfd.h
 -rw-r--r--   2.2KiB /usr/include/linux/mempolicy.h
 -rw-r--r--   2.5KiB /usr/include/linux/meye.h
 -rw-r--r--   6.4KiB /usr/include/linux/mic_common.h
 -rw-r--r--   2.2KiB /usr/include/linux/mic_ioctl.h
 -rw-r--r--   7.9KiB /usr/include/linux/mii.h
 -rw-r--r--   2.1KiB /usr/include/linux/minix_fs.h
--rw-r--r--   1.3KiB /usr/include/linux/mman.h
+-rw-r--r--   1.4KiB /usr/include/linux/mman.h
 -rw-r--r--   2.3KiB /usr/include/linux/mmc/ioctl.h
 -rw-r--r--   2.1KiB /usr/include/linux/mmtimer.h
 -rw-r--r--     255B /usr/include/linux/module.h
@@ -1226,7 +1226,7 @@
 -rw-r--r--   6.1KiB /usr/include/linux/serial_core.h
 -rw-r--r--    16KiB /usr/include/linux/serial_reg.h
 -rw-r--r--   2.1KiB /usr/include/linux/serio.h
--rw-r--r--   3.6KiB /usr/include/linux/shm.h
+-rw-r--r--   3.7KiB /usr/include/linux/shm.h
 -rw-r--r--     388B /usr/include/linux/signal.h
 -rw-r--r--   1.2KiB /usr/include/linux/signalfd.h
 -rw-r--r--     780B /usr/include/linux/smc.h
