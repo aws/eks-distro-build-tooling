@@ -25,7 +25,7 @@ contain and are intended to only run a static golang binary.  These containers c
 for [kindnetd](https://github.com/aws/eks-anywhere-build-tooling/blob/main/projects/kubernetes-sigs/kind/images/kindnetd/Dockerfile) in the EKS-A kind node-image.  The list of packages
 is tracked in [iptables](../eks-distro-minimal-packages/linux_amd64/iptables).
 
-[minimal-base-glibc] is used as the base image for any image which contains golang binaries which are compiled with `CGO_ENABLED=1` or for containers which require other
+[minimal-base-glibc](./Dockerfile.minimal-base-glibc) is used as the base image for any image which contains golang binaries which are compiled with `CGO_ENABLED=1` or for containers which require other
 standard linux dependencies, such as the iptables variant.  The list of packages
 is tracked in [glibc](../eks-distro-minimal-packages/linux_amd64/glibc).
 
@@ -50,7 +50,7 @@ to date via periodic prow jobs.  These files can found at [eks-distro-minimal-pa
 
 There are multiple approaches taken to getting the final list of RPMs that should be installed and how they are installed depending on the specific use case.
 
-##**Recommended** 
+## **Recommended** 
 
 When the desired executables are known, using the [install_binary](./scripts/install_binary) script is the easiest and best approach.  This approach uses `yum provides` to determine
 the RPM which includes the desired executable, downloads and extracts the RPM and finally manually copies the specific executable (along with text files in `/etc` and `/usr/share` like licenses).
@@ -87,7 +87,7 @@ common failures here, but not all so pay close attention to the output when addi
 
 ### Creating new images
 
-Creating new images based off minimal variants where new packages are necessary will require a multi-stage build using the builder images which are also pushed to [ECR](https://gallery.ecr.aws/eks-distro-build-tooling].
+Creating new images based off minimal variants where new packages are necessary will require a multi-stage build using the builder images which are also pushed to [ECR](https://gallery.ecr.aws/eks-distro-build-tooling).
 To ensure consistency and proper cleanup during install and removal of packages, the [scripts](./scripts) are added to `/usr/bin` and are used extensively throughout the variant Dockerfiles.
 
 #### Examples
