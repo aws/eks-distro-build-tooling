@@ -22,7 +22,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   3.1KiB /etc/ld.so.cache
+-rw-r--r--   3.7KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--      15B /etc/libibverbs.d/bnxt_re.driver
 -rw-r--r--      13B /etc/libibverbs.d/cxgb4.driver
@@ -45,6 +45,10 @@
 -rw-r--r--   1.5KiB /etc/libnl/pktloc
 -rw-r--r--       0B /etc/motd
 -rw-r--r--      58B /etc/networks
+-rw-------   1.7KiB /etc/nftables/main.nft
+-rw-------   1.1KiB /etc/nftables/nat.nft
+-rw-------    29KiB /etc/nftables/osf/pf.os
+-rw-------     407B /etc/nftables/router.nft
 -rw-r--r--     229B /etc/nsswitch.conf
 -rw-r--r--     327B /etc/os-release
 -rw-r--r--     149B /etc/passwd
@@ -227,6 +231,7 @@
 -rw-r--r--   1.2KiB /etc/ssl/README
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
+-rw-------     364B /etc/sysconfig/nftables.conf
 -rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     845B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
@@ -274,10 +279,12 @@
 -rw-r--r--      52B /usr/lib/systemd/system-preset/91-update-motd.preset
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
+-rw-rw-r--     393B /usr/lib/systemd/system/nftables.service
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
+-rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
 -rwxr-xr-x    17KiB /usr/lib64/conntrack-tools/ct_helper_amanda.so
 -rwxr-xr-x    16KiB /usr/lib64/conntrack-tools/ct_helper_dhcpv6.so
@@ -314,7 +321,11 @@
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libebtc.so.0.0.0
 -rwxr-xr-x    49KiB /usr/lib64/libefa.so.1.2.48.0
+-rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
+-rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
 -rwxr-xr-x   106KiB /usr/lib64/libgcc_s-11-20230605.so.1
+-rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
+-rwxr-xr-x    53KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   140KiB /usr/lib64/libibverbs.so.1.14.48.0
 -rwxr-xr-x    40KiB /usr/lib64/libibverbs/libbnxt_re-rdmav34.so
 -rwxr-xr-x    49KiB /usr/lib64/libibverbs/libcxgb4-rdmav34.so
@@ -332,19 +343,25 @@
 -rwxr-xr-x    37KiB /usr/lib64/libip4tc.so.2.0.0
 -rwxr-xr-x    37KiB /usr/lib64/libip6tc.so.2.0.0
 -rwxr-xr-x   206KiB /usr/lib64/libipset.so.13.2.0
+-rwxr-xr-x    62KiB /usr/lib64/libjansson.so.4.14.0
 -rwxr-xr-x   175KiB /usr/lib64/liblzma.so.5.2.5
 -rwxr-xr-x   885KiB /usr/lib64/libm.so.6
 -rwxr-xr-x    33KiB /usr/lib64/libmana.so.1.0.48.0
 -rwxr-xr-x    21KiB /usr/lib64/libmemusage.so
+-rwxr-xr-x    41KiB /usr/lib64/libmenu.so.6.2
+-rwxr-xr-x    41KiB /usr/lib64/libmenuw.so.6.2
 -rwxr-xr-x    57KiB /usr/lib64/libmlx4.so.1.0.48.0
 -rwxr-xr-x   476KiB /usr/lib64/libmlx5.so.1.24.48.0
 -rwxr-xr-x    28KiB /usr/lib64/libmnl.so.0.2.0
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
+-rwxr-xr-x   185KiB /usr/lib64/libncurses.so.6.2
+-rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
 -rwxr-xr-x   123KiB /usr/lib64/libnetfilter_conntrack.so.3.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libnetfilter_cthelper.so.0.0.0
 -rwxr-xr-x    24KiB /usr/lib64/libnetfilter_cttimeout.so.1.0.0
 -rwxr-xr-x    40KiB /usr/lib64/libnetfilter_queue.so.1.5.0
 -rwxr-xr-x    35KiB /usr/lib64/libnfnetlink.so.0.2.0
+-rwxr-xr-x   900KiB /usr/lib64/libnftables.so.1.1.0
 -rwxr-xr-x   215KiB /usr/lib64/libnftnl.so.11.6.0
 -rwxr-xr-x   144KiB /usr/lib64/libnl-3.so.200.26.0
 -rwxr-xr-x    38KiB /usr/lib64/libnl-genl-3.so.200.26.0
@@ -358,6 +375,8 @@
 -rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   355KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.2
+-rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x   313KiB /usr/lib64/libpcap.so.1.10.1
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
@@ -366,6 +385,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.48
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
+-rwxr-xr-x   350KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
@@ -374,6 +394,8 @@
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   896KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
+-rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
+-rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x    69KiB /usr/lib64/libxtables.so.12.6.0
@@ -520,6 +542,7 @@
 -rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
 -rwxr-xr-x    33KiB /usr/sbin/nfct
+-rwxr-xr-x    28KiB /usr/sbin/nft
 -rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwxr-xr-x    92KiB /usr/sbin/xtables-legacy-multi
 -rwxr-xr-x   225KiB /usr/sbin/xtables-nft-multi
@@ -547,16 +570,23 @@
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
+-rw-r--r--    18KiB /usr/share/info/history.info.gz
+-rw-r--r--    26KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/conntrack-tools/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/ebtables-legacy/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
 -rw-r--r--    19KiB /usr/share/licenses/glibc/LICENSES
+-rw-r--r--    35KiB /usr/share/licenses/gmp/COPYING
+-rw-r--r--   7.5KiB /usr/share/licenses/gmp/COPYING.LESSERv3
+-rw-r--r--    18KiB /usr/share/licenses/gmp/COPYINGv2
+-rw-r--r--    35KiB /usr/share/licenses/gmp/COPYINGv3
 -rw-r--r--    18KiB /usr/share/licenses/ipset-libs/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/ipset/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/iptables-legacy-libs/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/iptables-libs/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
 -rw-r--r--    20KiB /usr/share/licenses/libcap/License
 -rw-r--r--    18KiB /usr/share/licenses/libgcc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc/COPYING.LIB
@@ -569,9 +599,12 @@
 -rw-r--r--     868B /usr/share/licenses/libpcap/LICENSE
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
+-rw-r--r--    18KiB /usr/share/licenses/nftables/COPYING
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
 -rw-r--r--      95B /usr/share/licenses/pcre/COPYING
 -rw-r--r--   3.2KiB /usr/share/licenses/pcre/LICENCE
+-rw-r--r--    35KiB /usr/share/licenses/readline/COPYING
+-rw-r--r--   2.0KiB /usr/share/licenses/readline/USAGE
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/systemd/LICENSE.LGPL2.1
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
@@ -2381,7 +2414,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   4.0KiB /var/cache/ldconfig/aux-cache
+-rw-------   4.9KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
 -rw-r--r--     297B /var/lib/alternatives/ip6tables
@@ -2725,12 +2758,17 @@ lrwxrwxrwx       7B /usr/lib/debug/bin usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
+lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.48
 lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
 lrwxrwxrwx      16B /usr/lib64/libebtc.so libebtc.so.0.0.0
 lrwxrwxrwx      16B /usr/lib64/libebtc.so.0 libebtc.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libefa.so.1 libefa.so.1.2.48.0
+lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
+lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
 lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
+lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
+lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
 lrwxrwxrwx      23B /usr/lib64/libibverbs.so.1 libibverbs.so.1.14.48.0
 lrwxrwxrwx      21B /usr/lib64/libibverbs/libefa-rdmav34.so ../libefa.so.1.2.48.0
 lrwxrwxrwx      22B /usr/lib64/libibverbs/libmana-rdmav34.so ../libmana.so.1.0.48.0
@@ -2739,16 +2777,22 @@ lrwxrwxrwx      23B /usr/lib64/libibverbs/libmlx5-rdmav34.so ../libmlx5.so.1.24.
 lrwxrwxrwx      17B /usr/lib64/libip4tc.so.2 libip4tc.so.2.0.0
 lrwxrwxrwx      17B /usr/lib64/libip6tc.so.2 libip6tc.so.2.0.0
 lrwxrwxrwx      18B /usr/lib64/libipset.so.13 libipset.so.13.2.0
+lrwxrwxrwx      20B /usr/lib64/libjansson.so.4 libjansson.so.4.14.0
 lrwxrwxrwx      16B /usr/lib64/liblzma.so.5 liblzma.so.5.2.5
 lrwxrwxrwx      19B /usr/lib64/libmana.so.1 libmana.so.1.0.48.0
+lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.2
+lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.2
 lrwxrwxrwx      19B /usr/lib64/libmlx4.so.1 libmlx4.so.1.0.48.0
 lrwxrwxrwx      20B /usr/lib64/libmlx5.so.1 libmlx5.so.1.24.48.0
 lrwxrwxrwx      15B /usr/lib64/libmnl.so.0 libmnl.so.0.2.0
+lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
+lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
 lrwxrwxrwx      31B /usr/lib64/libnetfilter_conntrack.so.3 libnetfilter_conntrack.so.3.7.0
 lrwxrwxrwx      30B /usr/lib64/libnetfilter_cthelper.so.0 libnetfilter_cthelper.so.0.0.0
 lrwxrwxrwx      31B /usr/lib64/libnetfilter_cttimeout.so.1 libnetfilter_cttimeout.so.1.0.0
 lrwxrwxrwx      27B /usr/lib64/libnetfilter_queue.so.1 libnetfilter_queue.so.1.5.0
 lrwxrwxrwx      21B /usr/lib64/libnfnetlink.so.0 libnfnetlink.so.0.2.0
+lrwxrwxrwx      20B /usr/lib64/libnftables.so.1 libnftables.so.1.1.0
 lrwxrwxrwx      18B /usr/lib64/libnftnl.so.11 libnftnl.so.11.6.0
 lrwxrwxrwx      19B /usr/lib64/libnl-3.so.200 libnl-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-genl-3.so.200 libnl-genl-3.so.200.26.0
@@ -2756,15 +2800,20 @@ lrwxrwxrwx      25B /usr/lib64/libnl-idiag-3.so.200 libnl-idiag-3.so.200.26.0
 lrwxrwxrwx      22B /usr/lib64/libnl-nf-3.so.200 libnl-nf-3.so.200.26.0
 lrwxrwxrwx      25B /usr/lib64/libnl-route-3.so.200 libnl-route-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-xfrm-3.so.200 libnl-xfrm-3.so.200.26.0
+lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.2
+lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.2
 lrwxrwxrwx      17B /usr/lib64/libpcap.so.1 libpcap.so.1.10.1
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.48
+lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
+lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
+lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.5
 lrwxrwxrwx      20B /usr/lib64/libxtables.so.12 libxtables.so.12.6.0
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
