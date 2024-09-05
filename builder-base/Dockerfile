@@ -606,6 +606,8 @@ COPY --link --from=golang-1.21 /golang-1.21 /
 COPY --link --from=go-licenses-1.21 /go-licenses-1.21 /
 COPY --link --from=golang-1.22 /golang-1.22 /
 COPY --link --from=go-licenses-1.22 /go-licenses-1.22 /
+COPY --link --from=golang-1.23 /golang-1.23 /
+COPY --link --from=go-licenses-1.23 /go-licenses-1.23 /
 COPY --link --from=go-vuln-check /go-vuln-check /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
