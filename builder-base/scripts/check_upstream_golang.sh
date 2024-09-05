@@ -28,14 +28,14 @@ function update::go::version {
 
   local -r cur_builder_base_version=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${majorversion//./}")
 
-  sed -i "s/${cur_builder_base_version}/GOLANG_VERSION_${majorversion//./}: ${version}-0/g" "${VERSIONS_YAML}"
+  yq eval -i -P ".GOLANG_VERSION_${majorversion//./} = \"${version}-0\" | sort_keys(.)" "${VERSIONS_YAML}"
 }
 
 function add::go::version {
   local -r version=$1
   local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
 
-  echo "GOLANG_VERSION_${majorversion//./}: $version-0" >>$VERSIONS_YAML
+  yq eval -i -P ".GOLANG_VERSION_${majorversion//./} = \"${version}-0\" | sort_keys(.)" "${VERSIONS_YAML}"
 }
 
 # Using YQ allows us to modify the existing tag or add the correct tag if it doesn't exist
