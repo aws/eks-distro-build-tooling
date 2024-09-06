@@ -1,9 +1,2 @@
 
-ca-certificates.noarch
 kernel-headers.x86_64
-krb5-libs.x86_64
-openssl-libs.x86_64
-python3.x86_64
-python3-libs.x86_64
-python3-setuptools.noarch
-python3-setuptools-wheel.noarch
