@@ -196,7 +196,7 @@
 -rwxr-xr-x   6.8KiB /usr/bin/bashbug-64
 -rwxr-xr-x      26B /usr/bin/bg
 -rwxr-xr-x    65KiB /usr/bin/bootctl
--rwxr-xr-x   384KiB /usr/bin/busctl
+-rwxr-xr-x   383KiB /usr/bin/busctl
 -rwxr-xr-x   1.6KiB /usr/bin/ca-legacy
 -rwxr-xr-x    54KiB /usr/bin/cal
 -rwxr-xr-x    49KiB /usr/bin/cat
