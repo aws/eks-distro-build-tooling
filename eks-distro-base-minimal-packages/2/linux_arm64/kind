@@ -161,9 +161,9 @@ socat-1.7.3.2-2.amzn2.0.1.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
 sudo-1.8.23-10.amzn2.3.7.aarch64
 system-release-2-16.amzn2.aarch64
-systemd-219-78.amzn2.0.23.aarch64
-systemd-libs-219-78.amzn2.0.23.aarch64
-systemd-sysv-219-78.amzn2.0.23.aarch64
+systemd-219-78.amzn2.0.24.aarch64
+systemd-libs-219-78.amzn2.0.24.aarch64
+systemd-sysv-219-78.amzn2.0.24.aarch64
 tar-1.26-35.amzn2.0.4.aarch64
 tcp_wrappers-7.6-77.amzn2.0.2.aarch64
 tcp_wrappers-libs-7.6-77.amzn2.0.2.aarch64
