@@ -1,5 +1,5 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.5.20240805-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.5.20240916-0.amzn2023.noarch
 audit-libs-3.0.6-1.amzn2023.0.2.aarch64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
@@ -42,7 +42,7 @@ json-c-0.14-8.amzn2023.0.2.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
 krb5-libs-1.21.3-1.amzn2023.0.1.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
-libarchive-3.5.3-2.amzn2023.0.3.aarch64
+libarchive-3.7.4-2.amzn2023.0.1.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libattr-2.5.1-3.amzn2023.0.2.aarch64
 libblkid-2.37.4-1.amzn2023.0.4.aarch64
@@ -117,7 +117,7 @@ rpm-sign-libs-4.16.1.3-29.amzn2023.0.6.aarch64
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-libs-3.40.0-1.amzn2023.0.4.aarch64
-system-release-2023.5.20240805-0.amzn2023.noarch
+system-release-2023.5.20240916-0.amzn2023.noarch
 tar-1.34-1.amzn2023.0.4.aarch64
 tzdata-2024a-1.amzn2023.0.1.noarch
 which-2.21-26.amzn2023.0.2.aarch64

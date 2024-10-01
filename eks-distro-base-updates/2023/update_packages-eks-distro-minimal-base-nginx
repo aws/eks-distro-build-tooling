@@ -1,4 +1,6 @@
 
+amazon-linux-repo-cdn.noarch
 nginx.x86_64
 nginx-core.x86_64
 nginx-filesystem.noarch
+system-release.noarch

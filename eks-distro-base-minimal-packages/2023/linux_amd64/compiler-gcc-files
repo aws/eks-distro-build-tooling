@@ -3125,7 +3125,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
 -rw-r--r--       8B /usr/lib64/libanl.a
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
--rwxr-xr-x   839KiB /usr/lib64/libarchive.so.13.5.3
+-rwxr-xr-x   871KiB /usr/lib64/libarchive.so.13.7.4
 -rwxr-xr-x    37KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    85KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
@@ -9776,7 +9776,7 @@ lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so.0 guile-re
 lrwxrwxrwx      32B /usr/lib64/libBrokenLocale.so ../../lib64/libBrokenLocale.so.1
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
 lrwxrwxrwx      23B /usr/lib64/libanl.so ../../lib64/libanl.so.1
-lrwxrwxrwx      20B /usr/lib64/libarchive.so.13 libarchive.so.13.5.3
+lrwxrwxrwx      20B /usr/lib64/libarchive.so.13 libarchive.so.13.7.4
 lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
