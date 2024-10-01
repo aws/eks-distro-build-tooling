@@ -1,2 +1,4 @@
 
-ca-certificates.noarch
+amazon-linux-repo-cdn.noarch
+docker.x86_64
+system-release.noarch

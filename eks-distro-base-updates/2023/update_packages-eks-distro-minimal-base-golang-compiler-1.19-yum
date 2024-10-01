@@ -1,7 +1,4 @@
 
-ca-certificates.noarch
-krb5-libs.x86_64
-openssl-libs.x86_64
-python3.x86_64
-python3-libs.x86_64
-python3-setuptools-wheel.noarch
+amazon-linux-repo-cdn.noarch
+libarchive.x86_64
+system-release.noarch

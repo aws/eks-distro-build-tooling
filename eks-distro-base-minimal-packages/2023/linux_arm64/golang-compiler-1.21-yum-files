@@ -13889,7 +13889,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x   197KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
--rwxr-xr-x   911KiB /usr/lib64/libarchive.so.13.5.3
+-rwxr-xr-x   911KiB /usr/lib64/libarchive.so.13.7.4
 -rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   198KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
@@ -21036,7 +21036,7 @@ lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hm
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so guile-readline.so.0.0.0
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so.0 guile-readline.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
-lrwxrwxrwx      20B /usr/lib64/libarchive.so.13 libarchive.so.13.5.3
+lrwxrwxrwx      20B /usr/lib64/libarchive.so.13 libarchive.so.13.7.4
 lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
