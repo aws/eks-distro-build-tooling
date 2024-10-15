@@ -6,7 +6,7 @@ bash-5.2.15-1.amzn2023.0.2.x86_64
 bzip2-libs-1.0.8-6.amzn2023.0.2.x86_64
 ca-certificates-2023.2.68-1.0.amzn2023.0.1.noarch
 conntrack-tools-1.4.6-2.amzn2023.0.2.x86_64
-containerd-1.7.20-1.amzn2023.0.1.x86_64
+containerd-1.7.22-1.amzn2023.0.2.x86_64
 coreutils-8.32-30.amzn2023.0.3.x86_64
 coreutils-common-8.32-30.amzn2023.0.3.x86_64
 cracklib-2.9.6-27.amzn2023.0.2.x86_64
@@ -46,7 +46,7 @@ grep-3.8-1.amzn2023.0.4.x86_64
 gssproxy-0.8.4-2.amzn2023.0.3.x86_64
 gzip-1.12-1.amzn2023.0.1.x86_64
 hostname-3.23-4.amzn2023.0.3.x86_64
-iproute-5.10.0-2.amzn2023.0.5.x86_64
+iproute-6.10.0-319.amzn2023.0.1.x86_64
 ipset-7.11-1.amzn2023.0.3.x86_64
 ipset-libs-7.11-1.amzn2023.0.3.x86_64
 iptables-legacy-1.8.8-3.amzn2023.0.2.x86_64
@@ -56,6 +56,7 @@ iptables-nft-1.8.8-3.amzn2023.0.2.x86_64
 jansson-2.14-0.amzn2023.x86_64
 jq-1.7.1-48.amzn2023.0.1.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
+kernel-libbpf-6.1.112-122.189.amzn2023.x86_64
 keyutils-1.6.3-1.amzn2023.0.1.x86_64
 keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
@@ -82,7 +83,7 @@ libevent-2.1.12-3.amzn2023.0.3.x86_64
 libfdisk-2.37.4-1.amzn2023.0.4.x86_64
 libffi-3.4.4-1.amzn2023.0.1.x86_64
 libgcc-11.4.1-2.amzn2023.0.2.x86_64
-libgcrypt-1.10.2-1.amzn2023.0.1.x86_64
+libgcrypt-1.10.2-1.amzn2023.0.2.x86_64
 libgomp-11.4.1-2.amzn2023.0.2.x86_64
 libgpg-error-1.42-1.amzn2023.0.2.x86_64
 libibverbs-48.0-1.amzn2023.0.1.x86_64
@@ -140,7 +141,7 @@ nftables-1.0.4-3.amzn2023.0.2.x86_64
 npth-1.6-6.amzn2023.0.2.x86_64
 oniguruma-6.9.7.1-1.amzn2023.0.2.x86_64
 openldap-2.4.57-6.amzn2023.0.6.x86_64
-openssl-libs-3.0.8-1.amzn2023.0.14.x86_64
+openssl-libs-3.0.8-1.amzn2023.0.16.x86_64
 p11-kit-0.24.1-2.amzn2023.0.3.x86_64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.x86_64
 pam-1.5.1-8.amzn2023.0.4.x86_64
@@ -158,7 +159,7 @@ python3-hawkey-0.69.0-8.amzn2023.0.5.x86_64
 python3-libcomps-0.1.20-1.amzn2023.x86_64
 python3-libdnf-0.69.0-8.amzn2023.0.5.x86_64
 python3-libs-3.9.16-1.amzn2023.0.9.x86_64
-python3-pip-wheel-21.3.1-2.amzn2023.0.7.noarch
+python3-pip-wheel-21.3.1-2.amzn2023.0.8.noarch
 python3-rpm-4.16.1.3-29.amzn2023.0.6.x86_64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.5.noarch
 quota-4.06-4.amzn2023.0.2.x86_64
@@ -170,7 +171,7 @@ rpm-build-libs-4.16.1.3-29.amzn2023.0.6.x86_64
 rpm-libs-4.16.1.3-29.amzn2023.0.6.x86_64
 rpm-sign-libs-4.16.1.3-29.amzn2023.0.6.x86_64
 rsync-3.2.6-1.amzn2023.0.3.x86_64
-runc-1.1.13-1.amzn2023.0.1.x86_64
+runc-1.1.14-1.amzn2023.0.1.x86_64
 sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.4.x86_64

@@ -36,7 +36,7 @@ libsepol-3.4-3.amzn2023.0.3.aarch64
 libstdc++-11.4.1-2.amzn2023.0.2.aarch64
 ncurses-libs-6.2-4.20200222.amzn2023.0.6.aarch64
 nftables-1.0.4-3.amzn2023.0.2.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.14.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.16.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 readline-8.1-2.amzn2023.0.2.aarch64

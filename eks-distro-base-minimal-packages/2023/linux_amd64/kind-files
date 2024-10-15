@@ -12,7 +12,7 @@
 -rw-r--r--     535B /etc/bindresvport.blacklist
 -rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
--rw-r--r--     260B /etc/containerd/config.toml
+-rw-r--r--     387B /etc/containerd/config.toml
 -rw-r--r--       8B /etc/crypto-policies/config
 -rw-r--r--       8B /etc/crypto-policies/state/current
 -rw-r--r--   1.7KiB /etc/csh.cshrc
@@ -47,15 +47,6 @@
 -rw-r--r--   5.7KiB /etc/idmapd.conf
 -rw-r--r--     490B /etc/inittab
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--      85B /etc/iproute2/bpf_pinning
--rw-r--r--      81B /etc/iproute2/ematch_map
--rw-r--r--      31B /etc/iproute2/group
--rw-r--r--     262B /etc/iproute2/nl_protos
--rw-r--r--     331B /etc/iproute2/rt_dsfield
--rw-r--r--     210B /etc/iproute2/rt_protos
--rw-r--r--     112B /etc/iproute2/rt_realms
--rw-r--r--      92B /etc/iproute2/rt_scopes
--rw-r--r--      87B /etc/iproute2/rt_tables
 -rw-r--r--     880B /etc/krb5.conf
 -rw-r--r--   9.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
@@ -376,7 +367,7 @@
 -rwxr-xr-x    37KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x    58MiB /usr/bin/containerd
--rwxr-xr-x   7.0MiB /usr/bin/containerd-shim
+-rwxr-xr-x   7.1MiB /usr/bin/containerd-shim
 -rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v1
 -rwxr-xr-x    20MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   147KiB /usr/bin/cp
@@ -1382,6 +1373,7 @@
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   360KiB /usr/lib64/libbpf.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -4281,14 +4273,13 @@
 -rwxr-xr-x    58KiB /usr/sbin/agetty
 -rwxr-xr-x    41KiB /usr/sbin/alternatives
 -rwxr-xr-x   2.2KiB /usr/sbin/applygnupgdefaults
--rwxr-xr-x    29KiB /usr/sbin/arpd
 -r-xr-xr-x    16KiB /usr/sbin/blkdeactivate
 -rwxr-xr-x    24KiB /usr/sbin/blkdiscard
 -rwxr-xr-x    53KiB /usr/sbin/blkid
 -rwxr-xr-x    41KiB /usr/sbin/blkmapd
 -rwxr-xr-x    37KiB /usr/sbin/blkzone
 -rwxr-xr-x    33KiB /usr/sbin/blockdev
--rwxr-xr-x    96KiB /usr/sbin/bridge
+-rwxr-xr-x   125KiB /usr/sbin/bridge
 -rwxr-xr-x    32KiB /usr/sbin/capsh
 -rwxr-xr-x    98KiB /usr/sbin/cfdisk
 -rwxr-xr-x    33KiB /usr/sbin/chcpu
@@ -4304,8 +4295,9 @@
 -rwxr-xr-x    16KiB /usr/sbin/cracklib-unpacker
 -rwxr-xr-x     994B /usr/sbin/create-cracklib-dict
 -rwxr-xr-x    16KiB /usr/sbin/ctrlaltdel
+-rwxr-xr-x    96KiB /usr/sbin/dcb
 -rwxr-xr-x    16KiB /usr/sbin/delpart
--rwxr-xr-x   134KiB /usr/sbin/devlink
+-rwxr-xr-x   164KiB /usr/sbin/devlink
 -r-xr-xr-x    25KiB /usr/sbin/dmfilemapd
 -r-xr-xr-x   163KiB /usr/sbin/dmsetup
 -rwxr-xr-x    16KiB /usr/sbin/ebtables-legacy
@@ -4325,7 +4317,7 @@
 -rwxr-xr-x    45KiB /usr/sbin/fstrim
 -rwxr-xr-x    42KiB /usr/sbin/fuser
 -rwxr-xr-x    90KiB /usr/sbin/g13-syshelp
--rwxr-xr-x    95KiB /usr/sbin/genl
+-rwxr-xr-x   131KiB /usr/sbin/genl
 -rwxr-xr-x    16KiB /usr/sbin/getcap
 -rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    70KiB /usr/sbin/groupadd
@@ -4338,9 +4330,8 @@
 -rwxr-xr-x   126KiB /usr/sbin/gssproxy
 -rwxr-xr-x    61KiB /usr/sbin/hwclock
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
--rwxr-xr-x   3.1KiB /usr/sbin/ifcfg
 -rwxr-xr-x    41KiB /usr/sbin/ifstat
--rwxr-xr-x   704KiB /usr/sbin/ip
+-rwxr-xr-x   764KiB /usr/sbin/ip
 -rwxr-xr-x    16KiB /usr/sbin/ipset
 -rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x    33KiB /usr/sbin/key.dns_resolver
@@ -4383,14 +4374,12 @@
 -rwxr-xr-x    95KiB /usr/sbin/quotacheck
 -rwxr-xr-x    58KiB /usr/sbin/quotaon
 -rwxr-xr-x    16KiB /usr/sbin/quotastats
--rwxr-xr-x    94KiB /usr/sbin/rdma
+-rwxr-xr-x   110KiB /usr/sbin/rdma
 -rwxr-xr-x    25KiB /usr/sbin/readprofile
 -rwxr-xr-x    79KiB /usr/sbin/repquota
 -rwxr-xr-x    29KiB /usr/sbin/request-key
 -rwxr-xr-x    25KiB /usr/sbin/resizepart
 -rwxr-xr-x    33KiB /usr/sbin/rfkill
--rwxr-xr-x     211B /usr/sbin/routef
--rwxr-xr-x   1.7KiB /usr/sbin/routel
 -rwxr-xr-x    89KiB /usr/sbin/rpc.gssd
 -rwxr-xr-x    49KiB /usr/sbin/rpc.idmapd
 -rwxr-xr-x   130KiB /usr/sbin/rpc.mountd
@@ -4399,9 +4388,8 @@
 -rwxr-xr-x    19KiB /usr/sbin/rpcdebug
 -rwxr-xr-x    27KiB /usr/sbin/rtacct
 -rwxr-xr-x    33KiB /usr/sbin/rtcwake
--rwxr-xr-x    90KiB /usr/sbin/rtmon
--rwxr-xr-x      73B /usr/sbin/rtpr
--rwxr-xr-x   9.9MiB /usr/sbin/runc
+-rwxr-xr-x   127KiB /usr/sbin/rtmon
+-rwxr-xr-x    10MiB /usr/sbin/runc
 -rwxr-xr-x    57KiB /usr/sbin/runuser
 -rwxr-xr-x    17KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x    21KiB /usr/sbin/saslpasswd2
@@ -4410,7 +4398,7 @@
 -rwxr-xr-x   105KiB /usr/sbin/sfdisk
 -rwxr-xr-x    17KiB /usr/sbin/showmount
 -rwxr-xr-x    53KiB /usr/sbin/sm-notify
--rwxr-xr-x   129KiB /usr/sbin/ss
+-rwxr-xr-x   133KiB /usr/sbin/ss
 -rwxr-xr-x   1.1KiB /usr/sbin/start-statd
 -rwxr-xr-x    45KiB /usr/sbin/sulogin
 -rwxr-xr-x    20KiB /usr/sbin/swaplabel
@@ -4418,12 +4406,13 @@
 -rwxr-xr-x    45KiB /usr/sbin/swapon
 -rwxr-xr-x    24KiB /usr/sbin/switch_root
 -rwxr-xr-x    33KiB /usr/sbin/sysctl
--rwxr-xr-x   102KiB /usr/sbin/tipc
+-rwxr-xr-x    94KiB /usr/sbin/tipc
 -rwsr-xr-x    29KiB /usr/sbin/unix_chkpwd
 -rwx------    33KiB /usr/sbin/unix_update
 -rwxr-xr-x   139KiB /usr/sbin/useradd
 -rwxr-xr-x    90KiB /usr/sbin/userdel
 -rwxr-xr-x   131KiB /usr/sbin/usermod
+-rwxr-xr-x    37KiB /usr/sbin/vdpa
 -rwxr-xr-x    59KiB /usr/sbin/vipw
 -rwxr-xr-x   260KiB /usr/sbin/visudo
 -rwxr-xr-x    41KiB /usr/sbin/wipefs
@@ -4476,7 +4465,7 @@
 -rw-r--r--   1.5KiB /usr/share/bash-completion/completions/column
 -rw-r--r--     335B /usr/share/bash-completion/completions/ctrlaltdel
 -rw-r--r--     563B /usr/share/bash-completion/completions/delpart
--rw-r--r--    24KiB /usr/share/bash-completion/completions/devlink
+-rw-r--r--    27KiB /usr/share/bash-completion/completions/devlink
 -rw-r--r--   1.3KiB /usr/share/bash-completion/completions/dmesg
 -rw-r--r--    11KiB /usr/share/bash-completion/completions/dnf
 -rw-r--r--   1.3KiB /usr/share/bash-completion/completions/eject
@@ -4881,6 +4870,15 @@
 -rw-r--r--    93KiB /usr/share/info/tar.info-2.gz
 -rw-r--r--   5.1KiB /usr/share/info/tar.info.gz
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
+-rw-r--r--      85B /usr/share/iproute2/bpf_pinning
+-rw-r--r--      81B /usr/share/iproute2/ematch_map
+-rw-r--r--      31B /usr/share/iproute2/group
+-rw-r--r--     262B /usr/share/iproute2/nl_protos
+-rw-r--r--     331B /usr/share/iproute2/rt_dsfield
+-rw-r--r--     219B /usr/share/iproute2/rt_protos
+-rw-r--r--     112B /usr/share/iproute2/rt_realms
+-rw-r--r--      92B /usr/share/iproute2/rt_scopes
+-rw-r--r--      87B /usr/share/iproute2/rt_tables
 -rwxr-xr-x     910B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    39KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
@@ -8460,6 +8458,7 @@ lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      24B /usr/lib64/libbasicobjects.so.0 libbasicobjects.so.0.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
+lrwxrwxrwx      15B /usr/lib64/libbpf.so.1 libbpf.so.1.1.0
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9
