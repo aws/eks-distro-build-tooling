@@ -13447,7 +13447,7 @@
 -rw-r--r--     734B /usr/include/linux/fsl_mc.h
 -rw-r--r--   4.3KiB /usr/include/linux/fsmap.h
 -rw-r--r--   3.2KiB /usr/include/linux/fsverity.h
--rw-r--r--    25KiB /usr/include/linux/fuse.h
+-rw-r--r--    26KiB /usr/include/linux/fuse.h
 -rw-r--r--   5.6KiB /usr/include/linux/futex.h
 -rw-r--r--     897B /usr/include/linux/gameport.h
 -rw-r--r--   1.5KiB /usr/include/linux/gen_stats.h

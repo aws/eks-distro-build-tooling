@@ -1,3 +1,5 @@
 
-amazon-linux-repo-cdn.noarch
-system-release.noarch
+libgcrypt.x86_64
+openssl-libs.x86_64
+python3-pip-wheel.noarch
+runc.x86_64
