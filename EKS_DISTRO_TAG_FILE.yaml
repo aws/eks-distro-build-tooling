@@ -37,9 +37,9 @@ al2:
   eks-distro-minimal-base-nodejs-compiler-16-base: 16-2024-08-13-1723575672.2
   eks-distro-minimal-base-nodejs-compiler-16-yum: 16-yum-2024-08-13-1723575672.2
   eks-distro-minimal-base-nodejs-compiler-16-gcc: 16-gcc-2024-10-03-1727982065.2
-  eks-distro-minimal-base-python-compiler-3.7-base: 3.7-2024-10-03-1727982065.2
-  eks-distro-minimal-base-python-compiler-3.7-yum: 3.7-yum-2024-10-03-1727982065.2
-  eks-distro-minimal-base-python-compiler-3.7-gcc: 3.7-gcc-2024-10-03-1727982065.2
+  eks-distro-minimal-base-python-compiler-3.7-base: 3.7-2024-10-17-1729148465.2
+  eks-distro-minimal-base-python-compiler-3.7-yum: 3.7-yum-2024-10-17-1729148465.2
+  eks-distro-minimal-base-python-compiler-3.7-gcc: 3.7-gcc-2024-10-17-1729148465.2
   eks-distro-minimal-base-python-compiler-3.9-base: 3.9-2024-08-13-1723575672.2
   eks-distro-minimal-base-python-compiler-3.9-yum: 3.9-yum-2024-08-13-1723575672.2
   eks-distro-minimal-base-python-compiler-3.9-gcc: 3.9-gcc-2024-10-03-1727982065.2
