@@ -1,4 +1,2 @@
 
-systemd.x86_64
-systemd-libs.x86_64
-systemd-sysv.x86_64
+runc.x86_64
