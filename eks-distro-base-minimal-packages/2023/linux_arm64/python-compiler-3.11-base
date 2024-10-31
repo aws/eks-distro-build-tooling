@@ -72,8 +72,8 @@ python3.11-3.11.6-1.amzn2023.0.3.aarch64
 python3.11-libs-3.11.6-1.amzn2023.0.3.aarch64
 python3.11-pip-22.3.1-2.amzn2023.0.3.noarch
 python3.11-pip-wheel-22.3.1-2.amzn2023.0.3.noarch
-python3.11-setuptools-65.5.1-2.amzn2023.0.5.noarch
-python3.11-setuptools-wheel-65.5.1-2.amzn2023.0.5.noarch
+python3.11-setuptools-65.5.1-2.amzn2023.0.6.noarch
+python3.11-setuptools-wheel-65.5.1-2.amzn2023.0.6.noarch
 readline-8.1-2.amzn2023.0.2.aarch64
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
