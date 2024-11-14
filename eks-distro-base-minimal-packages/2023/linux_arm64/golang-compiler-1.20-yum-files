@@ -13367,7 +13367,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   263KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   402KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   328KiB /usr/lib64/libfido2.so.1.10.0
@@ -20511,7 +20511,7 @@ lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0

@@ -1407,7 +1407,7 @@
 -rwxr-xr-x   155KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
 -rwxr-xr-x    36KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
 -rwxr-xr-x    16KiB /usr/lib64/libevent_pthreads-2.1.so.7.0.1
--rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   451KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   335KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
@@ -8486,7 +8486,7 @@ lrwxrwxrwx      26B /usr/lib64/libevent_core-2.1.so.7 libevent_core-2.1.so.7.0.1
 lrwxrwxrwx      27B /usr/lib64/libevent_extra-2.1.so.7 libevent_extra-2.1.so.7.0.1
 lrwxrwxrwx      29B /usr/lib64/libevent_openssl-2.1.so.7 libevent_openssl-2.1.so.7.0.1
 lrwxrwxrwx      30B /usr/lib64/libevent_pthreads-2.1.so.7 libevent_pthreads-2.1.so.7.0.1
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2

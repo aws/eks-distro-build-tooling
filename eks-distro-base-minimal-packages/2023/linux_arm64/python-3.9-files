@@ -317,7 +317,7 @@
 -rwxr-xr-x   4.2MiB /usr/lib64/libcrypto.so.3.0.8
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
@@ -5112,7 +5112,7 @@ lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
 lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
