@@ -353,7 +353,7 @@
 -rwxr-xr-x   598KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   328KiB /usr/lib64/libfido2.so.1.10.0
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
@@ -3136,7 +3136,7 @@ lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
 lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2

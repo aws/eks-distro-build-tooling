@@ -934,15 +934,15 @@
 -rw-r--r--   1.2KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--   5.4KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/codec.cpython-311.pyc
 -rw-r--r--   1.1KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/compat.cpython-311.pyc
--rw-r--r--    20KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/core.cpython-311.pyc
--rw-r--r--    39KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/idnadata.cpython-311.pyc
+-rw-r--r--    19KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/core.cpython-311.pyc
+-rw-r--r--   100KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/idnadata.cpython-311.pyc
 -rw-r--r--   3.0KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/intranges.cpython-311.pyc
 -rw-r--r--     262B /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/package_data.cpython-311.pyc
 -rw-r--r--   160KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/__pycache__/uts46data.cpython-311.pyc
 -rw-r--r--   3.3KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/codec.py
 -rw-r--r--     321B /usr/lib/python3.11/site-packages/pip/_vendor/idna/compat.py
 -rw-r--r--    13KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/core.py
--rw-r--r--    44KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/idnadata.py
+-rw-r--r--    77KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/idnadata.py
 -rw-r--r--   1.9KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/intranges.py
 -rw-r--r--      21B /usr/lib/python3.11/site-packages/pip/_vendor/idna/package_data.py
 -rw-r--r--   202KiB /usr/lib/python3.11/site-packages/pip/_vendor/idna/uts46data.py
@@ -2262,7 +2262,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   610KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x   111KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
@@ -2776,7 +2776,7 @@
 -rw-r--r--    12KiB /usr/lib64/python3.11/__pycache__/tabnanny.cpython-311.opt-2.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.11/__pycache__/tabnanny.cpython-311.pyc
 -rw-r--r--   128KiB /usr/lib64/python3.11/__pycache__/tarfile.cpython-311.opt-1.pyc
--rw-r--r--   114KiB /usr/lib64/python3.11/__pycache__/tarfile.cpython-311.opt-2.pyc
+-rw-r--r--   115KiB /usr/lib64/python3.11/__pycache__/tarfile.cpython-311.opt-2.pyc
 -rw-r--r--   128KiB /usr/lib64/python3.11/__pycache__/tarfile.cpython-311.pyc
 -rw-r--r--    31KiB /usr/lib64/python3.11/__pycache__/telnetlib.cpython-311.opt-1.pyc
 -rw-r--r--    24KiB /usr/lib64/python3.11/__pycache__/telnetlib.cpython-311.opt-2.pyc
@@ -4495,7 +4495,7 @@
 -rw-r--r--    11KiB /usr/lib64/python3.11/symtable.py
 -rw-r--r--    32KiB /usr/lib64/python3.11/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.11/tabnanny.py
--rwxr-xr-x   104KiB /usr/lib64/python3.11/tarfile.py
+-rwxr-xr-x   106KiB /usr/lib64/python3.11/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.11/telnetlib.py
 -rw-r--r--    30KiB /usr/lib64/python3.11/tempfile.py
 -rw-r--r--    20KiB /usr/lib64/python3.11/textwrap.py
@@ -8204,7 +8204,7 @@ lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      22B /usr/lib64/libdebuginfod.so.1 libdebuginfod-0.188.so
 lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2

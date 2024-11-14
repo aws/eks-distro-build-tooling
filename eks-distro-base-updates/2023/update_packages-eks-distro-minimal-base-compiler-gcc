@@ -1,2 +1,4 @@
 
-libarchive.x86_64
+expat.x86_64
+kernel-headers.x86_64
+python3-pip-wheel.noarch

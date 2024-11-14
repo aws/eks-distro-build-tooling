@@ -16,7 +16,7 @@ elfutils-debuginfod-client-0.188-3.amzn2023.0.2.aarch64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
 elfutils-libelf-0.188-3.amzn2023.0.2.aarch64
 elfutils-libs-0.188-3.amzn2023.0.2.aarch64
-expat-2.5.0-1.amzn2023.0.4.aarch64
+expat-2.6.3-1.amzn2023.0.1.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
 findutils-4.8.0-2.amzn2023.0.2.aarch64
 gawk-5.1.0-3.amzn2023.0.3.aarch64

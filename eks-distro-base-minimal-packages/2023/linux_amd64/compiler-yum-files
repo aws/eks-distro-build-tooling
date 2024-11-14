@@ -1200,7 +1200,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libdrop_ambient.so.0.0.0
 -rwxr-xr-x   610KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x   111KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
@@ -7740,7 +7740,7 @@ lrwxrwxrwx      22B /usr/lib64/libdebuginfod.so.1 libdebuginfod-0.188.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2

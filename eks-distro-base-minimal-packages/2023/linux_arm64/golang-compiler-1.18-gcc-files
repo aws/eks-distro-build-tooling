@@ -12552,8 +12552,8 @@
 -rw-r--r--   2.0KiB /usr/include/bits/fcntl.h
 -rw-r--r--   5.5KiB /usr/include/bits/fcntl2.h
 -rw-r--r--   2.4KiB /usr/include/bits/fenv.h
--rw-r--r--   9.6KiB /usr/include/bits/floatn-common.h
--rw-r--r--   3.4KiB /usr/include/bits/floatn.h
+-rw-r--r--    11KiB /usr/include/bits/floatn-common.h
+-rw-r--r--   3.5KiB /usr/include/bits/floatn.h
 -rw-r--r--   1.7KiB /usr/include/bits/flt-eval-method.h
 -rw-r--r--   1.2KiB /usr/include/bits/fp-fast.h
 -rw-r--r--   1.2KiB /usr/include/bits/fp-logb.h
@@ -12661,10 +12661,10 @@
 -rw-r--r--   1.3KiB /usr/include/bits/struct_rwlock.h
 -rw-r--r--   5.2KiB /usr/include/bits/struct_stat.h
 -rw-r--r--   2.6KiB /usr/include/bits/struct_stat_time64_helper.h
--rw-r--r--    45KiB /usr/include/bits/syscall.h
+-rw-r--r--    46KiB /usr/include/bits/syscall.h
 -rw-r--r--   1.2KiB /usr/include/bits/syslog-ldbl.h
 -rw-r--r--   1.1KiB /usr/include/bits/syslog-path.h
--rw-r--r--   1.7KiB /usr/include/bits/syslog.h
+-rw-r--r--   2.0KiB /usr/include/bits/syslog.h
 -rw-r--r--   2.9KiB /usr/include/bits/sysmacros.h
 -rw-r--r--   1.8KiB /usr/include/bits/termios-baud.h
 -rw-r--r--   1.3KiB /usr/include/bits/termios-c_cc.h
@@ -13803,7 +13803,7 @@
 -rw-r--r--   1.6KiB /usr/include/sys/swap.h
 -rw-r--r--   1.3KiB /usr/include/sys/syscall.h
 -rw-r--r--   1.5KiB /usr/include/sys/sysinfo.h
--rw-r--r--   7.6KiB /usr/include/sys/syslog.h
+-rw-r--r--   7.7KiB /usr/include/sys/syslog.h
 -rw-r--r--   2.1KiB /usr/include/sys/sysmacros.h
 -rw-r--r--      74B /usr/include/sys/termios.h
 -rw-r--r--   9.0KiB /usr/include/sys/time.h
@@ -13831,7 +13831,7 @@
 -rw-r--r--   3.7KiB /usr/include/tar.h
 -rw-r--r--     214B /usr/include/termio.h
 -rw-r--r--   3.6KiB /usr/include/termios.h
--rw-r--r--    37KiB /usr/include/tgmath.h
+-rw-r--r--    40KiB /usr/include/tgmath.h
 -rw-r--r--    16KiB /usr/include/thread_db.h
 -rw-r--r--   7.6KiB /usr/include/threads.h
 -rw-r--r--    15KiB /usr/include/time.h
@@ -13909,7 +13909,7 @@
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/rpmver
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   838KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   843KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -14973,7 +14973,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   263KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.8.10
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   402KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   328KiB /usr/lib64/libfido2.so.1.10.0
@@ -22220,7 +22220,7 @@ lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
-lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.8.10
+lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0
