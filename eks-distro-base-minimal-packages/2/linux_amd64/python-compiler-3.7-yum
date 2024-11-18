@@ -84,8 +84,8 @@ python-libs-2.7.18-1.amzn2.0.9.x86_64
 python-pycurl-7.19.0-19.amzn2.0.2.x86_64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.4.x86_64
-python3-3.7.16-1.amzn2.0.7.x86_64
-python3-libs-3.7.16-1.amzn2.0.7.x86_64
+python3-3.7.16-1.amzn2.0.8.x86_64
+python3-libs-3.7.16-1.amzn2.0.8.x86_64
 python3-pip-20.2.2-1.amzn2.0.7.noarch
 python3-setuptools-49.1.3-1.amzn2.0.5.noarch
 pyxattr-0.5.1-5.amzn2.0.2.x86_64

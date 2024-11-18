@@ -62,8 +62,8 @@ openssl-libs-1.0.2k-24.amzn2.0.13.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 popt-1.13-16.amzn2.0.2.aarch64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
-python3-3.7.16-1.amzn2.0.7.aarch64
-python3-libs-3.7.16-1.amzn2.0.7.aarch64
+python3-3.7.16-1.amzn2.0.8.aarch64
+python3-libs-3.7.16-1.amzn2.0.8.aarch64
 python3-pip-20.2.2-1.amzn2.0.7.noarch
 python3-setuptools-49.1.3-1.amzn2.0.5.noarch
 readline-6.2-10.amzn2.0.2.aarch64
