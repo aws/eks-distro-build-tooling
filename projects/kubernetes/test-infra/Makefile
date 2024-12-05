@@ -27,7 +27,7 @@ prow-controller-manager/images/%: BASE_IMAGE_NAME=k8s-prow/prow-controller-manag
 
 prow-statusreconciler/images/%: BASE_IMAGE_NAME=k8s-prow/status-reconciler
 
-prow-deck/images/%: DOCKERFILE_FOLDER?=./docker/linux/deck
+prow-deck/images/%: DOCKERFILE_FOLDER=./docker/linux/deck
 
 .PHONY: buildkit-check
 buildkit-check:
