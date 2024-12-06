@@ -19,7 +19,8 @@ IMAGE_NAMES=prow-deck prow-cherrypicker prow-clonerefs prow-crier prow-entrypoin
 VALUES_YAML_PATHS=deck.image cherrypicker.image utility_images.clonerefs crier.image utility_images.entrypoint ghproxy.image hook.image \
 	horologium.image utility_images.initupload prowControllerManager.image utility_images.sidecar sinker.image statusreconciler.image tide.image
 
-LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/amd64)
+IMAGE_PLATFORMS?=linux/amd64
+LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/build)
 IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/push)
 
 
@@ -69,27 +70,20 @@ define BUILDCTL
 endef 
 
 
-.PHONY: %/images/push %/images/amd64 %/images/arm64
-%/images/push %/images/amd64 %/images/arm64: IMAGE_NAME=$*
-%/images/push %/images/amd64 %/images/arm64: DOCKERFILE_FOLDER?=./docker/linux
-%/images/push %/images/amd64 %/images/arm64: IMAGE_CONTEXT_DIR?=.
-%/images/push %/images/amd64 %/images/arm64: IMAGE_BUILD_ARGS?=
+.PHONY: %/images/build %/images/push
+%/images/build %/images/push: IMAGE_NAME=$*
+%/images/build %/images/push: DOCKERFILE_FOLDER?=./docker/linux
+%/images/build %/images/push: IMAGE_CONTEXT_DIR?=.
+%/images/build %/images/push: IMAGE_BUILD_ARGS?=
 
-# Build image using buildkit for all platforms, by default pushes to registry defined in IMAGE_REPO.
-%/images/push: IMAGE_PLATFORMS?=linux/amd64,linux/arm64
+# Build image using buildkit and send output OCI tarball to /dev/null.
+%/images/build: IMAGE_OUTPUT_TYPE?=oci
+%/images/build: IMAGE_OUTPUT?=dest=/dev/null
+%/images/build:
+	$(BUILDCTL)
+
+# Build image using buildkit and push to registry defined in IMAGE_REPO.
 %/images/push: IMAGE_OUTPUT_TYPE?=image
 %/images/push: IMAGE_OUTPUT?=push=true
 %/images/push:
-	$(BUILDCTL)
-
-# Build image using buildkit only builds linux/amd64 oci and saves to local tar.
-%/images/amd64: IMAGE_PLATFORMS?=linux/amd64
-
-# Build image using buildkit only builds linux/arm64 oci and saves to local tar.
-%/images/arm64: IMAGE_PLATFORMS?=linux/arm64
-
-%/images/amd64 %/images/arm64: IMAGE_OUTPUT_TYPE?=oci
-%/images/amd64 %/images/arm64: IMAGE_OUTPUT?=dest=/dev/null
-
-%/images/amd64:
 	$(BUILDCTL)
