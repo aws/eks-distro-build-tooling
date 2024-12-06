@@ -19,7 +19,7 @@ IMAGE_NAMES=prow-deck prow-cherrypicker prow-clonerefs prow-crier prow-entrypoin
 VALUES_YAML_PATHS=deck.image cherrypicker.image utility_images.clonerefs crier.image utility_images.entrypoint ghproxy.image hook.image \
 	horologium.image utility_images.initupload prowControllerManager.image utility_images.sidecar sinker.image statusreconciler.image tide.image
 
-LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/amd64)
+LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/amd64) $(foreach image,$(IMAGE_NAMES),$(image)/images/arm64)
 IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/push)
 
 
@@ -92,4 +92,7 @@ endef
 %/images/amd64 %/images/arm64: IMAGE_OUTPUT?=dest=/dev/null
 
 %/images/amd64:
+	$(BUILDCTL)
+
+%/images/arm64:
 	$(BUILDCTL)
