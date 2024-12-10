@@ -538,7 +538,7 @@
 -rwxr-xr-x   196KiB /usr/sbin/getpcaps
 -rwxr-xr-x   197KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   196KiB /usr/sbin/ipset
--rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
+-rwxr-xr-x   2.1MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   932KiB /usr/sbin/ldconfig
 -rwxr-xr-x   197KiB /usr/sbin/nfct
 -rwxr-xr-x   196KiB /usr/sbin/nft
