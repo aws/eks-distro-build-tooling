@@ -573,7 +573,7 @@
 -rwxr-xr-x    75KiB /usr/sbin/iconvconfig.aarch64
 -rwxr-xr-x    68KiB /usr/sbin/ipset
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
--rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
+-rwxr-xr-x   2.1MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   762KiB /usr/sbin/ldconfig
 -rwxr-xr-x    68KiB /usr/sbin/nfct
 -rwxr-xr-x    69KiB /usr/sbin/sefcontext_compile
