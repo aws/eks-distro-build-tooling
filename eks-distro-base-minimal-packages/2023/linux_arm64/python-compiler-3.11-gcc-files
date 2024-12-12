@@ -30,7 +30,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   7.3KiB /etc/ld.so.cache
+-rw-r--r--   7.4KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--     813B /etc/libreport/events.d/collect_dnf.conf
@@ -2649,7 +2649,7 @@
 -rw-r--r--   6.4KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--     636B /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/__version__.cpython-311.pyc
 -rw-r--r--   2.1KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/_internal_utils.cpython-311.pyc
--rw-r--r--    25KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-311.pyc
+-rw-r--r--    27KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-311.pyc
 -rw-r--r--   7.4KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/api.cpython-311.pyc
 -rw-r--r--    15KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/auth.cpython-311.pyc
 -rw-r--r--   1.1KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/certs.cpython-311.pyc
@@ -2666,7 +2666,7 @@
 -rw-r--r--    40KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/__pycache__/utils.cpython-311.pyc
 -rw-r--r--     440B /usr/lib/python3.11/site-packages/pip/_vendor/requests/__version__.py
 -rw-r--r--   1.4KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/_internal_utils.py
--rw-r--r--    21KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/adapters.py
+-rw-r--r--    23KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/adapters.py
 -rw-r--r--   6.3KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/api.py
 -rw-r--r--    10KiB /usr/lib/python3.11/site-packages/pip/_vendor/requests/auth.py
 -rw-r--r--     575B /usr/lib/python3.11/site-packages/pip/_vendor/requests/certs.py
@@ -4106,6 +4106,13 @@
 -rwxr-xr-x   260KiB /usr/lib64/gconv/libJISX0213.so
 -rwxr-xr-x   196KiB /usr/lib64/gconv/libKSC.so
 -rw-r--r--    26KiB /usr/lib64/gcrt1.o
+-rw-r--r--    24KiB /usr/lib64/girepository-1.0/GIRepository-3.0.typelib
+-rw-r--r--   224KiB /usr/lib64/girepository-1.0/GLib-2.0.typelib
+-rw-r--r--   2.1KiB /usr/lib64/girepository-1.0/GLibUnix-2.0.typelib
+-rw-r--r--   1.9KiB /usr/lib64/girepository-1.0/GModule-2.0.typelib
+-rw-r--r--    66KiB /usr/lib64/girepository-1.0/GObject-2.0.typelib
+-rw-r--r--   363KiB /usr/lib64/girepository-1.0/Gio-2.0.typelib
+-rw-r--r--    15KiB /usr/lib64/girepository-1.0/GioUnix-2.0.typelib
 -rw-r--r--    53KiB /usr/lib64/girepository-1.0/Modulemd-2.0.typelib
 -rw-r--r--    20KiB /usr/lib64/grcrt1.o
 -rw-r--r--    75KiB /usr/lib64/guile/2.2/ccache/ice-9/and-let-star.go
@@ -4468,18 +4475,19 @@
 -rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libgdbm.so.6.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libgdbm_compat.so.4.0.0
--rwxr-xr-x   2.2MiB /usr/lib64/libgio-2.0.so.0.7400.7
--rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.7400.7
--rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.7400.7
+-rwxr-xr-x   2.1MiB /usr/lib64/libgio-2.0.so.0.8200.2
+-rwxr-xr-x   262KiB /usr/lib64/libgirepository-2.0.so.0.8200.2
+-rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.8200.2
+-rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
 -rwxr-xr-x   2.4MiB /usr/lib64/libgnutls.so.30.35.0
--rwxr-xr-x   463KiB /usr/lib64/libgobject-2.0.so.0.7400.7
+-rwxr-xr-x   463KiB /usr/lib64/libgobject-2.0.so.0.8200.2
 -rwxr-xr-x   332KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   463KiB /usr/lib64/libgpgme.so.11.24.1
 -rwxr-xr-x   396KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   264KiB /usr/lib64/libgssrpc.so.4.2
--rwxr-xr-x   196KiB /usr/lib64/libgthread-2.0.so.0.7400.7
+-rwxr-xr-x   196KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   392KiB /usr/lib64/libhogweed.so.6.5
@@ -5084,9 +5092,9 @@
 -rw-r--r--    12KiB /usr/lib64/python3.11/__pycache__/zipapp.cpython-311.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.11/__pycache__/zipapp.cpython-311.opt-2.pyc
 -rw-r--r--    12KiB /usr/lib64/python3.11/__pycache__/zipapp.cpython-311.pyc
--rw-r--r--   116KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.opt-1.pyc
--rw-r--r--   107KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.opt-2.pyc
--rw-r--r--   116KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.pyc
+-rw-r--r--   119KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.opt-1.pyc
+-rw-r--r--   108KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.opt-2.pyc
+-rw-r--r--   119KiB /usr/lib64/python3.11/__pycache__/zipfile.cpython-311.pyc
 -rw-r--r--    29KiB /usr/lib64/python3.11/__pycache__/zipimport.cpython-311.opt-1.pyc
 -rw-r--r--    26KiB /usr/lib64/python3.11/__pycache__/zipimport.cpython-311.opt-2.pyc
 -rw-r--r--    30KiB /usr/lib64/python3.11/__pycache__/zipimport.cpython-311.pyc
@@ -5631,9 +5639,9 @@
 -rw-r--r--    11KiB /usr/lib64/python3.11/email/__pycache__/quoprimime.cpython-311.opt-1.pyc
 -rw-r--r--   7.7KiB /usr/lib64/python3.11/email/__pycache__/quoprimime.cpython-311.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.11/email/__pycache__/quoprimime.cpython-311.pyc
--rw-r--r--    16KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.opt-1.pyc
--rw-r--r--    12KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.opt-2.pyc
--rw-r--r--    16KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.pyc
+-rw-r--r--    19KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.opt-1.pyc
+-rw-r--r--    16KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.opt-2.pyc
+-rw-r--r--    19KiB /usr/lib64/python3.11/email/__pycache__/utils.cpython-311.pyc
 -rw-r--r--   8.4KiB /usr/lib64/python3.11/email/_encoded_words.py
 -rw-r--r--   105KiB /usr/lib64/python3.11/email/_header_value_parser.py
 -rw-r--r--    18KiB /usr/lib64/python3.11/email/_parseaddr.py
@@ -5689,7 +5697,7 @@
 -rw-r--r--   5.0KiB /usr/lib64/python3.11/email/parser.py
 -rw-r--r--    11KiB /usr/lib64/python3.11/email/policy.py
 -rw-r--r--   9.7KiB /usr/lib64/python3.11/email/quoprimime.py
--rw-r--r--    14KiB /usr/lib64/python3.11/email/utils.py
+-rw-r--r--    17KiB /usr/lib64/python3.11/email/utils.py
 -rw-r--r--   5.8KiB /usr/lib64/python3.11/encodings/__init__.py
 -rw-r--r--   6.4KiB /usr/lib64/python3.11/encodings/__pycache__/__init__.cpython-311.opt-1.pyc
 -rw-r--r--   4.9KiB /usr/lib64/python3.11/encodings/__pycache__/__init__.cpython-311.opt-2.pyc
@@ -6990,7 +6998,7 @@
 -rw-r--r--    49KiB /usr/lib64/python3.11/xmlrpc/client.py
 -rw-r--r--    37KiB /usr/lib64/python3.11/xmlrpc/server.py
 -rw-r--r--   7.4KiB /usr/lib64/python3.11/zipapp.py
--rw-r--r--    92KiB /usr/lib64/python3.11/zipfile.py
+-rw-r--r--    93KiB /usr/lib64/python3.11/zipfile.py
 -rw-r--r--    31KiB /usr/lib64/python3.11/zipimport.py
 -rw-r--r--     703B /usr/lib64/python3.11/zoneinfo/__init__.py
 -rw-r--r--   1.2KiB /usr/lib64/python3.11/zoneinfo/__pycache__/__init__.cpython-311.opt-1.pyc
@@ -7221,15 +7229,15 @@
 -rw-r--r--    19KiB /usr/lib64/python3.9/__pycache__/gzip.cpython-39.opt-1.pyc
 -rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/gzip.cpython-39.opt-2.pyc
 -rw-r--r--    19KiB /usr/lib64/python3.9/__pycache__/gzip.cpython-39.pyc
--rw-r--r--   5.1KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.opt-1.pyc
--rw-r--r--   4.8KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.opt-2.pyc
--rw-r--r--   5.1KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.pyc
+-rw-r--r--   6.6KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.opt-1.pyc
+-rw-r--r--   6.0KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.opt-2.pyc
+-rw-r--r--   6.6KiB /usr/lib64/python3.9/__pycache__/hashlib.cpython-39.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/heapq.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/heapq.cpython-39.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/heapq.cpython-39.pyc
--rw-r--r--   7.0KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.opt-1.pyc
--rw-r--r--   4.5KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.opt-2.pyc
--rw-r--r--   7.0KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.pyc
+-rw-r--r--   6.7KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.opt-1.pyc
+-rw-r--r--   4.2KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.opt-2.pyc
+-rw-r--r--   6.7KiB /usr/lib64/python3.9/__pycache__/hmac.cpython-39.pyc
 -rw-r--r--    40KiB /usr/lib64/python3.9/__pycache__/imaplib.cpython-39.opt-1.pyc
 -rw-r--r--    27KiB /usr/lib64/python3.9/__pycache__/imaplib.cpython-39.opt-2.pyc
 -rw-r--r--    42KiB /usr/lib64/python3.9/__pycache__/imaplib.cpython-39.pyc
@@ -7245,9 +7253,9 @@
 -rw-r--r--   3.4KiB /usr/lib64/python3.9/__pycache__/io.cpython-39.opt-1.pyc
 -rw-r--r--   1.9KiB /usr/lib64/python3.9/__pycache__/io.cpython-39.opt-2.pyc
 -rw-r--r--   3.4KiB /usr/lib64/python3.9/__pycache__/io.cpython-39.pyc
--rw-r--r--    62KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.opt-1.pyc
--rw-r--r--    37KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.opt-2.pyc
--rw-r--r--    62KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.pyc
+-rw-r--r--    63KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.opt-1.pyc
+-rw-r--r--    38KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.opt-2.pyc
+-rw-r--r--    63KiB /usr/lib64/python3.9/__pycache__/ipaddress.cpython-39.pyc
 -rw-r--r--     916B /usr/lib64/python3.9/__pycache__/keyword.cpython-39.opt-1.pyc
 -rw-r--r--     512B /usr/lib64/python3.9/__pycache__/keyword.cpython-39.opt-2.pyc
 -rw-r--r--     916B /usr/lib64/python3.9/__pycache__/keyword.cpython-39.pyc
@@ -7341,9 +7349,9 @@
 -rw-r--r--   3.9KiB /usr/lib64/python3.9/__pycache__/pty.cpython-39.opt-1.pyc
 -rw-r--r--   3.1KiB /usr/lib64/python3.9/__pycache__/pty.cpython-39.opt-2.pyc
 -rw-r--r--   3.9KiB /usr/lib64/python3.9/__pycache__/pty.cpython-39.pyc
--rw-r--r--   7.3KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.opt-1.pyc
--rw-r--r--   3.7KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.opt-2.pyc
--rw-r--r--   7.3KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.pyc
+-rw-r--r--   7.2KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.opt-1.pyc
+-rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.opt-2.pyc
+-rw-r--r--   7.2KiB /usr/lib64/python3.9/__pycache__/py_compile.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/pyclbr.cpython-39.opt-1.pyc
 -rw-r--r--   6.7KiB /usr/lib64/python3.9/__pycache__/pyclbr.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/pyclbr.cpython-39.pyc
@@ -7455,9 +7463,9 @@
 -rw-r--r--   6.9KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.opt-1.pyc
 -rw-r--r--   6.0KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.opt-2.pyc
 -rw-r--r--   6.9KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.pyc
--rw-r--r--    62KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-1.pyc
--rw-r--r--    49KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-2.pyc
--rw-r--r--    62KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.pyc
+-rw-r--r--    69KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-1.pyc
+-rw-r--r--    55KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-2.pyc
+-rw-r--r--    69KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.opt-2.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.pyc
@@ -7500,9 +7508,9 @@
 -rw-r--r--    71KiB /usr/lib64/python3.9/__pycache__/typing.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/__pycache__/typing.cpython-39.opt-2.pyc
 -rw-r--r--    71KiB /usr/lib64/python3.9/__pycache__/typing.cpython-39.pyc
--rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.opt-1.pyc
--rw-r--r--   3.4KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.opt-2.pyc
--rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.pyc
+-rw-r--r--   3.8KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.opt-1.pyc
+-rw-r--r--   3.6KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.opt-2.pyc
+-rw-r--r--   3.8KiB /usr/lib64/python3.9/__pycache__/uu.cpython-39.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/uuid.cpython-39.opt-1.pyc
 -rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/uuid.cpython-39.opt-2.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/__pycache__/uuid.cpython-39.pyc
@@ -7543,7 +7551,7 @@
 -rw-r--r--    92KiB /usr/lib64/python3.9/_pyio.py
 -rw-r--r--   3.1KiB /usr/lib64/python3.9/_sitebuiltins.py
 -rw-r--r--    25KiB /usr/lib64/python3.9/_strptime.py
--rw-r--r--    44KiB /usr/lib64/python3.9/_sysconfigdata__linux_aarch64-linux-gnu.py
+-rw-r--r--    43KiB /usr/lib64/python3.9/_sysconfigdata__linux_aarch64-linux-gnu.py
 -rw-r--r--    43KiB /usr/lib64/python3.9/_sysconfigdata_d_linux_aarch64-linux-gnu.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/_threading_local.py
 -rw-r--r--   5.8KiB /usr/lib64/python3.9/_weakrefset.py
@@ -7558,9 +7566,9 @@
 -rw-r--r--     781B /usr/lib64/python3.9/asyncio/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     725B /usr/lib64/python3.9/asyncio/__pycache__/__init__.cpython-39.opt-2.pyc
 -rw-r--r--     781B /usr/lib64/python3.9/asyncio/__pycache__/__init__.cpython-39.pyc
--rw-r--r--   3.1KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.opt-1.pyc
--rw-r--r--   3.1KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.opt-2.pyc
--rw-r--r--   3.1KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.pyc
+-rw-r--r--   3.2KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.opt-1.pyc
+-rw-r--r--   3.2KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.opt-2.pyc
+-rw-r--r--   3.2KiB /usr/lib64/python3.9/asyncio/__pycache__/__main__.cpython-39.pyc
 -rw-r--r--    51KiB /usr/lib64/python3.9/asyncio/__pycache__/base_events.cpython-39.opt-1.pyc
 -rw-r--r--    43KiB /usr/lib64/python3.9/asyncio/__pycache__/base_events.cpython-39.opt-2.pyc
 -rw-r--r--    52KiB /usr/lib64/python3.9/asyncio/__pycache__/base_events.cpython-39.pyc
@@ -7718,7 +7726,7 @@
 -rw-r--r--    23KiB /usr/lib64/python3.9/concurrent/futures/_base.py
 -rw-r--r--    31KiB /usr/lib64/python3.9/concurrent/futures/process.py
 -rw-r--r--   8.6KiB /usr/lib64/python3.9/concurrent/futures/thread.py
--rw-r--r--    82KiB /usr/lib64/python3.9/config-3.9-aarch64-linux-gnu/Makefile
+-rw-r--r--    83KiB /usr/lib64/python3.9/config-3.9-aarch64-linux-gnu/Makefile
 -rw-r--r--    54KiB /usr/lib64/python3.9/configparser.py
 -rw-r--r--    25KiB /usr/lib64/python3.9/contextlib.py
 -rw-r--r--     129B /usr/lib64/python3.9/contextvars.py
@@ -8040,14 +8048,14 @@
 -rw-r--r--   1.6KiB /usr/lib64/python3.9/email/__pycache__/encoders.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/email/__pycache__/encoders.cpython-39.opt-2.pyc
 -rw-r--r--   1.6KiB /usr/lib64/python3.9/email/__pycache__/encoders.cpython-39.pyc
--rw-r--r--   5.8KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.opt-1.pyc
--rw-r--r--   4.4KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.opt-2.pyc
--rw-r--r--   5.8KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.pyc
+-rw-r--r--   6.0KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.opt-1.pyc
+-rw-r--r--   4.6KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.opt-2.pyc
+-rw-r--r--   6.0KiB /usr/lib64/python3.9/email/__pycache__/errors.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/__pycache__/feedparser.cpython-39.opt-1.pyc
 -rw-r--r--   8.7KiB /usr/lib64/python3.9/email/__pycache__/feedparser.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/__pycache__/feedparser.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-1.pyc
--rw-r--r--   8.7KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-2.pyc
+-rw-r--r--   9.1KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-2.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/email/__pycache__/header.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/__pycache__/header.cpython-39.opt-2.pyc
@@ -8070,21 +8078,21 @@
 -rw-r--r--   7.5KiB /usr/lib64/python3.9/email/__pycache__/quoprimime.cpython-39.opt-1.pyc
 -rw-r--r--   4.2KiB /usr/lib64/python3.9/email/__pycache__/quoprimime.cpython-39.opt-2.pyc
 -rw-r--r--   7.5KiB /usr/lib64/python3.9/email/__pycache__/quoprimime.cpython-39.pyc
--rw-r--r--   9.4KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.opt-1.pyc
--rw-r--r--   6.2KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.opt-2.pyc
--rw-r--r--   9.4KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.opt-1.pyc
+-rw-r--r--   8.0KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.opt-2.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/email/__pycache__/utils.cpython-39.pyc
 -rw-r--r--   8.4KiB /usr/lib64/python3.9/email/_encoded_words.py
 -rw-r--r--   105KiB /usr/lib64/python3.9/email/_header_value_parser.py
 -rw-r--r--    18KiB /usr/lib64/python3.9/email/_parseaddr.py
--rw-r--r--    15KiB /usr/lib64/python3.9/email/_policybase.py
+-rw-r--r--    16KiB /usr/lib64/python3.9/email/_policybase.py
 -rw-r--r--   9.4KiB /usr/lib64/python3.9/email/architecture.rst
 -rw-r--r--   3.5KiB /usr/lib64/python3.9/email/base64mime.py
 -rw-r--r--    17KiB /usr/lib64/python3.9/email/charset.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/contentmanager.py
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/email/encoders.py
--rw-r--r--   3.6KiB /usr/lib64/python3.9/email/errors.py
+-rw-r--r--   3.7KiB /usr/lib64/python3.9/email/errors.py
 -rw-r--r--    23KiB /usr/lib64/python3.9/email/feedparser.py
--rw-r--r--    20KiB /usr/lib64/python3.9/email/generator.py
+-rw-r--r--    21KiB /usr/lib64/python3.9/email/generator.py
 -rw-r--r--    24KiB /usr/lib64/python3.9/email/header.py
 -rw-r--r--    21KiB /usr/lib64/python3.9/email/headerregistry.py
 -rw-r--r--   2.1KiB /usr/lib64/python3.9/email/iterators.py
@@ -8128,7 +8136,7 @@
 -rw-r--r--   5.0KiB /usr/lib64/python3.9/email/parser.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/policy.py
 -rw-r--r--   9.7KiB /usr/lib64/python3.9/email/quoprimime.py
--rw-r--r--    13KiB /usr/lib64/python3.9/email/utils.py
+-rw-r--r--    17KiB /usr/lib64/python3.9/email/utils.py
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/encodings/__init__.py
 -rw-r--r--   3.9KiB /usr/lib64/python3.9/encodings/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   2.4KiB /usr/lib64/python3.9/encodings/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -8422,11 +8430,11 @@
 -rw-r--r--   4.1KiB /usr/lib64/python3.9/encodings/utf_8_sig.py
 -rw-r--r--   2.8KiB /usr/lib64/python3.9/encodings/uu_codec.py
 -rw-r--r--   2.2KiB /usr/lib64/python3.9/encodings/zlib_codec.py
--rw-r--r--   7.4KiB /usr/lib64/python3.9/ensurepip/__init__.py
+-rw-r--r--   6.8KiB /usr/lib64/python3.9/ensurepip/__init__.py
 -rw-r--r--      88B /usr/lib64/python3.9/ensurepip/__main__.py
--rw-r--r--   5.7KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.opt-1.pyc
--rw-r--r--   5.1KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.opt-2.pyc
--rw-r--r--   5.7KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--   5.2KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--   4.6KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.opt-2.pyc
+-rw-r--r--   5.2KiB /usr/lib64/python3.9/ensurepip/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--     228B /usr/lib64/python3.9/ensurepip/__pycache__/__main__.cpython-39.opt-1.pyc
 -rw-r--r--     228B /usr/lib64/python3.9/ensurepip/__pycache__/__main__.cpython-39.opt-2.pyc
 -rw-r--r--     228B /usr/lib64/python3.9/ensurepip/__pycache__/__main__.cpython-39.pyc
@@ -8449,9 +8457,9 @@
 -rw-r--r--   5.7KiB /usr/lib64/python3.9/glob.py
 -rw-r--r--   9.4KiB /usr/lib64/python3.9/graphlib.py
 -rw-r--r--    22KiB /usr/lib64/python3.9/gzip.py
--rw-r--r--   7.9KiB /usr/lib64/python3.9/hashlib.py
+-rw-r--r--   9.8KiB /usr/lib64/python3.9/hashlib.py
 -rw-r--r--    23KiB /usr/lib64/python3.9/heapq.py
--rw-r--r--   7.9KiB /usr/lib64/python3.9/hmac.py
+-rw-r--r--   6.9KiB /usr/lib64/python3.9/hmac.py
 -rw-r--r--   4.7KiB /usr/lib64/python3.9/html/__init__.py
 -rw-r--r--   3.1KiB /usr/lib64/python3.9/html/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   2.5KiB /usr/lib64/python3.9/html/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -8482,7 +8490,7 @@
 -rw-r--r--    35KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.pyc
 -rw-r--r--    56KiB /usr/lib64/python3.9/http/client.py
 -rw-r--r--    76KiB /usr/lib64/python3.9/http/cookiejar.py
--rw-r--r--    21KiB /usr/lib64/python3.9/http/cookies.py
+-rw-r--r--    20KiB /usr/lib64/python3.9/http/cookies.py
 -rw-r--r--    48KiB /usr/lib64/python3.9/http/server.py
 -rw-r--r--    54KiB /usr/lib64/python3.9/imaplib.py
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/imghdr.py
@@ -8525,7 +8533,7 @@
 -rw-r--r--    12KiB /usr/lib64/python3.9/importlib/util.py
 -rw-r--r--   116KiB /usr/lib64/python3.9/inspect.py
 -rw-r--r--   3.5KiB /usr/lib64/python3.9/io.py
--rw-r--r--    73KiB /usr/lib64/python3.9/ipaddress.py
+-rw-r--r--    77KiB /usr/lib64/python3.9/ipaddress.py
 -rw-r--r--    14KiB /usr/lib64/python3.9/json/__init__.py
 -rw-r--r--    13KiB /usr/lib64/python3.9/json/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   3.0KiB /usr/lib64/python3.9/json/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -8568,7 +8576,7 @@
 -rwxr-xr-x   337KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   202KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   201KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_heapq.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_json.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_lsprof.cpython-39-aarch64-linux-gnu.so
@@ -8583,7 +8591,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_random.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_socket.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   203KiB /usr/lib64/python3.9/lib-dynload/_sqlite3.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   293KiB /usr/lib64/python3.9/lib-dynload/_ssl.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   294KiB /usr/lib64/python3.9/lib-dynload/_ssl.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_statistics.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_struct.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_uuid.cpython-39-aarch64-linux-gnu.so
@@ -8610,9 +8618,9 @@
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-aarch64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.9/lib2to3/Grammar.txt
--rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.16.final.0.pickle
+-rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.20.final.0.pickle
 -rw-r--r--     793B /usr/lib64/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.16.final.0.pickle
+-rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.20.final.0.pickle
 -rw-r--r--     163B /usr/lib64/python3.9/lib2to3/__init__.py
 -rw-r--r--      67B /usr/lib64/python3.9/lib2to3/__main__.py
 -rw-r--r--     302B /usr/lib64/python3.9/lib2to3/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -8930,7 +8938,7 @@
 -rw-r--r--     654B /usr/lib64/python3.9/multiprocessing/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--    25KiB /usr/lib64/python3.9/multiprocessing/__pycache__/connection.cpython-39.opt-1.pyc
 -rw-r--r--    23KiB /usr/lib64/python3.9/multiprocessing/__pycache__/connection.cpython-39.opt-2.pyc
--rw-r--r--    26KiB /usr/lib64/python3.9/multiprocessing/__pycache__/connection.cpython-39.pyc
+-rw-r--r--    25KiB /usr/lib64/python3.9/multiprocessing/__pycache__/connection.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/multiprocessing/__pycache__/context.cpython-39.opt-1.pyc
 -rw-r--r--    12KiB /usr/lib64/python3.9/multiprocessing/__pycache__/context.cpython-39.opt-2.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/multiprocessing/__pycache__/context.cpython-39.pyc
@@ -8988,7 +8996,7 @@
 -rw-r--r--    12KiB /usr/lib64/python3.9/multiprocessing/__pycache__/util.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/multiprocessing/__pycache__/util.cpython-39.opt-2.pyc
 -rw-r--r--    12KiB /usr/lib64/python3.9/multiprocessing/__pycache__/util.cpython-39.pyc
--rw-r--r--    32KiB /usr/lib64/python3.9/multiprocessing/connection.py
+-rw-r--r--    31KiB /usr/lib64/python3.9/multiprocessing/connection.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/multiprocessing/context.py
 -rw-r--r--   3.0KiB /usr/lib64/python3.9/multiprocessing/dummy/__init__.py
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/multiprocessing/dummy/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -9039,7 +9047,7 @@
 -rwxr-xr-x    23KiB /usr/lib64/python3.9/profile.py
 -rw-r--r--    29KiB /usr/lib64/python3.9/pstats.py
 -rw-r--r--   4.7KiB /usr/lib64/python3.9/pty.py
--rw-r--r--   8.1KiB /usr/lib64/python3.9/py_compile.py
+-rw-r--r--   8.0KiB /usr/lib64/python3.9/py_compile.py
 -rw-r--r--    15KiB /usr/lib64/python3.9/pyclbr.py
 -rwxr-xr-x   108KiB /usr/lib64/python3.9/pydoc.py
 -rw-r--r--       0B /usr/lib64/python3.9/pydoc_data/__init__.py
@@ -9212,7 +9220,7 @@
 -rwxr-xr-x    35KiB /usr/lib64/python3.9/smtpd.py
 -rwxr-xr-x    45KiB /usr/lib64/python3.9/smtplib.py
 -rw-r--r--   7.0KiB /usr/lib64/python3.9/sndhdr.py
--rw-r--r--    36KiB /usr/lib64/python3.9/socket.py
+-rw-r--r--    37KiB /usr/lib64/python3.9/socket.py
 -rw-r--r--    27KiB /usr/lib64/python3.9/socketserver.py
 -rw-r--r--   2.0KiB /usr/lib64/python3.9/sqlite3/__init__.py
 -rw-r--r--   1.2KiB /usr/lib64/python3.9/sqlite3/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -9235,13 +9243,13 @@
 -rw-r--r--    11KiB /usr/lib64/python3.9/string.py
 -rw-r--r--    13KiB /usr/lib64/python3.9/stringprep.py
 -rw-r--r--     257B /usr/lib64/python3.9/struct.py
--rw-r--r--    81KiB /usr/lib64/python3.9/subprocess.py
+-rw-r--r--    82KiB /usr/lib64/python3.9/subprocess.py
 -rw-r--r--    18KiB /usr/lib64/python3.9/sunau.py
 -rw-r--r--   2.3KiB /usr/lib64/python3.9/symbol.py
 -rw-r--r--   7.8KiB /usr/lib64/python3.9/symtable.py
 -rw-r--r--    25KiB /usr/lib64/python3.9/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.9/tabnanny.py
--rwxr-xr-x    93KiB /usr/lib64/python3.9/tarfile.py
+-rwxr-xr-x   105KiB /usr/lib64/python3.9/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.9/telnetlib.py
 -rw-r--r--    28KiB /usr/lib64/python3.9/tempfile.py
 -rw-r--r--    19KiB /usr/lib64/python3.9/textwrap.py
@@ -9328,11 +9336,11 @@
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/urllib/__pycache__/robotparser.cpython-39.opt-2.pyc
 -rw-r--r--   7.2KiB /usr/lib64/python3.9/urllib/__pycache__/robotparser.cpython-39.pyc
 -rw-r--r--   2.6KiB /usr/lib64/python3.9/urllib/error.py
--rw-r--r--    42KiB /usr/lib64/python3.9/urllib/parse.py
--rw-r--r--   100KiB /usr/lib64/python3.9/urllib/request.py
+-rw-r--r--    43KiB /usr/lib64/python3.9/urllib/parse.py
+-rw-r--r--    99KiB /usr/lib64/python3.9/urllib/request.py
 -rw-r--r--   2.4KiB /usr/lib64/python3.9/urllib/response.py
 -rw-r--r--   9.3KiB /usr/lib64/python3.9/urllib/robotparser.py
--rwxr-xr-x   6.8KiB /usr/lib64/python3.9/uu.py
+-rw-r--r--   7.2KiB /usr/lib64/python3.9/uu.py
 -rw-r--r--    27KiB /usr/lib64/python3.9/uuid.py
 -rw-r--r--    23KiB /usr/lib64/python3.9/venv/__init__.py
 -rw-r--r--     145B /usr/lib64/python3.9/venv/__main__.py
@@ -9421,9 +9429,9 @@
 -rw-r--r--   8.3KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementPath.cpython-39.opt-1.pyc
 -rw-r--r--   8.3KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementPath.cpython-39.opt-2.pyc
 -rw-r--r--   8.3KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementPath.cpython-39.pyc
--rw-r--r--    55KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementTree.cpython-39.opt-1.pyc
+-rw-r--r--    56KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementTree.cpython-39.opt-1.pyc
 -rw-r--r--    37KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementTree.cpython-39.opt-2.pyc
--rw-r--r--    55KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementTree.cpython-39.pyc
+-rw-r--r--    56KiB /usr/lib64/python3.9/xml/etree/__pycache__/ElementTree.cpython-39.pyc
 -rw-r--r--     133B /usr/lib64/python3.9/xml/etree/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     133B /usr/lib64/python3.9/xml/etree/__pycache__/__init__.cpython-39.opt-2.pyc
 -rw-r--r--     133B /usr/lib64/python3.9/xml/etree/__pycache__/__init__.cpython-39.pyc
@@ -9447,7 +9455,7 @@
 -rw-r--r--   2.8KiB /usr/lib64/python3.9/xml/sax/__pycache__/_exceptions.cpython-39.opt-2.pyc
 -rw-r--r--   5.4KiB /usr/lib64/python3.9/xml/sax/__pycache__/_exceptions.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/xml/sax/__pycache__/expatreader.cpython-39.opt-1.pyc
--rw-r--r--    12KiB /usr/lib64/python3.9/xml/sax/__pycache__/expatreader.cpython-39.opt-2.pyc
+-rw-r--r--    13KiB /usr/lib64/python3.9/xml/sax/__pycache__/expatreader.cpython-39.opt-2.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/xml/sax/__pycache__/expatreader.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/xml/sax/__pycache__/handler.cpython-39.opt-1.pyc
 -rw-r--r--   4.6KiB /usr/lib64/python3.9/xml/sax/__pycache__/handler.cpython-39.opt-2.pyc
@@ -9564,10 +9572,10 @@
 -rw-r--r--     214B /usr/share/awk/walkarray.awk
 -rw-r--r--     424B /usr/share/awk/zerofile.awk
 -rw-r--r--    11KiB /usr/share/bash-completion/completions/dnf
--rw-r--r--   1.4KiB /usr/share/bash-completion/completions/gapplication
--rw-r--r--     935B /usr/share/bash-completion/completions/gdbus
--rw-r--r--   3.8KiB /usr/share/bash-completion/completions/gio
--rw-r--r--   2.8KiB /usr/share/bash-completion/completions/gsettings
+-rw-r--r--   2.4KiB /usr/share/bash-completion/completions/gapplication
+-rw-r--r--   1.8KiB /usr/share/bash-completion/completions/gdbus
+-rw-r--r--   4.0KiB /usr/share/bash-completion/completions/gio
+-rw-r--r--   4.2KiB /usr/share/bash-completion/completions/gsettings
 -rw-r--r--     520B /usr/share/bash-completion/completions/p11-kit
 -rw-r--r--     290B /usr/share/bash-completion/completions/pip3.11
 -rw-r--r--   2.0KiB /usr/share/bash-completion/completions/trust
@@ -10306,7 +10314,7 @@
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   3.4KiB /usr/share/licenses/zip/LICENSE
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
--rw-r--r--    13KiB /usr/share/locale/ab/LC_MESSAGES/glib20.mo
+-rw-r--r--    11KiB /usr/share/locale/ab/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
 -rw-r--r--    28KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.2KiB /usr/share/locale/af/LC_MESSAGES/glib20.mo
@@ -10339,7 +10347,7 @@
 -rw-r--r--   476KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
 -rw-r--r--    49KiB /usr/share/locale/bg/LC_MESSAGES/dnf.mo
 -rw-r--r--    47KiB /usr/share/locale/bg/LC_MESSAGES/findutils.mo
--rw-r--r--   176KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
+-rw-r--r--   180KiB /usr/share/locale/bg/LC_MESSAGES/glib20.mo
 -rw-r--r--    13KiB /usr/share/locale/bg/LC_MESSAGES/gprof.mo
 -rw-r--r--    24KiB /usr/share/locale/bg/LC_MESSAGES/grep.mo
 -rw-r--r--    97KiB /usr/share/locale/bg/LC_MESSAGES/ld.mo
@@ -10363,7 +10371,7 @@
 -rw-r--r--    16KiB /usr/share/locale/ca/LC_MESSAGES/cpplib.mo
 -rw-r--r--    50KiB /usr/share/locale/ca/LC_MESSAGES/dnf.mo
 -rw-r--r--   7.8KiB /usr/share/locale/ca/LC_MESSAGES/findutils.mo
--rw-r--r--   140KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
+-rw-r--r--   144KiB /usr/share/locale/ca/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/ca/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    12KiB /usr/share/locale/ca/LC_MESSAGES/grep.mo
 -rw-r--r--   2.3KiB /usr/share/locale/ca/LC_MESSAGES/libdnf.mo
@@ -10378,7 +10386,7 @@
 -rw-r--r--   368KiB /usr/share/locale/cs/LC_MESSAGES/coreutils.mo
 -rw-r--r--    50KiB /usr/share/locale/cs/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/cs/LC_MESSAGES/findutils.mo
--rw-r--r--   135KiB /usr/share/locale/cs/LC_MESSAGES/glib20.mo
+-rw-r--r--   138KiB /usr/share/locale/cs/LC_MESSAGES/glib20.mo
 -rw-r--r--   221KiB /usr/share/locale/cs/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/cs/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/cs/LC_MESSAGES/grep.mo
@@ -10402,7 +10410,7 @@
 -rw-r--r--    34KiB /usr/share/locale/da/LC_MESSAGES/findutils.mo
 -rw-r--r--   181KiB /usr/share/locale/da/LC_MESSAGES/gcc.mo
 -rw-r--r--    15KiB /usr/share/locale/da/LC_MESSAGES/gdbm.mo
--rw-r--r--   131KiB /usr/share/locale/da/LC_MESSAGES/glib20.mo
+-rw-r--r--   134KiB /usr/share/locale/da/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/da/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/da/LC_MESSAGES/gprof.mo
 -rw-r--r--    16KiB /usr/share/locale/da/LC_MESSAGES/grep.mo
@@ -10425,7 +10433,7 @@
 -rw-r--r--    36KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
 -rw-r--r--   2.0MiB /usr/share/locale/de/LC_MESSAGES/gcc.mo
 -rw-r--r--    17KiB /usr/share/locale/de/LC_MESSAGES/gdbm.mo
--rw-r--r--   138KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
+-rw-r--r--   142KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
@@ -10466,7 +10474,7 @@
 -rw-r--r--    69KiB /usr/share/locale/en@shaw/LC_MESSAGES/glib20.mo
 -rw-r--r--    79KiB /usr/share/locale/en_CA/LC_MESSAGES/glib20.mo
 -rw-r--r--    26KiB /usr/share/locale/en_GB/LC_MESSAGES/dnf.mo
--rw-r--r--   127KiB /usr/share/locale/en_GB/LC_MESSAGES/glib20.mo
+-rw-r--r--   130KiB /usr/share/locale/en_GB/LC_MESSAGES/glib20.mo
 -rw-r--r--   7.5KiB /usr/share/locale/en_GB/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     369B /usr/share/locale/en_US/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   159KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
@@ -10475,7 +10483,7 @@
 -rw-r--r--    38KiB /usr/share/locale/eo/LC_MESSAGES/dnf.mo
 -rw-r--r--    34KiB /usr/share/locale/eo/LC_MESSAGES/findutils.mo
 -rw-r--r--    16KiB /usr/share/locale/eo/LC_MESSAGES/gdbm.mo
--rw-r--r--    60KiB /usr/share/locale/eo/LC_MESSAGES/glib20.mo
+-rw-r--r--    59KiB /usr/share/locale/eo/LC_MESSAGES/glib20.mo
 -rw-r--r--    28KiB /usr/share/locale/eo/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    33KiB /usr/share/locale/eo/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/eo/LC_MESSAGES/gprof.mo
@@ -10498,7 +10506,7 @@
 -rw-r--r--   500KiB /usr/share/locale/es/LC_MESSAGES/gas.mo
 -rw-r--r--   1.1MiB /usr/share/locale/es/LC_MESSAGES/gcc.mo
 -rw-r--r--    15KiB /usr/share/locale/es/LC_MESSAGES/gdbm.mo
--rw-r--r--   137KiB /usr/share/locale/es/LC_MESSAGES/glib20.mo
+-rw-r--r--   141KiB /usr/share/locale/es/LC_MESSAGES/glib20.mo
 -rw-r--r--   211KiB /usr/share/locale/es/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/es/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/es/LC_MESSAGES/gprof.mo
@@ -10525,14 +10533,14 @@
 -rw-r--r--    59KiB /usr/share/locale/et/LC_MESSAGES/tar.mo
 -rw-r--r--    27KiB /usr/share/locale/eu/LC_MESSAGES/coreutils.mo
 -rw-r--r--    22KiB /usr/share/locale/eu/LC_MESSAGES/dnf.mo
--rw-r--r--   136KiB /usr/share/locale/eu/LC_MESSAGES/glib20.mo
+-rw-r--r--   140KiB /usr/share/locale/eu/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.3KiB /usr/share/locale/eu/LC_MESSAGES/grep.mo
 -rw-r--r--     417B /usr/share/locale/eu/LC_MESSAGES/libdnf.mo
 -rw-r--r--     483B /usr/share/locale/eu/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   1.8KiB /usr/share/locale/eu/LC_MESSAGES/sed.mo
 -rw-r--r--    32KiB /usr/share/locale/eu/LC_MESSAGES/tar.mo
 -rw-r--r--   7.3KiB /usr/share/locale/fa/LC_MESSAGES/dnf.mo
--rw-r--r--   101KiB /usr/share/locale/fa/LC_MESSAGES/glib20.mo
+-rw-r--r--   163KiB /usr/share/locale/fa/LC_MESSAGES/glib20.mo
 -rw-r--r--     469B /usr/share/locale/fa/LC_MESSAGES/libdnf.mo
 -rw-r--r--     477B /usr/share/locale/fa/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    72KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
@@ -10573,7 +10581,7 @@
 -rw-r--r--   562KiB /usr/share/locale/fr/LC_MESSAGES/gas.mo
 -rw-r--r--   2.0MiB /usr/share/locale/fr/LC_MESSAGES/gcc.mo
 -rw-r--r--    17KiB /usr/share/locale/fr/LC_MESSAGES/gdbm.mo
--rw-r--r--   144KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
+-rw-r--r--   148KiB /usr/share/locale/fr/LC_MESSAGES/glib20.mo
 -rw-r--r--   197KiB /usr/share/locale/fr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/fr/LC_MESSAGES/gnutls.mo
 -rw-r--r--    12KiB /usr/share/locale/fr/LC_MESSAGES/gprof.mo
@@ -10612,7 +10620,7 @@
 -rw-r--r--    53KiB /usr/share/locale/gl/LC_MESSAGES/bash.mo
 -rw-r--r--    28KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    24KiB /usr/share/locale/gl/LC_MESSAGES/findutils.mo
--rw-r--r--   137KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
+-rw-r--r--   141KiB /usr/share/locale/gl/LC_MESSAGES/glib20.mo
 -rw-r--r--    43KiB /usr/share/locale/gl/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/gl/LC_MESSAGES/grep.mo
 -rw-r--r--    22KiB /usr/share/locale/gl/LC_MESSAGES/make.mo
@@ -10625,13 +10633,13 @@
 -rw-r--r--     487B /usr/share/locale/gu/LC_MESSAGES/libdnf.mo
 -rw-r--r--     481B /usr/share/locale/gu/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.2KiB /usr/share/locale/he/LC_MESSAGES/dnf.mo
--rw-r--r--   128KiB /usr/share/locale/he/LC_MESSAGES/glib20.mo
+-rw-r--r--   133KiB /usr/share/locale/he/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.2KiB /usr/share/locale/he/LC_MESSAGES/grep.mo
 -rw-r--r--    10KiB /usr/share/locale/he/LC_MESSAGES/make.mo
 -rw-r--r--     479B /usr/share/locale/he/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   1.4KiB /usr/share/locale/he/LC_MESSAGES/sed.mo
 -rw-r--r--     416B /usr/share/locale/hi/LC_MESSAGES/dnf.mo
--rw-r--r--   144KiB /usr/share/locale/hi/LC_MESSAGES/glib20.mo
+-rw-r--r--   205KiB /usr/share/locale/hi/LC_MESSAGES/glib20.mo
 -rw-r--r--     478B /usr/share/locale/hi/LC_MESSAGES/libdnf.mo
 -rw-r--r--     478B /usr/share/locale/hi/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   175KiB /usr/share/locale/hr/LC_MESSAGES/bash.mo
@@ -10652,7 +10660,7 @@
 -rw-r--r--   352KiB /usr/share/locale/hu/LC_MESSAGES/coreutils.mo
 -rw-r--r--    93KiB /usr/share/locale/hu/LC_MESSAGES/dnf.mo
 -rw-r--r--    36KiB /usr/share/locale/hu/LC_MESSAGES/findutils.mo
--rw-r--r--   139KiB /usr/share/locale/hu/LC_MESSAGES/glib20.mo
+-rw-r--r--   142KiB /usr/share/locale/hu/LC_MESSAGES/glib20.mo
 -rw-r--r--    44KiB /usr/share/locale/hu/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/hu/LC_MESSAGES/gprof.mo
 -rw-r--r--    13KiB /usr/share/locale/hu/LC_MESSAGES/grep.mo
@@ -10676,7 +10684,7 @@
 -rw-r--r--    20KiB /usr/share/locale/id/LC_MESSAGES/findutils.mo
 -rw-r--r--   409KiB /usr/share/locale/id/LC_MESSAGES/gas.mo
 -rw-r--r--   321KiB /usr/share/locale/id/LC_MESSAGES/gcc.mo
--rw-r--r--   130KiB /usr/share/locale/id/LC_MESSAGES/glib20.mo
+-rw-r--r--   133KiB /usr/share/locale/id/LC_MESSAGES/glib20.mo
 -rw-r--r--    41KiB /usr/share/locale/id/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/id/LC_MESSAGES/gprof.mo
 -rw-r--r--    18KiB /usr/share/locale/id/LC_MESSAGES/grep.mo
@@ -10700,7 +10708,7 @@
 -rw-r--r--   162KiB /usr/share/locale/it/LC_MESSAGES/coreutils.mo
 -rw-r--r--    60KiB /usr/share/locale/it/LC_MESSAGES/dnf.mo
 -rw-r--r--    33KiB /usr/share/locale/it/LC_MESSAGES/findutils.mo
--rw-r--r--   136KiB /usr/share/locale/it/LC_MESSAGES/glib20.mo
+-rw-r--r--   140KiB /usr/share/locale/it/LC_MESSAGES/glib20.mo
 -rw-r--r--   231KiB /usr/share/locale/it/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    35KiB /usr/share/locale/it/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/it/LC_MESSAGES/gprof.mo
@@ -10742,12 +10750,13 @@
 -rw-r--r--    12KiB /usr/share/locale/ja/LC_MESSAGES/sed.mo
 -rw-r--r--    58KiB /usr/share/locale/ja/LC_MESSAGES/tar.mo
 -rw-r--r--    60KiB /usr/share/locale/ka/LC_MESSAGES/dnf.mo
--rw-r--r--    65KiB /usr/share/locale/ka/LC_MESSAGES/glib20.mo
+-rw-r--r--   215KiB /usr/share/locale/ka/LC_MESSAGES/glib20.mo
 -rw-r--r--    51KiB /usr/share/locale/ka/LC_MESSAGES/gnutls.mo
 -rw-r--r--    16KiB /usr/share/locale/ka/LC_MESSAGES/gprof.mo
 -rw-r--r--    26KiB /usr/share/locale/ka/LC_MESSAGES/grep.mo
 -rw-r--r--   307KiB /usr/share/locale/ka/LC_MESSAGES/mit-krb5.mo
 -rw-r--r--   4.3KiB /usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
+-rw-r--r--    16KiB /usr/share/locale/kab/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
 -rw-r--r--   9.1KiB /usr/share/locale/kk/LC_MESSAGES/dnf.mo
 -rw-r--r--    31KiB /usr/share/locale/kk/LC_MESSAGES/glib20.mo
@@ -10759,7 +10768,7 @@
 -rw-r--r--    25KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo
 -rw-r--r--    92KiB /usr/share/locale/ko/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.9KiB /usr/share/locale/ko/LC_MESSAGES/findutils.mo
--rw-r--r--   143KiB /usr/share/locale/ko/LC_MESSAGES/glib20.mo
+-rw-r--r--   147KiB /usr/share/locale/ko/LC_MESSAGES/glib20.mo
 -rw-r--r--    19KiB /usr/share/locale/ko/LC_MESSAGES/grep.mo
 -rw-r--r--    29KiB /usr/share/locale/ko/LC_MESSAGES/libdnf.mo
 -rw-r--r--    46KiB /usr/share/locale/ko/LC_MESSAGES/make.mo
@@ -10778,11 +10787,11 @@
 -rw-r--r--    30KiB /usr/share/locale/lt/LC_MESSAGES/coreutils.mo
 -rw-r--r--    31KiB /usr/share/locale/lt/LC_MESSAGES/dnf.mo
 -rw-r--r--   6.2KiB /usr/share/locale/lt/LC_MESSAGES/findutils.mo
--rw-r--r--   132KiB /usr/share/locale/lt/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/lt/LC_MESSAGES/glib20.mo
 -rw-r--r--   1.4KiB /usr/share/locale/lt/LC_MESSAGES/grep.mo
 -rw-r--r--   6.9KiB /usr/share/locale/lt/LC_MESSAGES/make.mo
 -rw-r--r--     546B /usr/share/locale/lt/LC_MESSAGES/p11-kit.mo
--rw-r--r--   132KiB /usr/share/locale/lv/LC_MESSAGES/glib20.mo
+-rw-r--r--   137KiB /usr/share/locale/lv/LC_MESSAGES/glib20.mo
 -rw-r--r--   7.5KiB /usr/share/locale/lv/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   2.3KiB /usr/share/locale/lv/LC_MESSAGES/popt.mo
 -rw-r--r--    43KiB /usr/share/locale/mai/LC_MESSAGES/glib20.mo
@@ -10811,7 +10820,7 @@
 -rw-r--r--   342KiB /usr/share/locale/nb/LC_MESSAGES/coreutils.mo
 -rw-r--r--   6.3KiB /usr/share/locale/nb/LC_MESSAGES/dnf.mo
 -rw-r--r--    34KiB /usr/share/locale/nb/LC_MESSAGES/findutils.mo
--rw-r--r--   111KiB /usr/share/locale/nb/LC_MESSAGES/glib20.mo
+-rw-r--r--    97KiB /usr/share/locale/nb/LC_MESSAGES/glib20.mo
 -rw-r--r--   206KiB /usr/share/locale/nb/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    18KiB /usr/share/locale/nb/LC_MESSAGES/grep.mo
 -rw-r--r--     469B /usr/share/locale/nb/LC_MESSAGES/libdnf.mo
@@ -10851,7 +10860,7 @@
 -rw-r--r--     478B /usr/share/locale/or/LC_MESSAGES/libdnf.mo
 -rw-r--r--     478B /usr/share/locale/or/LC_MESSAGES/p11-kit.mo
 -rw-r--r--    59KiB /usr/share/locale/pa/LC_MESSAGES/dnf.mo
--rw-r--r--   137KiB /usr/share/locale/pa/LC_MESSAGES/glib20.mo
+-rw-r--r--   161KiB /usr/share/locale/pa/LC_MESSAGES/glib20.mo
 -rw-r--r--   5.0KiB /usr/share/locale/pa/LC_MESSAGES/grep.mo
 -rw-r--r--     818B /usr/share/locale/pa/LC_MESSAGES/libdnf.mo
 -rw-r--r--   9.9KiB /usr/share/locale/pa/LC_MESSAGES/p11-kit.mo
@@ -10861,7 +10870,7 @@
 -rw-r--r--   163KiB /usr/share/locale/pl/LC_MESSAGES/elfutils.mo
 -rw-r--r--    35KiB /usr/share/locale/pl/LC_MESSAGES/findutils.mo
 -rw-r--r--    17KiB /usr/share/locale/pl/LC_MESSAGES/gdbm.mo
--rw-r--r--   139KiB /usr/share/locale/pl/LC_MESSAGES/glib20.mo
+-rw-r--r--   143KiB /usr/share/locale/pl/LC_MESSAGES/glib20.mo
 -rw-r--r--   224KiB /usr/share/locale/pl/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    34KiB /usr/share/locale/pl/LC_MESSAGES/gnutls.mo
 -rw-r--r--    19KiB /usr/share/locale/pl/LC_MESSAGES/grep.mo
@@ -10881,7 +10890,7 @@
 -rw-r--r--   350KiB /usr/share/locale/pt/LC_MESSAGES/coreutils.mo
 -rw-r--r--    35KiB /usr/share/locale/pt/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/pt/LC_MESSAGES/findutils.mo
--rw-r--r--   135KiB /usr/share/locale/pt/LC_MESSAGES/glib20.mo
+-rw-r--r--   139KiB /usr/share/locale/pt/LC_MESSAGES/glib20.mo
 -rw-r--r--    36KiB /usr/share/locale/pt/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    16KiB /usr/share/locale/pt/LC_MESSAGES/grep.mo
 -rw-r--r--   1.4KiB /usr/share/locale/pt/LC_MESSAGES/libdnf.mo
@@ -10898,7 +10907,7 @@
 -rw-r--r--    86KiB /usr/share/locale/pt_BR/LC_MESSAGES/dnf.mo
 -rw-r--r--    35KiB /usr/share/locale/pt_BR/LC_MESSAGES/findutils.mo
 -rw-r--r--    17KiB /usr/share/locale/pt_BR/LC_MESSAGES/gdbm.mo
--rw-r--r--   135KiB /usr/share/locale/pt_BR/LC_MESSAGES/glib20.mo
+-rw-r--r--   138KiB /usr/share/locale/pt_BR/LC_MESSAGES/glib20.mo
 -rw-r--r--    34KiB /usr/share/locale/pt_BR/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/pt_BR/LC_MESSAGES/gprof.mo
 -rw-r--r--    16KiB /usr/share/locale/pt_BR/LC_MESSAGES/grep.mo
@@ -10938,7 +10947,7 @@
 -rw-r--r--   709KiB /usr/share/locale/ru/LC_MESSAGES/gas.mo
 -rw-r--r--   1.7MiB /usr/share/locale/ru/LC_MESSAGES/gcc.mo
 -rw-r--r--    21KiB /usr/share/locale/ru/LC_MESSAGES/gdbm.mo
--rw-r--r--   174KiB /usr/share/locale/ru/LC_MESSAGES/glib20.mo
+-rw-r--r--   182KiB /usr/share/locale/ru/LC_MESSAGES/glib20.mo
 -rw-r--r--   284KiB /usr/share/locale/ru/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/ru/LC_MESSAGES/gprof.mo
 -rw-r--r--    23KiB /usr/share/locale/ru/LC_MESSAGES/grep.mo
@@ -10965,7 +10974,7 @@
 -rw-r--r--    69KiB /usr/share/locale/sk/LC_MESSAGES/coreutils.mo
 -rw-r--r--    20KiB /usr/share/locale/sk/LC_MESSAGES/dnf.mo
 -rw-r--r--    24KiB /usr/share/locale/sk/LC_MESSAGES/findutils.mo
--rw-r--r--   125KiB /usr/share/locale/sk/LC_MESSAGES/glib20.mo
+-rw-r--r--   124KiB /usr/share/locale/sk/LC_MESSAGES/glib20.mo
 -rw-r--r--    44KiB /usr/share/locale/sk/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    18KiB /usr/share/locale/sk/LC_MESSAGES/grep.mo
 -rw-r--r--     486B /usr/share/locale/sk/LC_MESSAGES/libdnf.mo
@@ -10977,7 +10986,7 @@
 -rw-r--r--    79KiB /usr/share/locale/sl/LC_MESSAGES/bash.mo
 -rw-r--r--   303KiB /usr/share/locale/sl/LC_MESSAGES/coreutils.mo
 -rw-r--r--    34KiB /usr/share/locale/sl/LC_MESSAGES/findutils.mo
--rw-r--r--   132KiB /usr/share/locale/sl/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/sl/LC_MESSAGES/glib20.mo
 -rw-r--r--   9.8KiB /usr/share/locale/sl/LC_MESSAGES/grep.mo
 -rw-r--r--   7.6KiB /usr/share/locale/sl/LC_MESSAGES/p11-kit.mo
 -rw-r--r--     533B /usr/share/locale/sl/LC_MESSAGES/popt.mo
@@ -11027,7 +11036,7 @@
 -rw-r--r--   513KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--   1.9MiB /usr/share/locale/sv/LC_MESSAGES/gcc.mo
 -rw-r--r--    16KiB /usr/share/locale/sv/LC_MESSAGES/gdbm.mo
--rw-r--r--   131KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
+-rw-r--r--   135KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/sv/LC_MESSAGES/gprof.mo
@@ -11068,7 +11077,7 @@
 -rw-r--r--    33KiB /usr/share/locale/tr/LC_MESSAGES/findutils.mo
 -rw-r--r--   249KiB /usr/share/locale/tr/LC_MESSAGES/gas.mo
 -rw-r--r--   243KiB /usr/share/locale/tr/LC_MESSAGES/gcc.mo
--rw-r--r--   133KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
+-rw-r--r--   137KiB /usr/share/locale/tr/LC_MESSAGES/glib20.mo
 -rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    11KiB /usr/share/locale/tr/LC_MESSAGES/gprof.mo
 -rw-r--r--    17KiB /usr/share/locale/tr/LC_MESSAGES/grep.mo
@@ -11094,7 +11103,7 @@
 -rw-r--r--   725KiB /usr/share/locale/uk/LC_MESSAGES/gas.mo
 -rw-r--r--   193KiB /usr/share/locale/uk/LC_MESSAGES/gcc.mo
 -rw-r--r--    22KiB /usr/share/locale/uk/LC_MESSAGES/gdbm.mo
--rw-r--r--   175KiB /usr/share/locale/uk/LC_MESSAGES/glib20.mo
+-rw-r--r--   180KiB /usr/share/locale/uk/LC_MESSAGES/glib20.mo
 -rw-r--r--   289KiB /usr/share/locale/uk/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    43KiB /usr/share/locale/uk/LC_MESSAGES/gnutls.mo
 -rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/gprof.mo
@@ -11148,7 +11157,7 @@
 -rw-r--r--    32KiB /usr/share/locale/zh_CN/LC_MESSAGES/findutils.mo
 -rw-r--r--   3.8KiB /usr/share/locale/zh_CN/LC_MESSAGES/gas.mo
 -rw-r--r--   435KiB /usr/share/locale/zh_CN/LC_MESSAGES/gcc.mo
--rw-r--r--   123KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
+-rw-r--r--   125KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
 -rw-r--r--   215KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    22KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnutls.mo
 -rw-r--r--    17KiB /usr/share/locale/zh_CN/LC_MESSAGES/grep.mo
@@ -13145,7 +13154,7 @@
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
--rw-------   9.4KiB /var/cache/ldconfig/aux-cache
+-rw-------   9.5KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--      37B /var/lib/alternatives/ld
 -rw-r--r--      69B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--   132KiB /var/lib/dnf/history.sqlite
@@ -13572,18 +13581,19 @@ lrwxrwxrwx      17B /usr/lib64/libgccpp.so.1 libgccpp.so.1.4.0
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
 lrwxrwxrwx      23B /usr/lib64/libgdbm_compat.so.4 libgdbm_compat.so.4.0.0
-lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.7400.7
-lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.7400.7
-lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.7400.7
+lrwxrwxrwx      22B /usr/lib64/libgio-2.0.so.0 libgio-2.0.so.0.8200.2
+lrwxrwxrwx      31B /usr/lib64/libgirepository-2.0.so.0 libgirepository-2.0.so.0.8200.2
+lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.8200.2
+lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
 lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
-lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.7400.7
+lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
 lrwxrwxrwx      19B /usr/lib64/libgpgme.so.11 libgpgme.so.11.24.1
 lrwxrwxrwx      21B /usr/lib64/libgssapi_krb5.so.2 libgssapi_krb5.so.2.2
 lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
-lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.7400.7
+lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.8200.2
 lrwxrwxrwx      21B /usr/lib64/libguile-2.2.so.1 libguile-2.2.so.1.4.2
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.5
