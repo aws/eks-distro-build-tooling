@@ -66,7 +66,7 @@ for TARGETARCH in arm64 amd64; do
   for v in $go_active_version; do
     go_major_version=$(if [[ $(echo "$v" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${v%.*}; else echo ${v%-*}; fi)
     sha256=$(curl -sSLf --retry 5 "https://go.dev/dl/?mode=json" | jq -r --arg tar "$v.linux-${TARGETARCH/\//-}.tar.gz" '.[].files[] | if .filename == $tar then .sha256 else "" end' | xargs)
-    echo "$sha256 /home/prow/go/src/github.com/aws/eks-distro-build-tooling/builder-base/tmp/golang-downloads/linux/$TARGETARCH/${v}.linux-$TARGETARCH.tar.gz" >"$CHECKSUMS_ROOT/checksums/go-$go_major_version-$TARGETARCH-checksum"
+    echo "$sha256 ${v}.linux-$TARGETARCH.tar.gz" >"$CHECKSUMS_ROOT/checksums/go-$go_major_version-$TARGETARCH-checksum"
   done
 
   # GOVC
