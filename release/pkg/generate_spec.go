@@ -18,7 +18,6 @@ import (
 	"net/url"
 	"strings"
 	"time"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ecrpublic"
