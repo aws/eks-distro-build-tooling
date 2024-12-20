@@ -4098,7 +4098,7 @@
 -rwxr-xr-x   674KiB /usr/sbin/ip
 -rwxr-xr-x    68KiB /usr/sbin/ipset
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
--rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
+-rwxr-xr-x   2.1MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x    68KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    69KiB /usr/sbin/ldattach
 -rwxr-xr-x   762KiB /usr/sbin/ldconfig
@@ -4538,7 +4538,7 @@
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.22/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.23/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
@@ -8421,7 +8421,7 @@
 -rw-r--r--    96KiB /var/lib/rpm/Providename
 -rw-r--r--    84KiB /var/lib/rpm/Requirename
 -rw-r--r--    24KiB /var/lib/rpm/Sha1header
--rw-r--r--    20KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database
 -rw-------       0B /var/lib/systemd/random-seed
