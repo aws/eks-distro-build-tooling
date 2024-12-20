@@ -1383,8 +1383,8 @@
 -rw-r--r--     515B /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/__version__.cpython-37.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/_internal_utils.cpython-37.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/_internal_utils.cpython-37.pyc
--rw-r--r--    17KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-37.opt-1.pyc
--rw-r--r--    17KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-37.pyc
+-rw-r--r--    18KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-37.opt-1.pyc
+-rw-r--r--    18KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-37.pyc
 -rw-r--r--   6.6KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/api.cpython-37.opt-1.pyc
 -rw-r--r--   6.6KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/api.cpython-37.pyc
 -rw-r--r--   8.2KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/auth.cpython-37.opt-1.pyc
@@ -1415,7 +1415,7 @@
 -rw-r--r--    22KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/__pycache__/utils.cpython-37.pyc
 -rw-r--r--     441B /usr/lib/python3.7/site-packages/pip/_vendor/requests/__version__.py
 -rw-r--r--   1.1KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/_internal_utils.py
--rw-r--r--    22KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/adapters.py
+-rw-r--r--    23KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/adapters.py
 -rw-r--r--   6.4KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/api.py
 -rw-r--r--    10KiB /usr/lib/python3.7/site-packages/pip/_vendor/requests/auth.py
 -rw-r--r--     465B /usr/lib/python3.7/site-packages/pip/_vendor/requests/certs.py

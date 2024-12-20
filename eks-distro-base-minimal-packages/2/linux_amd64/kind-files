@@ -223,7 +223,7 @@
 -rwxr-xr-x      31B /usr/bin/command
 -rwxr-xr-x    54MiB /usr/bin/containerd
 -rwxr-xr-x   6.1MiB /usr/bin/containerd-shim
--rwxr-xr-x   7.1MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x   7.2MiB /usr/bin/containerd-shim-runc-v1
 -rwxr-xr-x    12MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   151KiB /usr/bin/coredumpctl
 -rwxr-xr-x   144KiB /usr/bin/cp
@@ -4100,7 +4100,7 @@
 -rwxr-xr-x   572KiB /usr/sbin/ip
 -rwxr-xr-x    24KiB /usr/sbin/ipset
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
--rwxr-xr-x   1.7MiB /usr/sbin/iptables-wrapper
+-rwxr-xr-x   2.0MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x    20KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    28KiB /usr/sbin/ldattach
 -rwxr-xr-x   885KiB /usr/sbin/ldconfig
@@ -4540,7 +4540,7 @@
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.22/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.23/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
