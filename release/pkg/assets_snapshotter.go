@@ -31,7 +31,7 @@ func (r *ReleaseConfig) GetSnapshotterComponent(spec distrov1alpha1.ReleaseSpec)
 		return nil, errors.Cause(err)
 	}
 	assets := []distrov1alpha1.Asset{}
-	binaries := []string{"csi-snapshotter", "snapshot-controller", "snapshot-validation-webhook"}
+	binaries := []string{"csi-snapshotter", "snapshot-controller"}
 	for _, binary := range binaries {
 		assets = append(assets, distrov1alpha1.Asset{
 			Name:        fmt.Sprintf("%s-image", binary),

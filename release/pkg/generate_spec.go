@@ -87,11 +87,6 @@ func UpdateImageDigests(ecrPublicClient *ecrpublic.ECRPublic, r *ReleaseConfig, 
 				releaseUriSplit := strings.Split(asset.Image.URI, ":")
 				repoName := strings.Replace(releaseUriSplit[0], r.ContainerImageRepository+"/", "", -1)
 				imageTag = releaseUriSplit[1]
-				// Skip updating digest for the specific repository kubernetes-csi/external-snapshotter/snapshot-validation-webhook
-				if repoName == "kubernetes-csi/external-snapshotter/snapshot-validation-webhook" {
-					fmt.Printf("Skipping digest update for %s:%s\n", repoName, imageTag)
-					continue
-				}
 				describeImagesOutput, err := ecrPublicClient.DescribeImages(
 					&ecrpublic.DescribeImagesInput{
 						ImageIds: []*ecrpublic.ImageIdentifier{
