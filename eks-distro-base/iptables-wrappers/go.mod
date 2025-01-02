@@ -1,3 +1,3 @@
 module github.com/kubernetes-sigs/iptables-wrappers
 
-go 1.19
+go 1.23
