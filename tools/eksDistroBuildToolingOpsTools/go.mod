@@ -1,6 +1,6 @@
 module github.com/aws/eks-distro-build-tooling/tools/eksDistroBuildToolingOpsTools
 
-go 1.19
+go 1.22
 
 require (
 	github.com/aws/aws-sdk-go v1.44.331
