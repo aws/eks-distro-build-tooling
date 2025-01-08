@@ -28,7 +28,7 @@ else
 fi
 
 
-REPOS=(eks-distro eks-anywhere-build-tooling eks-anywhere)
+REPOS=(eks-distro eks-anywhere)
 for repo in "${REPOS[@]}"; do
     ${SCRIPT_ROOT}/../pr-scripts/update_local_branch.sh "$repo"
 
