@@ -10,7 +10,9 @@ If security updates are found, a new image is built and pushed to
 [ECR](https://gallery.ecr.aws/eks-distro-build-tooling/eks-distro-base).  A PR is then automatically created to update the EKS_DISTRO_BASE_TAG_FILE 
 file in this repo, which is the source of truth of the latest base image versions for each of the listed images ([example](https://github.com/aws/eks-distro-build-tooling/pull/807/files)). 
 
-Once that PR merges, a postsubmit runs to update the dependent EKS_DISTRO_*_TAG_FILEs in [eks-distro](https://github.com/aws/eks-distro) and [eks-anywhere-build-tooling](https://github.com/aws/eks-anywhere-build-tooling) for each of the images that received a package update ([example](https://github.com/aws/eks-anywhere-build-tooling/pull/1820)).
+Once that PR merges, a postsubmit runs to update the dependent EKS_DISTRO_*_TAG_FILEs in [eks-distro](https://github.com/aws/eks-distro) and [eks-anywhere](https://github.com/aws/eks-anywhere) for each of the images that received a package update ([example](https://github.com/aws/eks-anywhere/pull/8597)).
+
+Previously the base images in the [eks-anywhere-build-tooling](https://github.com/aws/eks-anywhere-build-tooling) were also directly updated by this automation (similar to EKS Distro) but now they are managed by their own [version-tracker tool](https://github.com/aws/eks-anywhere-build-tooling/tree/main/tools/version-tracker) which checks daily for new base image tags and opens automatic PRs to update them.
 
 The standard variant is currently the base image for EKS-D versions 1.18-1.21, but is not intended to be the base for future EKS-D versions or new container images.  
 The minimal variants are now recommended where possible.
