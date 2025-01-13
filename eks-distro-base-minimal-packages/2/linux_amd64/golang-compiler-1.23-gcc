@@ -12,7 +12,7 @@ cpp-7.3.1-17.amzn2.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
 cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
 cryptsetup-libs-1.7.4-4.amzn2.x86_64
-curl-8.3.0-1.amzn2.0.7.x86_64
+curl-8.3.0-1.amzn2.0.8.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.0.1.x86_64
 dbus-1.10.24-7.amzn2.0.4.x86_64
 dbus-libs-1.10.24-7.amzn2.0.4.x86_64
@@ -62,7 +62,7 @@ libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcilkrts-7.3.1-17.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-64.amzn2.0.3.x86_64
-libcurl-8.3.0-1.amzn2.0.7.x86_64
+libcurl-8.3.0-1.amzn2.0.8.x86_64
 libdb-5.3.21-24.amzn2.0.5.x86_64
 libdb-utils-5.3.21-24.amzn2.0.5.x86_64
 libedit-3.0-12.20121213cvs.amzn2.0.2.x86_64
