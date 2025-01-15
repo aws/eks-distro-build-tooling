@@ -59,7 +59,7 @@ al2023:
   eks-distro-minimal-base-csi: 2025-01-10-1736535671.2023
   eks-distro-minimal-base-csi-ebs: 2025-01-01-1735689705.2023
   eks-distro-minimal-base-haproxy: 2025-01-01-1735689705.2023
-  eks-distro-minimal-base-kind: 2025-01-10-1736535671.2023
+  eks-distro-minimal-base-kind: 2025-01-15-1736924476.2023
   eks-distro-minimal-base-nginx: 2025-01-01-1735689705.2023
   eks-distro-minimal-base-git: 2025-01-10-1736535671.2023
   eks-distro-minimal-base-nsenter: 2025-01-01-1735689705.2023

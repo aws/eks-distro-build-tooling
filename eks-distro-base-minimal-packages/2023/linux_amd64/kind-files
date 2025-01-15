@@ -560,7 +560,7 @@
 -rwxr-xr-x    16KiB /usr/bin/rpm2cpio
 -rwxr-xr-x    21KiB /usr/bin/rpmdb
 -rwxr-xr-x    17KiB /usr/bin/rpmkeys
--rwxr-xr-x   550KiB /usr/bin/rsync
+-rwxr-xr-x   567KiB /usr/bin/rsync
 -rwxr-xr-x   5.1KiB /usr/bin/rsync-ssl
 -rwxr-xr-x    37KiB /usr/bin/runcon
 -rwxr-xr-x    53KiB /usr/bin/script
