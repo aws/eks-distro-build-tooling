@@ -151,7 +151,7 @@ rpcbind-0.2.0-44.amzn2.x86_64
 rpm-4.11.3-48.amzn2.0.4.x86_64
 rpm-build-libs-4.11.3-48.amzn2.0.4.x86_64
 rpm-libs-4.11.3-48.amzn2.0.4.x86_64
-rsync-3.1.2-11.amzn2.0.3.x86_64
+rsync-3.1.2-11.amzn2.0.5.x86_64
 runc-1.1.14-1.amzn2.x86_64
 sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
