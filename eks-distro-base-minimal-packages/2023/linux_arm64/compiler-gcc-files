@@ -1484,7 +1484,7 @@
 -rw-r--r--   1.8KiB /usr/include/linux/spi/spi.h
 -rw-r--r--   4.6KiB /usr/include/linux/spi/spidev.h
 -rw-r--r--   6.8KiB /usr/include/linux/stat.h
--rw-r--r--   1.6KiB /usr/include/linux/stddef.h
+-rw-r--r--   1.8KiB /usr/include/linux/stddef.h
 -rw-r--r--   1.3KiB /usr/include/linux/stm.h
 -rw-r--r--     238B /usr/include/linux/string.h
 -rw-r--r--   1.2KiB /usr/include/linux/sunrpc/debug.h
@@ -1718,7 +1718,7 @@
 -rw-r--r--    47KiB /usr/include/python3.9/pyconfig-64.h
 -rw-r--r--   3.5KiB /usr/include/rdma/bnxt_re-abi.h
 -rw-r--r--   3.1KiB /usr/include/rdma/cxgb4-abi.h
--rw-r--r--   3.5KiB /usr/include/rdma/efa-abi.h
+-rw-r--r--   3.6KiB /usr/include/rdma/efa-abi.h
 -rw-r--r--     811B /usr/include/rdma/erdma-abi.h
 -rw-r--r--   6.5KiB /usr/include/rdma/hfi/hfi1_ioctl.h
 -rw-r--r--   9.1KiB /usr/include/rdma/hfi/hfi1_user.h
