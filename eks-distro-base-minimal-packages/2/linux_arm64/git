@@ -6,7 +6,7 @@ cyrus-sasl-lib-2.1.26-24.amzn2.0.1.aarch64
 expat-2.1.0-15.amzn2.0.4.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 fipscheck-lib-1.4.1-6.amzn2.0.2.aarch64
-git-core-2.40.1-1.amzn2.0.3.aarch64
+git-core-2.47.1-1.amzn2.0.2.aarch64
 glibc-2.26-64.amzn2.0.3.aarch64
 glibc-common-2.26-64.amzn2.0.3.aarch64
 glibc-minimal-langpack-2.26-64.amzn2.0.3.aarch64
