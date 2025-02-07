@@ -1,5 +1,5 @@
 al2:
-  eks-distro-base: 2025-01-10-1736535672.2
+  eks-distro-base: 2025-02-05-1738738870.2
   eks-distro-minimal-base: 2024-08-13-1723575672.2
   eks-distro-minimal-base-nonroot: 2024-08-13-1723575672.2
   eks-distro-minimal-base-glibc: 2024-12-20-1734721295.2
