@@ -18,8 +18,8 @@ dbus-broker-32-1.amzn2023.0.2.x86_64
 dbus-common-1.12.28-1.amzn2023.0.1.noarch
 device-mapper-1.02.185-1.amzn2023.0.5.x86_64
 device-mapper-libs-1.02.185-1.amzn2023.0.5.x86_64
-dnf-4.14.0-1.amzn2023.0.5.noarch
-dnf-data-4.14.0-1.amzn2023.0.5.noarch
+dnf-4.14.0-1.amzn2023.0.6.noarch
+dnf-data-4.14.0-1.amzn2023.0.6.noarch
 e2fsprogs-libs-1.46.5-2.amzn2023.0.2.x86_64
 ebtables-legacy-2.0.11-9.amzn2023.0.2.x86_64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
@@ -56,7 +56,7 @@ iptables-nft-1.8.8-3.amzn2023.0.2.x86_64
 jansson-2.14-0.amzn2023.x86_64
 jq-1.7.1-48.amzn2023.0.1.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-kernel-libbpf-6.1.127-135.201.amzn2023.x86_64
+kernel-libbpf-6.1.128-136.201.amzn2023.x86_64
 keyutils-1.6.3-1.amzn2023.0.1.x86_64
 keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
@@ -127,7 +127,7 @@ libuuid-2.37.4-1.amzn2023.0.4.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
 libverto-libev-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
-libxml2-2.10.4-1.amzn2023.0.7.x86_64
+libxml2-2.10.4-1.amzn2023.0.8.x86_64
 libyaml-0.2.5-5.amzn2023.0.2.x86_64
 libzstd-1.5.5-1.amzn2023.0.1.x86_64
 lockdev-1.0.4-0.35.20111007git.amzn2023.0.3.x86_64
@@ -140,7 +140,7 @@ nfs-utils-2.5.4-2.rc3.amzn2023.0.3.x86_64
 nftables-1.0.4-3.amzn2023.0.2.x86_64
 npth-1.6-6.amzn2023.0.2.x86_64
 oniguruma-6.9.7.1-1.amzn2023.0.2.x86_64
-openldap-2.4.57-6.amzn2023.0.6.x86_64
+openldap-2.4.57-6.amzn2023.0.7.x86_64
 openssl-libs-3.0.8-1.amzn2023.0.18.x86_64
 p11-kit-0.24.1-2.amzn2023.0.3.x86_64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.x86_64
@@ -153,7 +153,7 @@ procps-ng-3.3.17-1.amzn2023.0.2.x86_64
 psmisc-23.4-1.amzn2023.0.2.x86_64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
 python3-3.9.20-1.amzn2023.0.3.x86_64
-python3-dnf-4.14.0-1.amzn2023.0.5.noarch
+python3-dnf-4.14.0-1.amzn2023.0.6.noarch
 python3-gpg-1.15.1-6.amzn2023.0.3.x86_64
 python3-hawkey-0.69.0-8.amzn2023.0.5.x86_64
 python3-libcomps-0.1.20-1.amzn2023.x86_64
@@ -189,5 +189,5 @@ util-linux-core-2.37.4-1.amzn2023.0.4.x86_64
 which-2.21-26.amzn2023.0.2.x86_64
 xxhash-libs-0.8.0-3.amzn2023.0.2.x86_64
 xz-libs-5.2.5-9.amzn2023.0.2.x86_64
-yum-4.14.0-1.amzn2023.0.5.noarch
+yum-4.14.0-1.amzn2023.0.6.noarch
 zlib-1.2.11-33.amzn2023.0.5.x86_64

@@ -2055,8 +2055,8 @@
 -rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -2081,7 +2081,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -6762,7 +6762,7 @@
 -rwxr-xr-x   202KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_heapq.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_heapq.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_json.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_lsprof.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_lzma.cpython-39-aarch64-linux-gnu.so
