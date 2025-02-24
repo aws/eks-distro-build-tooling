@@ -15280,8 +15280,8 @@
 -rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -15306,7 +15306,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -15429,7 +15429,7 @@
 -rw-r--r--     862B /usr/lib/rpm/macros.d/macros.perl-srpm
 -rw-r--r--      61B /usr/lib/rpm/macros.d/macros.pkgconf
 -rw-r--r--    12KiB /usr/lib/rpm/macros.d/macros.python-srpm
--rw-r--r--   1.4KiB /usr/lib/rpm/macros.d/macros.rust-srpm
+-rw-r--r--   2.1KiB /usr/lib/rpm/macros.d/macros.rust-srpm
 -rw-r--r--     181B /usr/lib/rpm/macros.d/macros.shell-completions
 -rw-r--r--     127B /usr/lib/rpm/macros.d/macros.valgrind-srpm
 -rw-r--r--     241B /usr/lib/rpm/macros.d/macros.vpath
@@ -17894,7 +17894,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   127KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    26KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   306KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    30KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    73KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -19918,7 +19918,6 @@
 -rw-r--r--    35KiB /usr/share/licenses/readline/COPYING
 -rw-r--r--   2.0KiB /usr/share/licenses/readline/USAGE
 -rw-r--r--    44KiB /usr/share/licenses/rpm/COPYING
--rw-r--r--   1.1KiB /usr/share/licenses/rust-srpm-macros/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/sed/COPYING
 -rw-r--r--     118B /usr/share/licenses/setup/COPYING
 -rw-rw-r--    18KiB /usr/share/licenses/shadow-utils/gpl-2.0.txt

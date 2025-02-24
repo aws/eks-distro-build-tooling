@@ -11,8 +11,8 @@ coreutils-common-8.32-30.amzn2023.0.3.aarch64
 crypto-policies-20220428-1.gitdfb10ea.amzn2023.0.2.noarch
 curl-8.5.0-1.amzn2023.0.4.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
-dnf-4.14.0-1.amzn2023.0.5.noarch
-dnf-data-4.14.0-1.amzn2023.0.5.noarch
+dnf-4.14.0-1.amzn2023.0.6.noarch
+dnf-data-4.14.0-1.amzn2023.0.6.noarch
 elfutils-debuginfod-client-0.188-3.amzn2023.0.2.aarch64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
 elfutils-libelf-0.188-3.amzn2023.0.2.aarch64
@@ -30,7 +30,7 @@ glibc-common-2.34-117.amzn2023.0.1.aarch64
 glibc-minimal-langpack-2.34-117.amzn2023.0.1.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gnupg2-2.3.7-1.amzn2023.0.4.aarch64
-gnutls-3.8.0-380.amzn2023.0.6.aarch64
+gnutls-3.8.0-381.amzn2023.0.7.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 gpgme-1.15.1-6.amzn2023.0.3.aarch64
@@ -80,7 +80,7 @@ libunistring-0.9.10-10.amzn2023.0.2.aarch64
 libuuid-2.37.4-1.amzn2023.0.4.aarch64
 libverto-0.3.2-1.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-libxml2-2.10.4-1.amzn2023.0.7.aarch64
+libxml2-2.10.4-1.amzn2023.0.8.aarch64
 libyaml-0.2.5-5.amzn2023.0.2.aarch64
 libzstd-1.5.5-1.amzn2023.0.1.aarch64
 lua-libs-5.4.4-3.amzn2023.0.2.aarch64
@@ -99,13 +99,13 @@ pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 popt-1.18-6.amzn2023.0.2.aarch64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
-python3-3.9.20-1.amzn2023.0.2.aarch64
-python3-dnf-4.14.0-1.amzn2023.0.5.noarch
+python3-3.9.20-1.amzn2023.0.3.aarch64
+python3-dnf-4.14.0-1.amzn2023.0.6.noarch
 python3-gpg-1.15.1-6.amzn2023.0.3.aarch64
 python3-hawkey-0.69.0-8.amzn2023.0.5.aarch64
 python3-libcomps-0.1.20-1.amzn2023.aarch64
 python3-libdnf-0.69.0-8.amzn2023.0.5.aarch64
-python3-libs-3.9.20-1.amzn2023.0.2.aarch64
+python3-libs-3.9.20-1.amzn2023.0.3.aarch64
 python3-pip-wheel-21.3.1-2.amzn2023.0.10.noarch
 python3-rpm-4.16.1.3-29.amzn2023.0.6.aarch64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.5.noarch
@@ -122,5 +122,5 @@ tar-1.34-1.amzn2023.0.4.aarch64
 tzdata-2024a-1.amzn2023.0.1.noarch
 which-2.21-26.amzn2023.0.2.aarch64
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
-yum-4.14.0-1.amzn2023.0.5.noarch
+yum-4.14.0-1.amzn2023.0.6.noarch
 zlib-1.2.11-33.amzn2023.0.5.aarch64

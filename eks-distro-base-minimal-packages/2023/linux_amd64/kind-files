@@ -837,8 +837,8 @@
 -rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -863,7 +863,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py

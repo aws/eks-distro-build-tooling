@@ -838,8 +838,8 @@
 -rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    14KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -864,7 +864,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -1554,7 +1554,7 @@
 -rwxr-xr-x   332KiB /usr/lib64/libsemanage.so.2
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libsigsegv.so.2.0.6
--rwxr-xr-x   263KiB /usr/lib64/libslapi-2.4.so.2.11.5
+-rwxr-xr-x   262KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   199KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   654KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   334KiB /usr/lib64/libsolvext.so.1
