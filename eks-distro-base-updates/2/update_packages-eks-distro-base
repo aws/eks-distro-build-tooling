@@ -1,3 +1,4 @@
 
-python.x86_64
-python-libs.x86_64
+glib2.x86_64
+vim-data.noarch
+vim-minimal.x86_64

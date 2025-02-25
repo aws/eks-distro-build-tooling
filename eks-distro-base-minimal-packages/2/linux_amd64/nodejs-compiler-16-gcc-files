@@ -25,7 +25,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--    11KiB /etc/ld.so.cache
+-rw-r--r--   9.6KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     100B /etc/logrotate.d/yum
 -rw-r--r--       0B /etc/motd
