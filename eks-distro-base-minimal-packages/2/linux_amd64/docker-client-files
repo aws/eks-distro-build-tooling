@@ -397,8 +397,8 @@
 -rwxr-xr-x   885KiB /usr/sbin/sln
 -rwxr-xr-x    23KiB /usr/sbin/zdump
 -rwxr-xr-x    50KiB /usr/sbin/zic
--rw-r--r--    11KiB /usr/share/doc/docker-25.0.6/LICENSE
--rw-r--r--     642B /usr/share/doc/docker-25.0.6/NOTICE
+-rw-r--r--    11KiB /usr/share/doc/docker-25.0.8/LICENSE
+-rw-r--r--     642B /usr/share/doc/docker-25.0.8/NOTICE
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -430,7 +430,7 @@
 -rw-r--r--     488B /usr/share/locale/de/LC_MESSAGES/libstdc++.mo
 -rw-r--r--     490B /usr/share/locale/fr/LC_MESSAGES/libstdc++.mo
 -rw-r--r--   3.0KiB /usr/share/locale/locale.alias
--rw-r--r--     343B /usr/share/man/man1/docker-manifest-annotate.1.gz
+-rw-r--r--     342B /usr/share/man/man1/docker-manifest-annotate.1.gz
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README

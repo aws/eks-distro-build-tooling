@@ -32,7 +32,7 @@ filesystem-3.2-25.amzn2.0.4.x86_64
 findutils-4.5.11-6.amzn2.x86_64
 gawk-4.0.2-4.amzn2.1.3.x86_64
 gdbm-1.13-6.amzn2.0.2.x86_64
-glib2-2.56.1-9.amzn2.0.8.x86_64
+glib2-2.56.1-9.amzn2.0.9.x86_64
 glibc-2.26-64.amzn2.0.3.x86_64
 glibc-common-2.26-64.amzn2.0.3.x86_64
 glibc-minimal-langpack-2.26-64.amzn2.0.3.x86_64
@@ -170,8 +170,8 @@ tcp_wrappers-libs-7.6-77.amzn2.0.2.x86_64
 tzdata-2024a-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.11.x86_64
-vim-data-9.0.2153-1.amzn2.0.2.noarch
-vim-minimal-9.0.2153-1.amzn2.0.2.x86_64
+vim-data-9.0.2153-1.amzn2.0.3.noarch
+vim-minimal-9.0.2153-1.amzn2.0.3.x86_64
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
 yum-3.4.3-158.amzn2.0.7.noarch
