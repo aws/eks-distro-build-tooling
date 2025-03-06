@@ -1434,7 +1434,7 @@
 -rwxr-xr-x   127KiB /usr/lib64/libevent_extra-2.0.so.5.1.9
 -rwxr-xr-x    24KiB /usr/lib64/libevent_openssl-2.0.so.5.1.9
 -rwxr-xr-x    11KiB /usr/lib64/libevent_pthreads-2.0.so.5.1.9
--rwxr-xr-x   194KiB /usr/lib64/libexpat.so.1.6.0
+-rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.6.0
 -rwxr-xr-x   267KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   395KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    32KiB /usr/lib64/libffi.so.6.0.1
