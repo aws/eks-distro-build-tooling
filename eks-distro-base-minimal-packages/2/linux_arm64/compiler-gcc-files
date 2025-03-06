@@ -2174,7 +2174,7 @@
 -rwxr-xr-x   134KiB /usr/lib64/libassuan.so.0.4.0
 -rwxr-xr-x    66KiB /usr/lib64/libatomic.so.1.2.0
 -rwxr-xr-x    68KiB /usr/lib64/libattr.so.1.1.0
--rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.1.so
+-rwxr-xr-x   1.7MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.2.so
 -rwxr-xr-x   332KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    71KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   1.8MiB /usr/lib64/libc-2.26.so
@@ -2254,7 +2254,7 @@
 -rwxr-xr-x   204KiB /usr/lib64/libnsspem.so
 -rwxr-xr-x    68KiB /usr/lib64/libnsssysinit.so
 -rwxr-xr-x   263KiB /usr/lib64/libnssutil3.so
--rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.0.1.so
+-rwxr-xr-x   2.5MiB /usr/lib64/libopcodes-2.29.1-31.amzn2.0.2.so
 -rwxr-xr-x    67KiB /usr/lib64/libpanel.so.6.0
 -rwxr-xr-x    67KiB /usr/lib64/libpanelw.so.6.0
 -rwxr-xr-x    70KiB /usr/lib64/libpcprofile.so

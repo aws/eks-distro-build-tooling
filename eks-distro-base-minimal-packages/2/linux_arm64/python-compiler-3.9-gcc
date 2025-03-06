@@ -1,6 +1,6 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
-binutils-2.29.1-31.amzn2.0.1.aarch64
+binutils-2.29.1-31.amzn2.0.2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
 ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
@@ -11,7 +11,7 @@ curl-8.3.0-1.amzn2.0.8.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.0.1.aarch64
 diffutils-3.3-5.amzn2.aarch64
 elfutils-libelf-0.176-2.amzn2.0.2.aarch64
-expat-2.1.0-15.amzn2.0.4.aarch64
+expat-2.1.0-15.amzn2.0.5.aarch64
 file-libs-5.11-36.amzn2.0.1.aarch64
 filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
@@ -65,7 +65,7 @@ libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.14.aarch64
+libxml2-2.9.1-6.amzn2.5.15.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 make-3.82-24.amzn2.aarch64
 mpfr-3.1.1-4.amzn2.0.2.aarch64
@@ -81,7 +81,7 @@ nss-sysinit-3.90.0-2.amzn2.0.2.aarch64
 nss-tools-3.90.0-2.amzn2.0.2.aarch64
 nss-util-3.90.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.14.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.15.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64
 pkgconfig-0.27.1-4.amzn2.0.2.aarch64
