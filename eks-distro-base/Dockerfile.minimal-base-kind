@@ -30,7 +30,7 @@ ARG OUTPUT_DEBUG_LOG
 COPY scripts/ /usr/bin
 
 # test included with python, obviously not needed, and missing a dep (al22)
-ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/python3.9/site-packages/hawkey/test/_hawkey_test.so"
+ENV CLEANUP_UNNECESSARY_FILES="/usr/lib64/python3.9/site-packages/hawkey/test/_hawkey_test.so /var/lib/gssproxy/default.sock"
 
 # This build is meant to include the deps from the kind base image defined in the upstream
 # dockerfile, plus the changes from the patching we do in eks-anywhere-build-tooling
