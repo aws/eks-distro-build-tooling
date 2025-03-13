@@ -24,10 +24,10 @@ gmp-6.2.1-2.amzn2023.0.2.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 grep-3.8-1.amzn2023.0.4.x86_64
-gssproxy-0.8.4-2.amzn2023.0.3.x86_64
-inih-49-3.amzn2023.0.2.x86_64
-keyutils-1.6.3-1.amzn2023.0.1.x86_64
-keyutils-libs-1.6.3-1.amzn2023.0.1.x86_64
+gssproxy-0.9.2-6.amzn2023.0.1.x86_64
+inih-58-2.amzn2023.0.1.x86_64
+keyutils-1.6.3-1.amzn2023.0.2.x86_64
+keyutils-libs-1.6.3-1.amzn2023.0.2.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
 kmod-libs-29-2.amzn2023.0.5.x86_64
 krb5-libs-1.21.3-1.amzn2023.0.1.x86_64
@@ -72,7 +72,7 @@ ncurses-base-6.2-4.20200222.amzn2023.0.6.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.6.x86_64
 nfs-utils-2.5.4-2.rc3.amzn2023.0.3.x86_64
 openldap-2.4.57-6.amzn2023.0.7.x86_64
-openssl-libs-3.0.8-1.amzn2023.0.18.x86_64
+openssl-libs-3.0.8-1.amzn2023.0.19.x86_64
 p11-kit-0.24.1-2.amzn2023.0.3.x86_64
 pam-1.5.1-8.amzn2023.0.4.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64

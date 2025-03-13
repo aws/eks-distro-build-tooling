@@ -288,10 +288,10 @@
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
--rwxr-xr-x    25KiB /usr/lib64/engines-3/afalg.so
--rwxr-xr-x    16KiB /usr/lib64/engines-3/capi.so
+-rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
+-rwxr-xr-x    15KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    53KiB /usr/lib64/engines-3/loader_attic.so
--rwxr-xr-x    33KiB /usr/lib64/engines-3/padlock.so
+-rwxr-xr-x    32KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x    28KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    20KiB /usr/lib64/gconv/CP1252.so
@@ -329,7 +329,7 @@
 -rwxr-xr-x    53KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x    98KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    90KiB /usr/lib64/libkdb5.so.10.0
--rwxr-xr-x    25KiB /usr/lib64/libkeyutils.so.1.10
+-rwxr-xr-x    24KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   887KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x    66KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   175KiB /usr/lib64/liblzma.so.5.2.5
@@ -359,7 +359,7 @@
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
+-rwxr-xr-x   673KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
@@ -369,7 +369,7 @@
 -rwxr-xr-x    33KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
--rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   117KiB /usr/lib64/ossl-modules/legacy.so
 -rw-r--r--    14KiB /usr/lib64/python3.9/LICENSE.txt
 -rw-r--r--   5.1KiB /usr/lib64/python3.9/__future__.py
 -rw-r--r--      64B /usr/lib64/python3.9/__phello__.foo.py
@@ -1927,7 +1927,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   127KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    26KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   306KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    30KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    73KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so

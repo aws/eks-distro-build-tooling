@@ -43,7 +43,7 @@ gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 gpgme-1.15.1-6.amzn2023.0.3.aarch64
 grep-3.8-1.amzn2023.0.4.aarch64
-gssproxy-0.8.4-2.amzn2023.0.3.aarch64
+gssproxy-0.9.2-6.amzn2023.0.1.aarch64
 gzip-1.12-1.amzn2023.0.1.aarch64
 hostname-3.23-4.amzn2023.0.3.aarch64
 iproute-6.10.0-319.amzn2023.0.1.aarch64
@@ -56,9 +56,9 @@ iptables-nft-1.8.8-3.amzn2023.0.2.aarch64
 jansson-2.14-0.amzn2023.aarch64
 jq-1.7.1-48.amzn2023.0.1.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
-kernel-libbpf-6.1.128-136.201.amzn2023.aarch64
-keyutils-1.6.3-1.amzn2023.0.1.aarch64
-keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
+kernel-libbpf-6.1.129-138.220.amzn2023.aarch64
+keyutils-1.6.3-1.amzn2023.0.2.aarch64
+keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 kmod-29-2.amzn2023.0.5.aarch64
 kmod-libs-29-2.amzn2023.0.5.aarch64
 krb5-libs-1.21.3-1.amzn2023.0.1.aarch64
@@ -141,7 +141,7 @@ nftables-1.0.4-3.amzn2023.0.2.aarch64
 npth-1.6-6.amzn2023.0.2.aarch64
 oniguruma-6.9.7.1-1.amzn2023.0.2.aarch64
 openldap-2.4.57-6.amzn2023.0.7.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.18.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.19.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.aarch64
 pam-1.5.1-8.amzn2023.0.4.aarch64
