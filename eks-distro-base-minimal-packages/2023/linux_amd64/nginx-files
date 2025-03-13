@@ -407,10 +407,10 @@
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
--rwxr-xr-x    25KiB /usr/lib64/engines-3/afalg.so
--rwxr-xr-x    16KiB /usr/lib64/engines-3/capi.so
+-rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
+-rwxr-xr-x    15KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    53KiB /usr/lib64/engines-3/loader_attic.so
--rwxr-xr-x    33KiB /usr/lib64/engines-3/padlock.so
+-rwxr-xr-x    32KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x    28KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x    20KiB /usr/lib64/gconv/CP1252.so
@@ -462,7 +462,7 @@
 -rwxr-xr-x    17KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
+-rwxr-xr-x   673KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   320KiB /usr/lib64/libtcmalloc.so.4.5.9
 -rwxr-xr-x   341KiB /usr/lib64/libtcmalloc_and_profiler.so.4.6.4
@@ -478,7 +478,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
--rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   117KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/libexec/coreutils/libstdbuf.so
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
