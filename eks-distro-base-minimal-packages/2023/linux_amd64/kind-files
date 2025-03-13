@@ -38,9 +38,9 @@
 -rw-r--r--     125B /etc/group-
 ----------     250B /etc/gshadow
 ----------     249B /etc/gshadow-
--rw-r--r--     189B /etc/gss/mech.d/gssproxy.conf
+-rw-r--r--     189B /etc/gss/mech.d/proxymech.conf
 -rw-------     152B /etc/gssproxy/24-nfs-server.conf
--rw-------     276B /etc/gssproxy/99-nfs-client.conf
+-rw-------     304B /etc/gssproxy/99-network-fs-clients.conf
 -rw-------      11B /etc/gssproxy/gssproxy.conf
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
@@ -1105,7 +1105,7 @@
 -rw-r--r--     509B /usr/lib/systemd/system/getty.target
 -rw-r--r--   2.0KiB /usr/lib/systemd/system/getty@.service
 -rw-r--r--     606B /usr/lib/systemd/system/graphical.target
--rw-r--r--     462B /usr/lib/systemd/system/gssproxy.service
+-rw-r--r--   1.3KiB /usr/lib/systemd/system/gssproxy.service
 -rw-r--r--     542B /usr/lib/systemd/system/halt.target
 -rw-r--r--     549B /usr/lib/systemd/system/kexec.target
 -rw-r--r--     756B /usr/lib/systemd/system/ldconfig.service
@@ -1272,6 +1272,8 @@
 -rw-r--r--     234B /usr/lib/systemd/user/gpg-agent.socket
 -rw-r--r--     576B /usr/lib/systemd/user/graphical-session-pre.target
 -rw-r--r--     492B /usr/lib/systemd/user/graphical-session.target
+-rw-r--r--     161B /usr/lib/systemd/user/gssuserproxy.service
+-rw-r--r--     154B /usr/lib/systemd/user/gssuserproxy.socket
 -rw-r--r--     402B /usr/lib/systemd/user/paths.target
 -rw-r--r--     425B /usr/lib/systemd/user/printer.target
 -rw-r--r--     443B /usr/lib/systemd/user/session.slice
@@ -1293,6 +1295,7 @@
 -rw-r--r--     400B /usr/lib/tmpfiles.d/README
 -rw-r--r--     188B /usr/lib/tmpfiles.d/dnf.conf
 -rw-r--r--     516B /usr/lib/tmpfiles.d/etc.conf
+-rw-r--r--      79B /usr/lib/tmpfiles.d/gssproxy.conf
 -rw-r--r--     362B /usr/lib/tmpfiles.d/home.conf
 -rw-r--r--   1.1KiB /usr/lib/tmpfiles.d/journal-nocow.conf
 -rw-r--r--     907B /usr/lib/tmpfiles.d/legacy.conf
@@ -1329,10 +1332,10 @@
 -rwxr-xr-x    21KiB /usr/lib64/conntrack-tools/ct_helper_ssdp.so
 -rwxr-xr-x    16KiB /usr/lib64/conntrack-tools/ct_helper_tftp.so
 -rwxr-xr-x    17KiB /usr/lib64/conntrack-tools/ct_helper_tns.so
--rwxr-xr-x    25KiB /usr/lib64/engines-3/afalg.so
--rwxr-xr-x    16KiB /usr/lib64/engines-3/capi.so
+-rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
+-rwxr-xr-x    15KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x    53KiB /usr/lib64/engines-3/loader_attic.so
--rwxr-xr-x    33KiB /usr/lib64/engines-3/padlock.so
+-rwxr-xr-x    32KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x    41KiB /usr/lib64/gawk/filefuncs.so
 -rwxr-xr-x    16KiB /usr/lib64/gawk/fnmatch.so
@@ -1380,7 +1383,7 @@
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   360KiB /usr/lib64/libbpf.so.1.1.0
+-rwxr-xr-x   359KiB /usr/lib64/libbpf.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -1463,7 +1466,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libjson-c.so.5.0.0
 -rwxr-xr-x    98KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    90KiB /usr/lib64/libkdb5.so.10.0
--rwxr-xr-x    25KiB /usr/lib64/libkeyutils.so.1.10
+-rwxr-xr-x    24KiB /usr/lib64/libkeyutils.so.1.10
 -rwxr-xr-x   103KiB /usr/lib64/libkmod.so.2.3.7
 -rwxr-xr-x    45KiB /usr/lib64/libkrad.so.0.0
 -rwxr-xr-x   887KiB /usr/lib64/libkrb5.so.3.3
@@ -1561,7 +1564,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   674KiB /usr/lib64/libssl.so.3.0.8
+-rwxr-xr-x   673KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
 -rwxr-xr-x   896KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
@@ -1583,7 +1586,7 @@
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   762KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
--rwxr-xr-x   118KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   117KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   232KiB /usr/lib64/pkcs11/p11-kit-trust.so
 -rw-r--r--    14KiB /usr/lib64/python3.9/LICENSE.txt
 -rw-r--r--   5.1KiB /usr/lib64/python3.9/__future__.py
@@ -4336,14 +4339,14 @@
 -rwxr-xr-x    61KiB /usr/sbin/grpck
 -rwxr-xr-x    53KiB /usr/sbin/grpconv
 -rwxr-xr-x    53KiB /usr/sbin/grpunconv
--rwxr-xr-x   126KiB /usr/sbin/gssproxy
+-rwxr-xr-x   135KiB /usr/sbin/gssproxy
 -rwxr-xr-x    61KiB /usr/sbin/hwclock
 -rwxr-xr-x    33KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    41KiB /usr/sbin/ifstat
 -rwxr-xr-x   764KiB /usr/sbin/ip
 -rwxr-xr-x    16KiB /usr/sbin/ipset
 -rwxr-xr-x   2.0MiB /usr/sbin/iptables-wrapper
--rwxr-xr-x    33KiB /usr/sbin/key.dns_resolver
+-rwxr-xr-x    32KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    28KiB /usr/sbin/ldattach
 -rwxr-xr-x   1.2MiB /usr/sbin/ldconfig
 -rwxr-xr-x    25KiB /usr/sbin/lnstat
@@ -4386,7 +4389,7 @@
 -rwxr-xr-x   110KiB /usr/sbin/rdma
 -rwxr-xr-x    25KiB /usr/sbin/readprofile
 -rwxr-xr-x    79KiB /usr/sbin/repquota
--rwxr-xr-x    29KiB /usr/sbin/request-key
+-rwxr-xr-x    28KiB /usr/sbin/request-key
 -rwxr-xr-x    25KiB /usr/sbin/resizepart
 -rwxr-xr-x    33KiB /usr/sbin/rfkill
 -rwxr-xr-x    89KiB /usr/sbin/rpc.gssd

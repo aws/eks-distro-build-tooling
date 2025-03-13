@@ -15,7 +15,7 @@ gnupg2-2.3.7-1.amzn2023.0.4.aarch64
 gnutls-3.8.0-381.amzn2023.0.7.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
-keyutils-libs-1.6.3-1.amzn2023.0.1.aarch64
+keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 krb5-libs-1.21.3-1.amzn2023.0.1.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
@@ -41,9 +41,9 @@ ncurses-base-6.2-4.20200222.amzn2023.0.6.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.6.aarch64
 nettle-3.8-1.amzn2023.0.2.aarch64
 npth-1.6-6.amzn2023.0.2.aarch64
-openldap-2.4.57-6.amzn2023.0.6.aarch64
-openssh-clients-8.7p1-8.amzn2023.0.13.aarch64
-openssl-libs-3.0.8-1.amzn2023.0.18.aarch64
+openldap-2.4.57-6.amzn2023.0.7.aarch64
+openssh-clients-8.7p1-8.amzn2023.0.14.aarch64
+openssl-libs-3.0.8-1.amzn2023.0.19.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
