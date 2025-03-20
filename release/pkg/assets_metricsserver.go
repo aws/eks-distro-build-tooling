@@ -33,7 +33,7 @@ var ReleaseMap = map[string]int{
 // this is hard coded until EKS-A deprecates their usage of metrics server
 func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	componentName := "metrics-server"
-	gitTag := "0.7.2"
+	gitTag := "v0.7.2"
 	component := &distrov1alpha1.Component{
 		Name:   componentName,
 		GitTag: gitTag,
