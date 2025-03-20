@@ -16,42 +16,45 @@ package pkg
 
 import (
 	"fmt"
-	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
-	"github.com/pkg/errors"
 )
 
+// ReleaseMap mapping from release channel to last release of metrics server for prod (which is basically the same for dev)
+var ReleaseMap = map[string]int{
+	"1-32": 8,
+	"1-31": 16,
+	"1-30": 27,
+	"1-29": 34,
+	"1-28": 45,
+}
+
 // GetMetricsServerComponent returns the Component for Metrics Server
+// this is hard coded until EKS-A deprecates their usage of metrics server
 func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
-	projectSource := "projects/kubernetes-sigs/metrics-server"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
-	gitTag, err := readTag(tagFile)
-	if err != nil {
-		return nil, errors.Cause(err)
-	}
-	assets := []distrov1alpha1.Asset{}
-	binary := "metrics-server"
-	assets = append(assets, distrov1alpha1.Asset{
-		Name:        fmt.Sprintf("%s-image", binary),
-		Type:        "Image",
-		Description: fmt.Sprintf("%s container image", binary),
-		OS:          "linux",
-		Arch:        []string{"amd64", "arm64"},
-		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
-				r.ContainerImageRepository,
-				binary,
-				gitTag,
-				spec.Channel,
-				spec.Number,
-			),
-		},
-	})
+	componentName := "metrics-server"
+	gitTag := "0.7.2"
 	component := &distrov1alpha1.Component{
-		Name:   "metrics-server",
+		Name:   componentName,
 		GitTag: gitTag,
-		Assets: assets,
+		Assets: []distrov1alpha1.Asset{
+			{
+				Name:        fmt.Sprintf("%s-image", componentName),
+				Type:        "Image",
+				Description: fmt.Sprintf("%s container image", componentName),
+				OS:          "linux",
+				Arch:        []string{"amd64", "arm64"},
+				Image: &distrov1alpha1.AssetImage{
+					URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
+						r.ContainerImageRepository,
+						componentName,
+						gitTag,
+						spec.Channel,
+						ReleaseMap[spec.Channel],
+					),
+				},
+			},
+		},
 	}
 	return component, nil
 }
