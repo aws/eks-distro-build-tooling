@@ -244,8 +244,8 @@
 -rw-r--r--     845B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   197KiB /usr/bin/[
--rwxr-xr-x   1.3MiB /usr/bin/aarch64-amazon-linux-gcc
--rwxr-xr-x   1.3MiB /usr/bin/aarch64-amazon-linux-gcc-11
+-rwxr-xr-x   1.1MiB /usr/bin/aarch64-amazon-linux-gcc
+-rwxr-xr-x   1.1MiB /usr/bin/aarch64-amazon-linux-gcc-11
 -rwxr-xr-x     616B /usr/bin/aarch64-amazon-linux-gnu-pkg-config
 -rwxr-xr-x   197KiB /usr/bin/addr2line
 -rwxr-xr-x      33B /usr/bin/alias
@@ -275,7 +275,7 @@
 -rwxr-xr-x   197KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   262KiB /usr/bin/cp
--rwxr-xr-x   1.3MiB /usr/bin/cpp
+-rwxr-xr-x   1.1MiB /usr/bin/cpp
 -rwxr-xr-x   263KiB /usr/bin/csplit
 -rwxr-xr-x   391KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
@@ -311,24 +311,24 @@
 -rwxr-xr-x   200KiB /usr/bin/g13
 -rwxr-xr-x   196KiB /usr/bin/gapplication
 -rwxr-xr-x   719KiB /usr/bin/gawk
--rwxr-xr-x   1.3MiB /usr/bin/gcc
--rwxr-xr-x   197KiB /usr/bin/gcc-ar
--rwxr-xr-x   197KiB /usr/bin/gcc-nm
--rwxr-xr-x   197KiB /usr/bin/gcc-ranlib
--rwxr-xr-x   801KiB /usr/bin/gcov
--rwxr-xr-x   663KiB /usr/bin/gcov-dump
--rwxr-xr-x   728KiB /usr/bin/gcov-tool
+-rwxr-xr-x   1.1MiB /usr/bin/gcc
+-rwxr-xr-x   196KiB /usr/bin/gcc-ar
+-rwxr-xr-x   196KiB /usr/bin/gcc-nm
+-rwxr-xr-x   196KiB /usr/bin/gcc-ranlib
+-rwxr-xr-x   532KiB /usr/bin/gcov
+-rwxr-xr-x   331KiB /usr/bin/gcov-dump
+-rwxr-xr-x   396KiB /usr/bin/gcov-tool
 -rwxr-xr-x   197KiB /usr/bin/gdbm_dump
 -rwxr-xr-x   197KiB /usr/bin/gdbm_load
 -rwxr-xr-x   206KiB /usr/bin/gdbmtool
--rwxr-xr-x   197KiB /usr/bin/gdbus
+-rwxr-xr-x   196KiB /usr/bin/gdbus
 -rwxr-xr-x   197KiB /usr/bin/gencat
 -rwxr-xr-x   196KiB /usr/bin/getconf
 -rwxr-xr-x   197KiB /usr/bin/getent
 -rwxr-xr-x      35B /usr/bin/getopts
 -rwxr-xr-x   197KiB /usr/bin/gio
 -rwxr-xr-x   196KiB /usr/bin/gio-querymodules-64
--rwxr-xr-x   197KiB /usr/bin/glib-compile-schemas
+-rwxr-xr-x   196KiB /usr/bin/glib-compile-schemas
 -rwxr-xr-x   1.1MiB /usr/bin/gpg
 -rwxr-xr-x   460KiB /usr/bin/gpg-agent
 -rwxr-xr-x   264KiB /usr/bin/gpg-card
@@ -345,7 +345,7 @@
 -rwxr-xr-x   199KiB /usr/bin/gprof
 -rwxr-xr-x   263KiB /usr/bin/grep
 -rwxr-xr-x   197KiB /usr/bin/groups
--rwxr-xr-x   197KiB /usr/bin/gsettings
+-rwxr-xr-x   196KiB /usr/bin/gsettings
 -rwxr-xr-x   2.9KiB /usr/bin/guild2.2
 -rwxr-xr-x   196KiB /usr/bin/guile2.2
 -rwxr-xr-x   2.3KiB /usr/bin/gunzip
@@ -367,7 +367,7 @@
 -rwxr-xr-x   336KiB /usr/bin/localedef
 -rwxr-xr-x   197KiB /usr/bin/logname
 -rwxr-xr-x   263KiB /usr/bin/ls
--rwxr-xr-x    24MiB /usr/bin/lto-dump
+-rwxr-xr-x    26MiB /usr/bin/lto-dump
 -rwxr-xr-x   331KiB /usr/bin/make
 -rwxr-xr-x   197KiB /usr/bin/md5sum
 -rwxr-xr-x   197KiB /usr/bin/mkdir
@@ -474,7 +474,7 @@
 -rwxr-xr-x   197KiB /usr/bin/whoami
 -rwxr-xr-x   197KiB /usr/bin/xargs
 -rwxr-xr-x   196KiB /usr/bin/xmlcatalog
--rwxr-xr-x   198KiB /usr/bin/xmllint
+-rwxr-xr-x   197KiB /usr/bin/xmllint
 -rwxr-xr-x   197KiB /usr/bin/xmlwf
 -rwxr-xr-x   197KiB /usr/bin/yes
 -rwxr-xr-x   2.0KiB /usr/bin/zcat
@@ -1909,9 +1909,9 @@
 -rw-r--r--   2.6KiB /usr/include/xen/gntalloc.h
 -rw-r--r--    11KiB /usr/include/xen/gntdev.h
 -rw-r--r--   4.2KiB /usr/include/xen/privcmd.h
--rw-r--r--   3.9KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtbegin.o
+-rw-r--r--   3.6KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtbegin.o
 -rw-r--r--   3.9KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtbeginS.o
--rw-r--r--   4.5KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtbeginT.o
+-rw-r--r--   4.2KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtbeginT.o
 -rw-r--r--   1.7KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtend.o
 -rw-r--r--   1.7KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtendS.o
 -rw-r--r--   4.3KiB /usr/lib/gcc/aarch64-amazon-linux/11/crtfastmath.o
@@ -1960,6 +1960,7 @@
 -rw-r--r--   4.6KiB /usr/lib/gcc/aarch64-amazon-linux/11/libtsan_preinit.o
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin-plugin-version-info
 -rwxr-xr-x   197KiB /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so.0.0.0
+-rwxr-xr-x   197KiB /usr/lib/gcc/aarch64-amazon-linux/11/plugin/gcc-annobin.so.0.0.0
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/rpmver
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
@@ -3666,7 +3667,7 @@
 -rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/yum/rpmtrans.py
 -rwxr-xr-x   1.5KiB /usr/lib/rpm/brp-boot-efi-times
 -rw-r--r--     948B /usr/lib/rpm/fileattrs/kmod.attr
--rw-r--r--     268B /usr/lib/rpm/fileattrs/libsymlink.attr
+-rw-r--r--     271B /usr/lib/rpm/fileattrs/libsymlink.attr
 -rwxr-xr-x   1.7KiB /usr/lib/rpm/generate-rpm-note.sh
 -rw-r--r--   9.5KiB /usr/lib/rpm/lua/fedora/common.lua
 -rw-r--r--   8.7KiB /usr/lib/rpm/lua/fedora/srpm/fonts.lua
@@ -3696,6 +3697,7 @@
 -rw-r--r--     862B /usr/lib/rpm/macros.d/macros.perl-srpm
 -rw-r--r--      61B /usr/lib/rpm/macros.d/macros.pkgconf
 -rw-r--r--    12KiB /usr/lib/rpm/macros.d/macros.python-srpm
+-rw-r--r--     707B /usr/lib/rpm/macros.d/macros.rpmautospec
 -rw-r--r--   2.1KiB /usr/lib/rpm/macros.d/macros.rust-srpm
 -rw-r--r--     181B /usr/lib/rpm/macros.d/macros.shell-completions
 -rw-r--r--     127B /usr/lib/rpm/macros.d/macros.valgrind-srpm
@@ -3768,8 +3770,8 @@
 -rw-r--r--   3.4KiB /usr/lib/rpm/platform/x86_64-linux/macros
 -rwxr-xr-x     560B /usr/lib/rpm/redhat/brp-fix-pyc-reproducibility
 -rwxr-xr-x     417B /usr/lib/rpm/redhat/brp-ldconfig
--rwxr-xr-x   1.5KiB /usr/lib/rpm/redhat/brp-llvm-compile-lto-elf
--rwxr-xr-x   4.4KiB /usr/lib/rpm/redhat/brp-mangle-shebangs
+-rwxr-xr-x   1.6KiB /usr/lib/rpm/redhat/brp-llvm-compile-lto-elf
+-rwxr-xr-x   4.5KiB /usr/lib/rpm/redhat/brp-mangle-shebangs
 -rwxr-xr-x   5.7KiB /usr/lib/rpm/redhat/brp-python-bytecompile
 -rwxr-xr-x     558B /usr/lib/rpm/redhat/brp-strip-lto
 -rw-r--r--    22KiB /usr/lib/rpm/redhat/compileall2.py
@@ -3783,7 +3785,7 @@
 -rwxr-xr-x   6.1KiB /usr/lib/rpm/redhat/redhat-annobin-plugin-select.sh
 -r--r--r--      90B /usr/lib/rpm/redhat/redhat-annobin-select-annobin-built-plugin
 -r--r--r--      94B /usr/lib/rpm/redhat/redhat-annobin-select-gcc-built-plugin
--r--r--r--      76B /usr/lib/rpm/redhat/redhat-hardened-cc1
+-r--r--r--     153B /usr/lib/rpm/redhat/redhat-hardened-cc1
 -r--r--r--       6B /usr/lib/rpm/redhat/redhat-hardened-clang.cfg
 -r--r--r--      47B /usr/lib/rpm/redhat/redhat-hardened-ld
 -rw-r--r--   5.6KiB /usr/lib/rpm/redhat/rpmrc
@@ -4110,7 +4112,7 @@
 -rw-r--r--   224KiB /usr/lib64/girepository-1.0/GLib-2.0.typelib
 -rw-r--r--   2.1KiB /usr/lib64/girepository-1.0/GLibUnix-2.0.typelib
 -rw-r--r--   1.9KiB /usr/lib64/girepository-1.0/GModule-2.0.typelib
--rw-r--r--    66KiB /usr/lib64/girepository-1.0/GObject-2.0.typelib
+-rw-r--r--    65KiB /usr/lib64/girepository-1.0/GObject-2.0.typelib
 -rw-r--r--   363KiB /usr/lib64/girepository-1.0/Gio-2.0.typelib
 -rw-r--r--    15KiB /usr/lib64/girepository-1.0/GioUnix-2.0.typelib
 -rw-r--r--    53KiB /usr/lib64/girepository-1.0/Modulemd-2.0.typelib
@@ -4446,7 +4448,7 @@
 -rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
 -rw-r--r--   7.2KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x   197KiB /usr/lib64/libcap.so.2.48
+-rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.48
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   265KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
@@ -4470,7 +4472,7 @@
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
 -rw-r--r--   7.4KiB /usr/lib64/libg.a
 -rwxr-xr-x   265KiB /usr/lib64/libgc.so.1.4.3
--rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20230605.so.1
+-rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20240719.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libgccpp.so.1.4.0
 -rwxr-xr-x   1.1MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libgdbm.so.6.0.0
@@ -4481,13 +4483,13 @@
 -rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
 -rwxr-xr-x   2.4MiB /usr/lib64/libgnutls.so.30.35.0
--rwxr-xr-x   463KiB /usr/lib64/libgobject-2.0.so.0.8200.2
+-rwxr-xr-x   461KiB /usr/lib64/libgobject-2.0.so.0.8200.2
 -rwxr-xr-x   332KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   463KiB /usr/lib64/libgpgme.so.11.24.1
 -rwxr-xr-x   396KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   264KiB /usr/lib64/libgssrpc.so.4.2
--rwxr-xr-x   196KiB /usr/lib64/libgthread-2.0.so.0.8200.2
+-rwxr-xr-x   195KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libhistory.so.8.1
 -rwxr-xr-x   392KiB /usr/lib64/libhogweed.so.6.5
@@ -4539,7 +4541,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x   198KiB /usr/lib64/libpkgconf.so.3.0.0
 -rwxr-xr-x   198KiB /usr/lib64/libpopt.so.0.0.1
--rwxr-xr-x   196KiB /usr/lib64/libpsl.so.5.3.3
+-rwxr-xr-x   196KiB /usr/lib64/libpsl.so.5.3.5
 -rwxr-xr-x   196KiB /usr/lib64/libpsx.so.2.48
 -rw-r--r--       8B /usr/lib64/libpthread.a
 -rwxr-xr-x   196KiB /usr/lib64/libpthread.so.0
@@ -8555,72 +8557,72 @@
 -rw-r--r--   2.4KiB /usr/lib64/python3.9/json/scanner.py
 -rw-r--r--   3.3KiB /usr/lib64/python3.9/json/tool.py
 -rw-r--r--   1.1KiB /usr/lib64/python3.9/keyword.py
--rwxr-xr-x   204KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   203KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   261KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   260KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   324KiB /usr/lib64/python3.9/lib-dynload/_codecs_hk.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_codecs_iso2022.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_codecs_iso2022.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   388KiB /usr/lib64/python3.9/lib-dynload/_codecs_jp.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   260KiB /usr/lib64/python3.9/lib-dynload/_codecs_kr.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   260KiB /usr/lib64/python3.9/lib-dynload/_codecs_tw.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_contextvars.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_crypt.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_csv.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   276KiB /usr/lib64/python3.9/lib-dynload/_ctypes.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   204KiB /usr/lib64/python3.9/lib-dynload/_curses.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   270KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_crypt.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_csv.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   275KiB /usr/lib64/python3.9/lib-dynload/_ctypes.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   203KiB /usr/lib64/python3.9/lib-dynload/_curses.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   269KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   401KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   202KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   400KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   201KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_heapq.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_json.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_lsprof.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_lzma.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_json.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_lsprof.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_lzma.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_multibytecodec.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_multiprocessing.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_multiprocessing.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_opcode.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   266KiB /usr/lib64/python3.9/lib-dynload/_pickle.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_posixshmem.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_posixsubprocess.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   265KiB /usr/lib64/python3.9/lib-dynload/_pickle.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_posixshmem.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_posixsubprocess.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_queue.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_random.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_socket.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_random.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_socket.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   203KiB /usr/lib64/python3.9/lib-dynload/_sqlite3.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   294KiB /usr/lib64/python3.9/lib-dynload/_ssl.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   293KiB /usr/lib64/python3.9/lib-dynload/_ssl.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_statistics.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/_struct.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_uuid.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_xxsubinterpreters.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_zoneinfo.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/_struct.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/_uuid.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/_xxsubinterpreters.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/_zoneinfo.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/array.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/audioop.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/binascii.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/audioop.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/binascii.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/cmath.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/fcntl.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/grp.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/math.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/mmap.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   199KiB /usr/lib64/python3.9/lib-dynload/ossaudiodev.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/parser.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   203KiB /usr/lib64/python3.9/lib-dynload/pyexpat.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/readline.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/resource.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/select.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/spwd.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/syslog.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   201KiB /usr/lib64/python3.9/lib-dynload/termios.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/fcntl.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/grp.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/math.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/mmap.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/ossaudiodev.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/parser.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   202KiB /usr/lib64/python3.9/lib-dynload/pyexpat.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/readline.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/resource.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/select.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/spwd.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/syslog.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   200KiB /usr/lib64/python3.9/lib-dynload/termios.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   1.2MiB /usr/lib64/python3.9/lib-dynload/unicodedata.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-aarch64-linux-gnu.so
--rwxr-xr-x   198KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-aarch64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.9/lib2to3/Grammar.txt
--rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.20.final.0.pickle
+-rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.21.final.0.pickle
 -rw-r--r--     793B /usr/lib64/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.20.final.0.pickle
+-rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.21.final.0.pickle
 -rw-r--r--     163B /usr/lib64/python3.9/lib2to3/__init__.py
 -rw-r--r--      67B /usr/lib64/python3.9/lib2to3/__main__.py
 -rw-r--r--     302B /usr/lib64/python3.9/lib2to3/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -9323,9 +9325,9 @@
 -rw-r--r--   2.8KiB /usr/lib64/python3.9/urllib/__pycache__/error.cpython-39.opt-1.pyc
 -rw-r--r--   2.2KiB /usr/lib64/python3.9/urllib/__pycache__/error.cpython-39.opt-2.pyc
 -rw-r--r--   2.8KiB /usr/lib64/python3.9/urllib/__pycache__/error.cpython-39.pyc
--rw-r--r--    35KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.opt-1.pyc
--rw-r--r--    24KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.opt-2.pyc
--rw-r--r--    35KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.pyc
+-rw-r--r--    36KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.opt-1.pyc
+-rw-r--r--    25KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.opt-2.pyc
+-rw-r--r--    36KiB /usr/lib64/python3.9/urllib/__pycache__/parse.cpython-39.pyc
 -rw-r--r--    71KiB /usr/lib64/python3.9/urllib/__pycache__/request.cpython-39.opt-1.pyc
 -rw-r--r--    59KiB /usr/lib64/python3.9/urllib/__pycache__/request.cpython-39.opt-2.pyc
 -rw-r--r--    71KiB /usr/lib64/python3.9/urllib/__pycache__/request.cpython-39.pyc
@@ -9336,17 +9338,17 @@
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/urllib/__pycache__/robotparser.cpython-39.opt-2.pyc
 -rw-r--r--   7.2KiB /usr/lib64/python3.9/urllib/__pycache__/robotparser.cpython-39.pyc
 -rw-r--r--   2.6KiB /usr/lib64/python3.9/urllib/error.py
--rw-r--r--    43KiB /usr/lib64/python3.9/urllib/parse.py
+-rw-r--r--    44KiB /usr/lib64/python3.9/urllib/parse.py
 -rw-r--r--    99KiB /usr/lib64/python3.9/urllib/request.py
 -rw-r--r--   2.4KiB /usr/lib64/python3.9/urllib/response.py
 -rw-r--r--   9.3KiB /usr/lib64/python3.9/urllib/robotparser.py
 -rw-r--r--   7.2KiB /usr/lib64/python3.9/uu.py
 -rw-r--r--    27KiB /usr/lib64/python3.9/uuid.py
--rw-r--r--    23KiB /usr/lib64/python3.9/venv/__init__.py
+-rw-r--r--    24KiB /usr/lib64/python3.9/venv/__init__.py
 -rw-r--r--     145B /usr/lib64/python3.9/venv/__main__.py
--rw-r--r--    16KiB /usr/lib64/python3.9/venv/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--    17KiB /usr/lib64/python3.9/venv/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--    12KiB /usr/lib64/python3.9/venv/__pycache__/__init__.cpython-39.opt-2.pyc
--rw-r--r--    16KiB /usr/lib64/python3.9/venv/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--    17KiB /usr/lib64/python3.9/venv/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--     333B /usr/lib64/python3.9/venv/__pycache__/__main__.cpython-39.opt-1.pyc
 -rw-r--r--     333B /usr/lib64/python3.9/venv/__pycache__/__main__.cpython-39.opt-2.pyc
 -rw-r--r--     333B /usr/lib64/python3.9/venv/__pycache__/__main__.cpython-39.pyc
@@ -9511,11 +9513,11 @@
 -rwxr-xr-x   196KiB /usr/libexec/coreutils/libstdbuf.so
 -rwxr-xr-x   197KiB /usr/libexec/dirmngr_ldap
 -rwxr-xr-x     333B /usr/libexec/fips-setup-helper
--rwxr-xr-x    25MiB /usr/libexec/gcc/aarch64-amazon-linux/11/cc1
--rwxr-xr-x   729KiB /usr/libexec/gcc/aarch64-amazon-linux/11/collect2
--rwxr-xr-x   198KiB /usr/libexec/gcc/aarch64-amazon-linux/11/liblto_plugin.so
--rwxr-xr-x   1.3MiB /usr/libexec/gcc/aarch64-amazon-linux/11/lto-wrapper
--rwxr-xr-x    24MiB /usr/libexec/gcc/aarch64-amazon-linux/11/lto1
+-rwxr-xr-x    27MiB /usr/libexec/gcc/aarch64-amazon-linux/11/cc1
+-rwxr-xr-x   461KiB /usr/libexec/gcc/aarch64-amazon-linux/11/collect2
+-rwxr-xr-x   197KiB /usr/libexec/gcc/aarch64-amazon-linux/11/liblto_plugin.so
+-rwxr-xr-x   915KiB /usr/libexec/gcc/aarch64-amazon-linux/11/lto-wrapper
+-rwxr-xr-x    26MiB /usr/libexec/gcc/aarch64-amazon-linux/11/lto1
 -rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x   196KiB /usr/libexec/getconf/XBS5_LP64_OFF64
@@ -13496,8 +13498,10 @@ lrwxrwxrwx      34B /usr/lib/gcc/aarch64-amazon-linux/11/libgomp.so ../../../../
 lrwxrwxrwx      35B /usr/lib/gcc/aarch64-amazon-linux/11/libubsan.so ../../../../lib64/libubsan.so.1.0.0
 lrwxrwxrwx      16B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so annobin.so.0.0.0
 lrwxrwxrwx      16B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/annobin.so.0 annobin.so.0.0.0
+lrwxrwxrwx      20B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/gcc-annobin.so gcc-annobin.so.0.0.0
+lrwxrwxrwx      20B /usr/lib/gcc/aarch64-amazon-linux/11/plugin/gcc-annobin.so.0 gcc-annobin.so.0.0.0
 lrwxrwxrwx       6B /usr/lib/rpm/amazon redhat
-lrwxrwxrwx      42B /usr/lib/rpm/redhat/redhat-annobin-cc1 redhat-annobin-select-annobin-built-plugin
+lrwxrwxrwx      38B /usr/lib/rpm/redhat/redhat-annobin-cc1 redhat-annobin-select-gcc-built-plugin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
 lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.35.0.hmac
 lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
@@ -13544,7 +13548,7 @@ lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
 lrwxrwxrwx      14B /usr/lib64/libgc.so.1 libgc.so.1.4.3
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20240719.so.1
 lrwxrwxrwx      17B /usr/lib64/libgccpp.so.1 libgccpp.so.1.4.0
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
@@ -13605,7 +13609,7 @@ lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      19B /usr/lib64/libpkgconf.so.3 libpkgconf.so.3.0.0
 lrwxrwxrwx      16B /usr/lib64/libpopt.so.0 libpopt.so.0.0.1
-lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.3
+lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.5
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.48
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      26B /usr/lib64/libresolv.so ../../lib64/libresolv.so.2

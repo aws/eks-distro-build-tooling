@@ -40,7 +40,7 @@ libacl-2.3.1-2.amzn2023.0.2.x86_64
 libattr-2.5.1-3.amzn2023.0.2.x86_64
 libblkid-2.37.4-1.amzn2023.0.4.x86_64
 libbrotli-1.0.9-4.amzn2023.0.2.x86_64
-libcap-2.48-2.amzn2023.0.3.x86_64
+libcap-2.48-2.amzn2023.0.4.x86_64
 libcap-ng-0.8.2-4.amzn2023.0.2.x86_64
 libcbor-0.7.0-3.amzn2023.0.2.x86_64
 libcom_err-1.46.5-2.amzn2023.0.2.x86_64
@@ -55,7 +55,7 @@ libgcc-11.4.1-2.amzn2023.0.2.x86_64
 libidn2-2.3.2-1.amzn2023.0.5.x86_64
 libmount-2.37.4-1.amzn2023.0.4.x86_64
 libnghttp2-1.59.0-3.amzn2023.0.1.x86_64
-libpsl-0.21.1-3.amzn2023.0.2.x86_64
+libpsl-0.21.5-1.amzn2023.0.1.x86_64
 libpwquality-1.4.4-6.amzn2023.0.2.x86_64
 libselinux-3.4-5.amzn2023.0.2.x86_64
 libsemanage-3.4-5.amzn2023.0.2.x86_64
