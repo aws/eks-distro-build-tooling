@@ -1,5 +1,5 @@
 
-binutils.x86_64
-openssh.x86_64
-openssh-clients.x86_64
-openssl-libs.x86_64
+libcap.x86_64
+libxml2.x86_64
+python3.x86_64
+python3-libs.x86_64

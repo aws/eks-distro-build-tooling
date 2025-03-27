@@ -13216,7 +13216,7 @@
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x   197KiB /usr/lib64/libcap.so.2.48
+-rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.48
 -rwxr-xr-x   198KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
@@ -13288,7 +13288,7 @@
 -rwxr-xr-x   647KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x   196KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcreposix.so.0.0.7
--rwxr-xr-x   196KiB /usr/lib64/libpsl.so.5.3.3
+-rwxr-xr-x   196KiB /usr/lib64/libpsl.so.5.3.5
 -rwxr-xr-x   196KiB /usr/lib64/libpsx.so.2.48
 -rwxr-xr-x   196KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x   197KiB /usr/lib64/libpwquality.so.1.0.2
@@ -17343,7 +17343,7 @@ lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
-lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.3
+lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.5
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.48
 lrwxrwxrwx      21B /usr/lib64/libpwquality.so.1 libpwquality.so.1.0.2
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1

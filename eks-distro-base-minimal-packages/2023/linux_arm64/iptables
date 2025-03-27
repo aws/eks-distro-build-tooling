@@ -19,7 +19,7 @@ iptables-libs-1.8.8-3.amzn2023.0.2.aarch64
 iptables-nft-1.8.8-3.amzn2023.0.2.aarch64
 jansson-2.14-0.amzn2023.aarch64
 kmod-29-2.amzn2023.0.5.aarch64
-libcap-2.48-2.amzn2023.0.3.aarch64
+libcap-2.48-2.amzn2023.0.4.aarch64
 libgcc-11.4.1-2.amzn2023.0.2.aarch64
 libibverbs-48.0-1.amzn2023.0.1.aarch64
 libmnl-1.0.4-13.amzn2023.0.2.aarch64
