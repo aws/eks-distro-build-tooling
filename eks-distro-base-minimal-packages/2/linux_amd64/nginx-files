@@ -241,7 +241,7 @@
 -rw-r--r--   2.5KiB /usr/lib/locale/C.utf8/LC_TIME
 -rw-r--r--     264B /usr/lib/systemd/system-preset/85-display-manager.preset
 -rw-r--r--   2.9KiB /usr/lib/systemd/system-preset/90-default.preset
--rw-r--r--     651B /usr/lib/systemd/system/nginx.service
+-rw-r--r--     653B /usr/lib/systemd/system/nginx.service
 -rw-r--r--      34B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      65B /usr/lib64/.libcrypto.so.1.0.2k.hmac
 -rw-r--r--      65B /usr/lib64/.libcrypto.so.1.1.1zb.hmac
@@ -591,7 +591,7 @@
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig
 -rwxr-xr-x    29KiB /usr/sbin/iconvconfig.x86_64
 -rwxr-xr-x   885KiB /usr/sbin/ldconfig
--rwxr-xr-x   1.2MiB /usr/sbin/nginx
+-rwxr-xr-x   1.4MiB /usr/sbin/nginx
 -rwxr-xr-x    61KiB /usr/sbin/sefcontext_compile
 -rwxr-xr-x    12KiB /usr/sbin/setcap
 -rwxr-xr-x   885KiB /usr/sbin/sln
@@ -602,7 +602,7 @@
 -rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
 -rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--   3.4KiB /usr/share/doc/nginx-1.22.1/UPGRADE-NOTES-1.6-to-1.10
+-rw-r--r--   3.4KiB /usr/share/doc/nginx-1.26.3/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -640,7 +640,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
--rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.22.1/LICENSE
+-rw-r--r--   1.4KiB /usr/share/licenses/nginx-core-1.26.3/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1zb/LICENSE
 -rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
@@ -908,7 +908,7 @@
 -rw-r--r--     198B /usr/share/vim/vimfiles/ftdetect/nginx.vim
 -rw-r--r--      29B /usr/share/vim/vimfiles/ftplugin/nginx.vim
 -rw-r--r--     250B /usr/share/vim/vimfiles/indent/nginx.vim
--rw-r--r--   137KiB /usr/share/vim/vimfiles/syntax/nginx.vim
+-rw-r--r--   111KiB /usr/share/vim/vimfiles/syntax/nginx.vim
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Abidjan
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Accra
 -rw-r--r--     299B /usr/share/zoneinfo/Africa/Addis_Ababa
