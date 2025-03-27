@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.355-275.591.amzn2.x86_64
+kernel-headers-4.14.355-275.603.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -57,7 +57,7 @@ libassuan-2.1.0-3.amzn2.0.2.x86_64
 libatomic-7.3.1-17.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
 libblkid-2.30.2-2.amzn2.0.11.x86_64
-libcap-2.54-1.amzn2.0.2.x86_64
+libcap-2.54-1.amzn2.0.3.x86_64
 libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcilkrts-7.3.1-17.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
@@ -92,7 +92,7 @@ libunistring-0.9.3-9.amzn2.0.2.x86_64
 libutempter-1.1.6-4.amzn2.0.2.x86_64
 libuuid-2.30.2-2.amzn2.0.11.x86_64
 libverto-0.2.5-4.amzn2.0.2.x86_64
-libxml2-2.9.1-6.amzn2.5.15.x86_64
+libxml2-2.9.1-6.amzn2.5.16.x86_64
 lua-5.1.4-15.amzn2.0.2.x86_64
 lz4-1.7.5-2.amzn2.0.1.x86_64
 make-3.82-24.amzn2.x86_64
@@ -122,9 +122,9 @@ pth-2.0.7-23.amzn2.0.2.x86_64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
 pygpgme-0.3-9.amzn2.0.3.x86_64
 pyliblzma-0.5.3-25.amzn2.x86_64
-python-2.7.18-1.amzn2.0.10.x86_64
+python-2.7.18-1.amzn2.0.11.x86_64
 python-iniparse-0.4-9.amzn2.noarch
-python-libs-2.7.18-1.amzn2.0.10.x86_64
+python-libs-2.7.18-1.amzn2.0.11.x86_64
 python-pycurl-7.19.0-19.amzn2.0.2.x86_64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.4.x86_64

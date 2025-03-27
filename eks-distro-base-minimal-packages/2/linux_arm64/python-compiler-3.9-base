@@ -25,7 +25,7 @@ keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 krb5-libs-1.15.1-55.amzn2.2.8.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
-libcap-2.54-1.amzn2.0.2.aarch64
+libcap-2.54-1.amzn2.0.3.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-64.amzn2.0.3.aarch64
 libcurl-8.3.0-1.amzn2.0.8.aarch64
