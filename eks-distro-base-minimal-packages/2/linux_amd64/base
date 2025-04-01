@@ -3,5 +3,5 @@ ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 filesystem-3.2-25.amzn2.0.4.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 setup-2.8.71-10.amzn2.0.1.noarch
-system-release-2-16.amzn2.x86_64
-tzdata-2024a-1.amzn2.0.1.noarch
+system-release-2-17.amzn2.x86_64
+tzdata-2025a-1.amzn2.0.1.noarch

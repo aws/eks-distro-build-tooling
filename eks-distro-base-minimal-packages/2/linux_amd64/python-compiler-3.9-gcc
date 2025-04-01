@@ -108,9 +108,9 @@ sed-4.2.2-5.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 shared-mime-info-1.8-4.amzn2.x86_64
 sqlite-3.7.17-8.amzn2.1.2.x86_64
-system-release-2-16.amzn2.x86_64
+system-release-2-17.amzn2.x86_64
 tar-1.26-35.amzn2.0.4.x86_64
-tzdata-2024a-1.amzn2.0.1.noarch
+tzdata-2025a-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
 yum-3.4.3-158.amzn2.0.7.noarch

@@ -136,11 +136,11 @@ setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.3.aarch64
 shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.2.aarch64
-system-release-2-16.amzn2.aarch64
+system-release-2-17.amzn2.aarch64
 systemd-219-78.amzn2.0.24.aarch64
 systemd-libs-219-78.amzn2.0.24.aarch64
 tar-1.26-35.amzn2.0.4.aarch64
-tzdata-2024a-1.amzn2.0.1.noarch
+tzdata-2025a-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.aarch64
 util-linux-2.30.2-2.amzn2.0.11.aarch64
 which-2.20-7.amzn2.0.2.aarch64
