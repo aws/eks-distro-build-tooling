@@ -1,0 +1,276 @@
+commit d8a7a5cd7b5879bea5821262cf592276616cb741
+Merge: d4ecd9a175 f56cc529df
+Author: Kubernetes Prow Robot <20407524+k8s-ci-robot@users.noreply.github.com>
+Date:   Fri Feb 21 16:44:26 2025 -0800
+
+Cherry-pick of https://github.com/kubernetes/kops/commit/36a32537a1a0044b474e63603881f5b96b3e7fff
+
+This patch can be removed when this commit is part of a kOps release.
+
+    Merge pull request #17270 from rifelpet/apiserver-133
+    
+    Remove cloud-config and cloud-provider from 1.33 apiserver
+
+diff --git a/nodeup/pkg/model/kube_apiserver.go b/nodeup/pkg/model/kube_apiserver.go
+index f1636a4..c0bbd94 100644
+--- a/nodeup/pkg/model/kube_apiserver.go
++++ b/nodeup/pkg/model/kube_apiserver.go
+@@ -573,7 +573,9 @@ func (b *KubeAPIServerBuilder) buildPod(ctx context.Context, kubeAPIServer *kops
+ 		return nil, fmt.Errorf("error building kube-apiserver flags: %v", err)
+ 	}
+ 
+-	flags = append(flags, fmt.Sprintf("--cloud-config=%s", InTreeCloudConfigFilePath))
++	if b.IsKubernetesLT("1.33") {
++		flags = append(flags, fmt.Sprintf("--cloud-config=%s", InTreeCloudConfigFilePath))
++	}
+ 
+ 	pod := &v1.Pod{
+ 		TypeMeta: metav1.TypeMeta{
+diff --git a/nodeup/pkg/model/tests/golden/minimal/cluster.yaml b/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
+index 498b651..1f00fce 100644
+--- a/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
++++ b/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
+@@ -30,7 +30,7 @@ spec:
+   iam: {}
+   kubelet:
+     anonymousAuth: false
+-  kubernetesVersion: v1.28.0
++  kubernetesVersion: v1.33.0
+   masterPublicName: api.minimal.example.com
+   networkCIDR: 172.20.0.0/16
+   networking:
+diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
+index 3dbb7f0..922aa24 100644
+--- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
++++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
+@@ -24,15 +24,12 @@ contents: |
+       - --authorization-mode=AlwaysAllow
+       - --bind-address=0.0.0.0
+       - --client-ca-file=/srv/kubernetes/ca.crt
+-      - --cloud-config=/etc/kubernetes/in-tree-cloud.config
+-      - --cloud-provider=external
+       - --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,NodeRestriction,ResourceQuota
+       - --etcd-cafile=/srv/kubernetes/kube-apiserver/etcd-ca.crt
+       - --etcd-certfile=/srv/kubernetes/kube-apiserver/etcd-client.crt
+       - --etcd-keyfile=/srv/kubernetes/kube-apiserver/etcd-client.key
+       - --etcd-servers-overrides=/events#https://127.0.0.1:4002
+       - --etcd-servers=https://127.0.0.1:4001
+-      - --feature-gates=InTreePluginAWSUnregister=true
+       - --kubelet-client-certificate=/srv/kubernetes/kube-apiserver/kubelet-api.crt
+       - --kubelet-client-key=/srv/kubernetes/kube-apiserver/kubelet-api.key
+       - --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP
+@@ -55,23 +52,44 @@ contents: |
+       - --v=2
+       command:
+       - /go-runner
+-      image: registry.k8s.io/kube-apiserver:v1.28.0
++      image: registry.k8s.io/kube-apiserver:v1.33.0
+       livenessProbe:
++        failureThreshold: 8
+         httpGet:
+           host: 127.0.0.1
+-          path: /healthz
++          path: /livez
+           port: 443
+           scheme: HTTPS
+-        initialDelaySeconds: 45
++        initialDelaySeconds: 10
++        periodSeconds: 10
+         timeoutSeconds: 15
+       name: kube-apiserver
+       ports:
+       - containerPort: 443
+         hostPort: 443
+         name: https
++      readinessProbe:
++        failureThreshold: 3
++        httpGet:
++          host: 127.0.0.1
++          path: /healthz
++          port: 443
++          scheme: HTTPS
++        periodSeconds: 1
++        timeoutSeconds: 15
+       resources:
+         requests:
+           cpu: 150m
++      startupProbe:
++        failureThreshold: 30
++        httpGet:
++          host: 127.0.0.1
++          path: /livez
++          port: 443
++          scheme: HTTPS
++        initialDelaySeconds: 10
++        periodSeconds: 10
++        timeoutSeconds: 300
+       volumeMounts:
+       - mountPath: /var/log/kube-apiserver.log
+         name: logfile
+diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
+index afd6cb3..44cd652 100644
+--- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
++++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
+@@ -24,7 +24,6 @@ contents: |
+       - --cluster-signing-cert-file=/srv/kubernetes/kube-controller-manager/ca.crt
+       - --cluster-signing-key-file=/srv/kubernetes/kube-controller-manager/ca.key
+       - --configure-cloud-routes=true
+-      - --feature-gates=InTreePluginAWSUnregister=true
+       - --flex-volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+       - --kubeconfig=/var/lib/kube-controller-manager/kubeconfig
+       - --leader-elect=true
+@@ -36,7 +35,7 @@ contents: |
+       - --v=2
+       command:
+       - /go-runner
+-      image: registry.k8s.io/kube-controller-manager:v1.28.0
++      image: registry.k8s.io/kube-controller-manager:v1.33.0
+       livenessProbe:
+         httpGet:
+           host: 127.0.0.1
+diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
+index 53173b7..2c5db12 100644
+--- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
++++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
+@@ -23,7 +23,7 @@ contents: |
+       - --v=2
+       command:
+       - /go-runner
+-      image: registry.k8s.io/kube-proxy:v1.28.0
++      image: registry.k8s.io/kube-proxy:v1.33.0
+       name: kube-proxy
+       resources:
+         requests:
+diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
+index 932291a..4d4710f 100644
+--- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
++++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
+@@ -16,14 +16,13 @@ contents: |
+       - --authentication-kubeconfig=/var/lib/kube-scheduler/kubeconfig
+       - --authorization-kubeconfig=/var/lib/kube-scheduler/kubeconfig
+       - --config=/var/lib/kube-scheduler/config.yaml
+-      - --feature-gates=InTreePluginAWSUnregister=true
+       - --leader-elect=true
+       - --tls-cert-file=/srv/kubernetes/kube-scheduler/server.crt
+       - --tls-private-key-file=/srv/kubernetes/kube-scheduler/server.key
+       - --v=2
+       command:
+       - /go-runner
+-      image: registry.k8s.io/kube-scheduler:v1.28.0
++      image: registry.k8s.io/kube-scheduler:v1.33.0
+       livenessProbe:
+         httpGet:
+           host: 127.0.0.1
+diff --git a/pkg/apis/kops/validation/legacy.go b/pkg/apis/kops/validation/legacy.go
+index ecb8c71..c07d8e6 100644
+--- a/pkg/apis/kops/validation/legacy.go
++++ b/pkg/apis/kops/validation/legacy.go
+@@ -21,6 +21,7 @@ import (
+ 	"net"
+ 	"strings"
+ 
++	"github.com/blang/semver/v4"
+ 	"k8s.io/apimachinery/pkg/util/validation/field"
+ 	"k8s.io/kops/pkg/apis/kops"
+ 	"k8s.io/kops/pkg/apis/kops/util"
+@@ -40,12 +41,17 @@ func ValidateCluster(c *kops.Cluster, strict bool, vfsContext *vfs.VFSContext) f
+ 	// KubernetesVersion
+ 	// This is one case we return the error because a large part of the rest of the validation logic depends on a valid kubernetes version.
+ 
++	var k8sVersion *semver.Version
++	var err error
+ 	if c.Spec.KubernetesVersion == "" {
+ 		allErrs = append(allErrs, field.Required(fieldSpec.Child("kubernetesVersion"), ""))
+ 		return allErrs
+-	} else if _, err := util.ParseKubernetesVersion(c.Spec.KubernetesVersion); err != nil {
+-		allErrs = append(allErrs, field.Invalid(fieldSpec.Child("kubernetesVersion"), c.Spec.KubernetesVersion, "unable to determine kubernetes version"))
+-		return allErrs
++	} else {
++		k8sVersion, err = util.ParseKubernetesVersion(c.Spec.KubernetesVersion)
++		if err != nil {
++			allErrs = append(allErrs, field.Invalid(fieldSpec.Child("kubernetesVersion"), c.Spec.KubernetesVersion, "unable to determine kubernetes version"))
++			return allErrs
++		}
+ 	}
+ 
+ 	if strict && c.Spec.Kubelet == nil {
+@@ -72,7 +78,6 @@ func ValidateCluster(c *kops.Cluster, strict bool, vfsContext *vfs.VFSContext) f
+ 
+ 	var nonMasqueradeCIDR *net.IPNet
+ 	var serviceClusterIPRange *net.IPNet
+-	var err error
+ 
+ 	if c.Spec.Networking.NonMasqueradeCIDR != "" {
+ 		_, nonMasqueradeCIDR, _ = net.ParseCIDR(c.Spec.Networking.NonMasqueradeCIDR)
+@@ -182,8 +187,10 @@ func ValidateCluster(c *kops.Cluster, strict bool, vfsContext *vfs.VFSContext) f
+ 				}
+ 			}
+ 			if c.Spec.KubeAPIServer != nil && (strict || c.Spec.KubeAPIServer.CloudProvider != "") {
+-				if c.Spec.KubeAPIServer.CloudProvider != "external" && k8sCloudProvider != c.Spec.KubeAPIServer.CloudProvider {
+-					allErrs = append(allErrs, field.Forbidden(fieldSpec.Child("kubeAPIServer", "cloudProvider"), "Did not match cluster cloudProvider"))
++				if k8sVersion != nil && k8sVersion.LT(semver.MustParse("1.33.0")) {
++					if c.Spec.KubeAPIServer.CloudProvider != "external" && k8sCloudProvider != c.Spec.KubeAPIServer.CloudProvider {
++						allErrs = append(allErrs, field.Forbidden(fieldSpec.Child("kubeAPIServer", "cloudProvider"), "Did not match cluster cloudProvider"))
++					}
+ 				}
+ 			}
+ 			if c.Spec.KubeControllerManager != nil && (strict || c.Spec.KubeControllerManager.CloudProvider != "") {
+diff --git a/pkg/model/components/apiserver.go b/pkg/model/components/apiserver.go
+index a4e44f7..a563ccc 100644
+--- a/pkg/model/components/apiserver.go
++++ b/pkg/model/components/apiserver.go
+@@ -97,29 +97,31 @@ func (b *KubeAPIServerOptionsBuilder) BuildOptions(cluster *kops.Cluster) error 
+ 	}
+ 	c.Image = image
+ 
+-	switch cluster.GetCloudProvider() {
+-	case kops.CloudProviderAWS:
+-		c.CloudProvider = "aws"
+-	case kops.CloudProviderGCE:
+-		c.CloudProvider = "gce"
+-	case kops.CloudProviderDO:
+-		c.CloudProvider = "external"
+-	case kops.CloudProviderHetzner:
+-		c.CloudProvider = "external"
+-	case kops.CloudProviderOpenstack:
+-		c.CloudProvider = "openstack"
+-	case kops.CloudProviderAzure:
+-		c.CloudProvider = "azure"
+-	case kops.CloudProviderScaleway:
+-		c.CloudProvider = "external"
+-	case kops.CloudProviderMetal:
+-		c.CloudProvider = "external"
+-	default:
+-		return fmt.Errorf("unknown cloudprovider %q", cluster.GetCloudProvider())
+-	}
+-
+-	if clusterSpec.ExternalCloudControllerManager != nil {
+-		c.CloudProvider = "external"
++	if b.controlPlaneKubernetesVersion.IsLT("1.33") {
++		switch cluster.GetCloudProvider() {
++		case kops.CloudProviderAWS:
++			c.CloudProvider = "aws"
++		case kops.CloudProviderGCE:
++			c.CloudProvider = "gce"
++		case kops.CloudProviderDO:
++			c.CloudProvider = "external"
++		case kops.CloudProviderHetzner:
++			c.CloudProvider = "external"
++		case kops.CloudProviderOpenstack:
++			c.CloudProvider = "openstack"
++		case kops.CloudProviderAzure:
++			c.CloudProvider = "azure"
++		case kops.CloudProviderScaleway:
++			c.CloudProvider = "external"
++		case kops.CloudProviderMetal:
++			c.CloudProvider = "external"
++		default:
++			return fmt.Errorf("unknown cloudprovider %q", cluster.GetCloudProvider())
++		}
++
++		if clusterSpec.ExternalCloudControllerManager != nil {
++			c.CloudProvider = "external"
++		}
+ 	}
+ 
+ 	c.LogLevel = 2
