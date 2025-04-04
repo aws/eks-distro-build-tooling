@@ -94,8 +94,8 @@ pam-1.1.8-23.amzn2.0.2.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 popt-1.13-16.amzn2.0.2.aarch64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
-python-2.7.18-1.amzn2.0.11.aarch64
-python-libs-2.7.18-1.amzn2.0.11.aarch64
+python-2.7.18-1.amzn2.0.12.aarch64
+python-libs-2.7.18-1.amzn2.0.12.aarch64
 quota-4.01-17.amzn2.aarch64
 quota-nls-4.01-17.amzn2.noarch
 readline-6.2-10.amzn2.0.2.aarch64
