@@ -7,7 +7,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
 ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 conntrack-tools-1.4.4-5.amzn2.2.x86_64
-containerd-1.7.25-1.amzn2.0.1.x86_64
+containerd-1.7.27-1.amzn2.0.1.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cpio-2.12-11.amzn2.0.1.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
@@ -136,9 +136,9 @@ pth-2.0.7-23.amzn2.0.2.x86_64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
 pygpgme-0.3-9.amzn2.0.3.x86_64
 pyliblzma-0.5.3-25.amzn2.x86_64
-python-2.7.18-1.amzn2.0.11.x86_64
+python-2.7.18-1.amzn2.0.12.x86_64
 python-iniparse-0.4-9.amzn2.noarch
-python-libs-2.7.18-1.amzn2.0.11.x86_64
+python-libs-2.7.18-1.amzn2.0.12.x86_64
 python-pycurl-7.19.0-19.amzn2.0.2.x86_64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.4.x86_64

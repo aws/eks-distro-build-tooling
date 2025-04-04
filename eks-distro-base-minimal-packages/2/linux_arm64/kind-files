@@ -10,7 +10,7 @@
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
--rw-r--r--   8.9KiB /etc/containerd/config.toml
+-rw-r--r--   9.0KiB /etc/containerd/config.toml
 -rw-r--r--   1.6KiB /etc/csh.cshrc
 -rw-r--r--     866B /etc/csh.login
 -rw-r--r--     838B /etc/dbus-1/session.conf
@@ -221,10 +221,10 @@
 -rwxr-xr-x    69KiB /usr/bin/column
 -rwxr-xr-x    69KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
--rwxr-xr-x    40MiB /usr/bin/containerd
--rwxr-xr-x   6.0MiB /usr/bin/containerd-shim
--rwxr-xr-x   7.1MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    12MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    41MiB /usr/bin/containerd
+-rwxr-xr-x   6.2MiB /usr/bin/containerd-shim
+-rwxr-xr-x   7.4MiB /usr/bin/containerd-shim-runc-v1
+-rwxr-xr-x    13MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   199KiB /usr/bin/coredumpctl
 -rwxr-xr-x   200KiB /usr/bin/cp
 -rwxr-xr-x   203KiB /usr/bin/cpio
@@ -3527,7 +3527,7 @@
 -rw-r--r--    30KiB /usr/lib64/python2.7/sre_parse.py
 -rw-r--r--    21KiB /usr/lib64/python2.7/sre_parse.pyc
 -rw-r--r--    21KiB /usr/lib64/python2.7/sre_parse.pyo
--rw-r--r--    37KiB /usr/lib64/python2.7/ssl.py
+-rw-r--r--    39KiB /usr/lib64/python2.7/ssl.py
 -rw-r--r--    32KiB /usr/lib64/python2.7/ssl.pyc
 -rw-r--r--    32KiB /usr/lib64/python2.7/ssl.pyo
 -rw-r--r--   1.8KiB /usr/lib64/python2.7/stat.py
@@ -3569,9 +3569,9 @@
 -rwxr-xr-x    12KiB /usr/lib64/python2.7/tabnanny.py
 -rw-r--r--   8.1KiB /usr/lib64/python2.7/tabnanny.pyc
 -rw-r--r--   8.1KiB /usr/lib64/python2.7/tabnanny.pyo
--rw-r--r--    89KiB /usr/lib64/python2.7/tarfile.py
--rw-r--r--    75KiB /usr/lib64/python2.7/tarfile.pyc
--rw-r--r--    75KiB /usr/lib64/python2.7/tarfile.pyo
+-rw-r--r--   101KiB /usr/lib64/python2.7/tarfile.py
+-rw-r--r--    84KiB /usr/lib64/python2.7/tarfile.pyc
+-rw-r--r--    84KiB /usr/lib64/python2.7/tarfile.pyo
 -rw-r--r--    27KiB /usr/lib64/python2.7/telnetlib.py
 -rw-r--r--    23KiB /usr/lib64/python2.7/telnetlib.pyc
 -rw-r--r--    23KiB /usr/lib64/python2.7/telnetlib.pyo
@@ -4538,7 +4538,7 @@
 -rw-r--r--   2.4KiB /usr/share/info/which.info.gz
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.25/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.27/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
