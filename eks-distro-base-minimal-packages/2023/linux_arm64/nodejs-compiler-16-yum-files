@@ -3241,9 +3241,9 @@
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
--rw-r--r--     525B /usr/lib64/.libgnutls.so.30.35.0.hmac
--rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
--rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
+-rw-r--r--     405B /usr/lib64/.libgnutls.so.30.37.1.hmac
+-rw-r--r--      65B /usr/lib64/.libhogweed.so.6.10.hmac
+-rw-r--r--      65B /usr/lib64/.libnettle.so.8.10.hmac
 -rwxr-xr-x   196KiB /usr/lib64/audit/sotruss-lib.so
 -rwxr-xr-x   196KiB /usr/lib64/bfd-plugins/libdep.so
 -rwxr-xr-x   196KiB /usr/lib64/engines-3/afalg.so
@@ -3638,9 +3638,9 @@
 -rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.8200.2
 -rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   2.4MiB /usr/lib64/libgnutls.so.30.35.0
+-rwxr-xr-x   2.3MiB /usr/lib64/libgnutls.so.30.37.1
 -rwxr-xr-x   461KiB /usr/lib64/libgobject-2.0.so.0.8200.2
--rwxr-xr-x   332KiB /usr/lib64/libgomp.so.1.0.0
+-rwxr-xr-x   396KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   463KiB /usr/lib64/libgpgme.so.11.24.1
 -rwxr-xr-x   396KiB /usr/lib64/libgssapi_krb5.so.2.2
@@ -3648,7 +3648,7 @@
 -rwxr-xr-x   195KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libhistory.so.8.1
--rwxr-xr-x   392KiB /usr/lib64/libhogweed.so.6.5
+-rwxr-xr-x   585KiB /usr/lib64/libhogweed.so.6.10
 -rwxr-xr-x   261KiB /usr/lib64/libidn2.so.0.3.7
 -rwxr-xr-x   198KiB /usr/lib64/libjansson.so.4.14.0
 -rwxr-xr-x   197KiB /usr/lib64/libjson-c.so.5.0.0
@@ -3676,7 +3676,7 @@
 -rwxr-xr-x   585KiB /usr/lib64/libmpfr.so.6.1.0
 -rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
--rwxr-xr-x   394KiB /usr/lib64/libnettle.so.8.5
+-rwxr-xr-x   393KiB /usr/lib64/libnettle.so.8.10
 -rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   196KiB /usr/lib64/libnpth.so.0.1.2
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
@@ -6809,11 +6809,11 @@
 -rw-r--r--    16KiB /usr/share/info/gzip.info.gz
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--   119KiB /usr/share/info/ld.info.gz
--rw-r--r--    49KiB /usr/share/info/libgomp.info.gz
+-rw-r--r--    70KiB /usr/share/info/libgomp.info.gz
 -rw-r--r--    87KiB /usr/share/info/make.info-1.gz
 -rw-r--r--    79KiB /usr/share/info/make.info-2.gz
 -rw-r--r--   2.6KiB /usr/share/info/make.info.gz
--rw-r--r--    69KiB /usr/share/info/nettle.info.gz
+-rw-r--r--    74KiB /usr/share/info/nettle.info.gz
 -rw-r--r--    62KiB /usr/share/info/r5rs-2.2.info.gz
 -rw-r--r--    26KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    53KiB /usr/share/info/sed.info.gz
@@ -7066,7 +7066,7 @@
 -rw-r--r--    36KiB /usr/share/locale/de/LC_MESSAGES/findutils.mo
 -rw-r--r--   142KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
--rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
+-rw-r--r--    35KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
 -rw-r--r--    19KiB /usr/share/locale/de/LC_MESSAGES/grep.mo
 -rw-r--r--    51KiB /usr/share/locale/de/LC_MESSAGES/ld.mo
@@ -7423,7 +7423,7 @@
 -rw-r--r--   3.4KiB /usr/share/locale/ms/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.5KiB /usr/share/locale/ms/LC_MESSAGES/findutils.mo
 -rw-r--r--   124KiB /usr/share/locale/ms/LC_MESSAGES/glib20.mo
--rw-r--r--    28KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
+-rw-r--r--    31KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/ms/LC_MESSAGES/gprof.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.0KiB /usr/share/locale/ms/LC_MESSAGES/rpm.mo
@@ -7636,7 +7636,7 @@
 -rw-r--r--   513KiB /usr/share/locale/sv/LC_MESSAGES/gas.mo
 -rw-r--r--   135KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
--rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
+-rw-r--r--    33KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/sv/LC_MESSAGES/gprof.mo
 -rw-r--r--    18KiB /usr/share/locale/sv/LC_MESSAGES/grep.mo
 -rw-r--r--    52KiB /usr/share/locale/sv/LC_MESSAGES/ld.mo
@@ -9744,7 +9744,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.5MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.6MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -10104,9 +10104,9 @@ lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
-lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.35.0.hmac
-lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
-lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
+lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.37.1.hmac
+lrwxrwxrwx      24B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.10.hmac
+lrwxrwxrwx      23B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.10.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so guile-readline.so.0.0.0
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so.0 guile-readline.so.0.0.0
@@ -10152,7 +10152,7 @@ lrwxrwxrwx      31B /usr/lib64/libgirepository-2.0.so.0 libgirepository-2.0.so.0
 lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.8200.2
 lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
-lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
+lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.37.1
 lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
@@ -10162,7 +10162,7 @@ lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
 lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.8200.2
 lrwxrwxrwx      21B /usr/lib64/libguile-2.2.so.1 libguile-2.2.so.1.4.2
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
-lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.5
+lrwxrwxrwx      18B /usr/lib64/libhogweed.so.6 libhogweed.so.6.10
 lrwxrwxrwx      16B /usr/lib64/libidn2.so.0 libidn2.so.0.3.7
 lrwxrwxrwx      20B /usr/lib64/libjansson.so.4 libjansson.so.4.14.0
 lrwxrwxrwx      18B /usr/lib64/libjson-c.so.5 libjson-c.so.5.0.0
@@ -10186,7 +10186,7 @@ lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.5
+lrwxrwxrwx      17B /usr/lib64/libnettle.so.8 libnettle.so.8.10
 lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
 lrwxrwxrwx      16B /usr/lib64/libnpth.so.0 libnpth.so.0.1.2
 lrwxrwxrwx      31B /usr/lib64/libnssckbi.so /etc/alternatives/libnssckbi.so

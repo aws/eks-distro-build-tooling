@@ -841,8 +841,8 @@
 -rw-r--r--   6.1KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-39.pyc
 -rw-r--r--   7.0KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-39.opt-1.pyc
 -rw-r--r--   7.1KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-39.pyc
--rw-r--r--   6.6KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-39.opt-1.pyc
--rw-r--r--   6.6KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-39.pyc
+-rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-39.opt-1.pyc
+-rw-r--r--   7.8KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-39.pyc
 -rw-r--r--   1.5KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/urls.cpython-39.opt-1.pyc
 -rw-r--r--   1.6KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/urls.cpython-39.pyc
 -rw-r--r--   3.2KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/virtualenv.cpython-39.opt-1.pyc
@@ -874,7 +874,7 @@
 -rw-r--r--   4.6KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/setuptools_build.py
 -rw-r--r--   9.9KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/subprocess.py
 -rw-r--r--   7.5KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/temp_dir.py
--rw-r--r--   8.7KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/unpacking.py
+-rw-r--r--    12KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/unpacking.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/urls.py
 -rw-r--r--   3.4KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/virtualenv.py
 -rw-r--r--   6.1KiB /usr/lib/python3.9/site-packages/pip/_internal/utils/wheel.py

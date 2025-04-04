@@ -756,9 +756,9 @@
 -rw-r--r--   3.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/models.cpython-311.pyc
 -rw-r--r--   2.8KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/packaging.cpython-311.pyc
 -rw-r--r--   6.1KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/setuptools_build.cpython-311.pyc
--rw-r--r--   9.8KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-311.pyc
+-rw-r--r--   9.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-311.pyc
 -rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-311.pyc
--rw-r--r--    13KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
+-rw-r--r--    15KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
 -rw-r--r--   2.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/urls.cpython-311.pyc
 -rw-r--r--   4.9KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/virtualenv.cpython-311.pyc
 -rw-r--r--   7.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/wheel.cpython-311.pyc
@@ -785,7 +785,7 @@
 -rw-r--r--   5.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/setuptools_build.py
 -rw-r--r--   9.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/subprocess.py
 -rw-r--r--   7.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/temp_dir.py
--rw-r--r--   8.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
+-rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
 -rw-r--r--   1.8KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/urls.py
 -rw-r--r--   3.4KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/virtualenv.py
 -rw-r--r--   4.5KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/wheel.py
@@ -1215,7 +1215,7 @@
 -rw-r--r--   4.8KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_log_render.cpython-311.pyc
 -rw-r--r--   2.2KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_loop.cpython-311.pyc
 -rw-r--r--   5.2KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_palettes.cpython-311.pyc
--rw-r--r--     841B /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_pick.cpython-311.pyc
+-rw-r--r--     840B /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_pick.cpython-311.pyc
 -rw-r--r--   7.8KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_ratio.cpython-311.pyc
 -rw-r--r--    14KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_spinners.cpython-311.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.11/site-packages/pip/_vendor/rich/__pycache__/_stack.cpython-311.pyc
@@ -2274,9 +2274,9 @@
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
--rw-r--r--     525B /usr/lib64/.libgnutls.so.30.35.0.hmac
--rw-r--r--      65B /usr/lib64/.libhogweed.so.6.5.hmac
--rw-r--r--      65B /usr/lib64/.libnettle.so.8.5.hmac
+-rw-r--r--     405B /usr/lib64/.libgnutls.so.30.37.1.hmac
+-rw-r--r--      65B /usr/lib64/.libhogweed.so.6.10.hmac
+-rw-r--r--      65B /usr/lib64/.libnettle.so.8.10.hmac
 -rwxr-xr-x    16KiB /usr/lib64/audit/sotruss-lib.so
 -rwxr-xr-x    16KiB /usr/lib64/bfd-plugins/libdep.so
 -rwxr-xr-x    24KiB /usr/lib64/engines-3/afalg.so
@@ -2673,9 +2673,9 @@
 -rwxr-xr-x   1.4MiB /usr/lib64/libglib-2.0.so.0.8200.2
 -rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   2.2MiB /usr/lib64/libgnutls.so.30.35.0
+-rwxr-xr-x   2.3MiB /usr/lib64/libgnutls.so.30.37.1
 -rwxr-xr-x   404KiB /usr/lib64/libgobject-2.0.so.0.8200.2
--rwxr-xr-x   280KiB /usr/lib64/libgomp.so.1.0.0
+-rwxr-xr-x   353KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   347KiB /usr/lib64/libgpgme.so.11.24.1
 -rwxr-xr-x   352KiB /usr/lib64/libgssapi_krb5.so.2.2
@@ -2683,7 +2683,7 @@
 -rwxr-xr-x    15KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.3MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x    53KiB /usr/lib64/libhistory.so.8.1
--rwxr-xr-x   268KiB /usr/lib64/libhogweed.so.6.5
+-rwxr-xr-x   632KiB /usr/lib64/libhogweed.so.6.10
 -rwxr-xr-x   129KiB /usr/lib64/libidn2.so.0.3.7
 -rwxr-xr-x    62KiB /usr/lib64/libjansson.so.4.14.0
 -rwxr-xr-x    74KiB /usr/lib64/libjson-c.so.5.0.0
@@ -2714,7 +2714,7 @@
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x   185KiB /usr/lib64/libncurses.so.6.2
 -rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
--rwxr-xr-x   342KiB /usr/lib64/libnettle.so.8.5
+-rwxr-xr-x   362KiB /usr/lib64/libnettle.so.8.10
 -rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x    24KiB /usr/lib64/libnpth.so.0.1.2
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
@@ -4378,7 +4378,7 @@
 -rwxr-xr-x   127KiB /usr/lib64/python3.11/lib-dynload/_curses.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.11/lib-dynload/_curses_panel.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x   106KiB /usr/lib64/python3.11/lib-dynload/_datetime.cpython-311-x86_64-linux-gnu.so
--rwxr-xr-x    24KiB /usr/lib64/python3.11/lib-dynload/_dbm.cpython-311-x86_64-linux-gnu.so
+-rwxr-xr-x    25KiB /usr/lib64/python3.11/lib-dynload/_dbm.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x   163KiB /usr/lib64/python3.11/lib-dynload/_decimal.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    78KiB /usr/lib64/python3.11/lib-dynload/_elementtree.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.11/lib-dynload/_gdbm.cpython-311-x86_64-linux-gnu.so
@@ -4386,7 +4386,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/python3.11/lib-dynload/_heapq.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    50KiB /usr/lib64/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.11/lib-dynload/_lsprof.cpython-311-x86_64-linux-gnu.so
--rwxr-xr-x    45KiB /usr/lib64/python3.11/lib-dynload/_lzma.cpython-311-x86_64-linux-gnu.so
+-rwxr-xr-x    46KiB /usr/lib64/python3.11/lib-dynload/_lzma.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    51KiB /usr/lib64/python3.11/lib-dynload/_multibytecodec.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.11/lib-dynload/_multiprocessing.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.11/lib-dynload/_opcode.cpython-311-x86_64-linux-gnu.so
@@ -4395,7 +4395,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/python3.11/lib-dynload/_posixsubprocess.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    21KiB /usr/lib64/python3.11/lib-dynload/_queue.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    24KiB /usr/lib64/python3.11/lib-dynload/_random.cpython-311-x86_64-linux-gnu.so
--rwxr-xr-x    99KiB /usr/lib64/python3.11/lib-dynload/_socket.cpython-311-x86_64-linux-gnu.so
+-rwxr-xr-x   100KiB /usr/lib64/python3.11/lib-dynload/_socket.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x   123KiB /usr/lib64/python3.11/lib-dynload/_sqlite3.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x   221KiB /usr/lib64/python3.11/lib-dynload/_ssl.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.11/lib-dynload/_statistics.cpython-311-x86_64-linux-gnu.so
@@ -4413,7 +4413,7 @@
 -rwxr-xr-x    71KiB /usr/lib64/python3.11/lib-dynload/math.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    33KiB /usr/lib64/python3.11/lib-dynload/mmap.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    34KiB /usr/lib64/python3.11/lib-dynload/ossaudiodev.cpython-311-x86_64-linux-gnu.so
--rwxr-xr-x    70KiB /usr/lib64/python3.11/lib-dynload/pyexpat.cpython-311-x86_64-linux-gnu.so
+-rwxr-xr-x    71KiB /usr/lib64/python3.11/lib-dynload/pyexpat.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    41KiB /usr/lib64/python3.11/lib-dynload/readline.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    20KiB /usr/lib64/python3.11/lib-dynload/resource.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    41KiB /usr/lib64/python3.11/lib-dynload/select.cpython-311-x86_64-linux-gnu.so
@@ -4421,7 +4421,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/python3.11/lib-dynload/syslog.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    36KiB /usr/lib64/python3.11/lib-dynload/termios.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x   1.1MiB /usr/lib64/python3.11/lib-dynload/unicodedata.cpython-311-x86_64-linux-gnu.so
--rwxr-xr-x    20KiB /usr/lib64/python3.11/lib-dynload/xxlimited.cpython-311-x86_64-linux-gnu.so
+-rwxr-xr-x    21KiB /usr/lib64/python3.11/lib-dynload/xxlimited.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.11/lib-dynload/xxlimited_35.cpython-311-x86_64-linux-gnu.so
 -rwxr-xr-x    46KiB /usr/lib64/python3.11/lib-dynload/zlib.cpython-311-x86_64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.11/lib2to3/Grammar.txt
@@ -6743,7 +6743,7 @@
 -rw-r--r--   1.1KiB /usr/lib64/python3.9/keyword.py
 -rwxr-xr-x    63KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x    78KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   156KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   160KiB /usr/lib64/python3.9/lib-dynload/_codecs_hk.cpython-39-x86_64-linux-gnu.so
@@ -6759,7 +6759,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   306KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    72KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -8281,11 +8281,11 @@
 -rw-r--r--    16KiB /usr/share/info/gzip.info.gz
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--   119KiB /usr/share/info/ld.info.gz
--rw-r--r--    49KiB /usr/share/info/libgomp.info.gz
+-rw-r--r--    70KiB /usr/share/info/libgomp.info.gz
 -rw-r--r--    87KiB /usr/share/info/make.info-1.gz
 -rw-r--r--    79KiB /usr/share/info/make.info-2.gz
 -rw-r--r--   2.6KiB /usr/share/info/make.info.gz
--rw-r--r--    69KiB /usr/share/info/nettle.info.gz
+-rw-r--r--    74KiB /usr/share/info/nettle.info.gz
 -rw-r--r--    62KiB /usr/share/info/r5rs-2.2.info.gz
 -rw-r--r--    26KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    53KiB /usr/share/info/sed.info.gz
@@ -8546,7 +8546,7 @@
 -rw-r--r--    17KiB /usr/share/locale/de/LC_MESSAGES/gdbm.mo
 -rw-r--r--   142KiB /usr/share/locale/de/LC_MESSAGES/glib20.mo
 -rw-r--r--   239KiB /usr/share/locale/de/LC_MESSAGES/gnupg2.mo
--rw-r--r--    34KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
+-rw-r--r--    35KiB /usr/share/locale/de/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/de/LC_MESSAGES/gprof.mo
 -rw-r--r--    19KiB /usr/share/locale/de/LC_MESSAGES/grep.mo
 -rw-r--r--    51KiB /usr/share/locale/de/LC_MESSAGES/ld.mo
@@ -8908,7 +8908,7 @@
 -rw-r--r--   3.4KiB /usr/share/locale/ms/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.5KiB /usr/share/locale/ms/LC_MESSAGES/findutils.mo
 -rw-r--r--   124KiB /usr/share/locale/ms/LC_MESSAGES/glib20.mo
--rw-r--r--    28KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
+-rw-r--r--    31KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/ms/LC_MESSAGES/gprof.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.0KiB /usr/share/locale/ms/LC_MESSAGES/rpm.mo
@@ -9126,7 +9126,7 @@
 -rw-r--r--    16KiB /usr/share/locale/sv/LC_MESSAGES/gdbm.mo
 -rw-r--r--   135KiB /usr/share/locale/sv/LC_MESSAGES/glib20.mo
 -rw-r--r--   129KiB /usr/share/locale/sv/LC_MESSAGES/gnupg2.mo
--rw-r--r--    24KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
+-rw-r--r--    33KiB /usr/share/locale/sv/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/sv/LC_MESSAGES/gprof.mo
 -rw-r--r--    18KiB /usr/share/locale/sv/LC_MESSAGES/grep.mo
 -rw-r--r--    52KiB /usr/share/locale/sv/LC_MESSAGES/ld.mo
@@ -11598,9 +11598,9 @@ lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
-lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.35.0.hmac
-lrwxrwxrwx      23B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.5.hmac
-lrwxrwxrwx      22B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.5.hmac
+lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.37.1.hmac
+lrwxrwxrwx      24B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.10.hmac
+lrwxrwxrwx      23B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.10.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so guile-readline.so.0.0.0
 lrwxrwxrwx      23B /usr/lib64/guile/2.2/extensions/guile-readline.so.0 guile-readline.so.0.0.0
@@ -11647,7 +11647,7 @@ lrwxrwxrwx      31B /usr/lib64/libgirepository-2.0.so.0 libgirepository-2.0.so.0
 lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.8200.2
 lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
-lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.35.0
+lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.37.1
 lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
@@ -11657,7 +11657,7 @@ lrwxrwxrwx      16B /usr/lib64/libgssrpc.so.4 libgssrpc.so.4.2
 lrwxrwxrwx      26B /usr/lib64/libgthread-2.0.so.0 libgthread-2.0.so.0.8200.2
 lrwxrwxrwx      21B /usr/lib64/libguile-2.2.so.1 libguile-2.2.so.1.4.2
 lrwxrwxrwx      17B /usr/lib64/libhistory.so.8 libhistory.so.8.1
-lrwxrwxrwx      17B /usr/lib64/libhogweed.so.6 libhogweed.so.6.5
+lrwxrwxrwx      18B /usr/lib64/libhogweed.so.6 libhogweed.so.6.10
 lrwxrwxrwx      16B /usr/lib64/libidn2.so.0 libidn2.so.0.3.7
 lrwxrwxrwx      20B /usr/lib64/libjansson.so.4 libjansson.so.4.14.0
 lrwxrwxrwx      18B /usr/lib64/libjson-c.so.5 libjson-c.so.5.0.0
@@ -11683,7 +11683,7 @@ lrwxrwxrwx      17B /usr/lib64/libmpdec.so.3 libmpdec.so.2.5.1
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      16B /usr/lib64/libnettle.so.8 libnettle.so.8.5
+lrwxrwxrwx      17B /usr/lib64/libnettle.so.8 libnettle.so.8.10
 lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
 lrwxrwxrwx      16B /usr/lib64/libnpth.so.0 libnpth.so.0.1.2
 lrwxrwxrwx      38B /usr/lib64/libnssckbi.so /etc/alternatives/libnssckbi.so.x86_64
