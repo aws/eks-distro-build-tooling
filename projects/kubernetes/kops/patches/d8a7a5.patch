@@ -1,16 +1,3 @@
-commit d8a7a5cd7b5879bea5821262cf592276616cb741
-Merge: d4ecd9a175 f56cc529df
-Author: Kubernetes Prow Robot <20407524+k8s-ci-robot@users.noreply.github.com>
-Date:   Fri Feb 21 16:44:26 2025 -0800
-
-Cherry-pick of https://github.com/kubernetes/kops/commit/36a32537a1a0044b474e63603881f5b96b3e7fff
-
-This patch can be removed when this commit is part of a kOps release.
-
-    Merge pull request #17270 from rifelpet/apiserver-133
-    
-    Remove cloud-config and cloud-provider from 1.33 apiserver
-
 diff --git a/nodeup/pkg/model/kube_apiserver.go b/nodeup/pkg/model/kube_apiserver.go
 index f1636a4..c0bbd94 100644
 --- a/nodeup/pkg/model/kube_apiserver.go
