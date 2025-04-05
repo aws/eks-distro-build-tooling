@@ -27,7 +27,7 @@ patch-kops:
 	git -C $(CLONED_REPO_DIRECTORY) config user.email $(GITHUB_EMAIL)
 	git -C $(CLONED_REPO_DIRECTORY) config user.name $(GITHUB_USER)
 	git -C $(CLONED_REPO_DIRECTORY) checkout $(KOPS_VERSION_TAG)
-	if [ $(shell ls -A $(PROJECT_PATCHES_DIRECTORY)) ]; then git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(PROJECT_PATCHES_DIRECTORY)/*; fi
+	if [ -n "$(shell ls -A $(PROJECT_PATCHES_DIRECTORY))" ]; then git -C $(CLONED_REPO_DIRECTORY) am --committer-date-is-author-date $(PROJECT_PATCHES_DIRECTORY)/*; fi
 
 .PHONY: build-nodeup
 build-nodeup:
