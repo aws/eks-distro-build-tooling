@@ -1,18 +1,28 @@
-commit d8a7a5cd7b5879bea5821262cf592276616cb741
-Merge: d4ecd9a175 f56cc529df
-Author: Kubernetes Prow Robot <20407524+k8s-ci-robot@users.noreply.github.com>
-Date:   Fri Feb 21 16:44:26 2025 -0800
+From 33558f433c6bdf65ee0ba6575dd8a2eb40352bff Mon Sep 17 00:00:00 2001
+From: Ganesh Putta <ganiredi@amazon.com>
+Date: Mon, 7 Apr 2025 12:03:02 -0500
+Subject: [PATCH] Add Kubernetes 1.33 compatibility with cloud provider and
+ cloud config changes
 
-Cherry-pick of https://github.com/kubernetes/kops/commit/36a32537a1a0044b474e63603881f5b96b3e7fff
+This patch implements the  changes to support Kubernetes 1.33 in Kops.
+It incorporates the upstream changes from commit d8a7a5cd7b5879bea5821262cf592276616cb741
+which removes the cloud-config flag and makes cloud provider configuration conditional
+for Kubernetes 1.33+. These changes are required as the cloud provider interface
+was modified in Kubernetes 1.33.
 
-This patch can be removed when this commit is part of a kOps release.
-
-    Merge pull request #17270 from rifelpet/apiserver-133
-    
-    Remove cloud-config and cloud-provider from 1.33 apiserver
+---
+ nodeup/pkg/model/kube_apiserver.go            |  4 +-
+ .../model/tests/golden/minimal/cluster.yaml   |  2 +-
+ .../golden/minimal/tasks-kube-apiserver.yaml  | 30 ++++++++++---
+ .../tasks-kube-controller-manager.yaml        |  3 +-
+ .../golden/minimal/tasks-kube-proxy.yaml      |  2 +-
+ .../golden/minimal/tasks-kube-scheduler.yaml  |  3 +-
+ pkg/apis/kops/validation/legacy.go            | 19 +++++---
+ pkg/model/components/apiserver.go             | 43 ++++++++++---------
+ 8 files changed, 66 insertions(+), 40 deletions(-)
 
 diff --git a/nodeup/pkg/model/kube_apiserver.go b/nodeup/pkg/model/kube_apiserver.go
-index f1636a4..c0bbd94 100644
+index ed69b9ca69..00fe10fa1a 100644
 --- a/nodeup/pkg/model/kube_apiserver.go
 +++ b/nodeup/pkg/model/kube_apiserver.go
 @@ -573,7 +573,9 @@ func (b *KubeAPIServerBuilder) buildPod(ctx context.Context, kubeAPIServer *kops
@@ -27,7 +37,7 @@ index f1636a4..c0bbd94 100644
  	pod := &v1.Pod{
  		TypeMeta: metav1.TypeMeta{
 diff --git a/nodeup/pkg/model/tests/golden/minimal/cluster.yaml b/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
-index 498b651..1f00fce 100644
+index 498b651d7f..1f00fce8c3 100644
 --- a/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
 +++ b/nodeup/pkg/model/tests/golden/minimal/cluster.yaml
 @@ -30,7 +30,7 @@ spec:
@@ -40,7 +50,7 @@ index 498b651..1f00fce 100644
    networkCIDR: 172.20.0.0/16
    networking:
 diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
-index 3dbb7f0..922aa24 100644
+index 3dbb7f0f3e..922aa24bea 100644
 --- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
 +++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-apiserver.yaml
 @@ -24,15 +24,12 @@ contents: |
@@ -108,7 +118,7 @@ index 3dbb7f0..922aa24 100644
        - mountPath: /var/log/kube-apiserver.log
          name: logfile
 diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
-index afd6cb3..44cd652 100644
+index afd6cb3402..44cd652e2c 100644
 --- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
 +++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-controller-manager.yaml
 @@ -24,7 +24,6 @@ contents: |
@@ -129,7 +139,7 @@ index afd6cb3..44cd652 100644
          httpGet:
            host: 127.0.0.1
 diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
-index 53173b7..2c5db12 100644
+index 53173b7e58..2c5db1263f 100644
 --- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
 +++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-proxy.yaml
 @@ -23,7 +23,7 @@ contents: |
@@ -142,7 +152,7 @@ index 53173b7..2c5db12 100644
        resources:
          requests:
 diff --git a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
-index 932291a..4d4710f 100644
+index 932291a39f..4d4710f55b 100644
 --- a/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
 +++ b/nodeup/pkg/model/tests/golden/minimal/tasks-kube-scheduler.yaml
 @@ -16,14 +16,13 @@ contents: |
@@ -162,7 +172,7 @@ index 932291a..4d4710f 100644
          httpGet:
            host: 127.0.0.1
 diff --git a/pkg/apis/kops/validation/legacy.go b/pkg/apis/kops/validation/legacy.go
-index ecb8c71..c07d8e6 100644
+index 378f6a0dd8..8ad26b8e7b 100644
 --- a/pkg/apis/kops/validation/legacy.go
 +++ b/pkg/apis/kops/validation/legacy.go
 @@ -21,6 +21,7 @@ import (
@@ -216,38 +226,15 @@ index ecb8c71..c07d8e6 100644
  			}
  			if c.Spec.KubeControllerManager != nil && (strict || c.Spec.KubeControllerManager.CloudProvider != "") {
 diff --git a/pkg/model/components/apiserver.go b/pkg/model/components/apiserver.go
-index a4e44f7..a563ccc 100644
+index 60a8fb5146..279a97e3d3 100644
 --- a/pkg/model/components/apiserver.go
 +++ b/pkg/model/components/apiserver.go
-@@ -97,29 +97,31 @@ func (b *KubeAPIServerOptionsBuilder) BuildOptions(cluster *kops.Cluster) error 
+@@ -96,28 +96,29 @@ func (b *KubeAPIServerOptionsBuilder) BuildOptions(o interface{}) error {
+ 		return err
  	}
  	c.Image = image
- 
--	switch cluster.GetCloudProvider() {
--	case kops.CloudProviderAWS:
--		c.CloudProvider = "aws"
--	case kops.CloudProviderGCE:
--		c.CloudProvider = "gce"
--	case kops.CloudProviderDO:
--		c.CloudProvider = "external"
--	case kops.CloudProviderHetzner:
--		c.CloudProvider = "external"
--	case kops.CloudProviderOpenstack:
--		c.CloudProvider = "openstack"
--	case kops.CloudProviderAzure:
--		c.CloudProvider = "azure"
--	case kops.CloudProviderScaleway:
--		c.CloudProvider = "external"
--	case kops.CloudProviderMetal:
--		c.CloudProvider = "external"
--	default:
--		return fmt.Errorf("unknown cloudprovider %q", cluster.GetCloudProvider())
--	}
--
--	if clusterSpec.ExternalCloudControllerManager != nil {
--		c.CloudProvider = "external"
-+	if b.controlPlaneKubernetesVersion.IsLT("1.33") {
-+		switch cluster.GetCloudProvider() {
++	if b.IsKubernetesLT("1.33") {
++		switch clusterSpec.GetCloudProvider() {
 +		case kops.CloudProviderAWS:
 +			c.CloudProvider = "aws"
 +		case kops.CloudProviderGCE:
@@ -262,15 +249,37 @@ index a4e44f7..a563ccc 100644
 +			c.CloudProvider = "azure"
 +		case kops.CloudProviderScaleway:
 +			c.CloudProvider = "external"
-+		case kops.CloudProviderMetal:
-+			c.CloudProvider = "external"
 +		default:
-+			return fmt.Errorf("unknown cloudprovider %q", cluster.GetCloudProvider())
++			return fmt.Errorf("unknown cloudprovider %q", clusterSpec.GetCloudProvider())
 +		}
-+
+ 
+-	switch clusterSpec.GetCloudProvider() {
+-	case kops.CloudProviderAWS:
+-		c.CloudProvider = "aws"
+-	case kops.CloudProviderGCE:
+-		c.CloudProvider = "gce"
+-	case kops.CloudProviderDO:
+-		c.CloudProvider = "external"
+-	case kops.CloudProviderHetzner:
+-		c.CloudProvider = "external"
+-	case kops.CloudProviderOpenstack:
+-		c.CloudProvider = "openstack"
+-	case kops.CloudProviderAzure:
+-		c.CloudProvider = "azure"
+-	case kops.CloudProviderScaleway:
+-		c.CloudProvider = "external"
+-	default:
+-		return fmt.Errorf("unknown cloudprovider %q", clusterSpec.GetCloudProvider())
+-	}
+-
+-	if clusterSpec.ExternalCloudControllerManager != nil {
+-		c.CloudProvider = "external"
 +		if clusterSpec.ExternalCloudControllerManager != nil {
 +			c.CloudProvider = "external"
 +		}
  	}
  
  	c.LogLevel = 2
+-- 
+2.45.2
+
