@@ -22,6 +22,7 @@ import (
 
 // ReleaseMap mapping from release channel to last release of metrics server for prod (which is basically the same for dev)
 var ReleaseMap = map[string]int{
+	"1-33": 8,
 	"1-32": 8,
 	"1-31": 16,
 	"1-30": 27,
@@ -34,6 +35,17 @@ var ReleaseMap = map[string]int{
 func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	componentName := "metrics-server"
 	gitTag := "v0.7.2"
+
+	effectiveChannel := spec.Channel
+	if spec.Channel == "1-33" {
+		effectiveChannel = "1-32"
+	}
+
+	releaseNumber, exists := ReleaseMap[effectiveChannel]
+	if !exists {
+		return nil, fmt.Errorf("no release number for channel %s", effectiveChannel)
+	}
+
 	component := &distrov1alpha1.Component{
 		Name:   componentName,
 		GitTag: gitTag,
@@ -50,7 +62,7 @@ func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpe
 						componentName,
 						gitTag,
 						spec.Channel,
-						ReleaseMap[spec.Channel],
+						releaseNumber,
 					),
 				},
 			},
@@ -58,3 +70,4 @@ func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpe
 	}
 	return component, nil
 }
+
