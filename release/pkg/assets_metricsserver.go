@@ -61,7 +61,7 @@ func (r *ReleaseConfig) GetMetricsServerComponent(spec distrov1alpha1.ReleaseSpe
 						r.ContainerImageRepository,
 						componentName,
 						gitTag,
-						spec.Channel,
+						effectiveChannel,
 						releaseNumber,
 					),
 				},
