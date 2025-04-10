@@ -42,13 +42,13 @@ RUN set -x && \
     if_al2023 install_rpm nginx-mimetypes && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
     install_rpm bash \
-        coreutils && \
+        coreutils pam-libs && \
     install_binary /usr/bin/envsubst && \
     cleanup "nginx"
 
 ################# NGINX ####################
-FROM ${BUILT_BUILDER_IMAGE} as base-nginx-builder 
-FROM ${BASE_IMAGE} as final
-COPY --from=base-nginx-builder /newroot /
+# FROM ${BUILT_BUILDER_IMAGE} as base-nginx-builder 
+# FROM ${BASE_IMAGE} as final
+# COPY --from=base-nginx-builder /newroot /
 
-USER nginx
+# USER nginx
