@@ -36,12 +36,12 @@ ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /etc/pk
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     enable_extra nginx1 && \
-    clean_install nginx-filesystem \         
+    install_rpm nginx-filesystem \
         nginx \
         nginx-core && \
     if_al2023 install_rpm nginx-mimetypes && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
-    clean_install bash \
+    install_rpm bash \
         coreutils && \
     install_binary /usr/bin/envsubst && \
     cleanup "nginx"
