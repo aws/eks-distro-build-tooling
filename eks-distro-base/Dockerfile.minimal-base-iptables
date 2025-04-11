@@ -48,7 +48,7 @@ RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     if_al2 install_rpm chkconfig && \
     if_al2023 install_rpm alternatives && \
-    install_rpm conntrack-tools \
+    clean_install conntrack-tools \
         ipset \
         kmod \
         iptables-nft && \

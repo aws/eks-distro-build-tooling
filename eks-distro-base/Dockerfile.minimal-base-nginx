@@ -31,7 +31,7 @@ COPY scripts/ /usr/bin
 
 # cleanup broken symlinks from nginx package
 # libssl2k installed with openssl but not needed by nginx and missing deps
-ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /usr/lib64/libssl.so.1.0.2k /usr/lib64/libssl.so.10 /etc/pki/tls/fips_local.cnf"
+ENV CLEANUP_UNNECESSARY_FILES="/usr/share/nginx/html/icons/poweredby.png /etc/pki/tls/fips_local.cnf"
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
