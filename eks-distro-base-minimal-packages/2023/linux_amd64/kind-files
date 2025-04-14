@@ -270,7 +270,7 @@
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
 -rw-r--r--     412B /etc/pki/tls/ct_log_list.cnf
--rw-r--r--    12KiB /etc/pki/tls/openssl.cnf
+-rw-r--r--    13KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
 -rw-r--r--   1.8KiB /etc/profile
 -rw-r--r--     196B /etc/profile.d/colorgrep.csh
@@ -446,10 +446,10 @@
 -rwxr-xr-x      32B /usr/bin/hash
 -rwxr-xr-x    45KiB /usr/bin/head
 -rwxr-xr-x    53KiB /usr/bin/hexdump
--rwxr-xr-x   154KiB /usr/bin/homectl
+-rwxr-xr-x   153KiB /usr/bin/homectl
 -rwxr-xr-x    33KiB /usr/bin/hostid
 -rwxr-xr-x    24KiB /usr/bin/hostname
--rwxr-xr-x    33KiB /usr/bin/hostnamectl
+-rwxr-xr-x    32KiB /usr/bin/hostnamectl
 -rwxr-xr-x    66KiB /usr/bin/iconv
 -rwxr-xr-x    41KiB /usr/bin/id
 -rwxr-xr-x   147KiB /usr/bin/install
@@ -473,7 +473,7 @@
 -rwxr-xr-x    33KiB /usr/bin/link
 -rwxr-xr-x    57KiB /usr/bin/ln
 -rwxr-xr-x    61KiB /usr/bin/locale
--rwxr-xr-x    33KiB /usr/bin/localectl
+-rwxr-xr-x    32KiB /usr/bin/localectl
 -rwxr-xr-x   316KiB /usr/bin/localedef
 -rwxr-xr-x    41KiB /usr/bin/logger
 -rwxr-xr-x    45KiB /usr/bin/login
@@ -512,7 +512,7 @@
 -rwxr-xr-x    29KiB /usr/bin/nsenter
 -rwxr-xr-x    57KiB /usr/bin/numfmt
 -rwxr-xr-x    65KiB /usr/bin/od
--rwxr-xr-x    21KiB /usr/bin/oomctl
+-rwxr-xr-x    20KiB /usr/bin/oomctl
 -rwxr-xr-x    33KiB /usr/bin/p11-kit
 -rwxr-xr-x    37KiB /usr/bin/paste
 -rwxr-xr-x    37KiB /usr/bin/pathchk
@@ -549,7 +549,7 @@
 -rwxr-xr-x    41KiB /usr/bin/realpath
 -rwxr-xr-x    24KiB /usr/bin/rename
 -rwxr-xr-x    16KiB /usr/bin/renice
--rwxr-xr-x   159KiB /usr/bin/resolvectl
+-rwxr-xr-x   158KiB /usr/bin/resolvectl
 -rwxr-xr-x    16KiB /usr/bin/rev
 -rwxr-xr-x    61KiB /usr/bin/rm
 -rwxr-xr-x    45KiB /usr/bin/rmdir
@@ -596,38 +596,38 @@
 ---x--x--x    98KiB /usr/bin/sudoreplay
 -rwxr-xr-x    37KiB /usr/bin/sum
 -rwxr-xr-x    37KiB /usr/bin/sync
--rwxr-xr-x   296KiB /usr/bin/systemctl
--rwxr-xr-x   207KiB /usr/bin/systemd-analyze
--rwxr-xr-x    21KiB /usr/bin/systemd-ask-password
+-rwxr-xr-x   295KiB /usr/bin/systemctl
+-rwxr-xr-x   206KiB /usr/bin/systemd-analyze
+-rwxr-xr-x    20KiB /usr/bin/systemd-ask-password
 -rwxr-xr-x    20KiB /usr/bin/systemd-cat
--rwxr-xr-x    25KiB /usr/bin/systemd-cgls
--rwxr-xr-x    41KiB /usr/bin/systemd-cgtop
--rwxr-xr-x    45KiB /usr/bin/systemd-creds
--rwxr-xr-x    29KiB /usr/bin/systemd-delta
+-rwxr-xr-x    24KiB /usr/bin/systemd-cgls
+-rwxr-xr-x    40KiB /usr/bin/systemd-cgtop
+-rwxr-xr-x    44KiB /usr/bin/systemd-creds
+-rwxr-xr-x    28KiB /usr/bin/systemd-delta
 -rwxr-xr-x    20KiB /usr/bin/systemd-detect-virt
--rwxr-xr-x    49KiB /usr/bin/systemd-dissect
+-rwxr-xr-x    48KiB /usr/bin/systemd-dissect
 -rwxr-xr-x    24KiB /usr/bin/systemd-escape
 -rwxr-xr-x    57KiB /usr/bin/systemd-firstboot
--rwxr-xr-x    33KiB /usr/bin/systemd-id128
+-rwxr-xr-x    32KiB /usr/bin/systemd-id128
 -rwxr-xr-x    24KiB /usr/bin/systemd-inhibit
--rwxr-xr-x    21KiB /usr/bin/systemd-machine-id-setup
+-rwxr-xr-x    20KiB /usr/bin/systemd-machine-id-setup
 -rwxr-xr-x    61KiB /usr/bin/systemd-mount
--rwxr-xr-x    25KiB /usr/bin/systemd-notify
+-rwxr-xr-x    24KiB /usr/bin/systemd-notify
 -rwxr-xr-x    20KiB /usr/bin/systemd-path
 -rwxr-xr-x    65KiB /usr/bin/systemd-run
--rwxr-xr-x    29KiB /usr/bin/systemd-socket-activate
+-rwxr-xr-x    28KiB /usr/bin/systemd-socket-activate
 -rwxr-xr-x    24KiB /usr/bin/systemd-stdio-bridge
--rwxr-xr-x    49KiB /usr/bin/systemd-sysext
+-rwxr-xr-x    48KiB /usr/bin/systemd-sysext
 -rwxr-xr-x    73KiB /usr/bin/systemd-sysusers
--rwxr-xr-x   122KiB /usr/bin/systemd-tmpfiles
--rwxr-xr-x    37KiB /usr/bin/systemd-tty-ask-password-agent
+-rwxr-xr-x   121KiB /usr/bin/systemd-tmpfiles
+-rwxr-xr-x    36KiB /usr/bin/systemd-tty-ask-password-agent
 -rwxr-xr-x   106KiB /usr/bin/tac
 -rwxr-xr-x    69KiB /usr/bin/tail
 -rwxr-xr-x   516KiB /usr/bin/tar
 -rwxr-xr-x    24KiB /usr/bin/taskset
 -rwxr-xr-x    37KiB /usr/bin/tee
 -rwxr-xr-x    45KiB /usr/bin/test
--rwxr-xr-x    49KiB /usr/bin/timedatectl
+-rwxr-xr-x    48KiB /usr/bin/timedatectl
 -rwxr-xr-x    41KiB /usr/bin/timeout
 -rwxr-xr-x    20KiB /usr/bin/tload
 -rwxr-xr-x   134KiB /usr/bin/top
@@ -654,7 +654,7 @@
 -rwxr-xr-x    37KiB /usr/bin/unshare
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
 -rwxr-xr-x    16KiB /usr/bin/uptime
--rwxr-xr-x    53KiB /usr/bin/userdbctl
+-rwxr-xr-x    52KiB /usr/bin/userdbctl
 -rwxr-xr-x    37KiB /usr/bin/users
 -rwxr-xr-x    24KiB /usr/bin/utmpdump
 -rwxr-xr-x    20KiB /usr/bin/uuidgen
@@ -1062,13 +1062,13 @@
 -rw-r--r--     710B /usr/lib/systemd/resolv.conf
 -rwxr-xr-x    41KiB /usr/lib/systemd/system-generators/nfs-server-generator
 -rwxr-xr-x    29KiB /usr/lib/systemd/system-generators/rpc-pipefs-generator
--rwxr-xr-x    21KiB /usr/lib/systemd/system-generators/systemd-debug-generator
+-rwxr-xr-x    20KiB /usr/lib/systemd/system-generators/systemd-debug-generator
 -rwxr-xr-x    53KiB /usr/lib/systemd/system-generators/systemd-fstab-generator
--rwxr-xr-x    25KiB /usr/lib/systemd/system-generators/systemd-getty-generator
+-rwxr-xr-x    24KiB /usr/lib/systemd/system-generators/systemd-getty-generator
 -rwxr-xr-x    16KiB /usr/lib/systemd/system-generators/systemd-rc-local-generator
--rwxr-xr-x    21KiB /usr/lib/systemd/system-generators/systemd-run-generator
+-rwxr-xr-x    20KiB /usr/lib/systemd/system-generators/systemd-run-generator
 -rwxr-xr-x    16KiB /usr/lib/systemd/system-generators/systemd-system-update-generator
--rwxr-xr-x    37KiB /usr/lib/systemd/system-generators/systemd-sysv-generator
+-rwxr-xr-x    36KiB /usr/lib/systemd/system-generators/systemd-sysv-generator
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
 -rw-r--r--   8.3KiB /usr/lib/systemd/system-preset/90-default.preset
 -rw-r--r--   1.4KiB /usr/lib/systemd/system-preset/90-systemd.preset
@@ -1223,35 +1223,35 @@
 -rw-r--r--     605B /usr/lib/systemd/system/user@.service.d/10-login-barrier.conf
 -rw-r--r--     548B /usr/lib/systemd/system/user@0.service.d/10-login-barrier.conf
 -rw-r--r--     191B /usr/lib/systemd/system/var-lib-nfs-rpc_pipefs.mount
--rwxr-xr-x   101KiB /usr/lib/systemd/systemd
+-rwxr-xr-x   100KiB /usr/lib/systemd/systemd
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-ac-power
 -rwxr-xr-x    20KiB /usr/lib/systemd/systemd-boot-check-no-failures
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-cgroups-agent
--rwxr-xr-x   231KiB /usr/lib/systemd/systemd-homework
+-rwxr-xr-x   230KiB /usr/lib/systemd/systemd-homework
 -rwxr-xr-x    53KiB /usr/lib/systemd/systemd-hostnamed
--rwxr-xr-x    25KiB /usr/lib/systemd/systemd-initctl
--rwxr-xr-x   183KiB /usr/lib/systemd/systemd-journald
--rwxr-xr-x    53KiB /usr/lib/systemd/systemd-localed
--rwxr-xr-x   301KiB /usr/lib/systemd/systemd-logind
--rwxr-xr-x    45KiB /usr/lib/systemd/systemd-network-generator
+-rwxr-xr-x    24KiB /usr/lib/systemd/systemd-initctl
+-rwxr-xr-x   182KiB /usr/lib/systemd/systemd-journald
+-rwxr-xr-x    52KiB /usr/lib/systemd/systemd-localed
+-rwxr-xr-x   300KiB /usr/lib/systemd/systemd-logind
+-rwxr-xr-x    44KiB /usr/lib/systemd/systemd-network-generator
 -rwxr-xr-x    65KiB /usr/lib/systemd/systemd-oomd
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-reply-password
--rwxr-xr-x    53KiB /usr/lib/systemd/systemd-shutdown
--rwxr-xr-x    33KiB /usr/lib/systemd/systemd-socket-proxyd
--rwxr-xr-x    17KiB /usr/lib/systemd/systemd-sulogin-shell
--rwxr-xr-x   126KiB /usr/lib/systemd/systemd-sysupdate
--rwxr-xr-x    21KiB /usr/lib/systemd/systemd-time-wait-sync
--rwxr-xr-x    49KiB /usr/lib/systemd/systemd-timedated
+-rwxr-xr-x    52KiB /usr/lib/systemd/systemd-shutdown
+-rwxr-xr-x    32KiB /usr/lib/systemd/systemd-socket-proxyd
+-rwxr-xr-x    16KiB /usr/lib/systemd/systemd-sulogin-shell
+-rwxr-xr-x   125KiB /usr/lib/systemd/systemd-sysupdate
+-rwxr-xr-x    20KiB /usr/lib/systemd/systemd-time-wait-sync
+-rwxr-xr-x    48KiB /usr/lib/systemd/systemd-timedated
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-update-done
 -rwxr-xr-x   3.1KiB /usr/lib/systemd/systemd-update-helper
--rwxr-xr-x    25KiB /usr/lib/systemd/systemd-update-utmp
+-rwxr-xr-x    24KiB /usr/lib/systemd/systemd-update-utmp
 -rwxr-xr-x    24KiB /usr/lib/systemd/systemd-user-runtime-dir
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-user-sessions
--rwxr-xr-x    25KiB /usr/lib/systemd/systemd-userdbd
--rwxr-xr-x    33KiB /usr/lib/systemd/systemd-userwork
--rwxr-xr-x    17KiB /usr/lib/systemd/systemd-xdg-autostart-condition
+-rwxr-xr-x    24KiB /usr/lib/systemd/systemd-userdbd
+-rwxr-xr-x    32KiB /usr/lib/systemd/systemd-userwork
+-rwxr-xr-x    16KiB /usr/lib/systemd/systemd-xdg-autostart-condition
 -rwxr-xr-x    16KiB /usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator
--rwxr-xr-x    37KiB /usr/lib/systemd/user-generators/systemd-xdg-autostart-generator
+-rwxr-xr-x    36KiB /usr/lib/systemd/user-generators/systemd-xdg-autostart-generator
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--     580B /usr/lib/systemd/user-preset/90-systemd.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
@@ -1391,13 +1391,13 @@
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x    36KiB /usr/lib64/libcap.so.2.48
+-rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    58KiB /usr/lib64/libcollection.so.4.1.1
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   189KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.4MiB /usr/lib64/libcrypto.so.3.0.8
+-rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   785KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
@@ -1518,9 +1518,9 @@
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
--rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   355KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   154KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   150KiB /usr/lib64/libnss_resolve.so.2
+-rwxr-xr-x   354KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   602KiB /usr/lib64/libonig.so.5.2.0
 -rwxr-xr-x   1.3MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
@@ -1538,7 +1538,7 @@
 -rwxr-xr-x    58KiB /usr/lib64/libpopt.so.0.0.1
 -rwxr-xr-x    85KiB /usr/lib64/libprocps.so.8.0.3
 -rwxr-xr-x    80KiB /usr/lib64/libpsl.so.5.3.5
--rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.48
+-rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.73
 -rwxr-xr-x    16KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x   3.7MiB /usr/lib64/libpython3.9.so.1.0
@@ -1564,15 +1564,15 @@
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   673KiB /usr/lib64/libssl.so.3.0.8
+-rwxr-xr-x   944KiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   896KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
 -rwxr-xr-x   193KiB /usr/lib64/libtirpc.so.3.0.0
--rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
+-rwxr-xr-x   200KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutempter.so.1.2.1
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
@@ -1585,8 +1585,7 @@
 -rwxr-xr-x   137KiB /usr/lib64/libyaml-0.so.2.0.9
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   762KiB /usr/lib64/libzstd.so.1.5.5
--rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
--rwxr-xr-x   117KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   134KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   232KiB /usr/lib64/pkcs11/p11-kit-trust.so
 -rw-r--r--    14KiB /usr/lib64/python3.9/LICENSE.txt
 -rw-r--r--   5.1KiB /usr/lib64/python3.9/__future__.py
@@ -4076,7 +4075,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    37KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x    15KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x    20KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    32KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_debug.so
@@ -4115,8 +4114,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_shells.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_stress.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_succeed_if.so
--rwxr-xr-x   512KiB /usr/lib64/security/pam_systemd.so
--rwxr-xr-x   443KiB /usr/lib64/security/pam_systemd_home.so
+-rwxr-xr-x   511KiB /usr/lib64/security/pam_systemd.so
+-rwxr-xr-x   442KiB /usr/lib64/security/pam_systemd_home.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_time.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_timestamp.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_tty_audit.so
@@ -4127,8 +4126,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-2.amzn2023.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-2.amzn2023.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-3.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-3.amzn2023.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_among.so
@@ -4292,7 +4291,7 @@
 -rwxr-xr-x    37KiB /usr/sbin/blkzone
 -rwxr-xr-x    33KiB /usr/sbin/blockdev
 -rwxr-xr-x   125KiB /usr/sbin/bridge
--rwxr-xr-x    32KiB /usr/sbin/capsh
+-rwxr-xr-x    59KiB /usr/sbin/capsh
 -rwxr-xr-x    98KiB /usr/sbin/cfdisk
 -rwxr-xr-x    33KiB /usr/sbin/chcpu
 -rwxr-xr-x    61KiB /usr/sbin/chgpasswd
@@ -4753,7 +4752,6 @@
 -rw-r--r--    35KiB /usr/share/doc/libbasicobjects/COPYING
 -rw-r--r--   7.5KiB /usr/share/doc/libbasicobjects/COPYING.LESSER
 -rw-r--r--     361B /usr/share/doc/libblkid/COPYING
--rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
 -rw-r--r--    35KiB /usr/share/doc/libcollection/COPYING
 -rw-r--r--   7.5KiB /usr/share/doc/libcollection/COPYING.LESSER
 -rw-r--r--    35KiB /usr/share/doc/libini_config/COPYING
@@ -8445,12 +8443,12 @@ lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9
 lrwxrwxrwx      15B /usr/lib64/libbz2.so.1 libbz2.so.1.0.8
 lrwxrwxrwx      18B /usr/lib64/libcap-ng.so.0 libcap-ng.so.0.0.0
-lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.48
+lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
 lrwxrwxrwx      22B /usr/lib64/libcollection.so.4 libcollection.so.4.1.1
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.2.2
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
@@ -8564,7 +8562,7 @@ lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      16B /usr/lib64/libpopt.so.0 libpopt.so.0.0.1
 lrwxrwxrwx      18B /usr/lib64/libprocps.so.8 libprocps.so.8.0.3
 lrwxrwxrwx      15B /usr/lib64/libpsl.so.5 libpsl.so.5.3.5
-lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.48
+lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.73
 lrwxrwxrwx      21B /usr/lib64/libpwquality.so.1 libpwquality.so.1.0.2
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      21B /usr/lib64/libref_array.so.1 libref_array.so.1.2.1
@@ -8581,7 +8579,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.2.2
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3

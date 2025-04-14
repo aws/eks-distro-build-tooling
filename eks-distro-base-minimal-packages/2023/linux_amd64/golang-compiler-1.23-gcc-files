@@ -16669,9 +16669,9 @@
 -rwxr-xr-x    46KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   155KiB /usr/lib64/libnss_myhostname.so.2
--rwxr-xr-x   151KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   355KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   154KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   150KiB /usr/lib64/libnss_resolve.so.2
+-rwxr-xr-x   354KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libopcodes-2.39-6.amzn2023.0.11.so
 -rwxr-xr-x   1.3MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
@@ -16715,12 +16715,12 @@
 -rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   673KiB /usr/lib64/libssl.so.3.0.8
 -rwxr-xr-x   2.2MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   896KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
--rwxr-xr-x   201KiB /usr/lib64/libudev.so.1.7.5
+-rwxr-xr-x   200KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
 -rwxr-xr-x    16KiB /usr/lib64/libutempter.so.1.2.1
 -rw-r--r--       8B /usr/lib64/libutil.a
