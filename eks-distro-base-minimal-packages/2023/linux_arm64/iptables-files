@@ -1,6 +1,8 @@
 ****************** Regular Files ******************
 
 -rw-r--r--       0B /dev/null
+-rw-r--r--   4.6KiB /etc/DIR_COLORS
+-rw-r--r--   4.7KiB /etc/DIR_COLORS.lightbgcolor
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
 -rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
@@ -22,8 +24,9 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   3.7KiB /etc/ld.so.cache
+-rw-r--r--   4.3KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
+-rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--      15B /etc/libibverbs.d/bnxt_re.driver
 -rw-r--r--      13B /etc/libibverbs.d/cxgb4.driver
 -rw-r--r--      11B /etc/libibverbs.d/efa.driver
@@ -51,6 +54,13 @@
 -rw-------     407B /etc/nftables/router.nft
 -rw-r--r--     229B /etc/nsswitch.conf
 -rw-r--r--     327B /etc/os-release
+-rw-r--r--     232B /etc/pam.d/config-util
+-rw-r--r--     617B /etc/pam.d/fingerprint-auth
+-rw-r--r--     154B /etc/pam.d/other
+-rw-r--r--     663B /etc/pam.d/password-auth
+-rw-r--r--     300B /etc/pam.d/postlogin
+-rw-r--r--     646B /etc/pam.d/smartcard-auth
+-rw-r--r--     663B /etc/pam.d/system-auth
 -rw-r--r--     149B /etc/passwd
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
@@ -216,41 +226,199 @@
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
 -rw-r--r--     412B /etc/pki/tls/ct_log_list.cnf
--rw-r--r--    12KiB /etc/pki/tls/openssl.cnf
+-rw-r--r--    13KiB /etc/pki/tls/openssl.cnf
 -rw-r--r--     233B /etc/printcap
 -rw-r--r--   1.8KiB /etc/profile
+-rw-r--r--   1.8KiB /etc/profile.d/colorls.csh
+-rw-r--r--   1.6KiB /etc/profile.d/colorls.sh
+-rw-r--r--     216B /etc/profile.d/colorzgrep.csh
+-rw-r--r--     220B /etc/profile.d/colorzgrep.sh
 -rw-r--r--      80B /etc/profile.d/csh.local
 -rw-r--r--   3.4KiB /etc/profile.d/lang.csh
 -rw-r--r--   3.2KiB /etc/profile.d/lang.sh
 -rw-r--r--      81B /etc/profile.d/sh.local
 -rw-r--r--   6.5KiB /etc/protocols
 -rw-r--r--   1.6KiB /etc/rpc
+-rw-r--r--   4.5KiB /etc/security/access.conf
+-rw-r--r--      82B /etc/security/chroot.conf
+-rw-r--r--     624B /etc/security/console.handlers
+-rw-r--r--     939B /etc/security/console.perms
+-rw-r--r--   2.2KiB /etc/security/faillock.conf
+-rw-r--r--   3.6KiB /etc/security/group.conf
+-rw-r--r--   2.4KiB /etc/security/limits.conf
+-rw-r--r--   1.6KiB /etc/security/namespace.conf
+-rwxr-xr-x    1020B /etc/security/namespace.init
+-rw-------       0B /etc/security/opasswd
+-rw-r--r--   3.0KiB /etc/security/pam_env.conf
+-rw-r--r--   2.7KiB /etc/security/pwquality.conf
+-rw-r--r--     418B /etc/security/sepermit.conf
+-rw-r--r--   2.2KiB /etc/security/time.conf
 -rw-r--r--   677KiB /etc/services
 ----------     346B /etc/shadow
 -rw-r--r--      44B /etc/shells
+-rw-r--r--      18B /etc/skel/.bash_logout
+-rw-r--r--     141B /etc/skel/.bash_profile
+-rw-r--r--     492B /etc/skel/.bashrc
 -rw-r--r--   1.2KiB /etc/ssl/README
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
 -rw-------     364B /etc/sysconfig/nftables.conf
 -rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
+-rw-r--r--     817B /etc/xattr.conf
 -rw-r--r--     845B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
+-rwxr-xr-x   197KiB /usr/bin/[
+-rwxr-xr-x      33B /usr/bin/alias
+-rwxr-xr-x   197KiB /usr/bin/arch
+-rwxr-xr-x   197KiB /usr/bin/b2sum
+-rwxr-xr-x   197KiB /usr/bin/base32
+-rwxr-xr-x   197KiB /usr/bin/base64
+-rwxr-xr-x   197KiB /usr/bin/basename
+-rwxr-xr-x   197KiB /usr/bin/basenc
+-rwxr-xr-x   1.5MiB /usr/bin/bash
+-rwxr-xr-x   7.1KiB /usr/bin/bashbug-64
+-rwxr-xr-x      30B /usr/bin/bg
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
+-rwxr-xr-x   197KiB /usr/bin/cat
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
+-rwxr-xr-x      30B /usr/bin/cd
+-rwxr-xr-x   197KiB /usr/bin/chcon
+-rwxr-xr-x   197KiB /usr/bin/chgrp
+-rwxr-xr-x   197KiB /usr/bin/chmod
+-rwxr-xr-x   197KiB /usr/bin/chown
+-rwxr-xr-x   197KiB /usr/bin/cksum
+-rwxr-xr-x   197KiB /usr/bin/comm
+-rwxr-xr-x      35B /usr/bin/command
+-rwxr-xr-x   262KiB /usr/bin/cp
+-rwxr-xr-x   263KiB /usr/bin/csplit
+-rwxr-xr-x   197KiB /usr/bin/cut
+-rwxr-xr-x   197KiB /usr/bin/date
+-rwxr-xr-x   197KiB /usr/bin/dd
+-rwxr-xr-x   198KiB /usr/bin/df
+-rwxr-xr-x   263KiB /usr/bin/dir
+-rwxr-xr-x   197KiB /usr/bin/dircolors
+-rwxr-xr-x   197KiB /usr/bin/dirname
+-rwxr-xr-x   263KiB /usr/bin/du
+-rwxr-xr-x   197KiB /usr/bin/echo
+-rwxr-xr-x   197KiB /usr/bin/env
+-rwxr-xr-x   197KiB /usr/bin/expand
+-rwxr-xr-x   262KiB /usr/bin/expr
+-rwxr-xr-x   197KiB /usr/bin/factor
+-rwxr-xr-x   197KiB /usr/bin/false
+-rwxr-xr-x      30B /usr/bin/fc
+-rwxr-xr-x      30B /usr/bin/fg
+-rwxr-xr-x   197KiB /usr/bin/fmt
+-rwxr-xr-x   197KiB /usr/bin/fold
 -rwxr-xr-x   197KiB /usr/bin/gencat
 -rwxr-xr-x   196KiB /usr/bin/getconf
 -rwxr-xr-x   197KiB /usr/bin/getent
+-rwxr-xr-x      35B /usr/bin/getopts
+-rwxr-xr-x   197KiB /usr/bin/groups
+-rwxr-xr-x   2.3KiB /usr/bin/gunzip
+-rwxr-xr-x   6.3KiB /usr/bin/gzexe
+-rwxr-xr-x   198KiB /usr/bin/gzip
+-rwxr-xr-x      32B /usr/bin/hash
+-rwxr-xr-x   197KiB /usr/bin/head
+-rwxr-xr-x   197KiB /usr/bin/hostid
 -rwxr-xr-x   198KiB /usr/bin/iconv
+-rwxr-xr-x   197KiB /usr/bin/id
+-rwxr-xr-x   262KiB /usr/bin/install
+-rwxr-xr-x      32B /usr/bin/jobs
+-rwxr-xr-x   197KiB /usr/bin/join
 -rwxr-xr-x   263KiB /usr/bin/kmod
 -rwxr-xr-x   5.3KiB /usr/bin/ldd
+-rwxr-xr-x   197KiB /usr/bin/link
+-rwxr-xr-x   197KiB /usr/bin/ln
 -rwxr-xr-x   205KiB /usr/bin/locale
 -rwxr-xr-x   336KiB /usr/bin/localedef
+-rwxr-xr-x   197KiB /usr/bin/logname
+-rwxr-xr-x   263KiB /usr/bin/ls
+-rwxr-xr-x   197KiB /usr/bin/md5sum
+-rwxr-xr-x   197KiB /usr/bin/mkdir
+-rwxr-xr-x   197KiB /usr/bin/mkfifo
+-rwxr-xr-x   197KiB /usr/bin/mknod
+-rwxr-xr-x   197KiB /usr/bin/mktemp
+-rwxr-xr-x   262KiB /usr/bin/mv
+-rwxr-xr-x   197KiB /usr/bin/nice
+-rwxr-xr-x   262KiB /usr/bin/nl
+-rwxr-xr-x   197KiB /usr/bin/nohup
+-rwxr-xr-x   197KiB /usr/bin/nproc
+-rwxr-xr-x   197KiB /usr/bin/numfmt
+-rwxr-xr-x   197KiB /usr/bin/od
+-rwxr-xr-x   197KiB /usr/bin/paste
+-rwxr-xr-x   197KiB /usr/bin/pathchk
+-rwxr-xr-x   197KiB /usr/bin/pinky
 -rwxr-xr-x   196KiB /usr/bin/pldd
+-rwxr-xr-x   197KiB /usr/bin/pr
+-rwxr-xr-x   197KiB /usr/bin/printenv
+-rwxr-xr-x   197KiB /usr/bin/printf
+-rwxr-xr-x   262KiB /usr/bin/ptx
+-rwxr-xr-x   197KiB /usr/bin/pwd
+-rwxr-xr-x   196KiB /usr/bin/pwmake
+-rwxr-xr-x   196KiB /usr/bin/pwscore
+-rwxr-xr-x      32B /usr/bin/read
+-rwxr-xr-x   197KiB /usr/bin/readlink
+-rwxr-xr-x   197KiB /usr/bin/realpath
+-rwxr-xr-x   197KiB /usr/bin/rm
+-rwxr-xr-x   197KiB /usr/bin/rmdir
+-rwxr-xr-x   197KiB /usr/bin/runcon
+-rwxr-xr-x   197KiB /usr/bin/seq
+-rwxr-xr-x   197KiB /usr/bin/sha1sum
+-rwxr-xr-x   197KiB /usr/bin/sha224sum
+-rwxr-xr-x   197KiB /usr/bin/sha256sum
+-rwxr-xr-x   197KiB /usr/bin/sha384sum
+-rwxr-xr-x   197KiB /usr/bin/sha512sum
+-rwxr-xr-x   197KiB /usr/bin/shred
+-rwxr-xr-x   197KiB /usr/bin/shuf
+-rwxr-xr-x   197KiB /usr/bin/sleep
+-rwxr-xr-x   262KiB /usr/bin/sort
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
+-rwxr-xr-x   197KiB /usr/bin/split
 -rwxr-xr-x   197KiB /usr/bin/sprof
+-rwxr-xr-x   197KiB /usr/bin/stat
+-rwxr-xr-x   197KiB /usr/bin/stdbuf
+-rwxr-xr-x   197KiB /usr/bin/stty
+-rwxr-xr-x   197KiB /usr/bin/sum
+-rwxr-xr-x   197KiB /usr/bin/sync
+-rwxr-xr-x   262KiB /usr/bin/tac
+-rwxr-xr-x   197KiB /usr/bin/tail
+-rwxr-xr-x   197KiB /usr/bin/tee
+-rwxr-xr-x   197KiB /usr/bin/test
+-rwxr-xr-x   197KiB /usr/bin/timeout
+-rwxr-xr-x   197KiB /usr/bin/touch
+-rwxr-xr-x   197KiB /usr/bin/tr
+-rwxr-xr-x   197KiB /usr/bin/true
+-rwxr-xr-x   197KiB /usr/bin/truncate
+-rwxr-xr-x   197KiB /usr/bin/tsort
+-rwxr-xr-x   197KiB /usr/bin/tty
+-rwxr-xr-x      32B /usr/bin/type
 -rwxr-xr-x    15KiB /usr/bin/tzselect
+-rwxr-xr-x      34B /usr/bin/ulimit
+-rwxr-xr-x      33B /usr/bin/umask
+-rwxr-xr-x      35B /usr/bin/unalias
+-rwxr-xr-x   197KiB /usr/bin/uname
+-rwxr-xr-x   197KiB /usr/bin/unexpand
+-rwxr-xr-x   197KiB /usr/bin/uniq
+-rwxr-xr-x   197KiB /usr/bin/unlink
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
+-rwxr-xr-x   197KiB /usr/bin/users
+-rwxr-xr-x   263KiB /usr/bin/vdir
+-rwxr-xr-x      32B /usr/bin/wait
+-rwxr-xr-x   197KiB /usr/bin/wc
+-rwxr-xr-x   197KiB /usr/bin/who
+-rwxr-xr-x   197KiB /usr/bin/whoami
+-rwxr-xr-x   197KiB /usr/bin/yes
+-rwxr-xr-x   2.0KiB /usr/bin/zcat
+-rwxr-xr-x   1.7KiB /usr/bin/zcmp
+-rwxr-xr-x   6.4KiB /usr/bin/zdiff
 -rwxr-xr-x   196KiB /usr/bin/zdump
+-rwxr-xr-x      33B /usr/bin/zegrep
+-rwxr-xr-x      33B /usr/bin/zfgrep
+-rwxr-xr-x   2.1KiB /usr/bin/zforce
+-rwxr-xr-x   8.0KiB /usr/bin/zgrep
+-rwxr-xr-x   2.2KiB /usr/bin/zless
+-rwxr-xr-x   1.9KiB /usr/bin/zmore
+-rwxr-xr-x   4.5KiB /usr/bin/znew
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
 -rwxr-xr-x   843KiB /usr/lib/ld-linux-aarch64.so.1
@@ -281,9 +449,11 @@
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
 -rw-rw-r--     393B /usr/lib/systemd/system/nftables.service
+-rw-r--r--     331B /usr/lib/systemd/system/pam_namespace.service
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
+-rw-r--r--     135B /usr/lib/tmpfiles.d/pam.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
 -rwxr-xr-x   196KiB /usr/lib64/audit/sotruss-lib.so
@@ -301,6 +471,7 @@
 -rwxr-xr-x   195KiB /usr/lib64/engines-3/capi.so
 -rwxr-xr-x   197KiB /usr/lib64/engines-3/loader_attic.so
 -rwxr-xr-x   195KiB /usr/lib64/engines-3/padlock.so
+-rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
 -rwxr-xr-x   196KiB /usr/lib64/gconv/ANSI_X3.110.so
 -rwxr-xr-x   196KiB /usr/lib64/gconv/CP1252.so
 -rwxr-xr-x   196KiB /usr/lib64/gconv/ISO8859-1.so
@@ -313,13 +484,23 @@
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
 -rwxr-xr-x   196KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libSegFault.so
+-rwxr-xr-x   197KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
+-rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
+-rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
--rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.48
--rwxr-xr-x   4.2MiB /usr/lib64/libcrypto.so.3.0.8
+-rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
+-rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.73
+-rwxr-xr-x   196KiB /usr/lib64/libcrack.so.2.9.0
+-rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
+-rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
+-rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
+-rwxr-xr-x   196KiB /usr/lib64/libdrop_ambient.so.0.0.0
 -rwxr-xr-x   266KiB /usr/lib64/libebtc.so.0.0.0
+-rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   197KiB /usr/lib64/libefa.so.1.2.48.0
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
@@ -371,9 +552,12 @@
 -rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   199KiB /usr/lib64/libnss_myhostname.so.2
--rwxr-xr-x   263KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   459KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   198KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   262KiB /usr/lib64/libnss_resolve.so.2
+-rwxr-xr-x   458KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   197KiB /usr/lib64/libpam.so.0.85.1
+-rwxr-xr-x   196KiB /usr/lib64/libpam_misc.so.0.82.1
+-rwxr-xr-x   196KiB /usr/lib64/libpamc.so.0.82.1
 -rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
 -rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
 -rwxr-xr-x   392KiB /usr/lib64/libpcap.so.1.10.1
@@ -382,26 +566,75 @@
 -rwxr-xr-x   647KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x   196KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcreposix.so.0.0.7
--rwxr-xr-x   196KiB /usr/lib64/libpsx.so.2.48
+-rwxr-xr-x   196KiB /usr/lib64/libpsx.so.2.73
 -rwxr-xr-x   196KiB /usr/lib64/libpthread.so.0
+-rwxr-xr-x   197KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   265KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x   733KiB /usr/lib64/libssl.so.3.0.8
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.3MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   983KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   264KiB /usr/lib64/libtinfo.so.6.2
--rwxr-xr-x   265KiB /usr/lib64/libudev.so.1.7.5
+-rwxr-xr-x   264KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   196KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libxtables.so.12.6.0
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
--rwxr-xr-x   1.2MiB /usr/lib64/ossl-modules/fips.so
--rwxr-xr-x   197KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
+-rwxr-xr-x   201KiB /usr/lib64/security/pam_console.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_debug.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_deny.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_echo.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_env.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_exec.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_faildelay.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_faillock.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_filter.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_filter/upperLOWER
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_ftp.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_group.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_issue.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_keyinit.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_lastlog.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_limits.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_listfile.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_localuser.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_loginuid.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_mail.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_mkhomedir.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_motd.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_namespace.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_nologin.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_permit.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_postgresok.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_pwhistory.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_pwquality.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_rhosts.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_rootok.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_securetty.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_selinux.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_sepermit.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_setquota.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_shells.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_stress.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_succeed_if.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_time.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_timestamp.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_tty_audit.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_umask.so
+-rwxr-xr-x   197KiB /usr/lib64/security/pam_unix.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_userdb.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_usertype.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_wheel.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_xauth.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_among.so
@@ -524,30 +757,46 @@
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libxt_u32.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libxt_udp.so
 -rwxr-xr-x   1.3KiB /usr/libexec/arptables-nft-helper
+-rwxr-xr-x   196KiB /usr/libexec/coreutils/libstdbuf.so
 -rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x   196KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x   197KiB /usr/sbin/alternatives
--rwxr-xr-x   196KiB /usr/sbin/capsh
+-rwxr-xr-x   198KiB /usr/sbin/capsh
+-rwxr-xr-x   197KiB /usr/sbin/chroot
 -rwxr-xr-x   207KiB /usr/sbin/conntrack
 -rwxr-xr-x   333KiB /usr/sbin/conntrackd
+-rwxr-xr-x   196KiB /usr/sbin/cracklib-check
+-rwxr-xr-x     255B /usr/sbin/cracklib-format
+-rwxr-xr-x   196KiB /usr/sbin/cracklib-packer
+-rwxr-xr-x   196KiB /usr/sbin/cracklib-unpacker
+-rwxr-xr-x     994B /usr/sbin/create-cracklib-dict
 -rwxr-xr-x   196KiB /usr/sbin/ebtables-legacy
 -rwxr-xr-x   196KiB /usr/sbin/ebtables-legacy-restore
 -rwxr-xr-x     855B /usr/sbin/ebtables-legacy-save
+-rwxr-xr-x   196KiB /usr/sbin/faillock
 -rwxr-xr-x   196KiB /usr/sbin/getcap
 -rwxr-xr-x   196KiB /usr/sbin/getpcaps
 -rwxr-xr-x   197KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   196KiB /usr/sbin/ipset
 -rwxr-xr-x   2.1MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x   932KiB /usr/sbin/ldconfig
+-rwxr-xr-x   204KiB /usr/sbin/mkhomedir_helper
 -rwxr-xr-x   197KiB /usr/sbin/nfct
 -rwxr-xr-x   196KiB /usr/sbin/nft
+-rwxr-xr-x   201KiB /usr/sbin/pam_console_apply
+-rwxr-xr-x     471B /usr/sbin/pam_namespace_helper
+-rwsr-xr-x   196KiB /usr/sbin/pam_timestamp_check
+-rwxr-xr-x   196KiB /usr/sbin/pwhistory_helper
 -rwxr-xr-x   196KiB /usr/sbin/setcap
+-rwsr-xr-x   197KiB /usr/sbin/unix_chkpwd
+-rwx------   197KiB /usr/sbin/unix_update
 -rwxr-xr-x   200KiB /usr/sbin/xtables-legacy-multi
 -rwxr-xr-x   268KiB /usr/sbin/xtables-nft-multi
 -rwxr-xr-x   197KiB /usr/sbin/zic
 -rw-r--r--   3.2KiB /usr/share/bash-completion/completions/kmod
--rw-r--r--   2.5KiB /usr/share/doc/libcap/capability.notes
+-rw-r--r--     360B /usr/share/cracklib/cracklib.magic
+-rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
 -rw-r--r--    18KiB /usr/share/doc/libnetfilter_cthelper/COPYING
 -rw-r--r--    18KiB /usr/share/doc/libnetfilter_cttimeout/COPYING
 -rw-r--r--    18KiB /usr/share/doc/libnetfilter_queue/COPYING
@@ -569,10 +818,17 @@
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
 -rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
 -rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
+-rw-r--r--   148KiB /usr/share/info/bash.info.gz
+-rw-r--r--   233KiB /usr/share/info/coreutils.info.gz
+-rw-r--r--    16KiB /usr/share/info/gzip.info.gz
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    26KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    18KiB /usr/share/licenses/alternatives/COPYING
+-rw-r--r--    26KiB /usr/share/licenses/audit-libs/lgpl-2.1.txt
+-rw-r--r--    35KiB /usr/share/licenses/bash/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/conntrack-tools/COPYING
+-rw-r--r--    35KiB /usr/share/licenses/coreutils-common/COPYING
+-rw-r--r--    26KiB /usr/share/licenses/cracklib/COPYING.LIB
 -rw-r--r--    18KiB /usr/share/licenses/ebtables-legacy/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
@@ -581,12 +837,18 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/gmp/COPYING.LESSERv3
 -rw-r--r--    18KiB /usr/share/licenses/gmp/COPYINGv2
 -rw-r--r--    35KiB /usr/share/licenses/gmp/COPYINGv3
+-rw-r--r--    35KiB /usr/share/licenses/gzip/COPYING
+-rw-r--r--    23KiB /usr/share/licenses/gzip/fdl-1.3.txt
 -rw-r--r--    18KiB /usr/share/licenses/ipset-libs/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/ipset/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/iptables-legacy-libs/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/iptables-libs/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/jansson/LICENSE
+-rw-r--r--    26KiB /usr/share/licenses/libcap-ng/COPYING.LIB
 -rw-r--r--    20KiB /usr/share/licenses/libcap/License
+-rw-r--r--   7.2KiB /usr/share/licenses/libdb/LICENSE
+-rw-r--r--    26KiB /usr/share/licenses/libdb/lgpl-2.1.txt
+-rw-r--r--   1.1KiB /usr/share/licenses/libeconf/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/libgcc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libgcc/COPYING.LIB
 -rw-r--r--   3.3KiB /usr/share/licenses/libgcc/COPYING.RUNTIME
@@ -596,10 +858,16 @@
 -rw-r--r--    18KiB /usr/share/licenses/libnetfilter_conntrack/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/libnfnetlink/COPYING
 -rw-r--r--     868B /usr/share/licenses/libpcap/LICENSE
+-rw-r--r--    20KiB /usr/share/licenses/libpwquality/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
+-rw-r--r--   1.9KiB /usr/share/licenses/libxcrypt/AUTHORS
+-rw-r--r--    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
+-rw-r--r--   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
 -rw-r--r--    18KiB /usr/share/licenses/nftables/COPYING
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
+-rw-r--r--   2.0KiB /usr/share/licenses/pam/Copyright
+-rw-r--r--    18KiB /usr/share/licenses/pam/gpl-2.0.txt
 -rw-r--r--      95B /usr/share/licenses/pcre/COPYING
 -rw-r--r--   3.2KiB /usr/share/licenses/pcre/LICENCE
 -rw-r--r--    35KiB /usr/share/licenses/readline/COPYING
@@ -609,7 +877,265 @@
 -rw-r--r--     252B /usr/share/licenses/tzdata/LICENSE
 -rw-r--r--   2.8KiB /usr/share/licenses/xz-libs/COPYING
 -rw-r--r--   5.1KiB /usr/share/licenses/zlib/README
+-rw-r--r--     494B /usr/share/locale/af/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
+-rw-r--r--    28KiB /usr/share/locale/af/LC_MESSAGES/coreutils.mo
+-rw-r--r--     491B /usr/share/locale/am/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   6.5KiB /usr/share/locale/ar/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     801B /usr/share/locale/ar/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/as/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.6KiB /usr/share/locale/as/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.6KiB /usr/share/locale/as/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   2.0KiB /usr/share/locale/az/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     360B /usr/share/locale/az/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     569B /usr/share/locale/be/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    59KiB /usr/share/locale/be/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.3KiB /usr/share/locale/be/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.9KiB /usr/share/locale/bg/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   243KiB /usr/share/locale/bg/LC_MESSAGES/bash.mo
+-rw-r--r--   476KiB /usr/share/locale/bg/LC_MESSAGES/coreutils.mo
+-rw-r--r--   7.3KiB /usr/share/locale/bg/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/bn/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    11KiB /usr/share/locale/bn_IN/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   3.1KiB /usr/share/locale/bn_IN/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.9KiB /usr/share/locale/bn_IN/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     566B /usr/share/locale/bs/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    11KiB /usr/share/locale/ca/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   180KiB /usr/share/locale/ca/LC_MESSAGES/bash.mo
+-rw-r--r--   359KiB /usr/share/locale/ca/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/ca/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.1KiB /usr/share/locale/ca/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.7KiB /usr/share/locale/cs/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   181KiB /usr/share/locale/cs/LC_MESSAGES/bash.mo
+-rw-r--r--   368KiB /usr/share/locale/cs/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/cs/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.0KiB /usr/share/locale/cs/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     535B /usr/share/locale/cy/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.5KiB /usr/share/locale/da/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    69KiB /usr/share/locale/da/LC_MESSAGES/bash.mo
+-rw-r--r--   337KiB /usr/share/locale/da/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/da/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/da/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.9KiB /usr/share/locale/de/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   123KiB /usr/share/locale/de/LC_MESSAGES/bash.mo
+-rw-r--r--   369KiB /usr/share/locale/de/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/de/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/de/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     511B /usr/share/locale/de_CH/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     467B /usr/share/locale/el/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    82KiB /usr/share/locale/el/LC_MESSAGES/bash.mo
+-rw-r--r--    24KiB /usr/share/locale/el/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.2KiB /usr/share/locale/el/LC_MESSAGES/cracklib.mo
+-rw-r--r--   161KiB /usr/share/locale/en@boldquot/LC_MESSAGES/bash.mo
+-rw-r--r--   160KiB /usr/share/locale/en@quot/LC_MESSAGES/bash.mo
+-rw-r--r--     494B /usr/share/locale/eo/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   159KiB /usr/share/locale/eo/LC_MESSAGES/bash.mo
+-rw-r--r--   165KiB /usr/share/locale/eo/LC_MESSAGES/coreutils.mo
+-rw-r--r--   7.4KiB /usr/share/locale/es/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   180KiB /usr/share/locale/es/LC_MESSAGES/bash.mo
+-rw-r--r--   252KiB /usr/share/locale/es/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/es/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.2KiB /usr/share/locale/es/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   2.2KiB /usr/share/locale/et/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    12KiB /usr/share/locale/et/LC_MESSAGES/bash.mo
+-rw-r--r--   322KiB /usr/share/locale/et/LC_MESSAGES/coreutils.mo
+-rw-r--r--     968B /usr/share/locale/eu/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    27KiB /usr/share/locale/eu/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.3KiB /usr/share/locale/eu/LC_MESSAGES/cracklib.mo
+-rw-r--r--   2.1KiB /usr/share/locale/eu/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     485B /usr/share/locale/fa/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     360B /usr/share/locale/fa/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   8.7KiB /usr/share/locale/fi/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    72KiB /usr/share/locale/fi/LC_MESSAGES/bash.mo
+-rw-r--r--   109KiB /usr/share/locale/fi/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/fi/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.8KiB /usr/share/locale/fi/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/fr/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   186KiB /usr/share/locale/fr/LC_MESSAGES/bash.mo
+-rw-r--r--   379KiB /usr/share/locale/fr/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/fr/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.3KiB /usr/share/locale/fr/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   5.9KiB /usr/share/locale/fur/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   7.6KiB /usr/share/locale/ga/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   113KiB /usr/share/locale/ga/LC_MESSAGES/bash.mo
+-rw-r--r--   111KiB /usr/share/locale/ga/LC_MESSAGES/coreutils.mo
+-rw-r--r--     493B /usr/share/locale/gl/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    53KiB /usr/share/locale/gl/LC_MESSAGES/bash.mo
+-rw-r--r--    28KiB /usr/share/locale/gl/LC_MESSAGES/coreutils.mo
+-rw-r--r--    11KiB /usr/share/locale/gu/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.7KiB /usr/share/locale/gu/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.2KiB /usr/share/locale/gu/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/he/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   1.5KiB /usr/share/locale/he/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.2KiB /usr/share/locale/he/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.7KiB /usr/share/locale/hi/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.8KiB /usr/share/locale/hi/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.2KiB /usr/share/locale/hi/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     565B /usr/share/locale/hr/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   175KiB /usr/share/locale/hr/LC_MESSAGES/bash.mo
+-rw-r--r--   357KiB /usr/share/locale/hr/LC_MESSAGES/coreutils.mo
+-rw-r--r--   7.1KiB /usr/share/locale/hu/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   150KiB /usr/share/locale/hu/LC_MESSAGES/bash.mo
+-rw-r--r--   352KiB /usr/share/locale/hu/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/hu/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/hu/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   7.0KiB /usr/share/locale/ia/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   6.7KiB /usr/share/locale/ia/LC_MESSAGES/coreutils.mo
+-rw-r--r--   4.0KiB /usr/share/locale/id/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    96KiB /usr/share/locale/id/LC_MESSAGES/bash.mo
+-rw-r--r--   140KiB /usr/share/locale/id/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/id/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.8KiB /usr/share/locale/id/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     494B /usr/share/locale/is/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.7KiB /usr/share/locale/it/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    82KiB /usr/share/locale/it/LC_MESSAGES/bash.mo
+-rw-r--r--   162KiB /usr/share/locale/it/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/it/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.0KiB /usr/share/locale/it/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   7.6KiB /usr/share/locale/ja/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   113KiB /usr/share/locale/ja/LC_MESSAGES/bash.mo
+-rw-r--r--   183KiB /usr/share/locale/ja/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.1KiB /usr/share/locale/ja/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.9KiB /usr/share/locale/ja/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   2.6KiB /usr/share/locale/ka/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    13KiB /usr/share/locale/kk/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   1.6KiB /usr/share/locale/kk/LC_MESSAGES/coreutils.mo
+-rw-r--r--     691B /usr/share/locale/kk/LC_MESSAGES/cracklib.mo
+-rw-r--r--   3.8KiB /usr/share/locale/kk/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   8.7KiB /usr/share/locale/km/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.1KiB /usr/share/locale/km/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/kn/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   3.0KiB /usr/share/locale/kn/LC_MESSAGES/cracklib.mo
+-rw-r--r--   9.3KiB /usr/share/locale/kn/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   7.0KiB /usr/share/locale/ko/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   182KiB /usr/share/locale/ko/LC_MESSAGES/bash.mo
+-rw-r--r--    25KiB /usr/share/locale/ko/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.1KiB /usr/share/locale/ko/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.3KiB /usr/share/locale/ko/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     448B /usr/share/locale/kw_GB/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     484B /usr/share/locale/ky/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   205KiB /usr/share/locale/lg/LC_MESSAGES/coreutils.mo
 -rw-r--r--   3.0KiB /usr/share/locale/locale.alias
+-rw-r--r--     558B /usr/share/locale/lt/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    29KiB /usr/share/locale/lt/LC_MESSAGES/bash.mo
+-rw-r--r--    30KiB /usr/share/locale/lt/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/lt/LC_MESSAGES/cracklib.mo
+-rw-r--r--     527B /usr/share/locale/lv/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     525B /usr/share/locale/mk/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    13KiB /usr/share/locale/ml/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   3.0KiB /usr/share/locale/ml/LC_MESSAGES/cracklib.mo
+-rw-r--r--   9.7KiB /usr/share/locale/ml/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     494B /usr/share/locale/mn/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    11KiB /usr/share/locale/mr/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.7KiB /usr/share/locale/mr/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.8KiB /usr/share/locale/mr/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     532B /usr/share/locale/ms/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    23KiB /usr/share/locale/ms/LC_MESSAGES/coreutils.mo
+-rw-r--r--     485B /usr/share/locale/my/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.4KiB /usr/share/locale/nb/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   169KiB /usr/share/locale/nb/LC_MESSAGES/bash.mo
+-rw-r--r--   342KiB /usr/share/locale/nb/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.8KiB /usr/share/locale/nb/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.7KiB /usr/share/locale/nb/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     491B /usr/share/locale/ne/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.7KiB /usr/share/locale/nl/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   178KiB /usr/share/locale/nl/LC_MESSAGES/bash.mo
+-rw-r--r--   329KiB /usr/share/locale/nl/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/nl/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/nl/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     473B /usr/share/locale/nn/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    16KiB /usr/share/locale/or/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.9KiB /usr/share/locale/or/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.9KiB /usr/share/locale/or/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    14KiB /usr/share/locale/pa/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.7KiB /usr/share/locale/pa/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.5KiB /usr/share/locale/pa/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.9KiB /usr/share/locale/pl/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   180KiB /usr/share/locale/pl/LC_MESSAGES/bash.mo
+-rw-r--r--   368KiB /usr/share/locale/pl/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/pl/LC_MESSAGES/cracklib.mo
+-rw-r--r--   6.0KiB /usr/share/locale/pl/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    10KiB /usr/share/locale/pt/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   167KiB /usr/share/locale/pt/LC_MESSAGES/bash.mo
+-rw-r--r--   350KiB /usr/share/locale/pt/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/pt/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/pt/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.5KiB /usr/share/locale/pt_BR/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   170KiB /usr/share/locale/pt_BR/LC_MESSAGES/bash.mo
+-rw-r--r--   366KiB /usr/share/locale/pt_BR/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/pt_BR/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/pt_BR/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     534B /usr/share/locale/ro/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   186KiB /usr/share/locale/ro/LC_MESSAGES/bash.mo
+-rw-r--r--    47KiB /usr/share/locale/ro/LC_MESSAGES/coreutils.mo
+-rw-r--r--    13KiB /usr/share/locale/ru/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   126KiB /usr/share/locale/ru/LC_MESSAGES/bash.mo
+-rw-r--r--   470KiB /usr/share/locale/ru/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.4KiB /usr/share/locale/ru/LC_MESSAGES/cracklib.mo
+-rw-r--r--   7.5KiB /usr/share/locale/ru/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   8.5KiB /usr/share/locale/si/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     729B /usr/share/locale/si/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.7KiB /usr/share/locale/sk/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    82KiB /usr/share/locale/sk/LC_MESSAGES/bash.mo
+-rw-r--r--    69KiB /usr/share/locale/sk/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/sk/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.7KiB /usr/share/locale/sk/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     546B /usr/share/locale/sl/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--    79KiB /usr/share/locale/sl/LC_MESSAGES/bash.mo
+-rw-r--r--   303KiB /usr/share/locale/sl/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/sl_SI/LC_MESSAGES/cracklib.mo
+-rw-r--r--     493B /usr/share/locale/sq/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.1KiB /usr/share/locale/sq/LC_MESSAGES/cracklib.mo
+-rw-r--r--   1.3KiB /usr/share/locale/sq/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   8.9KiB /usr/share/locale/sr/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   228KiB /usr/share/locale/sr/LC_MESSAGES/bash.mo
+-rw-r--r--   394KiB /usr/share/locale/sr/LC_MESSAGES/coreutils.mo
+-rw-r--r--   7.2KiB /usr/share/locale/sr/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   6.8KiB /usr/share/locale/sr@latin/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     779B /usr/share/locale/sr@latin/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   9.6KiB /usr/share/locale/sv/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   173KiB /usr/share/locale/sv/LC_MESSAGES/bash.mo
+-rw-r--r--   348KiB /usr/share/locale/sv/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.9KiB /usr/share/locale/sv/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.9KiB /usr/share/locale/sv/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/ta/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   3.1KiB /usr/share/locale/ta/LC_MESSAGES/cracklib.mo
+-rw-r--r--   9.9KiB /usr/share/locale/ta/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    11KiB /usr/share/locale/te/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   2.9KiB /usr/share/locale/te/LC_MESSAGES/cracklib.mo
+-rw-r--r--   8.8KiB /usr/share/locale/te/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     490B /usr/share/locale/tg/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     482B /usr/share/locale/th/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   9.6KiB /usr/share/locale/tr/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   128KiB /usr/share/locale/tr/LC_MESSAGES/bash.mo
+-rw-r--r--   140KiB /usr/share/locale/tr/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.0KiB /usr/share/locale/tr/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.8KiB /usr/share/locale/tr/LC_MESSAGES/libpwquality.mo
+-rw-r--r--    13KiB /usr/share/locale/uk/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   232KiB /usr/share/locale/uk/LC_MESSAGES/bash.mo
+-rw-r--r--   462KiB /usr/share/locale/uk/LC_MESSAGES/coreutils.mo
+-rw-r--r--   2.5KiB /usr/share/locale/uk/LC_MESSAGES/cracklib.mo
+-rw-r--r--   7.8KiB /usr/share/locale/uk/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     468B /usr/share/locale/ur/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   1.1KiB /usr/share/locale/ur/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   7.2KiB /usr/share/locale/vi/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   131KiB /usr/share/locale/vi/LC_MESSAGES/bash.mo
+-rw-r--r--   368KiB /usr/share/locale/vi/LC_MESSAGES/coreutils.mo
+-rw-r--r--     716B /usr/share/locale/vi/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     392B /usr/share/locale/yo/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   8.9KiB /usr/share/locale/zh_CN/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   167KiB /usr/share/locale/zh_CN/LC_MESSAGES/bash.mo
+-rw-r--r--   289KiB /usr/share/locale/zh_CN/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.7KiB /usr/share/locale/zh_CN/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.3KiB /usr/share/locale/zh_CN/LC_MESSAGES/libpwquality.mo
+-rw-r--r--     476B /usr/share/locale/zh_HK/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   8.9KiB /usr/share/locale/zh_TW/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--   165KiB /usr/share/locale/zh_TW/LC_MESSAGES/bash.mo
+-rw-r--r--   322KiB /usr/share/locale/zh_TW/LC_MESSAGES/coreutils.mo
+-rw-r--r--   1.8KiB /usr/share/locale/zh_TW/LC_MESSAGES/cracklib.mo
+-rw-r--r--   5.2KiB /usr/share/locale/zh_TW/LC_MESSAGES/libpwquality.mo
+-rw-r--r--   5.7KiB /usr/share/locale/zu/LC_MESSAGES/Linux-PAM.mo
+-rw-r--r--     697B /usr/share/locale/zu/LC_MESSAGES/libpwquality.mo
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
@@ -2412,14 +2938,19 @@
 -rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
+-rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   4.8KiB /var/cache/ldconfig/aux-cache
+-rw-r--r--       2B /var/cache/dnf/tempfiles.json
+-rw-------   5.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--     584B /var/lib/alternatives/arptables
 -rw-r--r--     412B /var/lib/alternatives/ebtables
 -rw-r--r--     297B /var/lib/alternatives/ip6tables
 -rw-r--r--     749B /var/lib/alternatives/iptables
+-rw-r--r--   116KiB /var/lib/dnf/history.sqlite
+-rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
+-rw-r--r--   580KiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   1.4MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   1.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -2751,17 +3282,30 @@ lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
 lrwxrwxrwx       7B /lib usr/lib
 lrwxrwxrwx       9B /lib64 usr/lib64
 lrwxrwxrwx       8B /sbin usr/sbin
+lrwxrwxrwx      10B /usr/bin/bashbug bashbug-64
 lrwxrwxrwx      30B /usr/bin/iptables-xml /usr/sbin/xtables-legacy-multi
 lrwxrwxrwx      31B /usr/bin/ld.so ../../lib/ld-linux-aarch64.so.1
+lrwxrwxrwx       4B /usr/bin/sh bash
 lrwxrwxrwx       7B /usr/lib/debug/bin usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
-lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.48
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.0.8
+lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
+lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
+lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
+lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
+lrwxrwxrwx      18B /usr/lib64/libcap-ng.so.0 libcap-ng.so.0.0.0
+lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
+lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
+lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.2.2
+lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
+lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      16B /usr/lib64/libebtc.so libebtc.so.0.0.0
 lrwxrwxrwx      16B /usr/lib64/libebtc.so.0 libebtc.so.0.0.0
+lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
 lrwxrwxrwx      18B /usr/lib64/libefa.so.1 libefa.so.1.2.48.0
 lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
 lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
@@ -2799,6 +3343,9 @@ lrwxrwxrwx      25B /usr/lib64/libnl-idiag-3.so.200 libnl-idiag-3.so.200.26.0
 lrwxrwxrwx      22B /usr/lib64/libnl-nf-3.so.200 libnl-nf-3.so.200.26.0
 lrwxrwxrwx      25B /usr/lib64/libnl-route-3.so.200 libnl-route-3.so.200.26.0
 lrwxrwxrwx      24B /usr/lib64/libnl-xfrm-3.so.200 libnl-xfrm-3.so.200.26.0
+lrwxrwxrwx      16B /usr/lib64/libpam.so.0 libpam.so.0.85.1
+lrwxrwxrwx      21B /usr/lib64/libpam_misc.so.0 libpam_misc.so.0.82.1
+lrwxrwxrwx      17B /usr/lib64/libpamc.so.0 libpamc.so.0.82.1
 lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.2
 lrwxrwxrwx      17B /usr/lib64/libpcap.so.1 libpcap.so.1.10.1
@@ -2806,9 +3353,10 @@ lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
-lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.48
+lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.73
+lrwxrwxrwx      21B /usr/lib64/libpwquality.so.1 libpwquality.so.1.0.2
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.0.8
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.2.2
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
@@ -2816,6 +3364,11 @@ lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.5
 lrwxrwxrwx      20B /usr/lib64/libxtables.so.12 libxtables.so.12.6.0
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
+lrwxrwxrwx      15B /usr/lib64/security/pam_selinux_permit.so pam_sepermit.so
+lrwxrwxrwx      11B /usr/lib64/security/pam_unix_acct.so pam_unix.so
+lrwxrwxrwx      11B /usr/lib64/security/pam_unix_auth.so pam_unix.so
+lrwxrwxrwx      11B /usr/lib64/security/pam_unix_passwd.so pam_unix.so
+lrwxrwxrwx      11B /usr/lib64/security/pam_unix_session.so pam_unix.so
 lrwxrwxrwx      11B /usr/lib64/xtables/libxt_NOTRACK.so libxt_CT.so
 lrwxrwxrwx      13B /usr/lib64/xtables/libxt_REDIRECT.so libxt_DNAT.so
 lrwxrwxrwx      18B /usr/lib64/xtables/libxt_state.so libxt_conntrack.so
@@ -2862,6 +3415,49 @@ lrwxrwxrwx      11B /usr/sbin/modprobe ../bin/kmod
 lrwxrwxrwx      11B /usr/sbin/rmmod ../bin/kmod
 lrwxrwxrwx      12B /usr/sbin/update-alternatives alternatives
 lrwxrwxrwx      17B /usr/sbin/xtables-monitor xtables-nft-multi
+lrwxrwxrwx      27B /usr/share/locale/af/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/be/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/bg/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ca/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/cs/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/da/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/de/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/el/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/eo/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/es/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/et/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/eu/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/fi/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/fr/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ga/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/gl/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/hr/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/hu/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ia/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/id/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/it/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ja/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/kk/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ko/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/lg/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/lt/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ms/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/nb/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/nl/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/pl/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/pt/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/pt_BR/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ro/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/ru/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/sk/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/sl/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/sr/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/sv/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/tr/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/uk/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/vi/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/zh_CN/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
+lrwxrwxrwx      27B /usr/share/locale/zh_TW/LC_TIME/coreutils.mo ../LC_MESSAGES/coreutils.mo
 lrwxrwxrwx      10B /usr/tmp ../var/tmp
 lrwxrwxrwx      11B /var/lock ../run/lock
 lrwxrwxrwx      10B /var/mail spool/mail
