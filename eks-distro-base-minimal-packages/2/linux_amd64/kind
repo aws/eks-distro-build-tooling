@@ -7,7 +7,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
 ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 conntrack-tools-1.4.4-5.amzn2.2.x86_64
-containerd-1.7.27-1.amzn2.0.1.x86_64
+containerd-1.7.27-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cpio-2.12-11.amzn2.0.1.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
@@ -33,9 +33,9 @@ findutils-4.5.11-6.amzn2.x86_64
 gawk-4.0.2-4.amzn2.1.3.x86_64
 gdbm-1.13-6.amzn2.0.2.x86_64
 glib2-2.56.1-9.amzn2.0.9.x86_64
-glibc-2.26-64.amzn2.0.3.x86_64
-glibc-common-2.26-64.amzn2.0.3.x86_64
-glibc-minimal-langpack-2.26-64.amzn2.0.3.x86_64
+glibc-2.26-64.amzn2.0.4.x86_64
+glibc-common-2.26-64.amzn2.0.4.x86_64
+glibc-minimal-langpack-2.26-64.amzn2.0.4.x86_64
 gmp-6.0.0-15.amzn2.0.3.x86_64
 gnupg2-2.0.22-5.amzn2.0.5.x86_64
 gpg-pubkey-c87f5b1a-593863f8
@@ -66,7 +66,7 @@ libcap-2.54-1.amzn2.0.3.x86_64
 libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcollection-0.7.0-29.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
-libcrypt-2.26-64.amzn2.0.3.x86_64
+libcrypt-2.26-64.amzn2.0.4.x86_64
 libcurl-8.3.0-1.amzn2.0.8.x86_64
 libdb-5.3.21-24.amzn2.0.5.x86_64
 libdb-utils-5.3.21-24.amzn2.0.5.x86_64
@@ -170,8 +170,8 @@ tcp_wrappers-libs-7.6-77.amzn2.0.2.x86_64
 tzdata-2025a-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.11.x86_64
-vim-data-9.0.2153-1.amzn2.0.3.noarch
-vim-minimal-9.0.2153-1.amzn2.0.3.x86_64
+vim-data-9.0.2153-1.amzn2.0.4.noarch
+vim-minimal-9.0.2153-1.amzn2.0.4.x86_64
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
 yum-3.4.3-158.amzn2.0.7.noarch

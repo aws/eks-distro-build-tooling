@@ -1,9 +1,9 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 filesystem-3.2-25.amzn2.0.4.x86_64
-glibc-2.26-64.amzn2.0.3.x86_64
-glibc-common-2.26-64.amzn2.0.3.x86_64
-glibc-minimal-langpack-2.26-64.amzn2.0.3.x86_64
+glibc-2.26-64.amzn2.0.4.x86_64
+glibc-common-2.26-64.amzn2.0.4.x86_64
+glibc-minimal-langpack-2.26-64.amzn2.0.4.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 libcap-2.54-1.amzn2.0.3.x86_64
 libgcc-7.3.1-17.amzn2.x86_64

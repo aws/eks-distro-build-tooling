@@ -33,11 +33,11 @@ gcc-7.3.1-17.amzn2.x86_64
 gdbm-1.13-6.amzn2.0.2.x86_64
 git-core-2.47.1-1.amzn2.0.2.x86_64
 glib2-2.56.1-9.amzn2.0.9.x86_64
-glibc-2.26-64.amzn2.0.3.x86_64
-glibc-common-2.26-64.amzn2.0.3.x86_64
-glibc-devel-2.26-64.amzn2.0.3.x86_64
-glibc-headers-2.26-64.amzn2.0.3.x86_64
-glibc-minimal-langpack-2.26-64.amzn2.0.3.x86_64
+glibc-2.26-64.amzn2.0.4.x86_64
+glibc-common-2.26-64.amzn2.0.4.x86_64
+glibc-devel-2.26-64.amzn2.0.4.x86_64
+glibc-headers-2.26-64.amzn2.0.4.x86_64
+glibc-minimal-langpack-2.26-64.amzn2.0.4.x86_64
 gmp-6.0.0-15.amzn2.0.3.x86_64
 gnupg2-2.0.22-5.amzn2.0.5.x86_64
 gpg-pubkey-c87f5b1a-593863f8
@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.355-275.603.amzn2.x86_64
+kernel-headers-4.14.355-276.618.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
@@ -61,7 +61,7 @@ libcap-2.54-1.amzn2.0.3.x86_64
 libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcilkrts-7.3.1-17.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
-libcrypt-2.26-64.amzn2.0.3.x86_64
+libcrypt-2.26-64.amzn2.0.4.x86_64
 libcurl-8.3.0-1.amzn2.0.8.x86_64
 libdb-5.3.21-24.amzn2.0.5.x86_64
 libdb-utils-5.3.21-24.amzn2.0.5.x86_64
