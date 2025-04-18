@@ -1,4 +1,8 @@
 
 containerd.x86_64
-python.x86_64
-python-libs.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libcrypt.x86_64
+vim-data.noarch
+vim-minimal.x86_64
