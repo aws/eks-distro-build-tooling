@@ -373,7 +373,7 @@
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   263KiB /usr/bin/csplit
 -rwxr-xr-x    22MiB /usr/bin/ctr
--rwxr-xr-x   391KiB /usr/bin/curl
+-rwxr-xr-x   387KiB /usr/bin/curl
 -rwxr-xr-x   197KiB /usr/bin/cut
 -rwxr-xr-x   400KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
@@ -667,6 +667,7 @@
 -rwxr-xr-x   197KiB /usr/bin/watch
 -rwxr-xr-x   196KiB /usr/bin/watchgnupg
 -rwxr-xr-x   197KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x   197KiB /usr/bin/wdctl
 -rwxr-xr-x   197KiB /usr/bin/whereis
 -rwxr-xr-x   197KiB /usr/bin/which
@@ -1398,7 +1399,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
--rwxr-xr-x   857KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   844KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   469KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
