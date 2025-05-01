@@ -69,7 +69,7 @@ al2023:
   eks-distro-minimal-base-python-3.7: null
   eks-distro-minimal-base-python-3.9: 3.9-2025-04-02-1743620476.2023
   eks-distro-minimal-base-python-3.11: 3.11-2025-03-13-1741889715.2023
-  eks-distro-minimal-base-nodejs-16: 16-2025-04-30-1746043275.2023
+  eks-distro-minimal-base-nodejs-16: 16-2025-05-01-1746082883.2023
   eks-distro-minimal-base-compiler-base: 2025-04-30-1746043275.2023
   eks-distro-minimal-base-compiler-yum: yum-2025-04-30-1746043275.2023
   eks-distro-minimal-base-compiler-gcc: gcc-2025-04-30-1746043275.2023
