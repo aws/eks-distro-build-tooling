@@ -69,7 +69,7 @@ al2023:
   eks-distro-minimal-base-python-3.7: null
   eks-distro-minimal-base-python-3.9: 3.9-2025-04-02-1743620476.2023
   eks-distro-minimal-base-python-3.11: 3.11-2025-05-05-1746471660.2023
-  eks-distro-minimal-base-nodejs-16: 16-2025-05-06-1746558060.2023
+  eks-distro-minimal-base-nodejs-16: 16-2025-05-07-1746644483.2023
   eks-distro-minimal-base-compiler-base: 2025-04-30-1746043275.2023
   eks-distro-minimal-base-compiler-yum: yum-2025-04-30-1746043275.2023
   eks-distro-minimal-base-compiler-gcc: gcc-2025-04-30-1746043275.2023
@@ -100,12 +100,12 @@ al2023:
   eks-distro-minimal-base-python-compiler-3.11-base: 3.11-2025-04-30-1746043275.2023
   eks-distro-minimal-base-python-compiler-3.11-yum: 3.11-yum-2025-04-30-1746043275.2023
   eks-distro-minimal-base-python-compiler-3.11-gcc: 3.11-gcc-2025-04-30-1746043275.2023
-  eks-distro-minimal-base-golang-compiler-1.23-base: null
-  eks-distro-minimal-base-golang-compiler-1.23-yum: null
-  eks-distro-minimal-base-golang-compiler-1.23-gcc: null
-  eks-distro-minimal-base-golang-compiler-1.24-base: null
-  eks-distro-minimal-base-golang-compiler-1.24-yum: null
-  eks-distro-minimal-base-golang-compiler-1.24-gcc: null
+  eks-distro-minimal-base-golang-compiler-1.23-base: 1.23-2025-05-07-1746644483.2023
+  eks-distro-minimal-base-golang-compiler-1.23-yum: 1.23-yum-2025-05-07-1746644483.2023
+  eks-distro-minimal-base-golang-compiler-1.23-gcc: 1.23-gcc-2025-05-07-1746644483.2023
+  eks-distro-minimal-base-golang-compiler-1.24-base: 1.24-2025-05-07-1746644483.2023
+  eks-distro-minimal-base-golang-compiler-1.24-yum: 1.24-yum-2025-05-07-1746644483.2023
+  eks-distro-minimal-base-golang-compiler-1.24-gcc: 1.24-gcc-2025-05-07-1746644483.2023
 windows:
   eks-distro-windows-base-1809: 1809-2025-04-30-1746043247.2
   eks-distro-windows-base-20H2: 20H2-2025-04-30-1746043247.2
