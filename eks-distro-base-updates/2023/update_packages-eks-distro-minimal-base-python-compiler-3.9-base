@@ -1,2 +1,7 @@
 
-binutils.x86_64
+elfutils-debuginfod-client.x86_64
+elfutils-default-yama-scope.noarch
+elfutils-libelf.x86_64
+elfutils-libs.x86_64
+sqlite.x86_64
+sqlite-libs.x86_64
