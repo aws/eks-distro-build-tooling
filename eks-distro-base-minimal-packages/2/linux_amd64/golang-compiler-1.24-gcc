@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 groff-base-1.22.2-8.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
-kernel-headers-4.14.355-276.639.amzn2.x86_64
+kernel-headers-4.14.355-277.643.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 kmod-25-3.amzn2.0.2.x86_64
 kmod-libs-25-3.amzn2.0.2.x86_64
