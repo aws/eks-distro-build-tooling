@@ -270,7 +270,7 @@
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   197KiB /usr/bin/date
 -rwxr-xr-x   197KiB /usr/bin/dd
--rwxr-xr-x   197KiB /usr/bin/debuginfod-find
+-rwxr-xr-x   196KiB /usr/bin/debuginfod-find
 -rwxr-xr-x   198KiB /usr/bin/df
 -rwxr-xr-x   263KiB /usr/bin/dir
 -rwxr-xr-x   197KiB /usr/bin/dircolors
@@ -2241,7 +2241,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x   197KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
--rwxr-xr-x   197KiB /usr/lib64/libasm-0.188.so
+-rwxr-xr-x   196KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   1.9MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.3.so
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
@@ -2259,10 +2259,10 @@
 -rwxr-xr-x   259KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   844KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
--rwxr-xr-x   197KiB /usr/lib64/libdebuginfod-0.188.so
+-rwxr-xr-x   196KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   718KiB /usr/lib64/libdw-0.188.so
--rwxr-xr-x   263KiB /usr/lib64/libelf-0.188.so
+-rwxr-xr-x   717KiB /usr/lib64/libdw-0.188.so
+-rwxr-xr-x   262KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
@@ -7800,7 +7800,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   2.3MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.3MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

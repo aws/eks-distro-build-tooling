@@ -268,7 +268,7 @@
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
 -rwxr-xr-x    69KiB /usr/bin/dd
--rwxr-xr-x    21KiB /usr/bin/debuginfod-find
+-rwxr-xr-x    20KiB /usr/bin/debuginfod-find
 -rwxr-xr-x    86KiB /usr/bin/df
 -rwxr-xr-x   139KiB /usr/bin/dir
 -rwxr-xr-x    41KiB /usr/bin/dircolors
@@ -3206,7 +3206,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
--rwxr-xr-x    37KiB /usr/lib64/libasm-0.188.so
+-rwxr-xr-x    36KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.3.so
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
@@ -3225,8 +3225,8 @@
 -rwxr-xr-x   772KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   610KiB /usr/lib64/libdw-0.188.so
--rwxr-xr-x   111KiB /usr/lib64/libelf-0.188.so
+-rwxr-xr-x   609KiB /usr/lib64/libdw-0.188.so
+-rwxr-xr-x   110KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2

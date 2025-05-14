@@ -12,10 +12,10 @@ cracklib-2.9.6-27.amzn2023.0.2.x86_64
 crypto-policies-20240828-2.git626aa59.amzn2023.0.1.noarch
 curl-8.5.0-1.amzn2023.0.5.x86_64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.x86_64
-elfutils-debuginfod-client-0.188-3.amzn2023.0.2.x86_64
-elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
-elfutils-libelf-0.188-3.amzn2023.0.2.x86_64
-elfutils-libs-0.188-3.amzn2023.0.2.x86_64
+elfutils-debuginfod-client-0.188-3.amzn2023.0.3.x86_64
+elfutils-default-yama-scope-0.188-3.amzn2023.0.3.noarch
+elfutils-libelf-0.188-3.amzn2023.0.3.x86_64
+elfutils-libs-0.188-3.amzn2023.0.3.x86_64
 expat-2.6.3-1.amzn2023.0.2.x86_64
 filesystem-3.14-5.amzn2023.0.3.x86_64
 findutils-4.8.0-2.amzn2023.0.2.x86_64
