@@ -157,4 +157,7 @@ echo Updated base image tag file for eks-distro-windows-base-20H2
 checking pushed file: /override/root/eks-distro-windows-base-ltsc2022-pushed - true
 update_base_image.sh ltsc2022-test-tag eks-distro-windows-base-ltsc2022 windows image-tag-update-al2
 echo Updated base image tag file for eks-distro-windows-base-ltsc2022
+checking pushed file: /override/root/eks-distro-windows-base-ltsc2025-pushed - true
+update_base_image.sh ltsc2025-test-tag eks-distro-windows-base-ltsc2025 windows image-tag-update-al2
+echo Updated base image tag file for eks-distro-windows-base-ltsc2025
 /override/root/../pr-scripts/create_pr.sh eks-distro-build-tooling 'EKS_DISTRO*_TAG_FILE*' image-tag-update-al2
