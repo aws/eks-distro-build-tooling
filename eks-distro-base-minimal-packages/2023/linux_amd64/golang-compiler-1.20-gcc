@@ -20,10 +20,10 @@ dnf-4.14.0-1.amzn2023.0.6.noarch
 dnf-data-4.14.0-1.amzn2023.0.6.noarch
 dwz-0.14-6.amzn2023.0.2.x86_64
 efi-srpm-macros-5-4.amzn2023.0.5.noarch
-elfutils-debuginfod-client-0.188-3.amzn2023.0.2.x86_64
-elfutils-default-yama-scope-0.188-3.amzn2023.0.2.noarch
-elfutils-libelf-0.188-3.amzn2023.0.2.x86_64
-elfutils-libs-0.188-3.amzn2023.0.2.x86_64
+elfutils-debuginfod-client-0.188-3.amzn2023.0.3.x86_64
+elfutils-default-yama-scope-0.188-3.amzn2023.0.3.noarch
+elfutils-libelf-0.188-3.amzn2023.0.3.x86_64
+elfutils-libs-0.188-3.amzn2023.0.3.x86_64
 expat-2.6.3-1.amzn2023.0.2.x86_64
 file-5.39-7.amzn2023.0.4.x86_64
 file-libs-5.39-7.amzn2023.0.4.x86_64
@@ -56,7 +56,7 @@ guile22-2.2.7-2.amzn2023.0.3.x86_64
 gzip-1.12-1.amzn2023.0.1.x86_64
 jansson-2.14-0.amzn2023.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-kernel-headers-6.12.23-29.97.amzn2023.x86_64
+kernel-headers-6.12.25-32.101.amzn2023.x86_64
 kernel-srpm-macros-1.0-14.amzn2023.0.3.noarch
 keyutils-libs-1.6.3-1.amzn2023.0.2.x86_64
 krb5-libs-1.21.3-1.amzn2023.0.1.x86_64
@@ -112,7 +112,7 @@ libuuid-2.37.4-1.amzn2023.0.4.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
 libxcrypt-devel-4.4.33-7.amzn2023.x86_64
-libxml2-2.10.4-1.amzn2023.0.9.x86_64
+libxml2-2.10.4-1.amzn2023.0.10.x86_64
 libyaml-0.2.5-5.amzn2023.0.2.x86_64
 libzstd-1.5.5-1.amzn2023.0.1.x86_64
 lua-libs-5.4.4-3.amzn2023.0.2.x86_64
@@ -144,13 +144,13 @@ pkgconf-pkg-config-1.8.0-4.amzn2023.0.2.x86_64
 popt-1.18-6.amzn2023.0.2.x86_64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
 python-srpm-macros-3.9-41.amzn2023.0.6.noarch
-python3-3.9.21-1.amzn2023.0.3.x86_64
+python3-3.9.22-1.amzn2023.0.1.x86_64
 python3-dnf-4.14.0-1.amzn2023.0.6.noarch
 python3-gpg-1.15.1-6.amzn2023.0.3.x86_64
 python3-hawkey-0.69.0-8.amzn2023.0.5.x86_64
 python3-libcomps-0.1.20-1.amzn2023.x86_64
 python3-libdnf-0.69.0-8.amzn2023.0.5.x86_64
-python3-libs-3.9.21-1.amzn2023.0.3.x86_64
+python3-libs-3.9.22-1.amzn2023.0.1.x86_64
 python3-pip-wheel-21.3.1-2.amzn2023.0.11.noarch
 python3-rpm-4.16.1.3-29.amzn2023.0.6.x86_64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.5.noarch
@@ -163,7 +163,7 @@ rust-toolset-srpm-macros-1.85.0-1.amzn2023.0.1.noarch
 sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.4.x86_64
-sqlite-libs-3.40.0-1.amzn2023.0.4.x86_64
+sqlite-libs-3.40.0-1.amzn2023.0.5.x86_64
 system-release-2023.6.20241212-0.amzn2023.noarch
 systemd-libs-252.23-3.amzn2023.x86_64
 tar-1.34-1.amzn2023.0.4.x86_64

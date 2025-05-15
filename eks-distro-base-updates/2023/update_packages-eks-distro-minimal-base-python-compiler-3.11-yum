@@ -4,5 +4,4 @@ elfutils-default-yama-scope.noarch
 elfutils-libelf.x86_64
 elfutils-libs.x86_64
 libxml2.x86_64
-sqlite.x86_64
 sqlite-libs.x86_64

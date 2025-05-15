@@ -1,4 +1,6 @@
 
-python3.x86_64
-python3-libs.x86_64
-python3-pip-wheel.noarch
+elfutils-default-yama-scope.noarch
+elfutils-libelf.x86_64
+elfutils-libs.x86_64
+libxml2.x86_64
+sqlite-libs.x86_64
