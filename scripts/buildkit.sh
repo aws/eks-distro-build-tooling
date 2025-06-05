@@ -90,7 +90,7 @@ if [ -f "/buildkit.sh" ]; then
 	[ $i -gt 1 ] && sleep 15
 	$CMD $ARGS | tee $log_file
 	s=${PIPESTATUS[0]}
-	printf "\nLogfile-start----------->\n %s \n<----------Logfile-end\n" "$(< $log_file)"
+	grep -A 1 "merging manifest list" $log_file
 	# builkit is not returning non-zero exit code on httpReadSeeker
 	if grep -q "ERROR: httpReadSeeker" $log_file ; then
             echo "******************************************************"
