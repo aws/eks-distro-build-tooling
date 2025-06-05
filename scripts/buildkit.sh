@@ -86,9 +86,8 @@ if [ -f "/buildkit.sh" ]; then
     log_file=$(mktemp)
     trap "rm -f $log_file" EXIT
     for i in $(seq 1 5); do
-	echo "Image building attempt: $i"
 	[ $i -gt 1 ] && sleep 15
-	$CMD $ARGS 2>&1 | tee $log_file
+	$CMD $ARGS | tee $log_file
 	s=${PIPESTATUS[0]}
 	# builkit is not returning non-zero exit code on httpReadSeeker
 	if grep -q "ERROR: httpReadSeeker" $log_file ; then
