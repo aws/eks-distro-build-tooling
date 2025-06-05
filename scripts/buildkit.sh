@@ -95,16 +95,21 @@ if [ -f "/buildkit.sh" ]; then
 
     (exit $s)
 else
-    # skip retry when running locally
     log_file=$(mktemp)
     trap "rm -f $log_file" EXIT
-    if ! $CMD $ARGS 2>&1 | tee $log_file; then        
+    for i in $(seq 1 5); do
+	echo "Image building attempt: $i"
+        [ $i -gt 1 ] && sleep 15
+        $CMD $ARGS 2>&1 | tee $log_file
+        s=${PIPESTATUS[0]}
+        [ $s == 0 ] && break
         if grep -q "blobs/uploads/\": EOF" $log_file ; then
             echo "******************************************************"
             echo "Ensure container registry and repository exists!!"
             echo "Try running make create-ecr-repos to create ecr repositories in your aws account."
             echo "******************************************************"
+            break
         fi
-        exit 1
-    fi
+    done
+    exit $s
 fi
