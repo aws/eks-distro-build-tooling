@@ -306,6 +306,7 @@ define BUILDCTL
 		--opt platform=$(PLATFORMS) \
 		--opt build-arg:OUTPUT_DEBUG_LOG=$(OUTPUT_DEBUG_LOG) \
 		$(foreach BUILD_ARG,$(BUILDCTL_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
+		--provenance=false \
 		--progress plain \
 		--local dockerfile=./ \
 		--local context=. \
