@@ -88,13 +88,17 @@ if [ -f "/buildkit.sh" ]; then
     for i in $(seq 1 5); do
 	printf "\nBuilding attempt: $i\n" >&2
 	[ $i -gt 1 ] && sleep 15
-	$CMD $ARGS | tee $log_file
+	$CMD $ARGS 2>&1 | tee $log_file
 	s=${PIPESTATUS[0]}
+	printf "\nExit Code from job: $s\n" >&2
 	# builkit is not returning non-zero exit code on httpReadSeeker
-	if grep -q "ERROR: httpReadSeeker" $log_file ; then
+	if grep "ERROR: httpReadSeeker" $log_file ; then
+	    printf "\nFound ERROR: httpReadSeeker in log\n" >&2
             s=1
         fi
+	printf "\nExit Code after grep block: $s\n" >&2
         [ $s == 0 ] && break
+	printf "\nBuilding attempt ending: $i with exit code: $s\n" >&2
     done
 
     # space is limited on presubmit nodes, after each image build clear the build cache
