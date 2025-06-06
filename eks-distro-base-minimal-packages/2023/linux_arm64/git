@@ -7,9 +7,9 @@ cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 expat-2.6.3-1.amzn2023.0.2.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
 git-core-2.47.1-1.amzn2023.0.2.aarch64
-glibc-2.34-117.amzn2023.0.1.aarch64
-glibc-common-2.34-117.amzn2023.0.1.aarch64
-glibc-minimal-langpack-2.34-117.amzn2023.0.1.aarch64
+glibc-2.34-181.amzn2023.0.1.aarch64
+glibc-common-2.34-181.amzn2023.0.1.aarch64
+glibc-minimal-langpack-2.34-181.amzn2023.0.1.aarch64
 gnupg2-2.3.7-1.amzn2023.0.4.aarch64
 gnutls-3.8.3-6.amzn2023.0.1.aarch64
 gpg-pubkey-afaa0026-61929986
@@ -23,7 +23,7 @@ libcurl-minimal-8.5.0-1.amzn2023.0.5.aarch64
 libedit-3.1-38.20210714cvs.amzn2023.0.2.aarch64
 libffi-3.4.4-1.amzn2023.0.1.aarch64
 libfido2-1.10.0-2.amzn2023.0.2.aarch64
-libgcc-11.4.1-2.amzn2023.0.2.aarch64
+libgcc-14.2.1-7.amzn2023.0.1.aarch64
 libgcrypt-1.10.2-1.amzn2023.0.2.aarch64
 libgpg-error-1.42-1.amzn2023.0.2.aarch64
 libidn2-2.3.2-1.amzn2023.0.5.aarch64
@@ -32,8 +32,8 @@ libnghttp2-1.59.0-3.amzn2023.0.1.aarch64
 libpsl-0.21.5-1.amzn2023.0.1.aarch64
 libselinux-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
-libstdc++-11.4.1-2.amzn2023.0.2.aarch64
-libtasn1-4.19.0-1.amzn2023.0.4.aarch64
+libstdc++-14.2.1-7.amzn2023.0.1.aarch64
+libtasn1-4.19.0-1.amzn2023.0.5.aarch64
 libunistring-0.9.10-10.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
 ncurses-base-6.2-4.20200222.amzn2023.0.6.noarch
