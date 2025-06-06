@@ -1,5 +1,4 @@
 
-elfutils-debuginfod-client.x86_64
-elfutils-default-yama-scope.noarch
-elfutils-libelf.x86_64
-elfutils-libs.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
