@@ -214,22 +214,22 @@
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
 -rwxr-xr-x    26MiB /usr/bin/docker
--rwxr-xr-x   197KiB /usr/bin/gencat
--rwxr-xr-x   196KiB /usr/bin/getconf
--rwxr-xr-x   197KiB /usr/bin/getent
--rwxr-xr-x   198KiB /usr/bin/iconv
+-rwxr-xr-x   195KiB /usr/bin/gencat
+-rwxr-xr-x   195KiB /usr/bin/getconf
+-rwxr-xr-x   195KiB /usr/bin/getent
+-rwxr-xr-x   195KiB /usr/bin/iconv
 -rwxr-xr-x   5.3KiB /usr/bin/ldd
--rwxr-xr-x   205KiB /usr/bin/locale
--rwxr-xr-x   336KiB /usr/bin/localedef
--rwxr-xr-x   196KiB /usr/bin/pldd
+-rwxr-xr-x   202KiB /usr/bin/locale
+-rwxr-xr-x   332KiB /usr/bin/localedef
+-rwxr-xr-x   195KiB /usr/bin/pldd
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
--rwxr-xr-x   197KiB /usr/bin/sprof
+-rwxr-xr-x   195KiB /usr/bin/sprof
 -rwxr-xr-x    15KiB /usr/bin/tzselect
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
--rwxr-xr-x   196KiB /usr/bin/zdump
+-rwxr-xr-x   195KiB /usr/bin/zdump
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   843KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   852KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -259,65 +259,65 @@
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
--rwxr-xr-x   196KiB /usr/lib64/audit/sotruss-lib.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/ANSI_X3.110.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/CP1252.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/ISO8859-1.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/ISO8859-15.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/UNICODE.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/UTF-16.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/UTF-32.so
--rwxr-xr-x   196KiB /usr/lib64/gconv/UTF-7.so
+-rwxr-xr-x   195KiB /usr/lib64/audit/sotruss-lib.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/ANSI_X3.110.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/CP1252.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/ISO8859-1.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/ISO8859-15.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/UNICODE.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/UTF-16.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/UTF-32.so
+-rwxr-xr-x   195KiB /usr/lib64/gconv/UTF-7.so
 -rw-r--r--   3.8KiB /usr/lib64/gconv/gconv-modules
 -rw-r--r--   2.2KiB /usr/lib64/gconv/gconv-modules.cache
--rwxr-xr-x   196KiB /usr/lib64/libBrokenLocale.so.1
--rwxr-xr-x   196KiB /usr/lib64/libSegFault.so
--rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
+-rwxr-xr-x   195KiB /usr/lib64/libBrokenLocale.so.1
+-rwxr-xr-x   195KiB /usr/lib64/libSegFault.so
+-rwxr-xr-x   195KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
--rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
--rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   198KiB /usr/lib64/libgcc_s-11-20230605.so.1
--rwxr-xr-x   655KiB /usr/lib64/libm.so.6
--rwxr-xr-x   197KiB /usr/lib64/libmemusage.so
--rwxr-xr-x   198KiB /usr/lib64/libnss_compat.so.2
--rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
--rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   196KiB /usr/lib64/libpcprofile.so
+-rwxr-xr-x   199KiB /usr/lib64/libc_malloc_debug.so.0
+-rwxr-xr-x   195KiB /usr/lib64/libdl.so.2
+-rwxr-xr-x   262KiB /usr/lib64/libgcc_s-14-20250110.so.1
+-rwxr-xr-x   643KiB /usr/lib64/libm.so.6
+-rwxr-xr-x   195KiB /usr/lib64/libmemusage.so
+-rwxr-xr-x   195KiB /usr/lib64/libnss_compat.so.2
+-rwxr-xr-x   195KiB /usr/lib64/libnss_dns.so.2
+-rwxr-xr-x   195KiB /usr/lib64/libnss_files.so.2
+-rwxr-xr-x   195KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   519KiB /usr/lib64/libpcre.so.1.2.12
 -rwxr-xr-x   647KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x   196KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x   196KiB /usr/lib64/libpcreposix.so.0.0.7
--rwxr-xr-x   196KiB /usr/lib64/libpthread.so.0
--rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
--rwxr-xr-x   196KiB /usr/lib64/librt.so.1
+-rwxr-xr-x   195KiB /usr/lib64/libpthread.so.0
+-rwxr-xr-x   195KiB /usr/lib64/libresolv.so.2
+-rwxr-xr-x   195KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   265KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x   2.3MiB /usr/lib64/libstdc++.so.6.0.29
--rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
--rwxr-xr-x   196KiB /usr/lib64/libutil.so.1
--rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
--rwxr-xr-x   196KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
--rwxr-xr-x   196KiB /usr/libexec/getconf/XBS5_LP64_OFF64
--rwxr-xr-x   197KiB /usr/sbin/iconvconfig
--rwxr-xr-x   932KiB /usr/sbin/ldconfig
--rwxr-xr-x   197KiB /usr/sbin/zic
+-rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
+-rwxr-xr-x   195KiB /usr/lib64/libthread_db.so.1
+-rwxr-xr-x   195KiB /usr/lib64/libutil.so.1
+-rwxr-xr-x   195KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
+-rwxr-xr-x   195KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
+-rwxr-xr-x   195KiB /usr/libexec/getconf/XBS5_LP64_OFF64
+-rwxr-xr-x   195KiB /usr/sbin/iconvconfig
+-rwxr-xr-x   912KiB /usr/sbin/ldconfig
+-rwxr-xr-x   195KiB /usr/sbin/zic
 -rw-r--r--    11KiB /usr/share/doc/docker/LICENSE
 -rw-r--r--     642B /usr/share/doc/docker/NOTICE
--rw-r--r--       1B /usr/share/gcc-11/python/libstdcxx/__init__.py
--rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
--rw-r--r--     137B /usr/share/gcc-11/python/libstdcxx/__pycache__/__init__.cpython-39.pyc
--rw-r--r--   1.2KiB /usr/share/gcc-11/python/libstdcxx/v6/__init__.py
--rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
--rw-r--r--     605B /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
--rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
--rw-r--r--    68KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
--rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
--rw-r--r--    35KiB /usr/share/gcc-11/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
--rw-r--r--    83KiB /usr/share/gcc-11/python/libstdcxx/v6/printers.py
--rw-r--r--    28KiB /usr/share/gcc-11/python/libstdcxx/v6/xmethods.py
--rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.opt-1.pyc
--rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.29-gdb.cpython-39.pyc
--rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.29-gdb.py
+-rw-r--r--       1B /usr/share/gcc-14/python/libstdcxx/__init__.py
+-rw-r--r--     137B /usr/share/gcc-14/python/libstdcxx/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--     137B /usr/share/gcc-14/python/libstdcxx/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--   1.2KiB /usr/share/gcc-14/python/libstdcxx/v6/__init__.py
+-rw-r--r--     585B /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--     585B /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--    88KiB /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/printers.cpython-39.opt-1.pyc
+-rw-r--r--    88KiB /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/printers.cpython-39.pyc
+-rw-r--r--    35KiB /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.opt-1.pyc
+-rw-r--r--    35KiB /usr/share/gcc-14/python/libstdcxx/v6/__pycache__/xmethods.cpython-39.pyc
+-rw-r--r--   110KiB /usr/share/gcc-14/python/libstdcxx/v6/printers.py
+-rw-r--r--    29KiB /usr/share/gcc-14/python/libstdcxx/v6/xmethods.py
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.33-gdb.cpython-39.opt-1.pyc
+-rw-r--r--     732B /usr/share/gdb/auto-load/usr/lib64/__pycache__/libstdc++.so.6.0.33-gdb.cpython-39.pyc
+-rw-r--r--   2.4KiB /usr/share/gdb/auto-load/usr/lib64/libstdc++.so.6.0.33-gdb.py
 -rw-r--r--    18KiB /usr/share/licenses/glibc/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc/COPYING.LIB
 -rw-r--r--    19KiB /usr/share/licenses/glibc/LICENSES
@@ -2139,7 +2139,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   932KiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   976KiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -2458,17 +2458,17 @@ lrwxrwxrwx      29B /etc/system-release-cpe ../usr/lib/system-release-cpe
 lrwxrwxrwx       7B /lib usr/lib
 lrwxrwxrwx       9B /lib64 usr/lib64
 lrwxrwxrwx       8B /sbin usr/sbin
-lrwxrwxrwx      31B /usr/bin/ld.so ../../lib/ld-linux-aarch64.so.1
+lrwxrwxrwx      28B /usr/bin/ld.so ../lib/ld-linux-aarch64.so.1
 lrwxrwxrwx       7B /usr/lib/debug/bin usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
-lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-11-20230605.so.1
+lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-14-20250110.so.1
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
-lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.29
+lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      10B /usr/tmp ../var/tmp
 lrwxrwxrwx      11B /var/lock ../run/lock
 lrwxrwxrwx      10B /var/mail spool/mail

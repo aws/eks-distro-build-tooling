@@ -19,9 +19,9 @@ findutils-4.8.0-2.amzn2023.0.2.x86_64
 gawk-5.1.0-3.amzn2023.0.3.x86_64
 gc-8.0.4-5.amzn2023.0.2.x86_64
 gdbm-libs-1.19-2.amzn2023.0.2.x86_64
-glibc-2.34-117.amzn2023.0.1.x86_64
-glibc-common-2.34-117.amzn2023.0.1.x86_64
-glibc-minimal-langpack-2.34-117.amzn2023.0.1.x86_64
+glibc-2.34-181.amzn2023.0.1.x86_64
+glibc-common-2.34-181.amzn2023.0.1.x86_64
+glibc-minimal-langpack-2.34-181.amzn2023.0.1.x86_64
 gmp-6.2.1-2.amzn2023.0.2.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
@@ -38,7 +38,7 @@ libcap-2.73-1.amzn2023.0.2.x86_64
 libcom_err-1.46.5-2.amzn2023.0.2.x86_64
 libcurl-8.5.0-1.amzn2023.0.5.x86_64
 libffi-3.4.4-1.amzn2023.0.1.x86_64
-libgcc-11.4.1-2.amzn2023.0.2.x86_64
+libgcc-14.2.1-7.amzn2023.0.1.x86_64
 libidn2-2.3.2-1.amzn2023.0.5.x86_64
 libnghttp2-1.59.0-3.amzn2023.0.1.x86_64
 libpsl-0.21.5-1.amzn2023.0.1.x86_64
@@ -47,7 +47,7 @@ libsepol-3.4-3.amzn2023.0.3.x86_64
 libsigsegv-2.13-2.amzn2023.0.2.x86_64
 libssh-0.10.6-1.amzn2023.0.1.x86_64
 libssh-config-0.10.6-1.amzn2023.0.1.noarch
-libstdc++-11.4.1-2.amzn2023.0.2.x86_64
+libstdc++-14.2.1-7.amzn2023.0.1.x86_64
 libtool-ltdl-2.4.7-1.amzn2023.0.3.x86_64
 libunistring-0.9.10-10.amzn2023.0.2.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
