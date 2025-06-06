@@ -83,9 +83,20 @@ fi
 # If running in builder base, most likely we are running in prow/codebuild, us retry logic
 # if not in builder base, probably running locally so skip the retry
 if [ -f "/buildkit.sh" ]; then
+    log_file=$(mktemp)
+    trap "rm -f $log_file" EXIT
     for i in $(seq 1 5); do
-        [ $i -gt 1 ] && sleep 15
-        $CMD $ARGS && s=0 && break || s=$?
+	printf "\nBuilding attempt: $i\n" >&2
+	[ $i -gt 1 ] && sleep 15
+	$CMD $ARGS 2>&1 | tee $log_file
+	s=${PIPESTATUS[0]}
+	# buildkit is not returning non-zero exit code on httpReadSeeker
+	# Retry if "ERROR: httpReadSeeker" in logs.
+	if grep -q "ERROR: httpReadSeeker" $log_file ; then
+	    printf "\nFound ERROR: httpReadSeeker in buildkit log, retrying..\n" >&2
+	    s=1
+	fi
+	[ $s == 0 ] && break
     done
 
     # space is limited on presubmit nodes, after each image build clear the build cache
