@@ -55,7 +55,7 @@ libedit-3.0-12.20121213cvs.amzn2.0.2.aarch64
 libfdisk-2.30.2-2.amzn2.0.11.aarch64
 libgcc-7.3.1-17.amzn2.aarch64
 libgcrypt-1.5.3-14.amzn2.0.3.aarch64
-libgpg-error-1.12-3.amzn2.0.3.aarch64
+libgpg-error-1.31-1.amzn2.0.1.aarch64
 libidn2-2.3.0-1.amzn2.0.3.aarch64
 libmount-2.30.2-2.amzn2.0.11.aarch64
 libnghttp2-1.41.0-1.amzn2.0.5.aarch64
