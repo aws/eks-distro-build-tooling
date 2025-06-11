@@ -501,7 +501,7 @@
 -rw-r--r--    25KiB /usr/include/argp.h
 -rw-r--r--   6.0KiB /usr/include/argz.h
 -rw-r--r--   3.4KiB /usr/include/arpa/ftp.h
--rw-r--r--   4.3KiB /usr/include/arpa/inet.h
+-rw-r--r--   4.4KiB /usr/include/arpa/inet.h
 -rw-r--r--    15KiB /usr/include/arpa/nameser.h
 -rw-r--r--   6.9KiB /usr/include/arpa/nameser_compat.h
 -rw-r--r--    11KiB /usr/include/arpa/telnet.h
@@ -644,6 +644,8 @@
 -rw-r--r--     972B /usr/include/bits/hwcap.h
 -rw-r--r--   9.4KiB /usr/include/bits/in.h
 -rw-r--r--   1.6KiB /usr/include/bits/indirect-return.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified-decl.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified.h
 -rw-r--r--      25B /usr/include/bits/initspin.h
 -rw-r--r--   1.1KiB /usr/include/bits/inotify.h
 -rw-r--r--   2.4KiB /usr/include/bits/ioctl-types.h
@@ -4805,7 +4807,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   876KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   880KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    23KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
@@ -4826,7 +4828,7 @@
 -rw-r--r--     253B /usr/lib64/libc.so
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    52KiB /usr/lib64/libc_malloc_debug.so.0
--rw-r--r--    13KiB /usr/lib64/libc_nonshared.a
+-rw-r--r--    16KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x    51KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1

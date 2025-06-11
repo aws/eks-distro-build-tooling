@@ -1371,7 +1371,7 @@
 -rwxr-xr-x   126KiB /usr/lib64/gssproxy/proxymech.so
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   876KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   880KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    23KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301

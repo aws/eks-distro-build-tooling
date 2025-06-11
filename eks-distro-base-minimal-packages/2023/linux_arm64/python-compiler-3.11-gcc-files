@@ -503,7 +503,7 @@
 -rw-r--r--    25KiB /usr/include/argp.h
 -rw-r--r--   6.0KiB /usr/include/argz.h
 -rw-r--r--   3.4KiB /usr/include/arpa/ftp.h
--rw-r--r--   4.3KiB /usr/include/arpa/inet.h
+-rw-r--r--   4.4KiB /usr/include/arpa/inet.h
 -rw-r--r--    15KiB /usr/include/arpa/nameser.h
 -rw-r--r--   6.9KiB /usr/include/arpa/nameser_compat.h
 -rw-r--r--    11KiB /usr/include/arpa/telnet.h
@@ -618,6 +618,8 @@
 -rw-r--r--   2.8KiB /usr/include/bits/hwcap.h
 -rw-r--r--   9.4KiB /usr/include/bits/in.h
 -rw-r--r--   1.1KiB /usr/include/bits/indirect-return.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified-decl.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified.h
 -rw-r--r--      25B /usr/include/bits/initspin.h
 -rw-r--r--   1.1KiB /usr/include/bits/inotify.h
 -rw-r--r--   2.4KiB /usr/include/bits/ioctl-types.h
@@ -1997,7 +1999,7 @@
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/rpmver
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   852KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   855KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -3117,7 +3119,7 @@
 -rw-r--r--   6.9KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/monkey.cpython-311.pyc
 -rw-r--r--    63KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/msvc.cpython-311.pyc
 -rw-r--r--   5.6KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/namespaces.cpython-311.pyc
--rw-r--r--    60KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/package_index.cpython-311.pyc
+-rw-r--r--    61KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/package_index.cpython-311.pyc
 -rw-r--r--     771B /usr/lib/python3.11/site-packages/setuptools/__pycache__/py34compat.cpython-311.pyc
 -rw-r--r--    27KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/sandbox.cpython-311.pyc
 -rw-r--r--   1.9KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/unicode_utils.cpython-311.pyc
@@ -3443,7 +3445,7 @@
 -rw-r--r--   4.8KiB /usr/lib/python3.11/site-packages/setuptools/monkey.py
 -rw-r--r--    47KiB /usr/lib/python3.11/site-packages/setuptools/msvc.py
 -rw-r--r--   3.1KiB /usr/lib/python3.11/site-packages/setuptools/namespaces.py
--rw-r--r--    40KiB /usr/lib/python3.11/site-packages/setuptools/package_index.py
+-rw-r--r--    41KiB /usr/lib/python3.11/site-packages/setuptools/package_index.py
 -rw-r--r--     245B /usr/lib/python3.11/site-packages/setuptools/py34compat.py
 -rw-r--r--    15KiB /usr/lib/python3.11/site-packages/setuptools/sandbox.py
 -rw-r--r--     218B /usr/lib/python3.11/site-packages/setuptools/script (dev).tmpl
@@ -4477,7 +4479,7 @@
 -rw-r--r--     259B /usr/lib64/libc.so
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   199KiB /usr/lib64/libc_malloc_debug.so.0
--rw-r--r--    13KiB /usr/lib64/libc_nonshared.a
+-rw-r--r--    17KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x   195KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
@@ -11215,7 +11217,7 @@
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
 -rwxr-xr-x   587KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rwxr-xr-x   1.5MiB /usr/share/python3.11-wheels/pip-22.3.1-py3-none-any.whl
--rwxr-xr-x   860KiB /usr/share/python3.11-wheels/setuptools-65.5.1-py3-none-any.whl
+-rwxr-xr-x   861KiB /usr/share/python3.11-wheels/setuptools-65.5.1-py3-none-any.whl
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100

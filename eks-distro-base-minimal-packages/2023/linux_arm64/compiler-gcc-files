@@ -493,7 +493,7 @@
 -rw-r--r--    25KiB /usr/include/argp.h
 -rw-r--r--   6.0KiB /usr/include/argz.h
 -rw-r--r--   3.4KiB /usr/include/arpa/ftp.h
--rw-r--r--   4.3KiB /usr/include/arpa/inet.h
+-rw-r--r--   4.4KiB /usr/include/arpa/inet.h
 -rw-r--r--    15KiB /usr/include/arpa/nameser.h
 -rw-r--r--   6.9KiB /usr/include/arpa/nameser_compat.h
 -rw-r--r--    11KiB /usr/include/arpa/telnet.h
@@ -608,6 +608,8 @@
 -rw-r--r--   2.8KiB /usr/include/bits/hwcap.h
 -rw-r--r--   9.4KiB /usr/include/bits/in.h
 -rw-r--r--   1.1KiB /usr/include/bits/indirect-return.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified-decl.h
+-rw-r--r--   1.8KiB /usr/include/bits/inet-fortified.h
 -rw-r--r--      25B /usr/include/bits/initspin.h
 -rw-r--r--   1.1KiB /usr/include/bits/inotify.h
 -rw-r--r--   2.4KiB /usr/include/bits/ioctl-types.h
@@ -1986,7 +1988,7 @@
 -rw-r--r--      34B /usr/lib/gcc/aarch64-amazon-linux/11/rpmver
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   852KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   855KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -3027,7 +3029,7 @@
 -rw-r--r--     259B /usr/lib64/libc.so
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   199KiB /usr/lib64/libc_malloc_debug.so.0
--rw-r--r--    13KiB /usr/lib64/libc_nonshared.a
+-rw-r--r--    17KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x   195KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1

@@ -19,9 +19,9 @@ findutils-4.8.0-2.amzn2023.0.2.aarch64
 gawk-5.1.0-3.amzn2023.0.3.aarch64
 gc-8.0.4-5.amzn2023.0.2.aarch64
 gdbm-libs-1.19-2.amzn2023.0.2.aarch64
-glibc-2.34-181.amzn2023.0.1.aarch64
-glibc-common-2.34-181.amzn2023.0.1.aarch64
-glibc-minimal-langpack-2.34-181.amzn2023.0.1.aarch64
+glibc-2.34-196.amzn2023.0.1.aarch64
+glibc-common-2.34-196.amzn2023.0.1.aarch64
+glibc-minimal-langpack-2.34-196.amzn2023.0.1.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
