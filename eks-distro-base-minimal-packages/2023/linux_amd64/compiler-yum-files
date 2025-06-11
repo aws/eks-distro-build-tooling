@@ -1172,7 +1172,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   876KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   880KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    23KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
@@ -7338,7 +7338,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.7MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.6MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

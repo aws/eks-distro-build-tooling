@@ -5,5 +5,4 @@ glibc-devel.x86_64
 glibc-gconv-extra.x86_64
 glibc-headers-x86.noarch
 glibc-minimal-langpack.x86_64
-kernel-headers.x86_64
-libtasn1.x86_64
+python3-setuptools-wheel.noarch

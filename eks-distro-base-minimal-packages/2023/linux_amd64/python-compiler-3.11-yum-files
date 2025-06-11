@@ -1591,7 +1591,7 @@
 -rw-r--r--   6.9KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/monkey.cpython-311.pyc
 -rw-r--r--    63KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/msvc.cpython-311.pyc
 -rw-r--r--   5.6KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/namespaces.cpython-311.pyc
--rw-r--r--    60KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/package_index.cpython-311.pyc
+-rw-r--r--    61KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/package_index.cpython-311.pyc
 -rw-r--r--     771B /usr/lib/python3.11/site-packages/setuptools/__pycache__/py34compat.cpython-311.pyc
 -rw-r--r--    27KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/sandbox.cpython-311.pyc
 -rw-r--r--   1.9KiB /usr/lib/python3.11/site-packages/setuptools/__pycache__/unicode_utils.cpython-311.pyc
@@ -1917,7 +1917,7 @@
 -rw-r--r--   4.8KiB /usr/lib/python3.11/site-packages/setuptools/monkey.py
 -rw-r--r--    47KiB /usr/lib/python3.11/site-packages/setuptools/msvc.py
 -rw-r--r--   3.1KiB /usr/lib/python3.11/site-packages/setuptools/namespaces.py
--rw-r--r--    40KiB /usr/lib/python3.11/site-packages/setuptools/package_index.py
+-rw-r--r--    41KiB /usr/lib/python3.11/site-packages/setuptools/package_index.py
 -rw-r--r--     245B /usr/lib/python3.11/site-packages/setuptools/py34compat.py
 -rw-r--r--    15KiB /usr/lib/python3.11/site-packages/setuptools/sandbox.py
 -rw-r--r--     218B /usr/lib/python3.11/site-packages/setuptools/script (dev).tmpl
@@ -2622,7 +2622,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
 -rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   876KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   880KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    23KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
@@ -9294,7 +9294,7 @@
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
 -rwxr-xr-x   587KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rwxr-xr-x   1.5MiB /usr/share/python3.11-wheels/pip-22.3.1-py3-none-any.whl
--rwxr-xr-x   860KiB /usr/share/python3.11-wheels/setuptools-65.5.1-py3-none-any.whl
+-rwxr-xr-x   861KiB /usr/share/python3.11-wheels/setuptools-65.5.1-py3-none-any.whl
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100

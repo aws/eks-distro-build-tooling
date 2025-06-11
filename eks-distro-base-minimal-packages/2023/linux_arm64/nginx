@@ -8,9 +8,9 @@ coreutils-common-8.32-30.amzn2023.0.3.aarch64
 cracklib-2.9.6-27.amzn2023.0.2.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
 gettext-0.21-4.amzn2023.0.2.aarch64
-glibc-2.34-181.amzn2023.0.1.aarch64
-glibc-common-2.34-181.amzn2023.0.1.aarch64
-glibc-minimal-langpack-2.34-181.amzn2023.0.1.aarch64
+glibc-2.34-196.amzn2023.0.1.aarch64
+glibc-common-2.34-196.amzn2023.0.1.aarch64
+glibc-minimal-langpack-2.34-196.amzn2023.0.1.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gperftools-libs-2.9.1-1.amzn2023.0.3.aarch64
 gpg-pubkey-afaa0026-61929986
