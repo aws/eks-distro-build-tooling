@@ -10,7 +10,7 @@
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
--rw-r--r--   9.0KiB /etc/containerd/config.toml
+-rw-r--r--   7.3KiB /etc/containerd/config.toml
 -rw-r--r--   1.6KiB /etc/csh.cshrc
 -rw-r--r--     866B /etc/csh.login
 -rw-r--r--     838B /etc/dbus-1/session.conf
@@ -221,16 +221,14 @@
 -rwxr-xr-x    41KiB /usr/bin/column
 -rwxr-xr-x    33KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
--rwxr-xr-x    55MiB /usr/bin/containerd
--rwxr-xr-x   6.4MiB /usr/bin/containerd-shim
--rwxr-xr-x   7.5MiB /usr/bin/containerd-shim-runc-v1
--rwxr-xr-x    13MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    54MiB /usr/bin/containerd
+-rwxr-xr-x   7.4MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   151KiB /usr/bin/coredumpctl
 -rwxr-xr-x   144KiB /usr/bin/cp
 -rwxr-xr-x   143KiB /usr/bin/cpio
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
--rwxr-xr-x    29MiB /usr/bin/ctr
+-rwxr-xr-x    22MiB /usr/bin/ctr
 -rwxr-xr-x   247KiB /usr/bin/curl
 -rwxr-xr-x    41KiB /usr/bin/cut
 -rwxr-xr-x   242KiB /usr/bin/cvtsudoers
@@ -4540,7 +4538,7 @@
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-1.7.27/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-2.0.5/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
