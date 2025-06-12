@@ -1,2 +1,4 @@
 
-libxml2.x86_64
+git-core.x86_64
+openssh.x86_64
+openssh-clients.x86_64
