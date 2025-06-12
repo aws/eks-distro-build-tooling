@@ -7,7 +7,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
 ca-certificates-2023.2.68-1.amzn2.0.1.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 conntrack-tools-1.4.4-5.amzn2.2.aarch64
-containerd-1.7.27-1.amzn2.0.2.aarch64
+containerd-2.0.5-1.amzn2.0.1.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.0.1.aarch64
 cracklib-2.9.0-11.amzn2.0.2.aarch64
