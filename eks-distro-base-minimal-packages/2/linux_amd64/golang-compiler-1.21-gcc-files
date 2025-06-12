@@ -17905,7 +17905,7 @@
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
 -rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.3KiB /usr/libexec/git-core/git-web--browse

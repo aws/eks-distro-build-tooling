@@ -3367,7 +3367,7 @@
 -rw-r--r--   5.2KiB /usr/lib/python3.7/site-packages/setuptools/monkey.py
 -rw-r--r--    51KiB /usr/lib/python3.7/site-packages/setuptools/msvc.py
 -rw-r--r--   3.2KiB /usr/lib/python3.7/site-packages/setuptools/namespaces.py
--rw-r--r--    40KiB /usr/lib/python3.7/site-packages/setuptools/package_index.py
+-rw-r--r--    41KiB /usr/lib/python3.7/site-packages/setuptools/package_index.py
 -rw-r--r--   1.5KiB /usr/lib/python3.7/site-packages/setuptools/py27compat.py
 -rw-r--r--     838B /usr/lib/python3.7/site-packages/setuptools/py31compat.py
 -rw-r--r--   1.3KiB /usr/lib/python3.7/site-packages/setuptools/py33compat.py
