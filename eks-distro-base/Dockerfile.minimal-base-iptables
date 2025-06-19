@@ -51,7 +51,13 @@ RUN set -x && \
     install_rpm conntrack-tools \
         ipset \
         kmod \
-        iptables-nft && \
+        iptables-nft \
+        libevent \
+        libnfnetlink \
+        libnetfilter_conntrack \
+        libnetfilter_cthelper \
+        libnetfilter_cttimeout \
+        libnetfilter_queue && \
     if_al2 install_rpm iptables ebtables && \
     if_al2023 install_rpm iptables-legacy ebtables-legacy nftables && \
     if_al2023 yum --installroot $NEWROOT install -y --setopt=install_weak_deps=False pam && \

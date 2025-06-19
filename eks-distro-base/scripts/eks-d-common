@@ -88,7 +88,8 @@ function build::common::binary_to_libraries() {
     [[ ! $binary == *".so"* ]] && echo "Finding libraries for ${binary}"
 
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    local -r ldd_output=$(LD_LIBRARY_PATH=$ld_library_path ldd "${binary}" 2>&1)
+    local ldd_output_with_path=$(LD_LIBRARY_PATH=$ld_library_path ldd "${binary}" 2>&1)
+    local -r ldd_output=$(if [[ $ldd_output_with_path == *"symbol lookup error"* ]] || [[ $ldd_output_with_path == *"undefined symbol"* ]]; then ldd "${binary}" 2>&1; else echo "$ldd_output_with_path"; fi)
     local needed_libraries=""
     local objdump_fallback="false"
     if [[ $ldd_output == *"core dump"* ]] || [[ $ldd_output == *"Segmentation"* ]] || [[ $ldd_output == *"exited with unknown exit code"* ]] \
@@ -109,7 +110,8 @@ function build::common::binary_to_libraries() {
                 | awk '{print $1}' \
                 `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
                 `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
-                | grep -v 'linux-vdso.so.1'
+                | grep -v 'linux-vdso.so.1' \
+                | grep '^/'
             )
         fi
     fi
@@ -122,6 +124,8 @@ function build::common::binary_to_libraries() {
     if [ -n "${needed_libraries}" ]; then
         local full_paths=""
         while IFS= read -r library; do             
+            # Skip empty lines
+            [ -z "$library" ] && continue           
             local full_path=""
 
             # already a full path
@@ -571,4 +575,5 @@ function build::common::install_deps_for_binary() {
         done
     done
 }
+
 
