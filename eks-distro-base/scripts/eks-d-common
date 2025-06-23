@@ -25,17 +25,26 @@ function build::common::yum_provides() {
     local -r bin=$1  
     local  __resultvar="$2"
 
-    build::log::off
+    # Log function entry and parameters
+    echo "[DEBUG] Entering build::common::yum_provides with bin='${bin}', resultvar='${__resultvar}'"
 
+    build::log::off
+    
+    # Log the cache check
+    echo "[DEBUG] Checking if PROVIDES_CACHE[${bin}] exists..."
     # if key exists, 1 is returned which would resolve to true
     if [ ! ${PROVIDES_CACHE[$bin]+1} ]; then
         echo "Finding yum package for ${bin}"
         PROVIDES_CACHE[$bin]=$(yum provides "${bin}" 2>&1 || true)
+        echo "[DEBUG] Initial yum provides result for '${bin}': ${PROVIDES_CACHE[$bin]}"
         # al22 is not as forgiving when searching
+        echo "[DEBUG] Running: yum provides '*/$(basename ${bin})'"
         [[ ${PROVIDES_CACHE[$bin]} == *"No matches found"* ]] && PROVIDES_CACHE[$bin]=$(yum provides "*/$(basename ${bin})" 2>&1)
+        echo "[DEBUG] Before sed processing: ${PROVIDES_CACHE[$bin]}"
         PROVIDES_CACHE[$bin]=$(echo "${PROVIDES_CACHE[$bin]}" | sed "s/'//g")
+        echo "[DEBUG] After sed processing: ${PROVIDES_CACHE[$bin]}"
     fi
-
+    echo "[DEBUG] Cached value: ${PROVIDES_CACHE[$bin]}"
     eval $__resultvar="'${PROVIDES_CACHE[$bin]}'"
 
     build::log::setup
@@ -88,8 +97,7 @@ function build::common::binary_to_libraries() {
     [[ ! $binary == *".so"* ]] && echo "Finding libraries for ${binary}"
 
     # see: https://man7.org/linux/man-pages/man1/ldd.1.html
-    local ldd_output_with_path=$(LD_LIBRARY_PATH=$ld_library_path ldd "${binary}" 2>&1)
-    local -r ldd_output=$(if [[ $ldd_output_with_path == *"symbol lookup error"* ]] || [[ $ldd_output_with_path == *"undefined symbol"* ]]; then ldd "${binary}" 2>&1; else echo "$ldd_output_with_path"; fi)
+    local -r ldd_output=$(LD_LIBRARY_PATH=$ld_library_path ldd "${binary}" 2>&1)
     local needed_libraries=""
     local objdump_fallback="false"
     if [[ $ldd_output == *"core dump"* ]] || [[ $ldd_output == *"Segmentation"* ]] || [[ $ldd_output == *"exited with unknown exit code"* ]] \
@@ -110,8 +118,7 @@ function build::common::binary_to_libraries() {
                 | awk '{print $1}' \
                 `# linux-vdso.so.1 is a special virtual shared object from the kernel` \
                 `# see: http://man7.org/linux/man-pages/man7/vdso.7.html` \
-                | grep -v 'linux-vdso.so.1' \
-                | grep '^/'
+                | grep -v 'linux-vdso.so.1'
             )
         fi
     fi
@@ -123,9 +130,7 @@ function build::common::binary_to_libraries() {
     # ldd segfaulting should be a non-issue in al22
     if [ -n "${needed_libraries}" ]; then
         local full_paths=""
-        while IFS= read -r library; do             
-            # Skip empty lines
-            [ -z "$library" ] && continue           
+        while IFS= read -r library; do                     
             local full_path=""
 
             # already a full path
