@@ -263,7 +263,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   287KiB /usr/bin/curl
+-rwxr-xr-x   295KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -806,7 +806,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   203KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   772KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   837KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    15KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   609KiB /usr/lib64/libdw-0.188.so

@@ -1,5 +1,4 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
-python3-setuptools-wheel.noarch
+libxml2.x86_64
+python3.x86_64
+python3-libs.x86_64

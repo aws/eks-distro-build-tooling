@@ -13583,7 +13583,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x   287KiB /usr/bin/curl
+-rwxr-xr-x   295KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -13723,7 +13723,7 @@
 -rwxr-xr-x    45KiB /usr/bin/rmdir
 -rwxr-xr-x    37KiB /usr/bin/runcon
 -rwxr-xr-x   812KiB /usr/bin/scalar
--rwxr-xr-x   133KiB /usr/bin/scp
+-rwxr-xr-x   131KiB /usr/bin/scp
 -rwxr-xr-x    53KiB /usr/bin/script
 -rwxr-xr-x    45KiB /usr/bin/scriptlive
 -rwxr-xr-x    37KiB /usr/bin/scriptreplay
@@ -13733,7 +13733,7 @@
 -rwxr-xr-x    41KiB /usr/bin/setpriv
 -rwxr-xr-x    16KiB /usr/bin/setsid
 -rwxr-xr-x    37KiB /usr/bin/setterm
--rwxr-xr-x   145KiB /usr/bin/sftp
+-rwxr-xr-x   143KiB /usr/bin/sftp
 -rwxr-xr-x    41KiB /usr/bin/sha1sum
 -rwxr-xr-x    41KiB /usr/bin/sha224sum
 -rwxr-xr-x    41KiB /usr/bin/sha256sum
@@ -13747,12 +13747,12 @@
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    53KiB /usr/bin/split
 -rwxr-xr-x    35KiB /usr/bin/sprof
--rwxr-xr-x   848KiB /usr/bin/ssh
--rwxr-xr-x   165KiB /usr/bin/ssh-add
--rwxr-xr-x   285KiB /usr/bin/ssh-agent
+-rwxr-xr-x   839KiB /usr/bin/ssh
+-rwxr-xr-x   163KiB /usr/bin/ssh-add
+-rwxr-xr-x   283KiB /usr/bin/ssh-agent
 -rwxr-xr-x    13KiB /usr/bin/ssh-copy-id
--rwxr-xr-x   455KiB /usr/bin/ssh-keygen
--rwxr-xr-x   202KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   451KiB /usr/bin/ssh-keygen
+-rwxr-xr-x   199KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x    85KiB /usr/bin/stat
 -rwxr-xr-x    49KiB /usr/bin/stdbuf
 -rwxr-xr-x    31KiB /usr/bin/strings
@@ -14219,7 +14219,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   199KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   203KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   772KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   837KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    15KiB /usr/lib64/libdl.so.2
@@ -14416,9 +14416,9 @@
 -rw-r--r--     510B /usr/libexec/git-core/mergetools/winmerge
 -rw-r--r--     913B /usr/libexec/git-core/mergetools/xxdiff
 -rwxr-xr-x     257B /usr/libexec/grepconf.sh
--r-xr-sr-x   330KiB /usr/libexec/openssh/ssh-keysign
--rwxr-xr-x   125KiB /usr/libexec/openssh/ssh-pkcs11-helper
--rwxr-xr-x   137KiB /usr/libexec/openssh/ssh-sk-helper
+-r-xr-sr-x   327KiB /usr/libexec/openssh/ssh-keysign
+-rwxr-xr-x   123KiB /usr/libexec/openssh/ssh-pkcs11-helper
+-rwxr-xr-x   135KiB /usr/libexec/openssh/ssh-sk-helper
 -rwx--s--x    16KiB /usr/libexec/utempter/utempter
 -rwxr-xr-x    16KiB /usr/sbin/addpart
 -rwxr-xr-x    58KiB /usr/sbin/agetty
