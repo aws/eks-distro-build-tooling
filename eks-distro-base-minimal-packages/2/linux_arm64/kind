@@ -152,7 +152,7 @@ rpm-4.11.3-48.amzn2.0.5.aarch64
 rpm-build-libs-4.11.3-48.amzn2.0.5.aarch64
 rpm-libs-4.11.3-48.amzn2.0.5.aarch64
 rsync-3.1.2-11.amzn2.0.5.aarch64
-runc-1.2.4-1.amzn2.aarch64
+runc-1.2.4-3.amzn2.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 shadow-utils-4.1.5.1-24.amzn2.0.3.aarch64
