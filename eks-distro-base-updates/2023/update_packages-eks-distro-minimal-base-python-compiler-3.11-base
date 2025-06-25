@@ -1,6 +1,5 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
-python3.11-setuptools.noarch
-python3.11-setuptools-wheel.noarch
+curl.x86_64
+libcurl.x86_64
+python3.11.x86_64
+python3.11-libs.x86_64

@@ -1,9 +1,7 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-devel.x86_64
-glibc-gconv-extra.x86_64
-glibc-headers-x86.noarch
-glibc-minimal-langpack.x86_64
-python3-setuptools.noarch
-python3-setuptools-wheel.noarch
+curl.x86_64
+libarchive.x86_64
+libcurl.x86_64
+libxml2.x86_64
+python3.x86_64
+python3-libs.x86_64

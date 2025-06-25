@@ -10,7 +10,7 @@ coreutils-8.32-30.amzn2023.0.3.aarch64
 coreutils-common-8.32-30.amzn2023.0.3.aarch64
 cracklib-2.9.6-27.amzn2023.0.2.aarch64
 crypto-policies-20240828-2.git626aa59.amzn2023.0.1.noarch
-curl-8.5.0-1.amzn2023.0.5.aarch64
+curl-8.11.1-4.amzn2023.0.1.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 dnf-4.14.0-1.amzn2023.0.6.noarch
 dnf-data-4.14.0-1.amzn2023.0.6.noarch
@@ -45,7 +45,7 @@ keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 krb5-libs-1.21.3-1.amzn2023.0.1.aarch64
 less-608-2.amzn2023.0.2.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
-libarchive-3.7.4-2.amzn2023.0.2.aarch64
+libarchive-3.7.4-2.amzn2023.0.3.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libattr-2.5.1-3.amzn2023.0.2.aarch64
 libblkid-2.37.4-1.amzn2023.0.4.aarch64
@@ -55,7 +55,7 @@ libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
 libcomps-0.1.20-1.amzn2023.aarch64
-libcurl-8.5.0-1.amzn2023.0.5.aarch64
+libcurl-8.11.1-4.amzn2023.0.1.aarch64
 libdb-5.3.28-49.amzn2023.0.2.aarch64
 libdnf-0.69.0-8.amzn2023.0.5.aarch64
 libeconf-0.4.0-1.amzn2023.0.3.aarch64
@@ -92,7 +92,7 @@ libutempter-1.2.1-4.amzn2023.0.2.aarch64
 libuuid-2.37.4-1.amzn2023.0.4.aarch64
 libverto-0.3.2-1.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-libxml2-2.10.4-1.amzn2023.0.10.aarch64
+libxml2-2.10.4-1.amzn2023.0.11.aarch64
 libyaml-0.2.5-5.amzn2023.0.2.aarch64
 libzstd-1.5.5-1.amzn2023.0.1.aarch64
 lua-libs-5.4.4-3.amzn2023.0.2.aarch64
@@ -104,8 +104,8 @@ ncurses-libs-6.2-4.20200222.amzn2023.0.6.aarch64
 nettle-3.10.1-1.amzn2023.0.1.aarch64
 npth-1.6-6.amzn2023.0.2.aarch64
 openldap-2.4.57-6.amzn2023.0.7.aarch64
-openssh-8.7p1-8.amzn2023.0.14.aarch64
-openssh-clients-8.7p1-8.amzn2023.0.14.aarch64
+openssh-8.7p1-8.amzn2023.0.15.aarch64
+openssh-clients-8.7p1-8.amzn2023.0.15.aarch64
 openssl-fips-provider-latest-3.2.2-1.amzn2023.0.1.aarch64
 openssl-libs-3.2.2-1.amzn2023.0.1.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
@@ -115,13 +115,13 @@ pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 popt-1.18-6.amzn2023.0.2.aarch64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
-python3-3.9.22-1.amzn2023.0.1.aarch64
+python3-3.9.23-1.amzn2023.0.1.aarch64
 python3-dnf-4.14.0-1.amzn2023.0.6.noarch
 python3-gpg-1.23.2-182.amzn2023.0.1.aarch64
 python3-hawkey-0.69.0-8.amzn2023.0.5.aarch64
 python3-libcomps-0.1.20-1.amzn2023.aarch64
 python3-libdnf-0.69.0-8.amzn2023.0.5.aarch64
-python3-libs-3.9.22-1.amzn2023.0.1.aarch64
+python3-libs-3.9.23-1.amzn2023.0.1.aarch64
 python3-pip-wheel-21.3.1-2.amzn2023.0.11.noarch
 python3-rpm-4.16.1.3-29.amzn2023.0.6.aarch64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.6.noarch
