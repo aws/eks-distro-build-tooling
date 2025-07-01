@@ -32,11 +32,11 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     566B /etc/pki/ca-trust/extracted/edk2/README
--r--r--r--   160KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
+-r--r--r--   154KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   160KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   155KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   521KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   528KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
 -r--r--r--   2.8KiB /etc/pki/ca-trust/extracted/pem/directory-hash/ACCVRAIZ1.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/AC_RAIZ_FNMT-RCM.pem
@@ -57,7 +57,6 @@
 -r--r--r--   2.2KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/BJCA_Global_Root_CA1.pem
 -r--r--r--     806B /etc/pki/ca-trust/extracted/pem/directory-hash/BJCA_Global_Root_CA2.pem
--r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Baltimore_CyberTrust_Root.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Buypass_Class_2_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Buypass_Class_3_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/CA_Disig_Root_R2.pem
@@ -77,9 +76,10 @@
 -r--r--r--     794B /etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_ECC_Root-02.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_RSA_Root-01.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_RSA_Root-02.pem
--r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Comodo_AAA_Services_root.pem
 -r--r--r--   1.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_BR_Root_CA_1_2020.pem
+-r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_BR_Root_CA_2_2023.pem
 -r--r--r--   1.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_EV_Root_CA_1_2020.pem
+-r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_EV_Root_CA_2_2023.pem
 -r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_Root_Class_3_CA_2_2009.pem
 -r--r--r--   1.6KiB /etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_Root_Class_3_CA_2_EV_2009.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/DigiCert_Assured_ID_Root_CA.pem
@@ -92,11 +92,9 @@
 -r--r--r--     790B /etc/pki/ca-trust/extracted/pem/directory-hash/DigiCert_TLS_ECC_P384_Root_G5.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/DigiCert_TLS_RSA4096_Root_G5.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/DigiCert_Trusted_Root_G4.pem
--r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust.net_Premium_2048_Secure_Server_CA.pem
 -r--r--r--   1.7KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority.pem
 -r--r--r--   1.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_EC1.pem
 -r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_G2.pem
--r--r--r--   2.2KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Entrust_Root_Certification_Authority_-_G4.pem
 -r--r--r--     920B /etc/pki/ca-trust/extracted/pem/directory-hash/FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GDCA_TrustAUTH_R5_ROOT.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GTS_Root_R1.pem
@@ -105,12 +103,10 @@
 -r--r--r--     765B /etc/pki/ca-trust/extracted/pem/directory-hash/GTS_Root_R4.pem
 -r--r--r--     704B /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_ECC_Root_CA_-_R4.pem
 -r--r--r--     794B /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_ECC_Root_CA_-_R5.pem
--r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_Root_CA.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_Root_CA_-_R3.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_Root_CA_-_R6.pem
 -r--r--r--     769B /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_Root_E46.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/GlobalSign_Root_R46.pem
--r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Go_Daddy_Class_2_CA.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Go_Daddy_Root_Certificate_Authority_-_G2.pem
 -r--r--r--     867B /etc/pki/ca-trust/extracted/pem/directory-hash/HARICA_TLS_ECC_Root_CA_2021.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/HARICA_TLS_RSA_Root_CA_2021.pem
@@ -144,20 +140,20 @@
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SZAFIR_ROOT_CA2.pem
 -r--r--r--     834B /etc/pki/ca-trust/extracted/pem/directory-hash/Sectigo_Public_Server_Authentication_Root_E46.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Sectigo_Public_Server_Authentication_Root_R46.pem
--r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SecureSign_RootCA11.pem
+-r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SecureSign_Root_CA12.pem
+-r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SecureSign_Root_CA14.pem
+-r--r--r--     802B /etc/pki/ca-trust/extracted/pem/directory-hash/SecureSign_Root_CA15.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SecureTrust_CA.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Secure_Global_CA.pem
 -r--r--r--     830B /etc/pki/ca-trust/extracted/pem/directory-hash/Security_Communication_ECC_RootCA1.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Security_Communication_RootCA2.pem
--r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Security_Communication_RootCA3.pem
--r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Class_2_CA.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Root_Certificate_Authority_-_G2.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Services_Root_Certificate_Authority_-_G2.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SwissSign_Gold_CA_-_G2.pem
--r--r--r--   2.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SwissSign_Silver_CA_-_G2.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/T-TeleSec_GlobalRoot_Class_2.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/T-TeleSec_GlobalRoot_Class_3.pem
 -r--r--r--   1.6KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
+-r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TWCA_CYBER_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TWCA_Global_Root_CA.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/TWCA_Root_Certification_Authority.pem
 -r--r--r--     843B /etc/pki/ca-trust/extracted/pem/directory-hash/Telekom_Security_TLS_ECC_Root_2020.pem
@@ -174,7 +170,6 @@
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/UCA_Global_G2_Root.pem
 -r--r--r--     948B /etc/pki/ca-trust/extracted/pem/directory-hash/USERTrust_ECC_Certification_Authority.pem
 -r--r--r--   2.1KiB /etc/pki/ca-trust/extracted/pem/directory-hash/USERTrust_RSA_Certification_Authority.pem
--r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/XRamp_Global_CA_Root.pem
 -r--r--r--   1.2KiB /etc/pki/ca-trust/extracted/pem/directory-hash/certSIGN_ROOT_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/certSIGN_Root_CA_G2.pem
 -r--r--r--     843B /etc/pki/ca-trust/extracted/pem/directory-hash/e-Szigno_Root_CA_2017.pem
@@ -185,9 +180,9 @@
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_Root_CA_-_G1.pem
 -r--r--r--     774B /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_ECC_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_Root_CA.pem
--r--r--r--   160KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
--r--r--r--   383KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   220KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   147KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   380KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
+-r--r--r--   212KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
@@ -245,6 +240,7 @@
 -rw-r--r--     305B /usr/lib/rpm/macros.d/macros.dist
 -rw-r--r--      52B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
+-rw-r--r--     187B /usr/lib/systemd/system-preset/80-amzn-overrides.preset
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
 -rw-r--r--   8.3KiB /usr/lib/systemd/system-preset/90-default.preset
 -rw-r--r--      32B /usr/lib/systemd/system-preset/91-amazon-ssm-agent.preset
@@ -405,11 +401,11 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Argentina/Tucuman
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Argentina/Ushuaia
 -rw-r--r--     246B /usr/share/zoneinfo/America/Aruba
--rw-r--r--   2.0KiB /usr/share/zoneinfo/America/Asuncion
+-rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Asuncion
 -rw-r--r--     182B /usr/share/zoneinfo/America/Atikokan
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Atka
 -rw-r--r--   1.0KiB /usr/share/zoneinfo/America/Bahia
--rw-r--r--   1.2KiB /usr/share/zoneinfo/America/Bahia_Banderas
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Bahia_Banderas
 -rw-r--r--     436B /usr/share/zoneinfo/America/Barbados
 -rw-r--r--     576B /usr/share/zoneinfo/America/Belem
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Belize
@@ -420,7 +416,7 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Buenos_Aires
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Cambridge_Bay
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Campo_Grande
--rw-r--r--     834B /usr/share/zoneinfo/America/Cancun
+-rw-r--r--     864B /usr/share/zoneinfo/America/Cancun
 -rw-r--r--     264B /usr/share/zoneinfo/America/Caracas
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Catamarca
 -rw-r--r--     198B /usr/share/zoneinfo/America/Cayenne
@@ -431,6 +427,7 @@
 -rw-r--r--     182B /usr/share/zoneinfo/America/Coral_Harbour
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Cordoba
 -rw-r--r--     316B /usr/share/zoneinfo/America/Costa_Rica
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Coyhaique
 -rw-r--r--     360B /usr/share/zoneinfo/America/Creston
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/America/Cuiaba
 -rw-r--r--     246B /usr/share/zoneinfo/America/Curacao
@@ -443,7 +440,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Edmonton
 -rw-r--r--     656B /usr/share/zoneinfo/America/Eirunepe
 -rw-r--r--     224B /usr/share/zoneinfo/America/El_Salvador
--rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Ensenada
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Ensenada
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Fort_Nelson
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Fort_Wayne
 -rw-r--r--     716B /usr/share/zoneinfo/America/Fortaleza
@@ -458,7 +455,7 @@
 -rw-r--r--     262B /usr/share/zoneinfo/America/Guyana
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/America/Halifax
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Havana
--rw-r--r--     456B /usr/share/zoneinfo/America/Hermosillo
+-rw-r--r--     388B /usr/share/zoneinfo/America/Hermosillo
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Indiana/Indianapolis
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Indiana/Knox
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Indiana/Marengo
@@ -488,7 +485,7 @@
 -rw-r--r--     246B /usr/share/zoneinfo/America/Marigot
 -rw-r--r--     232B /usr/share/zoneinfo/America/Martinique
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/America/Matamoros
--rw-r--r--   1.2KiB /usr/share/zoneinfo/America/Mazatlan
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Mazatlan
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Mendoza
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Menominee
 -rw-r--r--    1004B /usr/share/zoneinfo/America/Merida
@@ -496,7 +493,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/America/Mexico_City
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Miquelon
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/America/Moncton
--rw-r--r--     980B /usr/share/zoneinfo/America/Monterrey
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Monterrey
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Montevideo
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/America/Montreal
 -rw-r--r--     246B /usr/share/zoneinfo/America/Montserrat
@@ -527,7 +524,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Resolute
 -rw-r--r--     628B /usr/share/zoneinfo/America/Rio_Branco
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Rosario
--rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Santa_Isabel
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Santa_Isabel
 -rw-r--r--     602B /usr/share/zoneinfo/America/Santarem
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Santiago
 -rw-r--r--     458B /usr/share/zoneinfo/America/Santo_Domingo
@@ -545,7 +542,7 @@
 -rw-r--r--     252B /usr/share/zoneinfo/America/Tegucigalpa
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Thule
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/America/Thunder_Bay
--rw-r--r--   2.4KiB /usr/share/zoneinfo/America/Tijuana
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/America/Tortola
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Vancouver
@@ -586,14 +583,14 @@
 -rw-r--r--     483B /usr/share/zoneinfo/Asia/Brunei
 -rw-r--r--     285B /usr/share/zoneinfo/Asia/Calcutta
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Asia/Chita
--rw-r--r--     949B /usr/share/zoneinfo/Asia/Choibalsan
+-rw-r--r--     891B /usr/share/zoneinfo/Asia/Choibalsan
 -rw-r--r--     561B /usr/share/zoneinfo/Asia/Chongqing
 -rw-r--r--     561B /usr/share/zoneinfo/Asia/Chungking
 -rw-r--r--     372B /usr/share/zoneinfo/Asia/Colombo
 -rw-r--r--     337B /usr/share/zoneinfo/Asia/Dacca
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Asia/Damascus
 -rw-r--r--     337B /usr/share/zoneinfo/Asia/Dhaka
--rw-r--r--     227B /usr/share/zoneinfo/Asia/Dili
+-rw-r--r--     271B /usr/share/zoneinfo/Asia/Dili
 -rw-r--r--     165B /usr/share/zoneinfo/Asia/Dubai
 -rw-r--r--     591B /usr/share/zoneinfo/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Asia/Famagusta
@@ -624,7 +621,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Asia/Macau
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Asia/Magadan
 -rw-r--r--     254B /usr/share/zoneinfo/Asia/Makassar
--rw-r--r--     328B /usr/share/zoneinfo/Asia/Manila
+-rw-r--r--     422B /usr/share/zoneinfo/Asia/Manila
 -rw-r--r--     165B /usr/share/zoneinfo/Asia/Muscat
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Asia/Nicosia
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Asia/Novokuznetsk
@@ -666,14 +663,14 @@
 -rw-r--r--     268B /usr/share/zoneinfo/Asia/Yangon
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/Asia/Yekaterinburg
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Asia/Yerevan
--rw-r--r--   3.5KiB /usr/share/zoneinfo/Atlantic/Azores
+-rw-r--r--   3.4KiB /usr/share/zoneinfo/Atlantic/Azores
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Atlantic/Bermuda
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/Atlantic/Canary
 -rw-r--r--     270B /usr/share/zoneinfo/Atlantic/Cape_Verde
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/Atlantic/Faeroe
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/Atlantic/Faroe
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/Atlantic/Jan_Mayen
--rw-r--r--   3.5KiB /usr/share/zoneinfo/Atlantic/Madeira
+-rw-r--r--   3.3KiB /usr/share/zoneinfo/Atlantic/Madeira
 -rw-r--r--     148B /usr/share/zoneinfo/Atlantic/Reykjavik
 -rw-r--r--     164B /usr/share/zoneinfo/Atlantic/South_Georgia
 -rw-r--r--     148B /usr/share/zoneinfo/Atlantic/St_Helena
@@ -705,8 +702,8 @@
 -rw-r--r--     716B /usr/share/zoneinfo/Brazil/DeNoronha
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/Brazil/East
 -rw-r--r--     604B /usr/share/zoneinfo/Brazil/West
--rw-r--r--   2.1KiB /usr/share/zoneinfo/CET
--rw-r--r--   2.3KiB /usr/share/zoneinfo/CST6CDT
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/CET
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/CST6CDT
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/Canada/Atlantic
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/Canada/Central
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Canada/Eastern
@@ -718,9 +715,9 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Chile/Continental
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/Chile/EasterIsland
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Cuba
--rw-r--r--   1.9KiB /usr/share/zoneinfo/EET
--rw-r--r--     114B /usr/share/zoneinfo/EST
--rw-r--r--   2.3KiB /usr/share/zoneinfo/EST5EDT
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/EET
+-rw-r--r--     182B /usr/share/zoneinfo/EST
+-rw-r--r--   3.5KiB /usr/share/zoneinfo/EST5EDT
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Eire
 -rw-r--r--     114B /usr/share/zoneinfo/Etc/GMT
@@ -830,7 +827,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/GMT-0
 -rw-r--r--     114B /usr/share/zoneinfo/GMT0
 -rw-r--r--     114B /usr/share/zoneinfo/Greenwich
--rw-r--r--     115B /usr/share/zoneinfo/HST
+-rw-r--r--     329B /usr/share/zoneinfo/HST
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/Hongkong
 -rw-r--r--     148B /usr/share/zoneinfo/Iceland
 -rw-r--r--     265B /usr/share/zoneinfo/Indian/Antananarivo
@@ -850,17 +847,17 @@
 -rw-r--r--     309B /usr/share/zoneinfo/Japan
 -rw-r--r--     316B /usr/share/zoneinfo/Kwajalein
 -rw-r--r--     625B /usr/share/zoneinfo/Libya
--rw-r--r--   2.1KiB /usr/share/zoneinfo/MET
--rw-r--r--     114B /usr/share/zoneinfo/MST
--rw-r--r--   2.3KiB /usr/share/zoneinfo/MST7MDT
--rw-r--r--   2.4KiB /usr/share/zoneinfo/Mexico/BajaNorte
--rw-r--r--   1.2KiB /usr/share/zoneinfo/Mexico/BajaSur
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/MET
+-rw-r--r--     360B /usr/share/zoneinfo/MST
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/MST7MDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/Mexico/BajaNorte
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/Mexico/BajaSur
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Mexico/General
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/NZ
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/NZ-CHAT
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Navajo
 -rw-r--r--     561B /usr/share/zoneinfo/PRC
--rw-r--r--   2.3KiB /usr/share/zoneinfo/PST8PDT
+-rw-r--r--   2.8KiB /usr/share/zoneinfo/PST8PDT
 -rw-r--r--     612B /usr/share/zoneinfo/Pacific/Apia
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Pacific/Auckland
 -rw-r--r--     268B /usr/share/zoneinfo/Pacific/Bougainville
@@ -927,7 +924,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/UTC
 -rw-r--r--     114B /usr/share/zoneinfo/Universal
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/W-SU
--rw-r--r--   1.9KiB /usr/share/zoneinfo/WET
+-rw-r--r--   3.5KiB /usr/share/zoneinfo/WET
 -rw-r--r--     114B /usr/share/zoneinfo/Zulu
 -rw-r--r--   4.7KiB /usr/share/zoneinfo/iso3166.tab
 -rw-r--r--   5.0KiB /usr/share/zoneinfo/leap-seconds.list
@@ -1005,11 +1002,11 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Argentina/Tucuman
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Argentina/Ushuaia
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Aruba
--rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/America/Asuncion
+-rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Asuncion
 -rw-r--r--     182B /usr/share/zoneinfo/posix/America/Atikokan
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Atka
 -rw-r--r--   1.0KiB /usr/share/zoneinfo/posix/America/Bahia
--rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/America/Bahia_Banderas
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Bahia_Banderas
 -rw-r--r--     436B /usr/share/zoneinfo/posix/America/Barbados
 -rw-r--r--     576B /usr/share/zoneinfo/posix/America/Belem
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Belize
@@ -1020,7 +1017,7 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Buenos_Aires
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Cambridge_Bay
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Campo_Grande
--rw-r--r--     834B /usr/share/zoneinfo/posix/America/Cancun
+-rw-r--r--     864B /usr/share/zoneinfo/posix/America/Cancun
 -rw-r--r--     264B /usr/share/zoneinfo/posix/America/Caracas
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Catamarca
 -rw-r--r--     198B /usr/share/zoneinfo/posix/America/Cayenne
@@ -1031,6 +1028,7 @@
 -rw-r--r--     182B /usr/share/zoneinfo/posix/America/Coral_Harbour
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Cordoba
 -rw-r--r--     316B /usr/share/zoneinfo/posix/America/Costa_Rica
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Coyhaique
 -rw-r--r--     360B /usr/share/zoneinfo/posix/America/Creston
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/posix/America/Cuiaba
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Curacao
@@ -1043,7 +1041,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Edmonton
 -rw-r--r--     656B /usr/share/zoneinfo/posix/America/Eirunepe
 -rw-r--r--     224B /usr/share/zoneinfo/posix/America/El_Salvador
--rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Ensenada
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Ensenada
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Fort_Nelson
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Fort_Wayne
 -rw-r--r--     716B /usr/share/zoneinfo/posix/America/Fortaleza
@@ -1058,7 +1056,7 @@
 -rw-r--r--     262B /usr/share/zoneinfo/posix/America/Guyana
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/posix/America/Halifax
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Havana
--rw-r--r--     456B /usr/share/zoneinfo/posix/America/Hermosillo
+-rw-r--r--     388B /usr/share/zoneinfo/posix/America/Hermosillo
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Indiana/Indianapolis
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Indiana/Knox
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Indiana/Marengo
@@ -1088,7 +1086,7 @@
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Marigot
 -rw-r--r--     232B /usr/share/zoneinfo/posix/America/Martinique
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/posix/America/Matamoros
--rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/America/Mazatlan
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Mazatlan
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Mendoza
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Menominee
 -rw-r--r--    1004B /usr/share/zoneinfo/posix/America/Merida
@@ -1096,7 +1094,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/America/Mexico_City
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Miquelon
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/posix/America/Moncton
--rw-r--r--     980B /usr/share/zoneinfo/posix/America/Monterrey
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Monterrey
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Montevideo
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/America/Montreal
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Montserrat
@@ -1127,7 +1125,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Resolute
 -rw-r--r--     628B /usr/share/zoneinfo/posix/America/Rio_Branco
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Rosario
--rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Santa_Isabel
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Santa_Isabel
 -rw-r--r--     602B /usr/share/zoneinfo/posix/America/Santarem
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Santiago
 -rw-r--r--     458B /usr/share/zoneinfo/posix/America/Santo_Domingo
@@ -1145,7 +1143,7 @@
 -rw-r--r--     252B /usr/share/zoneinfo/posix/America/Tegucigalpa
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Thule
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/America/Thunder_Bay
--rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/America/Tijuana
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Tortola
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Vancouver
@@ -1186,14 +1184,14 @@
 -rw-r--r--     483B /usr/share/zoneinfo/posix/Asia/Brunei
 -rw-r--r--     285B /usr/share/zoneinfo/posix/Asia/Calcutta
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Asia/Chita
--rw-r--r--     949B /usr/share/zoneinfo/posix/Asia/Choibalsan
+-rw-r--r--     891B /usr/share/zoneinfo/posix/Asia/Choibalsan
 -rw-r--r--     561B /usr/share/zoneinfo/posix/Asia/Chongqing
 -rw-r--r--     561B /usr/share/zoneinfo/posix/Asia/Chungking
 -rw-r--r--     372B /usr/share/zoneinfo/posix/Asia/Colombo
 -rw-r--r--     337B /usr/share/zoneinfo/posix/Asia/Dacca
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Asia/Damascus
 -rw-r--r--     337B /usr/share/zoneinfo/posix/Asia/Dhaka
--rw-r--r--     227B /usr/share/zoneinfo/posix/Asia/Dili
+-rw-r--r--     271B /usr/share/zoneinfo/posix/Asia/Dili
 -rw-r--r--     165B /usr/share/zoneinfo/posix/Asia/Dubai
 -rw-r--r--     591B /usr/share/zoneinfo/posix/Asia/Dushanbe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Asia/Famagusta
@@ -1224,7 +1222,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Asia/Macau
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Asia/Magadan
 -rw-r--r--     254B /usr/share/zoneinfo/posix/Asia/Makassar
--rw-r--r--     328B /usr/share/zoneinfo/posix/Asia/Manila
+-rw-r--r--     422B /usr/share/zoneinfo/posix/Asia/Manila
 -rw-r--r--     165B /usr/share/zoneinfo/posix/Asia/Muscat
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Asia/Nicosia
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Asia/Novokuznetsk
@@ -1266,14 +1264,14 @@
 -rw-r--r--     268B /usr/share/zoneinfo/posix/Asia/Yangon
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/posix/Asia/Yekaterinburg
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Asia/Yerevan
--rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Atlantic/Azores
+-rw-r--r--   3.4KiB /usr/share/zoneinfo/posix/Atlantic/Azores
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Atlantic/Bermuda
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/Atlantic/Canary
 -rw-r--r--     270B /usr/share/zoneinfo/posix/Atlantic/Cape_Verde
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/posix/Atlantic/Faeroe
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/posix/Atlantic/Faroe
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/Atlantic/Jan_Mayen
--rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Atlantic/Madeira
+-rw-r--r--   3.3KiB /usr/share/zoneinfo/posix/Atlantic/Madeira
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Atlantic/Reykjavik
 -rw-r--r--     164B /usr/share/zoneinfo/posix/Atlantic/South_Georgia
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Atlantic/St_Helena
@@ -1305,8 +1303,8 @@
 -rw-r--r--     716B /usr/share/zoneinfo/posix/Brazil/DeNoronha
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/Brazil/East
 -rw-r--r--     604B /usr/share/zoneinfo/posix/Brazil/West
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/CET
--rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/CST6CDT
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/CET
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/posix/CST6CDT
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/posix/Canada/Atlantic
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/Canada/Central
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Canada/Eastern
@@ -1318,9 +1316,9 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Chile/Continental
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/Chile/EasterIsland
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Cuba
--rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/EET
--rw-r--r--     114B /usr/share/zoneinfo/posix/EST
--rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/EST5EDT
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/EET
+-rw-r--r--     182B /usr/share/zoneinfo/posix/EST
+-rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/EST5EDT
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Eire
 -rw-r--r--     114B /usr/share/zoneinfo/posix/Etc/GMT
@@ -1430,7 +1428,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/posix/GMT-0
 -rw-r--r--     114B /usr/share/zoneinfo/posix/GMT0
 -rw-r--r--     114B /usr/share/zoneinfo/posix/Greenwich
--rw-r--r--     115B /usr/share/zoneinfo/posix/HST
+-rw-r--r--     329B /usr/share/zoneinfo/posix/HST
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/posix/Hongkong
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Iceland
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Indian/Antananarivo
@@ -1450,17 +1448,17 @@
 -rw-r--r--     309B /usr/share/zoneinfo/posix/Japan
 -rw-r--r--     316B /usr/share/zoneinfo/posix/Kwajalein
 -rw-r--r--     625B /usr/share/zoneinfo/posix/Libya
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/MET
--rw-r--r--     114B /usr/share/zoneinfo/posix/MST
--rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/MST7MDT
--rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Mexico/BajaNorte
--rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Mexico/BajaSur
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/MET
+-rw-r--r--     360B /usr/share/zoneinfo/posix/MST
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/MST7MDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Mexico/BajaNorte
+-rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/Mexico/BajaSur
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Mexico/General
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/NZ
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/NZ-CHAT
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Navajo
 -rw-r--r--     561B /usr/share/zoneinfo/posix/PRC
--rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/PST8PDT
+-rw-r--r--   2.8KiB /usr/share/zoneinfo/posix/PST8PDT
 -rw-r--r--     612B /usr/share/zoneinfo/posix/Pacific/Apia
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Pacific/Auckland
 -rw-r--r--     268B /usr/share/zoneinfo/posix/Pacific/Bougainville
@@ -1527,7 +1525,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/posix/UTC
 -rw-r--r--     114B /usr/share/zoneinfo/posix/Universal
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/W-SU
--rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/WET
+-rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/WET
 -rw-r--r--     114B /usr/share/zoneinfo/posix/Zulu
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posixrules
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Abidjan
@@ -1543,7 +1541,7 @@
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Blantyre
 -rw-r--r--     784B /usr/share/zoneinfo/right/Africa/Brazzaville
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Bujumbura
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Africa/Cairo
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Africa/Cairo
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Africa/Casablanca
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Africa/Ceuta
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Conakry
@@ -1551,7 +1549,7 @@
 -rw-r--r--     814B /usr/share/zoneinfo/right/Africa/Dar_es_Salaam
 -rw-r--r--     814B /usr/share/zoneinfo/right/Africa/Djibouti
 -rw-r--r--     784B /usr/share/zoneinfo/right/Africa/Douala
--rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Africa/El_Aaiun
+-rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Africa/El_Aaiun
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Freetown
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Gaborone
 -rw-r--r--     698B /usr/share/zoneinfo/right/Africa/Harare
@@ -1585,7 +1583,7 @@
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/Africa/Tunis
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Africa/Windhoek
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Adak
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Anchorage
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Anchorage
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Anguilla
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Antigua
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/right/America/Araguaina
@@ -1629,6 +1627,7 @@
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Coral_Harbour
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Cordoba
 -rw-r--r--     866B /usr/share/zoneinfo/right/America/Costa_Rica
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Coyhaique
 -rw-r--r--     910B /usr/share/zoneinfo/right/America/Creston
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Cuiaba
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Curacao
@@ -1641,13 +1640,13 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Edmonton
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/America/Eirunepe
 -rw-r--r--     774B /usr/share/zoneinfo/right/America/El_Salvador
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Ensenada
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Ensenada
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/America/Fort_Nelson
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Fort_Wayne
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Fortaleza
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Glace_Bay
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Godthab
--rw-r--r--   3.3KiB /usr/share/zoneinfo/right/America/Goose_Bay
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Godthab
+-rw-r--r--   3.4KiB /usr/share/zoneinfo/right/America/Goose_Bay
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Grenada
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Guadeloupe
@@ -1656,7 +1655,7 @@
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Guyana
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Halifax
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Havana
--rw-r--r--    1006B /usr/share/zoneinfo/right/America/Hermosillo
+-rw-r--r--     938B /usr/share/zoneinfo/right/America/Hermosillo
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indiana/Indianapolis
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Indiana/Knox
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indiana/Marengo
@@ -1666,19 +1665,19 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indiana/Vincennes
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Indiana/Winamac
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indianapolis
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Inuvik
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/America/Inuvik
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Iqaluit
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/America/Jamaica
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Jujuy
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Juneau
--rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Kentucky/Louisville
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Kentucky/Monticello
+-rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Kentucky/Louisville
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Kentucky/Monticello
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Knox_IN
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Kralendijk
 -rw-r--r--     766B /usr/share/zoneinfo/right/America/La_Paz
 -rw-r--r--     940B /usr/share/zoneinfo/right/America/Lima
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Los_Angeles
--rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Louisville
+-rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Louisville
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Lower_Princes
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Maceio
 -rw-r--r--     980B /usr/share/zoneinfo/right/America/Managua
@@ -1686,27 +1685,27 @@
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Marigot
 -rw-r--r--     782B /usr/share/zoneinfo/right/America/Martinique
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Matamoros
--rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Mazatlan
+-rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Mazatlan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Mendoza
--rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Menominee
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Menominee
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Merida
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Metlakatla
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/America/Mexico_City
--rw-r--r--   1.8KiB /usr/share/zoneinfo/right/America/Miquelon
+-rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Miquelon
 -rw-r--r--   3.3KiB /usr/share/zoneinfo/right/America/Moncton
--rw-r--r--   1.5KiB /usr/share/zoneinfo/right/America/Monterrey
+-rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Monterrey
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Montevideo
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Montreal
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Montreal
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Montserrat
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Nassau
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Nassau
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/New_York
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Nipigon
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Nome
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Nipigon
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Nome
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Noronha
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/North_Dakota/Beulah
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/North_Dakota/Center
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/North_Dakota/New_Salem
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Nuuk
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Nuuk
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Ojinaga
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Panama
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Pangnirtung
@@ -1719,13 +1718,13 @@
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Puerto_Rico
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Punta_Arenas
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Rainy_River
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Rankin_Inlet
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/America/Rankin_Inlet
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Recife
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/America/Regina
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Resolute
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/America/Resolute
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/America/Rio_Branco
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Rosario
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Santa_Isabel
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Santa_Isabel
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/America/Santarem
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Santiago
 -rw-r--r--    1008B /usr/share/zoneinfo/right/America/Santo_Domingo
@@ -1742,11 +1741,11 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/America/Swift_Current
 -rw-r--r--     802B /usr/share/zoneinfo/right/America/Tegucigalpa
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Thule
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Thunder_Bay
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Tijuana
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/America/Toronto
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Thunder_Bay
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Tijuana
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/America/Toronto
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Tortola
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Vancouver
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/America/Vancouver
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Virgin
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Whitehorse
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Winnipeg
@@ -1762,7 +1761,7 @@
 -rw-r--r--     698B /usr/share/zoneinfo/right/Antarctica/Rothera
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Antarctica/South_Pole
 -rw-r--r--     698B /usr/share/zoneinfo/right/Antarctica/Syowa
--rw-r--r--   1.3KiB /usr/share/zoneinfo/right/Antarctica/Troll
+-rw-r--r--   1.4KiB /usr/share/zoneinfo/right/Antarctica/Troll
 -rw-r--r--     760B /usr/share/zoneinfo/right/Antarctica/Vostok
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Arctic/Longyearbyen
 -rw-r--r--     698B /usr/share/zoneinfo/right/Asia/Aden
@@ -1784,14 +1783,14 @@
 -rw-r--r--    1016B /usr/share/zoneinfo/right/Asia/Brunei
 -rw-r--r--     831B /usr/share/zoneinfo/right/Asia/Calcutta
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Chita
--rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Asia/Choibalsan
+-rw-r--r--   1.4KiB /usr/share/zoneinfo/right/Asia/Choibalsan
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Chongqing
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Chungking
 -rw-r--r--     900B /usr/share/zoneinfo/right/Asia/Colombo
 -rw-r--r--     870B /usr/share/zoneinfo/right/Asia/Dacca
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Asia/Damascus
 -rw-r--r--     870B /usr/share/zoneinfo/right/Asia/Dhaka
--rw-r--r--     760B /usr/share/zoneinfo/right/Asia/Dili
+-rw-r--r--     804B /usr/share/zoneinfo/right/Asia/Dili
 -rw-r--r--     698B /usr/share/zoneinfo/right/Asia/Dubai
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Dushanbe
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Asia/Famagusta
@@ -1805,7 +1804,7 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Asia/Istanbul
 -rw-r--r--     932B /usr/share/zoneinfo/right/Asia/Jakarta
 -rw-r--r--     770B /usr/share/zoneinfo/right/Asia/Jayapura
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Asia/Jerusalem
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Jerusalem
 -rw-r--r--     736B /usr/share/zoneinfo/right/Asia/Kabul
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Asia/Kamchatka
 -rw-r--r--     928B /usr/share/zoneinfo/right/Asia/Karachi
@@ -1822,7 +1821,7 @@
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Macau
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Magadan
 -rw-r--r--     802B /usr/share/zoneinfo/right/Asia/Makassar
--rw-r--r--     877B /usr/share/zoneinfo/right/Asia/Manila
+-rw-r--r--     971B /usr/share/zoneinfo/right/Asia/Manila
 -rw-r--r--     698B /usr/share/zoneinfo/right/Asia/Muscat
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Asia/Nicosia
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Asia/Novokuznetsk
@@ -1848,7 +1847,7 @@
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Tashkent
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Asia/Tbilisi
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Tehran
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Asia/Tel_Aviv
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Tel_Aviv
 -rw-r--r--     736B /usr/share/zoneinfo/right/Asia/Thimbu
 -rw-r--r--     736B /usr/share/zoneinfo/right/Asia/Thimphu
 -rw-r--r--     858B /usr/share/zoneinfo/right/Asia/Tokyo
@@ -1871,16 +1870,16 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Atlantic/Faeroe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Atlantic/Faroe
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Atlantic/Jan_Mayen
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Atlantic/Madeira
+-rw-r--r--   3.5KiB /usr/share/zoneinfo/right/Atlantic/Madeira
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/Reykjavik
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/South_Georgia
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/St_Helena
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Atlantic/Stanley
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/ACT
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/ACT
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Adelaide
 -rw-r--r--     966B /usr/share/zoneinfo/right/Australia/Brisbane
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Broken_Hill
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Canberra
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Canberra
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Australia/Currie
 -rw-r--r--     870B /usr/share/zoneinfo/right/Australia/Darwin
 -rw-r--r--     998B /usr/share/zoneinfo/right/Australia/Eucla
@@ -1888,38 +1887,38 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Australia/LHI
 -rw-r--r--    1022B /usr/share/zoneinfo/right/Australia/Lindeman
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Australia/Lord_Howe
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Melbourne
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/NSW
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Melbourne
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/NSW
 -rw-r--r--     870B /usr/share/zoneinfo/right/Australia/North
 -rw-r--r--     994B /usr/share/zoneinfo/right/Australia/Perth
 -rw-r--r--     966B /usr/share/zoneinfo/right/Australia/Queensland
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/South
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Sydney
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Sydney
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Australia/Tasmania
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Australia/Victoria
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Victoria
 -rw-r--r--     994B /usr/share/zoneinfo/right/Australia/West
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Yancowinna
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Brazil/Acre
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/Brazil/DeNoronha
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Brazil/East
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Brazil/West
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/CET
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/CST6CDT
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/CET
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/CST6CDT
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Canada/Atlantic
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Canada/Central
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Canada/Eastern
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Canada/Eastern
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Canada/Mountain
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/right/Canada/Newfoundland
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Canada/Pacific
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Canada/Pacific
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/right/Canada/Saskatchewan
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Canada/Yukon
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Chile/Continental
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Chile/EasterIsland
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Cuba
--rw-r--r--   2.1KiB /usr/share/zoneinfo/right/EET
--rw-r--r--     664B /usr/share/zoneinfo/right/EST
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/EST5EDT
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Egypt
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/EET
+-rw-r--r--     732B /usr/share/zoneinfo/right/EST
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/EST5EDT
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Egypt
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Eire
 -rw-r--r--     664B /usr/share/zoneinfo/right/Etc/GMT
 -rw-r--r--     664B /usr/share/zoneinfo/right/Etc/GMT+0
@@ -1965,10 +1964,10 @@
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Berlin
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Bratislava
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Europe/Brussels
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Bucharest
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Bucharest
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Budapest
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Busingen
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Chisinau
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Chisinau
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Copenhagen
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Europe/Dublin
 -rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Gibraltar
@@ -1981,7 +1980,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Kiev
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Kirov
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Kyiv
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Europe/Lisbon
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Europe/Lisbon
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Ljubljana
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/right/Europe/London
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Europe/Luxembourg
@@ -2004,11 +2003,11 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Europe/Saratov
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Europe/Simferopol
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Skopje
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Sofia
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Sofia
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Stockholm
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Tallinn
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Tirane
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Tiraspol
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Tirane
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Uzhgorod
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Vaduz
@@ -2028,7 +2027,7 @@
 -rw-r--r--     664B /usr/share/zoneinfo/right/GMT-0
 -rw-r--r--     664B /usr/share/zoneinfo/right/GMT0
 -rw-r--r--     664B /usr/share/zoneinfo/right/Greenwich
--rw-r--r--     664B /usr/share/zoneinfo/right/HST
+-rw-r--r--     878B /usr/share/zoneinfo/right/HST
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Hongkong
 -rw-r--r--     698B /usr/share/zoneinfo/right/Iceland
 -rw-r--r--     814B /usr/share/zoneinfo/right/Indian/Antananarivo
@@ -2043,22 +2042,22 @@
 -rw-r--r--     814B /usr/share/zoneinfo/right/Indian/Mayotte
 -rw-r--r--     698B /usr/share/zoneinfo/right/Indian/Reunion
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Iran
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Israel
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Israel
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Jamaica
 -rw-r--r--     858B /usr/share/zoneinfo/right/Japan
 -rw-r--r--     848B /usr/share/zoneinfo/right/Kwajalein
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Libya
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/MET
--rw-r--r--     664B /usr/share/zoneinfo/right/MST
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/MST7MDT
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Mexico/BajaNorte
--rw-r--r--   1.7KiB /usr/share/zoneinfo/right/Mexico/BajaSur
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/MET
+-rw-r--r--     910B /usr/share/zoneinfo/right/MST
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/MST7MDT
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Mexico/BajaNorte
+-rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Mexico/BajaSur
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Mexico/General
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/NZ
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/NZ-CHAT
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Navajo
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/PRC
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/PST8PDT
+-rw-r--r--   3.0KiB /usr/share/zoneinfo/right/PST8PDT
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Pacific/Apia
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Pacific/Auckland
 -rw-r--r--     800B /usr/share/zoneinfo/right/Pacific/Bougainville
@@ -2104,13 +2103,13 @@
 -rw-r--r--     698B /usr/share/zoneinfo/right/Pacific/Wallis
 -rw-r--r--     718B /usr/share/zoneinfo/right/Pacific/Yap
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Poland
--rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Portugal
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Portugal
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/ROC
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/ROK
 -rw-r--r--     948B /usr/share/zoneinfo/right/Singapore
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Turkey
 -rw-r--r--     664B /usr/share/zoneinfo/right/UCT
--rw-r--r--   2.5KiB /usr/share/zoneinfo/right/US/Alaska
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/right/US/Alaska
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/US/Aleutian
 -rw-r--r--     910B /usr/share/zoneinfo/right/US/Arizona
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/US/Central
@@ -2125,15 +2124,15 @@
 -rw-r--r--     664B /usr/share/zoneinfo/right/UTC
 -rw-r--r--     664B /usr/share/zoneinfo/right/Universal
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
--rw-r--r--   2.1KiB /usr/share/zoneinfo/right/WET
+-rw-r--r--   3.7KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     664B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   105KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.7KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   980KiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   972KiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -2154,7 +2153,6 @@ lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/064e0aa9.0 Qu
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/068570d1.0 FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
 lrwxrwxrwx      50B /etc/pki/ca-trust/extracted/pem/directory-hash/06dc52d5.0 SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/073bfcc5.0 TrustAsia_Global_Root_CA_G4.pem
-lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/08063a00.0 Security_Communication_RootCA3.pem
 lrwxrwxrwx      54B /etc/pki/ca-trust/extracted/pem/directory-hash/09789157.0 Starfield_Services_Root_Certificate_Authority_-_G2.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/0a775a30.0 GTS_Root_R3.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/0b1b94ef.0 CFCA_EV_ROOT.pem
@@ -2168,7 +2166,6 @@ lrwxrwxrwx      54B /etc/pki/ca-trust/extracted/pem/directory-hash/10531352.0 St
 lrwxrwxrwx      46B /etc/pki/ca-trust/extracted/pem/directory-hash/106f3e4d.0 Entrust_Root_Certification_Authority_-_EC1.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/128f4b91.0 Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/14bc7599.0 emSign_ECC_Root_CA_-_G3.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/18856ac4.0 SecureSign_RootCA11.pem
 lrwxrwxrwx      53B /etc/pki/ca-trust/extracted/pem/directory-hash/1ae85e5e.0 Trustwave_Global_ECC_P256_Certification_Authority.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/1b0f7e5c.0 GlobalSign_Root_R46.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/1cef98f5.0 TrustAsia_Global_Root_CA_G4.pem
@@ -2177,11 +2174,10 @@ lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/1df5a75f.0 D-
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/1e08bfd1.0 IdenTrust_Public_Sector_Root_CA_1.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/1e09d511.0 T-TeleSec_GlobalRoot_Class_2.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/1e1eab7c.0 T-TeleSec_GlobalRoot_Class_3.pem
+lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/1e44ef15.0 D-TRUST_BR_Root_CA_2_2023.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/1e8e7201.0 GlobalSign_Root_CA_-_R3.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/1f58a078.0 QuoVadis_Root_CA_2_G3.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/219d9499.0 Go_Daddy_Class_2_CA.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/228f89db.0 CommScope_Public_Trust_ECC_Root-01.pem
-lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/23f4c490.0 Starfield_Class_2_CA.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/244b5494.0 DigiCert_High_Assurance_EV_Root_CA.pem
 lrwxrwxrwx      33B /etc/pki/ca-trust/extracted/pem/directory-hash/252252d2.0 DigiCert_TLS_ECC_P384_Root_G5.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/2923b3f9.0 emSign_Root_CA_-_G1.pem
@@ -2200,14 +2196,12 @@ lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/34d996fb.0 Co
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/35105088.0 USERTrust_RSA_Certification_Authority.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/3513523f.0 DigiCert_Global_Root_CA.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/399e7759.0 DigiCert_Global_Root_CA.pem
-lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/3ad48a91.0 Baltimore_CyberTrust_Root.pem
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/3afde786.0 Sectigo_Public_Server_Authentication_Root_E46.pem
 lrwxrwxrwx      61B /etc/pki/ca-trust/extracted/pem/directory-hash/3bde41ac.0 Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/3c860d51.0 SwissSign_Gold_CA_-_G2.pem
 lrwxrwxrwx      35B /etc/pki/ca-trust/extracted/pem/directory-hash/3c899c73.0 OISTE_WISeKey_Global_Root_GC_CA.pem
 lrwxrwxrwx      13B /etc/pki/ca-trust/extracted/pem/directory-hash/3c9a4d3b.0 ACCVRAIZ1.pem
 lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/3e359ba6.0 BJCA_Global_Root_CA2.pem
-lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/3e7271e8.0 Entrust.net_Premium_2048_Secure_Server_CA.pem
 lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/3fb36b73.0 NAVER_Global_Root_Certification_Authority.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/40193066.0 Certum_Trusted_Network_CA_2.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/4042bcee.0 ISRG_Root_X1.pem
@@ -2215,6 +2209,7 @@ lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/40547a79.0 CO
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/406c9bb1.0 emSign_Root_CA_-_C1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/41a3f684.0 Certum_EC-384_CA.pem
 lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/455f1b52.0 Entrust_Root_Certification_Authority_-_G2.pem
+lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/47b283f6.0 TWCA_CYBER_Root_CA.pem
 lrwxrwxrwx      14B /etc/pki/ca-trust/extracted/pem/directory-hash/48a195d8.0 Izenpe.com.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/48bec511.0 Certum_Trusted_Network_CA.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/4b718d9b.0 emSign_ECC_Root_CA_-_C3.pem
@@ -2223,21 +2218,18 @@ lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/4bfab552.0 St
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/4c3982f2.0 HARICA_TLS_ECC_Root_CA_2021.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/4f316efb.0 SwissSign_Gold_CA_-_G2.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/4fd49c6c.0 CommScope_Public_Trust_RSA_Root-02.pem
-lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/5046c355.0 SwissSign_Silver_CA_-_G2.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/52b525c7.0 QuoVadis_Root_CA_1_G3.pem
 lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/53a1b57a.0 HiPKI_Root_CA_-_G1.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/5443e9e3.0 T-TeleSec_GlobalRoot_Class_3.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/54657681.0 Buypass_Class_2_Root_CA.pem
-lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/57bcb2da.0 SwissSign_Silver_CA_-_G2.pem
 lrwxrwxrwx      50B /etc/pki/ca-trust/extracted/pem/directory-hash/583d0756.0 SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/5860aaa6.0 Security_Communication_ECC_RootCA1.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/5931b5bc.0 D-TRUST_EV_Root_CA_1_2020.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/595e996b.0 CommScope_Public_Trust_ECC_Root-01.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/5a3f0ff8.0 COMODO_Certification_Authority.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/5acf816d.0 GTS_Root_R4.pem
-lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/5ad8a5d6.0 GlobalSign_Root_CA.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/5cd81ad7.0 TeliaSonera_Root_CA_v1.pem
-lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/5e98733a.0 Entrust_Root_Certification_Authority_-_G4.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/5d139d02.0 SecureSign_Root_CA12.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/5f15c80c.0 TWCA_Global_Root_CA.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/5f47b495.0 Actalis_Authentication_Root_CA.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/5f618aec.0 certSIGN_Root_CA_G2.pem
@@ -2245,23 +2237,21 @@ lrwxrwxrwx      39B /etc/pki/ca-trust/extracted/pem/directory-hash/5f9a69fa.0 AC
 lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/5fdd185d.0 Certainly_Root_E1.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/607986c7.0 DigiCert_Global_Root_G2.pem
 lrwxrwxrwx      48B /etc/pki/ca-trust/extracted/pem/directory-hash/60afe812.0 NetLock_Arany__Class_Gold__F__tan__s__tv__ny.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/616816f6.0 SecureSign_Root_CA12.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/6187b673.0 ISRG_Root_X1.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/626dceaf.0 GTS_Root_R2.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/63a2c897.0 TeliaSonera_Root_CA_v1.pem
-lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/653b494a.0 Baltimore_CyberTrust_Root.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/68dd7389.0 Hongkong_Post_Root_CA_3.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/69105f4f.0 DigiCert_Assured_ID_Root_CA.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/6a9bdba3.0 SecureSign_Root_CA15.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/6b03dec0.0 GTS_Root_R3.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/6b483515.0 Telekom_Security_TLS_ECC_Root_2020.pem
 lrwxrwxrwx      40B /etc/pki/ca-trust/extracted/pem/directory-hash/6b99d060.0 Entrust_Root_Certification_Authority.pem
+lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/6c85d883.0 D-TRUST_EV_Root_CA_2_2023.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/6d41d539.0 Amazon_Root_CA_2.pem
-lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/6f7454b3.0 Security_Communication_RootCA3.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/6fa5da56.0 SSL.com_Root_Certification_Authority_RSA.pem
-lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/706f604c.0 XRamp_Global_CA_Root.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/749e9e03.0 QuoVadis_Root_CA_1_G3.pem
-lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/75680d2e.0 Comodo_AAA_Services_root.pem
 lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/75d1b2ed.0 DigiCert_Trusted_Root_G4.pem
-lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/76579174.0 XRamp_Global_CA_Root.pem
 lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/76faf6c0.0 QuoVadis_Root_CA_3.pem
 lrwxrwxrwx      63B /etc/pki/ca-trust/extracted/pem/directory-hash/7719f463.0 Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.pem
 lrwxrwxrwx      35B /etc/pki/ca-trust/extracted/pem/directory-hash/773e07ad.0 OISTE_WISeKey_Global_Root_GC_CA.pem
@@ -2284,6 +2274,8 @@ lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/85cde254.0 St
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/86212b19.0 AffirmTrust_Networking.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/865fbdf9.0 SSL.com_TLS_ECC_Root_CA_2022.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/869fbf79.0 emSign_ECC_Root_CA_-_C3.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/8761519c.0 SecureSign_Root_CA14.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/878d9bca.0 SecureSign_Root_CA14.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/8794b4e3.0 ISRG_Root_X2.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/882de061.0 certSIGN_ROOT_CA.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/88950faa.0 SSL.com_Root_Certification_Authority_ECC.pem
@@ -2294,6 +2286,7 @@ lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/8d6437c3.0 Di
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/8d86cdd1.0 certSIGN_ROOT_CA.pem
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/8d89cda1.0 Microsoft_ECC_Root_Certificate_Authority_2017.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/8f103249.0 Telia_Root_CA_v2.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/8f6cd7bb.0 SecureSign_Root_CA15.pem
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/9046744a.0 Sectigo_Public_Server_Authentication_Root_R46.pem
 lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/90c5a3c8.0 HiPKI_Root_CA_-_G1.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/9282e51c.0 CFCA_EV_ROOT.pem
@@ -2320,6 +2313,7 @@ lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/9d04f354.0 Di
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/9d6523ce.0 ePKI_Root_Certification_Authority.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/9ef4a08a.0 D-TRUST_BR_Root_CA_1_2020.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/9f727ac7.0 HARICA_TLS_RSA_Root_CA_2021.pem
+lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/a09a51ae.0 D-TRUST_EV_Root_CA_2_2023.pem
 lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/a2c66da8.0 DigiCert_Trusted_Root_G4.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/a3418fda.0 GTS_Root_R4.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/a716d4ed.0 D-TRUST_EV_Root_CA_1_2020.pem
@@ -2327,12 +2321,9 @@ lrwxrwxrwx      19B /etc/pki/ca-trust/extracted/pem/directory-hash/a81e292b.0 SZ
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/a89d74c2.0 SSL.com_TLS_RSA_Root_CA_2022.pem
 lrwxrwxrwx      13B /etc/pki/ca-trust/extracted/pem/directory-hash/a94d09e5.0 ACCVRAIZ1.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/a9d40e02.0 certSIGN_Root_CA_G2.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/ab5346f4.0 SecureSign_RootCA11.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/ab59055e.0 GDCA_TrustAUTH_R5_ROOT.pem
-lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/aee5f10d.0 Entrust.net_Premium_2048_Secure_Server_CA.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/b0e59380.0 GlobalSign_ECC_Root_CA_-_R4.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/b0ed035a.0 TWCA_Global_Root_CA.pem
-lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/b0f3e76e.0 GlobalSign_Root_CA.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/b1159c4c.0 DigiCert_Assured_ID_Root_CA.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/b30d5fda.0 D-TRUST_BR_Root_CA_1_2020.pem
 lrwxrwxrwx      46B /etc/pki/ca-trust/extracted/pem/directory-hash/b3fb433b.0 Entrust_Root_Certification_Authority_-_EC1.pem
@@ -2344,6 +2335,7 @@ lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/b7a5b843.0 TW
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/b7db1890.0 TWCA_Root_Certification_Authority.pem
 lrwxrwxrwx      39B /etc/pki/ca-trust/extracted/pem/directory-hash/b81b93f0.0 AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/b872f2b4.0 Atos_TrustedRoot_2011.pem
+lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/b8d25de6.0 TWCA_CYBER_Root_CA.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/b92fd57f.0 HARICA_TLS_RSA_Root_CA_2021.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/b936d1c6.0 AC_RAIZ_FNMT-RCM.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/ba8887ce.0 FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
@@ -2415,17 +2407,13 @@ lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/ed858448.0 vT
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/edcbddb5.0 Trustwave_Global_Certification_Authority.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/ee37c333.0 Telekom_Security_TLS_RSA_Root_2023.pem
 lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/ee532fd5.0 vTrus_ECC_Root_CA.pem
-lrwxrwxrwx      28B /etc/pki/ca-trust/extracted/pem/directory-hash/ee64a828.0 Comodo_AAA_Services_root.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/eed8c118.0 COMODO_ECC_Certification_Authority.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/ef954a4e.0 IdenTrust_Commercial_Root_CA_1.pem
 lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/f013ecaf.0 GTS_Root_R1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/f058632f.0 Telia_Root_CA_v2.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/f081611a.0 Go_Daddy_Class_2_CA.pem
 lrwxrwxrwx      47B /etc/pki/ca-trust/extracted/pem/directory-hash/f0c70a8d.0 SSL.com_EV_Root_Certification_Authority_ECC.pem
-lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/f0cd152c.0 Entrust_Root_Certification_Authority_-_G4.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/f249de83.0 Trustwave_Global_Certification_Authority.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/f30dd6ad.0 USERTrust_ECC_Certification_Authority.pem
-lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/f387163d.0 Starfield_Class_2_CA.pem
 lrwxrwxrwx      18B /etc/pki/ca-trust/extracted/pem/directory-hash/f39fc864.0 SecureTrust_CA.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/f459871d.0 emSign_Root_CA_-_G1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/f51bb24c.0 Certigna_Root_CA.pem
@@ -2440,6 +2428,7 @@ lrwxrwxrwx      19B /etc/pki/ca-trust/extracted/pem/directory-hash/fe8a2cd8.0 SZ
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/feffd413.0 GlobalSign_Root_E46.pem
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/ff34af3f.0 TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
 lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/ffa7f1eb.0 BJCA_Global_Root_CA1.pem
+lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/ffdd40f9.0 D-TRUST_BR_Root_CA_2_2023.pem
 lrwxrwxrwx      59B /etc/pki/ca-trust/source/ca-bundle.legacy.crt /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 lrwxrwxrwx      40B /etc/pki/java/cacerts /etc/pki/ca-trust/extracted/java/cacerts
 lrwxrwxrwx      49B /etc/pki/tls/cert.pem /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
