@@ -1,8 +1,8 @@
-amazon-linux-repo-cdn-2023.6.20241212-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
 bzip2-libs-1.0.8-6.amzn2023.0.2.aarch64
-ca-certificates-2023.2.68-1.0.amzn2023.0.1.noarch
+ca-certificates-2025.2.76-1.0.amzn2023.0.1.noarch
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 expat-2.6.3-1.amzn2023.0.2.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
@@ -49,7 +49,7 @@ pcre2-10.40-1.amzn2023.0.3.aarch64
 readline-8.1-2.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-libs-3.40.0-1.amzn2023.0.5.aarch64
-system-release-2023.6.20241212-0.amzn2023.noarch
+system-release-2023.7.20250623-0.amzn2023.noarch
 systemd-libs-252.23-3.amzn2023.aarch64
-tzdata-2024a-1.amzn2023.0.1.noarch
+tzdata-2025b-1.amzn2023.0.1.noarch
 zlib-1.2.11-33.amzn2023.0.5.aarch64

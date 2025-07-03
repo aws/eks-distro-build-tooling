@@ -1,9 +1,9 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.6.20241212-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
 audit-libs-3.0.6-1.amzn2023.0.2.aarch64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
-ca-certificates-2023.2.68-1.0.amzn2023.0.1.noarch
+ca-certificates-2025.2.76-1.0.amzn2023.0.1.noarch
 conntrack-tools-1.4.6-2.amzn2023.0.2.aarch64
 coreutils-8.32-30.amzn2023.0.3.aarch64
 coreutils-common-8.32-30.amzn2023.0.3.aarch64
@@ -55,8 +55,8 @@ pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 readline-8.1-2.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
-system-release-2023.6.20241212-0.amzn2023.noarch
+system-release-2023.7.20250623-0.amzn2023.noarch
 systemd-libs-252.23-3.amzn2023.aarch64
-tzdata-2024a-1.amzn2023.0.1.noarch
+tzdata-2025b-1.amzn2023.0.1.noarch
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
 zlib-1.2.11-33.amzn2023.0.5.aarch64
