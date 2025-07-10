@@ -13258,7 +13258,7 @@
 -rwxr-xr-x   196KiB /usr/bin/gio-querymodules-64
 -rwxr-xr-x   4.0MiB /usr/bin/git
 -rwxr-xr-x   844KiB /usr/bin/git-shell
--rwxr-xr-x   196KiB /usr/bin/glib-compile-schemas
+-rwxr-xr-x   197KiB /usr/bin/glib-compile-schemas
 -rwsr-xr-x   201KiB /usr/bin/gpasswd
 -rwxr-xr-x   1.1MiB /usr/bin/gpg
 -rwxr-xr-x   460KiB /usr/bin/gpg-agent
