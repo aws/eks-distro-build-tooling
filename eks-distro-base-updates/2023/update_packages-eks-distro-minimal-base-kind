@@ -1,5 +1,7 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-system-release.noarch
-tzdata.noarch
+containerd.x86_64
+glib2.x86_64
+kernel-libbpf.x86_64
+python3-pip-wheel.noarch
+runc.x86_64
+sudo.x86_64

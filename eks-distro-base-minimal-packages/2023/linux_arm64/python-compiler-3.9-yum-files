@@ -306,7 +306,7 @@
 -rwxr-xr-x      35B /usr/bin/getopts
 -rwxr-xr-x   197KiB /usr/bin/gio
 -rwxr-xr-x   196KiB /usr/bin/gio-querymodules-64
--rwxr-xr-x   196KiB /usr/bin/glib-compile-schemas
+-rwxr-xr-x   197KiB /usr/bin/glib-compile-schemas
 -rwxr-xr-x   1.1MiB /usr/bin/gpg
 -rwxr-xr-x   460KiB /usr/bin/gpg-agent
 -rwxr-xr-x   264KiB /usr/bin/gpg-card
@@ -1884,7 +1884,7 @@
 -rw-r--r--   3.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-39.opt-1.pyc
 -rw-r--r--   3.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-39.pyc
 -rw-r--r--   5.6KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/_implementation.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
+-rw-r--r--    21KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
 -rw-r--r--   5.9KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/request.py
 -rw-r--r--    28KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__init__.py

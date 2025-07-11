@@ -828,7 +828,7 @@
 -rw-r--r--     442B /usr/include/bits/wordsize.h
 -rw-r--r--   3.8KiB /usr/include/bits/xopen_lim.h
 -rw-r--r--    25KiB /usr/include/bpf/bpf.h
--rw-r--r--    22KiB /usr/include/bpf/bpf_core_read.h
+-rw-r--r--    23KiB /usr/include/bpf/bpf_core_read.h
 -rw-r--r--   3.7KiB /usr/include/bpf/bpf_endian.h
 -rw-r--r--   172KiB /usr/include/bpf/bpf_helper_defs.h
 -rw-r--r--    16KiB /usr/include/bpf/bpf_helpers.h
@@ -3570,7 +3570,7 @@
 -rw-r--r--   3.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-39.opt-1.pyc
 -rw-r--r--   3.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-39.pyc
 -rw-r--r--   5.6KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/_implementation.py
--rw-r--r--    20KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
+-rw-r--r--    21KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
 -rw-r--r--   5.9KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/request.py
 -rw-r--r--    28KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__init__.py
@@ -11083,7 +11083,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.0MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

@@ -361,14 +361,14 @@
 -rwxr-xr-x    37KiB /usr/bin/column
 -rwxr-xr-x    37KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    59MiB /usr/bin/containerd
+-rwxr-xr-x    60MiB /usr/bin/containerd
 -rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   147KiB /usr/bin/cp
 -rwxr-xr-x   110KiB /usr/bin/csplit
--rwxr-xr-x    23MiB /usr/bin/ctr
+-rwxr-xr-x    24MiB /usr/bin/ctr
 -rwxr-xr-x   295KiB /usr/bin/curl
 -rwxr-xr-x    49KiB /usr/bin/cut
--rwxr-xr-x   333KiB /usr/bin/cvtsudoers
+-rwxr-xr-x   337KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
 -rwxr-xr-x   237KiB /usr/bin/dbus-broker
@@ -595,10 +595,10 @@
 -rwxr-xr-x    20KiB /usr/bin/systemd-cat
 -rwxr-xr-x    24KiB /usr/bin/systemd-cgls
 -rwxr-xr-x    40KiB /usr/bin/systemd-cgtop
--rwxr-xr-x    44KiB /usr/bin/systemd-creds
+-rwxr-xr-x    45KiB /usr/bin/systemd-creds
 -rwxr-xr-x    28KiB /usr/bin/systemd-delta
 -rwxr-xr-x    20KiB /usr/bin/systemd-detect-virt
--rwxr-xr-x    48KiB /usr/bin/systemd-dissect
+-rwxr-xr-x    49KiB /usr/bin/systemd-dissect
 -rwxr-xr-x    24KiB /usr/bin/systemd-escape
 -rwxr-xr-x    57KiB /usr/bin/systemd-firstboot
 -rwxr-xr-x    32KiB /usr/bin/systemd-id128
@@ -647,7 +647,7 @@
 -rwxr-xr-x    37KiB /usr/bin/unshare
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
 -rwxr-xr-x    16KiB /usr/bin/uptime
--rwxr-xr-x    52KiB /usr/bin/userdbctl
+-rwxr-xr-x    53KiB /usr/bin/userdbctl
 -rwxr-xr-x    37KiB /usr/bin/users
 -rwxr-xr-x    24KiB /usr/bin/utmpdump
 -rwxr-xr-x    20KiB /usr/bin/uuidgen
@@ -1234,7 +1234,7 @@
 -rwxr-xr-x    52KiB /usr/lib/systemd/systemd-shutdown
 -rwxr-xr-x    32KiB /usr/lib/systemd/systemd-socket-proxyd
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-sulogin-shell
--rwxr-xr-x   125KiB /usr/lib/systemd/systemd-sysupdate
+-rwxr-xr-x   129KiB /usr/lib/systemd/systemd-sysupdate
 -rwxr-xr-x    20KiB /usr/lib/systemd/systemd-time-wait-sync
 -rwxr-xr-x    48KiB /usr/lib/systemd/systemd-timedated
 -rwxr-xr-x    16KiB /usr/lib/systemd/systemd-update-done
@@ -1378,7 +1378,7 @@
 -rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   415KiB /usr/lib64/libbpf.so.1.5.0
+-rwxr-xr-x   419KiB /usr/lib64/libbpf.so.1.5.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -1515,7 +1515,7 @@
 -rwxr-xr-x    15KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x   154KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   150KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   354KiB /usr/lib64/libnss_systemd.so.2
+-rwxr-xr-x   358KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   602KiB /usr/lib64/libonig.so.5.2.0
 -rwxr-xr-x   1.3MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
@@ -4124,8 +4124,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-3.amzn2023.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-3.amzn2023.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-4.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-4.amzn2023.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_among.so
@@ -4270,8 +4270,8 @@
 -rwxr-xr-x     275B /usr/libexec/p11-kit/trust-extract-compat
 -rwxr-xr-x   437KiB /usr/libexec/scdaemon
 -rw-r--r--    32KiB /usr/libexec/sudo/audit_json.so
--rw-r--r--    16KiB /usr/libexec/sudo/group_file.so
--rw-r--r--   142KiB /usr/libexec/sudo/libsudo_util.so.0.0.0
+-rw-r--r--    15KiB /usr/libexec/sudo/group_file.so
+-rw-r--r--   141KiB /usr/libexec/sudo/libsudo_util.so.0.0.0
 -rwxr-xr-x    36KiB /usr/libexec/sudo/sesh
 -rw-r--r--    15KiB /usr/libexec/sudo/sudo_noexec.so
 -rw-r--r--   650KiB /usr/libexec/sudo/sudoers.so
@@ -4398,7 +4398,7 @@
 -rwxr-xr-x    27KiB /usr/sbin/rtacct
 -rwxr-xr-x    33KiB /usr/sbin/rtcwake
 -rwxr-xr-x   127KiB /usr/sbin/rtmon
--rwxr-xr-x    12MiB /usr/sbin/runc
+-rwxr-xr-x    13MiB /usr/sbin/runc
 -rwxr-xr-x    57KiB /usr/sbin/runuser
 -rwxr-xr-x    17KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x    21KiB /usr/sbin/saslpasswd2
@@ -4423,7 +4423,7 @@
 -rwxr-xr-x   131KiB /usr/sbin/usermod
 -rwxr-xr-x    37KiB /usr/sbin/vdpa
 -rwxr-xr-x    59KiB /usr/sbin/vipw
--rwxr-xr-x   260KiB /usr/sbin/visudo
+-rwxr-xr-x   264KiB /usr/sbin/visudo
 -rwxr-xr-x    41KiB /usr/sbin/wipefs
 -rwxr-xr-x    16KiB /usr/sbin/xqmstats
 -rwxr-xr-x    92KiB /usr/sbin/xtables-legacy-multi
