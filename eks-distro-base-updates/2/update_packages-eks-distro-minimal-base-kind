@@ -1,4 +1,3 @@
 
-python.x86_64
-python-libs.x86_64
-sudo.x86_64
+containerd.x86_64
+runc.x86_64
