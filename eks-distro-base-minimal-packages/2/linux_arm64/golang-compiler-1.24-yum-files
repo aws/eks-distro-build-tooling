@@ -18567,7 +18567,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-GPLV2
 -rw-r--r--   7.5KiB /usr/share/licenses/elfutils-libs-0.176/COPYING-LGPLV3
 -rw-r--r--    35KiB /usr/share/licenses/gdbm-1.13/COPYING
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.3/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glib2-2.56.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
