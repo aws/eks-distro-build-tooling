@@ -3979,10 +3979,10 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--   8.9KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--   9.3KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    17KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    18KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -7900,7 +7900,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   2.3MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.3MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

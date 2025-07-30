@@ -1,7 +1,9 @@
 
-containerd.x86_64
-glib2.x86_64
+gnupg2.x86_64
+jq.x86_64
 kernel-libbpf.x86_64
+libarchive.x86_64
+libxml2.x86_64
+python3.x86_64
+python3-libs.x86_64
 python3-pip-wheel.noarch
-runc.x86_64
-sudo.x86_64
