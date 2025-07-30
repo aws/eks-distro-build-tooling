@@ -1807,11 +1807,11 @@
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.opt-1.pyc
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.opt-2.pyc
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.pyc
--rw-r--r--    19KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-1.pyc
--rw-r--r--    17KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-2.pyc
--rw-r--r--    19KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.pyc
+-rw-r--r--    20KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-1.pyc
+-rw-r--r--    19KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-2.pyc
+-rw-r--r--    21KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.11/html/entities.py
--rw-r--r--    17KiB /usr/lib64/python3.11/html/parser.py
+-rw-r--r--    18KiB /usr/lib64/python3.11/html/parser.py
 -rw-r--r--   7.8KiB /usr/lib64/python3.11/http/__init__.py
 -rw-r--r--   8.6KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-1.pyc
 -rw-r--r--   7.5KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-2.pyc

@@ -1,5 +1,5 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-system-release.noarch
-tzdata.noarch
+python3.11.x86_64
+python3.11-libs.x86_64
+python3.11-pip.noarch
+python3.11-pip-wheel.noarch

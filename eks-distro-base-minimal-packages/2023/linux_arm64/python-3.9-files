@@ -1816,10 +1816,10 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--   8.9KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--   9.3KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    17KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    18KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
