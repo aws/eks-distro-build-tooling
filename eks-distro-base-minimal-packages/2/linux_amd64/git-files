@@ -517,7 +517,7 @@
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
 -rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.3KiB /usr/libexec/git-core/git-web--browse
@@ -658,7 +658,7 @@
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    24KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.3/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES

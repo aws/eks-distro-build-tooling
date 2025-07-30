@@ -17597,7 +17597,7 @@
 -rwxr-xr-x   3.7KiB /usr/libexec/git-core/git-quiltimport
 -rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-remote-http
 -rw-r--r--   1.7KiB /usr/libexec/git-core/git-sh-i18n
--rwxr-xr-x   2.2MiB /usr/libexec/git-core/git-sh-i18n--envsubst
+-rwxr-xr-x   2.1MiB /usr/libexec/git-core/git-sh-i18n--envsubst
 -rw-r--r--   8.3KiB /usr/libexec/git-core/git-sh-setup
 -rwxr-xr-x    11KiB /usr/libexec/git-core/git-submodule
 -rwxr-xr-x   4.3KiB /usr/libexec/git-core/git-web--browse
@@ -18259,7 +18259,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/gcc-7.3.1/COPYING3.LIB
 -rw-r--r--   4.5KiB /usr/share/licenses/gcc-7.3.1/LICENSE.TXT
 -rw-r--r--    35KiB /usr/share/licenses/gdbm-1.13/COPYING
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.3/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glib2-2.56.1/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
@@ -22232,7 +22232,7 @@
 -rw-r--r--   7.7MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
 -rw-r--r--    84KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    28KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

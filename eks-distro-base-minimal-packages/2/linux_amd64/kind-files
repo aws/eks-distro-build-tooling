@@ -1466,7 +1466,7 @@
 -rwxr-xr-x    29KiB /usr/lib64/libip6tc.so.2.0.0
 -rwxr-xr-x   247KiB /usr/lib64/libipset.so.3.6.0
 -rwxr-xr-x   6.5KiB /usr/lib64/libiptc.so.1.0.0
--rwxr-xr-x   281KiB /usr/lib64/libjq.so.1.0.4
+-rwxr-xr-x   277KiB /usr/lib64/libjq.so.1.0.4
 -rwxr-xr-x   198KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    78KiB /usr/lib64/libkdb5.so.8.0
 -rwxr-xr-x    16KiB /usr/lib64/libkeyutils.so.1.5
