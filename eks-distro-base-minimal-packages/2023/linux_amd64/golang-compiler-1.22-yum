@@ -110,7 +110,7 @@ openssl-fips-provider-latest-3.2.2-1.amzn2023.0.1.x86_64
 openssl-libs-3.2.2-1.amzn2023.0.1.x86_64
 p11-kit-0.24.1-2.amzn2023.0.3.x86_64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.x86_64
-pam-1.5.1-8.amzn2023.0.4.x86_64
+pam-1.5.1-8.amzn2023.0.6.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 popt-1.18-6.amzn2023.0.2.x86_64
@@ -135,7 +135,7 @@ setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.4.x86_64
 sqlite-libs-3.40.0-1.amzn2023.0.5.x86_64
 system-release-2023.7.20250623-0.amzn2023.noarch
-systemd-libs-252.23-4.amzn2023.x86_64
+systemd-libs-252.23-6.amzn2023.x86_64
 tar-1.34-1.amzn2023.0.4.x86_64
 tzdata-2025b-1.amzn2023.0.1.noarch
 util-linux-2.37.4-1.amzn2023.0.4.x86_64
