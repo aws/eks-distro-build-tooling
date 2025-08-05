@@ -1,0 +1,33 @@
+From 3fb2724b9224079cefad8761a9a60d56205a9077 Mon Sep 17 00:00:00 2001
+From: Ganesh Putta <ganiredi@amazon.com>
+Date: Tue, 5 Aug 2025 16:17:29 -0500
+Subject: [PATCH] Fix kubelet cloud-config flag for Kubernetes 1.33+
+ compatibility
+
+The kubelet was still receiving the --cloud-config flag unconditionally,
+causing failures in Kubernetes 1.33+ where this flag was removed.
+This adds the same version check used for kube-apiserver to only
+apply the cloud-config flag for Kubernetes versions before 1.33.
+---
+ nodeup/pkg/model/kubelet.go | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/nodeup/pkg/model/kubelet.go b/nodeup/pkg/model/kubelet.go
+index 6bfa7c073a..3a83b8c311 100644
+--- a/nodeup/pkg/model/kubelet.go
++++ b/nodeup/pkg/model/kubelet.go
+@@ -327,7 +327,10 @@ func (b *KubeletBuilder) buildSystemdEnvironmentFile(ctx context.Context, kubele
+ 	// We build this flag differently because it depends on CloudConfig, and to expose it directly
+ 	// would be a degree of freedom we don't have (we'd have to write the config to different files)
+ 	// We can always add this later if it is needed.
+-	flags += " --cloud-config=" + InTreeCloudConfigFilePath
++	// Only add cloud-config flag for Kubernetes versions before 1.33
++	if b.IsKubernetesLT("1.33") {
++		flags += " --cloud-config=" + InTreeCloudConfigFilePath
++	}
+ 
+ 	if b.UsesSecondaryIP() {
+ 		localIP, err := b.GetMetadataLocalIP(ctx)
+-- 
+2.45.2
+
