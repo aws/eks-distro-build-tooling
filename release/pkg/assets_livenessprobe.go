@@ -16,20 +16,16 @@ package pkg
 
 import (
 	"fmt"
-	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
-	"github.com/pkg/errors"
 )
 
 // GetLivenessprobeComponent returns the Component for Liveness Probe
+// CSI components are now external - using hardcoded versions from public.ecr.aws/csi-components
 func (r *ReleaseConfig) GetLivenessprobeComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
-	projectSource := "projects/kubernetes-csi/livenessprobe"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
-	gitTag, err := readTag(tagFile)
-	if err != nil {
-		return nil, errors.Cause(err)
-	}
+	gitTag := "v2.16.0"
+	eksTag := "v2.16.0-eksbuild.4"
+	
 	assets := []distrov1alpha1.Asset{}
 	binary := "livenessprobe"
 	assets = append(assets, distrov1alpha1.Asset{
@@ -39,12 +35,9 @@ func (r *ReleaseConfig) GetLivenessprobeComponent(spec distrov1alpha1.ReleaseSpe
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
-				r.ContainerImageRepository,
+			URI: fmt.Sprintf("public.ecr.aws/csi-components/%s:%s",
 				binary,
-				gitTag,
-				spec.Channel,
-				spec.Number,
+				eksTag,
 			),
 		},
 	})

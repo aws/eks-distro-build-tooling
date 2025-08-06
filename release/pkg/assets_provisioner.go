@@ -16,22 +16,18 @@ package pkg
 
 import (
 	"fmt"
-	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
-	"github.com/pkg/errors"
 )
 
 // GetProvisionerComponent returns the Component for External Provisioner
+// CSI components are now external - using hardcoded versions from public.ecr.aws/csi-components
 func (r *ReleaseConfig) GetProvisionerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
-	projectSource := "projects/kubernetes-csi/external-provisioner"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
-	gitTag, err := readTag(tagFile)
-	if err != nil {
-		return nil, errors.Cause(err)
-	}
+	gitTag := "v5.3.0"
+	eksTag := "v5.3.0-eksbuild.3"
+	
 	assets := []distrov1alpha1.Asset{}
-	binary := "external-provisioner"
+	binary := "csi-provisioner"
 	assets = append(assets, distrov1alpha1.Asset{
 		Name:        fmt.Sprintf("%s-image", binary),
 		Type:        "Image",
@@ -39,12 +35,9 @@ func (r *ReleaseConfig) GetProvisionerComponent(spec distrov1alpha1.ReleaseSpec)
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
-				r.ContainerImageRepository,
+			URI: fmt.Sprintf("public.ecr.aws/csi-components/%s:%s",
 				binary,
-				gitTag,
-				spec.Channel,
-				spec.Number,
+				eksTag,
 			),
 		},
 	})

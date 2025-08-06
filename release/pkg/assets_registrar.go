@@ -16,22 +16,18 @@ package pkg
 
 import (
 	"fmt"
-	"path/filepath"
 
 	distrov1alpha1 "github.com/aws/eks-distro-build-tooling/release/api/v1alpha1"
-	"github.com/pkg/errors"
 )
 
 // GetRegistrarComponent returns the Component for Node Driver Registrar
+// CSI components are now external - using hardcoded versions from public.ecr.aws/csi-components
 func (r *ReleaseConfig) GetRegistrarComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
-	projectSource := "projects/kubernetes-csi/node-driver-registrar"
-	tagFile := filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "GIT_TAG")
-	gitTag, err := readTag(tagFile)
-	if err != nil {
-		return nil, errors.Cause(err)
-	}
+	gitTag := "v2.14.0"
+	eksTag := "v2.14.0-eksbuild.4"
+	
 	assets := []distrov1alpha1.Asset{}
-	binary := "node-driver-registrar"
+	binary := "csi-node-driver-registrar"
 	assets = append(assets, distrov1alpha1.Asset{
 		Name:        fmt.Sprintf("%s-image", binary),
 		Type:        "Image",
@@ -39,12 +35,9 @@ func (r *ReleaseConfig) GetRegistrarComponent(spec distrov1alpha1.ReleaseSpec) (
 		OS:          "linux",
 		Arch:        []string{"amd64", "arm64"},
 		Image: &distrov1alpha1.AssetImage{
-			URI: fmt.Sprintf("%s/kubernetes-csi/%s:%s-eks-%s-%d",
-				r.ContainerImageRepository,
+			URI: fmt.Sprintf("public.ecr.aws/csi-components/%s:%s",
 				binary,
-				gitTag,
-				spec.Channel,
-				spec.Number,
+				eksTag,
 			),
 		},
 	})
