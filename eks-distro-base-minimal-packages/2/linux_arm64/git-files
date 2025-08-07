@@ -657,7 +657,7 @@
 -rw-r--r--    18KiB /usr/share/info/history.info.gz
 -rw-r--r--    24KiB /usr/share/info/rluserman.info.gz
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
--rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.1/COPYING
+-rw-r--r--    19KiB /usr/share/licenses/git-core-2.47.3/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/glibc-2.26/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/glibc-2.26/COPYING.LIB
 -rw-r--r--    22KiB /usr/share/licenses/glibc-2.26/LICENSES

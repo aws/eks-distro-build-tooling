@@ -1546,7 +1546,7 @@
 -rw-r--r--   3.3KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-37.opt-1.pyc
 -rw-r--r--   3.3KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__pycache__/_implementation.cpython-37.pyc
 -rw-r--r--   5.6KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/_implementation.py
--rw-r--r--    18KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/poolmanager.py
+-rw-r--r--    19KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/poolmanager.py
 -rw-r--r--   5.9KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/request.py
 -rw-r--r--    28KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/response.py
 -rw-r--r--   1.1KiB /usr/lib/python3.7/site-packages/pip/_vendor/urllib3/util/__init__.py
