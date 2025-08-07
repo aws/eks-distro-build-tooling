@@ -82,6 +82,10 @@ func UpdateImageDigests(ecrPublicClient *ecrpublic.ECRPublic, r *ReleaseConfig, 
 		assets := componentDer.Assets
 		for _, asset := range assets {
 			if asset.Image != nil {
+				// Skip digest updates for external CSI components
+				if strings.Contains(asset.Image.URI, "public.ecr.aws/csi-components/") {
+					continue
+				}
 				var imageTag string
 				releaseUriSplit := strings.Split(asset.Image.URI, ":")
 				repoName := strings.Replace(releaseUriSplit[0], r.ContainerImageRepository+"/", "", -1)
