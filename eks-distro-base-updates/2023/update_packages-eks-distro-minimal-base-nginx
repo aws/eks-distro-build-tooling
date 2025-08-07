@@ -1,8 +1,2 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-nginx.x86_64
-nginx-core.x86_64
-nginx-filesystem.noarch
-system-release.noarch
-tzdata.noarch
+pam.x86_64

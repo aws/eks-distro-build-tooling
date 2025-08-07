@@ -252,7 +252,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1020B /etc/security/namespace.init
+-rwxr-xr-x    1022B /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -17802,7 +17802,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    32KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_debug.so
--rwxr-xr-x    16KiB /usr/lib64/security/pam_deny.so
+-rwxr-xr-x    15KiB /usr/lib64/security/pam_deny.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_echo.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_env.so
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_exec.so
@@ -17841,7 +17841,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_timestamp.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_tty_audit.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_umask.so
--rwxr-xr-x    61KiB /usr/lib64/security/pam_unix.so
+-rwxr-xr-x    60KiB /usr/lib64/security/pam_unix.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_userdb.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_usertype.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
@@ -17968,7 +17968,7 @@
 -rwxr-xr-x    49KiB /usr/sbin/mkswap
 -rwxr-xr-x    94KiB /usr/sbin/newusers
 -rwxr-xr-x    16KiB /usr/sbin/nologin
--rwxr-xr-x    45KiB /usr/sbin/pam_console_apply
+-rwxr-xr-x    44KiB /usr/sbin/pam_console_apply
 -rwxr-xr-x     471B /usr/sbin/pam_namespace_helper
 -rwsr-xr-x    16KiB /usr/sbin/pam_timestamp_check
 -rwxr-xr-x    61KiB /usr/sbin/partx
@@ -17991,8 +17991,8 @@
 -rwxr-xr-x    25KiB /usr/sbin/swapoff
 -rwxr-xr-x    45KiB /usr/sbin/swapon
 -rwxr-xr-x    24KiB /usr/sbin/switch_root
--rwsr-xr-x    29KiB /usr/sbin/unix_chkpwd
--rwx------    33KiB /usr/sbin/unix_update
+-rwsr-xr-x    28KiB /usr/sbin/unix_chkpwd
+-rwx------    32KiB /usr/sbin/unix_update
 -rwxr-xr-x   139KiB /usr/sbin/useradd
 -rwxr-xr-x    90KiB /usr/sbin/userdel
 -rwxr-xr-x   131KiB /usr/sbin/usermod

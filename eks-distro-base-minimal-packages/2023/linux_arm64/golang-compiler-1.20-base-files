@@ -247,7 +247,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1020B /etc/security/namespace.init
+-rwxr-xr-x    1022B /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -13022,7 +13022,7 @@
 -rwxr-xr-x   195KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   195KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   195KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   198KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   262KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   262KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   458KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   2.4MiB /usr/lib64/libopcodes-2.41-50.amzn2023.0.3.so
@@ -13073,9 +13073,9 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x   194KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
--rwxr-xr-x   201KiB /usr/lib64/security/pam_console.so
+-rwxr-xr-x   200KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_debug.so
--rwxr-xr-x   196KiB /usr/lib64/security/pam_deny.so
+-rwxr-xr-x   195KiB /usr/lib64/security/pam_deny.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_echo.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_env.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_exec.so
@@ -13114,7 +13114,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_timestamp.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_tty_audit.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_umask.so
--rwxr-xr-x   197KiB /usr/lib64/security/pam_unix.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_unix.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_userdb.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_usertype.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
@@ -13222,7 +13222,7 @@
 -rwxr-xr-x   197KiB /usr/sbin/mkswap
 -rwxr-xr-x   206KiB /usr/sbin/newusers
 -rwxr-xr-x   196KiB /usr/sbin/nologin
--rwxr-xr-x   201KiB /usr/sbin/pam_console_apply
+-rwxr-xr-x   200KiB /usr/sbin/pam_console_apply
 -rwxr-xr-x     471B /usr/sbin/pam_namespace_helper
 -rwsr-xr-x   196KiB /usr/sbin/pam_timestamp_check
 -rwxr-xr-x   197KiB /usr/sbin/partx
@@ -13245,8 +13245,8 @@
 -rwxr-xr-x   197KiB /usr/sbin/swapoff
 -rwxr-xr-x   197KiB /usr/sbin/swapon
 -rwxr-xr-x   197KiB /usr/sbin/switch_root
--rwsr-xr-x   197KiB /usr/sbin/unix_chkpwd
--rwx------   197KiB /usr/sbin/unix_update
+-rwsr-xr-x   196KiB /usr/sbin/unix_chkpwd
+-rwx------   196KiB /usr/sbin/unix_update
 -rwxr-xr-x   271KiB /usr/sbin/useradd
 -rwxr-xr-x   206KiB /usr/sbin/userdel
 -rwxr-xr-x   207KiB /usr/sbin/usermod

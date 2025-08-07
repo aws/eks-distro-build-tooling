@@ -1,9 +1,2 @@
 
-gnupg2.x86_64
-kernel-headers.x86_64
-libarchive.x86_64
-libxml2.x86_64
-python3.x86_64
-python3-libs.x86_64
-python3-pip-wheel.noarch
-rust-toolset-srpm-macros.noarch
+kernel6.12-headers.x86_64

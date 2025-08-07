@@ -299,7 +299,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1020B /etc/security/namespace.init
+-rwxr-xr-x    1022B /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -1223,6 +1223,7 @@
 -rwxr-xr-x   196KiB /usr/lib/systemd/systemd-ac-power
 -rwxr-xr-x   196KiB /usr/lib/systemd/systemd-boot-check-no-failures
 -rwxr-xr-x   196KiB /usr/lib/systemd/systemd-cgroups-agent
+-rwxr-xr-x   196KiB /usr/lib/systemd/systemd-export
 -rwxr-xr-x   262KiB /usr/lib/systemd/systemd-homework
 -rwxr-xr-x   197KiB /usr/lib/systemd/systemd-hostnamed
 -rwxr-xr-x   196KiB /usr/lib/systemd/systemd-initctl
@@ -1512,7 +1513,7 @@
 -rwxr-xr-x   195KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   195KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   195KiB /usr/lib64/libnss_files.so.2
--rwxr-xr-x   198KiB /usr/lib64/libnss_myhostname.so.2
+-rwxr-xr-x   262KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   262KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   458KiB /usr/lib64/libnss_systemd.so.2
 -rwxr-xr-x   673KiB /usr/lib64/libonig.so.5.2.0
@@ -4074,9 +4075,9 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x   194KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
--rwxr-xr-x   201KiB /usr/lib64/security/pam_console.so
+-rwxr-xr-x   200KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_debug.so
--rwxr-xr-x   196KiB /usr/lib64/security/pam_deny.so
+-rwxr-xr-x   195KiB /usr/lib64/security/pam_deny.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_echo.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_env.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_exec.so
@@ -4117,14 +4118,14 @@
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_timestamp.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_tty_audit.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_umask.so
--rwxr-xr-x   197KiB /usr/lib64/security/pam_unix.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_unix.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_userdb.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_usertype.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-4.amzn2023.so
--rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.23-4.amzn2023.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-6.amzn2023.so
+-rwxr-xr-x   3.5MiB /usr/lib64/systemd/libsystemd-shared-252.23-6.amzn2023.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x   196KiB /usr/lib64/xtables/libebt_among.so
@@ -4370,7 +4371,7 @@
 -rwxr-xr-x   196KiB /usr/sbin/nft
 -rwxr-xr-x   196KiB /usr/sbin/nologin
 -rwxr-xr-x   197KiB /usr/sbin/nstat
--rwxr-xr-x   201KiB /usr/sbin/pam_console_apply
+-rwxr-xr-x   200KiB /usr/sbin/pam_console_apply
 -rwxr-xr-x     471B /usr/sbin/pam_namespace_helper
 -rwsr-xr-x   196KiB /usr/sbin/pam_timestamp_check
 -rwxr-xr-x   197KiB /usr/sbin/partx
@@ -4415,8 +4416,8 @@
 -rwxr-xr-x   197KiB /usr/sbin/switch_root
 -rwxr-xr-x   197KiB /usr/sbin/sysctl
 -rwxr-xr-x   198KiB /usr/sbin/tipc
--rwsr-xr-x   197KiB /usr/sbin/unix_chkpwd
--rwx------   197KiB /usr/sbin/unix_update
+-rwsr-xr-x   196KiB /usr/sbin/unix_chkpwd
+-rwx------   196KiB /usr/sbin/unix_update
 -rwxr-xr-x   271KiB /usr/sbin/useradd
 -rwxr-xr-x   206KiB /usr/sbin/userdel
 -rwxr-xr-x   207KiB /usr/sbin/usermod
@@ -7971,7 +7972,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.0MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--   232KiB /var/lib/systemd/catalog/database
