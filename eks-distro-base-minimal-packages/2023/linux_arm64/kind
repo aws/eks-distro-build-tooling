@@ -56,7 +56,7 @@ iptables-nft-1.8.8-3.amzn2023.0.2.aarch64
 jansson-2.14-0.amzn2023.aarch64
 jq-1.7.1-50.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
-kernel6.12-libbpf-6.12.40-63.107.amzn2023.aarch64
+kernel6.12-libbpf-6.12.40-63.114.amzn2023.aarch64
 keyutils-1.6.3-1.amzn2023.0.2.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 kmod-29-2.amzn2023.0.5.aarch64
