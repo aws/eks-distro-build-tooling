@@ -107,7 +107,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.5KiB /etc/security/namespace.conf
--rwxr-xr-x    1019B /etc/security/namespace.init
+-rwxr-xr-x    1021B /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   1.7KiB /etc/security/pwquality.conf
@@ -6291,7 +6291,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   6.3MiB /var/lib/rpm/Packages
--rw-r--r--    64KiB /var/lib/rpm/Providename
+-rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    52KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
