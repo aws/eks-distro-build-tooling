@@ -75,6 +75,8 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
   /go/go1.23/bin/go-licenses --help
   /go/bin/go1.24 version
   /go/go1.24/bin/go-licenses --help
+  /go/bin/go1.25 version
+  /go/go1.25/bin/go-licenses --help
 
   gcc --version
 
