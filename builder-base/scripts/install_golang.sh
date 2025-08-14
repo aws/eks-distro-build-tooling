@@ -55,10 +55,22 @@ function build::go::install {
 
 function build::go::extract {
   local version=$1
+  local major_version=$(echo "$version" | cut -d. -f1)
+  local minor_version=$(echo "$version" | cut -d. -f2)
 
   mkdir -p /tmp/go-extracted
   cd /tmp/go-extracted
   tar -xzf /tmp/linux/$TARGETARCH/go$version.linux-$TARGETARCH.tar.gz
+
+  # go stopped building addr2line, doc, objdump, pprof, and trace by default starting with 1.25 so building them here
+  if [[ "$major_version" -eq 1 && "$minor_version" -ge 25 ]]; then
+      local binaries=("addr2line" "doc" "objdump" "pprof" "trace")
+      pushd /tmp/go-extracted/go/
+      for binary in "${binaries[@]}"; do
+        bin/go build -o "pkg/tool/linux_$TARGETARCH/$binary" "./src/cmd/$binary"
+      done
+      popd
+  fi
 
   local -r golang_version=$(/tmp/go-extracted/go/bin/go version | grep -o "go[0-9].* " | xargs)
 
