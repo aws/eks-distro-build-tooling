@@ -559,7 +559,7 @@ const goLangVersion = process.argv[4];
 const projectOutputDirectory = process.argv[5];
 
 const gitTagPath = path.join(projectDirectory, 'GIT_TAG');
-const version = await fsPromises.readFile(gitTagPath, 'utf8');
+const version = fsPromises.readFile(gitTagPath, 'utf8');
 const projectVersion = process.argv[6] || version;
 
 const projectLicensesDirectory = path.join(projectOutputDirectory, "LICENSES");
