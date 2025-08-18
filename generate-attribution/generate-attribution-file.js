@@ -421,10 +421,9 @@ async function generateAuthorizationHeader() {
 }
 
 async function populateRootComponentVersion(dependencies) {
-    const version = await fsPromises.readFile(gitTagPath, 'utf8');
     dependencies.forEach((dep) => {
         if (dep.modulePath.startsWith(rootModuleName) && !dep.version) {
-            dep.version = version.trim();
+            dep.version = projectVersion.trim();
         }
     });
     return dependencies;
@@ -560,6 +559,9 @@ const goLangVersion = process.argv[4];
 const projectOutputDirectory = process.argv[5];
 
 const gitTagPath = path.join(projectDirectory, 'GIT_TAG');
+const version = await fsPromises.readFile(gitTagPath, 'utf8');
+const projectVersion = process.argv[6] || version;
+
 const projectLicensesDirectory = path.join(projectOutputDirectory, "LICENSES");
 const projectAttributionDirectory = path.join(projectOutputDirectory, "attribution");
 
