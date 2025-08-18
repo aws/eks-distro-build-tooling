@@ -1,8 +1,7 @@
 
-gnupg2.x86_64
-libarchive.x86_64
-libxml2.x86_64
+gnutls.x86_64
+libcap.x86_64
 python3.x86_64
 python3-libs.x86_64
-python3-pip.noarch
-python3-pip-wheel.noarch
+sqlite.x86_64
+sqlite-libs.x86_64
