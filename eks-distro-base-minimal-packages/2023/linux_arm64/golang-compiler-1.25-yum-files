@@ -15818,7 +15818,7 @@
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   199KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x   195KiB /usr/lib64/libcap.so.2.73
+-rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x   198KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   265KiB /usr/lib64/libcomps.so.0
@@ -15918,7 +15918,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x   198KiB /usr/lib64/libpopt.so.0.0.1
 -rwxr-xr-x   196KiB /usr/lib64/libpsl.so.5.3.5
--rwxr-xr-x   195KiB /usr/lib64/libpsx.so.2.73
+-rwxr-xr-x   196KiB /usr/lib64/libpsx.so.2.73
 -rwxr-xr-x   195KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x   197KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x   3.7MiB /usr/lib64/libpython3.9.so.1.0
@@ -15941,7 +15941,7 @@
 -rwxr-xr-x   199KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   654KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   334KiB /usr/lib64/libsolvext.so.1
--rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
+-rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
@@ -18455,7 +18455,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x   194KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x   196KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x   200KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_debug.so
@@ -18576,7 +18576,7 @@
 -rwxr-xr-x   197KiB /usr/sbin/blkid
 -rwxr-xr-x   197KiB /usr/sbin/blkzone
 -rwxr-xr-x   197KiB /usr/sbin/blockdev
--rwxr-xr-x   197KiB /usr/sbin/capsh
+-rwxr-xr-x   198KiB /usr/sbin/capsh
 -rwxr-xr-x   198KiB /usr/sbin/cfdisk
 -rwxr-xr-x   197KiB /usr/sbin/chcpu
 -rwxr-xr-x   201KiB /usr/sbin/chgpasswd
@@ -18599,8 +18599,8 @@
 -rwxr-xr-x   196KiB /usr/sbin/fsfreeze
 -rwxr-xr-x   197KiB /usr/sbin/fstrim
 -rwxr-xr-x   197KiB /usr/sbin/g13-syshelp
--rwxr-xr-x   195KiB /usr/sbin/getcap
--rwxr-xr-x   195KiB /usr/sbin/getpcaps
+-rwxr-xr-x   196KiB /usr/sbin/getcap
+-rwxr-xr-x   196KiB /usr/sbin/getpcaps
 -rwxr-xr-x   206KiB /usr/sbin/groupadd
 -rwxr-xr-x   205KiB /usr/sbin/groupdel
 -rwxr-xr-x   201KiB /usr/sbin/groupmems
@@ -18636,7 +18636,7 @@
 -rwxr-xr-x   197KiB /usr/sbin/runuser
 -rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
--rwxr-xr-x   195KiB /usr/sbin/setcap
+-rwxr-xr-x   196KiB /usr/sbin/setcap
 -rwxr-xr-x   197KiB /usr/sbin/sfdisk
 -rwxr-xr-x   197KiB /usr/sbin/sulogin
 -rwxr-xr-x   196KiB /usr/sbin/swaplabel

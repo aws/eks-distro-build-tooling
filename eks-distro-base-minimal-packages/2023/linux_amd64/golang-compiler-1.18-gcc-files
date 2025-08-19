@@ -15149,7 +15149,7 @@
 -rwxr-xr-x    52KiB /usr/lib64/libc_malloc_debug.so.0
 -rw-r--r--    16KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x    51KiB /usr/lib64/libcap.so.2.73
+-rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    70KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   189KiB /usr/lib64/libcomps.so.0
@@ -15256,7 +15256,7 @@
 -rwxr-xr-x    74KiB /usr/lib64/libpkgconf.so.3.0.0
 -rwxr-xr-x    58KiB /usr/lib64/libpopt.so.0.0.1
 -rwxr-xr-x    80KiB /usr/lib64/libpsl.so.5.3.5
--rwxr-xr-x    19KiB /usr/lib64/libpsx.so.2.73
+-rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.73
 -rw-r--r--       8B /usr/lib64/libpthread.a
 -rwxr-xr-x    15KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libpwquality.so.1.0.2
@@ -15281,7 +15281,7 @@
 -rwxr-xr-x   107KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
--rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
+-rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   944KiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
@@ -16846,7 +16846,7 @@
 -rw-r--r--   1.1KiB /usr/lib64/python3.9/keyword.py
 -rwxr-xr-x    63KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x    78KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   156KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   160KiB /usr/lib64/python3.9/lib-dynload/_codecs_hk.cpython-39-x86_64-linux-gnu.so
@@ -17798,7 +17798,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    37KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x    19KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x    20KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    32KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_debug.so
@@ -17924,7 +17924,7 @@
 -rwxr-xr-x    53KiB /usr/sbin/blkid
 -rwxr-xr-x    37KiB /usr/sbin/blkzone
 -rwxr-xr-x    33KiB /usr/sbin/blockdev
--rwxr-xr-x    57KiB /usr/sbin/capsh
+-rwxr-xr-x    59KiB /usr/sbin/capsh
 -rwxr-xr-x    98KiB /usr/sbin/cfdisk
 -rwxr-xr-x    33KiB /usr/sbin/chcpu
 -rwxr-xr-x    61KiB /usr/sbin/chgpasswd
@@ -17947,8 +17947,8 @@
 -rwxr-xr-x    16KiB /usr/sbin/fsfreeze
 -rwxr-xr-x    45KiB /usr/sbin/fstrim
 -rwxr-xr-x    89KiB /usr/sbin/g13-syshelp
--rwxr-xr-x    15KiB /usr/sbin/getcap
--rwxr-xr-x    15KiB /usr/sbin/getpcaps
+-rwxr-xr-x    16KiB /usr/sbin/getcap
+-rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    70KiB /usr/sbin/groupadd
 -rwxr-xr-x    66KiB /usr/sbin/groupdel
 -rwxr-xr-x    57KiB /usr/sbin/groupmems
@@ -17984,7 +17984,7 @@
 -rwxr-xr-x    57KiB /usr/sbin/runuser
 -rwxr-xr-x    17KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x    21KiB /usr/sbin/saslpasswd2
--rwxr-xr-x    15KiB /usr/sbin/setcap
+-rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwxr-xr-x   105KiB /usr/sbin/sfdisk
 -rwxr-xr-x    45KiB /usr/sbin/sulogin
 -rwxr-xr-x    20KiB /usr/sbin/swaplabel

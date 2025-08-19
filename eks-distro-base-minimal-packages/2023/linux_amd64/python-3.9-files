@@ -354,7 +354,7 @@
 -rwxr-xr-x    15KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x   1.3MiB /usr/lib64/libsqlite3.so.0.8.6
+-rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   944KiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x    40KiB /usr/lib64/libthread_db.so.1
@@ -1906,7 +1906,7 @@
 -rw-r--r--   1.1KiB /usr/lib64/python3.9/keyword.py
 -rwxr-xr-x    63KiB /usr/lib64/python3.9/lib-dynload/_asyncio.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    16KiB /usr/lib64/python3.9/lib-dynload/_bisect.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x    78KiB /usr/lib64/python3.9/lib-dynload/_blake2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_bz2.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   156KiB /usr/lib64/python3.9/lib-dynload/_codecs_cn.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   160KiB /usr/lib64/python3.9/lib-dynload/_codecs_hk.cpython-39-x86_64-linux-gnu.so

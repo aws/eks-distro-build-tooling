@@ -11,7 +11,7 @@ glibc-2.34-196.amzn2023.0.1.x86_64
 glibc-common-2.34-196.amzn2023.0.1.x86_64
 glibc-minimal-langpack-2.34-196.amzn2023.0.1.x86_64
 gnupg2-2.3.7-1.amzn2023.0.5.x86_64
-gnutls-3.8.3-6.amzn2023.0.1.x86_64
+gnutls-3.8.3-8.amzn2023.0.1.x86_64
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
 keyutils-libs-1.6.3-1.amzn2023.0.2.x86_64
@@ -48,8 +48,8 @@ pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 readline-8.1-2.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
-sqlite-libs-3.40.0-1.amzn2023.0.5.x86_64
+sqlite-libs-3.40.0-1.amzn2023.0.6.x86_64
 system-release-2023.7.20250623-0.amzn2023.noarch
-systemd-libs-252.23-4.amzn2023.x86_64
+systemd-libs-252.23-6.amzn2023.x86_64
 tzdata-2025b-1.amzn2023.0.1.noarch
 zlib-1.2.11-33.amzn2023.0.5.x86_64
