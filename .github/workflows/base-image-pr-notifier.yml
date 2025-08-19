@@ -7,8 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR title and notify Slack
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          if [[ "${{ github.event.pull_request.title }}" == *"Update base image"* ]]; then
+          if [[ "$PR_TITLE" == *"Update base image"* ]]; then
             curl -X POST $SLACK_WEBHOOK
             echo "Base image update detected - Slack notification sent"
           else
