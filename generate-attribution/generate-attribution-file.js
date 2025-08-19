@@ -559,8 +559,15 @@ const goLangVersion = process.argv[4];
 const projectOutputDirectory = process.argv[5];
 
 const gitTagPath = path.join(projectDirectory, 'GIT_TAG');
-const version = fsPromises.readFile(gitTagPath, 'utf8');
-const projectVersion = process.argv[6] || version;
+let version;
+let projectVersion;
+try {
+    version = fs.readFileSync(gitTagPath, 'utf8');
+    projectVersion = process.argv[6] || version;
+} catch (error) {
+    console.error('Error reading version file:', error);
+    process.exit(1);
+}
 
 const projectLicensesDirectory = path.join(projectOutputDirectory, "LICENSES");
 const projectAttributionDirectory = path.join(projectOutputDirectory, "attribution");
