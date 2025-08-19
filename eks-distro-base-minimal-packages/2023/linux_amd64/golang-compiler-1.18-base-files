@@ -12763,7 +12763,7 @@
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    52KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x    51KiB /usr/lib64/libcap.so.2.73
+-rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    70KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    41KiB /usr/lib64/libcord.so.1.4.0
@@ -12838,7 +12838,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    80KiB /usr/lib64/libpsl.so.5.3.5
--rwxr-xr-x    19KiB /usr/lib64/libpsx.so.2.73
+-rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.73
 -rwxr-xr-x    15KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x   350KiB /usr/lib64/libreadline.so.8.1
@@ -12872,7 +12872,7 @@
 -rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    37KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x    19KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x    20KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    32KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_debug.so
@@ -12980,7 +12980,7 @@
 -rwxr-xr-x    53KiB /usr/sbin/blkid
 -rwxr-xr-x    37KiB /usr/sbin/blkzone
 -rwxr-xr-x    33KiB /usr/sbin/blockdev
--rwxr-xr-x    57KiB /usr/sbin/capsh
+-rwxr-xr-x    59KiB /usr/sbin/capsh
 -rwxr-xr-x    98KiB /usr/sbin/cfdisk
 -rwxr-xr-x    33KiB /usr/sbin/chcpu
 -rwxr-xr-x    61KiB /usr/sbin/chgpasswd
@@ -13002,8 +13002,8 @@
 -rwxr-xr-x    57KiB /usr/sbin/fsck.minix
 -rwxr-xr-x    16KiB /usr/sbin/fsfreeze
 -rwxr-xr-x    45KiB /usr/sbin/fstrim
--rwxr-xr-x    15KiB /usr/sbin/getcap
--rwxr-xr-x    15KiB /usr/sbin/getpcaps
+-rwxr-xr-x    16KiB /usr/sbin/getcap
+-rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    70KiB /usr/sbin/groupadd
 -rwxr-xr-x    66KiB /usr/sbin/groupdel
 -rwxr-xr-x    57KiB /usr/sbin/groupmems
@@ -13039,7 +13039,7 @@
 -rwxr-xr-x    57KiB /usr/sbin/runuser
 -rwxr-xr-x    17KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x    21KiB /usr/sbin/saslpasswd2
--rwxr-xr-x    15KiB /usr/sbin/setcap
+-rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwxr-xr-x   105KiB /usr/sbin/sfdisk
 -rwxr-xr-x    45KiB /usr/sbin/sulogin
 -rwxr-xr-x    20KiB /usr/sbin/swaplabel

@@ -474,7 +474,7 @@
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    52KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
--rwxr-xr-x    51KiB /usr/lib64/libcap.so.2.73
+-rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
@@ -507,7 +507,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    73KiB /usr/lib64/libprofiler.so.0.5.4
--rwxr-xr-x    19KiB /usr/lib64/libpsx.so.2.73
+-rwxr-xr-x    20KiB /usr/lib64/libpsx.so.2.73
 -rwxr-xr-x    15KiB /usr/lib64/libpthread.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libpwquality.so.1.0.2
 -rwxr-xr-x    67KiB /usr/lib64/libresolv.so.2
@@ -531,7 +531,7 @@
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   134KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_access.so
--rwxr-xr-x    19KiB /usr/lib64/security/pam_cap.so
+-rwxr-xr-x    20KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
 -rwxr-xr-x    32KiB /usr/lib64/security/pam_console.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_debug.so
@@ -585,7 +585,7 @@
 -rwxr-xr-x    35KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64
 -rwxr-xr-x    35KiB /usr/libexec/getconf/XBS5_LP64_OFF64
 -rwxr-xr-x      96B /usr/libexec/nginx-ssl-pass-dialog
--rwxr-xr-x    57KiB /usr/sbin/capsh
+-rwxr-xr-x    59KiB /usr/sbin/capsh
 -rwxr-xr-x    41KiB /usr/sbin/chroot
 -rwxr-xr-x    16KiB /usr/sbin/cracklib-check
 -rwxr-xr-x     255B /usr/sbin/cracklib-format
@@ -593,8 +593,8 @@
 -rwxr-xr-x    16KiB /usr/sbin/cracklib-unpacker
 -rwxr-xr-x     994B /usr/sbin/create-cracklib-dict
 -rwxr-xr-x    16KiB /usr/sbin/faillock
--rwxr-xr-x    15KiB /usr/sbin/getcap
--rwxr-xr-x    15KiB /usr/sbin/getpcaps
+-rwxr-xr-x    16KiB /usr/sbin/getcap
+-rwxr-xr-x    16KiB /usr/sbin/getpcaps
 -rwxr-xr-x    31KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   1.1MiB /usr/sbin/ldconfig
 -rwxr-xr-x    24KiB /usr/sbin/mkhomedir_helper
@@ -603,7 +603,7 @@
 -rwxr-xr-x     471B /usr/sbin/pam_namespace_helper
 -rwsr-xr-x    16KiB /usr/sbin/pam_timestamp_check
 -rwxr-xr-x    24KiB /usr/sbin/pwhistory_helper
--rwxr-xr-x    15KiB /usr/sbin/setcap
+-rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwsr-xr-x    28KiB /usr/sbin/unix_chkpwd
 -rwx------    32KiB /usr/sbin/unix_update
 -rwxr-xr-x    59KiB /usr/sbin/zic
