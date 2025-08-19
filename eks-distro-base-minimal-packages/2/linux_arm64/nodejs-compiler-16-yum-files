@@ -324,6 +324,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    68KiB /usr/bin/watchgnupg
 -rwxr-xr-x    69KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x    68KiB /usr/bin/which
 -rwxr-xr-x    69KiB /usr/bin/who
 -rwxr-xr-x    69KiB /usr/bin/whoami
@@ -9397,7 +9398,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   5.1MiB /var/lib/rpm/Packages
+-rw-r--r--   5.0MiB /var/lib/rpm/Packages
 -rw-r--r--    52KiB /var/lib/rpm/Providename
 -rw-r--r--    44KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header

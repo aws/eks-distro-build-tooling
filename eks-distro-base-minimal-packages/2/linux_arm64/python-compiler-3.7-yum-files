@@ -331,6 +331,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    68KiB /usr/bin/watchgnupg
 -rwxr-xr-x    69KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x    68KiB /usr/bin/which
 -rwxr-xr-x    69KiB /usr/bin/who
 -rwxr-xr-x    69KiB /usr/bin/whoami
@@ -6982,7 +6983,7 @@
 -rw-r--r--   7.2KiB /usr/lib64/python3.7/symtable.py
 -rw-r--r--    24KiB /usr/lib64/python3.7/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.7/tabnanny.py
--rwxr-xr-x   102KiB /usr/lib64/python3.7/tarfile.py
+-rw-r--r--   103KiB /usr/lib64/python3.7/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.7/telnetlib.py
 -rw-r--r--    28KiB /usr/lib64/python3.7/tempfile.py
 -rw-r--r--      47B /usr/lib64/python3.7/test/__init__.py
@@ -11049,7 +11050,7 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   676KiB /var/lib/rpm/Basenames
+-rw-r--r--   688KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   164KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group

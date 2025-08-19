@@ -299,6 +299,7 @@
 -rwxr-xr-x   107KiB /usr/bin/vdir
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    37KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x    24KiB /usr/bin/which
 -rwxr-xr-x    49KiB /usr/bin/who
 -rwxr-xr-x    29KiB /usr/bin/whoami
@@ -4606,7 +4607,7 @@
 -rw-r--r--   7.2KiB /usr/lib64/python3.7/symtable.py
 -rw-r--r--    24KiB /usr/lib64/python3.7/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.7/tabnanny.py
--rwxr-xr-x   102KiB /usr/lib64/python3.7/tarfile.py
+-rw-r--r--   103KiB /usr/lib64/python3.7/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.7/telnetlib.py
 -rw-r--r--    28KiB /usr/lib64/python3.7/tempfile.py
 -rw-r--r--      47B /usr/lib64/python3.7/test/__init__.py
