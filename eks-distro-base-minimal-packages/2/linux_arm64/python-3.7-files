@@ -2725,7 +2725,7 @@
 -rw-r--r--   7.2KiB /usr/lib64/python3.7/symtable.py
 -rw-r--r--    24KiB /usr/lib64/python3.7/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.7/tabnanny.py
--rwxr-xr-x   102KiB /usr/lib64/python3.7/tarfile.py
+-rw-r--r--   103KiB /usr/lib64/python3.7/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.7/telnetlib.py
 -rw-r--r--    28KiB /usr/lib64/python3.7/tempfile.py
 -rw-r--r--      47B /usr/lib64/python3.7/test/__init__.py

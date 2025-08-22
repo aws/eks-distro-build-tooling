@@ -323,6 +323,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    12KiB /usr/bin/watchgnupg
 -rwxr-xr-x    37KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x    24KiB /usr/bin/which
 -rwxr-xr-x    49KiB /usr/bin/who
 -rwxr-xr-x    29KiB /usr/bin/whoami
@@ -6974,14 +6975,14 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   480KiB /var/lib/rpm/Basenames
+-rw-r--r--   484KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   136KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   5.1MiB /var/lib/rpm/Packages
+-rw-r--r--   5.0MiB /var/lib/rpm/Packages
 -rw-r--r--    60KiB /var/lib/rpm/Providename
 -rw-r--r--    44KiB /var/lib/rpm/Requirename
 -rw-r--r--    16KiB /var/lib/rpm/Sha1header

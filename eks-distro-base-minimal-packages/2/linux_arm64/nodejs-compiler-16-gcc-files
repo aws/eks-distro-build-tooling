@@ -337,6 +337,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    68KiB /usr/bin/watchgnupg
 -rwxr-xr-x    69KiB /usr/bin/wc
+-rwxr-xr-x    11KiB /usr/bin/wcurl
 -rwxr-xr-x    68KiB /usr/bin/which
 -rwxr-xr-x    69KiB /usr/bin/who
 -rwxr-xr-x    69KiB /usr/bin/whoami
@@ -10857,7 +10858,7 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   556KiB /var/lib/rpm/Basenames
+-rw-r--r--   552KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group

@@ -1,2 +1,7 @@
 
 kernel-headers.x86_64
+python.x86_64
+python-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+sqlite.x86_64
