@@ -46,11 +46,11 @@ grep-2.20-3.amzn2.0.2.aarch64
 groff-base-1.22.2-8.amzn2.0.2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 info-5.1-5.amzn2.aarch64
-kernel-headers-4.14.355-280.672.amzn2.aarch64
+kernel-headers-4.14.355-280.679.amzn2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
-krb5-libs-1.15.1-55.amzn2.2.8.aarch64
+krb5-libs-1.15.1-55.amzn2.2.9.aarch64
 less-458-9.amzn2.0.4.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libassuan-2.1.0-3.amzn2.0.2.aarch64
@@ -89,7 +89,7 @@ libunistring-0.9.3-9.amzn2.0.2.aarch64
 libutempter-1.1.6-4.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.11.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.19.aarch64
+libxml2-2.9.1-6.amzn2.5.20.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 lz4-1.7.5-2.amzn2.0.1.aarch64
 make-3.82-24.amzn2.aarch64
