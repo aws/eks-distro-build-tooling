@@ -7,7 +7,7 @@ glibc-common-2.26-64.amzn2.0.4.aarch64
 glibc-minimal-langpack-2.26-64.amzn2.0.4.aarch64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
-krb5-libs-1.15.1-55.amzn2.2.8.aarch64
+krb5-libs-1.15.1-55.amzn2.2.9.aarch64
 libacl-2.2.51-14.amzn2.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
