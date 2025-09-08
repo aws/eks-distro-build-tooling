@@ -15124,7 +15124,7 @@
 -rw-r--r--   109KiB /usr/lib64/guile/2.2/ccache/web/server/http.go
 -rw-r--r--   200KiB /usr/lib64/guile/2.2/ccache/web/uri.go
 -rwxr-xr-x    24KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
--rwxr-xr-x    90KiB /usr/lib64/krb5/plugins/preauth/spake.so
+-rwxr-xr-x    89KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
 -rwxr-xr-x   880KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libBrokenLocale.so.1
@@ -15195,7 +15195,7 @@
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   356KiB /usr/lib64/libgpgme.so.11.32.1
 -rwxr-xr-x   2.2MiB /usr/lib64/libgprofng.so.0.0.0
--rwxr-xr-x   352KiB /usr/lib64/libgssapi_krb5.so.2.2
+-rwxr-xr-x   351KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   140KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x    15KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.3MiB /usr/lib64/libguile-2.2.so.1.4.2
@@ -15204,12 +15204,12 @@
 -rwxr-xr-x   129KiB /usr/lib64/libidn2.so.0.3.7
 -rwxr-xr-x    62KiB /usr/lib64/libjansson.so.4.14.0
 -rwxr-xr-x    74KiB /usr/lib64/libjson-c.so.5.0.0
--rwxr-xr-x    98KiB /usr/lib64/libk5crypto.so.3.1
--rwxr-xr-x    90KiB /usr/lib64/libkdb5.so.10.0
+-rwxr-xr-x    97KiB /usr/lib64/libk5crypto.so.3.1
+-rwxr-xr-x    89KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x    24KiB /usr/lib64/libkeyutils.so.1.10
--rwxr-xr-x    45KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   887KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x    66KiB /usr/lib64/libkrb5support.so.0.1
+-rwxr-xr-x    48KiB /usr/lib64/libkrad.so.0.0
+-rwxr-xr-x   890KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x    65KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   267KiB /usr/lib64/libksba.so.8.14.3
 -rwxr-xr-x    74KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   358KiB /usr/lib64/libldap_r-2.4.so.2.11.5
@@ -15282,7 +15282,7 @@
 -rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   474KiB /usr/lib64/libssh.so.4.9.6
+-rwxr-xr-x   473KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   944KiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
