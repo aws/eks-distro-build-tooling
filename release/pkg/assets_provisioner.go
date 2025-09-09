@@ -25,7 +25,7 @@ import (
 func (r *ReleaseConfig) GetProvisionerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	gitTag := "v5.3.0"
 	eksTag := "v5.3.0-eksbuild.3"
-	
+
 	assets := []distrov1alpha1.Asset{}
 	binary := "csi-provisioner"
 	assets = append(assets, distrov1alpha1.Asset{

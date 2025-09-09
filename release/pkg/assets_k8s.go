@@ -47,7 +47,6 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 		"linux": []string{
 			"kube-apiserver",
 			"kube-controller-manager",
-			"kube-proxy",
 			"kube-scheduler",
 			"kubectl",
 			"kubelet",
@@ -57,7 +56,6 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 			"kubectl",
 		},
 		"windows": []string{
-			"kube-proxy.exe",
 			"kubeadm.exe",
 			"kubectl.exe",
 			"kubelet.exe",
@@ -138,7 +136,6 @@ func (r *ReleaseConfig) GetKubernetesComponent(spec distrov1alpha1.ReleaseSpec) 
 		"kube-apiserver",
 		"kube-controller-manager",
 		"kube-scheduler",
-		"kube-proxy",
 		"pause",
 	}
 

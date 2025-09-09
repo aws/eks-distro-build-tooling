@@ -84,13 +84,12 @@ func isKubernetesVersionNewer(version1, version2 string) bool {
 		minor, _ := strconv.Atoi(parts[1])
 		return major, minor
 	}
-	
+
 	major1, minor1 := parseVersion(version1)
 	major2, minor2 := parseVersion(version2)
-	
+
 	if major1 != major2 {
 		return major1 > major2
 	}
 	return minor1 > minor2
 }
-

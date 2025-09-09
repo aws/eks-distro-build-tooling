@@ -39,6 +39,7 @@ func (r *ReleaseConfig) GenerateComponentsTable(release *distrov1alpha1.Release)
 	componentsTable := map[string]*distrov1alpha1.Component{}
 	componentFuncs := map[string]func(distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error){
 		"kubernetes":            r.GetKubernetesComponent,
+		"kube-proxy":            r.GetKubeProxyComponent,
 		"aws-iam-authenticator": r.GetAuthenticatorComponent,
 		"livenessprobe":         r.GetLivenessprobeComponent,
 		"external-attacher":     r.GetAttacherComponent,
