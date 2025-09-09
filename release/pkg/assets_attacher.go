@@ -25,7 +25,7 @@ import (
 func (r *ReleaseConfig) GetAttacherComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	gitTag := "v4.9.0"
 	eksTag := "v4.9.0-eksbuild.3"
-	
+
 	assets := []distrov1alpha1.Asset{}
 	binary := "csi-attacher"
 	assets = append(assets, distrov1alpha1.Asset{

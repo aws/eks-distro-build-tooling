@@ -25,7 +25,7 @@ import (
 func (r *ReleaseConfig) GetSnapshotterComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	gitTag := "v8.3.0"
 	eksTag := "v8.3.0-eksbuild.1"
-	
+
 	assets := []distrov1alpha1.Asset{}
 	binaries := []string{"csi-snapshotter", "snapshot-controller"}
 	for _, binary := range binaries {

@@ -25,7 +25,7 @@ import (
 func (r *ReleaseConfig) GetResizerComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	gitTag := "v1.14.0"
 	eksTag := "v1.14.0-eksbuild.3"
-	
+
 	assets := []distrov1alpha1.Asset{}
 	binary := "csi-resizer"
 	assets = append(assets, distrov1alpha1.Asset{
