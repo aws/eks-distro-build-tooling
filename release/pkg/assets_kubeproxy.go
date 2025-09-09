@@ -43,7 +43,7 @@ func (r *ReleaseConfig) GetKubeProxyComponent(spec distrov1alpha1.ReleaseSpec) (
 	assets = append(assets, binaryAssets...)
 
 	// Image assets for kube-proxy
-	imageAssets := r.getKubeProxyImageAssets(kubernetesGitTag, spec)
+	imageAssets := r.getKubeProxyImageAssets(gitTag, kubernetesGitTag, spec)
 	assets = append(assets, imageAssets...)
 
 	component := &distrov1alpha1.Component{
@@ -106,7 +106,7 @@ func (r *ReleaseConfig) getKubeProxyBinaryAssets(gitTag string, spec distrov1alp
 	return assets
 }
 
-func (r *ReleaseConfig) getKubeProxyImageAssets(gitTag string, spec distrov1alpha1.ReleaseSpec) []distrov1alpha1.Asset {
+func (r *ReleaseConfig) getKubeProxyImageAssets(gitTag, kubernetesGitTag string, spec distrov1alpha1.ReleaseSpec) []distrov1alpha1.Asset {
 	var assets []distrov1alpha1.Asset
 
 	// Container image
@@ -130,7 +130,7 @@ func (r *ReleaseConfig) getKubeProxyImageAssets(gitTag string, spec distrov1alph
 	linuxImageArches := []string{"amd64", "arm64"}
 	for _, arch := range linuxImageArches {
 		filename := filepath.Join("bin", "linux", arch, "kube-proxy.tar")
-		sha256, sha512, err := r.ReadK8sShaSums(gitTag, filename)
+		sha256, sha512, err := r.ReadK8sShaSums(kubernetesGitTag, filename)
 		if err != nil {
 			continue
 		}
@@ -140,7 +140,7 @@ func (r *ReleaseConfig) getKubeProxyImageAssets(gitTag string, spec distrov1alph
 			fmt.Sprintf("%d", spec.Number),
 			"artifacts",
 			"kubernetes",
-			gitTag,
+			kubernetesGitTag,
 			filename,
 		))
 		if err != nil {
