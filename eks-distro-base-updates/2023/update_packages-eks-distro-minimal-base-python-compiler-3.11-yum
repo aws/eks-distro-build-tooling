@@ -1,9 +1,5 @@
 
-gnutls.x86_64
-libcap.x86_64
-python3.x86_64
-python3-libs.x86_64
-python3.11.x86_64
-python3.11-libs.x86_64
-sqlite.x86_64
-sqlite-libs.x86_64
+krb5-libs.x86_64
+libssh.x86_64
+libssh-config.noarch
+libxml2.x86_64
