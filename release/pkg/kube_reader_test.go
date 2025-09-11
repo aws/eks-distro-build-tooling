@@ -48,6 +48,7 @@ KUBE_GIT_TREE_STATE='archive'`,
 	}
 
 	for _, tc := range cases {
+		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 

@@ -25,7 +25,7 @@ import (
 func (r *ReleaseConfig) GetRegistrarComponent(spec distrov1alpha1.ReleaseSpec) (*distrov1alpha1.Component, error) {
 	gitTag := "v2.14.0"
 	eksTag := "v2.14.0-eksbuild.4"
-	
+
 	assets := []distrov1alpha1.Asset{}
 	binary := "csi-node-driver-registrar"
 	assets = append(assets, distrov1alpha1.Asset{

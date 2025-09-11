@@ -41,7 +41,7 @@ gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
-krb5-libs-1.21.3-1.amzn2023.0.1.aarch64
+krb5-libs-1.21.3-6.amzn2023.0.1.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
 libarchive-3.7.4-2.amzn2023.0.4.aarch64
 libassuan-2.5.5-1.amzn2023.0.2.aarch64
@@ -73,8 +73,8 @@ libsepol-3.4-3.amzn2023.0.3.aarch64
 libsigsegv-2.13-2.amzn2023.0.2.aarch64
 libsmartcols-2.37.4-1.amzn2023.0.4.aarch64
 libsolv-0.7.22-1.amzn2023.0.2.aarch64
-libssh-0.10.6-1.amzn2023.0.1.aarch64
-libssh-config-0.10.6-1.amzn2023.0.1.noarch
+libssh-0.10.6-1.amzn2023.0.2.aarch64
+libssh-config-0.10.6-1.amzn2023.0.2.noarch
 libstdc++-14.2.1-7.amzn2023.0.1.aarch64
 libtasn1-4.19.0-1.amzn2023.0.5.aarch64
 libtirpc-1.3.3-0.amzn2023.aarch64
@@ -83,7 +83,7 @@ libunistring-0.9.10-10.amzn2023.0.2.aarch64
 libuuid-2.37.4-1.amzn2023.0.4.aarch64
 libverto-0.3.2-1.amzn2023.0.2.aarch64
 libxcrypt-4.4.33-7.amzn2023.aarch64
-libxml2-2.10.4-1.amzn2023.0.12.aarch64
+libxml2-2.10.4-1.amzn2023.0.13.aarch64
 libyaml-0.2.5-5.amzn2023.0.2.aarch64
 libzstd-1.5.5-1.amzn2023.0.1.aarch64
 lua-libs-5.4.4-3.amzn2023.0.2.aarch64

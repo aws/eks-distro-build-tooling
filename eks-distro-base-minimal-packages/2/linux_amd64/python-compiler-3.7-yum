@@ -28,7 +28,7 @@ grep-2.20-3.amzn2.0.2.x86_64
 gzip-1.5-10.amzn2.0.1.x86_64
 info-5.1-5.amzn2.x86_64
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-55.amzn2.2.8.x86_64
+krb5-libs-1.15.1-55.amzn2.2.9.x86_64
 libacl-2.2.51-14.amzn2.x86_64
 libassuan-2.1.0-3.amzn2.0.2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
@@ -55,7 +55,7 @@ libtirpc-0.2.4-0.16.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
 libuuid-2.30.2-2.amzn2.0.11.x86_64
 libverto-0.2.5-4.amzn2.0.2.x86_64
-libxml2-2.9.1-6.amzn2.5.19.x86_64
+libxml2-2.9.1-6.amzn2.5.20.x86_64
 lua-5.1.4-15.amzn2.0.2.x86_64
 make-3.82-24.amzn2.x86_64
 ncurses-6.0-8.20170212.amzn2.1.8.x86_64

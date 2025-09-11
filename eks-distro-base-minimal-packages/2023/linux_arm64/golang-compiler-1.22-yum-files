@@ -14201,8 +14201,8 @@
 -rw-r--r--   109KiB /usr/lib64/guile/2.2/ccache/web/server/http.go
 -rw-r--r--   200KiB /usr/lib64/guile/2.2/ccache/web/uri.go
 -rwxr-xr-x   197KiB /usr/lib64/guile/2.2/extensions/guile-readline.so.0.0.0
--rwxr-xr-x   198KiB /usr/lib64/krb5/plugins/preauth/spake.so
--rwxr-xr-x   197KiB /usr/lib64/krb5/plugins/tls/k5tls.so
+-rwxr-xr-x   197KiB /usr/lib64/krb5/plugins/preauth/spake.so
+-rwxr-xr-x   196KiB /usr/lib64/krb5/plugins/tls/k5tls.so
 -rwxr-xr-x   195KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x   195KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x   197KiB /usr/lib64/libacl.so.1.1.2301
@@ -14266,8 +14266,8 @@
 -rwxr-xr-x   263KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   456KiB /usr/lib64/libgpgme.so.11.32.1
 -rwxr-xr-x   2.3MiB /usr/lib64/libgprofng.so.0.0.0
--rwxr-xr-x   396KiB /usr/lib64/libgssapi_krb5.so.2.2
--rwxr-xr-x   264KiB /usr/lib64/libgssrpc.so.4.2
+-rwxr-xr-x   395KiB /usr/lib64/libgssapi_krb5.so.2.2
+-rwxr-xr-x   263KiB /usr/lib64/libgssrpc.so.4.2
 -rwxr-xr-x   195KiB /usr/lib64/libgthread-2.0.so.0.8200.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libguile-2.2.so.1.4.2
 -rwxr-xr-x   197KiB /usr/lib64/libhistory.so.8.1
@@ -14275,12 +14275,12 @@
 -rwxr-xr-x   261KiB /usr/lib64/libidn2.so.0.3.7
 -rwxr-xr-x   198KiB /usr/lib64/libjansson.so.4.14.0
 -rwxr-xr-x   197KiB /usr/lib64/libjson-c.so.5.0.0
--rwxr-xr-x   198KiB /usr/lib64/libk5crypto.so.3.1
+-rwxr-xr-x   197KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x   198KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x   196KiB /usr/lib64/libkeyutils.so.1.10
--rwxr-xr-x   197KiB /usr/lib64/libkrad.so.0.0
--rwxr-xr-x   982KiB /usr/lib64/libkrb5.so.3.3
--rwxr-xr-x   198KiB /usr/lib64/libkrb5support.so.0.1
+-rwxr-xr-x   196KiB /usr/lib64/libkrad.so.0.0
+-rwxr-xr-x   981KiB /usr/lib64/libkrb5.so.3.3
+-rwxr-xr-x   197KiB /usr/lib64/libkrb5support.so.0.1
 -rwxr-xr-x   391KiB /usr/lib64/libksba.so.8.14.3
 -rwxr-xr-x   198KiB /usr/lib64/liblber-2.4.so.2.11.5
 -rwxr-xr-x   458KiB /usr/lib64/libldap_r-2.4.so.2.11.5
@@ -14346,7 +14346,7 @@
 -rwxr-xr-x   654KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   334KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x   530KiB /usr/lib64/libssh.so.4.9.6
+-rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
@@ -20961,7 +20961,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.3MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog

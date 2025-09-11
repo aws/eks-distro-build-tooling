@@ -54,14 +54,14 @@ iptables-legacy-libs-1.8.8-3.amzn2023.0.2.x86_64
 iptables-libs-1.8.8-3.amzn2023.0.2.x86_64
 iptables-nft-1.8.8-3.amzn2023.0.2.x86_64
 jansson-2.14-0.amzn2023.x86_64
-jq-1.7.1-50.amzn2023.x86_64
+jq-1.7.1-51.amzn2023.x86_64
 json-c-0.14-8.amzn2023.0.2.x86_64
-kernel6.12-libbpf-6.12.40-63.114.amzn2023.x86_64
+kernel6.12-libbpf-6.12.40-64.114.amzn2023.x86_64
 keyutils-1.6.3-1.amzn2023.0.2.x86_64
 keyutils-libs-1.6.3-1.amzn2023.0.2.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
 kmod-libs-29-2.amzn2023.0.5.x86_64
-krb5-libs-1.21.3-1.amzn2023.0.1.x86_64
+krb5-libs-1.21.3-6.amzn2023.0.1.x86_64
 libacl-2.3.1-2.amzn2023.0.2.x86_64
 libarchive-3.7.4-2.amzn2023.0.4.x86_64
 libassuan-2.5.5-1.amzn2023.0.2.x86_64
@@ -116,8 +116,8 @@ libsepol-3.4-3.amzn2023.0.3.x86_64
 libsigsegv-2.13-2.amzn2023.0.2.x86_64
 libsmartcols-2.37.4-1.amzn2023.0.4.x86_64
 libsolv-0.7.22-1.amzn2023.0.2.x86_64
-libssh-0.10.6-1.amzn2023.0.1.x86_64
-libssh-config-0.10.6-1.amzn2023.0.1.noarch
+libssh-0.10.6-1.amzn2023.0.2.x86_64
+libssh-config-0.10.6-1.amzn2023.0.2.noarch
 libstdc++-14.2.1-7.amzn2023.0.1.x86_64
 libtasn1-4.19.0-1.amzn2023.0.5.x86_64
 libtirpc-1.3.3-0.amzn2023.x86_64
@@ -127,7 +127,7 @@ libuuid-2.37.4-1.amzn2023.0.4.x86_64
 libverto-0.3.2-1.amzn2023.0.2.x86_64
 libverto-libev-0.3.2-1.amzn2023.0.2.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
-libxml2-2.10.4-1.amzn2023.0.12.x86_64
+libxml2-2.10.4-1.amzn2023.0.13.x86_64
 libyaml-0.2.5-5.amzn2023.0.2.x86_64
 libzstd-1.5.5-1.amzn2023.0.1.x86_64
 lockdev-1.0.4-0.35.20111007git.amzn2023.0.3.x86_64
