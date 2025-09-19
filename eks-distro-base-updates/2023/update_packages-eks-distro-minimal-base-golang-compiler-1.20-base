@@ -1,4 +1,4 @@
 
-krb5-libs.x86_64
-libssh.x86_64
-libssh-config.noarch
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64

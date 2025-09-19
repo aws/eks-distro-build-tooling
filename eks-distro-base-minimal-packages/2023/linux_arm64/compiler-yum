@@ -25,9 +25,9 @@ gawk-5.1.0-3.amzn2023.0.3.aarch64
 gc-8.0.4-5.amzn2023.0.2.aarch64
 gdbm-libs-1.19-2.amzn2023.0.2.aarch64
 glib2-2.82.2-766.amzn2023.aarch64
-glibc-2.34-196.amzn2023.0.1.aarch64
-glibc-common-2.34-196.amzn2023.0.1.aarch64
-glibc-minimal-langpack-2.34-196.amzn2023.0.1.aarch64
+glibc-2.34-231.amzn2023.0.1.aarch64
+glibc-common-2.34-231.amzn2023.0.1.aarch64
+glibc-minimal-langpack-2.34-231.amzn2023.0.1.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gnupg2-2.3.7-1.amzn2023.0.5.aarch64
 gnutls-3.8.3-8.amzn2023.0.1.aarch64
