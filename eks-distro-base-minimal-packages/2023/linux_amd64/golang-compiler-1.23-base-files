@@ -13806,7 +13806,7 @@
 -rwxr-xr-x    33KiB /usr/bin/whoami
 -rwxr-sr-x    24KiB /usr/bin/write
 -rwxr-xr-x    65KiB /usr/bin/xargs
--rwxr-xr-x    41KiB /usr/bin/xmlwf
+-rwxr-xr-x    40KiB /usr/bin/xmlwf
 -rwxr-xr-x    33KiB /usr/bin/yes
 -rwxr-xr-x   2.0KiB /usr/bin/zcat
 -rwxr-xr-x   1.7KiB /usr/bin/zcmp
@@ -14231,7 +14231,7 @@
 -rwxr-xr-x    41KiB /usr/lib64/libeconf.so.0.4.0
 -rwxr-xr-x   239KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   110KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   195KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   335KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   219KiB /usr/lib64/libfido2.so.1.10.0
