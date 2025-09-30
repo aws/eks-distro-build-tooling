@@ -408,7 +408,7 @@
 -rwxr-xr-x   197KiB /usr/bin/who
 -rwxr-xr-x   197KiB /usr/bin/whoami
 -rwxr-xr-x   197KiB /usr/bin/xargs
--rwxr-xr-x   197KiB /usr/bin/xmlwf
+-rwxr-xr-x   196KiB /usr/bin/xmlwf
 -rwxr-xr-x   197KiB /usr/bin/yes
 -rwxr-xr-x   2.0KiB /usr/bin/zcat
 -rwxr-xr-x   1.7KiB /usr/bin/zcmp
@@ -2451,7 +2451,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   717KiB /usr/lib64/libdw-0.188.so
 -rwxr-xr-x   262KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
