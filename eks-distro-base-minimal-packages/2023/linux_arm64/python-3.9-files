@@ -248,7 +248,7 @@
 -rwxr-xr-x      35B /usr/bin/unalias
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
 -rwxr-xr-x      32B /usr/bin/wait
--rwxr-xr-x   197KiB /usr/bin/xmlwf
+-rwxr-xr-x   196KiB /usr/bin/xmlwf
 -rwxr-xr-x   196KiB /usr/bin/zdump
 -rw-r--r--    47KiB /usr/include/python3.9/pyconfig-64.h
 -rw-r--r--      28B /usr/lib/issue
@@ -313,7 +313,7 @@
 -rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
 -rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2

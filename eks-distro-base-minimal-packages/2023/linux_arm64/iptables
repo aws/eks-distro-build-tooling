@@ -5,8 +5,8 @@ basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
 ca-certificates-2025.2.76-1.0.amzn2023.0.1.noarch
 conntrack-tools-1.4.6-2.amzn2023.0.2.aarch64
-coreutils-8.32-30.amzn2023.0.3.aarch64
-coreutils-common-8.32-30.amzn2023.0.3.aarch64
+coreutils-8.32-30.amzn2023.0.4.aarch64
+coreutils-common-8.32-30.amzn2023.0.4.aarch64
 cracklib-2.9.6-27.amzn2023.0.2.aarch64
 ebtables-legacy-2.0.11-9.amzn2023.0.2.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64

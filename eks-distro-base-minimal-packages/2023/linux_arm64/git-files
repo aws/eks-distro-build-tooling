@@ -270,7 +270,7 @@
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
 -rwxr-xr-x      32B /usr/bin/wait
 -rwxr-xr-x   196KiB /usr/bin/watchgnupg
--rwxr-xr-x   197KiB /usr/bin/xmlwf
+-rwxr-xr-x   196KiB /usr/bin/xmlwf
 -rwxr-xr-x   196KiB /usr/bin/zdump
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
@@ -348,7 +348,7 @@
 -rwxr-xr-x   716KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
--rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   328KiB /usr/lib64/libfido2.so.1.10.0
 -rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
