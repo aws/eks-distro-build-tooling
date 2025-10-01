@@ -1,4 +1,5 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
+coreutils.x86_64
+coreutils-common.x86_64
+expat.x86_64
+kernel6.12-libbpf.x86_64

@@ -1,4 +1,3 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
+coreutils-single.x86_64
+expat.x86_64

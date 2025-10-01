@@ -208,7 +208,7 @@
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
 -rwxr-xr-x   3.3KiB /usr/bin/catchsegv
--rwxr-xr-x   147KiB /usr/bin/cp
+-rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x    28KiB /usr/bin/gencat
 -rwxr-xr-x    36KiB /usr/bin/getconf
 -rwxr-xr-x    36KiB /usr/bin/getent
