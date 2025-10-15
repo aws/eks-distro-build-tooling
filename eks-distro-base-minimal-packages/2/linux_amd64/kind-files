@@ -10,7 +10,7 @@
 -rw-r--r--   2.8KiB /etc/bashrc
 -rw-r--r--     590B /etc/cloud/cloud.cfg.d/10_aws_yumvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
--rw-r--r--   7.3KiB /etc/containerd/config.toml
+-rw-r--r--   7.8KiB /etc/containerd/config.toml
 -rw-r--r--   1.6KiB /etc/csh.cshrc
 -rw-r--r--     866B /etc/csh.login
 -rw-r--r--     838B /etc/dbus-1/session.conf
@@ -221,14 +221,14 @@
 -rwxr-xr-x    41KiB /usr/bin/column
 -rwxr-xr-x    33KiB /usr/bin/comm
 -rwxr-xr-x      31B /usr/bin/command
--rwxr-xr-x    54MiB /usr/bin/containerd
--rwxr-xr-x   7.4MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    43MiB /usr/bin/containerd
+-rwxr-xr-x   8.0MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   151KiB /usr/bin/coredumpctl
 -rwxr-xr-x   144KiB /usr/bin/cp
 -rwxr-xr-x   143KiB /usr/bin/cpio
 -rwxr-xr-x   123KiB /usr/bin/crlutil
 -rwxr-xr-x    45KiB /usr/bin/csplit
--rwxr-xr-x    22MiB /usr/bin/ctr
+-rwxr-xr-x    24MiB /usr/bin/ctr
 -rwxr-xr-x   247KiB /usr/bin/curl
 -rwxr-xr-x    41KiB /usr/bin/cut
 -rwxr-xr-x   242KiB /usr/bin/cvtsudoers
@@ -812,7 +812,7 @@
 -rw-r--r--     787B /usr/lib/systemd/system/console-getty.service
 -rw-r--r--     749B /usr/lib/systemd/system/console-shell.service
 -rw-r--r--     808B /usr/lib/systemd/system/container-getty@.service
--rw-r--r--   1.4KiB /usr/lib/systemd/system/containerd.service
+-rw-r--r--   1.3KiB /usr/lib/systemd/system/containerd.service
 -rw-r--r--     425B /usr/lib/systemd/system/cryptsetup-pre.target
 -rw-r--r--     372B /usr/lib/systemd/system/cryptsetup.target
 -rw-r--r--     366B /usr/lib/systemd/system/dbus.service
@@ -4155,7 +4155,7 @@
 -rwxr-xr-x    41KiB /usr/sbin/rtcwake
 -rwxr-xr-x    74KiB /usr/sbin/rtmon
 -rwxr-xr-x      70B /usr/sbin/rtpr
--rwxr-xr-x    12MiB /usr/sbin/runc
+-rwxr-xr-x    13MiB /usr/sbin/runc
 -rwxr-xr-x    33KiB /usr/sbin/runuser
 -rwxr-xr-x    12KiB /usr/sbin/safe_finger
 -rwxr-xr-x    20KiB /usr/sbin/sasldblistusers2
@@ -4538,7 +4538,7 @@
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-2.0.5/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-2.1.4/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
@@ -4597,7 +4597,7 @@
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.2.6/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.3.1/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1

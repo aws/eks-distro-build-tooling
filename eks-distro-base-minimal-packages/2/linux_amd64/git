@@ -37,7 +37,7 @@ nss-3.90.0-2.amzn2.0.2.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
 openldap-2.4.44-25.amzn2.0.7.x86_64
 openssh-clients-7.4p1-22.amzn2.0.10.x86_64
-openssl-libs-1.0.2k-24.amzn2.0.15.x86_64
+openssl-libs-1.0.2k-24.amzn2.0.16.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 pcre2-10.23-11.amzn2.0.2.x86_64
 pth-2.0.7-23.amzn2.0.2.x86_64
