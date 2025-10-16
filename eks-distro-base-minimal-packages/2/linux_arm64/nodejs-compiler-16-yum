@@ -69,7 +69,7 @@ nss-sysinit-3.90.0-2.amzn2.0.2.aarch64
 nss-tools-3.90.0-2.amzn2.0.2.aarch64
 nss-util-3.90.0-1.amzn2.aarch64
 openldap-2.4.44-25.amzn2.0.7.aarch64
-openssl-libs-1.0.2k-24.amzn2.0.15.aarch64
+openssl-libs-1.0.2k-24.amzn2.0.16.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 pinentry-0.8.1-17.amzn2.0.2.aarch64
 popt-1.13-16.amzn2.0.2.aarch64

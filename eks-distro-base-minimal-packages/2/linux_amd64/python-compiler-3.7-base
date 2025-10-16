@@ -58,13 +58,13 @@ nss-sysinit-3.90.0-2.amzn2.0.2.x86_64
 nss-tools-3.90.0-2.amzn2.0.2.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
 openldap-2.4.44-25.amzn2.0.7.x86_64
-openssl-libs-1.0.2k-24.amzn2.0.15.x86_64
+openssl-libs-1.0.2k-24.amzn2.0.16.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 popt-1.13-16.amzn2.0.2.x86_64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
 python3-3.7.16-1.amzn2.0.19.x86_64
 python3-libs-3.7.16-1.amzn2.0.19.x86_64
-python3-pip-20.2.2-1.amzn2.0.12.noarch
+python3-pip-20.2.2-1.amzn2.0.13.noarch
 python3-setuptools-49.1.3-1.amzn2.0.6.noarch
 readline-6.2-10.amzn2.0.2.x86_64
 rpm-4.11.3-48.amzn2.0.5.x86_64
