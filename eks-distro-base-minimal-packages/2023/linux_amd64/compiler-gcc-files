@@ -3176,8 +3176,8 @@
 -rwxr-xr-x    36KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    85KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   160KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.4.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
@@ -9425,7 +9425,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.5MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.6MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
@@ -9807,6 +9807,7 @@ lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9

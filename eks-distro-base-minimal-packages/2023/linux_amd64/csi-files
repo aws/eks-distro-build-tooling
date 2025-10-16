@@ -617,8 +617,8 @@
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   160KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    80KiB /usr/lib64/libbz2.so.1.0.8
@@ -3138,7 +3138,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-6.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-8.amzn2023.so
 -rwxr-xr-x    16KiB /usr/libexec/awk/grcat
 -rwxr-xr-x    16KiB /usr/libexec/awk/pwcat
 -rwxr-xr-x    16KiB /usr/libexec/coreutils/libstdbuf.so
@@ -6465,6 +6465,7 @@ lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hm
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      24B /usr/lib64/libbasicobjects.so.0 libbasicobjects.so.0.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0

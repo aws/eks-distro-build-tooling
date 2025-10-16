@@ -483,8 +483,8 @@
 -rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   160KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
@@ -3285,6 +3285,7 @@ lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hm
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libcap-ng.so.0 libcap-ng.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73

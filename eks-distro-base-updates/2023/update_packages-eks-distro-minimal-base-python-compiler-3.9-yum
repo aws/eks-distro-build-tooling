@@ -1,5 +1,5 @@
 
-binutils.x86_64
-coreutils.x86_64
-coreutils-common.x86_64
-expat.x86_64
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+python3-pip.noarch
+python3-pip-wheel.noarch

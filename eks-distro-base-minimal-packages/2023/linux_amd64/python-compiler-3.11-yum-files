@@ -30,7 +30,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   7.1KiB /etc/ld.so.cache
+-rw-r--r--   7.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--     813B /etc/libreport/events.d/collect_dnf.conf
@@ -754,7 +754,7 @@
 -rw-r--r--   6.1KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/setuptools_build.cpython-311.pyc
 -rw-r--r--   9.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-311.pyc
 -rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-311.pyc
--rw-r--r--    15KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
+-rw-r--r--    16KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
 -rw-r--r--   2.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/urls.cpython-311.pyc
 -rw-r--r--   4.9KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/virtualenv.cpython-311.pyc
 -rw-r--r--   7.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/wheel.cpython-311.pyc
@@ -781,7 +781,7 @@
 -rw-r--r--   5.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/setuptools_build.py
 -rw-r--r--   9.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/subprocess.py
 -rw-r--r--   7.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/temp_dir.py
--rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
+-rw-r--r--    13KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
 -rw-r--r--   1.8KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/urls.py
 -rw-r--r--   3.4KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/virtualenv.py
 -rw-r--r--   4.5KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/wheel.py
@@ -2627,8 +2627,8 @@
 -rwxr-xr-x    36KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    85KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   160KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.4.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
@@ -11609,6 +11609,7 @@ lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9

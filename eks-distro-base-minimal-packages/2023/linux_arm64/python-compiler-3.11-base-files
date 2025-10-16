@@ -713,7 +713,7 @@
 -rw-r--r--   6.1KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/setuptools_build.cpython-311.pyc
 -rw-r--r--   9.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-311.pyc
 -rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-311.pyc
--rw-r--r--    15KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
+-rw-r--r--    16KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-311.pyc
 -rw-r--r--   2.7KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/urls.cpython-311.pyc
 -rw-r--r--   4.9KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/virtualenv.cpython-311.pyc
 -rw-r--r--   7.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/__pycache__/wheel.cpython-311.pyc
@@ -740,7 +740,7 @@
 -rw-r--r--   5.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/setuptools_build.py
 -rw-r--r--   9.0KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/subprocess.py
 -rw-r--r--   7.6KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/temp_dir.py
--rw-r--r--    12KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
+-rw-r--r--    13KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/unpacking.py
 -rw-r--r--   1.8KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/urls.py
 -rw-r--r--   3.4KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/virtualenv.py
 -rw-r--r--   4.5KiB /usr/lib/python3.11/site-packages/pip/_internal/utils/wheel.py

@@ -13139,8 +13139,8 @@
 -rwxr-xr-x   196KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x   198KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   260KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   261KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.4.so
 -rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
@@ -13277,7 +13277,7 @@
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
--rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   983KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   195KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libtic.so.6.2
@@ -19889,7 +19889,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.3MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog
@@ -20266,6 +20266,7 @@ lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
