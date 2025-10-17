@@ -26,7 +26,7 @@
 -rw-r--r--       9B /etc/host.conf
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
--rw-r--r--   3.1KiB /etc/ld.so.cache
+-rw-r--r--   3.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--     261B /etc/logrotate.d/nginx
@@ -469,8 +469,8 @@
 -rwxr-xr-x   197KiB /usr/lib64/libacl.so.1.1.2301
 -rwxr-xr-x   196KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   261KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   262KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   260KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   261KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
 -rwxr-xr-x   201KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
@@ -3213,6 +3213,7 @@ lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hm
 lrwxrwxrwx      18B /usr/lib64/libacl.so.1 libacl.so.1.1.2301
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libcap-ng.so.0 libcap-ng.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73

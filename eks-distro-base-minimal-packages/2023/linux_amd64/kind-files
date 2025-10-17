@@ -361,11 +361,11 @@
 -rwxr-xr-x    37KiB /usr/bin/column
 -rwxr-xr-x    36KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    60MiB /usr/bin/containerd
--rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    45MiB /usr/bin/containerd
+-rwxr-xr-x    17MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x    24MiB /usr/bin/ctr
+-rwxr-xr-x    25MiB /usr/bin/ctr
 -rwxr-xr-x   295KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   337KiB /usr/bin/cvtsudoers
@@ -1080,7 +1080,7 @@
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/console-getty.service
 -rw-r--r--   1.3KiB /usr/lib/systemd/system/container-getty@.service
--rw-r--r--   1.4KiB /usr/lib/systemd/system/containerd.service
+-rw-r--r--   1.3KiB /usr/lib/systemd/system/containerd.service
 -rw-r--r--     547B /usr/lib/systemd/system/dbus-broker.service
 -rw-r--r--     137B /usr/lib/systemd/system/dbus.socket
 -rw-r--r--   1.1KiB /usr/lib/systemd/system/debug-shell.service
@@ -1375,8 +1375,8 @@
 -rwxr-xr-x    36KiB /usr/lib64/libasm-0.188.so
 -rwxr-xr-x    85KiB /usr/lib64/libassuan.so.0.8.5
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
--rwxr-xr-x   137KiB /usr/lib64/libaudit.so.1.0.0
--rwxr-xr-x   142KiB /usr/lib64/libauparse.so.0.0.0
+-rwxr-xr-x   160KiB /usr/lib64/libaudit.so.1.0.0
+-rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   419KiB /usr/lib64/libbpf.so.1.5.0
@@ -4125,8 +4125,8 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-6.amzn2023.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-6.amzn2023.so
+-rwxr-xr-x   2.2MiB /usr/lib64/systemd/libsystemd-core-252.23-8.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-8.amzn2023.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libarpt_mangle.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_802_3.so
 -rwxr-xr-x    16KiB /usr/lib64/xtables/libebt_among.so
@@ -8427,6 +8427,7 @@ lrwxrwxrwx      15B /usr/lib64/libasm.so.1 libasm-0.188.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0 libassuan.so.0.8.5
 lrwxrwxrwx      19B /usr/lib64/libattr.so.1 libattr.so.1.1.2501
 lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
+lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      24B /usr/lib64/libbasicobjects.so.0 libbasicobjects.so.0.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
