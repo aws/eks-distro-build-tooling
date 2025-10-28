@@ -1,4 +1,10 @@
 
+glibc.x86_64
+glibc-common.x86_64
+glibc-devel.x86_64
+glibc-headers.x86_64
+glibc-minimal-langpack.x86_64
 kernel-headers.x86_64
-openssl-libs.x86_64
-python3-pip.noarch
+libcrypt.x86_64
+python3.x86_64
+python3-libs.x86_64
