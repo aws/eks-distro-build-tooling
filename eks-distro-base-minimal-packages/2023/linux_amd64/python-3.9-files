@@ -1816,11 +1816,11 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--   9.3KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
+-rw-r--r--    13KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
+-rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    18KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    21KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -1922,7 +1922,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   314KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    72KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -1967,9 +1967,9 @@
 -rwxr-xr-x    16KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    41KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-x86_64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.9/lib2to3/Grammar.txt
--rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.23.final.0.pickle
+-rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.24.final.0.pickle
 -rw-r--r--     793B /usr/lib64/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.23.final.0.pickle
+-rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.24.final.0.pickle
 -rw-r--r--     163B /usr/lib64/python3.9/lib2to3/__init__.py
 -rw-r--r--      67B /usr/lib64/python3.9/lib2to3/__main__.py
 -rw-r--r--     302B /usr/lib64/python3.9/lib2to3/__pycache__/__init__.cpython-39.opt-1.pyc

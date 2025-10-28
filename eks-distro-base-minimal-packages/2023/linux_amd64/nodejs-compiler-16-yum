@@ -1,6 +1,6 @@
 alternatives-1.15-2.amzn2023.0.2.x86_64
 amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
-audit-libs-3.1.5-1.amzn2023.0.1.x86_64
+audit-libs-3.1.5-1.amzn2023.0.2.x86_64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.x86_64
 binutils-2.41-50.amzn2023.0.4.x86_64
@@ -52,7 +52,7 @@ libcap-ng-0.8.2-4.amzn2023.0.2.x86_64
 libcom_err-1.46.5-2.amzn2023.0.2.x86_64
 libcomps-0.1.20-1.amzn2023.x86_64
 libcurl-8.11.1-4.amzn2023.0.1.x86_64
-libdnf-0.69.0-8.amzn2023.0.5.x86_64
+libdnf-0.69.0-8.amzn2023.0.6.x86_64
 libffi-3.4.4-1.amzn2023.0.1.x86_64
 libgcc-14.2.1-7.amzn2023.0.1.x86_64
 libgcrypt-1.10.2-1.amzn2023.0.2.x86_64
@@ -64,7 +64,7 @@ libmodulemd-2.13.0-2.amzn2023.0.2.x86_64
 libmount-2.37.4-1.amzn2023.0.4.x86_64
 libnghttp2-1.59.0-3.amzn2023.0.1.x86_64
 libpsl-0.21.5-1.amzn2023.0.1.x86_64
-librepo-1.14.5-2.amzn2023.0.1.x86_64
+librepo-1.14.5-2.amzn2023.0.2.x86_64
 libreport-filesystem-2.15.2-2.amzn2023.0.2.noarch
 libselinux-3.4-5.amzn2023.0.2.x86_64
 libsepol-3.4-3.amzn2023.0.3.x86_64
@@ -100,13 +100,13 @@ pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 popt-1.18-6.amzn2023.0.2.x86_64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
-python3-3.9.23-1.amzn2023.0.3.x86_64
+python3-3.9.24-1.amzn2023.0.3.x86_64
 python3-dnf-4.14.0-1.amzn2023.0.6.noarch
 python3-gpg-1.23.2-182.amzn2023.0.1.x86_64
-python3-hawkey-0.69.0-8.amzn2023.0.5.x86_64
+python3-hawkey-0.69.0-8.amzn2023.0.6.x86_64
 python3-libcomps-0.1.20-1.amzn2023.x86_64
-python3-libdnf-0.69.0-8.amzn2023.0.5.x86_64
-python3-libs-3.9.23-1.amzn2023.0.3.x86_64
+python3-libdnf-0.69.0-8.amzn2023.0.6.x86_64
+python3-libs-3.9.24-1.amzn2023.0.3.x86_64
 python3-pip-wheel-21.3.1-2.amzn2023.0.14.noarch
 python3-rpm-4.16.1.3-29.amzn2023.0.6.x86_64
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.6.noarch

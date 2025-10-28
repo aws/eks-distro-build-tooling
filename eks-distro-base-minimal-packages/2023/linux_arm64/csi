@@ -1,5 +1,5 @@
 amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
-audit-libs-3.1.5-1.amzn2023.0.1.aarch64
+audit-libs-3.1.5-1.amzn2023.0.2.aarch64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
 bzip2-libs-1.0.8-6.amzn2023.0.2.aarch64
@@ -78,8 +78,8 @@ pam-1.5.1-8.amzn2023.0.6.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 popt-1.18-6.amzn2023.0.2.aarch64
-python3-3.9.23-1.amzn2023.0.3.aarch64
-python3-libs-3.9.23-1.amzn2023.0.3.aarch64
+python3-3.9.24-1.amzn2023.0.3.aarch64
+python3-libs-3.9.24-1.amzn2023.0.3.aarch64
 python3-pip-wheel-21.3.1-2.amzn2023.0.14.noarch
 python3-setuptools-wheel-59.6.0-2.amzn2023.0.6.noarch
 quota-4.06-4.amzn2023.0.2.aarch64
