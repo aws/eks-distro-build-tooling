@@ -6294,7 +6294,7 @@
 -rw-r--r--   6.3MiB /var/lib/rpm/Packages
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    60KiB /var/lib/rpm/Requirename
--rw-r--r--    20KiB /var/lib/rpm/Sha1header
+-rw-r--r--    16KiB /var/lib/rpm/Sha1header
 -rw-r--r--    20KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--       0B /var/log/lastlog
