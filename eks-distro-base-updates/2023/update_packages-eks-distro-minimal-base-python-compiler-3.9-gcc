@@ -1,5 +1,4 @@
 
-openssl-fips-provider-latest.x86_64
-openssl-libs.x86_64
-python3-pip.noarch
-python3-pip-wheel.noarch
+kernel6.12-headers.x86_64
+python3.x86_64
+python3-libs.x86_64

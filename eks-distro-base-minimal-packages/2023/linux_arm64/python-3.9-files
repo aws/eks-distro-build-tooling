@@ -1815,11 +1815,11 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--   9.3KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
+-rw-r--r--    13KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
+-rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    18KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    21KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -1966,9 +1966,9 @@
 -rwxr-xr-x   196KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-aarch64-linux-gnu.so
 -rwxr-xr-x   197KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-aarch64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.9/lib2to3/Grammar.txt
--rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.23.final.0.pickle
+-rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.24.final.0.pickle
 -rw-r--r--     793B /usr/lib64/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.23.final.0.pickle
+-rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.24.final.0.pickle
 -rw-r--r--     163B /usr/lib64/python3.9/lib2to3/__init__.py
 -rw-r--r--      67B /usr/lib64/python3.9/lib2to3/__main__.py
 -rw-r--r--     302B /usr/lib64/python3.9/lib2to3/__pycache__/__init__.cpython-39.opt-1.pyc
