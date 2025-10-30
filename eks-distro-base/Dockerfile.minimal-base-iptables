@@ -54,7 +54,6 @@ RUN set -x && \
         iptables-nft && \
     if_al2 install_rpm iptables ebtables && \
     if_al2023 install_rpm iptables-legacy ebtables-legacy nftables && \
-    if_al2023 yum --installroot $NEWROOT install -y --setopt=install_weak_deps=False pam && \
     # The original iptables-wrapper.sh script assumed that there were both iptables and ip6tables 
     # alternatives setup since the upstream image was based on debian which sets them up that way
     # AL2 follows RHEL which uses a single alternaive setup for both iptables and ip6tables
