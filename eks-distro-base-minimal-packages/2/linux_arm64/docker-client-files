@@ -396,8 +396,8 @@
 -rwxr-xr-x   762KiB /usr/sbin/sln
 -rwxr-xr-x    73KiB /usr/sbin/zdump
 -rwxr-xr-x    75KiB /usr/sbin/zic
--rw-r--r--    11KiB /usr/share/doc/docker-25.0.8/LICENSE
--rw-r--r--     642B /usr/share/doc/docker-25.0.8/NOTICE
+-rw-r--r--    11KiB /usr/share/doc/docker-25.0.13/LICENSE
+-rw-r--r--     642B /usr/share/doc/docker-25.0.13/NOTICE
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING

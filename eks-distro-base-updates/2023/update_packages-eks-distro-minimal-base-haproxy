@@ -1,5 +1,2 @@
 
-amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-system-release.noarch
-tzdata.noarch
+openssl-libs.x86_64
