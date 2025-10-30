@@ -110,6 +110,7 @@ PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit 
 # ************************************************************
 
 # base and minimal-base use al2 as the base image
+# Test comment to verify build issue is unrelated to PAM changes
 AL_TAG?=2
 
 BUILD_DEPS?=false
