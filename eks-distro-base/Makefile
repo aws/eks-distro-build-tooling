@@ -105,7 +105,7 @@ IMAGE_REPO_FOR_VARIANT=$(if $(filter true,$(call CAT_PUSHED_FILE,$(MAKE_ROOT)/$(
 PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit postsubmit), \
 	$(eval _PUSHED_FILE := $(MAKE_ROOT)/$(IMAGE_NAME)-pushed) \
 	$(eval _CAT_PUSHED_FILE_CACHE_$(_PUSHED_FILE) := ) \
-	$(shell if [ -n "$(LOG_CAT_PUSHED_FILE)" ]; then echo "echo true > $(_PUSHED_FILE)"; fi && echo true > $(_PUSHED_FILE)),)
+	$(shell if [ -n "$(LOG_CAT_PUSHED_FILE)" ]; then echo "echo true > $(_PUSHED_FILE)"; fi && echo true > '$(_PUSHED_FILE)'),)
 
 # ************************************************************
 
