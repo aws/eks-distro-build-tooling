@@ -40,6 +40,7 @@ RUN set -x && \
         nginx \
         nginx-core && \
     if_al2023 install_rpm nginx-mimetypes && \
+    if_al2023 yum --installroot $NEWROOT install -y --setopt=install_weak_deps=False && \
     # TODO: remove these when changes can be coordinated in eks-a-build-tooling
     install_rpm bash \
         coreutils && \
