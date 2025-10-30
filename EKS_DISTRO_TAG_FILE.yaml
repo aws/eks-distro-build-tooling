@@ -3,13 +3,13 @@ al2:
   eks-distro-minimal-base: 2025-04-01-1743465687.2
   eks-distro-minimal-base-nonroot: 2025-04-01-1743465687.2
   eks-distro-minimal-base-glibc: 2025-10-28-1761678121.2
-  eks-distro-minimal-base-iptables: null
+  eks-distro-minimal-base-iptables: 2025-10-30-1761807660.2
   eks-distro-minimal-base-docker-client: 2025-10-28-1761678121.2
   eks-distro-minimal-base-csi: 2025-10-28-1761678121.2
   eks-distro-minimal-base-csi-ebs: 2025-10-28-1761678121.2
   eks-distro-minimal-base-haproxy: 2025-10-28-1761678121.2
   eks-distro-minimal-base-kind: 2025-10-28-1761678121.2
-  eks-distro-minimal-base-nginx: null
+  eks-distro-minimal-base-nginx: 2025-10-30-1761807660.2
   eks-distro-minimal-base-git: 2025-10-28-1761678121.2
   eks-distro-minimal-base-nsenter: 2025-10-28-1761678121.2
   eks-distro-minimal-base-python-3.7: 3.7-2025-10-28-1761678121.2
