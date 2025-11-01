@@ -16,6 +16,7 @@ IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 JOB_TYPE?=
 TEST_IMAGE_REPO?=localhost:5000
 IGNORE_NO_CACHE?=false
+SECURITY?=
 # ******************** Helpers ******************************
 # For replacing commas or with commas, it needs to be in a var
 COMMA=,

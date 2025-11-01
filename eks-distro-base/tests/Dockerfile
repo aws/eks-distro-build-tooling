@@ -52,3 +52,8 @@ COPY --from=iptables-wrapper-tests-builder /iptables-wrappers/bin/tests /
 
 CMD ["iptables"]
 
+FROM ${BASE_IMAGE} as check-no-shell
+
+CMD ["/bin/sh", "-c", "exit 0"]
+
+

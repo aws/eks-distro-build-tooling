@@ -49,7 +49,36 @@ function build::docker::retry_pull() {
   retry docker pull "$@"
 }
 
+function check_no_shell() {
+    local -r variant="$1"
+    
+    $SCRIPT_ROOT/../../scripts/buildkit.sh  \
+        build \
+        --frontend dockerfile.v0 \
+        --opt filename=./tests/Dockerfile \
+        --opt platform=$PLATFORMS \
+        --opt build-arg:BASE_IMAGE=$IMAGE_REPO/eks-distro-minimal-base-$variant:$IMAGE_TAG \
+        --opt build-arg:AL_TAG=$AL_TAG \
+        --progress plain \
+        --opt target=check-no-shell \
+        --local dockerfile=./ \
+        --local context=./tests \
+        --export-cache type=inline \
+        --import-cache type=registry,ref=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:no-shell-$variant-latest \
+        --output type=image,oci-mediatypes=true,\"name=$LOCAL_REGISTRY/eks-distro-minimal-images-base-test:no-shell-$variant-latest\",push=true
+
+    for platform in ${PLATFORMS//,/ }; do
+        build::docker::retry_pull --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:no-shell-$variant-latest
+        if docker run --rm --platform=$platform $LOCAL_REGISTRY/eks-distro-minimal-images-base-test:no-shell-$variant-latest; then
+            echo "Shell detected in $variant image! Minimal images should not contain shell binaries."
+            exit 1
+        fi
+    done
+}
+
 function check_base() {
+    check_no_shell base
+
     $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
@@ -75,10 +104,12 @@ function check_base() {
 }
 
 function check_base-nonroot() {
-    echo "not impl"
+    check_no_shell nonroot
 }
 
 function check_base-glibc() {
+    check_no_shell glibc
+
     $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
@@ -115,6 +146,8 @@ function cleanup-iptable-rules() {
 }
 
 function check_base-iptables() {
+    check_no_shell iptables
+
     $SCRIPT_ROOT/../../scripts/buildkit.sh  \
         build \
         --frontend dockerfile.v0 \
@@ -323,6 +356,8 @@ function check_base-csi() {
  }
 
  function check_base-csi-ebs() {
+    check_no_shell csi-ebs
+
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG
         if docker run --rm --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-csi-ebs:$IMAGE_TAG mount --version | grep -v 'mount'; then
@@ -368,6 +403,8 @@ function check_base-csi() {
  }
 
  check_base-docker-client() {
+    check_no_shell docker-client
+
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-docker-client:$IMAGE_TAG
 
@@ -379,6 +416,8 @@ function check_base-csi() {
  }
 
  check_base-haproxy() {
+    check_no_shell haproxy
+
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-haproxy:$IMAGE_TAG
 
@@ -390,6 +429,8 @@ function check_base-csi() {
  }
 
  check_base-nginx() {
+    # TODO: Add check_no_shell nginx after bash is removed (coordinate with eks-a-build-tooling)
+
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-nginx:$IMAGE_TAG
 
@@ -412,6 +453,8 @@ function check_base-csi() {
  }
 
  check_base-nsenter() {
+    check_no_shell nsenter
+
     for platform in ${PLATFORMS//,/ }; do
         build::docker::retry_pull --platform=$platform $IMAGE_REPO/eks-distro-minimal-base-nsenter:$IMAGE_TAG
 
