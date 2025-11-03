@@ -4,7 +4,7 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.x86_64
 binutils-2.29.1-31.amzn2.0.2.x86_64
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2023.2.68-1.amzn2.0.1.noarch
+ca-certificates-2025.2.76-1.amzn2.0.2.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
@@ -106,7 +106,7 @@ system-release-2-17.amzn2.x86_64
 systemd-219-78.amzn2.0.24.x86_64
 systemd-libs-219-78.amzn2.0.24.x86_64
 tar-1.26-35.amzn2.0.4.x86_64
-tzdata-2025a-1.amzn2.0.1.noarch
+tzdata-2025b-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.11.x86_64
 which-2.20-7.amzn2.0.2.x86_64

@@ -71,13 +71,13 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   160KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   156KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   269KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   272KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
--r--r--r--   160KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   147KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--       0B /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   220KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   214KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--     257B /etc/pki/nss-legacy/nss-rhel7.config
 -rw-r--r--    64KiB /etc/pki/nssdb/cert8.db
@@ -19988,7 +19988,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--  1017KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--   1.1MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--   9.4KiB /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
 -rw-r--r--   2.0KiB /usr/share/polkit-1/actions/org.freedesktop.import1.policy
 -rw-r--r--   6.2KiB /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
@@ -20250,6 +20250,7 @@
 -rw-r--r--     203B /usr/share/zoneinfo/America/Coral_Harbour
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Cordoba
 -rw-r--r--     341B /usr/share/zoneinfo/America/Costa_Rica
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Coyhaique
 -rw-r--r--     369B /usr/share/zoneinfo/America/Creston
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/America/Cuiaba
 -rw-r--r--     255B /usr/share/zoneinfo/America/Curacao
@@ -20848,6 +20849,7 @@
 -rw-r--r--     203B /usr/share/zoneinfo/posix/America/Coral_Harbour
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Cordoba
 -rw-r--r--     341B /usr/share/zoneinfo/posix/America/Costa_Rica
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Coyhaique
 -rw-r--r--     369B /usr/share/zoneinfo/posix/America/Creston
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/America/Cuiaba
 -rw-r--r--     255B /usr/share/zoneinfo/posix/America/Curacao
@@ -21445,6 +21447,7 @@
 -rw-r--r--     743B /usr/share/zoneinfo/right/America/Coral_Harbour
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Cordoba
 -rw-r--r--     881B /usr/share/zoneinfo/right/America/Costa_Rica
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Coyhaique
 -rw-r--r--     909B /usr/share/zoneinfo/right/America/Creston
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Cuiaba
 -rw-r--r--     795B /usr/share/zoneinfo/right/America/Curacao
@@ -21942,7 +21945,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
 -rw-r--r--   4.0KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     667B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   107KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   108KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--     721B /usr/share/zsh/site-functions/_bootctl
