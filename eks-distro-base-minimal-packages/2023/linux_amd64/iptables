@@ -1,7 +1,7 @@
 alternatives-1.15-2.amzn2023.0.2.x86_64
-amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.9.20251027-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
-ca-certificates-2025.2.76-1.0.amzn2023.0.1.noarch
+ca-certificates-2025.2.76-1.0.amzn2023.0.2.noarch
 conntrack-tools-1.4.6-2.amzn2023.0.2.x86_64
 ebtables-legacy-2.0.11-9.amzn2023.0.2.x86_64
 filesystem-3.14-5.amzn2023.0.3.x86_64
@@ -20,7 +20,7 @@ iptables-nft-1.8.8-3.amzn2023.0.2.x86_64
 jansson-2.14-0.amzn2023.x86_64
 kmod-29-2.amzn2023.0.5.x86_64
 libcap-2.73-1.amzn2023.0.3.x86_64
-libgcc-14.2.1-7.amzn2023.0.1.x86_64
+libgcc-14.2.1-7.amzn2023.0.2.x86_64
 libibverbs-48.0-1.amzn2023.0.1.x86_64
 libmnl-1.0.4-13.amzn2023.0.2.x86_64
 libnetfilter_conntrack-1.0.8-2.amzn2023.0.2.x86_64
@@ -33,7 +33,7 @@ libnl3-3.5.0-6.amzn2023.0.2.x86_64
 libpcap-1.10.1-1.amzn2023.0.2.x86_64
 libselinux-3.4-5.amzn2023.0.2.x86_64
 libsepol-3.4-3.amzn2023.0.3.x86_64
-libstdc++-14.2.1-7.amzn2023.0.1.x86_64
+libstdc++-14.2.1-7.amzn2023.0.2.x86_64
 ncurses-libs-6.2-4.20200222.amzn2023.0.6.x86_64
 nftables-1.0.4-3.amzn2023.0.2.x86_64
 openssl-libs-3.2.2-1.amzn2023.0.2.x86_64
@@ -41,7 +41,7 @@ pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 readline-8.1-2.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
-system-release-2023.7.20250623-0.amzn2023.noarch
+system-release-2023.9.20251027-0.amzn2023.noarch
 systemd-libs-252.23-8.amzn2023.x86_64
 tzdata-2025b-1.amzn2023.0.1.noarch
 xz-libs-5.2.5-9.amzn2023.0.2.x86_64

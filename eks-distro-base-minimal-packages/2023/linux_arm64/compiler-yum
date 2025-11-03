@@ -1,11 +1,11 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.7.20250623-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.9.20251027-0.amzn2023.noarch
 audit-libs-3.1.5-1.amzn2023.0.2.aarch64
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
 binutils-2.41-50.amzn2023.0.4.aarch64
 bzip2-libs-1.0.8-6.amzn2023.0.2.aarch64
-ca-certificates-2025.2.76-1.0.amzn2023.0.1.noarch
+ca-certificates-2025.2.76-1.0.amzn2023.0.2.noarch
 coreutils-8.32-30.amzn2023.0.4.aarch64
 coreutils-common-8.32-30.amzn2023.0.4.aarch64
 crypto-policies-20240828-2.git626aa59.amzn2023.0.1.noarch
@@ -54,7 +54,7 @@ libcomps-0.1.20-1.amzn2023.aarch64
 libcurl-8.11.1-4.amzn2023.0.1.aarch64
 libdnf-0.69.0-8.amzn2023.0.6.aarch64
 libffi-3.4.4-1.amzn2023.0.1.aarch64
-libgcc-14.2.1-7.amzn2023.0.1.aarch64
+libgcc-14.2.1-7.amzn2023.0.2.aarch64
 libgcrypt-1.10.2-1.amzn2023.0.2.aarch64
 libgomp-14.2.1-7.amzn2023.0.2.aarch64
 libgpg-error-1.42-1.amzn2023.0.2.aarch64
@@ -73,7 +73,7 @@ libsmartcols-2.37.4-1.amzn2023.0.4.aarch64
 libsolv-0.7.22-1.amzn2023.0.2.aarch64
 libssh-0.10.6-1.amzn2023.0.2.aarch64
 libssh-config-0.10.6-1.amzn2023.0.2.noarch
-libstdc++-14.2.1-7.amzn2023.0.1.aarch64
+libstdc++-14.2.1-7.amzn2023.0.2.aarch64
 libtasn1-4.19.0-1.amzn2023.0.5.aarch64
 libtool-ltdl-2.4.7-1.amzn2023.0.3.aarch64
 libunistring-0.9.10-10.amzn2023.0.2.aarch64
@@ -118,7 +118,7 @@ rpm-sign-libs-4.16.1.3-29.amzn2023.0.6.aarch64
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-libs-3.40.0-1.amzn2023.0.6.aarch64
-system-release-2023.7.20250623-0.amzn2023.noarch
+system-release-2023.9.20251027-0.amzn2023.noarch
 tar-1.34-1.amzn2023.0.4.aarch64
 tzdata-2025b-1.amzn2023.0.1.noarch
 which-2.21-26.amzn2023.0.2.aarch64

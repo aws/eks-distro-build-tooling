@@ -1,4 +1,6 @@
 
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
+amazon-linux-repo-cdn.noarch
+ca-certificates.noarch
+libgcc.x86_64
+libstdc++.x86_64
+system-release.noarch

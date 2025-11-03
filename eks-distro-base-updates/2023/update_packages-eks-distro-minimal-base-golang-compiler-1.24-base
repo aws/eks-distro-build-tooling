@@ -1,1 +1,7 @@
 
+amazon-linux-repo-cdn.noarch
+audit-libs.x86_64
+ca-certificates.noarch
+libgcc.x86_64
+libstdc++.x86_64
+system-release.noarch

@@ -49,9 +49,9 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     566B /etc/pki/ca-trust/extracted/edk2/README
--r--r--r--   154KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
+-r--r--r--   155KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   155KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   156KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
 -r--r--r--   528KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
@@ -164,6 +164,7 @@
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Secure_Global_CA.pem
 -r--r--r--     830B /etc/pki/ca-trust/extracted/pem/directory-hash/Security_Communication_ECC_RootCA1.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Security_Communication_RootCA2.pem
+-r--r--r--   1.5KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Class_2_CA.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Root_Certificate_Authority_-_G2.pem
 -r--r--r--   1.4KiB /etc/pki/ca-trust/extracted/pem/directory-hash/Starfield_Services_Root_Certificate_Authority_-_G2.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/SwissSign_Gold_CA_-_G2.pem
@@ -199,7 +200,7 @@
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_Root_CA.pem
 -r--r--r--   147KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
 -r--r--r--   380KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   212KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   214KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
@@ -10985,6 +10986,7 @@ lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/1e44ef15.0 D-
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/1e8e7201.0 GlobalSign_Root_CA_-_R3.pem
 lrwxrwxrwx      25B /etc/pki/ca-trust/extracted/pem/directory-hash/1f58a078.0 QuoVadis_Root_CA_2_G3.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/228f89db.0 CommScope_Public_Trust_ECC_Root-01.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/23f4c490.0 Starfield_Class_2_CA.pem
 lrwxrwxrwx      38B /etc/pki/ca-trust/extracted/pem/directory-hash/244b5494.0 DigiCert_High_Assurance_EV_Root_CA.pem
 lrwxrwxrwx      33B /etc/pki/ca-trust/extracted/pem/directory-hash/252252d2.0 DigiCert_TLS_ECC_P384_Root_G5.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/2923b3f9.0 emSign_Root_CA_-_G1.pem
@@ -11221,6 +11223,7 @@ lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/f058632f.0 Te
 lrwxrwxrwx      47B /etc/pki/ca-trust/extracted/pem/directory-hash/f0c70a8d.0 SSL.com_EV_Root_Certification_Authority_ECC.pem
 lrwxrwxrwx      44B /etc/pki/ca-trust/extracted/pem/directory-hash/f249de83.0 Trustwave_Global_Certification_Authority.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/f30dd6ad.0 USERTrust_ECC_Certification_Authority.pem
+lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/f387163d.0 Starfield_Class_2_CA.pem
 lrwxrwxrwx      18B /etc/pki/ca-trust/extracted/pem/directory-hash/f39fc864.0 SecureTrust_CA.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/f459871d.0 emSign_Root_CA_-_G1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/f51bb24c.0 Certigna_Root_CA.pem
