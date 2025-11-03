@@ -2,7 +2,7 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 binutils-2.29.1-31.amzn2.0.2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2023.2.68-1.amzn2.0.1.noarch
+ca-certificates-2025.2.76-1.amzn2.0.2.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.0.1.aarch64
@@ -99,7 +99,7 @@ shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.3.aarch64
 system-release-2-17.amzn2.aarch64
 tar-1.26-35.amzn2.0.4.aarch64
-tzdata-2025a-1.amzn2.0.1.noarch
+tzdata-2025b-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 yum-3.4.3-158.amzn2.0.7.noarch
