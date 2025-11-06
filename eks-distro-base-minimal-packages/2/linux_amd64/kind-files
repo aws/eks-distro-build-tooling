@@ -4099,7 +4099,7 @@
 -rwxr-xr-x   572KiB /usr/sbin/ip
 -rwxr-xr-x    24KiB /usr/sbin/ipset
 -rwxr-xr-x   3.5KiB /usr/sbin/iptables-apply
--rwxr-xr-x   2.0MiB /usr/sbin/iptables-wrapper
+-rwxr-xr-x   2.1MiB /usr/sbin/iptables-wrapper
 -rwxr-xr-x    20KiB /usr/sbin/key.dns_resolver
 -rwxr-xr-x    28KiB /usr/sbin/ldattach
 -rwxr-xr-x   885KiB /usr/sbin/ldconfig
@@ -4597,7 +4597,7 @@
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.3.1/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.3.2/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1

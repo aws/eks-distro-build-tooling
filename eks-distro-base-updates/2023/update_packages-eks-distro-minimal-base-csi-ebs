@@ -1,8 +1,3 @@
 
 amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-libgcc.x86_64
-libstdc++.x86_64
 system-release.noarch
-systemd-libs.x86_64
-xfsprogs.x86_64

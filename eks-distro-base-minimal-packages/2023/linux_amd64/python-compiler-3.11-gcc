@@ -1,5 +1,5 @@
 alternatives-1.15-2.amzn2023.0.2.x86_64
-amazon-linux-repo-cdn-2023.9.20251027-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.9.20251105-0.amzn2023.noarch
 amazon-rpm-config-228-10.amzn2023.0.1.noarch
 annobin-docs-12.69-1.amzn2023.0.1.noarch
 annobin-plugin-gcc-12.69-1.amzn2023.0.1.x86_64
@@ -159,7 +159,7 @@ sed-4.8-7.amzn2023.0.2.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-3.40.0-1.amzn2023.0.6.x86_64
 sqlite-libs-3.40.0-1.amzn2023.0.6.x86_64
-system-release-2023.9.20251027-0.amzn2023.noarch
+system-release-2023.9.20251105-0.amzn2023.noarch
 tar-1.34-1.amzn2023.0.4.x86_64
 tzdata-2025b-1.amzn2023.0.1.noarch
 unzip-6.0-57.amzn2023.0.2.x86_64
