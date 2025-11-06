@@ -269,7 +269,7 @@
 -rw-r--r--       0B /etc/subuid
 -rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     817B /etc/xattr.conf
--rw-r--r--     845B /etc/yum.repos.d/amazonlinux.repo
+-rw-r--r--     905B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       9B /root/sdk/go1.20.14/VERSION
 -rw-r--r--   1.2KiB /root/sdk/go1.20.14/api/README
 -rw-r--r--    34KiB /root/sdk/go1.20.14/api/except.txt
