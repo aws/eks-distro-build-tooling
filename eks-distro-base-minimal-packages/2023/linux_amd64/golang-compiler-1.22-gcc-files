@@ -253,7 +253,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1022B /etc/security/namespace.init
+-rwxr-xr-x   2.0KiB /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -13231,7 +13231,7 @@
 -rwxr-xr-x    73KiB /usr/bin/dmesg
 -rwxr-xr-x   2.1KiB /usr/bin/dnf-3
 -rwxr-xr-x   154KiB /usr/bin/du
--rwxr-xr-x   217KiB /usr/bin/dwz
+-rwxr-xr-x   233KiB /usr/bin/dwz
 -rwxr-xr-x    28KiB /usr/bin/echo
 -rwxr-xr-x      45B /usr/bin/egrep
 -rwxr-xr-x    45KiB /usr/bin/eject
@@ -16291,7 +16291,7 @@
 -rwxr-xr-x    45KiB /usr/lib64/libltdl.so.7.3.2
 -rwxr-xr-x   258KiB /usr/lib64/liblua-5.3.so
 -rwxr-xr-x   286KiB /usr/lib64/liblua-5.4.so
--rwxr-xr-x   165KiB /usr/lib64/liblz4.so.1.9.4
+-rwxr-xr-x   164KiB /usr/lib64/liblz4.so.1.9.4
 -rwxr-xr-x   175KiB /usr/lib64/liblzma.so.5.2.5
 -rw-r--r--     110B /usr/lib64/libm.so
 -rwxr-xr-x   891KiB /usr/lib64/libm.so.6
@@ -17937,7 +17937,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   314KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    72KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -18897,7 +18897,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_mail.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_mkhomedir.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_motd.so
--rwxr-xr-x    44KiB /usr/lib64/security/pam_namespace.so
+-rwxr-xr-x    48KiB /usr/lib64/security/pam_namespace.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_nologin.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_permit.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_postgresok.so

@@ -253,7 +253,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1022B /etc/security/namespace.init
+-rwxr-xr-x   2.0KiB /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -15817,7 +15817,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libltdl.so.7.3.2
 -rwxr-xr-x   330KiB /usr/lib64/liblua-5.3.so
 -rwxr-xr-x   330KiB /usr/lib64/liblua-5.4.so
--rwxr-xr-x   261KiB /usr/lib64/liblz4.so.1.9.4
+-rwxr-xr-x   260KiB /usr/lib64/liblz4.so.1.9.4
 -rwxr-xr-x   263KiB /usr/lib64/liblzma.so.5.2.5
 -rwxr-xr-x   660KiB /usr/lib64/libm.so.6
 -rwxr-xr-x   262KiB /usr/lib64/libmagic.so.1.0.0
