@@ -137,7 +137,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.5KiB /etc/security/namespace.conf
--rwxr-xr-x    1021B /etc/security/namespace.init
+-rwxr-xr-x   2.0KiB /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   1.7KiB /etc/security/pwquality.conf
@@ -365,7 +365,7 @@
 -rwxr-xr-x    37KiB /usr/bin/lsns
 -rwxr-xr-x    16KiB /usr/bin/lua
 -rwxr-xr-x   115KiB /usr/bin/luac
--rwxr-xr-x   118KiB /usr/bin/lz4
+-rwxr-xr-x   114KiB /usr/bin/lz4
 -rwxr-xr-x   118KiB /usr/bin/lz4c
 -rwxr-xr-x   510KiB /usr/bin/machinectl
 -rwxr-xr-x    25KiB /usr/bin/makedb
@@ -1479,7 +1479,7 @@
 -rwxr-xr-x   357KiB /usr/lib64/libldap_r-2.4.so.2.10.7
 -rwxr-xr-x    16KiB /usr/lib64/liblockdev.so.1.0.0
 -rwxr-xr-x   186KiB /usr/lib64/liblua-5.1.so
--rwxr-xr-x    80KiB /usr/lib64/liblz4.so.1.7.5
+-rwxr-xr-x    76KiB /usr/lib64/liblz4.so.1.7.5
 -rwxr-xr-x   150KiB /usr/lib64/liblzma.so.5.2.2
 -rwxr-xr-x   1.4MiB /usr/lib64/libm-2.26.so
 -rwxr-xr-x   110KiB /usr/lib64/libmagic.so.1.0.0
@@ -3851,7 +3851,7 @@
 -rwxr-xr-x    11KiB /usr/lib64/security/pam_mail.so
 -rwxr-xr-x    11KiB /usr/lib64/security/pam_mkhomedir.so
 -rwxr-xr-x   6.9KiB /usr/lib64/security/pam_motd.so
--rwxr-xr-x    40KiB /usr/lib64/security/pam_namespace.so
+-rwxr-xr-x    44KiB /usr/lib64/security/pam_namespace.so
 -rwxr-xr-x    11KiB /usr/lib64/security/pam_nologin.so
 -rwxr-xr-x   6.8KiB /usr/lib64/security/pam_permit.so
 -rwxr-xr-x   6.8KiB /usr/lib64/security/pam_postgresok.so
@@ -4597,7 +4597,7 @@
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.3.2/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.3.3/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1

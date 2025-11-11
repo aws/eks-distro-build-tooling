@@ -1,1 +1,6 @@
 
+curl.x86_64
+kernel-headers.x86_64
+libcurl.x86_64
+lz4.x86_64
+pam.x86_64

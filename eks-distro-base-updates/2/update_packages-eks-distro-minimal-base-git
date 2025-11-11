@@ -1,3 +1,2 @@
 
-ca-certificates.noarch
-tzdata.noarch
+libcurl.x86_64

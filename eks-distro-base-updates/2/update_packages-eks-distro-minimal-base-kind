@@ -1,2 +1,7 @@
 
+containerd.x86_64
+curl.x86_64
+libcurl.x86_64
+lz4.x86_64
+pam.x86_64
 runc.x86_64
