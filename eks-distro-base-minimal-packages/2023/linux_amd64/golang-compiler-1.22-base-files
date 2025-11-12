@@ -248,7 +248,7 @@
 -rw-r--r--   3.6KiB /etc/security/group.conf
 -rw-r--r--   2.4KiB /etc/security/limits.conf
 -rw-r--r--   1.6KiB /etc/security/namespace.conf
--rwxr-xr-x    1022B /etc/security/namespace.init
+-rwxr-xr-x   2.0KiB /etc/security/namespace.init
 -rw-------       0B /etc/security/opasswd
 -rw-r--r--   3.0KiB /etc/security/pam_env.conf
 -rw-r--r--   2.7KiB /etc/security/pwquality.conf
@@ -13969,7 +13969,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_mail.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_mkhomedir.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_motd.so
--rwxr-xr-x    44KiB /usr/lib64/security/pam_namespace.so
+-rwxr-xr-x    48KiB /usr/lib64/security/pam_namespace.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_nologin.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_permit.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_postgresok.so
