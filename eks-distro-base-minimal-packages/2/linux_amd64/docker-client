@@ -1,6 +1,6 @@
 basesystem-10.0-7.amzn2.0.1.noarch
 ca-certificates-2025.2.76-1.amzn2.0.2.noarch
-docker-25.0.13-1.amzn2.0.1.x86_64
+docker-25.0.13-1.amzn2.0.2.x86_64
 filesystem-3.2-25.amzn2.0.4.x86_64
 glibc-2.26-64.amzn2.0.5.x86_64
 glibc-common-2.26-64.amzn2.0.5.x86_64

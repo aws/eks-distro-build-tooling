@@ -7,7 +7,7 @@ chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
 cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
-curl-8.3.0-1.amzn2.0.9.x86_64
+curl-8.3.0-1.amzn2.0.10.x86_64
 cyrus-sasl-lib-2.1.26-24.amzn2.0.1.x86_64
 device-mapper-1.02.170-6.amzn2.5.x86_64
 device-mapper-libs-1.02.170-6.amzn2.5.x86_64
@@ -43,7 +43,7 @@ libcap-ng-0.7.5-4.amzn2.0.4.x86_64
 libcollection-0.7.0-29.amzn2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
 libcrypt-2.26-64.amzn2.0.5.x86_64
-libcurl-8.3.0-1.amzn2.0.9.x86_64
+libcurl-8.3.0-1.amzn2.0.10.x86_64
 libdb-5.3.21-24.amzn2.0.5.x86_64
 libdb-utils-5.3.21-24.amzn2.0.5.x86_64
 libevent-2.0.21-4.amzn2.0.3.x86_64
@@ -75,7 +75,7 @@ libuuid-2.30.2-2.amzn2.0.11.x86_64
 libverto-0.2.5-4.amzn2.0.2.x86_64
 libverto-libevent-0.2.5-4.amzn2.0.2.x86_64
 lua-5.1.4-15.amzn2.0.2.x86_64
-lz4-1.7.5-2.amzn2.0.1.x86_64
+lz4-1.7.5-2.amzn2.0.2.x86_64
 ncurses-6.0-8.20170212.amzn2.1.8.x86_64
 ncurses-base-6.0-8.20170212.amzn2.1.8.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.8.x86_64
@@ -90,7 +90,7 @@ nss-tools-3.90.0-2.amzn2.0.2.x86_64
 nss-util-3.90.0-1.amzn2.x86_64
 openldap-2.4.44-25.amzn2.0.7.x86_64
 openssl-libs-1.0.2k-24.amzn2.0.16.x86_64
-pam-1.1.8-23.amzn2.0.4.x86_64
+pam-1.1.8-23.amzn2.0.5.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 popt-1.13-16.amzn2.0.2.x86_64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
