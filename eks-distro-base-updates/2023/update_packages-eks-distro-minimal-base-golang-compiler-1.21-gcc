@@ -1,12 +1,3 @@
 
 amazon-linux-repo-cdn.noarch
-dwz.x86_64
-kernel6.12-headers.x86_64
-libcap.x86_64
-libssh.x86_64
-libssh-config.noarch
-lz4-libs.x86_64
-pam.x86_64
-python3.x86_64
-python3-libs.x86_64
 system-release.noarch
