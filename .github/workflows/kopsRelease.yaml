@@ -6,6 +6,8 @@ on:
 
 jobs:
   kops_release:
+    permissions:
+      issues: write
     name: kOps Release Check
     runs-on: ubuntu-latest
     steps:
