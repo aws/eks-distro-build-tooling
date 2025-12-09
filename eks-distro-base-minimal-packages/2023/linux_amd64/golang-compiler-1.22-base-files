@@ -8,7 +8,7 @@
 -rw-r--r--      12B /etc/adjtime
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
--rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
+-rw-r--r--     593B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--       8B /etc/crypto-policies/config
 -rw-r--r--       8B /etc/crypto-policies/state/current
 -rw-r--r--   1.7KiB /etc/csh.cshrc
@@ -13208,7 +13208,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x   295KiB /usr/bin/curl
+-rwxr-xr-x   298KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -13421,7 +13421,7 @@
 -rwxr-xr-x      32B /usr/bin/wait
 -rwxr-xr-x    24KiB /usr/bin/wall
 -rwxr-xr-x    44KiB /usr/bin/wc
--rwxr-xr-x    11KiB /usr/bin/wcurl
+-rwxr-xr-x    12KiB /usr/bin/wcurl
 -rwxr-xr-x    33KiB /usr/bin/wdctl
 -rwxr-xr-x    33KiB /usr/bin/whereis
 -rwxr-xr-x    29KiB /usr/bin/which
@@ -13827,7 +13827,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   164KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.4.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.5.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -13845,7 +13845,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   203KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   837KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   849KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -13899,7 +13899,7 @@
 -rwxr-xr-x   154KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   150KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   358KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.1MiB /usr/lib64/libopcodes-2.41-50.amzn2023.0.4.so
+-rwxr-xr-x   1.1MiB /usr/lib64/libopcodes-2.41-50.amzn2023.0.5.so
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1

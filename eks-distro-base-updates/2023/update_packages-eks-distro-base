@@ -1,3 +1,9 @@
 
 amazon-linux-repo-cdn.noarch
+curl-minimal.x86_64
+glib2.x86_64
+libcurl-minimal.x86_64
+python3.x86_64
+python3-libs.x86_64
+sqlite-libs.x86_64
 system-release.noarch

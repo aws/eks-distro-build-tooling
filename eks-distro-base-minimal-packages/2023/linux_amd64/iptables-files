@@ -3,7 +3,7 @@
 -rw-r--r--       0B /dev/null
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
--rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
+-rw-r--r--     593B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
 -rw-r--r--   1.7KiB /etc/csh.cshrc
 -rw-r--r--   1.1KiB /etc/csh.login

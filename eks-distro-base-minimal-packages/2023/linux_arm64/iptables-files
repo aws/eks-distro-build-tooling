@@ -3,7 +3,7 @@
 -rw-r--r--       0B /dev/null
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
--rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
+-rw-r--r--     593B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--    14KiB /etc/conntrackd/conntrackd.conf
 -rw-r--r--   1.7KiB /etc/csh.cshrc
 -rw-r--r--   1.1KiB /etc/csh.login
@@ -388,7 +388,7 @@
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
--rwxr-xr-x   983KiB /usr/lib64/libsystemd.so.0.35.0
+-rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   264KiB /usr/lib64/libtinfo.so.6.2
