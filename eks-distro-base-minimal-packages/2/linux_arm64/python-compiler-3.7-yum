@@ -6,7 +6,7 @@ ca-certificates-2025.2.76-1.amzn2.0.2.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.0.1.aarch64
-curl-8.3.0-1.amzn2.0.10.aarch64
+curl-8.3.0-1.amzn2.0.11.aarch64
 cyrus-sasl-lib-2.1.26-24.amzn2.0.1.aarch64
 diffutils-3.3-5.amzn2.aarch64
 elfutils-libelf-0.176-2.amzn2.0.2.aarch64
@@ -16,7 +16,7 @@ filesystem-3.2-25.amzn2.0.4.aarch64
 findutils-4.5.11-6.amzn2.aarch64
 gawk-4.0.2-4.amzn2.1.3.aarch64
 gdbm-1.13-6.amzn2.0.2.aarch64
-glib2-2.56.1-9.amzn2.0.11.aarch64
+glib2-2.56.1-9.amzn2.0.12.aarch64
 glibc-2.26-64.amzn2.0.5.aarch64
 glibc-common-2.26-64.amzn2.0.5.aarch64
 glibc-minimal-langpack-2.26-64.amzn2.0.5.aarch64
@@ -36,7 +36,7 @@ libblkid-2.30.2-2.amzn2.0.11.aarch64
 libcap-2.54-1.amzn2.0.3.aarch64
 libcom_err-1.42.9-19.amzn2.0.1.aarch64
 libcrypt-2.26-64.amzn2.0.5.aarch64
-libcurl-8.3.0-1.amzn2.0.10.aarch64
+libcurl-8.3.0-1.amzn2.0.11.aarch64
 libdb-5.3.21-24.amzn2.0.5.aarch64
 libdb-utils-5.3.21-24.amzn2.0.5.aarch64
 libffi-3.0.13-18.amzn2.0.2.aarch64
@@ -84,8 +84,8 @@ python-libs-2.7.18-1.amzn2.0.14.aarch64
 python-pycurl-7.19.0-19.amzn2.0.2.aarch64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.5.aarch64
-python3-3.7.16-1.amzn2.0.20.aarch64
-python3-libs-3.7.16-1.amzn2.0.20.aarch64
+python3-3.7.16-1.amzn2.0.21.aarch64
+python3-libs-3.7.16-1.amzn2.0.21.aarch64
 python3-pip-20.2.2-1.amzn2.0.13.noarch
 python3-setuptools-49.1.3-1.amzn2.0.6.noarch
 pyxattr-0.5.1-5.amzn2.0.2.aarch64

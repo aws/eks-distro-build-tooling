@@ -12364,7 +12364,7 @@
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    12KiB /usr/bin/watchgnupg
 -rwxr-xr-x    37KiB /usr/bin/wc
--rwxr-xr-x    11KiB /usr/bin/wcurl
+-rwxr-xr-x    12KiB /usr/bin/wcurl
 -rwxr-xr-x    32KiB /usr/bin/wdctl
 -rwxr-xr-x    25KiB /usr/bin/whereis
 -rwxr-xr-x    24KiB /usr/bin/which
@@ -21786,7 +21786,7 @@
 -rw-r--r--   7.7MiB /var/lib/rpm/Packages
 -rw-r--r--    84KiB /var/lib/rpm/Providename
 -rw-r--r--    84KiB /var/lib/rpm/Requirename
--rw-r--r--    28KiB /var/lib/rpm/Sha1header
+-rw-r--r--    24KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

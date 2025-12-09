@@ -776,7 +776,7 @@
 -rw-r--r--   8.2KiB /usr/lib64/python3.7/__pycache__/poplib.cpython-37.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.7/__pycache__/poplib.cpython-37.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.7/__pycache__/posixpath.cpython-37.opt-1.pyc
--rw-r--r--   8.5KiB /usr/lib64/python3.7/__pycache__/posixpath.cpython-37.opt-2.pyc
+-rw-r--r--   8.6KiB /usr/lib64/python3.7/__pycache__/posixpath.cpython-37.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.7/__pycache__/posixpath.cpython-37.pyc
 -rw-r--r--    16KiB /usr/lib64/python3.7/__pycache__/pprint.cpython-37.opt-1.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.7/__pycache__/pprint.cpython-37.opt-2.pyc
@@ -2644,7 +2644,7 @@
 -rw-r--r--    14KiB /usr/lib64/python3.7/multiprocessing/util.py
 -rw-r--r--   5.5KiB /usr/lib64/python3.7/netrc.py
 -rw-r--r--    43KiB /usr/lib64/python3.7/nntplib.py
--rw-r--r--    22KiB /usr/lib64/python3.7/ntpath.py
+-rw-r--r--    20KiB /usr/lib64/python3.7/ntpath.py
 -rw-r--r--   2.6KiB /usr/lib64/python3.7/nturl2path.py
 -rw-r--r--    11KiB /usr/lib64/python3.7/numbers.py
 -rw-r--r--   5.7KiB /usr/lib64/python3.7/opcode.py

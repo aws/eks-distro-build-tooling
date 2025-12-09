@@ -12523,7 +12523,7 @@
 -rwxr-xr-x   107KiB /usr/bin/vdir
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    37KiB /usr/bin/wc
--rwxr-xr-x    11KiB /usr/bin/wcurl
+-rwxr-xr-x    12KiB /usr/bin/wcurl
 -rwxr-xr-x    32KiB /usr/bin/wdctl
 -rwxr-xr-x    25KiB /usr/bin/whereis
 -rwxr-xr-x    24KiB /usr/bin/which

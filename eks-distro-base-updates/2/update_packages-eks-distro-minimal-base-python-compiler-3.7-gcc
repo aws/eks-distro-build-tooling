@@ -1,4 +1,7 @@
 
 curl.x86_64
+glib2.x86_64
 kernel-headers.x86_64
 libcurl.x86_64
+python3.x86_64
+python3-libs.x86_64
