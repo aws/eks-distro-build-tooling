@@ -395,7 +395,7 @@
 -rwxr-xr-x   107KiB /usr/bin/vdir
 -rwxr-xr-x      28B /usr/bin/wait
 -rwxr-xr-x    37KiB /usr/bin/wc
--rwxr-xr-x    11KiB /usr/bin/wcurl
+-rwxr-xr-x    12KiB /usr/bin/wcurl
 -rwxr-xr-x    32KiB /usr/bin/wdctl
 -rwxr-xr-x    25KiB /usr/bin/whereis
 -rwxr-xr-x    49KiB /usr/bin/who
@@ -6287,9 +6287,9 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   576KiB /var/lib/rpm/Basenames
+-rw-r--r--   568KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   144KiB /var/lib/rpm/Dirnames
+-rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
