@@ -51,4 +51,15 @@ FROM ${BUILT_BUILDER_IMAGE} as base-nginx-builder
 FROM ${BASE_IMAGE} as final
 COPY --from=base-nginx-builder /newroot /
 
+COPY nginx /etc/nginx
+
+RUN mkdir -p /run/nginx && \
+    chown -R nginx:nginx /run/nginx
+
+# Link nginx logs to stdout and stderr
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
+
 USER nginx
+
+CMD [ "nginx", "-g", "daemon off;"]
