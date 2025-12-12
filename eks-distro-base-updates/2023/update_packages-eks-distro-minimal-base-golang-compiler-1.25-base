@@ -1,1 +1,7 @@
 
+amazon-linux-repo-cdn.noarch
+binutils.x86_64
+curl.x86_64
+libcurl.x86_64
+system-release.noarch
+systemd-libs.x86_64

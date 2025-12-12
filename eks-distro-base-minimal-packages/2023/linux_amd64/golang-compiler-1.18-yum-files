@@ -8,7 +8,7 @@
 -rw-r--r--      12B /etc/adjtime
 -rw-r--r--   1.5KiB /etc/aliases
 -rw-r--r--   3.0KiB /etc/bashrc
--rw-r--r--     591B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
+-rw-r--r--     593B /etc/cloud/cloud.cfg.d/10_aws_dnfvars.cfg
 -rw-r--r--       8B /etc/crypto-policies/config
 -rw-r--r--       8B /etc/crypto-policies/state/current
 -rw-r--r--   1.7KiB /etc/csh.cshrc
@@ -12140,7 +12140,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x   295KiB /usr/bin/curl
+-rwxr-xr-x   298KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -12387,7 +12387,7 @@
 -rwxr-xr-x    24KiB /usr/bin/wall
 -rwxr-xr-x    24KiB /usr/bin/watchgnupg
 -rwxr-xr-x    44KiB /usr/bin/wc
--rwxr-xr-x    11KiB /usr/bin/wcurl
+-rwxr-xr-x    12KiB /usr/bin/wcurl
 -rwxr-xr-x    33KiB /usr/bin/wdctl
 -rwxr-xr-x    33KiB /usr/bin/whereis
 -rwxr-xr-x    29KiB /usr/bin/which
@@ -13142,7 +13142,7 @@
 -rwxr-xr-x    28KiB /usr/lib64/libattr.so.1.1.2501
 -rwxr-xr-x   164KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
--rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.4.so
+-rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.5.so
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
@@ -13161,7 +13161,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   203KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   837KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   849KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -13238,7 +13238,7 @@
 -rwxr-xr-x   154KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   150KiB /usr/lib64/libnss_resolve.so.2
 -rwxr-xr-x   358KiB /usr/lib64/libnss_systemd.so.2
--rwxr-xr-x   1.1MiB /usr/lib64/libopcodes-2.41-50.amzn2023.0.4.so
+-rwxr-xr-x   1.1MiB /usr/lib64/libopcodes-2.41-50.amzn2023.0.5.so
 -rwxr-xr-x   1.3MiB /usr/lib64/libp11-kit.so.0.3.0
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
@@ -13567,9 +13567,9 @@
 -rw-r--r--    32KiB /usr/lib64/python3.9/__pycache__/nntplib.cpython-39.opt-1.pyc
 -rw-r--r--    20KiB /usr/lib64/python3.9/__pycache__/nntplib.cpython-39.opt-2.pyc
 -rw-r--r--    32KiB /usr/lib64/python3.9/__pycache__/nntplib.cpython-39.pyc
--rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.opt-1.pyc
--rw-r--r--    13KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.opt-2.pyc
--rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.opt-1.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.opt-2.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/ntpath.cpython-39.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/__pycache__/nturl2path.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/__pycache__/nturl2path.cpython-39.opt-2.pyc
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/__pycache__/nturl2path.cpython-39.pyc
@@ -13616,7 +13616,7 @@
 -rw-r--r--   8.6KiB /usr/lib64/python3.9/__pycache__/poplib.cpython-39.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/poplib.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/posixpath.cpython-39.opt-1.pyc
--rw-r--r--   8.7KiB /usr/lib64/python3.9/__pycache__/posixpath.cpython-39.opt-2.pyc
+-rw-r--r--   8.8KiB /usr/lib64/python3.9/__pycache__/posixpath.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/posixpath.cpython-39.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/pprint.cpython-39.opt-1.pyc
 -rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/pprint.cpython-39.opt-2.pyc
@@ -14347,9 +14347,9 @@
 -rw-r--r--   1.9KiB /usr/lib64/python3.9/email/__pycache__/iterators.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/email/__pycache__/iterators.cpython-39.opt-2.pyc
 -rw-r--r--   1.9KiB /usr/lib64/python3.9/email/__pycache__/iterators.cpython-39.pyc
--rw-r--r--    37KiB /usr/lib64/python3.9/email/__pycache__/message.cpython-39.opt-1.pyc
+-rw-r--r--    38KiB /usr/lib64/python3.9/email/__pycache__/message.cpython-39.opt-1.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.9/email/__pycache__/message.cpython-39.opt-2.pyc
--rw-r--r--    37KiB /usr/lib64/python3.9/email/__pycache__/message.cpython-39.pyc
+-rw-r--r--    38KiB /usr/lib64/python3.9/email/__pycache__/message.cpython-39.pyc
 -rw-r--r--   5.7KiB /usr/lib64/python3.9/email/__pycache__/parser.cpython-39.opt-1.pyc
 -rw-r--r--   2.7KiB /usr/lib64/python3.9/email/__pycache__/parser.cpython-39.opt-2.pyc
 -rw-r--r--   5.7KiB /usr/lib64/python3.9/email/__pycache__/parser.cpython-39.pyc
@@ -14377,7 +14377,7 @@
 -rw-r--r--    24KiB /usr/lib64/python3.9/email/header.py
 -rw-r--r--    21KiB /usr/lib64/python3.9/email/headerregistry.py
 -rw-r--r--   2.1KiB /usr/lib64/python3.9/email/iterators.py
--rw-r--r--    46KiB /usr/lib64/python3.9/email/message.py
+-rw-r--r--    47KiB /usr/lib64/python3.9/email/message.py
 -rw-r--r--       0B /usr/lib64/python3.9/email/mime/__init__.py
 -rw-r--r--     134B /usr/lib64/python3.9/email/mime/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     134B /usr/lib64/python3.9/email/mime/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -14854,7 +14854,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   314KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   306KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    72KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -14899,9 +14899,9 @@
 -rwxr-xr-x    16KiB /usr/lib64/python3.9/lib-dynload/xxlimited.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    41KiB /usr/lib64/python3.9/lib-dynload/zlib.cpython-39-x86_64-linux-gnu.so
 -rw-r--r--   8.5KiB /usr/lib64/python3.9/lib2to3/Grammar.txt
--rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.24.final.0.pickle
+-rw-r--r--    15KiB /usr/lib64/python3.9/lib2to3/Grammar3.9.25.final.0.pickle
 -rw-r--r--     793B /usr/lib64/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.24.final.0.pickle
+-rw-r--r--   1.2KiB /usr/lib64/python3.9/lib2to3/PatternGrammar3.9.25.final.0.pickle
 -rw-r--r--     163B /usr/lib64/python3.9/lib2to3/__init__.py
 -rw-r--r--      67B /usr/lib64/python3.9/lib2to3/__main__.py
 -rw-r--r--     302B /usr/lib64/python3.9/lib2to3/__pycache__/__init__.cpython-39.opt-1.pyc
@@ -15307,7 +15307,7 @@
 -rw-r--r--    14KiB /usr/lib64/python3.9/multiprocessing/util.py
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/netrc.py
 -rw-r--r--    41KiB /usr/lib64/python3.9/nntplib.py
--rw-r--r--    28KiB /usr/lib64/python3.9/ntpath.py
+-rw-r--r--    26KiB /usr/lib64/python3.9/ntpath.py
 -rw-r--r--   2.9KiB /usr/lib64/python3.9/nturl2path.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/numbers.py
 -rw-r--r--   5.6KiB /usr/lib64/python3.9/opcode.py
