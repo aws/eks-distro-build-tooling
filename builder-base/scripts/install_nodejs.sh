@@ -22,6 +22,14 @@ NEWROOT=/nodejs
 
 source $SCRIPT_ROOT/common_vars.sh
 
+# Select Node.js version based on AL_TAG (similar to skopeo pattern)
+if [ "$IS_AL23" = "true" ]; then
+    NODEJS_VERSION=$NODEJS_VERSION_AL23
+    CHECKSUM_FILE="nodejs-al23-$TARGETARCH-checksum"
+else
+    CHECKSUM_FILE="nodejs-$TARGETARCH-checksum"
+fi
+
 if [ $TARGETARCH == 'amd64' ]; then 
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-x64.tar.gz"
     NODEJS_FOLDER="node-$NODEJS_VERSION-linux-x64"
@@ -36,7 +44,7 @@ NODEJS_CHECKSUM_URL="https://nodejs.org/dist/$NODEJS_VERSION/SHASUMS256.txt.asc"
 function install_nodejs() {
     # Installing NodeJS to run attribution generation script
     wget --progress dot:giga $NODEJS_DOWNLOAD_URL
-    sha256sum -c ${BASE_DIR}/nodejs-$TARGETARCH-checksum
+    sha256sum -c ${BASE_DIR}/$CHECKSUM_FILE
     tar -C $USR --strip-components=1 -xzf $NODEJS_FILENAME $NODEJS_FOLDER
     rm -rf $NODEJS_FILENAME
 }

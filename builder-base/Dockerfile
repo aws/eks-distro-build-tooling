@@ -175,7 +175,9 @@ FROM ${BUILDER_IMAGE} as nodejs
 ARG TARGETARCH
 WORKDIR /workdir
 ARG NODEJS_VERSION
+ARG NODEJS_VERSION_AL23
 ENV NODEJS_VERSION=$NODEJS_VERSION
+ENV NODEJS_VERSION_AL23=$NODEJS_VERSION_AL23
 
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
@@ -184,7 +186,8 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     generate-attribution/generate-attribution  \
     generate-attribution/generate-attribution-file.js \
     generate-attribution/LICENSE-2.0.txt \
-    ./checksums/nodejs-${TARGETARCH}-checksum /
+    ./checksums/nodejs-${TARGETARCH}-checksum \
+    ./checksums/nodejs-al23-${TARGETARCH}-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_base_yum_packages.sh && \
     /install_nodejs.sh && \
