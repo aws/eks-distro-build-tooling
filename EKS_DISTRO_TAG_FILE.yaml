@@ -60,7 +60,7 @@ al2023:
   eks-distro-minimal-base: 2025-12-09-1765306943.2023
   eks-distro-minimal-base-nonroot: 2025-12-09-1765306943.2023
   eks-distro-minimal-base-glibc: 2025-12-09-1765306943.2023
-  eks-distro-minimal-base-iptables: null
+  eks-distro-minimal-base-iptables: 2025-12-30-1767116653.2023
   eks-distro-minimal-base-docker-client: 2025-12-09-1765306943.2023
   eks-distro-minimal-base-csi: 2025-12-09-1765306943.2023
   eks-distro-minimal-base-csi-ebs: 2025-12-09-1765306943.2023
