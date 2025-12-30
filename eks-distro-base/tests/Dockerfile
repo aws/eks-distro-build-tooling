@@ -40,7 +40,7 @@ RUN ["update-alternatives", "--set", "ip6tables", "/usr/sbin/ip6tables-nft"]
 
 CMD ["iptables"]
 
-FROM public.ecr.aws/eks-distro-build-tooling/golang:1.23-al${AL_TAG} as iptables-wrapper-tests-builder
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.25-al${AL_TAG} as iptables-wrapper-tests-builder
 
 COPY iptables-wrappers /iptables-wrappers
 RUN cd /iptables-wrappers && \

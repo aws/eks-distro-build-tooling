@@ -21,7 +21,7 @@
 ARG BUILDER_IMAGE
 ARG BASE_IMAGE
 
-FROM public.ecr.aws/eks-distro-build-tooling/golang:1.23 as iptables-wrapper-builder
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.25 as iptables-wrapper-builder
 
 COPY iptables-wrappers/ /iptables-wrappers
 RUN set -x && \
