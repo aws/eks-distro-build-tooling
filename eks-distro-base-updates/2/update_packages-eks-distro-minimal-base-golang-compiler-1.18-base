@@ -1,3 +1,9 @@
 
-curl.x86_64
-libcurl.x86_64
+libblkid.x86_64
+libfdisk.x86_64
+libgcc.x86_64
+libmount.x86_64
+libsmartcols.x86_64
+libstdc++.x86_64
+libuuid.x86_64
+util-linux.x86_64

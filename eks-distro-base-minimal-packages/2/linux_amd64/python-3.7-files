@@ -770,9 +770,9 @@
 -rw-r--r--    28KiB /usr/lib64/python3.7/__pycache__/platform.cpython-37.opt-1.pyc
 -rw-r--r--    19KiB /usr/lib64/python3.7/__pycache__/platform.cpython-37.opt-2.pyc
 -rw-r--r--    28KiB /usr/lib64/python3.7/__pycache__/platform.cpython-37.pyc
--rw-r--r--    25KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.opt-1.pyc
--rw-r--r--    22KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.opt-2.pyc
--rw-r--r--    25KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.pyc
+-rw-r--r--    26KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.opt-1.pyc
+-rw-r--r--    23KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.opt-2.pyc
+-rw-r--r--    26KiB /usr/lib64/python3.7/__pycache__/plistlib.cpython-37.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.7/__pycache__/poplib.cpython-37.opt-1.pyc
 -rw-r--r--   8.2KiB /usr/lib64/python3.7/__pycache__/poplib.cpython-37.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.7/__pycache__/poplib.cpython-37.pyc
@@ -2659,7 +2659,7 @@
 -rw-r--r--   8.8KiB /usr/lib64/python3.7/pipes.py
 -rw-r--r--    21KiB /usr/lib64/python3.7/pkgutil.py
 -rwxr-xr-x    46KiB /usr/lib64/python3.7/platform.py
--rw-r--r--    30KiB /usr/lib64/python3.7/plistlib.py
+-rw-r--r--    31KiB /usr/lib64/python3.7/plistlib.py
 -rw-r--r--    15KiB /usr/lib64/python3.7/poplib.py
 -rw-r--r--    16KiB /usr/lib64/python3.7/posixpath.py
 -rw-r--r--    21KiB /usr/lib64/python3.7/pprint.py

@@ -1,3 +1,4 @@
 
-curl.x86_64
-libcurl.x86_64
+libgcc.x86_64
+libstdc++.x86_64
+libuuid.x86_64

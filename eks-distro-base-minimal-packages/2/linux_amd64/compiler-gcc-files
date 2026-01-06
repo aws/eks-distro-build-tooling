@@ -2331,7 +2331,7 @@
 -rwxr-xr-x    27KiB /usr/lib64/libatomic.so.1.2.0
 -rwxr-xr-x    20KiB /usr/lib64/libattr.so.1.1.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.2.so
--rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   305KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rw-r--r--     253B /usr/lib64/libc.so
@@ -2395,7 +2395,7 @@
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
 -rwxr-xr-x    33KiB /usr/lib64/libmenuw.so.6.0
--rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   341KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x    98KiB /usr/lib64/libmpc.so.3.0.0
 -rwxr-xr-x   381KiB /usr/lib64/libmpfr.so.4.1.1
 -rwxr-xr-x    19KiB /usr/lib64/libmpx.so.2.0.1

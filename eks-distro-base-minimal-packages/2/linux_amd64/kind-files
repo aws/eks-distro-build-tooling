@@ -357,7 +357,7 @@
 -rwxr-xr-x    16KiB /usr/bin/look
 -rwxr-xr-x   107KiB /usr/bin/ls
 -rwxr-xr-x    78KiB /usr/bin/lsblk
--rwxr-xr-x    65KiB /usr/bin/lscpu
+-rwxr-xr-x    74KiB /usr/bin/lscpu
 -rwxr-xr-x    66KiB /usr/bin/lsipc
 -rwxr-xr-x    33KiB /usr/bin/lslocks
 -rwxr-xr-x    58KiB /usr/bin/lslogins
@@ -1407,7 +1407,7 @@
 -rwxr-xr-x   125KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   122KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libbasicobjects.so.0.1.0
--rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   305KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    24KiB /usr/lib64/libcap-ng.so.0.0.0
@@ -1435,7 +1435,7 @@
 -rwxr-xr-x    11KiB /usr/lib64/libevent_pthreads-2.0.so.5.1.9
 -rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.6.0
 -rwxr-xr-x   267KiB /usr/lib64/libext2fs.so.2.4
--rwxr-xr-x   395KiB /usr/lib64/libfdisk.so.1.1.0
+-rwxr-xr-x   408KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    32KiB /usr/lib64/libffi.so.6.0.1
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
@@ -1487,7 +1487,7 @@
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
 -rwxr-xr-x    33KiB /usr/lib64/libmenuw.so.6.0
 -rwxr-xr-x    20KiB /usr/lib64/libmnl.so.0.1.0
--rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   341KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   177KiB /usr/lib64/libmvec-2.26.so
 -rwxr-xr-x   161KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   227KiB /usr/lib64/libncursesw.so.6.0
@@ -1554,7 +1554,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libsemanage.so.1
 -rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   125KiB /usr/lib64/libslapi-2.4.so.2.10.7
--rwxr-xr-x   185KiB /usr/lib64/libsmartcols.so.1.1.0
+-rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   157KiB /usr/lib64/libsmime3.so
 -rw-r--r--      84B /usr/lib64/libsoftokn3.chk
 -rwxr-xr-x   328KiB /usr/lib64/libsoftokn3.so
@@ -4597,7 +4597,7 @@
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
 -rw-rw-r--    17KiB /usr/share/licenses/publicsuffix-list-dafsa-20240208/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/pyliblzma-0.5.3/COPYING
--rw-r--r--    11KiB /usr/share/licenses/runc-1.3.3/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/runc-1.3.4/LICENSE
 -rw-r--r--    18KiB /usr/share/licenses/shared-mime-info-1.8/COPYING
 -rw-r--r--    18KiB /usr/share/licenses/systemd-219/LICENSE.GPL2
 -rw-r--r--    26KiB /usr/share/licenses/systemd-219/LICENSE.LGPL2.1
