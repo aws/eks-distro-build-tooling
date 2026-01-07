@@ -14,10 +14,10 @@ libacl-2.2.51-14.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
 libcap-2.54-1.amzn2.0.3.x86_64
 libcrypt-2.26-64.amzn2.0.5.x86_64
-libgcc-7.3.1-17.amzn2.x86_64
+libgcc-7.3.1-18.amzn2.x86_64
 libselinux-2.5-12.amzn2.0.2.x86_64
 libsepol-2.5-10.amzn2.0.1.x86_64
-libstdc++-7.3.1-17.amzn2.x86_64
+libstdc++-7.3.1-18.amzn2.x86_64
 ncurses-base-6.0-8.20170212.amzn2.1.8.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.8.x86_64
 nginx-1.28.0-1.amzn2.0.2.x86_64

@@ -1,6 +1,9 @@
 
-curl.x86_64
 glib2.x86_64
-libcurl.x86_64
+libblkid.x86_64
+libgcc.x86_64
+libmount.x86_64
+libstdc++.x86_64
+libuuid.x86_64
 python3.x86_64
 python3-libs.x86_64
