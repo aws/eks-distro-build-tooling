@@ -261,7 +261,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x   298KiB /usr/bin/curl
+-rwxr-xr-x   306KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -440,7 +440,7 @@
 -rw-r--r--   3.3KiB /usr/lib/locale/C.utf8/LC_TIME
 -rw-r--r--       0B /usr/lib/motd
 -rwxr-xr-x     232B /usr/lib/motd.d/30-banner
--rw-r--r--     530B /usr/lib/os-release
+-rw-r--r--     531B /usr/lib/os-release
 -rw-r--r--   6.0KiB /usr/lib/python3.11/site-packages/_distutils_hack/__init__.py
 -rw-r--r--    11KiB /usr/lib/python3.11/site-packages/_distutils_hack/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--     368B /usr/lib/python3.11/site-packages/_distutils_hack/__pycache__/override.cpython-311.pyc
@@ -1882,7 +1882,7 @@
 -rw-r--r--     718B /usr/lib/python3.11/site-packages/setuptools/windows_support.py
 -rw-r--r--     305B /usr/lib/rpm/macros.d/macros.dist
 -rw-r--r--   1.8KiB /usr/lib/sysctl.d/10-default-yama-scope.conf
--rw-r--r--      52B /usr/lib/system-release
+-rw-r--r--      53B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
 -rw-r--r--     187B /usr/lib/systemd/system-preset/80-amzn-overrides.preset
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
@@ -2254,7 +2254,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   203KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   849KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   911KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -2648,7 +2648,7 @@
 -rw-r--r--    43KiB /usr/lib64/python3.11/__pycache__/platform.cpython-311.pyc
 -rw-r--r--    45KiB /usr/lib64/python3.11/__pycache__/plistlib.cpython-311.opt-1.pyc
 -rw-r--r--    43KiB /usr/lib64/python3.11/__pycache__/plistlib.cpython-311.opt-2.pyc
--rw-r--r--    45KiB /usr/lib64/python3.11/__pycache__/plistlib.cpython-311.pyc
+-rw-r--r--    46KiB /usr/lib64/python3.11/__pycache__/plistlib.cpython-311.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.11/__pycache__/poplib.cpython-311.opt-1.pyc
 -rw-r--r--    16KiB /usr/lib64/python3.11/__pycache__/poplib.cpython-311.opt-2.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.11/__pycache__/poplib.cpython-311.pyc
@@ -3788,9 +3788,9 @@
 -rw-r--r--   8.6KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-1.pyc
 -rw-r--r--   7.5KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-2.pyc
 -rw-r--r--   8.6KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.pyc
--rw-r--r--    60KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-1.pyc
--rw-r--r--    51KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-2.pyc
--rw-r--r--    60KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.pyc
+-rw-r--r--    61KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-1.pyc
+-rw-r--r--    52KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-2.pyc
+-rw-r--r--    61KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.pyc
 -rw-r--r--    86KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.opt-1.pyc
 -rw-r--r--    71KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.opt-2.pyc
 -rw-r--r--    87KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.pyc
@@ -4671,7 +4671,7 @@
 -rw-r--r--   3.5KiB /usr/lib64/python3.11/xml/dom/__pycache__/minicompat.cpython-311.opt-2.pyc
 -rw-r--r--   3.9KiB /usr/lib64/python3.11/xml/dom/__pycache__/minicompat.cpython-311.pyc
 -rw-r--r--    94KiB /usr/lib64/python3.11/xml/dom/__pycache__/minidom.cpython-311.opt-1.pyc
--rw-r--r--    92KiB /usr/lib64/python3.11/xml/dom/__pycache__/minidom.cpython-311.opt-2.pyc
+-rw-r--r--    91KiB /usr/lib64/python3.11/xml/dom/__pycache__/minidom.cpython-311.opt-2.pyc
 -rw-r--r--    94KiB /usr/lib64/python3.11/xml/dom/__pycache__/minidom.cpython-311.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.11/xml/dom/__pycache__/pulldom.cpython-311.opt-1.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.11/xml/dom/__pycache__/pulldom.cpython-311.opt-2.pyc

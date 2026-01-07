@@ -2888,7 +2888,7 @@
 -rw-r--r--     652B /usr/lib/node_modules/npm/node_modules/yallist/package.json
 -rw-r--r--   8.3KiB /usr/lib/node_modules/npm/node_modules/yallist/yallist.js
 -rw-r--r--   6.5KiB /usr/lib/node_modules/npm/package.json
--rw-r--r--     530B /usr/lib/os-release
+-rw-r--r--     531B /usr/lib/os-release
 -rw-r--r--   1.4KiB /usr/lib/python3.9/site-packages/dnf/__init__.py
 -rw-r--r--     544B /usr/lib/python3.9/site-packages/dnf/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     544B /usr/lib/python3.9/site-packages/dnf/__pycache__/__init__.cpython-39.pyc
@@ -3213,7 +3213,7 @@
 -rw-r--r--    18KiB /usr/lib/rpm/rpmrc
 -rwxr-xr-x     937B /usr/lib/rpm/tgpg
 -rw-r--r--   1.8KiB /usr/lib/sysctl.d/10-default-yama-scope.conf
--rw-r--r--      52B /usr/lib/system-release
+-rw-r--r--      53B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
 -rw-r--r--     187B /usr/lib/systemd/system-preset/80-amzn-overrides.preset
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
@@ -3613,7 +3613,7 @@
 -rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   921KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   196KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   1.6MiB /usr/lib64/libdnf.so.2
@@ -4044,9 +4044,9 @@
 -rw-r--r--    26KiB /usr/lib64/python3.9/__pycache__/platform.cpython-39.opt-1.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/platform.cpython-39.opt-2.pyc
 -rw-r--r--    26KiB /usr/lib64/python3.9/__pycache__/platform.cpython-39.pyc
--rw-r--r--    23KiB /usr/lib64/python3.9/__pycache__/plistlib.cpython-39.opt-1.pyc
+-rw-r--r--    24KiB /usr/lib64/python3.9/__pycache__/plistlib.cpython-39.opt-1.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.9/__pycache__/plistlib.cpython-39.opt-2.pyc
--rw-r--r--    23KiB /usr/lib64/python3.9/__pycache__/plistlib.cpython-39.pyc
+-rw-r--r--    24KiB /usr/lib64/python3.9/__pycache__/plistlib.cpython-39.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/poplib.cpython-39.opt-1.pyc
 -rw-r--r--   8.6KiB /usr/lib64/python3.9/__pycache__/poplib.cpython-39.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/__pycache__/poplib.cpython-39.pyc
