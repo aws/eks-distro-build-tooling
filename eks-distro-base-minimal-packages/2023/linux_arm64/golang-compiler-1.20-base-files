@@ -12588,10 +12588,10 @@
 -rw-r--r--   3.3KiB /usr/lib/locale/C.utf8/LC_TIME
 -rw-r--r--       0B /usr/lib/motd
 -rwxr-xr-x     232B /usr/lib/motd.d/30-banner
--rw-r--r--     530B /usr/lib/os-release
+-rw-r--r--     531B /usr/lib/os-release
 -rw-r--r--     305B /usr/lib/rpm/macros.d/macros.dist
 -rw-r--r--   1.8KiB /usr/lib/sysctl.d/10-default-yama-scope.conf
--rw-r--r--      52B /usr/lib/system-release
+-rw-r--r--      53B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
 -rw-r--r--     187B /usr/lib/systemd/system-preset/80-amzn-overrides.preset
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
@@ -12973,13 +12973,13 @@
 -rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   921KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x   196KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libdrop_ambient.so.0.0.0
 -rwxr-xr-x   717KiB /usr/lib64/libdw-0.188.so
--rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.4.0
+-rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.7.9
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   262KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
@@ -17046,7 +17046,7 @@ lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      22B /usr/lib64/libdebuginfod.so.1 libdebuginfod-0.188.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
-lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.4.0
+lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.7.9
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
 lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3

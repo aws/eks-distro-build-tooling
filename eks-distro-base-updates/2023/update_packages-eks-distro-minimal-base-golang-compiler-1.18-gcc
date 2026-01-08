@@ -1,13 +1,16 @@
 
 amazon-linux-repo-cdn.noarch
-binutils.x86_64
 curl.x86_64
 glib2.x86_64
 kernel6.12-headers.x86_64
+libcap.x86_64
 libcurl.x86_64
+libeconf.x86_64
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+pam.x86_64
 python3.x86_64
 python3-libs.x86_64
 rust-toolset-srpm-macros.noarch
-sqlite-libs.x86_64
 system-release.noarch
 systemd-libs.x86_64

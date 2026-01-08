@@ -240,9 +240,9 @@
 -rw-r--r--   3.3KiB /usr/lib/locale/C.utf8/LC_TIME
 -rw-r--r--       0B /usr/lib/motd
 -rwxr-xr-x     232B /usr/lib/motd.d/30-banner
--rw-r--r--     530B /usr/lib/os-release
+-rw-r--r--     531B /usr/lib/os-release
 -rw-r--r--     305B /usr/lib/rpm/macros.d/macros.dist
--rw-r--r--      52B /usr/lib/system-release
+-rw-r--r--      53B /usr/lib/system-release
 -rw-r--r--      35B /usr/lib/system-release-cpe
 -rw-r--r--     187B /usr/lib/systemd/system-preset/80-amzn-overrides.preset
 -rw-r--r--     284B /usr/lib/systemd/system-preset/85-display-manager.preset
