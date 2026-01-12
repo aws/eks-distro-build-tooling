@@ -3224,7 +3224,7 @@
 -rwxr-xr-x    70KiB /usr/lib64/libassuan.so.0.4.0
 -rwxr-xr-x    20KiB /usr/lib64/libattr.so.1.1.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.2.so
--rwxr-xr-x   305KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    36KiB /usr/lib64/libcap.so.2.54
@@ -3278,7 +3278,7 @@
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
 -rwxr-xr-x    33KiB /usr/lib64/libmenuw.so.6.0
--rwxr-xr-x   341KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   177KiB /usr/lib64/libmvec-2.26.so
 -rwxr-xr-x   161KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   227KiB /usr/lib64/libncursesw.so.6.0
