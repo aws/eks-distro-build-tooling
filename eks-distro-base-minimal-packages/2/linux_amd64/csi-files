@@ -264,7 +264,7 @@
 -rwxr-xr-x   107KiB /usr/bin/ls
 -rwxr-xr-x    12KiB /usr/bin/lsattr
 -rwxr-xr-x    78KiB /usr/bin/lsblk
--rwxr-xr-x    74KiB /usr/bin/lscpu
+-rwxr-xr-x    65KiB /usr/bin/lscpu
 -rwxr-xr-x    66KiB /usr/bin/lsipc
 -rwxr-xr-x    33KiB /usr/bin/lslocks
 -rwxr-xr-x    58KiB /usr/bin/lslogins
@@ -815,7 +815,7 @@
 -rwxr-xr-x   125KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   122KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    11KiB /usr/lib64/libbasicobjects.so.0.1.0
--rwxr-xr-x   305KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    24KiB /usr/lib64/libcap-ng.so.0.0.0
@@ -840,7 +840,7 @@
 -rwxr-xr-x    11KiB /usr/lib64/libevent_pthreads-2.0.so.5.1.9
 -rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.6.0
 -rwxr-xr-x   267KiB /usr/lib64/libext2fs.so.2.4
--rwxr-xr-x   408KiB /usr/lib64/libfdisk.so.1.1.0
+-rwxr-xr-x   395KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    32KiB /usr/lib64/libffi.so.6.0.1
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
@@ -877,7 +877,7 @@
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
 -rwxr-xr-x    33KiB /usr/lib64/libmenuw.so.6.0
--rwxr-xr-x   341KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   177KiB /usr/lib64/libmvec-2.26.so
 -rwxr-xr-x   161KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   227KiB /usr/lib64/libncursesw.so.6.0
@@ -930,7 +930,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libsemanage.so.1
 -rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   125KiB /usr/lib64/libslapi-2.4.so.2.10.7
--rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
+-rwxr-xr-x   185KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   157KiB /usr/lib64/libsmime3.so
 -rw-r--r--      84B /usr/lib64/libsoftokn3.chk
 -rwxr-xr-x   328KiB /usr/lib64/libsoftokn3.so
@@ -6287,9 +6287,9 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   568KiB /var/lib/rpm/Basenames
+-rw-r--r--   564KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
--rw-r--r--   144KiB /var/lib/rpm/Dirnames
+-rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
@@ -6298,7 +6298,7 @@
 -rw-r--r--    68KiB /var/lib/rpm/Providename
 -rw-r--r--    60KiB /var/lib/rpm/Requirename
 -rw-r--r--    20KiB /var/lib/rpm/Sha1header
--rw-r--r--    20KiB /var/lib/rpm/Sigmd5
+-rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--       0B /var/log/lastlog
 -rw-------      62B /var/log/tallylog

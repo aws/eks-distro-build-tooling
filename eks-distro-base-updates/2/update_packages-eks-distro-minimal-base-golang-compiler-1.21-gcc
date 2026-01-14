@@ -1,19 +1,7 @@
 
-cpp.x86_64
-gcc.x86_64
-glib2.x86_64
-libatomic.x86_64
 libblkid.x86_64
-libcilkrts.x86_64
 libfdisk.x86_64
-libgcc.x86_64
-libgomp.x86_64
-libitm.x86_64
 libmount.x86_64
-libmpx.x86_64
-libquadmath.x86_64
-libsanitizer.x86_64
 libsmartcols.x86_64
-libstdc++.x86_64
 libuuid.x86_64
 util-linux.x86_64

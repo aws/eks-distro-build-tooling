@@ -12344,7 +12344,7 @@
 -rwxr-xr-x    16KiB /usr/bin/look
 -rwxr-xr-x   107KiB /usr/bin/ls
 -rwxr-xr-x    78KiB /usr/bin/lsblk
--rwxr-xr-x    74KiB /usr/bin/lscpu
+-rwxr-xr-x    65KiB /usr/bin/lscpu
 -rwxr-xr-x    66KiB /usr/bin/lsipc
 -rwxr-xr-x    33KiB /usr/bin/lslocks
 -rwxr-xr-x    58KiB /usr/bin/lslogins
@@ -13193,7 +13193,7 @@
 -rwxr-xr-x   125KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   122KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.29.1-31.amzn2.0.2.so
--rwxr-xr-x   305KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   292KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    67KiB /usr/lib64/libbz2.so.1.0.6
 -rwxr-xr-x   2.0MiB /usr/lib64/libc-2.26.so
 -rwxr-xr-x    24KiB /usr/lib64/libcap-ng.so.0.0.0
@@ -13213,7 +13213,7 @@
 -rwxr-xr-x   230KiB /usr/lib64/libedit.so.0.0.42
 -rwxr-xr-x    94KiB /usr/lib64/libelf-0.176.so
 -rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.6.0
--rwxr-xr-x   408KiB /usr/lib64/libfdisk.so.1.1.0
+-rwxr-xr-x   395KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    12KiB /usr/lib64/libfipscheck.so.1.2.1
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
@@ -13247,7 +13247,7 @@
 -rwxr-xr-x    19KiB /usr/lib64/libmemusage.so
 -rwxr-xr-x    33KiB /usr/lib64/libmenu.so.6.0
 -rwxr-xr-x    33KiB /usr/lib64/libmenuw.so.6.0
--rwxr-xr-x   341KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   177KiB /usr/lib64/libmvec-2.26.so
 -rwxr-xr-x   161KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   227KiB /usr/lib64/libncursesw.so.6.0
@@ -13297,7 +13297,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libsemanage.so.1
 -rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
 -rwxr-xr-x   125KiB /usr/lib64/libslapi-2.4.so.2.10.7
--rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
+-rwxr-xr-x   185KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   157KiB /usr/lib64/libsmime3.so
 -rw-r--r--      84B /usr/lib64/libsoftokn3.chk
 -rwxr-xr-x   328KiB /usr/lib64/libsoftokn3.so
