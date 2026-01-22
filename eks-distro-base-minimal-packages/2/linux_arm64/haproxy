@@ -20,6 +20,6 @@ openssl-libs-1.0.2k-24.amzn2.0.16.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-17.amzn2.aarch64
-tzdata-2025b-1.amzn2.0.1.noarch
+tzdata-2025c-1.amzn2.0.1.noarch
 util-linux-2.30.2-2.amzn2.0.13.aarch64
 zlib-1.2.7-19.amzn2.0.3.aarch64

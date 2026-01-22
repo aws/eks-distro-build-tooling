@@ -21,7 +21,7 @@ glibc-2.26-64.amzn2.0.5.aarch64
 glibc-common-2.26-64.amzn2.0.5.aarch64
 glibc-minimal-langpack-2.26-64.amzn2.0.5.aarch64
 gmp-6.0.0-15.amzn2.0.3.aarch64
-gnupg2-2.0.22-5.amzn2.0.5.aarch64
+gnupg2-2.0.22-5.amzn2.0.6.aarch64
 gpg-pubkey-c87f5b1a-593863f8
 gpgme-1.3.2-5.amzn2.0.2.aarch64
 grep-2.20-3.amzn2.0.2.aarch64
@@ -55,7 +55,7 @@ libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libuuid-2.30.2-2.amzn2.0.13.aarch64
 libverto-0.2.5-4.amzn2.0.2.aarch64
-libxml2-2.9.1-6.amzn2.5.20.aarch64
+libxml2-2.9.1-6.amzn2.5.21.aarch64
 lua-5.1.4-15.amzn2.0.2.aarch64
 make-3.82-24.amzn2.aarch64
 ncurses-6.0-8.20170212.amzn2.1.8.aarch64
@@ -78,15 +78,15 @@ pth-2.0.7-23.amzn2.0.2.aarch64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
 pygpgme-0.3-9.amzn2.0.3.aarch64
 pyliblzma-0.5.3-25.amzn2.aarch64
-python-2.7.18-1.amzn2.0.14.aarch64
+python-2.7.18-1.amzn2.0.15.aarch64
 python-iniparse-0.4-9.amzn2.noarch
-python-libs-2.7.18-1.amzn2.0.14.aarch64
+python-libs-2.7.18-1.amzn2.0.15.aarch64
 python-pycurl-7.19.0-19.amzn2.0.2.aarch64
 python-urlgrabber-3.10-9.amzn2.0.1.noarch
 python2-rpm-4.11.3-48.amzn2.0.5.aarch64
 python3-3.7.16-1.amzn2.0.22.aarch64
 python3-libs-3.7.16-1.amzn2.0.22.aarch64
-python3-pip-20.2.2-1.amzn2.0.13.noarch
+python3-pip-20.2.2-1.amzn2.0.14.noarch
 python3-setuptools-49.1.3-1.amzn2.0.6.noarch
 pyxattr-0.5.1-5.amzn2.0.2.aarch64
 readline-6.2-10.amzn2.0.2.aarch64
@@ -99,7 +99,7 @@ shared-mime-info-1.8-4.amzn2.aarch64
 sqlite-3.7.17-8.amzn2.1.3.aarch64
 system-release-2-17.amzn2.aarch64
 tar-1.26-35.amzn2.0.4.aarch64
-tzdata-2025b-1.amzn2.0.1.noarch
+tzdata-2025c-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 yum-3.4.3-158.amzn2.0.7.noarch

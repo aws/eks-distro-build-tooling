@@ -64,7 +64,7 @@ popt-1.13-16.amzn2.0.2.aarch64
 publicsuffix-list-dafsa-20240208-1.amzn2.0.1.noarch
 python3-3.7.16-1.amzn2.0.22.aarch64
 python3-libs-3.7.16-1.amzn2.0.22.aarch64
-python3-pip-20.2.2-1.amzn2.0.13.noarch
+python3-pip-20.2.2-1.amzn2.0.14.noarch
 python3-setuptools-49.1.3-1.amzn2.0.6.noarch
 readline-6.2-10.amzn2.0.2.aarch64
 rpm-4.11.3-48.amzn2.0.5.aarch64
@@ -74,7 +74,7 @@ setup-2.8.71-10.amzn2.0.1.noarch
 sqlite-3.7.17-8.amzn2.1.3.aarch64
 system-release-2-17.amzn2.aarch64
 tar-1.26-35.amzn2.0.4.aarch64
-tzdata-2025b-1.amzn2.0.1.noarch
+tzdata-2025c-1.amzn2.0.1.noarch
 which-2.20-7.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 zlib-1.2.7-19.amzn2.0.3.aarch64
