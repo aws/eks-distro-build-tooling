@@ -1,18 +1,9 @@
 
 amazon-linux-repo-cdn.noarch
 containerd.x86_64
-curl.x86_64
-glib2.x86_64
+gnupg2.x86_64
 kernel6.12-libbpf.x86_64
-libcap.x86_64
-libcurl.x86_64
-libeconf.x86_64
-openssl-libs.x86_64
-pam.x86_64
-python3.x86_64
-python3-libs.x86_64
-runc.x86_64
+libxml2.x86_64
+python3-pip-wheel.noarch
 system-release.noarch
-systemd.x86_64
-systemd-libs.x86_64
-systemd-pam.x86_64
+tzdata.noarch

@@ -1,4 +1,4 @@
 
 amazon-linux-repo-cdn.noarch
 system-release.noarch
-systemd-libs.x86_64
+tzdata.noarch
