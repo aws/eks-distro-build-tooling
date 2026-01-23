@@ -10,7 +10,7 @@ git-core-2.47.3-1.amzn2.0.1.x86_64
 glibc-2.26-64.amzn2.0.5.x86_64
 glibc-common-2.26-64.amzn2.0.5.x86_64
 glibc-minimal-langpack-2.26-64.amzn2.0.5.x86_64
-gnupg2-2.0.22-5.amzn2.0.5.x86_64
+gnupg2-2.0.22-5.amzn2.0.6.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
 krb5-libs-1.15.1-55.amzn2.2.9.x86_64
@@ -44,5 +44,5 @@ pth-2.0.7-23.amzn2.0.2.x86_64
 readline-6.2-10.amzn2.0.2.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-17.amzn2.x86_64
-tzdata-2025b-1.amzn2.0.1.noarch
+tzdata-2025c-1.amzn2.0.1.noarch
 zlib-1.2.7-19.amzn2.0.3.x86_64

@@ -1,4 +1,2 @@
 
-docker.x86_64
-libgcc.x86_64
-libstdc++.x86_64
+tzdata.noarch
