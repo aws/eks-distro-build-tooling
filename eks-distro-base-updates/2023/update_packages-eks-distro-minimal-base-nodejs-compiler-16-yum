@@ -1,11 +1,7 @@
 
 amazon-linux-repo-cdn.noarch
-curl.x86_64
-glib2.x86_64
-libcap.x86_64
-libcurl.x86_64
-openssl-fips-provider-latest.x86_64
-openssl-libs.x86_64
-python3.x86_64
-python3-libs.x86_64
+gnupg2.x86_64
+libxml2.x86_64
+python3-pip-wheel.noarch
 system-release.noarch
+tzdata.noarch

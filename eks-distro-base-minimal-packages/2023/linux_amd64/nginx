@@ -1,4 +1,4 @@
-amazon-linux-repo-cdn-2023.10.20260105-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.10.20260120-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.x86_64
 ca-certificates-2025.2.76-1.0.amzn2023.0.2.noarch
@@ -23,14 +23,14 @@ libunwind-1.4.0-5.amzn2023.0.3.x86_64
 libxcrypt-4.4.33-7.amzn2023.x86_64
 ncurses-base-6.2-4.20200222.amzn2023.0.6.noarch
 ncurses-libs-6.2-4.20200222.amzn2023.0.6.x86_64
-nginx-1.28.0-1.amzn2023.0.2.x86_64
-nginx-core-1.28.0-1.amzn2023.0.2.x86_64
-nginx-filesystem-1.28.0-1.amzn2023.0.2.noarch
+nginx-1.28.1-1.amzn2023.0.1.x86_64
+nginx-core-1.28.1-1.amzn2023.0.1.x86_64
+nginx-filesystem-1.28.1-1.amzn2023.0.1.noarch
 nginx-mimetypes-2.1.49-3.amzn2023.0.3.noarch
 openssl-libs-3.2.2-1.amzn2023.0.3.x86_64
 pcre-8.44-3.amzn2023.1.0.3.x86_64
 pcre2-10.40-1.amzn2023.0.3.x86_64
 setup-2.13.7-3.amzn2023.0.2.noarch
-system-release-2023.10.20260105-0.amzn2023.noarch
-tzdata-2025b-1.amzn2023.0.1.noarch
+system-release-2023.10.20260120-0.amzn2023.noarch
+tzdata-2025c-1.amzn2023.0.1.noarch
 zlib-1.2.11-33.amzn2023.0.5.x86_64

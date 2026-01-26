@@ -1,5 +1,5 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.10.20260105-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.10.20260120-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
 bash-5.2.15-1.amzn2023.0.2.aarch64
 binutils-2.41-50.amzn2023.0.5.aarch64
@@ -71,8 +71,8 @@ pcre2-10.40-1.amzn2023.0.3.aarch64
 publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
 python3.11-3.11.14-1.amzn2023.0.3.aarch64
 python3.11-libs-3.11.14-1.amzn2023.0.3.aarch64
-python3.11-pip-22.3.1-2.amzn2023.0.8.noarch
-python3.11-pip-wheel-22.3.1-2.amzn2023.0.8.noarch
+python3.11-pip-22.3.1-2.amzn2023.0.9.noarch
+python3.11-pip-wheel-22.3.1-2.amzn2023.0.9.noarch
 python3.11-setuptools-65.5.1-2.amzn2023.0.7.noarch
 python3.11-setuptools-wheel-65.5.1-2.amzn2023.0.7.noarch
 readline-8.1-2.amzn2023.0.2.aarch64
@@ -80,9 +80,9 @@ sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-3.40.0-1.amzn2023.0.7.aarch64
 sqlite-libs-3.40.0-1.amzn2023.0.7.aarch64
-system-release-2023.10.20260105-0.amzn2023.noarch
+system-release-2023.10.20260120-0.amzn2023.noarch
 tar-1.34-1.amzn2023.0.4.aarch64
-tzdata-2025b-1.amzn2023.0.1.noarch
+tzdata-2025c-1.amzn2023.0.1.noarch
 which-2.21-26.amzn2023.0.2.aarch64
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
 zlib-1.2.11-33.amzn2023.0.5.aarch64

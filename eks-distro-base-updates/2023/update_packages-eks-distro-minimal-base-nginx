@@ -1,5 +1,7 @@
 
 amazon-linux-repo-cdn.noarch
-libcap.x86_64
-openssl-libs.x86_64
+nginx.x86_64
+nginx-core.x86_64
+nginx-filesystem.noarch
 system-release.noarch
+tzdata.noarch
