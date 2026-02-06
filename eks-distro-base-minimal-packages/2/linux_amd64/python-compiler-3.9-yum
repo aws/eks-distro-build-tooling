@@ -55,7 +55,7 @@ libtirpc-0.2.4-0.16.amzn2.x86_64
 libunistring-0.9.3-9.amzn2.0.2.x86_64
 libuuid-2.30.2-2.amzn2.0.13.x86_64
 libverto-0.2.5-4.amzn2.0.2.x86_64
-libxml2-2.9.1-6.amzn2.5.21.x86_64
+libxml2-2.9.1-6.amzn2.5.23.x86_64
 lua-5.1.4-15.amzn2.0.2.x86_64
 make-3.82-24.amzn2.x86_64
 ncurses-6.0-8.20170212.amzn2.1.8.x86_64
