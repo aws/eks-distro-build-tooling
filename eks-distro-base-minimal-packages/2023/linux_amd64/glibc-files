@@ -267,7 +267,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    16KiB /usr/lib64/libanl.so.1
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
--rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
+-rwxr-xr-x    58KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   187KiB /usr/lib64/libgcc_s-14-20250110.so.1
 -rwxr-xr-x   891KiB /usr/lib64/libm.so.6
@@ -2133,7 +2133,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   1.8KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   932KiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   928KiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

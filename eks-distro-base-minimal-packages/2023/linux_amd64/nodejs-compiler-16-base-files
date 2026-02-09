@@ -3211,7 +3211,7 @@
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
 -rwxr-xr-x    80KiB /usr/lib64/libbz2.so.1.0.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
--rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
+-rwxr-xr-x    58KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x    41KiB /usr/lib64/libcord.so.1.4.0
