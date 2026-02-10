@@ -19,6 +19,7 @@ GOOS?=linux
 
 # the values used by rpmbuild for indicating architecture are different than that of our other systems.
 # rather than use 'x86_64' throughout, we just make sure to set the RPM arch to the right value here.
+# Dummy change
 ARCHITECTURE?=AMD64
 RPM_ARCH?=x86_64
 ifeq ($(ARCHITECTURE), ARM64)
