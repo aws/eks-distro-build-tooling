@@ -8,6 +8,7 @@ golang:
     - 1.23
     - 1.24
     - 1.25
+    - 1.26
   versions:
     GOLANG_1.18_FULL_VERSION: 1.18.10-8
     GOLANG_1.19_FULL_VERSION: 1.19.13-14
@@ -17,3 +18,4 @@ golang:
     GOLANG_1.23_FULL_VERSION: 1.23.12-0
     GOLANG_1.24_FULL_VERSION: 1.24.13-0
     GOLANG_1.25_FULL_VERSION: 1.25.7-0
+    GOLANG_1.26_FULL_VERSION: 1.26.0-0
