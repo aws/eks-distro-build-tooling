@@ -14856,7 +14856,7 @@
 -rwxr-xr-x   197KiB /usr/bin/flock
 -rwxr-xr-x   196KiB /usr/bin/fmt
 -rwxr-xr-x   196KiB /usr/bin/fold
--rwxr-xr-x   197KiB /usr/bin/funzip
+-rwxr-xr-x   196KiB /usr/bin/funzip
 -rwxr-xr-x   199KiB /usr/bin/g13
 -rwxr-xr-x   196KiB /usr/bin/gapplication
 -rwxr-xr-x   719KiB /usr/bin/gawk
@@ -15070,8 +15070,8 @@
 -rwxr-xr-x   196KiB /usr/bin/uniq
 -rwxr-xr-x   196KiB /usr/bin/unlink
 -rwxr-xr-x   197KiB /usr/bin/unshare
--rwxr-xr-x   262KiB /usr/bin/unzip
--rwxr-xr-x   197KiB /usr/bin/unzipsfx
+-rwxr-xr-x   261KiB /usr/bin/unzip
+-rwxr-xr-x   196KiB /usr/bin/unzipsfx
 -rwxr-xr-x   1.9KiB /usr/bin/update-ca-trust
 -rwxr-xr-x   196KiB /usr/bin/users
 -rwxr-xr-x   196KiB /usr/bin/utmpdump
@@ -15105,7 +15105,7 @@
 -rwxr-xr-x   263KiB /usr/bin/zip
 -rwxr-xr-x   197KiB /usr/bin/zipcloak
 -rwxr-xr-x   2.9KiB /usr/bin/zipgrep
--rwxr-xr-x   262KiB /usr/bin/zipinfo
+-rwxr-xr-x   261KiB /usr/bin/zipinfo
 -rwxr-xr-x   197KiB /usr/bin/zipnote
 -rwxr-xr-x   197KiB /usr/bin/zipsplit
 -rwxr-xr-x   2.2KiB /usr/bin/zless
@@ -17662,7 +17662,7 @@
 -rwxr-xr-x   200KiB /usr/lib64/libbz2.so.1.0.8
 -rw-r--r--     259B /usr/lib64/libc.so
 -rwxr-xr-x   2.3MiB /usr/lib64/libc.so.6
--rwxr-xr-x   201KiB /usr/lib64/libc_malloc_debug.so.0
+-rwxr-xr-x   202KiB /usr/lib64/libc_malloc_debug.so.0
 -rw-r--r--    17KiB /usr/lib64/libc_nonshared.a
 -rwxr-xr-x   196KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libcap.so.2.73
@@ -17800,7 +17800,7 @@
 -rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
--rwxr-xr-x   195KiB /usr/lib64/libtasn1.so.6.6.3
+-rwxr-xr-x   197KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   197KiB /usr/lib64/libtic.so.6.2
 -rwxr-xr-x   264KiB /usr/lib64/libtinfo.so.6.2
