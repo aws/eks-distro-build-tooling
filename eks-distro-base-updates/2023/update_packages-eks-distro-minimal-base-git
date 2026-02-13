@@ -1,5 +1,8 @@
 
 amazon-linux-repo-cdn.noarch
-gnupg2.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libtasn1.x86_64
+openssl-libs.x86_64
 system-release.noarch
-tzdata.noarch

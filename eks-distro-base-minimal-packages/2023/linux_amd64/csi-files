@@ -624,7 +624,7 @@
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x    80KiB /usr/lib64/libbz2.so.1.0.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
--rwxr-xr-x    54KiB /usr/lib64/libc_malloc_debug.so.0
+-rwxr-xr-x    58KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    32KiB /usr/lib64/libcap-ng.so.0.0.0
 -rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
 -rwxr-xr-x    58KiB /usr/lib64/libcollection.so.4.1.1
