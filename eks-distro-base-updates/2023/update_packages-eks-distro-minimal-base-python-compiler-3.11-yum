@@ -1,14 +1,13 @@
 
 amazon-linux-repo-cdn.noarch
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
-libcap.x86_64
-libtasn1.x86_64
-libxml2.x86_64
+coreutils.x86_64
+coreutils-common.x86_64
+curl.x86_64
+expat.x86_64
+gnupg2.x86_64
+libcurl.x86_64
 openssl-fips-provider-latest.x86_64
 openssl-libs.x86_64
-python3-pip-wheel.noarch
-python3.11-pip.noarch
-python3.11-pip-wheel.noarch
+publicsuffix-list-dafsa.noarch
 system-release.noarch
+zlib.x86_64

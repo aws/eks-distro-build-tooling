@@ -1,8 +1,9 @@
 
 amazon-linux-repo-cdn.noarch
-glibc.x86_64
-glibc-common.x86_64
-glibc-minimal-langpack.x86_64
-libcap.x86_64
+coreutils.x86_64
+nginx.x86_64
+nginx-core.x86_64
+nginx-filesystem.noarch
 openssl-libs.x86_64
 system-release.noarch
+zlib.x86_64
