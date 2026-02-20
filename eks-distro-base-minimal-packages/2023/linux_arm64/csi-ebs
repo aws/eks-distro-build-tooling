@@ -1,4 +1,4 @@
-amazon-linux-repo-cdn-2023.10.20260202-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.10.20260216-0.amzn2023.noarch
 basesystem-11-11.amzn2023.0.2.noarch
 ca-certificates-2025.2.76-1.0.amzn2023.0.2.noarch
 e2fsprogs-1.46.5-2.amzn2023.0.2.aarch64
@@ -24,7 +24,7 @@ ncurses-libs-6.2-4.20200222.amzn2023.0.6.aarch64
 pcre-8.44-3.amzn2023.1.0.3.aarch64
 pcre2-10.40-1.amzn2023.0.3.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
-system-release-2023.10.20260202-0.amzn2023.noarch
+system-release-2023.10.20260216-0.amzn2023.noarch
 systemd-libs-252.23-11.amzn2023.aarch64
 tzdata-2025c-1.amzn2023.0.1.noarch
 userspace-rcu-0.12.1-3.amzn2023.0.4.aarch64

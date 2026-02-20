@@ -12586,7 +12586,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x   306KiB /usr/bin/curl
+-rwxr-xr-x   318KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   105KiB /usr/bin/date
@@ -12726,7 +12726,7 @@
 -rwxr-xr-x    44KiB /usr/bin/rmdir
 -rwxr-xr-x    36KiB /usr/bin/runcon
 -rwxr-xr-x   857KiB /usr/bin/scalar
--rwxr-xr-x   131KiB /usr/bin/scp
+-rwxr-xr-x   134KiB /usr/bin/scp
 -rwxr-xr-x    53KiB /usr/bin/script
 -rwxr-xr-x    45KiB /usr/bin/scriptlive
 -rwxr-xr-x    37KiB /usr/bin/scriptreplay
@@ -12736,7 +12736,7 @@
 -rwxr-xr-x    41KiB /usr/bin/setpriv
 -rwxr-xr-x    16KiB /usr/bin/setsid
 -rwxr-xr-x    37KiB /usr/bin/setterm
--rwxr-xr-x   143KiB /usr/bin/sftp
+-rwxr-xr-x   146KiB /usr/bin/sftp
 -rwxr-xr-x    40KiB /usr/bin/sha1sum
 -rwxr-xr-x    40KiB /usr/bin/sha224sum
 -rwxr-xr-x    40KiB /usr/bin/sha256sum
@@ -12750,12 +12750,12 @@
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    53KiB /usr/bin/split
 -rwxr-xr-x    36KiB /usr/bin/sprof
--rwxr-xr-x   839KiB /usr/bin/ssh
--rwxr-xr-x   163KiB /usr/bin/ssh-add
--rwxr-xr-x   283KiB /usr/bin/ssh-agent
+-rwxr-xr-x   848KiB /usr/bin/ssh
+-rwxr-xr-x   165KiB /usr/bin/ssh-add
+-rwxr-xr-x   286KiB /usr/bin/ssh-agent
 -rwxr-xr-x    13KiB /usr/bin/ssh-copy-id
--rwxr-xr-x   451KiB /usr/bin/ssh-keygen
--rwxr-xr-x   199KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   456KiB /usr/bin/ssh-keygen
+-rwxr-xr-x   202KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x    81KiB /usr/bin/stat
 -rwxr-xr-x    44KiB /usr/bin/stdbuf
 -rwxr-xr-x    33KiB /usr/bin/strings
@@ -13223,7 +13223,7 @@
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
 -rwxr-xr-x   203KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   207KiB /usr/lib64/libctf.so.0.0.0
--rwxr-xr-x   911KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   927KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -rwxr-xr-x    40KiB /usr/lib64/libdebuginfod-0.188.so
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -13420,9 +13420,9 @@
 -rw-r--r--     510B /usr/libexec/git-core/mergetools/winmerge
 -rw-r--r--     913B /usr/libexec/git-core/mergetools/xxdiff
 -rwxr-xr-x     257B /usr/libexec/grepconf.sh
--r-xr-sr-x   327KiB /usr/libexec/openssh/ssh-keysign
--rwxr-xr-x   123KiB /usr/libexec/openssh/ssh-pkcs11-helper
--rwxr-xr-x   135KiB /usr/libexec/openssh/ssh-sk-helper
+-r-xr-sr-x   334KiB /usr/libexec/openssh/ssh-keysign
+-rwxr-xr-x   125KiB /usr/libexec/openssh/ssh-pkcs11-helper
+-rwxr-xr-x   137KiB /usr/libexec/openssh/ssh-sk-helper
 -rwx--s--x    16KiB /usr/libexec/utempter/utempter
 -rwxr-xr-x    16KiB /usr/sbin/addpart
 -rwxr-xr-x    58KiB /usr/sbin/agetty
@@ -14954,7 +14954,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
 -rw-r--r--   2.0MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
--rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
+-rw-r--r--    55KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--     135B /usr/share/tabset/std
 -rw-r--r--      95B /usr/share/tabset/stdcrt
 -rw-r--r--     160B /usr/share/tabset/vt100
@@ -16899,7 +16899,7 @@
 -rw-r--r--   105KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
--rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
+-rw-r--r--    17KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json

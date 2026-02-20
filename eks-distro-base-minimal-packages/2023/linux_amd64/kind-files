@@ -362,12 +362,12 @@
 -rwxr-xr-x    37KiB /usr/bin/column
 -rwxr-xr-x    36KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    45MiB /usr/bin/containerd
--rwxr-xr-x    17MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    47MiB /usr/bin/containerd
+-rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
 -rwxr-xr-x    25MiB /usr/bin/ctr
--rwxr-xr-x   306KiB /usr/bin/curl
+-rwxr-xr-x   318KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   337KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
@@ -1395,7 +1395,7 @@
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
 -rwxr-xr-x   5.3MiB /usr/lib64/libcrypto.so.3.2.2
--rwxr-xr-x   911KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   927KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -6132,7 +6132,7 @@
 -rw-r--r--    25KiB /usr/share/polkit-1/actions/org.freedesktop.login1.policy
 -rw-r--r--   4.3KiB /usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
 -rw-r--r--   3.1KiB /usr/share/polkit-1/actions/org.freedesktop.timedate1.policy
--rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
+-rw-r--r--    55KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rwxr-xr-x   1.2MiB /usr/share/python3-wheels/pip-21.3.1-py3-none-any.whl
 -rwxr-xr-x   587KiB /usr/share/python3-wheels/setuptools-59.6.0-py3-none-any.whl
 -rw-r--r--   3.8KiB /usr/share/systemd/kbd-model-map
@@ -7939,7 +7939,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--   9.5KiB /usr/share/zsh/site-functions/_busctl
--rw-r--r--    16KiB /usr/share/zsh/site-functions/_curl
+-rw-r--r--    17KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--   2.8KiB /usr/share/zsh/site-functions/_hostnamectl
 -rw-r--r--   7.1KiB /usr/share/zsh/site-functions/_journalctl
 -rw-r--r--   3.7KiB /usr/share/zsh/site-functions/_localectl

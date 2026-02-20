@@ -1,5 +1,5 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.10.20260202-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.10.20260216-0.amzn2023.noarch
 amazon-rpm-config-228-10.amzn2023.0.1.noarch
 annobin-docs-12.69-1.amzn2023.0.1.noarch
 annobin-plugin-gcc-12.69-1.amzn2023.0.1.aarch64
@@ -9,11 +9,11 @@ bash-5.2.15-1.amzn2023.0.2.aarch64
 binutils-2.41-50.amzn2023.0.5.aarch64
 bzip2-libs-1.0.8-6.amzn2023.0.2.aarch64
 ca-certificates-2025.2.76-1.0.amzn2023.0.2.noarch
-coreutils-8.32-30.amzn2023.0.4.aarch64
-coreutils-common-8.32-30.amzn2023.0.4.aarch64
+coreutils-8.32-30.amzn2023.0.5.aarch64
+coreutils-common-8.32-30.amzn2023.0.5.aarch64
 cpp-11.5.0-5.amzn2023.0.5.aarch64
 crypto-policies-20240828-2.git626aa59.amzn2023.0.1.noarch
-curl-8.15.0-4.amzn2023.0.1.aarch64
+curl-8.17.0-1.amzn2023.0.1.aarch64
 cyrus-sasl-lib-2.1.27-18.amzn2023.0.3.aarch64
 dnf-4.14.0-1.amzn2023.0.6.noarch
 dnf-data-4.14.0-1.amzn2023.0.6.noarch
@@ -23,7 +23,7 @@ elfutils-debuginfod-client-0.188-3.amzn2023.0.3.aarch64
 elfutils-default-yama-scope-0.188-3.amzn2023.0.3.noarch
 elfutils-libelf-0.188-3.amzn2023.0.3.aarch64
 elfutils-libs-0.188-3.amzn2023.0.3.aarch64
-expat-2.6.3-1.amzn2023.0.3.aarch64
+expat-2.6.3-1.amzn2023.0.4.aarch64
 file-5.39-7.amzn2023.0.4.aarch64
 file-libs-5.39-7.amzn2023.0.4.aarch64
 filesystem-3.14-5.amzn2023.0.3.aarch64
@@ -43,7 +43,7 @@ glibc-devel-2.34-231.amzn2023.0.3.aarch64
 glibc-gconv-extra-2.34-231.amzn2023.0.3.aarch64
 glibc-minimal-langpack-2.34-231.amzn2023.0.3.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
-gnupg2-2.3.7-1.amzn2023.0.6.aarch64
+gnupg2-2.3.7-1.amzn2023.0.7.aarch64
 gnutls-3.8.3-8.amzn2023.0.1.aarch64
 go-srpm-macros-3.8.0-1.amzn2023.0.1.noarch
 gpg-pubkey-afaa0026-61929986
@@ -55,7 +55,7 @@ gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
 kernel-srpm-macros-1.0-14.amzn2023.0.3.noarch
-kernel6.12-headers-6.12.66-88.122.amzn2023.aarch64
+kernel6.12-headers-6.12.68-92.122.amzn2023.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 krb5-libs-1.21.3-6.amzn2023.0.1.aarch64
 libacl-2.3.1-2.amzn2023.0.2.aarch64
@@ -68,7 +68,7 @@ libcap-2.73-1.amzn2023.0.6.aarch64
 libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
 libcomps-0.1.20-1.amzn2023.aarch64
-libcurl-8.15.0-4.amzn2023.0.1.aarch64
+libcurl-8.17.0-1.amzn2023.0.1.aarch64
 libdb-5.3.28-49.amzn2023.0.2.aarch64
 libdnf-0.69.0-8.amzn2023.0.6.aarch64
 libffi-3.4.4-1.amzn2023.0.1.aarch64
@@ -117,8 +117,8 @@ npth-1.6-6.amzn2023.0.2.aarch64
 ocaml-srpm-macros-6-6.amzn2023.0.2.noarch
 openblas-srpm-macros-2-9.amzn2023.0.2.noarch
 openldap-2.4.57-6.amzn2023.0.7.aarch64
-openssl-fips-provider-latest-3.2.2-1.amzn2023.0.4.aarch64
-openssl-libs-3.2.2-1.amzn2023.0.4.aarch64
+openssl-fips-provider-latest-3.2.2-1.amzn2023.0.5.aarch64
+openssl-libs-3.2.2-1.amzn2023.0.5.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
 p11-kit-trust-0.24.1-2.amzn2023.0.3.aarch64
 package-notes-srpm-macros-0.4-18.amzn2023.0.5.noarch
@@ -129,7 +129,7 @@ pkgconf-1.8.0-4.amzn2023.0.2.aarch64
 pkgconf-m4-1.8.0-4.amzn2023.0.2.noarch
 pkgconf-pkg-config-1.8.0-4.amzn2023.0.2.aarch64
 popt-1.18-6.amzn2023.0.2.aarch64
-publicsuffix-list-dafsa-20240212-61.amzn2023.noarch
+publicsuffix-list-dafsa-20260116-1.amzn2023.0.1.noarch
 python-srpm-macros-3.9-41.amzn2023.0.6.noarch
 python3-3.9.25-1.amzn2023.0.3.aarch64
 python3-dnf-4.14.0-1.amzn2023.0.6.noarch
@@ -148,12 +148,12 @@ rpm-4.16.1.3-29.amzn2023.0.6.aarch64
 rpm-build-libs-4.16.1.3-29.amzn2023.0.6.aarch64
 rpm-libs-4.16.1.3-29.amzn2023.0.6.aarch64
 rpm-sign-libs-4.16.1.3-29.amzn2023.0.6.aarch64
-rust-toolset-srpm-macros-1.92.0-1.amzn2023.0.1.noarch
+rust-toolset-srpm-macros-1.93.0-1.amzn2023.0.1.noarch
 sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 sqlite-3.40.0-1.amzn2023.0.7.aarch64
 sqlite-libs-3.40.0-1.amzn2023.0.7.aarch64
-system-release-2023.10.20260202-0.amzn2023.noarch
+system-release-2023.10.20260216-0.amzn2023.noarch
 tar-1.34-1.amzn2023.0.4.aarch64
 tzdata-2025c-1.amzn2023.0.1.noarch
 unzip-6.0-68.amzn2023.0.1.aarch64
@@ -161,4 +161,4 @@ which-2.21-26.amzn2023.0.2.aarch64
 xz-libs-5.2.5-9.amzn2023.0.2.aarch64
 yum-4.14.0-1.amzn2023.0.6.noarch
 zip-3.0-28.amzn2023.0.2.aarch64
-zlib-1.2.11-33.amzn2023.0.5.aarch64
+zlib-1.2.11-33.amzn2023.0.6.aarch64
