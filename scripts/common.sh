@@ -13,71 +13,65 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-set -o pipefail
-set -x
 
-function retry() {
-  local n=1
-  local max=120
-  local delay=5
-  while true; do
-    "$@" && break || {
-      if [[ $n -lt $max ]]; then
-        ((n++))
-        sleep $delay;
-      fi
-    }
-  done
-}
+if [ -n "${OUTPUT_DEBUG_LOG:-}" ]; then
+    set -x
+fi
 
-function build::docker::retry_pull() {
-  retry docker pull "$@"
-}
 
-function build::common::get_go_path() {
-  local -r version=$1
+function build::common::ensure_tar() {
+  if [[ -n "${TAR:-}" ]]; then
+    return
+  fi
 
-  # This is the path where the specific go binary versions reside in our builder-base image
-  local -r gorootbinarypath="/go/go${version}/bin"
-  # This is the path that will most likely be correct if running locally
-  local -r gopathbinarypath="$GOPATH/go${version}/bin"
-  if [ -d "$gorootbinarypath" ]; then
-    echo $gorootbinarypath
-  elif [ -d "$gopathbinarypath" ]; then
-    echo $gopathbinarypath
-  else
-    # not in builder-base, probably running in dev environment
-    # return default go installation
-    local -r which_go=$(which go)
-    echo "$(dirname $which_go)"
+  # Find gnu tar if it is available, bomb out if not.
+  TAR=tar
+  if which gtar &>/dev/null; then
+      TAR=gtar
+  elif which gnutar &>/dev/null; then
+      TAR=gnutar
+  fi
+  if ! "${TAR}" --version | grep -q GNU; then
+    echo "  !!! Cannot find GNU tar. Build on Linux or install GNU tar"
+    echo "      on Mac OS X (brew install gnu-tar)."
+    return 1
   fi
 }
 
-function build::common::use_go_version() {
-  local -r version=$1
-  local -r GOROOT_CUSTOM=$2
+# Build a release tarball.  $1 is the output tar name.  $2 is the base directory
+# of the files to be packaged.  This assumes that ${2}/kubernetes is what is
+# being packaged.
+function build::common::create_tarball() {
+  build::common::ensure_tar
 
-  if (( "${version#*.}" < 16 )); then
-    echo "Building with GO version $version is no longer supported!  Please update the build to use a newer version."
+  local -r tarfile=$1
+  local -r stagingdir=$2
+  local -r repository=$3
+
+  build::common::echo_and_run "${TAR}" czf "${tarfile}" -C "${stagingdir}" $repository --owner=0 --group=0
+}
+
+# Generate shasum of tarballs. $1 is the directory of the tarballs.
+function build::common::generate_shasum() {
+
+  local -r tarpath=$1
+
+  echo "Writing artifact hashes to shasum files..."
+
+  if [ ! -d "$tarpath" ]; then
+    echo "  Unable to find tar directory $tarpath"
     exit 1
   fi
 
-  local gobinarypath
-  if [[ -n "$GOROOT_CUSTOM" && -f "$GOROOT_CUSTOM/bin/go" ]]; then
-    export GOROOT=$GOROOT_CUSTOM
-    gobinarypath=$GOROOT/bin
-  else
-    echo "Custom GOPATH is not set for job or directory doesn't exist, using system's go"
-    gobinarypath=$(build::common::get_go_path $version)
-  fi
-
-  local -r gobinarypath=${gobinarypath:=(build::common::get_go_path $version)}
-  echo "Adding $gobinarypath to PATH"
-  # Adding to the beginning of PATH to allow for builds on specific version if it exists
-  export PATH=${gobinarypath}:$PATH
-  export GOCACHE=$(go env GOCACHE)/$version
+  cd $tarpath
+  for file in $(find . -name '*.tar.gz'); do
+    filepath=$(basename $file)
+    sha256sum "$filepath" > "$file.sha256"
+    sha512sum "$filepath" > "$file.sha512"
+  done
+  cd -
 }
+
 
 function build::gather_licenses() {
   local -r outputdir=$1
@@ -152,9 +146,165 @@ function build::gather_licenses() {
   fi
 }
 
+function build::non-golang::gather_licenses(){
+  local -r project="$1"
+  local -r git_tag="$2"
+  local -r output_dir="$3"
+  project_org="$(cut -d '/' -f1 <<< ${project})"
+  project_name="$(cut -d '/' -f2 <<< ${project})"
+  git clone https://github.com/${project_org}/${project_name}
+  cd $project_name
+  git checkout $git_tag
+  cd ..
+  build::non-golang::copy_licenses $project_name $output_dir/LICENSES/github.com/${project_org}/${project_name}
+  rm -rf $project_name
+}
+
+function build::non-golang::copy_licenses(){
+  local -r source_dir="$1"
+  local -r destination_dir="$2"
+  (cd $source_dir; find . \( -name "*COPYING*" -o -name "*COPYRIGHT*" -o -name "*LICEN[C|S]E*" -o -name "*NOTICE*" \)) |
+  while read file
+  do
+    license_dest=$destination_dir/$(dirname $file)
+    mkdir -p $license_dest
+    cp -r "${source_dir}/${file}" $license_dest/$(basename $file)
+  done
+}
+
+function build::generate_attribution(){
+  local -r project_root=$1
+  local -r golang_version=$2
+  local -r output_directory=${3:-"${project_root}/_output"}
+  local -r attribution_file=${4:-"${project_root}/ATTRIBUTION.txt"}
+
+  local -r root_module_name=$(cat ${output_directory}/attribution/root-module.txt)
+  local -r go_path=$(build::common::get_go_path $golang_version)
+  local -r golang_version_tag=$($go_path/go version | grep -o "go[0-9].* ")
+
+  if cat "${output_directory}/attribution/go-license.csv" | grep -e ",LGPL-" -e ",GPL-"; then
+    echo " one of the dependencies is licensed as LGPL or GPL"
+    echo " which is prohibited at Amazon"
+    echo " please look into removing the dependency"
+    exit 1
+  fi
+
+  build::common::echo_and_run generate-attribution $root_module_name $project_root $golang_version_tag $output_directory 
+  cp -f "${output_directory}/attribution/ATTRIBUTION.txt" $attribution_file
+}
+
+function build::common::get_go_path() {
+  local -r version=$1
+
+  # This is the path where the specific go binary versions reside in our builder-base image
+  local -r gorootbinarypath="/go/go${version}/bin"
+  # This is the path that will most likely be correct if running locally
+  local -r gopathbinarypath="$GOPATH/go${version}/bin"
+  if [ -d "$gorootbinarypath" ]; then
+    echo $gorootbinarypath
+  elif [ -d "$gopathbinarypath" ]; then
+    echo $gopathbinarypath
+  else
+    # not in builder-base, probably running in dev environment
+    # return default go installation
+    local -r which_go=$(which go)
+    echo "$(dirname $which_go)"
+  fi
+}
+
+function build::common::use_go_version() {
+  local -r version=$1
+
+  if (( "${version#*.}" < 16 )); then
+    echo "Building with GO version $version is no longer supported!  Please update the build to use a newer version."
+    exit 1
+  fi
+
+  local -r gobinarypath=$(build::common::get_go_path $version)
+  echo "Adding $gobinarypath to PATH"
+  # Adding to the beginning of PATH to allow for builds on specific version if it exists
+  export PATH=${gobinarypath}:$PATH
+  export GOCACHE=$(go env GOCACHE)/$version
+}
+
+# Use a seperate build cache for each project/version to ensure there are no
+# shared bits which can mess up the final checksum calculation
+# this is mostly needed for create checksums locally since in the builds
+# different versions of the same project are not built in the same container
+function build::common::set_go_cache() {
+  local -r project=$1
+  local -r git_tag=$2
+  export GOCACHE=$(go env GOCACHE)/$project/$git_tag
+}
+
+function build::common::re_quote() {
+    local -r to_escape=$1
+    sed 's/[][()\.^$\/?*+]/\\&/g' <<< "$to_escape"
+}
+function build::common::wait_for_tag() {
+  local -r tag=$1
+  sleep_interval=20
+  for i in {1..60}; do
+    echo "Checking for tag ${tag}..."
+    git rev-parse --verify --quiet "${tag}" && echo "Tag ${tag} exists!" && break
+    git fetch --tags > /dev/null 2>&1
+    echo "Tag ${tag} does not exist!"
+    echo "Waiting for tag ${tag}..."
+    sleep $sleep_interval
+    if [ "$i" = "60" ]; then
+      exit 1
+    fi
+  done
+}
+
+function build::common::wait_for_tarball() {
+  local -r tarball_url=$1
+  sleep_interval=20
+  for i in {1..60}; do
+    echo "Checking for URL ${tarball_url}..."
+    local -r http_code=$(curl -I -L -s -o /dev/null -w "%{http_code}" $tarball_url)
+    if [[ "$http_code" == "200" ]]; then 
+      echo "Tarball exists!" && break
+    fi
+    echo "Tarball does not exist!"
+    echo "Waiting for tarball to be uploaded to ${tarball_url}"
+    sleep $sleep_interval
+    if [ "$i" = "60" ]; then
+      exit 1
+    fi
+  done
+}
+
+function build::common::get_clone_url() {
+  local -r org=$1
+  local -r repo=$2
+  local -r aws_region=$3
+
+  echo "https://github.com/${org}/${repo}.git"
+}
+
+function retry() {
+  local n=1
+  local max=120
+  local delay=5
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max ]]; then
+        ((n++))
+        >&2 echo "Command failed. Attempt $n/$max:"
+        sleep $delay;
+      else
+        fail "The command has failed after $n attempts."
+      fi
+    }
+  done
+}
+
+function build::docker::retry_pull() {
+  retry docker pull "$@"
+}
+
 function build::common::echo_and_run() {
   >&2 echo "($(pwd)) \$ $*"
   "$@"
 }
-
-

@@ -21,7 +21,7 @@ OUTPUT_DIR="$1"
 
 MAKE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 ATTRIBUTION_DIR="${OUTPUT_DIR}/attribution"
-source "${MAKE_ROOT}/../../../build/lib/common.sh"
+source "${MAKE_ROOT}/../../scripts/common.sh"
 
 
 # go-licenses calls the main module command-line-arguments in the csv output
