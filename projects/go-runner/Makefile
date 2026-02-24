@@ -30,7 +30,7 @@ AL_TAG?=2
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-GO_RUNNER_IMAGE_REPO?=eks-distro-build-tooling/kubernetes/go-runner
+GO_RUNNER_IMAGE_REPO?=eks-distro-build-tooling/go-runner
 PUSH_IMAGES?=false
 
 .PHONY: process-go-versions
