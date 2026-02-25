@@ -2,12 +2,13 @@ RELEASE_BRANCH?=0.18.0
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/go-runner
 GIT_TAG?=$(shell cat ./$(RELEASE_BRANCH)/GIT_TAG)
+MIN_GO_VERSION=1.24
 
 GO_VERSIONS := $(wildcard /go/go*)
 AWS_PROFILE?=ecr-public-push
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
-#ACCOUNT_ECR_HOST=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
-ECR_REPO_HOST?=public.ecr.aws
+IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+IMAGE_NAME?=go-runner
 
 # REPO_FOLDER can't be release since there is a phony release target
 # using release-src and overriding component
@@ -20,7 +21,6 @@ BINARY_TARGET_FILES=go-runner
 GO_MOD_PATHS=images/build/go-runner
 FIX_LICENSES_GO_RUNNER_TARGET=$(REPO_FOLDER)/images/build/go-runner/LICENSE
 
-DOCKERFILE_FOLDER=./docker/$(IMAGE_NAME)
 GOOS?=linux
 ARCH_LOWER?=amd64
 GOLANG_ARCHIVE_PATH=$(GO_VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GO_BIN_VERSION_WITHOUT_RELEASE).$(GOOS)-$(ARCH_LOWER).tar.gz
@@ -30,35 +30,38 @@ AL_TAG?=2
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-GO_RUNNER_IMAGE_REPO?=eks-distro-build-tooling/go-runner
 PUSH_IMAGES?=false
+
 
 .PHONY: process-go-versions
 process-go-versions:
 	@for GOROOT in $(GO_VERSIONS); do \
 		echo "Processing for $$GOROOT"; \
 		GO_VERSION=$${GOROOT/\/go\/go/}; \
+		if [[ "$$GO_VERSION" < $(MIN_GO_VERSION) ]]; then \
+			echo "Skipping go-runner build with older go version than $(MIN_GO_VERSION)"; \
+			continue; \
+		fi; \
 		GO_PATCH_VERSION=`$$GOROOT/bin/go version | awk '{print $$3}' | sed 's/go//'` ; \
 		IMAGE_TAG=$(GIT_TAG)-go-$$GO_PATCH_VERSION; \
-		echo "Checking if image already pushed: $(GO_RUNNER_IMAGE_REPO):$$IMAGE_TAG"; \
-		IMAGE_NOT_FOUND=false; \
-		aws ecr describe-images --registry-id $(AWS_ACCOUNT_ID) --repository-name $(GO_RUNNER_IMAGE_REPO) \
-			--image-ids imageTag=$$IMAGE_TAG --region $(AWS_REGION) > /dev/null || IMAGE_NOT_FOUND=true; \
-		if [[ "$$IMAGE_NOT_FOUND" == "true" ]]; then \
-			echo "$$IMAGE_TAG doesn't exist in repository"; \
-			$(MAKE) build-multi-arch-images GO_VERSION=$$GO_VERSION IMAGE_TAG=$$IMAGE_TAG; \
-		else \
+		echo "Checking if image already pushed: $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG"; \
+		if docker manifest inspect $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG > /dev/null 2>&1; then \
 			echo "$$IMAGE_TAG exists in repository, skipping build.."; \
+		else \
+			echo "$$IMAGE_TAG doesn't exist in repository"; \
+			LATEST_IMAGE_TAG=$(GIT_TAG)-go-$$GO_VERSION-latest; \
+			IMAGES=$(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG,$(IMAGE_REPO)/$(IMAGE_NAME):$$LATEST_IMAGE_TAG; \
+			$(MAKE) build-multi-arch-images GO_VERSION=$$GO_VERSION IMAGES=$$IMAGES; \
 		fi; \
 	done
 
 
 .PHONY: build-multi-arch-images
 build-multi-arch-images:
-	@echo "Building image $(IMAGE_TAG)"
+	@echo "Building $(IMAGES)"
 	$(MAKE) build-binaries GO_VERSION=$(GO_VERSION)
 	$(MAKE) fix-licenses GO_VERSION=$(GO_VERSION)
-	$(MAKE) images GO_VERSION=$(GO_VERSION) IMAGE_TAG=$(IMAGE_TAG)
+	$(MAKE) images GO_VERSION=$(GO_VERSION) IMAGES=$(IMAGES)
 	$(MAKE) clean-image-build-data
 
 
@@ -78,16 +81,15 @@ build-binaries: clone
 fix-licenses:
 #	go-licenses requires a LICENSE file in each folder with the go.mod
 	cp $(REPO_FOLDER)/LICENSE $(FIX_LICENSES_GO_RUNNER_TARGET)
-	bash $(BASE_DIRECTORY)/scripts/gather_licenses.sh release-src $(PROJECT_DIRECTORY)/$(RELEASE_BRANCH)/_output "." images/build/go-runner $(GO_VERSION)
+	bash $(BASE_DIRECTORY)/scripts/gather_licenses.sh release-src \
+		$(PROJECT_DIRECTORY)/$(RELEASE_BRANCH)/_output "." images/build/go-runner $(GO_VERSION)
 	build/fix_licenses.sh $(PROJECT_DIRECTORY)/$(RELEASE_BRANCH)/_output
 	build/generate_attribution.sh $(PROJECT_DIRECTORY)/$(RELEASE_BRANCH) $(GO_VERSION)
 
 
 .PHONY: setup-permissions
 setup-permissions:
-	if [[ "$(PUSH_IMAGES)" == "true" ]]; then \
-		aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(ECR_REPO_HOST); \
-	fi
+	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(IMAGE_REPO)
 
 
 .PHONY: images
@@ -101,7 +103,7 @@ images: buildkit-check
 		--local dockerfile=$(PROJECT_DIRECTORY)/docker/go-runner \
 		--local context=$(PROJECT_DIRECTORY)/$(RELEASE_BRANCH)/_output \
 		--progress plain \
-		--output type=image,oci-mediatypes=true,\"name=$(ECR_REPO_HOST)/$(GO_RUNNER_IMAGE_REPO):$(IMAGE_TAG)\",push=$(PUSH_IMAGES)
+		--output type=image,oci-mediatypes=true,\"name=$(IMAGES)\",push=$(PUSH_IMAGES)
 
 
 .PHONY: clean-image-build-data
