@@ -1,11 +1,12 @@
 RELEASE_BRANCH?=0.18.0
+GIT_TAG?=$(shell cat ./$(RELEASE_BRANCH)/GIT_TAG)
+MIN_GO_VERSION?=1.24
+
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/go-runner
-GIT_TAG?=$(shell cat ./$(RELEASE_BRANCH)/GIT_TAG)
-MIN_GO_VERSION=1.24
 
+# Get available go versions on the builder image
 GO_VERSIONS := $(wildcard /go/go*)
-AWS_PROFILE?=ecr-public-push
 AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output text)
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 IMAGE_NAME?=go-runner
