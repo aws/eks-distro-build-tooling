@@ -27,6 +27,8 @@ GOLANG_ARCHIVE_PATH=$(GO_VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GO_
 ARCHITECTURES="amd64" "arm64"
 
 AL_TAG?=2
+# Remove 20 from 2023 for latest image tags
+AL_TAG_LATEST=$(subst 20,,$(AL_TAG))
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
@@ -43,13 +45,13 @@ process-go-versions:
 			continue; \
 		fi; \
 		GO_PATCH_VERSION=`$$GOROOT/bin/go version | awk '{print $$3}' | sed 's/go//'` ; \
-		IMAGE_TAG=$(GIT_TAG)-go-$$GO_PATCH_VERSION; \
+		IMAGE_TAG=$(GIT_TAG)-go-$$GO_PATCH_VERSION.$(AL_TAG); \
 		echo "Checking if image already pushed: $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG"; \
 		if docker manifest inspect $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG > /dev/null 2>&1; then \
 			echo "$$IMAGE_TAG exists in repository, skipping build.."; \
 		else \
 			echo "$$IMAGE_TAG doesn't exist in repository"; \
-			LATEST_IMAGE_TAG=$(GIT_TAG)-go-$$GO_VERSION-latest; \
+			LATEST_IMAGE_TAG=$(GIT_TAG)-go-$$GO_VERSION-latest.al$(AL_TAG_LATEST); \
 			IMAGES=$(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG,$(IMAGE_REPO)/$(IMAGE_NAME):$$LATEST_IMAGE_TAG; \
 			$(MAKE) build-multi-arch-images GO_VERSION=$$GO_VERSION IMAGES=$$IMAGES; \
 		fi; \
