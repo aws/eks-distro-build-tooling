@@ -28,7 +28,7 @@ GOLANG_ARCHIVE_PATH=$(GO_VERSION_DIRECTORY)/archives/$(GOOS)/$(ARCH_LOWER)/$(GO_
 ARCHITECTURES="amd64" "arm64"
 
 AL_TAG?=2
-# Remove 20 from 2023 for latest image tags
+# Strip 20 from 2023 for latest image tags
 AL_TAG_LATEST=$(subst 20,,$(AL_TAG))
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base
