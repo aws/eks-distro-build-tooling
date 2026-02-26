@@ -5031,7 +5031,7 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Installtid
 -rw-r--r--   8.0KiB /var/lib/rpm/Name
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
--rw-r--r--   3.0MiB /var/lib/rpm/Packages
+-rw-r--r--   3.1MiB /var/lib/rpm/Packages
 -rw-r--r--    28KiB /var/lib/rpm/Providename
 -rw-r--r--    20KiB /var/lib/rpm/Requirename
 -rw-r--r--   8.0KiB /var/lib/rpm/Sha1header
