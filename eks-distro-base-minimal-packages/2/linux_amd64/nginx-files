@@ -244,9 +244,9 @@
 -rw-r--r--     653B /usr/lib/systemd/system/nginx.service
 -rw-r--r--      34B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--      65B /usr/lib64/.libcrypto.so.1.0.2k.hmac
--rw-r--r--      65B /usr/lib64/.libcrypto.so.1.1.1zd.hmac
+-rw-r--r--      65B /usr/lib64/.libcrypto.so.1.1.1zf.hmac
 -rw-r--r--      65B /usr/lib64/.libssl.so.1.0.2k.hmac
--rw-r--r--      65B /usr/lib64/.libssl.so.1.1.1zd.hmac
+-rw-r--r--      65B /usr/lib64/.libssl.so.1.1.1zf.hmac
 -rwxr-xr-x    14KiB /usr/lib64/audit/sotruss-lib.so
 -rwxr-xr-x    20KiB /usr/lib64/engines-1.1/afalg.so
 -rwxr-xr-x   6.6KiB /usr/lib64/engines-1.1/capi.so
@@ -518,7 +518,7 @@
 -rwxr-xr-x   193KiB /usr/lib64/libcidn-2.26.so
 -rwxr-xr-x    41KiB /usr/lib64/libcrypt-2.26.so
 -rwxr-xr-x   2.4MiB /usr/lib64/libcrypto.so.1.0.2k
--rwxr-xr-x   2.9MiB /usr/lib64/libcrypto.so.1.1.1zd
+-rwxr-xr-x   2.9MiB /usr/lib64/libcrypto.so.1.1.1zf
 -rwxr-xr-x    19KiB /usr/lib64/libdl-2.26.so
 -rwxr-xr-x    63KiB /usr/lib64/libform.so.6.0
 -rwxr-xr-x    71KiB /usr/lib64/libformw.so.6.0
@@ -553,7 +553,7 @@
 -rwxr-xr-x    43KiB /usr/lib64/librt-2.26.so
 -rwxr-xr-x   153KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   613KiB /usr/lib64/libsepol.so.1
--rwxr-xr-x   576KiB /usr/lib64/libssl.so.1.1.1zd
+-rwxr-xr-x   576KiB /usr/lib64/libssl.so.1.1.1zf
 -rwxr-xr-x   1.5MiB /usr/lib64/libstdc++.so.6.0.24
 -rwxr-xr-x   291KiB /usr/lib64/libtcmalloc.so.4.4.5
 -rwxr-xr-x   315KiB /usr/lib64/libtcmalloc_and_profiler.so.4.4.5
@@ -602,7 +602,7 @@
 -rw-r--r--    35KiB /usr/share/doc/gettext-0.19.8.1/COPYING
 -rw-r--r--    26KiB /usr/share/doc/gettext-0.19.8.1/COPYING.LIB
 -rw-r--r--   2.5KiB /usr/share/doc/libcap-2.54/capability.notes
--rw-r--r--   3.4KiB /usr/share/doc/nginx-1.28.1/UPGRADE-NOTES-1.6-to-1.10
+-rw-r--r--   3.4KiB /usr/share/doc/nginx-1.28.2/UPGRADE-NOTES-1.6-to-1.10
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -640,9 +640,9 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libgcc-7.3.1/COPYING3.LIB
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--   1.4KiB /usr/share/licenses/ncurses-base-6.0/COPYING
--rw-r--r--   1.3KiB /usr/share/licenses/nginx-core-1.28.1/LICENSE
+-rw-r--r--   1.3KiB /usr/share/licenses/nginx-core-1.28.2/LICENSE
 -rw-r--r--   6.2KiB /usr/share/licenses/openssl-libs-1.0.2k/LICENSE
--rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1zd/LICENSE
+-rw-r--r--   6.0KiB /usr/share/licenses/openssl11-libs-1.1.1zf/LICENSE
 -rw-r--r--      97B /usr/share/licenses/pcre2-10.23/COPYING
 -rw-r--r--   2.9KiB /usr/share/licenses/pcre2-10.23/LICENCE
 -rw-r--r--   1.3KiB /usr/share/locale/af/LC_MESSAGES/bash.mo
@@ -2741,9 +2741,9 @@ lrwxrwxrwx       7B /usr/lib/debug/bin	usr/bin
 lrwxrwxrwx       7B /usr/lib/debug/lib	usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64	usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin	usr/sbin
-lrwxrwxrwx      26B /usr/lib64/.libcrypto.so.1.1.hmac	.libcrypto.so.1.1.1zd.hmac
+lrwxrwxrwx      26B /usr/lib64/.libcrypto.so.1.1.hmac	.libcrypto.so.1.1.1zf.hmac
 lrwxrwxrwx      25B /usr/lib64/.libcrypto.so.10.hmac	.libcrypto.so.1.0.2k.hmac
-lrwxrwxrwx      23B /usr/lib64/.libssl.so.1.1.hmac	.libssl.so.1.1.1zd.hmac
+lrwxrwxrwx      23B /usr/lib64/.libssl.so.1.1.hmac	.libssl.so.1.1.1zf.hmac
 lrwxrwxrwx      22B /usr/lib64/.libssl.so.10.hmac	.libssl.so.1.0.2k.hmac
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-x86-64.so.2	ld-2.26.so
@@ -2755,7 +2755,7 @@ lrwxrwxrwx      12B /usr/lib64/libc.so.6	libc-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2	libcap.so.2.54
 lrwxrwxrwx      15B /usr/lib64/libcidn.so.1	libcidn-2.26.so
 lrwxrwxrwx      16B /usr/lib64/libcrypt.so.1	libcrypt-2.26.so
-lrwxrwxrwx      20B /usr/lib64/libcrypto.so.1.1	libcrypto.so.1.1.1zd
+lrwxrwxrwx      20B /usr/lib64/libcrypto.so.1.1	libcrypto.so.1.1.1zf
 lrwxrwxrwx      19B /usr/lib64/libcrypto.so.10	libcrypto.so.1.0.2k
 lrwxrwxrwx      13B /usr/lib64/libdl.so.2	libdl-2.26.so
 lrwxrwxrwx      14B /usr/lib64/libform.so.6	libform.so.6.0
@@ -2787,7 +2787,7 @@ lrwxrwxrwx      14B /usr/lib64/libpsx.so.2	libpsx.so.2.54
 lrwxrwxrwx      18B /usr/lib64/libpthread.so.0	libpthread-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libresolv.so.2	libresolv-2.26.so
 lrwxrwxrwx      13B /usr/lib64/librt.so.1	librt-2.26.so
-lrwxrwxrwx      17B /usr/lib64/libssl.so.1.1	libssl.so.1.1.1zd
+lrwxrwxrwx      17B /usr/lib64/libssl.so.1.1	libssl.so.1.1.1zf
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6	libstdc++.so.6.0.24
 lrwxrwxrwx      20B /usr/lib64/libtcmalloc.so.4	libtcmalloc.so.4.4.5
 lrwxrwxrwx      33B /usr/lib64/libtcmalloc_and_profiler.so.4	libtcmalloc_and_profiler.so.4.4.5

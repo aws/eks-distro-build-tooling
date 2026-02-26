@@ -1,4 +1,5 @@
 
-kernel-headers.x86_64
-libxml2.x86_64
-python3-pip.noarch
+curl.x86_64
+expat.x86_64
+libcurl.x86_64
+openssl-libs.x86_64
