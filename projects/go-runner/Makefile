@@ -90,11 +90,6 @@ fix-licenses:
 	build/generate_attribution.sh $(PROJECT_DIRECTORY)/$(RELEASE_BRANCH) $(GO_VERSION)
 
 
-.PHONY: setup-permissions
-setup-permissions:
-	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(IMAGE_REPO)
-
-
 .PHONY: images
 images: buildkit-check
 	$(BASE_DIRECTORY)/scripts/buildkit.sh \
@@ -130,7 +125,7 @@ buildkit-check:
 
 
 .PHONY: release
-release: setup-permissions process-go-versions clean
+release: process-go-versions clean
 
 
 .PHONY: clean
