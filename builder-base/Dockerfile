@@ -441,6 +441,24 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_golang.sh $GOLANG_VERSION_125 && \
     /remove_yum_packages.sh
 
+FROM ${BUILDER_IMAGE} as golang-1.26
+ARG TARGETARCH
+ARG GOLANG_VERSION_126
+ARG GOLANG_RPM_SOURCE_DIR
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+
+COPY --link --from=upx  /upx /
+COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
+    ./scripts/install_golang.sh /
+COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.26*.tar.gz /tmp/linux/arm64/
+COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.26*.tar.gz /tmp/linux/amd64/
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    /install_base_yum_packages.sh && \
+    /install_golang.sh $GOLANG_VERSION_126 && \
+    /remove_yum_packages.sh
+
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
@@ -625,6 +643,22 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_licenses.sh
 
+FROM ${BUILDER_IMAGE} as go-licenses-1.26
+ARG TARGETARCH
+ARG GOPROXY
+ARG GO_LICENSES_VERSION
+ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
+WORKDIR /workdir
+ENV GOPATH /go
+ENV PATH="/go/bin/:$PATH"
+COPY --link --from=upx  /upx /
+COPY --link --from=golang-1.26 /golang-1.26 /
+COPY ./scripts/common_vars.sh \
+    ./scripts/install_go_licenses.sh /
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+    --mount=type=secret,id=netrc,target=/root/.netrc \
+    /install_go_licenses.sh
+
 FROM ${BUILDER_IMAGE} as go-vuln-check
 ARG TARGETARCH
 ARG GOPROXY
@@ -684,6 +718,8 @@ COPY --link --from=golang-1.24 /golang-1.24 /
 COPY --link --from=go-licenses-1.24 /go-licenses-1.24 /
 COPY --link --from=golang-1.25 /golang-1.25 /
 COPY --link --from=go-licenses-1.25 /go-licenses-1.25 /
+COPY --link --from=golang-1.26 /golang-1.26 /
+COPY --link --from=go-licenses-1.26 /go-licenses-1.26 /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
 COPY --link --from=golang-1.20 /golang-1.20 /

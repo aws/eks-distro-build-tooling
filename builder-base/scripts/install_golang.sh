@@ -64,7 +64,11 @@ function build::go::extract {
 
   # go stopped building addr2line, doc, objdump, pprof, and trace by default starting with 1.25 so building them here
   if [[ "$major_version" -eq 1 && "$minor_version" -ge 25 ]]; then
-      local binaries=("addr2line" "doc" "objdump" "pprof" "trace")
+      local binaries=("addr2line" "objdump" "pprof" "trace")
+      # cmd/doc was removed in Go 1.26: https://go.dev/doc/go1.26#tools
+      if [[ "$minor_version" -lt 26 ]]; then
+          binaries+=("doc")
+      fi
       pushd /tmp/go-extracted/go/
       for binary in "${binaries[@]}"; do
         bin/go build -o "pkg/tool/linux_$TARGETARCH/$binary" "./src/cmd/$binary"
@@ -147,4 +151,9 @@ mv ${GOPATH} ${NEWROOT}/${GOPATH}
 #   process, then using the compressed version will require more RAM and/or
 #   swap space.  So, shell programs (bash, csh, etc.)  and ``make''
 #   might not be good candidates for compression.
-time upx --best --no-lzma ${NEWROOT}/root/sdk/go${VERSION%-*}/bin/go ${NEWROOT}/root/sdk/go${VERSION%-*}/pkg/tool/linux_$TARGETARCH/{addr2line,asm,cgo,cover,doc,objdump,pprof,trace,vet}
+UPX_TOOLS=(addr2line asm cgo cover objdump pprof trace vet)
+MINOR=$(echo "${VERSION%-*}" | cut -d. -f2)
+if [[ "$MINOR" -lt 26 ]]; then
+  UPX_TOOLS+=(doc)
+fi
+time upx --best --no-lzma ${NEWROOT}/root/sdk/go${VERSION%-*}/bin/go $(printf "${NEWROOT}/root/sdk/go${VERSION%-*}/pkg/tool/linux_$TARGETARCH/%s " "${UPX_TOOLS[@]}")
