@@ -1,15 +1,7 @@
 
 amazon-linux-repo-cdn.noarch
-containerd.x86_64
-coreutils.x86_64
-coreutils-common.x86_64
-curl.x86_64
-expat.x86_64
-gnupg2.x86_64
 kernel6.12-libbpf.x86_64
-libcurl.x86_64
-openssl-libs.x86_64
-publicsuffix-list-dafsa.noarch
-runc.x86_64
+libssh.x86_64
+libssh-config.noarch
+libxml2.x86_64
 system-release.noarch
-zlib.x86_64

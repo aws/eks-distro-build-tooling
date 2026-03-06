@@ -1380,7 +1380,7 @@
 -rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x    16KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   230KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   419KiB /usr/lib64/libbpf.so.1.5.0
+-rwxr-xr-x   439KiB /usr/lib64/libbpf.so.1.7.0
 -rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -8434,7 +8434,7 @@ lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      24B /usr/lib64/libbasicobjects.so.0 libbasicobjects.so.0.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
-lrwxrwxrwx      15B /usr/lib64/libbpf.so.1 libbpf.so.1.5.0
+lrwxrwxrwx      15B /usr/lib64/libbpf.so.1 libbpf.so.1.7.0
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9
