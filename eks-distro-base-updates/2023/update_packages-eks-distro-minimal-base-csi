@@ -1,8 +1,4 @@
 
 amazon-linux-repo-cdn.noarch
-coreutils.x86_64
-coreutils-common.x86_64
-expat.x86_64
-openssl-libs.x86_64
+libxml2.x86_64
 system-release.noarch
-zlib.x86_64
