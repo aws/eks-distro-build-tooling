@@ -3,10 +3,10 @@ AWS_REGION?=us-west-2
 
 IMAGE_TAG?=$(shell cat IMAGE_TAG)
 
-BASE_IMAGE_REPO?=gcr.io
+BASE_IMAGE_REPO?=us-docker.pkg.dev/k8s-infra-prow/images
 
 BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(IMAGE_TAG)
-BASE_IMAGE_NAME?=k8s-prow/$(IMAGE_NAME:prow-%=%)
+BASE_IMAGE_NAME?=$(IMAGE_NAME:prow-%=%)
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
@@ -24,9 +24,9 @@ LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/build)
 IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/push)
 
 
-prow-controller-manager/images/%: BASE_IMAGE_NAME=k8s-prow/prow-controller-manager
+prow-controller-manager/images/%: BASE_IMAGE_NAME=prow-controller-manager
 
-prow-statusreconciler/images/%: BASE_IMAGE_NAME=k8s-prow/status-reconciler
+prow-statusreconciler/images/%: BASE_IMAGE_NAME=status-reconciler
 
 prow-deck/images/%: DOCKERFILE_FOLDER=./docker/linux/deck
 
