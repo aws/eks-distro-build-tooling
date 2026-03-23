@@ -33,9 +33,6 @@ for chart in *; do
   if [ $chart = "prow-control-plane" ]; then
     DIFF_CHECK_TARGETS="$GIT_REPO_ROOT/helm-charts/patches/prow-control-plane $DIFF_CHECK_TARGETS"
   fi
-  if [ $chart = "amazon-eks-pod-identity-webhook" ]; then
-    DIFF_CHECK_TARGETS="$chart/config $DIFF_CHECK_TARGETS"
-  fi
   CHART_EXISTED=$(git ls-tree -r ${PREV_RELEASE_HASH} --name-only | grep -c ${chart}/Chart.yaml || true)
   if [ $CHART_EXISTED -eq 0 ]; then
     echo "✅ This is the first release of chart $chart, nothing to compare"
@@ -47,9 +44,6 @@ for chart in *; do
     TEMPLATES_CHANGED=false
     if [ "${CURR_VERSION}" = "${PREV_VERSION}" ]; then
       FILES_TO_CHECK="$chart/templates/* $chart/values.yaml"
-      if [ $chart = "amazon-eks-pod-identity-webhook" ]; then
-        FILES_TO_CHECK="$chart/config/* $FILES_TO_CHECK"
-      fi
       for file in $FILES_TO_CHECK; do
         CHANGED_LINES=$(git show -U0 $file | grep '^[+-]' | grep -Ev '^(--- a/|\+\+\+ b/|\+#|-#|\+$)' || true)
         if [ "$CHANGED_LINES" != "" ]; then
