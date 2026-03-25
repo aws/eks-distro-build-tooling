@@ -1,11 +1,12 @@
 IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
-IMAGE_NAME?=athens
+IMAGE_NAME?=external-dns
 IMAGE_TAG?=$(shell cat IMAGE_TAG)
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(IMAGE_TAG)
 
-BASE_IMAGE_REPO?=docker.io/gomods
-BASE_IMAGE_NAME?=athens
-BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(IMAGE_TAG)
+BASE_IMAGE_TAG?=$(shell cat IMAGE_TAG)
+BASE_IMAGE_REPO?=registry.k8s.io/external-dns
+BASE_IMAGE_NAME?=external-dns
+BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
 
 MAKE_ROOT=$(shell cd "$(shell dirname "${BASH_SOURCE[0]}")" && pwd -P)
 

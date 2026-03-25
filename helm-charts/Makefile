@@ -13,7 +13,10 @@ verify: install-toolchain prepare-prow-control-plane
 	${CHART_ROOT}/scripts/lint-charts.sh ${STABLE}
 	${CHART_ROOT}/scripts/verify-version.sh ${STABLE}
 
-publish: prepare-prow-control-plane
+prepare-upstream:
+	${CHART_ROOT}/scripts/prepare-upstream.sh
+
+publish: prepare-prow-control-plane prepare-upstream
 	${CHART_ROOT}/scripts/publish-charts.sh ${STABLE}
 
 release: install-toolchain publish
