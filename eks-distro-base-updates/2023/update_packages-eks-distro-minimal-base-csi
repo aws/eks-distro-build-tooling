@@ -1,4 +1,5 @@
 
 amazon-linux-repo-cdn.noarch
-libxml2.x86_64
+ncurses-base.noarch
+ncurses-libs.x86_64
 system-release.noarch
