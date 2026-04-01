@@ -285,24 +285,24 @@
 -rwxr-xr-x   198KiB /usr/lib64/libe2p.so.2.3
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   523KiB /usr/lib64/libext2fs.so.2.4
--rwxr-xr-x   199KiB /usr/lib64/libform.so.6.2
--rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.2
+-rwxr-xr-x   199KiB /usr/lib64/libform.so.6.6
+-rwxr-xr-x   199KiB /usr/lib64/libformw.so.6.6
 -rwxr-xr-x   262KiB /usr/lib64/libgcc_s-14-20250110.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libinih.so.0
 -rwxr-xr-x   660KiB /usr/lib64/libm.so.6
 -rwxr-xr-x   196KiB /usr/lib64/libmemusage.so
--rwxr-xr-x   197KiB /usr/lib64/libmenu.so.6.2
--rwxr-xr-x   197KiB /usr/lib64/libmenuw.so.6.2
+-rwxr-xr-x   197KiB /usr/lib64/libmenu.so.6.6
+-rwxr-xr-x   197KiB /usr/lib64/libmenuw.so.6.6
 -rwxr-xr-x   330KiB /usr/lib64/libmount.so.1.1.0
--rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.2
--rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.2
+-rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.6
+-rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.6
 -rwxr-xr-x   197KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
 -rwxr-xr-x   262KiB /usr/lib64/libnss_myhostname.so.2
 -rwxr-xr-x   262KiB /usr/lib64/libnss_resolve.so.2
--rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.2
--rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.2
+-rwxr-xr-x   196KiB /usr/lib64/libpanel.so.6.6
+-rwxr-xr-x   196KiB /usr/lib64/libpanelw.so.6.6
 -rwxr-xr-x   196KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   519KiB /usr/lib64/libpcre.so.1.2.12
 -rwxr-xr-x   647KiB /usr/lib64/libpcre2-8.so.0.11.0
@@ -316,8 +316,8 @@
 -rwxr-xr-x   199KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
--rwxr-xr-x   197KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   264KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x   196KiB /usr/lib64/libtic.so.6.6
+-rwxr-xr-x   327KiB /usr/lib64/libtinfo.so.6.6
 -rwxr-xr-x   264KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   197KiB /usr/lib64/liburcu-bp.so.6.1.0
 -rwxr-xr-x   197KiB /usr/lib64/liburcu-cds.so.6.1.0
@@ -2530,24 +2530,24 @@ lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      13B /usr/lib64/libe2p.so.2 libe2p.so.2.3
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
-lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
+lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.6
 lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-14-20250110.so.1
-lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.2
+lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.6
 lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
-lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
-lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.2
-lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.2
+lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.6
+lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.6
+lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.6
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
 lrwxrwxrwx      20B /usr/lib64/libpcre2-8.so.0 libpcre2-8.so.0.11.0
 lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
-lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
+lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.6
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.5
 lrwxrwxrwx      19B /usr/lib64/liburcu-bp.so.6 liburcu-bp.so.6.1.0
 lrwxrwxrwx      20B /usr/lib64/liburcu-cds.so.6 liburcu-cds.so.6.1.0

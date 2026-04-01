@@ -2,4 +2,6 @@
 amazon-linux-repo-cdn.noarch
 libssh.x86_64
 libssh-config.noarch
+ncurses-base.noarch
+ncurses-libs.x86_64
 system-release.noarch

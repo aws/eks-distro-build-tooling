@@ -1418,8 +1418,8 @@
 -rwxr-xr-x   451KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   335KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
--rwxr-xr-x    75KiB /usr/lib64/libform.so.6.2
--rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.2
+-rwxr-xr-x    75KiB /usr/lib64/libform.so.6.6
+-rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.6
 -rwxr-xr-x   187KiB /usr/lib64/libgcc_s-14-20250110.so.1
 -rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.2
 -rwxr-xr-x    65KiB /usr/lib64/libgdbm.so.6.0.0
@@ -1480,8 +1480,8 @@
 -rwxr-xr-x   179KiB /usr/lib64/libmagic.so.1.0.0
 -rwxr-xr-x    33KiB /usr/lib64/libmana.so.1.0.48.0
 -rwxr-xr-x    20KiB /usr/lib64/libmemusage.so
--rwxr-xr-x    41KiB /usr/lib64/libmenu.so.6.2
--rwxr-xr-x    41KiB /usr/lib64/libmenuw.so.6.2
+-rwxr-xr-x    41KiB /usr/lib64/libmenu.so.6.6
+-rwxr-xr-x    41KiB /usr/lib64/libmenuw.so.6.6
 -rwxr-xr-x    57KiB /usr/lib64/libmlx4.so.1.0.48.0
 -rwxr-xr-x   476KiB /usr/lib64/libmlx5.so.1.24.48.0
 -rwxr-xr-x    28KiB /usr/lib64/libmnl.so.0.2.0
@@ -1489,8 +1489,8 @@
 -rwxr-xr-x   282KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   718KiB /usr/lib64/libmpfr.so.6.1.0
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
--rwxr-xr-x   185KiB /usr/lib64/libncurses.so.6.2
--rwxr-xr-x   254KiB /usr/lib64/libncursesw.so.6.2
+-rwxr-xr-x   184KiB /usr/lib64/libncurses.so.6.6
+-rwxr-xr-x   261KiB /usr/lib64/libncursesw.so.6.6
 -rwxr-xr-x   123KiB /usr/lib64/libnetfilter_conntrack.so.3.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libnetfilter_cthelper.so.0.0.0
 -rwxr-xr-x    24KiB /usr/lib64/libnetfilter_cttimeout.so.1.0.0
@@ -1523,8 +1523,8 @@
 -rwxr-xr-x    69KiB /usr/lib64/libpam.so.0.85.1
 -rwxr-xr-x    24KiB /usr/lib64/libpam_misc.so.0.82.1
 -rwxr-xr-x    24KiB /usr/lib64/libpamc.so.0.82.1
--rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.2
--rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.2
+-rwxr-xr-x    20KiB /usr/lib64/libpanel.so.6.6
+-rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.6
 -rwxr-xr-x    20KiB /usr/lib64/libpath_utils.so.1.0.1
 -rwxr-xr-x   313KiB /usr/lib64/libpcap.so.1.10.1
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
@@ -1566,8 +1566,8 @@
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
--rwxr-xr-x    73KiB /usr/lib64/libtic.so.6.2
--rwxr-xr-x   192KiB /usr/lib64/libtinfo.so.6.2
+-rwxr-xr-x    76KiB /usr/lib64/libtic.so.6.6
+-rwxr-xr-x   223KiB /usr/lib64/libtinfo.so.6.6
 -rwxr-xr-x   193KiB /usr/lib64/libtirpc.so.3.0.0
 -rwxr-xr-x   200KiB /usr/lib64/libudev.so.1.7.5
 -rwxr-xr-x   1.6MiB /usr/lib64/libunistring.so.2.1.0
@@ -8466,8 +8466,8 @@ lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
-lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.2
+lrwxrwxrwx      14B /usr/lib64/libform.so.6 libform.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libformw.so.6 libformw.so.6.6
 lrwxrwxrwx      25B /usr/lib64/libgcc_s.so.1 libgcc_s-14-20250110.so.1
 lrwxrwxrwx      19B /usr/lib64/libgcrypt.so.20 libgcrypt.so.20.4.2
 lrwxrwxrwx      16B /usr/lib64/libgdbm.so.6 libgdbm.so.6.0.0
@@ -8515,16 +8515,16 @@ lrwxrwxrwx      15B /usr/lib64/liblz4.so.1 liblz4.so.1.9.4
 lrwxrwxrwx      16B /usr/lib64/liblzma.so.5 liblzma.so.5.2.5
 lrwxrwxrwx      17B /usr/lib64/libmagic.so.1 libmagic.so.1.0.0
 lrwxrwxrwx      19B /usr/lib64/libmana.so.1 libmana.so.1.0.48.0
-lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.2
+lrwxrwxrwx      14B /usr/lib64/libmenu.so.6 libmenu.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6 libmenuw.so.6.6
 lrwxrwxrwx      19B /usr/lib64/libmlx4.so.1 libmlx4.so.1.0.48.0
 lrwxrwxrwx      20B /usr/lib64/libmlx5.so.1 libmlx5.so.1.24.48.0
 lrwxrwxrwx      15B /usr/lib64/libmnl.so.0 libmnl.so.0.2.0
 lrwxrwxrwx      21B /usr/lib64/libmodulemd.so.2 libmodulemd.so.2.13.0
 lrwxrwxrwx      17B /usr/lib64/libmount.so.1 libmount.so.1.1.0
 lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
-lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.2
-lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.2
+lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.6
+lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.6
 lrwxrwxrwx      31B /usr/lib64/libnetfilter_conntrack.so.3 libnetfilter_conntrack.so.3.7.0
 lrwxrwxrwx      30B /usr/lib64/libnetfilter_cthelper.so.0 libnetfilter_cthelper.so.0.0.0
 lrwxrwxrwx      31B /usr/lib64/libnetfilter_cttimeout.so.1 libnetfilter_cttimeout.so.1.0.0
@@ -8548,8 +8548,8 @@ lrwxrwxrwx      19B /usr/lib64/libp11-kit.so.0 libp11-kit.so.0.3.0
 lrwxrwxrwx      16B /usr/lib64/libpam.so.0 libpam.so.0.85.1
 lrwxrwxrwx      21B /usr/lib64/libpam_misc.so.0 libpam_misc.so.0.82.1
 lrwxrwxrwx      17B /usr/lib64/libpamc.so.0 libpamc.so.0.82.1
-lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.2
-lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.2
+lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.6
+lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.6
 lrwxrwxrwx      22B /usr/lib64/libpath_utils.so.1 libpath_utils.so.1.0.1
 lrwxrwxrwx      17B /usr/lib64/libpcap.so.1 libpcap.so.1.10.1
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
@@ -8580,8 +8580,8 @@ lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.2.2
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3
-lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.2
-lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.2
+lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
+lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.6
 lrwxrwxrwx      17B /usr/lib64/libtirpc.so.3 libtirpc.so.3.0.0
 lrwxrwxrwx      16B /usr/lib64/libudev.so.1 libudev.so.1.7.5
 lrwxrwxrwx      21B /usr/lib64/libunistring.so.2 libunistring.so.2.1.0
