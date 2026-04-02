@@ -1,4 +1,5 @@
 
 amazon-linux-repo-cdn.noarch
-ncurses-libs.x86_64
+openssl-libs.x86_64
 system-release.noarch
+tzdata.noarch

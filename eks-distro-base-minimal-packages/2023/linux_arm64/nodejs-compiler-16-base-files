@@ -27,7 +27,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   4.6KiB /etc/ld.so.cache
+-rw-r--r--   4.7KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     178B /etc/libssh/libssh_client.config
 -rw-r--r--      99B /etc/libssh/libssh_server.config
@@ -3216,7 +3216,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   4.5MiB /usr/lib64/libcrypto.so.3.2.2
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.5
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
@@ -3258,6 +3258,9 @@
 -rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.6
 -rwxr-xr-x   329KiB /usr/lib64/libncursesw.so.6.6
 -rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.26.0
+-rwxr-xr-x   268KiB /usr/lib64/libnghttp3.so.9.6.1
+-rwxr-xr-x   391KiB /usr/lib64/libngtcp2.so.16.7.4
+-rwxr-xr-x   196KiB /usr/lib64/libngtcp2_crypto_ossl.so.0.1.1
 -rwxr-xr-x   197KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_dns.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libnss_files.so.2
@@ -3282,7 +3285,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   262KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.2.2
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.5
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libtic.so.6.6
@@ -3292,7 +3295,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
--rwxr-xr-x   1.3MiB /usr/lib64/ossl-modules/fips.so
+-rwxr-xr-x   1.7MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
@@ -3890,6 +3893,7 @@
 -rw-r--r--   8.6KiB /usr/share/licenses/libidn2/COPYING.unicode
 -rw-r--r--    18KiB /usr/share/licenses/libidn2/COPYINGv2
 -rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/libnghttp3/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libpsl/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libselinux/LICENSE
 -rw-r--r--    26KiB /usr/share/licenses/libsepol/COPYING
@@ -3908,6 +3912,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/mpfr/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/mpfr/COPYING.LESSER
 -rw-r--r--   1.5KiB /usr/share/licenses/ncurses-base/COPYING
+-rw-r--r--   1.1KiB /usr/share/licenses/ngtcp2/COPYING
 -rw-r--r--   2.3KiB /usr/share/licenses/openldap/COPYRIGHT
 -rw-r--r--   2.2KiB /usr/share/licenses/openldap/LICENSE
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
@@ -5817,7 +5822,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Glace_Bay
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Godthab
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/right/America/Goose_Bay
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Grand_Turk
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Grand_Turk
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Grenada
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Guadeloupe
 -rw-r--r--     830B /usr/share/zoneinfo/right/America/Guatemala
@@ -5827,7 +5832,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Havana
 -rw-r--r--     938B /usr/share/zoneinfo/right/America/Hermosillo
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indiana/Indianapolis
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Indiana/Knox
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Indiana/Knox
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/America/Indiana/Marengo
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Indiana/Petersburg
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Indiana/Tell_City
@@ -5842,11 +5847,11 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Juneau
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Kentucky/Louisville
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Kentucky/Monticello
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/Knox_IN
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/America/Knox_IN
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Kralendijk
 -rw-r--r--     766B /usr/share/zoneinfo/right/America/La_Paz
 -rw-r--r--     940B /usr/share/zoneinfo/right/America/Lima
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Los_Angeles
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/America/Los_Angeles
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Louisville
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Lower_Princes
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/America/Maceio
@@ -5854,12 +5859,12 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/America/Manaus
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Marigot
 -rw-r--r--     782B /usr/share/zoneinfo/right/America/Martinique
--rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Matamoros
+-rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Matamoros
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Mazatlan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Mendoza
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/America/Menominee
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Merida
--rw-r--r--   1.6KiB /usr/share/zoneinfo/right/America/Metlakatla
+-rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Metlakatla
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/America/Mexico_City
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/America/Miquelon
 -rw-r--r--   3.3KiB /usr/share/zoneinfo/right/America/Moncton
@@ -5876,7 +5881,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/North_Dakota/Center
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/America/North_Dakota/New_Salem
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/America/Nuuk
--rw-r--r--   1.7KiB /usr/share/zoneinfo/right/America/Ojinaga
+-rw-r--r--   1.8KiB /usr/share/zoneinfo/right/America/Ojinaga
 -rw-r--r--     732B /usr/share/zoneinfo/right/America/Panama
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/America/Pangnirtung
 -rw-r--r--     796B /usr/share/zoneinfo/right/America/Paramaribo
@@ -5966,7 +5971,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Asia/Famagusta
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Gaza
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Asia/Harbin
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Asia/Hebron
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Asia/Hebron
 -rw-r--r--     884B /usr/share/zoneinfo/right/Asia/Ho_Chi_Minh
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Asia/Hong_Kong
 -rw-r--r--   1.4KiB /usr/share/zoneinfo/right/Asia/Hovd
@@ -6040,7 +6045,7 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Atlantic/Faeroe
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Atlantic/Faroe
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Atlantic/Jan_Mayen
--rw-r--r--   3.5KiB /usr/share/zoneinfo/right/Atlantic/Madeira
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Atlantic/Madeira
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/Reykjavik
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/South_Georgia
 -rw-r--r--     698B /usr/share/zoneinfo/right/Atlantic/St_Helena
@@ -6054,9 +6059,9 @@
 -rw-r--r--     870B /usr/share/zoneinfo/right/Australia/Darwin
 -rw-r--r--     998B /usr/share/zoneinfo/right/Australia/Eucla
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Australia/Hobart
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Australia/LHI
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Australia/LHI
 -rw-r--r--    1022B /usr/share/zoneinfo/right/Australia/Lindeman
--rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Australia/Lord_Howe
+-rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Australia/Lord_Howe
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/Melbourne
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Australia/NSW
 -rw-r--r--     870B /usr/share/zoneinfo/right/Australia/North
@@ -6140,7 +6145,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Chisinau
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Copenhagen
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Europe/Dublin
--rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Gibraltar
+-rw-r--r--   3.3KiB /usr/share/zoneinfo/right/Europe/Gibraltar
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/right/Europe/Guernsey
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Helsinki
 -rw-r--r--   3.8KiB /usr/share/zoneinfo/right/Europe/Isle_of_Man
@@ -6158,11 +6163,11 @@
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Malta
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Mariehamn
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/Europe/Minsk
--rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Europe/Monaco
+-rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Monaco
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Moscow
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Europe/Nicosia
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Oslo
--rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Europe/Paris
+-rw-r--r--   3.2KiB /usr/share/zoneinfo/right/Europe/Paris
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Podgorica
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Prague
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Riga
@@ -6175,7 +6180,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Skopje
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Sofia
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/Europe/Stockholm
--rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Tallinn
+-rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Tallinn
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Tirane
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Europe/Tiraspol
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Ulyanovsk
@@ -6185,7 +6190,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Vienna
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Europe/Vilnius
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Europe/Volgograd
--rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Europe/Warsaw
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Europe/Warsaw
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Zagreb
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Europe/Zaporozhye
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/Europe/Zurich
@@ -6224,14 +6229,14 @@
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Mexico/BajaSur
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Mexico/General
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/NZ
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/NZ-CHAT
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/NZ-CHAT
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Navajo
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/PRC
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/PST8PDT
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/PST8PDT
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Pacific/Apia
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Pacific/Auckland
 -rw-r--r--     800B /usr/share/zoneinfo/right/Pacific/Bougainville
--rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Pacific/Chatham
+-rw-r--r--   2.3KiB /usr/share/zoneinfo/right/Pacific/Chatham
 -rw-r--r--     718B /usr/share/zoneinfo/right/Pacific/Chuuk
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/Pacific/Easter
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/Pacific/Efate
@@ -6272,7 +6277,7 @@
 -rw-r--r--     698B /usr/share/zoneinfo/right/Pacific/Wake
 -rw-r--r--     698B /usr/share/zoneinfo/right/Pacific/Wallis
 -rw-r--r--     718B /usr/share/zoneinfo/right/Pacific/Yap
--rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Poland
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Poland
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Portugal
 -rw-r--r--   1.3KiB /usr/share/zoneinfo/right/ROC
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/ROK
@@ -6286,10 +6291,10 @@
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/right/US/East-Indiana
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/US/Eastern
 -rw-r--r--     878B /usr/share/zoneinfo/right/US/Hawaii
--rw-r--r--   2.6KiB /usr/share/zoneinfo/right/US/Indiana-Starke
+-rw-r--r--   2.7KiB /usr/share/zoneinfo/right/US/Indiana-Starke
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/right/US/Michigan
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/US/Mountain
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/US/Pacific
+-rw-r--r--   3.1KiB /usr/share/zoneinfo/right/US/Pacific
 -rw-r--r--     724B /usr/share/zoneinfo/right/US/Samoa
 -rw-r--r--     664B /usr/share/zoneinfo/right/UTC
 -rw-r--r--     664B /usr/share/zoneinfo/right/Universal
@@ -6303,11 +6308,11 @@
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
--rw-------   5.9KiB /var/cache/ldconfig/aux-cache
+-rw-------   6.1KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--      37B /var/lib/alternatives/ld
 -rw-r--r--   116KiB /var/lib/dnf/history.sqlite
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
--rw-r--r--   2.3MiB /var/lib/dnf/history.sqlite-wal
+-rw-r--r--   2.4MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   2.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -6665,7 +6670,7 @@ lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcord.so.1 libcord.so.1.4.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.2.2
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so libctf-nobfd.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so.0 libctf-nobfd.so.0.0.0
 lrwxrwxrwx      15B /usr/lib64/libctf.so libctf.so.0.0.0
@@ -6707,6 +6712,9 @@ lrwxrwxrwx      16B /usr/lib64/libmpfr.so.6 libmpfr.so.6.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6 libncurses.so.6.6
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6 libncursesw.so.6.6
 lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14 libnghttp2.so.14.26.0
+lrwxrwxrwx      19B /usr/lib64/libnghttp3.so.9 libnghttp3.so.9.6.1
+lrwxrwxrwx      19B /usr/lib64/libngtcp2.so.16 libngtcp2.so.16.7.4
+lrwxrwxrwx      30B /usr/lib64/libngtcp2_crypto_ossl.so.0 libngtcp2_crypto_ossl.so.0.1.1
 lrwxrwxrwx      15B /usr/lib64/libpanel.so.6 libpanel.so.6.6
 lrwxrwxrwx      16B /usr/lib64/libpanelw.so.6 libpanelw.so.6.6
 lrwxrwxrwx      17B /usr/lib64/libpcre.so.1 libpcre.so.1.2.12
@@ -6724,7 +6732,7 @@ lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.2.2
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.6
