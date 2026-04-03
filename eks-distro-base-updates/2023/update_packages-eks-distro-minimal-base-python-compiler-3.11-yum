@@ -1,9 +1,11 @@
 
 amazon-linux-repo-cdn.noarch
-libssh.x86_64
-libssh-config.noarch
-ncurses-base.noarch
-ncurses-libs.x86_64
-python3.11.x86_64
-python3.11-libs.x86_64
+curl.x86_64
+gnutls.x86_64
+libcurl.x86_64
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+python3.11-pip.noarch
+python3.11-pip-wheel.noarch
 system-release.noarch
+tzdata.noarch
