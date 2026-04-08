@@ -1,8 +1,3 @@
 
 amazon-linux-repo-cdn.noarch
-curl-minimal.x86_64
-libcurl-minimal.x86_64
-openssl-fips-provider-latest.x86_64
-openssl-libs.x86_64
 system-release.noarch
-tzdata.noarch
