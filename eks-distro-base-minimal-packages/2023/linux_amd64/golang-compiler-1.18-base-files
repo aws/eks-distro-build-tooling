@@ -12820,7 +12820,7 @@
 -rwxr-xr-x   174KiB /usr/lib64/libmvec.so.1
 -rwxr-xr-x   184KiB /usr/lib64/libncurses.so.6.6
 -rwxr-xr-x   261KiB /usr/lib64/libncursesw.so.6.6
--rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.26.0
+-rwxr-xr-x   169KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   156KiB /usr/lib64/libnghttp3.so.9.6.1
 -rwxr-xr-x   299KiB /usr/lib64/libngtcp2.so.16.7.4
 -rwxr-xr-x    48KiB /usr/lib64/libngtcp2_crypto_ossl.so.0.1.1

@@ -1,3 +1,12 @@
 
 amazon-linux-repo-cdn.noarch
+kernel6.18-headers.x86_64
+libnghttp2.x86_64
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+python3.11.x86_64
+python3.11-libs.x86_64
+rust-toolset-srpm-macros.noarch
 system-release.noarch
