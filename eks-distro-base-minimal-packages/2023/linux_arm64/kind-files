@@ -1380,7 +1380,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libbasicobjects.so.0.1.0
 -rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   515KiB /usr/lib64/libbpf.so.1.7.0
+-rwxr-xr-x   523KiB /usr/lib64/libbpf.so.1.6.1
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -1503,7 +1503,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libnfsidmap/umich_ldap.so
 -rwxr-xr-x   978KiB /usr/lib64/libnftables.so.1.1.0
 -rwxr-xr-x   269KiB /usr/lib64/libnftnl.so.11.6.0
--rwxr-xr-x   262KiB /usr/lib64/libnghttp2.so.14.26.0
+-rwxr-xr-x   261KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   268KiB /usr/lib64/libnghttp3.so.9.6.1
 -rwxr-xr-x   391KiB /usr/lib64/libngtcp2.so.16.7.4
 -rwxr-xr-x   196KiB /usr/lib64/libngtcp2_crypto_ossl.so.0.1.1
@@ -2093,9 +2093,9 @@
 -rw-r--r--    20KiB /usr/lib64/python3.9/__pycache__/weakref.cpython-39.opt-1.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/weakref.cpython-39.opt-2.pyc
 -rw-r--r--    20KiB /usr/lib64/python3.9/__pycache__/weakref.cpython-39.pyc
--rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/webbrowser.cpython-39.opt-1.pyc
+-rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/webbrowser.cpython-39.opt-1.pyc
 -rw-r--r--    15KiB /usr/lib64/python3.9/__pycache__/webbrowser.cpython-39.opt-2.pyc
--rw-r--r--    17KiB /usr/lib64/python3.9/__pycache__/webbrowser.cpython-39.pyc
+-rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/webbrowser.cpython-39.pyc
 -rw-r--r--   8.1KiB /usr/lib64/python3.9/__pycache__/xdrlib.cpython-39.opt-1.pyc
 -rw-r--r--   7.6KiB /usr/lib64/python3.9/__pycache__/xdrlib.cpython-39.opt-2.pyc
 -rw-r--r--   8.1KiB /usr/lib64/python3.9/__pycache__/xdrlib.cpython-39.pyc
@@ -2598,7 +2598,7 @@
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/email/__pycache__/_encoded_words.cpython-39.opt-2.pyc
 -rw-r--r--   5.6KiB /usr/lib64/python3.9/email/__pycache__/_encoded_words.cpython-39.pyc
 -rw-r--r--    79KiB /usr/lib64/python3.9/email/__pycache__/_header_value_parser.cpython-39.opt-1.pyc
--rw-r--r--    62KiB /usr/lib64/python3.9/email/__pycache__/_header_value_parser.cpython-39.opt-2.pyc
+-rw-r--r--    63KiB /usr/lib64/python3.9/email/__pycache__/_header_value_parser.cpython-39.opt-2.pyc
 -rw-r--r--    79KiB /usr/lib64/python3.9/email/__pycache__/_header_value_parser.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/email/__pycache__/_parseaddr.cpython-39.opt-1.pyc
 -rw-r--r--   9.3KiB /usr/lib64/python3.9/email/__pycache__/_parseaddr.cpython-39.opt-2.pyc
@@ -2625,7 +2625,7 @@
 -rw-r--r--   8.7KiB /usr/lib64/python3.9/email/__pycache__/feedparser.cpython-39.opt-2.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/__pycache__/feedparser.cpython-39.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-1.pyc
--rw-r--r--   9.1KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-2.pyc
+-rw-r--r--   9.3KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.opt-2.pyc
 -rw-r--r--    13KiB /usr/lib64/python3.9/email/__pycache__/generator.cpython-39.pyc
 -rw-r--r--    17KiB /usr/lib64/python3.9/email/__pycache__/header.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/email/__pycache__/header.cpython-39.opt-2.pyc
@@ -3052,15 +3052,15 @@
 -rw-r--r--    53KiB /usr/lib64/python3.9/http/__pycache__/cookiejar.cpython-39.opt-1.pyc
 -rw-r--r--    37KiB /usr/lib64/python3.9/http/__pycache__/cookiejar.cpython-39.opt-2.pyc
 -rw-r--r--    53KiB /usr/lib64/python3.9/http/__pycache__/cookiejar.cpython-39.pyc
--rw-r--r--    15KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.opt-1.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.opt-2.pyc
--rw-r--r--    15KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.pyc
+-rw-r--r--    16KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.opt-1.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.opt-2.pyc
+-rw-r--r--    16KiB /usr/lib64/python3.9/http/__pycache__/cookies.cpython-39.pyc
 -rw-r--r--    35KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.opt-1.pyc
 -rw-r--r--    23KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.opt-2.pyc
 -rw-r--r--    35KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.pyc
 -rw-r--r--    56KiB /usr/lib64/python3.9/http/client.py
 -rw-r--r--    76KiB /usr/lib64/python3.9/http/cookiejar.py
--rw-r--r--    20KiB /usr/lib64/python3.9/http/cookies.py
+-rw-r--r--    21KiB /usr/lib64/python3.9/http/cookies.py
 -rw-r--r--    48KiB /usr/lib64/python3.9/http/server.py
 -rw-r--r--    54KiB /usr/lib64/python3.9/imaplib.py
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/imghdr.py
@@ -3909,7 +3909,7 @@
 -rw-r--r--   7.2KiB /usr/lib64/python3.9/urllib/__pycache__/robotparser.cpython-39.pyc
 -rw-r--r--   2.6KiB /usr/lib64/python3.9/urllib/error.py
 -rw-r--r--    44KiB /usr/lib64/python3.9/urllib/parse.py
--rw-r--r--    99KiB /usr/lib64/python3.9/urllib/request.py
+-rw-r--r--   100KiB /usr/lib64/python3.9/urllib/request.py
 -rw-r--r--   2.4KiB /usr/lib64/python3.9/urllib/response.py
 -rw-r--r--   9.3KiB /usr/lib64/python3.9/urllib/robotparser.py
 -rw-r--r--   7.2KiB /usr/lib64/python3.9/uu.py
@@ -3937,9 +3937,9 @@
 -rw-r--r--    16KiB /usr/lib64/python3.9/wsgiref/__pycache__/handlers.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/wsgiref/__pycache__/handlers.cpython-39.opt-2.pyc
 -rw-r--r--    16KiB /usr/lib64/python3.9/wsgiref/__pycache__/handlers.cpython-39.pyc
--rw-r--r--   7.6KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.opt-1.pyc
--rw-r--r--   4.4KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.opt-2.pyc
--rw-r--r--   7.6KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.pyc
+-rw-r--r--   7.7KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.opt-1.pyc
+-rw-r--r--   4.5KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.opt-2.pyc
+-rw-r--r--   7.7KiB /usr/lib64/python3.9/wsgiref/__pycache__/headers.cpython-39.pyc
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/wsgiref/__pycache__/simple_server.cpython-39.opt-1.pyc
 -rw-r--r--   4.5KiB /usr/lib64/python3.9/wsgiref/__pycache__/simple_server.cpython-39.opt-2.pyc
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/wsgiref/__pycache__/simple_server.cpython-39.pyc
@@ -3950,7 +3950,7 @@
 -rw-r--r--    11KiB /usr/lib64/python3.9/wsgiref/__pycache__/validate.cpython-39.opt-2.pyc
 -rw-r--r--    15KiB /usr/lib64/python3.9/wsgiref/__pycache__/validate.cpython-39.pyc
 -rw-r--r--    22KiB /usr/lib64/python3.9/wsgiref/handlers.py
--rw-r--r--   6.7KiB /usr/lib64/python3.9/wsgiref/headers.py
+-rw-r--r--   6.8KiB /usr/lib64/python3.9/wsgiref/headers.py
 -rw-r--r--   5.1KiB /usr/lib64/python3.9/wsgiref/simple_server.py
 -rw-r--r--   5.8KiB /usr/lib64/python3.9/wsgiref/util.py
 -rw-r--r--    15KiB /usr/lib64/python3.9/wsgiref/validate.py
@@ -4402,7 +4402,7 @@
 -rwxr-xr-x   199KiB /usr/sbin/rtacct
 -rwxr-xr-x   197KiB /usr/sbin/rtcwake
 -rwxr-xr-x   215KiB /usr/sbin/rtmon
--rwxr-xr-x    13MiB /usr/sbin/runc
+-rwxr-xr-x    12MiB /usr/sbin/runc
 -rwxr-xr-x   197KiB /usr/sbin/runuser
 -rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
@@ -7978,7 +7978,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.0MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--   232KiB /var/lib/systemd/catalog/database
@@ -8436,7 +8436,7 @@ lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      24B /usr/lib64/libbasicobjects.so.0 libbasicobjects.so.0.1.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
-lrwxrwxrwx      15B /usr/lib64/libbpf.so.1 libbpf.so.1.7.0
+lrwxrwxrwx      15B /usr/lib64/libbpf.so.1 libbpf.so.1.6.1
 lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
 lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9

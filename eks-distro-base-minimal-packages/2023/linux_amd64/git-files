@@ -379,7 +379,7 @@
 -rwxr-xr-x   184KiB /usr/lib64/libncurses.so.6.6
 -rwxr-xr-x   261KiB /usr/lib64/libncursesw.so.6.6
 -rwxr-xr-x   362KiB /usr/lib64/libnettle.so.8.10
--rwxr-xr-x   170KiB /usr/lib64/libnghttp2.so.14.26.0
+-rwxr-xr-x   169KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x    24KiB /usr/lib64/libnpth.so.0.1.2
 -rwxr-xr-x    45KiB /usr/lib64/libnss_compat.so.2
 -rwxr-xr-x    15KiB /usr/lib64/libnss_dns.so.2
