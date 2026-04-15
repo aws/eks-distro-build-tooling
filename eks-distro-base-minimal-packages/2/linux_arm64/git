@@ -23,7 +23,7 @@ libgcc-7.3.1-18.amzn2.aarch64
 libgcrypt-1.5.3-14.amzn2.0.3.aarch64
 libgpg-error-1.31-1.amzn2.0.1.aarch64
 libidn2-2.3.0-1.amzn2.0.3.aarch64
-libnghttp2-1.41.0-1.amzn2.0.5.aarch64
+libnghttp2-1.41.0-1.amzn2.0.6.aarch64
 libpsl-0.21.5-1.amzn2.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-10.amzn2.0.1.aarch64

@@ -1,2 +1,5 @@
 
-tzdata.noarch
+nginx.x86_64
+nginx-core.x86_64
+nginx-filesystem.noarch
+openssl11-libs.x86_64

@@ -1,4 +1,6 @@
 
+containerd.x86_64
+libnghttp2.x86_64
 python.x86_64
 python-libs.x86_64
-tzdata.noarch
+runc.x86_64
