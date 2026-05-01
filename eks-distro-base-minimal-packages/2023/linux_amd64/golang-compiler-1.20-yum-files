@@ -15057,7 +15057,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x   306KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    82KiB /usr/lib64/python3.9/lib-dynload/_elementtree.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/lib-dynload/_gdbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    72KiB /usr/lib64/python3.9/lib-dynload/_hashlib.cpython-39-x86_64-linux-gnu.so
@@ -15844,7 +15844,7 @@
 -rw-r--r--    20KiB /usr/lib64/python3.9/warnings.py
 -rw-r--r--    18KiB /usr/lib64/python3.9/wave.py
 -rw-r--r--    22KiB /usr/lib64/python3.9/weakref.py
--rwxr-xr-x    24KiB /usr/lib64/python3.9/webbrowser.py
+-rwxr-xr-x    25KiB /usr/lib64/python3.9/webbrowser.py
 -rw-r--r--     587B /usr/lib64/python3.9/wsgiref/__init__.py
 -rw-r--r--     726B /usr/lib64/python3.9/wsgiref/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     131B /usr/lib64/python3.9/wsgiref/__pycache__/__init__.cpython-39.opt-2.pyc
