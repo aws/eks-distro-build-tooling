@@ -1,14 +1,15 @@
 
 amazon-linux-repo-cdn.noarch
 containerd.x86_64
-kernel6.18-libbpf.x86_64
-libnghttp2.x86_64
-openssl-libs.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+gnupg2.x86_64
+libssh.x86_64
+libssh-config.noarch
+ngtcp2.x86_64
+ngtcp2-crypto-ossl.x86_64
 python3.x86_64
 python3-libs.x86_64
-runc.x86_64
-sudo.x86_64
+python3-pip-wheel.noarch
 system-release.noarch
-Obsoleting
-libbpf.x86_64
-kernel6.18-libbpf.x86_64

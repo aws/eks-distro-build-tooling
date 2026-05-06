@@ -19858,7 +19858,7 @@
 -rw-r--r--    20KiB /usr/lib64/python3.9/warnings.py
 -rw-r--r--    18KiB /usr/lib64/python3.9/wave.py
 -rw-r--r--    22KiB /usr/lib64/python3.9/weakref.py
--rwxr-xr-x    24KiB /usr/lib64/python3.9/webbrowser.py
+-rwxr-xr-x    25KiB /usr/lib64/python3.9/webbrowser.py
 -rw-r--r--     587B /usr/lib64/python3.9/wsgiref/__init__.py
 -rw-r--r--     726B /usr/lib64/python3.9/wsgiref/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     131B /usr/lib64/python3.9/wsgiref/__pycache__/__init__.cpython-39.opt-2.pyc
