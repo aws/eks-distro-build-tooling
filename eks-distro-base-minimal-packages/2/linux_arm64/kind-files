@@ -4536,7 +4536,7 @@
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-2.1.5/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-2.1.7/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
