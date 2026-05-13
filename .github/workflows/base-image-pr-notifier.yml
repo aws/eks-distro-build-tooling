@@ -2,6 +2,7 @@ name: baseimage-pr-notifier
 on:
   pull_request_target:
     types: [opened]
+permissions: {}
 jobs:
   baseimage-pr-notifier:
     runs-on: ubuntu-latest
