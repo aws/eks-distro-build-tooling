@@ -1555,6 +1555,7 @@
 -rw-r--r--   3.4KiB /usr/include/linux/sync_file.h
 -rw-r--r--   8.8KiB /usr/include/linux/synclink.h
 -rw-r--r--    26KiB /usr/include/linux/sysctl.h
+-rw-r--r--     383B /usr/include/linux/sysgenid.h
 -rw-r--r--   1.1KiB /usr/include/linux/sysinfo.h
 -rw-r--r--   4.6KiB /usr/include/linux/target_core_user.h
 -rw-r--r--   8.7KiB /usr/include/linux/taskstats.h
@@ -9453,7 +9454,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.6MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 
