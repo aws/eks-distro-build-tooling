@@ -1,4 +1,18 @@
 
 amazon-linux-repo-cdn.noarch
+curl.x86_64
+dnf.noarch
+dnf-data.noarch
 kernel6.18-headers.x86_64
+krb5-libs.x86_64
+libcurl.x86_64
+libdnf.x86_64
+libgcrypt.x86_64
+python3-dnf.noarch
+python3-hawkey.x86_64
+python3-libdnf.x86_64
+python3-pip-wheel.noarch
+rust-toolset-srpm-macros.noarch
 system-release.noarch
+tzdata.noarch
+yum.noarch

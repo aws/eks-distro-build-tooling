@@ -572,7 +572,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/America/Tortola
--rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Vancouver
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
@@ -736,7 +736,7 @@
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Canada/Eastern
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/Canada/Newfoundland
--rw-r--r--   2.9KiB /usr/share/zoneinfo/Canada/Pacific
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/Canada/Pacific
 -rw-r--r--     980B /usr/share/zoneinfo/Canada/Saskatchewan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/Canada/Yukon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Chile/Continental
@@ -1173,7 +1173,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Tortola
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Vancouver
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
@@ -1337,7 +1337,7 @@
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Canada/Eastern
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/posix/Canada/Newfoundland
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/Canada/Pacific
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/Canada/Pacific
 -rw-r--r--     980B /usr/share/zoneinfo/posix/Canada/Saskatchewan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/Canada/Yukon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Chile/Continental
