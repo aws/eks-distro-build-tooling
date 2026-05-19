@@ -762,8 +762,8 @@
 -rw-r--r--     581B /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/main.cpython-39.pyc
 -rw-r--r--   3.6KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/pyproject.cpython-39.opt-1.pyc
 -rw-r--r--   3.6KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/pyproject.cpython-39.pyc
--rw-r--r--   4.4KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-39.opt-1.pyc
--rw-r--r--   4.4KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-39.pyc
+-rw-r--r--   5.2KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-39.opt-1.pyc
+-rw-r--r--   5.2KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-39.pyc
 -rw-r--r--   8.8KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/wheel_builder.cpython-39.opt-1.pyc
 -rw-r--r--   8.9KiB /usr/lib/python3.9/site-packages/pip/_internal/__pycache__/wheel_builder.cpython-39.pyc
 -rw-r--r--   9.8KiB /usr/lib/python3.9/site-packages/pip/_internal/build_env.py
@@ -773,8 +773,8 @@
 -rw-r--r--     236B /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--   5.0KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/autocompletion.cpython-39.opt-1.pyc
 -rw-r--r--   5.0KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/autocompletion.cpython-39.pyc
--rw-r--r--   5.9KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/base_command.cpython-39.opt-1.pyc
--rw-r--r--   6.0KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/base_command.cpython-39.pyc
+-rw-r--r--   6.1KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/base_command.cpython-39.opt-1.pyc
+-rw-r--r--   6.1KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/base_command.cpython-39.pyc
 -rw-r--r--    23KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/cmdoptions.cpython-39.opt-1.pyc
 -rw-r--r--    23KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/cmdoptions.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/command_context.cpython-39.opt-1.pyc
@@ -787,7 +787,7 @@
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/parser.cpython-39.pyc
 -rw-r--r--   7.5KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/progress_bars.cpython-39.opt-1.pyc
 -rw-r--r--   7.5KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/progress_bars.cpython-39.pyc
--rw-r--r--    12KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/req_command.cpython-39.opt-1.pyc
+-rw-r--r--    13KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/req_command.cpython-39.opt-1.pyc
 -rw-r--r--    13KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/req_command.cpython-39.pyc
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/spinners.cpython-39.opt-1.pyc
 -rw-r--r--   4.8KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/__pycache__/spinners.cpython-39.pyc
@@ -801,7 +801,7 @@
 -rw-r--r--   2.6KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/main_parser.py
 -rw-r--r--    11KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/parser.py
 -rw-r--r--   8.2KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/progress_bars.py
--rw-r--r--    17KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/req_command.py
+-rw-r--r--    18KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/req_command.py
 -rw-r--r--   5.0KiB /usr/lib/python3.9/site-packages/pip/_internal/cli/spinners.py
 -rw-r--r--     116B /usr/lib/python3.9/site-packages/pip/_internal/cli/status_codes.py
 -rw-r--r--   3.7KiB /usr/lib/python3.9/site-packages/pip/_internal/commands/__init__.py
@@ -1069,7 +1069,7 @@
 -rw-r--r--   2.5KiB /usr/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/reporter.py
 -rw-r--r--   5.4KiB /usr/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/requirements.py
 -rw-r--r--   9.4KiB /usr/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/resolver.py
--rw-r--r--   6.3KiB /usr/lib/python3.9/site-packages/pip/_internal/self_outdated_check.py
+-rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/pip/_internal/self_outdated_check.py
 -rw-r--r--       0B /usr/lib/python3.9/site-packages/pip/_internal/utils/__init__.py
 -rw-r--r--     155B /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--     155B /usr/lib/python3.9/site-packages/pip/_internal/utils/__pycache__/__init__.cpython-39.pyc
@@ -7415,7 +7415,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/America/Tortola
--rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Vancouver
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
@@ -7579,7 +7579,7 @@
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Canada/Eastern
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/Canada/Newfoundland
--rw-r--r--   2.9KiB /usr/share/zoneinfo/Canada/Pacific
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/Canada/Pacific
 -rw-r--r--     980B /usr/share/zoneinfo/Canada/Saskatchewan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/Canada/Yukon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Chile/Continental
@@ -8016,7 +8016,7 @@
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Tijuana
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/America/Toronto
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Tortola
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Vancouver
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Whitehorse
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
@@ -8180,7 +8180,7 @@
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Canada/Eastern
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/posix/Canada/Newfoundland
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/Canada/Pacific
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/Canada/Pacific
 -rw-r--r--     980B /usr/share/zoneinfo/posix/Canada/Saskatchewan
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/Canada/Yukon
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Chile/Continental
