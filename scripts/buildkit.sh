@@ -45,6 +45,8 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
                 shift
                 if [[ $1 = context* ]]; then
                     ARGS+="${1/context=/} "        
+                elif [[ $1 = dockerfile* ]]; then
+                    ARGS+="-f ${1/dockerfile=/}/Dockerfile "
                 fi
                 shift
                 ;;
