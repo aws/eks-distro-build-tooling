@@ -45,6 +45,11 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
                 shift
                 if [[ $1 = context* ]]; then
                     ARGS+="${1/context=/} "        
+                elif [[ $1 = dockerfile* ]]; then
+                    # Only add if --file not already set via --opt filename
+                    if [[ "$ARGS" != *"--file"* ]]; then
+                        ARGS+="--file ${1/dockerfile=/}/Dockerfile "
+                    fi
                 fi
                 shift
                 ;;
