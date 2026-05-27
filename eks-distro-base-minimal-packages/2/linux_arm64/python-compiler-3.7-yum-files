@@ -34,6 +34,7 @@
 -rw-r--r--     363B /etc/openldap/ldap.conf
 -rw-r--r--     161B /etc/os-release
 -rw-r--r--     149B /etc/passwd
+-rw-r--r--      57B /etc/pip.conf
 -rw-r--r--     166B /etc/pki/ca-trust/README
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
@@ -544,7 +545,7 @@
 -rw-r--r--     361B /usr/lib/python3.7/site-packages/pip/_internal/cli/__pycache__/status_codes.cpython-37.opt-1.pyc
 -rw-r--r--     361B /usr/lib/python3.7/site-packages/pip/_internal/cli/__pycache__/status_codes.cpython-37.pyc
 -rw-r--r--   6.4KiB /usr/lib/python3.7/site-packages/pip/_internal/cli/autocompletion.py
--rw-r--r--   8.7KiB /usr/lib/python3.7/site-packages/pip/_internal/cli/base_command.py
+-rw-r--r--   9.2KiB /usr/lib/python3.7/site-packages/pip/_internal/cli/base_command.py
 -rw-r--r--    29KiB /usr/lib/python3.7/site-packages/pip/_internal/cli/cmdoptions.py
 -rw-r--r--     975B /usr/lib/python3.7/site-packages/pip/_internal/cli/command_context.py
 -rw-r--r--   2.6KiB /usr/lib/python3.7/site-packages/pip/_internal/cli/main.py

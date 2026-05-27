@@ -408,7 +408,7 @@
 -rwxr-xr-x    29KiB /usr/bin/printenv
 -rwxr-xr-x    49KiB /usr/bin/printf
 -rwxr-xr-x    33KiB /usr/bin/prlimit
--rwxr-xr-x    77KiB /usr/bin/procan
+-rwxr-xr-x    73KiB /usr/bin/procan
 -rwxr-xr-x    16KiB /usr/bin/prtstat
 -rwxr-xr-x    98KiB /usr/bin/ps
 -rwxr-xr-x    28KiB /usr/bin/pstree
@@ -460,7 +460,7 @@
 -rwxr-xr-x    20KiB /usr/bin/slabtop
 -rwxr-xr-x    29KiB /usr/bin/sleep
 -rwxr-xr-x    24KiB /usr/bin/snice
--rwxr-xr-x   381KiB /usr/bin/socat
+-rwxr-xr-x   373KiB /usr/bin/socat
 -rwxr-xr-x   111KiB /usr/bin/sort
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    66KiB /usr/bin/split
@@ -8430,8 +8430,8 @@
 -rw-r--r--   8.0KiB /var/lib/rpm/Obsoletename
 -rw-r--r--   7.7MiB /var/lib/rpm/Packages
 -rw-r--r--    96KiB /var/lib/rpm/Providename
--rw-r--r--    92KiB /var/lib/rpm/Requirename
--rw-r--r--    24KiB /var/lib/rpm/Sha1header
+-rw-r--r--    96KiB /var/lib/rpm/Requirename
+-rw-r--r--    28KiB /var/lib/rpm/Sha1header
 -rw-r--r--    16KiB /var/lib/rpm/Sigmd5
 -rw-r--r--   8.0KiB /var/lib/rpm/Triggername
 -rw-r--r--    58KiB /var/lib/systemd/catalog/database

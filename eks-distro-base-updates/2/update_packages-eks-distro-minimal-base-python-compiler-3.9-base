@@ -1,2 +1,4 @@
 
-tzdata.noarch
+nss.x86_64
+nss-sysinit.x86_64
+nss-tools.x86_64
