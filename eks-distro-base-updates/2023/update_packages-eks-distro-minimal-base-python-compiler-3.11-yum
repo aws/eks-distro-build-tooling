@@ -1,18 +1,6 @@
 
 amazon-linux-repo-cdn.noarch
-curl.x86_64
-dnf.noarch
-dnf-data.noarch
-krb5-libs.x86_64
-libcurl.x86_64
-libdnf.x86_64
-libgcrypt.x86_64
-python3-dnf.noarch
-python3-hawkey.x86_64
-python3-libdnf.x86_64
-python3-pip-wheel.noarch
-python3.11-pip.noarch
-python3.11-pip-wheel.noarch
+gnutls.x86_64
+libcap.x86_64
+libsolv.x86_64
 system-release.noarch
-tzdata.noarch
-yum.noarch
