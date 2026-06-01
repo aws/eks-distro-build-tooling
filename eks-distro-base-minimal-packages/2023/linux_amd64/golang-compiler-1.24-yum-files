@@ -15627,8 +15627,8 @@
 -rwxr-xr-x    20KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   107KiB /usr/lib64/libsmartcols.so.1.1.0
--rwxr-xr-x   602KiB /usr/lib64/libsolv.so.1
--rwxr-xr-x   262KiB /usr/lib64/libsolvext.so.1
+-rwxr-xr-x   601KiB /usr/lib64/libsolv.so.1
+-rwxr-xr-x   261KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   473KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x  1016KiB /usr/lib64/libssl.so.3.5.5

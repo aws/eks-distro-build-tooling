@@ -1,9 +1,4 @@
 
 amazon-linux-repo-cdn.noarch
-curl.x86_64
-krb5-libs.x86_64
-libcurl.x86_64
-python3.11-pip.noarch
-python3.11-pip-wheel.noarch
+libcap.x86_64
 system-release.noarch
-tzdata.noarch

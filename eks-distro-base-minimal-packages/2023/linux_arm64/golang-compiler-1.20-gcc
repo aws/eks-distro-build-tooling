@@ -1,5 +1,5 @@
 alternatives-1.15-2.amzn2023.0.2.aarch64
-amazon-linux-repo-cdn-2023.11.20260514-0.amzn2023.noarch
+amazon-linux-repo-cdn-2023.11.20260526-0.amzn2023.noarch
 amazon-rpm-config-228-10.amzn2023.0.1.noarch
 annobin-docs-12.69-1.amzn2023.0.1.noarch
 annobin-plugin-gcc-12.69-1.amzn2023.0.1.aarch64
@@ -45,7 +45,7 @@ glibc-gconv-extra-2.34-231.amzn2023.0.4.aarch64
 glibc-minimal-langpack-2.34-231.amzn2023.0.4.aarch64
 gmp-6.2.1-2.amzn2023.0.2.aarch64
 gnupg2-2.3.7-1.amzn2023.0.8.aarch64
-gnutls-3.8.3-8.amzn2023.0.2.aarch64
+gnutls-3.8.3-8.amzn2023.0.3.aarch64
 go-srpm-macros-3.8.0-1.amzn2023.0.1.noarch
 gpg-pubkey-afaa0026-61929986
 gpg-pubkey-d832c631-6515c85e
@@ -56,7 +56,7 @@ gzip-1.12-1.amzn2023.0.1.aarch64
 jansson-2.14-0.amzn2023.aarch64
 json-c-0.14-8.amzn2023.0.2.aarch64
 kernel-srpm-macros-1.0-14.amzn2023.0.3.noarch
-kernel6.18-headers-6.18.25-57.109.amzn2023.aarch64
+kernel6.18-headers-6.18.30-61.116.amzn2023.aarch64
 keyutils-libs-1.6.3-1.amzn2023.0.2.aarch64
 krb5-libs-1.21.3-7.amzn2023.0.1.aarch64
 less-608-2.amzn2023.0.2.aarch64
@@ -66,7 +66,7 @@ libassuan-2.5.5-1.amzn2023.0.2.aarch64
 libattr-2.5.1-3.amzn2023.0.2.aarch64
 libblkid-2.37.4-1.amzn2023.0.4.aarch64
 libbrotli-1.0.9-4.amzn2023.0.2.aarch64
-libcap-2.73-1.amzn2023.0.6.aarch64
+libcap-2.73-1.amzn2023.0.7.aarch64
 libcap-ng-0.8.2-4.amzn2023.0.2.aarch64
 libcbor-0.7.0-3.amzn2023.0.2.aarch64
 libcom_err-1.46.5-2.amzn2023.0.2.aarch64
@@ -100,7 +100,7 @@ libsemanage-3.4-5.amzn2023.0.2.aarch64
 libsepol-3.4-3.amzn2023.0.3.aarch64
 libsigsegv-2.13-2.amzn2023.0.2.aarch64
 libsmartcols-2.37.4-1.amzn2023.0.4.aarch64
-libsolv-0.7.22-1.amzn2023.0.2.aarch64
+libsolv-0.7.22-1.amzn2023.0.3.aarch64
 libssh-0.10.6-1.amzn2023.0.6.aarch64
 libssh-config-0.10.6-1.amzn2023.0.6.noarch
 libstdc++-14.2.1-7.amzn2023.0.2.aarch64
@@ -129,8 +129,8 @@ npth-1.6-6.amzn2023.0.2.aarch64
 ocaml-srpm-macros-6-6.amzn2023.0.2.noarch
 openblas-srpm-macros-2-9.amzn2023.0.2.noarch
 openldap-2.4.57-6.amzn2023.0.7.aarch64
-openssh-8.7p1-8.amzn2023.0.17.aarch64
-openssh-clients-8.7p1-8.amzn2023.0.17.aarch64
+openssh-8.7p1-8.amzn2023.0.18.aarch64
+openssh-clients-8.7p1-8.amzn2023.0.18.aarch64
 openssl-fips-provider-latest-3.5.5-1.amzn2023.0.4.aarch64
 openssl-libs-3.5.5-1.amzn2023.0.4.aarch64
 p11-kit-0.24.1-2.amzn2023.0.3.aarch64
@@ -166,7 +166,7 @@ sed-4.8-7.amzn2023.0.2.aarch64
 setup-2.13.7-3.amzn2023.0.2.noarch
 shadow-utils-4.9-12.amzn2023.0.4.aarch64
 sqlite-libs-3.40.0-1.amzn2023.0.7.aarch64
-system-release-2023.11.20260514-0.amzn2023.noarch
+system-release-2023.11.20260526-0.amzn2023.noarch
 systemd-libs-252.23-11.amzn2023.aarch64
 tar-1.34-1.amzn2023.0.4.aarch64
 tzdata-2026b-1.amzn2023.0.1.noarch
