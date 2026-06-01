@@ -1,6 +1,4 @@
 
-python.x86_64
-python-libs.x86_64
-tzdata.noarch
-vim-data.noarch
-vim-minimal.x86_64
+nss.x86_64
+nss-sysinit.x86_64
+nss-tools.x86_64
