@@ -1,9 +1,1 @@
 
-amazon-linux-repo-cdn.noarch
-gnutls.x86_64
-kernel6.18-headers.x86_64
-libcap.x86_64
-libsolv.x86_64
-openssh.x86_64
-openssh-clients.x86_64
-system-release.noarch
