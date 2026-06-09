@@ -509,6 +509,8 @@ $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_GLIBC): BASE_IMAGE_NAME=eks-distro-minimal-
 
 # ****************** IPTABLES VARIANTS **********************
 $(ALL_MINIMAL_IMAGE_TARGETS_FOR_BASE_IPTABLES): BASE_IMAGE_NAME=eks-distro-minimal-base-glibc
+IPTABLES_GO_VERSION=$(shell grep 'FROM.*golang:' $(MAKE_ROOT)/Dockerfile.minimal-base-iptables | sed 's/.*golang:\([0-9.]*\).*/\1/')
+builder-minimal-images-base-iptables: | minimal-images-base-golang-compiler-$(IPTABLES_GO_VERSION)-base
 # ***********************************************************
 
 # ****************** CSI VARIANTS ***************************

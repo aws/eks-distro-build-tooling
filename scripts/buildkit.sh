@@ -93,7 +93,12 @@ if [ -f "/buildkit.sh" ]; then
     for i in $(seq 1 5); do
 	printf "\nBuilding attempt: $i\n" >&2
 	[ $i -gt 1 ] && sleep 15
-	$CMD $ARGS 2>&1 | tee $log_file
+	# Go's http2 library logs informational messages about stale connections to stderr
+	# which can be interpreted as shell commands when output flows through Makefile recipes
+	# these are safe to filter since the http2 client handles reconnection internally
+	NOISY_MESSAGES="^[0-9/].*http2:.*connection error"
+
+	$CMD $ARGS 2>&1 | grep -v "$NOISY_MESSAGES" | tee $log_file
 	s=${PIPESTATUS[0]}
 	# buildkit is not returning non-zero exit code on httpReadSeeker
 	# Retry if "ERROR: httpReadSeeker" in logs.
