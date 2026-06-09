@@ -1,4 +1,6 @@
 
 amazon-linux-repo-cdn.noarch
-libcap.x86_64
+crypto-policies.noarch
+python3.x86_64
+python3-libs.x86_64
 system-release.noarch

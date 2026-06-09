@@ -1839,7 +1839,7 @@
 -rw-r--r--    35KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.pyc
 -rw-r--r--    56KiB /usr/lib64/python3.9/http/client.py
 -rw-r--r--    76KiB /usr/lib64/python3.9/http/cookiejar.py
--rw-r--r--    21KiB /usr/lib64/python3.9/http/cookies.py
+-rw-r--r--    22KiB /usr/lib64/python3.9/http/cookies.py
 -rw-r--r--    48KiB /usr/lib64/python3.9/http/server.py
 -rw-r--r--    54KiB /usr/lib64/python3.9/imaplib.py
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/imghdr.py

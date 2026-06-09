@@ -1,8 +1,15 @@
 
 amazon-linux-repo-cdn.noarch
 containerd.x86_64
+crypto-policies.noarch
 gnutls.x86_64
-libcap.x86_64
+jq.x86_64
 libsolv.x86_64
+libssh.x86_64
+libssh-config.noarch
+pigz.x86_64
+python3.x86_64
+python3-libs.x86_64
+rsync.x86_64
 runc.x86_64
 system-release.noarch

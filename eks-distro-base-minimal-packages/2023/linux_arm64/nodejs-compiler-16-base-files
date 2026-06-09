@@ -3353,12 +3353,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/DEFAULT/krb5.txt
 -rw-r--r--     565B /usr/share/crypto-policies/DEFAULT/libreswan.txt
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/DEFAULT/libssh.txt
--rw-r--r--     401B /usr/share/crypto-policies/DEFAULT/nss.txt
+-rw-r--r--     409B /usr/share/crypto-policies/DEFAULT/nss.txt
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/DEFAULT/openssh.txt
 -rw-r--r--   1.8KiB /usr/share/crypto-policies/DEFAULT/opensshserver.txt
 -rw-r--r--     151B /usr/share/crypto-policies/DEFAULT/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/DEFAULT/openssl_fips.txt
--rw-r--r--     737B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+-rw-r--r--     738B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/DEFAULT/rpm-sequoia.txt
 -rw-r--r--     140B /usr/share/crypto-policies/FIPS/bind.txt
 -rw-r--r--   2.5KiB /usr/share/crypto-policies/FIPS/gnutls.txt
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/FIPS/java.txt
@@ -3369,9 +3370,10 @@
 -rw-r--r--     352B /usr/share/crypto-policies/FIPS/nss.txt
 -rw-r--r--     820B /usr/share/crypto-policies/FIPS/openssh.txt
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/FIPS/opensshserver.txt
--rw-r--r--     177B /usr/share/crypto-policies/FIPS/openssl.txt
+-rw-r--r--     182B /usr/share/crypto-policies/FIPS/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/FIPS/openssl_fips.txt
--rw-r--r--     708B /usr/share/crypto-policies/FIPS/opensslcnf.txt
+-rw-r--r--     714B /usr/share/crypto-policies/FIPS/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/FIPS/rpm-sequoia.txt
 -rw-r--r--     124B /usr/share/crypto-policies/FUTURE/bind.txt
 -rw-r--r--   2.6KiB /usr/share/crypto-policies/FUTURE/gnutls.txt
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/FUTURE/java.txt
@@ -3379,12 +3381,13 @@
 -rw-r--r--      86B /usr/share/crypto-policies/FUTURE/krb5.txt
 -rw-r--r--     303B /usr/share/crypto-policies/FUTURE/libreswan.txt
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/FUTURE/libssh.txt
--rw-r--r--     347B /usr/share/crypto-policies/FUTURE/nss.txt
+-rw-r--r--     355B /usr/share/crypto-policies/FUTURE/nss.txt
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/FUTURE/openssh.txt
 -rw-r--r--   1.7KiB /usr/share/crypto-policies/FUTURE/opensshserver.txt
--rw-r--r--     175B /usr/share/crypto-policies/FUTURE/openssl.txt
+-rw-r--r--     180B /usr/share/crypto-policies/FUTURE/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/FUTURE/openssl_fips.txt
--rw-r--r--     681B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
+-rw-r--r--     687B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/FUTURE/rpm-sequoia.txt
 -rw-r--r--      94B /usr/share/crypto-policies/LEGACY/bind.txt
 -rw-r--r--   3.3KiB /usr/share/crypto-policies/LEGACY/gnutls.txt
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/LEGACY/java.txt
@@ -3392,12 +3395,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/LEGACY/krb5.txt
 -rw-r--r--     594B /usr/share/crypto-policies/LEGACY/libreswan.txt
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/LEGACY/libssh.txt
--rw-r--r--     406B /usr/share/crypto-policies/LEGACY/nss.txt
+-rw-r--r--     414B /usr/share/crypto-policies/LEGACY/nss.txt
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/LEGACY/openssh.txt
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/LEGACY/opensshserver.txt
 -rw-r--r--     151B /usr/share/crypto-policies/LEGACY/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/LEGACY/openssl_fips.txt
--rw-r--r--     851B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
+-rw-r--r--     852B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/LEGACY/rpm-sequoia.txt
 -rw-r--r--     124B /usr/share/crypto-policies/back-ends/DEFAULT/bind.config
 -rw-r--r--   3.1KiB /usr/share/crypto-policies/back-ends/DEFAULT/gnutls.config
 -rw-r--r--   1.6KiB /usr/share/crypto-policies/back-ends/DEFAULT/java.config
@@ -3405,12 +3409,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/back-ends/DEFAULT/krb5.config
 -rw-r--r--     565B /usr/share/crypto-policies/back-ends/DEFAULT/libreswan.config
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/DEFAULT/libssh.config
--rw-r--r--     401B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
+-rw-r--r--     409B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/back-ends/DEFAULT/openssh.config
 -rw-r--r--   1.8KiB /usr/share/crypto-policies/back-ends/DEFAULT/opensshserver.config
 -rw-r--r--     151B /usr/share/crypto-policies/back-ends/DEFAULT/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/DEFAULT/openssl_fips.config
--rw-r--r--     737B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
+-rw-r--r--     738B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/DEFAULT/rpm-sequoia.config
 -rw-r--r--     140B /usr/share/crypto-policies/back-ends/FIPS/bind.config
 -rw-r--r--   2.5KiB /usr/share/crypto-policies/back-ends/FIPS/gnutls.config
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/back-ends/FIPS/java.config
@@ -3421,9 +3426,10 @@
 -rw-r--r--     352B /usr/share/crypto-policies/back-ends/FIPS/nss.config
 -rw-r--r--     820B /usr/share/crypto-policies/back-ends/FIPS/openssh.config
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/FIPS/opensshserver.config
--rw-r--r--     177B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
+-rw-r--r--     182B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/FIPS/openssl_fips.config
--rw-r--r--     708B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
+-rw-r--r--     714B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/FIPS/rpm-sequoia.config
 -rw-r--r--     124B /usr/share/crypto-policies/back-ends/FUTURE/bind.config
 -rw-r--r--   2.6KiB /usr/share/crypto-policies/back-ends/FUTURE/gnutls.config
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/back-ends/FUTURE/java.config
@@ -3431,12 +3437,13 @@
 -rw-r--r--      86B /usr/share/crypto-policies/back-ends/FUTURE/krb5.config
 -rw-r--r--     303B /usr/share/crypto-policies/back-ends/FUTURE/libreswan.config
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/FUTURE/libssh.config
--rw-r--r--     347B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
+-rw-r--r--     355B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/FUTURE/openssh.config
 -rw-r--r--   1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/opensshserver.config
--rw-r--r--     175B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
+-rw-r--r--     180B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/FUTURE/openssl_fips.config
--rw-r--r--     681B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
+-rw-r--r--     687B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/FUTURE/rpm-sequoia.config
 -rw-r--r--      94B /usr/share/crypto-policies/back-ends/LEGACY/bind.config
 -rw-r--r--   3.3KiB /usr/share/crypto-policies/back-ends/LEGACY/gnutls.config
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/java.config
@@ -3444,24 +3451,26 @@
 -rw-r--r--     137B /usr/share/crypto-policies/back-ends/LEGACY/krb5.config
 -rw-r--r--     594B /usr/share/crypto-policies/back-ends/LEGACY/libreswan.config
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/back-ends/LEGACY/libssh.config
--rw-r--r--     406B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
+-rw-r--r--     414B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/openssh.config
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/LEGACY/opensshserver.config
 -rw-r--r--     151B /usr/share/crypto-policies/back-ends/LEGACY/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/LEGACY/openssl_fips.config
--rw-r--r--     851B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
+-rw-r--r--     852B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/LEGACY/rpm-sequoia.config
 -rw-r--r--     680B /usr/share/crypto-policies/default-config
--rw-r--r--   2.5KiB /usr/share/crypto-policies/policies/DEFAULT.pol
+-rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/DEFAULT.pol
 -rw-r--r--     277B /usr/share/crypto-policies/policies/EMPTY.pol
--rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/FIPS.pol
--rw-r--r--   2.5KiB /usr/share/crypto-policies/policies/FUTURE.pol
--rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/LEGACY.pol
+-rw-r--r--   2.2KiB /usr/share/crypto-policies/policies/FIPS.pol
+-rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/FUTURE.pol
+-rw-r--r--   2.8KiB /usr/share/crypto-policies/policies/LEGACY.pol
 -rw-r--r--     469B /usr/share/crypto-policies/policies/modules/AD-SUPPORT-LEGACY.pmod
 -rw-r--r--     283B /usr/share/crypto-policies/policies/modules/AD-SUPPORT.pmod
 -rw-r--r--     136B /usr/share/crypto-policies/policies/modules/ECDHE-ONLY.pmod
 -rw-r--r--     248B /usr/share/crypto-policies/policies/modules/NO-ENFORCE-EMS.pmod
 -rw-r--r--     123B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
 -rw-r--r--   2.1KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
+-rw-r--r--     359B /usr/share/crypto-policies/policies/modules/PQ.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    63KiB /usr/share/doc/krb5-libs/NOTICE
@@ -6337,6 +6346,7 @@ lrwxrwxrwx      52B /etc/crypto-policies/back-ends/opensshserver.config /usr/sha
 lrwxrwxrwx      46B /etc/crypto-policies/back-ends/openssl.config /usr/share/crypto-policies/DEFAULT/openssl.txt
 lrwxrwxrwx      51B /etc/crypto-policies/back-ends/openssl_fips.config /usr/share/crypto-policies/DEFAULT/openssl_fips.txt
 lrwxrwxrwx      49B /etc/crypto-policies/back-ends/opensslcnf.config /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+lrwxrwxrwx      50B /etc/crypto-policies/back-ends/rpm-sequoia.config /usr/share/crypto-policies/DEFAULT/rpm-sequoia.txt
 lrwxrwxrwx      16B /etc/issue ../usr/lib/issue
 lrwxrwxrwx      20B /etc/issue.net ../usr/lib/issue.net
 lrwxrwxrwx      42B /etc/krb5.conf.d/crypto-policies /etc/crypto-policies/back-ends/krb5.config

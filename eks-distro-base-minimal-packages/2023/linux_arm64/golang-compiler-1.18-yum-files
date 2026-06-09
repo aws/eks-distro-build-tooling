@@ -12785,7 +12785,7 @@
 -rw-r--r--     135B /usr/lib/tmpfiles.d/pam.conf
 -rw-r--r--      60B /usr/lib/tmpfiles.d/setup.conf
 -rw-r--r--      65B /usr/lib64/.libgmp.so.10.4.1.hmac
--rw-r--r--     405B /usr/lib64/.libgnutls.so.30.37.1.hmac
+-rw-r--r--     405B /usr/lib64/.libgnutls.so.30.40.4.hmac
 -rw-r--r--      65B /usr/lib64/.libhogweed.so.6.10.hmac
 -rw-r--r--      65B /usr/lib64/.libnettle.so.8.10.hmac
 -rwxr-xr-x   196KiB /usr/lib64/audit/sotruss-lib.so
@@ -13189,7 +13189,7 @@
 -rwxr-xr-x   1.5MiB /usr/lib64/libglib-2.0.so.0.8200.2
 -rwxr-xr-x   196KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   586KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   2.3MiB /usr/lib64/libgnutls.so.30.37.1
+-rwxr-xr-x   2.8MiB /usr/lib64/libgnutls.so.30.40.4
 -rwxr-xr-x   461KiB /usr/lib64/libgobject-2.0.so.0.8200.2
 -rwxr-xr-x   396KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libgpg-error.so.0.32.0
@@ -14773,7 +14773,7 @@
 -rw-r--r--    35KiB /usr/lib64/python3.9/http/__pycache__/server.cpython-39.pyc
 -rw-r--r--    56KiB /usr/lib64/python3.9/http/client.py
 -rw-r--r--    76KiB /usr/lib64/python3.9/http/cookiejar.py
--rw-r--r--    21KiB /usr/lib64/python3.9/http/cookies.py
+-rw-r--r--    22KiB /usr/lib64/python3.9/http/cookies.py
 -rw-r--r--    48KiB /usr/lib64/python3.9/http/server.py
 -rw-r--r--    54KiB /usr/lib64/python3.9/imaplib.py
 -rw-r--r--   3.8KiB /usr/lib64/python3.9/imghdr.py
@@ -16129,12 +16129,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/DEFAULT/krb5.txt
 -rw-r--r--     565B /usr/share/crypto-policies/DEFAULT/libreswan.txt
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/DEFAULT/libssh.txt
--rw-r--r--     401B /usr/share/crypto-policies/DEFAULT/nss.txt
+-rw-r--r--     409B /usr/share/crypto-policies/DEFAULT/nss.txt
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/DEFAULT/openssh.txt
 -rw-r--r--   1.8KiB /usr/share/crypto-policies/DEFAULT/opensshserver.txt
 -rw-r--r--     151B /usr/share/crypto-policies/DEFAULT/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/DEFAULT/openssl_fips.txt
--rw-r--r--     737B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+-rw-r--r--     738B /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/DEFAULT/rpm-sequoia.txt
 -rw-r--r--     140B /usr/share/crypto-policies/FIPS/bind.txt
 -rw-r--r--   2.5KiB /usr/share/crypto-policies/FIPS/gnutls.txt
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/FIPS/java.txt
@@ -16145,9 +16146,10 @@
 -rw-r--r--     352B /usr/share/crypto-policies/FIPS/nss.txt
 -rw-r--r--     820B /usr/share/crypto-policies/FIPS/openssh.txt
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/FIPS/opensshserver.txt
--rw-r--r--     177B /usr/share/crypto-policies/FIPS/openssl.txt
+-rw-r--r--     182B /usr/share/crypto-policies/FIPS/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/FIPS/openssl_fips.txt
--rw-r--r--     708B /usr/share/crypto-policies/FIPS/opensslcnf.txt
+-rw-r--r--     714B /usr/share/crypto-policies/FIPS/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/FIPS/rpm-sequoia.txt
 -rw-r--r--     124B /usr/share/crypto-policies/FUTURE/bind.txt
 -rw-r--r--   2.6KiB /usr/share/crypto-policies/FUTURE/gnutls.txt
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/FUTURE/java.txt
@@ -16155,12 +16157,13 @@
 -rw-r--r--      86B /usr/share/crypto-policies/FUTURE/krb5.txt
 -rw-r--r--     303B /usr/share/crypto-policies/FUTURE/libreswan.txt
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/FUTURE/libssh.txt
--rw-r--r--     347B /usr/share/crypto-policies/FUTURE/nss.txt
+-rw-r--r--     355B /usr/share/crypto-policies/FUTURE/nss.txt
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/FUTURE/openssh.txt
 -rw-r--r--   1.7KiB /usr/share/crypto-policies/FUTURE/opensshserver.txt
--rw-r--r--     175B /usr/share/crypto-policies/FUTURE/openssl.txt
+-rw-r--r--     180B /usr/share/crypto-policies/FUTURE/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/FUTURE/openssl_fips.txt
--rw-r--r--     681B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
+-rw-r--r--     687B /usr/share/crypto-policies/FUTURE/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/FUTURE/rpm-sequoia.txt
 -rw-r--r--      94B /usr/share/crypto-policies/LEGACY/bind.txt
 -rw-r--r--   3.3KiB /usr/share/crypto-policies/LEGACY/gnutls.txt
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/LEGACY/java.txt
@@ -16168,12 +16171,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/LEGACY/krb5.txt
 -rw-r--r--     594B /usr/share/crypto-policies/LEGACY/libreswan.txt
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/LEGACY/libssh.txt
--rw-r--r--     406B /usr/share/crypto-policies/LEGACY/nss.txt
+-rw-r--r--     414B /usr/share/crypto-policies/LEGACY/nss.txt
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/LEGACY/openssh.txt
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/LEGACY/opensshserver.txt
 -rw-r--r--     151B /usr/share/crypto-policies/LEGACY/openssl.txt
 -rw-r--r--      49B /usr/share/crypto-policies/LEGACY/openssl_fips.txt
--rw-r--r--     851B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
+-rw-r--r--     852B /usr/share/crypto-policies/LEGACY/opensslcnf.txt
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/LEGACY/rpm-sequoia.txt
 -rw-r--r--     124B /usr/share/crypto-policies/back-ends/DEFAULT/bind.config
 -rw-r--r--   3.1KiB /usr/share/crypto-policies/back-ends/DEFAULT/gnutls.config
 -rw-r--r--   1.6KiB /usr/share/crypto-policies/back-ends/DEFAULT/java.config
@@ -16181,12 +16185,13 @@
 -rw-r--r--     137B /usr/share/crypto-policies/back-ends/DEFAULT/krb5.config
 -rw-r--r--     565B /usr/share/crypto-policies/back-ends/DEFAULT/libreswan.config
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/DEFAULT/libssh.config
--rw-r--r--     401B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
+-rw-r--r--     409B /usr/share/crypto-policies/back-ends/DEFAULT/nss.config
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/back-ends/DEFAULT/openssh.config
 -rw-r--r--   1.8KiB /usr/share/crypto-policies/back-ends/DEFAULT/opensshserver.config
 -rw-r--r--     151B /usr/share/crypto-policies/back-ends/DEFAULT/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/DEFAULT/openssl_fips.config
--rw-r--r--     737B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
+-rw-r--r--     738B /usr/share/crypto-policies/back-ends/DEFAULT/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/DEFAULT/rpm-sequoia.config
 -rw-r--r--     140B /usr/share/crypto-policies/back-ends/FIPS/bind.config
 -rw-r--r--   2.5KiB /usr/share/crypto-policies/back-ends/FIPS/gnutls.config
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/back-ends/FIPS/java.config
@@ -16197,9 +16202,10 @@
 -rw-r--r--     352B /usr/share/crypto-policies/back-ends/FIPS/nss.config
 -rw-r--r--     820B /usr/share/crypto-policies/back-ends/FIPS/openssh.config
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/FIPS/opensshserver.config
--rw-r--r--     177B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
+-rw-r--r--     182B /usr/share/crypto-policies/back-ends/FIPS/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/FIPS/openssl_fips.config
--rw-r--r--     708B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
+-rw-r--r--     714B /usr/share/crypto-policies/back-ends/FIPS/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/FIPS/rpm-sequoia.config
 -rw-r--r--     124B /usr/share/crypto-policies/back-ends/FUTURE/bind.config
 -rw-r--r--   2.6KiB /usr/share/crypto-policies/back-ends/FUTURE/gnutls.config
 -rw-r--r--   1.9KiB /usr/share/crypto-policies/back-ends/FUTURE/java.config
@@ -16207,12 +16213,13 @@
 -rw-r--r--      86B /usr/share/crypto-policies/back-ends/FUTURE/krb5.config
 -rw-r--r--     303B /usr/share/crypto-policies/back-ends/FUTURE/libreswan.config
 -rw-r--r--   1.1KiB /usr/share/crypto-policies/back-ends/FUTURE/libssh.config
--rw-r--r--     347B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
+-rw-r--r--     355B /usr/share/crypto-policies/back-ends/FUTURE/nss.config
 -rw-r--r--   1.2KiB /usr/share/crypto-policies/back-ends/FUTURE/openssh.config
 -rw-r--r--   1.7KiB /usr/share/crypto-policies/back-ends/FUTURE/opensshserver.config
--rw-r--r--     175B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
+-rw-r--r--     180B /usr/share/crypto-policies/back-ends/FUTURE/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/FUTURE/openssl_fips.config
--rw-r--r--     681B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
+-rw-r--r--     687B /usr/share/crypto-policies/back-ends/FUTURE/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/FUTURE/rpm-sequoia.config
 -rw-r--r--      94B /usr/share/crypto-policies/back-ends/LEGACY/bind.config
 -rw-r--r--   3.3KiB /usr/share/crypto-policies/back-ends/LEGACY/gnutls.config
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/java.config
@@ -16220,24 +16227,26 @@
 -rw-r--r--     137B /usr/share/crypto-policies/back-ends/LEGACY/krb5.config
 -rw-r--r--     594B /usr/share/crypto-policies/back-ends/LEGACY/libreswan.config
 -rw-r--r--   1.3KiB /usr/share/crypto-policies/back-ends/LEGACY/libssh.config
--rw-r--r--     406B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
+-rw-r--r--     414B /usr/share/crypto-policies/back-ends/LEGACY/nss.config
 -rw-r--r--   1.5KiB /usr/share/crypto-policies/back-ends/LEGACY/openssh.config
 -rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/LEGACY/opensshserver.config
 -rw-r--r--     151B /usr/share/crypto-policies/back-ends/LEGACY/openssl.config
 -rw-r--r--      49B /usr/share/crypto-policies/back-ends/LEGACY/openssl_fips.config
--rw-r--r--     851B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
+-rw-r--r--     852B /usr/share/crypto-policies/back-ends/LEGACY/opensslcnf.config
+-rw-r--r--   2.0KiB /usr/share/crypto-policies/back-ends/LEGACY/rpm-sequoia.config
 -rw-r--r--     680B /usr/share/crypto-policies/default-config
--rw-r--r--   2.5KiB /usr/share/crypto-policies/policies/DEFAULT.pol
+-rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/DEFAULT.pol
 -rw-r--r--     277B /usr/share/crypto-policies/policies/EMPTY.pol
--rw-r--r--   2.0KiB /usr/share/crypto-policies/policies/FIPS.pol
--rw-r--r--   2.5KiB /usr/share/crypto-policies/policies/FUTURE.pol
--rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/LEGACY.pol
+-rw-r--r--   2.2KiB /usr/share/crypto-policies/policies/FIPS.pol
+-rw-r--r--   2.6KiB /usr/share/crypto-policies/policies/FUTURE.pol
+-rw-r--r--   2.8KiB /usr/share/crypto-policies/policies/LEGACY.pol
 -rw-r--r--     469B /usr/share/crypto-policies/policies/modules/AD-SUPPORT-LEGACY.pmod
 -rw-r--r--     283B /usr/share/crypto-policies/policies/modules/AD-SUPPORT.pmod
 -rw-r--r--     136B /usr/share/crypto-policies/policies/modules/ECDHE-ONLY.pmod
 -rw-r--r--     248B /usr/share/crypto-policies/policies/modules/NO-ENFORCE-EMS.pmod
 -rw-r--r--     123B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
 -rw-r--r--   2.1KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
+-rw-r--r--     359B /usr/share/crypto-policies/policies/modules/PQ.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
@@ -16715,8 +16724,7 @@
 -rw-r--r--    35KiB /usr/share/licenses/gmp/COPYINGv3
 -rw-r--r--    35KiB /usr/share/licenses/gnupg2/COPYING
 -rw-r--r--    35KiB /usr/share/licenses/gnutls/COPYING
--rw-r--r--    26KiB /usr/share/licenses/gnutls/COPYING.LESSER
--rw-r--r--     936B /usr/share/licenses/gnutls/LICENSE
+-rw-r--r--    26KiB /usr/share/licenses/gnutls/COPYING.LESSERv2
 -rw-r--r--    18KiB /usr/share/licenses/gpgme/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/gpgme/COPYING.LESSER
 -rw-r--r--   1.7KiB /usr/share/licenses/gpgme/LICENSES
@@ -17459,7 +17467,7 @@
 -rw-r--r--   3.4KiB /usr/share/locale/ms/LC_MESSAGES/dnf.mo
 -rw-r--r--   1.5KiB /usr/share/locale/ms/LC_MESSAGES/findutils.mo
 -rw-r--r--   124KiB /usr/share/locale/ms/LC_MESSAGES/glib20.mo
--rw-r--r--    31KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
+-rw-r--r--    33KiB /usr/share/locale/ms/LC_MESSAGES/gnutls.mo
 -rw-r--r--    11KiB /usr/share/locale/ms/LC_MESSAGES/gprof.mo
 -rw-r--r--     471B /usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
 -rw-r--r--   3.0KiB /usr/share/locale/ms/LC_MESSAGES/rpm.mo
@@ -17883,7 +17891,7 @@
 -rw-r--r--   620KiB /usr/share/locale/zh_CN/LC_MESSAGES/git.mo
 -rw-r--r--   125KiB /usr/share/locale/zh_CN/LC_MESSAGES/glib20.mo
 -rw-r--r--   215KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnupg2.mo
--rw-r--r--    22KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnutls.mo
+-rw-r--r--    31KiB /usr/share/locale/zh_CN/LC_MESSAGES/gnutls.mo
 -rw-r--r--    17KiB /usr/share/locale/zh_CN/LC_MESSAGES/grep.mo
 -rw-r--r--    54KiB /usr/share/locale/zh_CN/LC_MESSAGES/ld.mo
 -rw-r--r--    25KiB /usr/share/locale/zh_CN/LC_MESSAGES/libdnf.mo
@@ -19928,6 +19936,7 @@ lrwxrwxrwx      52B /etc/crypto-policies/back-ends/opensshserver.config /usr/sha
 lrwxrwxrwx      46B /etc/crypto-policies/back-ends/openssl.config /usr/share/crypto-policies/DEFAULT/openssl.txt
 lrwxrwxrwx      51B /etc/crypto-policies/back-ends/openssl_fips.config /usr/share/crypto-policies/DEFAULT/openssl_fips.txt
 lrwxrwxrwx      49B /etc/crypto-policies/back-ends/opensslcnf.config /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
+lrwxrwxrwx      50B /etc/crypto-policies/back-ends/rpm-sequoia.config /usr/share/crypto-policies/DEFAULT/rpm-sequoia.txt
 lrwxrwxrwx      16B /etc/issue ../usr/lib/issue
 lrwxrwxrwx      20B /etc/issue.net ../usr/lib/issue.net
 lrwxrwxrwx      42B /etc/krb5.conf.d/crypto-policies /etc/crypto-policies/back-ends/krb5.config
@@ -20270,7 +20279,7 @@ lrwxrwxrwx       7B /usr/lib/debug/lib usr/lib
 lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
-lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.37.1.hmac
+lrwxrwxrwx      26B /usr/lib64/.libgnutls.so.30.hmac .libgnutls.so.30.40.4.hmac
 lrwxrwxrwx      24B /usr/lib64/.libhogweed.so.6.hmac .libhogweed.so.6.10.hmac
 lrwxrwxrwx      23B /usr/lib64/.libnettle.so.8.hmac .libnettle.so.8.10.hmac
 lrwxrwxrwx      22B /usr/lib64/fipscheck/libcrypt.so.2.hmac libcrypt.so.2.0.0.hmac
@@ -20326,7 +20335,7 @@ lrwxrwxrwx      31B /usr/lib64/libgirepository-2.0.so.0 libgirepository-2.0.so.0
 lrwxrwxrwx      23B /usr/lib64/libglib-2.0.so.0 libglib-2.0.so.0.8200.2
 lrwxrwxrwx      26B /usr/lib64/libgmodule-2.0.so.0 libgmodule-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgmp.so.10 libgmp.so.10.4.1
-lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.37.1
+lrwxrwxrwx      20B /usr/lib64/libgnutls.so.30 libgnutls.so.30.40.4
 lrwxrwxrwx      26B /usr/lib64/libgobject-2.0.so.0 libgobject-2.0.so.0.8200.2
 lrwxrwxrwx      16B /usr/lib64/libgomp.so.1 libgomp.so.1.0.0
 lrwxrwxrwx      22B /usr/lib64/libgpg-error.so.0 libgpg-error.so.0.32.0
