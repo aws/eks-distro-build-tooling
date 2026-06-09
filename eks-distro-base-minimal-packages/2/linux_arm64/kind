@@ -98,7 +98,7 @@ libselinux-2.5-12.amzn2.0.2.aarch64
 libsemanage-2.5-11.amzn2.aarch64
 libsepol-2.5-10.amzn2.0.1.aarch64
 libsmartcols-2.30.2-2.amzn2.0.13.aarch64
-libssh2-1.4.3-12.amzn2.2.6.aarch64
+libssh2-1.4.3-12.amzn2.2.7.aarch64
 libstdc++-7.3.1-18.amzn2.aarch64
 libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
@@ -151,7 +151,7 @@ rpcbind-0.2.0-44.amzn2.aarch64
 rpm-4.11.3-48.amzn2.0.5.aarch64
 rpm-build-libs-4.11.3-48.amzn2.0.5.aarch64
 rpm-libs-4.11.3-48.amzn2.0.5.aarch64
-rsync-3.1.2-11.amzn2.0.6.aarch64
+rsync-3.1.2-11.amzn2.0.7.aarch64
 runc-1.3.4-5.amzn2.aarch64
 sed-4.2.2-5.amzn2.0.2.aarch64
 setup-2.8.71-10.amzn2.0.1.noarch
