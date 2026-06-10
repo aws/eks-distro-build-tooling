@@ -1,9 +1,12 @@
 
 amazon-linux-repo-cdn.noarch
+crypto-policies.noarch
 gnutls.x86_64
 kernel6.18-headers.x86_64
-libcap.x86_64
 libsolv.x86_64
-openssh.x86_64
-openssh-clients.x86_64
+libssh.x86_64
+libssh-config.noarch
+python3.x86_64
+python3-libs.x86_64
 system-release.noarch
+zip.x86_64
