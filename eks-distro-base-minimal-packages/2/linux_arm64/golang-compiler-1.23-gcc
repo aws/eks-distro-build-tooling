@@ -46,7 +46,7 @@ grep-2.20-3.amzn2.0.2.aarch64
 groff-base-1.22.2-8.amzn2.0.2.aarch64
 gzip-1.5-10.amzn2.0.1.aarch64
 info-5.1-5.amzn2.aarch64
-kernel-headers-4.14.355-282.729.amzn2.aarch64
+kernel-headers-4.14.355-282.733.amzn2.aarch64
 keyutils-libs-1.5.8-3.amzn2.0.2.aarch64
 kmod-25-3.amzn2.0.2.aarch64
 kmod-libs-25-3.amzn2.0.2.aarch64
@@ -83,7 +83,7 @@ libselinux-2.5-12.amzn2.0.2.aarch64
 libsemanage-2.5-11.amzn2.aarch64
 libsepol-2.5-10.amzn2.0.1.aarch64
 libsmartcols-2.30.2-2.amzn2.0.13.aarch64
-libssh2-1.4.3-12.amzn2.2.6.aarch64
+libssh2-1.4.3-12.amzn2.2.7.aarch64
 libstdc++-7.3.1-18.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
 libutempter-1.1.6-4.amzn2.0.2.aarch64
