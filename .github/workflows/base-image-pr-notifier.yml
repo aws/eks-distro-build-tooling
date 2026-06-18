@@ -12,7 +12,7 @@ jobs:
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          if [[ "$PR_AUTHOR" == "eks-distro-pr-bot" && ( "$PR_TITLE" == *"Update base image"* || "$PR_TITLE" == *"Update builder-base image"* || "$PR_TITLE" == *"Update golang"* || "$PR_TITLE" == *"Update GIT_TAG and GOLANG_VERSION"* ) ]]; then
+          if [[ "$PR_AUTHOR" == "eks-distro-pr-bot" && ( "$PR_TITLE" == *"Update base image"* || "$PR_TITLE" == *"Update builder-base image"* || "$PR_TITLE" == *"Update golang"* || "$PR_TITLE" == *"Update GIT_TAG and GOLANG_VERSION"* || "$PR_TITLE" == *"Update helm chart images"* ) ]]; then
             curl -X POST $SLACK_WEBHOOK
             echo "Base image update detected - Slack notification sent"
           else
