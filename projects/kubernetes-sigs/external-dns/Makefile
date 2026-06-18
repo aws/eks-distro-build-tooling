@@ -38,6 +38,10 @@ images: buildkit-check
 		--local context=. \
 		--output type=image,oci-mediatypes=true,"name=$(IMAGE)",push=true
 
+.PHONY: check-external-dns-release
+check-external-dns-release:
+	$(MAKE_ROOT)/check_upstream_external_dns_image.sh
+
 .PHONY: build
 build: local-images
 

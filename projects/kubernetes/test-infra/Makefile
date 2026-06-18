@@ -40,6 +40,10 @@ local-images: buildkit-check $(LOCAL_IMAGE_TARGETS)
 .PHONY: images
 images: buildkit-check $(IMAGE_TARGETS)	
 
+.PHONY: check-prow-release
+check-prow-release:
+	$(MAKE_ROOT)/check_upstream_prow_image.sh
+
 .PHONY: update-helm-chart
 update-helm-chart:
 	./update_helm_images.sh "$(foreach image,$(IMAGE_NAMES),$(IMAGE_REPO)/$(image):$(IMAGE_TAG))" "$(VALUES_YAML_PATHS)"

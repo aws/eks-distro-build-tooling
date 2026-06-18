@@ -37,6 +37,10 @@ images: buildkit-check
 		--local context=. \
 		--output type=image,oci-mediatypes=true,"name=$(IMAGE)",push=true
 
+.PHONY: check-athens-release
+check-athens-release:
+	$(MAKE_ROOT)/check_upstream_athens_image.sh
+
 .PHONY: build
 build: local-images
 

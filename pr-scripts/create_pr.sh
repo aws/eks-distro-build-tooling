@@ -35,6 +35,8 @@ MINIMAL_IMAGE_REBUILD_PJ_NAME="quarterly-minimal-image-rebuild"
 
 GOLANG_RELEASE_PERIODIC="check-upstream-golang-release"
 
+HELM_CHART_IMAGES_PERIODIC="check-upstream-helm-chart-images"
+
 CHANGED_FILE="tag file(s)"
 CHANGED_COMPONENT="base image"
 if [[ $REPO =~ "prow-jobs" ]]; then
@@ -53,6 +55,10 @@ if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
   CHANGED_FILE="builder-base and eks-distro-base"
   CHANGED_COMPONENT="golang"
 fi
+if [[ $JOB_NAME =~ $HELM_CHART_IMAGES_PERIODIC ]]; then
+  CHANGED_FILE="helm chart IMAGE_TAG files"
+  CHANGED_COMPONENT="helm chart images"
+fi
 
 if [ $REPO_OWNER = "aws" ]; then
   ORIGIN_ORG="eks-distro-pr-bot"
@@ -70,6 +76,8 @@ else
     PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/prow_cp_pr_body
   elif [[ $JOB_NAME =~ $MINIMAL_IMAGE_REBUILD_PJ_NAME ]]; then
     PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/rebuild-minimal-images-pr-body
+  elif [[ $JOB_NAME =~ $HELM_CHART_IMAGES_PERIODIC ]]; then
+    PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/helm_chart_image_pr_body
   else
     PR_BODY_FILE=${SCRIPT_ROOT}/../pr-scripts/eks_distro_base_other_repo_pr_body
     if [ $REPO = "eks-distro-build-tooling" ]; then
@@ -137,6 +145,13 @@ if [[ $JOB_NAME =~ $GOLANG_RELEASE_PERIODIC ]]; then
   git add ./eks-distro-base/make-tests/make-dry-run
   # TODO: remove after verifying what changes are unstaged
   git diff --name-only
+fi
+
+if [[ $JOB_NAME =~ $HELM_CHART_IMAGES_PERIODIC ]]; then
+  cp -f ${SCRIPT_ROOT}/../projects/kubernetes/test-infra/IMAGE_TAG ./projects/kubernetes/test-infra/IMAGE_TAG
+  cp -f ${SCRIPT_ROOT}/../projects/gomods/athens/IMAGE_TAG ./projects/gomods/athens/IMAGE_TAG
+  cp -f ${SCRIPT_ROOT}/../projects/kubernetes-sigs/external-dns/IMAGE_TAG ./projects/kubernetes-sigs/external-dns/IMAGE_TAG
+  git add ./projects/kubernetes/test-infra/IMAGE_TAG ./projects/gomods/athens/IMAGE_TAG ./projects/kubernetes-sigs/external-dns/IMAGE_TAG
 fi
 
 FILES_ADDED=$(git diff --staged --name-only)
