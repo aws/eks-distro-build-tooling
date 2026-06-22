@@ -1,3 +1,8 @@
 
 amazon-linux-repo-cdn.noarch
+ca-certificates.noarch
+libssh.x86_64
+libssh-config.noarch
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
 system-release.noarch

@@ -1,3 +1,11 @@
 
 amazon-linux-repo-cdn.noarch
+ca-certificates.noarch
+kernel6.18-headers.x86_64
+libssh.x86_64
+libssh-config.noarch
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+python3-pip-wheel.noarch
+rust-toolset-srpm-macros.noarch
 system-release.noarch
