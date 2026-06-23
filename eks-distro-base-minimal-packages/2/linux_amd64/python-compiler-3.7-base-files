@@ -579,7 +579,7 @@
 -rw-r--r--    21KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/install/__pycache__/wheel.cpython-37.pyc
 -rw-r--r--   1.5KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/install/editable_legacy.py
 -rw-r--r--   4.2KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/install/legacy.py
--rw-r--r--    31KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/install/wheel.py
+-rw-r--r--    32KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/install/wheel.py
 -rw-r--r--    20KiB /usr/lib/python3.7/site-packages/pip/_internal/operations/prepare.py
 -rw-r--r--   7.3KiB /usr/lib/python3.7/site-packages/pip/_internal/pyproject.py
 -rw-r--r--   3.1KiB /usr/lib/python3.7/site-packages/pip/_internal/req/__init__.py
@@ -2256,7 +2256,7 @@
 -rwxr-xr-x   177KiB /usr/lib64/libmvec-2.26.so
 -rwxr-xr-x   161KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   227KiB /usr/lib64/libncursesw.so.6.0
--rwxr-xr-x   159KiB /usr/lib64/libnghttp2.so.14.20.0
+-rwxr-xr-x   175KiB /usr/lib64/libnghttp2.so.14.24.1
 -rwxr-xr-x   103KiB /usr/lib64/libnsl-2.26.so
 -rwxr-xr-x   242KiB /usr/lib64/libnspr4.so
 -rwxr-xr-x   1.2MiB /usr/lib64/libnss3.so
@@ -5014,7 +5014,7 @@
 -rw-r--r--   7.5KiB /usr/share/licenses/libidn2-2.3.0/COPYING.LESSERv3
 -rw-r--r--   8.6KiB /usr/share/licenses/libidn2-2.3.0/COPYING.unicode
 -rw-r--r--    18KiB /usr/share/licenses/libidn2-2.3.0/COPYINGv2
--rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.41.0/COPYING
+-rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.52.0/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libpsl-0.21.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
 -rw-r--r--     217B /usr/share/licenses/libuuid-2.30.2/COPYING
@@ -7683,7 +7683,7 @@ lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6	libmenuw.so.6.0
 lrwxrwxrwx      15B /usr/lib64/libmvec.so.1	libmvec-2.26.so
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6	libncurses.so.6.0
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6	libncursesw.so.6.0
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14	libnghttp2.so.14.20.0
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14	libnghttp2.so.14.24.1
 lrwxrwxrwx      14B /usr/lib64/libnsl.so.1	libnsl-2.26.so
 lrwxrwxrwx      21B /usr/lib64/libnss_compat.so.2	libnss_compat-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libnss_dns.so.2	libnss_dns-2.26.so

@@ -13410,7 +13410,7 @@
 -rwxr-xr-x   397KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   201KiB /usr/lib64/libncurses.so.6.0
 -rwxr-xr-x   267KiB /usr/lib64/libncursesw.so.6.0
--rwxr-xr-x   199KiB /usr/lib64/libnghttp2.so.14.20.0
+-rwxr-xr-x   199KiB /usr/lib64/libnghttp2.so.14.24.1
 -rwxr-xr-x   155KiB /usr/lib64/libnsl-2.26.so
 -rwxr-xr-x   270KiB /usr/lib64/libnspr4.so
 -rwxr-xr-x   1.3MiB /usr/lib64/libnss3.so
@@ -16449,7 +16449,7 @@
 -rw-r--r--    18KiB /usr/share/licenses/libidn2-2.3.0/COPYINGv2
 -rw-r--r--     352B /usr/share/licenses/libmount-2.30.2/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libmount-2.30.2/COPYING.LGPLv2.1
--rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.41.0/COPYING
+-rw-r--r--   1.2KiB /usr/share/licenses/libnghttp2-1.52.0/COPYING
 -rw-r--r--   1.1KiB /usr/share/licenses/libpsl-0.21.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libsemanage-2.5/COPYING
 -rw-r--r--    26KiB /usr/share/licenses/libsepol-2.5/COPYING
@@ -20619,7 +20619,7 @@ lrwxrwxrwx      15B /usr/lib64/libmenuw.so.6	libmenuw.so.6.0
 lrwxrwxrwx      17B /usr/lib64/libmount.so.1	libmount.so.1.1.0
 lrwxrwxrwx      17B /usr/lib64/libncurses.so.6	libncurses.so.6.0
 lrwxrwxrwx      18B /usr/lib64/libncursesw.so.6	libncursesw.so.6.0
-lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14	libnghttp2.so.14.20.0
+lrwxrwxrwx      21B /usr/lib64/libnghttp2.so.14	libnghttp2.so.14.24.1
 lrwxrwxrwx      14B /usr/lib64/libnsl.so.1	libnsl-2.26.so
 lrwxrwxrwx      21B /usr/lib64/libnss_compat.so.2	libnss_compat-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libnss_dns.so.2	libnss_dns-2.26.so

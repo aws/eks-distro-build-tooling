@@ -1,4 +1,3 @@
 
-nginx.x86_64
-nginx-core.x86_64
-nginx-filesystem.noarch
+openssl-libs.x86_64
+openssl11-libs.x86_64
