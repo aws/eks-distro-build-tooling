@@ -33,7 +33,7 @@ function install_skopeo() {
     git clone https://github.com/containers/skopeo
     cd skopeo
     git checkout $SKOPEO_VERSION
-    make bin/skopeo
+    make bin/skopeo DISABLE_CGO=1
     mv bin/skopeo $USR_BIN/skopeo
 
     cd ..

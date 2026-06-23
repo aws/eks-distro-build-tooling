@@ -59,22 +59,6 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
   go-licenses --help
 
   linuxkit version
-  /go/bin/go1.17 version
-  /go/go1.17/bin/go-licenses --help
-  /go/bin/go1.18 version
-  /go/go1.18/bin/go-licenses --help
-  /go/bin/go1.19 version
-  /go/go1.19/bin/go-licenses --help
-  /go/bin/go1.20 version
-  /go/go1.20/bin/go-licenses --help
-  /go/bin/go1.21 version
-  /go/go1.21/bin/go-licenses --help
-  /go/bin/go1.22 version
-  /go/go1.22/bin/go-licenses --help
-  /go/bin/go1.23 version
-  /go/go1.23/bin/go-licenses --help
-  /go/bin/go1.24 version
-  /go/go1.24/bin/go-licenses --help
   /go/bin/go1.25 version
   /go/go1.25/bin/go-licenses --help
   /go/bin/go1.26 version

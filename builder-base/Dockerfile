@@ -279,150 +279,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     /install_ansible.sh
 
 
-FROM ${BUILDER_IMAGE} as golang-1.17
-ARG TARGETARCH
-ARG GOLANG_VERSION_117
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.17*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.17*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_117 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.18
-ARG TARGETARCH
-ARG GOLANG_VERSION_118
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.18*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.18*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_118 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.19
-ARG TARGETARCH
-ARG GOLANG_VERSION_119
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.19*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.19*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_119 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.20
-ARG TARGETARCH
-ARG GOLANG_VERSION_120
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/x86_64/golang*1.20*.rpm /tmp/x86_64/
-COPY $GOLANG_RPM_SOURCE_DIR/aarch64/golang*1.20*.rpm /tmp/aarch64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_120 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.21
-ARG TARGETARCH
-ARG GOLANG_VERSION_121
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.21*.tar.gz /tmp/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.21*.tar.gz /tmp/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_121 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.22
-ARG TARGETARCH
-ARG GOLANG_VERSION_122
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.22*.tar.gz /tmp/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.22*.tar.gz /tmp/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_122 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.23
-ARG TARGETARCH
-ARG GOLANG_VERSION_123
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.23*.tar.gz /tmp/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.23*.tar.gz /tmp/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_123 && \
-    /remove_yum_packages.sh
-
-FROM ${BUILDER_IMAGE} as golang-1.24
-ARG TARGETARCH
-ARG GOLANG_VERSION_124
-ARG GOLANG_RPM_SOURCE_DIR
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go1.24*.tar.gz /tmp/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go1.24*.tar.gz /tmp/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    /install_base_yum_packages.sh && \
-    /install_golang.sh $GOLANG_VERSION_124 && \
-    /remove_yum_packages.sh
-
 FROM ${BUILDER_IMAGE} as golang-1.25
 ARG TARGETARCH
 ARG GOLANG_VERSION_125
@@ -471,7 +327,7 @@ ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 
 COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.20 /golang-1.20 /
+COPY --link --from=golang-1.25 /golang-1.25 /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_skopeo.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
@@ -491,141 +347,12 @@ ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 
 COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.19 /golang-1.19 /
+COPY --link --from=golang-1.25 /golang-1.25 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_linuxkit.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_linuxkit.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.17
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.17 /golang-1.17 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.18
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.18 /golang-1.18 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.19
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.19 /golang-1.19 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.20
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.20 /golang-1.20 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.21
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.21 /golang-1.21 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.22
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.22 /golang-1.22 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.23
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.23 /golang-1.23 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
-
-FROM ${BUILDER_IMAGE} as go-licenses-1.24
-ARG TARGETARCH
-ARG GOPROXY
-ARG GO_LICENSES_VERSION
-ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
-WORKDIR /workdir
-ENV GOPATH /go
-ENV PATH="/go/bin/:$PATH"
-COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.24 /golang-1.24 /
-COPY ./scripts/common_vars.sh \
-    ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=secret,id=netrc,target=/root/.netrc \
-    /install_go_licenses.sh
 
 FROM ${BUILDER_IMAGE} as go-licenses-1.25
 ARG TARGETARCH
@@ -668,7 +395,7 @@ WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
-COPY --link --from=golang-1.21 /golang-1.21 /
+COPY --link --from=golang-1.25 /golang-1.25 /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_vuln_check.sh /
 RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
@@ -701,29 +428,13 @@ COPY --link --from=packer /packer /
 COPY --link --from=ansible /ansible /
 COPY --link --from=nodejs /nodejs /
 COPY --link --from=linuxkit /linuxkit /
-COPY --link --from=golang-1.17 /golang-1.17 /
-COPY --link --from=go-licenses-1.17 /go-licenses-1.17 /
-COPY --link --from=golang-1.18 /golang-1.18 /
-COPY --link --from=go-licenses-1.18 /go-licenses-1.18 /
-COPY --link --from=golang-1.19 /golang-1.19 /
-COPY --link --from=go-licenses-1.19 /go-licenses-1.19 /
-COPY --link --from=golang-1.21 /golang-1.21 /
-COPY --link --from=go-licenses-1.21 /go-licenses-1.21 /
-COPY --link --from=golang-1.22 /golang-1.22 /
-COPY --link --from=go-licenses-1.22 /go-licenses-1.22 /
-COPY --link --from=golang-1.23 /golang-1.23 /
-COPY --link --from=go-licenses-1.23 /go-licenses-1.23 /
 COPY --link --from=go-vuln-check /go-vuln-check /
-COPY --link --from=golang-1.24 /golang-1.24 /
-COPY --link --from=go-licenses-1.24 /go-licenses-1.24 /
-COPY --link --from=golang-1.25 /golang-1.25 /
-COPY --link --from=go-licenses-1.25 /go-licenses-1.25 /
 COPY --link --from=golang-1.26 /golang-1.26 /
 COPY --link --from=go-licenses-1.26 /go-licenses-1.26 /
 # add the default golang verison last so its /usr/bin/go
 # takes precendent
-COPY --link --from=golang-1.20 /golang-1.20 /
-COPY --link --from=go-licenses-1.20 /go-licenses-1.20 /
+COPY --link --from=golang-1.25 /golang-1.25 /
+COPY --link --from=go-licenses-1.25 /go-licenses-1.25 /
 
 
 FROM ${FINAL_STAGE_BASE} as final
