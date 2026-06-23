@@ -22,6 +22,10 @@ IMAGE_NAME="$1"
 AL_TAG="$2"
 NAME_FOR_TAG_FILE="$3"
 
+WINDOWS_IMAGE_REGISTRY=mcr.microsoft.com/windows
+WINDOWS_BASE_IMAGE_NAME=nanoserver
+WINDOWS_ADDON_IMAGE_NAME=servercore
+
 function retry() {
     local n=1
     local max=120
@@ -51,19 +55,50 @@ fi
 
 BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/$IMAGE_NAME
 
-# Pull the buildinfo from the last published image which will contain the sha of the two windows images
-# used to build that image. Compare these sha with the current shas tagged upstream for this given
-# windows version. If the current tag points to a different sha, the image needs updating
-BUILDINFO=$(retry skopeo inspect --config --override-os windows --override-arch amd64 docker://$BASE_IMAGE:$BASE_IMAGE_TAG --raw   | jq -r '."moby.buildkit.buildinfo.v1"' | base64 -d)
+# Extract the windows version (e.g. ltsc2022) from the tag file entry name
+WINDOWS_VERSION="${NAME_FOR_TAG_FILE##*-}"
 
-for variant in "nanoserver" "servercore"; do
-    SOURCE_IMAGE_REF=$(jq -r ".sources | .[] | select(.ref | contains(\"$variant\")) | .ref" <<< "$BUILDINFO")
-    SOURCE_IMAGE_PIN=$(jq -r ".sources | .[] | select(.ref | contains(\"$variant\")) | .pin" <<< "$BUILDINFO")
-    
-    if [ "$(retry docker buildx imagetools inspect --raw $SOURCE_IMAGE_REF@$SOURCE_IMAGE_PIN)" != "$(retry docker buildx imagetools inspect --raw $SOURCE_IMAGE_REF)" ]; then
-        echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
-        exit 0
-    fi
-done
+# Read the OCI annotations from the published image manifest to get the upstream
+# digests that were recorded at build time. Compare them against what the upstream
+# tags currently resolve to. If they differ, Microsoft pushed a new image.
+PUBLISHED_MANIFEST=$(retry docker buildx imagetools inspect --raw $BASE_IMAGE:$BASE_IMAGE_TAG)
+
+# Get the manifest entry for the windows/amd64 platform (skip attestation manifests)
+WINDOWS_MANIFEST_DIGEST=$(jq -r '.manifests[] | select(.platform.os == "windows" and .platform.architecture == "amd64") | .digest' <<< "$PUBLISHED_MANIFEST" | head -1)
+
+if [ -z "$WINDOWS_MANIFEST_DIGEST" ] || [ "$WINDOWS_MANIFEST_DIGEST" = "null" ]; then
+    echo "Could not find windows/amd64 manifest in published image, triggering rebuild" >&2
+    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
+    exit 0
+fi
+
+# Inspect the individual manifest to get annotations
+IMAGE_MANIFEST=$(retry docker buildx imagetools inspect --raw $BASE_IMAGE:$BASE_IMAGE_TAG@$WINDOWS_MANIFEST_DIGEST)
+
+STORED_NANOSERVER_DIGEST=$(jq -r '.annotations."org.opencontainers.image.base.digest" // empty' <<< "$IMAGE_MANIFEST")
+STORED_SERVERCORE_DIGEST=$(jq -r '.annotations."com.amazonaws.eks.servercore.digest" // empty' <<< "$IMAGE_MANIFEST")
+
+if [ -z "$STORED_NANOSERVER_DIGEST" ] || [ -z "$STORED_SERVERCORE_DIGEST" ]; then
+    echo "No upstream digest annotations found in published image, triggering rebuild" >&2
+    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
+    exit 0
+fi
+
+# Get current upstream digests
+CURRENT_NANOSERVER_DIGEST=$(retry docker buildx imagetools inspect --raw $WINDOWS_IMAGE_REGISTRY/$WINDOWS_BASE_IMAGE_NAME:$WINDOWS_VERSION \
+    | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest')
+CURRENT_SERVERCORE_DIGEST=$(retry docker buildx imagetools inspect --raw $WINDOWS_IMAGE_REGISTRY/$WINDOWS_ADDON_IMAGE_NAME:$WINDOWS_VERSION \
+    | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest')
+
+echo "Stored nanoserver digest: $STORED_NANOSERVER_DIGEST" >&2
+echo "Current nanoserver digest: $CURRENT_NANOSERVER_DIGEST" >&2
+echo "Stored servercore digest: $STORED_SERVERCORE_DIGEST" >&2
+echo "Current servercore digest: $CURRENT_SERVERCORE_DIGEST" >&2
+
+if [ "$STORED_NANOSERVER_DIGEST" != "$CURRENT_NANOSERVER_DIGEST" ] || [ "$STORED_SERVERCORE_DIGEST" != "$CURRENT_SERVERCORE_DIGEST" ]; then
+    echo "Upstream digest has changed, rebuild needed" >&2
+    echo "updates" > ./check-update/${NAME_FOR_TAG_FILE}
+    exit 0
+fi
 
 echo "none" > ./check-update/${NAME_FOR_TAG_FILE}

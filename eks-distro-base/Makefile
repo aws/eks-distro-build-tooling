@@ -638,7 +638,29 @@ windows-images-%: VERSIONED_VARIANT=$*
 windows-images-%: buildkit-check
 	@printf "Building windows-$(VERSIONED_VARIANT)\n\n"
 	$(call CHECK_UPDATE_IF_PROW,$(IMAGE_COMPONENT),windows,$(IMAGE_NAME))
-	$(call BUILDCTL)
+	NANOSERVER_DIGEST=$$(docker buildx imagetools inspect --raw $(WINDOWS_IMAGE_REGISTRY)/$(WINDOWS_BASE_IMAGE_NAME):$(VERSIONED_VARIANT) | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
+	SERVERCORE_DIGEST=$$(docker buildx imagetools inspect --raw $(WINDOWS_IMAGE_REGISTRY)/$(WINDOWS_ADDON_IMAGE_NAME):$(VERSIONED_VARIANT) | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
+	printf "Upstream nanoserver digest: $$NANOSERVER_DIGEST\nUpstream servercore digest: $$SERVERCORE_DIGEST\n" && \
+	$(MAKE_ROOT)/../scripts/buildkit.sh \
+		build \
+		--frontend dockerfile.v0 \
+		--opt filename=$(DOCKERFILE) \
+		--opt platform=$(PLATFORMS) \
+		--opt build-arg:OUTPUT_DEBUG_LOG=$(OUTPUT_DEBUG_LOG) \
+		$(foreach BUILD_ARG,$(BUILDCTL_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
+		--progress plain \
+		--local dockerfile=./ \
+		--local context=. \
+		--opt target=$(IMAGE_TARGET) \
+		$(if $(IMAGE_METADATA_FILE),--metadata-file $(IMAGE_METADATA_FILE),) \
+		$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,--export-cache type=inline) \
+		$(foreach IMPORT_CACHE,$(BUILDCTL_IMPORT_CACHE),--import-cache $(IMPORT_CACHE)) \
+		$(if $(filter false,$(IGNORE_NO_CACHE)),$(BUILDCTL_NO_CACHE),) \
+		--opt annotation-manifest:org.opencontainers.image.base.digest=$$NANOSERVER_DIGEST \
+		--opt annotation-manifest:com.amazonaws.eks.servercore.digest=$$SERVERCORE_DIGEST \
+		--output type=$(IMAGE_OUTPUT_TYPE)$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,$(BUILDCTL_IMAGE_TAGS)),$(IMAGE_OUTPUT)
+	@printf "\n=== Verifying annotations on pushed manifest ===\n"
+	@docker buildx imagetools inspect --raw $(IMAGE_REPO)/$(IMAGE_COMPONENT)@$$(docker buildx imagetools inspect --raw $(IMAGE_REPO)/$(IMAGE_COMPONENT)@$$(jq -r '."containerimage.descriptor".digest' $(IMAGE_METADATA_FILE)) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 	./create_windows_manifest.sh $(IMAGE_NAME) $(IMAGE) $(LATEST_IMAGE) $(VERSIONED_VARIANT) $(WINDOWS_IMAGE_REGISTRY) $(WINDOWS_BASE_IMAGE_NAME)
 	$(call PUSHED_FILE_TRUE)
 

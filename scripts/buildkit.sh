@@ -36,6 +36,8 @@ if [ "${USE_BUILDX:-}" == "true" ]; then
                     ARGS+="--${1/filename/file} "
                 elif [[ $1 = "no-cache"* ]]; then
                     ARGS+="--${1/no-cache/no-cache-filter} "
+                elif [[ $1 = annotation-manifest:* ]]; then
+                    ARGS+="--annotation manifest:${1#annotation-manifest:} "
                 else
                     ARGS+="--${1/:/ } "
                 fi
