@@ -6,4 +6,3 @@ libssh-config.noarch
 openssl-fips-provider-latest.x86_64
 openssl-libs.x86_64
 system-release.noarch
-systemd-libs.x86_64
