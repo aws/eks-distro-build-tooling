@@ -1,13 +1,3 @@
 
 amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
-containerd.x86_64
-jq.x86_64
-libssh.x86_64
-libssh-config.noarch
-openssl-libs.x86_64
-python3-pip-wheel.noarch
 system-release.noarch
-systemd.x86_64
-systemd-libs.x86_64
-systemd-pam.x86_64
