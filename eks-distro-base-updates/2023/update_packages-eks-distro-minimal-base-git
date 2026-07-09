@@ -1,3 +1,6 @@
 
 amazon-linux-repo-cdn.noarch
+expat.x86_64
+gnupg2.x86_64
+sqlite-libs.x86_64
 system-release.noarch

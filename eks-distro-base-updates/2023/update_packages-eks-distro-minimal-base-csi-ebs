@@ -1,3 +1,9 @@
 
 amazon-linux-repo-cdn.noarch
+libblkid.x86_64
+libmount.x86_64
+libsmartcols.x86_64
+libuuid.x86_64
 system-release.noarch
+util-linux.x86_64
+util-linux-core.x86_64

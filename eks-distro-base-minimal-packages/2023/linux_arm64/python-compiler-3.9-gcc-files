@@ -14,6 +14,7 @@
 -rw-r--r--   1.1KiB /etc/csh.login
 -rw-r--r--     167B /etc/dnf/dnf.conf
 -rw-r--r--      89B /etc/dnf/plugins/release-notification.conf
+-rw-r--r--     169B /etc/dnf/plugins/supportinfo.conf
 -rw-r--r--       4B /etc/dnf/protected.d/dnf.conf
 -rw-r--r--      14B /etc/dnf/vars/awsdomain
 -rw-r--r--      10B /etc/dnf/vars/awsregion
@@ -4018,7 +4019,7 @@
 -rwxr-xr-x   1.2KiB /usr/lib/rpm/redhat/find-provides
 -rwxr-xr-x     994B /usr/lib/rpm/redhat/find-requires
 -rwxr-xr-x   3.6KiB /usr/lib/rpm/redhat/gpgverify
--rw-r--r--    19KiB /usr/lib/rpm/redhat/macros
+-rw-r--r--    20KiB /usr/lib/rpm/redhat/macros
 -rwxr-xr-x   6.1KiB /usr/lib/rpm/redhat/redhat-annobin-plugin-select.sh
 -r--r--r--      90B /usr/lib/rpm/redhat/redhat-annobin-select-annobin-built-plugin
 -r--r--r--      94B /usr/lib/rpm/redhat/redhat-annobin-select-gcc-built-plugin
@@ -4674,7 +4675,7 @@
 -rwxr-xr-x   260KiB /usr/lib64/libaudit.so.1.0.0
 -rwxr-xr-x   261KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.5.so
--rwxr-xr-x   330KiB /usr/lib64/libblkid.so.1.1.0
+-rwxr-xr-x   329KiB /usr/lib64/libblkid.so.1.1.0
 -rwxr-xr-x   260KiB /usr/lib64/libbrotlicommon.so.1.0.9
 -rwxr-xr-x   196KiB /usr/lib64/libbrotlidec.so.1.0.9
 -rwxr-xr-x   710KiB /usr/lib64/libbrotlienc.so.1.0.9
@@ -4754,7 +4755,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libmenu.so.6.6
 -rwxr-xr-x   197KiB /usr/lib64/libmenuw.so.6.6
 -rwxr-xr-x   711KiB /usr/lib64/libmodulemd.so.2.13.0
--rwxr-xr-x   330KiB /usr/lib64/libmount.so.1.1.0
+-rwxr-xr-x   329KiB /usr/lib64/libmount.so.1.1.0
 -rwxr-xr-x   261KiB /usr/lib64/libmpc.so.3.2.1
 -rwxr-xr-x   585KiB /usr/lib64/libmpfr.so.6.1.0
 -rwxr-xr-x   264KiB /usr/lib64/libncurses.so.6.6
@@ -4800,7 +4801,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libsframe.so.1.0.0
 -rwxr-xr-x   196KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   262KiB /usr/lib64/libslapi-2.4.so.2.11.5
--rwxr-xr-x   199KiB /usr/lib64/libsmartcols.so.1.1.0
+-rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   653KiB /usr/lib64/libsolv.so.1
 -rwxr-xr-x   333KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
@@ -4815,7 +4816,7 @@
 -rwxr-xr-x   1.7MiB /usr/lib64/libunistring.so.2.1.0
 -rw-r--r--       8B /usr/lib64/libutil.a
 -rwxr-xr-x   196KiB /usr/lib64/libutil.so.1
--rwxr-xr-x   197KiB /usr/lib64/libuuid.so.1.3.0
+-rwxr-xr-x   196KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x   197KiB /usr/lib64/libverto.so.1.0.0
 -rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.4
 -rwxr-xr-x   261KiB /usr/lib64/libyaml-0.so.2.0.9
@@ -5272,9 +5273,9 @@
 -rw-r--r--   6.9KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.opt-1.pyc
 -rw-r--r--   6.0KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.opt-2.pyc
 -rw-r--r--   6.9KiB /usr/lib64/python3.9/__pycache__/tabnanny.cpython-39.pyc
--rw-r--r--    72KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-1.pyc
+-rw-r--r--    73KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-1.pyc
 -rw-r--r--    57KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.opt-2.pyc
--rw-r--r--    72KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.pyc
+-rw-r--r--    73KiB /usr/lib64/python3.9/__pycache__/tarfile.cpython-39.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.opt-2.pyc
 -rw-r--r--    18KiB /usr/lib64/python3.9/__pycache__/telnetlib.cpython-39.pyc
@@ -5361,7 +5362,7 @@
 -rw-r--r--   3.1KiB /usr/lib64/python3.9/_sitebuiltins.py
 -rw-r--r--    25KiB /usr/lib64/python3.9/_strptime.py
 -rw-r--r--    44KiB /usr/lib64/python3.9/_sysconfigdata__linux_aarch64-linux-gnu.py
--rw-r--r--    43KiB /usr/lib64/python3.9/_sysconfigdata_d_linux_aarch64-linux-gnu.py
+-rw-r--r--    44KiB /usr/lib64/python3.9/_sysconfigdata_d_linux_aarch64-linux-gnu.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/_threading_local.py
 -rw-r--r--   5.8KiB /usr/lib64/python3.9/_weakrefset.py
 -rw-r--r--   4.9KiB /usr/lib64/python3.9/abc.py
@@ -6257,7 +6258,7 @@
 -rw-r--r--   5.9KiB /usr/lib64/python3.9/fnmatch.py
 -rw-r--r--    15KiB /usr/lib64/python3.9/formatter.py
 -rw-r--r--    24KiB /usr/lib64/python3.9/fractions.py
--rw-r--r--    35KiB /usr/lib64/python3.9/ftplib.py
+-rw-r--r--    36KiB /usr/lib64/python3.9/ftplib.py
 -rw-r--r--    38KiB /usr/lib64/python3.9/functools.py
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/genericpath.py
 -rw-r--r--   7.4KiB /usr/lib64/python3.9/getopt.py
@@ -7061,7 +7062,7 @@
 -rw-r--r--   7.8KiB /usr/lib64/python3.9/symtable.py
 -rw-r--r--    25KiB /usr/lib64/python3.9/sysconfig.py
 -rwxr-xr-x    12KiB /usr/lib64/python3.9/tabnanny.py
--rwxr-xr-x   109KiB /usr/lib64/python3.9/tarfile.py
+-rwxr-xr-x   110KiB /usr/lib64/python3.9/tarfile.py
 -rw-r--r--    23KiB /usr/lib64/python3.9/telnetlib.py
 -rw-r--r--    28KiB /usr/lib64/python3.9/tempfile.py
 -rw-r--r--    19KiB /usr/lib64/python3.9/textwrap.py
