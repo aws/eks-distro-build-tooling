@@ -1,4 +1,4 @@
 
-libnghttp2.x86_64
-openssl-libs.x86_64
-python3-pip.noarch
+expat.x86_64
+libuuid.x86_64
+system-release.x86_64

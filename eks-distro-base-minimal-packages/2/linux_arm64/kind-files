@@ -1465,7 +1465,7 @@
 -rwxr-xr-x    69KiB /usr/lib64/libip6tc.so.2.0.0
 -rwxr-xr-x   278KiB /usr/lib64/libipset.so.3.6.0
 -rwxr-xr-x    67KiB /usr/lib64/libiptc.so.1.0.0
--rwxr-xr-x   329KiB /usr/lib64/libjq.so.1.0.4
+-rwxr-xr-x   396KiB /usr/lib64/libjq.so.1.0.4
 -rwxr-xr-x   262KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x   134KiB /usr/lib64/libkdb5.so.8.0
 -rwxr-xr-x    68KiB /usr/lib64/libkeyutils.so.1.5
@@ -4376,7 +4376,7 @@
 -rw-r--r--    35KiB /usr/share/doc/info-5.1/COPYING
 -rw-r--r--    18KiB /usr/share/doc/ipset-6.29/COPYING
 -rw-r--r--    18KiB /usr/share/doc/ipset-libs-6.29/COPYING
--rw-r--r--   2.9KiB /usr/share/doc/jq/COPYING
+-rw-r--r--   4.6KiB /usr/share/doc/jq/COPYING
 -rw-r--r--    18KiB /usr/share/doc/keyutils-1.5.8/LICENCE.GPL
 -rw-r--r--    26KiB /usr/share/doc/keyutils-libs-1.5.8/LICENCE.LGPL
 -rw-r--r--    60KiB /usr/share/doc/krb5-libs-1.15.1/NOTICE
@@ -4536,7 +4536,7 @@
 -rwxr-xr-x     906B /usr/share/keyutils/request-key-debug.sh
 -rw-r--r--    35KiB /usr/share/libgpg-error/errorref.txt
 -rw-r--r--    18KiB /usr/share/licenses/chkconfig-1.7.4/COPYING
--rw-r--r--    11KiB /usr/share/licenses/containerd-2.1.7/LICENSE
+-rw-r--r--    11KiB /usr/share/licenses/containerd-2.1.9/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/cpio-2.12/COPYING
 -rw-r--r--    19KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING
 -rw-r--r--    27KiB /usr/share/licenses/cryptsetup-libs-1.7.4/COPYING.LGPL
