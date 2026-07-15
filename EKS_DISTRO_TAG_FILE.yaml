@@ -112,7 +112,7 @@ al2023:
   eks-distro-minimal-base-golang-compiler-1.24-base: 1.24-2026-07-14-1784055682.2023
   eks-distro-minimal-base-golang-compiler-1.24-yum: 1.24-yum-2026-07-14-1784055682.2023
   eks-distro-minimal-base-golang-compiler-1.24-gcc: 1.24-gcc-2026-07-14-1784055682.2023
-  eks-distro-minimal-base-golang-compiler-1.25-base: 1.25-2026-07-14-1784055682.2023
+  eks-distro-minimal-base-golang-compiler-1.25-base: 1.25-2026-07-15-1784142082.2023
   eks-distro-minimal-base-golang-compiler-1.25-yum: 1.25-yum-2026-07-14-1784055682.2023
   eks-distro-minimal-base-golang-compiler-1.25-gcc: 1.25-gcc-2026-07-14-1784055682.2023
   eks-distro-minimal-base-golang-compiler-1.26-base: 1.26-2026-07-14-1784055682.2023
