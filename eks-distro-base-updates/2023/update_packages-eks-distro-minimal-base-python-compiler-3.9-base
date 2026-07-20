@@ -1,3 +1,12 @@
 
 amazon-linux-repo-cdn.noarch
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+krb5-libs.x86_64
+libacl.x86_64
+libuuid.x86_64
+python3.x86_64
+python3-libs.x86_64
 system-release.noarch
+tzdata.noarch

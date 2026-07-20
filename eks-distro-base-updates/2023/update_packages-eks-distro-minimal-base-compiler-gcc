@@ -1,4 +1,21 @@
 
 amazon-linux-repo-cdn.noarch
+glib2.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-devel.x86_64
+glibc-gconv-extra.x86_64
+glibc-headers-x86.noarch
+glibc-minimal-langpack.x86_64
 kernel6.18-headers.x86_64
+krb5-libs.x86_64
+libacl.x86_64
+libblkid.x86_64
+libmount.x86_64
+libsmartcols.x86_64
+libuuid.x86_64
+python3.x86_64
+python3-libs.x86_64
+rust-toolset-srpm-macros.noarch
 system-release.noarch
+tzdata.noarch
