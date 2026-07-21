@@ -1,9 +1,7 @@
 
 expat.x86_64
-libblkid.x86_64
-libfdisk.x86_64
-libmount.x86_64
-libsmartcols.x86_64
-libuuid.x86_64
-system-release.x86_64
-util-linux.x86_64
+krb5-libs.x86_64
+libssh2.x86_64
+python.x86_64
+python-libs.x86_64
+tzdata.noarch

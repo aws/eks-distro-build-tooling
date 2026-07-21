@@ -7,7 +7,7 @@ glibc-common-2.26-64.amzn2.0.6.x86_64
 glibc-minimal-langpack-2.26-64.amzn2.0.6.x86_64
 gpg-pubkey-c87f5b1a-593863f8
 keyutils-libs-1.5.8-3.amzn2.0.2.x86_64
-krb5-libs-1.15.1-55.amzn2.2.9.x86_64
+krb5-libs-1.15.1-55.amzn2.2.10.x86_64
 libacl-2.2.51-14.amzn2.x86_64
 libattr-2.4.46-12.amzn2.0.2.x86_64
 libcom_err-1.42.9-19.amzn2.0.1.x86_64
@@ -20,6 +20,6 @@ openssl-libs-1.0.2k-24.amzn2.0.21.x86_64
 pcre-8.32-17.amzn2.0.3.x86_64
 setup-2.8.71-10.amzn2.0.1.noarch
 system-release-2-18.amzn2.x86_64
-tzdata-2026b-1.amzn2.0.1.noarch
+tzdata-2026c-1.amzn2.0.1.noarch
 util-linux-2.30.2-2.amzn2.0.14.x86_64
 zlib-1.2.7-19.amzn2.0.3.x86_64
