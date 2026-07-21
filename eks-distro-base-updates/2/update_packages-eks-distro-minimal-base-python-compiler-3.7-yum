@@ -1,7 +1,10 @@
 
 expat.x86_64
-libblkid.x86_64
-libmount.x86_64
-libuuid.x86_64
-libxml2.x86_64
-system-release.x86_64
+glib2.x86_64
+krb5-libs.x86_64
+libssh2.x86_64
+python.x86_64
+python-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+tzdata.noarch

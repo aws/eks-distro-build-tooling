@@ -1,4 +1,5 @@
 
 expat.x86_64
-libuuid.x86_64
-system-release.x86_64
+krb5-libs.x86_64
+libssh2.x86_64
+tzdata.noarch
