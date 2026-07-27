@@ -13,7 +13,7 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          if [[ "$PR_AUTHOR" == "eks-distro-pr-bot" && ( "$PR_TITLE" == *"Update base image"* || "$PR_TITLE" == *"Update builder-base image"* || "$PR_TITLE" == *"Update golang"* || "$PR_TITLE" == *"Update GIT_TAG and GOLANG_VERSION"* || "$PR_TITLE" == *"Update helm chart images"* ) ]]; then
+          if [[ "$PR_AUTHOR" == "eks-distro-pr-bot" && ( "$PR_TITLE" == *"Update base image"* || "$PR_TITLE" == *"Update builder-base image"* || "$PR_TITLE" == *"Update golang"* || "$PR_TITLE" == *"Update GIT_TAG and GOLANG_VERSION"* || "$PR_TITLE" == *"Update helm chart images"* || "$PR_TITLE" == *"Update Prow component images"* ) ]]; then
             payload=$(jq -n \
               --arg repo "$GITHUB_REPOSITORY" \
               --arg pr_title "$PR_TITLE" \
