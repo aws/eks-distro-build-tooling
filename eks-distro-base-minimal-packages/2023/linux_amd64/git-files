@@ -255,15 +255,15 @@
 -rwxr-xr-x    24KiB /usr/bin/pldd
 -rwxr-xr-x      32B /usr/bin/read
 -rwxr-xr-x   857KiB /usr/bin/scalar
--rwxr-xr-x   134KiB /usr/bin/scp
--rwxr-xr-x   146KiB /usr/bin/sftp
+-rwxr-xr-x   138KiB /usr/bin/scp
+-rwxr-xr-x   158KiB /usr/bin/sftp
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x    36KiB /usr/bin/sprof
--rwxr-xr-x   848KiB /usr/bin/ssh
--rwxr-xr-x   165KiB /usr/bin/ssh-add
--rwxr-xr-x   286KiB /usr/bin/ssh-agent
--rwxr-xr-x    13KiB /usr/bin/ssh-copy-id
--rwxr-xr-x   202KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   909KiB /usr/bin/ssh
+-rwxr-xr-x   310KiB /usr/bin/ssh-add
+-rwxr-xr-x   322KiB /usr/bin/ssh-agent
+-rwxr-xr-x    14KiB /usr/bin/ssh-copy-id
+-rwxr-xr-x   351KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x      32B /usr/bin/type
 -rwxr-xr-x    15KiB /usr/bin/tzselect
 -rwxr-xr-x      34B /usr/bin/ulimit
@@ -346,7 +346,7 @@
 -rwxr-xr-x    70KiB /usr/lib64/libcbor.so.0.7.0
 -rwxr-xr-x    24KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.5
+-rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.7
 -rwxr-xr-x   724KiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   239KiB /usr/lib64/libedit.so.0.0.67
@@ -405,7 +405,7 @@
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.5
+-rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.7
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
@@ -467,8 +467,8 @@
 -rwxr-xr-x    85KiB /usr/libexec/gpg-protect-tool
 -rwxr-xr-x      50B /usr/libexec/gpg-wks-client
 -rwxr-xr-x   159KiB /usr/libexec/keyboxd
--rwxr-xr-x   125KiB /usr/libexec/openssh/ssh-pkcs11-helper
--rwxr-xr-x   137KiB /usr/libexec/openssh/ssh-sk-helper
+-rwxr-xr-x   266KiB /usr/libexec/openssh/ssh-pkcs11-helper
+-rwxr-xr-x   270KiB /usr/libexec/openssh/ssh-sk-helper
 -rwxr-xr-x    17KiB /usr/libexec/p11-kit/p11-kit-remote
 -rwxr-xr-x   436KiB /usr/libexec/scdaemon
 -rwxr-xr-x   3.1KiB /usr/sbin/addgnupghome
@@ -838,7 +838,7 @@
 -rw-r--r--   171KiB /usr/share/locale/zh_TW/LC_MESSAGES/gnupg2.mo
 -rw-r--r--    32KiB /usr/share/locale/zh_TW/LC_MESSAGES/libgpg-error.mo
 -rw-r--r--     548B /usr/share/locale/zh_TW/LC_MESSAGES/p11-kit.mo
--rw-r--r--   3.1KiB /usr/share/man/man1/ssh-copy-id.1.gz
+-rw-r--r--   3.2KiB /usr/share/man/man1/ssh-copy-id.1.gz
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
@@ -3130,7 +3130,7 @@ lrwxrwxrwx      15B /usr/lib64/libbz2.so.1 libbz2.so.1.0.8
 lrwxrwxrwx      16B /usr/lib64/libcbor.so.0.7 libcbor.so.0.7.0
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
@@ -3174,7 +3174,7 @@ lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
 lrwxrwxrwx      17B /usr/lib64/libsasl2.so.3 libsasl2.so.3.0.0
 lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6

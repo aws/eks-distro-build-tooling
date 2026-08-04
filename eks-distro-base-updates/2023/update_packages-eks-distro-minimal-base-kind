@@ -1,3 +1,16 @@
 
 amazon-linux-repo-cdn.noarch
+crypto-policies.noarch
+gawk.x86_64
+glib2.x86_64
+libxml2.x86_64
+nftables.x86_64
+openssl-libs.x86_64
+python3.x86_64
+python3-libs.x86_64
+python3-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+rpm-sign-libs.x86_64
 system-release.noarch
