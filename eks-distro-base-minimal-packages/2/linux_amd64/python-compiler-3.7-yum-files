@@ -337,7 +337,7 @@
 -rwxr-xr-x    49KiB /usr/bin/who
 -rwxr-xr-x    29KiB /usr/bin/whoami
 -rwxr-xr-x    61KiB /usr/bin/xargs
--rwxr-xr-x    16KiB /usr/bin/xmlcatalog
+-rwxr-xr-x    20KiB /usr/bin/xmlcatalog
 -rwxr-xr-x    62KiB /usr/bin/xmllint
 -rwxr-xr-x    24KiB /usr/bin/xmlwf
 -rwxr-xr-x    29KiB /usr/bin/yes
@@ -2357,7 +2357,7 @@
 -rwxr-xr-x   171KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x   8.1KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    22KiB /usr/lib64/libSegFault.so
--rwxr-xr-x    37KiB /usr/lib64/libacl.so.1.1.0
+-rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.2.0
 -rwxr-xr-x    20KiB /usr/lib64/libanl-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libassuan.so.0.4.0
 -rwxr-xr-x    20KiB /usr/lib64/libattr.so.1.1.0
@@ -2449,7 +2449,7 @@
 -rwxr-xr-x    78KiB /usr/lib64/libpth.so.20.0.27
 -rwxr-xr-x   146KiB /usr/lib64/libpthread-2.26.so
 -rwxr-xr-x   1.8MiB /usr/lib64/libpython2.7.so.1.0
--rwxr-xr-x   3.4MiB /usr/lib64/libpython3.7m.so.1.0
+-rwxr-xr-x   3.0MiB /usr/lib64/libpython3.7m.so.1.0
 -rwxr-xr-x   6.5KiB /usr/lib64/libpython3.so
 -rwxr-xr-x   279KiB /usr/lib64/libreadline.so.6.2
 -rwxr-xr-x    92KiB /usr/lib64/libresolv-2.26.so
@@ -2528,9 +2528,9 @@
 -rw-r--r--    11KiB /usr/lib64/python2.7/DocXMLRPCServer.py
 -rw-r--r--    10KiB /usr/lib64/python2.7/DocXMLRPCServer.pyc
 -rw-r--r--   9.9KiB /usr/lib64/python2.7/DocXMLRPCServer.pyo
--rw-r--r--    18KiB /usr/lib64/python2.7/HTMLParser.py
--rw-r--r--    14KiB /usr/lib64/python2.7/HTMLParser.pyc
--rw-r--r--    14KiB /usr/lib64/python2.7/HTMLParser.pyo
+-rw-r--r--    20KiB /usr/lib64/python2.7/HTMLParser.py
+-rw-r--r--    15KiB /usr/lib64/python2.7/HTMLParser.pyc
+-rw-r--r--    15KiB /usr/lib64/python2.7/HTMLParser.pyo
 -rw-r--r--   6.4KiB /usr/lib64/python2.7/MimeWriter.py
 -rw-r--r--   7.2KiB /usr/lib64/python2.7/MimeWriter.pyc
 -rw-r--r--   7.2KiB /usr/lib64/python2.7/MimeWriter.pyo
@@ -3485,7 +3485,7 @@
 -rw-r--r--    20KiB /usr/lib64/python2.7/htmllib.pyc
 -rw-r--r--    20KiB /usr/lib64/python2.7/htmllib.pyo
 -rw-r--r--    53KiB /usr/lib64/python2.7/httplib.py
--rw-r--r--    38KiB /usr/lib64/python2.7/httplib.pyc
+-rw-r--r--    39KiB /usr/lib64/python2.7/httplib.pyc
 -rw-r--r--    38KiB /usr/lib64/python2.7/httplib.pyo
 -rw-r--r--   8.8KiB /usr/lib64/python2.7/idlelib/AutoComplete.py
 -rw-r--r--   7.9KiB /usr/lib64/python2.7/idlelib/AutoComplete.pyc
@@ -6353,11 +6353,11 @@
 -rw-r--r--    50KiB /usr/lib64/python3.7/html/__pycache__/entities.cpython-37.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.7/html/__pycache__/entities.cpython-37.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.7/html/__pycache__/entities.cpython-37.pyc
--rw-r--r--    11KiB /usr/lib64/python3.7/html/__pycache__/parser.cpython-37.opt-1.pyc
--rw-r--r--   9.6KiB /usr/lib64/python3.7/html/__pycache__/parser.cpython-37.opt-2.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.7/html/__pycache__/parser.cpython-37.opt-1.pyc
+-rw-r--r--   9.9KiB /usr/lib64/python3.7/html/__pycache__/parser.cpython-37.opt-2.pyc
 -rw-r--r--    12KiB /usr/lib64/python3.7/html/__pycache__/parser.cpython-37.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.7/html/entities.py
--rw-r--r--    19KiB /usr/lib64/python3.7/html/parser.py
+-rw-r--r--    20KiB /usr/lib64/python3.7/html/parser.py
 -rw-r--r--   6.0KiB /usr/lib64/python3.7/http/__init__.py
 -rw-r--r--   5.8KiB /usr/lib64/python3.7/http/__pycache__/__init__.cpython-37.opt-1.pyc
 -rw-r--r--   5.2KiB /usr/lib64/python3.7/http/__pycache__/__init__.cpython-37.opt-2.pyc
@@ -6445,7 +6445,7 @@
 -rwxr-xr-x   112KiB /usr/lib64/python3.7/lib-dynload/_codecs_tw.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   7.1KiB /usr/lib64/python3.7/lib-dynload/_contextvars.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   7.5KiB /usr/lib64/python3.7/lib-dynload/_crypt.cpython-37m-x86_64-linux-gnu.so
--rwxr-xr-x    39KiB /usr/lib64/python3.7/lib-dynload/_csv.cpython-37m-x86_64-linux-gnu.so
+-rwxr-xr-x    43KiB /usr/lib64/python3.7/lib-dynload/_csv.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   145KiB /usr/lib64/python3.7/lib-dynload/_ctypes.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    84KiB /usr/lib64/python3.7/lib-dynload/_curses.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    17KiB /usr/lib64/python3.7/lib-dynload/_curses_panel.cpython-37m-x86_64-linux-gnu.so
@@ -6479,7 +6479,7 @@
 -rwxr-xr-x   7.1KiB /usr/lib64/python3.7/lib-dynload/_uuid.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    66KiB /usr/lib64/python3.7/lib-dynload/array.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    52KiB /usr/lib64/python3.7/lib-dynload/audioop.cpython-37m-x86_64-linux-gnu.so
--rwxr-xr-x    31KiB /usr/lib64/python3.7/lib-dynload/binascii.cpython-37m-x86_64-linux-gnu.so
+-rwxr-xr-x    39KiB /usr/lib64/python3.7/lib-dynload/binascii.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    64KiB /usr/lib64/python3.7/lib-dynload/cmath.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    19KiB /usr/lib64/python3.7/lib-dynload/fcntl.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    13KiB /usr/lib64/python3.7/lib-dynload/grp.cpython-37m-x86_64-linux-gnu.so
@@ -11055,7 +11055,7 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   676KiB /var/lib/rpm/Basenames
+-rw-r--r--   684KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   164KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -11129,7 +11129,7 @@ lrwxrwxrwx      22B /usr/lib64/.libssl.so.10.hmac	.libssl.so.1.0.2k.hmac
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-x86-64.so.2	ld-2.26.so
 lrwxrwxrwx      23B /usr/lib64/libBrokenLocale.so.1	libBrokenLocale-2.26.so
-lrwxrwxrwx      15B /usr/lib64/libacl.so.1	libacl.so.1.1.0
+lrwxrwxrwx      15B /usr/lib64/libacl.so.1	libacl.so.1.2.0
 lrwxrwxrwx      14B /usr/lib64/libanl.so.1	libanl-2.26.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0	libassuan.so.0.4.0
 lrwxrwxrwx      16B /usr/lib64/libattr.so.1	libattr.so.1.1.0

@@ -10,7 +10,7 @@ glibc-minimal-langpack-2.26-64.amzn2.0.6.aarch64
 gmp-6.0.0-15.amzn2.0.3.aarch64
 gperftools-libs-2.6.1-1.amzn2.aarch64
 gpg-pubkey-c87f5b1a-593863f8
-libacl-2.2.51-14.amzn2.aarch64
+libacl-2.2.51-14.amzn2.0.1.aarch64
 libattr-2.4.46-12.amzn2.0.2.aarch64
 libcap-2.54-1.amzn2.0.3.aarch64
 libcrypt-2.26-64.amzn2.0.6.aarch64
@@ -20,9 +20,9 @@ libsepol-2.5-10.amzn2.0.1.aarch64
 libstdc++-7.3.1-18.amzn2.aarch64
 ncurses-base-6.0-8.20170212.amzn2.1.8.noarch
 ncurses-libs-6.0-8.20170212.amzn2.1.8.aarch64
-nginx-1.30.3-1.amzn2.0.1.aarch64
-nginx-core-1.30.3-1.amzn2.0.1.aarch64
-nginx-filesystem-1.30.3-1.amzn2.0.1.noarch
+nginx-1.30.4-1.amzn2.0.1.aarch64
+nginx-core-1.30.4-1.amzn2.0.1.aarch64
+nginx-filesystem-1.30.4-1.amzn2.0.1.noarch
 openssl-libs-1.0.2k-24.amzn2.0.21.aarch64
 openssl11-libs-1.1.1zh-1.amzn2.0.1.aarch64
 pcre-8.32-17.amzn2.0.3.aarch64
