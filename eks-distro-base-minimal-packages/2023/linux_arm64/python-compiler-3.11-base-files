@@ -287,7 +287,7 @@
 -rwxr-xr-x   330KiB /usr/bin/find
 -rwxr-xr-x   196KiB /usr/bin/fmt
 -rwxr-xr-x   196KiB /usr/bin/fold
--rwxr-xr-x   719KiB /usr/bin/gawk
+-rwxr-xr-x   718KiB /usr/bin/gawk
 -rwxr-xr-x   197KiB /usr/bin/gdbm_dump
 -rwxr-xr-x   197KiB /usr/bin/gdbm_load
 -rwxr-xr-x   206KiB /usr/bin/gdbmtool
@@ -1906,7 +1906,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/engines-3/loader_attic.so
 -rwxr-xr-x   195KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
--rwxr-xr-x   197KiB /usr/lib64/gawk/filefuncs.so
+-rwxr-xr-x   196KiB /usr/lib64/gawk/filefuncs.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fnmatch.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fork.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/inplace.so
@@ -2252,7 +2252,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.5
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.7
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
@@ -2327,7 +2327,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.5
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.7
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libtic.so.6.6
@@ -3782,18 +3782,18 @@
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.opt-1.pyc
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.opt-2.pyc
 -rw-r--r--    98KiB /usr/lib64/python3.11/html/__pycache__/entities.cpython-311.pyc
--rw-r--r--    23KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-1.pyc
--rw-r--r--    21KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-2.pyc
--rw-r--r--    24KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.pyc
+-rw-r--r--    24KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-1.pyc
+-rw-r--r--    22KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.opt-2.pyc
+-rw-r--r--    25KiB /usr/lib64/python3.11/html/__pycache__/parser.cpython-311.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.11/html/entities.py
--rw-r--r--    21KiB /usr/lib64/python3.11/html/parser.py
+-rw-r--r--    22KiB /usr/lib64/python3.11/html/parser.py
 -rw-r--r--   7.8KiB /usr/lib64/python3.11/http/__init__.py
 -rw-r--r--   8.6KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-1.pyc
 -rw-r--r--   7.5KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.opt-2.pyc
 -rw-r--r--   8.6KiB /usr/lib64/python3.11/http/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--    61KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-1.pyc
--rw-r--r--    52KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-2.pyc
--rw-r--r--    61KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.pyc
+-rw-r--r--    53KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.opt-2.pyc
+-rw-r--r--    62KiB /usr/lib64/python3.11/http/__pycache__/client.cpython-311.pyc
 -rw-r--r--    86KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.opt-1.pyc
 -rw-r--r--    71KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.opt-2.pyc
 -rw-r--r--    87KiB /usr/lib64/python3.11/http/__pycache__/cookiejar.cpython-311.pyc
@@ -3803,7 +3803,7 @@
 -rw-r--r--    60KiB /usr/lib64/python3.11/http/__pycache__/server.cpython-311.opt-1.pyc
 -rw-r--r--    48KiB /usr/lib64/python3.11/http/__pycache__/server.cpython-311.opt-2.pyc
 -rw-r--r--    60KiB /usr/lib64/python3.11/http/__pycache__/server.cpython-311.pyc
--rw-r--r--    57KiB /usr/lib64/python3.11/http/client.py
+-rw-r--r--    58KiB /usr/lib64/python3.11/http/client.py
 -rw-r--r--    76KiB /usr/lib64/python3.11/http/cookiejar.py
 -rw-r--r--    22KiB /usr/lib64/python3.11/http/cookies.py
 -rw-r--r--    48KiB /usr/lib64/python3.11/http/server.py
@@ -4945,7 +4945,7 @@
 -rw-r--r--     248B /usr/share/crypto-policies/policies/modules/NO-ENFORCE-EMS.pmod
 -rw-r--r--     123B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
 -rw-r--r--   2.1KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
--rw-r--r--     359B /usr/share/crypto-policies/policies/modules/PQ.pmod
+-rw-r--r--     385B /usr/share/crypto-policies/policies/modules/PQ.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--   1.1KiB /usr/share/doc/gdbm/NOTE-WARNING
@@ -8184,7 +8184,7 @@ lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcord.so.1 libcord.so.1.4.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so libctf-nobfd.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so.0 libctf-nobfd.so.0.0.0
 lrwxrwxrwx      15B /usr/lib64/libctf.so libctf.so.0.0.0
@@ -8251,7 +8251,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
 lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.6

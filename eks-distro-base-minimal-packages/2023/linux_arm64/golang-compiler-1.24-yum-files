@@ -266,7 +266,7 @@
 -rw-r--r--      18B /etc/skel/.bash_logout
 -rw-r--r--     141B /etc/skel/.bash_profile
 -rw-r--r--     492B /etc/skel/.bashrc
--rw-r--r--   565KiB /etc/ssh/moduli
+-rw-r--r--   530KiB /etc/ssh/moduli
 -rw-r--r--   1.9KiB /etc/ssh/ssh_config
 -rw-r--r--     581B /etc/ssh/ssh_config.d/50-redhat.conf
 -rw-r--r--   1.2KiB /etc/ssl/README
@@ -14528,7 +14528,7 @@
 -rwxr-xr-x   196KiB /usr/bin/fold
 -rwxr-xr-x   199KiB /usr/bin/g13
 -rwxr-xr-x   196KiB /usr/bin/gapplication
--rwxr-xr-x   719KiB /usr/bin/gawk
+-rwxr-xr-x   718KiB /usr/bin/gawk
 -rwxr-xr-x   196KiB /usr/bin/gdbus
 -rwxr-xr-x   196KiB /usr/bin/gencat
 -rwxr-xr-x   196KiB /usr/bin/getconf
@@ -14657,11 +14657,11 @@
 -rwxr-xr-x   196KiB /usr/bin/rev
 -rwxr-xr-x   197KiB /usr/bin/rm
 -rwxr-xr-x   196KiB /usr/bin/rmdir
--rwxr-xr-x   197KiB /usr/bin/rpm
+-rwxr-xr-x   196KiB /usr/bin/rpm
 -rwxr-xr-x   196KiB /usr/bin/rpm2archive
 -rwxr-xr-x   196KiB /usr/bin/rpm2cpio
--rwxr-xr-x   197KiB /usr/bin/rpmdb
--rwxr-xr-x   197KiB /usr/bin/rpmkeys
+-rwxr-xr-x   196KiB /usr/bin/rpmdb
+-rwxr-xr-x   196KiB /usr/bin/rpmkeys
 -rwxr-xr-x   196KiB /usr/bin/runcon
 -rwxr-xr-x   924KiB /usr/bin/scalar
 -rwxr-xr-x   262KiB /usr/bin/scp
@@ -14688,12 +14688,12 @@
 -rwxr-xr-x   4.2KiB /usr/bin/sotruss
 -rwxr-xr-x   197KiB /usr/bin/split
 -rwxr-xr-x   196KiB /usr/bin/sprof
--rwxr-xr-x   908KiB /usr/bin/ssh
--rwxr-xr-x   261KiB /usr/bin/ssh-add
--rwxr-xr-x   390KiB /usr/bin/ssh-agent
--rwxr-xr-x    13KiB /usr/bin/ssh-copy-id
+-rwxr-xr-x   973KiB /usr/bin/ssh
+-rwxr-xr-x   391KiB /usr/bin/ssh-add
+-rwxr-xr-x   391KiB /usr/bin/ssh-agent
+-rwxr-xr-x    14KiB /usr/bin/ssh-copy-id
 -rwxr-xr-x   520KiB /usr/bin/ssh-keygen
--rwxr-xr-x   262KiB /usr/bin/ssh-keyscan
+-rwxr-xr-x   455KiB /usr/bin/ssh-keyscan
 -rwxr-xr-x   197KiB /usr/bin/stat
 -rwxr-xr-x   196KiB /usr/bin/stdbuf
 -rwxr-xr-x   197KiB /usr/bin/strings
@@ -15132,6 +15132,7 @@
 -rw-r--r--     223B /usr/lib/systemd/user/gpg-agent.service
 -rw-r--r--     234B /usr/lib/systemd/user/gpg-agent.socket
 -rw-r--r--     459B /usr/lib/systemd/user/ssh-agent.service
+-rw-r--r--      37B /usr/lib/sysusers.d/openssh.conf
 -rw-r--r--     188B /usr/lib/tmpfiles.d/dnf.conf
 -rw-r--r--      30B /usr/lib/tmpfiles.d/libselinux.conf
 -rw-r--r--     135B /usr/lib/tmpfiles.d/pam.conf
@@ -15147,7 +15148,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/engines-3/loader_attic.so
 -rwxr-xr-x   195KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
--rwxr-xr-x   197KiB /usr/lib64/gawk/filefuncs.so
+-rwxr-xr-x   196KiB /usr/lib64/gawk/filefuncs.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fnmatch.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fork.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/inplace.so
@@ -15510,7 +15511,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
 -rwxr-xr-x   196KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.5
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.7
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
@@ -15614,9 +15615,9 @@
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x   262KiB /usr/lib64/librepo.so.0
 -rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
--rwxr-xr-x   599KiB /usr/lib64/librpm.so.9.1.3
--rwxr-xr-x   264KiB /usr/lib64/librpmbuild.so.9.1.3
--rwxr-xr-x   267KiB /usr/lib64/librpmio.so.9.1.3
+-rwxr-xr-x   598KiB /usr/lib64/librpm.so.9.1.3
+-rwxr-xr-x   263KiB /usr/lib64/librpmbuild.so.9.1.3
+-rwxr-xr-x   266KiB /usr/lib64/librpmio.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librpmsign.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
@@ -15631,7 +15632,7 @@
 -rwxr-xr-x   333KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.5
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.7
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   197KiB /usr/lib64/libtasn1.so.6.6.3
@@ -17102,11 +17103,11 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
--rw-r--r--    13KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    21KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    22KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -17852,7 +17853,7 @@
 -rw-r--r--   3.2KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/transaction.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/transaction.cpython-39.pyc
--rwxr-xr-x   221KiB /usr/lib64/python3.9/site-packages/rpm/_rpm.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   220KiB /usr/lib64/python3.9/site-packages/rpm/_rpm.cpython-39-aarch64-linux-gnu.so
 -rw-r--r--   5.8KiB /usr/lib64/python3.9/site-packages/rpm/transaction.py
 -rw-r--r--    22KiB /usr/lib64/python3.9/site.py
 -rwxr-xr-x    35KiB /usr/lib64/python3.9/smtpd.py
@@ -18248,9 +18249,9 @@
 -rwxr-xr-x      50B /usr/libexec/gpg-wks-client
 -rwxr-xr-x     257B /usr/libexec/grepconf.sh
 -rwxr-xr-x   263KiB /usr/libexec/keyboxd
--r-xr-sr-x   454KiB /usr/libexec/openssh/ssh-keysign
--rwxr-xr-x   261KiB /usr/libexec/openssh/ssh-pkcs11-helper
--rwxr-xr-x   261KiB /usr/libexec/openssh/ssh-sk-helper
+-r-xr-sr-x   455KiB /usr/libexec/openssh/ssh-keysign
+-rwxr-xr-x   390KiB /usr/libexec/openssh/ssh-pkcs11-helper
+-rwxr-xr-x   390KiB /usr/libexec/openssh/ssh-sk-helper
 -rwxr-xr-x   197KiB /usr/libexec/p11-kit/p11-kit-remote
 -rwxr-xr-x     275B /usr/libexec/p11-kit/trust-extract-compat
 -rwxr-xr-x   524KiB /usr/libexec/scdaemon
@@ -18598,7 +18599,7 @@
 -rw-r--r--     248B /usr/share/crypto-policies/policies/modules/NO-ENFORCE-EMS.pmod
 -rw-r--r--     123B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
 -rw-r--r--   2.1KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
--rw-r--r--     359B /usr/share/crypto-policies/policies/modules/PQ.pmod
+-rw-r--r--     385B /usr/share/crypto-policies/policies/modules/PQ.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--    14KiB /usr/share/doc/cracklib/README-LICENSE
@@ -19170,7 +19171,7 @@
 -rw-r--r--    26KiB /usr/share/licenses/npth/COPYING.LIB
 -rw-r--r--   2.3KiB /usr/share/licenses/openldap/COPYRIGHT
 -rw-r--r--   2.2KiB /usr/share/licenses/openldap/LICENSE
--rw-r--r--    19KiB /usr/share/licenses/openssh/LICENCE
+-rw-r--r--    21KiB /usr/share/licenses/openssh/LICENCE
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
 -rw-r--r--   1.5KiB /usr/share/licenses/p11-kit/COPYING
 -rw-r--r--   2.0KiB /usr/share/licenses/pam/Copyright
@@ -20289,7 +20290,7 @@
 -rw-r--r--   5.7KiB /usr/share/locale/zu/LC_MESSAGES/Linux-PAM.mo
 -rw-r--r--     697B /usr/share/locale/zu/LC_MESSAGES/libpwquality.mo
 -rw-r--r--    15KiB /usr/share/man/man1/objcopy.1.gz
--rw-r--r--   3.1KiB /usr/share/man/man1/ssh-copy-id.1.gz
+-rw-r--r--   3.2KiB /usr/share/man/man1/ssh-copy-id.1.gz
 -rw-r--r--   1.2MiB /usr/share/misc/magic
 -rw-r--r--   6.4MiB /usr/share/misc/magic.mgc
 -rw-r--r--     902B /usr/share/p11-kit/modules/p11-kit-trust.module
@@ -22655,7 +22656,7 @@ lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcord.so.1 libcord.so.1.4.0
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so libctf-nobfd.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so.0 libctf-nobfd.so.0.0.0
 lrwxrwxrwx      15B /usr/lib64/libctf.so libctf.so.0.0.0
@@ -22757,7 +22758,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3

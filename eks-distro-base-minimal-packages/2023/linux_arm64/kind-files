@@ -407,7 +407,7 @@
 -rwxr-xr-x   197KiB /usr/bin/free
 -rwxr-xr-x   199KiB /usr/bin/g13
 -rwxr-xr-x   196KiB /usr/bin/gapplication
--rwxr-xr-x   719KiB /usr/bin/gawk
+-rwxr-xr-x   718KiB /usr/bin/gawk
 -rwxr-xr-x   196KiB /usr/bin/gdbus
 -rwxr-xr-x   196KiB /usr/bin/gencat
 -rwxr-xr-x   196KiB /usr/bin/getconf
@@ -550,11 +550,11 @@
 -rwxr-xr-x   196KiB /usr/bin/rmdir
 -rwxr-xr-x   197KiB /usr/bin/rpcbind
 -rwxr-xr-x   197KiB /usr/bin/rpcinfo
--rwxr-xr-x   197KiB /usr/bin/rpm
+-rwxr-xr-x   196KiB /usr/bin/rpm
 -rwxr-xr-x   196KiB /usr/bin/rpm2archive
 -rwxr-xr-x   196KiB /usr/bin/rpm2cpio
--rwxr-xr-x   197KiB /usr/bin/rpmdb
--rwxr-xr-x   197KiB /usr/bin/rpmkeys
+-rwxr-xr-x   196KiB /usr/bin/rpmdb
+-rwxr-xr-x   196KiB /usr/bin/rpmkeys
 -rwxr-xr-x   601KiB /usr/bin/rsync
 -rwxr-xr-x   5.1KiB /usr/bin/rsync-ssl
 -rwxr-xr-x   196KiB /usr/bin/runcon
@@ -1336,7 +1336,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/engines-3/loader_attic.so
 -rwxr-xr-x   195KiB /usr/lib64/engines-3/padlock.so
 -rw-r--r--      65B /usr/lib64/fipscheck/libcrypt.so.2.0.0.hmac
--rwxr-xr-x   197KiB /usr/lib64/gawk/filefuncs.so
+-rwxr-xr-x   196KiB /usr/lib64/gawk/filefuncs.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fnmatch.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/fork.so
 -rwxr-xr-x   196KiB /usr/lib64/gawk/inplace.so
@@ -1395,7 +1395,7 @@
 -rwxr-xr-x   265KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x   196KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.5
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.7
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   469KiB /usr/lib64/libdevmapper.so.1.02
@@ -1502,7 +1502,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libnfsidmap/regex.so
 -rwxr-xr-x   197KiB /usr/lib64/libnfsidmap/static.so
 -rwxr-xr-x   197KiB /usr/lib64/libnfsidmap/umich_ldap.so
--rwxr-xr-x   978KiB /usr/lib64/libnftables.so.1.1.0
+-rwxr-xr-x   977KiB /usr/lib64/libnftables.so.1.1.0
 -rwxr-xr-x   269KiB /usr/lib64/libnftnl.so.11.6.0
 -rwxr-xr-x   261KiB /usr/lib64/libnghttp2.so.14.26.0
 -rwxr-xr-x   268KiB /usr/lib64/libnghttp3.so.9.6.1
@@ -1547,9 +1547,9 @@
 -rwxr-xr-x   196KiB /usr/lib64/libref_array.so.1.2.1
 -rwxr-xr-x   262KiB /usr/lib64/librepo.so.0
 -rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
--rwxr-xr-x   599KiB /usr/lib64/librpm.so.9.1.3
--rwxr-xr-x   264KiB /usr/lib64/librpmbuild.so.9.1.3
--rwxr-xr-x   267KiB /usr/lib64/librpmio.so.9.1.3
+-rwxr-xr-x   598KiB /usr/lib64/librpm.so.9.1.3
+-rwxr-xr-x   263KiB /usr/lib64/librpmbuild.so.9.1.3
+-rwxr-xr-x   266KiB /usr/lib64/librpmio.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librpmsign.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
@@ -1564,7 +1564,7 @@
 -rwxr-xr-x   333KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.5
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.7
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   197KiB /usr/lib64/libtasn1.so.6.6.3
@@ -3038,11 +3038,11 @@
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-1.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.opt-2.pyc
 -rw-r--r--    50KiB /usr/lib64/python3.9/html/__pycache__/entities.cpython-39.pyc
--rw-r--r--    13KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
--rw-r--r--    11KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
+-rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-1.pyc
+-rw-r--r--    12KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.opt-2.pyc
 -rw-r--r--    14KiB /usr/lib64/python3.9/html/__pycache__/parser.cpython-39.pyc
 -rw-r--r--    74KiB /usr/lib64/python3.9/html/entities.py
--rw-r--r--    21KiB /usr/lib64/python3.9/html/parser.py
+-rw-r--r--    22KiB /usr/lib64/python3.9/html/parser.py
 -rw-r--r--   6.6KiB /usr/lib64/python3.9/http/__init__.py
 -rw-r--r--   6.3KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/http/__pycache__/__init__.cpython-39.opt-2.pyc
@@ -3787,7 +3787,7 @@
 -rw-r--r--   3.2KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/transaction.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib64/python3.9/site-packages/rpm/__pycache__/transaction.cpython-39.pyc
--rwxr-xr-x   221KiB /usr/lib64/python3.9/site-packages/rpm/_rpm.cpython-39-aarch64-linux-gnu.so
+-rwxr-xr-x   220KiB /usr/lib64/python3.9/site-packages/rpm/_rpm.cpython-39-aarch64-linux-gnu.so
 -rw-r--r--   5.8KiB /usr/lib64/python3.9/site-packages/rpm/transaction.py
 -rw-r--r--    22KiB /usr/lib64/python3.9/site.py
 -rwxr-xr-x    35KiB /usr/lib64/python3.9/smtpd.py
@@ -4717,7 +4717,7 @@
 -rw-r--r--     248B /usr/share/crypto-policies/policies/modules/NO-ENFORCE-EMS.pmod
 -rw-r--r--     123B /usr/share/crypto-policies/policies/modules/NO-SHA1.pmod
 -rw-r--r--   2.1KiB /usr/share/crypto-policies/policies/modules/OSPP.pmod
--rw-r--r--     359B /usr/share/crypto-policies/policies/modules/PQ.pmod
+-rw-r--r--     385B /usr/share/crypto-policies/policies/modules/PQ.pmod
 -rw-r--r--     131B /usr/share/crypto-policies/policies/modules/SHA1.pmod
 -rw-r--r--     167B /usr/share/crypto-policies/reload-cmds.sh
 -rw-r--r--   2.0KiB /usr/share/dbus-1/interfaces/org.freedesktop.LogControl1.xml
@@ -8457,7 +8457,7 @@ lrwxrwxrwx      22B /usr/lib64/libcollection.so.4 libcollection.so.4.1.1
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
@@ -8591,7 +8591,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3

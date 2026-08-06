@@ -315,7 +315,7 @@
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    58KiB /usr/lib64/libc_malloc_debug.so.0
 -rwxr-xr-x    52KiB /usr/lib64/libcap.so.2.73
--rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.5
+-rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.7
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   151KiB /usr/lib64/libebtc.so.0.0.0
 -rwxr-xr-x    49KiB /usr/lib64/libefa.so.1.2.48.0
@@ -359,7 +359,7 @@
 -rwxr-xr-x    24KiB /usr/lib64/libnetfilter_cttimeout.so.1.0.0
 -rwxr-xr-x    40KiB /usr/lib64/libnetfilter_queue.so.1.5.0
 -rwxr-xr-x    35KiB /usr/lib64/libnfnetlink.so.0.2.0
--rwxr-xr-x   900KiB /usr/lib64/libnftables.so.1.1.0
+-rwxr-xr-x   899KiB /usr/lib64/libnftables.so.1.1.0
 -rwxr-xr-x   215KiB /usr/lib64/libnftnl.so.11.6.0
 -rwxr-xr-x   144KiB /usr/lib64/libnl-3.so.200.26.0
 -rwxr-xr-x    38KiB /usr/lib64/libnl-genl-3.so.200.26.0
@@ -388,7 +388,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.5
+-rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.7
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
@@ -2751,7 +2751,7 @@ lrwxrwxrwx       9B /usr/lib/debug/lib64 usr/lib64
 lrwxrwxrwx       8B /usr/lib/debug/sbin usr/sbin
 lrwxrwxrwx      22B /usr/lib64/.libgmp.so.10.hmac .libgmp.so.10.4.1.hmac
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.5
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
 lrwxrwxrwx      16B /usr/lib64/libebtc.so libebtc.so.0.0.0
 lrwxrwxrwx      16B /usr/lib64/libebtc.so.0 libebtc.so.0.0.0
 lrwxrwxrwx      18B /usr/lib64/libefa.so.1 libefa.so.1.2.48.0
@@ -2800,7 +2800,7 @@ lrwxrwxrwx      23B /usr/lib64/libpcre2-posix.so.3 libpcre2-posix.so.3.0.2
 lrwxrwxrwx      21B /usr/lib64/libpcreposix.so.0 libpcreposix.so.0.0.7
 lrwxrwxrwx      14B /usr/lib64/libpsx.so.2 libpsx.so.2.73
 lrwxrwxrwx      18B /usr/lib64/libreadline.so.8 libreadline.so.8.1
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.5
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
