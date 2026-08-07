@@ -15064,7 +15064,7 @@
 -rwxr-xr-x    29KiB /usr/bin/whoami
 -rwxr-sr-x    20KiB /usr/bin/write
 -rwxr-xr-x    61KiB /usr/bin/xargs
--rwxr-xr-x    16KiB /usr/bin/xmlcatalog
+-rwxr-xr-x    20KiB /usr/bin/xmlcatalog
 -rwxr-xr-x    62KiB /usr/bin/xmllint
 -rwxr-xr-x    24KiB /usr/bin/xmlwf
 -rwxr-xr-x    29KiB /usr/bin/yes
@@ -15837,7 +15837,7 @@
 -rwxr-xr-x   171KiB /usr/lib64/ld-2.26.so
 -rwxr-xr-x   8.1KiB /usr/lib64/libBrokenLocale-2.26.so
 -rwxr-xr-x    22KiB /usr/lib64/libSegFault.so
--rwxr-xr-x    37KiB /usr/lib64/libacl.so.1.1.0
+-rwxr-xr-x    41KiB /usr/lib64/libacl.so.1.2.0
 -rwxr-xr-x    20KiB /usr/lib64/libanl-2.26.so
 -rwxr-xr-x    32KiB /usr/lib64/libasm-0.176.so
 -rwxr-xr-x    70KiB /usr/lib64/libassuan.so.0.4.0
@@ -16039,9 +16039,9 @@
 -rw-r--r--    11KiB /usr/lib64/python2.7/DocXMLRPCServer.py
 -rw-r--r--    10KiB /usr/lib64/python2.7/DocXMLRPCServer.pyc
 -rw-r--r--   9.9KiB /usr/lib64/python2.7/DocXMLRPCServer.pyo
--rw-r--r--    18KiB /usr/lib64/python2.7/HTMLParser.py
--rw-r--r--    14KiB /usr/lib64/python2.7/HTMLParser.pyc
--rw-r--r--    14KiB /usr/lib64/python2.7/HTMLParser.pyo
+-rw-r--r--    20KiB /usr/lib64/python2.7/HTMLParser.py
+-rw-r--r--    15KiB /usr/lib64/python2.7/HTMLParser.pyc
+-rw-r--r--    15KiB /usr/lib64/python2.7/HTMLParser.pyo
 -rw-r--r--   6.4KiB /usr/lib64/python2.7/MimeWriter.py
 -rw-r--r--   7.2KiB /usr/lib64/python2.7/MimeWriter.pyc
 -rw-r--r--   7.2KiB /usr/lib64/python2.7/MimeWriter.pyo
@@ -16996,7 +16996,7 @@
 -rw-r--r--    20KiB /usr/lib64/python2.7/htmllib.pyc
 -rw-r--r--    20KiB /usr/lib64/python2.7/htmllib.pyo
 -rw-r--r--    53KiB /usr/lib64/python2.7/httplib.py
--rw-r--r--    38KiB /usr/lib64/python2.7/httplib.pyc
+-rw-r--r--    39KiB /usr/lib64/python2.7/httplib.pyc
 -rw-r--r--    38KiB /usr/lib64/python2.7/httplib.pyo
 -rw-r--r--   8.8KiB /usr/lib64/python2.7/idlelib/AutoComplete.py
 -rw-r--r--   7.9KiB /usr/lib64/python2.7/idlelib/AutoComplete.pyc
@@ -22849,7 +22849,7 @@
 -rw-r--r--      63B /var/lib/alternatives/libnssckbi.so.x86_64
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   604KiB /var/lib/rpm/Basenames
+-rw-r--r--   600KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   140KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
@@ -23054,7 +23054,7 @@ lrwxrwxrwx      26B /usr/lib64/fipscheck/libfipscheck.so.1.hmac	libfipscheck.so.
 lrwxrwxrwx      21B /usr/lib64/fipscheck/libgmp.so.10.hmac	libgmp.so.10.2.0.hmac
 lrwxrwxrwx      10B /usr/lib64/ld-linux-x86-64.so.2	ld-2.26.so
 lrwxrwxrwx      23B /usr/lib64/libBrokenLocale.so.1	libBrokenLocale-2.26.so
-lrwxrwxrwx      15B /usr/lib64/libacl.so.1	libacl.so.1.1.0
+lrwxrwxrwx      15B /usr/lib64/libacl.so.1	libacl.so.1.2.0
 lrwxrwxrwx      14B /usr/lib64/libanl.so.1	libanl-2.26.so
 lrwxrwxrwx      15B /usr/lib64/libasm.so.1	libasm-0.176.so
 lrwxrwxrwx      18B /usr/lib64/libassuan.so.0	libassuan.so.0.4.0
