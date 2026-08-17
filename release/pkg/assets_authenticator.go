@@ -30,6 +30,13 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 	if err != nil {
 		return nil, errors.Cause(err)
 	}
+	// imageVersion is the clean upstream tag the container image was pushed with.
+	// Decoupled components write a sibling IMAGE_VERSION file; others do not, so
+	// fall back to gitTag (their image tag equals gitTag).
+	imageVersion := gitTag
+	if v, err := readTag(filepath.Join(r.BuildRepoSource, projectSource, spec.Channel, "IMAGE_VERSION")); err == nil && v != "" {
+		imageVersion = v
+	}
 	assets := []distrov1alpha1.Asset{}
 	osArchMap := map[string][]string{
 		"linux":   []string{"arm64", "amd64"},
@@ -83,7 +90,7 @@ func (r *ReleaseConfig) GetAuthenticatorComponent(spec distrov1alpha1.ReleaseSpe
 			URI: fmt.Sprintf("%s/kubernetes-sigs/%s:%s-eks-%s-%d",
 				r.ContainerImageRepository,
 				binary,
-				gitTag,
+				imageVersion,
 				spec.Channel,
 				spec.Number,
 			),
