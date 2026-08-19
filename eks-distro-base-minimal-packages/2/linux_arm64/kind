@@ -7,7 +7,7 @@ bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
 ca-certificates-2025.2.76-1.amzn2.0.2.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 conntrack-tools-1.4.4-5.amzn2.2.aarch64
-containerd-2.1.9-1.amzn2.0.1.aarch64
+containerd-2.1.9-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.0.1.aarch64
 cracklib-2.9.0-11.amzn2.0.2.aarch64
@@ -98,7 +98,7 @@ libselinux-2.5-12.amzn2.0.2.aarch64
 libsemanage-2.5-11.amzn2.aarch64
 libsepol-2.5-10.amzn2.0.1.aarch64
 libsmartcols-2.30.2-2.amzn2.0.14.aarch64
-libssh2-1.4.3-12.amzn2.2.8.aarch64
+libssh2-1.4.3-12.amzn2.2.9.aarch64
 libstdc++-7.3.1-18.amzn2.aarch64
 libtirpc-0.2.4-0.16.amzn2.aarch64
 libunistring-0.9.3-9.amzn2.0.2.aarch64
