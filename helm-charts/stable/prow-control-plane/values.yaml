@@ -57,24 +57,24 @@ ingress:
 
 crier:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-crier:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-crier:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 deck:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-deck:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-deck:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 ghproxy:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-ghproxy:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-ghproxy:v20260814-c97c24fca
   volumeSize: 100
 
 hook:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-hook:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-hook:v20260814-c97c24fca
   service:
     type: 'LoadBalancer'
   serviceAccount:
@@ -82,30 +82,30 @@ hook:
 
 horologium:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-horologium:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-horologium:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 prowControllerManager:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-controller-manager:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-controller-manager:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 sinker:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-sinker:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-sinker:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 statusreconciler:
-  image: public.ecr.aws/eks-distro-build-tooling/prow-statusreconciler:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-statusreconciler:v20260814-c97c24fca
   serviceAccount:
     create: false
 
 tide:
   scrape_metrics: false
-  image: public.ecr.aws/eks-distro-build-tooling/prow-tide:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-tide:v20260814-c97c24fca
   serviceAccount:
     create: false
 
@@ -124,10 +124,10 @@ s3Credentials:
     create: true
 
 utility_images:
-  clonerefs: public.ecr.aws/eks-distro-build-tooling/prow-clonerefs:v20260729-83fc9ab42
-  entrypoint: public.ecr.aws/eks-distro-build-tooling/prow-entrypoint:v20260729-83fc9ab42
-  initupload: public.ecr.aws/eks-distro-build-tooling/prow-initupload:v20260729-83fc9ab42
-  sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20260729-83fc9ab42
+  clonerefs: public.ecr.aws/eks-distro-build-tooling/prow-clonerefs:v20260814-c97c24fca
+  entrypoint: public.ecr.aws/eks-distro-build-tooling/prow-entrypoint:v20260814-c97c24fca
+  initupload: public.ecr.aws/eks-distro-build-tooling/prow-initupload:v20260814-c97c24fca
+  sidecar: public.ecr.aws/eks-distro-build-tooling/prow-sidecar:v20260814-c97c24fca
 awsIamAuthenticator:
   image: public.ecr.aws/eks-distro/kubernetes-sigs/aws-iam-authenticator:v0.5.7-eks-1-21-12
 
@@ -197,7 +197,7 @@ plugins:
 
 cherrypicker:
   serviceName: cherrypicker
-  image: public.ecr.aws/eks-distro-build-tooling/prow-cherrypicker:v20260729-83fc9ab42
+  image: public.ecr.aws/eks-distro-build-tooling/prow-cherrypicker:v20260814-c97c24fca
 eksdistroopstool:
   serviceName: eksdistroopstool
   image:  public.ecr.aws/eks-distro-build-tooling/eks-distro-ops-tool:6
