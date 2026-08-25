@@ -1,10 +1,10 @@
 # EKS Golang 1.26
 
-Current Release: `0`
+Current Release: `1`
 
-Tracking Tag: `go1.26.2`
+Tracking Tag: `go1.26.6`
 
-Artifacts: https://distro.eks.amazonaws.com/golang-go1.26/releases/0/RPMS
+Artifacts: https://distro.eks.amazonaws.com/golang-go1.26/releases/1/RPMS
 
 ### ARM64 Builds
 [![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1.26-ARM64-PROD-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
@@ -16,5 +16,5 @@ Artifacts: https://distro.eks.amazonaws.com/golang-go1.26/releases/0/RPMS
 The patches in `./patches` include relevant utility fixes for go `1.26`.
 
 ### Spec
-The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.26 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.26.2` source.
+The RPM spec file in `./rpmbuild/SPECS` is sourced from the go 1.26 SRPM available on Fedora, and modified to include the relevant patches and build the `go1.26.6` source.
 
