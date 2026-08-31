@@ -1,17 +1,6 @@
 
 amazon-linux-repo-cdn.noarch
-crypto-policies.noarch
-gawk.x86_64
-glib2.x86_64
-libxml2.x86_64
 openssl-fips-provider-latest.x86_64
-1:3.5.7-2.amzn2023.0.1
 openssl-libs.x86_64
-python3.x86_64
-python3-libs.x86_64
-python3-rpm.x86_64
-rpm.x86_64
-rpm-build-libs.x86_64
-rpm-libs.x86_64
-rpm-sign-libs.x86_64
+python3-pip-wheel.noarch
 system-release.noarch
