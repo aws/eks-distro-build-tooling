@@ -170,8 +170,8 @@ tcp_wrappers-libs-7.6-77.amzn2.0.2.x86_64
 tzdata-2026c-1.amzn2.0.1.noarch
 ustr-1.0.4-16.amzn2.0.3.x86_64
 util-linux-2.30.2-2.amzn2.0.14.x86_64
-vim-data-9.0.2153-1.amzn2.0.9.noarch
-vim-minimal-9.0.2153-1.amzn2.0.9.x86_64
+vim-data-9.0.2153-1.amzn2.0.11.noarch
+vim-minimal-9.0.2153-1.amzn2.0.11.x86_64
 which-2.20-7.amzn2.0.2.x86_64
 xz-libs-5.2.2-1.amzn2.0.3.x86_64
 yum-3.4.3-158.amzn2.0.7.noarch
