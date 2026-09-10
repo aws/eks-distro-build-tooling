@@ -1,5 +1,4 @@
 
 amazon-linux-repo-cdn.noarch
-openssl-libs.x86_64
-python3-pip-wheel.noarch
+containerd.x86_64
 system-release.noarch

@@ -363,11 +363,11 @@
 -rwxr-xr-x    36KiB /usr/bin/column
 -rwxr-xr-x    36KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    47MiB /usr/bin/containerd
--rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v2
+-rwxr-xr-x    49MiB /usr/bin/containerd
+-rwxr-xr-x    17MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
--rwxr-xr-x    25MiB /usr/bin/ctr
+-rwxr-xr-x    26MiB /usr/bin/ctr
 -rwxr-xr-x   318KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   337KiB /usr/bin/cvtsudoers
