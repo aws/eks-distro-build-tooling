@@ -1,11 +1,11 @@
-FROM buildpack-deps:bullseye-scm AS go-untar
+FROM buildpack-deps:trixie-scm AS go-untar
 ARG GOLANG_ARCHIVE_PATH
 RUN mkdir -p /usr/local/go
 COPY $GOLANG_ARCHIVE_PATH /usr/local/
 RUN cd /usr/local/ \
 	&& tar -xvf *.tar.gz
 
-FROM buildpack-deps:bullseye-scm
+FROM buildpack-deps:trixie-scm
 RUN mkdir -p /usr/local/go
 COPY --from=go-untar /usr/local/go/ /usr/local/go/
 
