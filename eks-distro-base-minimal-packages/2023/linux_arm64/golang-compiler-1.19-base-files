@@ -12587,7 +12587,7 @@
 -rwxr-xr-x      35B /usr/bin/command
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   261KiB /usr/bin/csplit
--rwxr-xr-x   390KiB /usr/bin/curl
+-rwxr-xr-x   326KiB /usr/bin/curl
 -rwxr-xr-x   196KiB /usr/bin/cut
 -rwxr-xr-x   1.6MiB /usr/bin/cyrusbdb2current
 -rwxr-xr-x   197KiB /usr/bin/date
@@ -13222,7 +13222,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libcord.so.1.4.0
 -rwxr-xr-x   196KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.7
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.8
 -rwxr-xr-x   263KiB /usr/lib64/libctf-nobfd.so.0.0.0
 -rwxr-xr-x   263KiB /usr/lib64/libctf.so.0.0.0
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
@@ -13234,7 +13234,7 @@
 -rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.7.9
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   262KiB /usr/lib64/libelf-0.188.so
--rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.12.3
 -rwxr-xr-x   401KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
 -rwxr-xr-x   328KiB /usr/lib64/libfido2.so.1.10.0
@@ -13308,7 +13308,7 @@
 -rwxr-xr-x   262KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   529KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.7
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
@@ -17311,7 +17311,7 @@ lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      16B /usr/lib64/libcord.so.1 libcord.so.1.4.0
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.8
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so libctf-nobfd.so.0.0.0
 lrwxrwxrwx      21B /usr/lib64/libctf-nobfd.so.0 libctf-nobfd.so.0.0.0
 lrwxrwxrwx      15B /usr/lib64/libctf.so libctf.so.0.0.0
@@ -17324,7 +17324,7 @@ lrwxrwxrwx      14B /usr/lib64/libdw.so.1 libdw-0.188.so
 lrwxrwxrwx      17B /usr/lib64/libeconf.so.0 libeconf.so.0.7.9
 lrwxrwxrwx      17B /usr/lib64/libedit.so.0 libedit.so.0.0.67
 lrwxrwxrwx      15B /usr/lib64/libelf.so.1 libelf-0.188.so
-lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
+lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.12.3
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
 lrwxrwxrwx      18B /usr/lib64/libfido2.so.1 libfido2.so.1.10.0
@@ -17386,7 +17386,7 @@ lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
