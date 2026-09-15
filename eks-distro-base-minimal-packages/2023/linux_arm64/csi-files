@@ -631,7 +631,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libcollection.so.4.1.1
 -rwxr-xr-x   197KiB /usr/lib64/libcom_err.so.2.1
 -rwxr-xr-x   325KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.7
+-rwxr-xr-x   5.1MiB /usr/lib64/libcrypto.so.3.5.8
 -rwxr-xr-x   1.8MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   469KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x   196KiB /usr/lib64/libdl.so.2
@@ -640,12 +640,12 @@
 -rwxr-xr-x   197KiB /usr/lib64/libeconf.so.0.7.9
 -rwxr-xr-x   263KiB /usr/lib64/libedit.so.0.0.67
 -rwxr-xr-x   198KiB /usr/lib64/libev.so.4.0.0
--rwxr-xr-x   458KiB /usr/lib64/libevent-2.1.so.7.0.1
--rwxr-xr-x   328KiB /usr/lib64/libevent_core-2.1.so.7.0.1
--rwxr-xr-x   263KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
--rwxr-xr-x   197KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
+-rwxr-xr-x   457KiB /usr/lib64/libevent-2.1.so.7.0.1
+-rwxr-xr-x   327KiB /usr/lib64/libevent_core-2.1.so.7.0.1
+-rwxr-xr-x   262KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
+-rwxr-xr-x   196KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
 -rwxr-xr-x   196KiB /usr/lib64/libevent_pthreads-2.1.so.7.0.1
--rwxr-xr-x   262KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   263KiB /usr/lib64/libexpat.so.1.12.3
 -rwxr-xr-x   523KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   401KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x   197KiB /usr/lib64/libffi.so.8.1.2
@@ -722,7 +722,7 @@
 -rwxr-xr-x   198KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   1.5MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   197KiB /usr/lib64/libss.so.2.0
--rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.7
+-rwxr-xr-x   1.1MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   982KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x   198KiB /usr/lib64/libthread_db.so.1
@@ -6494,7 +6494,7 @@ lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
 lrwxrwxrwx      22B /usr/lib64/libcollection.so.4 libcollection.so.4.1.1
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.8
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
 lrwxrwxrwx      13B /usr/lib64/libe2p.so.2 libe2p.so.2.3
@@ -6506,7 +6506,7 @@ lrwxrwxrwx      26B /usr/lib64/libevent_core-2.1.so.7 libevent_core-2.1.so.7.0.1
 lrwxrwxrwx      27B /usr/lib64/libevent_extra-2.1.so.7 libevent_extra-2.1.so.7.0.1
 lrwxrwxrwx      29B /usr/lib64/libevent_openssl-2.1.so.7 libevent_openssl-2.1.so.7.0.1
 lrwxrwxrwx      30B /usr/lib64/libevent_pthreads-2.1.so.7 libevent_pthreads-2.1.so.7.0.1
-lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
+lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.12.3
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
@@ -6561,7 +6561,7 @@ lrwxrwxrwx      22B /usr/lib64/libslapi-2.4.so.2 libslapi-2.4.so.2.11.5
 lrwxrwxrwx      21B /usr/lib64/libsmartcols.so.1 libsmartcols.so.1.1.0
 lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      12B /usr/lib64/libss.so.2 libss.so.2.0
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      13B /usr/lib64/libtic.so.6 libtic.so.6.6
