@@ -368,7 +368,7 @@
 -rwxr-xr-x   142KiB /usr/bin/cp
 -rwxr-xr-x   109KiB /usr/bin/csplit
 -rwxr-xr-x    26MiB /usr/bin/ctr
--rwxr-xr-x   318KiB /usr/bin/curl
+-rwxr-xr-x   242KiB /usr/bin/curl
 -rwxr-xr-x    44KiB /usr/bin/cut
 -rwxr-xr-x   337KiB /usr/bin/cvtsudoers
 -rwxr-xr-x   1.7MiB /usr/bin/cyrusbdb2current
@@ -1395,8 +1395,8 @@
 -rwxr-xr-x   189KiB /usr/lib64/libcomps.so.0
 -rwxr-xr-x    48KiB /usr/lib64/libcrack.so.2.9.0
 -rwxr-xr-x   198KiB /usr/lib64/libcrypt.so.2.0.0
--rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.7
--rwxr-xr-x   976KiB /usr/lib64/libcurl.so.4.8.0
+-rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.8
+-rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
 -r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
@@ -1410,12 +1410,12 @@
 -rwxr-xr-x    49KiB /usr/lib64/libefa.so.1.2.48.0
 -rwxr-xr-x   110KiB /usr/lib64/libelf-0.188.so
 -rwxr-xr-x    70KiB /usr/lib64/libev.so.4.0.0
--rwxr-xr-x   358KiB /usr/lib64/libevent-2.1.so.7.0.1
--rwxr-xr-x   228KiB /usr/lib64/libevent_core-2.1.so.7.0.1
--rwxr-xr-x   155KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
+-rwxr-xr-x   357KiB /usr/lib64/libevent-2.1.so.7.0.1
+-rwxr-xr-x   227KiB /usr/lib64/libevent_core-2.1.so.7.0.1
+-rwxr-xr-x   154KiB /usr/lib64/libevent_extra-2.1.so.7.0.1
 -rwxr-xr-x    36KiB /usr/lib64/libevent_openssl-2.1.so.7.0.1
 -rwxr-xr-x    16KiB /usr/lib64/libevent_pthreads-2.1.so.7.0.1
--rwxr-xr-x   198KiB /usr/lib64/libexpat.so.1.9.3
+-rwxr-xr-x   199KiB /usr/lib64/libexpat.so.1.12.3
 -rwxr-xr-x   451KiB /usr/lib64/libext2fs.so.2.4
 -rwxr-xr-x   334KiB /usr/lib64/libfdisk.so.1.1.0
 -rwxr-xr-x    49KiB /usr/lib64/libffi.so.8.1.2
@@ -1565,7 +1565,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   473KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.7
+-rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
@@ -7988,7 +7988,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.0MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.1MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--   232KiB /var/lib/systemd/catalog/database
@@ -8460,7 +8460,7 @@ lrwxrwxrwx      22B /usr/lib64/libcollection.so.4 libcollection.so.4.1.1
 lrwxrwxrwx      17B /usr/lib64/libcom_err.so.2 libcom_err.so.2.1
 lrwxrwxrwx      17B /usr/lib64/libcrack.so.2 libcrack.so.2.9.0
 lrwxrwxrwx      17B /usr/lib64/libcrypt.so.2 libcrypt.so.2.0.0
-lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.7
+lrwxrwxrwx      18B /usr/lib64/libcrypto.so.3 libcrypto.so.3.5.8
 lrwxrwxrwx      16B /usr/lib64/libcurl.so.4 libcurl.so.4.8.0
 lrwxrwxrwx      12B /usr/lib64/libdb-5.so libdb-5.3.so
 lrwxrwxrwx      24B /usr/lib64/libdrop_ambient.so.0 libdrop_ambient.so.0.0.0
@@ -8477,7 +8477,7 @@ lrwxrwxrwx      26B /usr/lib64/libevent_core-2.1.so.7 libevent_core-2.1.so.7.0.1
 lrwxrwxrwx      27B /usr/lib64/libevent_extra-2.1.so.7 libevent_extra-2.1.so.7.0.1
 lrwxrwxrwx      29B /usr/lib64/libevent_openssl-2.1.so.7 libevent_openssl-2.1.so.7.0.1
 lrwxrwxrwx      30B /usr/lib64/libevent_pthreads-2.1.so.7 libevent_pthreads-2.1.so.7.0.1
-lrwxrwxrwx      17B /usr/lib64/libexpat.so.1 libexpat.so.1.9.3
+lrwxrwxrwx      18B /usr/lib64/libexpat.so.1 libexpat.so.1.12.3
 lrwxrwxrwx      16B /usr/lib64/libext2fs.so.2 libext2fs.so.2.4
 lrwxrwxrwx      17B /usr/lib64/libfdisk.so.1 libfdisk.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libffi.so.8 libffi.so.8.1.2
@@ -8594,7 +8594,7 @@ lrwxrwxrwx      19B /usr/lib64/libsqlite3.so.0 libsqlite3.so.0.8.6
 lrwxrwxrwx      15B /usr/lib64/libssh.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4 libssh.so.4.9.6
 lrwxrwxrwx      15B /usr/lib64/libssh_threads.so.4.9.6 libssh.so.4.9.6
-lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.7
+lrwxrwxrwx      15B /usr/lib64/libssl.so.3 libssl.so.3.5.8
 lrwxrwxrwx      19B /usr/lib64/libstdc++.so.6 libstdc++.so.6.0.33
 lrwxrwxrwx      20B /usr/lib64/libsystemd.so.0 libsystemd.so.0.35.0
 lrwxrwxrwx      17B /usr/lib64/libtasn1.so.6 libtasn1.so.6.6.3
