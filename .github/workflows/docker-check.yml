@@ -1,9 +1,11 @@
 name: Docker Check
 on:
   pull_request:
-    paths: 
+    paths:
       - 'Docker*'
       - '**/*/Docker*'
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
