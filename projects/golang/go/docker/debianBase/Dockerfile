@@ -15,6 +15,7 @@ ENV PATH /usr/local/go/bin:$GOPATH/bin:$PATH
 
 RUN set -eux; \
 	apt-get update; \
+	apt-get upgrade -y; \
 	apt-get install -y --no-install-recommends \
 		g++ \
 		gcc \
