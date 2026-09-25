@@ -109,7 +109,7 @@ images-%:
 		$(if $(wildcard $(HOME)/.netrc),$(NETRC),) \
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
-	if [ "$(AL_TAG)" = "2" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
+	if [ "$(AL_TAG)" = "2023" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG); \
 	fi
 	
