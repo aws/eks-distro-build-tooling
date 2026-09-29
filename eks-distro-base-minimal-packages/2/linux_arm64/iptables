@@ -22,7 +22,7 @@ libnetfilter_cttimeout-1.0.0-6.amzn2.1.aarch64
 libnetfilter_queue-1.0.2-2.amzn2.0.2.aarch64
 libnfnetlink-1.0.1-4.amzn2.0.2.aarch64
 libnftnl-1.1.5-4.amzn2.aarch64
-libpcap-1.5.3-11.amzn2.aarch64
+libpcap-1.5.3-11.amzn2.0.1.aarch64
 libselinux-2.5-12.amzn2.0.2.aarch64
 libsepol-2.5-10.amzn2.0.1.aarch64
 libstdc++-7.3.1-18.amzn2.aarch64
