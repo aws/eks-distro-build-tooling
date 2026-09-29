@@ -392,7 +392,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.6
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
--rwxr-xr-x   632KiB /usr/lib64/libpcre2-8.so.0.11.0
+-rwxr-xr-x   631KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    80KiB /usr/lib64/libpsl.so.5.3.5
@@ -2795,6 +2795,7 @@
 -rw-r--r--   102KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
+-rw-r--r--       0B /var/cache/dnf/clean_command.lock
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   5.2KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock

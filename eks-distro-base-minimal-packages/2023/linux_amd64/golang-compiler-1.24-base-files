@@ -15110,9 +15110,9 @@
 -rwxr-xr-x   145KiB /usr/lib64/libauparse.so.0.0.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libbfd-2.41-50.amzn2023.0.5.so
 -rwxr-xr-x   229KiB /usr/lib64/libblkid.so.1.1.0
--rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.0.9
--rwxr-xr-x    52KiB /usr/lib64/libbrotlidec.so.1.0.9
--rwxr-xr-x   578KiB /usr/lib64/libbrotlienc.so.1.0.9
+-rwxr-xr-x   140KiB /usr/lib64/libbrotlicommon.so.1.1.0
+-rwxr-xr-x    56KiB /usr/lib64/libbrotlidec.so.1.1.0
+-rwxr-xr-x   630KiB /usr/lib64/libbrotlienc.so.1.1.0
 -rwxr-xr-x    80KiB /usr/lib64/libbz2.so.1.0.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libc.so.6
 -rwxr-xr-x    58KiB /usr/lib64/libc_malloc_debug.so.0
@@ -15191,7 +15191,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libpanelw.so.6.6
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
--rwxr-xr-x   632KiB /usr/lib64/libpcre2-8.so.0.11.0
+-rwxr-xr-x   631KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    80KiB /usr/lib64/libpsl.so.5.3.5
@@ -15209,7 +15209,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   106KiB /usr/lib64/libsmartcols.so.1.1.0
--rwxr-xr-x   473KiB /usr/lib64/libssh.so.4.9.6
+-rwxr-xr-x   477KiB /usr/lib64/libssh.so.4.9.6
 -rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
@@ -18826,6 +18826,7 @@
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--    17KiB /usr/share/zsh/site-functions/_curl
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
+-rw-r--r--       0B /var/cache/dnf/clean_command.lock
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
 -rw-------   7.8KiB /var/cache/ldconfig/aux-cache
@@ -19202,9 +19203,9 @@ lrwxrwxrwx      17B /usr/lib64/libaudit.so.1 libaudit.so.1.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so libauparse.so.0.0.0
 lrwxrwxrwx      19B /usr/lib64/libauparse.so.0 libauparse.so.0.0.0
 lrwxrwxrwx      17B /usr/lib64/libblkid.so.1 libblkid.so.1.1.0
-lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.0.9
-lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.0.9
-lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.0.9
+lrwxrwxrwx      24B /usr/lib64/libbrotlicommon.so.1 libbrotlicommon.so.1.1.0
+lrwxrwxrwx      21B /usr/lib64/libbrotlidec.so.1 libbrotlidec.so.1.1.0
+lrwxrwxrwx      21B /usr/lib64/libbrotlienc.so.1 libbrotlienc.so.1.1.0
 lrwxrwxrwx      15B /usr/lib64/libbz2.so.1 libbz2.so.1.0.8
 lrwxrwxrwx      18B /usr/lib64/libcap-ng.so.0 libcap-ng.so.0.0.0
 lrwxrwxrwx      14B /usr/lib64/libcap.so.2 libcap.so.2.73
