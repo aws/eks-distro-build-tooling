@@ -1,4 +1,6 @@
 
-libevent.x86_64
-openssl-libs.x86_64
-runc.x86_64
+curl.x86_64
+libcurl.x86_64
+libpcap.x86_64
+libxml2.x86_64
+rsync.x86_64

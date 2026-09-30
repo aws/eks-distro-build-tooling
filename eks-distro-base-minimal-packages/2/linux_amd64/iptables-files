@@ -413,7 +413,7 @@
 -rwxr-xr-x    38KiB /usr/lib64/libnss_compat-2.26.so
 -rwxr-xr-x    27KiB /usr/lib64/libnss_dns-2.26.so
 -rwxr-xr-x    70KiB /usr/lib64/libnss_files-2.26.so
--rwxr-xr-x   261KiB /usr/lib64/libpcap.so.1.5.3
+-rwxr-xr-x   257KiB /usr/lib64/libpcap.so.1.5.3
 -rwxr-xr-x   8.4KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   393KiB /usr/lib64/libpcre.so.1.2.0
 -rwxr-xr-x   357KiB /usr/lib64/libpcre16.so.0.2.0
