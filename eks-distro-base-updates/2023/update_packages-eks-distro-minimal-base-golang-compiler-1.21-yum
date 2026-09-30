@@ -1,3 +1,21 @@
 
 amazon-linux-repo-cdn.noarch
+curl.x86_64
+dnf.noarch
+dnf-data.noarch
+krb5-libs.x86_64
+libbrotli.x86_64
+libcurl.x86_64
+libssh.x86_64
+libssh-config.noarch
+libxml2.x86_64
+pcre2.x86_64
+python3-dnf.noarch
+python3-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+rpm-sign-libs.x86_64
 system-release.noarch
+systemd-libs.x86_64
+yum.noarch

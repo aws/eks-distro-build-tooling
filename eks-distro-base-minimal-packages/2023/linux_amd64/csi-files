@@ -42,7 +42,7 @@
 -rw-r--r--     490B /etc/inittab
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   6.1KiB /etc/ld.so.cache
+-rw-r--r--   6.2KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r-----     191B /etc/libaudit.conf
 -rw-r--r--   8.3KiB /etc/login.defs.rpmnew
@@ -375,7 +375,7 @@
 -rwxr-xr-x    52KiB /usr/bin/join
 -rwxr-xr-x    65KiB /usr/bin/keyctl
 -rwxr-xr-x    32KiB /usr/bin/kill
--rwxr-xr-x   163KiB /usr/bin/kmod
+-rwxr-xr-x   162KiB /usr/bin/kmod
 -rwxr-xr-x    36KiB /usr/bin/last
 -rwxr-xr-x    30KiB /usr/bin/lastlog
 -rwxr-xr-x   5.4KiB /usr/bin/ldd
@@ -665,7 +665,7 @@
 -rwxr-xr-x    97KiB /usr/lib64/libk5crypto.so.3.1
 -rwxr-xr-x    89KiB /usr/lib64/libkdb5.so.10.0
 -rwxr-xr-x    24KiB /usr/lib64/libkeyutils.so.1.10
--rwxr-xr-x   103KiB /usr/lib64/libkmod.so.2.3.7
+-rwxr-xr-x   106KiB /usr/lib64/libkmod.so.2.3.7
 -rwxr-xr-x    48KiB /usr/lib64/libkrad.so.0.0
 -rwxr-xr-x   890KiB /usr/lib64/libkrb5.so.3.3
 -rwxr-xr-x    65KiB /usr/lib64/libkrb5support.so.0.1
@@ -701,7 +701,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libpath_utils.so.1.0.1
 -rwxr-xr-x    16KiB /usr/lib64/libpcprofile.so
 -rwxr-xr-x   483KiB /usr/lib64/libpcre.so.1.2.12
--rwxr-xr-x   632KiB /usr/lib64/libpcre2-8.so.0.11.0
+-rwxr-xr-x   631KiB /usr/lib64/libpcre2-8.so.0.11.0
 -rwxr-xr-x    16KiB /usr/lib64/libpcre2-posix.so.3.0.2
 -rwxr-xr-x    16KiB /usr/lib64/libpcreposix.so.0.0.7
 -rwxr-xr-x    58KiB /usr/lib64/libpopt.so.0.0.1
@@ -745,8 +745,9 @@
 -rwxr-xr-x    32KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x    16KiB /usr/lib64/libverto-libev.so.1.0.0
 -rwxr-xr-x    28KiB /usr/lib64/libverto.so.1.0.0
--rwxr-xr-x   1.5MiB /usr/lib64/libxml2.so.2.10.4
+-rwxr-xr-x   1.6MiB /usr/lib64/libxml2.so.2.10.4
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
+-rwxr-xr-x   762KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   138KiB /usr/lib64/ossl-modules/legacy.so
 -rw-r--r--    14KiB /usr/lib64/python3.9/LICENSE.txt
 -rw-r--r--   5.1KiB /usr/lib64/python3.9/__future__.py
@@ -3140,7 +3141,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_warn.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_wheel.so
 -rwxr-xr-x    28KiB /usr/lib64/security/pam_xauth.so
--rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-12.amzn2023.so
+-rwxr-xr-x   3.6MiB /usr/lib64/systemd/libsystemd-shared-252.23-14.amzn2023.so
 -rwxr-xr-x    16KiB /usr/libexec/awk/grcat
 -rwxr-xr-x    16KiB /usr/libexec/awk/pwcat
 -rwxr-xr-x    16KiB /usr/libexec/coreutils/libstdbuf.so
@@ -3670,6 +3671,8 @@
 -rw-r--r--    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
 -rw-r--r--   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
 -rw-r--r--   1.3KiB /usr/share/licenses/libxml2/Copyright
+-rw-r--r--    18KiB /usr/share/licenses/libzstd/COPYING
+-rw-r--r--   1.6KiB /usr/share/licenses/libzstd/LICENSE
 -rw-r--r--    35KiB /usr/share/licenses/mpfr/COPYING
 -rw-r--r--   7.5KiB /usr/share/licenses/mpfr/COPYING.LESSER
 -rw-r--r--   1.5KiB /usr/share/licenses/ncurses-base/COPYING
@@ -6125,6 +6128,7 @@
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       0B /var/cache/dnf/.gpgkeyschecked.yum
+-rw-r--r--       0B /var/cache/dnf/clean_command.lock
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-r--r--       2B /var/cache/dnf/tempfiles.json
 -rw-------   8.2KiB /var/cache/ldconfig/aux-cache
@@ -6134,7 +6138,7 @@
 -rw-r--r--       0B /var/lib/nfs/etab
 -rw-r--r--       0B /var/lib/nfs/rmtab
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.4MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.5MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog
@@ -6586,6 +6590,7 @@ lrwxrwxrwx      23B /usr/lib64/libverto-libev.so.1 libverto-libev.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libverto.so.1 libverto.so.1.0.0
 lrwxrwxrwx      17B /usr/lib64/libxml2.so.2 libxml2.so.2.10.4
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
+lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.5
 lrwxrwxrwx      15B /usr/lib64/p11-kit-proxy.so libp11-kit.so.0
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so libanonymous.so.3.0.0
 lrwxrwxrwx      21B /usr/lib64/sasl2/libanonymous.so.3 libanonymous.so.3.0.0
