@@ -23,7 +23,7 @@ rm -rf $SCRIPT_ROOT/actual $MAKE_ROOT/check-update $MAKE_ROOT/*-pushed
 
 EXIT_CODE=0
 
-GO_VERSION_OVERRIDES="GOLANG_1.18_FULL_VERSION=1.18.9-mock GOLANG_1.19_FULL_VERSION=1.19.4-mock GOLANG_1.20_FULL_VERSION=1.20-mock GOLANG_1.21_FULL_VERSION=1.21-mock GOLANG_1.22_FULL_VERSION=1.22-mock  GOLANG_1.23_FULL_VERSION=1.23-mock  GOLANG_1.24_FULL_VERSION=1.24-mock  GOLANG_1.25_FULL_VERSION=1.25-mock  GOLANG_1.26_FULL_VERSION=1.26-mock  GOLANG_1.27_FULL_VERSION=1.27-mock"
+GO_VERSION_OVERRIDES="GOLANG_1.25_FULL_VERSION=1.25-mock  GOLANG_1.26_FULL_VERSION=1.26-mock  GOLANG_1.27_FULL_VERSION=1.27-mock"
 PYTHON_VERSION_OVERRIDES="PYTHON_3.7_FULL_VERSION=3.7.14-mock PYTHON_3.9_FULL_VERSION=3.9.14-mock"
 
 GOLANG_RELEASE_PERIODIC="check-upstream-golang-release"
@@ -111,7 +111,7 @@ common::run_target "packages-export-all-minimal-images" "export/all" "BUILD_DEPS
 common::run_target "test-all-minimal-images" "test/all" "BUILD_DEPS=false MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=someotherjob"
 
 # Validate base image tag logic, when the job type is not pre/postsubmit and the pushed file resolves to false, the tag from the tag file is used for the base image
-for variant in "base" "base-compiler-yum" "base-golang-compiler-1.18-gcc"; do
+for variant in "base" "base-compiler-yum" "base-golang-compiler-1.25-gcc"; do
   common::run_target "minimal-images-$variant" "$variant/base-image-tag/use-tag-from-file" "BUILD_DEPS=false JOB_TYPE=periodic MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates LOG_CAT_PUSHED_FILE=true SECURITY=--security"
   common::run_target "minimal-images-$variant" "$variant/base-image-tag/presubmit-use-new-tag" "BUILD_DEPS=true JOB_TYPE=presubmit MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates LOG_CAT_PUSHED_FILE=true SECURITY=--security"
   common::run_target "minimal-images-$variant" "$variant/base-image-tag/postsubmit-use-new-tag" "BUILD_DEPS=true JOB_TYPE=postsubmit MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag MOCK_CHECK_UPDATE=updates LOG_CAT_PUSHED_FILE=true SECURITY=--security"
@@ -119,7 +119,7 @@ done
 
 # check dynamic compiler targets
 common::run_target "golang-compiler-images" "base-golang-compiler/images/all-compiler-images" "BUILD_DEPS=true MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true SECURITY=--security"
-common::run_target "golang-1.18-compiler-images" "base-golang-compiler-1.18/images/compiler-images" "BUILD_DEPS=true MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true SECURITY=--security"
+common::run_target "golang-1.25-compiler-images" "base-golang-compiler-1.25/images/compiler-images" "BUILD_DEPS=true MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true SECURITY=--security"
 
 common::run_target "create-ecr-repos" "create-ecr-repos/all"
 

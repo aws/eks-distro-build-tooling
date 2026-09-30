@@ -1,6 +1,6 @@
 RELEASE_BRANCH?=0.18.0
 GIT_TAG?=$(shell cat ./$(RELEASE_BRANCH)/GIT_TAG)
-MIN_GO_VERSION?=1.24
+MIN_GO_VERSION?=1.25
 
 BASE_DIRECTORY:=$(shell git rev-parse --show-toplevel)
 PROJECT_DIRECTORY:=$(BASE_DIRECTORY)/projects/go-runner

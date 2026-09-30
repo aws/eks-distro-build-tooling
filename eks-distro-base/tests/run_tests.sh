@@ -693,40 +693,40 @@ check_base-golang-compiler() {
     done
 }
 
-check_base-golang-compiler-1.18-base() {
-    check_base-golang-compiler 1.18 base
+check_base-golang-compiler-1.25-base() {
+    check_base-golang-compiler 1.25 base
 }
 
-check_base-golang-compiler-1.18-yum() {
-    check_base-golang-compiler 1.18 yum
+check_base-golang-compiler-1.25-yum() {
+    check_base-golang-compiler 1.25 yum
 }
 
-check_base-golang-compiler-1.18-gcc() {
-    check_base-golang-compiler 1.18 gcc
+check_base-golang-compiler-1.25-gcc() {
+    check_base-golang-compiler 1.25 gcc
 }
 
-check_base-golang-compiler-1.19-base() {
-    check_base-golang-compiler 1.19 base
+check_base-golang-compiler-1.26-base() {
+    check_base-golang-compiler 1.26 base
 }
 
-check_base-golang-compiler-1.19-yum() {
-    check_base-golang-compiler 1.19 yum
+check_base-golang-compiler-1.26-yum() {
+    check_base-golang-compiler 1.26 yum
 }
 
-check_base-golang-compiler-1.19-gcc() {
-    check_base-golang-compiler 1.19 gcc
+check_base-golang-compiler-1.26-gcc() {
+    check_base-golang-compiler 1.26 gcc
 }
 
-check_base-golang-compiler-1.20-base() {
-    check_base-golang-compiler 1.20 base
+check_base-golang-compiler-1.27-base() {
+    check_base-golang-compiler 1.27 base
 }
 
-check_base-golang-compiler-1.20-yum() {
-    check_base-golang-compiler 1.20 yum
+check_base-golang-compiler-1.27-yum() {
+    check_base-golang-compiler 1.27 yum
 }
 
-check_base-golang-compiler-1.20-gcc() {
-    check_base-golang-compiler 1.20 gcc
+check_base-golang-compiler-1.27-gcc() {
+    check_base-golang-compiler 1.27 gcc
 }
 
 

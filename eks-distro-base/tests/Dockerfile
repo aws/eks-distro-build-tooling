@@ -3,7 +3,7 @@ ARG AL_TAG
 ARG BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base:${AL_TAG}
 FROM ${BASE_IMAGE} as base
 
-FROM public.ecr.aws/eks-distro-build-tooling/golang:1.18-gcc-al${AL_TAG} as builder
+FROM public.ecr.aws/eks-distro-build-tooling/golang:1.25-gcc-al${AL_TAG} as builder
 
 WORKDIR /var/app
 
