@@ -317,6 +317,7 @@ define BUILDCTL
 		$(foreach IMPORT_CACHE,$(BUILDCTL_IMPORT_CACHE),--import-cache $(IMPORT_CACHE)) \
 		$(if $(filter false,$(IGNORE_NO_CACHE)),$(BUILDCTL_NO_CACHE),) \
 		--output type=$(IMAGE_OUTPUT_TYPE)$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,$(BUILDCTL_IMAGE_TAGS)),$(IMAGE_OUTPUT)
+	$(if $(and $(filter image,$(IMAGE_OUTPUT_TYPE)),$(filter push=true,$(IMAGE_OUTPUT))),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE)$(COMMA)$(LATEST_IMAGE),)
 endef
 
 # $1 - AL_TAG (may be windows)
@@ -662,6 +663,7 @@ windows-images-%: buildkit-check
 	@printf "\n=== Verifying annotations on pushed manifest ===\n"
 	@docker buildx imagetools inspect --raw $(IMAGE_REPO)/$(IMAGE_COMPONENT)@$$(docker buildx imagetools inspect --raw $(IMAGE_REPO)/$(IMAGE_COMPONENT)@$$(jq -r '."containerimage.descriptor".digest' $(IMAGE_METADATA_FILE)) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 	./create_windows_manifest.sh $(IMAGE_NAME) $(IMAGE) $(LATEST_IMAGE) $(VERSIONED_VARIANT) $(WINDOWS_IMAGE_REGISTRY) $(WINDOWS_BASE_IMAGE_NAME)
+	$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE),$(LATEST_IMAGE)
 	$(call PUSHED_FILE_TRUE)
 
 windows-update-%: VERSIONED_VARIANT=$*

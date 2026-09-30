@@ -55,4 +55,5 @@ define BUILDCTL_PUSH
 		--local dockerfile=./docker/linux \
 		--local context=. \
 		--output type=image,oci-mediatypes=true,\"name=$(IMAGE)\",push=true
+	$(MAKE_ROOT)/../../../scripts/tag_image_children.sh $(IMAGE)
 endef

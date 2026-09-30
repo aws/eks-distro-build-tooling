@@ -102,6 +102,7 @@ images: buildkit-check
 		--local context=$(PROJECT_DIRECTORY)/$(RELEASE_BRANCH)/_output \
 		--progress plain \
 		--output type=image,oci-mediatypes=true,\"name=$(IMAGES)\",push=$(PUSH_IMAGES)
+	if [ "$(PUSH_IMAGES)" = "true" ]; then $(BASE_DIRECTORY)/scripts/tag_image_children.sh $(IMAGES); fi
 
 
 .PHONY: clean-image-build-data
