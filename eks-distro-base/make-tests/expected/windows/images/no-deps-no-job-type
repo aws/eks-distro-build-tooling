@@ -27,6 +27,7 @@ printf "Upstream nanoserver digest: $NANOSERVER_DIGEST\nUpstream servercore dige
 printf "\n=== Verifying annotations on pushed manifest ===\n"
 docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(jq -r '."containerimage.descriptor".digest' /tmp/eks-distro-windows-base-1809-metadata.json) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 ./create_windows_manifest.sh eks-distro-windows-base-1809 localhost:5000/eks-distro-windows-base:1809-test-tag localhost:5000/eks-distro-windows-base:1809 1809 mcr.microsoft.com/windows nanoserver
+/override/root/../scripts/tag_image_children.sh localhost:5000/eks-distro-windows-base:1809-test-tag,localhost:5000/eks-distro-windows-base:1809
 printf "Building windows-20H2\n\n"
 NANOSERVER_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/nanoserver:20H2 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
 SERVERCORE_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/servercore:20H2 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
@@ -52,6 +53,7 @@ printf "Upstream nanoserver digest: $NANOSERVER_DIGEST\nUpstream servercore dige
 printf "\n=== Verifying annotations on pushed manifest ===\n"
 docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(jq -r '."containerimage.descriptor".digest' /tmp/eks-distro-windows-base-20H2-metadata.json) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 ./create_windows_manifest.sh eks-distro-windows-base-20H2 localhost:5000/eks-distro-windows-base:20H2-test-tag localhost:5000/eks-distro-windows-base:20H2 20H2 mcr.microsoft.com/windows nanoserver
+/override/root/../scripts/tag_image_children.sh localhost:5000/eks-distro-windows-base:20H2-test-tag,localhost:5000/eks-distro-windows-base:20H2
 printf "Building windows-ltsc2022\n\n"
 NANOSERVER_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/nanoserver:ltsc2022 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
 SERVERCORE_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/servercore:ltsc2022 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
@@ -77,6 +79,7 @@ printf "Upstream nanoserver digest: $NANOSERVER_DIGEST\nUpstream servercore dige
 printf "\n=== Verifying annotations on pushed manifest ===\n"
 docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(jq -r '."containerimage.descriptor".digest' /tmp/eks-distro-windows-base-ltsc2022-metadata.json) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 ./create_windows_manifest.sh eks-distro-windows-base-ltsc2022 localhost:5000/eks-distro-windows-base:ltsc2022-test-tag localhost:5000/eks-distro-windows-base:ltsc2022 ltsc2022 mcr.microsoft.com/windows nanoserver
+/override/root/../scripts/tag_image_children.sh localhost:5000/eks-distro-windows-base:ltsc2022-test-tag,localhost:5000/eks-distro-windows-base:ltsc2022
 printf "Building windows-ltsc2025\n\n"
 NANOSERVER_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/nanoserver:ltsc2025 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
 SERVERCORE_DIGEST=$(docker buildx imagetools inspect --raw mcr.microsoft.com/windows/servercore:ltsc2025 | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') && \
@@ -102,3 +105,4 @@ printf "Upstream nanoserver digest: $NANOSERVER_DIGEST\nUpstream servercore dige
 printf "\n=== Verifying annotations on pushed manifest ===\n"
 docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(docker buildx imagetools inspect --raw localhost:5000/eks-distro-windows-base@$(jq -r '."containerimage.descriptor".digest' /tmp/eks-distro-windows-base-ltsc2025-metadata.json) | jq -r '.manifests[] | select(.platform.os == "windows") | .digest')
 ./create_windows_manifest.sh eks-distro-windows-base-ltsc2025 localhost:5000/eks-distro-windows-base:ltsc2025-test-tag localhost:5000/eks-distro-windows-base:ltsc2025 ltsc2025 mcr.microsoft.com/windows nanoserver
+/override/root/../scripts/tag_image_children.sh localhost:5000/eks-distro-windows-base:ltsc2025-test-tag,localhost:5000/eks-distro-windows-base:ltsc2025

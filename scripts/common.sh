@@ -283,6 +283,11 @@ function build::common::get_clone_url() {
   echo "https://github.com/${org}/${repo}.git"
 }
 
+function fail() {
+  >&2 echo "$@"
+  exit 1
+}
+
 function retry() {
   local n=1
   local max=120

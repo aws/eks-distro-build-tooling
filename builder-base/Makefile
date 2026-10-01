@@ -45,6 +45,7 @@ VARIANT?=standard
 IGNORE_NO_CACHE?=false
 
 NETRC=--secret id=netrc,src=$(HOME)/.netrc
+COMMA=,
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -109,6 +110,7 @@ images-%:
 		$(if $(wildcard $(HOME)/.netrc),$(NETRC),) \
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
+	$(if $(findstring push=true,$(BUILDKIT_OUTPUT)),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE)$(COMMA)$(LATEST_IMAGE),)
 	if [ "$(AL_TAG)" = "2023" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG); \
 	fi

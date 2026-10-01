@@ -55,7 +55,7 @@ for TARGETARCH in arm64 amd64; do
   echo "$(curl -sSL --retry 5 -v --silent $PACKER_CHECKSUM_URL 2>&1 | grep packer_${PACKER_VERSION}_linux_$TARGETARCH.zip | cut -d ":" -f 2)" >$CHECKSUMS_ROOT/checksums/packer-$TARGETARCH-checksum
 
   # NODEJS
-  echo "$(curl -sSL --retry 5 -v --silent $NODEJS_CHECKSUM_URL 2>&1 | grep $NODEJS_FILENAME | cut -d ":" -f 2)" >$CHECKSUMS_ROOT/checksums/nodejs-$TARGETARCH-checksum
+  echo "$(curl -sSL --retry 5 -v --silent $NODEJS_CHECKSUM_URL 2>&1 | grep $NODEJS_FILENAME | cut -d ":" -f 2)" >$CHECKSUMS_ROOT/checksums/$CHECKSUM_FILE
 
   # HELM
   sha256=$(curl -sSL --retry 5 $HELM_CHECKSUM_URL)
