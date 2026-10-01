@@ -108,8 +108,8 @@ PR_BODY=$(cat $PR_BODY_FILE)
 cd ${OTHER_CLONE_ROOT}/${ORIGIN_ORG}/${REPO}
 
 if [[ "$(basename "$FILEPATH")" != "$FILEPATH" ]]; then
-  cd $(dirname $FILEPATH)
-  FILEPATH="$(basename $FILEPATH)"
+  cd "$(dirname "$FILEPATH")"
+  FILEPATH="$(basename "$FILEPATH")"
 fi
 
 for FILE in $(find ./ -type f -name "$FILEPATH"); do
