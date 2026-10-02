@@ -232,3 +232,26 @@ func TestUpstreamPickCreateIssue(t *testing.T) {
 
 	}
 }
+
+// Regression test: a comment that is not a /backport command must not panic.
+// Previously handleIssueComment indexed backportMatches[2] before checking the
+// match length, crashing the plugin on every ordinary issue/PR comment.
+func TestHandleIssueCommentNonBackportDoesNotPanic(t *testing.T) {
+	t.Parallel()
+	ghc := &fghc{}
+	s := &Server{Ghc: ghc}
+
+	ic := github.IssueCommentEvent{
+		Action:  github.IssueCommentActionCreated,
+		Repo:    github.Repo{Owner: github.User{Login: "aws"}, Name: "eks-distro-prow-jobs"},
+		Issue:   github.Issue{Number: 1},
+		Comment: github.IssueComment{Body: "/lgtm", User: github.User{Login: "someone"}},
+	}
+
+	if err := s.handleIssueComment(logrus.WithField("test", t.Name()), ic); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if len(ghc.comments) != 0 || len(ghc.issues) != 0 {
+		t.Fatalf("expected no GitHub actions for a non-backport comment, got comments=%v issues=%v", ghc.comments, ghc.issues)
+	}
+}

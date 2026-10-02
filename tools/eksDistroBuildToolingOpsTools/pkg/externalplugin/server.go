@@ -176,8 +176,8 @@ func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent
 	// backportMatches[1] holds the project
 	// backportMatches[2] holds the versions to backport to unparsed. ("v1.2.2 ...")
 	backportMatches := backportRe.FindStringSubmatch(ic.Comment.Body)
-	versions := versionsRe.FindAllString(backportMatches[2], -1)
-	if len(backportMatches) != 0 && len(backportMatches) == 3 {
+	if len(backportMatches) == 3 {
+		versions := versionsRe.FindAllString(backportMatches[2], -1)
 		if err := s.handleBackportRequest(l, commentAuthor, &ic.Comment, &ic.Issue, backportMatches[1], versions, org, repo, num); err != nil {
 			return fmt.Errorf("Handle backport request failure: %w", err)
 		}
