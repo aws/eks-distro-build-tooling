@@ -403,7 +403,7 @@
 -rwxr-xr-x   196KiB /usr/bin/column
 -rwxr-xr-x   196KiB /usr/bin/comm
 -rwxr-xr-x      35B /usr/bin/command
--rwxr-xr-x    46MiB /usr/bin/containerd
+-rwxr-xr-x    40MiB /usr/bin/containerd
 -rwxr-xr-x    16MiB /usr/bin/containerd-shim-runc-v2
 -rwxr-xr-x   262KiB /usr/bin/cp
 -rwxr-xr-x   261KiB /usr/bin/csplit
@@ -591,7 +591,7 @@
 -rwxr-xr-x   197KiB /usr/bin/rm
 -rwxr-xr-x   196KiB /usr/bin/rmdir
 -rwxr-xr-x   197KiB /usr/bin/rpcbind
--rwxr-xr-x   197KiB /usr/bin/rpcinfo
+-rwxr-xr-x   196KiB /usr/bin/rpcinfo
 -rwxr-xr-x   196KiB /usr/bin/rpm
 -rwxr-xr-x   196KiB /usr/bin/rpm2archive
 -rwxr-xr-x   196KiB /usr/bin/rpm2cpio
@@ -636,7 +636,7 @@
 -rwxr-xr-x   196KiB /usr/bin/stdbuf
 -rwxr-xr-x   196KiB /usr/bin/stty
 -rwsr-xr-x   196KiB /usr/bin/su
----s--x--x   330KiB /usr/bin/sudo
+---s--x--x   331KiB /usr/bin/sudo
 ---x--x--x   198KiB /usr/bin/sudoreplay
 -rwxr-xr-x   196KiB /usr/bin/sum
 -rwxr-xr-x   196KiB /usr/bin/sync
@@ -883,8 +883,8 @@
 -rw-r--r--   7.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -909,7 +909,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    24KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -4469,7 +4469,7 @@
 -rwxr-xr-x   199KiB /usr/sbin/rtacct
 -rwxr-xr-x   196KiB /usr/sbin/rtcwake
 -rwxr-xr-x   215KiB /usr/sbin/rtmon
--rwxr-xr-x    13MiB /usr/sbin/runc
+-rwxr-xr-x    12MiB /usr/sbin/runc
 -rwxr-xr-x   196KiB /usr/sbin/runuser
 -rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
 -rwxr-xr-x   197KiB /usr/sbin/saslpasswd2

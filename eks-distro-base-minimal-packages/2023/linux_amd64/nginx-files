@@ -460,7 +460,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/librt.so.1
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
+-rwxr-xr-x   1.0MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   320KiB /usr/lib64/libtcmalloc.so.4.5.9
 -rwxr-xr-x   341KiB /usr/lib64/libtcmalloc_and_profiler.so.4.6.4
@@ -2546,7 +2546,7 @@
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
 -rw-------   3.5KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   1.3MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   1.4MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

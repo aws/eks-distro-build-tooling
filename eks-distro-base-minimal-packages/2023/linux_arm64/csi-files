@@ -443,7 +443,7 @@
 -rwxr-xr-x   197KiB /usr/bin/rm
 -rwxr-xr-x   196KiB /usr/bin/rmdir
 -rwxr-xr-x   197KiB /usr/bin/rpcbind
--rwxr-xr-x   197KiB /usr/bin/rpcinfo
+-rwxr-xr-x   196KiB /usr/bin/rpcinfo
 -rwxr-xr-x   196KiB /usr/bin/runcon
 -rwxr-xr-x   196KiB /usr/bin/script
 -rwxr-xr-x   196KiB /usr/bin/scriptlive
