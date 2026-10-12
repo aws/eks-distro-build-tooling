@@ -871,7 +871,7 @@
 -rwxr-xr-x    20KiB /usr/lib64/libsigsegv.so.2.0.6
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
 -rwxr-xr-x   477KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
+-rwxr-xr-x   1.0MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
 -rwxr-xr-x    76KiB /usr/lib64/libtic.so.6.6

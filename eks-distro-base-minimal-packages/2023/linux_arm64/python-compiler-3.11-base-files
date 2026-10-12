@@ -1352,7 +1352,7 @@
 -rw-r--r--   4.5KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/__pycache__/filepost.cpython-311.pyc
 -rw-r--r--    22KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/__pycache__/poolmanager.cpython-311.pyc
 -rw-r--r--   6.6KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/__pycache__/request.cpython-311.pyc
--rw-r--r--    49KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-311.pyc
+-rw-r--r--    50KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-311.pyc
 -rw-r--r--    11KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/_collections.py
 -rw-r--r--      64B /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/_version.py
 -rw-r--r--    20KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/connection.py
@@ -1390,7 +1390,7 @@
 -rw-r--r--    34KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/packages/six.py
 -rw-r--r--    21KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/poolmanager.py
 -rw-r--r--   5.9KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/request.py
--rw-r--r--    43KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/response.py
+-rw-r--r--    44KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/response.py
 -rw-r--r--   1.2KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/util/__init__.py
 -rw-r--r--   1.5KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/util/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--   5.1KiB /usr/lib/python3.11/site-packages/pip/_vendor/urllib3/util/__pycache__/connection.cpython-311.pyc
@@ -7824,7 +7824,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   2.4MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   3.3MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   3.2MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

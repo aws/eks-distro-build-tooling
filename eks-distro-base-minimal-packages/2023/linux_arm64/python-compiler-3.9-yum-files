@@ -618,8 +618,8 @@
 -rw-r--r--   7.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -644,7 +644,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    24KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -1829,8 +1829,8 @@
 -rw-r--r--    15KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/poolmanager.cpython-39.pyc
 -rw-r--r--   5.5KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/request.cpython-39.opt-1.pyc
 -rw-r--r--   5.5KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/request.cpython-39.pyc
--rw-r--r--    26KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-39.opt-1.pyc
--rw-r--r--    26KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-39.pyc
+-rw-r--r--    27KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-39.opt-1.pyc
+-rw-r--r--    27KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-39.pyc
 -rw-r--r--    11KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/_collections.py
 -rw-r--r--      63B /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/_version.py
 -rw-r--r--    20KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/connection.py
@@ -1888,7 +1888,7 @@
 -rw-r--r--   5.6KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/_implementation.py
 -rw-r--r--    21KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
 -rw-r--r--   5.9KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/request.py
--rw-r--r--    38KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py
+-rw-r--r--    39KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__init__.py
 -rw-r--r--   1.1KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   1.1KiB /usr/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__pycache__/__init__.cpython-39.pyc
