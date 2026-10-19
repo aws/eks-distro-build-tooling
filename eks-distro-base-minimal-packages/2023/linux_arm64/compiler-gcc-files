@@ -1393,7 +1393,7 @@
 -rw-r--r--    18KiB /usr/include/linux/nilfs2_ondisk.h
 -rw-r--r--    37KiB /usr/include/linux/nitro_enclaves.h
 -rw-r--r--   4.5KiB /usr/include/linux/nl80211-vnd-intel.h
--rw-r--r--   356KiB /usr/include/linux/nl80211.h
+-rw-r--r--   363KiB /usr/include/linux/nl80211.h
 -rw-r--r--   1.2KiB /usr/include/linux/npcm-video.h
 -rw-r--r--   2.3KiB /usr/include/linux/nsfs.h
 -rw-r--r--     740B /usr/include/linux/nsm.h
@@ -1812,7 +1812,7 @@
 -rw-r--r--    11KiB /usr/include/sound/firewire.h
 -rw-r--r--   2.1KiB /usr/include/sound/hdsp.h
 -rw-r--r--   4.4KiB /usr/include/sound/hdspm.h
--rw-r--r--   5.8KiB /usr/include/sound/intel/avs/tokens.h
+-rw-r--r--   6.0KiB /usr/include/sound/intel/avs/tokens.h
 -rw-r--r--   3.5KiB /usr/include/sound/sb16_csp.h
 -rw-r--r--   1.6KiB /usr/include/sound/scarlett2.h
 -rw-r--r--   6.6KiB /usr/include/sound/sfnt_info.h
@@ -2147,8 +2147,8 @@
 -rw-r--r--   7.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -2173,7 +2173,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    24KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py

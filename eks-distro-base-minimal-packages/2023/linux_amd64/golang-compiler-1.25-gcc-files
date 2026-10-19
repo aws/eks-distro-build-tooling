@@ -16091,7 +16091,7 @@
 -rw-r--r--    18KiB /usr/include/linux/nilfs2_ondisk.h
 -rw-r--r--    37KiB /usr/include/linux/nitro_enclaves.h
 -rw-r--r--   4.5KiB /usr/include/linux/nl80211-vnd-intel.h
--rw-r--r--   356KiB /usr/include/linux/nl80211.h
+-rw-r--r--   363KiB /usr/include/linux/nl80211.h
 -rw-r--r--   1.2KiB /usr/include/linux/npcm-video.h
 -rw-r--r--   2.3KiB /usr/include/linux/nsfs.h
 -rw-r--r--     740B /usr/include/linux/nsm.h
@@ -16510,7 +16510,7 @@
 -rw-r--r--    11KiB /usr/include/sound/firewire.h
 -rw-r--r--   2.1KiB /usr/include/sound/hdsp.h
 -rw-r--r--   4.4KiB /usr/include/sound/hdspm.h
--rw-r--r--   5.8KiB /usr/include/sound/intel/avs/tokens.h
+-rw-r--r--   6.0KiB /usr/include/sound/intel/avs/tokens.h
 -rw-r--r--   3.5KiB /usr/include/sound/sb16_csp.h
 -rw-r--r--   1.6KiB /usr/include/sound/scarlett2.h
 -rw-r--r--   6.6KiB /usr/include/sound/sfnt_info.h
@@ -16974,8 +16974,8 @@
 -rw-r--r--   7.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/shell.cpython-39.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.opt-1.pyc
 -rw-r--r--   2.0KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/swap.cpython-39.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
--rw-r--r--    16KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.opt-1.pyc
+-rw-r--r--    17KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/updateinfo.cpython-39.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.opt-1.pyc
 -rw-r--r--   3.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrade.cpython-39.pyc
 -rw-r--r--   1.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/__pycache__/upgrademinimal.cpython-39.opt-1.pyc
@@ -17000,7 +17000,7 @@
 -rw-r--r--   6.2KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/search.py
 -rw-r--r--   9.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/shell.py
 -rw-r--r--   2.7KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/swap.py
--rw-r--r--    23KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
+-rw-r--r--    24KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/updateinfo.py
 -rw-r--r--   4.9KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrade.py
 -rw-r--r--   1.8KiB /usr/lib/python3.9/site-packages/dnf/cli/commands/upgrademinimal.py
 -rw-r--r--   7.3KiB /usr/lib/python3.9/site-packages/dnf/cli/completion_helper.py
@@ -18017,7 +18017,7 @@
 -rwxr-xr-x   261KiB /usr/lib64/libsolvext.so.1
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x   477KiB /usr/lib64/libssh.so.4.9.6
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
+-rwxr-xr-x   1.0MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    93KiB /usr/lib64/libtasn1.so.6.6.3
@@ -20186,7 +20186,7 @@
 -rw-r--r--    14KiB /usr/lib64/python3.9/site-packages/hawkey/__init__.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/site-packages/hawkey/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--    11KiB /usr/lib64/python3.9/site-packages/hawkey/__pycache__/__init__.cpython-39.pyc
--rwxr-xr-x   240KiB /usr/lib64/python3.9/site-packages/hawkey/_hawkey.so
+-rwxr-xr-x   244KiB /usr/lib64/python3.9/site-packages/hawkey/_hawkey.so
 -rw-r--r--   1.8KiB /usr/lib64/python3.9/site-packages/hawkey/test/__init__.py
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--   1.3KiB /usr/lib64/python3.9/site-packages/hawkey/test/__pycache__/__init__.cpython-39.pyc
@@ -20223,7 +20223,7 @@
 -rwxr-xr-x    29KiB /usr/lib64/python3.9/site-packages/libdnf/_error.so
 -rwxr-xr-x   896KiB /usr/lib64/python3.9/site-packages/libdnf/_module.so
 -rwxr-xr-x   306KiB /usr/lib64/python3.9/site-packages/libdnf/_repo.so
--rwxr-xr-x   244KiB /usr/lib64/python3.9/site-packages/libdnf/_smartcols.so
+-rwxr-xr-x   243KiB /usr/lib64/python3.9/site-packages/libdnf/_smartcols.so
 -rwxr-xr-x   469KiB /usr/lib64/python3.9/site-packages/libdnf/_transaction.so
 -rwxr-xr-x   105KiB /usr/lib64/python3.9/site-packages/libdnf/_utils.so
 -rw-r--r--    29KiB /usr/lib64/python3.9/site-packages/libdnf/common_types.py

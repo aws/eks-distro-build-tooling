@@ -443,7 +443,7 @@
 -rwxr-xr-x    57KiB /usr/bin/rm
 -rwxr-xr-x    44KiB /usr/bin/rmdir
 -rwxr-xr-x    65KiB /usr/bin/rpcbind
--rwxr-xr-x    37KiB /usr/bin/rpcinfo
+-rwxr-xr-x    36KiB /usr/bin/rpcinfo
 -rwxr-xr-x    36KiB /usr/bin/runcon
 -rwxr-xr-x    52KiB /usr/bin/script
 -rwxr-xr-x    44KiB /usr/bin/scriptlive
@@ -723,7 +723,7 @@
 -rwxr-xr-x   106KiB /usr/lib64/libsmartcols.so.1.1.0
 -rwxr-xr-x   1.4MiB /usr/lib64/libsqlite3.so.0.8.6
 -rwxr-xr-x    37KiB /usr/lib64/libss.so.2.0
--rwxr-xr-x  1020KiB /usr/lib64/libssl.so.3.5.8
+-rwxr-xr-x   1.0MiB /usr/lib64/libssl.so.3.5.8
 -rwxr-xr-x   2.5MiB /usr/lib64/libstdc++.so.6.0.33
 -rwxr-xr-x   895KiB /usr/lib64/libsystemd.so.0.35.0
 -rwxr-xr-x    42KiB /usr/lib64/libthread_db.so.1
