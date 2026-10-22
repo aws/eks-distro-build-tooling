@@ -2234,7 +2234,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Indiana/Vincennes
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/America/Indiana/Winamac
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/America/Indianapolis
--rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Inuvik
+-rw-r--r--   1.8KiB /usr/share/zoneinfo/America/Inuvik
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/America/Iqaluit
 -rw-r--r--     482B /usr/share/zoneinfo/America/Jamaica
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/America/Jujuy
@@ -2286,7 +2286,7 @@
 -rw-r--r--     576B /usr/share/zoneinfo/America/Porto_Velho
 -rw-r--r--     246B /usr/share/zoneinfo/America/Puerto_Rico
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/America/Punta_Arenas
--rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Rainy_River
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/America/Rainy_River
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/America/Rankin_Inlet
 -rw-r--r--     716B /usr/share/zoneinfo/America/Recife
 -rw-r--r--     980B /usr/share/zoneinfo/America/Regina
@@ -2317,7 +2317,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/America/Whitehorse
--rw-r--r--   2.9KiB /usr/share/zoneinfo/America/Winnipeg
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/America/Yakutat
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/America/Yellowknife
 -rw-r--r--     437B /usr/share/zoneinfo/Antarctica/Casey
@@ -2472,9 +2472,9 @@
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/Brazil/East
 -rw-r--r--     604B /usr/share/zoneinfo/Brazil/West
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/CET
--rw-r--r--   3.6KiB /usr/share/zoneinfo/CST6CDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/CST6CDT
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/Canada/Atlantic
--rw-r--r--   2.9KiB /usr/share/zoneinfo/Canada/Central
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/Canada/Central
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Canada/Eastern
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/Canada/Newfoundland
@@ -2486,7 +2486,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Cuba
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/EET
 -rw-r--r--     182B /usr/share/zoneinfo/EST
--rw-r--r--   3.5KiB /usr/share/zoneinfo/EST5EDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/EST5EDT
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/Eire
 -rw-r--r--     114B /usr/share/zoneinfo/Etc/GMT
@@ -2618,7 +2618,7 @@
 -rw-r--r--     625B /usr/share/zoneinfo/Libya
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/MET
 -rw-r--r--     360B /usr/share/zoneinfo/MST
--rw-r--r--   2.5KiB /usr/share/zoneinfo/MST7MDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/MST7MDT
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/Mexico/BajaNorte
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/Mexico/BajaSur
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/Mexico/General
@@ -2626,7 +2626,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/NZ-CHAT
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/Navajo
 -rw-r--r--     561B /usr/share/zoneinfo/PRC
--rw-r--r--   2.8KiB /usr/share/zoneinfo/PST8PDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/PST8PDT
 -rw-r--r--     612B /usr/share/zoneinfo/Pacific/Apia
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/Pacific/Auckland
 -rw-r--r--     268B /usr/share/zoneinfo/Pacific/Bougainville
@@ -2835,7 +2835,7 @@
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Indiana/Vincennes
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/posix/America/Indiana/Winamac
 -rw-r--r--   1.7KiB /usr/share/zoneinfo/posix/America/Indianapolis
--rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Inuvik
+-rw-r--r--   1.8KiB /usr/share/zoneinfo/posix/America/Inuvik
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/America/Iqaluit
 -rw-r--r--     482B /usr/share/zoneinfo/posix/America/Jamaica
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/America/Jujuy
@@ -2887,7 +2887,7 @@
 -rw-r--r--     576B /usr/share/zoneinfo/posix/America/Porto_Velho
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Puerto_Rico
 -rw-r--r--   1.9KiB /usr/share/zoneinfo/posix/America/Punta_Arenas
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Rainy_River
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/America/Rainy_River
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/America/Rankin_Inlet
 -rw-r--r--     716B /usr/share/zoneinfo/posix/America/Recife
 -rw-r--r--     980B /usr/share/zoneinfo/posix/America/Regina
@@ -2918,7 +2918,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/America/Vancouver
 -rw-r--r--     246B /usr/share/zoneinfo/posix/America/Virgin
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/posix/America/Whitehorse
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/America/Winnipeg
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/America/Winnipeg
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/America/Yakutat
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/America/Yellowknife
 -rw-r--r--     437B /usr/share/zoneinfo/posix/Antarctica/Casey
@@ -3073,9 +3073,9 @@
 -rw-r--r--   1.5KiB /usr/share/zoneinfo/posix/Brazil/East
 -rw-r--r--     604B /usr/share/zoneinfo/posix/Brazil/West
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/CET
--rw-r--r--   3.6KiB /usr/share/zoneinfo/posix/CST6CDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/CST6CDT
 -rw-r--r--   3.4KiB /usr/share/zoneinfo/posix/Canada/Atlantic
--rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/Canada/Central
+-rw-r--r--   2.6KiB /usr/share/zoneinfo/posix/Canada/Central
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Canada/Eastern
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/posix/Canada/Mountain
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/posix/Canada/Newfoundland
@@ -3087,7 +3087,7 @@
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Cuba
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/posix/EET
 -rw-r--r--     182B /usr/share/zoneinfo/posix/EST
--rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/EST5EDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/EST5EDT
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Egypt
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/posix/Eire
 -rw-r--r--     114B /usr/share/zoneinfo/posix/Etc/GMT
@@ -3219,7 +3219,7 @@
 -rw-r--r--     625B /usr/share/zoneinfo/posix/Libya
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/MET
 -rw-r--r--     360B /usr/share/zoneinfo/posix/MST
--rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/MST7MDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/MST7MDT
 -rw-r--r--   2.9KiB /usr/share/zoneinfo/posix/Mexico/BajaNorte
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/posix/Mexico/BajaSur
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/posix/Mexico/General
@@ -3227,7 +3227,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/posix/NZ-CHAT
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/posix/Navajo
 -rw-r--r--     561B /usr/share/zoneinfo/posix/PRC
--rw-r--r--   2.8KiB /usr/share/zoneinfo/posix/PST8PDT
+-rw-r--r--   2.2KiB /usr/share/zoneinfo/posix/PST8PDT
 -rw-r--r--     612B /usr/share/zoneinfo/posix/Pacific/Apia
 -rw-r--r--   2.4KiB /usr/share/zoneinfo/posix/Pacific/Auckland
 -rw-r--r--     268B /usr/share/zoneinfo/posix/Pacific/Bougainville
@@ -3672,7 +3672,7 @@
 -rw-r--r--   2.0KiB /usr/share/zoneinfo/right/Brazil/East
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Brazil/West
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/CET
--rw-r--r--   3.8KiB /usr/share/zoneinfo/right/CST6CDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/CST6CDT
 -rw-r--r--   3.6KiB /usr/share/zoneinfo/right/Canada/Atlantic
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Canada/Central
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Canada/Eastern
@@ -3686,7 +3686,7 @@
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Cuba
 -rw-r--r--   2.5KiB /usr/share/zoneinfo/right/EET
 -rw-r--r--     732B /usr/share/zoneinfo/right/EST
--rw-r--r--   3.8KiB /usr/share/zoneinfo/right/EST5EDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/EST5EDT
 -rw-r--r--   2.6KiB /usr/share/zoneinfo/right/Egypt
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/Eire
 -rw-r--r--     664B /usr/share/zoneinfo/right/Etc/GMT
@@ -3818,7 +3818,7 @@
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Libya
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/MET
 -rw-r--r--     910B /usr/share/zoneinfo/right/MST
--rw-r--r--   2.7KiB /usr/share/zoneinfo/right/MST7MDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/MST7MDT
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Mexico/BajaNorte
 -rw-r--r--   1.6KiB /usr/share/zoneinfo/right/Mexico/BajaSur
 -rw-r--r--   1.8KiB /usr/share/zoneinfo/right/Mexico/General
@@ -3826,7 +3826,7 @@
 -rw-r--r--   2.3KiB /usr/share/zoneinfo/right/NZ-CHAT
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Navajo
 -rw-r--r--   1.1KiB /usr/share/zoneinfo/right/PRC
--rw-r--r--   3.1KiB /usr/share/zoneinfo/right/PST8PDT
+-rw-r--r--   2.5KiB /usr/share/zoneinfo/right/PST8PDT
 -rw-r--r--   1.2KiB /usr/share/zoneinfo/right/Pacific/Apia
 -rw-r--r--   2.7KiB /usr/share/zoneinfo/right/Pacific/Auckland
 -rw-r--r--     800B /usr/share/zoneinfo/right/Pacific/Bougainville
@@ -3895,7 +3895,7 @@
 -rw-r--r--   2.1KiB /usr/share/zoneinfo/right/W-SU
 -rw-r--r--   3.7KiB /usr/share/zoneinfo/right/WET
 -rw-r--r--     664B /usr/share/zoneinfo/right/Zulu
--rw-r--r--   102KiB /usr/share/zoneinfo/tzdata.zi
+-rw-r--r--   103KiB /usr/share/zoneinfo/tzdata.zi
 -rw-r--r--    19KiB /usr/share/zoneinfo/zone.tab
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--    17KiB /usr/share/zsh/site-functions/_curl
