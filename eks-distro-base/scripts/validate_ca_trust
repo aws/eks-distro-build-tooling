@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -eE
+set -o nounset
+set -o pipefail
+
+# Distrusted per CVE-2026-113470, https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 and https://bugzilla.mozilla.org/show_bug.cgi?id=2083709.
+DISTRUSTED_SPKI_SHA256=(
+    8d417db2dd8bf5e3084d1e3f196d583849d81bdd4c00c70b9d39369e96b8c782
+    c619e4780ed8e0abeda24ad732567de4383a7ea941338f6d1a7d1b49ac792fe9
+    bd153ed7b0434f6886b17bce8bbe84ed340c7132d702a8f4fa318f756ecbd6f3
+    eabc185c4e82d942b1a5978ba3c0181487d6b3b9974e5c49f72f6d0bd9637150
+    b7408b4d2be0238ba37004dd34e276c6019bd2f24c9db7d4980f5f6c359a4bcc
+)
+
+if [ "$#" -gt 0 ]; then
+    ROOTS=("$@")
+else
+    ROOTS=(/ "${NEWROOT:-/newroot}")
+fi
+
+WORK_DIR=$(mktemp -d)
+trap 'rm -rf "$WORK_DIR"' EXIT
+
+printf '%s\n' "${DISTRUSTED_SPKI_SHA256[@]}" | sort > "$WORK_DIR/distrusted"
+
+function spki_sha256() {
+    openssl x509 -in "$1" -noout -pubkey | openssl pkey -pubin -outform der | sha256sum | cut -d' ' -f1
+}
+
+for root in "${ROOTS[@]}"; do
+    echo "Validating distrusted roots in $root"
+
+    # p11-kit on AL2 reads the blacklist directory and on AL2023 reads blocklist.
+    for blocklist in "${root%/}/etc/pki/ca-trust/source/blocklist" "${root%/}/etc/pki/ca-trust/source/blacklist"; do
+        for cert in "$blocklist"/*.pem; do
+            if [ -f "$cert" ]; then
+                spki_sha256 "$cert"
+            fi
+        done | sort > "$WORK_DIR/blocklisted"
+        missing=$(comm -23 "$WORK_DIR/distrusted" "$WORK_DIR/blocklisted")
+        if [ -n "$missing" ]; then
+            echo "Distrusted roots missing from $blocklist: $missing"
+            exit 1
+        fi
+    done
+
+    tls_bundle="${root%/}/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
+    if [ ! -s "$tls_bundle" ]; then
+        echo "$tls_bundle is missing or empty"
+        exit 1
+    fi
+
+    for bundle in "$tls_bundle" "${root%/}/etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem" "${root%/}/etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem"; do
+        [ -f "$bundle" ] || continue
+        rm -f "$WORK_DIR"/cert-*.pem
+        awk -v dir="$WORK_DIR" '/-----BEGIN CERTIFICATE-----/ { if (out) close(out); out = sprintf("%s/cert-%04d.pem", dir, ++n) } out { print > out }' "$bundle"
+        checked=0
+        for cert in "$WORK_DIR"/cert-*.pem; do
+            [ -f "$cert" ] || continue
+            spki=$(spki_sha256 "$cert")
+            if grep -qxF "$spki" "$WORK_DIR/distrusted"; then
+                echo "$(openssl x509 -in "$cert" -noout -subject) is still trusted in $bundle"
+                exit 1
+            fi
+            checked=$((checked + 1))
+        done
+        echo "No distrusted roots among $checked certificates in $bundle"
+    done
+done
