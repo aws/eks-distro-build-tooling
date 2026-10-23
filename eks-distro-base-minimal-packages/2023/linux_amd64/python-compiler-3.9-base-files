@@ -44,11 +44,11 @@
 -rw-r--r--     980B /etc/pki/ca-trust/ca-legacy.conf
 -rw-r--r--     560B /etc/pki/ca-trust/extracted/README
 -rw-r--r--     566B /etc/pki/ca-trust/extracted/edk2/README
--r--r--r--   155KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
+-r--r--r--   153KiB /etc/pki/ca-trust/extracted/edk2/cacerts.bin
 -rw-r--r--     726B /etc/pki/ca-trust/extracted/java/README
--r--r--r--   156KiB /etc/pki/ca-trust/extracted/java/cacerts
+-r--r--r--   154KiB /etc/pki/ca-trust/extracted/java/cacerts
 -rw-r--r--     787B /etc/pki/ca-trust/extracted/openssl/README
--r--r--r--   527KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-r--r--r--   528KiB /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
 -rw-r--r--     898B /etc/pki/ca-trust/extracted/pem/README
 -r--r--r--   2.8KiB /etc/pki/ca-trust/extracted/pem/directory-hash/ACCVRAIZ1.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/AC_RAIZ_FNMT-RCM.pem
@@ -187,16 +187,23 @@
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/certSIGN_Root_CA_G2.pem
 -r--r--r--     843B /etc/pki/ca-trust/extracted/pem/directory-hash/e-Szigno_Root_CA_2017.pem
 -r--r--r--   2.0KiB /etc/pki/ca-trust/extracted/pem/directory-hash/ePKI_Root_Certification_Authority.pem
--r--r--r--     814B /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_ECC_Root_CA_-_C3.pem
--r--r--r--     859B /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_ECC_Root_CA_-_G3.pem
--r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_Root_CA_-_C1.pem
 -r--r--r--   1.3KiB /etc/pki/ca-trust/extracted/pem/directory-hash/emSign_Root_CA_-_G1.pem
 -r--r--r--     774B /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_ECC_Root_CA.pem
 -r--r--r--   1.9KiB /etc/pki/ca-trust/extracted/pem/directory-hash/vTrus_Root_CA.pem
--r--r--r--   147KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
--r--r--r--   379KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
--r--r--r--   214KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+-r--r--r--   142KiB /etc/pki/ca-trust/extracted/pem/email-ca-bundle.pem
+-r--r--r--   376KiB /etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem
+-r--r--r--   211KiB /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 -rw-r--r--     932B /etc/pki/ca-trust/source/README
+-rw-r--r--   1.5KiB /etc/pki/ca-trust/source/blacklist/AAA_Certificate_Services.pem
+-rw-r--r--     814B /etc/pki/ca-trust/source/blacklist/emSign_ECC_Root_CA_-_C3.pem
+-rw-r--r--     859B /etc/pki/ca-trust/source/blacklist/emSign_ECC_Root_CA_-_G3.pem
+-rw-r--r--   1.3KiB /etc/pki/ca-trust/source/blacklist/emSign_Root_CA_-_C1.pem
+-rw-r--r--     810B /etc/pki/ca-trust/source/blacklist/emSign_Root_TLS_CA_-_G3.pem
+-rw-r--r--   1.5KiB /etc/pki/ca-trust/source/blocklist/AAA_Certificate_Services.pem
+-rw-r--r--     814B /etc/pki/ca-trust/source/blocklist/emSign_ECC_Root_CA_-_C3.pem
+-rw-r--r--     859B /etc/pki/ca-trust/source/blocklist/emSign_ECC_Root_CA_-_G3.pem
+-rw-r--r--   1.3KiB /etc/pki/ca-trust/source/blocklist/emSign_Root_CA_-_C1.pem
+-rw-r--r--     810B /etc/pki/ca-trust/source/blocklist/emSign_Root_TLS_CA_-_G3.pem
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2022
 -rw-r--r--   1.8KiB /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023
 -rw-r--r--     412B /etc/pki/tls/ct_log_list.cnf
@@ -7975,7 +7982,6 @@ lrwxrwxrwx      15B /etc/pki/ca-trust/extracted/pem/directory-hash/1001acf7.0 GT
 lrwxrwxrwx      54B /etc/pki/ca-trust/extracted/pem/directory-hash/10531352.0 Starfield_Services_Root_Certificate_Authority_-_G2.pem
 lrwxrwxrwx      46B /etc/pki/ca-trust/extracted/pem/directory-hash/106f3e4d.0 Entrust_Root_Certification_Authority_-_EC1.pem
 lrwxrwxrwx      41B /etc/pki/ca-trust/extracted/pem/directory-hash/128f4b91.0 Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
-lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/14bc7599.0 emSign_ECC_Root_CA_-_G3.pem
 lrwxrwxrwx      53B /etc/pki/ca-trust/extracted/pem/directory-hash/1ae85e5e.0 Trustwave_Global_ECC_P256_Certification_Authority.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/1b0f7e5c.0 GlobalSign_Root_R46.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/1cef98f5.0 TrustAsia_Global_Root_CA_G4.pem
@@ -8017,13 +8023,11 @@ lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/3fb36b73.0 NA
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/40193066.0 Certum_Trusted_Network_CA_2.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/4042bcee.0 ISRG_Root_X1.pem
 lrwxrwxrwx      34B /etc/pki/ca-trust/extracted/pem/directory-hash/40547a79.0 COMODO_Certification_Authority.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/406c9bb1.0 emSign_Root_CA_-_C1.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/41a3f684.0 Certum_EC-384_CA.pem
 lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/455f1b52.0 Entrust_Root_Certification_Authority_-_G2.pem
 lrwxrwxrwx      22B /etc/pki/ca-trust/extracted/pem/directory-hash/47b283f6.0 TWCA_CYBER_Root_CA.pem
 lrwxrwxrwx      14B /etc/pki/ca-trust/extracted/pem/directory-hash/48a195d8.0 Izenpe.com.pem
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/48bec511.0 Certum_Trusted_Network_CA.pem
-lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/4b718d9b.0 emSign_ECC_Root_CA_-_C3.pem
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/4be590e0.0 IdenTrust_Public_Sector_Root_CA_1.pem
 lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/4bfab552.0 Starfield_Root_Certificate_Authority_-_G2.pem
 lrwxrwxrwx      31B /etc/pki/ca-trust/extracted/pem/directory-hash/4c3982f2.0 HARICA_TLS_ECC_Root_CA_2021.pem
@@ -8084,7 +8088,6 @@ lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/8508e720.0 Ce
 lrwxrwxrwx      45B /etc/pki/ca-trust/extracted/pem/directory-hash/85cde254.0 Starfield_Root_Certificate_Authority_-_G2.pem
 lrwxrwxrwx      26B /etc/pki/ca-trust/extracted/pem/directory-hash/86212b19.0 AffirmTrust_Networking.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/865fbdf9.0 SSL.com_TLS_ECC_Root_CA_2022.pem
-lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/869fbf79.0 emSign_ECC_Root_CA_-_C3.pem
 lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/8761519c.0 SecureSign_Root_CA14.pem
 lrwxrwxrwx      24B /etc/pki/ca-trust/extracted/pem/directory-hash/878d9bca.0 SecureSign_Root_CA14.pem
 lrwxrwxrwx      16B /etc/pki/ca-trust/extracted/pem/directory-hash/8794b4e3.0 ISRG_Root_X2.pem
@@ -8141,7 +8144,6 @@ lrwxrwxrwx      46B /etc/pki/ca-trust/extracted/pem/directory-hash/b3fb433b.0 En
 lrwxrwxrwx      29B /etc/pki/ca-trust/extracted/pem/directory-hash/b433981b.0 ANF_Secure_Server_Root_CA.pem
 lrwxrwxrwx      20B /etc/pki/ca-trust/extracted/pem/directory-hash/b66938e9.0 Secure_Global_CA.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/b727005e.0 AffirmTrust_Premium.pem
-lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/b74d2bd5.0 emSign_ECC_Root_CA_-_G3.pem
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/b7a5b843.0 TWCA_Root_Certification_Authority.pem
 lrwxrwxrwx      37B /etc/pki/ca-trust/extracted/pem/directory-hash/b7db1890.0 TWCA_Root_Certification_Authority.pem
 lrwxrwxrwx      39B /etc/pki/ca-trust/extracted/pem/directory-hash/b81b93f0.0 AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
@@ -8191,7 +8193,6 @@ lrwxrwxrwx      21B /etc/pki/ca-trust/extracted/pem/directory-hash/d96b65e2.0 Ce
 lrwxrwxrwx      49B /etc/pki/ca-trust/extracted/pem/directory-hash/da0cfd1d.0 Sectigo_Public_Server_Authentication_Root_E46.pem
 lrwxrwxrwx      32B /etc/pki/ca-trust/extracted/pem/directory-hash/da7377f6.0 UCA_Extended_Validation_Root.pem
 lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/dbc54cab.0 AffirmTrust_Premium.pem
-lrwxrwxrwx      23B /etc/pki/ca-trust/extracted/pem/directory-hash/dbff3a01.0 emSign_Root_CA_-_C1.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/dc4d6a89.0 GlobalSign_Root_CA_-_R6.pem
 lrwxrwxrwx      59B /etc/pki/ca-trust/extracted/pem/directory-hash/dc99f41e.0 Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
 lrwxrwxrwx      27B /etc/pki/ca-trust/extracted/pem/directory-hash/dd8e9d41.0 DigiCert_Global_Root_G3.pem
