@@ -55,7 +55,12 @@ yum install -y \
     which \
     yum-utils
 
-time upx --best --no-lzma /usr/libexec/docker/cli-plugins/docker-buildx /usr/bin/{containerd,ctr,docker,dockerd}
+UPX_DOCKER_BINS=(/usr/libexec/docker/cli-plugins/docker-buildx /usr/bin/{containerd,docker,dockerd})
+# UPX 5.1.1 rejects the AL2 ctr binary with CantPackException bad e_shstrtab.
+if [ "$IS_AL23" = "true" ]; then
+    UPX_DOCKER_BINS+=(/usr/bin/ctr)
+fi
+time upx --best --no-lzma "${UPX_DOCKER_BINS[@]}"
 
 # We see issues in fargate when installing on top of these images
 # including this plugin appears to fix it
