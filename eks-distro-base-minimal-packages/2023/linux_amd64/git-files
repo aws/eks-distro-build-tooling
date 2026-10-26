@@ -407,7 +407,7 @@
 -rwxr-xr-x   350KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    16KiB /usr/lib64/librt.so.1
--rwxr-xr-x   127KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   126KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   745KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   143KiB /usr/lib64/libslapi-2.4.so.2.11.5
@@ -423,7 +423,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   105KiB /usr/lib64/libz.so.1.2.11
 -rwxr-xr-x   138KiB /usr/lib64/ossl-modules/legacy.so
--rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x    24KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
 -rwxr-xr-x    41KiB /usr/libexec/dirmngr_ldap
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V6_LP64_OFF64
 -rwxr-xr-x    36KiB /usr/libexec/getconf/POSIX_V7_LP64_OFF64

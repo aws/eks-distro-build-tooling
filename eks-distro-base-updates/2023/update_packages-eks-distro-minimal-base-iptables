@@ -1,3 +1,6 @@
 
 amazon-linux-repo-cdn.noarch
+ca-certificates.noarch
+libcap.x86_64
+pcre2.x86_64
 system-release.noarch

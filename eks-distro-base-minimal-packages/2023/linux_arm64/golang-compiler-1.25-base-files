@@ -15122,6 +15122,7 @@
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--     481B /usr/lib/systemd/system/fstrim.service
 -rw-r--r--     270B /usr/lib/systemd/system/fstrim.timer
+-rw-r--r--     351B /usr/lib/systemd/system/fstrim.timer.d/99-amazon-fstrim-schedule.conf
 -rw-r--r--     331B /usr/lib/systemd/system/pam_namespace.service
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
@@ -15567,7 +15568,7 @@
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
--rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   262KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   265KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   332KiB /usr/lib64/libsemanage.so.2
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
@@ -15592,8 +15593,8 @@
 -rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   1.7MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
@@ -15722,7 +15723,7 @@
 -rwxr-xr-x   196KiB /usr/sbin/findfs
 -rwxr-xr-x   196KiB /usr/sbin/fsck
 -rwxr-xr-x   196KiB /usr/sbin/fsck.cramfs
--rwxr-xr-x   196KiB /usr/sbin/fsck.minix
+-rwxr-xr-x   197KiB /usr/sbin/fsck.minix
 -rwxr-xr-x   196KiB /usr/sbin/fsfreeze
 -rwxr-xr-x   196KiB /usr/sbin/fstrim
 -rwxr-xr-x   196KiB /usr/sbin/getcap
@@ -15760,8 +15761,8 @@
 -rwxr-xr-x   196KiB /usr/sbin/rfkill
 -rwxr-xr-x   196KiB /usr/sbin/rtcwake
 -rwxr-xr-x   196KiB /usr/sbin/runuser
--rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x   196KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x   196KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x   196KiB /usr/sbin/setcap
 -rwxr-xr-x   197KiB /usr/sbin/sfdisk
 -rwxr-xr-x   196KiB /usr/sbin/sulogin
