@@ -3999,7 +3999,7 @@
 -rw-r--r--     222B /usr/lib64/libpthread.so
 -rw-r--r--   1.7KiB /usr/lib64/libpthread_nonshared.a
 -rwxr-xr-x   1.8MiB /usr/lib64/libpython2.7.so.1.0
--rwxr-xr-x   3.0MiB /usr/lib64/libpython3.7m.so.1.0
+-rwxr-xr-x   3.4MiB /usr/lib64/libpython3.7m.so.1.0
 -rwxr-xr-x   6.5KiB /usr/lib64/libpython3.so
 -rwxr-xr-x   248KiB /usr/lib64/libquadmath.so.0.0.0
 -rwxr-xr-x   279KiB /usr/lib64/libreadline.so.6.2
@@ -6682,9 +6682,9 @@
 -rw-r--r--    21KiB /usr/lib64/python3.7/__pycache__/sre_parse.cpython-37.opt-1.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.7/__pycache__/sre_parse.cpython-37.opt-2.pyc
 -rw-r--r--    21KiB /usr/lib64/python3.7/__pycache__/sre_parse.cpython-37.pyc
--rw-r--r--    39KiB /usr/lib64/python3.7/__pycache__/ssl.cpython-37.opt-1.pyc
+-rw-r--r--    40KiB /usr/lib64/python3.7/__pycache__/ssl.cpython-37.opt-1.pyc
 -rw-r--r--    30KiB /usr/lib64/python3.7/__pycache__/ssl.cpython-37.opt-2.pyc
--rw-r--r--    39KiB /usr/lib64/python3.7/__pycache__/ssl.cpython-37.pyc
+-rw-r--r--    40KiB /usr/lib64/python3.7/__pycache__/ssl.cpython-37.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.7/__pycache__/stat.cpython-37.opt-1.pyc
 -rw-r--r--   3.5KiB /usr/lib64/python3.7/__pycache__/stat.cpython-37.opt-2.pyc
 -rw-r--r--   4.3KiB /usr/lib64/python3.7/__pycache__/stat.cpython-37.pyc
@@ -7999,7 +7999,7 @@
 -rwxr-xr-x   112KiB /usr/lib64/python3.7/lib-dynload/_codecs_tw.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   7.1KiB /usr/lib64/python3.7/lib-dynload/_contextvars.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   7.5KiB /usr/lib64/python3.7/lib-dynload/_crypt.cpython-37m-x86_64-linux-gnu.so
--rwxr-xr-x    43KiB /usr/lib64/python3.7/lib-dynload/_csv.cpython-37m-x86_64-linux-gnu.so
+-rwxr-xr-x    39KiB /usr/lib64/python3.7/lib-dynload/_csv.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x   145KiB /usr/lib64/python3.7/lib-dynload/_ctypes.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    84KiB /usr/lib64/python3.7/lib-dynload/_curses.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x    17KiB /usr/lib64/python3.7/lib-dynload/_curses_panel.cpython-37m-x86_64-linux-gnu.so
@@ -10738,7 +10738,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   1.1MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--  1018KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--     522B /usr/share/systemtap/tapset/libpython2.7-64.stp
 -rw-r--r--     135B /usr/share/tabset/std

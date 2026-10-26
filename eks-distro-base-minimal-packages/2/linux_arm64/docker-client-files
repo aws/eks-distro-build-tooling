@@ -406,8 +406,8 @@
 -rwxr-xr-x   762KiB /usr/sbin/sln
 -rwxr-xr-x    73KiB /usr/sbin/zdump
 -rwxr-xr-x    75KiB /usr/sbin/zic
--rw-r--r--    11KiB /usr/share/doc/docker-25.0.16/LICENSE
--rw-r--r--     642B /usr/share/doc/docker-25.0.16/NOTICE
+-rw-r--r--    11KiB /usr/share/doc/docker-25.0.18/LICENSE
+-rw-r--r--     642B /usr/share/doc/docker-25.0.18/NOTICE
 -rw-r--r--      95B /usr/share/doc/pcre-8.32/COPYING
 -rw-r--r--   3.1KiB /usr/share/doc/pcre-8.32/LICENCE
 -rw-r--r--     118B /usr/share/doc/setup-2.8.71/COPYING
@@ -443,7 +443,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   1.1MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--  1018KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Abidjan
 -rw-r--r--     170B /usr/share/zoneinfo/Africa/Accra
 -rw-r--r--     299B /usr/share/zoneinfo/Africa/Addis_Ababa

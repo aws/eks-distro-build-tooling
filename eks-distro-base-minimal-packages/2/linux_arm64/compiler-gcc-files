@@ -25,7 +25,7 @@
 -rw-r--r--      23B /etc/issue
 -rw-r--r--      22B /etc/issue.net
 -rw-r--r--     646B /etc/krb5.conf
--rw-r--r--   9.3KiB /etc/ld.so.cache
+-rw-r--r--    10KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--     100B /etc/logrotate.d/yum
 -rw-r--r--       0B /etc/motd
@@ -6497,7 +6497,7 @@
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.default.crt
 -rw-r--r--       0B /usr/share/pki/ca-trust-legacy/ca-bundle.legacy.disable.crt
 -rw-r--r--     937B /usr/share/pki/ca-trust-source/README
--rw-r--r--   1.1MiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
+-rw-r--r--  1018KiB /usr/share/pki/ca-trust-source/ca-bundle.trust.p11-kit
 -rw-r--r--    52KiB /usr/share/publicsuffix/public_suffix_list.dafsa
 -rw-r--r--     522B /usr/share/systemtap/tapset/libpython2.7-64.stp
 -rw-r--r--     135B /usr/share/tabset/std
