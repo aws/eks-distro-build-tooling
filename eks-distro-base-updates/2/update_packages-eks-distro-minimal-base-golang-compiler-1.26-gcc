@@ -1,5 +1,4 @@
 
-curl.x86_64
+ca-certificates.noarch
+cyrus-sasl-lib.x86_64
 kernel-headers.x86_64
-libcurl.x86_64
-libxml2.x86_64

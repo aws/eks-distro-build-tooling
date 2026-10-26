@@ -4,14 +4,14 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.x86_64
 binutils-2.29.1-31.amzn2.0.2.x86_64
 bzip2-libs-1.0.6-13.amzn2.0.3.x86_64
-ca-certificates-2025.2.76-1.amzn2.0.2.noarch
+ca-certificates-2025.2.76-1.amzn2.0.3.noarch
 chkconfig-1.7.4-1.amzn2.0.2.x86_64
 coreutils-8.22-24.amzn2.x86_64
 cracklib-2.9.0-11.amzn2.0.2.x86_64
 cracklib-dicts-2.9.0-11.amzn2.0.2.x86_64
 cryptsetup-libs-1.7.4-4.amzn2.x86_64
 curl-8.3.0-1.amzn2.0.13.x86_64
-cyrus-sasl-lib-2.1.26-24.amzn2.0.1.x86_64
+cyrus-sasl-lib-2.1.26-24.amzn2.0.2.x86_64
 dbus-1.10.24-7.amzn2.0.4.x86_64
 dbus-libs-1.10.24-7.amzn2.0.4.x86_64
 device-mapper-1.02.170-6.amzn2.5.x86_64
