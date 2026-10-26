@@ -870,7 +870,7 @@
 -rwxr-xr-x   414KiB /usr/lib64/libreadline.so.8.1
 -rwxr-xr-x   198KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
--rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   262KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   265KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
 -rwxr-xr-x   196KiB /usr/lib64/libsframe.so.1.0.0
@@ -889,8 +889,8 @@
 -rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   1.7MiB /usr/lib64/ossl-modules/fips.so
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/libexec/awk/grcat
 -rwxr-xr-x   196KiB /usr/libexec/awk/pwcat
@@ -907,8 +907,8 @@
 -rwxr-xr-x   196KiB /usr/sbin/getpcaps
 -rwxr-xr-x   196KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   936KiB /usr/sbin/ldconfig
--rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x   196KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x   196KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x   196KiB /usr/sbin/setcap
 -rwxr-xr-x   196KiB /usr/sbin/zic
 -rw-r--r--     383B /usr/share/awk/assert.awk

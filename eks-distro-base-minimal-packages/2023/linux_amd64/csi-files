@@ -557,6 +557,7 @@
 -rw-r--r--     666B /usr/lib/systemd/system/auth-rpcgss-module.service
 -rw-r--r--     481B /usr/lib/systemd/system/fstrim.service
 -rw-r--r--     270B /usr/lib/systemd/system/fstrim.timer
+-rw-r--r--     351B /usr/lib/systemd/system/fstrim.timer.d/99-amazon-fstrim-schedule.conf
 -rw-r--r--   1.3KiB /usr/lib/systemd/system/gssproxy.service
 -rw-r--r--     291B /usr/lib/systemd/system/nfs-blkmap.service
 -rw-r--r--     433B /usr/lib/systemd/system/nfs-client.target
@@ -720,7 +721,7 @@
 -rwxr-xr-x    16KiB /usr/lib64/libref_array.so.1.2.1
 -rwxr-xr-x    70KiB /usr/lib64/libresolv.so.2
 -rwxr-xr-x    16KiB /usr/lib64/librt.so.1
--rwxr-xr-x   127KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   126KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   125KiB /usr/lib64/libseccomp.so.2.5.3
 -rwxr-xr-x   173KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   268KiB /usr/lib64/libsemanage.so.2
@@ -2310,7 +2311,7 @@
 -rwxr-xr-x    39KiB /usr/lib64/python3.9/lib-dynload/_csv.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   132KiB /usr/lib64/python3.9/lib-dynload/_ctypes.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   131KiB /usr/lib64/python3.9/lib-dynload/_curses.cpython-39-x86_64-linux-gnu.so
--rwxr-xr-x    24KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
+-rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_curses_panel.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   126KiB /usr/lib64/python3.9/lib-dynload/_datetime.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x    25KiB /usr/lib64/python3.9/lib-dynload/_dbm.cpython-39-x86_64-linux-gnu.so
 -rwxr-xr-x   310KiB /usr/lib64/python3.9/lib-dynload/_decimal.cpython-39-x86_64-linux-gnu.so
@@ -2832,7 +2833,7 @@
 -rw-r--r--    28KiB /usr/lib64/python3.9/sre_compile.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/sre_constants.py
 -rw-r--r--    40KiB /usr/lib64/python3.9/sre_parse.py
--rw-r--r--    52KiB /usr/lib64/python3.9/ssl.py
+-rw-r--r--    53KiB /usr/lib64/python3.9/ssl.py
 -rw-r--r--   5.4KiB /usr/lib64/python3.9/stat.py
 -rw-r--r--    38KiB /usr/lib64/python3.9/statistics.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/string.py
@@ -3097,8 +3098,8 @@
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/zoneinfo/_common.py
 -rw-r--r--   5.0KiB /usr/lib64/python3.9/zoneinfo/_tzpath.py
 -rw-r--r--    24KiB /usr/lib64/python3.9/zoneinfo/_zoneinfo.py
--rwxr-xr-x    25KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x    37KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x    24KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x    36KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x    24KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x    20KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x    16KiB /usr/lib64/security/pam_chroot.so
@@ -3274,8 +3275,8 @@
 -rwxr-xr-x    19KiB /usr/sbin/rpcdebug
 -rwxr-xr-x    32KiB /usr/sbin/rtcwake
 -rwxr-xr-x    56KiB /usr/sbin/runuser
--rwxr-xr-x    17KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x    21KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x    16KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x    20KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x    16KiB /usr/sbin/setcap
 -rwxr-xr-x    83KiB /usr/sbin/setquota
 -rwxr-xr-x   105KiB /usr/sbin/sfdisk

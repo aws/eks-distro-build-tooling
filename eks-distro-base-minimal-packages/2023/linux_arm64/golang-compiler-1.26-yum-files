@@ -15993,6 +15993,7 @@
 -rw-r--r--     320B /usr/lib/systemd/system/dnf-makecache.timer
 -rw-r--r--     481B /usr/lib/systemd/system/fstrim.service
 -rw-r--r--     270B /usr/lib/systemd/system/fstrim.timer
+-rw-r--r--     351B /usr/lib/systemd/system/fstrim.timer.d/99-amazon-fstrim-schedule.conf
 -rw-r--r--     331B /usr/lib/systemd/system/pam_namespace.service
 -rw-r--r--     446B /usr/lib/systemd/system/rpmdb-rebuild.service
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
@@ -16493,7 +16494,7 @@
 -rwxr-xr-x   266KiB /usr/lib64/librpmio.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librpmsign.so.9.1.3
 -rwxr-xr-x   196KiB /usr/lib64/librt.so.1
--rwxr-xr-x   263KiB /usr/lib64/libsasl2.so.3.0.0
+-rwxr-xr-x   262KiB /usr/lib64/libsasl2.so.3.0.0
 -rwxr-xr-x   265KiB /usr/lib64/libselinux.so.1
 -rwxr-xr-x   332KiB /usr/lib64/libsemanage.so.2
 -rwxr-xr-x   849KiB /usr/lib64/libsepol.so.2
@@ -18749,7 +18750,7 @@
 -rw-r--r--    28KiB /usr/lib64/python3.9/sre_compile.py
 -rw-r--r--   7.1KiB /usr/lib64/python3.9/sre_constants.py
 -rw-r--r--    40KiB /usr/lib64/python3.9/sre_parse.py
--rw-r--r--    52KiB /usr/lib64/python3.9/ssl.py
+-rw-r--r--    53KiB /usr/lib64/python3.9/ssl.py
 -rw-r--r--   5.4KiB /usr/lib64/python3.9/stat.py
 -rw-r--r--    38KiB /usr/lib64/python3.9/statistics.py
 -rw-r--r--    11KiB /usr/lib64/python3.9/string.py
@@ -19014,8 +19015,8 @@
 -rw-r--r--   5.2KiB /usr/lib64/python3.9/zoneinfo/_common.py
 -rw-r--r--   5.0KiB /usr/lib64/python3.9/zoneinfo/_tzpath.py
 -rw-r--r--    24KiB /usr/lib64/python3.9/zoneinfo/_zoneinfo.py
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
--rwxr-xr-x   197KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libanonymous.so.3.0.0
+-rwxr-xr-x   196KiB /usr/lib64/sasl2/libsasldb.so.3.0.0
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_access.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_cap.so
 -rwxr-xr-x   196KiB /usr/lib64/security/pam_chroot.so
@@ -19157,7 +19158,7 @@
 -rwxr-xr-x   196KiB /usr/sbin/findfs
 -rwxr-xr-x   196KiB /usr/sbin/fsck
 -rwxr-xr-x   196KiB /usr/sbin/fsck.cramfs
--rwxr-xr-x   196KiB /usr/sbin/fsck.minix
+-rwxr-xr-x   197KiB /usr/sbin/fsck.minix
 -rwxr-xr-x   196KiB /usr/sbin/fsfreeze
 -rwxr-xr-x   196KiB /usr/sbin/fstrim
 -rwxr-xr-x   197KiB /usr/sbin/g13-syshelp
@@ -19196,8 +19197,8 @@
 -rwxr-xr-x   196KiB /usr/sbin/rfkill
 -rwxr-xr-x   196KiB /usr/sbin/rtcwake
 -rwxr-xr-x   196KiB /usr/sbin/runuser
--rwxr-xr-x   197KiB /usr/sbin/sasldblistusers2
--rwxr-xr-x   197KiB /usr/sbin/saslpasswd2
+-rwxr-xr-x   196KiB /usr/sbin/sasldblistusers2
+-rwxr-xr-x   196KiB /usr/sbin/saslpasswd2
 -rwxr-xr-x   196KiB /usr/sbin/setcap
 -rwxr-xr-x   197KiB /usr/sbin/sfdisk
 -rwxr-xr-x   196KiB /usr/sbin/sulogin
@@ -23138,7 +23139,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   4.2MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   4.3MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 -rw-r--r--       0B /var/log/lastlog
