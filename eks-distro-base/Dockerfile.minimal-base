@@ -37,7 +37,6 @@ RUN set -x && \
     clean_install binutils \
         cpio \
         findutils \
-        openssl \
         shadow-utils \
         yum-utils && \
     if grep -q "2023" "/etc/os-release"; then \
@@ -70,9 +69,6 @@ ENV CA_CERTIFICATES_SCRIPTLET_REQS="/usr/bin/p11-kit /usr/bin/trust /usr/share/p
 # and can safely remove these symlinks
 ENV CLEANUP_UNNECESSARY_FILES="/usr/lib/debug/usr/.dwz /etc/ssl/ct_log_list.cnf /etc/ssl/openssl.cnf"
 
-COPY files/etc/pki/ca-trust/source/blocklist/ $NEWROOT/etc/pki/ca-trust/source/blocklist/
-COPY files/etc/pki/ca-trust/source/blocklist/ $NEWROOT/etc/pki/ca-trust/source/blacklist/
-
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     rpm --root $NEWROOT --import /etc/pki/rpm-gpg/* && \
@@ -88,8 +84,7 @@ RUN set -x && \
         # available at that time
         echo latest > /etc/dnf/vars/releasever; \
     fi && \    
-    cleanup "base" && \
-    validate_ca_trust / $NEWROOT
+    cleanup "base"
 
 COPY files/ $NEWROOT
 
