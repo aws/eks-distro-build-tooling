@@ -47,7 +47,6 @@ func (r *ReleaseConfig) GenerateComponentsTable(release *distrov1alpha1.Release)
 		"external-resizer":      r.GetResizerComponent,
 		"node-driver-registrar": r.GetRegistrarComponent,
 		"external-snapshotter":  r.GetSnapshotterComponent,
-		"metrics-server":        r.GetMetricsServerComponent,
 		"cni-plugin":            r.GetCniComponent,
 		"etcd":                  r.GetEtcdComponent,
 		"coredns":               r.GetCorednsComponent,
