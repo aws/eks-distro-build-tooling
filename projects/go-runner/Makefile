@@ -34,6 +34,8 @@ BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
 PUSH_IMAGES?=false
+# Set to true to rebuild even if the tag already exists on the current base image
+FORCE_BUILD?=false
 
 
 .PHONY: process-go-versions
@@ -48,10 +50,10 @@ process-go-versions:
 		GO_PATCH_VERSION=`$$GOROOT/bin/go version | awk '{print $$3}' | sed 's/go//'` ; \
 		IMAGE_TAG=$(GIT_TAG)-go-$$GO_PATCH_VERSION.$(AL_TAG); \
 		echo "Checking if image already pushed: $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG"; \
-		if docker manifest inspect $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG > /dev/null 2>&1; then \
-			echo "$$IMAGE_TAG exists in repository, skipping build.."; \
+		if [ "$(FORCE_BUILD)" != "true" ] && build/image_on_base.sh $(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG $(BASE_IMAGE); then \
+			echo "$$IMAGE_TAG exists and is built on $(BASE_IMAGE), skipping build.."; \
 		else \
-			echo "$$IMAGE_TAG doesn't exist in repository"; \
+			echo "$$IMAGE_TAG doesn't exist, is not built on $(BASE_IMAGE), or FORCE_BUILD=true; building"; \
 			LATEST_IMAGE_TAG=$(GIT_TAG)-go-$$GO_VERSION-latest.al$(AL_TAG_LATEST); \
 			IMAGES=$(IMAGE_REPO)/$(IMAGE_NAME):$$IMAGE_TAG,$(IMAGE_REPO)/$(IMAGE_NAME):$$LATEST_IMAGE_TAG; \
 			$(MAKE) build-multi-arch-images GO_VERSION=$$GO_VERSION IMAGES=$$IMAGES; \
