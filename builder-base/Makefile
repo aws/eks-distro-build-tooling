@@ -25,6 +25,11 @@ IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG)
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_NAME):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
+PRIVATE_IMAGE_REPO?=
+PRIVATE_IMAGE=$(if $(PRIVATE_IMAGE_REPO),$(PRIVATE_IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG),)
+PRIVATE_LATEST_IMAGE=$(shell echo $(foreach tag,$(LATEST),$(PRIVATE_IMAGE_REPO)/$(IMAGE_NAME):$(tag)) | sed "s/ \+/,/g")
+IMAGE_NAMES=$(IMAGE),$(LATEST_IMAGE)$(if $(PRIVATE_IMAGE),$(COMMA)$(PRIVATE_IMAGE)$(COMMA)$(PRIVATE_LATEST_IMAGE),)
+
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base-kind
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
@@ -38,7 +43,7 @@ UPDATE_BASE_IMAGE?=true
 
 IMPORT_CACHE_REPOS=public.ecr.aws/eks-distro-build-tooling $(IMAGE_REPO)
 
-BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\",push=true
+BUILDKIT_OUTPUT=type=image,oci-mediatypes=true,\"name=$(IMAGE_NAMES)\",push=true
 BUILDKIT_PLATFORMS?=linux/amd64,linux/arm64
 FINAL_STAGE_BASE?=full-copy-stage
 VARIANT?=standard
@@ -111,6 +116,7 @@ images-%:
 		--progress plain \
 		--output $(BUILDKIT_OUTPUT)
 	$(if $(findstring push=true,$(BUILDKIT_OUTPUT)),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE)$(COMMA)$(LATEST_IMAGE),)
+	$(if $(and $(PRIVATE_IMAGE),$(findstring push=true,$(BUILDKIT_OUTPUT))),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(PRIVATE_IMAGE)$(COMMA)$(PRIVATE_LATEST_IMAGE) || echo "WARNING: failed to tag child images for $(PRIVATE_IMAGE)",)
 	if [ "$(AL_TAG)" = "2023" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG); \
 	fi

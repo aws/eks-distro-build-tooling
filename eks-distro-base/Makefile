@@ -156,6 +156,11 @@ BUILT_BUILDER_IMAGE?=$(IMAGE_REPO)/$(IMAGE_COMPONENT)-builder:$(VERSIONED_IMAGE_
 LATEST_TAGS=$(foreach tag,$(LATEST),$(IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag))
 LATEST_IMAGE=$(shell echo $(LATEST_TAGS) | sed "s/ \+/,/g")
 
+PRIVATE_IMAGE_REPO?=
+PRIVATE_IMAGE=$(if $(PRIVATE_IMAGE_REPO),$(PRIVATE_IMAGE_REPO)/$(IMAGE_COMPONENT):$(VERSIONED_IMAGE_TAG),)
+PRIVATE_LATEST_IMAGE=$(shell echo $(foreach tag,$(LATEST),$(PRIVATE_IMAGE_REPO)/$(IMAGE_COMPONENT):$(tag)) | sed "s/ \+/,/g")
+IMAGE_NAMES=$(IMAGE),$(LATEST_IMAGE)$(if $(PRIVATE_IMAGE),$(COMMA)$(PRIVATE_IMAGE)$(COMMA)$(PRIVATE_LATEST_IMAGE),)
+
 # al2023 is the default: gets "latest" and "latest-al23"
 # al2 is deprecated: gets "latest.2" and "latest-al2" only
 STANDARD_LATEST=$(foreach tag,$(if $(filter $(AL_TAG),2023),latest latest-al23,latest.2 latest-al2),$(call ADD_VERSIONED_VARIANT,$(tag)))
@@ -318,6 +323,7 @@ define BUILDCTL
 		$(if $(filter false,$(IGNORE_NO_CACHE)),$(BUILDCTL_NO_CACHE),) \
 		--output type=$(IMAGE_OUTPUT_TYPE)$(if $(filter local,$(IMAGE_OUTPUT_TYPE)),,$(BUILDCTL_IMAGE_TAGS)),$(IMAGE_OUTPUT)
 	$(if $(and $(filter image,$(IMAGE_OUTPUT_TYPE)),$(filter push=true,$(IMAGE_OUTPUT))),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE)$(COMMA)$(LATEST_IMAGE),)
+	$(if $(and $(PRIVATE_IMAGE),$(filter image,$(IMAGE_OUTPUT_TYPE)),$(filter push=true,$(IMAGE_OUTPUT))),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(PRIVATE_IMAGE)$(COMMA)$(PRIVATE_LATEST_IMAGE) || echo "WARNING: failed to tag child images for $(PRIVATE_IMAGE)",)
 endef
 
 # $1 - AL_TAG (may be windows)
@@ -478,7 +484,7 @@ $(ALL_MINIMAL_IMAGE_TARGETS): BASE_VERSIONED_VARIANT=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMPORT_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_NO_CACHE=
 $(ALL_MINIMAL_IMAGE_TARGETS): LATEST=$(call STANDARD_LATEST)
-$(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+$(ALL_MINIMAL_IMAGE_TARGETS): BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE_NAMES)\"
 $(ALL_MINIMAL_IMAGE_TARGETS): IMAGE_METADATA_FILE=
 $(ALL_MINIMAL_IMAGE_TARGETS): PLATFORMS?=linux/amd64,linux/arm64
 
@@ -604,7 +610,7 @@ standard-images: BASE_VERSIONED_VARIANT=
 standard-images: BUILDCTL_BUILD_ARGS=BASE_IMAGE
 standard-images: BUILDCTL_IMPORT_CACHE=
 standard-images: BUILDCTL_NO_CACHE=
-standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE),$(LATEST_IMAGE)\"
+standard-images: BUILDCTL_IMAGE_TAGS=,oci-mediatypes=true,\"name=$(IMAGE_NAMES)\"
 standard-images: IMAGE_METADATA_FILE=
 standard-images: PLATFORMS?=linux/amd64,linux/arm64
 # al2023 is the default: gets "latest" and "latest-al23"
