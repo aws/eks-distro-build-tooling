@@ -2,7 +2,7 @@ basesystem-10.0-7.amzn2.0.1.noarch
 bash-4.2.46-34.amzn2.aarch64
 binutils-2.29.1-31.amzn2.0.2.aarch64
 bzip2-libs-1.0.6-13.amzn2.0.3.aarch64
-ca-certificates-2025.2.76-1.amzn2.0.3.noarch
+ca-certificates-2025.2.76-1.amzn2.0.4.noarch
 chkconfig-1.7.4-1.amzn2.0.2.aarch64
 coreutils-8.22-24.amzn2.aarch64
 cpio-2.12-11.amzn2.0.1.aarch64
