@@ -2,10 +2,11 @@ AWS_ACCOUNT_ID?=$(shell aws sts get-caller-identity --query Account --output tex
 AWS_REGION?=us-west-2
 
 IMAGE_TAG?=$(shell cat IMAGE_TAG)
+BASE_IMAGE_TAG?=$(IMAGE_TAG)
 
 BASE_IMAGE_REPO?=us-docker.pkg.dev/k8s-infra-prow/images
 
-BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(IMAGE_TAG)
+BASE_IMAGE=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(BASE_IMAGE_TAG)
 BASE_IMAGE_NAME?=$(IMAGE_NAME:prow-%=%)
 IMAGE_REPO?=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
@@ -20,6 +21,11 @@ VALUES_YAML_PATHS=deck.image cherrypicker.image utility_images.clonerefs crier.i
 	horologium.image utility_images.initupload prowControllerManager.image utility_images.sidecar sinker.image statusreconciler.image tide.image
 
 IMAGE_PLATFORMS?=linux/amd64
+# Decorated arm64 jobs run these utilities before their build containers.
+UTILITY_IMAGE_NAMES=prow-clonerefs prow-entrypoint prow-initupload prow-sidecar
+UTILITY_IMAGE_PLATFORMS?=linux/amd64,linux/arm64
+$(foreach image,$(UTILITY_IMAGE_NAMES),$(eval $(image)/images/%: override IMAGE_PLATFORMS=$(UTILITY_IMAGE_PLATFORMS)))
+
 LOCAL_IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/build)
 IMAGE_TARGETS=$(foreach image,$(IMAGE_NAMES),$(image)/images/push)
 
