@@ -1,15 +1,4 @@
 
 amazon-linux-repo-cdn.noarch
 ca-certificates.noarch
-curl-minimal.x86_64
-libblkid.x86_64
-libcap.x86_64
-libcurl-minimal.x86_64
-libmount.x86_64
-libsmartcols.x86_64
-libuuid.x86_64
-pcre2.x86_64
-pcre2-syntax.noarch
-python3.x86_64
-python3-libs.x86_64
 system-release.noarch
