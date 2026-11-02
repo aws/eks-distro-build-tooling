@@ -1,4 +1,5 @@
 
 amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
+openssh.x86_64
+openssh-clients.x86_64
 system-release.noarch
