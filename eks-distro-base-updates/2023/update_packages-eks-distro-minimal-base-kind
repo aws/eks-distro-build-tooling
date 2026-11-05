@@ -1,4 +1,5 @@
 
 amazon-linux-repo-cdn.noarch
-ca-certificates.noarch
+containerd.x86_64
+libxml2.x86_64
 system-release.noarch
