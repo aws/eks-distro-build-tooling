@@ -462,6 +462,7 @@
 -rwxr-xr-x    45KiB /usr/sbin/fsck
 -rwxr-xr-x   247KiB /usr/sbin/fsck.ext3
 -rwxr-xr-x   247KiB /usr/sbin/fsck.ext4
+-rwxr-xr-x    41KiB /usr/sbin/fstrim
 -rwxr-xr-x    12KiB /usr/sbin/getcap
 -rwxr-xr-x    12KiB /usr/sbin/getpcaps
 -rwx------   691KiB /usr/sbin/glibc_post_upgrade.x86_64

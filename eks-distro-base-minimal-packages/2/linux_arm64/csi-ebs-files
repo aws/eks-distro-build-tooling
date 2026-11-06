@@ -461,6 +461,7 @@
 -rwxr-xr-x    69KiB /usr/sbin/fsck
 -rwxr-xr-x   279KiB /usr/sbin/fsck.ext3
 -rwxr-xr-x   279KiB /usr/sbin/fsck.ext4
+-rwxr-xr-x    69KiB /usr/sbin/fstrim
 -rwxr-xr-x    68KiB /usr/sbin/getcap
 -rwxr-xr-x    68KiB /usr/sbin/getpcaps
 -rwx------   617KiB /usr/sbin/glibc_post_upgrade.aarch64
