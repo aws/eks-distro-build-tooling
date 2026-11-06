@@ -341,6 +341,7 @@
 -rwxr-xr-x   196KiB /usr/sbin/fsck
 -rwxr-xr-x   474KiB /usr/sbin/fsck.ext3
 -rwxr-xr-x   474KiB /usr/sbin/fsck.ext4
+-rwxr-xr-x   196KiB /usr/sbin/fstrim
 -rwxr-xr-x   196KiB /usr/sbin/iconvconfig
 -rwxr-xr-x   936KiB /usr/sbin/ldconfig
 -rwxr-xr-x   196KiB /usr/sbin/mkfs
