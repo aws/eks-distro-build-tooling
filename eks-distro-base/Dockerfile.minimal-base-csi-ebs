@@ -41,5 +41,6 @@ RUN set -x && \
                    /usr/sbin/mkfs /usr/sbin/mkfs.ext4 /usr/sbin/mkfs.ext3 /usr/sbin/mkfs.xfs \
                    /usr/sbin/xfs_io /usr/sbin/xfs_growfs \
                    /usr/bin/umount /usr/bin/mount \
-                   /usr/bin/lsblk && \
+                   /usr/bin/lsblk \
+                   /usr/sbin/fstrim && \
     cleanup "csi-ebs"
