@@ -123,6 +123,11 @@ common::run_target "golang-1.25-compiler-images" "base-golang-compiler-1.25/imag
 
 common::run_target "create-ecr-repos" "create-ecr-repos/all"
 
+# private repo dual push for standard, minimal and compiler targets
+common::run_target "standard-images" "private-image-repo/standard-images" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused LOG_CAT_PUSHED_FILE=true JOB_TYPE=presubmit SECURITY=--security PRIVATE_IMAGE_REPO=private.example.com"
+common::run_target "minimal-images-base" "private-image-repo/minimal-images-base" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true SECURITY=--security PRIVATE_IMAGE_REPO=private.example.com"
+common::run_target "golang-1.25-compiler-images" "private-image-repo/golang-1.25-compiler-images" "BUILD_DEPS=false MOCK_CHECK_UPDATE=unused MOCK_BASE_TAG_FROM_TAG_FILE=some-previous-tag JOB_TYPE=presubmit LOG_CAT_PUSHED_FILE=true SECURITY=--security PRIVATE_IMAGE_REPO=private.example.com"
+
 # ensure additional deps dont creep in on the all create pr target which is run in presubmit
 for variant in "${VARIANTS[@]}"; do
   echo true >$MAKE_ROOT/eks-distro-minimal-$variant-pushed
