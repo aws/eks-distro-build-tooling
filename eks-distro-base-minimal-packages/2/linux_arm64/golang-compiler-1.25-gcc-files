@@ -16689,6 +16689,7 @@
 -rw-r--r--     440B /usr/lib/systemd/system/final.target
 -rw-r--r--      96B /usr/lib/systemd/system/fstrim.service
 -rw-r--r--     170B /usr/lib/systemd/system/fstrim.timer
+-rw-r--r--     346B /usr/lib/systemd/system/fstrim.timer.d/99-amazon-fstrim-schedule.conf
 -rw-r--r--     466B /usr/lib/systemd/system/getty-pre.target
 -rw-r--r--     460B /usr/lib/systemd/system/getty.target
 -rw-r--r--   1.6KiB /usr/lib/systemd/system/getty@.service
@@ -23106,7 +23107,7 @@
 -rw-r--r--   3.5KiB /usr/share/zoneinfo/WET
 -rw-r--r--     127B /usr/share/zoneinfo/Zulu
 -rw-r--r--   4.8KiB /usr/share/zoneinfo/iso3166.tab
--rw-r--r--   3.7KiB /usr/share/zoneinfo/leapseconds
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/leapseconds
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Abidjan
 -rw-r--r--     170B /usr/share/zoneinfo/posix/Africa/Accra
 -rw-r--r--     299B /usr/share/zoneinfo/posix/Africa/Addis_Ababa
@@ -23831,7 +23832,7 @@
 -rw-r--r--     806B /usr/share/zoneinfo/right/America/Guayaquil
 -rw-r--r--     831B /usr/share/zoneinfo/right/America/Guyana
 -rw-r--r--   3.9KiB /usr/share/zoneinfo/right/America/Halifax
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Havana
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/America/Havana
 -rw-r--r--     942B /usr/share/zoneinfo/right/America/Hermosillo
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/America/Indiana/Indianapolis
 -rw-r--r--   3.0KiB /usr/share/zoneinfo/right/America/Indiana/Knox
@@ -24091,7 +24092,7 @@
 -rw-r--r--   2.2KiB /usr/share/zoneinfo/right/Canada/Yukon
 -rw-r--r--   3.1KiB /usr/share/zoneinfo/right/Chile/Continental
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/Chile/EasterIsland
--rw-r--r--   3.0KiB /usr/share/zoneinfo/right/Cuba
+-rw-r--r--   2.9KiB /usr/share/zoneinfo/right/Cuba
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/EET
 -rw-r--r--     743B /usr/share/zoneinfo/right/EST
 -rw-r--r--   2.8KiB /usr/share/zoneinfo/right/EST5EDT
