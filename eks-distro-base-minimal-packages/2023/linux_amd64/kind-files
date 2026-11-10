@@ -1427,7 +1427,7 @@
 -rwxr-xr-x   126KiB /usr/lib64/gssproxy/proxymech.so
 -rwxr-xr-x    89KiB /usr/lib64/krb5/plugins/preauth/spake.so
 -rwxr-xr-x    24KiB /usr/lib64/krb5/plugins/tls/k5tls.so
--rwxr-xr-x   913KiB /usr/lib64/ld-linux-x86-64.so.2
+-rwxr-xr-x   914KiB /usr/lib64/ld-linux-x86-64.so.2
 -rwxr-xr-x    16KiB /usr/lib64/libBrokenLocale.so.1
 -rwxr-xr-x    24KiB /usr/lib64/libSegFault.so
 -rwxr-xr-x    44KiB /usr/lib64/libacl.so.1.2.2400
@@ -1457,7 +1457,7 @@
 -rwxr-xr-x   6.0MiB /usr/lib64/libcrypto.so.3.5.8
 -rwxr-xr-x   1.1MiB /usr/lib64/libcurl.so.4.8.0
 -rwxr-xr-x   1.9MiB /usr/lib64/libdb-5.3.so
--r-xr-xr-x   377KiB /usr/lib64/libdevmapper.so.1.02
+-r-xr-xr-x   376KiB /usr/lib64/libdevmapper.so.1.02
 -rwxr-xr-x    16KiB /usr/lib64/libdl.so.2
 -rwxr-xr-x   1.6MiB /usr/lib64/libdnf.so.2
 -rw-r--r--     194B /usr/lib64/libdnf/plugins/README
@@ -4376,8 +4376,8 @@
 -rwxr-xr-x    96KiB /usr/sbin/dcb
 -rwxr-xr-x    16KiB /usr/sbin/delpart
 -rwxr-xr-x   164KiB /usr/sbin/devlink
--r-xr-xr-x    25KiB /usr/sbin/dmfilemapd
--r-xr-xr-x   163KiB /usr/sbin/dmsetup
+-r-xr-xr-x    24KiB /usr/sbin/dmfilemapd
+-r-xr-xr-x   162KiB /usr/sbin/dmsetup
 -rwxr-xr-x    16KiB /usr/sbin/ebtables-legacy
 -rwxr-xr-x    16KiB /usr/sbin/ebtables-legacy-restore
 -rwxr-xr-x     855B /usr/sbin/ebtables-legacy-save
@@ -6988,7 +6988,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/Zulu
 -rw-r--r--   4.8KiB /usr/share/zoneinfo/iso3166.tab
 -rw-r--r--   5.0KiB /usr/share/zoneinfo/leap-seconds.list
--rw-r--r--   3.7KiB /usr/share/zoneinfo/leapseconds
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/leapseconds
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Africa/Abidjan
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Africa/Accra
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Addis_Ababa
