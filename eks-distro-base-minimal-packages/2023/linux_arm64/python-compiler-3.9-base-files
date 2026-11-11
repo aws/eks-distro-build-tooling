@@ -429,7 +429,7 @@
 -rw-r--r--    47KiB /usr/include/python3.9/pyconfig-64.h
 -rw-r--r--      28B /usr/lib/issue
 -rw-r--r--      27B /usr/lib/issue.net
--rwxr-xr-x   882KiB /usr/lib/ld-linux-aarch64.so.1
+-rwxr-xr-x   883KiB /usr/lib/ld-linux-aarch64.so.1
 -rw-r--r--     127B /usr/lib/locale/C.utf8/LC_ADDRESS
 -rw-r--r--   1.4KiB /usr/lib/locale/C.utf8/LC_COLLATE
 -rw-r--r--   339KiB /usr/lib/locale/C.utf8/LC_CTYPE
@@ -6715,7 +6715,7 @@
 -rw-r--r--     114B /usr/share/zoneinfo/Zulu
 -rw-r--r--   4.8KiB /usr/share/zoneinfo/iso3166.tab
 -rw-r--r--   5.0KiB /usr/share/zoneinfo/leap-seconds.list
--rw-r--r--   3.7KiB /usr/share/zoneinfo/leapseconds
+-rw-r--r--   3.6KiB /usr/share/zoneinfo/leapseconds
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Africa/Abidjan
 -rw-r--r--     148B /usr/share/zoneinfo/posix/Africa/Accra
 -rw-r--r--     265B /usr/share/zoneinfo/posix/Africa/Addis_Ababa

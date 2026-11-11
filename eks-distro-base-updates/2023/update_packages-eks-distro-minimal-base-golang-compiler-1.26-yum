@@ -1,6 +1,17 @@
 
 amazon-linux-repo-cdn.noarch
-libxml2.x86_64
-openssh.x86_64
-openssh-clients.x86_64
+curl.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libarchive.x86_64
+libcurl.x86_64
+openssl-fips-provider-latest.x86_64
+openssl-libs.x86_64
+python3-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+rpm-sign-libs.x86_64
 system-release.noarch
+tzdata.noarch
