@@ -1,2 +1,13 @@
 
-libxml2.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libblkid.x86_64
+libcrypt.x86_64
+libmount.x86_64
+libuuid.x86_64
+python2-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+tzdata.noarch

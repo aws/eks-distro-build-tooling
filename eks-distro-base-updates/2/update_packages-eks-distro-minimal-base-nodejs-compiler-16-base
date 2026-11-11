@@ -1,2 +1,8 @@
 
-ca-certificates.noarch
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libcrypt.x86_64
+rpm.x86_64
+rpm-libs.x86_64
+tzdata.noarch
