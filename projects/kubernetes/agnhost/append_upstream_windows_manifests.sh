@@ -56,15 +56,20 @@ done
 docker buildx imagetools create -t "${IMAGE}" "${DESCRIPTOR_ARGS[@]}"
 
 EXPECTED_WINDOWS=$(jq -c '[.manifests[] | select(.platform.os == "windows") | {digest, platform}] | sort_by(.digest)' "${WORK_DIR}/upstream-index.json")
-# Public ECR can take a moment to serve the new manifest for an existing tag.
+# Public ECR can take a moment to serve the new index for an existing tag; a
+# stale read can even return a single child manifest with no .manifests, so a
+# failing inspect or jq must not abort the retry loop under errexit/pipefail.
 for attempt in 1 2 3 4 5 6; do
-  ACTUAL_WINDOWS=$(docker buildx imagetools inspect --raw "${IMAGE}" | jq -c '[.manifests[] | select(.platform.os == "windows") | {digest, platform}] | sort_by(.digest)')
+  ACTUAL_WINDOWS=$(docker buildx imagetools inspect --raw "${IMAGE}" 2>/dev/null \
+    | jq -c '[.manifests[]? | select(.platform.os == "windows") | {digest, platform}] | sort_by(.digest)' 2>/dev/null || true)
   if [ "${EXPECTED_WINDOWS}" = "${ACTUAL_WINDOWS}" ]; then
     docker buildx imagetools inspect "${IMAGE}"
     exit 0
   fi
+  echo "attempt ${attempt}: windows manifests not yet visible in ${IMAGE}; got: ${ACTUAL_WINDOWS:-<none>}"
   sleep 10
 done
 
 echo "Windows manifests in ${IMAGE} do not match ${UPSTREAM_IMAGE}"
+docker buildx imagetools inspect --raw "${IMAGE}" || true
 exit 1
