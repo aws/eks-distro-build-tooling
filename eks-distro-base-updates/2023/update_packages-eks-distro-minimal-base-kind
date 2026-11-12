@@ -1,5 +1,20 @@
 
 amazon-linux-repo-cdn.noarch
 containerd.x86_64
-libxml2.x86_64
+curl.x86_64
+device-mapper.x86_64
+device-mapper-libs.x86_64
+glibc.x86_64
+glibc-common.x86_64
+glibc-minimal-langpack.x86_64
+libarchive.x86_64
+libcurl.x86_64
+openssl-libs.x86_64
+python3-rpm.x86_64
+rpm.x86_64
+rpm-build-libs.x86_64
+rpm-libs.x86_64
+rpm-plugin-selinux.x86_64
+rpm-sign-libs.x86_64
 system-release.noarch
+tzdata.noarch
