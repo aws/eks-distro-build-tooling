@@ -53,23 +53,33 @@ for descriptor in "${WORK_DIR}"/descriptor-*; do
   DESCRIPTOR_ARGS+=(-f "${descriptor}")
 done
 
-docker buildx imagetools create -t "${IMAGE}" "${DESCRIPTOR_ARGS[@]}"
+# Capture the digest of the index we push: public.ecr.aws serves tag reads from a
+# cache that lags a push by a minute or more (the first runs read back the
+# Linux-only index, or a Windows child manifest, long after the final index was
+# pushed), so verification must go by digest, which cannot be stale.
+CREATE_LOG="${WORK_DIR}/create.log"
+docker buildx imagetools create -t "${IMAGE}" "${DESCRIPTOR_ARGS[@]}" 2>&1 | tee "${CREATE_LOG}"
+FINAL_DIGEST=$(grep -oE 'pushing sha256:[0-9a-f]{64} to ' "${CREATE_LOG}" | tail -1 | awk '{print $2}')
+if [ -z "${FINAL_DIGEST}" ]; then
+  echo "Could not determine the pushed index digest from imagetools output"
+  exit 1
+fi
+echo "Pushed ${IMAGE} as ${FINAL_DIGEST}"
 
 EXPECTED_WINDOWS=$(jq -c '[.manifests[] | select(.platform.os == "windows") | {digest, platform}] | sort_by(.digest)' "${WORK_DIR}/upstream-index.json")
-# Public ECR can take a moment to serve the new index for an existing tag; a
-# stale read can even return a single child manifest with no .manifests, so a
-# failing inspect or jq must not abort the retry loop under errexit/pipefail.
+ACTUAL_WINDOWS=""
 for attempt in 1 2 3 4 5 6; do
-  ACTUAL_WINDOWS=$(docker buildx imagetools inspect --raw "${IMAGE}" 2>/dev/null \
+  ACTUAL_WINDOWS=$(docker buildx imagetools inspect --raw "${IMAGE_REPO_NAME}@${FINAL_DIGEST}" 2>/dev/null \
     | jq -c '[.manifests[]? | select(.platform.os == "windows") | {digest, platform}] | sort_by(.digest)' 2>/dev/null || true)
   if [ "${EXPECTED_WINDOWS}" = "${ACTUAL_WINDOWS}" ]; then
-    docker buildx imagetools inspect "${IMAGE}"
+    echo "Windows manifests in ${IMAGE_REPO_NAME}@${FINAL_DIGEST} match ${UPSTREAM_IMAGE}"
+    docker buildx imagetools inspect "${IMAGE_REPO_NAME}@${FINAL_DIGEST}"
     exit 0
   fi
-  echo "attempt ${attempt}: windows manifests not yet visible in ${IMAGE}; got: ${ACTUAL_WINDOWS:-<none>}"
+  echo "attempt ${attempt}: pushed index not readable yet; got: ${ACTUAL_WINDOWS:-<none>}"
   sleep 10
 done
 
-echo "Windows manifests in ${IMAGE} do not match ${UPSTREAM_IMAGE}"
-docker buildx imagetools inspect --raw "${IMAGE}" || true
+echo "Windows manifests in ${IMAGE_REPO_NAME}@${FINAL_DIGEST} do not match ${UPSTREAM_IMAGE}"
+docker buildx imagetools inspect --raw "${IMAGE_REPO_NAME}@${FINAL_DIGEST}" || true
 exit 1
