@@ -7,7 +7,7 @@ Tracking Tag: `go1.26.6`
 Artifacts: https://distro.eks.amazonaws.com/golang-go1.26/releases/1/RPMS
 
 ### Images Build job
-[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-1-26-PROD-images-tooling-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
+[![Build status](https://prow.eks.amazonaws.com/badge.svg?jobs=golang-debian-images-postsubmit)](https://prow.eks.amazonaws.com/?repo=aws%2Feks-distro-build-tooling&type=postsubmit)
 
 ### Patches
 The patches in `./patches` include relevant utility fixes for go `1.26`.

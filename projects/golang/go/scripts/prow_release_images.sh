@@ -47,4 +47,4 @@ export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=ecr-public-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
-make -C ${BASE_DIRECTORY}/projects/golang/go "prod-release-images-upstream-bins"
+make -C ${BASE_DIRECTORY}/projects/golang/go "prod-release-images-upstream-bins-all"

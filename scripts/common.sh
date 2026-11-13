@@ -179,7 +179,8 @@ function build::generate_attribution(){
   local -r attribution_file=${4:-"${project_root}/ATTRIBUTION.txt"}
 
   local -r root_module_name=$(cat ${output_directory}/attribution/root-module.txt)
-  local -r go_path=$(build::common::get_go_path $golang_version)
+  local go_path
+  go_path=$(build::common::get_go_path $golang_version)
   local -r golang_version_tag=$($go_path/go version | grep -o "go[0-9].* ")
 
   if cat "${output_directory}/attribution/go-license.csv" | grep -e ",LGPL-" -e ",GPL-"; then
@@ -200,7 +201,15 @@ function build::common::get_go_path() {
   local -r gorootbinarypath="/go/go${version}/bin"
   # This is the path that will most likely be correct if running locally
   local -r gopathbinarypath="$GOPATH/go${version}/bin"
-  if [ -d "$gorootbinarypath" ]; then
+  # Set by builds that download their own toolchain instead of using the one in builder-base.
+  local -r toolchainbinarypath="${GO_TOOLCHAINS_DIR:-}/go${version}/bin"
+  if [ -n "${GO_TOOLCHAINS_DIR:-}" ]; then
+    if [ ! -d "$toolchainbinarypath" ]; then
+      echo "Go $version toolchain not found at $toolchainbinarypath" >&2
+      return 1
+    fi
+    echo $toolchainbinarypath
+  elif [ -d "$gorootbinarypath" ]; then
     echo $gorootbinarypath
   elif [ -d "$gopathbinarypath" ]; then
     echo $gopathbinarypath
@@ -220,7 +229,8 @@ function build::common::use_go_version() {
     exit 1
   fi
 
-  local -r gobinarypath=$(build::common::get_go_path $version)
+  local gobinarypath
+  gobinarypath=$(build::common::get_go_path $version)
   echo "Adding $gobinarypath to PATH"
   # Adding to the beginning of PATH to allow for builds on specific version if it exists
   export PATH=${gobinarypath}:$PATH

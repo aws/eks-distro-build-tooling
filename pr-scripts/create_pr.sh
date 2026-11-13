@@ -166,11 +166,16 @@ fi
 
 git commit -m "$COMMIT_MESSAGE"
 
-ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin $PR_BRANCH -f'
-
 gh auth login --with-token </secrets/github-secrets/token
 
 PR_EXISTS=$(GH_PAGER='' gh pr list --json number -H "${PR_BRANCH}")
+if [ "$PR_EXISTS" != "[]" ] && git fetch "https://github.com/${ORIGIN_ORG}/${REPO}.git" "$PR_BRANCH" && git diff --quiet FETCH_HEAD HEAD -- $FILES_ADDED; then
+  echo "Open PR on $PR_BRANCH already has these changes, skipping push"
+  exit 0
+fi
+
+ssh-agent bash -c 'ssh-add /secrets/ssh-secrets/ssh-key; ssh -o StrictHostKeyChecking=no git@github.com; git push -u origin $PR_BRANCH -f'
+
 if [ "$PR_EXISTS" = "[]" ]; then
   gh pr create --title "$PR_TITLE" --body "$PR_BODY"
 fi

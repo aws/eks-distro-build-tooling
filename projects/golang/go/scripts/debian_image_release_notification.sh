@@ -28,8 +28,13 @@ if [ "$SNS_TOPIC_ARN" == "" ]; then
     exit 1
 fi
 
-if [ "$GO_SOURCE_VERSION" == "" ]; then
-    echo "Empty GO_SOURCE_VERSION"
+GO_SOURCE_VERSION="${1:-}"
+GOLANG_TRACKING_TAG="${2:-}"
+EKS_GOLANG_RELEASE_NUMBER="${3:-}"
+DEBIAN_BASE_RELEASE_NUMBER="${4:-}"
+
+if [ -z "$GO_SOURCE_VERSION" ] || [ -z "$GOLANG_TRACKING_TAG" ] || [ -z "$EKS_GOLANG_RELEASE_NUMBER" ] || [ -z "$DEBIAN_BASE_RELEASE_NUMBER" ]; then
+    echo "Usage: $0 <go-minor-version> <go-tag> <release-number> <debian-base-release-number>"
     exit 1
 fi
 
@@ -52,9 +57,6 @@ export AWS_CONFIG_FILE=$(pwd)/awscliconfig
 export AWS_PROFILE=artifacts-push
 unset AWS_ROLE_ARN AWS_WEB_IDENTITY_TOKEN_FILE
 
-GOLANG_TRACKING_TAG="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/GIT_TAG)"
-EKS_GOLANG_RELEASE_NUMBER="$(cat $BASE_DIRECTORY/projects/golang/go/$GO_SOURCE_VERSION/RELEASE)"
-DEBIAN_BASE_RELEASE_NUMBER="$(cat $BASE_DIRECTORY/projects/golang/go/docker/debianBase/RELEASE)"
 DEBIAN_BASE_RELEASE_IMAGE_TAG="$GOLANG_TRACKING_TAG-$EKS_GOLANG_RELEASE_NUMBER-$DEBIAN_BASE_RELEASE_NUMBER"
 
 SNS_MESSAGE="golang:
