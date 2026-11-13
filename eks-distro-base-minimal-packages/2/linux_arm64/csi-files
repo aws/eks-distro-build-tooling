@@ -3377,7 +3377,7 @@
 -rwxr-xr-x    75KiB /usr/sbin/vipw
 -rwxr-xr-x    16KiB /usr/sbin/weak-modules
 -rwxr-xr-x    69KiB /usr/sbin/wipefs
--rwxr-xr-x   1.4KiB /usr/sbin/xfs_admin
+-rwxr-xr-x   2.7KiB /usr/sbin/xfs_admin
 -rwxr-xr-x     695B /usr/sbin/xfs_bmap
 -rwxr-xr-x   470KiB /usr/sbin/xfs_copy
 -rwxr-xr-x   732KiB /usr/sbin/xfs_db
@@ -6297,7 +6297,7 @@
 -rw-r--r--       0B /var/lib/nfs/xtab
 -rw-r--r--       0B /var/lib/rpm/.dbenv.lock
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   572KiB /var/lib/rpm/Basenames
+-rw-r--r--   568KiB /var/lib/rpm/Basenames
 -rw-r--r--   8.0KiB /var/lib/rpm/Conflictname
 -rw-r--r--   144KiB /var/lib/rpm/Dirnames
 -rw-r--r--   8.0KiB /var/lib/rpm/Group
