@@ -5,3 +5,7 @@ This image is used as the base for building other jobs. It is a base image for m
 New builds of this image will automatically raise a PR to update the image tags in the prowjobs in the aws/eks-distro-prow-jobs repo.
 
 You can pull these images from the [ECR Public Gallery](https://gallery.ecr.aws/eks-distro-build-tooling/builder-base).
+
+The final image is built on `eks-distro-minimal-base-kind`, using the tag in
+`EKS_DISTRO_TAG_FILE.yaml`. Changing only that file does not rebuild
+builder-base. To pick up a new base, change a file under `builder-base/`.
