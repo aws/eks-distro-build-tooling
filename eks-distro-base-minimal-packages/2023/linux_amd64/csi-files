@@ -3291,7 +3291,7 @@
 -rwxr-xr-x   131KiB /usr/sbin/usermod
 -rwxr-xr-x    59KiB /usr/sbin/vipw
 -rwxr-xr-x    40KiB /usr/sbin/wipefs
--rwxr-xr-x   2.2KiB /usr/sbin/xfs_admin
+-rwxr-xr-x   3.7KiB /usr/sbin/xfs_admin
 -rwxr-xr-x     699B /usr/sbin/xfs_bmap
 -rwxr-xr-x    93KiB /usr/sbin/xfs_copy
 -rwxr-xr-x   815KiB /usr/sbin/xfs_db
