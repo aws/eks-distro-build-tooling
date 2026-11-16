@@ -3378,7 +3378,7 @@
 -rwxr-xr-x    59KiB /usr/sbin/vipw
 -rwxr-xr-x    16KiB /usr/sbin/weak-modules
 -rwxr-xr-x    33KiB /usr/sbin/wipefs
--rwxr-xr-x   1.4KiB /usr/sbin/xfs_admin
+-rwxr-xr-x   2.7KiB /usr/sbin/xfs_admin
 -rwxr-xr-x     695B /usr/sbin/xfs_bmap
 -rwxr-xr-x   402KiB /usr/sbin/xfs_copy
 -rwxr-xr-x   668KiB /usr/sbin/xfs_db

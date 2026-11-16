@@ -29,6 +29,6 @@ system-release-2-18.amzn2.aarch64
 systemd-libs-219-78.amzn2.0.24.aarch64
 tzdata-2026f-1.amzn2.0.1.noarch
 util-linux-2.30.2-2.amzn2.0.15.aarch64
-xfsprogs-5.0.0-10.amzn2.0.1.aarch64
+xfsprogs-5.0.0-10.amzn2.0.2.aarch64
 xz-libs-5.2.2-1.amzn2.0.3.aarch64
 zlib-1.2.7-19.amzn2.0.3.aarch64
