@@ -11,4 +11,5 @@ eks-distro-base/*-pushed
 eks-distro-base/make-tests/actual/
 builder-base/tmp/
 tools/eksDistroBuildToolingOpsTools/bin
-
+projects/go-runner/_output/
+projects/golang/go/_output/
