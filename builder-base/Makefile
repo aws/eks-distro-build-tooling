@@ -17,7 +17,7 @@ IMAGE_NAME?=builder-base
 # or the base branch commit hash (postsubmit)
 IMAGE_TAG?=latest
 
-AL_TAG?=2
+AL_TAG?=2023
 LATEST?=$(if $(filter $(AL_TAG),2023),$(VARIANT)-latest.al23,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest latest.2,))
 
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG)

@@ -3,145 +3,145 @@
 
 tag from file for eks-distro-minimal-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nonroot: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nonroot localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nonroot localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-glibc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-glibc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-glibc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-iptables: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-iptables localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-iptables localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nsenter: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nsenter localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nsenter localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-docker-client: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-docker-client localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-docker-client localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nginx: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nginx localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nginx localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-csi-ebs: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-csi-ebs localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-csi-ebs localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-csi: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-csi localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-csi localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-kind: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-kind localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-kind localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-haproxy: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-haproxy localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-haproxy localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-git: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-git localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-git localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-compiler-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-compiler-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-compiler-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-compiler-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-compiler-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-compiler-gcc localhost:5000; \
-fi
-tag from file for eks-distro-minimal-base-python-3.7: some-previous-tag
-if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-3.7 localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-compiler-gcc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-python-3.9: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-3.9 localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-3.9 localhost:5000; \
+fi
+tag from file for eks-distro-minimal-base-python-3.11: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-3.11 localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nodejs-16: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-16 localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nodejs-16 localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.25-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.25-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.25-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.25-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.25-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.25-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.25-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.25-gcc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.25-gcc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.26-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.26-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.26-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.26-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.26-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.26-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.26-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.26-gcc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.26-gcc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.27-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.27-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.27-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.27-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.27-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.27-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.27-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-golang-compiler-1.27-gcc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-golang-compiler-1.27-gcc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nodejs-compiler-16-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nodejs-compiler-16-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-nodejs-compiler-16-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-nodejs-compiler-16-gcc localhost:5000; \
-fi
-tag from file for eks-distro-minimal-base-python-compiler-3.7-base: some-previous-tag
-if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.7-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-nodejs-compiler-16-gcc localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-python-compiler-3.9-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.9-base localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.9-base localhost:5000; \
 fi
-tag from file for eks-distro-minimal-base-python-compiler-3.7-yum: some-previous-tag
+tag from file for eks-distro-minimal-base-python-compiler-3.11-base: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.7-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.11-base localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-python-compiler-3.9-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.9-yum localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.9-yum localhost:5000; \
 fi
-tag from file for eks-distro-minimal-base-python-compiler-3.7-gcc: some-previous-tag
+tag from file for eks-distro-minimal-base-python-compiler-3.11-yum: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.7-gcc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.11-yum localhost:5000; \
 fi
 tag from file for eks-distro-minimal-base-python-compiler-3.9-gcc: some-previous-tag
 if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
-	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2 linux/amd64 check_base-python-compiler-3.9-gcc localhost:5000; \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.9-gcc localhost:5000; \
+fi
+tag from file for eks-distro-minimal-base-python-compiler-3.11-gcc: some-previous-tag
+if command -v docker &> /dev/null && docker info > /dev/null 2>&1 ; then \
+	/override/root/tests/run_tests.sh public.ecr.aws/eks-distro-build-tooling some-previous-tag 2023 linux/amd64 check_base-python-compiler-3.11-gcc localhost:5000; \
 fi

@@ -110,8 +110,7 @@ PUSHED_FILE_TRUE?=$(if $(filter $(call IF_OVERRIDE_VARIABLE,JOB_TYPE),presubmit 
 
 # ************************************************************
 
-# base and minimal-base use al2 as the base image
-AL_TAG?=2
+AL_TAG?=2023
 
 BUILD_DEPS?=false
 
@@ -294,10 +293,9 @@ ADD_BASE_VERSIONED_VARIANT=$(if $(BASE_VERSIONED_VARIANT),$(BASE_VERSIONED_VARIA
 # ************************************************************
 
 # ************** FINAL TARGETS *******************************
-# Only run windows builds during the AL 2 run so they arent run concurrently between al2 and al23
 IMAGE_TARGETS=standard-images $(addprefix minimal-images-, $(MINIMAL_VARIANTS))
-UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) $(if $(filter 2023,$(AL_TAG)),,windows-update)
-CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) $(if $(filter 2023,$(AL_TAG)),,windows-create-pr)
+UPDATE_TARGETS=standard-update $(addprefix minimal-update-, $(MINIMAL_VARIANTS)) windows-update
+CREATE_PR_TARGETS=standard-create-pr $(addprefix minimal-create-pr-, $(MINIMAL_VARIANTS)) windows-create-pr
 # ************************************************************
 
 IMAGE_UPDATE_BRANCH=image-tag-update-al$(AL_TAG)
