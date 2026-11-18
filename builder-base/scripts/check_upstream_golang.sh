@@ -43,11 +43,6 @@ function modify::go::minimal_image {
   local -r version=$1
   local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
 
-  # AL2 updates
-  AL2BASE=".al2.[\"eks-distro-minimal-base-golang-compiler-${majorversion}-base\"]" yq 'eval(strenv(AL2BASE)) = null' -i $TAG_FILE
-  AL2YUM=".al2.[\"eks-distro-minimal-base-golang-compiler-${majorversion}-yum\"]" yq 'eval(strenv(AL2YUM)) = null' -i $TAG_FILE
-  AL2GCC=".al2.[\"eks-distro-minimal-base-golang-compiler-${majorversion}-gcc\"]" yq 'eval(strenv(AL2GCC)) = null' -i $TAG_FILE
-
   # AL2023 updates
   AL2023BASE=".al2023.[\"eks-distro-minimal-base-golang-compiler-${majorversion}-base\"]" yq 'eval(strenv(AL2023BASE)) = null' -i $TAG_FILE
   AL2023YUM=".al2023.[\"eks-distro-minimal-base-golang-compiler-${majorversion}-yum\"]" yq 'eval(strenv(AL2023YUM)) = null' -i $TAG_FILE
