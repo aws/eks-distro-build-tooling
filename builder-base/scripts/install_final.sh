@@ -100,6 +100,10 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
 
     # https://github.com/kubernetes-sigs/image-builder/blob/main/images/capi/hack/ensure-ansible.sh
 
+    if [ "$IS_AL23" = "true" ]; then
+        yum install -y python3.11
+    fi
+
     ansible-galaxy collection install -p /home/imagebuilder/.ansible/collections \
         community.general \
         ansible.posix \

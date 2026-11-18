@@ -24,17 +24,22 @@ source $SCRIPT_ROOT/common_vars.sh
 
 function instal_ansible() {
     if [ "$IS_AL23" = "true" ]; then 
-        local -r deps="python3-pip"
+        # ansible-core 2.16 and later require Python 3.10 or newer.
+        local -r deps="python3.11 python3.11-pip"
         yum install -y $deps
+        local -r pip="python3.11 -m pip"
+        local -r python_version="3.11"
     else
         pip3 install --no-cache-dir -U pip setuptools
+        local -r pip="pip3"
+        local -r python_version="3.9"
     fi
 
     ANSIBLE_VERSION="$ANSIBLE_VERSION"
-    pip3 install --user --no-cache-dir "ansible-core==$ANSIBLE_VERSION"
+    $pip install --user --no-cache-dir "ansible-core==$ANSIBLE_VERSION"
 
     PYWINRM_VERSION="$PYWINRM_VERSION"
-    pip3 install --user --no-cache-dir "pywinrm==$PYWINRM_VERSION"
+    $pip install --user --no-cache-dir "pywinrm==$PYWINRM_VERSION"
     
     rm -rf ${NEWROOT}/usr/*
     mv /root/.local/* ${NEWROOT}/usr
@@ -59,7 +64,7 @@ function instal_ansible() {
         rm -f ${NEWROOT}/usr/lib/python3.9/config-3.9-*-linux-gnu/libpython3.9.a
     fi
 
-    chmod 755 ${NEWROOT}/usr/lib/python3.9/site-packages 
+    chmod 755 ${NEWROOT}/usr/lib/python${python_version}/site-packages 
 
     rm -rf /root/.cache
 }
