@@ -4692,7 +4692,7 @@
 -rwxr-xr-x   1.4MiB /usr/lib64/libglib-2.0.so.0.8200.2
 -rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   3.0MiB /usr/lib64/libgnutls.so.30.40.4
+-rwxr-xr-x   2.9MiB /usr/lib64/libgnutls.so.30.40.4
 -rwxr-xr-x   404KiB /usr/lib64/libgobject-2.0.so.0.8200.2
 -rwxr-xr-x   353KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
@@ -13375,7 +13375,7 @@
 -rw-r--r--    32KiB /var/lib/dnf/history.sqlite-shm
 -rw-r--r--   4.0MiB /var/lib/dnf/history.sqlite-wal
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
--rw-r--r--   5.6MiB /var/lib/rpm/rpmdb.sqlite
+-rw-r--r--   5.7MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
 -rw-r--r--       0B /var/lib/rpm/rpmdb.sqlite-wal
 

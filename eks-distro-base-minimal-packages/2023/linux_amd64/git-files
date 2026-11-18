@@ -359,7 +359,7 @@
 -rwxr-xr-x    83KiB /usr/lib64/libformw.so.6.6
 -rwxr-xr-x   187KiB /usr/lib64/libgcc_s-14-20250110.so.1
 -rwxr-xr-x   1.3MiB /usr/lib64/libgcrypt.so.20.4.2
--rwxr-xr-x   3.0MiB /usr/lib64/libgnutls.so.30.40.4
+-rwxr-xr-x   2.9MiB /usr/lib64/libgnutls.so.30.40.4
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
 -rwxr-xr-x   351KiB /usr/lib64/libgssapi_krb5.so.2.2
 -rwxr-xr-x   140KiB /usr/lib64/libgssrpc.so.4.2

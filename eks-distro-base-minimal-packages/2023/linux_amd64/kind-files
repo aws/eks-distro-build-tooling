@@ -599,7 +599,7 @@
 -rwxr-xr-x    16KiB /usr/bin/rpm2cpio
 -rwxr-xr-x    21KiB /usr/bin/rpmdb
 -rwxr-xr-x    16KiB /usr/bin/rpmkeys
--rwxr-xr-x   637KiB /usr/bin/rsync
+-rwxr-xr-x   650KiB /usr/bin/rsync
 -rwxr-xr-x   6.9KiB /usr/bin/rsync-ssl
 -rwxr-xr-x    36KiB /usr/bin/runcon
 -rwxr-xr-x    52KiB /usr/bin/script
@@ -1489,7 +1489,7 @@
 -rwxr-xr-x   1.4MiB /usr/lib64/libglib-2.0.so.0.8200.2
 -rwxr-xr-x    24KiB /usr/lib64/libgmodule-2.0.so.0.8200.2
 -rwxr-xr-x   684KiB /usr/lib64/libgmp.so.10.4.1
--rwxr-xr-x   3.0MiB /usr/lib64/libgnutls.so.30.40.4
+-rwxr-xr-x   2.9MiB /usr/lib64/libgnutls.so.30.40.4
 -rwxr-xr-x   404KiB /usr/lib64/libgobject-2.0.so.0.8200.2
 -rwxr-xr-x   353KiB /usr/lib64/libgomp.so.1.0.0
 -rwxr-xr-x   151KiB /usr/lib64/libgpg-error.so.0.32.0
