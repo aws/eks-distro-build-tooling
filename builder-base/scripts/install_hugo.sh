@@ -22,30 +22,22 @@ NEWROOT=/hugo
 
 source $SCRIPT_ROOT/common_vars.sh
 
-if [ $TARGETARCH == 'amd64' ]; then 
-    HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
-else
-    HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_Linux-ARM64.tar.gz"
-fi
+HUGO_FILENAME="hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
 HUGO_DOWNLOAD_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/$HUGO_FILENAME"
 HUGO_CHECKSUM_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
 
 
 function install_hugo() {
-    if [ $TARGETARCH == 'amd64' ]; then 
-        ARCH='64bit'
-    else 
-        ARCH='ARM64'
-        # there is no extended build for arm
+    if [ $TARGETARCH != 'amd64' ]; then 
         return
     fi
 
     # Installing Hugo for docs
     wget --progress dot:giga $HUGO_DOWNLOAD_URL
     sha256sum -c ${BASE_DIR}/hugo-$TARGETARCH-checksum
-    tar -xf hugo_extended_${HUGO_VERSION}_Linux-${ARCH}.tar.gz
+    tar -xf $HUGO_FILENAME
     mv hugo $USR_BIN/hugo
-    rm -rf hugo_extended_${HUGO_VERSION}_Linux-${ARCH}.tar.gz LICENSE README.md
+    rm -rf $HUGO_FILENAME LICENSE README.md
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || install_hugo
