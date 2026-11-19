@@ -19,24 +19,8 @@ set -x
 
 GO_PREFIX="go"
 SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-VERSIONS_YAML="${SCRIPT_ROOT}/../versions.yaml"
+GOLANG_VERSIONS_YAML="${SCRIPT_ROOT}/../../eks-distro-base/golang_versions.yaml"
 TAG_FILE="${SCRIPT_ROOT}/../../EKS_DISTRO_TAG_FILE.yaml"
-
-function update::go::version {
-  local -r version=$1
-  local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-
-  local -r cur_builder_base_version=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${majorversion//./}")
-
-  yq eval -i -P ".GOLANG_VERSION_${majorversion//./} = \"${version}-0\" | sort_keys(.)" "${VERSIONS_YAML}"
-}
-
-function add::go::version {
-  local -r version=$1
-  local -r majorversion=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-
-  yq eval -i -P ".GOLANG_VERSION_${majorversion//./} = \"${version}-0\" | sort_keys(.)" "${VERSIONS_YAML}"
-}
 
 # Using YQ allows us to modify the existing tag or add the correct tag if it doesn't exist
 function modify::go::minimal_image {
@@ -52,17 +36,11 @@ function modify::go::minimal_image {
 # curl go.dev for the supported versions of go
 ACTIVE_VERSIONS=$(curl https://go.dev/dl/?mode=json | jq -r '.[].version' | sed -e "s/^$GO_PREFIX//" | sort)
 
+# golang_versions.yaml still holds the previous versions here because eks-distro-base/scripts/check_upstream_golang runs after this script.
 for version in ${ACTIVE_VERSIONS}; do
-  # pull golang versions in the versions.yaml
   MAJORVERSION=$(if [[ $(echo "$version" | awk -F'.' '{print NF}') -ge 3 ]]; then echo ${version%.*}; else echo ${version%-*}; fi)
-  BUILDER_BASE_GO_VERSION=$(cat "${VERSIONS_YAML}" | grep -E "^GOLANG_VERSION_${MAJORVERSION//./}") || echo ""
-  # check builder-base versions for the upstream version of golang
-  # if the version doesn't exist in the builder base update the versions yaml.
-  if [[ -n $BUILDER_BASE_GO_VERSION && ! $BUILDER_BASE_GO_VERSION =~ $version ]]; then
-    update::go::version $version
-    modify::go::minimal_image $version
-  elif [[ -z $BUILDER_BASE_GO_VERSION ]]; then
-    add::go::version $version
+  CURRENT_GO_VERSION=$(yq ".golang.versions[\"GOLANG_${MAJORVERSION}_FULL_VERSION\"] // \"\"" "${GOLANG_VERSIONS_YAML}")
+  if [[ ! "$CURRENT_GO_VERSION" =~ ^${version}- ]]; then
     modify::go::minimal_image $version
   fi
 done

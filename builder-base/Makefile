@@ -50,6 +50,8 @@ IGNORE_NO_CACHE?=false
 
 NETRC=--secret id=netrc,src=$(HOME)/.netrc
 COMMA=,
+EMPTY=
+SPACE=$(EMPTY) $(EMPTY)
 
 define BASE_TAG_FROM_TAG_FILE
 $(shell yq e ".al$(AL_TAG).\"$(1)\"" $(MAKE_ROOT)/../EKS_DISTRO_TAG_FILE.yaml)
@@ -63,9 +65,17 @@ endef
 REALPATH=TZ=utc $(shell if [ "$$(uname -s)" = "Darwin" ] && command -v grealpath &> /dev/null; then echo grealpath; else echo realpath; fi)
 
 GOLANG_RPM_OUTPUT_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
-# Resolves to the download-golang-% targets for each golang version present in ./versions.yaml
-# For example, the `GOLANG_VERSION_116: 1.16.15-3` entry in versions.yaml resolves to `download-golang-1.16.15-3`, and so on
-GOLANG_RPM_DOWNLOAD_TARGETS?=$(shell yq  e 'to_entries | .[] | select(.key == "*GOLANG_VERSION*") | .value |= "download-golang-" + . | .value' ${MAKE_ROOT}/versions.yaml)
+GOLANG_VERSIONS_YAML?=$(MAKE_ROOT)/../eks-distro-base/golang_versions.yaml
+GOLANG_DEFAULT_MINOR?=$(shell yq e '.GOLANG_DEFAULT_MINOR' ${MAKE_ROOT}/versions.yaml)
+GOLANG_VARIANTS?=$(shell yq e '.golang.variants[]' $(GOLANG_VERSIONS_YAML))
+GOLANG_EXTRA_VARIANTS=$(filter-out $(GOLANG_DEFAULT_MINOR),$(GOLANG_VARIANTS))
+GOLANG_FULL_VERSION=$(shell yq e '.golang.versions["GOLANG_$(1)_FULL_VERSION"] // ""' $(GOLANG_VERSIONS_YAML))
+GOLANG_FULL_VERSIONS=$(strip $(foreach variant,$(1),$(call GOLANG_FULL_VERSION,$(variant))))
+GOLANG_VERSIONS?=$(subst $(SPACE),$(COMMA),$(call GOLANG_FULL_VERSIONS,$(GOLANG_VARIANTS)))
+GOLANG_DEFAULT_VERSION?=$(if $(filter $(GOLANG_DEFAULT_MINOR),$(GOLANG_VARIANTS)),$(call GOLANG_FULL_VERSION,$(GOLANG_DEFAULT_MINOR)),)
+GOLANG_EXTRA_VERSIONS?=$(subst $(SPACE),$(COMMA),$(call GOLANG_FULL_VERSIONS,$(GOLANG_EXTRA_VARIANTS)))
+GOLANG_VERSION_KEY_COUNT?=$(shell yq e '.golang.versions | length' $(GOLANG_VERSIONS_YAML))
+GOLANG_RPM_DOWNLOAD_TARGETS?=$(addprefix download-golang-,$(call GOLANG_FULL_VERSIONS,$(GOLANG_VARIANTS)))
 
 .PHONY: buildkit-check
 buildkit-check:
@@ -105,6 +115,9 @@ images-%:
 		--opt build-arg:AL_TAG=al$(AL_TAG) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
 		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell $(REALPATH) --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
+		--opt build-arg:GOLANG_VERSIONS=$(GOLANG_VERSIONS) \
+		--opt build-arg:GOLANG_EXTRA_VERSIONS=$(GOLANG_EXTRA_VERSIONS) \
+		--opt build-arg:GOLANG_DEFAULT_VERSION=$(GOLANG_DEFAULT_VERSION) \
 		$(foreach BUILD_ARG,$(IMAGE_BUILD_ARGS),--opt build-arg:$(BUILD_ARG)=$($(BUILD_ARG))) \
 		--export-cache type=inline \
 		$(foreach repo,$(IMPORT_CACHE_REPOS),--import-cache type=registry,ref=$(repo)/builder-base:$(word 1,$(LATEST))) \
@@ -150,6 +163,15 @@ validate-shasums: update-shasums
 
 .PHONY: download-golang
 download-golang: $(GOLANG_RPM_DOWNLOAD_TARGETS)
+	@if [ -z "$(GOLANG_DEFAULT_VERSION)" ]; then \
+		echo "GOLANG_DEFAULT_MINOR $(GOLANG_DEFAULT_MINOR) is not in $(GOLANG_VERSIONS_YAML)"; \
+		exit 1; \
+	fi
+	@if [ "$(words $(GOLANG_VARIANTS))" != "$(GOLANG_VERSION_KEY_COUNT)" ] || \
+		[ "$(words $(call GOLANG_FULL_VERSIONS,$(GOLANG_VARIANTS)))" != "$(words $(GOLANG_VARIANTS))" ]; then \
+		echo "golang.variants and golang.versions in $(GOLANG_VERSIONS_YAML) do not match"; \
+		exit 1; \
+	fi
 
 .PHONY: clean-golang-download
 clean-golang-download:
@@ -158,7 +180,7 @@ clean-golang-download:
 .PHONY: download-golang-%
 download-golang-%:
 	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
-	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR} ${BUILDKIT_PLATFORMS}
+	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR}$(if $(filter $*,$(GOLANG_DEFAULT_VERSION)),,/extra) ${BUILDKIT_PLATFORMS}
 
 .PHONY: check-golang-release
 check-golang-release:
