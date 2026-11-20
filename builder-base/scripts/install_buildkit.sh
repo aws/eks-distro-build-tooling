@@ -41,6 +41,8 @@ function install_buildkit() {
     sha256sum -c $BASE_DIR/buildkit-$TARGETARCH-checksum
     tar -C $USR -xzf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
     rm -rf buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz
+    # buildkitd here falls back to host networking because no CNI config exists, and upstream builds these plugins with an unsupported Go.
+    rm -f $USR_BIN/buildkit-cni-*
 
     time upx --best --no-lzma $USR_BIN/{buildkit-runc,buildctl,buildkitd}
 }
