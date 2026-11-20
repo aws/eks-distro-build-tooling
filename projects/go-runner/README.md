@@ -37,10 +37,10 @@ flowchart TD
 
 ## How a Go release is published
 
-1. The `check-upstream-golang-release` periodic runs every hour. When go.dev lists a Go version that `eks-distro-base/golang_versions.yaml` does not have, it opens a bot PR that updates `builder-base/versions.yaml`, `builder-base/checksums`, `eks-distro-base/golang_versions.yaml` and `EKS_DISTRO_TAG_FILE.yaml`. If that PR is already open, the job updates it.
+1. The `check-upstream-golang-release` periodic runs every hour. When go.dev lists a Go version that `eks-distro-base/golang_versions.yaml` does not have, it opens a bot PR that updates `eks-distro-base/golang_versions.yaml`, `builder-base/checksums` and `EKS_DISTRO_TAG_FILE.yaml`. If that PR is already open, the job updates it.
 2. The presubmits `go-runner-images-presubmit-al-2023` and `golang-debian-images-presubmit` build every image on the PR without pushing.
 3. A maintainer merges the PR, which starts `go-runner-images-postsubmit-al-2023` and `golang-debian-images-postsubmit`.
-4. Each job loops over the Go versions in `eks-distro-base/golang_versions.yaml`, the same file the `golang` compiler images are built from.
+4. Each job loops over the Go versions in `eks-distro-base/golang_versions.yaml`, the same file the `golang` compiler images and builder-base are built from.
 5. For each version, the job hashes the build inputs and compares the hash with the label on the published image. The job skips the version when the hash matches. When `PRIVATE_IMAGE_REPO` is set, the private image label must match too. A missing image counts as unbuilt, and any other registry error fails that version without pushing.
 6. For each version that changed, the job downloads the toolchain from go.dev and verifies it. go-runner checks the archive against `builder-base/checksums` and compiles `go-runner` with it. golang-debian checks the archive against the sha256 published by go.dev and copies it into the image.
 7. golang-debian sends a release notification for each version it pushed.

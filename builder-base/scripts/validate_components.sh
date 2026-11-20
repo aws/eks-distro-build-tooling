@@ -56,13 +56,41 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
 
   # validate default symlinks are correctly setup
   go version
+  default_release=${GOLANG_DEFAULT_VERSION:?GOLANG_DEFAULT_VERSION is not set}
+  default_release=${default_release%-*}
+  if ! go version | grep -q "go$default_release "; then
+    echo "default go is not go$default_release"
+    exit 1
+  fi
   go-licenses --help
 
   linuxkit version
-  /go/bin/go1.26 version
-  /go/go1.26/bin/go-licenses --help
-  /go/bin/go1.27 version
-  /go/go1.27/bin/go-licenses --help
+  if [ -z "${GOLANG_VERSIONS}" ]; then
+    echo "GOLANG_VERSIONS is not set"
+    exit 1
+  fi
+  for version in ${GOLANG_VERSIONS//,/ }; do
+    release=${version%-*}
+    minor=${release%.*}
+    /go/bin/go$minor version
+    /go/go$minor/bin/go-licenses --help
+
+    # A stdlib-only module must report only itself when go-licenses classifies the standard library correctly.
+    module=$(mktemp -d)
+    cp /root/sdk/go$release/LICENSE $module/
+    printf 'package main\n\nimport "fmt"\n\nfunc main() { fmt.Println() }\n' > $module/main.go
+    licenses=$(cd $module && export PATH=/go/go$minor/bin:$PATH GOTOOLCHAIN=local GOCACHE=$module/cache && \
+      go mod init example.com/stdlib-only && go-licenses csv .)
+    rm -rf $module
+    if [ -z "$licenses" ]; then
+      echo "go-licenses for go$minor reported no packages"
+      exit 1
+    fi
+    if echo "$licenses" | grep -v -e '^example.com/stdlib-only,' -e '^$'; then
+      echo "go-licenses for go$minor reports standard library packages"
+      exit 1
+    fi
+  done
 
   gcc --version
 

@@ -693,41 +693,8 @@ check_base-golang-compiler() {
     done
 }
 
-check_base-golang-compiler-1.25-base() {
-    check_base-golang-compiler 1.25 base
-}
-
-check_base-golang-compiler-1.25-yum() {
-    check_base-golang-compiler 1.25 yum
-}
-
-check_base-golang-compiler-1.25-gcc() {
-    check_base-golang-compiler 1.25 gcc
-}
-
-check_base-golang-compiler-1.26-base() {
-    check_base-golang-compiler 1.26 base
-}
-
-check_base-golang-compiler-1.26-yum() {
-    check_base-golang-compiler 1.26 yum
-}
-
-check_base-golang-compiler-1.26-gcc() {
-    check_base-golang-compiler 1.26 gcc
-}
-
-check_base-golang-compiler-1.27-base() {
-    check_base-golang-compiler 1.27 base
-}
-
-check_base-golang-compiler-1.27-yum() {
-    check_base-golang-compiler 1.27 yum
-}
-
-check_base-golang-compiler-1.27-gcc() {
-    check_base-golang-compiler 1.27 gcc
-}
-
-
-$TEST
+if [[ $TEST =~ ^check_base-golang-compiler-([0-9]+\.[0-9]+)-(base|yum|gcc)$ ]]; then
+    check_base-golang-compiler "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"
+else
+    $TEST
+fi
