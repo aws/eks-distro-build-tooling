@@ -40,6 +40,10 @@ fi
 NODEJS_DOWNLOAD_URL="https://nodejs.org/dist/$NODEJS_VERSION/$NODEJS_FILENAME"
 NODEJS_CHECKSUM_URL="https://nodejs.org/dist/$NODEJS_VERSION/SHASUMS256.txt.asc"
 
+NPM_FILENAME="npm-$NPM_VERSION_AL23.tgz"
+NPM_DOWNLOAD_URL="https://registry.npmjs.org/npm/-/$NPM_FILENAME"
+NPM_CHECKSUM_FILE="npm-al23-checksum"
+
 
 function install_nodejs() {
     # Installing NodeJS to run attribution generation script
@@ -47,6 +51,14 @@ function install_nodejs() {
     sha256sum -c ${BASE_DIR}/$CHECKSUM_FILE
     tar -C $USR --strip-components=1 -xzf $NODEJS_FILENAME $NODEJS_FOLDER
     rm -rf $NODEJS_FILENAME
+}
+
+function install_npm() {
+    # The npm bundled with Node lags behind npm releases that fix its vendored dependencies.
+    wget --progress dot:giga $NPM_DOWNLOAD_URL
+    sha512sum -c ${BASE_DIR}/$NPM_CHECKSUM_FILE
+    $USR_BIN/npm install --global --prefix $USR ./$NPM_FILENAME
+    rm -f $NPM_FILENAME
 }
 
 function install_generate_attribution() {
@@ -63,4 +75,4 @@ function install_generate_attribution() {
     time upx --best --no-lzma $USR_BIN/node
 }
 
-[ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && install_generate_attribution)
+[ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && { [ "$IS_AL23" != "true" ] || install_npm; } && install_generate_attribution)
