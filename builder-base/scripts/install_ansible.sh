@@ -66,6 +66,9 @@ function instal_ansible() {
 
     chmod 755 ${NEWROOT}/usr/lib/python${python_version}/site-packages 
 
+    # ansible-test is never run here and its pinned sanity requirement files trip image scans, see ansible/ansible#86459.
+    rm -rf ${NEWROOT}/usr/lib/python${python_version}/site-packages/ansible_test ${NEWROOT}/usr/bin/ansible-test
+
     rm -rf /root/.cache
 }
 
