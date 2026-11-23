@@ -31,7 +31,7 @@ ENV UPX_VERSION=$UPX_VERSION
 WORKDIR /workdir
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh ./scripts/install_upx.sh \
     ./checksums/upx-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_upx.sh && \
     /remove_yum_packages.sh
@@ -41,7 +41,7 @@ ARG TARGETARCH
 WORKDIR /workdir
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_aws_cli.sh /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_aws_cli.sh && \
     /remove_yum_packages.sh
@@ -55,7 +55,7 @@ ENV BUILDKIT_VERSION=$BUILDKIT_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_buildkit.sh ./checksums/buildkit-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_buildkit.sh && \
     /remove_yum_packages.sh
@@ -67,7 +67,7 @@ ARG AMAZON_ECR_CRED_HELPER_VERSION
 ENV AMAZON_ECR_CRED_HELPER_VERSION=$AMAZON_ECR_CRED_HELPER_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_ecr_cred_helper.sh ./checksums/amazon-ecr-cred-helper-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_ecr_cred_helper.sh && \
     /remove_yum_packages.sh
@@ -81,7 +81,7 @@ ENV GITHUB_CLI_VERSION=$GITHUB_CLI_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_gh_cli.sh ./checksums/github-cli-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_gh_cli.sh && \
     /remove_yum_packages.sh
@@ -93,7 +93,7 @@ ARG YQ_VERSION
 ENV YQ_VERSION=$YQ_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_yq.sh ./checksums/yq-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_yq.sh && \
     /remove_yum_packages.sh
@@ -107,7 +107,7 @@ ENV SEVENZIP_VERSION=$SEVENZIP_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_7zip.sh ./checksums/7zip-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_7zip.sh && \
     /remove_yum_packages.sh
@@ -123,7 +123,7 @@ ENV PACKER_ANSIBLE_PLUGIN=$PACKER_ANSIBLE_PLUGIN
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_packer.sh ./checksums/packer-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_packer.sh && \
     /remove_yum_packages.sh
@@ -137,7 +137,7 @@ ENV HELM_VERSION=$HELM_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_helm.sh ./checksums/helm-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_helm.sh && \
     /remove_yum_packages.sh
@@ -151,7 +151,7 @@ ENV NOTATION_VERSION=$NOTATION_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_notation.sh ./checksums/notation-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_notation.sh && \
     /remove_yum_packages.sh
@@ -166,7 +166,7 @@ ENV ORAS_VERSION=$ORAS_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_oras.sh ./checksums/oras-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_oras.sh && \
     /remove_yum_packages.sh
@@ -191,7 +191,7 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./checksums/nodejs-${TARGETARCH}-checksum \
     ./checksums/nodejs-al23-${TARGETARCH}-checksum \
     ./checksums/npm-al23-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_nodejs.sh && \
     /remove_yum_packages.sh
@@ -203,7 +203,7 @@ ARG HUGO_VERSION
 ENV HUGO_VERSION=$HUGO_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_hugo.sh ./checksums/hugo-amd64-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_hugo.sh && \
     /remove_yum_packages.sh
@@ -217,7 +217,7 @@ ENV GOVC_VERSION=$GOVC_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_govc.sh ./checksums/govc-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_govc.sh && \
     /remove_yum_packages.sh
@@ -231,7 +231,7 @@ ENV GOSS_VERSION=$GOSS_VERSION
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_goss.sh ./checksums/goss-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_goss.sh && \
     /remove_yum_packages.sh
@@ -246,7 +246,7 @@ ENV PATH="/root/.cargo/bin:$PATH"
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_tuftool.sh /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_gcc_yum_packages.sh && \
     /install_tuftool.sh && \
     /remove_yum_packages.sh
@@ -258,7 +258,7 @@ ARG OVERRIDE_BASH_VERSION
 ENV OVERRIDE_BASH_VERSION=$OVERRIDE_BASH_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/common_vars.sh ./scripts/install_bash.sh ./checksums/bash-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_gcc_yum_packages.sh && \
     /install_bash.sh && \
     /remove_yum_packages.sh
@@ -278,7 +278,7 @@ ARG PYWINRM_VERSION
 ENV PYWINRM_VERSION=$PYWINRM_VERSION
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_ansible.sh /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_ansible.sh
 
 
@@ -295,7 +295,7 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go*.tar.gz /tmp/linux/arm64/
 COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go*.tar.gz /tmp/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_DEFAULT_VERSION && \
     release=${GOLANG_DEFAULT_VERSION%-*} && \
@@ -318,8 +318,8 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     ./scripts/install_golang.sh ./scripts/install_go_licenses.sh ./scripts/install_golang_versions.sh /
 COPY $GOLANG_RPM_SOURCE_DIR/extra/linux/arm64/go*.tar.gz /tmp/golang-downloads/linux/arm64/
 COPY $GOLANG_RPM_SOURCE_DIR/extra/linux/amd64/go*.tar.gz /tmp/golang-downloads/linux/amd64/
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
+    --mount=type=cache,target=/root/.cache/go-build,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_base_yum_packages.sh && \
     /install_golang_versions.sh /tmp/golang-downloads $GOLANG_EXTRA_VERSIONS && \
@@ -340,8 +340,8 @@ COPY --link --from=upx  /upx /
 COPY --link --from=golang-default /golang-default /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_skopeo.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
-    --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=private \
+    --mount=type=cache,target=/var/cache/yum,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_gcc_yum_packages.sh && \
     /install_skopeo.sh && \
@@ -360,7 +360,7 @@ COPY --link --from=upx  /upx /
 COPY --link --from=golang-default /golang-default /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_linuxkit.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_linuxkit.sh
 
@@ -376,7 +376,7 @@ COPY --link --from=upx  /upx /
 COPY --link --from=golang-default /golang-default /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_licenses.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_licenses.sh && \
     mv /go-licenses-* /go-licenses-default
@@ -393,7 +393,7 @@ COPY --link --from=upx  /upx /
 COPY --link --from=golang-default /golang-default /
 COPY ./scripts/common_vars.sh \
     ./scripts/install_go_vuln_check.sh /
-RUN --mount=type=cache,target=/root/.cache/go-build,sharing=locked \
+RUN --mount=type=cache,target=/root/.cache/go-build,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
     /install_go_vuln_check.sh
 
@@ -444,7 +444,7 @@ ENV PATH="/go/bin/:$PATH"
 COPY ./scripts/docker.sh ./scripts/buildkit.sh ./scripts/common_vars.sh ./scripts/validate_components.sh \
     ./scripts/install_final.sh /
 
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_final.sh && \
     /validate_components.sh && \
     rm /common_vars.sh /validate_components.sh /install_final.sh

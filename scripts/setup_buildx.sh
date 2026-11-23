@@ -70,13 +70,21 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
             kubectl delete deployments -n buildkit-orchestration $DEPLOYMENTS
         fi
 
+        BUILDER_POD_RESOURCES=""
+        if [ -n "${BUILDER_POD_CPU_REQUEST:-}" ]; then
+            BUILDER_POD_RESOURCES+=",requests.cpu=${BUILDER_POD_CPU_REQUEST}"
+        fi
+        if [ -n "${BUILDER_POD_MEMORY_REQUEST:-}" ]; then
+            BUILDER_POD_RESOURCES+=",requests.memory=${BUILDER_POD_MEMORY_REQUEST}"
+        fi
+
         docker buildx create \
             --bootstrap \
             --name=$BUILDER_NAME \
             --driver=kubernetes \
             --platform=linux/amd64 \
             --node=builder-amd64-${PROW_JOB_ID:-1} \
-            --driver-opt=namespace=buildkit-orchestration,nodeselector="arch=AMD64",rootless=true,image=${BUILDKITD_IMAGE:-moby/buildkit:v0.10.5-rootless}
+            --driver-opt=namespace=buildkit-orchestration,nodeselector="arch=AMD64",rootless=true,image=${BUILDKITD_IMAGE:-moby/buildkit:v0.10.5-rootless}${BUILDER_POD_RESOURCES}
 
         docker buildx create \
             --bootstrap \
@@ -85,7 +93,7 @@ if ! docker buildx ls | grep $BUILDER_NAME > /dev/null 2>&1; then
             --driver=kubernetes \
             --platform=linux/arm64 \
             --node=builder-arm64-${PROW_JOB_ID:-1} \
-            --driver-opt=namespace=buildkit-orchestration,nodeselector="arch=ARM64",rootless=true,image=${BUILDKITD_IMAGE:-moby/buildkit:v0.10.5-rootless}
+            --driver-opt=namespace=buildkit-orchestration,nodeselector="arch=ARM64",rootless=true,image=${BUILDKITD_IMAGE:-moby/buildkit:v0.10.5-rootless}${BUILDER_POD_RESOURCES}
 
         kubectl get pods -n buildkit-orchestration
         kubectl get deployments -n buildkit-orchestration
