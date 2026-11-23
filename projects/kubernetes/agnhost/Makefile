@@ -7,6 +7,10 @@ BASE_IMAGE_REPO?=registry.k8s.io/e2e-test-images
 BASE_IMAGE_NAME?=agnhost
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(IMAGE_TAG)
 
+GOLANG_IMAGE?=public.ecr.aws/eks-distro-build-tooling/golang:1.26.11-gcc-al23
+ALPINE_IMAGE?=public.ecr.aws/docker/library/alpine:3.23
+KUBERNETES_COMMIT?=$(shell cat KUBERNETES_COMMIT)
+
 IMAGE_PLATFORMS?=linux/amd64,linux/arm64
 IMAGE_METADATA_FILE?=/tmp/$(IMAGE_NAME)-metadata.json
 
@@ -23,6 +27,10 @@ local-images: buildkit-check
 		--frontend dockerfile.v0 \
 		--opt platform=$(IMAGE_PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:GOLANG_IMAGE=$(GOLANG_IMAGE) \
+		--opt build-arg:ALPINE_IMAGE=$(ALPINE_IMAGE) \
+		--opt build-arg:KUBERNETES_COMMIT=$(KUBERNETES_COMMIT) \
+		--opt build-arg:AGNHOST_VERSION=$(IMAGE_TAG) \
 		--progress plain \
 		--local dockerfile=./docker/linux \
 		--local context=. \
@@ -35,6 +43,10 @@ images: buildkit-check
 		--frontend dockerfile.v0 \
 		--opt platform=$(IMAGE_PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
+		--opt build-arg:GOLANG_IMAGE=$(GOLANG_IMAGE) \
+		--opt build-arg:ALPINE_IMAGE=$(ALPINE_IMAGE) \
+		--opt build-arg:KUBERNETES_COMMIT=$(KUBERNETES_COMMIT) \
+		--opt build-arg:AGNHOST_VERSION=$(IMAGE_TAG) \
 		--progress plain \
 		--local dockerfile=./docker/linux \
 		--local context=. \
