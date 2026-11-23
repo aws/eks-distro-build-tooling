@@ -6,11 +6,7 @@ builder-base:
 
 minimal-image:
 - 'eks-distro-base/**/*'
-- 'eks-distro-minimal-images/**/*'
 - 'eks-distro-base-updates/**/*'
-
-al2023:
-- '**/2023/*'
 
 projects:
 - 'projects/**/*'
