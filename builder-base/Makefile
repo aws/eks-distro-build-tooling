@@ -18,7 +18,7 @@ IMAGE_NAME?=builder-base
 IMAGE_TAG?=latest
 
 AL_TAG?=2023
-LATEST?=$(if $(filter $(AL_TAG),2023),$(VARIANT)-latest.al23,$(VARIANT)-latest $(VARIANT)-latest.al2 $(if $(filter standard,$(VARIANT)),latest latest.2,))
+LATEST?=$(VARIANT)-latest.al23
 
 IMAGE?=$(IMAGE_REPO)/$(IMAGE_NAME):$(VARIANT)-$(IMAGE_TAG)
 
@@ -32,8 +32,6 @@ IMAGE_NAMES=$(IMAGE),$(LATEST_IMAGE)$(if $(PRIVATE_IMAGE),$(COMMA)$(PRIVATE_IMAG
 BASE_IMAGE_REPO?=public.ecr.aws/eks-distro-build-tooling
 BASE_IMAGE_NAME?=eks-distro-minimal-base-kind
 BASE_IMAGE?=$(BASE_IMAGE_REPO)/$(BASE_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,$(BASE_IMAGE_NAME))
-PYTHON_IMAGE_NAME?=python
-PYTHON_IMAGE?=$(BASE_IMAGE_REPO)/$(PYTHON_IMAGE_NAME):$(call BASE_TAG_FROM_TAG_FILE,eks-distro-minimal-base-python-compiler-3.9-yum)
 # using the minimal-base-builder as the base for the download/gcc stages of
 # this build since it doesnt change too often, limiting churn/rebuilds
 BUILDER_IMAGE_NAME?=eks-distro-minimal-base
@@ -109,10 +107,8 @@ images-%:
 		--frontend dockerfile.v0 \
 		--opt platform=$(BUILDKIT_PLATFORMS) \
 		--opt build-arg:BASE_IMAGE=$(BASE_IMAGE) \
-		--opt build-arg:PYTHON_IMAGE=$(PYTHON_IMAGE) \
 		--opt build-arg:BUILDER_IMAGE=$(BUILDER_IMAGE) \
 		--opt build-arg:GOPROXY=$(GOPROXY) \
-		--opt build-arg:AL_TAG=al$(AL_TAG) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
 		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell $(REALPATH) --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
 		--opt build-arg:GOLANG_VERSIONS=$(GOLANG_VERSIONS) \
@@ -129,7 +125,7 @@ images-%:
 		--output $(BUILDKIT_OUTPUT)
 	$(if $(findstring push=true,$(BUILDKIT_OUTPUT)),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(IMAGE)$(COMMA)$(LATEST_IMAGE),)
 	$(if $(and $(PRIVATE_IMAGE),$(findstring push=true,$(BUILDKIT_OUTPUT))),$(MAKE_ROOT)/../scripts/tag_image_children.sh $(PRIVATE_IMAGE) || echo "WARNING: failed to tag child images for $(PRIVATE_IMAGE)",)
-	if [ "$(AL_TAG)" = "2023" ] && [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
+	if [ "$(VARIANT)" = "standard" ] && [ "$(UPDATE_BASE_IMAGE)" = "true" ]; then \
 		./update_base_image.sh $(IMAGE_TAG); \
 	fi
 	

@@ -43,11 +43,7 @@ COPY --from=base_image /var/lib/rpm /var/lib/rpm
 COPY --from=base_image /etc/yum.repos.d /etc/yum.repos.d
 
 RUN set -x && \
-    if grep -q "2023" "/etc/os-release"; then \
-        yum check-update $SECURITY --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
-    else \
-        yum check-update $SECURITY  > ./check_update_output; echo \$? > ./return_value; \    
-    fi && \
+    yum check-update $SECURITY --releasever=latest  > ./check_update_output; echo \$? > ./return_value; \
     cat ./check_update_output | awk '/^$/,0' | awk '{print \$1}' > ./update_packages
 
 FROM scratch

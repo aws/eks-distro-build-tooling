@@ -55,19 +55,8 @@ yum install -y \
     which \
     yum-utils
 
-UPX_DOCKER_BINS=(/usr/libexec/docker/cli-plugins/docker-buildx /usr/bin/{containerd,docker,dockerd})
-# UPX 5.1.1 rejects the AL2 ctr binary with CantPackException bad e_shstrtab.
-if [ "$IS_AL23" = "true" ]; then
-    UPX_DOCKER_BINS+=(/usr/bin/ctr)
-fi
+UPX_DOCKER_BINS=(/usr/libexec/docker/cli-plugins/docker-buildx /usr/bin/{containerd,ctr,docker,dockerd})
 time upx --best --no-lzma "${UPX_DOCKER_BINS[@]}"
-
-# We see issues in fargate when installing on top of these images
-# including this plugin appears to fix it
-# ref: https://unix.stackexchange.com/questions/348941/rpmdb-checksum-is-invalid-trying-to-install-gcc-in-a-centos-7-2-docker-image    
-if [ "$IS_AL23" = "false" ]; then 
-    yum install -y yum-plugin-ovl
-fi
 
 if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     yum install -y \
@@ -79,13 +68,6 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
     yum install -y \
         glibc-static \
         libseccomp-static
-
-
-    if [ "$IS_AL23" = "false" ]; then
-        # headers for btrfs do not exist in al23. well need to address this in the future
-        # if we want to build containerd with btrfs support on al23
-        yum install -y btrfs-progs-devel
-    fi
 
     ############ IMAGE BUILDER ###################
 
@@ -100,9 +82,7 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
 
     # https://github.com/kubernetes-sigs/image-builder/blob/main/images/capi/hack/ensure-ansible.sh
 
-    if [ "$IS_AL23" = "true" ]; then
-        yum install -y python3.11
-    fi
+    yum install -y python3.11
 
     ansible-galaxy collection install -p /home/imagebuilder/.ansible/collections \
         community.general \
@@ -112,12 +92,7 @@ if [ "${FINAL_STAGE_BASE}" = "full-copy-stage" ]; then
 
     chown -R imagebuilder:imagebuilder /home/imagebuilder
 
-    if [ "$IS_AL23" = "true" ]; then
-        yum install -y python3-pip python
-    else
-        # we built python3.9 from source, ensure libs are all installed
-        yum install -y zlib bzip2 readline sqlite openssl11 tk libffi xz
-    fi
+    yum install -y python3-pip python
     ##############################################
 fi
 

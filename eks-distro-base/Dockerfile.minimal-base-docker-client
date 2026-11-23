@@ -31,6 +31,5 @@ COPY scripts/ /usr/bin
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     # we only want the docker client cli and not the service
-    enable_docker_install && \
     install_binary /usr/bin/docker && \
     cleanup "docker-client"

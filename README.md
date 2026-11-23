@@ -15,7 +15,7 @@ cluster](https://prow.eks.amazonaws.com).
 
 ### eks-distro-base
 
-eks-distro-base contains a Dockerfile used to build an up-to-date Amazon Linux 2
+eks-distro-base contains a Dockerfile used to build an up-to-date Amazon Linux 2023
 base image. This base will be updated whenever there are any security updates to
 RPMs contained in the base image.
 

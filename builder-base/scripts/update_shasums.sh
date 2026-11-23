@@ -95,7 +95,3 @@ done
 
 # HUGO
 echo "$(curl -sSL --retry 5 -v --silent $HUGO_CHECKSUM_URL 2>&1 | grep $HUGO_FILENAME | cut -d ":" -f 2)" >$CHECKSUMS_ROOT/checksums/hugo-$TARGETARCH-checksum
-
-# BASH
-sha256=$(curl -sSL --retry 5 $BASH_DOWNLOAD_URL | sha256sum | awk '{print $1}')
-echo "$sha256  bash-$OVERRIDE_BASH_VERSION.tar.gz" >$CHECKSUMS_ROOT/checksums/bash-checksum
