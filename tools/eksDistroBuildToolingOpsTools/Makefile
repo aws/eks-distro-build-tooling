@@ -14,7 +14,8 @@ GITHUB_USER?="Prow Bot"
 
 GO_ARCH:=$(shell go env GOARCH)
 GO_OS:=$(shell go env GOOS)
-GOLANG_VERSION:=1.20
+GOLANG_VERSION?=$(shell yq e '.GOLANG_DEFAULT_MINOR' $(BASE_DIRECTORY)/builder-base/versions.yaml)
+$(if $(GOLANG_VERSION),,$(error GOLANG_DEFAULT_MINOR not found in builder-base/versions.yaml))
 
 CONSUMER_UPDATER_BINARY_NAME=consumerUpdater
 EKS_PROW_PLUGIN_BINARY_NAME=eksDistroOpsProwPlugin

@@ -10,7 +10,7 @@ KOPS_REPO_URL?="https://github.com/kubernetes/kops.git"
 GITHUB_EMAIL?="prow@amazonaws.com"
 GITHUB_USER?="Prow Bot"
 
-export PATH:=/go/go1.22/bin:$(PATH)
+export PATH:=/go/go$(shell yq e '.GOLANG_DEFAULT_MINOR' $(BASE_DIRECTORY)/builder-base/versions.yaml)/bin:$(PATH)
 
 .PHONY: build
 build: check-env clone-kops patch-kops build-nodeup build-kops pull-binaries pull-images move-nodeup-binaries move-kops-binaries sync-artifacts-to-s3-dry-run
