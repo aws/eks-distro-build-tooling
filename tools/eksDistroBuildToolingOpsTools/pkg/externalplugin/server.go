@@ -82,7 +82,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	fmt.Fprint(w, "Event received. Have a nice day.")
+	_, _ = fmt.Fprint(w, "Event received. Have a nice day.")
 
 	if err := s.handleEvent(eventType, eventGUID, payload); err != nil {
 		logrus.WithError(err).Error("Error parsing event.")
@@ -179,7 +179,7 @@ func (s *Server) handleIssueComment(l *logrus.Entry, ic github.IssueCommentEvent
 	if len(backportMatches) == 3 {
 		versions := versionsRe.FindAllString(backportMatches[2], -1)
 		if err := s.handleBackportRequest(l, commentAuthor, &ic.Comment, &ic.Issue, backportMatches[1], versions, org, repo, num); err != nil {
-			return fmt.Errorf("Handle backport request failure: %w", err)
+			return fmt.Errorf("handle backport request failure: %w", err)
 		}
 	}
 

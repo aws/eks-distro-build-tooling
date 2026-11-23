@@ -60,7 +60,7 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 		query := fmt.Sprintf("repo:%s/%s milestone:Go%s label:Security", constants.GolangOrgName, constants.GoRepoName, version)
 		milestoneIssues, err := s.Ghc.FindIssuesWithOrg(constants.GolangOrgName, query, "", false)
 		if err != nil {
-			return fmt.Errorf("Find Golang Milestone: %v", err)
+			return fmt.Errorf("find Golang milestone: %v", err)
 		}
 		for _, i := range milestoneIssues {
 			for _, biMatch := range issNumRe.FindAllString(i.Body, -1) {
@@ -73,15 +73,15 @@ func (s *Server) handleGolangPatchRelease(l *logrus.Entry, requestor string, iss
 	for biNum := range m {
 		biInt, err := strconv.Atoi(biNum[1:])
 		if err != nil {
-			return fmt.Errorf("Converting issue number to int: %w", err)
+			return fmt.Errorf("converting issue number to int: %w", err)
 		}
 		baseIssue, err := s.Ghc.GetIssue(constants.GolangOrgName, constants.GoRepoName, biInt)
 		if err != nil {
-			return fmt.Errorf("Getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
+			return fmt.Errorf("getting base issue(%s/%s#%d): %w", constants.GolangOrgName, constants.GoRepoName, biInt, err)
 		}
 		miNum, err := s.Ghc.CreateIssue(constants.AwsOrgName, constants.EksdBuildToolingRepoName, baseIssue.Title, baseIssue.Body, 0, nil, nil)
 		if err != nil {
-			return fmt.Errorf("Creating mirrored issue: %w", err)
+			return fmt.Errorf("creating mirrored issue: %w", err)
 		}
 		l.Info(fmt.Sprintf("Created Issue: %s/%s#%d", constants.AwsOrgName, constants.EksdBuildToolingRepoName, miNum))
 	}

@@ -162,10 +162,10 @@ func getReleaseManifestBody(releaseBranch string, release int) (*v1alpha1.Releas
 	fmt.Println(releaseManifestURL)
 	resp, err := http.Get(releaseManifestURL)
 	if err != nil {
-		return nil, fmt.Errorf("getting Release Manifest: %w\n", err)
+		return nil, fmt.Errorf("getting Release Manifest: %w", err)
 	}
 
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != expectedStatusCode {
 		return nil, fmt.Errorf("got status code %v when getting Release Manifest (expected %d)",

@@ -69,7 +69,7 @@ func (p *RepoContentManager) GetFile(ctx context.Context, opts *GetFileOpts) (*g
 		logger.V(4).Error(err, "getting file from Github", "response", resp)
 		return nil, fmt.Errorf("getting file from Github: %v; resp: %v", err, resp)
 	}
-	logger.V(4).Info("get file response", "response", resp.Response.StatusCode)
+	logger.V(4).Info("get file response", "response", resp.StatusCode)
 	logger.V(1).Info("Github file received", "fileContent URL", fileContent.GetHTMLURL())
 	return fileContent, nil
 }
