@@ -36,11 +36,3 @@ golang:
 go:
 - 'projects/golang/go/**/*'
 
-go1.19:
-- 'projects/golang/go/1.19/**/*'
-
-go1.20:
-- 'projects/golang/go/1.20/**/*'
-
-go1.21:
-- 'projects/golang/go/1.21/**/*'

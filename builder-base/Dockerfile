@@ -262,7 +262,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
 FROM ${BUILDER_IMAGE} as golang-default
 ARG TARGETARCH
 ARG GOLANG_DEFAULT_VERSION
-ARG GOLANG_RPM_SOURCE_DIR
+ARG GOLANG_DOWNLOAD_SOURCE_DIR
 WORKDIR /workdir
 ENV GOPATH /go
 ENV PATH="/go/bin/:$PATH"
@@ -270,8 +270,8 @@ ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/linux/arm64/go*.tar.gz /tmp/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/linux/amd64/go*.tar.gz /tmp/linux/amd64/
+COPY $GOLANG_DOWNLOAD_SOURCE_DIR/linux/arm64/go*.tar.gz /tmp/linux/arm64/
+COPY $GOLANG_DOWNLOAD_SOURCE_DIR/linux/amd64/go*.tar.gz /tmp/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_base_yum_packages.sh && \
     /install_golang.sh $GOLANG_DEFAULT_VERSION && \
@@ -283,7 +283,7 @@ FROM ${BUILDER_IMAGE} as golang-versions
 ARG TARGETARCH
 ARG GOPROXY
 ARG GOLANG_EXTRA_VERSIONS
-ARG GOLANG_RPM_SOURCE_DIR
+ARG GOLANG_DOWNLOAD_SOURCE_DIR
 ARG GO_LICENSES_VERSION
 ENV GO_LICENSES_VERSION=$GO_LICENSES_VERSION
 WORKDIR /workdir
@@ -293,8 +293,8 @@ ENV PATH="/go/bin/:$PATH"
 COPY --link --from=upx  /upx /
 COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
     ./scripts/install_golang.sh ./scripts/install_go_licenses.sh ./scripts/install_golang_versions.sh /
-COPY $GOLANG_RPM_SOURCE_DIR/extra/linux/arm64/go*.tar.gz /tmp/golang-downloads/linux/arm64/
-COPY $GOLANG_RPM_SOURCE_DIR/extra/linux/amd64/go*.tar.gz /tmp/golang-downloads/linux/amd64/
+COPY $GOLANG_DOWNLOAD_SOURCE_DIR/extra/linux/arm64/go*.tar.gz /tmp/golang-downloads/linux/arm64/
+COPY $GOLANG_DOWNLOAD_SOURCE_DIR/extra/linux/amd64/go*.tar.gz /tmp/golang-downloads/linux/amd64/
 RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     --mount=type=cache,target=/root/.cache/go-build,sharing=private \
     --mount=type=secret,id=netrc,target=/root/.netrc \
