@@ -23,43 +23,7 @@ VERSION="$1"
 OUTPUT_DIR="$2"
 ARCHITECTURE="$3"
 
-RELEASE_NUMBER="$(echo $VERSION | cut -d'-' -f 2)"
-
 source $SCRIPT_ROOT/common_vars.sh
-
-function build::eksgo::download() {
-  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
-  # the function again with the specific parameter.
-  local version=${1%-*}
-  local outputDir=${2}
-  local arch=${3}
-
-  for artifact in golang golang-bin; do
-    local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm"
-    if [ ! -f $filename ]; then
-      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm -o $filename --create-dirs
-      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.$arch.rpm.sha256 -o $filename.sha256
-
-      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]]; then
-        echo "Checksum doesn't match!"
-        exit 1
-      fi
-    fi
-  done
-
-  for artifact in golang-docs golang-misc golang-tests golang-src; do
-    local filename="$outputDir/$arch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm"
-    if [ ! -f $filename ]; then
-      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm -o $filename --create-dirs
-      curl -sSLf --retry 5 https://distro.eks.amazonaws.com/golang-go$version/releases/$RELEASE_NUMBER/$arch/RPMS/noarch/$artifact-$version-$RELEASE_NUMBER.amzn2.eks.noarch.rpm.sha256 -o $filename.sha256
-
-      if [[ $(sha256sum ${filename} | cut -d' ' -f1) != $(cut -d' ' -f1 "${filename}.sha256") ]]; then
-        echo "Checksum doesn't match!"
-        exit 1
-      fi
-    fi
-  done
-}
 
 function build::go::download {
   # Set up specific go version by using go get, additional versions apart from default can be installed by calling
@@ -80,17 +44,7 @@ function build::go::download {
 }
 
 function download_golang {
-  if [[ ${VERSION:2:2} -ge "21" ]]; then
-    build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
-  else
-    if [[ $ARCHITECTURE =~ amd64 ]]; then
-      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "x86_64"
-    fi
-
-    if [[ $ARCHITECTURE =~ arm64 ]]; then
-      build::eksgo::download "${VERSION}" "$OUTPUT_DIR" "aarch64"
-    fi
-  fi
+  build::go::download "${VERSION}" "$OUTPUT_DIR" "$ARCHITECTURE"
 }
 
 [ ${SKIP_INSTALL:-false} != false ] || download_golang

@@ -87,52 +87,7 @@ function build::go::extract {
   rm -rf /tmp/go-extracted /tmp/linux/$TARGETARCH/go*.tar.gz
 }
 
-function build::eksgo::install() {
-  # Set up specific go version by using go get, additional versions apart from default can be installed by calling
-  # the function again with the specific parameter.
-  local version=${1%-*}
-  build::eksgo::extract $version
-  build::go::symlink $version
-}
-
-function build::eksgo::extract() {
-  local version=$1
-
-  if [ $TARGETARCH == 'amd64' ]; then
-    local arch='x86_64'
-  else
-    local arch='aarch64'
-  fi
-
-  mkdir -p /tmp/go-extracted
-  for rpm in /tmp/$arch/golang-*.noarch.rpm /tmp/$arch/golang-*.$arch.rpm; do $(cd /tmp/go-extracted && rpm2cpio $rpm | cpio -idm && rm -f $rpm); done
-
-  local -r golang_version=$(/tmp/go-extracted/usr/lib/golang/bin/go version | grep -o "go[0-9].* " | xargs)
-
-  mkdir -p /root/sdk/$golang_version
-  mv /tmp/go-extracted/usr/lib/golang/* /root/sdk/$golang_version
-
-  for license_dir in "/usr/share/licenses/golang" "/usr/share/doc/golang-$VERSION"; do
-    if [ -d /tmp/go-extracted/$license_dir ]; then
-      mv /tmp/go-extracted/$license_dir/* /root/sdk/$golang_version
-    fi
-  done
-
-  version=$(echo "$golang_version" | grep -o "[0-9].*")
-  ln -s /root/sdk/go${version}/bin/go ${GOPATH}/bin/$golang_version
-
-  # newer versions of golang stopped shipping the compiled .a lib files
-  # removing from old versions since we do not need these during our builds
-  find /root/sdk/go${version}/pkg -type f -name "*.a" -delete
-
-  rm -rf /tmp/go-extracted /tmp/golang-*.rpm
-}
-
-if [[ ${VERSION:2:2} -ge "21" ]]; then
-  build::go::install "${VERSION}"
-else
-  build::eksgo::install "${VERSION}"
-fi
+build::go::install "${VERSION}"
 
 # symlink default golang install to newroot bin
 for binary in go gofmt; do

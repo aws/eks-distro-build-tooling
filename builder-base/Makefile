@@ -64,7 +64,7 @@ endef
 
 REALPATH=TZ=utc $(shell if [ "$$(uname -s)" = "Darwin" ] && command -v grealpath &> /dev/null; then echo grealpath; else echo realpath; fi)
 
-GOLANG_RPM_OUTPUT_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
+GOLANG_DOWNLOAD_DIR?=$(MAKE_ROOT)/tmp/golang-downloads
 GOLANG_VERSIONS_YAML?=$(MAKE_ROOT)/../eks-distro-base/golang_versions.yaml
 GOLANG_DEFAULT_MINOR?=$(shell yq e '.GOLANG_DEFAULT_MINOR' ${MAKE_ROOT}/versions.yaml)
 GOLANG_VARIANTS?=$(shell yq e '.golang.variants[]' $(GOLANG_VERSIONS_YAML))
@@ -75,7 +75,7 @@ GOLANG_VERSIONS?=$(subst $(SPACE),$(COMMA),$(call GOLANG_FULL_VERSIONS,$(GOLANG_
 GOLANG_DEFAULT_VERSION?=$(if $(filter $(GOLANG_DEFAULT_MINOR),$(GOLANG_VARIANTS)),$(call GOLANG_FULL_VERSION,$(GOLANG_DEFAULT_MINOR)),)
 GOLANG_EXTRA_VERSIONS?=$(subst $(SPACE),$(COMMA),$(call GOLANG_FULL_VERSIONS,$(GOLANG_EXTRA_VARIANTS)))
 GOLANG_VERSION_KEY_COUNT?=$(shell yq e '.golang.versions | length' $(GOLANG_VERSIONS_YAML))
-GOLANG_RPM_DOWNLOAD_TARGETS?=$(addprefix download-golang-,$(call GOLANG_FULL_VERSIONS,$(GOLANG_VARIANTS)))
+GOLANG_DOWNLOAD_TARGETS?=$(addprefix download-golang-,$(call GOLANG_FULL_VERSIONS,$(GOLANG_VARIANTS)))
 
 .PHONY: buildkit-check
 buildkit-check:
@@ -114,7 +114,7 @@ images-%:
 		--opt build-arg:GOPROXY=$(GOPROXY) \
 		--opt build-arg:AL_TAG=al$(AL_TAG) \
 		--opt build-arg:FINAL_STAGE_BASE=$(FINAL_STAGE_BASE) \
-		--opt build-arg:GOLANG_RPM_SOURCE_DIR=$(shell $(REALPATH) --relative-to $(MAKE_ROOT) $(GOLANG_RPM_OUTPUT_DIR)) \
+		--opt build-arg:GOLANG_DOWNLOAD_SOURCE_DIR=$(shell $(REALPATH) --relative-to $(MAKE_ROOT) $(GOLANG_DOWNLOAD_DIR)) \
 		--opt build-arg:GOLANG_VERSIONS=$(GOLANG_VERSIONS) \
 		--opt build-arg:GOLANG_EXTRA_VERSIONS=$(GOLANG_EXTRA_VERSIONS) \
 		--opt build-arg:GOLANG_DEFAULT_VERSION=$(GOLANG_DEFAULT_VERSION) \
@@ -162,7 +162,7 @@ validate-shasums: update-shasums
 	git diff --exit-code ./checksums
 
 .PHONY: download-golang
-download-golang: $(GOLANG_RPM_DOWNLOAD_TARGETS)
+download-golang: $(GOLANG_DOWNLOAD_TARGETS)
 	@if [ -z "$(GOLANG_DEFAULT_VERSION)" ]; then \
 		echo "GOLANG_DEFAULT_MINOR $(GOLANG_DEFAULT_MINOR) is not in $(GOLANG_VERSIONS_YAML)"; \
 		exit 1; \
@@ -173,14 +173,10 @@ download-golang: $(GOLANG_RPM_DOWNLOAD_TARGETS)
 		exit 1; \
 	fi
 
-.PHONY: clean-golang-download
-clean-golang-download:
-	rm -f ${GOLANG_RPM_OUTPUT_DIR}/golang-*.rpm
-
 .PHONY: download-golang-%
 download-golang-%:
-	mkdir -p ${GOLANG_RPM_OUTPUT_DIR}
-	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_RPM_OUTPUT_DIR}$(if $(filter $*,$(GOLANG_DEFAULT_VERSION)),,/extra) ${BUILDKIT_PLATFORMS}
+	mkdir -p ${GOLANG_DOWNLOAD_DIR}
+	${MAKE_ROOT}/scripts/download_golang.sh ${*} ${GOLANG_DOWNLOAD_DIR}$(if $(filter $*,$(GOLANG_DEFAULT_VERSION)),,/extra) ${BUILDKIT_PLATFORMS}
 
 .PHONY: check-golang-release
 check-golang-release:

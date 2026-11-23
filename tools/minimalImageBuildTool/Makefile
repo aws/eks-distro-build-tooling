@@ -6,7 +6,7 @@ GO_OS:=$(shell go env GOOS)
 MINIMAL_IMAGE_BUILD_TOOL_BINARY_NAME="minimalImageBuildTool"
 
 .PHONY: build-minimal-image-build-tool
-build-eks-go-tools:  unit-test lint
+build-minimal-image-build-tool:  unit-test lint
 	CGO_ENABLED=0 GOOS=$(GO_OS) GOARCH=$(GO_ARCH) go build -ldflags "-X github.com/aws/eks-distro-build-tooling/tools/minimalImageBuildTool/pkg/version.gitVersion=$(GIT_VERSION) -s -w -extldflags -static" -o bin/$(GO_OS)/$(GO_ARCH)/$(MINIMAL_IMAGE_BUILD_TOOL_BINARY_NAME) github.com/aws/eks-distro-build-tooling/tools/minimalImageBuildTool/cmd/minimalImageBuild
 
 .PHONY: unit-test
