@@ -27,9 +27,6 @@ al2023:
   eks-distro-minimal-base-python-compiler-3.11-base: 3.11-2026-11-18-1795028524.2023
   eks-distro-minimal-base-python-compiler-3.11-yum: 3.11-yum-2026-11-18-1795028524.2023
   eks-distro-minimal-base-python-compiler-3.11-gcc: 3.11-gcc-2026-11-18-1795028524.2023
-  eks-distro-minimal-base-golang-compiler-1.25-base: 1.25-2026-11-18-1795028524.2023
-  eks-distro-minimal-base-golang-compiler-1.25-yum: 1.25-yum-2026-11-18-1795028524.2023
-  eks-distro-minimal-base-golang-compiler-1.25-gcc: 1.25-gcc-2026-11-18-1795028524.2023
   eks-distro-minimal-base-golang-compiler-1.26-base: 1.26-2026-11-18-1795028524.2023
   eks-distro-minimal-base-golang-compiler-1.26-yum: 1.26-yum-2026-11-18-1795028524.2023
   eks-distro-minimal-base-golang-compiler-1.26-gcc: 1.26-gcc-2026-11-18-1795028524.2023
