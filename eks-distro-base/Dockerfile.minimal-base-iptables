@@ -46,17 +46,15 @@ ENV CLEANUP_UNNECESSARY_FILES="/etc/pki/tls/fips_local.cnf"
 
 RUN set -x && \
     export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
-    if_al2 install_rpm chkconfig && \
-    if_al2023 install_rpm alternatives && \
+    install_rpm alternatives && \
     install_rpm conntrack-tools \
         ipset \
         kmod \
         iptables-nft && \
-    if_al2 install_rpm iptables ebtables && \
-    if_al2023 install_rpm iptables-legacy ebtables-legacy nftables && \
+    install_rpm iptables-legacy ebtables-legacy nftables && \
     # The original iptables-wrapper.sh script assumed that there were both iptables and ip6tables 
     # alternatives setup since the upstream image was based on debian which sets them up that way
-    # AL2 follows RHEL which uses a single alternaive setup for both iptables and ip6tables
+    # Amazon Linux follows RHEL which uses a single alternative setup for both iptables and ip6tables
     # The wrapper script is currently only used by the eks-a kind image, since the other consumers of this base image
     # do not include bash and have therefore relied on legacy as the default
     # This adds the ip6tables alternative so that the `update-alternatives --set` calls which happen during the kind

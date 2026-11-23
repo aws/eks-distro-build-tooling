@@ -26,15 +26,10 @@ source $SCRIPT_ROOT/common_vars.sh
 yum remove -y policycoreutils > /dev/null 2>&1
 
 # keep rpms around since we use them in every stage
-if [ "$IS_AL23" = "true" ]; then
-    echo "keepcache=1" >> /etc/dnf/dnf.conf
-    rm -rf /var/cache/dnf
-    ln -s yum /var/cache/dnf
-    rm -f /var/lib/dnf/history.*
-else
-    sed -i 's/keepcache=0/keepcache=1/g' /etc/yum.conf
-    yum history new
-fi
+echo "keepcache=1" >> /etc/dnf/dnf.conf
+rm -rf /var/cache/dnf
+ln -s yum /var/cache/dnf
+rm -f /var/lib/dnf/history.*
 
 yum install --setopt=install_weak_deps=False -y \
     gzip \

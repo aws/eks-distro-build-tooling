@@ -19,9 +19,7 @@
 
 ARG BUILDER_IMAGE
 ARG BASE_IMAGE
-ARG PYTHON_IMAGE
 ARG FINAL_STAGE_BASE
-ARG AL_TAG
 
 FROM ${BUILDER_IMAGE} as upx
 ARG TARGETARCH
@@ -174,10 +172,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
 FROM ${BUILDER_IMAGE} as nodejs
 ARG TARGETARCH
 WORKDIR /workdir
-ARG NODEJS_VERSION
 ARG NODEJS_VERSION_AL23
 ARG NPM_VERSION_AL23
-ENV NODEJS_VERSION=$NODEJS_VERSION
 ENV NODEJS_VERSION_AL23=$NODEJS_VERSION_AL23
 ENV NPM_VERSION_AL23=$NPM_VERSION_AL23
 
@@ -188,7 +184,6 @@ COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./s
     generate-attribution/generate-attribution  \
     generate-attribution/generate-attribution-file.js \
     generate-attribution/LICENSE-2.0.txt \
-    ./checksums/nodejs-${TARGETARCH}-checksum \
     ./checksums/nodejs-al23-${TARGETARCH}-checksum \
     ./checksums/npm-al23-checksum /
 RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
@@ -251,25 +246,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_tuftool.sh && \
     /remove_yum_packages.sh
 
-FROM ${BUILDER_IMAGE}  as bash
-ARG TARGETARCH
-WORKDIR /workdir
-ARG OVERRIDE_BASH_VERSION
-ENV OVERRIDE_BASH_VERSION=$OVERRIDE_BASH_VERSION
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/install_gcc_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/common_vars.sh ./scripts/install_bash.sh ./checksums/bash-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
-    /install_gcc_yum_packages.sh && \
-    /install_bash.sh && \
-    /remove_yum_packages.sh
-
-# for al2 builds we pull python3.9 from the minimal image build since al2
-# does not ship 3.9
-FROM ${PYTHON_IMAGE} as ansible-al2
-
-FROM ${BUILDER_IMAGE} as ansible-al2023
-
-FROM ansible-${AL_TAG} as ansible
+FROM ${BUILDER_IMAGE} as ansible
 ARG TARGETARCH
 WORKDIR /workdir
 ARG ANSIBLE_VERSION
@@ -328,9 +305,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
 FROM ${BUILDER_IMAGE} as skopeo
 ARG TARGETARCH
 ARG GOPROXY
-ARG SKOPEO_VERSION
 ARG SKOPEO_VERSION_AL23
-ENV SKOPEO_VERSION=$SKOPEO_VERSION
 ENV SKOPEO_VERSION_AL23=$SKOPEO_VERSION_AL23
 WORKDIR /workdir
 ENV GOPATH /go
@@ -400,7 +375,6 @@ RUN --mount=type=cache,target=/root/.cache/go-build,sharing=private \
 FROM ${BASE_IMAGE} as minimal-copy-stage
 
 # Ordered by least likely to be updated
-COPY --link --from=bash /bash /
 COPY --link --from=aws-cli /aws-cli /
 COPY --link --from=ecr-cred-helper /ecr-cred-helper /
 COPY --link --from=yq /yq /

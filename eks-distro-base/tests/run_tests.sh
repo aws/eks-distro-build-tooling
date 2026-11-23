@@ -511,14 +511,6 @@ function check_base-csi() {
     done
   }
 
-check_base-python-3.7() {
-    check_base-python3 3.7
-    if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
-        echo "pip should not exist!"
-        exit 1
-    fi
-}
-
 check_base-python-3.9() {
     check_base-python3 3.9
     if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
@@ -548,18 +540,6 @@ check_base-python-compiler() {
             exit 1
         fi
     done
-}
-
-check_base-python-compiler-3.7-base() {
-    check_base-python-compiler 3.7 base
-}
-
-check_base-python-compiler-3.7-yum() {
-    check_base-python-compiler 3.7 yum
-}
-
-check_base-python-compiler-3.7-gcc() {
-    check_base-python-compiler 3.7 gcc
 }
 
 check_base-python-compiler-3.9-base() {

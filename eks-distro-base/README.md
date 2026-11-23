@@ -2,7 +2,7 @@
 
 ## Standard Variant
 
-The standard eks-distro-base defined by [Dockerfile.base](./Dockerfile.base) is the upstream AL2 image with the latest package updates.  The upstream AL2
+The standard eks-distro-base defined by [Dockerfile.base](./Dockerfile.base) is the upstream AL2023 image with the latest package updates.  The upstream AL2023
 image is not updated with every package change.  A daily periodic job runs [check_update.sh](./check_update.sh) which checks yum for new
 security updates by running `yum check-update --security`.  
 
@@ -168,7 +168,6 @@ Building the eks-distro-base images locally requires `buildkitd` running and eit
     * `export SSH_KEY_FOLDER=<ssh_key_folder>`
     * `export PRIVATE_REPO=<private_repo>`
     * `IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-base-test -C eks-distro-base`
-1. To build AL22 based images pass `AL_TAG=2023` to the make call
 1. To build a specific image based on an image published to [the EKS-D ECR](https://gallery.ecr.aws/eks-distro-build-tooling)
     * `BASE_IMAGE_REPO=public.ecr.aws/eks-distro-build-tooling IMAGE_REPO=localhost:5000 IMAGE_TAG=${DATE_EPOCH} make minimal-images-base-iptables -C eks-distro-base`   
 

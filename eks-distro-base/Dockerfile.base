@@ -19,11 +19,9 @@ COPY files/etc/pki/ca-trust/source/blocklist/ /etc/pki/ca-trust/source/blocklist
 COPY files/etc/pki/ca-trust/source/blocklist/ /etc/pki/ca-trust/source/blacklist/
 
 RUN set -x && \
-    if grep -q "2023" "/etc/os-release"; then \
-        # to ensure all downstream yum commands always resolve using the latest releasever 
-        # available at that time
-        echo latest > /etc/dnf/vars/releasever; \
-    fi && \
+    # to ensure all downstream yum commands always resolve using the latest releasever 
+    # available at that time
+    echo latest > /etc/dnf/vars/releasever && \
     yum upgrade -y && \
     yum update -y && \
     update-ca-trust && \

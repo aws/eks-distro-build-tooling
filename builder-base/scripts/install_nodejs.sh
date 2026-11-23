@@ -22,13 +22,8 @@ NEWROOT=/nodejs
 
 source $SCRIPT_ROOT/common_vars.sh
 
-# Select Node.js version based on AL_TAG (similar to skopeo pattern)
-if [ "$IS_AL23" = "true" ]; then
-    NODEJS_VERSION=$NODEJS_VERSION_AL23
-    CHECKSUM_FILE="nodejs-al23-$TARGETARCH-checksum"
-else
-    CHECKSUM_FILE="nodejs-$TARGETARCH-checksum"
-fi
+NODEJS_VERSION=$NODEJS_VERSION_AL23
+CHECKSUM_FILE="nodejs-al23-$TARGETARCH-checksum"
 
 if [ $TARGETARCH == 'amd64' ]; then 
     NODEJS_FILENAME="node-$NODEJS_VERSION-linux-x64.tar.gz"
@@ -75,4 +70,4 @@ function install_generate_attribution() {
     time upx --best --no-lzma $USR_BIN/node
 }
 
-[ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && { [ "$IS_AL23" != "true" ] || install_npm; } && install_generate_attribution)
+[ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && install_npm && install_generate_attribution)

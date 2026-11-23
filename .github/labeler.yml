@@ -12,9 +12,6 @@ minimal-image:
 al2023:
 - '**/2023/*'
 
-al2:
-- '**/2/*'
-
 projects:
 - 'projects/**/*'
 

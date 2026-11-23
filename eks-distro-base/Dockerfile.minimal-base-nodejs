@@ -83,7 +83,7 @@ RUN set -x && \
     # between the coreutils and coreutils-single packages
     # easiest thing to do is only install coreutils in runtime image
     # where we know it doesnt already exist
-    if_al2023 install_binary /usr/bin/coreutils && \
+    install_binary /usr/bin/coreutils && \
     cleanup "nodejs-runtime"
 
 ################# BASE WITH YUM PACKAGES ######################

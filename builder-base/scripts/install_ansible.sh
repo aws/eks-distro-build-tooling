@@ -23,17 +23,11 @@ NEWROOT=/ansible
 source $SCRIPT_ROOT/common_vars.sh
 
 function instal_ansible() {
-    if [ "$IS_AL23" = "true" ]; then 
-        # ansible-core 2.16 and later require Python 3.10 or newer.
-        local -r deps="python3.11 python3.11-pip"
-        yum install -y $deps
-        local -r pip="python3.11 -m pip"
-        local -r python_version="3.11"
-    else
-        pip3 install --no-cache-dir -U pip setuptools
-        local -r pip="pip3"
-        local -r python_version="3.9"
-    fi
+    # ansible-core 2.16 and later require Python 3.10 or newer.
+    local -r deps="python3.11 python3.11-pip"
+    yum install -y $deps
+    local -r pip="python3.11 -m pip"
+    local -r python_version="3.11"
 
     ANSIBLE_VERSION="$ANSIBLE_VERSION"
     $pip install --user --no-cache-dir "ansible-core==$ANSIBLE_VERSION"
@@ -43,26 +37,6 @@ function instal_ansible() {
     
     rm -rf ${NEWROOT}/usr/*
     mv /root/.local/* ${NEWROOT}/usr
-
-    if [ "$IS_AL23" = "false" ]; then 
-        # pulling only the python folders/bin we need
-        # follows list from minimal image Dockerfile.minimal-base-python
-        mkdir -p $NEWROOT/usr/lib/pkgconfig ${NEWROOT}/usr/{bin,include}
-        cp /usr/bin/{pip3,pip3.9,pydoc3.9,python3,python3.9,python3.9-config} ${NEWROOT}/usr/bin
-        cp -rf /usr/include/python3.9 ${NEWROOT}/usr/include
-        cp /usr/lib/pkgconfig/python-3.9*.pc ${NEWROOT}/usr/lib/pkgconfig
-        cp -rf /usr/lib/python3.9 ${NEWROOT}/usr/lib
-
-        # for some reason the /usr/lib/libpython3.9.so file should be a symlink libpython3.9.so.1.0
-        # but this got lost somewhere, probably during minimal image build, so its a full copy
-        # manually recreating the symlink to avoid having a duplicated file
-        cp /usr/lib/libpython3.so /usr/lib/libpython3.9.so.1.0 ${NEWROOT}/usr/lib
-        ln -s ./libpython3.9.so.1.0 ${NEWROOT}/usr/lib/libpython3.9.so
-
-        # the static lib of python is not needed in our use case and it is quite big
-        # this file only exists on the arm build for some reason
-        rm -f ${NEWROOT}/usr/lib/python3.9/config-3.9-*-linux-gnu/libpython3.9.a
-    fi
 
     chmod 755 ${NEWROOT}/usr/lib/python${python_version}/site-packages 
 
