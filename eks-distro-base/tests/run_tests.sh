@@ -511,8 +511,8 @@ function check_base-csi() {
     done
   }
 
-check_base-python-3.9() {
-    check_base-python3 3.9
+check_base-python-runtime() {
+    check_base-python3 "$1"
     if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
         echo "pip should not exist!"
         exit 1
@@ -520,11 +520,19 @@ check_base-python-3.9() {
 }
 
 check_base-python-3.11() {
-    check_base-python3 3.11
-    if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
-        echo "pip should not exist!"
-        exit 1
-    fi
+    check_base-python-runtime 3.11
+}
+
+check_base-python-3.12() {
+    check_base-python-runtime 3.12
+}
+
+check_base-python-3.13() {
+    check_base-python-runtime 3.13
+}
+
+check_base-python-3.14() {
+    check_base-python-runtime 3.14
 }
 
 check_base-python-compiler() {
@@ -542,18 +550,6 @@ check_base-python-compiler() {
     done
 }
 
-check_base-python-compiler-3.9-base() {
-    check_base-python-compiler 3.9 base
-}
-
-check_base-python-compiler-3.9-yum() {
-    check_base-python-compiler 3.9 yum
-}
-
-check_base-python-compiler-3.9-gcc() {
-    check_base-python-compiler 3.9 gcc
-}
-
 check_base-python-compiler-3.11-base() {
     check_base-python-compiler 3.11 base
 }
@@ -564,6 +560,42 @@ check_base-python-compiler-3.11-yum() {
 
 check_base-python-compiler-3.11-gcc() {
     check_base-python-compiler 3.11 gcc
+}
+
+check_base-python-compiler-3.12-base() {
+    check_base-python-compiler 3.12 base
+}
+
+check_base-python-compiler-3.12-yum() {
+    check_base-python-compiler 3.12 yum
+}
+
+check_base-python-compiler-3.12-gcc() {
+    check_base-python-compiler 3.12 gcc
+}
+
+check_base-python-compiler-3.13-base() {
+    check_base-python-compiler 3.13 base
+}
+
+check_base-python-compiler-3.13-yum() {
+    check_base-python-compiler 3.13 yum
+}
+
+check_base-python-compiler-3.13-gcc() {
+    check_base-python-compiler 3.13 gcc
+}
+
+check_base-python-compiler-3.14-base() {
+    check_base-python-compiler 3.14 base
+}
+
+check_base-python-compiler-3.14-yum() {
+    check_base-python-compiler 3.14 yum
+}
+
+check_base-python-compiler-3.14-gcc() {
+    check_base-python-compiler 3.14 gcc
 }
 
 check_base-nodejs() {
@@ -583,13 +615,21 @@ check_base-nodejs() {
     done
 }
 
-check_base-nodejs-16() {
-    check_base-nodejs 16
+check_base-nodejs-runtime() {
+    check_base-nodejs "$1"
 
     if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-nodejs:$IMAGE_TAG npm --version > /dev/null 2>&1; then
         echo "npm should not exist!"
         exit 1
     fi
+}
+
+check_base-nodejs-24() {
+    check_base-nodejs-runtime 24
+}
+
+check_base-nodejs-26() {
+    check_base-nodejs-runtime 26
 }
 
 check_base-nodejs-compiler() {
@@ -600,7 +640,7 @@ check_base-nodejs-compiler() {
     check_base-nodejs "$1" nodejs
 
     for platform in ${PLATFORMS//,/ }; do
-        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/nodejs:$IMAGE_TAG npm --version | grep -v '8'; then
+        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/nodejs:$IMAGE_TAG npm --version | grep -v '^11\.'; then
             echo "npm issue!"
             exit 1
         fi
@@ -608,16 +648,28 @@ check_base-nodejs-compiler() {
 }
 
 
-check_base-nodejs-compiler-16-base() {
-    check_base-nodejs-compiler 16 base
+check_base-nodejs-compiler-24-base() {
+    check_base-nodejs-compiler 24 base
 }
 
-check_base-nodejs-compiler-16-yum() {
-    check_base-nodejs-compiler 16 yum
+check_base-nodejs-compiler-24-yum() {
+    check_base-nodejs-compiler 24 yum
 }
 
-check_base-nodejs-compiler-16-gcc() {
-    check_base-nodejs-compiler 16 gcc
+check_base-nodejs-compiler-24-gcc() {
+    check_base-nodejs-compiler 24 gcc
+}
+
+check_base-nodejs-compiler-26-base() {
+    check_base-nodejs-compiler 26 base
+}
+
+check_base-nodejs-compiler-26-yum() {
+    check_base-nodejs-compiler 26 yum
+}
+
+check_base-nodejs-compiler-26-gcc() {
+    check_base-nodejs-compiler 26 gcc
 }
 
 
