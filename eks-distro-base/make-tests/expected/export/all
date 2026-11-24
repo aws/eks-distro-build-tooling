@@ -103,11 +103,17 @@ printf "\n\nExporting packages and files from  base-python-3.11 final image\n\n"
 if [ -f /override/root/../eks-distro-base-minimal-packages/2023/python-3.11 ]; then \
 	mv /override/root/../eks-distro-base-minimal-packages/2023/python-3.11* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
-tag from file for eks-distro-minimal-base-nodejs-16: some-previous-tag
-printf "\n\nExporting packages and files from  base-nodejs-16 final image\n\n"
-/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-16 --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
-if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-16 ]; then \
-	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-16* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+tag from file for eks-distro-minimal-base-nodejs-24: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-24 final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-24 --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-24 ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-24* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+fi
+tag from file for eks-distro-minimal-base-nodejs-26: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-26 final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-26 --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-26 ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-26* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
 tag from file for eks-distro-minimal-base-golang-compiler-1.26-base: some-previous-tag
 printf "\n\nExporting packages and files from  base-golang-compiler-1.26-base final image\n\n"
@@ -145,23 +151,41 @@ printf "\n\nExporting packages and files from  base-golang-compiler-1.27-gcc fin
 if [ -f /override/root/../eks-distro-base-minimal-packages/2023/golang-compiler-1.27-gcc ]; then \
 	mv /override/root/../eks-distro-base-minimal-packages/2023/golang-compiler-1.27-gcc* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
-tag from file for eks-distro-minimal-base-nodejs-compiler-16-base: some-previous-tag
-printf "\n\nExporting packages and files from  base-nodejs-compiler-16-base final image\n\n"
-/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
-if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-base ]; then \
-	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-base* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+tag from file for eks-distro-minimal-base-nodejs-compiler-24-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-24-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-24-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-base ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-base* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
-tag from file for eks-distro-minimal-base-nodejs-compiler-16-yum: some-previous-tag
-printf "\n\nExporting packages and files from  base-nodejs-compiler-16-yum final image\n\n"
-/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
-if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-yum ]; then \
-	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-yum* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+tag from file for eks-distro-minimal-base-nodejs-compiler-26-base: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-26-base final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-26-base --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-base ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-base* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
-tag from file for eks-distro-minimal-base-nodejs-compiler-16-gcc: some-previous-tag
-printf "\n\nExporting packages and files from  base-nodejs-compiler-16-gcc final image\n\n"
-/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-16-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
-if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-gcc ]; then \
-	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-16-gcc* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+tag from file for eks-distro-minimal-base-nodejs-compiler-24-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-24-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-24-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-yum ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-yum* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-26-yum: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-26-yum final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-26-yum --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-yum ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-yum* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-24-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-24-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-24-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-gcc ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-24-gcc* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
+fi
+tag from file for eks-distro-minimal-base-nodejs-compiler-26-gcc: some-previous-tag
+printf "\n\nExporting packages and files from  base-nodejs-compiler-26-gcc final image\n\n"
+/override/root/../scripts/buildkit.sh build --frontend dockerfile.v0 --opt filename=Dockerfile.minimal-helpers --opt platform=linux/amd64 --opt build-arg:OUTPUT_DEBUG_LOG= --opt build-arg:BUILT_BUILDER_IMAGE=public.ecr.aws/eks-distro-build-tooling/nodejs-builder:some-previous-tag --opt build-arg:EXPORT_NAME=nodejs-compiler-26-gcc --progress plain --local dockerfile=./ --local context=. --opt target=export     --output type=local,dest=/override/root/../eks-distro-base-minimal-packages/2023
+if [ -f /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-gcc ]; then \
+	mv /override/root/../eks-distro-base-minimal-packages/2023/nodejs-compiler-26-gcc* /override/root/../eks-distro-base-minimal-packages/2023/linux_amd64/; \
 fi
 tag from file for eks-distro-minimal-base-python-compiler-3.9-base: some-previous-tag
 printf "\n\nExporting packages and files from  base-python-compiler-3.9-base final image\n\n"

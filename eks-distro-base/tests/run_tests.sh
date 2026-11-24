@@ -583,13 +583,21 @@ check_base-nodejs() {
     done
 }
 
-check_base-nodejs-16() {
-    check_base-nodejs 16
+check_base-nodejs-runtime() {
+    check_base-nodejs "$1"
 
     if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-nodejs:$IMAGE_TAG npm --version > /dev/null 2>&1; then
         echo "npm should not exist!"
         exit 1
     fi
+}
+
+check_base-nodejs-24() {
+    check_base-nodejs-runtime 24
+}
+
+check_base-nodejs-26() {
+    check_base-nodejs-runtime 26
 }
 
 check_base-nodejs-compiler() {
@@ -600,7 +608,7 @@ check_base-nodejs-compiler() {
     check_base-nodejs "$1" nodejs
 
     for platform in ${PLATFORMS//,/ }; do
-        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/nodejs:$IMAGE_TAG npm --version | grep -v '8'; then
+        if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/nodejs:$IMAGE_TAG npm --version | grep -v '^11\.'; then
             echo "npm issue!"
             exit 1
         fi
@@ -608,16 +616,28 @@ check_base-nodejs-compiler() {
 }
 
 
-check_base-nodejs-compiler-16-base() {
-    check_base-nodejs-compiler 16 base
+check_base-nodejs-compiler-24-base() {
+    check_base-nodejs-compiler 24 base
 }
 
-check_base-nodejs-compiler-16-yum() {
-    check_base-nodejs-compiler 16 yum
+check_base-nodejs-compiler-24-yum() {
+    check_base-nodejs-compiler 24 yum
 }
 
-check_base-nodejs-compiler-16-gcc() {
-    check_base-nodejs-compiler 16 gcc
+check_base-nodejs-compiler-24-gcc() {
+    check_base-nodejs-compiler 24 gcc
+}
+
+check_base-nodejs-compiler-26-base() {
+    check_base-nodejs-compiler 26 base
+}
+
+check_base-nodejs-compiler-26-yum() {
+    check_base-nodejs-compiler 26 yum
+}
+
+check_base-nodejs-compiler-26-gcc() {
+    check_base-nodejs-compiler 26 gcc
 }
 
 

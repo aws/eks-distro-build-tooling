@@ -37,6 +37,8 @@ FROM ${MINIMAL_BASE_BUILDER_IMAGE} as nodejs-download
 ARG OUTPUT_DEBUG_LOG
 
 ARG COMPILER_FULL_VERSION
+# The npm bundled with Node lags behind npm releases that fix its vendored dependencies.
+ARG NPM_VERSION=11.21.3
 
 # Copy scripts in every variant since we do not rebuild the base
 # every time these scripts change. This ensures whenever a variant is
@@ -48,11 +50,12 @@ RUN export OUTPUT_DEBUG_LOG=${OUTPUT_DEBUG_LOG} && \
     # Since this "layer" is used for each of the compiler variants, base/yum/gcc, we are creating a new-newroot which will be extracted
     # and copied specifically into the final image
     NODE_NEWROOT_COMPILER=/node-compiler && \
-    BUILD_DEPS="gzip tar" && \
+    BUILD_DEPS="gzip libatomic tar" && \
     NEWROOT=/ clean_install $BUILD_DEPS && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash && \
     source ~/.nvm/nvm.sh && \
     nvm install $COMPILER_FULL_VERSION && \
+    npm install --global npm@$NPM_VERSION && \
     set -x && \
     mkdir -p $NODE_NEWROOT_COMPILER/usr/share/node $NODE_NEWROOT_COMPILER/usr/{bin,lib,include} && mv ~/.nvm/versions/node/*/LICENSE $NODE_NEWROOT_COMPILER/usr/share/node && \    
     mv ~/.nvm/versions/node/*/include/node $NODE_NEWROOT_COMPILER/usr/include && \
@@ -102,6 +105,7 @@ COPY scripts/ /usr/bin
 
 RUN set -x && \
     install_binary /usr/bin/env && \
+    install_deps_for_binary $NEWROOT/usr/bin/node && \
     if [[ ! "$(chroot $NEWROOT node --version)" = v$COMPILER_VERSION* ]]; then echo "Unexpected version of node!" && exit 1; fi && \
     cleanup "nodejs-base"
 
