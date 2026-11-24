@@ -11,16 +11,15 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
-          go-version: "1.23"
+          go-version: "1.26"
+          cache-dependency-path: tools/eksDistroBuildToolingOpsTools/go.sum
       - run: go version
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v9
         with:
-          version: v1.64.8
+          version: v2.15.0
           working-directory: 'tools/eksDistroBuildToolingOpsTools'
-          # Disable package caching to avoid a double cache with setup-go.
-          skip-pkg-cache: true
           args: --timeout 10m

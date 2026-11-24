@@ -117,7 +117,7 @@ func (p *PrCreator) getPr(ctx context.Context, opts *GetPrOpts) (*gogithub.PullR
 	list, r, err := p.client.PullRequests.List(ctx, p.prRepoOwner, p.prRepo, o)
 	if err != nil {
 		if r != nil {
-			logger.V(3).Info("listing pr response", "status code", r.Response.StatusCode)
+			logger.V(3).Info("listing pr response", "status code", r.StatusCode)
 		}
 		return nil, fmt.Errorf("getting open PR into %v from %v: listing PR: %v", opts.BaseBranch, opts.CommitBranch, err)
 	}
@@ -131,7 +131,7 @@ func (p *PrCreator) getPr(ctx context.Context, opts *GetPrOpts) (*gogithub.PullR
 	pr, r, err := p.client.PullRequests.Get(ctx, p.prRepoOwner, p.sourceRepo, prNumber)
 	if err != nil {
 		if r != nil {
-			logger.V(3).Info("getting pr response", "status code", r.Response.StatusCode)
+			logger.V(3).Info("getting pr response", "status code", r.StatusCode)
 		}
 		return nil, fmt.Errorf("getting open PR number %d: %v", prNumber, err)
 	}

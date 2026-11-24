@@ -83,7 +83,7 @@ func (p *IssueManager) CreateIssue(ctx context.Context, opts *CreateIssueOpts) (
 		logger.V(4).Error(err, "creating Github issue", "response", resp)
 		return nil, fmt.Errorf("creating Github issue: %v; resp: %v", err, resp)
 	}
-	logger.V(4).Info("create issue response", "response", resp.Response.StatusCode)
+	logger.V(4).Info("create issue response", "response", resp.StatusCode)
 	logger.V(1).Info("Github issue created", "issue URL", issue.GetHTMLURL())
 	return issue, nil
 }
@@ -122,7 +122,7 @@ func (p *IssueManager) GetIssue(ctx context.Context, opts *GetIssueOpts) (*gogit
 		logger.V(4).Error(err, "getting Github issue", "response", resp)
 		return nil, fmt.Errorf("getting Github issue: %v; resp: %v", err, resp)
 	}
-	logger.V(4).Info("get issue response", "response", resp.Response.StatusCode)
+	logger.V(4).Info("get issue response", "response", resp.StatusCode)
 	logger.V(1).Info("Github issue received", "issue URL", issue.GetHTMLURL())
 	logger.V(4).Info("sleeping after Issue request to avoid secondary rate limiting by Github content API")
 	time.Sleep(time.Second * 1)

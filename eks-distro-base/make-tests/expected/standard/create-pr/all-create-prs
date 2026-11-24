@@ -58,15 +58,6 @@ echo Updated base image tag file for eks-distro-minimal-base-python-3.11
 checking pushed file: /override/root/eks-distro-minimal-base-nodejs-16-pushed - true
 update_base_image.sh 16-test-tag eks-distro-minimal-base-nodejs-16 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-nodejs-16
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.25-base-pushed - true
-update_base_image.sh 1.25-test-tag eks-distro-minimal-base-golang-compiler-1.25-base 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.25-base
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.25-yum-pushed - true
-update_base_image.sh 1.25-yum-test-tag eks-distro-minimal-base-golang-compiler-1.25-yum 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.25-yum
-checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.25-gcc-pushed - true
-update_base_image.sh 1.25-gcc-test-tag eks-distro-minimal-base-golang-compiler-1.25-gcc 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.25-gcc
 checking pushed file: /override/root/eks-distro-minimal-base-golang-compiler-1.26-base-pushed - true
 update_base_image.sh 1.26-test-tag eks-distro-minimal-base-golang-compiler-1.26-base 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-golang-compiler-1.26-base
