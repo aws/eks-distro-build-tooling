@@ -511,8 +511,8 @@ function check_base-csi() {
     done
   }
 
-check_base-python-3.9() {
-    check_base-python3 3.9
+check_base-python-runtime() {
+    check_base-python3 "$1"
     if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
         echo "pip should not exist!"
         exit 1
@@ -520,11 +520,19 @@ check_base-python-3.9() {
 }
 
 check_base-python-3.11() {
-    check_base-python3 3.11
-    if docker run --rm --platform=$platform --pull=always $IMAGE_REPO/eks-distro-minimal-base-python:$IMAGE_TAG pip3 --version >/dev/null 2>&1; then
-        echo "pip should not exist!"
-        exit 1
-    fi
+    check_base-python-runtime 3.11
+}
+
+check_base-python-3.12() {
+    check_base-python-runtime 3.12
+}
+
+check_base-python-3.13() {
+    check_base-python-runtime 3.13
+}
+
+check_base-python-3.14() {
+    check_base-python-runtime 3.14
 }
 
 check_base-python-compiler() {
@@ -542,18 +550,6 @@ check_base-python-compiler() {
     done
 }
 
-check_base-python-compiler-3.9-base() {
-    check_base-python-compiler 3.9 base
-}
-
-check_base-python-compiler-3.9-yum() {
-    check_base-python-compiler 3.9 yum
-}
-
-check_base-python-compiler-3.9-gcc() {
-    check_base-python-compiler 3.9 gcc
-}
-
 check_base-python-compiler-3.11-base() {
     check_base-python-compiler 3.11 base
 }
@@ -564,6 +560,42 @@ check_base-python-compiler-3.11-yum() {
 
 check_base-python-compiler-3.11-gcc() {
     check_base-python-compiler 3.11 gcc
+}
+
+check_base-python-compiler-3.12-base() {
+    check_base-python-compiler 3.12 base
+}
+
+check_base-python-compiler-3.12-yum() {
+    check_base-python-compiler 3.12 yum
+}
+
+check_base-python-compiler-3.12-gcc() {
+    check_base-python-compiler 3.12 gcc
+}
+
+check_base-python-compiler-3.13-base() {
+    check_base-python-compiler 3.13 base
+}
+
+check_base-python-compiler-3.13-yum() {
+    check_base-python-compiler 3.13 yum
+}
+
+check_base-python-compiler-3.13-gcc() {
+    check_base-python-compiler 3.13 gcc
+}
+
+check_base-python-compiler-3.14-base() {
+    check_base-python-compiler 3.14 base
+}
+
+check_base-python-compiler-3.14-yum() {
+    check_base-python-compiler 3.14 yum
+}
+
+check_base-python-compiler-3.14-gcc() {
+    check_base-python-compiler 3.14 gcc
 }
 
 check_base-nodejs() {

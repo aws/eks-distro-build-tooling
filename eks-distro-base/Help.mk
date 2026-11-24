@@ -22,8 +22,10 @@ minimal-images-base-git: ## Build, export packages, validate and run tests for m
 minimal-images-base-compiler-base: ## Build, export packages, validate and run tests for minimal variant `base-compiler-base`
 minimal-images-base-compiler-yum: ## Build, export packages, validate and run tests for minimal variant `base-compiler-yum`
 minimal-images-base-compiler-gcc: ## Build, export packages, validate and run tests for minimal variant `base-compiler-gcc`
-minimal-images-base-python-3.9: ## Build, export packages, validate and run tests for minimal variant `base-python-3.9`
 minimal-images-base-python-3.11: ## Build, export packages, validate and run tests for minimal variant `base-python-3.11`
+minimal-images-base-python-3.12: ## Build, export packages, validate and run tests for minimal variant `base-python-3.12`
+minimal-images-base-python-3.13: ## Build, export packages, validate and run tests for minimal variant `base-python-3.13`
+minimal-images-base-python-3.14: ## Build, export packages, validate and run tests for minimal variant `base-python-3.14`
 minimal-images-base-nodejs-24: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-24`
 minimal-images-base-nodejs-26: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-26`
 minimal-images-base-golang-compiler-1.26-base: ## Build, export packages, validate and run tests for minimal variant `base-golang-compiler-1.26-base`
@@ -38,12 +40,18 @@ minimal-images-base-nodejs-compiler-24-yum: ## Build, export packages, validate 
 minimal-images-base-nodejs-compiler-26-yum: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-compiler-26-yum`
 minimal-images-base-nodejs-compiler-24-gcc: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-compiler-24-gcc`
 minimal-images-base-nodejs-compiler-26-gcc: ## Build, export packages, validate and run tests for minimal variant `base-nodejs-compiler-26-gcc`
-minimal-images-base-python-compiler-3.9-base: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.9-base`
 minimal-images-base-python-compiler-3.11-base: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.11-base`
-minimal-images-base-python-compiler-3.9-yum: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.9-yum`
+minimal-images-base-python-compiler-3.12-base: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.12-base`
+minimal-images-base-python-compiler-3.13-base: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.13-base`
+minimal-images-base-python-compiler-3.14-base: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.14-base`
 minimal-images-base-python-compiler-3.11-yum: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.11-yum`
-minimal-images-base-python-compiler-3.9-gcc: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.9-gcc`
+minimal-images-base-python-compiler-3.12-yum: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.12-yum`
+minimal-images-base-python-compiler-3.13-yum: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.13-yum`
+minimal-images-base-python-compiler-3.14-yum: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.14-yum`
 minimal-images-base-python-compiler-3.11-gcc: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.11-gcc`
+minimal-images-base-python-compiler-3.12-gcc: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.12-gcc`
+minimal-images-base-python-compiler-3.13-gcc: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.13-gcc`
+minimal-images-base-python-compiler-3.14-gcc: ## Build, export packages, validate and run tests for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Package Export Minimal Targets
 packages-export-minimal-images-base: ## Export packages for minimal variant `base`
@@ -61,8 +69,10 @@ packages-export-minimal-images-base-git: ## Export packages for minimal variant 
 packages-export-minimal-images-base-compiler-base: ## Export packages for minimal variant `base-compiler-base`
 packages-export-minimal-images-base-compiler-yum: ## Export packages for minimal variant `base-compiler-yum`
 packages-export-minimal-images-base-compiler-gcc: ## Export packages for minimal variant `base-compiler-gcc`
-packages-export-minimal-images-base-python-3.9: ## Export packages for minimal variant `base-python-3.9`
 packages-export-minimal-images-base-python-3.11: ## Export packages for minimal variant `base-python-3.11`
+packages-export-minimal-images-base-python-3.12: ## Export packages for minimal variant `base-python-3.12`
+packages-export-minimal-images-base-python-3.13: ## Export packages for minimal variant `base-python-3.13`
+packages-export-minimal-images-base-python-3.14: ## Export packages for minimal variant `base-python-3.14`
 packages-export-minimal-images-base-nodejs-24: ## Export packages for minimal variant `base-nodejs-24`
 packages-export-minimal-images-base-nodejs-26: ## Export packages for minimal variant `base-nodejs-26`
 packages-export-minimal-images-base-golang-compiler-1.26-base: ## Export packages for minimal variant `base-golang-compiler-1.26-base`
@@ -77,12 +87,18 @@ packages-export-minimal-images-base-nodejs-compiler-24-yum: ## Export packages f
 packages-export-minimal-images-base-nodejs-compiler-26-yum: ## Export packages for minimal variant `base-nodejs-compiler-26-yum`
 packages-export-minimal-images-base-nodejs-compiler-24-gcc: ## Export packages for minimal variant `base-nodejs-compiler-24-gcc`
 packages-export-minimal-images-base-nodejs-compiler-26-gcc: ## Export packages for minimal variant `base-nodejs-compiler-26-gcc`
-packages-export-minimal-images-base-python-compiler-3.9-base: ## Export packages for minimal variant `base-python-compiler-3.9-base`
 packages-export-minimal-images-base-python-compiler-3.11-base: ## Export packages for minimal variant `base-python-compiler-3.11-base`
-packages-export-minimal-images-base-python-compiler-3.9-yum: ## Export packages for minimal variant `base-python-compiler-3.9-yum`
+packages-export-minimal-images-base-python-compiler-3.12-base: ## Export packages for minimal variant `base-python-compiler-3.12-base`
+packages-export-minimal-images-base-python-compiler-3.13-base: ## Export packages for minimal variant `base-python-compiler-3.13-base`
+packages-export-minimal-images-base-python-compiler-3.14-base: ## Export packages for minimal variant `base-python-compiler-3.14-base`
 packages-export-minimal-images-base-python-compiler-3.11-yum: ## Export packages for minimal variant `base-python-compiler-3.11-yum`
-packages-export-minimal-images-base-python-compiler-3.9-gcc: ## Export packages for minimal variant `base-python-compiler-3.9-gcc`
+packages-export-minimal-images-base-python-compiler-3.12-yum: ## Export packages for minimal variant `base-python-compiler-3.12-yum`
+packages-export-minimal-images-base-python-compiler-3.13-yum: ## Export packages for minimal variant `base-python-compiler-3.13-yum`
+packages-export-minimal-images-base-python-compiler-3.14-yum: ## Export packages for minimal variant `base-python-compiler-3.14-yum`
 packages-export-minimal-images-base-python-compiler-3.11-gcc: ## Export packages for minimal variant `base-python-compiler-3.11-gcc`
+packages-export-minimal-images-base-python-compiler-3.12-gcc: ## Export packages for minimal variant `base-python-compiler-3.12-gcc`
+packages-export-minimal-images-base-python-compiler-3.13-gcc: ## Export packages for minimal variant `base-python-compiler-3.13-gcc`
+packages-export-minimal-images-base-python-compiler-3.14-gcc: ## Export packages for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Validate Minimal Targets
 validate-minimal-images-base: ## Validate for minimal variant `base`
@@ -100,8 +116,10 @@ validate-minimal-images-base-git: ## Validate for minimal variant `base-git`
 validate-minimal-images-base-compiler-base: ## Validate for minimal variant `base-compiler-base`
 validate-minimal-images-base-compiler-yum: ## Validate for minimal variant `base-compiler-yum`
 validate-minimal-images-base-compiler-gcc: ## Validate for minimal variant `base-compiler-gcc`
-validate-minimal-images-base-python-3.9: ## Validate for minimal variant `base-python-3.9`
 validate-minimal-images-base-python-3.11: ## Validate for minimal variant `base-python-3.11`
+validate-minimal-images-base-python-3.12: ## Validate for minimal variant `base-python-3.12`
+validate-minimal-images-base-python-3.13: ## Validate for minimal variant `base-python-3.13`
+validate-minimal-images-base-python-3.14: ## Validate for minimal variant `base-python-3.14`
 validate-minimal-images-base-nodejs-24: ## Validate for minimal variant `base-nodejs-24`
 validate-minimal-images-base-nodejs-26: ## Validate for minimal variant `base-nodejs-26`
 validate-minimal-images-base-golang-compiler-1.26-base: ## Validate for minimal variant `base-golang-compiler-1.26-base`
@@ -116,12 +134,18 @@ validate-minimal-images-base-nodejs-compiler-24-yum: ## Validate for minimal var
 validate-minimal-images-base-nodejs-compiler-26-yum: ## Validate for minimal variant `base-nodejs-compiler-26-yum`
 validate-minimal-images-base-nodejs-compiler-24-gcc: ## Validate for minimal variant `base-nodejs-compiler-24-gcc`
 validate-minimal-images-base-nodejs-compiler-26-gcc: ## Validate for minimal variant `base-nodejs-compiler-26-gcc`
-validate-minimal-images-base-python-compiler-3.9-base: ## Validate for minimal variant `base-python-compiler-3.9-base`
 validate-minimal-images-base-python-compiler-3.11-base: ## Validate for minimal variant `base-python-compiler-3.11-base`
-validate-minimal-images-base-python-compiler-3.9-yum: ## Validate for minimal variant `base-python-compiler-3.9-yum`
+validate-minimal-images-base-python-compiler-3.12-base: ## Validate for minimal variant `base-python-compiler-3.12-base`
+validate-minimal-images-base-python-compiler-3.13-base: ## Validate for minimal variant `base-python-compiler-3.13-base`
+validate-minimal-images-base-python-compiler-3.14-base: ## Validate for minimal variant `base-python-compiler-3.14-base`
 validate-minimal-images-base-python-compiler-3.11-yum: ## Validate for minimal variant `base-python-compiler-3.11-yum`
-validate-minimal-images-base-python-compiler-3.9-gcc: ## Validate for minimal variant `base-python-compiler-3.9-gcc`
+validate-minimal-images-base-python-compiler-3.12-yum: ## Validate for minimal variant `base-python-compiler-3.12-yum`
+validate-minimal-images-base-python-compiler-3.13-yum: ## Validate for minimal variant `base-python-compiler-3.13-yum`
+validate-minimal-images-base-python-compiler-3.14-yum: ## Validate for minimal variant `base-python-compiler-3.14-yum`
 validate-minimal-images-base-python-compiler-3.11-gcc: ## Validate for minimal variant `base-python-compiler-3.11-gcc`
+validate-minimal-images-base-python-compiler-3.12-gcc: ## Validate for minimal variant `base-python-compiler-3.12-gcc`
+validate-minimal-images-base-python-compiler-3.13-gcc: ## Validate for minimal variant `base-python-compiler-3.13-gcc`
+validate-minimal-images-base-python-compiler-3.14-gcc: ## Validate for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Test Minimal Targets
 test-minimal-images-base: ## Run tests for minimal variant `base`
@@ -139,8 +163,10 @@ test-minimal-images-base-git: ## Run tests for minimal variant `base-git`
 test-minimal-images-base-compiler-base: ## Run tests for minimal variant `base-compiler-base`
 test-minimal-images-base-compiler-yum: ## Run tests for minimal variant `base-compiler-yum`
 test-minimal-images-base-compiler-gcc: ## Run tests for minimal variant `base-compiler-gcc`
-test-minimal-images-base-python-3.9: ## Run tests for minimal variant `base-python-3.9`
 test-minimal-images-base-python-3.11: ## Run tests for minimal variant `base-python-3.11`
+test-minimal-images-base-python-3.12: ## Run tests for minimal variant `base-python-3.12`
+test-minimal-images-base-python-3.13: ## Run tests for minimal variant `base-python-3.13`
+test-minimal-images-base-python-3.14: ## Run tests for minimal variant `base-python-3.14`
 test-minimal-images-base-nodejs-24: ## Run tests for minimal variant `base-nodejs-24`
 test-minimal-images-base-nodejs-26: ## Run tests for minimal variant `base-nodejs-26`
 test-minimal-images-base-golang-compiler-1.26-base: ## Run tests for minimal variant `base-golang-compiler-1.26-base`
@@ -155,12 +181,18 @@ test-minimal-images-base-nodejs-compiler-24-yum: ## Run tests for minimal varian
 test-minimal-images-base-nodejs-compiler-26-yum: ## Run tests for minimal variant `base-nodejs-compiler-26-yum`
 test-minimal-images-base-nodejs-compiler-24-gcc: ## Run tests for minimal variant `base-nodejs-compiler-24-gcc`
 test-minimal-images-base-nodejs-compiler-26-gcc: ## Run tests for minimal variant `base-nodejs-compiler-26-gcc`
-test-minimal-images-base-python-compiler-3.9-base: ## Run tests for minimal variant `base-python-compiler-3.9-base`
 test-minimal-images-base-python-compiler-3.11-base: ## Run tests for minimal variant `base-python-compiler-3.11-base`
-test-minimal-images-base-python-compiler-3.9-yum: ## Run tests for minimal variant `base-python-compiler-3.9-yum`
+test-minimal-images-base-python-compiler-3.12-base: ## Run tests for minimal variant `base-python-compiler-3.12-base`
+test-minimal-images-base-python-compiler-3.13-base: ## Run tests for minimal variant `base-python-compiler-3.13-base`
+test-minimal-images-base-python-compiler-3.14-base: ## Run tests for minimal variant `base-python-compiler-3.14-base`
 test-minimal-images-base-python-compiler-3.11-yum: ## Run tests for minimal variant `base-python-compiler-3.11-yum`
-test-minimal-images-base-python-compiler-3.9-gcc: ## Run tests for minimal variant `base-python-compiler-3.9-gcc`
+test-minimal-images-base-python-compiler-3.12-yum: ## Run tests for minimal variant `base-python-compiler-3.12-yum`
+test-minimal-images-base-python-compiler-3.13-yum: ## Run tests for minimal variant `base-python-compiler-3.13-yum`
+test-minimal-images-base-python-compiler-3.14-yum: ## Run tests for minimal variant `base-python-compiler-3.14-yum`
 test-minimal-images-base-python-compiler-3.11-gcc: ## Run tests for minimal variant `base-python-compiler-3.11-gcc`
+test-minimal-images-base-python-compiler-3.12-gcc: ## Run tests for minimal variant `base-python-compiler-3.12-gcc`
+test-minimal-images-base-python-compiler-3.13-gcc: ## Run tests for minimal variant `base-python-compiler-3.13-gcc`
+test-minimal-images-base-python-compiler-3.14-gcc: ## Run tests for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Update Minimal Targets
 minimal-update-base: ## Run update logic for minimal variant `base`
@@ -178,8 +210,10 @@ minimal-update-base-git: ## Run update logic for minimal variant `base-git`
 minimal-update-base-compiler-base: ## Run update logic for minimal variant `base-compiler-base`
 minimal-update-base-compiler-yum: ## Run update logic for minimal variant `base-compiler-yum`
 minimal-update-base-compiler-gcc: ## Run update logic for minimal variant `base-compiler-gcc`
-minimal-update-base-python-3.9: ## Run update logic for minimal variant `base-python-3.9`
 minimal-update-base-python-3.11: ## Run update logic for minimal variant `base-python-3.11`
+minimal-update-base-python-3.12: ## Run update logic for minimal variant `base-python-3.12`
+minimal-update-base-python-3.13: ## Run update logic for minimal variant `base-python-3.13`
+minimal-update-base-python-3.14: ## Run update logic for minimal variant `base-python-3.14`
 minimal-update-base-nodejs-24: ## Run update logic for minimal variant `base-nodejs-24`
 minimal-update-base-nodejs-26: ## Run update logic for minimal variant `base-nodejs-26`
 minimal-update-base-golang-compiler-1.26-base: ## Run update logic for minimal variant `base-golang-compiler-1.26-base`
@@ -194,12 +228,18 @@ minimal-update-base-nodejs-compiler-24-yum: ## Run update logic for minimal vari
 minimal-update-base-nodejs-compiler-26-yum: ## Run update logic for minimal variant `base-nodejs-compiler-26-yum`
 minimal-update-base-nodejs-compiler-24-gcc: ## Run update logic for minimal variant `base-nodejs-compiler-24-gcc`
 minimal-update-base-nodejs-compiler-26-gcc: ## Run update logic for minimal variant `base-nodejs-compiler-26-gcc`
-minimal-update-base-python-compiler-3.9-base: ## Run update logic for minimal variant `base-python-compiler-3.9-base`
 minimal-update-base-python-compiler-3.11-base: ## Run update logic for minimal variant `base-python-compiler-3.11-base`
-minimal-update-base-python-compiler-3.9-yum: ## Run update logic for minimal variant `base-python-compiler-3.9-yum`
+minimal-update-base-python-compiler-3.12-base: ## Run update logic for minimal variant `base-python-compiler-3.12-base`
+minimal-update-base-python-compiler-3.13-base: ## Run update logic for minimal variant `base-python-compiler-3.13-base`
+minimal-update-base-python-compiler-3.14-base: ## Run update logic for minimal variant `base-python-compiler-3.14-base`
 minimal-update-base-python-compiler-3.11-yum: ## Run update logic for minimal variant `base-python-compiler-3.11-yum`
-minimal-update-base-python-compiler-3.9-gcc: ## Run update logic for minimal variant `base-python-compiler-3.9-gcc`
+minimal-update-base-python-compiler-3.12-yum: ## Run update logic for minimal variant `base-python-compiler-3.12-yum`
+minimal-update-base-python-compiler-3.13-yum: ## Run update logic for minimal variant `base-python-compiler-3.13-yum`
+minimal-update-base-python-compiler-3.14-yum: ## Run update logic for minimal variant `base-python-compiler-3.14-yum`
 minimal-update-base-python-compiler-3.11-gcc: ## Run update logic for minimal variant `base-python-compiler-3.11-gcc`
+minimal-update-base-python-compiler-3.12-gcc: ## Run update logic for minimal variant `base-python-compiler-3.12-gcc`
+minimal-update-base-python-compiler-3.13-gcc: ## Run update logic for minimal variant `base-python-compiler-3.13-gcc`
+minimal-update-base-python-compiler-3.14-gcc: ## Run update logic for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Create PR Minimal Targets
 minimal-create-pr-base: ## Run create pr logic for minimal variant `base`
@@ -217,8 +257,10 @@ minimal-create-pr-base-git: ## Run create pr logic for minimal variant `base-git
 minimal-create-pr-base-compiler-base: ## Run create pr logic for minimal variant `base-compiler-base`
 minimal-create-pr-base-compiler-yum: ## Run create pr logic for minimal variant `base-compiler-yum`
 minimal-create-pr-base-compiler-gcc: ## Run create pr logic for minimal variant `base-compiler-gcc`
-minimal-create-pr-base-python-3.9: ## Run create pr logic for minimal variant `base-python-3.9`
 minimal-create-pr-base-python-3.11: ## Run create pr logic for minimal variant `base-python-3.11`
+minimal-create-pr-base-python-3.12: ## Run create pr logic for minimal variant `base-python-3.12`
+minimal-create-pr-base-python-3.13: ## Run create pr logic for minimal variant `base-python-3.13`
+minimal-create-pr-base-python-3.14: ## Run create pr logic for minimal variant `base-python-3.14`
 minimal-create-pr-base-nodejs-24: ## Run create pr logic for minimal variant `base-nodejs-24`
 minimal-create-pr-base-nodejs-26: ## Run create pr logic for minimal variant `base-nodejs-26`
 minimal-create-pr-base-golang-compiler-1.26-base: ## Run create pr logic for minimal variant `base-golang-compiler-1.26-base`
@@ -233,12 +275,18 @@ minimal-create-pr-base-nodejs-compiler-24-yum: ## Run create pr logic for minima
 minimal-create-pr-base-nodejs-compiler-26-yum: ## Run create pr logic for minimal variant `base-nodejs-compiler-26-yum`
 minimal-create-pr-base-nodejs-compiler-24-gcc: ## Run create pr logic for minimal variant `base-nodejs-compiler-24-gcc`
 minimal-create-pr-base-nodejs-compiler-26-gcc: ## Run create pr logic for minimal variant `base-nodejs-compiler-26-gcc`
-minimal-create-pr-base-python-compiler-3.9-base: ## Run create pr logic for minimal variant `base-python-compiler-3.9-base`
 minimal-create-pr-base-python-compiler-3.11-base: ## Run create pr logic for minimal variant `base-python-compiler-3.11-base`
-minimal-create-pr-base-python-compiler-3.9-yum: ## Run create pr logic for minimal variant `base-python-compiler-3.9-yum`
+minimal-create-pr-base-python-compiler-3.12-base: ## Run create pr logic for minimal variant `base-python-compiler-3.12-base`
+minimal-create-pr-base-python-compiler-3.13-base: ## Run create pr logic for minimal variant `base-python-compiler-3.13-base`
+minimal-create-pr-base-python-compiler-3.14-base: ## Run create pr logic for minimal variant `base-python-compiler-3.14-base`
 minimal-create-pr-base-python-compiler-3.11-yum: ## Run create pr logic for minimal variant `base-python-compiler-3.11-yum`
-minimal-create-pr-base-python-compiler-3.9-gcc: ## Run create pr logic for minimal variant `base-python-compiler-3.9-gcc`
+minimal-create-pr-base-python-compiler-3.12-yum: ## Run create pr logic for minimal variant `base-python-compiler-3.12-yum`
+minimal-create-pr-base-python-compiler-3.13-yum: ## Run create pr logic for minimal variant `base-python-compiler-3.13-yum`
+minimal-create-pr-base-python-compiler-3.14-yum: ## Run create pr logic for minimal variant `base-python-compiler-3.14-yum`
 minimal-create-pr-base-python-compiler-3.11-gcc: ## Run create pr logic for minimal variant `base-python-compiler-3.11-gcc`
+minimal-create-pr-base-python-compiler-3.12-gcc: ## Run create pr logic for minimal variant `base-python-compiler-3.12-gcc`
+minimal-create-pr-base-python-compiler-3.13-gcc: ## Run create pr logic for minimal variant `base-python-compiler-3.13-gcc`
+minimal-create-pr-base-python-compiler-3.14-gcc: ## Run create pr logic for minimal variant `base-python-compiler-3.14-gcc`
 
 ##@ Compiler Images Targets
 golang-compiler-images: ## Build compiler images for all versions of golang
@@ -248,7 +296,9 @@ nodejs-compiler-images: ## Build compiler images for all versions of nodejs
 nodejs-24-compiler-images: ## Build compiler images for nodejs-24
 nodejs-26-compiler-images: ## Build compiler images for nodejs-26
 python-compiler-images: ## Build compiler images for all versions of python
-python-3.9-compiler-images: ## Build compiler images for python-3.9
 python-3.11-compiler-images: ## Build compiler images for python-3.11
+python-3.12-compiler-images: ## Build compiler images for python-3.12
+python-3.13-compiler-images: ## Build compiler images for python-3.13
+python-3.14-compiler-images: ## Build compiler images for python-3.14
 
 ########### END GENERATED ###########################

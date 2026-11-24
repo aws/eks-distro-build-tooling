@@ -190,9 +190,11 @@ BASE_COMPILER_VARIANT_VERSIONS=base yum gcc
 
 # ****************** PYTHON VARIANTS *************************
 PYTHON_VARIANT_NAME=eks-distro-minimal-base-python
-BASE_PYTHON_VARIANT_VERSIONS=3.9 3.11
-PYTHON_3.9_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.9")
+BASE_PYTHON_VARIANT_VERSIONS=3.11 3.12 3.13 3.14
 PYTHON_3.11_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.11")
+PYTHON_3.12_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.12")
+PYTHON_3.13_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.13")
+PYTHON_3.14_FULL_VERSION?=$(shell ./query_yum_for_python_version.sh "3.14")
 
 BASE_PYTHON_COMPILER_VARIANT_VERSIONS=$(foreach ver,$(BASE_COMPILER_VARIANT_VERSIONS),$(addsuffix -$(ver),$(BASE_PYTHON_VARIANT_VERSIONS)))
 # ************************************************************

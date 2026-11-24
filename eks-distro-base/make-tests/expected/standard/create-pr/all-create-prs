@@ -49,12 +49,18 @@ echo Updated base image tag file for eks-distro-minimal-base-compiler-yum
 checking pushed file: /override/root/eks-distro-minimal-base-compiler-gcc-pushed - true
 update_base_image.sh gcc-test-tag eks-distro-minimal-base-compiler-gcc 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-compiler-gcc
-checking pushed file: /override/root/eks-distro-minimal-base-python-3.9-pushed - true
-update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-3.9 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-python-3.9
 checking pushed file: /override/root/eks-distro-minimal-base-python-3.11-pushed - true
 update_base_image.sh 3.11-test-tag eks-distro-minimal-base-python-3.11 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-python-3.11
+checking pushed file: /override/root/eks-distro-minimal-base-python-3.12-pushed - true
+update_base_image.sh 3.12-test-tag eks-distro-minimal-base-python-3.12 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-3.12
+checking pushed file: /override/root/eks-distro-minimal-base-python-3.13-pushed - true
+update_base_image.sh 3.13-test-tag eks-distro-minimal-base-python-3.13 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-3.13
+checking pushed file: /override/root/eks-distro-minimal-base-python-3.14-pushed - true
+update_base_image.sh 3.14-test-tag eks-distro-minimal-base-python-3.14 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-3.14
 checking pushed file: /override/root/eks-distro-minimal-base-nodejs-24-pushed - true
 update_base_image.sh 24-test-tag eks-distro-minimal-base-nodejs-24 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-nodejs-24
@@ -97,24 +103,42 @@ echo Updated base image tag file for eks-distro-minimal-base-nodejs-compiler-24-
 checking pushed file: /override/root/eks-distro-minimal-base-nodejs-compiler-26-gcc-pushed - true
 update_base_image.sh 26-gcc-test-tag eks-distro-minimal-base-nodejs-compiler-26-gcc 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-nodejs-compiler-26-gcc
-checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-base-pushed - true
-update_base_image.sh 3.9-test-tag eks-distro-minimal-base-python-compiler-3.9-base 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-base
 checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.11-base-pushed - true
 update_base_image.sh 3.11-test-tag eks-distro-minimal-base-python-compiler-3.11-base 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.11-base
-checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-yum-pushed - true
-update_base_image.sh 3.9-yum-test-tag eks-distro-minimal-base-python-compiler-3.9-yum 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-yum
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.12-base-pushed - true
+update_base_image.sh 3.12-test-tag eks-distro-minimal-base-python-compiler-3.12-base 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.12-base
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.13-base-pushed - true
+update_base_image.sh 3.13-test-tag eks-distro-minimal-base-python-compiler-3.13-base 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.13-base
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.14-base-pushed - true
+update_base_image.sh 3.14-test-tag eks-distro-minimal-base-python-compiler-3.14-base 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.14-base
 checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.11-yum-pushed - true
 update_base_image.sh 3.11-yum-test-tag eks-distro-minimal-base-python-compiler-3.11-yum 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.11-yum
-checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.9-gcc-pushed - true
-update_base_image.sh 3.9-gcc-test-tag eks-distro-minimal-base-python-compiler-3.9-gcc 2023 image-tag-update-al2023
-echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.9-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.12-yum-pushed - true
+update_base_image.sh 3.12-yum-test-tag eks-distro-minimal-base-python-compiler-3.12-yum 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.12-yum
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.13-yum-pushed - true
+update_base_image.sh 3.13-yum-test-tag eks-distro-minimal-base-python-compiler-3.13-yum 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.13-yum
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.14-yum-pushed - true
+update_base_image.sh 3.14-yum-test-tag eks-distro-minimal-base-python-compiler-3.14-yum 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.14-yum
 checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.11-gcc-pushed - true
 update_base_image.sh 3.11-gcc-test-tag eks-distro-minimal-base-python-compiler-3.11-gcc 2023 image-tag-update-al2023
 echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.11-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.12-gcc-pushed - true
+update_base_image.sh 3.12-gcc-test-tag eks-distro-minimal-base-python-compiler-3.12-gcc 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.12-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.13-gcc-pushed - true
+update_base_image.sh 3.13-gcc-test-tag eks-distro-minimal-base-python-compiler-3.13-gcc 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.13-gcc
+checking pushed file: /override/root/eks-distro-minimal-base-python-compiler-3.14-gcc-pushed - true
+update_base_image.sh 3.14-gcc-test-tag eks-distro-minimal-base-python-compiler-3.14-gcc 2023 image-tag-update-al2023
+echo Updated base image tag file for eks-distro-minimal-base-python-compiler-3.14-gcc
 checking pushed file: /override/root/eks-distro-windows-base-1809-pushed - true
 update_base_image.sh 1809-test-tag eks-distro-windows-base-1809 windows image-tag-update-al2023
 echo Updated base image tag file for eks-distro-windows-base-1809
