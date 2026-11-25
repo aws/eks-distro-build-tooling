@@ -58,18 +58,6 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
     /install_buildkit.sh && \
     /remove_yum_packages.sh
 
-FROM ${BUILDER_IMAGE} as ecr-cred-helper
-ARG TARGETARCH
-WORKDIR /workdir
-ARG AMAZON_ECR_CRED_HELPER_VERSION
-ENV AMAZON_ECR_CRED_HELPER_VERSION=$AMAZON_ECR_CRED_HELPER_VERSION
-COPY ./scripts/install_base_yum_packages.sh ./scripts/remove_yum_packages.sh ./scripts/common_vars.sh \
-    ./scripts/install_ecr_cred_helper.sh ./checksums/amazon-ecr-cred-helper-${TARGETARCH}-checksum /
-RUN --mount=type=cache,target=/var/cache/yum,sharing=private \
-    /install_base_yum_packages.sh && \
-    /install_ecr_cred_helper.sh && \
-    /remove_yum_packages.sh
-
 FROM ${BUILDER_IMAGE} as gh_cli
 ARG TARGETARCH
 WORKDIR /workdir
@@ -376,7 +364,6 @@ FROM ${BASE_IMAGE} as minimal-copy-stage
 
 # Ordered by least likely to be updated
 COPY --link --from=aws-cli /aws-cli /
-COPY --link --from=ecr-cred-helper /ecr-cred-helper /
 COPY --link --from=yq /yq /
 COPY --link --from=gh_cli /gh-cli /
 COPY --link --from=hugo /hugo /

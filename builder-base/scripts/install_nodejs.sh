@@ -52,8 +52,9 @@ function install_npm() {
     # The npm bundled with Node lags behind npm releases that fix its vendored dependencies.
     wget --progress dot:giga $NPM_DOWNLOAD_URL
     sha512sum -c ${BASE_DIR}/$NPM_CHECKSUM_FILE
-    $USR_BIN/npm install --global --prefix $USR ./$NPM_FILENAME
+    PATH=$USR_BIN:$PATH npm install --global --prefix $USR ./$NPM_FILENAME
     rm -f $NPM_FILENAME
+    [ "$(PATH=$USR_BIN:$PATH npm --version)" = "$NPM_VERSION_AL23" ]
 }
 
 function install_generate_attribution() {
@@ -70,4 +71,8 @@ function install_generate_attribution() {
     time upx --best --no-lzma $USR_BIN/node
 }
 
-[ ${SKIP_INSTALL:-false} != false ] || (install_nodejs && install_npm && install_generate_attribution)
+if [ "${SKIP_INSTALL:-false}" = false ]; then
+    install_nodejs
+    install_npm
+    install_generate_attribution
+fi
