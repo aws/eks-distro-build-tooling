@@ -30,6 +30,7 @@ usermod --shell /bin/bash root
 mkdir -p /go/src/github.com/aws/eks-distro
 
 yum install -y \
+    amazon-ecr-credential-helper \
     bc \
     bind-utils \
     bzip2 \

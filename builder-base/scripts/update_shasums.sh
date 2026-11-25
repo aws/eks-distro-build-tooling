@@ -41,9 +41,6 @@ for TARGETARCH in arm64 amd64; do
   sha256="${yq_checksums_ar[$yq_checksum_index]}"
   echo "$sha256  yq_linux_$TARGETARCH.tar.gz" >$CHECKSUMS_ROOT/checksums/yq-$TARGETARCH-checksum
 
-  # AMAZON_ECR_CRED_HELPER
-  curl -sSL --retry 5 $AMAZON_ECR_CRED_HELPER_CHECKSUM_URL -o $CHECKSUMS_ROOT/checksums/amazon-ecr-cred-helper-$TARGETARCH-checksum
-
   # BUILDKIT
   sha256=$(curl -sSL --retry 5 $BUILDKIT_DOWNLOAD_URL | sha256sum | awk '{print $1}')
   echo "$sha256  buildkit-$BUILDKIT_VERSION.linux-$TARGETARCH.tar.gz" >$CHECKSUMS_ROOT/checksums/buildkit-$TARGETARCH-checksum
