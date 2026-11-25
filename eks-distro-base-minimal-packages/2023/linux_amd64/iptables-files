@@ -231,7 +231,7 @@
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
 -rw-------     364B /etc/sysconfig/nftables.conf
--rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
+-rwxr-xr-x   1.5KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     905B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x   1.7KiB /usr/bin/ca-legacy
@@ -276,7 +276,7 @@
 -rw-r--r--      32B /usr/lib/systemd/system-preset/91-amazon-ssm-agent.preset
 -rw-r--r--      29B /usr/lib/systemd/system-preset/91-hibinit-agent.preset
 -rw-r--r--     119B /usr/lib/systemd/system-preset/91-systemd-networkd.preset
--rw-r--r--      52B /usr/lib/systemd/system-preset/91-update-motd.preset
+-rw-r--r--      85B /usr/lib/systemd/system-preset/91-update-motd.preset
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--     380B /usr/lib/systemd/system/conntrackd.service
 -rw-rw-r--     393B /usr/lib/systemd/system/nftables.service

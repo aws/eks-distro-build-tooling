@@ -24,7 +24,7 @@
 -rw-r--r--     158B /etc/hosts
 -rw-r--r--     943B /etc/inputrc
 -rw-r--r--     880B /etc/krb5.conf
--rw-r--r--   3.0KiB /etc/ld.so.cache
+-rw-r--r--   3.1KiB /etc/ld.so.cache
 -rw-r--r--      28B /etc/ld.so.conf
 -rw-r--r--       0B /etc/motd
 -rw-r--r--     767B /etc/netconfig
@@ -212,7 +212,7 @@
 -rw-r--r--   1.2KiB /etc/ssl/README
 -rw-r--r--       0B /etc/subgid
 -rw-r--r--       0B /etc/subuid
--rwxr-xr-x   1.3KiB /etc/update-motd.d/70-available-updates
+-rwxr-xr-x   1.5KiB /etc/update-motd.d/70-available-updates
 -rw-r--r--     905B /etc/yum.repos.d/amazonlinux.repo
 -rw-r--r--       0B /run/motd
 -rwxr-xr-x      33B /usr/bin/alias
@@ -282,7 +282,7 @@
 -rw-r--r--      32B /usr/lib/systemd/system-preset/91-amazon-ssm-agent.preset
 -rw-r--r--      29B /usr/lib/systemd/system-preset/91-hibinit-agent.preset
 -rw-r--r--     119B /usr/lib/systemd/system-preset/91-systemd-networkd.preset
--rw-r--r--      52B /usr/lib/systemd/system-preset/91-update-motd.preset
+-rw-r--r--      85B /usr/lib/systemd/system-preset/91-update-motd.preset
 -rw-r--r--      10B /usr/lib/systemd/system-preset/99-default-disable.preset
 -rw-r--r--   1.2KiB /usr/lib/systemd/user-preset/90-default-user.preset
 -rw-r--r--      10B /usr/lib/systemd/user-preset/99-default-disable.preset
@@ -368,6 +368,7 @@
 -rwxr-xr-x   196KiB /usr/lib64/libutil.so.1
 -rwxr-xr-x   196KiB /usr/lib64/libuuid.so.1.3.0
 -rwxr-xr-x   197KiB /usr/lib64/libz.so.1.2.11
+-rwxr-xr-x   714KiB /usr/lib64/libzstd.so.1.5.5
 -rwxr-xr-x   198KiB /usr/lib64/ossl-modules/legacy.so
 -rw-r--r--    14KiB /usr/lib64/python3.11/LICENSE.txt
 -rw-r--r--   5.1KiB /usr/lib64/python3.11/__future__.py
@@ -2850,6 +2851,8 @@
 -rw-r--r--   1.9KiB /usr/share/licenses/libxcrypt/AUTHORS
 -rw-r--r--    26KiB /usr/share/licenses/libxcrypt/COPYING.LIB
 -rw-r--r--   5.6KiB /usr/share/licenses/libxcrypt/LICENSING
+-rw-r--r--    18KiB /usr/share/licenses/libzstd/COPYING
+-rw-r--r--   1.6KiB /usr/share/licenses/libzstd/LICENSE
 -rw-r--r--   1.4KiB /usr/share/licenses/mpdecimal/LICENSE.txt
 -rw-r--r--   1.5KiB /usr/share/licenses/ncurses-base/COPYING
 -rw-r--r--    10KiB /usr/share/licenses/openssl-libs/LICENSE.txt
@@ -4876,7 +4879,7 @@
 -rw-r--r--    18KiB /usr/share/zoneinfo/zone1970.tab
 -rw-r--r--       0B /var/cache/dnf/clean_command.lock
 -rw-r--r--       2B /var/cache/dnf/expired_repos.json
--rw-------   4.0KiB /var/cache/ldconfig/aux-cache
+-rw-------   4.1KiB /var/cache/ldconfig/aux-cache
 -rw-r--r--       0B /var/lib/rpm/.rpm.lock
 -rw-r--r--   1.9MiB /var/lib/rpm/rpmdb.sqlite
 -rw-r--r--    32KiB /var/lib/rpm/rpmdb.sqlite-shm
@@ -5225,6 +5228,7 @@ lrwxrwxrwx      15B /usr/lib64/libtinfo.so.6 libtinfo.so.6.6
 lrwxrwxrwx      17B /usr/lib64/libtirpc.so.3 libtirpc.so.3.0.0
 lrwxrwxrwx      16B /usr/lib64/libuuid.so.1 libuuid.so.1.3.0
 lrwxrwxrwx      14B /usr/lib64/libz.so.1 libz.so.1.2.11
+lrwxrwxrwx      16B /usr/lib64/libzstd.so.1 libzstd.so.1.5.5
 lrwxrwxrwx      10B /usr/tmp ../var/tmp
 lrwxrwxrwx      11B /var/lock ../run/lock
 lrwxrwxrwx      10B /var/mail spool/mail
